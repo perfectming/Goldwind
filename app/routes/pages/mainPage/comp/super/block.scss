@@ -1,0 +1,37 @@
+.box{
+	 
+          width:33%;
+          height:36px;
+          display:inline-block;
+          margin-top:5px;
+         .block{
+         	float:left;
+            width:16px;
+            height:16px;
+            border-radius:2px;
+            color:#f00;
+            margin:10px 5px 10px 20px;
+            
+          
+         }
+         .contect{
+      		height:20px;
+      		line-heigh:20px;
+        	 float:left;
+         	display:inline-block;
+            margin:7px 10px 0 0; 
+
+         }
+         .num{
+
+         	height:20px;
+      		line-heigh:20px;
+        	 float:left;
+        	 font-weight:bold;
+         	display:inline-block;
+           
+            margin-top:8px; 
+
+         }
+      
+}

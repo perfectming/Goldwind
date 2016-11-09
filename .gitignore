@@ -1,0 +1,11 @@
+/node_modules
+/build
+.vagrant
+.idea
+
+/config/local.js
+/app/routes/local.js
+
+npm-debug.log
+
+.DS_Store
