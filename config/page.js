@@ -75,7 +75,7 @@ module.exports = {
                         page:'distribution',
                     },{
                         name:'风机光伏矩阵',
-                        page:'',
+                        page:'fan',
                     },{
                         name:'升压站矩阵',
                         page:'booster',

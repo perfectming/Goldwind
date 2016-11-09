@@ -11,6 +11,7 @@ import Tab from './Tab.jsx';
 import Booster from '../comp/Booster.jsx';
 import Tree from './Tree.jsx';
 import Header from './Header.jsx';
+import Fan from '../comp/Fan.jsx';
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
 
@@ -30,7 +31,8 @@ let Component = React.createClass({
                 {showPage === 'super' && <Super></Super>}
                 {showPage === 'booster' && <Booster></Booster>}
                 {showPage === 'tkgl' && <Tkgl></Tkgl>}
-                 {showPage === 'distribution' && <Distribution></Distribution>}
+                {showPage === 'distribution' && <Distribution></Distribution>}
+                {showPage === 'fan' && <Fan></Fan>}
 
             </div>
         );
