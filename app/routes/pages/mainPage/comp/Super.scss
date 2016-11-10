@@ -2,63 +2,63 @@
 
 overflow:hidden;
    .leftBox{
-    width: 478px;
-    overflow:hidden;
-    float:left;
-    padding-bottom:20px;
-    .states{
-       position:relative;
-       width:100%;
-       height:261px;
-       padding-top:35px;
-       margin-right:15px;
-       border:1px solid #3e4c67;
-       background: rgba(44,61,71,0.4);
-       .wind{
-        width:50%;
-        height:225px;
-        float:left;
+      width: 478px;
+      overflow:hidden;
+      float:left;
+      padding-bottom:20px;
+      .states{
+        position:relative;
+        width:100%;
+        height:261px;
+        padding-top:35px;
+        margin-right:15px;
+        border:1px solid #3e4c67;
+        background: rgba(44,61,71,0.4);
+        .wind{
+          width:50%;
+          height:225px;
+          float:left;
       
-        .gfzb{
-         width:100%;
-          height:34px;
-          padding-left:20px;
-          line-height:34px;
-          font-size:20px;
-          font-weight:bold;
-          color:#fff;
-          display:block;
+          .gfzb{
+            width:100%;
+            height:34px;
+            padding-left:20px;
+            line-height:34px;
+            font-size:20px;
+            font-weight:bold;
+            color:#fff;
+            display:block;
+          }
+          .num{
+            width:100%;
+            height:30px;
+            padding-left:20px;
+            line-height:30px;
+            font-size:16px;
+            color:#fff;
+            display:block;
+            a{ width:50%;}
+            .anum1{
+              font-family:'微软雅黑';
+              display:inline-block;
+              font-size:16px;
+              color:#fff;
+            }
+          
+            .anum{
+          
+              display:inline-block;
+              font-size:16px;
+              color:#fff;
+          
+              b{
+                font-size:20px;
+                color:#31f3fb;
+                font-weight:bold;
+              }
+            }
+          }
         }
-        .num{
-          width:100%;
-          height:30px;
-          padding-left:20px;
-          line-height:30px;
-          font-size:16px;
-          color:#fff;
-          display:block;
-          a{ width:50%;}
-          .anum1{
-          font-family:'微软雅黑';
-          display:inline-block;
-          font-size:16px;
-          color:#fff;
-          }
-          
-          .anum{
-          
-          display:inline-block;
-          font-size:16px;
-          color:#fff;
-          
-          b{
-          font-size:20px;
-          color:#31f3fb;
-          font-weight:bold;
-          }
-          }
-        }
-       }
       
       }
     .indexs{
@@ -92,18 +92,17 @@ overflow:hidden;
         padding-top:100px;
         color: #fff;
         float:right;
-
          a{
          font-size:20px;
          font-family:"微软雅黑";
          font-weight:bold;
          color: #1fe005;
 
-        }
+         }
       }
 
      
-      }
+    }
     .Situation{
       position:relative;
       width:100%;
