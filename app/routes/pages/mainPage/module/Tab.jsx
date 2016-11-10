@@ -15,8 +15,8 @@ let Component = React.createClass({
                     tabOpt && tabOpt.subPage[tab].page.map((value, key)=> {
                       
                         return (
-                            <div>
-                                <span className={itemActive === key ? styles.tabItemAct : styles.tabItem} key={key}
+                            <div key={key}>
+                                <span className={itemActive === key ? styles.tabItemAct : styles.tabItem}
                                      onClick={()=>changeTabItem(key,value.page)}>
                                      {value.name}
                                 </span>
