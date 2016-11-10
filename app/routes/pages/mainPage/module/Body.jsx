@@ -5,6 +5,7 @@ import Chart from '../comp/Chart.jsx';
 import From from '../comp/From.jsx';
 import Table from '../comp/Table.jsx';
 import Super from '../comp/Super.jsx';
+import Test from '../comp/Test.jsx';
 import Distribution from '../comp/Distribution.jsx';
 import Tkgl from '../comp/Tkgl.jsx';
 import Tab from './Tab.jsx';
@@ -33,7 +34,12 @@ let Component = React.createClass({
                 {showPage === 'tkgl' && <Tkgl></Tkgl>}
                 {showPage === 'distribution' && <Distribution></Distribution>}
                 {showPage === 'fan' && <Fan></Fan>}
+
+                
+
+                {showPage === 'test' && <Test></Test>}
                 <div className={styles.clearbox}></div>
+
 
             </div>
         );

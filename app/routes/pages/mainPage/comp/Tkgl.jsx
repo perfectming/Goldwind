@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Corner from './super/Corner.jsx';
-import Title from './super/Title.jsx';
+import css from  './Tkgl.scss'
 import Column from './tkgl/Column.jsx';
 import Table from './tkgl/table.jsx';
 
@@ -12,15 +11,15 @@ let Component = React.createClass({
     },
 
     render() {
-
+        let {AGC} = this.props;
         return (
 
-            <div >
-
-                <div >
+            <div className={css.tkglBox}>
+                <button onClick={AGC} className={css.agc}>AGC调节</button>
+                <div className={css.upBox}>
                     <Column></Column>
                 </div>
-                <div >
+                <div className={css.downBox}>
                     <Table></Table>
                 </div>
             </div>
@@ -41,6 +40,9 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        AGC: () => {
+            window.open ("random.html", "newwindow", "height=100, width=400, top=300, left=500, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no")
+        }
     };
 };
 
