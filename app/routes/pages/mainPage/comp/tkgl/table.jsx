@@ -16,7 +16,7 @@ let Component = React.createClass({
         this.props.init(tabaleData);
     },
     render() {
-        let {table, changeTableItem} = this.props;
+        let {table} = this.props;
         return (
             <div>
                 <div className={styles.actionBox}>
@@ -29,7 +29,7 @@ let Component = React.createClass({
                             tabaleData.data.header.map((value, key)=> {
                                 return (
                                     <div className={styles.tableHeaderItem}
-                                         style={{width:(1350/tabaleData.data.header.length)-6}} key={key}>{value}</div>
+                                         style={{width:(100/tabaleData.data.header.length-1)+'%'}} key={key}>{value}</div>
                                 )
                             })
                         }
@@ -41,27 +41,18 @@ let Component = React.createClass({
                                     <div className={styles.tableContentLine} key={key}>
                                         {
                                             value.map((valueC, keyC)=> {
-                                                if(valueC===1){
+                                                if(valueC<=1){
                                                     return (
                                                         <div className={styles.tableContentItem}
-                                                               style={{width:(1350/tabaleData.data.header.length)-6}}
-                                                               key={keyC}><div className={styles.succ}></div></div>
-                                                    )
-                                                }
-                                                else if(valueC===0){
-                                                    return (
-                                                        <div className={styles.tableContentItem}
-                                                               style={{width:(1350/tabaleData.data.header.length)-6}}
-                                                               key={keyC}><div className={styles.defa}></div></div>
+                                                               style={{width:(100/tabaleData.data.header.length-1)+'%'}}
+                                                               key={keyC}><div className={valueC?styles.succ:styles.defa}></div></div>
                                                     )
                                                 }
                                                 else{
                                                 return (
-                                                    <input className={styles.tableContentItem}
-                                                           style={{width:(1350/tabaleData.data.header.length)-6}}
-                                                           key={keyC} contentEditable="true"
-                                                           onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                           value={valueC}/>
+                                                    <div className={styles.tableContentItem}
+                                                           style={{width:(100/tabaleData.data.header.length-1)+'%'}}
+                                                           key={keyC}>{valueC}</div>
                                                 )}
                                             })
                                         }
@@ -88,11 +79,6 @@ const mapDispatchToProps = (dispatch) => {
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
         },
-        changeTableItem: (value, table, i, j) => {
-            let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.content[i][j] = value;
-            dispatch(actions.setObjs('tableContent', tableV));
-        }
     };
 };
 

@@ -21,14 +21,29 @@ let Component = React.createClass({
                 plotShadow: false
             },
             title: {
-                text: '升压站负荷概览'
-            },
-            xAxis: {
-                categories: database(0)
+                text: '升压站负荷概览',
+                style:{
+                    color:"#fff",
+                    fontSize:"24px",
+                    fontFamily:"Microsoft YaHei"
+                }
             },
             tooltip: {
+                headerFormat:'<span style="font-size: 20px;">{series.name}</span>',
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+                pointFormat: "<b>{point.percentage:.0f}%</b>",
+                style:{
+                    fontSize:'15px'
+                }
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'15px'  //字体
+                    }
+                },
+                categories: database(0)
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -41,18 +56,16 @@ let Component = React.createClass({
                     allowPointSelect: false,
                     cursor: 'pointer',
                     borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
                     dataLabels: {
                         enabled: false
                     }
                 }
             },
             series: [{
-                name: "装机容量",
+                name: '<span style="color:#fff;font-size: 18px">装机容量</span>',
                 data: database(5),
             },{
-                name: "负荷",
+                name: '<span style="color:#fff;font-size: 18px">装机容量</span>',
                 data: database(7),
             }]
         };
