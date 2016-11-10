@@ -89,42 +89,75 @@ let Component = React.createClass({
                                                         return (
                                                             <div className={styles.listoptbtn_4} key={keyB}
                                                             ><span>{valueB}</span>
+<<<<<<< HEAD
                                                                 <div className={styles.listoptinfo}>
                                                                     <span>{valueB}</span>
                                                                     <p>风速:m/s</p>
                                                                     <p>功率:KW</p>
                                                                 </div>
+=======
+                                                            <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                            </div>
+>>>>>>> a31c5bf
                                                             </div>
                                                         )
                                                     }else if(valueB <= 600){
                                                         return (
                                                             <div className={styles.listoptbtn_5} key={keyB}><span>{valueB}</span>
+<<<<<<< HEAD
                                                                 <div className={styles.listoptinfo}>
                                                                     <span>{valueB}</span>
                                                                     <p>风速:m/s</p>
                                                                     <p>功率:KW</p>
                                                                 </div>
+=======
+                                                            <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                            </div>
+                                                                
+>>>>>>> a31c5bf
                                                             </div>
                                                         )
                                                     }else if(valueB <= 800){
                                                         return (
                                                             <div className={styles.listoptbtn_1} key={keyB}><span>{valueB}</span>
+<<<<<<< HEAD
                                                                 <div className={styles.listoptinfo}>
                                                                     <span>{valueB}</span>
                                                                     <p>风速:m/s</p>
                                                                     <p>功率:KW</p>
                                                                 </div>
+=======
+                                                            <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                            </div>
+>>>>>>> a31c5bf
                                                             </div>
                                                         )
                                                     }else if(valueB <= 1000){
                                                         return (
                                                             <div className={styles.listoptbtn_3} key={keyB}><span>{valueB}</span>
+<<<<<<< HEAD
                                                                 <div className={styles.listoptinfo}>
                                                                     <span>{valueB}</span>
                                                                     <p>风速:m/s</p>
                                                                     <p>功率:KW</p>
                                                                 </div>
                                                             </div>
+=======
+                                                            <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                            </div></div>
+>>>>>>> a31c5bf
                                                         )
                                                     }
                                                 })

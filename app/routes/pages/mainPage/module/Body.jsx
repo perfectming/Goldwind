@@ -34,9 +34,12 @@ let Component = React.createClass({
                 {showPage === 'tkgl' && <Tkgl></Tkgl>}
                 {showPage === 'distribution' && <Distribution></Distribution>}
                 {showPage === 'fan' && <Fan></Fan>}
+<<<<<<< HEAD
 
                 
 
+=======
+>>>>>>> a31c5bf
                 {showPage === 'test' && <Test></Test>}
                 <div className={styles.clearbox}></div>
 
