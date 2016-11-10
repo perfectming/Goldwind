@@ -65,7 +65,7 @@ let Component = React.createClass({
                 name: '<span style="color:#fff;font-size: 18px">装机容量</span>',
                 data: database(5),
             },{
-                name: '<span style="color:#fff;font-size: 18px">装机容量</span>',
+                name: '<span style="color:#fff;font-size: 18px">负荷</span>',
                 data: database(7),
             }]
         };
