@@ -1,10 +1,13 @@
 .bodyBox {
+  display:inline-table;
   width: 1800px;
-  overflow: hidden;
+  overflow-x: hidden;
   border-top: 1px solid #3BA9AE;
   border-left: 1px solid #3BA9AE;
   min-height: 1200px;
   background-color: #141B2A;
   padding-left: 30px;
-  
+  .clearbox{
+  	clear:both
+  }
 }

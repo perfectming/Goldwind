@@ -77,23 +77,54 @@ let Component = React.createClass({
                                                 keyA !== key ? false : valueA.map((valueB, keyB)=> {
                                                     if(valueB <= 200){
                                                         return (
-                                                            <button className={styles.listoptbtn_2} key={keyB}>{valueB}</button>
+                                                            <div className={styles.listoptbtn_2} key={keyB} ><span>{valueB}</span>
+                                                                <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                                </div>
+                                                            </div>
                                                         )
                                                     }else if(valueB <= 400){
                                                         return (
-                                                            <button className={styles.listoptbtn_4} key={keyB}>{valueB}</button>
+                                                            <div className={styles.listoptbtn_4} key={keyB}
+                                                            ><span>{valueB}</span>
+                                                            <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                            </div>
+                                                            </div>
                                                         )
                                                     }else if(valueB <= 600){
                                                         return (
-                                                            <button className={styles.listoptbtn_5} key={keyB}>{valueB}</button>
+                                                            <div className={styles.listoptbtn_5} key={keyB}><span>{valueB}</span>
+                                                            <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                            </div>
+                                                                
+                                                            </div>
                                                         )
                                                     }else if(valueB <= 800){
                                                         return (
-                                                            <button className={styles.listoptbtn_1} key={keyB}>{valueB}</button>
+                                                            <div className={styles.listoptbtn_1} key={keyB}><span>{valueB}</span>
+                                                            <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                            </div>
+                                                            </div>
                                                         )
                                                     }else if(valueB <= 1000){
                                                         return (
-                                                            <button className={styles.listoptbtn_3} key={keyB}>{valueB}</button>
+                                                            <div className={styles.listoptbtn_3} key={keyB}><span>{valueB}</span>
+                                                            <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                            </div></div>
                                                         )
                                                     }
                                                 })

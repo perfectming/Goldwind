@@ -33,6 +33,7 @@ let Component = React.createClass({
                 {showPage === 'tkgl' && <Tkgl></Tkgl>}
                 {showPage === 'distribution' && <Distribution></Distribution>}
                 {showPage === 'fan' && <Fan></Fan>}
+                <div className={styles.clearbox}></div>
 
             </div>
         );
