@@ -84,7 +84,7 @@ module.exports = {
                         page:'tkgl',
                     },{
                         name:'集合预报',
-                        page:'',
+                        page:'power',
                     }]
             },{
                 name:'故障告警',

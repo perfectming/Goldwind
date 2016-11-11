@@ -325,7 +325,7 @@ module.exports ={
             "WfStateCode": "Disconnect",
             "StatusCode": "LimitPow"
     },
-    "8888800": {
+    "a8888800": {
         "WFCount": "13",
             "PVCount": "13",
             "WTCount": "498",
@@ -476,7 +476,7 @@ module.exports ={
         },
         "WfsStateCode": "Disconnect"
     },
-    "8888801": {
+    "a8888801": {
         "CurDayWindSpeedCurve": {
             "Time": [
                 "00:00",
@@ -604,7 +604,7 @@ module.exports ={
         },
         "WfsStateCode": "Disconnect"
     },
-    "8888802": {
+    "a8888802": {
         "CurDayPVTSICurve": {
             "Time": [
                 "00:00",

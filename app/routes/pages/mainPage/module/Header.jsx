@@ -27,7 +27,7 @@ let Component = React.createClass({
                         })
 
                     }
-                    <div className={styles.itemBoxAct}><span>|</span></div>
+                    <div className={`${styles.itemBoxAct} ${styles.nobor}`}><span>|</span></div>
                     <div className={styles.itemBox}><span>登录</span></div>
                 </div>
             </div>
