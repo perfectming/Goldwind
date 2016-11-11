@@ -1,0 +1,23 @@
+.music {
+  position: absolute;
+  width: 52px;
+  padding: 10px;
+  z-index: 100;
+  img {
+    width: 32px;
+    &.musicPlaying {
+      animation: music-rotate 3s linear 0s infinite;
+      -webkit-animation: music-rotate 3s linear 0s infinite;
+    }
+  }
+}
+
+@keyframes music-rotate {
+  from{transform: rotateZ(0deg);-webkit-transform: rotateZ(0deg)}
+  to{transform: rotateZ(360deg);-webkit-transform: rotateZ(360deg)}
+}
+@-webkit-keyframes music-rotate {
+  from{transform: rotateZ(0deg);-webkit-transform: rotateZ(0deg)}
+  to{transform: rotateZ(360deg);-webkit-transform: rotateZ(360deg)}
+}
+
