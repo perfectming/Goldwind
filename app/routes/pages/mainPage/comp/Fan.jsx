@@ -64,6 +64,10 @@ let Component = React.createClass({
                        
                     </div>
                 </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 50eb879e5d3fab773bf6f809b8f7c30aa194f700
                 <div className={styles.listbodyBox}>
                     {
                     fanData.data.area.map((value, key)=> {
@@ -139,6 +143,12 @@ let Component = React.createClass({
                    
                     }
                 </div>
+<<<<<<< HEAD
+=======
+=======
+               
+>>>>>>> 17ea942a010557a91a8e03d7732bc6376f411c6f
+>>>>>>> 50eb879e5d3fab773bf6f809b8f7c30aa194f700
             </div>
         );
     }

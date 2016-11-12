@@ -17,6 +17,7 @@ let FixedContent = React.createClass({
         "transformOrigin": "0px " + (origin || '0px') + " 0px",
         "WebkitTransform": "scale(" + widthScale + "," + widthScale + ")",
         "WebkitTransformOrigin": "0px " + (origin || '0px') + " 0px",
+        "overflow":"hidden",
       };
     } else {
       return {};
