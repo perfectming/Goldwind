@@ -10,7 +10,6 @@ import styles from './Fan.scss';
 let fanData = require('../../../../../config/fan-data');
 
 
-
 let Component = React.createClass({
     componentDidMount() {
         this.props.init(fanData);
@@ -64,6 +63,7 @@ let Component = React.createClass({
                        
                     </div>
                 </div>
+
                 <div className={styles.listbodyBox}>
                     {
                     fanData.data.area.map((value, key)=> {
@@ -139,6 +139,7 @@ let Component = React.createClass({
                    
                     }
                 </div>
+
             </div>
         );
     }

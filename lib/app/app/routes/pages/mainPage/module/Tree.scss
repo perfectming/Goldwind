@@ -1,0 +1,28 @@
+.navTree {
+  width: 120px;
+  min-height: 1200px;
+  background-color: #252932;
+  float: left;
+  font-size: 20px;
+  .treeItemAct {
+    padding-top: 15px;
+    background-color: #141519;
+    height: 100px;
+    line-height: 30px;
+    color: #3BAAAF;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    border-left: 5px solid #2f828a;
+  }
+  .treeItem {
+    padding-top: 15px;
+    background-color: #252932;
+    height: 100px;
+    line-height: 30px;
+    color: #eee;
+    text-align: center;
+    cursor: pointer;
+    position:relative;
+  }
+}

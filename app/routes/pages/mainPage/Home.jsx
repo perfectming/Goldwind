@@ -20,7 +20,7 @@ let Component = React.createClass({
         return (
             <FixedContent mode="fullWidth" width={1920}>
                 <Header headerInfo={page.header}></Header>
-                <Tree treeOpt={page.header[itemHeaderActive]}></Tree>
+                <Tree treeOpt={page.header[itemHeaderActive]} style={{overflow:'hidden'}}></Tree>
                 <Body tabOpt={page.header[itemHeaderActive]} tab={itemTreeAct}></Body>
             </FixedContent>
         );

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Booster.scss';
@@ -21,7 +22,8 @@ let Component = React.createClass({
                                 <Corner></Corner>
                                 <MTitle title={[value[0]]}></MTitle>
                                 <div className={styles.mainn}>
-                                    <div className={value[1]===0 ? styles.hongde : styles.hongdee}></div>
+                                    <div className={value[1]===1 ? styles.hongde : false}></div>
+                                    <div className={value[2]===1 ? styles.hongdee : false}></div>
                                     <div className={styles.lastt}>
                                         {
                                             boosterData.data.math[key].map((valueA,keyA)=> {
