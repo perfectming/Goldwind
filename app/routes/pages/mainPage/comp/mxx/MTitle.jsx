@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Tit from './Title.scss';
+import styles from './MTitle.scss';
 
 
 
@@ -12,25 +12,22 @@ let Component = React.createClass({
 
     render() {
 
-       let {title,arr } = this.props;
-       
+        let {title,arr } = this.props;
+
         return (
-           <div >
-                <div className={Tit.titlep}>
-                {
+            <div >
+                <div className={styles.titlep}>
+                    {
 
-                    title && title.map((value, key)=> {
-                        return (
+                        title && title.map((value, key)=> {
+                            return (
 
-                             <span key={key} style={{width:100/title.length+"%"}}  >{title[key]}</span>
+                                <span key={key}>{title}</span>
 
+                            )
+                        })
 
-                        )
-                    })
-
-
-
-                }
+                    }
                 </div>
             </div>
         );

@@ -1,8 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Booster.scss';
-var {getState} = require('../../../../redux/store');
-import Title from './super/Title.jsx';
+import MTitle from './mxx/MTitle';
 import Corner from './super/Corner.jsx';
 let boosterData = require('../../../../../config/booster-data');
 
@@ -12,17 +11,27 @@ let Component = React.createClass({
     },
 
     render() {
-        let{arr}=this.props;
+        let{arr,jb}=this.props;
         return(
             <div className={styles.bodyBox}>
                 {
                     boosterData.data.title.map((value, key)=> {
                         return (
                             <div className={styles.station} key={key}>
-                                <Title>
-                                    <div className={styles.titleChange} >{value}</div>
-                                </Title>
                                 <Corner></Corner>
+                                <MTitle title={[value[0]]}></MTitle>
+                                <div className={styles.mainn}>
+                                    <div className={value[1]===0 ? styles.hongde : styles.hongdee}></div>
+                                    <div className={styles.lastt}>
+                                        {
+                                            boosterData.data.math[key].map((valueA,keyA)=> {
+                                                return (
+                                                    <div key={keyA}>{valueA}</div>
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                </div>
                             </div>
 
                         )

@@ -8,6 +8,7 @@ import Super from '../comp/Super.jsx';
 import Test from '../comp/Test.jsx';
 import Distribution from '../comp/Distribution.jsx';
 import Tkgl from '../comp/Tkgl.jsx';
+import Power from '../comp/power/Power.jsx';
 import Tab from './Tab.jsx';
 import Booster from '../comp/Booster.jsx';
 import Tree from './Tree.jsx';
@@ -34,12 +35,7 @@ let Component = React.createClass({
                 {showPage === 'tkgl' && <Tkgl></Tkgl>}
                 {showPage === 'distribution' && <Distribution></Distribution>}
                 {showPage === 'fan' && <Fan></Fan>}
-<<<<<<< HEAD
-
-                
-
-=======
->>>>>>> a31c5bf
+                {showPage === 'power' && <Power></Power>}
                 {showPage === 'test' && <Test></Test>}
                 <div className={styles.clearbox}></div>
 

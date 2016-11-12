@@ -7,26 +7,20 @@ let booster = require('../../../../../../config/booster-data');
 
 
 
-
-
-
-
-
 let Component = React.createClass({
     componentWillMount() {
 
     },
 
     render() {
-        let{img='../../img/comp/icon'}=this.props;
             let{arr}=this.props;
             return (
 
              <div>
                 {
-                    booster.data.all.map((value, key)=> {
+                    booster.data.all1.map((value, key)=> {
                         return (
-                             <div className={Bllo.box} key={key} style={{color:value.color}}>
+                              <div className={`${Bllo.box} ${Bllo.box1}`} key={key} style={{color:value.color}}>
                                 <span className={Bllo.block}><img src={value.url}/></span>
                                 <span className={Bllo.contect}>{value.text}</span>
                                 <span className={Bllo.num}>{value.num}</span>

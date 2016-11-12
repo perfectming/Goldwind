@@ -37,11 +37,17 @@ let Component = React.createClass({
                     allowPointSelect: false,
                     cursor: 'pointer',
                     borderWidth: 0,
-                    size: '50%',
+                    size: '60%',
                     innerSize: '40%',
                     dataLabels: {
                         enabled: true,
                         format: '{point.name}',
+                           style: {
+                                    color: "#d1d2d3",
+                                    fontSize: '14px',
+                                    fontFamily:"微软雅黑"
+
+                                },
 
                     },                   
 
@@ -51,7 +57,7 @@ let Component = React.createClass({
                 type: 'pie',
                 name: "发电量占比",
                 data: doughnutValue,
-                style: {     fontSize:"20px",    color :'red'  } 
+                style: {     fontSize:"20px",  } 
             }]
         };
         return (

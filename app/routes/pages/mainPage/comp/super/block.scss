@@ -1,7 +1,7 @@
 .box{
 	 
-          width:33%;
-          height:36px;
+          width:50%;
+          height:14px;
           display:inline-block;
           margin-top:5px;
          .block{
@@ -10,13 +10,15 @@
             height:16px;
             border-radius:2px;
             color:#f00;
-            margin:10px 5px 10px 20px;
-            
+            margin:4px 5px 10px 20px;
+            img{
+            margin:0 0 0 -5px;
+            }
           
          }
          .contect{
-      		height:20px;
-      		line-heigh:20px;
+      		height:16px;
+      		line-heigh:16px;
         	 float:left;
          	display:inline-block;
             margin:7px 10px 0 0; 
@@ -34,4 +36,7 @@
 
          }
       
+}
+.box1{
+  width:100%
 }
