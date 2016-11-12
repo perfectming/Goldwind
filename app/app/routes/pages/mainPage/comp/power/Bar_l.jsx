@@ -10,8 +10,9 @@ let Component = React.createClass({
     },
 
     render() {
-        let barLo = data.data.bar_lo;
-        let barLt = data.data.bar_lt;
+        let barLoTime = data.data.bar_lotime;
+        let barLoPowerValue = data.data.bar_loPower;
+        let barLtPowerValue = data.data.bar_ltPower;
         let configPie = {
             chart: {
                 height:400,
@@ -67,6 +68,9 @@ let Component = React.createClass({
                     dataLabels: {
                         enabled: false
                     }
+                },
+                bar:{
+                    animation: true
                 }
             },
             plotOptions: {
@@ -87,7 +91,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories: ["2016/10/13","2016/10/13","2016/10/13","2016/10/13","2016/10/13","2016/10/13"],
+                categories:barLoTime
             },
             yAxis: {
                // lineWidth: 1,
@@ -104,11 +108,11 @@ let Component = React.createClass({
             series: [{
                 name: '发生次数',
                 type: 'column',
-                data: barLo
+                data: barLoPowerValue
             },{
                 name: '状态时长(s)',
                 type: 'column',
-                data: barLt
+                data:barLtPowerValue
             }]
         };
         return (
