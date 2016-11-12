@@ -10,8 +10,12 @@ let Component = React.createClass({
     },
 
     render() {
+<<<<<<< HEAD
         let timer = data.data.line_l.timer;
         let num = data.data.line_l.num;
+=======
+        let li = data.data.line_l;
+>>>>>>> 51dde314c19080c7d60f9a3420ef5a53f7e2011c
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -79,7 +83,11 @@ let Component = React.createClass({
                         fontSize:'14px',  //字体
                     }
                 },
+<<<<<<< HEAD
                 categories: timer
+=======
+                categories: li
+>>>>>>> 51dde314c19080c7d60f9a3420ef5a53f7e2011c
             },
             yAxis: {
                 lineWidth: 1,
@@ -97,7 +105,11 @@ let Component = React.createClass({
             series: [{
                 type: 'line',
                 name: "name",
+<<<<<<< HEAD
                 data: num
+=======
+                data: li
+>>>>>>> 51dde314c19080c7d60f9a3420ef5a53f7e2011c
             }]
         };
         return (

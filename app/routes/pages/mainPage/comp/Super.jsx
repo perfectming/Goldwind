@@ -19,7 +19,7 @@ import matData from '../../../../../config/MatrixData';
 
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init();
+        this.props.init();1111222222
     },
 
     render() {
@@ -28,12 +28,16 @@ let Component = React.createClass({
         let  mat=matrix.Model;
         let matD=matData.ModelData;
         return (
-            <div className={styles.bodyBox}>
+            <div className={styles.bodyBox}11111>
 
                 <div className={styles.leftBox}>
                     <div  className={`${styles.states} ${styles.box_shadow}`}>
                     
+<<<<<<< HEAD
                          <Title title={['综合指标ssssss']}></Title>
+=======
+                         <Title title={['综合指标']}></Title>
+>>>>>>> 51dde314c19080c7d60f9a3420ef5a53f7e2011c
                          <div className={styles.wind}>
                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.WFCount.name}</a><a className={styles.anum}><b>{data.a8888800.WFCount}</b>个</a></span>
                             <span className={styles.num}><a className={styles.anum1}>{mod.dis.WTCount.name}</a><a className={styles.anum}><b>{data.a8888800.WTCount}</b>台</a></span>
