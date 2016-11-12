@@ -10,7 +10,8 @@ let Component = React.createClass({
     },
 
     render() {
-        let doughnutValue = data.data.line_r;
+        let time = data.data.line_rtime;
+        let powerValue = data.data.line_rpower;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -78,7 +79,7 @@ let Component = React.createClass({
                         fontSize:'14px',  //字体
                     }
                 },
-                categories: ['10/8 0:00','10/9 0:00','10/10 0:00','10/11 0:00','10/12 0:00','10/9 0:00','10/10 0:00','10/11 0:00','10/12 0:00'                  ]
+                categories:time
             },
             yAxis: {
                 lineWidth: 1,
@@ -96,7 +97,7 @@ let Component = React.createClass({
             series: [{
                 type: 'line',
                 name: "name",
-                data: doughnutValue
+                data: powerValue
             }]
         };
         return (
