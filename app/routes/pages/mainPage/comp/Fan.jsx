@@ -10,7 +10,6 @@ import styles from './Fan.scss';
 let fanData = require('../../../../../config/fan-data');
 
 
-
 let Component = React.createClass({
     componentDidMount() {
         this.props.init(fanData);
@@ -64,7 +63,81 @@ let Component = React.createClass({
                        
                     </div>
                 </div>
-               
+                <div className={styles.listbodyBox}>
+                    {
+                    fanData.data.area.map((value, key)=> {
+                        return (
+                            <div className={styles.listheaderBox} key={key}>
+                                <button className={styles.listbtn}>{value}</button>
+                                <div className={styles.listopt}>
+                                    {
+                                        fanData.data.power.map((valueA, keyA)=> {
+                                            return (
+                                                keyA !== key ? false : valueA.map((valueB, keyB)=> {
+                                                    if(valueB <= 200){
+                                                        return (
+                                                            <div className={styles.listoptbtn_2} key={keyB} ><span>{valueB}</span>
+                                                                <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }else if(valueB <= 400){
+                                                        return (
+                                                            <div className={styles.listoptbtn_4} key={keyB}
+                                                            ><span>{valueB}</span>
+                                                                <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }else if(valueB <= 600){
+                                                        return (
+                                                            <div className={styles.listoptbtn_5} key={keyB}><span>{valueB}</span>
+                                                                <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }else if(valueB <= 800){
+                                                        return (
+                                                            <div className={styles.listoptbtn_1} key={keyB}><span>{valueB}</span>
+                                                                <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }else if(valueB <= 1000){
+                                                        return (
+                                                            <div className={styles.listoptbtn_3} key={keyB}><span>{valueB}</span>
+                                                                <div className={styles.listoptinfo}>
+                                                                    <span>{valueB}</span>
+                                                                    <p>风速:m/s</p>
+                                                                    <p>功率:KW</p>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }
+                                                })
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        )
+                        
+                    })
+                   
+                    }
+                </div>
             </div>
         );
     }
