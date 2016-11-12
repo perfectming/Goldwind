@@ -18,7 +18,8 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:317
+                height:220,
+
             },
             title: {
                 text: ''
@@ -41,14 +42,18 @@ let Component = React.createClass({
                     innerSize: '80%',
                     dataLabels: {
                         enabled: false
-                    }
-                    
+                    },
+                 
                 }
             },
             series: [{
-                type: 'areaspline',
+                type:'spline',
                 name: "name",
-                data: doughnutValue
+                data: doughnutValue,
+                   marker: {
+                        enabled: false
+                       
+                    }
             }]
         };
         return (

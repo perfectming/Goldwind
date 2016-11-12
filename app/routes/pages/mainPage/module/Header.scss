@@ -41,6 +41,8 @@
       line-height: 80px;
       text-align: center;
       margin: 0 20px 0;
+      padding: 0 15px 0 10px;
+      border-bottom:5px solid #26f4ff;
       cursor: pointer;
       img {
         height: 30px;
@@ -49,6 +51,9 @@
       span {
         color: #3BA9AE;
       }
+    }
+    .nobor{
+      border:none;
     }
   }
 }
