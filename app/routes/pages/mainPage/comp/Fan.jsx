@@ -63,6 +63,7 @@ let Component = React.createClass({
                        
                     </div>
                 </div>
+
                 <div className={styles.listbodyBox}>
                     {
                     fanData.data.area.map((value, key)=> {
@@ -138,6 +139,7 @@ let Component = React.createClass({
                    
                     }
                 </div>
+
             </div>
         );
     }
