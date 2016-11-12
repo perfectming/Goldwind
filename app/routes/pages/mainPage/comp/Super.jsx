@@ -35,15 +35,15 @@ let Component = React.createClass({
                     
                          <Title title={['综合指标']}></Title>
                          <div className={styles.wind}>
-                           <span className={styles.num}><a className={styles.anum1}>{mod.dis.WFCount.name}</a><a className={styles.anum}><b>{data.a8888800.WFCount}</b>个</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.WTCount.name}</a><a className={styles.anum}><b>{data.a8888800.WTCount}</b>台</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{data.a8888800.WindSpeed_DevAverValue}</b>m/s</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.PVCount.name}</a><a className={styles.anum}><b>{data.a8888800.PVCount}</b>个</a></span>
+                           <span className={styles.num}><a className={styles.anum1}>{mod.dis.TActPower.name}</a><a className={styles.anum}><b>{data[8888800].TActPower}</b>{mod.dis.TActPower.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.Capacity.name}</a><a className={styles.anum}><b>{data[8888800].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>风电容量</a><a className={styles.anum}><b>{data[8888801].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>光伏容量</a><a className={styles.anum}><b>{data[8888802].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
                          </div>
                           <div className={styles.wind}>
-                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.TActPower.name}</a><a className={styles.anum}><b>{data.a8888800.TActPower}</b>MW</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.Capacity.name}</a><a className={styles.anum}><b>{data.a8888800.Capacity}</b>MW</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.DayEgyAt.name}</a><a className={styles.anum}><b>{data.a8888800.DayEgyAt}</b>万kwh</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.YearEgyAt.name}</a><a className={styles.anum}><b>{data[8888800].YearEgyAt}</b>{mod.dis.YearEgyAt.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.MonthEgyAt.name}</a><a className={styles.anum}><b>{data[8888800].MonthEgyAt}</b>{mod.dis.MonthEgyAt.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.DayEgyAt.name}</a><a className={styles.anum}><b>{data[8888800].DayEgyAt}</b>{mod.dis.DayEgyAt.unit}</a></span>
                             
                          </div>
                     </div>
@@ -51,9 +51,9 @@ let Component = React.createClass({
                     
                          <Title title={['风场指标',]}></Title>
                          <div className={styles.wind}>
-                            <span className={styles.num}><a className={styles.anum1}>风场个数</a><a className={styles.anum}><b>3</b>个</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>风机台数</a><a className={styles.anum}><b>140</b>台</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>平均风速</a><a className={styles.anum}><b>3.31</b>m/s</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.WFCount.name}</a><a className={styles.anum}><b>{data[8888800].WFCount}</b>{mod.dis.WFCount.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.WTCount.name}</a><a className={styles.anum}><b>{data[8888800].WTCount}</b>{mod.dis.WTCount.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{data[8888800].WindSpeed_DevAverValue}</b>{mod.dis.WindSpeed_DevAverValue.unit}</a></span>
                           
                          </div>
                           <div className={styles.wind}>
@@ -65,9 +65,9 @@ let Component = React.createClass({
                       
                         <Title title={['机组运行状态','逆变器运行状态']}></Title>
                          <div className={styles.wind}>
-                            <span className={styles.num}><a className={styles.anum1}>风场个数</a><a className={styles.anum}><b>3</b>个</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>风机台数</a><a className={styles.anum}><b>140</b>台</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>平均风速</a><a className={styles.anum}><b>3.31</b>m/s</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.PVCount.name}</a><a className={styles.anum}><b>{data[8888802].PVCount}</b>个</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.InverterCount.name}</a><a className={styles.anum}><b>{data[8888802].InverterCount}</b>台</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{data[8888802].PVTSI_Aver}</b>W/m<sup>2</sup></a></span>
                           
                          </div>
                         <div className={styles.spedc}>
@@ -79,15 +79,15 @@ let Component = React.createClass({
                      <div className={`${styles.Situation} ${styles.box_shadow}`}>
                        
                         <Title title={['发电量完成情况']}></Title>
-                        <p>年发电量(万kWh)</p>
+                        <p>{mod.dis.YearEgyAt.name}({mod.dis.YearEgyAt.unit})</p>
                         <div className={styles.boxone}>
-                            <div className={styles.absbox1}>288000.50</div>
-                            <span className={styles.absnum}>73.1%</span>
+                            <div className={styles.absbox1} style={{width:((data[8888800].YearEgyAt/data[8888800].YearPlanTotEgyAt)*100).toFixed(1)+"%"}}>{data[8888800].YearEgyAt}</div>
+                            <span className={styles.absnum} >{((data[8888800].YearEgyAt/data[8888800].YearPlanTotEgyAt)*100).toFixed(1)}%</span>
                         </div>
-                         <p>月发电量(万kWh)</p>
+                         <p>{mod.dis.MonthEgyAt.name}({mod.dis.MonthEgyAt.unit})</p>
                         <div className={styles.boxone}>
-                            <div className={`${styles.absbox1} ${styles.absbox2}`}>24000.50</div>
-                            <span className={styles.absnum}>73.1%</span>
+                            <div className={`${styles.absbox1} ${styles.absbox2}`} style={{width:((data[8888800].MonthEgyAt/data[8888800].CurMonthPlanEgyAt)*100).toFixed(2)+"%"}} >{data[8888800].MonthEgyAt}</div>
+                            <span className={styles.absnum}>{((data[8888800].MonthEgyAt/data[8888800].CurMonthPlanEgyAt)*100).toFixed(2)}%</span>
                         </div>
                         
                     </div>
