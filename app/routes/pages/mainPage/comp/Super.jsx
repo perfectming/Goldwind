@@ -19,7 +19,7 @@ import matData from '../../../../../config/MatrixData';
 
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init();
+        this.props.init();1111
     },
 
     render() {
