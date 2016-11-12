@@ -34,6 +34,8 @@ let Component = React.createClass({
                     <div  className={`${styles.states} ${styles.box_shadow}`}>
                     
                          <Title title={['综合指标']}></Title>
+                         <Title title={['综合指标']}></Title>
+                         <Title title={['综合指标']}></Title>
                          <div className={styles.wind}>
                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.TActPower.name}</a><a className={styles.anum}><b>{data[8888800].TActPower}</b>{mod.dis.TActPower.unit}</a></span>
                             <span className={styles.num}><a className={styles.anum1}>{mod.dis.Capacity.name}</a><a className={styles.anum}><b>{data[8888800].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
