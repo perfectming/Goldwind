@@ -1,0 +1,72 @@
+body {
+  margin: 0 auto;
+  background-color: #F5F6F7;
+  color: #333;
+  font-family:"微软雅黑";
+}
+
+.relative {
+  position: relative;
+}
+
+.full {
+  width: 100%;
+}
+
+/* bootstrap */
+.modal-container {
+  position: relative;
+}
+
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+  top: 100px;
+
+}
+
+.modal-dialog {
+  top: 100px;
+  margin: 0 10%;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+.btn-default {
+  color: #ffffff;
+  background-color: #ff6633;
+  border-color: #ff6633;
+}
+
+.btn {
+  background-color: #ff6633;
+  color:#ffffff;
+}
+
+.btn:hover, .btn:active, .btn:focus {
+  background-color: #f24e14;
+  color: #ffffff;
+  /*border-color: #f53d00;*/
+  border: none;
+  outline: none !important;
+}
+
+.btn-default:hover, .btn-default:active, .btn-default:focus, .btn-default:active:hover {
+  color: #ffffff;
+  background-color: #f24e14;
+  /*border-color: #f53d00;*/
+  border: none;
+
+}
+
+.btn-default.disabled, .btn-default.disabled.active, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled:focus, .btn-default.disabled:hover, .btn-default[disabled], .btn-default[disabled].active, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled]:focus, .btn-default[disabled]:hover, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default.active, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:hover {
+  background-color: #ff4000;
+
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+input, button {
+  outline: none;
+}
