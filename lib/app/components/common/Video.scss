@@ -1,0 +1,23 @@
+.directiveVideo {
+  width: 100%;
+  position: relative;
+  img {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  video {
+    width: 100%;
+  }
+  .loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    color: #fff;
+    font-size: small;
+    margin-top: -20px;
+    margin-left: -20px;
+    z-index: 14;
+  }
+
+}

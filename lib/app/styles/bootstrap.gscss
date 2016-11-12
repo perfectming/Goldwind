@@ -1,0 +1,6 @@
+.btn-default:focus, .btn-default:active:hover, .btn-default:active:focus {
+  background-color: #ff4000;
+  border: none;
+  color: white;
+  outline: none;
+}
