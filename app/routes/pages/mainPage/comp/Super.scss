@@ -64,6 +64,44 @@ overflow:hidden;
       .states2{
        height:121px;
        margin-top:20px;
+         .box{
+   
+          width:50%;
+          height:20px;
+          display:inline-block;
+         .block{
+          float:left;
+            width:16px;
+            height:16px;
+            border-radius:2px;
+            color:#f00;
+            margin:4px 5px 10px 20px;
+            img{
+            margin:0 0 0 -5px;
+            }
+          
+         }
+         .contect{
+          height:16px;
+          line-heigh:16px;
+           float:left;
+          display:inline-block;
+            margin:7px 10px 0 0; 
+
+         }
+         .numx{
+
+          height:20px;
+          line-heigh:20px;
+           float:left;
+           font-weight:bold;
+          display:inline-block;
+           
+            margin-top:8px; 
+
+         }
+      
+}
       }
      
     .indexs{
@@ -88,7 +126,49 @@ overflow:hidden;
         height:142px;
         font-size:16px;
         display:inline-block; 
-       
+
+       .box{
+   
+          width:50%;
+          height:14px;
+          display:inline-block;
+         .block{
+          float:left;
+            width:16px;
+            height:16px;
+            border-radius:2px;
+            color:#f00;
+            margin:4px 5px 10px 20px;
+            img{
+            margin:0 0 0 -5px;
+            }
+          
+         }
+         .contect{
+          height:16px;
+          line-heigh:16px;
+           float:left;
+          display:inline-block;
+            margin:7px 10px 0 0; 
+
+         }
+         .num{
+
+          height:20px;
+          line-heigh:20px;
+           float:left;
+           font-weight:bold;
+          display:inline-block;
+           
+            margin-top:8px; 
+
+         }
+      
+}
+.box1{
+  width:100%
+}
+
 
       }
       .totalbox{
