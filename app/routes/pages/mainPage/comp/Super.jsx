@@ -78,24 +78,24 @@ let Component = React.createClass({
                              </div>
 
                              <div className={styles.box}>
-                                <span className={styles.block}><img src={icon3}/></span>
+                                <span className={styles.block}><img src={icon2}/></span>
                                 <span className={styles.contect} style={{"color":"#fbd500"}}>检测</span>
                                 <span className={styles.numx} style={{"color":"#fbd500"}}>{data[8888801].RepairCount}</span>
                              </div>
                                <div className={styles.box}>
-                                <span className={styles.block}><img src={icon0}/></span>
+                                <span className={styles.block}><img src={icon3}/></span>
                                 <span className={styles.contect} style={{"color":"#929396"}}>离线</span>
                                 <span className={styles.numx} style={{"color":"#929396"}}>{data[8888801].OfflineCount}</span>
                              </div>
 
                              <div className={styles.box}>
-                                <span className={styles.block}><img src={icon1}/></span>
+                                <span className={styles.block}><img src={icon4}/></span>
                                 <span className={styles.contect} style={{"color":"#2189ff"}}>待机</span>
                                 <span className={styles.numx} style={{"color":"#2189ff"}}>{data[8888801].WFStandbyCount}</span>
                              </div>
 
                              <div className={styles.box}>
-                                <span className={styles.block}><img src={icon3}/></span>
+                                <span className={styles.block}><img src={icon5}/></span>
                                 <span className={styles.contect} style={{"color":"#dddcdc"}}>限电</span>
                                 <span className={styles.numx} style={{"color":"#dddcdc"}}>{data[8888802].PVOFL}</span>
                              </div>
