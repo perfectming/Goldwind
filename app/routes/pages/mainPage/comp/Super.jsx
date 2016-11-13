@@ -14,6 +14,12 @@ import dataBase from '../../../../../config/ModelData';
 import model from '../../../../../config/Model';
 import matrix from '../../../../../config/MatrixModel';
 import matData from '../../../../../config/MatrixData';
+import icon0 from '../img/comp/icon0.png';
+import icon1 from '../img/comp/icon1.png';
+import icon2 from '../img/comp/icon2.png';
+import icon3 from '../img/comp/icon3.png';
+import icon4 from '../img/comp/icon4.png';
+import icon5 from '../img/comp/icon5.png';
 
 
 
@@ -59,13 +65,48 @@ let Component = React.createClass({
                           
                          </div>
                           <div className={styles.wind}>
-                           <Block></Block>
+                             <div className={styles.box}>
+                                <span className={styles.block}><img src={icon0}/></span>
+                                <span className={styles.contect} style={{"color":"#1fe005"}}>运行</span>
+                                <span className={styles.numx} style={{"color":"#1fe005"}}>{data[8888801].ONL}</span>
+                             </div>
+
+                             <div className={styles.box}>
+                                <span className={styles.block}><img src={icon1}/></span>
+                                <span className={styles.contect} style={{"color":"#ff0000"}}>故障</span>
+                                <span className={styles.numx} style={{"color":"#ff0000"}}>{data[8888801].FaultCount}</span>
+                             </div>
+
+                             <div className={styles.box}>
+                                <span className={styles.block}><img src={icon3}/></span>
+                                <span className={styles.contect} style={{"color":"#fbd500"}}>检测</span>
+                                <span className={styles.numx} style={{"color":"#fbd500"}}>{data[8888801].RepairCount}</span>
+                             </div>
+                               <div className={styles.box}>
+                                <span className={styles.block}><img src={icon0}/></span>
+                                <span className={styles.contect} style={{"color":"#929396"}}>离线</span>
+                                <span className={styles.numx} style={{"color":"#929396"}}>{data[8888801].OfflineCount}</span>
+                             </div>
+
+                             <div className={styles.box}>
+                                <span className={styles.block}><img src={icon1}/></span>
+                                <span className={styles.contect} style={{"color":"#2189ff"}}>待机</span>
+                                <span className={styles.numx} style={{"color":"#2189ff"}}>{data[8888801].WFStandbyCount}</span>
+                             </div>
+
+                             <div className={styles.box}>
+                                <span className={styles.block}><img src={icon3}/></span>
+                                <span className={styles.contect} style={{"color":"#dddcdc"}}>限电</span>
+                                <span className={styles.numx} style={{"color":"#dddcdc"}}>{data[8888802].PVOFL}</span>
+                             </div>
+
+
                             
                          </div>
                     </div>
                     <div className={`${styles.states} ${styles.Speed} ${styles.box_shadow}`}>
                       
-                        <Title title={['机组运行状态','逆变器运行状态']}></Title>
+                        <Title title={['光伏指标']}></Title>
                          <div className={styles.wind}>
                             <span className={styles.num}><a className={styles.anum1}>{mod.dis.PVCount.name}</a><a className={styles.anum}><b>{data[8888802].PVCount}</b>个</a></span>
                             <span className={styles.num}><a className={styles.anum1}>{mod.dis.InverterCount.name}</a><a className={styles.anum}><b>{data[8888802].InverterCount}</b>台</a></span>
@@ -73,7 +114,29 @@ let Component = React.createClass({
                           
                          </div>
                         <div className={styles.spedc}>
-                             <Block1></Block1>
+
+
+                            <div className={`${styles.box} ${styles.box1}`}>
+                                <span className={styles.block}><img src={icon0}/></span>
+                                <span className={styles.contect} style={{"color":"#1fe005"}}>运行</span>
+                                <span className={styles.num} style={{"color":"#1fe005"}}>{data[8888802].PVONL}</span>
+                             </div>
+
+                             <div className={`${styles.box} ${styles.box1}`}>
+                                <span className={styles.block}><img src={icon1}/></span>
+                                <span className={styles.contect} style={{"color":"#ff0000"}}>故障</span>
+                                <span className={styles.num} style={{"color":"#ff0000"}}>{data[8888802].PVFLT}</span>
+                             </div>
+
+                             <div className={`${styles.box} ${styles.box1}`}>
+                                <span className={styles.block}><img src={icon3}/></span>
+                                <span className={styles.contect} style={{"color":"#929396"}}>离线</span>
+                                <span className={styles.num} style={{"color":"#929396"}}>{data[8888802].PVOFL}</span>
+                             </div>
+
+
+
+
                         </div>
                         
                         
