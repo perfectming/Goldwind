@@ -4,13 +4,39 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('../../../../../../config/chart-data');
+let dataBase=require('../../../../../../config/ModelData');
+let dataName=require('../../../../../../config/Model');
+let date=dataBase.ModelData;
+let datename=dataName.Model.ens;
+let arr=[];
+let arrname=[];
+let num=[];
+(function(){
+    for(let i in date){
 
+    arr.push(date[i].DayEgyAt/1);
+    }
+    arr.pop();      
+   
+}());
+(function(){
+    for(let i in datename){
+         arrname.push(datename[i].name);
+     }    
+    
+    play();
+}())
+ function play(){
+    for(let i=0;i<arr.length;i++){
+        num.push([arrname[i],arr[i]])
+    }
+    console.log(JSON.stringify(num));
+ }
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let doughnutValue = data.data.pie;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -23,6 +49,9 @@ let Component = React.createClass({
             title: {
                 text: ''
             },
+           
+                categories:arrname,
+            
             tooltip: {
                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 //pointFormat: "<b>{point.percentage:.0f}%</b>"
@@ -56,7 +85,7 @@ let Component = React.createClass({
             series: [{
                 type: 'pie',
                 name: "发电量占比",
-                data: doughnutValue,
+                data: num,
                 style: {     fontSize:"20px",  } 
             }]
         };
