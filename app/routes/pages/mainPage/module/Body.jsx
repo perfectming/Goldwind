@@ -14,6 +14,7 @@ import Booster from '../comp/Booster.jsx';
 import Tree from './Tree.jsx';
 import Header from './Header.jsx';
 import Fan from '../comp/Fan.jsx';
+import Cockpit from '../comp/linjinjin/Cockpit.jsx';
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
 
@@ -37,6 +38,7 @@ let Component = React.createClass({
                 {showPage === 'fan' && <Fan></Fan>}
                 {showPage === 'power' && <Power></Power>}
                 {showPage === 'test' && <Test></Test>}
+                {showPage === 'cockpit' && <Cockpit></Cockpit>}
                 <div className={styles.clearbox}></div>
 
 
