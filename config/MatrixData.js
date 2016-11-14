@@ -6,7 +6,7 @@ module.exports =  {
     "8888801": {
         "WFDevsStatus": {
             "650107": [
-                {
+                {   
                     "Wtid": "650107001",
                     "Wtname": "C1-01",
                     "WTStateCode": "DisComForPre",

@@ -1,45 +1,61 @@
-  .bodyBox{
+.bodyBox{
+  .listrightBox{
+    width:1260px;
+    height:1130px;
+    overflow:hidden;
+    float:right;
+    .listbodyBox {
+    overflow-y:scroll;
+  
+    padding-right:10px;
+    -padding-left:10px;
+    -width:1200;
+    height:100%;
+    display:inline-block;
+    background-color: #2EA6AF;
+    .listheaderBox:last-child{
+      padding-bottom:55px;
+      }
+    .listheaderBox{
+      width:100%;
+      $height:auto;
+      margin: 10px auto;
+      background-color:#1D2835;
+      position:relative;
+      button{
 
-.listbodyBox {
-  float:right;
-  width:1280px;
-  display:inline-block;
-  background-color: #2EA6AF;
-  .listheaderBox{
-    width:100%;
-    height:auto;
-    margin: 10px auto;
-    background-color:#1D2835;
-    position:relative;
-    button{
-       border-radius:6px;
-    }
-    .listbtn{
-      width:100px;
+        border-radius:6px;
+      }
+      .listbtn{
+      width:160px;
+      padding:5px 0;
       background-color:#31F3FB;
       color:#69747B;
       font-size:20px;
       font-weight: bold;  
       position:absolute;
-      top:38%;left:40px;
+      top:38%;left:10px;
       box-shadow:1px 1px 3px #292929
     }
     .listbtnitem{
       float:left;
     }
-    .listopt{
+    .listopt:nth-child(3){
+      margin: 10px 0px 60px 170px;
+      }
+      .listopt{
       display:inline-table;
-      margin: 10px 0px 10px 140px;
+      margin: 10px 0px 10px 170px;
       padding:5px 10px;
       background-color:#1D2835;
-      width:1100px;
+      width:1080px;
       min-height:100px;
-  
+      
       div{
         cursor:pointer;
         display:inline-table;
         float:left;
-        width:40px;
+        width:60px;
         height:25px;
         border-radius:3px;
         line-height:25px;
@@ -49,7 +65,7 @@
         position:relative;
         .listoptinfo{
           width:150px;height:110px;background-color: #FFFFFF;display:none;
-          position:absolute;left:-55px;top: -130px;
+          position:absolute;right:65px;top: -10px;
           font-size:20px;
           text-align:left;
           color:#578D1E;
@@ -66,7 +82,7 @@
             margin:0 auto;
             display:block;
             line-height:35px;
-
+            font-size:16px;
           }
         }
         
@@ -79,30 +95,17 @@
           z-index:1000;
         }
       }
-      .listoptbtn_1{
-        box-shadow:1px 1px 3px #C4710F;
-        background-color:#C4710F;/*橙黄*/
-      }
+    
       .listoptbtn_2{
         box-shadow:1px 1px 3px #87CB2D;
         background-color:#87CB2D;/*绿色*/
       }
-      .listoptbtn_3{
-        box-shadow:1px 1px 3px #DB2721;
-        background-color:#DB2721;/*红色*/
-      }
-      .listoptbtn_4{
-        box-shadow:1px 1px 3px #3FAFF6;
-        background-color:#3FAFF6;/*蓝色*/
-      }
-      .listoptbtn_5{
-        box-shadow:1px 1px 3px #5D5252;
-        background-color:#5D5252;/*灰色*/
+      
       }
     }
+    }
   }
-}
-.leftBox{
+    .leftBox{
       width: 478px;
       float:left;
       padding-bottom:20px;
@@ -163,6 +166,44 @@
       .states2{
        height:121px;
        margin-top:20px;
+         .box{
+   
+          width:50%;
+          height:20px;
+          display:inline-block;
+         .block{
+          float:left;
+            width:16px;
+            height:16px;
+            border-radius:2px;
+            color:#f00;
+            margin:4px 5px 10px 20px;
+            img{
+            margin:0 0 0 -5px;
+            }
+          
+         }
+         .contect{
+          height:16px;
+          line-heigh:16px;
+           float:left;
+          display:inline-block;
+            margin:7px 10px 0 0; 
+
+         }
+         .numx{
+
+          height:20px;
+          line-heigh:20px;
+           float:left;
+           font-weight:bold;
+          display:inline-block;
+           
+            margin-top:8px; 
+
+         }
+      
+   }
       }
      
     .indexs{
@@ -187,7 +228,49 @@
         height:142px;
         font-size:16px;
         display:inline-block; 
-       
+
+       .box{
+   
+          width:50%;
+          height:14px;
+          display:inline-block;
+         .block{
+          float:left;
+            width:16px;
+            height:16px;
+            border-radius:2px;
+            color:#f00;
+            margin:4px 5px 10px 20px;
+            img{
+            margin:0 0 0 -5px;
+            }
+          
+         }
+         .contect{
+          height:16px;
+          line-heigh:16px;
+           float:left;
+          display:inline-block;
+            margin:7px 10px 0 0; 
+
+         }
+         .num{
+
+          height:20px;
+          line-heigh:20px;
+           float:left;
+           font-weight:bold;
+          display:inline-block;
+           
+            margin-top:8px; 
+
+         }
+      
+}
+.box1{
+  width:100%
+}
+
 
       }
       .totalbox{
@@ -270,4 +353,4 @@
       }
 
     }
-    }
+}
