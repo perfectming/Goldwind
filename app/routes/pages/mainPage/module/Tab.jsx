@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
             dispatch(actions.setVars('tabItemActive', 0));
-            dispatch(actions.setVars('showPage', 'table'));
+            dispatch(actions.setVars('showPage', 'cockpit'));
         },
         changeTabItem: (key, page) => {
             dispatch(actions.setVars('showPage', page));
