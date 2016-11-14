@@ -92,7 +92,7 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/gj_active.png'),
                 page:[
                      {
-                        name:'故障告警1',
+                        name:'报警查询',
                         page:'',
                     },{
                         name:'故障告警2',
