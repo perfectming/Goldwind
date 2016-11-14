@@ -225,48 +225,6 @@ let Component = React.createClass({
                                                                 <p>{'功率:'+Number(skt2[value].WindSpeed_DevAverValue).toFixed(2)+'KW'}</p>
                                                         </div>
                                                     </div>
-                                                
-                                                
-                                                        
-                                                            
-                                                       
-                                                    
-                                                       
-                                                    
-                                               
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
-                        )
-                        
-                    })
-                    arr2.map((value, key)=> {
-                        return (
-                            <div className={styles.listheaderBox} key={key}>
-                                <button className={styles.listbtn}>{skt[value].name}</button>
-                                <div className={styles.listopt}>
-                                    {
-                                        ssg1[value].map((valueA, keyA)=> {
-                                            return (
-                                                
-                                                    <div className={styles.listoptbtn_2}  key={keyA}><span>{valueA.Wtname}</span>
-                                                        <div className={styles.listoptinfo}>
-                                                            <span>{valueA.Wtname}</span>
-                                                                <p>{'风速:'+Math.ceil(skt2[value].WindSpeed_DevAverValue/3600)+'m/s'}</p>
-                                                                <p>{'功率:'+Number(skt2[value].WindSpeed_DevAverValue).toFixed(2)+'KW'}</p>
-                                                        </div>
-                                                    </div>
-                                                
-                                                
-                                                        
-                                                            
-                                                       
-                                                    
-                                                       
-                                                    
-                                               
                                             )
                                         })
                                     }
