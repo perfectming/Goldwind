@@ -5,15 +5,11 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/jsc.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/jsc_active.png'),
             subPage: [{
-                name:'驾驶舱-1',
+                name:'驾驶舱',
                 page:[
                     {
                         name:'驾驶舱1-1',
-                        page:'',
-                        
-                    },{
-                        name:'驾驶舱1-2',
-                        page:'',
+                        page:'cockpit',
                         
                     }]
             },{

@@ -14,13 +14,16 @@ let tabaleData = require('../../../../config/table-data');
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
+       
     },
     render() {
-        let {itemHeaderActive, itemTreeAct}=this.props;
+        let {itemHeaderActive, itemTreeAct, flag=true}=this.props;
         return (
             <FixedContent mode="fullWidth" width={1920}>
                 <Header headerInfo={page.header}></Header>
-                <Tree treeOpt={page.header[itemHeaderActive]} style={{overflow:'hidden'}}></Tree>
+                {
+                flag && <Tree treeOpt={page.header[itemHeaderActive]} style={{overflow:'hidden'}}></Tree>
+            }
                 <Body tabOpt={page.header[itemHeaderActive]} tab={itemTreeAct}></Body>
             </FixedContent>
         );
@@ -39,6 +42,7 @@ const mapDispatchToProps = (dispatch) => {
         init: ()=> {
             dispatch(actions.setVars('headerItemActive', 0));
         },
+      
     }
 };
 
