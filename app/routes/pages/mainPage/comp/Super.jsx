@@ -200,7 +200,7 @@ let Component = React.createClass({
                     </div>
                     <div className={`${styles.table} ${styles.box_shadow}`}>
                    
-                        <Title title={['风场指标','综合指标']}></Title>
+                       
                         <Table></Table>
                         <Table></Table>
                         
