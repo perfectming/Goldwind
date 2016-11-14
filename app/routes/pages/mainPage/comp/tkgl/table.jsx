@@ -10,7 +10,6 @@ import refresh from '../../img/comp/refresh.png';
 import _ from 'lodash';
 
 let tabaleData = require('../../../../../../config/tkgl-table');
-
 let Component = React.createClass({
     componentDidMount() {
         this.props.init(tabaleData);
