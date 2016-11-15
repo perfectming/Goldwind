@@ -324,7 +324,7 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/xtgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/xtgl_active.png'),
             subPage: [{
-                name:'系统管理-1',
+                name:'角色管理',
                 page:[
                     {
                         name:'系统管理1-1',
@@ -337,7 +337,7 @@ module.exports = {
                         page:'',
                     }]
             },{
-                name:'系统管理-2',
+                name:'用户管理',
                 page:[
                     {
                         name:'系统管理2-1',
