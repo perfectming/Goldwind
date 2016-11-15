@@ -328,7 +328,7 @@ module.exports = {
                 page:[
                     {
                         name:'系统管理1-1',
-                        page:'ms',
+                        page:'',
                     },{
                         name:'系统管理1-2',
                         page:'',
@@ -341,7 +341,7 @@ module.exports = {
                 page:[
                     {
                         name:'系统管理2-1',
-                        page:'amm',
+                        page:'',
                     },{
                         name:'系统管理2-2',
                         page:'',
