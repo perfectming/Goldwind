@@ -12,50 +12,24 @@ module.exports = {
                         page:'cockpit',
                         
                     }]
-            },{
-                name:'驾驶舱-2',
-                page:[
-                    {
-                        name:'驾驶舱2-1',
-                        page:'',
-                    },{
-                        name:'驾驶舱2-2',
-                        page:'',
-                    },{
-                        name:'驾驶舱2-3',
-                        page:'',
-                    }]
-            },{
-                name:'驾驶舱-3',
-                page:[
-                     {
-                        name:'驾驶舱3-1',
-                        page:'',
-                    },{
-                        name:'驾驶舱3-2',
-                        page:'',
-                    },{
-                        name:'驾驶舱3-3',
-                        page:'',
-                    }]
             }],
         },{
             name: '实时监控',
             iconNormal: require('../app/routes/pages/mainPage/img/comp/ssjk.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/ssjk_active.png'),
             subPage: [{
-                name:'监控面板',
+                name:'监控看板',
                 iconNormal: require('../app/routes/pages/mainPage/img/comp/jsc.png'),
                 iconActive: require('../app/routes/pages/mainPage/img/comp/jsc_active.png'),
                 page:[
                      {
-                        name:'监控面板1',
+                        name:'监控看板1',
+                        page:'monitorkb',
+                    },{
+                        name:'监控看板2',
                         page:'',
                     },{
-                        name:'监控面板2',
-                        page:'',
-                    },{
-                        name:'监控面板3',
+                        name:'监控看板3',
                         page:'',
                     }]
             },{
@@ -88,14 +62,17 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/gj_active.png'),
                 page:[
                      {
-                        name:'故障告警1',
+                        name:'报警查询',
+                        page:'alarm',
+                    },{
+                        name:'故障录波',
                         page:'',
                     },{
-                        name:'故障告警2',
-                        page:'',
+                        name:'报警规则设置',
+                        page:'ARS',
                     },{
-                        name:'故障告警3',
-                        page:'',
+                        name:'报警提醒设置',
+                        page:'AS',
                     }]
             },{
                 name:'批量控制',
@@ -128,13 +105,13 @@ module.exports = {
                         page:'',
                     }]
             },{
-                name:'数据整理',
+                name:'数据管理',
                 iconNormal: require('../app/routes/pages/mainPage/img/comp/sj.png'),
                 iconActive: require('../app/routes/pages/mainPage/img/comp/sj_active.png'),
                 page:[
                     {
-                        name:'数据整理1',
-                        page:'',
+                        name:'计划电量录入',
+                        page:'PEQI',
                     },{
                         name:'数据整理2',
                         page:'',
@@ -328,7 +305,7 @@ module.exports = {
                 page:[
                     {
                         name:'系统管理1-1',
-                        page:'',
+                        page:'ms',
                     },{
                         name:'系统管理1-2',
                         page:'',
@@ -341,7 +318,7 @@ module.exports = {
                 page:[
                     {
                         name:'系统管理2-1',
-                        page:'',
+                        page:'amm',
                     },{
                         name:'系统管理2-2',
                         page:'',

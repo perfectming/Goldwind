@@ -106,7 +106,7 @@
         height:120px;
         border-radius:10px;
         border:1px solid #ccc;
-        margin:20px auto;
+        margin:37px auto;
         overflow:hidden;
         span{
           width:25%;
@@ -156,8 +156,38 @@
    	width:20%;
    	height:100px;
    	float:left;
-	border-right:1px solid #ccc;
-	background: rgba(44, 61, 71, 0.4);
+   	border-right:1px solid #ccc;
+  	background: rgba(44, 61, 71, 0.4);
+    .leftimg{
+      width:40%;
+      float:left;
+      height:100px;
+      text-align:right;
+      img{margin:25px 20px 0 0;}
+
+    }
+    .righttext{
+      width:60%;
+      float:left;
+      height:100px;
+      line-height:100px;
+      font-size:24px;
+      color:#fff;
+    }
+    .righttext1{
+      width:60%;
+      float:left;
+      font-size:16px;
+      padding-top:24px;
+      height:100px;
+      color:#fff;
+      h2{
+        font-weight:normal;
+        font-size:16px;
+         margin:0px 0 10px 0;
+         b{font-size:22px; margin-right:15px;}
+         }
+    }
    }
    .bore{
    border-right:none;
@@ -167,12 +197,39 @@
    		height:500px;
    		float:left;
    		border-right:1px solid #ccc;
+       h6{
+     font-weight:normal;
+     padding:20px 0 0 20px;
+     margin:0 0 20px 0;
+     color:#fff;
+     font-size:20px;
+     img{
+     margin-right:10px;
+     margin-top:-5px;
+     }
+     }
    }
     .Fault{
    		width:50%;
    		height:500px;
+      position:relative;
    		float:left;
-   		
+      background:url('../../img/comp/gzbg.png')  100% 100%;
+     h6{
+     font-weight:normal;
+     padding:20px 0 0 20px;
+     margin:0 0 20px 0;
+     color:#fff;
+     font-size:20px;
+     img{
+     margin-right:10px;
+     margin-top:-5px;
+     }
+     }
+     .gznum{ float:left;margin:172px 65px 0 0;color: #fff; font-size:18px; width:80px; text-align:center}
+     .gzmor{margin-left:230px;}
+   		a{margin:180px 0 0 66px; float:left;color:#fff; font-size:14px; width:80px; text-align:center}
+     .gza{ margin-left:154px;}
    }
   }
   .bortop{

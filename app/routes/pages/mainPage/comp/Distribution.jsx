@@ -1,22 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Distribution.scss';
-import Corner from './super/Corner.jsx';
 import Block from './super/block.jsx';
 import Block1 from './super/block1.jsx';
 import Title from './super/Title.jsx';
-import Pie from './chart/Pie.jsx';
-import Line from './chart/line1.jsx';
-import Line1 from './chart/line2.jsx';
 import Column from './chart/column1.jsx';
-import Table from './super/table.jsx';
 import dataBase from '../../../../../config/ModelData';
 import model from '../../../../../config/Model';
 import matrix from '../../../../../config/MatrixModel';
 import matData from '../../../../../config/MatrixData';
 import map1 from '../img/comp/DistributionMap.jpg' ;
+import leftIcon from '../img/comp/leftIcon.png' ;
+import rightIcon from '../img/comp/rightIcon.png' ;
 
-
+var actions = require('redux/actions');
 
 let Component = React.createClass({
     componentDidMount() {
@@ -28,6 +25,7 @@ let Component = React.createClass({
         let mod=model.Model;
         let  mat=matrix.Model;
         let matD=matData.ModelData;
+        let {clickNumber} = this.props;
         return (
             <div className={styles.bodyBox}>
 
@@ -97,6 +95,9 @@ let Component = React.createClass({
                         <Title title={['发电量完成率']}></Title>
                         <Column></Column>
 
+                    </div>
+                    <div className={styles.changeBox}>
+                        <img src={leftIcon}/>
                     </div>
                 </div>
                 <div className={styles.rightBox}>

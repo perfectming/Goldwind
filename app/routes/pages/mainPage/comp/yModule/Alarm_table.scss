@@ -1,0 +1,71 @@
+// .actionBox {
+//   width: 100%;
+//   text-align: right;
+//   margin-bottom: 30px;
+//   overflow: hidden;
+//   img {
+//     width: 30px;
+//     margin-left: 50px;
+//   }
+// }
+
+.tableBox {
+  overflow-y: scroll;
+  overflow-x:hidden;                                                                                                                            
+  height:1000px;
+  display:block;
+  .tableHeaderBox {
+    overflow: hidden;
+    background: #464c58;
+    .tableHeaderItem {
+      float: left;
+      height:40px;
+      line-height:40px;
+      overflow: hidden;
+      color:#fff;
+      text-align: center;
+    }
+  }
+  .tableContentBox {
+    .tableContentLine {
+       color:#fff;
+       background: #30343f;
+      overflow: hidden;
+      .tableContentItem {
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        height: 40px;
+        line-height:40px;
+        border: none;
+      }
+      .tableLineNum {
+        width: 65px;
+        padding: 10px 0 10px;
+        text-align: center;
+        background-color: #E4E5E6;
+        float: left;
+      }
+    }
+     .tableContentLine1 {
+       color:#fff;
+      overflow: hidden;
+      background: #272b34;
+      .tableContentItem {
+        float: left;
+        padding: 10px 0 10px;
+        overflow: hidden;
+        text-align: center;
+        height: 40px;
+        border: none;
+      }
+      .tableLineNum {
+        width: 65px;
+        padding: 10px 0 10px;
+        text-align: center;
+        background-color: #E4E5E6;
+        float: left;
+      }
+    }
+  }
+}
