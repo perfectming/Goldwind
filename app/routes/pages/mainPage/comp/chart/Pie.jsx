@@ -30,7 +30,6 @@ let num=[];
     for(let i=0;i<arr.length;i++){
         num.push([arrname[i],arr[i]])
     }
-    console.log(JSON.stringify(num));
  }
 let Component = React.createClass({
     componentWillMount() {
@@ -66,7 +65,7 @@ let Component = React.createClass({
                     allowPointSelect: false,
                     cursor: 'pointer',
                     borderWidth: 0,
-                    size: '60%',
+                    size: '50%',
                     innerSize: '40%',
                     dataLabels: {
                         enabled: true,

@@ -18,7 +18,7 @@ let Component = React.createClass({
                 {
                     boosterData.data.title.map((value, key)=> {
                         return (
-                            <div className={styles.station} key={key}>
+                            <div className={`${styles.station} ${styles.box_shadow}`} key={key}>
                                 <Corner></Corner>
                                 <MTitle title={[value[0]]}></MTitle>
                                 <div className={styles.mainn}>

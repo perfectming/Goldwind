@@ -4,12 +4,38 @@ var actions = require('redux/actions');
 
 import styles from './table.scss';
 var {getState} = require('../../../../../redux/store');
-
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
 import _ from 'lodash';
+import $ from 'jquery';
 
 let tabaleData = require('../../../../../../config/super_table');
+let dataBase=require('../../../../../../config/ModelData');
+let header=require('./tabledate');
+let headername=header.header;
+let date=dataBase.ModelData;
+let arrname=[];
+let point=[];
+
+(function(){
+  for(let key in date){
+    let arr=[];
+    for(let i=0;i<headername.length;i++){
+         if(i==0){
+            arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1)+"%");
+        }
+        if(i==6){
+            arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1)+"%");
+        }
+           arr.push(date[key][headername[i]]);
+            }
+            arrname.push(arr);
+         }
+          arrname.pop();
+        console.log(arrname)
+}());
+
+
 
 let Component = React.createClass({
     componentDidMount() {
@@ -33,7 +59,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.tableContentBox}>
                         {
-                            tabaleData.data.content.map((value, key)=> {
+                            arrname.map((value, key)=> {
                                 return (
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         {

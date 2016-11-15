@@ -18,18 +18,18 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/ssjk.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/ssjk_active.png'),
             subPage: [{
-                name:'监控面板',
+                name:'监控看板',
                 iconNormal: require('../app/routes/pages/mainPage/img/comp/jsc.png'),
                 iconActive: require('../app/routes/pages/mainPage/img/comp/jsc_active.png'),
                 page:[
                      {
-                        name:'监控面板1',
+                        name:'监控看板1',
+                        page:'monitorkb',
+                    },{
+                        name:'监控看板2',
                         page:'',
                     },{
-                        name:'监控面板2',
-                        page:'',
-                    },{
-                        name:'监控面板3',
+                        name:'监控看板3',
                         page:'',
                     }]
             },{
@@ -301,11 +301,11 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/xtgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/xtgl_active.png'),
             subPage: [{
-                name:'系统管理-1',
+                name:'角色管理',
                 page:[
                     {
                         name:'系统管理1-1',
-                        page:'',
+                        page:'ms',
                     },{
                         name:'系统管理1-2',
                         page:'',
@@ -314,11 +314,11 @@ module.exports = {
                         page:'',
                     }]
             },{
-                name:'系统管理-2',
+                name:'用户管理',
                 page:[
                     {
                         name:'系统管理2-1',
-                        page:'',
+                        page:'amm',
                     },{
                         name:'系统管理2-2',
                         page:'',

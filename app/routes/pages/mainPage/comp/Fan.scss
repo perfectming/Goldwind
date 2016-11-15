@@ -1,7 +1,10 @@
 .bodyBox{
+  .box_shadow:hover{
+       box-shadow:0 0 15px #fff;
+      }
   .listrightBox{
     width:1260px;
-    height:1130px;
+    height:1140px;
     overflow:hidden;
     float:right;
     .listbodyBox {
@@ -18,20 +21,18 @@
       }
     .listheaderBox{
       width:100%;
-      $height:auto;
+      height:auto;
       margin: 10px auto;
       background-color:#1D2835;
       position:relative;
-      button{
 
-        border-radius:6px;
-      }
       .listbtn{
-      width:160px;
+      width:130px;
       padding:5px 0;
+      border-radius:6px;
       background-color:#31F3FB;
       color:#69747B;
-      font-size:20px;
+      font-size:16px;
       font-weight: bold;  
       position:absolute;
       top:38%;left:10px;
@@ -44,18 +45,20 @@
       margin: 10px 0px 60px 170px;
       }
       .listopt{
-      display:inline-table;
-      margin: 10px 0px 10px 170px;
-      padding:5px 10px;
+      display:inline-block;
+      margin: 10px 0px 10px 140px;
+      padding:5px 20px;
       background-color:#1D2835;
-      width:1080px;
+      width:1130px;
       min-height:100px;
+     
       
       div{
+        font-size:14px;
         cursor:pointer;
         display:inline-table;
         float:left;
-        width:60px;
+        width:58px;
         height:25px;
         border-radius:3px;
         line-height:25px;
