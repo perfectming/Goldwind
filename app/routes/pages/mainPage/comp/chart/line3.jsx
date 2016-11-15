@@ -4,9 +4,8 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let dataBase=require('../../../../../../config/ModelData');
 let dataName=require('../../../../../../config/Model');
-let datename=dataBase.ModelData[8888800].CurDayPowerCurve.Time;
-let date=dataBase.ModelData[8888800].CurDayPowerCurve.Value;
-
+let datename=dataBase.ModelData[8888801].CurDayWindSpeedCurve.Time;
+let date=dataBase.ModelData[8888801].CurDayWindSpeedCurve.Value;
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -19,7 +18,7 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:"220",
+                height:"150",
 
             },
             title: {
@@ -27,7 +26,6 @@ let Component = React.createClass({
             },
             xAxis:{
                  categories:datename,
-                 
                  labels: {
                         style: {
                             color: '#fff',//颜色
@@ -69,7 +67,7 @@ let Component = React.createClass({
             },
             series: [{
                 type:'spline',
-                name: "",
+                name: "name",
                 data: date,
                    marker: {
                         enabled: false
