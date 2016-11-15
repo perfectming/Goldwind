@@ -26,7 +26,7 @@ import icon5 from '../img/comp/icon5.png';
 
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init();
+        this.props.init();1111
     },
 
     render() {

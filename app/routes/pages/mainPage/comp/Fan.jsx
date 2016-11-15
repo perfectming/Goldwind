@@ -206,6 +206,7 @@ let Component = React.createClass({
                        
                     </div>
                 </div>
+
                 <div className={styles.listrightBox}>
                     <div className={styles.listbodyBox}>
                     {
@@ -237,6 +238,7 @@ let Component = React.createClass({
                     }
                     </div>
                 </div>
+
             </div>
         );
     }
