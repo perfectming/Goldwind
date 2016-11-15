@@ -76,12 +76,12 @@ let Component = React.createClass({
                                     </div>
                                 )
                             } else if (value.type === 'button') {
-                            return (
-                                <div className={styles.btnBox} key={key}>
-                                    <button onClick={this.buttonAction}>{value.title}</button>
-                                </div>
-                            )
-                        }
+                                return (
+                                    <div className={styles.btnBox} key={key}>
+                                        <button onClick={this.buttonAction}>{value.title}</button>
+                                    </div>
+                                )
+                            }
                         })
                     }
                 </div>

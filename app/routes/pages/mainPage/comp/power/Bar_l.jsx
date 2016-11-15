@@ -21,17 +21,10 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                    stops: [
-                        [0, 'rgb(56, 85, 94)'],
-                        [1, 'rgb(37, 41, 48)']
-                    ]
-                },
-                borderRadius:10
+               
             },
             title: {
-                text: '准确率和合格率',
+                text: '',
                 style:{
                     color:"#fff",
                     fontSize:"22px",
@@ -44,7 +37,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    //fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
@@ -56,7 +49,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#4CDB9D', '#1E664A', '#000','#134833', '#082B1F']
+            colors: ['#32c5cd', '#37545c', '#000','#134833', '#082B1F']
             ,
             plotOptions: {
                 pie: {
@@ -69,21 +62,25 @@ let Component = React.createClass({
                         enabled: false
                     }
                 },
+                
                 bar:{
                     animation: true
                 }
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0,
+                    pointPadding: 0,
+                    borderWidth: 0,//柱状的边
                     pointWidth: 30
-                }
+                },
+                series: {
+                    borderRadius: 8
+                },
             },
             xAxis: {
                 lineWidth: 1,
                //lineColor: "red",
-                tickWidth: 1,
+                tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
