@@ -39,9 +39,10 @@ let Component = React.createClass({
                 {showPage === 'power' && <Power></Power>}
                 {showPage === 'test' && <Test></Test>}
                 {showPage === 'cockpit' && <Cockpit></Cockpit>}
+
                 <div className={styles.clearbox}></div>
 
-
+                
             </div>
         );
     }
