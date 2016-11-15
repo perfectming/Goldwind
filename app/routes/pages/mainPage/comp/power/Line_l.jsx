@@ -10,7 +10,8 @@ let Component = React.createClass({
     },
 
     render() {
-        let li = data.data.line_l;
+        let time = data.data.line_ltime;
+        let powerValue = data.data.line_lpower;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -52,8 +53,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#4CDB9D', '#339C70', '#1E664A', '#134833', '#082B1F']
-            ,
+            colors: ['#4CDB9D', '#339C70', '#1E664A', '#134833', '#082B1F'],
             plotOptions: {
                 pie: {
                     allowPointSelect: false,
@@ -64,7 +64,7 @@ let Component = React.createClass({
                     dataLabels: {
                         enabled: false
                     }
-                }
+                },
             },
             xAxis: {
                 lineWidth: 0,
@@ -78,7 +78,7 @@ let Component = React.createClass({
                         fontSize:'14px',  //字体
                     }
                 },
-                categories: li
+                categories: time
             },
             yAxis: {
                 lineWidth: 1,
@@ -96,7 +96,7 @@ let Component = React.createClass({
             series: [{
                 type: 'line',
                 name: "name",
-                data: li
+                data: powerValue
             }]
         };
         return (

@@ -3,14 +3,33 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('../../../../../../config/tkgl-table');
-
+let data = require('../../../../../../config/RegulationData');
+let mod = require('../../../../../../config/Model');
+let arr1 = [];
+let arr2=[];
+let arr3=[];
+let ssg1 = data.ModelData;
+let ssg2=mod.Model.ens;
+(function(){
+    for(let x in ssg1){
+        arr1.push(ssg1[x].Capacity/1);
+    }}());
+arr1.splice(-2,2);
+(function(){
+    for(let x in ssg1){
+        arr2.push((ssg1[x].Transformer_P/1).toFixed(0)/1);
+    }}());
+arr2.splice(-2,2);
+(function(){
+    for(let x in ssg2){
+        arr3.push(ssg2[x].name);
+    }}());
+arr3.splice(-2,2);
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let{database}=this.props;
         let configPie = {
             chart: {
                 type: 'column',
@@ -28,8 +47,7 @@ let Component = React.createClass({
                     fontFamily:"Microsoft YaHei"
                 }
             },
-            tooltip: {
-                headerFormat:'<span style="font-size: 20px;">{series.name}</span>',
+            tooltip: {headerFormat:'<span style="font-size: 20px;">{series.name}</span>',
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 pointFormat: "<b>{point.percentage:.0f}%</b>",
                 style:{
@@ -43,7 +61,7 @@ let Component = React.createClass({
                         fontSize:'15px'  //字体
                     }
                 },
-                categories: database(0)
+                categories: arr3
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -63,10 +81,10 @@ let Component = React.createClass({
             },
             series: [{
                 name: '<span style="color:#fff;font-size: 18px">装机容量</span>',
-                data: database(5),
+                data: arr1
             },{
                 name: '<span style="color:#fff;font-size: 18px">负荷</span>',
-                data: database(7),
+                data: arr2
             }]
         };
         return (
@@ -83,17 +101,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {},
-        database:(e)=>{
-            let arr=[];
-            data.data.content.map((value,key)=>{
-                value.map((valueC,keyC)=>{
-                    if(keyC===e){
-                        arr.push(valueC);
-                    }
-                })
-            })
-            return arr;
-        }
     };
 };
 

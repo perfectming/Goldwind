@@ -10,8 +10,9 @@ let Component = React.createClass({
     },
 
     render() {
-        let barRo = data.data.bar_ro;
-        let barRt= data.data.bar_rt;
+        let barRoTime = data.data.bar_rotime;
+        let barRoPowerValue = data.data.bar_roPower;
+        let barRtPowerValue = data.data.bar_rtPower;
         let configPie = {
             chart: {
                 height:400,
@@ -75,7 +76,7 @@ let Component = React.createClass({
                 fontSize: 28,
             },
             xAxis: {
-                categories: ["2016/10/13","2016/10/13","2016/10/13","2016/10/13","2016/10/13","2016/10/13"],
+                categories: barRoTime,
                  labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
@@ -99,11 +100,11 @@ let Component = React.createClass({
             series: [{
                 name: '发生次数',
                 type: 'column',
-                data: barRo
+                data: barRoPowerValue
             },{
                 name: '状态时长(s)',
                 type: 'column',
-                data: barRt
+                data: barRtPowerValue
             }]
         };
         return (

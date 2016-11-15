@@ -64,6 +64,43 @@ overflow:hidden;
       .states2{
        height:121px;
        margin-top:20px;
+         .box{
+          width:50%;
+          height:20px;
+          display:inline-block;
+         .block{
+          float:left;
+            width:16px;
+            height:16px;
+            border-radius:2px;
+            color:#f00;
+            margin:4px 5px 10px 20px;
+            img{
+            margin:0 0 0 -5px;
+            }
+          
+         }
+         .contect{
+          height:16px;
+          line-heigh:16px;
+           float:left;
+          display:inline-block;
+            margin:7px 10px 0 0; 
+
+         }
+         .numx{
+
+          height:20px;
+          line-heigh:20px;
+           float:left;
+           font-weight:bold;
+          display:inline-block;
+           
+            margin-top:8px; 
+
+         }
+      
+}
       }
      
     .indexs{
@@ -85,10 +122,51 @@ overflow:hidden;
       background: rgba(44,61,71,0.4);
       .spedc{
         width:50%;
-        height:142px;
         font-size:16px;
         display:inline-block; 
-       
+
+       .box{
+   
+          width:50%;
+          height:14px;
+          display:inline-block;
+         .block{
+          float:left;
+            width:16px;
+            height:16px;
+            border-radius:2px;
+            color:#f00;
+            margin:4px 5px 10px 20px;
+            img{
+            margin:0 0 0 -5px;
+            }
+          
+         }
+         .contect{
+          height:16px;
+          line-heigh:16px;
+           float:left;
+          display:inline-block;
+            margin:7px 10px 0 0; 
+
+         }
+         .num{
+
+          height:20px;
+          line-heigh:20px;
+           float:left;
+           font-weight:bold;
+          display:inline-block;
+           
+            margin-top:8px; 
+
+         }
+      
+}
+.box1{
+  width:100%
+}
+
 
       }
       .totalbox{
@@ -149,9 +227,10 @@ overflow:hidden;
            color:#333;
            left:0px;
            top:0px;
+           padding-left:20px;
            border-radius:10px;
            background: #33c4cc;
-           text-align:center;
+           text-align:left;
         }
         .absbox2{
         width:50%;
@@ -180,7 +259,7 @@ overflow:hidden;
       width:100%;
       .ehart{
         position:relative;
-         width:390px;
+         width:450px;
          height:280px;
          float:left;
          border:1px solid #3e4c67;
@@ -215,7 +294,7 @@ overflow:hidden;
        }
       }
       .spanL{
-      width:800px;
+      width:740px;
       margin-left:25px;
       padding-top:66px;
       }

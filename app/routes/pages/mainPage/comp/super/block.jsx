@@ -30,7 +30,7 @@ let Component = React.createClass({
                                 <span className={Bllo.block}><img src={value.url}/></span>
                                 <span className={Bllo.contect}>{value.text}</span>
                                 <span className={Bllo.num}>{value.num}</span>
-                            </div>
+                             </div>
                         )
                     })
                 }

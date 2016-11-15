@@ -1,4 +1,7 @@
 .bodyBox {
+  .box_shadow:hover{
+    box-shadow:0 0 20px #fff;
+  }
   overflow:hidden;
   position: relative;
   .station {
@@ -7,10 +10,9 @@
     float:left;
     height:450px;
     overflow: hidden;
-    margin-right: 30px;
-    margin-bottom: 30px;
-    background: #1f2638;
+    margin: 15px;
     position: relative;
+    border:3px solid #464c58;
     .mainn{
       width:100%;
       height: 100%;
@@ -27,6 +29,8 @@
         position: absolute;
         margin-top: 18px;
         margin-left: 690px;
+        animation: blink .75s linear infinite;
+        -webkit-animation: blink .75s linear infinite;
       }
       .hongdee{
         width: 30px;
@@ -36,6 +40,14 @@
         position: absolute;
         margin-top: 18px;
         margin-left: 764px;
+        animation: blink .75s linear infinite;
+        -webkit-animation: blink .75s linear infinite;
+      }
+      @-webkit-keyframes blink {
+        0% { opacity: 1; }
+        50% { opacity: 1; }
+        50.01% { opacity: 0; }
+        100% { opacity: 0; }
       }
       .lastt{
         width:100px;

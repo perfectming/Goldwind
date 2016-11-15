@@ -2,15 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
-let data = require('../../../../../../config/chart-data');
+let dataBase=require('../../../../../../config/ModelData');
+let dataName=require('../../../../../../config/Model');
+let datename=dataBase.ModelData[8888800].CurDayPowerCurve.Time;
+let date=dataBase.ModelData[8888800].CurDayPowerCurve.Value;
 
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let doughnutValue = data.data.line;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -25,7 +26,15 @@ let Component = React.createClass({
                 text: ''
             },
             xAxis:{
+                 categories:datename,
+                 
+                 labels: {
+                        style: {
+                            color: '#fff',//颜色
+                            fontFamily:"微软雅黑"
 
+                        }
+                }
             },
              yAxis:{
                 title:{
@@ -60,8 +69,8 @@ let Component = React.createClass({
             },
             series: [{
                 type:'spline',
-                name: "name",
-                data: doughnutValue,
+                name: "",
+                data: date,
                    marker: {
                         enabled: false
                        
