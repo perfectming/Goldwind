@@ -7,6 +7,7 @@ import Block1 from './super/block1.jsx';
 import Title from './super/Title.jsx';
 import Pie from './chart/Pie.jsx';
 import Line from './chart/line1.jsx';
+import Line2 from './chart/line3.jsx';
 import Line1 from './chart/line2.jsx';
 import Column from './chart/column1.jsx';
 import Table from './super/table.jsx';
@@ -40,8 +41,7 @@ let Component = React.createClass({
                     <div  className={`${styles.states} ${styles.box_shadow}`}>
                     
                          <Title title={['综合指标']}></Title>
-                         <Title title={['综合指标']}></Title>
-                         <Title title={['综合指标']}></Title>
+
                          <div className={styles.wind}>
                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.TActPower.name}</a><a className={styles.anum}><b>{data[8888800].TActPower}</b>{mod.dis.TActPower.unit}</a></span>
                             <span className={styles.num}><a className={styles.anum1}>{mod.dis.Capacity.name}</a><a className={styles.anum}><b>{data[8888800].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
@@ -65,39 +65,39 @@ let Component = React.createClass({
                           
                          </div>
                           <div className={styles.wind}>
-                             <div className={styles.box}>
+                             <div className={styles.box} style={{color:mod.dis.ONL.color}}>
                                 <span className={styles.block}><img src={icon0}/></span>
-                                <span className={styles.contect} style={{"color":"#1fe005"}}>运行</span>
-                                <span className={styles.numx} style={{"color":"#1fe005"}}>{data[8888801].ONL}</span>
+                                <span className={styles.contect}>{mod.dis.ONL.name}</span>
+                                <span className={styles.numx}>{data[8888801].ONL}</span>
                              </div>
 
-                             <div className={styles.box}>
+                             <div className={styles.box} style={{color:mod.dis.FaultCount.color}}>
                                 <span className={styles.block}><img src={icon1}/></span>
-                                <span className={styles.contect} style={{"color":"#ff0000"}}>故障</span>
-                                <span className={styles.numx} style={{"color":"#ff0000"}}>{data[8888801].FaultCount}</span>
+                                <span className={styles.contect}>{mod.dis.FaultCount.name}</span>
+                                <span className={styles.numx}>{data[8888801].FaultCount}</span>
                              </div>
 
-                             <div className={styles.box}>
+                             <div className={styles.box} style={{color:mod.dis.RepairCount.color}}>
                                 <span className={styles.block}><img src={icon2}/></span>
-                                <span className={styles.contect} style={{"color":"#fbd500"}}>检测</span>
-                                <span className={styles.numx} style={{"color":"#fbd500"}}>{data[8888801].RepairCount}</span>
+                                <span className={styles.contect}>{mod.dis.RepairCount.name}</span>
+                                <span className={styles.numx}>{data[8888801].RepairCount}</span>
                              </div>
-                               <div className={styles.box}>
+                               <div className={styles.box} style={{color:mod.dis.OfflineCount.color}}>
                                 <span className={styles.block}><img src={icon3}/></span>
-                                <span className={styles.contect} style={{"color":"#929396"}}>离线</span>
-                                <span className={styles.numx} style={{"color":"#929396"}}>{data[8888801].OfflineCount}</span>
+                                <span className={styles.contect}>{mod.dis.OfflineCount.name}</span>
+                                <span className={styles.numx}>{data[8888801].OfflineCount}</span>
                              </div>
 
-                             <div className={styles.box}>
+                             <div className={styles.box} style={{color:mod.dis.WFStandbyCount.color}}>
                                 <span className={styles.block}><img src={icon4}/></span>
-                                <span className={styles.contect} style={{"color":"#2189ff"}}>待机</span>
-                                <span className={styles.numx} style={{"color":"#2189ff"}}>{data[8888801].WFStandbyCount}</span>
+                                <span className={styles.contect}>{mod.dis.WFStandbyCount.name}</span>
+                                <span className={styles.numx}>{data[8888801].WFStandbyCount}</span>
                              </div>
 
-                             <div className={styles.box}>
+                             <div className={styles.box} style={{color:mod.dis.OfflineCount.color}}>
                                 <span className={styles.block}><img src={icon5}/></span>
-                                <span className={styles.contect} style={{"color":"#dddcdc"}}>限电</span>
-                                <span className={styles.numx} style={{"color":"#dddcdc"}}>{data[8888802].PVOFL}</span>
+                                <span className={styles.contect}>{mod.dis.OfflineCount.name}</span>
+                                <span className={styles.numx}>{data[8888801].OfflineCount}</span>
                              </div>
 
 
@@ -116,22 +116,22 @@ let Component = React.createClass({
                         <div className={styles.spedc}>
 
 
-                            <div className={`${styles.box} ${styles.box1}`}>
+                            <div className={`${styles.box} ${styles.box1}`} style={{color:mod.dis.PVONL.color}}>
                                 <span className={styles.block}><img src={icon0}/></span>
-                                <span className={styles.contect} style={{"color":"#1fe005"}}>运行</span>
-                                <span className={styles.num} style={{"color":"#1fe005"}}>{data[8888802].PVONL}</span>
+                                <span className={styles.contect} >{mod.dis.PVONL.name}</span>
+                                <span className={styles.num} >{data[8888802].PVONL}</span>
                              </div>
 
-                             <div className={`${styles.box} ${styles.box1}`}>
+                             <div className={`${styles.box} ${styles.box1}`} style={{color:mod.dis.PVFLT.color}}>
                                 <span className={styles.block}><img src={icon1}/></span>
-                                <span className={styles.contect} style={{"color":"#ff0000"}}>故障</span>
-                                <span className={styles.num} style={{"color":"#ff0000"}}>{data[8888802].PVFLT}</span>
+                                <span className={styles.contect} >{mod.dis.PVFLT.name}</span>
+                                <span className={styles.num} >{data[8888802].PVFLT}</span>
                              </div>
 
-                             <div className={`${styles.box} ${styles.box1}`}>
+                             <div className={`${styles.box} ${styles.box1}`} style={{color:mod.dis.PVOFL.color}}>
                                 <span className={styles.block}><img src={icon3}/></span>
-                                <span className={styles.contect} style={{"color":"#929396"}}>离线</span>
-                                <span className={styles.num} style={{"color":"#929396"}}>{data[8888802].PVOFL}</span>
+                                <span className={styles.contect} >{mod.dis.PVOFL.name}</span>
+                                <span className={styles.num} >{data[8888802].PVOFL}</span>
                              </div>
 
 
@@ -175,7 +175,7 @@ let Component = React.createClass({
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
                             <Line1></Line1>
                    
-                            <Title title={['风场指标']}></Title>
+                            <Title title={[mod.dis.CurDayPowerCurve.name+'('+mod.dis.CurDayPowerCurve.unit+')']}></Title>
                             
                         </div>
                         <div style={{"clear":"both"}}></div>
@@ -183,13 +183,13 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.chart_bar}>
                         <div className={`${styles.linebox} ${styles.box_shadow}`}>
-                            <Line></Line>
-                            <Title title={['风场指标']}></Title>
+                            <Line2></Line2>
+                            <Title title={[mod.dis.CurDayWindSpeedCurve.name+'('+mod.dis.CurDayWindSpeedCurve.unit+')']}></Title>
                         </div>
 
                          <div className={`${styles.linebox} ${styles.linebox1} ${styles.box_shadow}`}>
                             <Line></Line>
-                            <Title title={['风场指标']}></Title>
+                            <Title title={[mod.dis.CurDayPVTSICurve.name+'('+mod.dis.CurDayPVTSICurve.unit+')']}></Title>
 
                         </div>
                         <div style={{"clear":"both"}}></div>
@@ -200,9 +200,9 @@ let Component = React.createClass({
                     </div>
                     <div className={`${styles.table} ${styles.box_shadow}`}>
                    
-                        <Title title={['风场指标','综合指标']}></Title>
+                       
                         <Table></Table>
-                        <Table></Table>
+                        
                         
                     </div>
                 </div>
