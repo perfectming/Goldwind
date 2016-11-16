@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Alarm.scss';
-import AlarmTable from '../yModule/Alarm_table.jsx';
+import styles from './Fault.scss';
+import FaultTable from '../yModule/Fault_table.jsx';
 
-let comps = require('./Alarm_dorpmenu.js');
+
+let comps = require('./Fault_dorpmenu.js');
 
 var actions = require('redux/actions');
 
@@ -16,22 +17,17 @@ let Component = React.createClass({
         // 获取select 选择的内容
         var sType = this.refs.selectType0.value;
         var sType1 = this.refs.selectType1.value;
-        var sType2 = this.refs.selectType2.value;
-        var sType3 = this.refs.selectType3.value;
         //开始时间
         var sTime = this.refs.startTime.value;
         //结束时间时间
         var eTime = this.refs.endTime.value;
-
-        var tContent = this.refs.textContent5.value;
-        var tContent1 = this.refs.textContent6.value;
 
         if(sTime == '' || eTime == ''){
             alert('请选择开始或者结束时间');
             return false;
         }
         console.log(sType);
-        alert(sType+sType1+sType2+sType3+sTime+eTime+tContent+tContent1);
+        alert(sType+sType1+sTime+eTime);
         // 在这个下边获取这个时间段的数据就行了
         // 然后去更新图表
     },
@@ -40,7 +36,7 @@ let Component = React.createClass({
          let {buttonAction, inputOnChange, onFocus} = this.props;
         let comp = comps.comps.from;
         return (
-            <div className={styles.alarmBox}>
+            <div className={styles.faultBox}>
                 <div className={styles.inquireBox}>
                     {
                         comp.map((value, key,valueName)=> {
@@ -84,7 +80,7 @@ let Component = React.createClass({
                     }
                 </div>
                 <div className={styles.tableBox}>
-                    <AlarmTable></AlarmTable>
+                    <FaultTable></FaultTable>
                 </div>
             </div>
         );

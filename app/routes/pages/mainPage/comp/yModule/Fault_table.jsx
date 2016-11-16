@@ -2,12 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 
-import styles from './Alarm_table.scss';
+import styles from './Fault_table.scss';
 var {getState} = require('../../../../../redux/store');
 
 import _ from 'lodash';
 
-let tabaleData = require('../yAll/Alarm_table.js');
+let tabaleData = require('../yAll/Fault_table.js');
 
 let Component = React.createClass({
     componentDidMount() {
