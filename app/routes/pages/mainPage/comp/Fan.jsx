@@ -64,7 +64,7 @@ for(var j in skt){
         // }
     }
     // console.log(arr1);
-    console.log(arr2);
+    // console.log(arr2);
 arr1.map((valueZ, keyZ)=> {
     // console.log(valueZ)
 })
