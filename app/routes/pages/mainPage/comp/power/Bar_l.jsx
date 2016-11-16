@@ -74,7 +74,7 @@ let Component = React.createClass({
                     pointWidth: 30
                 },
                 series: {
-                    borderRadius: 8
+                    borderRadius: 8,
                 },
             },
             xAxis: {
