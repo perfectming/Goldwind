@@ -38,7 +38,7 @@ let Component = React.createClass({
                     allowPointSelect: false,
                     cursor: 'pointer',
                     borderWidth: 0,
-                    size: '80%',
+                    size: '50%',
                     innerSize: '80%',
                     dataLabels: {
                         enabled: false

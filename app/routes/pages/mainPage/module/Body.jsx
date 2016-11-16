@@ -15,6 +15,7 @@ import Tree from './Tree.jsx';
 import Header from './Header.jsx';
 import Fan from '../comp/Fan.jsx';
 import Cockpit from '../comp/linjinjin/Cockpit.jsx';
+import Fan_matrix from '../comp/linjinjin/Fan_matrix.jsx';
 import Alarm from '../comp/yAll/Alarm.jsx';
 import PEQI from '../comp/jy/PEQI.jsx';
 import ARS from '../comp/jy/ARS.jsx';
@@ -22,6 +23,7 @@ import AS from '../comp/jy/AS.jsx';
 import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
+import Fault from '../comp/yAll/Fault.jsx';
 
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
@@ -32,9 +34,9 @@ let Component = React.createClass({
     },
 
     render() {
-        let {showPage, tabOpt, tab,} = this.props;
+        let {showPage, tabOpt, tab, flag=true} = this.props;
         return (
-            <div className={styles.bodyBox}>
+            <div className={flag===true?styles.bodyBox : styles.bodyBox1}>
                 <Tab tabOpt={tabOpt} tab={tab}/>
                 {showPage === 'chart' && <Chart></Chart>}
                 {showPage === 'from' && <From></From>}
@@ -54,11 +56,9 @@ let Component = React.createClass({
                 {showPage === 'ms' && <Ms></Ms>}
                 {showPage === 'amm' && <Amm></Amm>}
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
+                {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
+                {showPage === 'fault' && <Fault></Fault>}
                 <div className={styles.clearbox}></div>
-
-                <div className={styles.clearbox}></div>
-
-                
             </div>
         );
     }
@@ -68,12 +68,14 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         showPage: state.vars.showPage,
+        flag: state.vars.bodypage,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('bodypage', false));
         },
     };
 };

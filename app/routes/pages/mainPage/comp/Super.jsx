@@ -11,6 +11,7 @@ import Line2 from './chart/line3.jsx';
 import Line1 from './chart/line2.jsx';
 import Column from './chart/column1.jsx';
 import Table from './super/table.jsx';
+import Table1 from './super/table1.jsx';
 import dataBase from '../../../../../config/ModelData';
 import model from '../../../../../config/Model';
 import matrix from '../../../../../config/MatrixModel';
@@ -198,12 +199,13 @@ let Component = React.createClass({
                         
                        
                     </div>
-                    <div className={`${styles.table} ${styles.box_shadow}`}>
-                   
-                       
-                        <Table></Table>
-                        
-                        
+                    <div className={styles.box_shadow}>
+                        <div className={styles.table}>
+                            <Table></Table> 
+                        </div>
+                        <div className={`${styles.table} ${styles.bot}`}>
+                            <Table1></Table1> 
+                        </div>
                     </div>
                 </div>
             </div>

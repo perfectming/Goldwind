@@ -8,9 +8,9 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {tabOpt, tab, itemActive, changeTabItem} = this.props;
+        let {tabOpt, tab, itemActive, changeTabItem, hide=true} = this.props;
         return (
-            <div className={styles.navTab}>
+            <div className={hide===true? styles.navTab : styles.navTab1}>
                 {
                     tabOpt && tabOpt.subPage[tab].page.map((value, key)=> {
                       
@@ -34,6 +34,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         itemActive: state.vars.tabItemActive,
+        hide: state.vars.navhide,
     }
 };
 
@@ -42,6 +43,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('tabItemActive', 0));
             dispatch(actions.setVars('showPage', 'cockpit'));
+            dispatch(actions.setVars('navhide', false));
         },
         changeTabItem: (key, page) => {
             dispatch(actions.setVars('showPage', page));

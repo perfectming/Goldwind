@@ -11,3 +11,16 @@
   	clear:both
   }
 }
+.bodyBox1 {
+  display:inline-table;
+  width: 1922px;
+  overflow-x: hidden;
+  border-top: 1px solid #3BA9AE;
+  border-left: 1px solid #3BA9AE;
+  min-height: 1200px;
+  background: url("../img/icon/bg.png");
+  padding-left: 30px;
+  .clearbox{
+    clear:both
+  }
+}

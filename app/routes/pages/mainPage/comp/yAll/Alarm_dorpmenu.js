@@ -78,6 +78,12 @@ module.exports = {
                 id: 'button',
                 title: '查询',
             },
+            {
+                type: 'chcekBox',
+                content: '这是一个确认框',
+                id: 'input3',
+                title: '这是一个确认框'
+            },
             
         ],
         chart:[

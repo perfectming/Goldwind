@@ -35,11 +35,17 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
             dispatch(actions.setVars('treeItemActive', 0));
+            dispatch(actions.setVars('navhide', false));
         },
         changeTreeItem: (key,page) => {
             dispatch(actions.setVars('treeItemActive', key));
              dispatch(actions.setVars('tabItemActive', 0));
               dispatch(actions.setVars('showPage', page));
+               if(page=='monitorkb'){
+                dispatch(actions.setVars('navhide', false));
+             }else{
+                dispatch(actions.setVars('navhide', true));
+             }
               
         },
      
