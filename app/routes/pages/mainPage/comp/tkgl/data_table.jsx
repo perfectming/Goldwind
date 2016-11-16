@@ -34,7 +34,7 @@ let Component = React.createClass({
                                                 
                                               
                                                 return (
-                                                    <div className={styles.tableContentItem}style={{width:(100/tab.data.header.length)+"%"}}
+                                                    <div className={styles.tableContentItem} style={{width:(100/tab.data.header.length)+"%"}}
                                                            key={keyC}>{valueC}</div>
                                                 )
                                             })

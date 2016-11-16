@@ -6,11 +6,11 @@
     padding-top:20px;
     border-top:1px solid #ccc;
     overflow:hidden;
-    font-size:20px;
+    font-size:16px;
     .seleBox{
       float:left;
       margin-right:40px;
-      font-size: 20px;
+      font-size: 16px;
       color: #fff;
       select{
         margin-left: 20px;
@@ -19,6 +19,9 @@
         height:40px;
         line-height:30px;
         border-radius:2px;
+        .opt{
+          font-size: 16px;
+        }
       }
     }
     .btnBox{
@@ -27,6 +30,7 @@
         background: #fff;
         width:170px;
         height:30px;
+        line-height: 30px;
         text-align: center;
         margin-left:80%;
         border-radius:4px;

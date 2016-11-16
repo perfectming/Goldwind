@@ -7,6 +7,12 @@ var actions = require('redux/actions');
 let comps = require('./data');
 let ssg2=mod.Model.ens;
 let arr3=[];
+let years=[];
+let thDate=new Date();
+let thYear=thDate.getFullYear();
+for(let i=0;i<=30;i++){
+    years.push(thYear-15+i)
+}
 (function(){
     for(let x in ssg2){
         arr3.push(ssg2[x].name);
@@ -25,7 +31,7 @@ let Component = React.createClass({
                     <div className={styles.seleBox} key='0'>
                         <span>年度</span>
                         <select>
-                            {comp.yearD.map((value, key)=> {
+                            {years.map((value, key)=> {
                                     return (
                                     <option value={value} key={key}>{value}</option>
                                     )
@@ -38,7 +44,7 @@ let Component = React.createClass({
                         <select>
                             {arr3.map((value, key)=> {
                                 return (
-                                    <option value={value} key={key}>{value}</option>
+                                    <option className={styles.opt} value={value} key={key}>{value}</option>
                                 )
                             })
                             }
