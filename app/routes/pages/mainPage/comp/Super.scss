@@ -324,10 +324,13 @@ overflow:hidden;
     .table{ 
       position:relative;
       width:100%;
+      height:240px;
+      overflow:hidden;
       border:1px solid #3e4c67;
       margin-top:25px;
       background: rgba(44,61,71,0.4);
     }
+    .bot{margin-top:0px;}
     
 
  }

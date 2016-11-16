@@ -34,6 +34,7 @@ const mapStateToProps = (state) => {
     return {
         itemHeaderActive: state.vars.headerItemActive,
         itemTreeAct: state.vars.treeItemActive,
+        flag: state.vars.putpage,
     }
 };
 
@@ -41,6 +42,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: ()=> {
             dispatch(actions.setVars('headerItemActive', 0));
+            dispatch(actions.setVars('putpage', false));
+
         },
       
     }

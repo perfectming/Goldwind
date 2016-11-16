@@ -30,12 +30,16 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 height:360,
-                marginLeft:50
+                marginLeft:50,
+                overflow:'auto'
             },
             title: {
                 text: ''
             },
-             xAxis: { 
+             xAxis: {
+
+                tickInterval: 1,
+
                 categories: nam,
                  labels: {
 
@@ -49,7 +53,9 @@ let Component = React.createClass({
                         }
                 }
             }, 
-            yAxis: {    
+            yAxis: {  
+
+            tickPixelInterval: 500, 
                     lineWidth:1,
                     //dashStyle:"Dot",
                     //tickInterval:80,//刻度线间距
@@ -101,7 +107,7 @@ let Component = React.createClass({
                     borderColor:"",
                     },
                    series: {
-                borderRadius: 10//圆角
+                borderRadius: 8//圆角
             },
                 pie: {
                     allowPointSelect: false,
@@ -125,7 +131,7 @@ let Component = React.createClass({
                 type: 'line',
                 color:"#59e481",
                 name: "公司发电完成率",
-                data: 0,
+                data: arr,
                  marker: {
                         enabled: false
                        

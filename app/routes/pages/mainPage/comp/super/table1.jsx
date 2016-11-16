@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
-import styles from './table.scss';
+import styles from './table1.scss';
 var {getState} = require('../../../../../redux/store');
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
@@ -12,7 +12,7 @@ let tabaleData = require('../../../../../../config/super_table');
 let dataBase=require('../../../../../../config/ModelData');
 let place=require('../../../../../../config/Model');
 let header=require('./tabledate');
-let headername=header.header;
+let headername=header.header1;
 let date=dataBase.ModelData;
 let placename=place.Model.ens;
 let arrname=[];
@@ -55,7 +55,7 @@ let Component = React.createClass({
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
-                            tabaleData.data.header.map((value, key)=> {
+                            tabaleData.data.header1.map((value, key)=> {
                                 return (
                                     <div className={styles.tableHeaderItem}
                                          style={{width:(tabaleData.data.width[key])+"%"}} key={key}>{value}</div>
