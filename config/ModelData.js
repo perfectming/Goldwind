@@ -1,7 +1,7 @@
 module.exports ={
     "ModelData": {
     "650107": {
-        "WFCount": "1",
+            "WFCount": "1",
             "PVCount": "1",
             "WTCount": "17",
             "InverterCount": "0",

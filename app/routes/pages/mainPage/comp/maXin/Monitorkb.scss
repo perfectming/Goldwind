@@ -1,0 +1,113 @@
+.bodyBox{
+  overflow: hidden;
+  .zhzb{
+    width:480px;
+    height:260px;
+    margin:12px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:2px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+    .zhzbtop{
+      width:440px;
+      height:210px;
+      margin-left: 20px;
+      border-bottom: 1px solid #111111;
+    }
+    .zhzbdown{
+      width:440px;
+      height:47px;
+      margin-left: 20px;
+      color: #ffffff;
+      padding: 8px;
+      text-align: center;
+      font-size: 16px;
+      overflow: hidden;
+      .daynum{
+        font-size: 20px;
+        color:#1fe005;
+      }
+    }
+  }
+  .zhzbgl{
+    width:1215px;
+    height:260px;
+    margin:12px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+  }
+  .czrlzb{
+    width:480px;
+    height:280px;
+    margin:12px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+  }
+  .nfdlwcqk{
+    width:595px;
+    height:280px;
+    margin:12px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+  }
+  .czydfdqk{
+    width:595px;
+    height:280px;
+    margin:12px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+  }
+  .longbox{
+    width:1720px;
+    height:120px;
+    margin:12px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+  }
+  .fgzyfx{
+    width:622px;
+    height:280px;
+    margin:12px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+  }
+  .ssdlqkfx{
+    width:500px;
+    height:280px;
+    margin:12px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+  }
+  .gzsbgl{
+    width:550px;
+    height:280px;
+    margin:12px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+  }
+}

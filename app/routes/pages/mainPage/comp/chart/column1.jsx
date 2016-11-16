@@ -101,7 +101,7 @@ let Component = React.createClass({
                     borderColor:"",
                     },
                    series: {
-                borderRadius: 10
+                borderRadius: 10//圆角
             },
                 pie: {
                     allowPointSelect: false,
