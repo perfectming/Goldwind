@@ -98,8 +98,8 @@ module.exports = {
                         name:'业务报表1',
                         page:'',
                     },{
-                        name:'故障报表',
-                        page:'fault',
+                        name:'业务报表2',
+                        page:'',
                     },{
                         name:'业务报表3',
                         page:'',
