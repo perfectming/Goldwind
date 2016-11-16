@@ -1,3 +1,4 @@
+input{background: #000;}
 .actionBox {
   width: 100%;
   text-align: right;
@@ -20,20 +21,19 @@
 
   overflow: hidden;
   .tableHeaderBox {
-    font-size: 30px;
     overflow: hidden;
     background: #464c58;
     .tableHeaderItem {
       float: left;
-      height:100px;
-      line-height:100px;
+      height:40px;
+      line-height:40px;
       overflow: hidden;
       color:#fff;
       text-align: center;
     }
   }
   .tableContentBox {
-    font-size: 20px;
+    font-size: 14px;
     .tableContentLine {
       color:#fff;
       background: #30343f;
@@ -42,12 +42,12 @@
         float: left;
         overflow: hidden;
         text-align: center;
-        height: 60px;
-        line-height:30px;
+        height: 40px;
+        line-height:40px;
         border: none;
       }
       .tableLineNum {
-        width: 45px;
+        width: 65px;
         padding: 10px 0 10px;
         text-align: center;
         background-color: #E4E5E6;
@@ -60,14 +60,14 @@
       background: #272b34;
       .tableContentItem {
         float: left;
+        padding: 10px 0 10px;
         overflow: hidden;
         text-align: center;
-        height: 60px;
-        line-height:30px;
+        height: 40px;
         border: none;
       }
       .tableLineNum {
-        width: 45px;
+        width: 65px;
         padding: 10px 0 10px;
         text-align: center;
         background-color: #E4E5E6;

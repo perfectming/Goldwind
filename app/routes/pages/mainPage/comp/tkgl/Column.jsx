@@ -43,13 +43,12 @@ let Component = React.createClass({
                 text: '升压站负荷概览',
                 style:{
                     color:"#fff",
-                    fontSize:"24px",
+                    fontSize:"16px",
                     fontFamily:"Microsoft YaHei"
                 }
             },
-            tooltip: {headerFormat:'<span style="font-size: 20px;">{series.name}</span>',
+            tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>",
                 style:{
                     fontSize:'15px'
                 }
@@ -70,7 +69,8 @@ let Component = React.createClass({
             ,
             plotOptions: {
                 series: {
-                    stacking: 'normal',
+                    grouping: false,
+                    borderRadius: 20,
                     allowPointSelect: false,
                     cursor: 'pointer',
                     borderWidth: 0,

@@ -5,6 +5,7 @@ import Bar_l from './Bar_l.jsx';
 import Bar_r from './Bar_r.jsx';
 import Line_l from './Line_l.jsx';
 import Line_r from './Line_r.jsx';
+import Title from './PowerTitle.jsx';
 
 var actions = require('redux/actions');
 let comps = require('../../../../../../config/comp');
@@ -47,6 +48,7 @@ let Component = React.createClass({
                             } else if (value.type === 'select') {
                                 return (
                                     <div className={styles.seleBox} key={key}>
+                                        <span>风电场名称</span>
                                         <select ref="selectType">
                                             {value.select.map((value, key)=> {
                                                 return (
@@ -67,16 +69,20 @@ let Component = React.createClass({
                     }
                 </div>
                 <div className={styles.chartBox}>
-                    <div className={styles.barOne}>
+                    <div className={styles.charChildren}>
+                        <Title title={['准确率和合格率']}></Title>
                         <Bar_l></Bar_l>
                     </div>
-                    <div className={styles.barTwo}>
+                    <div className={styles.charChildren}>
+                        <Title title={['上报率']}></Title>
                         <Bar_r></Bar_r>
                     </div>
-                    <div className={styles.lineOne}>
+                    <div className={styles.charChildren}>
+                        <Title title={['短期功率预测']}></Title>
                         <Line_l></Line_l>
                     </div>
-                    <div className={styles.lineTwo}>
+                    <div className={styles.charChildren}>
+                        <Title title={['超短期功率预测']}></Title>
                         <Line_r></Line_r>
                     </div>
                 </div>
