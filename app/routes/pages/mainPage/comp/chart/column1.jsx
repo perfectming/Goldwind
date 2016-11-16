@@ -2,17 +2,25 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
-let data = require('../../../../../../config/chart-data');
-
+let base = require('../../../../../../config/Model');
+let data = require('../../../../../../config/ModelData');
+let dat = data.ModelData;
+let bas = base.Model.ens;
+let arr=[];
+let nam=[];
+(function(){for(let i in dat){
+    arr.push(dat[i].YearEgyAt/dat[i].YearPlanTotEgyAt);
+}})();
+arr.pop();
+(function(){for(let i in bas){
+    nam.push(bas[i].name);
+}})();
+nam.pop();
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let doughnutValue = data.data.column;
-        let doughnutValue1 = data.data.column2;
-        let coltext = data.data.texto;
         let configPie = {
             chart: {
                 type: 'bar',
@@ -28,7 +36,7 @@ let Component = React.createClass({
                 text: ''
             },
              xAxis: { 
-                categories: coltext,
+                categories: nam,
                  labels: {
 
                        rotation: 0,
@@ -111,13 +119,13 @@ let Component = React.createClass({
                 type: 'column',
                 color:"#33c5cd",
                 name: "站场发电完成率",
-                data: doughnutValue,
+                data: arr,
             },
              {
                 type: 'line',
                 color:"#59e481",
                 name: "公司发电完成率",
-                data: doughnutValue1,
+                data: 0,
                  marker: {
                         enabled: false
                        
