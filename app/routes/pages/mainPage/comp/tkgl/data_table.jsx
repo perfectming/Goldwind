@@ -1,18 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
+var {getState} = require('../../../../../redux/store');
 var actions = require('redux/actions');
-
+import save from '../../img/comp/save.png';
+import refresh from '../../img/comp/refresh.png';
 import styles from './data_table.scss';
-
-let tabledata = require('../jy/data');
-let tab =tabledata.peqi.table;
+import _ from 'lodash';
+let tabaleData = require('../jy/data');
+let tab =tabaleData.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init();
+        this.props.init(tabaleData.peqi);
     },
     render() {
+        let {table} = this.props;
         return (
             <div>
+                <div className={styles.actionBox}>
+                    <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
+                    <img src={refresh}/>
+                </div>
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {

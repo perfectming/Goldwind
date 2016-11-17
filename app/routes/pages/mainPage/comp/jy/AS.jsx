@@ -16,13 +16,14 @@ let tabaleData = require('./data');
 
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init(tabaleData);
+        this.props.init(tabaleData.as);
     },
     render() {
         let {blank,table, changeTableItem} = this.props;
         return (
             <div>
-                <div className={styles.btn}><img src={u865} onClick={blank}/><img src={u867} onClick={blank}/><img src={u869} onClick={blank}/></div>
+                <div className={styles.btn}><img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
+                    <img src={refresh}/><img src={u865} onClick={blank}/><img src={u867} onClick={blank}/><img src={u869} onClick={blank}/></div>
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
