@@ -6,7 +6,7 @@ module.exports = {
             rightpagge:[
             	{
             		tabname:'风机矩阵',
-            		rpage:'fjjz'
+            		rpage:'fanmatrix'
             	},
             	{
             		tabname:'数据列表',

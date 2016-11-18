@@ -1,141 +1,229 @@
-.actionBox {
-  width: 100%;
-  text-align: right;
-  margin-bottom: 30px;
+.toBox {
   overflow: hidden;
-  img {
-    width: 30px;
-    margin-left: 50px;
-  }
-}
-.btn{
-  margin-left: 85%;
-  padding: 20px;
-  img{
-    margin-right: 20px;
-    cursor: pointer;
-  }
-}
-.leftBox{
-  width:45%;
-  float: left;
-  margin-left: 3%;
-  margin-right: 2%;
-}
-.rightBox{
-  width:45%;
-  float: left;
-  margin-left: 3%;
-  margin-right: 2%;
-}
-.tableBox {
-
-  overflow: hidden;
-  .tableHeaderBox {
+  .actionBox {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 30px;
     overflow: hidden;
-    background: #464c58;
-    .tableHeaderItem {
-      float: left;
-      height:40px;
-      line-height:40px;
-      overflow: hidden;
-      color:#fff;
-      text-align: center;
+    img {
+      width: 30px;
+      margin-left: 50px;
     }
   }
-  .tableContentBox {
-    font-size: 14px;
-    .tableContentLine {
-      color:#fff;
-      background: #30343f;
+  .btn {
+    margin-left: 85%;
+    padding: 20px;
+    img {
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  }
+  .leftBox {
+    width: 45%;
+    float: left;
+    margin-left: 3%;
+    margin-right: 2%;
+  }
+  .rightBox {
+    width: 45%;
+    float: left;
+    margin-left: 3%;
+    margin-right: 2%;
+  }
+  .tableBox {
+
+    overflow: hidden;
+    .tableHeaderBox {
       overflow: hidden;
-      .tableContentItem {
+      background: #464c58;
+      .tableHeaderItem {
+        float: left;
+        height: 40px;
+        line-height: 40px;
+        overflow: hidden;
+        color: #fff;
+        text-align: center;
+      }
+    }
+    .tableContentBox {
+      font-size: 14px;
+      .tableContentLine {
+        color: #fff;
         background: #30343f;
-        float: left;
         overflow: hidden;
-        text-align: center;
-        height: 40px;
-        line-height:40px;
-        border: none;
+        .tableContentItem {
+          background: #30343f;
+          float: left;
+          padding: 10px 0 10px;
+          overflow: hidden;
+          text-align: center;
+          height: 40px;
+          border: none;
+          .icon0{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1fe005;
+            display: inline-block;
+            text-align: center;
+          }
+          .icon1{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ff0000;
+            display: inline-block;
+            text-align: center;
+          }
+          .icon2{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #818285;
+            display: inline-block;
+            text-align: center;
+          }
+          .icon3{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2187fb;
+            display: inline-block;
+            text-align: center;
+          }
+          .icon4{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fbd500;
+            display: inline-block;
+            text-align: center;
+          }
+        }
+        .tableLineNum {
+          width: 65px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
       }
-      .tableLineNum {
-        width: 65px;
-        padding: 10px 0 10px;
-        text-align: center;
-        background-color: #E4E5E6;
-        float: left;
-      }
-    }
-    .tableContentLine1 {
-      color:#fff;
-      overflow: hidden;
-      background: #272b34;
-      .tableContentItem {
+      .tableContentLine1 {
+        color: #fff;
+        overflow: hidden;
         background: #272b34;
-        float: left;
-        padding: 10px 0 10px;
-        overflow: hidden;
-        text-align: center;
-        height: 40px;
-        border: none;
-      }
-      .tableLineNum {
-        width: 65px;
-        padding: 10px 0 10px;
-        text-align: center;
-        background-color: #E4E5E6;
-        float: left;
+        .tableContentItem {
+          background: #272b34;
+          float: left;
+          padding: 10px 0 10px;
+          overflow: hidden;
+          text-align: center;
+          height: 40px;
+          border: none;
+          .icon0{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1fe005;
+            display: inline-block;
+            text-align: center;
+          }
+          .icon1{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #ff0000;
+            display: inline-block;
+            text-align: center;
+          }
+          .icon2{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #818285;
+            display: inline-block;
+            text-align: center;
+          }
+          .icon3{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2187fb;
+            display: inline-block;
+            text-align: center;
+          }
+          .icon4{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fbd500;
+            display: inline-block;
+            text-align: center;
+          }
+        }
+        .tableLineNum {
+          width: 65px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
       }
     }
   }
-}
-.btnClass {
-  font-size: 16px;
-  color: #fff;
-  margin: 20px;
-  .run {
-    height: 40px;
-    width: 120px;
-    border-radius: 10px;
-    margin: 20px;
-    background: #349b24;
-  }
-  .fau {
-    height: 40px;
-    width: 120px;
-    border-radius: 10px;
-    margin: 20px;
-    background: #f50000;
-  }
-  .offL {
-    height: 40px;
-    width: 120px;
-    border-radius: 10px;
-    margin: 20px;
-    background: #6b6965;
-  }
-  .stand {
-    height: 40px;
-    width: 120px;
-    border-radius: 10px;
-    margin: 20px;
-    background: #007dc3;
-  }
-  .haul {
-    height: 40px;
-    width: 120px;
-    border-radius: 10px;
-    margin: 20px;
-    background: #ef7b00;
-    margin-right: 30%;
-  }
-  .btnP {
-    height: 40px;
-    width: 120px;
-    border-radius: 10px;
-    background: #30343f;
-  }
-  .txt {
-    margin: 20px;
+  .btnClass {
+    clear: both;
+    float: left;
+    font-size: 16px;
+    color: #fff;
+    margin-top: 110px;
+    margin-left: 5%;
+    width: 1500px;
+    .run {
+      height: 40px;
+      width: 120px;
+      border-radius: 10px;
+      margin: 20px;
+      color: #1fe005;
+    }
+    .fau {
+      height: 40px;
+      width: 120px;
+      border-radius: 10px;
+      margin: 20px;
+      color: #ff0000;
+    }
+    .offL {
+      height: 40px;
+      width: 120px;
+      border-radius: 10px;
+      margin: 20px;
+      color: #818285;
+    }
+    .stand {
+      height: 40px;
+      width: 120px;
+      border-radius: 10px;
+      margin: 20px;
+      color: #2187fb;
+    }
+    .haul {
+      height: 40px;
+      width: 120px;
+      border-radius: 10px;
+      margin: 20px;
+      color: #fbd500;
+      margin-right: 45%;
+    }
+    .btnP {
+      height: 40px;
+      width: 120px;
+      border-radius: 10px;
+      color: #ccc;
+      cursor: pointer;
+    }
+    .txt {
+      margin: 20px;
+    }
   }
 }

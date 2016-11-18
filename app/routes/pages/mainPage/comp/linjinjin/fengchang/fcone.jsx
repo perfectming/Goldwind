@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './fcone.scss';
 import Navleft from '../../super/navleft.jsx';
-import Fjjz from './fcright/fjjz.jsx';
+import Fanmatrix from '../../xym/Fanmatrix.jsx';
 import Sjlb from './fcright/sjlb.jsx';
 import Fjkx from './fcright/fjkx.jsx';
 import Cft from './fcright/cft.jsx';
@@ -27,7 +27,7 @@ let Component = React.createClass({
                         <Navleft></Navleft>
                       </div>
                     <div className={`${styles.conright} ${flag===true? styles.animat3 : styles.animat2}`}>
-                        {numpage==='fjjz' &&<Fjjz></Fjjz>}
+                        {numpage==='fanmatrix' &&<Fanmatrix></Fanmatrix>}
                         {numpage==='sjlb' &&<Sjlb></Sjlb>}
                         {numpage==='fjkx' &&<Fjkx></Fjkx>}
                         {numpage==='cft' &&<Cft></Cft>}
@@ -55,6 +55,7 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:'',
                 }
+         dispatch(actions.setVars('numpage', 'fanmatrix'));
 
         },
          changeFlag :(flag)=>{
