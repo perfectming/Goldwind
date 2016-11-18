@@ -51,8 +51,10 @@
         color: #fff;
         background: #30343f;
         overflow: hidden;
+        &:hover{
+          background:rgba(183,195,224,.5);
+        }
         .tableContentItem {
-          background: #30343f;
           float: left;
           padding: 10px 0 10px;
           overflow: hidden;
@@ -112,8 +114,10 @@
         color: #fff;
         overflow: hidden;
         background: #272b34;
+        &:hover{
+          background:rgba(183,195,224,.5);
+        }
         .tableContentItem {
-          background: #272b34;
           float: left;
           padding: 10px 0 10px;
           overflow: hidden;
@@ -176,8 +180,8 @@
     float: left;
     font-size: 16px;
     color: #fff;
-    margin-top: 110px;
-    width: 100%;
+    margin-top: 30px;
+    width: 95%;
     padding-left: 5%;
     overflow: hidden;
     .run {
@@ -213,16 +217,17 @@
       width: 120px;
       border-radius: 10px;
       color: #fbd500;
-      margin-right: 45%;
     }
     .btnP {
+      float: right;
       height: 40px;
-      width: 120px;
+      width: 50px;
       border-radius: 10px;
       color: #ccc;
       cursor: pointer;
     }
     .txt {
+      float: right;
       margin-left: 1%;
       margin-right: 1%;
     }
