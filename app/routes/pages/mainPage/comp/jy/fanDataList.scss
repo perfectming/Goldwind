@@ -177,41 +177,41 @@
     font-size: 16px;
     color: #fff;
     margin-top: 110px;
-    margin-left: 5%;
-    width: 1500px;
+    width: 100%;
+    padding-left: 5%;
+    overflow: hidden;
     .run {
       height: 40px;
       width: 120px;
       border-radius: 10px;
-      margin: 20px;
+      margin-right: 2%;
       color: #1fe005;
     }
     .fau {
       height: 40px;
       width: 120px;
       border-radius: 10px;
-      margin: 20px;
+      margin-right: 2%;
       color: #ff0000;
     }
     .offL {
       height: 40px;
       width: 120px;
       border-radius: 10px;
-      margin: 20px;
+      margin-right: 2%;
       color: #818285;
     }
     .stand {
       height: 40px;
       width: 120px;
       border-radius: 10px;
-      margin: 20px;
+      margin-right: 2%;
       color: #2187fb;
     }
     .haul {
       height: 40px;
       width: 120px;
       border-radius: 10px;
-      margin: 20px;
       color: #fbd500;
       margin-right: 45%;
     }
@@ -223,7 +223,8 @@
       cursor: pointer;
     }
     .txt {
-      margin: 20px;
+      margin-left: 1%;
+      margin-right: 1%;
     }
   }
 }

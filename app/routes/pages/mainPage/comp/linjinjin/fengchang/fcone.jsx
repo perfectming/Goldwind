@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './fcone.scss';
 import Navleft from '../../super/navleft.jsx';
 import Fanmatrix from '../../xym/Fanmatrix.jsx';
-import Sjlb from './fcright/sjlb.jsx';
+import Sjlb from '../../jy/fanDataList.jsx';
 import Fjkx from './fcright/fjkx.jsx';
 import Cft from './fcright/cft.jsx';
 import Gisdxt from './fcright/gisdxt.jsx';
