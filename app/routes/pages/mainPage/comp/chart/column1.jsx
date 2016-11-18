@@ -12,10 +12,19 @@ let nam=[];
     arr.push(dat[i].YearEgyAt/dat[i].YearPlanTotEgyAt);
 }})();
 arr.pop();
-(function(){for(let i in bas){
+(function(){
+
+    for(let i in bas){
     nam.push(bas[i].name);
-}})();
+    }
+
+})();
 nam.pop();
+
+
+
+
+
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -30,12 +39,16 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 height:360,
-                marginLeft:50
+                marginLeft:50,
+                overflow:'auto'
             },
             title: {
                 text: ''
             },
-             xAxis: { 
+             xAxis: {
+
+                tickInterval: 1,
+
                 categories: nam,
                  labels: {
 
@@ -49,16 +62,18 @@ let Component = React.createClass({
                         }
                 }
             }, 
-            yAxis: {    
+            yAxis: {  
+
+            tickPixelInterval: 500, 
                     lineWidth:1,
                     //dashStyle:"Dot",
-                    //tickInterval:80,//刻度线间距
+                    tickInterval:0.1,//刻度线间距
                     gridLineWidth: 0,//虚线粗细
                     dashStyles: "ShortDot",//轴线样式：点状线
                     title: {
                         align: 'high',
                         rotation: 0,
-                            text: "万(wh)",
+                        text: "万(wh)",
                         style:{
                         color: "#fff"
                             },
@@ -101,7 +116,7 @@ let Component = React.createClass({
                     borderColor:"",
                     },
                    series: {
-                borderRadius: 10//圆角
+                borderRadius: 8//圆角
             },
                 pie: {
                     allowPointSelect: false,
@@ -125,7 +140,7 @@ let Component = React.createClass({
                 type: 'line',
                 color:"#59e481",
                 name: "公司发电完成率",
-                data: 0,
+                data: 0.5,
                  marker: {
                         enabled: false
                        

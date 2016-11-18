@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
-
 import styles from './table.scss';
 var {getState} = require('../../../../../redux/store');
 import save from '../../img/comp/save.png';
@@ -11,18 +10,25 @@ import $ from 'jquery';
 
 let tabaleData = require('../../../../../../config/super_table');
 let dataBase=require('../../../../../../config/ModelData');
+let place=require('../../../../../../config/Model');
 let header=require('./tabledate');
 let headername=header.header;
 let date=dataBase.ModelData;
+let placename=place.Model.ens;
 let arrname=[];
 let point=[];
 
 (function(){
+    let o=0;
+    for(let name in placename){     
+               point.push(placename[name].name)
+            }
   for(let key in date){
     let arr=[];
     for(let i=0;i<headername.length;i++){
          if(i==0){
-            arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1)+"%");
+             arr.push(point[o]);
+            o++;
         }
         if(i==6){
             arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1)+"%");
@@ -32,7 +38,7 @@ let point=[];
             arrname.push(arr);
          }
           arrname.pop();
-        console.log(arrname)
+        
 }());
 
 
@@ -52,7 +58,7 @@ let Component = React.createClass({
                             tabaleData.data.header.map((value, key)=> {
                                 return (
                                     <div className={styles.tableHeaderItem}
-                                         style={{width:(100/tabaleData.data.header.length)+"%"}} key={key}>{value}</div>
+                                         style={{width:(tabaleData.data.width[key])+"%"}} key={key}>{value}</div>
                                 )
                             })
                         }
@@ -67,7 +73,7 @@ let Component = React.createClass({
                                                 
                                               
                                                 return (
-                                                    <div className={styles.tableContentItem}style={{width:(100/tabaleData.data.header.length)+"%"}}
+                                                    <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%"}}
                                                            key={keyC}>{valueC}</div>
                                                 )
                                             })

@@ -36,19 +36,31 @@ let Component = React.createClass({
                             tabaleData.data.content.map((value, key)=> {
                                 return (
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
-                                        {
+                                        
+                                         {
                                             value.map((valueC, keyC)=> {
-                                                return (
-                                                    <div className={styles.tableContentItem}style={{width:tabaleData.data.length[keyC]}} key={keyC}>
-                                                        {valueC}
-                                                    </div>
-                                                )
+                                                if(keyC <= 12){
+                                                    return (
+                                                        <div className={styles.tableContentItem}style={{width:tabaleData.data.length[keyC]}} key={keyC}>
+                                                             {valueC}
+                                                        </div>
+                                                    )
+                                                }else{
+                                                    return (
+                                                        <input maxLength="15" className={styles.tableContentItem}
+                                                           style={{width:tabaleData.data.length[keyC]}}
+                                                           key={keyC} contentEditable="true"
+                                                           onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                           value={valueC}/>
+                                                    )
+                                                    
+                                                }
                                             })
                                         }
                                     </div>
                                 )
                             })
-                        }
+                         }   
                     </div>
                 </div>
             </div>

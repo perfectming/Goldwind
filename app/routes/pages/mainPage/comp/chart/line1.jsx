@@ -37,7 +37,8 @@ let Component = React.createClass({
              yAxis:{
                 title:{
                     enabled:false
-                }
+                },
+                tickInterval:1500,//刻度线间距
                  
             },
             legend:{

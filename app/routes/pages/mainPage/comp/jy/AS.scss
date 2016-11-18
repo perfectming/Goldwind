@@ -4,14 +4,15 @@
   margin-bottom: 30px;
   overflow: hidden;
   img {
-    width: 30px;
+
     margin-left: 50px;
   }
 }
 .btn{
-  margin-left: 85%;
+  margin-left: 80%;
   padding: 20px;
   img{
+    width: 40px;
     margin-right: 20px;
     cursor: pointer;
   }
@@ -20,34 +21,34 @@
 
   overflow: hidden;
   .tableHeaderBox {
-    font-size: 30px;
     overflow: hidden;
     background: #464c58;
     .tableHeaderItem {
       float: left;
-      height:100px;
-      line-height:100px;
+      height:40px;
+      line-height:40px;
       overflow: hidden;
       color:#fff;
       text-align: center;
     }
   }
   .tableContentBox {
-    font-size: 20px;
+    font-size: 14px;
     .tableContentLine {
       color:#fff;
       background: #30343f;
       overflow: hidden;
       .tableContentItem {
+        background: #30343f;
         float: left;
         overflow: hidden;
         text-align: center;
-        height: 60px;
-        line-height:30px;
+        height: 40px;
+        line-height:40px;
         border: none;
       }
       .tableLineNum {
-        width: 45px;
+        width: 65px;
         padding: 10px 0 10px;
         text-align: center;
         background-color: #E4E5E6;
@@ -59,15 +60,16 @@
       overflow: hidden;
       background: #272b34;
       .tableContentItem {
+        background: #272b34;
         float: left;
+        padding: 10px 0 10px;
         overflow: hidden;
         text-align: center;
-        height: 60px;
-        line-height:30px;
+        height: 40px;
         border: none;
       }
       .tableLineNum {
-        width: 45px;
+        width: 65px;
         padding: 10px 0 10px;
         text-align: center;
         background-color: #E4E5E6;

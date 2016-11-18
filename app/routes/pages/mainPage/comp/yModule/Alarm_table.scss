@@ -31,6 +31,9 @@
        color:#fff;
        background: #30343f;
       overflow: hidden;
+      &:hover{
+        background:rgba(183,195,224,.5);
+      }
       .tableContentItem {
         float: left;
         overflow: hidden;
@@ -38,6 +41,13 @@
         height: 40px;
         line-height:40px;
         border: none;
+      }
+      input{
+        background:#30343f;
+        border:6px solid #fff;
+        &:hover{
+           box-shadow:0px 0px 8px 2px #fff;
+        }
       }
       .tableLineNum {
         width: 65px;
@@ -51,6 +61,9 @@
        color:#fff;
       overflow: hidden;
       background: #272b34;
+      &:hover{
+        background:rgba(183,195,224,.5);
+      }
       .tableContentItem {
         float: left;
         padding: 10px 0 10px;
@@ -58,6 +71,13 @@
         text-align: center;
         height: 40px;
         border: none;
+      }
+      input{
+        background: #272b34;
+        border:6px solid #fff;
+        &:hover{
+           box-shadow:0px 0px 8px 2px #fff;
+        }
       }
       .tableLineNum {
         width: 65px;

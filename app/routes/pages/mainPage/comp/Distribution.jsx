@@ -99,9 +99,14 @@ let Component = React.createClass({
                 <div className={styles.changeBox}>
                     <img src={flag===true? leftIcon:rightIcon} onClick={()=>{changeFlag(flag===true? true:false,flag )}}/>
                 </div>
+<<<<<<< HEAD
                 <div className={`${styles.rightBox} ${flag===true? styles.animat3 : styles.animat2}`}>
                     <img src={map1} onClick={()=>play()}
                     />
+=======
+                <div className={styles.rightBox} >
+                   <img src={map1}/>
+>>>>>>> e9789160e40d07cf7eb6d2b9508d656bd7039c16
                 </div>
             </div>
         );
@@ -123,6 +128,7 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
+<<<<<<< HEAD
         play:()=>{
             dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('navhide', false));
@@ -136,6 +142,8 @@ const mapDispatchToProps = (dispatch) => {
             };
             dispatch(actions.setVars('flagff', flag));
         }
+=======
+>>>>>>> e9789160e40d07cf7eb6d2b9508d656bd7039c16
     };
 };
 

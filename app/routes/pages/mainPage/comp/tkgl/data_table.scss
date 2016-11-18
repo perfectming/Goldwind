@@ -1,4 +1,11 @@
-
+.actionBox{
+  img{
+    width: 40px;
+    display: inline-block;
+    margin: 20px;
+    cursor: pointer;
+  }
+}
 .tableBox {
   overflow: hidden;
   .tableHeaderBox {

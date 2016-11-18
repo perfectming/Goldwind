@@ -643,6 +643,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "498",
             "WFStandbyCount": "0",
+            "WFLIMCount": "0",
             "CurMonthPlanEgyAt": "38571",
             "YearPlanTotEgyAt": "3634104",
             "WfsStateCode": "Disconnect"

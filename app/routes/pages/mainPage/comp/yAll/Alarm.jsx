@@ -26,8 +26,6 @@ let Component = React.createClass({
         var tContent = this.refs.textContent5.value;
         var tContent1 = this.refs.textContent6.value;
 
-       
-
         if(sTime == '' || eTime == ''){
             alert('请选择开始或者结束时间');
             return false;
@@ -76,12 +74,12 @@ let Component = React.createClass({
                                     </div>
                                 )
                             } else if (value.type === 'button') {
-                            return (
-                                <div className={styles.btnBox} key={key}>
-                                    <button onClick={this.buttonAction}>{value.title}</button>
-                                </div>
-                            )
-                        }
+                                return (
+                                    <div className={styles.btnBox} key={key}>
+                                        <button onClick={this.buttonAction}>{value.title}</button>
+                                    </div>
+                                )
+                            }
                         })
                     }
                 </div>

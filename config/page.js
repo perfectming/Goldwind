@@ -8,7 +8,7 @@ module.exports = {
                 name:'驾驶舱',
                 page:[
                     {
-                        name:'驾驶舱1-1',
+                        name:'驾驶舱',
                         page:'cockpit',
                         
                     }]
@@ -98,8 +98,8 @@ module.exports = {
                         name:'业务报表1',
                         page:'',
                     },{
-                        name:'业务报表2',
-                        page:'',
+                        name:'故障报表',
+                        page:'fault',
                     },{
                         name:'业务报表3',
                         page:'',
@@ -209,7 +209,7 @@ module.exports = {
                     }]
             }],
         },{
-            name: '业务分析',
+            name: '业务职能',
             iconNormal: require('../app/routes/pages/mainPage/img/comp/ywfx.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/ywfx_active.png'),
             subPage: [{

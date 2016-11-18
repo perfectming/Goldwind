@@ -16,13 +16,15 @@ let tabaleData = require('./data');
 
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init(tabaleData);
+        this.props.init(tabaleData.data);
     },
     render() {
-        let {blank} = this.props;
+        let {blank,table, changeTableItem} = this.props;
         return (
             <div>
-                <div className={styles.btn}><img src={u865} onClick={blank}/><img src={u867} onClick={blank}/><img src={u869} onClick={blank}/></div>
+                <div className={styles.btn}>
+                    <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
+                    <img src={refresh}/><img src={u865} onClick={blank}/><img src={u867} onClick={blank}/><img src={u869} onClick={blank}/></div>
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
@@ -41,12 +43,19 @@ let Component = React.createClass({
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         {
                                             value.map((valueC, keyC)=> {
-
-
+                                                if(keyC==value.length-1){
+                                                    return (
+                                                        <input className={styles.tableContentItem}
+                                                               style={{width:(100/tabaleData.data.header.length)+"%"}}
+                                                               key={keyC} contentEditable="true"
+                                                               onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                               value={valueC}/>
+                                                    )
+                                                }else{
                                                 return (
-                                                    <div className={styles.tableContentItem}style={{width:(100/tabaleData.data.header.length)+"%"}}
+                                                    <div className={styles.tableContentItem} style={{width:(100/tabaleData.data.header.length)+"%"}}
                                                          key={keyC}>{valueC}</div>
-                                                )
+                                                );}
                                             })
                                         }
                                     </div>
@@ -74,6 +83,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         blank: () => {
             window.open ("../../../../../../../simple.html", "newwindow", "height=300, width=400, top=300, left=200, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no")
+        },
+        changeTableItem: (value, table, i, j) => {
+            let tableV = _.clone(getState().objs.tableContent);
+            tableV.data.content[i][j] = value;
+            dispatch(actions.setObjs('tableContent', tableV));
         }
     };
 };

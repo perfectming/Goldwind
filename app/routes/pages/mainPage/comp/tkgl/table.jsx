@@ -8,8 +8,27 @@ var {getState} = require('../../../../../redux/store');
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
 import _ from 'lodash';
-
-let tabaleData = require('../../../../../../config/tkgl-table');
+let tabaleData = require('../../../../../../config/RegulationData');
+let model=require('../../../../../../config/RegulationModel');
+let data=tabaleData.ModelData;
+let mode=model.Model.ens;
+let nam=['name','TransformerStatus','AVC','AGC','PlanActPower','Capacity','TActPower','Transformer_P'];
+let header=['场站名称','升压站状态', 'AVC状态','AGC状态','计划功率MW','装机容量MW','出力MW','负荷MW'];
+let narr=[];
+for(let key in mode){
+    let arr=[];
+    for(let i=0;i<nam.length;i++){
+        if(i==0){
+            arr.push(mode[key][nam[0]]);
+        }else if(i>3){
+            i==5?arr.push(data[key][nam[i]]):
+            arr.push((data[key][nam[i]]/1).toFixed(2))
+        }else{
+            arr.push(data[key][nam[i]])
+        }
+    }
+    narr.push(arr);
+}
 let Component = React.createClass({
     componentDidMount() {
         this.props.init(tabaleData);
@@ -25,32 +44,38 @@ let Component = React.createClass({
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
-                            tabaleData.data.header.map((value, key)=> {
+                            header.map((value, key)=> {
                                 return (
                                     <div className={styles.tableHeaderItem}
-                                         style={{width:(100/tabaleData.data.header.length-1)+'%'}} key={key}>{value}</div>
+                                         style={{width:(100/header.length)+'%'}} key={key}>{value}</div>
                                 )
                             })
                         }
                     </div>
                     <div className={styles.tableContentBox}>
                         {
-                            tabaleData.data.content.map((value, key)=> {
+                            narr.map((value, key)=> {
                                 return (
-                                    <div className={styles.tableContentLine} key={key}>
+                                    <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         {
                                             value.map((valueC, keyC)=> {
-                                                if(valueC<=1){
+                                                if(keyC==1){
                                                     return (
                                                         <div className={styles.tableContentItem}
-                                                               style={{width:(100/tabaleData.data.header.length-1)+'%'}}
+                                                               style={{width:(100/header.length)+'%'}}
                                                                key={keyC}><div className={valueC?styles.succ:styles.defa}></div></div>
+                                                    )
+                                                }else if(keyC==2||keyC==3){
+                                                    return (
+                                                        <div className={styles.tableContentItem}
+                                                             style={{width:(100/header.length)+'%'}}
+                                                             key={keyC}><div className={valueC=='#669999'?styles.succ:(valueC=='#FF0000'?styles.defa:styles.cutD)}></div></div>
                                                     )
                                                 }
                                                 else{
                                                 return (
                                                     <div className={styles.tableContentItem}
-                                                           style={{width:(100/tabaleData.data.header.length-1)+'%'}}
+                                                           style={{width:(100/header.length)+'%'}}
                                                            key={keyC}>{valueC}</div>
                                                 )}
                                             })

@@ -11,6 +11,7 @@ import Line2 from './chart/line3.jsx';
 import Line1 from './chart/line2.jsx';
 import Column from './chart/column1.jsx';
 import Table from './super/table.jsx';
+import Table1 from './super/table1.jsx';
 import dataBase from '../../../../../config/ModelData';
 import model from '../../../../../config/Model';
 import matrix from '../../../../../config/MatrixModel';
@@ -94,10 +95,10 @@ let Component = React.createClass({
                                 <span className={styles.numx}>{data[8888801].WFStandbyCount}</span>
                              </div>
 
-                             <div className={styles.box} style={{color:mod.dis.OfflineCount.color}}>
+                             <div className={styles.box} style={{color:mod.dis.WFLIMCount.color}}>
                                 <span className={styles.block}><img src={icon5}/></span>
-                                <span className={styles.contect}>{mod.dis.OfflineCount.name}</span>
-                                <span className={styles.numx}>{data[8888801].OfflineCount}</span>
+                                <span className={styles.contect}>{mod.dis.WFLIMCount.name}</span>
+                                <span className={styles.numx}>{data[8888801].WFLIMCount}</span>
                              </div>
 
 
@@ -144,12 +145,12 @@ let Component = React.createClass({
                      <div className={`${styles.Situation} ${styles.box_shadow}`}>
                        
                         <Title title={['发电量完成情况']}></Title>
-                        <p>{mod.dis.YearEgyAt.name}({mod.dis.YearEgyAt.unit})</p>
+                        <p>{mod.dis.YearEgyAt.name}<span className={styles.pspan}>({mod.dis.YearEgyAt.unit})</span></p>
                         <div className={styles.boxone}>
                             <div className={styles.absbox1} style={{width:((data[8888800].YearEgyAt/data[8888800].YearPlanTotEgyAt)*100).toFixed(1)+"%"}}>{data[8888800].YearEgyAt}</div>
                             <span className={styles.absnum} >{((data[8888800].YearEgyAt/data[8888800].YearPlanTotEgyAt)*100).toFixed(1)}%</span>
                         </div>
-                         <p>{mod.dis.MonthEgyAt.name}({mod.dis.MonthEgyAt.unit})</p>
+                         <p>{mod.dis.MonthEgyAt.name}<span className={styles.pspan}>({mod.dis.MonthEgyAt.unit})</span></p>
                         <div className={styles.boxone}>
                             <div className={`${styles.absbox1} ${styles.absbox2}`} style={{width:((data[8888800].MonthEgyAt/data[8888800].CurMonthPlanEgyAt)*100).toFixed(2)+"%"}} >{data[8888800].MonthEgyAt}</div>
                             <span className={styles.absnum}>{((data[8888800].MonthEgyAt/data[8888800].CurMonthPlanEgyAt)*100).toFixed(2)}%</span>
@@ -198,12 +199,13 @@ let Component = React.createClass({
                         
                        
                     </div>
-                    <div className={`${styles.table} ${styles.box_shadow}`}>
-                   
-                       
-                        <Table></Table>
-                        
-                        
+                    <div className={styles.box_shadow}>
+                        <div className={styles.table}>
+                            <Table></Table> 
+                        </div>
+                        <div className={`${styles.table} ${styles.bot}`}>
+                            <Table1></Table1> 
+                        </div>
                     </div>
                 </div>
             </div>
