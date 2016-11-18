@@ -7,6 +7,7 @@ module.exports ={
             "AVC": "#888888",
             "AGC": "#888888",
             "TransformerStatus": "1",
+            "TActPower": "57683.160",
             "WfStateCode": "Disconnect"
         },
         "650123": {
@@ -16,6 +17,7 @@ module.exports ={
             "AVC": "#669999",
             "AGC": "#669999",
             "TransformerStatus": "1",
+            "TActPower": "1653.110",
             "WfStateCode": "Disconnect"
         },
         "650124": {
@@ -25,6 +27,7 @@ module.exports ={
             "AVC": "#669999",
             "AGC": "#669999",
             "TransformerStatus": "0",
+            "TActPower": "1683.110",
             "WfStateCode": "Disconnect"
         },
         "652111": {
@@ -34,6 +37,7 @@ module.exports ={
             "AVC": "#669999",
             "AGC": "#669999",
             "TransformerStatus": "1",
+            "TActPower": "1453.110",
             "WfStateCode": "Disconnect"
         },
         "652112": {
@@ -43,6 +47,7 @@ module.exports ={
             "AVC": "#FF0000",
             "AGC": "#FF0000",
             "TransformerStatus": "1",
+            "TActPower": "1689.110",
             "WfStateCode": "Disconnect"
         },
         "652113": {
@@ -52,6 +57,7 @@ module.exports ={
             "AVC": "#FF0000",
             "AGC": "#FF0000",
             "TransformerStatus": "1",
+            "TActPower": "1673.110",
             "WfStateCode": "Disconnect"
         },
         "652303": {
@@ -61,6 +67,7 @@ module.exports ={
             "AVC": "#FF0000",
             "AGC": "#FF0000",
             "TransformerStatus": "1",
+            "TActPower": "653.110",
             "WfStateCode": "Disconnect"
         },
         "652304": {
@@ -70,6 +77,7 @@ module.exports ={
             "AVC": "#FF0000",
             "AGC": "#FF0000",
             "TransformerStatus": "1",
+            "TActPower": "753.110",
             "WfStateCode": "Disconnect"
         },
         "652305": {
@@ -79,6 +87,7 @@ module.exports ={
             "AVC": "#FF0000",
             "AGC": "#FF0000",
             "TransformerStatus": "1",
+            "TActPower": "753.110",
             "WfStateCode": "Disconnect"
         },
         "652325": {
@@ -88,6 +97,7 @@ module.exports ={
             "AVC": "#FF0000",
             "AGC": "#FF0000",
             "TransformerStatus": "1",
+            "TActPower": "1353.110",
             "WfStateCode": "Disconnect"
         },
         "654328": {
@@ -97,6 +107,7 @@ module.exports ={
             "AVC": "#669999",
             "AGC": "#669999",
             "TransformerStatus": "1",
+            "TActPower": "1153.110",
             "WfStateCode": "Disconnect"
         },
         "654330": {
@@ -106,6 +117,7 @@ module.exports ={
             "AVC": "#669999",
             "AGC": "#669999",
             "TransformerStatus": "0",
+            "TActPower": "1053.110",
             "WfStateCode": "Disconnect"
         },
         "836610": {
@@ -115,6 +127,7 @@ module.exports ={
             "AVC": "#669999",
             "AGC": "#669999",
             "TransformerStatus": "1",
+            "TActPower": "2653.110",
             "WfStateCode": "Disconnect"
         },
         "8888800": {
@@ -124,6 +137,7 @@ module.exports ={
             "AVC": "#669999",
             "AGC": "#669999",
             "TransformerStatus": "1",
+            "TActPower": "7653.110",
             "WfsStateCode": "Disconnect"
         },
         "guid": ""

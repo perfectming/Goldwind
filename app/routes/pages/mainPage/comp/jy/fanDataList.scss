@@ -1,0 +1,141 @@
+.actionBox {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 30px;
+  overflow: hidden;
+  img {
+    width: 30px;
+    margin-left: 50px;
+  }
+}
+.btn{
+  margin-left: 85%;
+  padding: 20px;
+  img{
+    margin-right: 20px;
+    cursor: pointer;
+  }
+}
+.leftBox{
+  width:45%;
+  float: left;
+  margin-left: 3%;
+  margin-right: 2%;
+}
+.rightBox{
+  width:45%;
+  float: left;
+  margin-left: 3%;
+  margin-right: 2%;
+}
+.tableBox {
+
+  overflow: hidden;
+  .tableHeaderBox {
+    overflow: hidden;
+    background: #464c58;
+    .tableHeaderItem {
+      float: left;
+      height:40px;
+      line-height:40px;
+      overflow: hidden;
+      color:#fff;
+      text-align: center;
+    }
+  }
+  .tableContentBox {
+    font-size: 14px;
+    .tableContentLine {
+      color:#fff;
+      background: #30343f;
+      overflow: hidden;
+      .tableContentItem {
+        background: #30343f;
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        height: 40px;
+        line-height:40px;
+        border: none;
+      }
+      .tableLineNum {
+        width: 65px;
+        padding: 10px 0 10px;
+        text-align: center;
+        background-color: #E4E5E6;
+        float: left;
+      }
+    }
+    .tableContentLine1 {
+      color:#fff;
+      overflow: hidden;
+      background: #272b34;
+      .tableContentItem {
+        background: #272b34;
+        float: left;
+        padding: 10px 0 10px;
+        overflow: hidden;
+        text-align: center;
+        height: 40px;
+        border: none;
+      }
+      .tableLineNum {
+        width: 65px;
+        padding: 10px 0 10px;
+        text-align: center;
+        background-color: #E4E5E6;
+        float: left;
+      }
+    }
+  }
+}
+.btnClass {
+  font-size: 16px;
+  color: #fff;
+  margin: 20px;
+  .run {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 20px;
+    background: #349b24;
+  }
+  .fau {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 20px;
+    background: #f50000;
+  }
+  .offL {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 20px;
+    background: #6b6965;
+  }
+  .stand {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 20px;
+    background: #007dc3;
+  }
+  .haul {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 20px;
+    background: #ef7b00;
+    margin-right: 30%;
+  }
+  .btnP {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    background: #30343f;
+  }
+  .txt {
+    margin: 20px;
+  }
+}

@@ -1,29 +1,23 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Fan_matrix.scss';
-import Nav from '../super/nav.jsx';
+import Headernav from './header.jsx';
+import Bodymap from './mapbody.jsx';
 var actions = require('redux/actions');
-
-
-
-
-
+let page1 = require('./mappage');
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-       let{play, flag, changeFlag, showFlag,i}=this.props;
+       let{ flag=true, changeFlag, changnav=0}=this.props;
+       
         return (
             <div className={styles.bodyBox}>
-                <Nav></Nav>
-                <div className={styles.contentbox}>
-                    
-                      <div className={styles.conleft}>45</div>
-                  
-                    <div className={styles.conright}>65</div>
-                </div>
+                <Headernav fcpage={page1.header}></Headernav>
+                <Bodymap tab={page1.header[changnav].rightpagge}></Bodymap>
+
             </div>
         );
     }
@@ -32,8 +26,8 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-
-
+        changnav : state.vars.Changnav,
+        flag : state.vars.flagff,
 
     }
 };
@@ -44,8 +38,18 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:'',
                 }
+             dispatch(actions.setVars('Changnav', 0));
 
         },
+         changeFlag :(flag)=>{
+            
+            if(flag){
+                flag=false;
+            }else{
+                flag=true;
+            };
+            dispatch(actions.setVars('flagff', flag));
+        }
    
     };
 };

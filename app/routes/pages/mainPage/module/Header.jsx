@@ -54,11 +54,17 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(actions.setVars('putpage', false));
                 dispatch(actions.setVars('bodypage', false));
                 dispatch(actions.setVars('navhide', false));
+             }else if(page=='monitorkb'){
+                dispatch(actions.setVars('navhide', false));
+                dispatch(actions.setVars('putpage', true));
+                dispatch(actions.setVars('bodypage', true));
              }else{
                 dispatch(actions.setVars('putpage', true));
                 dispatch(actions.setVars('bodypage', true));
                 dispatch(actions.setVars('navhide', true));
              }
+              
+             console.log(page);
         },
     };
 };
