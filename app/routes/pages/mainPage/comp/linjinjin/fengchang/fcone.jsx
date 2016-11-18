@@ -55,6 +55,7 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:'',
                 }
+         dispatch(actions.setVars('numpage', 'fanmatrix'));
 
         },
          changeFlag :(flag)=>{
