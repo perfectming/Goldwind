@@ -31,7 +31,7 @@ let point=[];
             o++;
         }
         if(i==6){
-            arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1)+"%");
+            arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1));
         }
            arr.push(date[key][headername[i]]);
             }
@@ -70,7 +70,42 @@ let Component = React.createClass({
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         {
                                             value.map((valueC, keyC)=> {
+                                                if(keyC==7){
+                                                        if(valueC<60){
+                                                             return (
+                                                            <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%",color:'#e72727'}}
+                                                           key={keyC}>{valueC+'%'}</div>
+
+                                                                )
+                                                        }else if(valueC>=60 && valueC<80){
+                                                             return (
+                                                            <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%",color:'#ec9e9e'}}
+                                                           key={keyC}>{valueC+'%'}</div>
+
+                                                                )
+                                                        }else if(valueC>=80 && valueC<90){
+                                                             return (
+                                                            <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%",color:'#f2d46c'}}
+                                                           key={keyC}>{valueC+'%'}</div>
+
+                                                                )
+                                                        }else if(valueC>90){
+                                                             return (
+                                                            <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%",color:'#1fe005'}}
+                                                           key={keyC}>{valueC+'%'}</div>
+
+                                                                )
+                                                        }
+                                                       
+                                                    
+                                                }
                                                 
+                                                if(keyC==10){
+                                                    return (
+                                                    <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%",color:'#f00'}}
+                                                           key={keyC}>{valueC}</div>
+                                                )
+                                                }
                                               
                                                 return (
                                                     <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%"}}

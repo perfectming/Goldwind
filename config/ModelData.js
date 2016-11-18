@@ -58,7 +58,7 @@ module.exports ={
             "WindSpeed_DevAverValue": "7136.3461",
             "PVTSI_Aver": "40201.9531",
             "Capacity": "49500",
-            "TActPower": "4624.440",
+            "TActPower": "40624.440",
             "DayEgyAt": "4098",
             "MonthEgyAt": "33795",
             "YearEgyAt": "94304",

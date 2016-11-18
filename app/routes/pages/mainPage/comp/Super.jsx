@@ -35,6 +35,7 @@ let Component = React.createClass({
         let mod=model.Model;
         let  mat=matrix.Model;
         let matD=matData.ModelData;
+        let {all}=this.props;
         return (
             <div className={styles.bodyBox}>
 
@@ -170,7 +171,7 @@ let Component = React.createClass({
                         <div className={styles.dingwei}>
                             <Pie></Pie>
                         </div>
-                        <span className={styles.chartnum}><p>25360</p><p>kWh</p></span>
+                        <span className={styles.chartnum}><p>{all}</p><p>kWh</p></span>
                             <Title title={['日发电量统计']}></Title>
                         </div>
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
@@ -215,7 +216,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        all: state.vars.allnumber,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
