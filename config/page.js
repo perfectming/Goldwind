@@ -84,7 +84,7 @@ module.exports = {
                         page:'',
                     },{
                         name:'批量控制2',
-                        page:'fdl',
+                        page:'',
                     },{
                         name:'批量控制3',
                         page:'',

@@ -24,7 +24,6 @@ import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
 import Fault from '../comp/yAll/Fault.jsx';
-import Fdl from '../comp/jy/fanDataList.jsx';
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
 
@@ -58,8 +57,6 @@ let Component = React.createClass({
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
                 {showPage === 'fault' && <Fault></Fault>}
-                {showPage === 'fdl' && <Fdl></Fdl>}
-
                 <div className={styles.clearbox}></div>
             </div>
         );
