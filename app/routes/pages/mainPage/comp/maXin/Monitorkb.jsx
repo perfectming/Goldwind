@@ -5,9 +5,11 @@ import Title from '../super/Title.jsx';
 import Pie1 from '../mxx/Pie1.jsx';
 import Column from '../mxx/Column.jsx';
 import Polar from '../mxx/Polar1';
-import jie from '../../img/comp/jieneng.png';
-import shui from '../../img/comp/jieshui.png';
-import co2 from '../../img/comp/co2.png';
+import jnjp from '../../img/comp/jienengjp.png';
+import nljys from '../../img/comp/nianleijys.png';
+import nljybm from '../../img/comp/nianleijybm.png';
+import nlcojp from '../../img/comp/nianleicojp.png';
+import nlsojp from '../../img/comp/nianleisojp.png';
 
 
 var actions = require('redux/actions');
@@ -69,23 +71,23 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.longbox}>
                     <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={jie}/></div>
+                        <div className={styles.leftimg}><img src={jnjp}/></div>
                         <div className={styles.righttext}>节能减排</div>
                     </div>
                     <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={co2}/></div>
+                        <div className={styles.leftimg}><img src={nljys}/></div>
                         <div className={styles.righttext1}><h2>年累节约水</h2><h2><b>2569</b>万吨</h2></div>
                     </div>
                     <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={shui}/></div>
+                        <div className={styles.leftimg}><img src={nljybm}/></div>
                         <div className={styles.righttext1}><h2>年累节约标煤</h2><h2><b>265 </b>万吨</h2></div>
                     </div>
                     <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={co2}/></div>
+                        <div className={styles.leftimg}><img src={nlcojp}/></div>
                         <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>815</b>万吨</h2></div>
                     </div>
                     <div className={`${styles.navitem} ${styles.bore}`}>
-                        <div className={styles.leftimg}><img src={shui}/></div>
+                        <div className={styles.leftimg}><img src={nlsojp}/></div>
                         <div className={styles.righttext1}><h2>年累SO2减排</h2><h2><b>5</b>万吨</h2></div>
                     </div>
                 </div>
