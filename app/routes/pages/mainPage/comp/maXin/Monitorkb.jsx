@@ -95,13 +95,14 @@ let Component = React.createClass({
                         <Polar></Polar>
                     </div>
                 </div>
-                <div className={styles.ssdlqkfx}>ji
+                <div className={styles.ssdlqkfx}>
                     <Title title={['故障设备概览']}></Title>
                     <div className={styles.ssdlqkfxmain}>
                         <span className={styles.tsstyle1}>3<span className={styles.tsstyled1}>台</span></span>
                         <span className={styles.tsstyle2}>12<span className={styles.tsstyled2}>台</span></span>
                         <span className={styles.tsstyle3}>13<span className={styles.tsstyled3}>台</span></span>
                         <span className={styles.tsstyle4}>19<span className={styles.tsstyled4}>台</span></span>
+                        <span className={styles.timestyle}><span>0.2h</span><span>12h</span><span>36h</span><span>72h</span></span>
                     </div>
                 </div>
                 <div className={styles.gzsbgl}>
