@@ -1,23 +1,26 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Fan_matrix.scss';
-import Headernav from './header.jsx';
-import Bodymap from './mapbody.jsx';
+import styles from './fctwo.scss';
+import Navleft from '../../super/navleft.jsx';
 var actions = require('redux/actions');
-let page1 = require('./mappage');
+
+
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-       let{ flag=true, changeFlag, changnav=0}=this.props;
-       
+       let{ flag=true, changeFlag}=this.props;
         return (
             <div className={styles.bodyBox}>
-                <Headernav fcpage={page1.header}></Headernav>
-                <Bodymap tab={page1.header[changnav].rightpagge}></Bodymap>
-
+                <div className={styles.contentbox}>
+                      <div className={`${styles.conleft} ${flag===true? styles.animat1 : styles.animat}`}>
+                        <span className={flag===true? styles.spanleft :styles.spanright} onClick={()=>{changeFlag(flag===true? true:false,flag )}}></span>
+                        <Navleft></Navleft>
+                      </div>
+                    <div className={`${styles.conright} ${flag===true? styles.animat3 : styles.animat2}`}>4566454564</div>
+                </div>
             </div>
         );
     }
@@ -26,7 +29,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        changnav : state.vars.Changnav,
+
         flag : state.vars.flagff,
 
     }
@@ -38,7 +41,6 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:'',
                 }
-             dispatch(actions.setVars('Changnav', 0));
 
         },
          changeFlag :(flag)=>{

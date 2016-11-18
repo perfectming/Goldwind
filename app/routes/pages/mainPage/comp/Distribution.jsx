@@ -100,7 +100,7 @@ let Component = React.createClass({
                         <img src={leftIcon}/>
                     </div>
                 </div>
-                <div className={styles.rightBox}>
+                <div className={styles.rightBox} >
                    <img src={map1}/>
                 </div>
             </div>
@@ -119,8 +119,7 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
-        }
-        ,
+        },
     };
 };
 

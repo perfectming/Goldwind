@@ -33,7 +33,7 @@
 			}
 		}
 		.nummor{border-left:0px;}
-		span{
+		.actspan{
 			width:100px;
 			height:40px;
 			line-height:40px;
@@ -42,13 +42,27 @@
 			color:#fff;
 			font-size:16px;
 			border:1px solid #2ff4fb;
-			margin:10px 30px 0 0;
+			margin:10px 13px 0 0;
 			float:left;
 			text-align:center;
 			&:hover{
 				box-shadow:0px 0px 8px #fff;
 				color:#2ff4fb;
 			}
+		}
+		.active{
+			box-shadow:0px 0px 8px #fff;
+				color:#2ff4fb;
+				width:100px;
+			height:40px;
+			line-height:40px;
+			cursor:pointer;
+			border-radius:5px;
+			font-size:16px;
+			border:1px solid #2ff4fb;
+			margin:10px 13px 0 0;
+			float:left;
+			text-align:center;
 		}
 
 	}

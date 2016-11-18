@@ -48,12 +48,13 @@ overflow:hidden;
             .anum{
           
               display:inline-block;
-              font-size:16px;
+              font-size:10px;
               color:#fff;
           
               b{
                 font-size:16px;
                 color:#31f3fb;
+                margin-right:5px;                              
                 font-weight:normal;
               }
             }
@@ -203,6 +204,9 @@ overflow:hidden;
         color: #fff;
         margin:0;
         font-size:16px;
+        .pspan{
+        font-size:10px;
+        }
       }
       .boxone{
         width:83%;

@@ -1,23 +1,9 @@
 .bodyBox {
-  .contentbox{
-      width:100%;
-      margin-top:25px;
-      overflow:hidden;
-      .conleft{
-        float:left;
-        width:30%;
-        height:500px;
-        background: #f00;
-        position:relative;
-       
-      }
-       .conright{
-        float:left;
-        width:70%;
-        height:500px;
-        background: #0f0;
-      }
-      
-  }
+  width:100%;
+  overflow:hidden;
+  
 }
+
+
+
 

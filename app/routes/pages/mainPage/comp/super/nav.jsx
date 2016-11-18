@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './nav.scss';
+var actions = require('redux/actions');
 
 
 
@@ -12,16 +13,20 @@ let Component = React.createClass({
 
     render() {
 
-       let {title,arr } = this.props;
+       let {title,arr, changetab, act=0 } = this.props;
        
         return (
           <div className={styles.navbox}>
                 <div className={styles.navleft}>
-                    <span>风机矩阵</span>
-                    <span>数据列表</span>
-                    <span>风机馈线</span>
-                    <span>GIS地形图</span>
-                    <span>升压站坚实</span>
+                   {
+                    title.map((value,key)=>{
+                        return(
+                            <span className={ act===key? styles.active : styles.actspan } key={key} onClick={()=>changetab(value.rpage,key)}>{value.tabname}</span>
+                            )
+
+                    })
+
+                   }
                     <div className={`${styles.numtai} ${styles.nummor}`}><div className={styles.numname}>华瑞SL1500x</div><b>15</b><a>台</a></div>
                     <div className={styles.numtai}><div className={styles.numname}>总计</div><b>500</b><a>台</a></div>
                     
@@ -55,13 +60,19 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        act: state.vars.actbtn,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
+        changetab:(page,act)=>{
+            dispatch(actions.setVars('numpage', page));
+            dispatch(actions.setVars('actbtn', act));
+        }
     };
 };
 
