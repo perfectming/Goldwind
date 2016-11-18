@@ -19,7 +19,7 @@ let Component = React.createClass({
         let {table, changeTableItem} = this.props;
         return (
            
-        <div className={styles.bodyBox}>
+        <div className={styles.bodyBox}> 
             <div className={styles.roleputBox}>
                 <ul>
                     <li>
