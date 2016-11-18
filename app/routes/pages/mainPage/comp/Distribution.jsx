@@ -101,7 +101,10 @@ let Component = React.createClass({
                 </div>
                 <div className={`${styles.rightBox} ${flag===true? styles.animat3 : styles.animat2}`}>
                     <img src={map1} onClick={()=>play()}/>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 06a5fef9c6a26b4f6b454368aa63aff686584f73
                 </div>
             </div>
         );
