@@ -51,8 +51,10 @@
         color: #fff;
         background: #30343f;
         overflow: hidden;
+        &:hover{
+          background:rgba(183,195,224,.5);
+        }
         .tableContentItem {
-          background: #30343f;
           float: left;
           padding: 10px 0 10px;
           overflow: hidden;
@@ -112,8 +114,10 @@
         color: #fff;
         overflow: hidden;
         background: #272b34;
+        &:hover{
+          background:rgba(183,195,224,.5);
+        }
         .tableContentItem {
-          background: #272b34;
           float: left;
           padding: 10px 0 10px;
           overflow: hidden;
@@ -176,7 +180,7 @@
     float: left;
     font-size: 16px;
     color: #fff;
-    margin-top: 110px;
+    margin-top: 30px;
     width: 95%;
     padding-left: 5%;
     overflow: hidden;

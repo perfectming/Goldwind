@@ -26,6 +26,9 @@
        color:#fff;
        background: #30343f;
       overflow: hidden;
+      &:hover{
+        background:rgba(183,195,224,.5);
+      }
       .tableContentItem {
         float: left;
         overflow: hidden;
@@ -46,6 +49,9 @@
        color:#fff;
       overflow: hidden;
       background: #272b34;
+       &:hover{
+         background:rgba(183,195,224,.5);
+       }
       .tableContentItem {
         float: left;
         padding: 10px 0 10px;

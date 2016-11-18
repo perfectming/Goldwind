@@ -59,7 +59,7 @@ let Component = React.createClass({
                         <div className={css.tableContentBox}>
                             {
                                 data.content.map((value, key)=> {
-                                    if(40*(page-1)<=key&&key<(40*(page-1)+20)){
+                                    if(46*(page-1)<=key&&key<(46*(page-1)+23)){
                                         return (
                                             <div className={key%2===0? css.tableContentLine : css.tableContentLine1} key={key}>
                                                 {
@@ -126,7 +126,7 @@ let Component = React.createClass({
                         <div className={css.tableContentBox}>
                             {
                                 data.content.map((value, key)=> {
-                                    if(key>=(page*40-20)&&key<(page*40)){
+                                    if(key>=(page*46-23)&&key<(page*46)){
                                         return (
                                             <div className={key%2===0? css.tableContentLine1 : css.tableContentLine} key={key}>
                                                 {
@@ -185,7 +185,7 @@ let Component = React.createClass({
                     <span className={css.stand}><img src={icon4}/>待机 &nbsp; {stand}</span>
                     <span className={css.haul}><img src={icon2}/>检修 &nbsp; {haul}</span>
                     <a className={css.btnP} onClick={()=>next(page)}>下一页</a>
-                    <span className={css.txt}>{page}/{Math.ceil(data.content.length/40)}</span>
+                    <span className={css.txt}>{page}/{Math.ceil(data.content.length/46)}</span>
                     <a className={css.btnP} onClick={()=>previous(page)}>上一页</a>
 
                 </div>
@@ -213,7 +213,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('page1', page));
         },
         next:(page)=>{
-            (page<(data.content.length/40)) ? page++:page;
+            (page<(data.content.length/46)) ? page++:page;
             dispatch(actions.setVars('page1', page));
 
         }
