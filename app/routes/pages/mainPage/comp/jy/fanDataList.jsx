@@ -59,7 +59,7 @@ let Component = React.createClass({
                         <div className={css.tableContentBox}>
                             {
                                 data.content.map((value, key)=> {
-                                    if(26*(page-1)<=key&&key<(26*(page-1)+13)){
+                                    if(40*(page-1)<=key&&key<(40*(page-1)+20)){
                                     return (
                                         <div className={key%2===0? css.tableContentLine : css.tableContentLine1} key={key}>
                                             {
@@ -126,7 +126,7 @@ let Component = React.createClass({
                         <div className={css.tableContentBox}>
                             {
                                 data.content.map((value, key)=> {
-                                    if(key>=(page*26-13)&&key<(page*26)){
+                                    if(key>=(page*40-20)&&key<(page*40)){
                                     return (
                                         <div className={key%2===0? css.tableContentLine1 : css.tableContentLine} key={key}>
                                             {
@@ -210,7 +210,7 @@ const mapDispatchToProps = (dispatch) => {
             document.getElementById('wcl').style.display='block';
         },
         next:()=>{
-            (page<(data.content.length/26)) ? page++:page;
+            (page<(data.content.length/40)) ? page++:page;
             document.getElementById('wcl').style.display='none';
             document.getElementById('wcl').style.display='block';
         }
