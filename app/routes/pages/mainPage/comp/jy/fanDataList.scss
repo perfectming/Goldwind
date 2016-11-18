@@ -177,7 +177,7 @@
     font-size: 16px;
     color: #fff;
     margin-top: 110px;
-    width: 100%;
+    width: 95%;
     padding-left: 5%;
     overflow: hidden;
     .run {
@@ -213,16 +213,17 @@
       width: 120px;
       border-radius: 10px;
       color: #fbd500;
-      margin-right: 45%;
     }
     .btnP {
+      float: right;
       height: 40px;
-      width: 120px;
+      width: 50px;
       border-radius: 10px;
       color: #ccc;
       cursor: pointer;
     }
     .txt {
+      float: right;
       margin-left: 1%;
       margin-right: 1%;
     }

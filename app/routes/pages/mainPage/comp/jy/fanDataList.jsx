@@ -10,7 +10,7 @@ var actions = require('redux/actions');
 let database = require('./data');
 import _ from 'lodash';
 let data=database.fanDataList;
-var page=1;
+
 var run=0;
 var fau=0;
 var offL=0;
@@ -41,9 +41,9 @@ let Component = React.createClass({
     },
 
     render() {
-        let {next,previous} = this.props;
+        let {next,previous,page=1} = this.props;
         return (
-            <div className={css.toBox} id="wcl">
+            <div className={css.toBox}>
                 <div className={css.leftBox}>
                     <div className={css.tableBox}>
                         <div className={css.tableHeaderBox}>
@@ -60,52 +60,52 @@ let Component = React.createClass({
                             {
                                 data.content.map((value, key)=> {
                                     if(40*(page-1)<=key&&key<(40*(page-1)+20)){
-                                    return (
-                                        <div className={key%2===0? css.tableContentLine : css.tableContentLine1} key={key}>
-                                            {
-                                                value.map((valueC, keyC)=> {
-                                                    if(keyC==5){
-                                                        switch (valueC){
-                                                            case 5:
-                                                                return (
-                                                                    <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                         key={keyC}><div className={css.icon0}></div></div>
-                                                                );
-                                                            case 1:
-                                                                return (
-                                                                    <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                         key={keyC}><div className={css.icon1}></div></div>
-                                                                );
-                                                                break;
-                                                            case 2:
-                                                                return (
-                                                                    <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                         key={keyC}><div className={css.icon2}></div></div>
-                                                                );
-                                                                break;
-                                                            case 3:
-                                                                return (
-                                                                    <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                         key={keyC}><div className={css.icon3}></div></div>
-                                                                );
-                                                                break;
-                                                            case 4:
-                                                                return (
-                                                                    <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                         key={keyC}><div className={css.icon4}></div></div>
-                                                                );
-                                                                break;
+                                        return (
+                                            <div className={key%2===0? css.tableContentLine : css.tableContentLine1} key={key}>
+                                                {
+                                                    value.map((valueC, keyC)=> {
+                                                        if(keyC==5){
+                                                            switch (valueC){
+                                                                case 5:
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon0}></div></div>
+                                                                    );
+                                                                case 1:
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon1}></div></div>
+                                                                    );
+                                                                    break;
+                                                                case 2:
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon2}></div></div>
+                                                                    );
+                                                                    break;
+                                                                case 3:
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon3}></div></div>
+                                                                    );
+                                                                    break;
+                                                                case 4:
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon4}></div></div>
+                                                                    );
+                                                                    break;
+                                                            }
+                                                        }else{
+                                                            return (
+                                                                <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                     key={keyC}>{valueC}</div>
+                                                            );
                                                         }
-                                                    }else{
-                                                        return (
-                                                            <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                 key={keyC}>{valueC}</div>
-                                                        );
-                                                    }
-                                                })
-                                            }
-                                        </div>
-                                    )}
+                                                    })
+                                                }
+                                            </div>
+                                        )}
                                 })
                             }
                         </div>
@@ -127,52 +127,52 @@ let Component = React.createClass({
                             {
                                 data.content.map((value, key)=> {
                                     if(key>=(page*40-20)&&key<(page*40)){
-                                    return (
-                                        <div className={key%2===0? css.tableContentLine1 : css.tableContentLine} key={key}>
-                                            {
-                                                value.map((valueC, keyC)=> {
-                                                    if(keyC==5){
-                                                        switch (valueC){
-                                                            case 5:
-                                                                return (
-                                                                    <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                         key={keyC}><div className={css.icon0}></div></div>
-                                                                );
-                                                            case 1:
-                                                                return (
-                                                                    <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                         key={keyC}><div className={css.icon1}></div></div>
-                                                                );
-                                                                break;
-                                                            case 2:
-                                                                return (
-                                                                    <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                         key={keyC}><div className={css.icon2}></div></div>
-                                                                );
-                                                                break;
-                                                            case 3:
-                                                                return (
-                                                                    <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                         key={keyC}><div className={css.icon3}></div></div>
-                                                                );
-                                                                break;
-                                                            case 4:
-                                                                return (
-                                                                    <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                         key={keyC}><div className={css.icon4}></div></div>
-                                                                );
-                                                                break;
+                                        return (
+                                            <div className={key%2===0? css.tableContentLine1 : css.tableContentLine} key={key}>
+                                                {
+                                                    value.map((valueC, keyC)=> {
+                                                        if(keyC==5){
+                                                            switch (valueC){
+                                                                case 5:
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon0}></div></div>
+                                                                    );
+                                                                case 1:
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon1}></div></div>
+                                                                    );
+                                                                    break;
+                                                                case 2:
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon2}></div></div>
+                                                                    );
+                                                                    break;
+                                                                case 3:
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon3}></div></div>
+                                                                    );
+                                                                    break;
+                                                                case 4:
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon4}></div></div>
+                                                                    );
+                                                                    break;
+                                                            }
+                                                        }else{
+                                                            return (
+                                                                <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                     key={keyC}>{valueC}</div>
+                                                            );
                                                         }
-                                                    }else{
-                                                        return (
-                                                            <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
-                                                                 key={keyC}>{valueC}</div>
-                                                        );
-                                                    }
-                                                })
-                                            }
-                                        </div>
-                                    )}
+                                                    })
+                                                }
+                                            </div>
+                                        )}
                                 })
                             }
                         </div>
@@ -184,8 +184,10 @@ let Component = React.createClass({
                     <span className={css.offL}><img src={icon3}/>离线 &nbsp; {offL}</span>
                     <span className={css.stand}><img src={icon4}/>待机 &nbsp; {stand}</span>
                     <span className={css.haul}><img src={icon2}/>检修 &nbsp; {haul}</span>
-                    <a className={css.btnP} onClick={previous}>上一页</a><span className={css.txt}>{page}/{Math.ceil(data.content.length/26)}</span>
-                    <a className={css.btnP} onClick={next}>下一页</a>
+                    <a className={css.btnP} onClick={()=>next(page)}>下一页</a>
+                    <span className={css.txt}>{page}/{Math.ceil(data.content.length/40)}</span>
+                    <a className={css.btnP} onClick={()=>previous(page)}>上一页</a>
+
                 </div>
             </div>
         );
@@ -194,7 +196,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        page: state.vars.page1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -204,15 +208,14 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        previous:()=>{
+        previous:(page)=>{
             page>1 ? page--:page;
-            document.getElementById('wcl').style.display='none';
-            document.getElementById('wcl').style.display='block';
+            dispatch(actions.setVars('page1', page));
         },
-        next:()=>{
+        next:(page)=>{
             (page<(data.content.length/40)) ? page++:page;
-            document.getElementById('wcl').style.display='none';
-            document.getElementById('wcl').style.display='block';
+            dispatch(actions.setVars('page1', page));
+
         }
     };
 };
