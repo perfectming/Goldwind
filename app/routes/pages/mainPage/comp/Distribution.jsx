@@ -1,14 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Monitorkb.scss';
-import Title from '../super/Title.jsx';
-import Pie1 from '../mxx/Pie1.jsx';
-import Column from '../mxx/Column.jsx';
-import Polar from '../mxx/Polar1';
-import jie from '../../img/comp/jieneng.png';
-import shui from '../../img/comp/jieshui.png';
-import co2 from '../../img/comp/co2.png';
-
+import styles from './Distribution.scss';
+import Block from './super/block.jsx';
+import Block1 from './super/block1.jsx';
+import Title from './super/Title.jsx';
+import Column from './chart/column1.jsx';
+import dataBase from '../../../../../config/ModelData';
+import model from '../../../../../config/Model';
+import matrix from '../../../../../config/MatrixModel';
+import matData from '../../../../../config/MatrixData';
+import map1 from '../img/comp/DistributionMap.jpg' ;
+import leftIcon from '../img/comp/leftIcon.png' ;
+import rightIcon from '../img/comp/rightIcon.png' ;
 
 var actions = require('redux/actions');
 
@@ -18,106 +21,98 @@ let Component = React.createClass({
     },
 
     render() {
-        return(
+        let data=dataBase.ModelData;
+        let mod=model.Model;
+        let  mat=matrix.Model;
+        let matD=matData.ModelData;
+        let {clickNumber, showFlag, changeFlag, flag=true,play} = this.props;
+        return (
             <div className={styles.bodyBox}>
-                <div className={styles.zhzb}>
-                    <Title title={['综合指标']}></Title>
-                    <div className={styles.zhzbtop}>
-                        <div className={styles.zhzbtopbox}><div>当前功率</div> <span className={styles.zhzbtopboxg}>201</span>MW</div>
-                        <div className={styles.zhzbtopbox}><div>装机容量</div> <span className={styles.zhzbtopboxg}>201</span>MW</div>
-                        <div className={styles.zhzbtopbox}><div>日发电量</div> <span className={styles.zhzbtopboxg}>201</span>万MW</div>
-                        <div className={styles.zhzbtopbox}><div>风机功率</div> <span className={styles.zhzbtopboxg}>201</span>MW</div>
-                        <div className={styles.zhzbtopbox}><div>风速</div> <span className={styles.zhzbtopboxg}>6.5</span>m/s</div>
-                        <div className={styles.zhzbtopbox}><div>月发电量</div> <span className={styles.zhzbtopboxg}>201</span>万MW</div>
-                        <div className={styles.zhzbtopbox}><div>光伏功率</div> <span className={styles.zhzbtopboxg}>201</span>MW</div>
-                        <div className={styles.zhzbtopbox}><div>辐照度</div> <span className={styles.zhzbtopboxg}>201</span>W/㎡</div>
-                        <div className={styles.zhzbtopbox}><div>年发电量</div> <span className={styles.zhzbtopboxg}>201</span>万MW</div>
+                    <div className={`${styles.leftBox} ${flag===true? styles.animat1 : styles.animat}`}>
+                        <div  className={`${styles.states} ${styles.box_shadow}`}>
+
+                            <Title title={['综合指标']}></Title>
+                            <div className={styles.wind}>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.TActPower.name}</a><a className={styles.anum}><b>{data[8888800].TActPower}</b>{mod.dis.TActPower.unit}</a></span>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.Capacity.name}</a><a className={styles.anum}><b>{data[8888800].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
+                                <span className={styles.num}><a className={styles.anum1}>风电容量</a><a className={styles.anum}><b>{data[8888801].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
+                                <span className={styles.num}><a className={styles.anum1}>光伏容量</a><a className={styles.anum}><b>{data[8888802].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
+                            </div>
+                            <div className={styles.wind}>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.YearEgyAt.name}</a><a className={styles.anum}><b>{data[8888800].YearEgyAt}</b>{mod.dis.YearEgyAt.unit}</a></span>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.MonthEgyAt.name}</a><a className={styles.anum}><b>{data[8888800].MonthEgyAt}</b>{mod.dis.MonthEgyAt.unit}</a></span>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.DayEgyAt.name}</a><a className={styles.anum}><b>{data[8888800].DayEgyAt}</b>{mod.dis.DayEgyAt.unit}</a></span>
+
+                            </div>
+                        </div>
+                        <div className={`${styles.states} ${styles.states2} ${styles.box_shadow}`}>
+
+                            <Title title={['风场指标',]}></Title>
+                            <div className={styles.wind}>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.WFCount.name}</a><a className={styles.anum}><b>{data[8888800].WFCount}</b>{mod.dis.WFCount.unit}</a></span>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.WTCount.name}</a><a className={styles.anum}><b>{data[8888800].WTCount}</b>{mod.dis.WTCount.unit}</a></span>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{data[8888800].WindSpeed_DevAverValue}</b>{mod.dis.WindSpeed_DevAverValue.unit}</a></span>
+
+                            </div>
+                            <div className={styles.wind}>
+                                <Block></Block>
+
+                            </div>
+                        </div>
+                        <div className={`${styles.states} ${styles.Speed} ${styles.box_shadow}`}>
+
+                            <Title title={['机组运行状态','逆变器运行状态']}></Title>
+                            <div className={styles.wind}>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.PVCount.name}</a><a className={styles.anum}><b>{data[8888802].PVCount}</b>个</a></span>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.InverterCount.name}</a><a className={styles.anum}><b>{data[8888802].InverterCount}</b>台</a></span>
+                                <span className={styles.num}><a className={styles.anum1}>{mod.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{data[8888802].PVTSI_Aver}</b>W/m<sup>2</sup></a></span>
+
+                            </div>
+                            <div className={styles.spedc}>
+                                <Block1></Block1>
+                            </div>
+
+
+                        </div>
+                        <div className={`${styles.Situation} ${styles.box_shadow}`}>
+
+                            <Title title={['发电量完成情况']}></Title>
+                            <p>{mod.dis.YearEgyAt.name}({mod.dis.YearEgyAt.unit})</p>
+                            <div className={styles.boxone}>
+                                <div className={styles.absbox1} style={{width:((data[8888800].YearEgyAt/data[8888800].YearPlanTotEgyAt)*100).toFixed(1)+"%"}}>{data[8888800].YearEgyAt}</div>
+                                <span className={styles.absnum} >{((data[8888800].YearEgyAt/data[8888800].YearPlanTotEgyAt)*100).toFixed(1)}%</span>
+                            </div>
+                            <p>{mod.dis.MonthEgyAt.name}({mod.dis.MonthEgyAt.unit})</p>
+                            <div className={styles.boxone}>
+                                <div className={`${styles.absbox1} ${styles.absbox2}`} style={{width:((data[8888800].MonthEgyAt/data[8888800].CurMonthPlanEgyAt)*100).toFixed(2)+"%"}} >{data[8888800].MonthEgyAt}</div>
+                                <span className={styles.absnum}>{((data[8888800].MonthEgyAt/data[8888800].CurMonthPlanEgyAt)*100).toFixed(2)}%</span>
+                            </div>
+
+                        </div>
+                        <div className={`${styles.Completion} ${styles.box_shadow}`}>
+
+                            <Title title={['发电量完成率']}></Title>
+                            <Column></Column>
+
+                        </div>
                     </div>
-                    <div className={styles.zhzbdown}>安全运行天数
-                        <span className={styles.daynum}>  1026</span> 天
-                    </div>
+                <div className={styles.changeBox}>
+                    <img src={flag===true? leftIcon:rightIcon} onClick={()=>{changeFlag(flag===true? true:false,flag )}}/>
                 </div>
-                <div className={styles.zhzbgl}>
-                    <Title title={['综合指标概览']}></Title>
-                    <div className={styles.zhzbglmain}>
-                        <div className={styles.zhzbglbox}></div>
-                        <div className={styles.zhzbglbox}></div>
-                        <div className={styles.zhzbglbox}></div>
-                        <div className={styles.zhzbglbox}></div>
-                        <div className={styles.zhzbglbox}></div>
-                        <div className={styles.zhzbglbox}></div>
-                    </div>
-                </div>
-                <div className={styles.czrlzb}>
-                    <Title title={['场站容量占比']}></Title>
-                    <div className={styles.czrlzdmain}>
-                        <Pie1></Pie1>
-                        <span className={styles.chartnum}><p>25360</p><p>kWh</p></span>
-                    </div>
-                </div>
-                <div className={styles.nfdlwcqk}>
-                    <Title title={['年发电量完成情况']}></Title>
-                    <div className={styles.nfdlwcqkmain}>
-                        <Column></Column>
-                    </div>
-                </div>
-                <div className={styles.czydfdqk}>
-                    <Title title={['场站月度发电情况']}></Title>
-                    <div className={styles.czydfdqkmain}>
-                        <Column></Column>
-                    </div>
-                </div>
-                <div className={styles.longbox}>
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={jie}/></div>
-                        <div className={styles.righttext}>节能减排</div>
-                    </div>
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={co2}/></div>
-                        <div className={styles.righttext1}><h2>年累节约水</h2><h2><b>2569</b>万吨</h2></div>
-                    </div>
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={shui}/></div>
-                        <div className={styles.righttext1}><h2>年累节约标煤</h2><h2><b>265 </b>万吨</h2></div>
-                    </div>
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={co2}/></div>
-                        <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>815</b>万吨</h2></div>
-                    </div>
-                    <div className={`${styles.navitem} ${styles.bore}`}>
-                        <div className={styles.leftimg}><img src={shui}/></div>
-                        <div className={styles.righttext1}><h2>年累SO2减排</h2><h2><b>5</b>万吨</h2></div>
-                    </div>
-                </div>
-                <div className={styles.fgzyfx}>
-                    <Title title={['风/光资源分析']}></Title>
-                    <div className={styles.fgzyfxmain}>
-                        <Polar></Polar>
-                    </div>
-                </div>
-                <div className={styles.ssdlqkfx}>ji
-                    <Title title={['故障设备概览']}></Title>
-                    <div className={styles.ssdlqkfxmain}>
-                        <span className={styles.tsstyle1}>3<span className={styles.tsstyled1}>台</span></span>
-                        <span className={styles.tsstyle2}>12<span className={styles.tsstyled2}>台</span></span>
-                        <span className={styles.tsstyle3}>13<span className={styles.tsstyled3}>台</span></span>
-                        <span className={styles.tsstyle4}>19<span className={styles.tsstyled4}>台</span></span>
-                    </div>
-                </div>
-                <div className={styles.gzsbgl}>
-                    <Title title={['损失电量情况分析']}></Title>
-                    <div className={styles.gzsbglmain}>
-                        <Column></Column>
-                    </div>
+                <div className={`${styles.rightBox} ${flag===true? styles.animat3 : styles.animat2}`}>
+                    <img src={map1} onClick={()=>play()}/>
                 </div>
             </div>
-        )
+        );
     }
 });
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        showFlag : state.vars.distributionLeftBox,
+        flag:state.vars.flagff,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -126,8 +121,20 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
+        },
+        play:()=>{
+            dispatch(actions.setVars('showPage', 'fan_matrix'));
+            dispatch(actions.setVars('navhide', false));
+        },
+        changeFlag :(flag)=>{
+            dispatch(actions.setVars('distributionLeftBox', flag));
+            if(flag){
+                flag=false;
+            }else{
+                flag=true;
+            };
+            dispatch(actions.setVars('flagff', flag));
         }
-        ,
     };
 };
 
