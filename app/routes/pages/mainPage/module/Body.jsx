@@ -64,7 +64,7 @@ let Component = React.createClass({
 });
 
 
-const mapStatemapStps = (state) => {
+const mapStateToProps = (state) => {
     return {
         showPage: state.vars.showPage,
         flag: state.vars.bodypage,
