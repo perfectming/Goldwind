@@ -26,13 +26,13 @@ let modeldata = require('../../../../../config/ModelData');
         let  mat=matrix.Model;
         let matD=matrixdata.ModelData;
 
-var skt2 = modeldata.ModelData;
+var model_data = modeldata.ModelData;
 
 var arr3 = [];
 var arr4 = [];
-var skt = model.Model.ens;
-for(var j in skt){
-    arr3.push(skt[j])
+var model_ens = model.Model.ens;
+for(var j in model_ens){
+    arr3.push(model_ens[j])
 }
 // arr3.map((valueE,keyE)=> {
 //     return (
@@ -46,21 +46,21 @@ for(var j in skt){
  // var arr3 = [];
  // var arr4 = [];
  var obj = matrixdata;
-    var ssg1 = obj.ModelData[8888801].WFDevsStatus;
-    var ssg2 = obj.ModelData[8888802].PVDevsStatus;
+    var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
+    var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 
 
-    // console.log(ssg1);
-    for(var x in ssg1){
+    console.log(obj_wfd);
+    for(var x in obj_wfd){
         arr1.push(x)
-        // for(var y in ssg1[x]){
-        //     arr2.push(ssg1[x][y])
+        // for(var y in obj_wfd[x]){
+        //     arr2.push(obj_wfd[x][y])
         // }
     }
-    for(var m in ssg2){
+    for(var m in obj_pvd){
         arr2.push(m)
-        // for(var n in ssg1[m]){
-        //     arr2.push(ssg1[m][n])
+        // for(var n in obj_wfd[m]){
+        //     arr2.push(obj_wfd[m][n])
         // }
     }
     // console.log(arr1);
@@ -212,17 +212,17 @@ let Component = React.createClass({
                     arr1.map((value, key)=> {
                         return (
                             <div className={styles.listheaderBox} key={key}>
-                                <button className={styles.listbtn}>{skt[value].name}</button>
+                                <button className={styles.listbtn}>{model_ens[value].name}</button>
                                 <div className={styles.listopt}>
                                     {
-                                        ssg1[value].map((valueA, keyA)=> {
+                                        obj_wfd[value].map((valueA, keyA)=> {
                                             return (
                                                 
                                                     <div className={styles.listoptbtn_2}  key={keyA}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
-                                                                <p>{'风速:'+Math.ceil(skt2[value].WindSpeed_DevAverValue/3600)+'m/s'}</p>
-                                                                <p>{'功率:'+Number(skt2[value].WindSpeed_DevAverValue).toFixed(2)+'KW'}</p>
+                                                                <p>{'风速:'+Math.ceil(model_data[value].WindSpeed_DevAverValue/3600)+'m/s'}</p>
+                                                                <p>{'功率:'+Number(model_data[value].WindSpeed_DevAverValue).toFixed(2)+'KW'}</p>
                                                         </div>
                                                     </div>
                                             )

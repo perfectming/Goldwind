@@ -1,0 +1,60 @@
+.listbodyBox{
+  float: left;
+  margin-left: 20px;
+    .listBox{
+      font-size: 20px;
+      color:#fff;
+      float: left;
+      margin-left: 10px;
+      margin-bottom: 10px;
+      width: 240px;
+      height: 112px;
+      background: #292F34;
+      .listitemL{
+        float: left;
+        border-left: 2px solid #00E438;
+      }
+      .listitemR{
+        float: left;
+        margin-left: 10px;
+        .listitemT{
+          display: block;
+          margin: 12px 0;
+          .listitemTT{
+            font-size: 18px;
+            line-height: 16px;
+          }
+          .listitemTB{
+            font-size: 14px;
+            line-height: 14px;
+          }
+        }
+        .listitemB{
+          padding-top: 10px;
+          font-size: 14px;
+           p{
+              margin:0;
+            }
+          .listitemBLL{
+              color:#00F7FE;
+          }
+          .listitemBLR{
+              font-size: 12px;
+              padding:2px 0 0 2px;
+          }
+          span{
+            float: left;
+          }
+          .listitemBL{
+            width: 60px;
+            p{
+              margin:0;
+            }
+          }
+        }
+      }
+      div{
+        float: left;
+      }
+    }  
+}
