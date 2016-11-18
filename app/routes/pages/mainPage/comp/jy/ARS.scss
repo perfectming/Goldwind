@@ -1,24 +1,24 @@
-input{background: #000;}
+
 .actionBox {
   width: 100%;
   text-align: right;
   margin-bottom: 30px;
   overflow: hidden;
   img {
-    width: 30px;
+
     margin-left: 50px;
   }
 }
 .btn{
-  margin-left: 85%;
+  margin-left: 80%;
   padding: 20px;
   img{
+    width: 40px;
     margin-right: 20px;
     cursor: pointer;
   }
 }
 .tableBox {
-
   overflow: hidden;
   .tableHeaderBox {
     overflow: hidden;
@@ -39,6 +39,7 @@ input{background: #000;}
       background: #30343f;
       overflow: hidden;
       .tableContentItem {
+        background: #30343f;
         float: left;
         overflow: hidden;
         text-align: center;
@@ -59,6 +60,7 @@ input{background: #000;}
       overflow: hidden;
       background: #272b34;
       .tableContentItem {
+        background: #272b34;
         float: left;
         padding: 10px 0 10px;
         overflow: hidden;

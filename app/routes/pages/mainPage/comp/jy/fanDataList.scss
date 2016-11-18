@@ -4,18 +4,29 @@
   margin-bottom: 30px;
   overflow: hidden;
   img {
-
+    width: 30px;
     margin-left: 50px;
   }
 }
 .btn{
-  margin-left: 80%;
+  margin-left: 85%;
   padding: 20px;
   img{
-    width: 40px;
     margin-right: 20px;
     cursor: pointer;
   }
+}
+.leftBox{
+  width:45%;
+  float: left;
+  margin-left: 3%;
+  margin-right: 2%;
+}
+.rightBox{
+  width:45%;
+  float: left;
+  margin-left: 3%;
+  margin-right: 2%;
 }
 .tableBox {
 
@@ -76,5 +87,55 @@
         float: left;
       }
     }
+  }
+}
+.btnClass {
+  font-size: 16px;
+  color: #fff;
+  margin: 20px;
+  .run {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 20px;
+    background: #349b24;
+  }
+  .fau {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 20px;
+    background: #f50000;
+  }
+  .offL {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 20px;
+    background: #6b6965;
+  }
+  .stand {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 20px;
+    background: #007dc3;
+  }
+  .haul {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    margin: 20px;
+    background: #ef7b00;
+    margin-right: 30%;
+  }
+  .btnP {
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    background: #30343f;
+  }
+  .txt {
+    margin: 20px;
   }
 }

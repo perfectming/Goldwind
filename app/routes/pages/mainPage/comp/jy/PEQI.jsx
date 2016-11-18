@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './PEQI.scss';
 import Table from '../tkgl/data_table.jsx';
+import save from '../../img/comp/save.png';
+import refresh from '../../img/comp/refresh.png';
 import mod from '../../../../../../config/Model'
 var actions = require('redux/actions');
 let comps = require('./data');
@@ -62,17 +64,16 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        table: state.objs.tableContent,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: () => {
-            var obj = {
-                test:''
-            }
-        }
-        ,
+        init: (obj) => {
+            dispatch(actions.setObjs('tableContent', obj));
+        },
     };
 };
 

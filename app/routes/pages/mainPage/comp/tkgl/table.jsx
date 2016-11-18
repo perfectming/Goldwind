@@ -9,24 +9,22 @@ import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
 import _ from 'lodash';
 let tabaleData = require('../../../../../../config/RegulationData');
-let model=require('../../../../../../config/Model');
+let model=require('../../../../../../config/RegulationModel');
 let data=tabaleData.ModelData;
 let mode=model.Model.ens;
-let nam=['name','TransformerStatus','AVC','AGC','PlanActPower','Capacity','Transformer_P'];
-let header=['场站名称','升压站状态', 'AVC状态','AGC状态','计划功率MW','装机容量MW','负荷MW'];
+let nam=['name','TransformerStatus','AVC','AGC','PlanActPower','Capacity','TActPower','Transformer_P'];
+let header=['场站名称','升压站状态', 'AVC状态','AGC状态','计划功率MW','装机容量MW','出力MW','负荷MW'];
 let narr=[];
-let num=[];
-for(let key in data){
-    num.push(key);
-}
-num.pop();
-for(let j=0;j<num.length;j++){
+for(let key in mode){
     let arr=[];
     for(let i=0;i<nam.length;i++){
         if(i==0){
-            arr.push(mode[num[j]][nam[0]]);
+            arr.push(mode[key][nam[0]]);
+        }else if(i>3){
+            i==5?arr.push(data[key][nam[i]]):
+            arr.push((data[key][nam[i]]/1).toFixed(2))
         }else{
-            arr.push(data[num[j]][nam[i]])
+            arr.push(data[key][nam[i]])
         }
     }
     narr.push(arr);
