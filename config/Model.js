@@ -533,7 +533,7 @@ module.exports ={
                 "path": "",
                 "coeff": "1",
                 "sort": "",
-                "color": "#328def",
+                "color": "#fbd500",
                 "ps": [ ]
             },
             "OfflineCount": {
@@ -551,7 +551,7 @@ module.exports ={
                 "path": "",
                 "coeff": "1",
                 "sort": "",
-                "color": "#ffffff",
+                "color": "#929396",
                 "ps": [ ]
             },
             "WFStandbyCount": {
@@ -571,6 +571,24 @@ module.exports ={
                 "sort": "",
                 "color": "#328def",
                 "ps": [ ]
+            },
+             "WFLIMCount": {
+                "name": "限功率",
+                "sn": "",
+                "max": "",
+                "min": "",
+                "unit": "",
+                "trgop": "",
+                "place": "0",
+                "ce": "0",
+                "type": "System.Int32",
+                "pk": "",
+                "df": "",
+                "path": "",
+                "coeff": "1",
+                "sort": "",
+                "color": "#dddcdc",
+                "ps": []
             },
             "PVONL": {
                 "name": "在线(逆变器)",
@@ -623,7 +641,7 @@ module.exports ={
                 "path": "",
                 "coeff": "1",
                 "sort": "",
-                "color": "#ffffff",
+                "color": "#929396",
                 "ps": [ ]
             },
             "CurMonthPlanEgyAt": {

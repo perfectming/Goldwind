@@ -81,7 +81,7 @@ module.exports = {
                 page:[
                      {
                         name:'批量控制1',
-                        page:'fan_matrix',
+                        page:'',
                     },{
                         name:'批量控制2',
                         page:'',
@@ -209,7 +209,7 @@ module.exports = {
                     }]
             }],
         },{
-            name: '业务分析',
+            name: '业务职能',
             iconNormal: require('../app/routes/pages/mainPage/img/comp/ywfx.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/ywfx_active.png'),
             subPage: [{

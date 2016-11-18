@@ -1,0 +1,171 @@
+.contentbox{
+      width:100%;
+      margin-top:25px;
+      overflow:hidden; 
+      .conleft{
+        float:left;
+        width:30%;
+        padding-bottom:20px;
+        position:relative;
+        .spanleft{
+            width:0; 
+            height:0; 
+            border-top:15px solid transparent;
+            border-bottom:15px solid transparent; 
+            border-right:15px solid #2ff4fb; 
+            position:absolute;top:5px; right:10px; cursor:pointer;
+          }
+          .spanright{
+            width:0; 
+            height:0; 
+            border-top:15px solid transparent;
+            border-bottom:15px solid transparent; 
+            border-left:15px solid #2ff4fb; 
+            position:absolute;top:5px; right:10px; cursor:pointer;
+          }
+        
+       
+      }
+       .conright{
+        float:left;
+        width:70%;
+        height:1030px;
+        background: #00f;
+      }
+
+
+      .animat{
+        margin-left:-28.5%;
+        animation:myfirst 1s;
+        -moz-animation:myfirst 1s; /* Firefox */
+        -webkit-animation:myfirst 1s; /* Safari and Chrome */
+        -o-animation:myfirst 1s; /* Opera */
+      }
+      .animat1{
+      margin-left:0px;
+        animation:myfirst1 1s;
+        -moz-animation:myfirst1 1s; /* Firefox */
+        -webkit-animation:myfirst1 1s; /* Safari and Chrome */
+        -o-animation:myfirst1 1s; /* Opera */
+      }
+      .animat2{
+        width:98.5%;
+        animation:myfirst2 1s;
+        -moz-animation:myfirst2 1s; /* Firefox */
+        -webkit-animation:myfirst2 1s; /* Safari and Chrome */
+        -o-animation:myfirst2 1s; /* Opera */
+      }
+      .animat3{
+        width:70%;
+        animation:myfirst3 1s;
+        -moz-animation:myfirst3 1s; /* Firefox */
+        -webkit-animation:myfirst3 1s; /* Safari and Chrome */
+        -o-animation:myfirst3 1s; /* Opera */
+      }
+      
+  }
+
+
+
+  @keyframes myfirst
+{
+from {margin-left:0%;}
+to {margin-left:-28.5%;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+from {margin-left:0%;}
+to {margin-left:-28.5%;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+from {margin-left:0%;}
+to {margin-left:-28.5%;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+from {margin-left:0%;}
+to {margin-left:-28.5%;}
+}
+
+
+@keyframes myfirst1
+{
+from {margin-left:-28.5%;}
+to {margin-left:0;}
+}
+
+@-moz-keyframes myfirst1 /* Firefox */
+{
+from {margin-left:-28.5%;}
+to {margin-left:0;}
+}
+
+@-webkit-keyframes myfirst1 /* Safari and Chrome */
+{
+from {margin-left:-28.5%;}
+to {margin-left:0;}
+}
+
+@-o-keyframes myfirst1 /* Opera */
+{
+from {margin-left:-28.5%;}
+to {margin-left:0;}
+}
+
+
+
+
+
+@keyframes myfirst2
+{
+from {width:70%;}
+to {width:98.5%;}
+}
+
+@-moz-keyframes myfirst2 /* Firefox */
+{
+from {width:70%;}
+to {width:98.5%;}
+}
+
+@-webkit-keyframes myfirst2 /* Safari and Chrome */
+{
+from {width:70%;}
+to {width:98.5%;}
+}
+
+@-o-keyframes myfirst2 /* Opera */
+{
+from {width:70%;}
+to {width:98.5%;}
+}
+
+
+
+@keyframes myfirst3
+{
+from {width:98.5%;}
+to {width:70%;}
+}
+
+@-moz-keyframes myfirst3 /* Firefox */
+{
+from {width:98.5%;}
+to {width:70%;}
+}
+
+@-webkit-keyframes myfirst3 /* Safari and Chrome */
+{
+from {width:98.5%;}
+to {width:70%;}
+}
+
+@-o-keyframes myfirst3 /* Opera */
+{
+from {width:98.5%;}
+to {width:70%;}
+}

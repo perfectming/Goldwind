@@ -1,0 +1,28 @@
+.bodybox{
+	width:100%;
+	height:1030px;
+	background-image: url('../../../../img/comp/cft.jpg');
+	background-size:100% 100%;
+	padding-top:10px;
+	.infobox{
+		width:250px;
+		height:50px;
+		float:left;
+		line-height:50px;
+		margin:10px 20px;
+		font-size:22px;
+		.boxname{
+			color:#1b5c40;
+		}
+		a{
+		color:#f00;
+		
+		b{
+		margin:0 10px 0 20px;
+		}
+		.unit{
+			font-size:16px;
+		}
+		}
+	}
+}
