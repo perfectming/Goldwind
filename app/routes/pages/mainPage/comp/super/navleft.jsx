@@ -45,7 +45,6 @@ let Component = React.createClass({
                                         <div className={styles.leftnum}>
                                             <a>{arr[key].unit}</a>
                                             <span className={styles.tabnum}>{arr[key].num}</span>
-                                            
                                         </div>
                                     </div>
                                 )
