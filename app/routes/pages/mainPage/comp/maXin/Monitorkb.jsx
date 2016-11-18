@@ -4,6 +4,8 @@ import styles from './Monitorkb.scss';
 import Title from '../super/Title.jsx';
 import Pie1 from '../mxx/Pie1.jsx';
 import Column from '../mxx/Column.jsx';
+import Column1 from '../mxx/Column1.jsx';
+import Column2 from '../mxx/Column2.jsx';
 import Polar from '../mxx/Polar1';
 import jnjp from '../../img/comp/jienengjp.png';
 import nljys from '../../img/comp/nianleijys.png';
@@ -66,7 +68,7 @@ let Component = React.createClass({
                 <div className={styles.czydfdqk}>
                     <Title title={['场站月度发电情况']}></Title>
                     <div className={styles.czydfdqkmain}>
-                        <Column></Column>
+                        <Column1></Column1>
                     </div>
                 </div>
                 <div className={styles.longbox}>
@@ -110,7 +112,7 @@ let Component = React.createClass({
                 <div className={styles.gzsbgl}>
                     <Title title={['损失电量情况分析']}></Title>
                     <div className={styles.gzsbglmain}>
-                        <Column></Column>
+                        <Column2></Column2>
                     </div>
                 </div>
             </div>
