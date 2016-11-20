@@ -18,7 +18,6 @@ let num=[];
     arr.push(date[i].DayEgyAt/1);
     }
     arr.pop(); 
-    console.log(arr);
     for(let x=0;x<arr.length;x++){
         allnum+=arr[x]
     }  

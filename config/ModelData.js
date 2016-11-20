@@ -336,7 +336,7 @@ module.exports ={
             "TActPower": "6499.220",
             "DayEgyAt": "6114",
             "MonthEgyAt": "12050",
-            "YearEgyAt": "97726",
+            "YearEgyAt": "57726",
             "ONL": "0",
             "FaultCount": "0",
             "RepairCount": "0",
