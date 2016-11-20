@@ -6,8 +6,6 @@ import Block from './super/block.jsx';
 import Block1 from './super/block1.jsx';
 import Title from './super/Title.jsx';
 import Pie from './chart/Pie.jsx';
-import Line from './chart/line1.jsx';
-import Line2 from './chart/line3.jsx';
 import Line1 from './chart/line2.jsx';
 import Column from './chart/column1.jsx';
 import Table from './super/table.jsx';
@@ -22,6 +20,12 @@ import icon2 from '../img/comp/icon2.png';
 import icon3 from '../img/comp/icon3.png';
 import icon4 from '../img/comp/icon4.png';
 import icon5 from '../img/comp/icon5.png';
+let datename00=dataBase.ModelData[8888800].CurDayPowerCurve.Time;
+let date00=dataBase.ModelData[8888800].CurDayPowerCurve.Value;
+let datename01=dataBase.ModelData[8888801].CurDayWindSpeedCurve.Time;
+let date01=dataBase.ModelData[8888801].CurDayWindSpeedCurve.Value;
+let datename02=dataBase.ModelData[8888802].CurDayPVTSICurve.Time;
+let date02=dataBase.ModelData[8888802].CurDayPVTSICurve.Value;
 
 
 
@@ -35,6 +39,7 @@ let Component = React.createClass({
         let mod=model.Model;
         let  mat=matrix.Model;
         let matD=matData.ModelData;
+        let {all}=this.props;
         return (
             <div className={styles.bodyBox}>
 
@@ -170,11 +175,11 @@ let Component = React.createClass({
                         <div className={styles.dingwei}>
                             <Pie></Pie>
                         </div>
-                        <span className={styles.chartnum}><p>25360</p><p>kWh</p></span>
+                        <span className={styles.chartnum}><p>{all}</p><p>kWh</p></span>
                             <Title title={['日发电量统计']}></Title>
                         </div>
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
-                            <Line1></Line1>
+                            <Line1 date={date00} datename={datename00} height={220}></Line1>
                    
                             <Title title={[mod.dis.CurDayPowerCurve.name+'('+mod.dis.CurDayPowerCurve.unit+')']}></Title>
                             
@@ -184,12 +189,12 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.chart_bar}>
                         <div className={`${styles.linebox} ${styles.box_shadow}`}>
-                            <Line2></Line2>
+                            <Line1 date={date01} datename={datename01} height={150}></Line1>
                             <Title title={[mod.dis.CurDayWindSpeedCurve.name+'('+mod.dis.CurDayWindSpeedCurve.unit+')']}></Title>
                         </div>
 
                          <div className={`${styles.linebox} ${styles.linebox1} ${styles.box_shadow}`}>
-                            <Line></Line>
+                            <Line1 date={date02} datename={datename02} height={150}></Line1>
                             <Title title={[mod.dis.CurDayPVTSICurve.name+'('+mod.dis.CurDayPVTSICurve.unit+')']}></Title>
 
                         </div>
@@ -215,7 +220,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        all: state.vars.allnumber,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

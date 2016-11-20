@@ -64,7 +64,6 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(actions.setVars('navhide', true));
              }
               
-             console.log(page);
         },
     };
 };

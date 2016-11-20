@@ -10,13 +10,17 @@ let date=dataBase.ModelData;
 let datename=dataName.Model.ens;
 let arr=[];
 let arrname=[];
+let allnum=0;
 let num=[];
 (function(){
     for(let i in date){
 
     arr.push(date[i].DayEgyAt/1);
     }
-    arr.pop();      
+    arr.pop(); 
+    for(let x=0;x<arr.length;x++){
+        allnum+=arr[x]
+    }  
    
 }());
 (function(){
@@ -32,7 +36,8 @@ let num=[];
     }
  }
 let Component = React.createClass({
-    componentWillMount() {
+    componentDidMount() {
+        this.props.init();
     },
 
     render() {
@@ -102,6 +107,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('allnumber', allnum));
         },
     };
 };

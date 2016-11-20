@@ -41,7 +41,7 @@ let Component = React.createClass({
                                             value.map((valueC, keyC)=> {
                                                 if(keyC <= 12){
                                                     return (
-                                                        <div className={styles.tableContentItem}style={{width:tabaleData.data.length[keyC]}} key={keyC}>
+                                                        <div className={styles.tableContentItem} style={{width:tabaleData.data.length[keyC]}} key={keyC}>
                                                              {valueC}
                                                         </div>
                                                     )

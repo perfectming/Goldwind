@@ -13,13 +13,12 @@ let Component = React.createClass({
     },
 
     render() {
-        let {showPage1,tab} = this.props;
-        console.log(tab);
+        let {tab} = this.props;
+        
         return (
             <div className={styles.bodyBox }>
              <Nav title={tab}></Nav>
-                {showPage1 === 'fcone' && <Fcone></Fcone>}
-                {showPage1 === 'fctwo' && <Fctwo></Fctwo>}
+               <Fcone></Fcone>
                 
               
             </div>
@@ -30,14 +29,12 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        showPage1: state.vars.showPage1,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            dispatch(actions.setVars('showPage1','fcone'))
         },
     };
 };

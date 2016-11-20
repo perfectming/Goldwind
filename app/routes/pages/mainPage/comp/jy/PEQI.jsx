@@ -22,7 +22,7 @@ for(let i=0;i<=30;i++){
 arr3.splice(-2,2);
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init();
+        this.props.init(comps.peqi);
     },
     render() {
         let {buttonAction, inputOnChange, onFocus} = this.props;
