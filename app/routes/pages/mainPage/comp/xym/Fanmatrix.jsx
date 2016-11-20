@@ -12,7 +12,7 @@ let modeldata = require('../../../../../../config/ModelData');
 
 var model_data = modeldata.ModelData;
 console.log(model_data);
-var arrdata = model_data[650123].WindSpeed_DevAverValue;
+var arrdata = model_data[valuepage].WindSpeed_DevAverValue;
 
 var arr3 = [];
 var arr4 = [];
@@ -63,18 +63,15 @@ let Component = React.createClass({
     },
 
     render() {
+        let{valuepage=650107}=this.props;
         return (
-           
-              
-             
-                    <div className={styles.listbodyBox}>
-                    {
-                    obj_wfd[650123].map((value, key)=> {
-                        return (
-                          <div className={styles.listBox} key={key}>
-
-                           
-                            <div className={styles.listitemL}><img src={fmatrix}/></div>
+            <div className={styles.listbodyBox}>
+                {
+                obj_wfd[valuepage].map((value, key)=> {
+                    return (
+                        <div className={styles.listBox} key={key}>
+                            <div className={styles.listitemL}><img src={fmatrix}/>
+                            </div>
                             <div className={styles.listitemR}>
                                 <span className={styles.listitemT}>
                                         <p className={styles.listitemTT}>{value.Wtname}</p>
@@ -91,34 +88,21 @@ let Component = React.createClass({
                                     </span>
                                 </span>
                             </div>          
-                                
-                                
-                                
-                            
-
-                          </div>  
-                               
-                                
-
-                           
-                                 
-                            
-                            
+                        </div>  
                         )
                         
-                    })
-                   
-                    }
-                    </div>
-            
-        
+                })
+                }
+            </div>
         );
     }
 });
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        valuepage : state.vars.valuepage,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

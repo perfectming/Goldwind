@@ -14,7 +14,7 @@ let Component = React.createClass({
 
     render() {
         let {showPage1,tab} = this.props;
-        
+        console.log(tab);
         return (
             <div className={styles.bodyBox }>
              <Nav title={tab}></Nav>
