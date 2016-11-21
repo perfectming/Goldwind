@@ -55,7 +55,7 @@ let Component = React.createClass({
                     <div className={styles.zhzbglmain}>
                         <div className={styles.zhzbglbox}><Pie2 color={['#33BAC0','#33545C']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#33BAC0'}}>50%</p>年发电完成率</span></div>
                         <div className={styles.zhzbglbox}><Pie2 color={['#E9C75C','#A69263']} num={[73,27]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#E9C75C'}}>27%</p>年发电能力</span></div>
-                        <div className={styles.zhzbglbox}><Pie2 color={['#D06960','#954A45']} num={[15,85]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#D06960'}}>85%</p>月发电完成率</span></div>
+                        <div className={styles.zhzbglbox}><Pie2 color={['#D06960','#954A45']} num={[85,15]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#D06960'}}>85%</p>月发电完成率</span></div>
                         <div className={styles.zhzbglbox}><Pie2 color={['#70C080','#4A7A59']} num={[75,25]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#70C080'}}>25%</p>弃风率</span></div>
                         <div className={styles.zhzbglbox}><Pie2 color={['#5298D3','#537388']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#5298D3'}}>50%</p>弃光率</span></div>
                         <div className={styles.zhzbglbox}><Pie2 color={['#31BAC0','#32535C']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#31BAC0'}}>50%</p>年发电完成率</span></div>
