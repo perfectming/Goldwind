@@ -17,14 +17,19 @@ let date=dataBase.ModelData;
 let placename=place.Model.ens;
 let arrname=[];
 let point=[];
-
+let fcnum=[];
 (function(){
     let o=0;
     for(let name in placename){     
+         if(placename[name].wft=='Gf')  {  
                point.push(placename[name].name)
+             }
+
             }
   for(let key in date){
     let arr=[];
+     if(date[key].WTCount=='0' && date[key].InverterCount!='0'){
+        fcnum.push(key);
     for(let i=0;i<headername.length;i++){
          if(i==0){
              arr.push(point[o]);
@@ -37,7 +42,8 @@ let point=[];
             }
             arrname.push(arr);
          }
-          arrname.pop();
+         
+      }
         
 }());
 
@@ -48,14 +54,14 @@ let Component = React.createClass({
         this.props.init(tabaleData);
     },
     render() {
-        let {table, changeTableItem} = this.props;
+        let {table, changeTableItem,changepage} = this.props;
         return (
             <div>
                 
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
-                            tabaleData.data.header1.map((value, key)=> {
+                            tabaleData.data.header.map((value, key)=> {
                                 return (
                                     <div className={styles.tableHeaderItem}
                                          style={{width:(tabaleData.data.width[key])+"%"}} key={key}>{value}</div>
@@ -66,11 +72,14 @@ let Component = React.createClass({
                     <div className={styles.tableContentBox}>
                         {
                             arrname.map((value, key)=> {
+                                
                                 return (
-                                    <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
+
+                                    <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key} onClick={()=>changepage(key)}>
                                         {
                                             value.map((valueC, keyC)=> {
-                                                if(keyC==7){
+
+                                                 if(keyC==7){
                                                         if(valueC<60){
                                                              return (
                                                             <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%",color:'#e72727'}}
@@ -99,23 +108,31 @@ let Component = React.createClass({
                                                        
                                                     
                                                 }
-                                                
-                                                if(keyC==10){
-                                                    return (
+
+                                                if(keyC==9){
+
+                                                     return (
+
                                                     <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%",color:'#f00'}}
                                                            key={keyC}>{valueC}</div>
-                                                )
+
+                                                     )
                                                 }
+
                                               
                                                 return (
+
                                                     <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%"}}
                                                            key={keyC}>{valueC}</div>
+
                                                 )
                                             })
                                         }
                                     </div>
                                 )
-                            })
+                            
+
+                          })
                         }
                     </div>
                 </div>
@@ -140,6 +157,14 @@ const mapDispatchToProps = (dispatch) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.data.content[i][j] = value;
             dispatch(actions.setObjs('tableContent', tableV));
+        },
+        changepage:(key) => {
+           dispatch(actions.setVars('showPage', 'fan_matrix'));
+           dispatch(actions.setVars('numpage', 'pvmatrix'));
+          dispatch(actions.setVars('actbt1',key ));
+          dispatch(actions.setVars('actbt','' ));
+          dispatch(actions.setVars('valuepage1', fcnum[key]));
+
         }
     };
 };

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './fcone.scss';
 import Navleft from '../../super/navleft.jsx';
 import Fanmatrix from '../../xym/Fanmatrix.jsx';
+import Pvmatrix from '../../xym/Pvmatrix.jsx';
 import Sjlb from '../../jy/fanDataList.jsx';
 import Fjkx from './fcright/fjkx.jsx';
 import Cft from './fcright/cft.jsx';
@@ -17,7 +18,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ flag=true, changeFlag}=this.props;
+       let{ flag=true, changeFlag,numpage='fanmatrix'}=this.props;
         return (
             <div className={styles.bodyBox}>
                 
@@ -27,7 +28,13 @@ let Component = React.createClass({
                         <Navleft></Navleft>
                       </div>
                     <div className={`${styles.conright} ${flag===true? styles.animat3 : styles.animat2}`}>
-                       <Fanmatrix></Fanmatrix>
+                        { numpage==='fanmatrix' && <Fanmatrix></Fanmatrix>}
+                        { numpage==='pvmatrix' && <Pvmatrix></Pvmatrix>}
+                        { numpage==='sjlb' && <Sjlb></Sjlb>}
+                        { numpage==='fjkx' && <Fjkx></Fjkx>}
+                        { numpage==='cft' && <Cft></Cft>}
+                        { numpage==='gisdxt' && <Gisdxt></Gisdxt>}
+                        { numpage==='syzjs' && <Syzjs></Syzjs>}
 
                     </div>
                 </div>
@@ -40,6 +47,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         flag : state.vars.flagff,
+        numpage : state.vars.numpage,
 
     }
 };
