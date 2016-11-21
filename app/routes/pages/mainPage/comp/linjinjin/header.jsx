@@ -49,6 +49,15 @@ let Component = React.createClass({
                             <div className={actbt===key? styles.bodybtn1 : styles.bodybtn} key={key} onClick={()=>changpage(value,key)}>{model_ens[value].name}</div>
                             )
                     })
+
+                 }
+                  {
+                    arr2.map((value,key)=>{
+                        return(
+                            <div className={actbt===key? styles.bodybtn1 : styles.bodybtn} key={key} onClick={()=>changpage(value,key)}>{model_ens[value].name}</div>
+                            )
+                    })
+                    
                  }
 
                 </div>
