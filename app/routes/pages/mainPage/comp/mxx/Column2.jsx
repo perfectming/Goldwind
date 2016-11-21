@@ -39,8 +39,9 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 height:270,
-                marginTop: 50,
+                marginTop: 60,
                 marginBottom:45,
+                marginLeft:40,
             },
             title: {
                 text: '',
@@ -62,18 +63,29 @@ let Component = React.createClass({
                 categories: ['十一月','十二月','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月']
             },
             yAxis: {
-                lineWidth: 1,
                 title: {
-                    text: ''
+                    text: '(万kMw)',
+                    align: 'high',
+                    rotation: 1,
+                    y: -5,
+                    x: 86
                 },
+                lineWidth: 1,
                 gridLineWidth: 0
+            },
+            legend: {
+                align:"right",
+                verticalAlign: "top",
+                itemStyle: {
+                    color: "#fff",
+                    //fontSize:"14px",
+                    fontWeight:"normal",
+                    fontFamily:"微软雅黑"
+                },
+                y:-15,
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
-            },
-            legend: {
-                shadow: false,
-                enabled:false
             },
             tooltip: {
                 shared: true
@@ -85,13 +97,19 @@ let Component = React.createClass({
                     borderWidth: 0
                 }
             },
-            colors: ['#37545C','#32C5CD'    ]
+            colors: ['#37545C','#32C5CD','#D06960']
             ,
             series: [{
+                name:'故障损失',
                 data: [300,320,360,330,260,380,290,320,360,340,280,340],
                 borderRadius: 5
             },{
+                name:'维护损失',
                 data: [350,300,280,310,250,300,280,320,340,300,200,320],
+                borderRadius: 5
+            },{
+                name:'限电损失',
+                data: [140,140,140,140,140,140,140,140,140,140,140,140],
                 borderRadius: 5
             }]
         };

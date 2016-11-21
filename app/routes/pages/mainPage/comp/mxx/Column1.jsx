@@ -32,23 +32,21 @@ let Component = React.createClass({
     render() {
         let configPie = {
             chart: {
-                type: 'column',
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 height:270,
-                marginTop: 50,
+                marginTop: 60,
                 marginBottom:45,
+                marginLeft:40,
             },
             title: {
-                text: '',
-                style:{
-                    color:"#fff",
-                    fontSize:"24px",
-                    fontFamily:"Microsoft YaHei"
-                }
+                text: ''
+            },
+            credits: {
+                enabled: false //不显示highCharts版权信息
             },
             xAxis: {
                 labels: {
@@ -62,18 +60,26 @@ let Component = React.createClass({
                 categories: ['十一月','十二月','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月']
             },
             yAxis: {
-                lineWidth: 1,
                 title: {
-                    text: ''
+                    text: '(万kMw)',
+                    align: 'high',
+                    rotation: 1,
+                    y: -5,
+                    x: 86
                 },
+                lineWidth: 1,
                 gridLineWidth: 0
             },
-            credits: {
-                enabled: false //不显示highCharts版权信息
-            },
             legend: {
-                shadow: false,
-                enabled:false
+                align:"right",
+                verticalAlign: "top",
+                itemStyle: {
+                    color: "#fff",
+                    //fontSize:"14px",
+                    fontWeight:"normal",
+                    fontFamily:"微软雅黑"
+                },
+                y:-15,
             },
             tooltip: {
                 shared: true
@@ -85,14 +91,26 @@ let Component = React.createClass({
                     borderWidth: 0
                 }
             },
-            colors: ['#37545C','#32C5CD'    ]
+            colors: ['#37545C','#32C5CD','#1fe005','#D06960']
             ,
             series: [{
+                name:'计划发电量',
+                type: 'column',
                 data: [300,320,360,330,260,380,290,320,360,340,280,340],
                 borderRadius: 5
             },{
+                name:'实际发电量',
+                type: 'column',
                 data: [350,300,280,310,250,300,280,320,340,300,200,320],
                 borderRadius: 5
+            },{
+                name:'场站完成率',
+                type: 'line',
+                data: [200,200,200,200,200,200,200,200,200,200,200,200]
+            },{
+                name:'公司完成率',
+                type: 'line',
+                data: [200,150,250,180,260,100,220,250,180,190,200,180]
             }]
         };
         return (

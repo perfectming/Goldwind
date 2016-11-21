@@ -17,14 +17,19 @@ let date=dataBase.ModelData;
 let placename=place.Model.ens;
 let arrname=[];
 let point=[];
-
+let fcnum=[];
 (function(){
     let o=0;
-    for(let name in placename){     
+    for(let name in placename){ 
+      if(placename[name].wft=='Wf')  {  
                point.push(placename[name].name)
+             }
+           
             }
   for(let key in date){
     let arr=[];
+  if(date[key].WTCount!='0' && date[key].InverterCount=='0'){
+     fcnum.push(key);
     for(let i=0;i<headername.length;i++){
          if(i==0){
              arr.push(point[o]);
@@ -32,12 +37,15 @@ let point=[];
         }
         if(i==6){
             arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1));
-        }
-           arr.push(date[key][headername[i]]);
+             }
+             arr.push(date[key][headername[i]]);
             }
             arrname.push(arr);
          }
-          arrname.pop();
+       }
+     
+
+      
         
 }());
 
@@ -48,7 +56,7 @@ let Component = React.createClass({
         this.props.init(tabaleData);
     },
     render() {
-        let {table, changeTableItem} = this.props;
+        let {table, changeTableItem,changepage} = this.props;
         return (
             <div>
                 
@@ -66,10 +74,13 @@ let Component = React.createClass({
                     <div className={styles.tableContentBox}>
                         {
                             arrname.map((value, key)=> {
+                                
                                 return (
-                                    <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
+
+                                    <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key} onClick={()=>changepage(key)}>
                                         {
                                             value.map((valueC, keyC)=> {
+
                                                  if(keyC==7){
                                                         if(valueC<60){
                                                              return (
@@ -109,6 +120,7 @@ let Component = React.createClass({
 
                                                      )
                                                 }
+
                                               
                                                 return (
 
@@ -120,7 +132,9 @@ let Component = React.createClass({
                                         }
                                     </div>
                                 )
-                            })
+                            
+
+                          })
                         }
                     </div>
                 </div>
@@ -145,6 +159,12 @@ const mapDispatchToProps = (dispatch) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.data.content[i][j] = value;
             dispatch(actions.setObjs('tableContent', tableV));
+        },
+        changepage:(key) => {
+           dispatch(actions.setVars('showPage', 'fan_matrix'));
+          dispatch(actions.setVars('actbt',key ));
+          dispatch(actions.setVars('valuepage', fcnum[key]));
+
         }
     };
 };
