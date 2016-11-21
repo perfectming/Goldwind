@@ -1,7 +1,7 @@
-.listbodyBox{
+.slistbodyBox{
   float: left;
 
-    .listBox{
+    .slistBox{
       font-size: 20px;
       color:#fff;
       float: left;
@@ -10,44 +10,44 @@
       width: 240px;
       height: 112px;
       background: #292F34;
-      .listitemL{
+      .slistitemL{
         float: left;
         border-left: 2px solid #00E438;
       }
-      .listitemR{
+      .slistitemR{
         float: left;
         margin-left: 10px;
-        .listitemT{
+        .slistitemT{
           display: block;
           margin: 12px 0;
-          .listitemTT{
+          .slistitemTT{
             font-size: 18px;
             line-height: 16px;
           }
-          .listitemTB{
+          .slistitemTB{
             font-size: 14px;
             line-height: 14px;
           }
         }
-        .listitemB{
+        .slistitemB{
           padding-top: 10px;
           font-size: 14px;
            p{
               margin:0;
             }
-          .listitemBLL{
+          .slistitemBLL{
               color:#00F7FE;
               line-height: 25px;
           }
-          .listitemBLR{
+          .slistitemBLR{
               font-size: 12px;
               padding:2px 0 0 2px;
           }
           span{
             float: left;
           }
-          .listitemBL{
-            width: 60px;
+          .slistitemBL{
+            width: 80px;
             p{
               margin:0;
             }

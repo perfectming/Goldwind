@@ -38,7 +38,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ changpage, fcpage,actbt=0,backtop }=this.props;
+       let{ changpage, fcpage,actbt=0,backtop,changpage1,actbt1}=this.props;
         return (
          
                 <div className={styles.bodynav}>
@@ -54,7 +54,7 @@ let Component = React.createClass({
                   {
                     arr2.map((value,key)=>{
                         return(
-                            <div className={actbt===key? styles.bodybtn1 : styles.bodybtn} key={key} onClick={()=>changpage(value,key)}>{model_ens[value].name}</div>
+                            <div className={actbt1===key? styles.bodybtn1 : styles.bodybtn} key={key} onClick={()=>changpage1(value,key)}>{model_ens[value].name}</div>
                             )
                     })
                     
@@ -70,6 +70,7 @@ const mapStateToProps = (state) => {
     return {
 
         actbt : state.vars.actbt,
+        actbt1 : state.vars.actbt1,
 
     }
 };
@@ -83,9 +84,16 @@ const mapDispatchToProps = (dispatch) => {
 
         },
          changpage :(value,key)=>{
-            
+              dispatch(actions.setVars('numpage', 'fanmatrix'));
               dispatch(actions.setVars('actbt',key ));
+              dispatch(actions.setVars('actbt1','' ));
               dispatch(actions.setVars('valuepage', value));
+        },
+        changpage1 :(value,key)=>{
+              dispatch(actions.setVars('numpage', 'pvmatrix'));
+              dispatch(actions.setVars('actbt1',key ));
+              dispatch(actions.setVars('actbt','' ));
+              dispatch(actions.setVars('valuepage1', value));
         },
         backtop:()=>{
             dispatch(actions.setVars('showPage','distribution'));

@@ -6512,9 +6512,510 @@ module.exports =  {
     },
     "8888802": {
         "PVDevsStatus": {
-            "652303": [],
-                "652304": [],
-                "652305": []
+            "652303": [
+                {   
+                    "Wtid": "650107001",
+                    "Wtname": "C1-01",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107002",
+                    "Wtname": "C1-02",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107003",
+                    "Wtname": "C1-03",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107004",
+                    "Wtname": "C2-04",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107005",
+                    "Wtname": "C2-05",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107006",
+                    "Wtname": "C2-06",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107007",
+                    "Wtname": "C3-07",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107008",
+                    "Wtname": "C3-08",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107009",
+                    "Wtname": "C3-09",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107010",
+                    "Wtname": "C3-10",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107011",
+                    "Wtname": "C4-11",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107012",
+                    "Wtname": "C4-12",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107013",
+                    "Wtname": "C4-13",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107014",
+                    "Wtname": "C5-14",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107015",
+                    "Wtname": "C5-15",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107016",
+                    "Wtname": "C5-16",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650107017",
+                    "Wtname": "C5-17",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                }
+            ],
+                "652304": [
+                    {
+                    "Wtid": "650123001",
+                    "Wtname": "B1-01",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123002",
+                    "Wtname": "B1-02",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123003",
+                    "Wtname": "B1-03",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123004",
+                    "Wtname": "B1-04",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123005",
+                    "Wtname": "B1-05",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123006",
+                    "Wtname": "B1-06",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123007",
+                    "Wtname": "B1-07",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123008",
+                    "Wtname": "B1-08",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123009",
+                    "Wtname": "B1-09",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123010",
+                    "Wtname": "B2-10",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123011",
+                    "Wtname": "B2-11",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123012",
+                    "Wtname": "B2-12",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123013",
+                    "Wtname": "B2-13",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123014",
+                    "Wtname": "B2-14",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123015",
+                    "Wtname": "B2-15",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123016",
+                    "Wtname": "B2-16",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123017",
+                    "Wtname": "B2-17",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123018",
+                    "Wtname": "B3-18",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123019",
+                    "Wtname": "B3-19",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123020",
+                    "Wtname": "B3-20",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123021",
+                    "Wtname": "B3-21",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123022",
+                    "Wtname": "B3-22",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123023",
+                    "Wtname": "B3-23",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123024",
+                    "Wtname": "B3-24",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123025",
+                    "Wtname": "B3-25",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123026",
+                    "Wtname": "B4-26",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123027",
+                    "Wtname": "B4-27",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123028",
+                    "Wtname": "B4-28",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123029",
+                    "Wtname": "B4-29",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123030",
+                    "Wtname": "B4-30",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123031",
+                    "Wtname": "B4-31",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123032",
+                    "Wtname": "B4-32",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650123033",
+                    "Wtname": "B4-33",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                }
+                ],
+                "652305": [
+                    {
+                    "Wtid": "650124001",
+                    "Wtname": "C1-01",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124002",
+                    "Wtname": "C1-02",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124003",
+                    "Wtname": "C1-03",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124004",
+                    "Wtname": "C1-04",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124005",
+                    "Wtname": "C1-05",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124006",
+                    "Wtname": "C1-06",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124007",
+                    "Wtname": "C1-07",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124008",
+                    "Wtname": "C1-08",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124009",
+                    "Wtname": "C2-09",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124010",
+                    "Wtname": "C2-10",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124011",
+                    "Wtname": "C2-11",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124012",
+                    "Wtname": "C2-12",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124013",
+                    "Wtname": "C2-13",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124014",
+                    "Wtname": "C2-14",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124015",
+                    "Wtname": "C2-15",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124016",
+                    "Wtname": "C2-16",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124017",
+                    "Wtname": "C2-17",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124018",
+                    "Wtname": "C2-18",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124019",
+                    "Wtname": "C2-19",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124020",
+                    "Wtname": "C2-20",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124021",
+                    "Wtname": "C2-21",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124022",
+                    "Wtname": "C2-22",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124023",
+                    "Wtname": "C1-23",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124024",
+                    "Wtname": "C1-24",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124025",
+                    "Wtname": "C3-25",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124026",
+                    "Wtname": "C3-26",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124027",
+                    "Wtname": "C3-27",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124028",
+                    "Wtname": "C3-28",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124029",
+                    "Wtname": "C3-29",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124030",
+                    "Wtname": "C3-30",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124031",
+                    "Wtname": "C3-31",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124032",
+                    "Wtname": "C3-32",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                },
+                {
+                    "Wtid": "650124033",
+                    "Wtname": "C3-33",
+                    "WTStateCode": "DisComForPre",
+                    "WTStateColor": "#f1a820"
+                }
+                ]
         },
         "InvertersStatByStatus": {
             "Disconnect": [],

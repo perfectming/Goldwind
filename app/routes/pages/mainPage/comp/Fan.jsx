@@ -51,7 +51,7 @@ for(var j in model_ens){
     var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 
 
-    // console.log(obj_wfd);
+    // console.log(obj_pvd);
     for(var x in obj_wfd){
         arr1.push(x)
         // for(var y in obj_wfd[x]){
@@ -79,7 +79,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {changepage2}=this.props;
+        let {changepage2,changepage3}=this.props;
         return (
             <div className={styles.bodyBox}>
                 <div className={styles.leftBox}>
@@ -210,7 +210,8 @@ let Component = React.createClass({
                     </div>
                 </div>
                 <div className={styles.listrightBox}>
-                    <div className={styles.listbodyBox}>
+                    <div className={styles.listbodyBox1}>
+                    <div>
                     {
                     arr1.map((value, key)=> {
                         return (
@@ -225,7 +226,7 @@ let Component = React.createClass({
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'风速:'+Math.ceil(model_data[value].WindSpeed_DevAverValue/3600)+'m/s'}</p>
-                                                                <p>{'功率:'+Number(model_data[value].WindSpeed_DevAverValue).toFixed(2)+'KW'}</p>
+                                                                <p>{'功率:'+Number(model_data[value].TActPower).toFixed(2)+'KW'}</p>
                                                         </div>
                                                     </div>
                                             )
@@ -236,8 +237,38 @@ let Component = React.createClass({
                         )
                         
                     })
-                   
+                  
                     }
+                    </div>
+                    <div>
+                    {
+                    arr2.map((value, key)=> {
+                        return (
+                            <div className={styles.listheaderBox} key={key}>
+                                <button className={styles.listbtn} onClick={()=>changepage3(value,key)}>{model_ens[value].name}</button>
+                                <div className={styles.listopt}>
+                                    {
+                                        obj_pvd[value].map((valueA, keyA)=> {
+                                            return (
+                                                
+                                                    <div className={styles.listoptbtn_2}  key={keyA}><span>{valueA.Wtname}</span>
+                                                        <div className={styles.listoptinfo}>
+                                                            <span>{valueA.Wtname}</span>
+                                                                <p>{'辐照度:'+Math.ceil(model_data[value].PVTSI_Aver)+'W/㎡'}</p>
+                                                                <p>{'功率:'+Number(model_data[value].TActPower).toFixed(2)+'KW'}</p>
+                                                        </div>
+                                                    </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        )
+                        
+                    })
+                  
+                    }
+                    </div>
                     </div>
                 </div>
             </div>
@@ -267,11 +298,22 @@ const mapDispatchToProps = (dispatch) => {
         },
         changepage2:(value,key)=>{
           dispatch(actions.setVars('showPage', 'fan_matrix'));
+          dispatch(actions.setVars('numpage', 'fanmatrix'));
           dispatch(actions.setVars('valuepage', value));
           dispatch(actions.setVars('actbt',key ));
+          dispatch(actions.setVars('actbt1','' ));
+
              
-        }
-        ,
+        },
+        changepage3:(value,key)=>{
+          dispatch(actions.setVars('showPage', 'fan_matrix'));
+          dispatch(actions.setVars('numpage', 'pvmatrix'));
+          dispatch(actions.setVars('valuepage1', value));
+          dispatch(actions.setVars('actbt1',key ));
+          dispatch(actions.setVars('actbt',''));
+
+             
+        },
     };
 };
 
