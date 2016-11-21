@@ -15,7 +15,7 @@ let tabaleData = require('../../../../config/table-data');
 
 let Component = React.createClass({
     componentDidMount() {
-        console.log('high',ReactHighcharts);
+        // console.log('high',ReactHighcharts);
         this.props.init(this.props.userInfo);
     },
     render() {
@@ -45,11 +45,13 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: (userInfo)=> {
             // console.log(userInfo);
-            // if(!userInfo){
-            //     browserHistory.push('/app/all/page/login')  ;
-            // }
+            if(!userInfo){
+               browserHistory.push('/app/all/page/login')  ;
+                alert('请输入账号')
+             }
             dispatch(actions.setVars('headerItemActive', 0));
             dispatch(actions.setVars('putpage', false));
+
         },
     }
 };

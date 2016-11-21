@@ -7,7 +7,6 @@
     float: left;
     margin-top: 32%;
     margin-left: 65%;
-    border: 1px solid #fff;
     width:26%;
     height: 10%;
     overflow: hidden;
@@ -19,12 +18,15 @@
       height: 40%;
       background: #0192d8;
       margin: 1%;
+      text-align: center;
+      padding-top:3px;
     }
     .int{
       color: #fff;
       display: inline-block;
       width: 58%;
       height: 40%;
+      border:1px solid #ccc;
       background:#000000;
       outline: 1px solid #0192d8;
       vertical-align: top;
@@ -36,11 +38,13 @@
     .submit{
       float: right;
       background: #0192d8;
+      text-align: center;
       width: 15%;
-      height:80%;
-      margin: 1%;
-      margin-top: -18%;
-
+      height:93%;
+      margin-top: -19%;
+      border-radius:5px;
+      cursor:pointer;
+      border:none;
     }
   }
 }
