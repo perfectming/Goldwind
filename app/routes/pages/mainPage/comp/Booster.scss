@@ -21,47 +21,63 @@
       position: relative;
       background:url("../img/comp/boosterBg.png") no-repeat;
       background-size: 850px 414px;
+    }
       .hongde{
         width: 30px;
         height: 30px;
-        border-radius: 50%;
-        background-color: rgba(255, 0, 0, 0.7);
+        background:url("../img/comp/defa.png") no-repeat;
         position: absolute;
-        margin-top: 18px;
-        margin-left: 690px;
+        margin-top: 7px;
+        margin-left: 500px;
         animation: blink .75s linear infinite;
         -webkit-animation: blink .75s linear infinite;
+      }
+      .lvde{
+        width: 30px;
+        height: 30px;
+        background:url("../img/comp/succ.png") no-repeat;
+        position: absolute;
+        margin-top: 7px;
+        margin-left: 500px;;
       }
       .hongdee{
         width: 30px;
         height: 30px;
-        border-radius: 50%;
-        background-color: rgba(255, 0, 0, 0.7);
+        background:url("../img/comp/defa.png") no-repeat;
         position: absolute;
-        margin-top: 18px;
-        margin-left: 764px;
+        margin-top: 7px;
+        margin-left: 550px;
         animation: blink .75s linear infinite;
         -webkit-animation: blink .75s linear infinite;
       }
-      @-webkit-keyframes blink {
-        0% { opacity: 1; }
-        50% { opacity: 1; }
-        50.01% { opacity: 0; }
-        100% { opacity: 0; }
+      .lvdee{
+        width: 30px;
+        height: 30px;
+        background:url("../img/comp/succ.png") no-repeat;
+        position: absolute;
+        margin-top: 7px;
+        margin-left: 550px;
       }
       .lastt{
-        width:100px;
-        height: 200px;
-        margin-left: 785px;
-        margin-top: 65px;
+        width:130px;
+        margin-left: 650px;
+        margin-top: 7px;
+        position: absolute;
         div{
           margin: 0px;
           width: 40px;
           height:25px;
+          display: inline-block;
           color:#ffffff;
         }
       }
-    }
+
   }
 
+}
+@-webkit-keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 1; }
+  50.01% { opacity: 0; }
+  100% { opacity: 0; }
 }
