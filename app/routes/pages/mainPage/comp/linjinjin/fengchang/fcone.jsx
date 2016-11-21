@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './fcone.scss';
 import Navleft from '../../super/navleft.jsx';
 import Fanmatrix from '../../xym/Fanmatrix.jsx';
+import Pvmatrix from '../../xym/Pvmatrix.jsx';
 import Sjlb from '../../jy/fanDataList.jsx';
 import Fjkx from './fcright/fjkx.jsx';
 import Cft from './fcright/cft.jsx';
@@ -28,6 +29,7 @@ let Component = React.createClass({
                       </div>
                     <div className={`${styles.conright} ${flag===true? styles.animat3 : styles.animat2}`}>
                         { numpage==='fanmatrix' && <Fanmatrix></Fanmatrix>}
+                        { numpage==='pvmatrix' && <Pvmatrix></Pvmatrix>}
                         { numpage==='sjlb' && <Sjlb></Sjlb>}
                         { numpage==='fjkx' && <Fjkx></Fjkx>}
                         { numpage==='cft' && <Cft></Cft>}
