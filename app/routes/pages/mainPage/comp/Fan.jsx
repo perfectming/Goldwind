@@ -79,7 +79,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {changepage2}=this.props;
+        let {changepage2,changepage3}=this.props;
         return (
             <div className={styles.bodyBox}>
                 <div className={styles.leftBox}>
@@ -245,7 +245,7 @@ let Component = React.createClass({
                     arr2.map((value, key)=> {
                         return (
                             <div className={styles.listheaderBox} key={key}>
-                                <button className={styles.listbtn} onClick={()=>changepage2(value,key)}>{model_ens[value].name}</button>
+                                <button className={styles.listbtn} onClick={()=>changepage3(value,key)}>{model_ens[value].name}</button>
                                 <div className={styles.listopt}>
                                     {
                                         obj_pvd[value].map((valueA, keyA)=> {
@@ -298,11 +298,22 @@ const mapDispatchToProps = (dispatch) => {
         },
         changepage2:(value,key)=>{
           dispatch(actions.setVars('showPage', 'fan_matrix'));
+          dispatch(actions.setVars('numpage', 'fanmatrix'));
           dispatch(actions.setVars('valuepage', value));
           dispatch(actions.setVars('actbt',key ));
+          dispatch(actions.setVars('actbt1','' ));
+
              
-        }
-        ,
+        },
+        changepage3:(value,key)=>{
+          dispatch(actions.setVars('showPage', 'fan_matrix'));
+          dispatch(actions.setVars('numpage', 'pvmatrix'));
+          dispatch(actions.setVars('valuepage1', value));
+          dispatch(actions.setVars('actbt1',key ));
+          dispatch(actions.setVars('actbt',''));
+
+             
+        },
     };
 };
 
