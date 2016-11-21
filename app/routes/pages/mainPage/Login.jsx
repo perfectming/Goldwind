@@ -15,11 +15,11 @@ let Component = React.createClass({
     this.props.init(this.props.userInfo);
   },
   render() {
-    let {login, flag=true}=this.props;
+    let {login,}=this.props;
     return (
         <FixedContent mode="fullWidth" width={1920}>
           {
-            flag && <div className={css.whole}>
+            <div className={css.whole}>
             <form className={css.loginBox}>
               <span>用户名: </span><input className={css.int} type="text" name="name"/><br/>
               <span>密码: </span><input className={css.int} type="text" name="password"/><br/>
@@ -34,7 +34,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
   return {
     userInfo: state.vars.userInfo,
-    flag: state.vars.putpage,
+
   }
 };
 
