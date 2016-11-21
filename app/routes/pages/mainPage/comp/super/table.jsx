@@ -162,7 +162,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         changepage:(key) => {
            dispatch(actions.setVars('showPage', 'fan_matrix'));
+           dispatch(actions.setVars('numpage', 'fanmatrix'));
           dispatch(actions.setVars('actbt',key ));
+          dispatch(actions.setVars('actbt1 ','' ));
           dispatch(actions.setVars('valuepage', fcnum[key]));
 
         }
