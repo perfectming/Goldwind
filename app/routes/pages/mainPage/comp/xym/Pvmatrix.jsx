@@ -64,11 +64,11 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage=652303,Tofaninfo}=this.props;
+        let{valuepage1=652303,Tofaninfo}=this.props;
         return (
             <div className={styles.slistbodyBox}>
                 {
-                obj_pvd[valuepage].map((value, key)=> {
+                obj_pvd[valuepage1].map((value, key)=> {
                     return (
                         <div className={styles.slistBox} key={key} onClick = {()=> Tofaninfo(value, key)}>
                             <div className={styles.slistitemL}><img src={smatrix}/>
@@ -102,7 +102,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        valuepage : state.vars.valuepage,
+        valuepage1 : state.vars.valuepage1,
     }
 };
 
