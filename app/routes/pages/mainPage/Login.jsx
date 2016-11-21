@@ -47,7 +47,8 @@ const mapDispatchToProps = (dispatch) => {
        // browserHistory.push('/app/all/page/main')  ;
     },
     login:(value)=>{
-      console.log(value);
+      !value?
+      alert('请输入账号'):
        browserHistory.push('/app/all/page/main')  ;
       dispatch(actions.setVars('userInfo', value));
     }
