@@ -24,6 +24,8 @@ import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
 import Fault from '../comp/yAll/Fault.jsx';
+
+
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
 

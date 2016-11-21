@@ -1,0 +1,134 @@
+.box{
+
+	overflow:hidden;
+  background: linear-gradient(to bottom,#242a32 ,#1f2025);
+  .tbox{
+      width:98%;
+	  height:300px;
+      margin-top: 70px;
+      margin-left: 5px;
+
+    .logofa{
+      position: relative;
+
+      .logo{
+        position: absolute;
+        left: 60px;
+        top: 6px;
+        background: url("../../img/icon/wind_logo.png") no-repeat;
+        background-size: 35px 35px;
+        width: 35px;
+        height: 35px;
+        z-index: 1;
+      }
+      .logomini{
+      position: absolute;
+      left: 68px;
+      top: 11px;
+      background: url("../../img/icon/wind_logo.png") no-repeat;
+      background-size: 25px 25px;
+      width: 25px;
+      height: 25px;
+      z-index: 1000;
+    }
+
+    }
+    
+	}
+	.rbox{
+	float:left;
+	width:48%;
+	height:500px;
+	margin-top:20px;
+      margin-left: 5px;
+	}
+  .rbox2{
+    float:left;
+    width:48%;
+    height:500px;
+    margin-top:20px;
+    margin-left: 3%;
+    .rbox4{
+      margin-top: 70px;
+    }
+
+  }
+  .rbox3{
+
+    width: 500px;
+    height: 50px;
+    z-index: 10;
+    position: absolute;
+    left: 70%;
+    top: 35px;
+
+  }
+  .button{
+
+    float: left;
+    z-index: 11;
+    color: #fff;
+    width: 100px;
+    height: 40px;
+    border-radius: 30px;
+    color: #FFFFFF;
+    font-size: 20px;
+    margin-left: 50px;
+    background: none;
+    border: 1px #00ffff solid;
+
+  }
+  .fbox{
+    width:98%;
+    height: 600px;
+    margin-top:120px;
+    margin-left: 5px;
+    position: relative;
+  }
+  .qbox>div{
+    width:100%
+  }
+  .qbox>div:hover{
+    border:1px solid #ddd;
+  }
+    .onmonth{
+      width: 98%;
+      text-align: center;
+      .inmonth{
+        cursor: pointer;
+      font-size:18px;
+      width : 90px;
+      height:40px;
+      border-radius: 30px;
+      float:left;
+      padding:5px;
+      margin:10px;
+      color:#fff;
+       display: inline-block;
+    }
+      .inmonth:nth-child(13){
+        border: 1px solid #00ffff;
+        color:#00ffff;
+      }
+      .inmonth:nth-child(13):hover{
+        color: black;
+      }
+    div:hover{
+      background:#00FFFF;
+      color:black;
+    }
+    }
+
+}
+
+.clear{
+  clear: both;
+}
+
+.box_shadow:hover{
+  box-shadow:0 0 15px #fff;
+}
+
+
+
+
