@@ -23,7 +23,6 @@ import AS from '../comp/jy/AS.jsx';
 import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
-import Monitorkbtwo from '../comp/maXin/Monitorkbtwo.jsx';
 import Fault from '../comp/yAll/Fault.jsx';
 
 
@@ -58,7 +57,6 @@ let Component = React.createClass({
                 {showPage === 'ms' && <Ms></Ms>}
                 {showPage === 'amm' && <Amm></Amm>}
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
-                {showPage === 'monitorkbtwo' && <Monitorkbtwo></Monitorkbtwo>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
                 {showPage === 'fault' && <Fault></Fault>}
                 <div className={styles.clearbox}></div>
