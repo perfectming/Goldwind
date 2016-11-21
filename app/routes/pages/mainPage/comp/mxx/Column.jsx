@@ -50,16 +50,6 @@ let Component = React.createClass({
                     fontFamily:"Microsoft YaHei"
                 }
             },
-            tooltip: {headerFormat:'<span style="font-size: 20px;">{series.name}</span>',
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>",
-                style:{
-                    fontSize:'15px'
-                }
-            },
-            legend: {
-                enabled:false
-            },
             xAxis: {
                 labels: {
                     style: {
@@ -68,6 +58,7 @@ let Component = React.createClass({
                     },
                     rotation: 0
                 },
+                tickLength: 0,
                 categories: ['十一月','十二月','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月']
             },
             yAxis: {
@@ -80,24 +71,27 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#32C5CD', '#37545C']
-            ,
+            legend: {
+                shadow: false,
+                enabled:false
+            },
+            tooltip: {
+                shared: true
+            },
             plotOptions: {
-                series: {
-                    stacking: 'normal',
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    dataLabels: {
-                        enabled: false
-                    }
+                column: {
+                    grouping: false,
+                    shadow: false,
+                    borderWidth: 0
                 }
             },
+            colors: ['#37545C','#32C5CD'    ]
+            ,
             series: [{
-                data: arr1,
+                data: [300,320,360,330,260,380,290,320,360,340,280,340],
                 borderRadius: 5
             },{
-                data: arr2,
+                data: [350,300,280,310,250,300,280,320,340,300,200,320],
                 borderRadius: 5
             }]
         };

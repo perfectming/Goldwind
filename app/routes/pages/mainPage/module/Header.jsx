@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import styles from './Header.scss';
 import icon from './../img/icon/cloudlink.png';
 var actions = require('redux/actions');
-
+var {browserHistory} = require('react-router');
 let Component = React.createClass({
     render() {
-        let {headerInfo, itemActive, changeHeaderItem} = this.props;
+        let {headerInfo, itemActive, changeHeaderItem,login} = this.props;
         return (
             <div className={styles.navHeader}>
                 <div className={styles.navIcon}>
@@ -28,7 +28,7 @@ let Component = React.createClass({
 
                     }
                     <div className={`${styles.itemBoxAct} ${styles.nobor}`}><span>|</span></div>
-                    <div className={styles.itemBox}><span>登录</span></div>
+                    <div className={styles.itemBox}><span onClick={()=>login()}>登录</span></div>
                 </div>
             </div>
         );
@@ -40,6 +40,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         itemActive: state.vars.headerItemActive,
+        userInfo: state.vars.userInfo,
     }
 };
 
@@ -65,6 +66,12 @@ const mapDispatchToProps = (dispatch) => {
              }
               
         },
+        login:(userInfo)=>{
+            console.log(userInfo);
+            if(!userInfo){
+                browserHistory.push('/app/all/page/login');
+            }
+        }
     };
 };
 

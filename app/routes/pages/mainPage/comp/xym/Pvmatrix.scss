@@ -1,0 +1,61 @@
+.slistbodyBox{
+  float: left;
+
+    .slistBox{
+      font-size: 20px;
+      color:#fff;
+      float: left;
+      margin-left: 8px;
+      margin-bottom: 10px;
+      width: 240px;
+      height: 112px;
+      background: #292F34;
+      .slistitemL{
+        float: left;
+        border-left: 2px solid #00E438;
+      }
+      .slistitemR{
+        float: left;
+        margin-left: 10px;
+        .slistitemT{
+          display: block;
+          margin: 12px 0;
+          .slistitemTT{
+            font-size: 18px;
+            line-height: 16px;
+          }
+          .slistitemTB{
+            font-size: 14px;
+            line-height: 14px;
+          }
+        }
+        .slistitemB{
+          padding-top: 10px;
+          font-size: 14px;
+           p{
+              margin:0;
+            }
+          .slistitemBLL{
+              color:#00F7FE;
+              line-height: 25px;
+          }
+          .slistitemBLR{
+              font-size: 12px;
+              padding:2px 0 0 2px;
+          }
+          span{
+            float: left;
+          }
+          .slistitemBL{
+            width: 80px;
+            p{
+              margin:0;
+            }
+          }
+        }
+      }
+      div{
+        float: left;
+      }
+    }  
+}

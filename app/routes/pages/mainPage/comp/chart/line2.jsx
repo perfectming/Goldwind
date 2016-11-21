@@ -2,16 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let dataBase=require('../../../../../../config/ModelData');
-let dataName=require('../../../../../../config/Model');
-let datename=dataBase.ModelData[8888800].CurDayPowerCurve.Time;
-let date=dataBase.ModelData[8888800].CurDayPowerCurve.Value;
+
 
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
+        let{date, datename,height}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -19,7 +17,7 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:"220",
+                height:height,
 
             },
             title: {

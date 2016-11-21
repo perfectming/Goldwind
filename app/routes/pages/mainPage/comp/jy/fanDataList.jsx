@@ -138,6 +138,7 @@ let Component = React.createClass({
                                                                         <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
                                                                              key={keyC}><div className={css.icon0}></div></div>
                                                                     );
+                                                                    break;
                                                                 case 1:
                                                                     return (
                                                                         <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}

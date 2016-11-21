@@ -22,11 +22,12 @@
         width:145px;
         height:55px;
         margin-top: 4px;
-        padding-left: 40px;
+        padding-left: 10px;
         display: inline-block;
         color: #ffffff;
         font-size: 14px;
         overflow: hidden;
+        text-align: center;
         .zhzbtopboxg{
           color:#26f4ff;
           font-size: 22px;
@@ -62,10 +63,30 @@
       .zhzbglbox{
         width: 195px;
         height:195px;
-        background-color: #000000;
         display: inline-block;
         margin-left: 6px;
-        margin-top: 20px;
+        margin-top: 28px;
+        position: relative;
+        .zhzbglboxnum{
+          position:absolute;
+          top:42%;
+          left:37%;
+          width:110px;
+          text-align: center;
+          height:40px;
+          line-height:18px;
+          font-size: 16px;
+          z-index:11;
+          margin-left:-30px;
+          margin-top:-15px;
+          display:inline-block;
+          padding:0 5px;
+          color: #ffffff;
+          p{
+            font-size: 26px;
+
+          }
+        }
       }
     }
   }
@@ -124,7 +145,7 @@
     border:1px solid #3e4c67;
     background: rgba(44,61,71,0.4);
     .czydfdqkmain{
-      margin-top: 20px;
+      margin-top: 10px;
     }
   }
   .longbox{
@@ -147,7 +168,7 @@
         float:left;
         height:90px;
         text-align:right;
-        img{margin:15px 20px 0 0;}
+        img{margin:23px 18px 0 0;}
 
       }
       .righttext{
@@ -203,7 +224,7 @@
     .ssdlqkfxmain{
       width:392px;
       height:182px;
-      margin-top: 45px;
+      margin-top: 65px;
       margin-left: 50px;
       position: relative;
       overflow: hidden;
@@ -257,6 +278,18 @@
           font-size: 12px;
         }
       }
+      .timestyle{
+        margin-left: 30px;
+        margin-top: 97px;
+        color: #CCCCCC;
+        font-size: 16px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        span{
+          margin-right: 59px;
+        }
+      }
     }
   }
   .gzsbgl{
@@ -269,7 +302,7 @@
     border:1px solid #3e4c67;
     background: rgba(44,61,71,0.4);
     .gzsbglmain{
-      margin-top: 25px;
+      margin-top: 10px;
     }
   }
 }
