@@ -28,8 +28,20 @@
     overflow:auto;
     .tableContentLine {
        color:#fff;
+       cursor:pointer;
        background: #30343f;
       overflow: hidden;
+        &:hover{
+         border:1px solid #2ff4fb;
+        .tableContentItem {
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        height: 28px;
+        line-height:28px;
+        border: none;
+        }
+       }
       .tableContentItem {
         float: left;
         overflow: hidden;
@@ -50,6 +62,18 @@
        color:#fff;
       overflow: hidden;
       background: #272b34;
+      cursor:pointer;
+        &:hover{
+         border:1px solid #2ff4fb;
+        .tableContentItem {
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        height: 40px;
+        line-height:20px;
+        border: none;
+        }
+       }
       .tableContentItem {
         float: left;
         padding: 10px 0 10px;

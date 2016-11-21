@@ -11,8 +11,8 @@ let modeldata = require('../../../../../../config/ModelData');
        
 
 var model_data = modeldata.ModelData;
-console.log(model_data);
-var arrdata = model_data[650123].WindSpeed_DevAverValue;
+// console.log(model_data);
+var arrdata = model_data[650107].WindSpeed_DevAverValue;
 
 var arr3 = [];
 var arr4 = [];
@@ -63,18 +63,15 @@ let Component = React.createClass({
     },
 
     render() {
+        let{valuepage=650107}=this.props;
         return (
-           
-              
-             
-                    <div className={styles.listbodyBox}>
-                    {
-                    obj_wfd[650123].map((value, key)=> {
-                        return (
-                          <div className={styles.listBox} key={key}>
-
-                           
-                            <div className={styles.listitemL}><img src={fmatrix}/></div>
+            <div className={styles.listbodyBox}>
+                {
+                obj_wfd[valuepage].map((value, key)=> {
+                    return (
+                        <div className={styles.listBox} key={key}>
+                            <div className={styles.listitemL}><img src={fmatrix}/>
+                            </div>
                             <div className={styles.listitemR}>
                                 <span className={styles.listitemT}>
                                         <p className={styles.listitemTT}>{value.Wtname}</p>
@@ -83,42 +80,29 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(model_data[650123].WindSpeed_DevAverValue/3600)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(model_data[valuepage].WindSpeed_DevAverValue/3600)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.listitemBLL}>{Number(model_data[650123].WindSpeed_DevAverValue).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(model_data[valuepage].WindSpeed_DevAverValue).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
-                                
-                                
-                                
-                            
-
-                          </div>  
-                               
-                                
-
-                           
-                                 
-                            
-                            
+                        </div>  
                         )
                         
-                    })
-                   
-                    }
-                    </div>
-            
-        
+                })
+                }
+            </div>
         );
     }
 });
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        valuepage : state.vars.valuepage,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

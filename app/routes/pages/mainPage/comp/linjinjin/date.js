@@ -119,15 +119,29 @@ module.exports = {
             num:69.9,
             unit:'%'
         },
+    ],
+
+    cft1:[
+       
          {
             name:'70m层风速',
             num:13.3,
             unit:'m/s'
         },
+         {
+            name:'70m层风向',
+            num:.4,
+            unit:'°'
+        },
           {
             name:'50m层风速',
             num:14.0,
             unit:'m/s'
+        },
+         {
+            name:'50m层风向',
+            num:2.1,
+            unit:'°'
         },
           {
             name:'30m层风速',
@@ -135,25 +149,16 @@ module.exports = {
             unit:'m/s'
         },
           {
-            name:'10m层风速',
-            num:9.5,
-            unit:'m/s'
-        },
-          {
-            name:'70m层风向',
-            num:.4,
-            unit:'°'
-        },
-          {
-            name:'50m层风向',
-            num:2.1,
-            unit:'°'
-        },
-         {
             name:'30m层风向',
             num:353.7,
             unit:'°'
         },
+          {
+            name:'10m层风速',
+            num:9.5,
+            unit:'m/s'
+        },
+         
          {
             name:'10m层风向',
             num:356.8,
@@ -161,7 +166,8 @@ module.exports = {
         },
         
 
-    ]
+    ],
+
 
 
   

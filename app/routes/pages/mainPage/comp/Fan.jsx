@@ -15,7 +15,8 @@ import icon2 from '../img/comp/icon2.png';
 import icon3 from '../img/comp/icon3.png';
 import icon4 from '../img/comp/icon4.png';
 import icon5 from '../img/comp/icon5.png';
-
+var actions = require('redux/actions');
+var { Router, Route, browserHistory} = require('react-router');
 // let fanData = require('../../../../../config/fan-data');
 let matrixdata = require('../../../../../config/MatrixData');
 let model = require('../../../../../config/Model');
@@ -50,7 +51,7 @@ for(var j in model_ens){
     var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 
 
-    console.log(obj_wfd);
+    // console.log(obj_wfd);
     for(var x in obj_wfd){
         arr1.push(x)
         // for(var y in obj_wfd[x]){
@@ -63,11 +64,12 @@ for(var j in model_ens){
         //     arr2.push(obj_wfd[m][n])
         // }
     }
+    // console.log(arr2);
     // console.log(arr1);
     // console.log(arr2);
-arr1.map((valueZ, keyZ)=> {
-    // console.log(valueZ)
-})
+// arr2.map((valueZ, keyZ)=> {
+//     console.log( )
+// })
 
 
 
@@ -77,6 +79,7 @@ let Component = React.createClass({
     },
 
     render() {
+        let {changepage2}=this.props;
         return (
             <div className={styles.bodyBox}>
                 <div className={styles.leftBox}>
@@ -212,7 +215,7 @@ let Component = React.createClass({
                     arr1.map((value, key)=> {
                         return (
                             <div className={styles.listheaderBox} key={key}>
-                                <button className={styles.listbtn}>{model_ens[value].name}</button>
+                                <button className={styles.listbtn} onClick={()=>changepage2(value,key)}>{model_ens[value].name}</button>
                                 <div className={styles.listopt}>
                                     {
                                         obj_wfd[value].map((valueA, keyA)=> {
@@ -244,15 +247,29 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+       play:()=>{
+            dispatch(actions.setVars('showPage', 'fan_matrix'));
+            dispatch(actions.setVars('navhide', false));
+        }
+     
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+
         init: () => {
+
             var obj = {
                 test:''
             }
+        },
+        changepage2:(value,key)=>{
+          dispatch(actions.setVars('showPage', 'fan_matrix'));
+          dispatch(actions.setVars('valuepage', value));
+          dispatch(actions.setVars('actbt',key ));
+             
         }
         ,
     };

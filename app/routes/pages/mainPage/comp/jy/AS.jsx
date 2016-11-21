@@ -52,7 +52,7 @@ let Component = React.createClass({
                                                     )
                                                 }else{
                                                 return (
-                                                    <div className={styles.tableContentItem}style={{width:(100/tabaleData.data.header.length)+"%"}}
+                                                    <div className={styles.tableContentItem} style={{width:(100/tabaleData.data.header.length)+"%"}}
                                                          key={keyC}>{valueC}</div>
                                                 );}
                                             })

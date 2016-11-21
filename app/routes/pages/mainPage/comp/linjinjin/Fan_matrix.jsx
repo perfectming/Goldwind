@@ -39,6 +39,7 @@ const mapDispatchToProps = (dispatch) => {
                 test:'',
                 }
              dispatch(actions.setVars('Changnav', 0));
+             dispatch(actions.setVars('navhide', false));
 
         },
          changeFlag :(flag)=>{

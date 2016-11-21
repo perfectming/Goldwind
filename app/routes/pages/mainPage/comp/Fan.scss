@@ -4,7 +4,7 @@
       }
   .listrightBox{
     width:1260px;
-    height:1140px;
+    height:1135px;
     overflow:hidden;
     float:right;
     .listbodyBox {
@@ -101,7 +101,8 @@
     
       .listoptbtn_2{
         box-shadow:1px 1px 3px #87CB2D;
-        background-color:#87CB2D;/*绿色*/
+        -background-color:#87CB2D;/*绿色*/
+        background-color:#f1a820
       }
       
       }
