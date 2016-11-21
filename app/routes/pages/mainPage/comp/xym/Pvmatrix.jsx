@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Corner from '../super/Corner.jsx';
-import fmatrix from '../../img/comp/fmatrix.png';
-import styles from './Fanmatrix.scss';
+import smatrix from '../../img/comp/smatrix.png';
+import styles from './Pvmatrix.scss';
 var actions = require('redux/actions');
 // import dataBase from '../../../../../config/ModelData';
 let matrixdata = require('../../../../../../config/MatrixData');
@@ -13,14 +13,14 @@ let modeldata = require('../../../../../../config/ModelData');
 
 var model_data = modeldata.ModelData;
 // console.log(model_data);
-var arrdata = model_data[650107].WindSpeed_DevAverValue;
-
-var arr3 = [];
-var arr4 = [];
+// var arrdata = model_data[650107].PVTSI_Aver;
+// console.log(arrdata);
+// var arr3 = [];
+// var arr4 = [];
 var model_ens = model.Model.ens;
-for(var j in model_ens){
-    arr3.push(model_ens[j])
-}
+// for(var j in model_ens){
+//     arr3.push(model_ens[j])
+// }
 // arr3.map((valueE,keyE)=> {
 //     return (
 //         console.log(valueE.name)
@@ -37,7 +37,7 @@ for(var j in model_ens){
     var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 
 
-    // console.log(obj_wfd);
+    console.log(obj_pvd[652303]);
     for(var x in obj_wfd){
         arr1.push(x)
         // for(var y in obj_wfd[x]){
@@ -64,28 +64,28 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage=650107,Tofaninfo}=this.props;
+        let{valuepage=652303,Tofaninfo}=this.props;
         return (
-            <div className={styles.listbodyBox}>
+            <div className={styles.slistbodyBox}>
                 {
-                obj_wfd[valuepage].map((value, key)=> {
+                obj_pvd[valuepage].map((value, key)=> {
                     return (
-                        <div className={styles.listBox} key={key} onClick = {()=> Tofaninfo(value, key)}>
-                            <div className={styles.listitemL}><img src={fmatrix}/>
+                        <div className={styles.slistBox} key={key} onClick = {()=> Tofaninfo(value, key)}>
+                            <div className={styles.slistitemL}><img src={smatrix}/>
                             </div>
-                            <div className={styles.listitemR}>
-                                <span className={styles.listitemT}>
-                                        <p className={styles.listitemTT}>{value.Wtname}</p>
-                                        <p className={styles.listitemTB}>正常发电</p>
+                            <div className={styles.slistitemR}>
+                                <span className={styles.slistitemT}>
+                                        <p className={styles.slistitemTT}>{value.Wtname}</p>
+                                        <p className={styles.slistitemTB}>正常发电</p>
                                 </span>
-                                <span className={styles.listitemB}>
-                                    <span className={styles.listitemBL}>
-                                        <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(model_data[valuepage].WindSpeed_DevAverValue/3600)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                <span className={styles.slistitemB}>
+                                    <span className={styles.slistitemBL}>
+                                        <p>辐照度:</p>
+                                        <p><span className={styles.slistitemBLL}>{Math.floor((model_data[valuepage].PVTSI_Aver))}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
                                     </span>
-                                    <span className={styles.listitemBR}>
+                                    <span className={styles.slistitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.listitemBLL}>{Number(model_data[valuepage].WindSpeed_DevAverValue).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(model_data[valuepage].TActPower)/100).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
