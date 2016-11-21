@@ -100,7 +100,11 @@ let Component = React.createClass({
                     <img src={flag===true? leftIcon:rightIcon} onClick={()=>{changeFlag(flag===true? true:false,flag )}}/>
                 </div>
                 <div className={`${styles.rightBox} ${flag===true? styles.animat3 : styles.animat2}`}>
-                    <img src={map1} onClick={()=>play()}/>
+                    <img className={styles.img} src={map1} onClick={()=>play()}/>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
         );

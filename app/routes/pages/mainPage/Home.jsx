@@ -4,6 +4,8 @@ import Header from './module/Header';
 import Tree from './module/Tree';
 import Body from './module/Body';
 import FixedContent from '../../../components/common/FixedContent.jsx';
+var {browserHistory} = require('react-router');
+var ReactHighcharts = require('react-highcharts');
 
 var actions = require('redux/actions');
 
@@ -13,8 +15,8 @@ let tabaleData = require('../../../../config/table-data');
 
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init();
-       
+        console.log('high',ReactHighcharts);
+        this.props.init(this.props.userInfo);
     },
     render() {
         let {itemHeaderActive, itemTreeAct, flag=true}=this.props;
@@ -34,18 +36,21 @@ const mapStateToProps = (state) => {
     return {
         itemHeaderActive: state.vars.headerItemActive,
         itemTreeAct: state.vars.treeItemActive,
+        userInfo: state.vars.userInfo,
         flag: state.vars.putpage,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: ()=> {
+        init: (userInfo)=> {
+            // console.log(userInfo);
+            // if(!userInfo){
+            //     browserHistory.push('/app/all/page/login')  ;
+            // }
             dispatch(actions.setVars('headerItemActive', 0));
             dispatch(actions.setVars('putpage', false));
-
         },
-      
     }
 };
 
