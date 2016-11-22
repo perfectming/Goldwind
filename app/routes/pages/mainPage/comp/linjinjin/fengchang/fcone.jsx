@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
     return {
         flag : state.vars.flagff,
         numpage : state.vars.numpage,
-
+        hiden:state.vars.hiden,
     }
 };
 
