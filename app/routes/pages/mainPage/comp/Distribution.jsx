@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Distribution.scss';
-import Superleftbox from './super/superleftbox.jsx';
 import dataBase from '../../../../../config/ModelData';
 import model from '../../../../../config/Model';
 import matrix from '../../../../../config/MatrixModel';
@@ -9,6 +8,7 @@ import matData from '../../../../../config/MatrixData';
 import map1 from '../img/comp/DistributionMap.jpg' ;
 import leftIcon from '../img/comp/leftIcon.png' ;
 import rightIcon from '../img/comp/rightIcon.png' ;
+import Superleftbox from './super/superleftbox.jsx';
 
 var actions = require('redux/actions');
 
@@ -25,7 +25,9 @@ let Component = React.createClass({
         let {clickNumber, showFlag, changeFlag, flag=true,play} = this.props;
         return (
             <div className={styles.bodyBox}>
-                <Superleftbox></Superleftbox>
+                    <div className={`${styles.leftBox} ${flag===true? styles.animat1 : styles.animat}`}>
+                        <Superleftbox></Superleftbox>
+                    </div>
                 <div className={styles.changeBox}>
                     <img src={flag===true? leftIcon:rightIcon} onClick={()=>{changeFlag(flag===true? true:false,flag )}}/>
                 </div>
