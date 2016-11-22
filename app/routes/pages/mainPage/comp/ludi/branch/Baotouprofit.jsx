@@ -107,6 +107,15 @@ let Component = React.createClass({
             	name: '成本',
                 type: 'column',
                 data: data.yearelectric[0].actrul,
+            },{
+            	name: '平均值',
+                type: 'spline',
+                data: data.yearelectric[0].actrul,
+                marker:{
+                	lineWidth:2,
+                	fillColor:"white",
+                	lineColor:"red"
+                }
             }]
         };
         return (
