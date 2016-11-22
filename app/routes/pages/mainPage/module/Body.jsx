@@ -99,7 +99,6 @@ let Component = React.createClass({
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
                 {showPage === 'fault' && <Fault></Fault>} 
-                {showPage === 'fault' && <Fault></Fault>}
 
                 {showPage === 'baotou' && <Baotou></Baotou>};
                 {showPage === 'windbtpage' && <Windbtpage></Windbtpage>};
