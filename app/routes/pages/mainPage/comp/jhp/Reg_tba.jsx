@@ -10,13 +10,16 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barRotimes,powerValue,text} = this.props;
-
+        let barRotime = data.data.bar_rotime;
+        let barLotime = data.data.bar_lotime;
+        let barLoPowerValue = data.data.bar_roPowerses;
+        let barLoPowerValues = data.data.bar_roPower;
+        let barLdpowerValue = data.data.line_lpower;
+        let barLpdpowerValue = data.data.line_pdate;
 
         let configPie = {
             chart: {
-                height:430,
-
+                height:400,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -25,19 +28,22 @@ let Component = React.createClass({
                 backgroundColor: {
                     linearGradient: [0, 0, 500, 500],
                     stops: [
-                        //[0, 'rgb(56, 85, 94)'],
-                        [0, 'rgb(37, 41, 48)']
+                        // [0, 'rgb(56, 85, 94)'],
+                        [0, 'rgb(37, 41, 48)'],
+
                     ]
                 },
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '11月份集团各风场TBA',
+
                 align:'left',
                 x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"22px",
+                    fontSize:"25px",
+                    fontWight:'600',
                     fontFamily:"微软雅黑"
                 }
             },
@@ -54,12 +60,13 @@ let Component = React.createClass({
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.yf}%</b>"
+                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
+
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#4CDB9D', '#1E664A', '#000','#134833', '#082B1F']
+            colors: ['#4CDB9D', ' #A2D04D', '#FFD927' , '#FF9424', '#FF6124', '#000fff','#134833', '#082B1F']
             ,
             plotOptions: {
                 pie: {
@@ -78,9 +85,10 @@ let Component = React.createClass({
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
+                    stacking: 'normal',
+
                     borderWidth: 0,
-                    pointWidth:20
+
                 }
             },
             xAxis: {
@@ -94,12 +102,14 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotimes,
+                categories:barLotime,
             },
-            yAxis: {
+            yAxis: [{
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                title:'小时',
+                max:400,
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
@@ -107,17 +117,57 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-            },
+            },{
+                title:'PBA%',
+                max:100,
+                oppsite:true,
+                labels: {
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
+                    }
+                },
+            }],
             series: [{
-                name: '实际健康度',
+                name: '实际运行时间量',
                 type: 'column',
-                data: powerValue
-            }
-            // ,{
-            //     name:'停机时间',
-            //     type:'column',
-            //     data: barLtPowerValue
-            // }
+                data: barLoPowerValues
+            },
+                {
+                    name: '停机时间',
+                    color:'#A2D04D',
+                    type: 'column',
+                    data: barLoPowerValue,
+                    stack:'time'
+                },
+                {
+                    name: '停机时间',
+                    color:'#FFD927',
+                    type: 'column',
+                    data: barLoPowerValue,
+                    stack:'time'
+                },
+                {
+                    name: '停机时间',
+                    color:'#FF9424',
+                    type: 'column',
+                    data: barLoPowerValue,
+                    stack:'time'
+                },
+                {
+                    name: '停机时间',
+                    color:'#FF6124',
+                    type: 'column',
+                    data: barLoPowerValue,
+                    stack:'time'
+                },
+                {
+                    name: 'TBA',
+                    type: 'line',
+                    color:'#0000ff',
+                    data: barLdpowerValue
+                },
 
             ]
         };

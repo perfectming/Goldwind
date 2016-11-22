@@ -10,13 +10,18 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barRotimes,powerValue,text} = this.props;
-
+        let barRotime = data.data.bar_rotime;
+        let barLotime = data.data.bar_lotime;
+        let barLoPowerValue = data.data.bar_loPower;
+        let barLdpowerValue = data.data.line_date;
+        let barLpdpowerValue = data.data.line_pdate;
+        let barlinepdats = data.data.line_pdates;
+        let barlinepdat = data.data.line_pdatess;
+        let barLpdpowerValues = data.data.line_pdates;
 
         let configPie = {
             chart: {
-                height:430,
-
+                height:400,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -26,13 +31,14 @@ let Component = React.createClass({
                     linearGradient: [0, 0, 500, 500],
                     stops: [
                         //[0, 'rgb(56, 85, 94)'],
-                        [0, 'rgb(37, 41, 48)']
+                        [0, 'rgb(37, 41, 48)'],
+
                     ]
                 },
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '集团11月每日PBA',
                 align:'left',
                 x : "0",
                 style:{
@@ -54,7 +60,8 @@ let Component = React.createClass({
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.yf}%</b>"
+                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
+
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -94,12 +101,13 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotimes,
+                categories:barLdpowerValue,
             },
             yAxis: {
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                max:100,
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
@@ -109,15 +117,22 @@ let Component = React.createClass({
                 },
             },
             series: [{
-                name: '实际健康度',
+                name: '实际运行时间',
                 type: 'column',
-                data: powerValue
+                data: barLpdpowerValue
+            },{
+                name: '停机时间',
+                type: 'column',
+                color:'#cccccc',
+                data: barlinepdat
             }
-            // ,{
-            //     name:'停机时间',
-            //     type:'column',
-            //     data: barLtPowerValue
-            // }
+                ,
+                {
+                    name: 'TBA',
+                    type: 'spline',
+                    color:'#0000ff',
+                    data: barlinepdats
+                }
 
             ]
         };

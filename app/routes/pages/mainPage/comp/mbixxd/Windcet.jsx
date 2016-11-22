@@ -3,44 +3,43 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Healthy-data');
+let data = require('./Profit-data');
 
 let Component = React.createClass({
     componentWillMount() {
     },
-
     render() {
-        let {barRotimes,powerValue,text} = this.props;
-
-
+        let areaName=data.areaName;
+        let areaRecordCost=data.areaRecordCost;
+        let areaPlan=data.areaPlan;
+        let areaPlanDay=data.areaPlanDay;
+        let areaPlanDayT=data.areaPlanDayT;
+      
         let configPie = {
             chart: {
-                height:430,
-
-                backgroundColor: "rgba(46, 46, 65, 0)",
-                plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                height:500,
+                backgroundColor: '#282f37',
+                plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                    stops: [
-                        //[0, 'rgb(56, 85, 94)'],
-                        [0, 'rgb(37, 41, 48)']
-                    ]
-                },
+                paddingLeft:100,
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '',
                 align:'left',
-                x : "0",
+                top:'-20px',
+                vertical:'top',
+                 x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"22px",
-                    fontFamily:"微软雅黑"
+                    fontSize:"25px",
+                    fontFamily:"微软雅黑",
+                    fontWeight:700,
                 }
             },
+            // 插入图片
             //图例说明
             legend: {
                 align:"right",
@@ -49,43 +48,33 @@ let Component = React.createClass({
                     color: "#fff",
                     fontSize:"18px",
                     fontWeight:"normal",
-                    fontFamily:"微软雅黑"
+                    fontFamily:"微软雅黑",
+
                 }
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.yf}%</b>"
+                pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#4CDB9D', '#1E664A', '#000','#134833', '#082B1F']
+            //柱子颜色
+            colors: [ '#1E664A', '#4CDB9D']
             ,
-            plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
-                bar:{
-                    animation: true
-                }
-            },
+            // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0,
-                    pointWidth:20
+                    pointPadding: 10,
+                    borderWidth: 1,
+                    pointWidth: 50,
+
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
-                //lineColor: "red",
+               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -94,11 +83,11 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotimes,
+                categories:areaPlan,
             },
             yAxis: {
-                // lineWidth: 1,
-                // lineColor: "red",
+               // lineWidth: 1,
+               // lineColor: "red",
                 //tickWidth: 4,
                 labels: {
                     y: 10, //x轴刻度往下移动20px
@@ -108,17 +97,25 @@ let Component = React.createClass({
                     }
                 },
             },
+            //几条数据
             series: [{
-                name: '实际健康度',
+                name: '计划发电量',
                 type: 'column',
-                data: powerValue
-            }
-            // ,{
-            //     name:'停机时间',
-            //     type:'column',
-            //     data: barLtPowerValue
-            // }
-
+                data: areaPlanDay,
+                color:'none',
+                borderColor:'#5B9BD5',
+                pointWidth: 15,
+                borderWidth: 4,
+            },
+            {
+            	name: '实际发电量',
+                type: 'column',
+                data:areaPlanDayT,
+                color:'none',
+                pointWidth: 15,
+                borderWidth: 4,
+                borderColor:'#ED7D31',
+            },
             ]
         };
         return (

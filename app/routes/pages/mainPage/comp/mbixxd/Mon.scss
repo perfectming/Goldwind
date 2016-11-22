@@ -1,0 +1,49 @@
+.monthbox{
+  width: 100%;
+  height: 80px;
+  list-style: none;
+  background-color: #21242b;
+  padding:0;
+  padding-left:10px;
+  position:relative;
+  background: linear-gradient(to bottom,#242a32 ,#1f2025);
+  li{
+    float:left;
+    font-size:20px;
+    font-family: '微软雅黑';
+    color:white;
+    height:35px;
+    line-height:33px;
+    text-align:center;
+    width:100px;
+    border-radius:17px;
+    margin:25px 10px;
+    font-weight:700;
+    cursor:pointer;
+    &:hover{
+      background:#20FEFF;
+      color:black;
+      box-shadow:0px 0px 10px  #20FEFF;
+    }
+  }
+  li:last-child{
+    color: #20FEFF;
+    position:absolute;
+    top:-5px;
+    right:412px;
+    border:1px solid #20FEFF;
+    width:110px;
+    height:45px;
+    line-height:45px;
+    margin-bottom:25px;
+    border-radius:45px;
+    background:radial-gradient(#1c444a, #1c3f46);
+    box-shadow:0px 0px 10px  #20FEFF;
+  }
+  li:nth-last-child(2){
+
+  }
+  li:last-child:hover{
+    background:#156e74;
+  }
+}

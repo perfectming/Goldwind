@@ -10,13 +10,13 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barRotimes,powerValue,text} = this.props;
-
+        let barRotime = data.data.bar_rotimes;
+        let barlopowers = data.data.bar_loPowers;
+        let barlopowerp = data.data.bar_loPowerp;
 
         let configPie = {
             chart: {
-                height:430,
-
+                height:500,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -32,7 +32,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '五月1区域各风机发电量',
                 align:'left',
                 x : "0",
                 style:{
@@ -94,7 +94,8 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotimes,
+                categories:barRotime,
+
             },
             yAxis: {
                 // lineWidth: 1,
@@ -109,15 +110,17 @@ let Component = React.createClass({
                 },
             },
             series: [{
-                name: '实际健康度',
+                name: '计划发电量',
                 type: 'column',
-                data: powerValue
+                color:'#5B9BD5',
+                data: barlopowers
             }
-            // ,{
-            //     name:'停机时间',
-            //     type:'column',
-            //     data: barLtPowerValue
-            // }
+                ,{
+                    name:'实际发电量',
+                    color:'#ED7D31',
+                    type:'column',
+                    data: barlopowerp
+                }
 
             ]
         };

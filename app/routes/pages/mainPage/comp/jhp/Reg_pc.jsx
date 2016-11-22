@@ -10,13 +10,16 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barRotimes,powerValue,text} = this.props;
-
+        let barRotime = data.data.bar_rotime;
+        let barLotime = data.data.bar_lotime;
+        let barLoPowerValue = data.data.bar_loPower;
+        let barLdpowerValue = data.data.line_date;
+        let barLpdpowerValue = data.data.line_pdate;
+        let barLpdpowerValues = data.data.line_pdates;
 
         let configPie = {
             chart: {
-                height:430,
-
+                height:500,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -26,13 +29,14 @@ let Component = React.createClass({
                     linearGradient: [0, 0, 500, 500],
                     stops: [
                         //[0, 'rgb(56, 85, 94)'],
-                        [0, 'rgb(37, 41, 48)']
+                        [0, 'rgb(37, 41, 48)'],
+
                     ]
                 },
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '11月每日集团发电量',
                 align:'left',
                 x : "0",
                 style:{
@@ -54,7 +58,8 @@ let Component = React.createClass({
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.yf}%</b>"
+                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
+
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -78,9 +83,10 @@ let Component = React.createClass({
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0,
-                    pointWidth:20
+                    pointPadding: 1,
+                    borderWidth: 1,
+                    pointWidth:15,
+                    shadow:true
                 }
             },
             xAxis: {
@@ -94,12 +100,13 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotimes,
+                categories:barLdpowerValue,
             },
             yAxis: {
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                max:100,
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
@@ -109,15 +116,25 @@ let Component = React.createClass({
                 },
             },
             series: [{
-                name: '实际健康度',
+                name: '计划发电量',
                 type: 'column',
-                data: powerValue
-            }
-            // ,{
-            //     name:'停机时间',
-            //     type:'column',
-            //     data: barLtPowerValue
-            // }
+                data: barLpdpowerValue,
+                color:'none',
+                borderWidth:3,
+                borderColor:'#5B9BD5'
+
+            },
+                {
+                    name: '实际发电量',
+                    type: 'column',
+                    data: barLpdpowerValues,
+                    color:'none',
+                    borderWidth:3,
+                    borderColor:'#ED7D31',
+                    shadow:'5px #ED7D31'
+
+
+                },
 
             ]
         };

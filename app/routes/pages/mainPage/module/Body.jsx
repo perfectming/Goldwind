@@ -60,14 +60,13 @@ import PBAspace from '../comp/mbixxd/PBAspace.jsx';
 
 
 
+
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
-
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-
     render() {
         let {showPage, tabOpt, tab, flag=true,cssif2} = this.props;
         return (
@@ -96,6 +95,7 @@ let Component = React.createClass({
                 {showPage === 'amm' && <Amm></Amm>}
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
+                {showPage === 'fault' && <Fault></Fault>} 
                 {showPage === 'fault' && <Fault></Fault>}
 
                 {showPage === 'baotou' && <Baotou></Baotou>};
