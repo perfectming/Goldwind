@@ -55,6 +55,7 @@ const mapDispatchToProps = (dispatch) => {
         play:()=>{
             dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('navhide', false));
+            dispatch(actions.setVars('fan_page', 'allpage'));
         },
         changeFlag :(flag)=>{
             dispatch(actions.setVars('distributionLeftBox', flag));
