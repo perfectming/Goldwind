@@ -11,7 +11,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ flag=true, changeFlag, changnav=0}=this.props;
+       let{ flag=true, changeFlag, changnav=0,hiden=false}=this.props;
        
         return (
             <div className={styles.bodyBox}>
@@ -28,6 +28,7 @@ const mapStateToProps = (state) => {
     return {
         changnav : state.vars.Changnav,
         flag : state.vars.flagff,
+        hiden : state.vars.hiden,
 
     }
 };
@@ -40,6 +41,7 @@ const mapDispatchToProps = (dispatch) => {
                 }
              dispatch(actions.setVars('Changnav', 0));
              dispatch(actions.setVars('navhide', false));
+             dispatch(actions.setVars('hiden', false));
 
         },
          changeFlag :(flag)=>{
