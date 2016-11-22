@@ -41,7 +41,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     init: ()=> {
-      console.log('login');
       dispatch(actions.setVars('userInfo', true));
       $.cookie('token','123123');
        // browserHistory.push('/app/all/page/main')  ;

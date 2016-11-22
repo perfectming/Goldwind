@@ -1,0 +1,31 @@
+.gbaBox{
+    width: 100%;
+    padding-right: 40px;
+    .content{
+        position: relative;
+        width: 100%;
+        .wind{
+            position: relative;
+            height: 500px;
+            width: 100%;
+            .img{
+                z-index: 5;
+                position: absolute;
+                left: 10px;
+                top: 10px;
+            }
+        }
+        .fan{
+            position: relative;
+            top: 10px;
+            height: 500px;
+            width: 100%;
+            .img{
+                z-index: 5;
+                position: absolute;
+                left: 10px;
+                top: 10px;
+            }
+        }
+    }
+}

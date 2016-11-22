@@ -4,7 +4,7 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('../../../../../../config/RegulationData');
-let mod = require('../../../../../../config/Model');
+let mod = require('../../../../../../config/RegulationModel');
 let arr1 = [];
 let arr2=[];
 let arr3=[];
@@ -65,7 +65,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#ff7322', '#1d558e']
+            colors: ['#37545c', '#32c5cd']
             ,
             plotOptions: {
                 series: {

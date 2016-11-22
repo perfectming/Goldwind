@@ -15,6 +15,7 @@ let Component = React.createClass({
 
     render() {
         let data=Instrumentdata;
+        let{changepage2}=this.props;
         return (
            <div className={styles.box}>
            		<div className={styles.left}>
@@ -37,7 +38,7 @@ let Component = React.createClass({
            				<div className={styles.section}>
            					<div className={styles.sectionbar}>
            						<span>健康度</span> 
-           						<a>图片</a><a>图片</a>
+           						<a onClick={()=>changepage2()}>图片</a><a>图片</a>
            						<span>{data.firstfloor[1].small/data.firstfloor[1].big*100}%</span>
            					</div>
            					<div className={styles.sectiontwo}>
@@ -197,8 +198,10 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
+        },
+        changepage2:()=>{
+        	dispatch(actions.setVars('showPage', 'baotou'));
         }
-        ,
     };
 };
 

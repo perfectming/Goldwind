@@ -1,14 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Hly_ts from './Hly_ts.jsx';
+import Hly_t from './Hly_t.jsx';
 import Hly_r from './Hly_r.jsx';
 import Hly_d from './Hly_d.jsx';
 var actions = require('redux/actions');
 
 
 let data = require('./Healthy-data');
-let month=data.data.line_month;
+let month = data.data.line_month;
+let button = data.data.button;
+let barLoTime1 = data.data.line_month;
+let barLoPowerValue1 = data.data.bar_loPower;
+let text0=data.data.text2;
+let text1=data.data.text5;
+let barRotime = data.data.bar_rotime;
+let barLotime = data.data.bar_lotime;
+let barLoPowerValue = data.data.bar_loPower;
+let barLdpowerValue1 = data.data.line_date;
+let barLpdpowerValue1 = data.data.line_pdate;
+
 
 
 let Component = React.createClass({
@@ -34,7 +45,8 @@ let Component = React.createClass({
 
                 <div className={styles.tbox}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                         <Hly_ts></Hly_ts>
+                        <Hly_t barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1}  text={text0} ></Hly_t>
+
                         <div className={styles.logo}>
 
                         </div>
@@ -46,7 +58,7 @@ let Component = React.createClass({
                </div>
                <div className={`${styles.fbox}  ${styles.logofa}`}>
                       <div className={`${styles.box_shadow}`}>
-                       <Hly_d></Hly_d>
+                       <Hly_d barLpdpowerValue={barLpdpowerValue1} barLdpowerValue={barLdpowerValue1} text={text1}></Hly_d>
                           <div className={styles.logomini}>
 
                           </div>

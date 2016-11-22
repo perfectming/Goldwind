@@ -401,6 +401,7 @@ module.exports ={
         "WfsStateCode": "Disconnect"
     },
     "8888801": {
+        "TActPower": "64301.450",
         "YearLossElec": {
             "Maintain": "1040.25",
                 "Fault": "8838.49",
@@ -421,6 +422,7 @@ module.exports ={
             "WfsStateCode": "Disconnect"
     },
     "8888802": {
+        "TActPower": "91895.350",
         "YearLossElec": {
             "Maintain": "8168.24",
                 "Fault": "5282.51",
