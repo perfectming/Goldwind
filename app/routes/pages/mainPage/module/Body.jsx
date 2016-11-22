@@ -18,7 +18,6 @@ import Cockpit from '../comp/linjinjin/Cockpit.jsx';
 import Fan_matrix from '../comp/linjinjin/Fan_matrix.jsx';
 import Alarm from '../comp/yAll/Alarm.jsx';
 import PEQI from '../comp/jy/PEQI.jsx';
-import ARS from '../comp/jy/ARS.jsx';
 import AS from '../comp/jy/AS.jsx';
 import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
@@ -71,7 +70,6 @@ let Component = React.createClass({
                 {showPage === 'alarm' && <Alarm></Alarm>}
                 {showPage === 'PEQI' && <PEQI></PEQI>}
                 {showPage === 'AS' && <AS></AS>}
-                {showPage === 'ARS' && <ARS></ARS>}
                 {showPage === 'ms' && <Ms></Ms>}
                 {showPage === 'amm' && <Amm></Amm>}
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}

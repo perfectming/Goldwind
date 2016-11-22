@@ -5,6 +5,7 @@ import Navleft from '../../super/navleft.jsx';
 import Fanmatrix from '../../xym/Fanmatrix.jsx';
 import Pvmatrix from '../../xym/Pvmatrix.jsx';
 import Faninfo from '../../xym/Faninfo.jsx';
+
 import Sjlb from '../../jy/fanDataList.jsx';
 import Fjkx from './fcright/fjkx.jsx';
 import Cft from './fcright/cft.jsx';
@@ -19,7 +20,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ flag=true, changeFlag,numpage='fanmatrix',hiden=true}=this.props;
+       let{ flag=true, changeFlag,numpage='fanmatrix',hiden=true,Tofaninfo}=this.props;
         return (
             <div className={styles.bodyBox}>
                 
@@ -50,27 +51,33 @@ const mapStateToProps = (state) => {
     return {
         flag : state.vars.flagff,
         numpage : state.vars.numpage,
-        hiden:state.vars.hiden,
+        hiden: state.vars.hiden,
+
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: (flag) => {
+        init: (flag,hiden) => {
+            dispatch(actions.setVars('hiden', true));
             var obj = {
                 test:'',
                 }
 
         },
-         changeFlag :(flag)=>{
+            changeFlag :(flag)=>{
+                
+                if(flag){
+                    flag=false;
+                }else{
+                    flag=true;
+                };
+                dispatch(actions.setVars('flagff', flag));
+            },
+            Tofaninfo: (hiden)=> {
+                dispatch(actions.setVars('hiden', false));
             
-            if(flag){
-                flag=false;
-            }else{
-                flag=true;
-            };
-            dispatch(actions.setVars('flagff', flag));
-        }
+            }
    
     };
 };

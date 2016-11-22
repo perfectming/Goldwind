@@ -65,12 +65,6 @@ module.exports = {
                         name:'报警查询',
                         page:'alarm',
                     },{
-                        name:'故障录波',
-                        page:'',
-                    },{
-                        name:'报警规则设置',
-                        page:'ARS',
-                    },{
                         name:'报警提醒设置',
                         page:'AS',
                     }]
