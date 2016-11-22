@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Hly_regpba from './Hly_regpba.jsx';
+import Reg_tba from './Reg_tba.jsx';
+import Reg_tbas from './Reg_tbas.jsx';
 import Hly_regpbas from './Hly_regpbas.jsx';
 import Hly_a from './Hly_a.jsx';
 
@@ -43,7 +44,7 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_regpba></Hly_regpba>
+                        <Reg_tba></Reg_tba>
                         <div className={styles.logo}>
 
                         </div>
@@ -55,7 +56,7 @@ let Component = React.createClass({
                 </div>
                 <div className={`${styles.fbox}  ${styles.logofa}`}>
                     <div className={`${styles.box_shadow}`}>
-                        <Hly_regpbas></Hly_regpbas>
+                        <Reg_tbas></Reg_tbas>
                         <div className={styles.logomini}>
 
                         </div>

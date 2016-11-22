@@ -36,7 +36,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '11月份集团各区域PBA',
+                text: '11月份集团各风场PBA',
 
                 align:'left',
                 x : "0",

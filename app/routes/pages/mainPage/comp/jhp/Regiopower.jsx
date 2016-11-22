@@ -1,16 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Hly_regpba from './Hly_regpba.jsx';
-import Hly_regpbas from './Hly_regpbas.jsx';
-import Hly_a from './Hly_a.jsx';
 
+import Reg_pa from './Reg_pa.jsx';
+import Reg_pb from './Reg_pb.jsx';
+
+;
 var actions = require('redux/actions');
 
 
 let data = require('./Healthy-data');
 let month = data.data.line_month;
-let button=data.data.button;
+let button = data.data.button;
+
 
 let Component = React.createClass({
     componentDidMount() {
@@ -43,19 +45,16 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_regpba></Hly_regpba>
+                        <Reg_pa></Reg_pa>
                         <div className={styles.logo}>
 
                         </div>
                     </div>
                 </div>
 
-                <div className={styles.clear}>
-
-                </div>
                 <div className={`${styles.fbox}  ${styles.logofa}`}>
                     <div className={`${styles.box_shadow}`}>
-                        <Hly_regpbas></Hly_regpbas>
+                        <Reg_pb></Reg_pb>
                         <div className={styles.logomini}>
 
                         </div>

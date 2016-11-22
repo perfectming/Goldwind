@@ -10,18 +10,20 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barRotimes,powerValue,text} = this.props;
-
-
+        let barLoTime = data.data.line_month;
+        let barLoPowerValue = data.data.bar_loPower;
+        let barRoPowerValue = data.data.bar_roPowers;
+        let barRoPowerValues = data.data.bar_roPowerses;
+        let barLtPowerValue = data.data.bar_ltPower;
         let configPie = {
             chart: {
-                height:430,
-
+                height:400,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
+                paddingLeft:100,
                 backgroundColor: {
                     linearGradient: [0, 0, 500, 500],
                     stops: [
@@ -32,12 +34,13 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '集团每月PBA',
                 align:'left',
                 x : "0",
                 style:{
+
                     color:"#fff",
-                    fontSize:"22px",
+                    fontSize:"25px",
                     fontFamily:"微软雅黑"
                 }
             },
@@ -54,7 +57,7 @@ let Component = React.createClass({
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.yf}%</b>"
+                // pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -80,7 +83,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth:20
+                    pointWidth: 40
                 }
             },
             xAxis: {
@@ -94,12 +97,13 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotimes,
+                categories:barLoTime,
             },
             yAxis: {
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                max:100,
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
@@ -109,15 +113,23 @@ let Component = React.createClass({
                 },
             },
             series: [{
-                name: '实际健康度',
+                name: '实际运行时间',
                 type: 'column',
-                data: powerValue
-            }
-            // ,{
-            //     name:'停机时间',
-            //     type:'column',
-            //     data: barLtPowerValue
-            // }
+                data: barRoPowerValue}
+                ,{
+                    name: '停机时间',
+                    type: 'column',
+                    color:'#cccccc',
+                    data: barRoPowerValues
+                }
+                ,
+                {
+                    name: 'TBA',
+                    type: 'spline',
+                    color:'#0000ff',
+                    data: barLoPowerValue
+                }
+
 
             ]
         };
