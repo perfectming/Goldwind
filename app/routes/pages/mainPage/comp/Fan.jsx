@@ -74,7 +74,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {changepage2,changepage3}=this.props;
+        let {changepage2,changepage3,Tofaninfo1,hiden=true}=this.props;
         return (
             <div className={styles.bodyBox}>
                 <div className={styles.leftBox}>
@@ -93,7 +93,7 @@ let Component = React.createClass({
                                         obj_wfd[value].map((valueA, keyA)=> {
                                             return (
                                                 
-                                                    <div className={styles.listoptbtn_2}  key={keyA}><span>{valueA.Wtname}</span>
+                                                    <div className={styles.listoptbtn_2} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key,hiden)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'风速:'+Math.ceil(model_data[value].WindSpeed_DevAverValue/3600)+'m/s'}</p>
@@ -150,19 +150,16 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-       play:()=>{
-            dispatch(actions.setVars('showPage', 'fan_matrix'));
-            dispatch(actions.setVars('navhide', false));
-        }
-     
+        hiden : state.vars.hiden,
+            
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
 
-        init: () => {
-
+        init: (hiden) => {
+            dispatch(actions.setVars('hiden', false));
             var obj = {
                 test:''
             }
@@ -185,6 +182,13 @@ const mapDispatchToProps = (dispatch) => {
 
              
         },
+        Tofaninfo1: (value,valueA,key,hiden)=> {
+            dispatch(actions.setVars('hiden', false));
+            dispatch(actions.setVars('value', valueA));
+            dispatch(actions.setVars('actbt', key));
+            dispatch(actions.setVars('showPage', 'fan_matrix'));
+            dispatch(actions.setVars('numpage', 'faninfo'));
+        }
     };
 };
 
