@@ -107,10 +107,11 @@ let Component = React.createClass({
                 {showPage === 'area' && <Area></Area>};
                 {showPage === 'group' && <Group></Group>};
                 {showPage === 'windpage' && <Windpage></Windpage>};
+
                 {showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
                 {showPage === 'areaKBA' && <AreaKBA></AreaKBA>};
                 {showPage === 'loseElectric' && <LoseElectric></LoseElectric>};
-
+				{showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
 
 
 
@@ -137,9 +138,6 @@ let Component = React.createClass({
                 {showPage === 'healthytime' && <Healthytime></Healthytime>}
                 {showPage === 'pbatime' && <PBAtime></PBAtime>}
                 {showPage === 'pbaspace' && <PBAspace></PBAspace>}
-
-               
-
                 <div className={styles.clearbox}></div>
             </div>
         );
