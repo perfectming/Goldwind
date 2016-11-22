@@ -88,16 +88,19 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('actbt',key ));
               dispatch(actions.setVars('actbt1','' ));
               dispatch(actions.setVars('valuepage', value));
+              dispatch(actions.setVars('hiden', true));
         },
         changpage1 :(value,key)=>{
               dispatch(actions.setVars('numpage', 'pvmatrix'));
               dispatch(actions.setVars('actbt1',key ));
               dispatch(actions.setVars('actbt','' ));
               dispatch(actions.setVars('valuepage1', value));
+              dispatch(actions.setVars('hiden', true));
         },
         backtop:()=>{
             dispatch(actions.setVars('showPage','distribution'));
             dispatch(actions.setVars('navhide', true));
+            dispatch(actions.setVars('numpage', 'fanmatrix'));
         }
    
     };

@@ -2,21 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Bllo from './block.scss';
 let booster = require('../../../../../../config/booster-data');
-
-
-
-
-
-
-
-
-
-
 let Component = React.createClass({
     componentWillMount() {
-
     },
-
     render() {
         let{img='../../img/comp/icon'}=this.props;
             let{arr}=this.props;

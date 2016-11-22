@@ -1,8 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import u865 from '../../img/comp/u865.png';
-import u867 from '../../img/comp/u867.png';
-import u869 from '../../img/comp/u869.png';
 var actions = require('redux/actions');
 
 import styles from './AS.scss';
@@ -19,11 +16,11 @@ let Component = React.createClass({
         this.props.init(tabaleData.as);
     },
     render() {
-        let {blank,table, changeTableItem} = this.props;
+        let {table, changeTableItem} = this.props;
         return (
             <div>
                 <div className={styles.btn}><img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
-                    <img src={refresh}/><img src={u865} onClick={blank}/><img src={u867} onClick={blank}/><img src={u869} onClick={blank}/></div>
+                    <img src={refresh}/></div>
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
@@ -79,9 +76,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
-        },
-        blank: () => {
-            window.open ("../../../../../../../simple.html", "newwindow", "height=300, width=400, top=300, left=200, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no")
         },
         changeTableItem: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);

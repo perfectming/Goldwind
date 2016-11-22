@@ -65,12 +65,6 @@ module.exports = {
                         name:'报警查询',
                         page:'alarm',
                     },{
-                        name:'故障录波',
-                        page:'',
-                    },{
-                        name:'报警规则设置',
-                        page:'ARS',
-                    },{
                         name:'报警提醒设置',
                         page:'AS',
                     }]
@@ -209,24 +203,28 @@ module.exports = {
                     }]
             }],
         },{
-            name: '业务职能',
+            name: '业务智能',
             iconNormal: require('../app/routes/pages/mainPage/img/comp/ywfx.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/ywfx_active.png'),
             subPage: [{
-                name:'业务分析-1',
+                name:'经营仪表盘',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/ybp.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/ybp1.png'),
                 page:[
                     {
-                        name:'业务分析1-1',
-                        page:'',
+                        name:'集团',
+                        page:'group',
                     },{
-                        name:'业务分析1-2',
-                        page:'',
+                        name:'区域',
+                        page:'area',
                     },{
-                        name:'业务分析1-3',
-                        page:'',
+                        name:'风场',
+                        page:'windpage',
                     }]
             },{
-                name:'业务分析-2',
+                name:'KPI指标',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/kizb.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/kizb1.png'),
                 page:[
                     {
                         name:'业务分析2-1',
@@ -239,7 +237,39 @@ module.exports = {
                         page:'',
                     }]
             },{
-                name:'业务分析-3',
+                name:'报表分析',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/bbfx.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/bbfx1.png'),
+                page:[
+                     {
+                        name:'业务分析3-1',
+                        page:'',
+                    },{
+                        name:'业务分析3-2',
+                        page:'',
+                    },{
+                        name:'业务分析3-3',
+                        page:'',
+                    }]
+            },{
+                name:'分析工具',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/fxgj.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/fxgj1.png'),
+                page:[
+                     {
+                        name:'业务分析3-1',
+                        page:'',
+                    },{
+                        name:'业务分析3-2',
+                        page:'',
+                    },{
+                        name:'业务分析3-3',
+                        page:'',
+                    }]
+            },{
+                name:'数据填报',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/sjtb.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/sjtb1.png'),
                 page:[
                      {
                         name:'业务分析3-1',
