@@ -24,16 +24,12 @@ import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
 import Fault from '../comp/yAll/Fault.jsx';
-
-
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
-
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-
     render() {
         let {showPage, tabOpt, tab, flag=true} = this.props;
         return (
@@ -58,7 +54,7 @@ let Component = React.createClass({
                 {showPage === 'amm' && <Amm></Amm>}
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
-                {showPage === 'fault' && <Fault></Fault>}
+                {showPage === 'fault' && <Fault></Fault>} 
                 <div className={styles.clearbox}></div>
             </div>
         );
