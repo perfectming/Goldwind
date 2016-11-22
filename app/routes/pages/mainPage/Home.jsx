@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
 import Header from './module/Header';
+import styles from './module/Home.scss';
 import Tree from './module/Tree';
 import Body from './module/Body';
 import FixedContent from '../../../components/common/FixedContent.jsx';
@@ -21,13 +22,17 @@ let Component = React.createClass({
     render() {
         let {itemHeaderActive, itemTreeAct, flag=true}=this.props;
         return (
+            
             <FixedContent mode="fullWidth" width={1920}>
+                <div className={styles.bgbox}>
                 <Header headerInfo={page.header}></Header>
                 {
                 flag && <Tree treeOpt={page.header[itemHeaderActive]} style={{overflow:'hidden'}}></Tree>
             }
                 <Body tabOpt={page.header[itemHeaderActive]} tab={itemTreeAct}></Body>
+                </div>
             </FixedContent>
+           
         );
     }
 });
