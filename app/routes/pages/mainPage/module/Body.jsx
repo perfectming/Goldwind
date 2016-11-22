@@ -35,7 +35,7 @@ import Area from '../comp/ludi/instrumentpanel/Area.jsx';
 import Group from '../comp/ludi/instrumentpanel/Group.jsx';
 import Windpage from '../comp/ludi/instrumentpanel/Windpage.jsx';
 
-import  Profitsss  from '../comp/mbixxd/tbatime/Profitsss.jsx';
+
 
 
 
@@ -85,16 +85,7 @@ let Component = React.createClass({
                 {showPage === 'group' && <Group></Group>};
                 {showPage === 'windpage' && <Windpage></Windpage>};
 
-                {showPage === 'profits' && <Profits></Profits>};
-                {showPage === 'profitss' && <Profitss></Profitss>};
-                {showPage === 'profitsss' && <Profitsss></Profitsss>};
-
-                {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
-                {showPage === 'healthy' && <Healthy></Healthy>}
-                {showPage === 'healthypba' && <Healthypba></Healthypba>}
-                {showPage === 'healthypbas' && <Healthypbas></Healthypbas>}
-                {showPage === 'healthyregin' && <Healthyregin></Healthyregin>}
-                {showPage === 'healthyregins' && <Healthyregins></Healthyregins>}
+               
 
                 <div className={styles.clearbox}></div>
             </div>

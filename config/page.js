@@ -220,10 +220,10 @@ module.exports = {
                         page:'group',
                     },{
                         name:'区域',
-                        page:'',
+                        page:'area',
                     },{
                         name:'风场',
-                        page:'',
+                        page:'windpage',
                     }]
             },{
                 name:'业务分析-2',
