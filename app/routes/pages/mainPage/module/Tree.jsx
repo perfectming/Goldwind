@@ -8,7 +8,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {treeOpt, itemAct, changeTreeItem} = this.props;
+        let {treeOpt, itemAct, changeTreeItem, trunleft} = this.props;
         return (
             <div className={styles.navTree}>
                 {treeOpt && treeOpt.subPage.map((value, key)=> {
@@ -20,6 +20,7 @@ let Component = React.createClass({
                         </div>
                     )
                 })}
+                <span className={styles.trunleft} onClick={()=>trunleft()}>《 </span>
             </div>
         );
     }
@@ -48,6 +49,9 @@ const mapDispatchToProps = (dispatch) => {
              }
               
         },
+        trunleft:()=>{
+           
+        }
      
     };
 };

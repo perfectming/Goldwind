@@ -209,20 +209,20 @@ module.exports = {
                     }]
             }],
         },{
-            name: '业务职能',
+            name: '业务智能',
             iconNormal: require('../app/routes/pages/mainPage/img/comp/ywfx.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/ywfx_active.png'),
             subPage: [{
                 name:'业务分析-1',
                 page:[
                     {
-                        name:'业务分析1-1',
+                        name:'集团',
+                        page:'group',
+                    },{
+                        name:'区域',
                         page:'',
                     },{
-                        name:'业务分析1-2',
-                        page:'',
-                    },{
-                        name:'业务分析1-3',
+                        name:'风场',
                         page:'',
                     }]
             },{

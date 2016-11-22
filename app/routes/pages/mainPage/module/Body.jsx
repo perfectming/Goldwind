@@ -24,6 +24,19 @@ import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
 import Fault from '../comp/yAll/Fault.jsx';
+import u865 from '../img/comp/u865.png';
+import u867 from '../img/comp/u867.png';
+import u869 from '../img/comp/u869.png';
+
+import Baotou from '../comp/ludi/branch/Baotou.jsx';
+import Windbtpage from '../comp/ludi/branch/Windbtpage.jsx';
+import Xilin from '../comp/ludi/branch/Xilin.jsx';
+import Area from '../comp/ludi/instrumentpanel/Area.jsx';
+import Group from '../comp/ludi/instrumentpanel/Group.jsx';
+import Windpage from '../comp/ludi/instrumentpanel/Windpage.jsx';
+
+import  Profitsss  from '../comp/mbixxd/tbatime/Profitsss.jsx';
+
 
 
 var actions = require('redux/actions');
@@ -38,6 +51,11 @@ let Component = React.createClass({
         let {showPage, tabOpt, tab, flag=true} = this.props;
         return (
             <div className={flag===true?styles.bodyBox : styles.bodyBox1}>
+                <div className={styles.fiexd}>
+                    <img src={u865}/>
+                    <img src={u867}/>
+                    <img src={u869}/>
+                </div>
                 <Tab tabOpt={tabOpt} tab={tab}/>
                 {showPage === 'chart' && <Chart></Chart>}
                 {showPage === 'from' && <From></From>}
@@ -59,6 +77,25 @@ let Component = React.createClass({
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
                 {showPage === 'fault' && <Fault></Fault>}
+
+                {showPage === 'baotou' && <Baotou></Baotou>};
+                {showPage === 'windbtpage' && <Windbtpage></Windbtpage>};
+                {showPage === 'xilin' && <Xilin></Xilin>};
+                {showPage === 'area' && <Area></Area>};
+                {showPage === 'group' && <Group></Group>};
+                {showPage === 'windpage' && <Windpage></Windpage>};
+
+                {showPage === 'profits' && <Profits></Profits>};
+                {showPage === 'profitss' && <Profitss></Profitss>};
+                {showPage === 'profitsss' && <Profitsss></Profitsss>};
+
+                {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
+                {showPage === 'healthy' && <Healthy></Healthy>}
+                {showPage === 'healthypba' && <Healthypba></Healthypba>}
+                {showPage === 'healthypbas' && <Healthypbas></Healthypbas>}
+                {showPage === 'healthyregin' && <Healthyregin></Healthyregin>}
+                {showPage === 'healthyregins' && <Healthyregins></Healthyregins>}
+
                 <div className={styles.clearbox}></div>
             </div>
         );
