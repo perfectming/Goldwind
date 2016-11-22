@@ -53,13 +53,13 @@ for(var j in model_ens){
 
     // console.log(obj_pvd);
     for(var x in obj_wfd){
-        arr1.push(x)
+        arr1.push(x);
         // for(var y in obj_wfd[x]){
         //     arr2.push(obj_wfd[x][y])
         // }
     }
     for(var m in obj_pvd){
-        arr2.push(m)
+        arr2.push(m);
         // for(var n in obj_wfd[m]){
         //     arr2.push(obj_wfd[m][n])
         // }

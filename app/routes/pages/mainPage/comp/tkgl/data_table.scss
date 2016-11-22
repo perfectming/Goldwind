@@ -37,6 +37,13 @@
         line-height:30px;
         border: none;
       }
+      input{
+        background: #30343f;
+        border:6px solid #fff;
+        &:hover{
+          box-shadow:0px 0px 8px 2px #fff;
+        }
+      }
       .tableLineNum {
         width: 45px;
         padding: 10px 0 10px;
@@ -60,6 +67,13 @@
         height: 40px;
         border: none;
       }
+       input{
+         background: #272b34;
+         border:6px solid #fff;
+         &:hover{
+           box-shadow:0px 0px 8px 2px #fff;
+         }
+       }
       .tableLineNum {
         width: 45px;
         padding: 10px 0 10px;
