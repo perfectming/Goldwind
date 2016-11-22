@@ -84,7 +84,8 @@ let Component = React.createClass({
                 {showPage === 'area' && <Area></Area>};
                 {showPage === 'group' && <Group></Group>};
                 {showPage === 'windpage' && <Windpage></Windpage>};
-
+                
+				{showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
                
 
                 <div className={styles.clearbox}></div>
