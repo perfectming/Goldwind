@@ -18,12 +18,22 @@ import Cockpit from '../comp/linjinjin/Cockpit.jsx';
 import Fan_matrix from '../comp/linjinjin/Fan_matrix.jsx';
 import Alarm from '../comp/yAll/Alarm.jsx';
 import PEQI from '../comp/jy/PEQI.jsx';
-import ARS from '../comp/jy/ARS.jsx';
 import AS from '../comp/jy/AS.jsx';
 import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
 import Fault from '../comp/yAll/Fault.jsx';
+import u865 from '../img/comp/u865.png';
+import u867 from '../img/comp/u867.png';
+import u869 from '../img/comp/u869.png';
+
+import Baotou from '../comp/ludi/branch/Baotou.jsx';
+import Windbtpage from '../comp/ludi/branch/Windbtpage.jsx';
+import Xilin from '../comp/ludi/branch/Xilin.jsx';
+import Area from '../comp/ludi/instrumentpanel/Area.jsx';
+import Group from '../comp/ludi/instrumentpanel/Group.jsx';
+import Windpage from '../comp/ludi/instrumentpanel/Windpage.jsx';
+
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
 let Component = React.createClass({
@@ -31,9 +41,14 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {showPage, tabOpt, tab, flag=true} = this.props;
+        let {showPage, tabOpt, tab, flag=true,cssif2} = this.props;
         return (
-            <div className={flag===true?styles.bodyBox : styles.bodyBox1}>
+            <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2===true? styles.animate : styles.anmate2}`}>
+                <div className={styles.fiexd}>
+                    <img src={u865}/>
+                    <img src={u867}/>
+                    <img src={u869}/>
+                </div>
                 <Tab tabOpt={tabOpt} tab={tab}/>
                 {showPage === 'chart' && <Chart></Chart>}
                 {showPage === 'from' && <From></From>}
@@ -49,12 +64,19 @@ let Component = React.createClass({
                 {showPage === 'alarm' && <Alarm></Alarm>}
                 {showPage === 'PEQI' && <PEQI></PEQI>}
                 {showPage === 'AS' && <AS></AS>}
-                {showPage === 'ARS' && <ARS></ARS>}
                 {showPage === 'ms' && <Ms></Ms>}
                 {showPage === 'amm' && <Amm></Amm>}
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
                 {showPage === 'fault' && <Fault></Fault>} 
+                {showPage === 'fault' && <Fault></Fault>}
+
+                {showPage === 'baotou' && <Baotou></Baotou>};
+                {showPage === 'windbtpage' && <Windbtpage></Windbtpage>};
+                {showPage === 'xilin' && <Xilin></Xilin>};
+                {showPage === 'area' && <Area></Area>};
+                {showPage === 'group' && <Group></Group>};
+                {showPage === 'windpage' && <Windpage></Windpage>};
                 <div className={styles.clearbox}></div>
             </div>
         );
@@ -66,6 +88,7 @@ const mapStateToProps = (state) => {
     return {
         showPage: state.vars.showPage,
         flag: state.vars.bodypage,
+        cssif2: state.vars.cssif2,
     }
 };
 

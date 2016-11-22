@@ -14,6 +14,11 @@ var actions = require('redux/actions');
 let data = require('./Healthy-data');
 let month = data.data.line_month;
 let button=data.data.button;
+let barLoPowerValue1 = data.data.bar_roPowerses;
+let barLoPowerValues1 = data.data.bar_roPower;
+let barLdpowerValue1 = data.data.line_lpower;
+let barLotime1= data.data.bar_lotime;
+let text1=data.data.text6;
 
 let Component = React.createClass({
     componentDidMount() {
@@ -46,7 +51,7 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_a></Hly_a>
+                        <Hly_a text={text1} barLotime={barLotime1}  barLdpowerValue={barLdpowerValue1} barLoPowerValues={barLoPowerValues1} barLoPowerValue={barLoPowerValue1} ></Hly_a>
                         <div className={styles.logo}>
 
                         </div>

@@ -23,7 +23,7 @@ let Component = React.createClass({
             <form className={css.loginBox}>
               <span>用户名</span><input className={css.int} id="qq" type="text" name="username"/><br/>
               <span>密码</span><input className={css.int} type="text" name="password"/><br/>
-              <input className={css.submit} type="submit " value='登陆' readOnly="true" onClick={()=>login(qq.value)}/>
+              <input className={css.submit} type="submit " value='登陆' readOnly="true" onClick={()=>login(123)}/>
             </form>
           </div>
           }
@@ -41,7 +41,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     init: ()=> {
-      console.log('login');
       dispatch(actions.setVars('userInfo', true));
       $.cookie('token','123123');
        // browserHistory.push('/app/all/page/main')  ;

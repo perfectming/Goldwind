@@ -10,9 +10,8 @@ let Component = React.createClass({
     },
 
     render() {
-        let barRotimes = data.data.bar_rotimes;
-        let barLoPowerValue = data.data.bar_loPower;
-        let barLtPowerValue = data.data.bar_ltPower;
+        let {barRotimes,powerValue,text} = this.props;
+
 
         let configPie = {
             chart: {
@@ -33,7 +32,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '五月1区域1风场各风机健康度',
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
@@ -112,7 +111,7 @@ let Component = React.createClass({
             series: [{
                 name: '实际健康度',
                 type: 'column',
-                data: barLoPowerValue
+                data: powerValue
             }
             // ,{
             //     name:'停机时间',
