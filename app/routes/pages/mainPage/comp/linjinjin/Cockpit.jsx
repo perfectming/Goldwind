@@ -18,6 +18,7 @@ import co2 from '../../img/comp/co2.png';
 import sunsi from '../../img/comp/sunsi.png';
 import gz from '../../img/comp/guzhang.png';
 import gzbg from '../../img/comp/gzbg.png';
+var actions = require('redux/actions');
 
 
 
@@ -127,9 +128,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+          dispatch(actions.setVars('putpage', false));
+                dispatch(actions.setVars('bodypage', false));
+                dispatch(actions.setVars('navhide', false));
+                dispatch(actions.setVars('cssif2', false));
             var obj = {
                 test:''
             }
+            
         }
         ,
     };

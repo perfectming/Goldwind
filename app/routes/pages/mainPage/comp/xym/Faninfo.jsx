@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Faninfo.scss';
 var actions = require('redux/actions');
 import Header from '../linjinjin/header';
+import Title from '../super/Title.jsx';
 
 let Component = React.createClass({
 	componentDidMount() {
@@ -10,10 +11,14 @@ let Component = React.createClass({
 	},
 
 	render() {
-		let {} = this.props;
+		let {value} = this.props;
+		console.log(value.Wtname);
 		return (
-			<div>
-				<Header></Header>
+			<div className={styles.bodyBox}>
+				<div className={styles.infoBox}>
+					<Title title={['日发电量统计']}></Title>
+				</div>
+				
 			</div>
 		)
 	}
@@ -24,18 +29,19 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        // valuepage : state.vars.valuepage,
+        value : state.vars.value,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        	
             var obj = {
                 test:''
             }
-        }
-        ,
+        },
+        
     };
 };
 

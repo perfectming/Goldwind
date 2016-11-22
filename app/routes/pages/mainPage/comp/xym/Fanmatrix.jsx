@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Corner from '../super/Corner.jsx';
 import fmatrix from '../../img/comp/fmatrix.png';
 import styles from './Fanmatrix.scss';
+import fan_matrix from '../linjinjin/Fan_matrix.jsx';
 var actions = require('redux/actions');
 // import dataBase from '../../../../../config/ModelData';
 let matrixdata = require('../../../../../../config/MatrixData');
@@ -64,13 +65,13 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage=650107,Tofaninfo}=this.props;
+        let{valuepage=650107,Tofaninfo,hiden}=this.props;
         return (
             <div className={styles.listbodyBox}>
                 {
                 obj_wfd[valuepage].map((value, key)=> {
                     return (
-                        <div className={styles.listBox} key={key} onClick = {()=> Tofaninfo(value, key)}>
+                        <div className={styles.listBox} key={key} onClick = {()=> Tofaninfo(value)}>
                             <div className={styles.listitemL}><img src={fmatrix}/>
                             </div>
                             <div className={styles.listitemR}>
@@ -103,6 +104,8 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         valuepage : state.vars.valuepage,
+        hiden : state.vars.hiden,
+        
     }
 };
 
@@ -112,8 +115,13 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
+        },
+        Tofaninfo: (value)=> {
+            dispatch(actions.setVars('hiden', false));
+            dispatch(actions.setVars('value', value));
+            
+            dispatch(actions.setVars('numpage', 'faninfo'));
         }
-        ,
     };
 };
 
