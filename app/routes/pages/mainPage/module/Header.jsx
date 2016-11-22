@@ -52,9 +52,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('showPage', page));
              dispatch(actions.setVars('tabItemActive', 0));
              if(page=='cockpit'){
-                dispatch(actions.setVars('putpage', false));
-                dispatch(actions.setVars('bodypage', false));
-                dispatch(actions.setVars('navhide', false));
+                
              }else if(page=='monitorkb'){
                 dispatch(actions.setVars('navhide', false));
                 dispatch(actions.setVars('putpage', true));
