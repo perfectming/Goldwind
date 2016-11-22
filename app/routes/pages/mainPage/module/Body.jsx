@@ -48,9 +48,9 @@ let Component = React.createClass({
     },
 
     render() {
-        let {showPage, tabOpt, tab, flag=true} = this.props;
+        let {showPage, tabOpt, tab, flag=true,cssif2} = this.props;
         return (
-            <div className={flag===true?styles.bodyBox : styles.bodyBox1}>
+            <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2===true? styles.animate : styles.anmate2}`}>
                 <div className={styles.fiexd}>
                     <img src={u865}/>
                     <img src={u867}/>
@@ -98,6 +98,7 @@ const mapStateToProps = (state) => {
     return {
         showPage: state.vars.showPage,
         flag: state.vars.bodypage,
+        cssif2: state.vars.cssif2,
     }
 };
 
