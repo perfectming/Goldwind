@@ -64,7 +64,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage1=652303,Tofaninfo}=this.props;
+        let{valuepage1=652303,Tofaninfo,hiden}=this.props;
         return (
             <div className={styles.slistbodyBox}>
                 {
@@ -103,6 +103,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         valuepage1 : state.vars.valuepage1,
+        hiden : state.vars.hiden,
     }
 };
 
@@ -112,8 +113,13 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
+        },
+        Tofaninfo: (value)=> {
+            dispatch(actions.setVars('hiden', false));
+            dispatch(actions.setVars('value', value));
+            
+            dispatch(actions.setVars('numpage', 'faninfo'));
         }
-        ,
     };
 };
 

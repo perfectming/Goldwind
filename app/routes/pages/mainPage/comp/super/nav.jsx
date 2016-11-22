@@ -13,7 +13,7 @@ let Component = React.createClass({
 
     render() {
 
-       let {title,arr, changetab, act=0 } = this.props;
+       let {title,arr, changetab, act=0} = this.props;
        
         return (
           <div className={styles.navbox}>
@@ -68,11 +68,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            
         },
         changetab:(page,act)=>{
             dispatch(actions.setVars('numpage', page));
             dispatch(actions.setVars('actbtn', act));
         }
+        
     };
 };
 
