@@ -33,6 +33,9 @@ import Xilin from '../comp/ludi/branch/Xilin.jsx';
 import Area from '../comp/ludi/instrumentpanel/Area.jsx';
 import Group from '../comp/ludi/instrumentpanel/Group.jsx';
 import Windpage from '../comp/ludi/instrumentpanel/Windpage.jsx';
+import GroupKBA from '../comp/ludi/KBA/GroupKBA.jsx';
+import AreaKBA from '../comp/ludi/KBA/AreaKBA.jsx';
+import LoseElectric from '../comp/ludi/KBA/LoseElectric.jsx';
 
 import Healthy_one from '../comp/jhp/Healthy_one.jsx';
 import Healthy from '../comp/jhp/Healthy.jsx';
@@ -104,6 +107,11 @@ let Component = React.createClass({
                 {showPage === 'area' && <Area></Area>};
                 {showPage === 'group' && <Group></Group>};
                 {showPage === 'windpage' && <Windpage></Windpage>};
+                {showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
+                {showPage === 'areaKBA' && <AreaKBA></AreaKBA>};
+                {showPage === 'loseElectric' && <LoseElectric></LoseElectric>};
+
+
 
 
                 {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
