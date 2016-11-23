@@ -13,7 +13,7 @@ let Component = React.createClass({
         this.props.init(tabaleData.peqi);
     },
     render() {
-        let {table, changeTableItem,showTab} = this.props;
+        let {table} = this.props;
         return (
             <div>
                 <div className={styles.actionBox}>
@@ -35,15 +35,14 @@ let Component = React.createClass({
                         {
                             tab.data.content.map((value, key)=> {
                                 return (
-                                    <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key} onClick={()=>showTab(key)}>
+                                    <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         {
                                             value.map((valueC, keyC)=> {
+
+
                                                 return (
-                                                    <input className={styles.tableContentItem}
-                                                           style={{width:(100/tab.data.header.length)+"%"}}
-                                                           key={keyC} contentEditable="true"
-                                                           onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                           value={valueC}/>
+                                                    <div className={styles.tableContentItem} style={{width:(100/tab.data.header.length)+"%"}}
+                                                           key={keyC}>{valueC}</div>
                                                 )
                                             })
                                         }
@@ -73,11 +72,8 @@ let Component = React.createClass({
                                             value.map((valueC, keyC)=> {
 
                                                 return (
-                                                    <input className={styles.tableContentItem}
-                                                           style={{width:(100/tab.data.header.length)+"%"}}
-                                                           key={keyC} contentEditable="true"
-                                                           onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                           value={valueC}/>
+                                                    <div className={styles.tableContentItem} style={{width:(100/tab.da.header.length)+"%"}}
+                                                         key={keyC}>{valueC}</div>
                                                 )
                                             })
                                         }
@@ -104,14 +100,6 @@ const mapDispatchToProps = (dispatch) => {
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
         },
-        changeTableItem: (value, table, i, j) => {
-            let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.content[i][j] = value;
-            dispatch(actions.setObjs('tableContent', tableV));
-        },
-        showTab:(key)=>{
-            console.log(key);
-        }
     };
 };
 
