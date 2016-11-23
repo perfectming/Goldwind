@@ -4,9 +4,10 @@ var actions = require('redux/actions');
 
 import styles from './AS.scss';
 var {getState} = require('../../../../../redux/store');
-
+import del from '../../img/icon/tabDel.png';
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
+import tabAdd from '../../img/icon/tabAdd.png';
 import _ from 'lodash';
 
 let tabaleData = require('./data');
@@ -16,17 +17,16 @@ let Component = React.createClass({
         this.props.init(tabaleData.as);
     },
     render() {
-        let {add,table, changeTableItem} = this.props;
+        let {add,table, changeTableItem,dele} = this.props;
         let newData=[];
         for(let i=0;i<tabaleData.as.header.length;i++){
-            newData.push('');
+            newData.push('')
         }
         return (
             <div>
                 <div className={styles.btn}><img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
                     <img src={refresh}/>
-                    <img src={save} onClick={()=>add(newData)}/>
-                    <img src={save} onClick={()=>dele()}/>
+                    <img src={tabAdd} onClick={()=>add(newData)}/>
                 </div>
 
                 <div className={styles.tableBox}>
@@ -35,10 +35,12 @@ let Component = React.createClass({
                             tabaleData.as.header.map((value, key)=> {
                                 return (
                                     <div className={styles.tableHeaderItem}
-                                         style={{width:(100/tabaleData.as.header.length)+"%"}} key={key}>{value}</div>
+                                         style={{width:(100/(tabaleData.as.header.length+1))+"%"}} key={key}>{value}</div>
                                 )
                             })
                         }
+                        <div className={styles.tableHeaderItem}
+                             style={{width:(100/(tabaleData.as.header.length+1))+"%"}} key={tabaleData.as.header.length}>删除</div>
                     </div>
                     <div className={styles.tableContentBox}>
                         {
@@ -50,7 +52,7 @@ let Component = React.createClass({
                                                 if(keyC==value.length-1){
                                                     return (
                                                         <input className={styles.tableContentItem}
-                                                               style={{width:(100/tabaleData.as.header.length)+"%"}}
+                                                               style={{width:(100/(tabaleData.as.header.length+1))+"%"}}
                                                                key={keyC} contentEditable="true"
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                value={valueC}/>
@@ -58,13 +60,16 @@ let Component = React.createClass({
                                                 }else{
                                                 return (
                                                     <input className={styles.tableContentItem}
-                                                           style={{width:(100/tabaleData.as.header.length)+"%"}}
+                                                           style={{width:(100/(tabaleData.as.header.length+1))+"%"}}
                                                            key={keyC} readOnly="true"
                                                            onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                            value={valueC}/>
-                                                );}
+                                                )}
                                             })
                                         }
+                                        <div className={styles.tableContentItem} style={{width:(100/(tabaleData.as.header.length+1))+"%"}}>
+                                            <img src={del} onClick={(e)=>dele(key)}/>
+                                        </div>
                                     </div>
                                 )
                             })
@@ -72,9 +77,9 @@ let Component = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        )
     }
-});
+})
 
 
 const mapStateToProps = (state) => {
@@ -96,6 +101,12 @@ const mapDispatchToProps = (dispatch) => {
         add:(i) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.content.push(i);
+            dispatch(actions.setObjs('tableContent', tableV));
+        },
+        dele:(j) => {
+            console.log(j);
+            let tableV = _.clone(getState().objs.tableContent);
+            tableV.content.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
         }
     };
