@@ -184,13 +184,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('tableContent', tableV));
         },
         deleData:(j) => {
-            console.log(j);
             let tableV = _.clone(getState().objs.tableContent);
             tableV.data.content.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         deleDa:(j) => {
-            console.log(j);
             let tableV = _.clone(getState().objs.tableContent);
             tableV.da.content.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
