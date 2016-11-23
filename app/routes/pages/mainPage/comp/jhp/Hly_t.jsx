@@ -5,17 +5,16 @@ var ReactHighcharts = require('react-highcharts');
 
 var $ = require('jQuery');
 
-let data = require('./Healthy-data');
+
 
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let barLoTime = data.data.bar_lotime;
-        let barLoPowerValue = data.data.bar_loPower;
-        let barRoPowerValue = data.data.bar_roPower;
-        let barLtPowerValue = data.data.bar_ltPower;
+
+
+        let {barLoPowerValue,barLoTime,text}=this.props;
         let configPie = {
             chart: {
                 height:400,
@@ -36,7 +35,7 @@ let Component = React.createClass({
             },
 
             title: {
-                text: '五月份区域健康度',
+                text: text,
                 align:'left',
                  x : "0",
                 style:{
@@ -116,7 +115,8 @@ let Component = React.createClass({
             series: [{
                 name: '实际健康度',
                 type: 'column',
-                data: barLoPowerValue}
+                data: barLoPowerValue
+            }
             // ,{
             //     name: '实际健康度',
             //     type: 'column',

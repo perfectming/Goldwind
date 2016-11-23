@@ -33,6 +33,32 @@ import Xilin from '../comp/ludi/branch/Xilin.jsx';
 import Area from '../comp/ludi/instrumentpanel/Area.jsx';
 import Group from '../comp/ludi/instrumentpanel/Group.jsx';
 import Windpage from '../comp/ludi/instrumentpanel/Windpage.jsx';
+import GroupKBA from '../comp/ludi/KBA/GroupKBA.jsx';
+import AreaKBA from '../comp/ludi/KBA/AreaKBA.jsx';
+import LoseElectric from '../comp/ludi/KBA/LoseElectric.jsx';
+
+import Healthy_one from '../comp/jhp/Healthy_one.jsx';
+import Healthy from '../comp/jhp/Healthy.jsx';
+import Healthypba from '../comp/jhp/Healthypba.jsx';
+import Healthypbas from '../comp/jhp/Healthypbas.jsx';
+import Healthyregin from '../comp/jhp/Healthyregin.jsx';
+import Healthyregins from '../comp/jhp/Healthyregins.jsx';
+import Healthyregpba from '../comp/jhp/Healthyregpba.jsx';
+import Healthyregpbas from '../comp/jhp/Healthyregpbas.jsx';
+import Healthygen from '../comp/jhp/Healthygen.jsx';
+import Healthygens from '../comp/jhp/Healthygens.jsx';
+import Regiopower from '../comp/jhp/Regiopower.jsx';
+import Regiopowers from '../comp/jhp/Regiopowers.jsx';
+
+import Areace from '../comp/mbixxd/Areace.jsx';
+import Areacet from '../comp/mbixxd/Areacet.jsx';
+import TBAtime from '../comp/mbixxd/TBAtime.jsx';
+import TBAspace from '../comp/mbixxd/TBAspace.jsx';
+import Healty from '../comp/mbixxd/Healty.jsx'; 
+import Healthytime from '../comp/mbixxd/Healthytime.jsx';
+import PBAtime from '../comp/mbixxd/PBAtime.jsx';
+import PBAspace from '../comp/mbixxd/PBAspace.jsx';
+
 
 
 
@@ -40,12 +66,10 @@ import Windpage from '../comp/ludi/instrumentpanel/Windpage.jsx';
 
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
-
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-
     render() {
         let {showPage, tabOpt, tab, flag=true,cssif2} = this.props;
         return (
@@ -74,7 +98,7 @@ let Component = React.createClass({
                 {showPage === 'amm' && <Amm></Amm>}
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
-                {showPage === 'fault' && <Fault></Fault>}
+                {showPage === 'fault' && <Fault></Fault>} 
 
                 {showPage === 'baotou' && <Baotou></Baotou>};
                 {showPage === 'windbtpage' && <Windbtpage></Windbtpage>};
@@ -83,7 +107,37 @@ let Component = React.createClass({
                 {showPage === 'group' && <Group></Group>};
                 {showPage === 'windpage' && <Windpage></Windpage>};
 
-               
+                {showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
+                {showPage === 'areaKBA' && <AreaKBA></AreaKBA>};
+                {showPage === 'loseElectric' && <LoseElectric></LoseElectric>};
+				{showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
+
+
+
+                {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
+                {showPage === 'healthy' && <Healthy></Healthy>}
+                {showPage === 'healthypba' && <Healthypba></Healthypba>}
+                {showPage === 'healthypbas' && <Healthypbas></Healthypbas>}
+                {showPage === 'healthyregin' && <Healthyregin></Healthyregin>}
+                {showPage === 'healthyregins' && <Healthyregins></Healthyregins>}
+                {showPage === 'healthyregpba' && <Healthyregpba></Healthyregpba>}
+                {showPage === 'healthyregpbas' && <Healthyregpbas></Healthyregpbas>}
+                {showPage === 'healthygen' && <Healthygen></Healthygen>}
+                {showPage === 'healthygens' && <Healthygens></Healthygens>}
+                {showPage === 'regiopower' && <Regiopower></Regiopower>}
+                {showPage === 'regiopowers' && <Regiopowers></Regiopowers>}
+                {showPage === 'regiotba' && <Regiotba></Regiotba>}
+                {showPage === 'regiotbas' && <Regiotbas></Regiotbas>}
+
+                {showPage === 'areace' && <Areace></Areace>}
+                {showPage === 'areacet' && <Areacet></Areacet>}
+                {showPage === 'tbatime' && <TBAtime></TBAtime>}
+                {showPage === 'tbaspace' && <TBAspace></TBAspace>}
+                {showPage === 'healty' && <Healty></Healty>}
+                {showPage === 'healthytime' && <Healthytime></Healthytime>}
+                {showPage === 'pbatime' && <PBAtime></PBAtime>}
+                {showPage === 'pbaspace' && <PBAspace></PBAspace>}
+
 
                 <div className={styles.clearbox}></div>
             </div>

@@ -1,0 +1,52 @@
+module.exports = {
+    header: [
+        {
+            name:'集团',
+            ypage:''
+        }, {
+            name:'区域',
+            nav:[{
+                name:'区域一',
+                ypage:'',
+                nav:[{
+                    name:'风场1-1',
+                    ypage:''
+                },{
+                    name:'风场1-2',
+                    ypage:''
+                },{
+                    name:'风场1-3',
+                    ypage:''
+                }]
+            },{
+                name:'区域二',
+                ypage:'',
+                nav:[{
+                    name:'风场2-1',
+                    ypage:''
+                },{
+                    name:'风场2-2',
+                    ypage:''
+                },{
+                    name:'风场2-3',
+                    ypage:''
+                }]
+            },{
+                name:'区域三',
+                ypage:'',
+                nav:[{
+                    name:'风场3-1',
+                    ypage:''
+                },{
+                    name:'风场3-2',
+                    ypage:''
+                },{
+                    name:'风场3-3',
+                    ypage:''
+                }]
+            }]
+        },{
+            name:'风场'
+        }
+    ]
+};

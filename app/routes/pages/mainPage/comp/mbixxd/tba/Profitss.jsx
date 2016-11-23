@@ -4,7 +4,6 @@ import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
 import FanTable from './FanTable.jsx';
-import icon0 from './167580248.jpg';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
