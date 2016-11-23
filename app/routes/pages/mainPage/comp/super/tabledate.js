@@ -11,6 +11,7 @@ module.exports ={
 		'OfflineCount',
 		'RepairCount',
 		'WFStandbyCount',
+		'WFLIMCount',
 	],
 	header1:[
 		'Capacity',
