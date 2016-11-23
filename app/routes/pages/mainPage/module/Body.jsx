@@ -138,6 +138,8 @@ let Component = React.createClass({
                 {showPage === 'healthytime' && <Healthytime></Healthytime>}
                 {showPage === 'pbatime' && <PBAtime></PBAtime>}
                 {showPage === 'pbaspace' && <PBAspace></PBAspace>}
+
+
                 <div className={styles.clearbox}></div>
             </div>
         );

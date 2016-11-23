@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import icon0 from './167580248.jpg';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
