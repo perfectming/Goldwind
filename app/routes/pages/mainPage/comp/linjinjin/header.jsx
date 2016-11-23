@@ -84,6 +84,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
          changpage :(value,key)=>{
+              dispatch(actions.setVars('fan_page', 'allpage'));
               dispatch(actions.setVars('numpage', 'fanmatrix'));
               dispatch(actions.setVars('actbt',key ));
               dispatch(actions.setVars('actbt1','' ));
@@ -91,6 +92,7 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('hiden', true));
         },
         changpage1 :(value,key)=>{
+              dispatch(actions.setVars('fan_page', 'allpage'));
               dispatch(actions.setVars('numpage', 'pvmatrix'));
               dispatch(actions.setVars('actbt1',key ));
               dispatch(actions.setVars('actbt','' ));
