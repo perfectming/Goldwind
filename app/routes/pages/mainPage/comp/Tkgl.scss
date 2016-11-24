@@ -1,4 +1,5 @@
 .tkglBox{
+  position: relative;
   .agc{
     margin-left: 85%;
     width:12%;
@@ -7,4 +8,137 @@
   }
   .upBox{}
   .downBox{}
+  .tableBox {
+    font-size: 16px;
+    overflow: auto;
+    width:1000px;
+    position: absolute;
+    top: 300px;
+    left:300px;
+    display: block;
+    z-index:20;
+    background:#000;
+    .tableHeaderBox {
+      overflow: hidden;
+      background: #464c58;
+      .tableHeaderItem {
+        float: left;
+        height:58px;
+        line-height:58px;
+        overflow: hidden;
+        color:#fff;
+        text-align: center;
+      }
+    }
+    .tableContentBox {
+      .tableContentLine {
+        color:#fff;
+        background: #30343f;
+        overflow: hidden;
+        &:hover{
+          background:#676e82;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 42px;
+          line-height:42px;
+          border: none;
+          position: relative;
+          .succ{
+            background: url("../img/comp/succ.png");
+            height: 18px;
+            width: 14px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -7px;
+            margin-top: -9px;
+          }
+          .defa{
+            background: url("../img/comp/defa.png");
+            height: 18px;
+            width: 14px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -7px;
+            margin-top: -9px;
+          }
+          .cutD{
+            background: url("../img/comp/cut.png");
+            height: 18px;
+            width: 14px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -7px;
+            margin-top: -9px;
+          }
+        }
+        .tableLineNum {
+          width: 45px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+      .tableContentLine1 {
+        color:#fff;
+        background: #272b34;
+        overflow: hidden;
+        &:hover{
+          background:#676e82;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 42px;
+          line-height:42px;
+          border: none;
+          position: relative;
+          .succ{
+            background: url("../img/comp/succ.png");
+            height: 18px;
+            width: 14px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -7px;
+            margin-top: -9px;
+          }
+          .defa{
+            background: url("../img/comp/defa.png");
+            height: 18px;
+            width: 14px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -7px;
+            margin-top: -9px;
+          }
+          .cutD{
+            background: url("../img/comp/cut.png");
+            height: 18px;
+            width: 14px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -7px;
+            margin-top: -9px;
+          }
+        }
+        .tableLineNum {
+          width: 45px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+    }
+  }
 }

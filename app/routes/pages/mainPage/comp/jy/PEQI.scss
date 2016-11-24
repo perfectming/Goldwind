@@ -59,8 +59,8 @@
         background: #464c58;
         .tableHeaderItem {
           float: left;
-          height:30px;
-          line-height:30px;
+          height:60px;
+          line-height:60px;
           overflow: hidden;
           color:#fff;
           text-align: center;
@@ -79,9 +79,13 @@
             float: left;
             overflow: hidden;
             text-align: center;
-            height: 30px;
-            line-height:30px;
+            height: 40px;
+            line-height:40px;
             border: none;
+            img{
+              height:20px;
+              width:20px;
+            }
           }
           input{
             background: #30343f;
@@ -107,11 +111,15 @@
           }
           .tableContentItem {
             float: left;
-            padding: 10px 0 10px;
             overflow: hidden;
             text-align: center;
+            line-height: 40px;
             height: 40px;
             border: none;
+            img{
+              height:20px;
+              width:20px;
+            }
           }
           input{
             background: #272b34;
