@@ -14,11 +14,11 @@ let Component = React.createClass({
     render() {
 
 
-       let {title,arr, changetab, act=0,hiden=true } = this.props;
+       let {title,arr, changetab, act=0 } = this.props;
 
        
         return (
-          <div className={hiden===true? styles.navbox : styles.navhiden}>
+          <div className={styles.navbox}>
                 <div className={styles.navleft}>
                    {
                     title.map((value,key)=>{
@@ -64,7 +64,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         act: state.vars.actbtn,
-        hiden: state.vars.hiden,
+       
     }
 };
 

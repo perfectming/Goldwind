@@ -6,7 +6,7 @@ import From from '../comp/From.jsx';
 import Table from '../comp/Table.jsx';
 import Super from '../comp/Super.jsx';
 import Test from '../comp/Test.jsx';
-import Distribution from '../comp/Distribution.jsx';
+import Distribution from '../comp/linjinjin/distribution.jsx';
 import Tkgl from '../comp/Tkgl.jsx';
 import Power from '../comp/power/Power.jsx';
 import Tab from './Tab.jsx';
@@ -101,19 +101,17 @@ let Component = React.createClass({
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
                 {showPage === 'fault' && <Fault></Fault>} 
-                {showPage === 'fault' && <Fault></Fault>}
 
-                {showPage === 'baotou' && <Baotou></Baotou>};
-                {showPage === 'windbtpage' && <Windbtpage></Windbtpage>};
-                {showPage === 'xilin' && <Xilin></Xilin>};
-                {showPage === 'area' && <Area></Area>};
-                {showPage === 'group' && <Group></Group>};
-                {showPage === 'windpage' && <Windpage></Windpage>};
+                {showPage === 'baotou' && <Baotou></Baotou>}
+                {showPage === 'windbtpage' && <Windbtpage></Windbtpage>}
+                {showPage === 'xilin' && <Xilin></Xilin>}
+                {showPage === 'area' && <Area></Area>}
+                {showPage === 'group' && <Group></Group>}
+                {showPage === 'windpage' && <Windpage></Windpage>}
 
-                {showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
-                {showPage === 'areaKBA' && <AreaKBA></AreaKBA>};
-                {showPage === 'loseElectric' && <LoseElectric></LoseElectric>};
-				{showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
+                {showPage === 'groupKBA' && <GroupKBA></GroupKBA>}
+                {showPage === 'areaKBA' && <AreaKBA></AreaKBA>}
+                {showPage === 'loseElectric' && <LoseElectric></LoseElectric>}
 
 
 
@@ -140,6 +138,8 @@ let Component = React.createClass({
                 {showPage === 'healthytime' && <Healthytime></Healthytime>}
                 {showPage === 'pbatime' && <PBAtime></PBAtime>}
                 {showPage === 'pbaspace' && <PBAspace></PBAspace>}
+
+
                 <div className={styles.clearbox}></div>
             </div>
         );

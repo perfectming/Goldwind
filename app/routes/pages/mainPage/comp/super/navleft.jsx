@@ -29,11 +29,11 @@ let Component = React.createClass({
     },
 
     render() {
-        let{hiden=true}=this.props;
+        
    
        
         return (
-          <div className={hiden===true? styles.navbox : styles.navhiden}>
+          <div className={ styles.navbox}>
                      <div className={styles.tit}>
                         <div className={styles.elect}>电场概况</div> 
                      </div>
@@ -89,7 +89,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        hiden:state.vars.hiden,
+       
 
     }
 };
@@ -97,6 +97,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+
         },
     };
 };
