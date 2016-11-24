@@ -10,13 +10,12 @@ let Component = React.createClass({
     },
 
     render() {
-        let barRotime = data.data.bar_rotime;
-        let barlopowers = data.data.bar_loPowers;
-        let barlopowerp = data.data.bar_loPowerp;
+        let {barRotime,text,barlopowers,barlopowerp,height} = this.props;
+
 
         let configPie = {
             chart: {
-                height:500,
+                height:height,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -32,7 +31,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '五月1区域发电量',
+                text: text,
                 align:'left',
                 x : "0",
                 style:{

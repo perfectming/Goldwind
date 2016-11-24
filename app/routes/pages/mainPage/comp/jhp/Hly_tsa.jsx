@@ -10,11 +10,9 @@ let Component = React.createClass({
     },
 
     render() {
-        let barLoTime = data.data.line_month;
-        let barLoPowerValue = data.data.bar_loPower;
-        let barRoPowerValue = data.data.bar_roPowers;
-        let barRoPowerValues = data.data.bar_roPowerses;
-        let barLtPowerValue = data.data.bar_ltPower;
+        let {barLoTime,barLoPowerValue,barRoPowerValue,barRoPowerValues,text} = this.props;
+
+
         let configPie = {
             chart: {
                 height:400,
@@ -34,7 +32,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '集团每月PBA',
+                text: text,
                 align:'left',
                 x : "0",
                 style:{

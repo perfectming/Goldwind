@@ -10,16 +10,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let barRotime = data.data.bar_rotime;
-        let barRotimes = data.data.bar_rotimes;
-        let barLoPowerValue = data.data.bar_roPowerses;
-        let barLoPowerValues = data.data.bar_roPower;
-        let barLdpowerValue = data.data.line_lpower;
-        let barLpdpowerValue = data.data.line_pdate;
-
+        let {barRotimes,barLoPowerValue,barLoPowerValues,barLdpowerValue,text,height} = this.props;
         let configPie = {
             chart: {
-                height:430,
+                height:height,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -36,7 +30,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '1区域1风场各风机PBA',
+                text: text,
 
                 align:'left',
                 x : "0",
