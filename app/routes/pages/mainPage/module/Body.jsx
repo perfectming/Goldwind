@@ -49,6 +49,8 @@ import Healthygen from '../comp/jhp/Healthygen.jsx';
 import Healthygens from '../comp/jhp/Healthygens.jsx';
 import Regiopower from '../comp/jhp/Regiopower.jsx';
 import Regiopowers from '../comp/jhp/Regiopowers.jsx';
+import Regiotba from '../comp/jhp/Regiotba.jsx';
+import Regiotbas from '../comp/jhp/Regiotbas.jsx';
 
 import Areace from '../comp/mbixxd/Areace.jsx';
 import Areacet from '../comp/mbixxd/Areacet.jsx';

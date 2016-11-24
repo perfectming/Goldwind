@@ -10,16 +10,13 @@ let Component = React.createClass({
     },
 
     render() {
-        let barRotime = data.data.bar_rotime;
-        let barLotime = data.data.bar_lotime;
-        let barLoPowerValue = data.data.bar_roPowerses;
-        let barLoPowerValues = data.data.bar_roPower;
-        let barLdpowerValue = data.data.line_lpower;
-        let barLpdpowerValue = data.data.line_pdate;
+        let {barRotime,barLdpowerValue,barLoPowerValues,barLoPowerValue,text,height} = this.props;
+
+
 
         let configPie = {
             chart: {
-                height:500,
+                height:height,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -37,7 +34,7 @@ let Component = React.createClass({
             },
 
             title: {
-                text: '五月份1区域各风场PBA',
+                text: text,
 
                 align:'left',
                 x : "0",
