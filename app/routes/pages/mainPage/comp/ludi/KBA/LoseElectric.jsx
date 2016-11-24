@@ -4,9 +4,6 @@ import styles from './LoseElectricstyle.scss';
 import PBAdata from './TimeSelect-data';
 import TimeSelect from './TimeSelectTwo.jsx';
 import ChartOne from './ChartOne.jsx';
-import ChartTwo from './ChartTwo.jsx';
-import ChartThree from './ChartThree.jsx';
-import ChartFour from './ChartFour.jsx';
 import ChartFive from './ChartFive.jsx';
 
 var actions = require('redux/actions');
@@ -17,23 +14,23 @@ let Component = React.createClass({
     },
     
 	render() {
-		let data=PBAdata.data;
+		let data=PBAdata;
 		return(
 			<div className={styles.bodyBox}>
 				<TimeSelect></TimeSelect>
 				<div className={styles.content}>
 					<div className={styles.areaLose}>
 						<div className={styles.areaSection}>
-							<ChartOne></ChartOne>
+							<ChartOne text={data.data[0].text[0]} lose={data.lose}></ChartOne>
 						</div>
 						<div className={styles.areaSection}>
-							<ChartTwo></ChartTwo>
+							<ChartOne text={data.data[0].text[1]} lose={data.lose}></ChartOne>
 						</div>
 						<div className={styles.areaSection}>
-							<ChartThree></ChartThree>
+							<ChartOne text={data.data[0].text[2]} lose={data.lose}></ChartOne>
 						</div>
 						<div className={styles.areaSection}>
-							<ChartFour></ChartFour>
+							<ChartOne text={data.data[0].text[3]} lose={data.lose}></ChartOne>
 						</div>
 					</div>
 					<div className={styles.border}></div>
