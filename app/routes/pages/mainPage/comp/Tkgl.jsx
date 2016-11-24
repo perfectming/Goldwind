@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import styles from  './Tkgl.scss';
 import Column from './tkgl/Column.jsx';
 import Table from './tkgl/table.jsx';
+import succ from '../img/icon/jyOn.png';
+import defa from '../img/icon/jyOff.png';
 let tabaleData = require('../../../../../config/RegulationData');
 let model=require('../../../../../config/RegulationModel');
 let obj=require('../../../../../config/MatrixData');
@@ -55,8 +57,12 @@ let Component = React.createClass({
                                                     if(keyC<2){
                                                         return (
                                                             <div className={styles.tableContentItem}
-                                                                 style={{width:1000/header.length}}
-                                                                 key={keyC}><div className={data[value][valueC]=='#669999'?styles.succ:styles.defa}></div></div>
+                                                                 style={{width:1000/header.length}} key={keyC}>
+                                                                <a href={"#jya"+key+keyC} className={data[value][valueC]=='#669999'?styles.succ:styles.defa}
+                                                                   id={"jya"+key+keyC}></a>
+                                                                <a href={"#jyb"+key+keyC} className={data[value][valueC]=='#669999'?styles.defa:styles.succ}
+                                                                   id={"jyb"+key+keyC}></a>
+                                                            </div>
                                                         )
                                                     }
                                                     else{
@@ -81,8 +87,12 @@ let Component = React.createClass({
                                                 if(keyC<2){
                                                     return (
                                                         <div className={styles.tableContentItem}
-                                                             style={{width:1000/header.length}}
-                                                             key={keyC}><div className={data[value][valueC]=='#669999'?styles.succ:styles.defa}></div></div>
+                                                             style={{width:1000/header.length}} key={keyC}>
+                                                            <a href={"#jyc"+key+keyC} className={data[value][valueC]=='#669999'?styles.succ:styles.defa}
+                                                               id={"jyc"+key+keyC}></a>
+                                                            <a href={"#jyd"+key+keyC} className={data[value][valueC]=='#669999'?styles.defa:styles.succ}
+                                                            id={"jyd"+key+keyC}></a>
+                                                        </div>
                                                     )
                                                 }
                                                 else{
