@@ -65,13 +65,13 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage=650107,Tofaninfo,hiden}=this.props;
+        let{valuepage=650107,Tofaninfo}=this.props;
         return (
             <div className={styles.listbodyBox}>
                 {
                 obj_wfd[valuepage].map((value, key)=> {
                     return (
-                        <div className={styles.listBox} key={key} onClick = {()=> Tofaninfo(value)}>
+                        <div className={styles.listBox} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                             <div className={styles.listitemL}><img src={fmatrix}/>
                             </div>
                             <div className={styles.listitemR}>
@@ -104,8 +104,6 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         valuepage : state.vars.valuepage,
-        hiden : state.vars.hiden,
-        
     }
 };
 
@@ -116,11 +114,10 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        Tofaninfo: (value)=> {
-            dispatch(actions.setVars('hiden', false));
+        Tofaninfo: (value,valuepage)=> {
             dispatch(actions.setVars('value', value));
-            
-            dispatch(actions.setVars('numpage', 'faninfo'));
+            dispatch(actions.setVars('valueid', valuepage));
+            dispatch(actions.setVars('fan_page', 'faninfo'));
         }
     };
 };

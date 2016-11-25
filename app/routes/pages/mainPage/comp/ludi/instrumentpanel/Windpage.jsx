@@ -2,8 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Windstyle.scss';
 import Instrumentdata from './Instrument-data';
-import Yearelectric from './Windelectric.jsx';
-import Yearprofit from './Windprofit.jsx';
+import Yearelectric from './Yearelectric.jsx';
 
 var actions = require('redux/actions');
 
@@ -15,23 +14,24 @@ let Component = React.createClass({
 
     render() {
         let data=Instrumentdata;
+        let{wind,actbt=0,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         return (
            <div className={styles.box}>
            		<ul className={styles.monthbox}>
                     {
-                    	data.yearelectric[0].windfield.map((value,key)=>{
-                    		return(<li key={key}>{value}</li>)
+                    	data.yearelectric[0].wind.map((value,key)=>{
+                    		return(<li key={key} className={actbt===key? styles.bg1 : styles.bg} onClick={()=>changepage(value,key)}>{value.name}</li>)
                     	})
                     }
                 </ul>
-           		
            		<div className={styles.left}>
            			<div className={styles.firstfloor}>
            				
            				<div className={styles.section}>
            					<div className={styles.sectionbar}>
            						<span>健康度</span> 
-           						<a>图片</a><a>图片</a>
+           						<a onClick={()=>changepageHealthyT()}>图片</a>
+           						<a onClick={()=>changepageHealthyS()}>图片</a>
            						<span>{data.firstfloor[1].small/data.firstfloor[1].big*100}%</span>
            					</div>
            					<div className={styles.sectiontwo}>
@@ -46,13 +46,14 @@ let Component = React.createClass({
            				<div className={styles.section}>
            					<div className={styles.sectionbar}>
            						<span>PBA</span>
-           						<a>图片</a><a>图片</a>
+           						<a onClick={()=>changepagePBAT()}>图片</a>
+           						<a onClick={()=>changepagePBAS()}>图片</a>
            						<span>{data.firstfloor[2].actrul/data.firstfloor[2].should*100}%</span>
            					</div>
            					<div className={styles.sectionthree}>
            						<div className={styles.should}>
            							<div className={styles.actrul} style={{width:((data.firstfloor[2].actrul/data.firstfloor[2].should)*100).toFixed(1)+"%"}}>
-           								实发:
+           								实发:2000kWh
            							</div>
            							<span>应发:</span>
            						</div>
@@ -62,13 +63,14 @@ let Component = React.createClass({
            				<div className={styles.section}>
            					<div className={styles.sectionbar}>
            						<span>TBA</span>
-           						<a>图片</a><a>图片</a>
+           						<a onClick={()=>changepageTBAT()}>图片</a>
+           						<a onClick={()=>changepageTBAS()}>图片</a>
            						<span>{data.firstfloor[3].usable/data.firstfloor[3].count*100}%</span>
            					</div>
            					<div className={styles.sectionfour}>
            						<div className={styles.count}>
            							<div className={styles.usable} style={{width:((data.firstfloor[3].usable/data.firstfloor[3].count)*100).toFixed(1)+"%"}}>
-           								可用时间: 
+           								可用时间:200000000 
            							</div>
            							<span>统计时间:</span>
            						</div>
@@ -118,12 +120,16 @@ let Component = React.createClass({
            				</div>
            				<div className={styles.yearelectric}>
            					<div>
-           						<Yearelectric></Yearelectric>
+           						<div className={styles.logo}><a>logo</a></div>
+           						<div className={styles.links}><a onClick={()=>changepageEleT()}>图片</a></div>
+           						<div className={styles.links}><a onClick={()=>changepageEleS()}>图片</a></div>
+           						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={wind==undefined? data.yearelectric[0].plan:wind} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            					</div>
            				</div>
            				<div className={styles.yearprofit}>
            					<div>
-           						<Yearprofit></Yearprofit>
+           						<div className={styles.logo}><a>logo</a></div>
+           						<Yearelectric title={data.yearelectric[0].title[1]} month={data.yearelectric[0].month} plan={wind==undefined? data.yearelectric[0].plan:wind} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[0]} nameOne={data.yearelectric[0].name[2]} nameTwo={data.yearelectric[0].name[3]}></Yearelectric>
            					</div>
            				</div>
            			</div>
@@ -182,7 +188,10 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+    	actbt : state.vars.actbt,
+    	wind : state.vars.wind,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -191,8 +200,36 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
+        },
+        changepage :(value,key)=>{
+        	
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('wind',value.plan ));
+        },
+        changepageHealthyT:()=>{
+        	dispatch(actions.setVars('showPage', 'healthytime'));
+        },
+        changepageHealthyS:()=>{
+        	dispatch(actions.setVars('showPage', 'healty'));
+        },
+        changepageTBAT:()=>{
+        	dispatch(actions.setVars('showPage', 'tbatime'));
+        },
+        changepageTBAS:()=>{
+        	dispatch(actions.setVars('showPage', 'tbaspace'));
+        },
+        changepagePBAT:()=>{
+        	dispatch(actions.setVars('showPage', 'pbatime'));
+        },
+        changepagePBAS:()=>{
+        	dispatch(actions.setVars('showPage', 'pbaspace'));
+        },
+        changepageEleT:()=>{
+        	dispatch(actions.setVars('showPage', 'areacet'));
+        },
+        changepageEleS:()=>{
+        	dispatch(actions.setVars('showPage', 'areace'));
         }
-        ,
     };
 };
 

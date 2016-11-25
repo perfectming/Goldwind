@@ -1,4 +1,5 @@
 .tkglBox{
+  position: relative;
   .agc{
     margin-left: 85%;
     width:12%;
@@ -7,4 +8,161 @@
   }
   .upBox{}
   .downBox{}
+  .tableBox {
+    font-size: 16px;
+    overflow: auto;
+    width:1000px;
+    position: absolute;
+    top: 33px;
+    left:780px;
+    display: none;
+    z-index:100;
+    background:#000;
+    .tableHeaderBox {
+      overflow: hidden;
+      background: #464c58;
+      .tableHeaderItem {
+        float: left;
+        height:58px;
+        line-height:58px;
+        overflow: hidden;
+        color:#fff;
+        text-align: center;
+      }
+    }
+    .tableContentBox {
+      .tableContentLine {
+        color:#fff;
+        background: #30343f;
+        overflow: hidden;
+        &:hover{
+          background:#676e82;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 42px;
+          line-height:42px;
+          border: none;
+          position: relative;
+          .succ{
+            background: url("../img/icon/jyOn.png");
+            background-size: 50px 30px;
+            height: 30px;
+            width: 50px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -25px;
+            margin-top: -15px;
+            display:none;
+            &:first-of-type{
+              display:block;
+            }
+            &:target{
+              display:none;
+            }
+            &:target + a{
+              display:block;
+            }
+          }
+          .defa{
+            background: url("../img/icon/jyOff.png");
+            background-size: 50px 30px;
+            height: 30px;
+            width: 50px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -25px;
+            margin-top: -15px;
+            display:none;
+            &:first-of-type{
+              display:block;
+            }
+            &:target{
+              display:none;
+            }
+            &:target + a{
+              display:block;
+            }
+          }
+        }
+        .tableLineNum {
+          width: 45px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+      .tableContentLine1 {
+        color:#fff;
+        background: #272b34;
+        overflow: hidden;
+        &:hover{
+          background:#676e82;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 42px;
+          line-height:42px;
+          border: none;
+          position: relative;
+          .succ{
+            background: url("../img/icon/jyOn.png");
+            background-size: 50px 30px;
+            height: 30px;
+            width: 50px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -25px;
+            margin-top: -15px;
+            display:none;
+            &:first-of-type{
+              display:block;
+            }
+            &:target{
+              display:none;
+            }
+            &:target + a{
+              display:block;
+            }
+          }
+          .defa{
+            background: url("../img/icon/jyOff.png");
+            background-size: 50px 30px;
+            height: 30px;
+            width: 50px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -25px;
+            margin-top: -15px;
+            display:none;
+            &:first-of-type{
+              display:block;
+            }
+            &:target{
+              display:none;
+            }
+            &:target + a{
+              display:block;
+            }
+          }
+        }
+        .tableLineNum {
+          width: 45px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+    }
+  }
 }

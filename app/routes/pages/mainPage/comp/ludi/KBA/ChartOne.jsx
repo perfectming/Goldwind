@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./TimeSelect-data.js');
 
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
+    	let {text,lose,}=this.props;
         let configPie = {
             chart: {
                 height:450,
@@ -22,7 +22,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '集团区域1<br>PBA',
+                text: text+'<br>PBA',
                 align:'left',
                 style:{
                     color:"#fff",
@@ -76,7 +76,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:data.data[1].fan,
+                
             },
             yAxis: {
                // lineWidth: 1,
@@ -95,7 +95,7 @@ let Component = React.createClass({
             type: 'pie',
             name: '集团区域1',
             innerSize: '80%',
-            data: data.lose,
+            data: lose,
         }]
         };
         return (

@@ -1,7 +1,178 @@
-.infoBox{
-	color:#999;
-	width: 320px;
-	height: 300px;
-	background:#666 ;
-	position: relative;
+.bodyBox{
+	.infofL{
+		float: left;
+		margin-right: 15px;
+		margin-top: 15px;
+		position: relative;
+		}
+	.dialbox{
+		float: left;
+		margin-left: 28px;
+		.boxtitle{
+			p{
+				width: 200px;
+				height: 50px;
+				color:#fff;
+				font-size: 16px;
+				margin: 0;
+				line-height: 50px;
+				text-align: center;
+			}
+		}
+	}
+	.fanidbox{
+		color:#999;
+		font-size: 14px;
+		height: 20px;
+		line-height: 20px;
+		div{
+			float: left;
+			margin-right: 15px;
+		}
+
+	}
+	.fanidbox:after{
+     content:".";        
+     display:block;        
+     height:0;        
+     clear:both;        
+     visibility:hidden;        
+	}
+
+
+	.infoBox{
+		width: 1340px;
+		
+		margin-right: 0;
+		margin-top: 0;
+		.infoBox1{
+			
+			color:#999;
+			width: 370px;
+			height: 290px;
+			background:#292F36;
+			
+		}
+		.infoBox2{
+			color:#999;
+			width: 940px;
+			height: 290px;
+			background:#292F36;
+			.wsbox1{
+				padding-top: 40px;
+				
+				.wsdialbox{
+					width:200px;
+					height:115px; 
+					background: url(../../img/comp/dial_01.png);
+					position: relative;
+					.wsipbox{
+						background: url(../../img/comp/dial_001.png);
+						width: 68px;
+						height: 13px;
+						position: absolute;
+						bottom:5px;
+						left: 33px;
+					}
+				}
+			}
+			.wsbox2{
+				padding-top: 40px;
+				
+				.wsdialbox{
+					width:200px;
+					height:115px; 
+					background: url(../../img/comp/dial_01.png);
+					position: relative;
+					.wsipbox{
+						background: url(../../img/comp/dial_001.png);
+						width: 70px;
+						height: 13px;
+						position: absolute;
+						bottom:5px;
+						left: 35px;
+					}
+				}
+			}
+			.wsbox3{
+				padding-top: 40px;
+				
+				.wsdialbox{
+					width:200px;
+					height:115px; 
+					background: url(../../img/comp/dial_01.png);
+					position: relative;
+					.wsipbox{
+						background: url(../../img/comp/dial_001.png);
+						width: 70px;
+						height: 13px;
+						position: absolute;
+						bottom:5px;
+						left: 35px;
+					}
+				}
+			}
+			.wsbox4{
+				padding-top: 40px;
+				
+				.wsdialbox{
+					width:200px;
+					height:115px; 
+					background: url(../../img/comp/dial_01.png);
+					position: relative;
+					.wsipbox{
+						background: url(../../img/comp/dial_001.png);
+						width: 70px;
+						height: 13px;
+						position: absolute;
+						bottom:5px;
+						left: 35px;
+					}
+				}
+			}
+		}
+		.infoBox3{
+			
+			color:#999;
+			width: 370px;
+			height: 350px;
+			background:#292F36;
+		}
+		.infoBox4{
+			
+			color:#999;
+			width: 465px;
+			height: 350px;
+			background:#292F36;
+		}
+		.infoBox5{
+			
+			color:#999;
+			width: 460px;
+			height: 350px;
+			background:#292F36;
+		}
+		.infoBox6{
+			
+			color:#999;
+			width: 370px;
+			height: 220px;
+			background:#292F36;
+		}
+		.infoBox7{
+			
+			color:#999;
+			width: 940px;
+			height: 220px;
+			background:#292F36;	
+		}
+	}
+	.fanrightbox{
+		width: 400px;
+		height: 890px;
+		background:#292F36;
+	}
+
 }
+
+

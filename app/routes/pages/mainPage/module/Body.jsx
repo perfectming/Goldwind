@@ -6,7 +6,7 @@ import From from '../comp/From.jsx';
 import Table from '../comp/Table.jsx';
 import Super from '../comp/Super.jsx';
 import Test from '../comp/Test.jsx';
-import Distribution from '../comp/Distribution.jsx';
+import Distribution from '../comp/linjinjin/distribution.jsx';
 import Tkgl from '../comp/Tkgl.jsx';
 import Power from '../comp/power/Power.jsx';
 import Tab from './Tab.jsx';
@@ -49,6 +49,8 @@ import Healthygen from '../comp/jhp/Healthygen.jsx';
 import Healthygens from '../comp/jhp/Healthygens.jsx';
 import Regiopower from '../comp/jhp/Regiopower.jsx';
 import Regiopowers from '../comp/jhp/Regiopowers.jsx';
+import Regiotba from '../comp/jhp/Regiotba.jsx';
+import Regiotbas from '../comp/jhp/Regiotbas.jsx';
 
 import Areace from '../comp/mbixxd/Areace.jsx';
 import Areacet from '../comp/mbixxd/Areacet.jsx';
@@ -103,17 +105,16 @@ let Component = React.createClass({
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
                 {showPage === 'fault' && <Fault></Fault>} 
 
-                {showPage === 'baotou' && <Baotou></Baotou>};
-                {showPage === 'windbtpage' && <Windbtpage></Windbtpage>};
-                {showPage === 'xilin' && <Xilin></Xilin>};
-                {showPage === 'area' && <Area></Area>};
-                {showPage === 'group' && <Group></Group>};
-                {showPage === 'windpage' && <Windpage></Windpage>};
+                {showPage === 'baotou' && <Baotou></Baotou>}
+                {showPage === 'windbtpage' && <Windbtpage></Windbtpage>}
+                {showPage === 'xilin' && <Xilin></Xilin>}
+                {showPage === 'area' && <Area></Area>}
+                {showPage === 'group' && <Group></Group>}
+                {showPage === 'windpage' && <Windpage></Windpage>}
 
-                {showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
-                {showPage === 'areaKBA' && <AreaKBA></AreaKBA>};
-                {showPage === 'loseElectric' && <LoseElectric></LoseElectric>};
-				{showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
+                {showPage === 'groupKBA' && <GroupKBA></GroupKBA>}
+                {showPage === 'areaKBA' && <AreaKBA></AreaKBA>}
+                {showPage === 'loseElectric' && <LoseElectric></LoseElectric>}
 
 
 

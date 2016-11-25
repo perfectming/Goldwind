@@ -10,6 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
+    	let {Xname,name,should,g,w,x,q,l,wind}=this.props;
         let configPie = {
             chart: {
                 height:500,
@@ -22,7 +23,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '**区域公司PBA',
+                text: name,
                 align:'left',
                  x : "0",
                 style:{
@@ -85,7 +86,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:data.data[1].wind,
+                categories:Xname,
             },
             yAxis: {
                // lineWidth: 1,
@@ -104,31 +105,31 @@ let Component = React.createClass({
             	name: '应发电量',
             	type: 'column',
                 stack:"male",
-                data: data.data[0].should,
+                data: should,
             },{
                 name: '故障损失',
                 type: 'column',
                 stack:"female",
-                data: data.data[0].g,
+                data: g,
             },{
             	name: '维护损失',
             	type: 'column',
                 stack:"female",
-                data: data.data[0].w,
+                data: w,
             },{
             	name: '性能损失',
             	type: 'column',
                 stack:"female",
-                data: data.data[0].x,
+                data: x,
             },{
             	name: '其他损失',
             	type: 'column',
                 stack:"female",
-                data: data.data[0].q,
+                data: q,
             },{
             	name: 'PBA',
             	type: 'spline',
-                data: data.data[0].l,
+                data: l,
             }]
         };
         return (
