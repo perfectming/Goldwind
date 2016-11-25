@@ -468,8 +468,8 @@ module.exports = {
                 "color": "",
                 "ps": []
             },
-            "ONL": {
-                "name": "运行",
+            "RunCount_SOAM": {
+                "name": "正常运行台数(SOAM)",
                 "sn": "",
                 "max": "",
                 "min": "",
@@ -519,7 +519,7 @@ module.exports = {
                 "path": "",
                 "coeff": "1",
                 "sort": "",
-                "color": "#fbd500",
+                "color": "#328def",
                 "ps": []
             },
             "OfflineCount": {
@@ -537,7 +537,7 @@ module.exports = {
                 "path": "",
                 "coeff": "1",
                 "sort": "",
-                "color": "#929396",
+                "color": "#ffffff",
                 "ps": []
             },
             "WFStandbyCount": {
@@ -573,7 +573,7 @@ module.exports = {
                 "path": "",
                 "coeff": "1",
                 "sort": "",
-                "color": "#dddcdc",
+                "color": "#328def",
                 "ps": []
             },
             "PVONL": {
