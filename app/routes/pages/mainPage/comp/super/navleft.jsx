@@ -144,6 +144,7 @@ let Component = React.createClass({
                                       )
                                   }):
                             namestatus.map((value,key)=>{
+                                console.log(datem[value].color)
                                 return(
                                 <div className={styles.pie} key={key}>
                                     <Pie2 num={datem[value].color}></Pie2>

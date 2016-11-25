@@ -468,7 +468,25 @@ module.exports = {
                 "color": "",
                 "ps": []
             },
-            "ONL": {
+            "RunCount_SOAM": {
+                "name": "正常运行台数(SOAM)",
+                "sn": "",
+                "max": "",
+                "min": "",
+                "unit": "",
+                "trgop": "",
+                "place": "0",
+                "ce": "0",
+                "type": "System.Int32",
+                "pk": "",
+                "df": "",
+                "path": "",
+                "coeff": "1",
+                "sort": "",
+                "color": "#00ff00",
+                "ps": []
+            },
+             "ONL": {
                 "name": "运行",
                 "sn": "",
                 "max": "",
