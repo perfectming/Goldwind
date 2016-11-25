@@ -17,25 +17,25 @@ let uint=wttitle.wt_unit;
 var d = new Date();
 let str=d.getDate();
 (function(){
- 
-  for(let key in date){
-    if(date[key].WTCount!='0' && date[key].InverterCount=='0'){ //开始遍历风场数据
-        let array=[];
-    for(let i=0;i<title.length;i++){ //遍历数据字段title
-        if(i==5){
-           array.push(((date[key].YearPostGridEgyAt/date[key].YearPlanTotEgyAt)*100).toFixed(1)+'%') //当年上网电量完成率
+
+    for(let key in date){
+        if(date[key].WTCount!='0' && date[key].InverterCount=='0'){ //开始遍历风场数据
+            let array=[];
+            for(let i=0;i<title.length;i++){ //遍历数据字段title
+                if(i==5){
+                    array.push(((date[key].YearPostGridEgyAt/date[key].YearPlanTotEgyAt)*100).toFixed(1)+'%') //当年上网电量完成率
+                }
+                if(i==7){
+                    array.push((date[key].YearEgyAt/date[key].Capacity).toFixed(1)+'h') //年累计利用小时
+                    array.push((((date[key].MonthEgyAt/date[key].Capacity)/str*24)*100).toFixed(2)+'%') //当月时间可利用率
+                }
+                array.push(date[key][title[i]]) //获取每一个key值得对应字段数组
+            }
+            array2.push(array) //获取全部风场的对应字段数据
         }
-         if(i==7){
-           array.push((date[key].YearEgyAt/date[key].Capacity).toFixed(1)+'h') //年累计利用小时
-           array.push((((date[key].MonthEgyAt/date[key].Capacity)/str*24)*100).toFixed(2)+'%') //当月时间可利用率
-        }
-        array.push(date[key][title[i]]) //获取每一个key值得对应字段数组
     }
-    array2.push(array) //获取全部风场的对应字段数据
-    } 
-}
-console.log(array2);
-  
+    console.log(array2);
+
 }());
 
 let Component = React.createClass({
@@ -44,83 +44,83 @@ let Component = React.createClass({
     },
 
     render() {
-        
-    let{fc_info='650107'}=this.props;
-       
+
+        let{fc_info='650107'}=this.props;
+
         return (
-          <div className={ styles.navbox}>
-                     <div className={styles.tit}>
-                        <div className={styles.elect}>电场概况</div> 
-                     </div>
-                    {    
-                        
-                         array2.map((value, key)=> {
-                            if(key==5){      
-                                return (
-                                    <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
-                                        <div className={styles.leftname}>{wtname[key]}</div>
-                                        <div className={styles.leftnum}>
-                                            <a>{uint[key]}</a>
-                                            <span className={styles.tabnum}>{((date[fc_info].YearPostGridEgyAt/date[fc_info].YearPlanTotEgyAt)*100).toFixed(1)}</span>
-                                        </div>
+            <div className={ styles.navbox}>
+                <div className={styles.tit}>
+                    <div className={styles.elect}>电场概况</div>
+                </div>
+                {
+
+                    array2.map((value, key)=> {
+                        if(key==5){
+                            return (
+                                <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
+                                    <div className={styles.leftname}>{wtname[key]}</div>
+                                    <div className={styles.leftnum}>
+                                        <a>{uint[key]}</a>
+                                        <span className={styles.tabnum}>{((date[fc_info].YearPostGridEgyAt/date[fc_info].YearPlanTotEgyAt)*100).toFixed(1)}</span>
                                     </div>
-                                )
-                            }
-                            if(key==8){      
-                                return (
-                                    <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
-                                        <div className={styles.leftname}>{wtname[key]}</div>
-                                        <div className={styles.leftnum}>
-                                            <a>{uint[key]}</a>
-                                            <span className={styles.tabnum}>{(date[fc_info].YearEgyAt/date[fc_info].Capacity).toFixed(1)}</span>
-                                        </div>
+                                </div>
+                            )
+                        }
+                        if(key==8){
+                            return (
+                                <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
+                                    <div className={styles.leftname}>{wtname[key]}</div>
+                                    <div className={styles.leftnum}>
+                                        <a>{uint[key]}</a>
+                                        <span className={styles.tabnum}>{(date[fc_info].YearEgyAt/date[fc_info].Capacity).toFixed(1)}</span>
                                     </div>
-                                )
-                            }
-                             if(key==9){      
-                                return (
-                                    <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
-                                        <div className={styles.leftname}>{wtname[key]}</div>
-                                        <div className={styles.leftnum}>
-                                            <a>{uint[key]}</a>
-                                            <span className={styles.tabnum}>{(((date[fc_info].MonthEgyAt/date[fc_info].Capacity)/str*24)*100).toFixed(2)}</span>
-                                        </div>
+                                </div>
+                            )
+                        }
+                        if(key==9){
+                            return (
+                                <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
+                                    <div className={styles.leftname}>{wtname[key]}</div>
+                                    <div className={styles.leftnum}>
+                                        <a>{uint[key]}</a>
+                                        <span className={styles.tabnum}>{(((date[fc_info].MonthEgyAt/date[fc_info].Capacity)/str*24)*100).toFixed(2)}</span>
                                     </div>
-                                )
-                            }
-                                return (
-                                    <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
-                                        <div className={styles.leftname}>{wtname[key]}</div>
-                                        <div className={styles.leftnum}>
-                                            <a>{uint[key]}</a>
-                                            
-                                            <span className={styles.tabnum}>{date[fc_info][title[key]]}</span>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                       
-                    }  
-                    <div className={styles.tit}>
-                        <div className={styles.elect}>状态统计</div> 
-                    </div>
-                  
-                   
-                    <div className={styles.chartbox}>
-                          {
-                            namestatus.map((value,key)=>{
-                                return(
+                                </div>
+                            )
+                        }
+                        return (
+                            <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
+                                <div className={styles.leftname}>{wtname[key]}</div>
+                                <div className={styles.leftnum}>
+                                    <a>{uint[key]}</a>
+
+                                    <span className={styles.tabnum}>{date[fc_info][title[key]]}</span>
+                                </div>
+                            </div>
+                        )
+                    })
+
+                }
+                <div className={styles.tit}>
+                    <div className={styles.elect}>状态统计</div>
+                </div>
+
+
+                <div className={styles.chartbox}>
+                    {
+                        namestatus.map((value,key)=>{
+                            return(
                                 <div className={styles.pie} key={key}>
                                     <Pie2 num={datem[value].color}></Pie2>
                                     <div className={styles.allnum}><p>{date[fc_info][namestatus[key]]}</p><p>{datem[value].name}</p></div>
                                 </div>
-                                )
-                            })
+                            )
+                        })
 
-                           }
+                    }
 
-                    </div>         
-        </div>
+                </div>
+            </div>
         );
     }
 });
@@ -128,7 +128,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-       fc_info:state.vars.fc_info,
+        fc_info:state.vars.fc_info,
 
     }
 };
