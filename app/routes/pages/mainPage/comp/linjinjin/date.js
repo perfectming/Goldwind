@@ -1,6 +1,51 @@
 module.exports = {
 
-
+    wt_title:[
+        "WTCount",
+        "Capacity",
+        "DayPostGridEgyAt",
+        "MonthPostGridEgyAt",
+        "YearPostGridEgyAt",
+        "sdfsd",
+        "WindSpeed_DevAverValue",
+        "TActPower",
+        'asd',
+    ],
+    wt_name:[
+         "装机台数",
+        "装机容量",
+        "当日上网电量",
+        "当月上网电量",
+        "当年上网电量",
+        "当年上网电量完成率",
+        "顺时风速",
+        "顺时功率",
+        "当年累计等效利用小时",
+        "当月时间可利用率",
+        
+    ],
+      wt_unit:[
+         "台",
+        "mw",
+        "万kWh",
+        "万kWh",
+        "万kWh",
+        "%",
+        "m/s",
+        "kw",
+        "h",
+        "%",
+        
+    ],
+    wt_status:[
+         "ONL",
+        "FaultCount",
+        "RepairCount",
+        "OfflineCount",
+        "WFStandbyCount",
+        "WFLIMCount",
+        
+    ],
 
     mapitem:[
         {
@@ -107,26 +152,31 @@ module.exports = {
     ],
     pie:[
         {
-        num:[12,11,9],
-        color:['#00e3ab', '#00a07c','#008272'  ],
+        num:39,
+        color:'#0f0',
         title:'正常',
-        name:['正常发电','天气停机','调度限功率'],
-    },{
+    },
+    {
 
-        num:[1,3,2,0],
-        color:['#f7cc5b', '#f7be2a','#ff8d32' ,'#d34900' ],
-        title:'维护',
-        name:['风机维护','告警','技术待命','其他'],
-    },{
-        num:[2,1,0,0],
-        color:['#fe7162', '#fc3736','#f00000','#bd0000'  ],
+       num:39,
+        color:'#f00',
         title:'故障',
-        name:['电网故障','故障停机','通讯中断','就地停机'],
     },{
-        num:[1,0,0],
-        color:['#0097c0', '#0080e8','#0066a0'  ],
-        title:'增效',
-        name:['降级','降额','暴风策略'],
+        num:39,
+        color:'#fbd500',
+        title:'检修',
+    },{
+        num:39,
+        color:'#929396',
+        title:'离线',
+    },{
+        num:39,
+        color:'#328def',
+        title:'待机',
+    },{
+        num:39,
+        color:'#dddcdc',
+        title:'限电',
     }
 
 ],

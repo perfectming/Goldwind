@@ -89,7 +89,10 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('actbt',key ));
               dispatch(actions.setVars('actbt1','' ));
               dispatch(actions.setVars('valuepage', value));
-              dispatch(actions.setVars('hiden', true));
+              dispatch(actions.setVars('Changnav', 0));
+              dispatch(actions.setVars('actbtn', 0));
+              dispatch(actions.setVars('fc_info', value));
+             
         },
         changpage1 :(value,key)=>{
               dispatch(actions.setVars('fan_page', 'allpage'));
@@ -97,7 +100,10 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('actbt1',key ));
               dispatch(actions.setVars('actbt','' ));
               dispatch(actions.setVars('valuepage1', value));
-              dispatch(actions.setVars('hiden', true));
+              dispatch(actions.setVars('Changnav', 1));
+              dispatch(actions.setVars('actbtn', 0));
+              dispatch(actions.setVars('fc_info', value));
+
         },
         backtop:()=>{
             dispatch(actions.setVars('showPage','distribution'));

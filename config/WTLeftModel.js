@@ -468,6 +468,24 @@ module.exports = {
                 "color": "",
                 "ps": []
             },
+            "ONL": {
+                "name": "运行",
+                "sn": "",
+                "max": "",
+                "min": "",
+                "unit": "",
+                "trgop": "",
+                "place": "0",
+                "ce": "0",
+                "type": "System.Int32",
+                "pk": "",
+                "df": "",
+                "path": "",
+                "coeff": "1",
+                "sort": "",
+                "color": "#00ff00",
+                "ps": []
+            },
             "FaultCount": {
                 "name": "故障",
                 "sn": "",
@@ -501,7 +519,7 @@ module.exports = {
                 "path": "",
                 "coeff": "1",
                 "sort": "",
-                "color": "#328def",
+                "color": "#fbd500",
                 "ps": []
             },
             "OfflineCount": {
@@ -519,7 +537,7 @@ module.exports = {
                 "path": "",
                 "coeff": "1",
                 "sort": "",
-                "color": "#ffffff",
+                "color": "#929396",
                 "ps": []
             },
             "WFStandbyCount": {
@@ -555,7 +573,7 @@ module.exports = {
                 "path": "",
                 "coeff": "1",
                 "sort": "",
-                "color": "#328def",
+                "color": "#dddcdc",
                 "ps": []
             },
             "PVONL": {
