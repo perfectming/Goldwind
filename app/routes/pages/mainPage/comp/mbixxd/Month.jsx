@@ -1,21 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
+var actions = require('redux/actions');
 import Mon from './Mon.scss';
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {month,arr } = this.props;
+        let {month,arr,actbt=0,changpage } = this.props;
         return (
-                <ul className={Mon.monthbox}>
-                    {
-                        month && month.map((value, key)=> {
-                            return (
-                                <li key={key}>{month[key]}</li>
-                            )
-                        })
-                    }
-                </ul>
+            <ul className={Mon.monthbox}>
+                {
+                    month.map((value,key)=>{
+                        return(<li className={actbt===key? Mon.red : Mon.green} key={key}onClick={()=>changpage(value,key)}>{value}</li>)
+                    })
+                }
+            </ul>
 
         );
     }
@@ -23,13 +22,18 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        actbt : state.vars.actbt,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
+        changpage :(value,key)=>{
+            dispatch(actions.setVars('actbt',key ));
+        }
     };
 };
 

@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
-import FanTable from './FanTable.jsx';
+import icono from './wind_logo.png';
+import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
@@ -14,7 +15,28 @@ let Component = React.createClass({
     },
 
     render() {
-         let {buttonAction, inputOnChange, onFocus} = this.props;
+        let areaName=data.areaName;
+        let areaRecordCosts=data.areaRecordCosts;
+        let areaRecordProfit=data.areaRecordProfit;
+        let text0=data.text[0];
+        let machine=data.machine;
+        let fanProfit=data.fanProfit;
+        let fanCost=data.fanCost;
+        let fanCost1=data.fanCost1;
+        let fanCost2=data.fanCost2;
+        let fanCost3=data.fanCost3;
+        let text1=data.text[1];
+        let windFiled=data.windFiled;
+        let areaRecordProfitt=data.areaRecordProfitt;
+        let areaRecordCostss=data.areaRecordCostss;
+        let areaRecordCostsS1=data.areaRecordCostsS1;
+        let areaRecordCostsS2=data.areaRecordCostsS2;
+        let areaRecordCostsS3=data.areaRecordCostsS3;
+        let areaRecordCostsS4=data.areaRecordCostsS4;
+        let areaNamee=data.areaNamee;
+        let text2=data.text[2];
+
+
           return (
            <div className={styles.box}>
                 <ul className={styles.monthbox}>
@@ -24,28 +46,44 @@ let Component = React.createClass({
                         })
                     }
                 </ul>
-                <div className={styles.areabox}>
-                   <div>
-                     <AreaTable></AreaTable>
-                   </div>
-                </div>
-               <div className={styles.windbox}>
-                   <div>
-                     <WindfieldTable></WindfieldTable>
+               <div className={styles.covers}>
+                   <div className={styles.bgc}> <img src={icono}/></div>
+                   <div className={styles.areabox}>
+                       <div>
+                           <AreaTable areaRecordCosts={areaRecordCosts} areaName={areaName} areaRecordProfit={areaRecordProfit} text0={text0} text1={text1}></AreaTable>
+                       </div>
                    </div>
                </div>
-                <div className={styles.buttons}>
-                    {
-                        button.map((value,key)=>{
-                            return(<button key={key}>{value}</button>)
-                        })
-                    }
-                </div>
-               <div className={styles.fanbox}>
-                    <div>
-                         <FanTable></FanTable>
-                     </div>
-                </div>
+               <div className={styles.covers}>
+                   <div className={styles.bgc}> <img src={icono}/></div>
+                   <div className={styles.windbox}>
+                       <div>
+                           <WindfieldTable areaNamee={areaNamee} text2={text2} windFiled={windFiled} areaRecordProfitt={areaRecordProfitt} areaRecordCostss={areaRecordCostss}  areaRecordCostsS1={areaRecordCostsS1}  areaRecordCostsS2={areaRecordCostsS2}  areaRecordCostsS3={areaRecordCostsS3} areaRecordCostsS4={areaRecordCostsS4}></WindfieldTable>
+                       </div>
+                   </div>
+               </div>
+               <div className={styles.bigbox}>
+                   <div className={styles.coverbox}>
+                       <div className={styles.windcebox}>
+                           <div>
+                               <Fanchart machine={machine} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} ></Fanchart>
+                           </div>
+                       </div>
+                       <div className={styles.tik}>
+                           <p>{text1}</p>
+                       </div>
+                   </div>
+                   <div className={styles.imgq}>
+                       <img src={icono}/>
+                   </div>
+                   <div className={styles.buttons}>
+                       {
+                           button.map((value,key)=>{
+                               return(<button key={key}>{value}</button>)
+                           })
+                       }
+                   </div>
+               </div>
                
            </div>
            
@@ -53,13 +91,9 @@ let Component = React.createClass({
         );
     }
 });
-
-
-
 const mapStateToProps = (state) => {
     return {}
 };
-
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
@@ -70,5 +104,4 @@ const mapDispatchToProps = (dispatch) => {
         ,
     };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
