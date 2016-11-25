@@ -95,7 +95,6 @@
          	width:100%;
           background: rgba(48, 52, 63, 0.5);
          	border:1px solid #2ff4fb;
-
          	overflow:hidden;
          	.pie{
          		width:50%;
@@ -103,13 +102,13 @@
          		float:left;
             position:relative;
             .allnum{
-              width:50px;
+              width:56px;
               height:50px;
               text-align:center;
               color:#fff;
               position:absolute;
               p{
-                font-size:16px;
+                font-size:14px;
                 margin-bottom:5px;
                 line-height:20px;
               }

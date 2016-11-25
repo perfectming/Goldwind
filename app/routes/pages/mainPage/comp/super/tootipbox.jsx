@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './tootipbox.scss';
 import jian from '../../img/comp/jian_icon.png';
 import add from '../../img/comp/add_icon.png';
+import close from '../../img/comp/close_icon.png';
 let $ =require('jquery');
 var actions = require('redux/actions');
 let matrixdata = require('../../../../../../config/MatrixData');
@@ -11,7 +12,7 @@ let modeldata = require('../../../../../../config/ModelData');
 
 let data=modeldata.ModelData;
 let mod=model.Model;
-let  mat=model.Model;
+let mat=model.Model;
 let matD=matrixdata.ModelData;
 let model_data = modeldata.ModelData;
 var model_ens = model.Model.ens;
@@ -30,7 +31,7 @@ var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
         arr2.push(m)
         
     }
-   console.log(arr2)
+
 }());
 
 
@@ -40,21 +41,23 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {border=true,changeborder,changeborder1} = this.props;
+        let {border=true,changeborder,changeborder1,retlegend,closebox} = this.props;
         return (
            
                     <div className={styles.fiexdbox}>
+                        <img src={close} className={styles.close} onClick={()=>closebox()}/>
                        <div className={styles.inputbox}>
-                            <span></span><input type='text' placeholder="查询" /><a></a>
-                            <div className={`${styles.line_title} ${border===true? styles.add_border : styles.line_title}`} onClick={()=>changeborder(border)}>风场</div>
-                            <div className={`${styles.line_title} ${border===false? styles.add_border : styles.line_title}`} onClick={()=>changeborder1(border)}>光伏场</div>
+                       
+                            <span className={styles.search}></span><input type='text' placeholder="查询" /><a></a>
+                            <div className={styles.line_title}  >风场</div>
+                            <div className={styles.line_title} >光伏场</div>
                        </div>
                        <div className={styles.listbox} id='list'>
                             <ul>
-                                {  border &&
+                                {  
                                     arr1.map((value,key)=>{
                                         return(
-                                            <li key={key}>
+                                            <li key={key} >
                                                 <a>{model_ens[value].name}</a>
                                                 <div className={styles.list_span}>
                                                     <span>C1-01</span>
@@ -64,7 +67,10 @@ let Component = React.createClass({
                                         )
                                     })
                                 }
-                                { !border &&
+
+                            </ul>
+                            <ul className={styles.show}>
+                                { 
                                     arr2.map((value,key)=>{
                                         return(
                                             <li key={key}>
@@ -77,13 +83,7 @@ let Component = React.createClass({
                                         )
                                     })
 
-                                }   
-
-                                 
-                  
-                                
-                                 
-                              
+                                }  
                             </ul>
                        </div>
                     </div>   
@@ -101,6 +101,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            $('.place').on('click',function(){
+                alert(1);
+            })
             $('#list ul li a').on('click',function(){
                 var bg=$(this).css("background-image");
                 if(bg=='url("'+add+'")'){
@@ -120,7 +123,11 @@ const mapDispatchToProps = (dispatch) => {
         changeborder1:(border)=>{
             border=false
             dispatch(actions.setVars('bordershow', border));
+        },
+        closebox:()=>{
+            dispatch(actions.setVars('legend', false));
         }
+       
     };
 };
 

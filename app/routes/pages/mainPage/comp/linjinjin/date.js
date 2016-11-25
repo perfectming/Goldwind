@@ -46,7 +46,11 @@ module.exports = {
         "WFLIMCount",
         
     ],
-
+    wt_stat:[
+        "PVONL",
+        "PVFLT",
+        "PVOFL"
+    ],
     mapitem:[
         {
             name:'图例',

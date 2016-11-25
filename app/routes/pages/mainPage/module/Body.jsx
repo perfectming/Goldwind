@@ -77,15 +77,15 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {showPage, tabOpt, tab, flag=true,cssif2,border=true,changeborder,changeborder1} = this.props;
+        let {showPage, tabOpt, tab, flag=true,cssif2,legend=false,navlegend=false,changelegend} = this.props;
         return (
             <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2===true? styles.animate : styles.anmate2}`}>
                 <div className={styles.fiexd}>
-                    <img src={u871}/>
+                    <img src={u871} onClick={()=>changelegend(legend)}/>
                     <img src={u865}/>
                     <img src={u867}/>
                     <img src={u869}/>
-                   <Legend></Legend>
+                   {legend===true && <Legend></Legend>}
                 </div>
                 <Tab tabOpt={tabOpt} tab={tab}/>
                 {showPage === 'chart' && <Chart></Chart>}
@@ -160,6 +160,7 @@ const mapStateToProps = (state) => {
         showPage: state.vars.showPage,
         flag: state.vars.bodypage,
         cssif2: state.vars.cssif2,
+        legend: state.vars.legend,
     }
 };
 
@@ -170,6 +171,11 @@ const mapDispatchToProps = (dispatch) => {
 
             
         },
+        changelegend:(legend)=>{
+            legend=true;
+            dispatch(actions.setVars('legend', legend));
+        },
+       
        
     };
 };
