@@ -12,22 +12,23 @@
 		display:inline-block;
 		overflow:hidden;
 		.numtai{
-			width:220px;
+			width:160px;
 			height:40px;
 			float:left;
 			border-left:1px solid #2ff4fb;
 			margin-top:10px;
+
 			color:#fff;
 			.numname{
 				display:inline-block;
 				line-height:40px;
-				font-size:18px;
+				font-size:14px;
 				margin:0 20px 0 10px;
 			}
 			b{
 				font-weight:normal;
 				color: #2ff4fb;
-				font-size:18px;
+				font-size:16px;
 			}
 			a{
 				color: #fff;
@@ -77,7 +78,7 @@
 		.userinfo{
 			float:right;
 			display:inline-block;
-			width:30%;
+			width:21%;
 			height:50px;
 			border-left:1px solid #2ff4fb;
 			margin-top:5px;
@@ -91,17 +92,18 @@
 					margin:0px;
 				}
 				.username{
-					font-size:18px;
+					font-size:14px;
 				}
 			}
 			.usmar{
-				margin-left:60px;
+				margin-left:50px;
 
 			}
 			
 		}
 		.usericon{
 			background-image:url('../../img/comp/user.png');
+			background-size:40px 40px;
 			background-repeat: no-repeat;
 			border-left:none;
 		}

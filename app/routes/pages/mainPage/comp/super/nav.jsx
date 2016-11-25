@@ -7,14 +7,14 @@ var actions = require('redux/actions');
 
 
 let Component = React.createClass({
-    componentWillMount() {
-
+    componentDidMount() {
+        this.props.init();
     },
 
     render() {
 
 
-       let {title,arr, changetab, act=0 } = this.props;
+       let {title,arr, changetab, act=0} = this.props;
 
        
         return (
@@ -71,7 +71,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            
+
+             
         },
         changetab:(page,act)=>{
             dispatch(actions.setVars('numpage', page));

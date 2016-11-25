@@ -19,7 +19,7 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:140
+                height:160
             },
             title: {
                 text: ''
@@ -36,7 +36,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: color,
+            colors: [num],
             plotOptions: {
                 pie: {
                     allowPointSelect: false,
@@ -61,7 +61,7 @@ let Component = React.createClass({
             series: [{
                 type: 'pie',
                 name: "发电量占比",
-                data: num,
+                data: [1],
                 style: {     fontSize:"20px",  } 
             }]
         };

@@ -8,33 +8,34 @@ let data = require('./Profit-data');
 let Component = React.createClass({
     componentWillMount() {
     },
-
     render() {
-        let fan=data.fan;
-        let fanCost=data.fanCost;
-        let fanProfit=data.fanProfit;
+
+      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA}=this.props;
         let configPie = {
             chart: {
-                height:340,
+                height:345,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                // borderRadius:10
+                borderRadius:10
             },
             title: {
-                text: '11月1区域1风场各风机TBA',
+                text: '',
                 align:'left',
-                 x : "0",
+                top:'-20px',
+                vertical:'top',
+                x : "0",
                 style:{
                     color:"#fff",
                     fontSize:"25px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700
+                    fontWeight:700,
                 }
             },
+            // 插入图片
             //图例说明
             legend: {
                 align:"right",
@@ -43,7 +44,8 @@ let Component = React.createClass({
                     color: "#fff",
                     fontSize:"18px",
                     fontWeight:"normal",
-                    fontFamily:"微软雅黑"
+                    fontFamily:"微软雅黑",
+
                 }
             },
             tooltip: {
@@ -53,34 +55,28 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-          colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31', '#EB6B34','#2623FF'],
+            //柱子颜色
+                colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31','#EB6B34'],
 
-            plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
-                bar:{
-                    animation: true
-                }
-            },
+            // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 0,
+                    pointPadding: 0.1,
                     borderWidth: 0,
                     pointWidth: 15,
-                    stacking:'nomal',
+                    stacking:'normal',
+                }, series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -89,42 +85,25 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:fan,
+                categories:machine,
             },
-            yAxis: [{
-                min:0,
-                title:{
-                    text:'kwh'
-                }
+            yAxis: {
+                labels: {
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
+                    }
+                },
             },
-                {
-                    title:{
-                        text:'TBA',
-                    },
-                    opposite:true,
-                }
-            ],
-              // 插入图片
-          labels:{
-             items:[{
-                 html:"<div>123</div>",
-                 style:{
-                    left:"-40px",
-                    top:'-35px',
-                    color:'red',
-                    fontSize:'30px',
-                 }
-                
-             }]
-
-          },
+            //几条数据
             series: [{
                 name: '收入',
                 type: 'column',
                 data: fanProfit
             },
             {
-            	name: '四',
+                name: '四',
                 type: 'column',
                 data: fanCost,
                 stack:'waste',
@@ -132,26 +111,27 @@ let Component = React.createClass({
                 {
                     name: '大',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCost1,
                     stack:'waste',
                 },
                 {
                     name: '成',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCost2,
                     stack:'waste',
                 },
                 {
                     name: '本',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCost3,
                     stack:'waste',
                 },
                 {
                     name: 'TBA',
                     type: 'line',
-                    data: [40,50,60,70,80,20,40,50,60,60,70],
-                    yAxis:1
+                    data: TBA,
+                    color:'blue',
+
                 },]
         };
         return (

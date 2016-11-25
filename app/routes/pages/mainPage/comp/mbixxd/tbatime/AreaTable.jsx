@@ -2,17 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
 let data = require('./Profit-data');
 
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaRecordCosts=data.areaRecordCosts;
-        let areaRecordProfit=data.areaRecordProfit;
+        let {areaNamee,areaRecordCostss,areaRecordProfitt,text}=this.props;
         let configPie = {
             chart: {
                 height:300,
@@ -25,7 +21,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '集团每月TBA',
+                text: text,
                 align:'left',
                  x : "0",
                 style:{
@@ -35,27 +31,9 @@ let Component = React.createClass({
                      fontWeight:700,
                 }
             },
-            // 插入图片
-          labels:{
-             items:[{
-                 html:"<div>123</div>",
-                 style:{
-                    left:"-40px",
-                    top:'-35px',
-                    color:'red',
-                    fontSize:'30px',
-                    backGround:'red',
-                 },
-             }],
-             style:{
-                backGround:'red',
-             }
-          },
-            //图例说明
             legend: {
                 align:"right",
                 verticalAlign: "top",
-
                 itemStyle: {
                     color: "#fff",
                     fontSize:"18px",
@@ -67,13 +45,11 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
-                enabled: false //不显示highCharts版权信息
+                enabled: false
             },
-            //柱子颜色
             colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31','#EB6B34'],
             plotOptions: {
                 column: {
@@ -81,48 +57,52 @@ let Component = React.createClass({
                     borderWidth: 0,
                     pointWidth:30,
                     stacking: 'normal',
+                }, series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
                 }
+
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
-                    y: 20, //x轴刻度往下移动20px
+                    y: 20,
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize:'14px'
                     }
                 },
-                categories:areaName,
+                categories:areaNamee,
             },
             yAxis: [{
                 title:'KWH',
             },{
                 title:"TBA"
-            }]
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
-
-            ,
-            //几条数据
+            }],
             series: [{
                 name: '停机时间',
                 type: 'column',
-                data: areaRecordProfit
+                data: areaRecordProfitt,
+               
             },
             {
             	name: '实际运行时间',
                 type: 'column',
-                data: areaRecordCosts,
-                stack:'first'
+                data: areaRecordCostss,
+                stack:'first',
+                color:'#ccc',
+                
             },
 
                 {
                     name: 'TBA',
                     type: 'line',
-                    data: areaRecordCosts,
+                    data: areaRecordCostss,
                     stack:'first',
                     color:'blue',
                 },

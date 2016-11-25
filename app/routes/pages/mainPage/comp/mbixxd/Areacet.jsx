@@ -13,6 +13,10 @@ let Component = React.createClass({
     },
 
     render() {
+        let areaPlan=data.areaPlan;
+        let areaPlanDay=data.areaPlanDay;
+        let areaPlanDayT=data.areaPlanDayT;
+        let text=data.text[1]
           return (
            <div className={styles.box}>
                 <ul className={styles.monthbox}>
@@ -26,11 +30,11 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <Windcet></Windcet>
+                                <Windcet areaPlan={areaPlan} areaPlanDay={areaPlanDay} areaPlanDayT={areaPlanDayT}></Windcet>
                             </div>
                         </div>
                          <div className={styles.tik}>
-                        <p>11月日发电量</p>
+                        <p>{text}</p>
                     </div>
                     </div>
                 <div className={styles.imgq}>

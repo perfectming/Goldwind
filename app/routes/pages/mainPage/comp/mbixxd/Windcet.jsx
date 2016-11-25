@@ -9,12 +9,9 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
         let areaPlan=data.areaPlan;
         let areaPlanDay=data.areaPlanDay;
         let areaPlanDayT=data.areaPlanDayT;
-      
         let configPie = {
             chart: {
                 height:500,
@@ -53,7 +50,6 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
@@ -69,12 +65,18 @@ let Component = React.createClass({
                     borderWidth: 1,
                     pointWidth: 50,
 
+                }, series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
                 }
             },
 
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -86,9 +88,6 @@ let Component = React.createClass({
                 categories:areaPlan,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
