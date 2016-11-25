@@ -73,9 +73,6 @@ let Component = React.createClass({
                 categories:month,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
                 title:{
                 	text:unit,
                 	align: 'high',
@@ -104,9 +101,9 @@ let Component = React.createClass({
                 cursor: 'pointer',
                 events: {
                     click: function(e) {
-                        alert('X轴的值：'+e.point.category);
-                        }
+                    	e.point.category;
                     }
+                }
 
             },{
             	name: nameTwo,
@@ -114,9 +111,7 @@ let Component = React.createClass({
                 data: actrul,
                 cursor: 'pointer',
                 events: {
-                    click: function(e) {
-                        alert('X轴的值：'+e.point.category);
-                        }
+                    click: function(e) {}
                     }
 
             }]
