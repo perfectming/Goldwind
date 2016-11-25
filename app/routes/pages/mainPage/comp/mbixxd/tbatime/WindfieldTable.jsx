@@ -47,60 +47,34 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
-                enabled: false //不显示highCharts版权信息
-            },
-           
-            plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
-                bar:{
-                    animation: true
-                }
+                enabled: false
             },
             plotOptions: {
                 column: {
                     pointPadding: 0,
                     borderWidth: 0,
-                    stacking: 'normal',
                     pointWidth: 15,
+                }, series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
                 }
             },
-          colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31', '#EB6B34','#2623FF'],
-              // 插入图片
-          labels:{
-             items:[{
-                 html:"<div>123</div>",
-                 style:{
-                    left:"-40px",
-                    top:'-35px',
-                    color:'red',
-                    fontSize:'30px',
-                 }
-                
-             }]
-
-          },
+          colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31', '#EB6B34','#2623FF'],  
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
-                    y: 20, //x轴刻度往下移动20px
+                    y: 20,
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize:'14px'  
                     }
                 },
                 categories:windFiled,
@@ -118,17 +92,6 @@ let Component = React.createClass({
                     opposite:true,
                 }
             ],
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
-            //     labels: {
-            //         y: 10, //x轴刻度往下移动20px
-            //         style: {
-            //             color: '#fff',//颜色
-            //             fontSize:'14px'  //字体
-            //         }
-            //     },
-            // },
             series: [{
                 name: '实际发电量',
                 type: 'column',
@@ -138,12 +101,13 @@ let Component = React.createClass({
                     name: '停机时间',
                     type: 'column',
                     data: windCost,
-                    stack:'waste'
+                    color:'#ccc'
                 },{
                     name:'TBA',
                     type:'line',
                     data:[80,30,3,36,70,70,70,70,80,80,80,80],
                     yAxis:1,
+                    color:'blue'
                 }
 
 

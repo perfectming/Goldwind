@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import styles from './Groupstyle.scss';
 import Instrumentdata from './Instrument-data';
 import Yearelectric from './Yearelectric.jsx';
-import Yearprofit from './Yearprofit.jsx';
 
 var actions = require('redux/actions');
 
@@ -15,7 +14,7 @@ let Component = React.createClass({
 
     render() {
         let data=Instrumentdata;
-        let{changepage2}=this.props;
+        let{changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         return (
            <div className={styles.box}>
            		<div className={styles.left}>
@@ -28,9 +27,9 @@ let Component = React.createClass({
            					<div className={styles.sectionone}>
            						<div className={styles.profit}>
            							<div className={styles.investment} style={{width:((data.firstfloor[0].profit/data.firstfloor[0].investment)*100).toFixed(1)+"%"}}>
-           								收益:    
            							</div>
-           							<span>投资:</span>
+           							<div className={styles.text1}>收益:{data.firstfloor[0].profit}万 &nbsp; 投资:{data.firstfloor[0].investment}万</div>
+           							
            						</div>
            					</div>
            					<div className={styles.border}></div>
@@ -38,14 +37,15 @@ let Component = React.createClass({
            				<div className={styles.section}>
            					<div className={styles.sectionbar}>
            						<span>健康度</span> 
-           						<a onClick={()=>changepage2()}>图片</a><a>图片</a>
+           						<a onClick={()=>changepageHealthyT()}>图片</a>
+           						<a onClick={()=>changepageHealthyS()}>图片</a>
            						<span>{data.firstfloor[1].small/data.firstfloor[1].big*100}%</span>
            					</div>
            					<div className={styles.sectiontwo}>
            						<div className={styles.big}>
            							<div className={styles.small} style={{width:((data.firstfloor[1].small/data.firstfloor[1].big)*100).toFixed(1)+"%"}}>
-           								{data.firstfloor[1].small/data.firstfloor[1].big*100}%
            							</div>
+           							<div className={styles.text1}>{data.firstfloor[1].small/data.firstfloor[1].big*100}%</div>
            						</div>
            					</div>
            					<div className={styles.border}></div>
@@ -53,15 +53,15 @@ let Component = React.createClass({
            				<div className={styles.section}>
            					<div className={styles.sectionbar}>
            						<span>PBA</span>
-           						<a>图片</a><a>图片</a>
+           						<a onClick={()=>changepagePBAT()}>图片</a>
+           						<a onClick={()=>changepagePBAS()}>图片</a>
            						<span>{data.firstfloor[2].actrul/data.firstfloor[2].should*100}%</span>
            					</div>
            					<div className={styles.sectionthree}>
            						<div className={styles.should}>
            							<div className={styles.actrul} style={{width:((data.firstfloor[2].actrul/data.firstfloor[2].should)*100).toFixed(1)+"%"}}>
-           								实发:
            							</div>
-           							<span>应发:</span>
+           							<div className={styles.text1}>实发:{data.firstfloor[2].actrul}kWh &nbsp; 应发:{data.firstfloor[2].should}kWh</div>
            						</div>
            					</div>
            					<div className={styles.border}></div>
@@ -69,15 +69,15 @@ let Component = React.createClass({
            				<div className={styles.section}>
            					<div className={styles.sectionbar}>
            						<span>TBA</span>
-           						<a>图片</a><a>图片</a>
+           						<a onClick={()=>changepageTBAT()}>图片</a>
+           						<a onClick={()=>changepageTBAS()}>图片</a>
            						<span>{data.firstfloor[3].usable/data.firstfloor[3].count*100}%</span>
            					</div>
            					<div className={styles.sectionfour}>
            						<div className={styles.count}>
            							<div className={styles.usable} style={{width:((data.firstfloor[3].usable/data.firstfloor[3].count)*100).toFixed(1)+"%"}}>
-           								可用时间: 
            							</div>
-           							<span>统计时间:</span>
+           							<div className={styles.text1}>可用时间:{data.firstfloor[3].usable}h &nbsp; 统计时间:{data.firstfloor[3].count}h</div>
            						</div>
            					</div>
            					<div className={styles.border}></div>
@@ -125,12 +125,16 @@ let Component = React.createClass({
            				</div>
            				<div className={styles.yearelectric}>
            					<div>
-           						<Yearelectric></Yearelectric>
+           						<div className={styles.logo}><a>logo</a></div>
+           						<div className={styles.links}><a onClick={()=>changepageEleT()}>图片</a></div>
+           						<div className={styles.links}><a onClick={()=>changepageEleS()}>图片</a></div>
+           						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            					</div>
            				</div>
            				<div className={styles.yearprofit}>
            					<div>
-           						<Yearprofit></Yearprofit>
+           						<div className={styles.logo}><a>logo</a></div>
+           						<Yearelectric title={data.yearelectric[0].title[1]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[0]} nameOne={data.yearelectric[0].name[2]} nameTwo={data.yearelectric[0].name[3]}></Yearelectric>
            					</div>
            				</div>
            			</div>
@@ -199,8 +203,29 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        changepage2:()=>{
-        	dispatch(actions.setVars('showPage', 'baotou'));
+        changepageHealthyT:()=>{
+        	dispatch(actions.setVars('showPage', 'healthy'));
+        },
+        changepageHealthyS:()=>{
+        	dispatch(actions.setVars('showPage', 'healthy_one'));
+        },
+        changepageTBAT:()=>{
+        	dispatch(actions.setVars('showPage', 'profitsss'));
+        },
+        changepageTBAS:()=>{
+        	dispatch(actions.setVars('showPage', 'profitss'));
+        },
+        changepagePBAT:()=>{
+        	dispatch(actions.setVars('showPage', 'healthypbas'));
+        },
+        changepagePBAS:()=>{
+        	dispatch(actions.setVars('showPage', 'healthypba'));
+        },
+        changepageEleT:()=>{
+        	dispatch(actions.setVars('showPage', 'healthygens'));
+        },
+        changepageEleS:()=>{
+        	dispatch(actions.setVars('showPage', 'healthygen'));
         }
     };
 };

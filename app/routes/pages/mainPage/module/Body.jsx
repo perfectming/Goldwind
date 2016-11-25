@@ -61,6 +61,9 @@ import Healty from '../comp/mbixxd/Healty.jsx';
 import Healthytime from '../comp/mbixxd/Healthytime.jsx';
 import PBAtime from '../comp/mbixxd/PBAtime.jsx';
 import PBAspace from '../comp/mbixxd/PBAspace.jsx';
+import Profits from '../comp/mbixxd/earnings/Profits.jsx';
+import Profitss from '../comp/mbixxd/tba/Profitss.jsx';
+import Profitsss from '../comp/mbixxd/tbatime/Profitsss.jsx';
 
 import Legend from '../comp/super/tootipbox.jsx';
 
@@ -141,7 +144,9 @@ let Component = React.createClass({
                 {showPage === 'healthytime' && <Healthytime></Healthytime>}
                 {showPage === 'pbatime' && <PBAtime></PBAtime>}
                 {showPage === 'pbaspace' && <PBAspace></PBAspace>}
-
+                {showPage === 'profits' && <Profits></Profits>}
+                {showPage === 'profitss' && <Profitss></Profitss>}
+                {showPage === 'profitsss' && <Profitsss></Profitsss>}
 
                 <div className={styles.clearbox}></div>
             </div>
