@@ -10,7 +10,15 @@ var actions = require('redux/actions');
 
 let data = require('./Healthy-data');
 let month=data.data.line_month;
-
+let barLoTime1 = data.data.line_month;
+let barLoPowerValue1 = data.data.bar_loPower;
+let barRoPowerValue1 = data.data.bar_roPowers;
+let barRoPowerValues1 = data.data.bar_roPowerses;
+let barLdpowerValue2 = data.data.line_date;
+let barLpdpowerValue2 = data.data.line_pdate;
+let barlinepdats2 = data.data.line_pdates;
+let barlinepdat2 = data.data.line_pdatess;
+let text0=data.data.line_date;
 
 let Component = React.createClass({
     componentDidMount() {
@@ -35,7 +43,7 @@ let Component = React.createClass({
 
                 <div className={styles.tbox}>
                     <div className={styles.box_shadow}>
-                        <Reg_tbat></Reg_tbat>
+                        <Reg_tbat   barRoPowerValues={barRoPowerValues1}  barRoPowerValue={barRoPowerValue1} barLoPowerValue={barLoPowerValue1}  barLoTime={barLoTime1} text={"每月TBA"}></Reg_tbat>
                     </div>
                 </div>
 
@@ -44,7 +52,7 @@ let Component = React.createClass({
                 </div>
                 <div className={`${styles.fbox} `}>
                     <div className={` ${styles.logofa} ${styles.box_shadow}`}>
-                        <Reg_tbats></Reg_tbats>
+                        <Reg_tbats barlinepdat={barlinepdat2} barlinepdats={barlinepdats2}  barLpdpowerValue={barLpdpowerValue2} barLdpowerValue={barLdpowerValue2} text={text0[5]+"月每日TBA"}></Reg_tbats>
                         <div className={styles.logomini}>
 
                         </div>

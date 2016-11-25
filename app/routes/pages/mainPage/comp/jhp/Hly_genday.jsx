@@ -10,12 +10,9 @@ let Component = React.createClass({
     },
 
     render() {
-        let barRotime = data.data.bar_rotime;
-        let barLotime = data.data.bar_lotime;
-        let barLoPowerValue = data.data.bar_loPower;
-        let barLdpowerValue = data.data.line_date;
-        let barLpdpowerValue = data.data.line_pdate;
-        let barLpdpowerValues = data.data.line_pdates;
+
+        let {barLdpowerValue,barLpdpowerValue,barLpdpowerValues,text} = this.props;
+
 
         let configPie = {
             chart: {
@@ -36,7 +33,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '11月每日集团发电量',
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
@@ -106,7 +103,7 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
-                max:100,
+
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {

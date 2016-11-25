@@ -12,7 +12,7 @@ let month = data.data.line_month;
 let button = data.data.button;
 let barLoTime1 = data.data.line_month;
 let barLoPowerValue1 = data.data.bar_loPower;
-let text0=data.data.text2;
+let text0=data.data.line_date;
 let text1=data.data.text5;
 let barRotime = data.data.bar_rotime;
 let barLotime = data.data.bar_lotime;
@@ -45,7 +45,7 @@ let Component = React.createClass({
 
                 <div className={styles.tbox}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_t barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1}  text={text0} ></Hly_t>
+                        <Hly_t barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1}  text={"集团每月健康度"} ></Hly_t>
 
                         <div className={styles.logo}>
 
@@ -58,7 +58,7 @@ let Component = React.createClass({
                </div>
                <div className={`${styles.fbox}  ${styles.logofa}`}>
                       <div className={`${styles.box_shadow}`}>
-                       <Hly_d barLpdpowerValue={barLpdpowerValue1} barLdpowerValue={barLdpowerValue1} text={text1}></Hly_d>
+                       <Hly_d barLpdpowerValue={barLpdpowerValue1} barLdpowerValue={barLdpowerValue1} text={text0[4]+"月每日健康度"}></Hly_d>
                           <div className={styles.logomini}>
 
                           </div>

@@ -17,19 +17,18 @@
         top:25px;
         left:100px;
         font-weight:700;
-        line-height:auto
       }
       .imgq{
         width:50px;
         height:30px;
         position:absolute;
-        top:28px;
+        top:23px;
         left:50px;
         text-align:center;
         line-height:30px;
         img{
-          height:30px;
-          width:30px;
+          height:40px;
+          width:40px;
         }
       }
     }
@@ -76,10 +75,17 @@
        box-shadow:0px 0px 10px  #20FEFF;
      }
      li:nth-last-child(2){
-     
+
      }
       li:last-child:hover{
       background:#156e74;
+      }
+      .red{
+        background:#20FEFF;
+        color:black;
+      }
+      .green{
+        color:white;
       }
     }
     .windecbox{
@@ -99,7 +105,7 @@
     line-height:60px;
       button{
       width:70px;
-       height:30px;
+      height:30px;
       line-height:20px;
       text-align:center;
       font-size:20px;

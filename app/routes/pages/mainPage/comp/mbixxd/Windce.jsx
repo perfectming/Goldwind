@@ -9,9 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaRecordProfit=data.areaRecordProfit;
+        let {areaNameX,areaRecordCostT,areaRecordProfitO,colorO,colorT,pointWidth}=this.props
         let configPie = {
             chart: {
                 height:500,
@@ -50,41 +48,43 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
-                enabled: false //不显示highCharts版权信息
+                enabled: false
             },
-            //柱子颜色
+
             colors: [ '#1E664A', '#4CDB9D']
             ,
-            // 柱子宽 柱子间隔 柱子边框；
+
             plotOptions: {
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30
+                    pointWidth: pointWidth,
+                }, series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
                 }
             },
 
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
-                    y: 20, //x轴刻度往下移动20px
+                    y: 20,
                     style: {
                         color: '#fff',//颜色
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:areaName,
+                categories:areaNameX,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
@@ -93,18 +93,17 @@ let Component = React.createClass({
                     }
                 },
             },
-            //几条数据
             series: [{
                 name: '计划发电量',
                 type: 'column',
-                data: areaRecordProfit,
-                color:'#5B9BD5',
+                data: areaRecordProfitO,
+                color:colorO,
             },
             {
             	name: '实际发电量',
                 type: 'column',
-                data: areaRecordCost,
-                color:'#ED7D31',
+                data: areaRecordCostT,
+                color:colorT,
             }]
         };
         return (

@@ -24,6 +24,9 @@
                     margin-top: 10px;
                     width: 100%;
                     height: 30px;
+                    a{
+                        cursor: pointer;
+                    }
                 }.border{
                     position: absolute;
                     bottom: 0;
@@ -36,81 +39,101 @@
                     border-right: 5px solid #00ffff;
                 }.sectionone{
                     .profit{
+                        position: relative;
                         overflow: hidden;
                         width: 80%;
                         height:30px;
                         margin-left: 10%;
                         background-color: #39565e;
                         border-radius:15px;
+                        .text1{
+                            line-height: 30px;
+                            z-index: 7;
+                            position: absolute;
+                            top: 0;
+                            height: 100%;
+                            width: 100%;
+                            padding-left: 5px;
+                        }
                         .investment{
-                            display: inline-block;
                             height:30px;
-                            line-height:30px;
-                            color:#333;
-                            padding-left: 10px;
                             border-radius:15px;
                             background: #2e75b6;
-                            text-align:left;
                         }
                     }
                     
                 }.sectiontwo{
                     .big{
+                        position: relative;
                         overflow: hidden;
                         width: 80%;
                         height:30px;
                         margin-left: 10%;
                         background-color: #a2a05c;
                         border-radius:15px;
+                        .text1{
+                            line-height: 30px;
+                            z-index: 7;
+                            position: absolute;
+                            top: 0;
+                            height: 100%;
+                            width: 100%;
+                            padding-left: 5px;
+                        }
                         .small{
-                            display: inline-block;
                             height:30px;
-                            line-height:30px;
-                            color:#333;
-                            padding-left: 10px;
                             border-radius:15px;
                             background: #e2ac00;
-                            text-align:left;
                         }
                     }
                     
                 }.sectionthree{
                     .should{
+                        position: relative;
                         overflow: hidden;
                         width: 80%;
                         height:30px;
                         margin-left: 10%;
                         background-color: #6d9b83;
                         border-radius:15px;
-                        .actrul{
-                            display: inline-block;
+                        .text1{
+                            line-height: 30px;
+                            z-index: 7;
+                            position: absolute;
+                            top: 0;
+                            height: 100%;
+                            width: 100%;
+                            padding-left: 5px;
+                        }
+                        .actrul{;
                             height:30px;
-                            line-height:30px;
-                            color:#333;
-                            padding-left: 10px;
                             border-radius:15px;
                             background: #009a46;
-                            text-align:left;
                         }
                     }
                     
                 }.sectionfour{
                     .count{
+                        position: relative;
                         overflow: hidden;
                         width: 80%;
                         height:30px;
                         margin-left: 10%;
                         background-color: #d1b9ab;
                         border-radius:15px;
+                        .text1{
+                            line-height: 30px;
+                            z-index: 7;
+                            position: absolute;
+                            top: 0;
+                            height: 100%;
+                            width: 100%;
+                            padding-left: 5px;
+                        }
                         .usable{
-                            display: inline-block;
                             height:30px;
-                            line-height:30px;
-                            color:#333;
-                            padding-left: 10px;
                             border-radius:15px;
                             background: #ff6600;
-                            text-align:left;
                         }
                     }
                     
@@ -286,12 +309,25 @@
                     border: 1px solid #00ff33;
                 }
             }.yearelectric{
+                .logo{
+                    margin-left: 20px;
+                    cursor: pointer;
+                    float: left; 
+                }
+                .links{
+                    cursor: pointer; 
+                    float: left;
+                    margin-left: 20px;
+                }
                 position: absolute;
                 left: 34%;
                 height: 49%;
                 width: 66%;
                 background-color: #282f37;
             }.yearprofit{
+                .logo{
+                    margin-left: 20px;
+                }
                 position: absolute;
                 left: 34%;
                 top: 50%;
