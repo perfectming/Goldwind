@@ -11,7 +11,7 @@ var $ = require('jquery');
 let modelvalue = require('../../../../../../config/WTDetailData.js');
 
 let fmvalue = modelvalue.ModelData[652113028];
-
+	// console.log(value.Wtid);
 // let qwer = "WTGS.PPV.Ra.F32.A";
 // console.log(fmvalue["WTUR.WSpd.Ra.F32"]);
 let WTURTemp = Math.ceil(fmvalue["WTUR.Temp.Ra.F32"]);
@@ -36,7 +36,6 @@ let Component = React.createClass({
 
 	render() {
 		let {value,fanid} = this.props;
-		// console.log(value);
 		let x;
 		let code = value.WTStateCode;
 		switch(code)
@@ -211,7 +210,7 @@ let Component = React.createClass({
 					<div className={`${styles.infoBox6} ${styles.infofL}`}>
 						<Title></Title>
 						
-						<div className={styles.titlebox}><span>风机描述</span><span>风机状态</span><span>状态时长</span></div>
+						<div className={styles.titlebox}><span>风机描述</span><span>风机状态</span><span>状态时长(min)</span></div>
 						<div className={styles.statusquery}>
 							{
 								fmvalue.DevStatusQuery.Value.map((value, key)=>{
@@ -257,67 +256,67 @@ let Component = React.createClass({
 					<div className={styles.action1box}>
 						<div className={styles.fandatabox}>
 							<span>日发电量</span>
-							<span><span>{Math.ceil(fmvalue["DayEgyAt"])}</span><span>万kWh</span></span>
+							<span className={styles.numbox}><span>{Math.ceil(fmvalue["DayEgyAt"])}</span><span>万kWh</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>月发电量</span>
-							<span><span>{Math.ceil(fmvalue["MonthEgyAt"])}</span><span>万kWh</span></span>
+							<span className={styles.numbox}><span>{Math.ceil(fmvalue["MonthEgyAt"])}</span><span>万kWh</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>年发电量</span>
-							<span><span>{Math.ceil(fmvalue["YearEgyAt"])}</span><span>万kWh</span></span>
+							<span className={styles.numbox}><span>{Math.ceil(fmvalue["YearEgyAt"])}</span><span>万kWh</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>累计发电量</span>
-							<span><span>{Math.ceil(fmvalue["TotalEgyAt"])}</span><span>万kWh</span></span>
+							<span className={styles.numbox}><span>{Math.ceil(fmvalue["TotalEgyAt"])}</span><span>万kWh</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>无功功率</span>
-							<span><span>{Number(fmvalue["WTUR.PwrReact.Ra.F32"]).toFixed(1)}</span><span>kVar</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTUR.PwrReact.Ra.F32"]).toFixed(1)}</span><span>kVar</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>偏航位置</span>
-							<span><span>{Number(fmvalue["WYAW.Posi.Ra.F32"]).toFixed(1)}</span><span>°</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WYAW.Posi.Ra.F32"]).toFixed(1)}</span><span>°</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>对风角度</span>
-							<span><span>{Number(fmvalue["WYAW.Wdir.Ra.F32"]).toFixed(1)}</span><span>°</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WYAW.Wdir.Ra.F32"]).toFixed(1)}</span><span>°</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>叶片1角度</span>
-							<span><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade1"]).toFixed(1)}</span><span>°</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade1"]).toFixed(1)}</span><span>°</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>叶片2角度</span>
-							<span><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade2"]).toFixed(1)}</span><span>°</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade2"]).toFixed(1)}</span><span>°</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>叶片3角度</span>
-							<span><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade3"]).toFixed(1)}</span><span>°</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade3"]).toFixed(1)}</span><span>°</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>1号变桨柜体温度</span>
-							<span><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox1"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox1"]).toFixed(1)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>2号变桨柜体温度</span>
-							<span><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox2"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox2"]).toFixed(1)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>3号变桨柜体温度</span>
-							<span><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox3"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox3"]).toFixed(1)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>1号变桨逆变器温度</span>
-							<span><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>2号变桨逆变器温度</span>
-							<span><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>3号变桨逆变器温度</span>
-							<span><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
 						</div>	
 					</div>
 				</div>
@@ -347,7 +346,7 @@ const mapDispatchToProps = (dispatch) => {
         		WTGShz = (WTGShz-45)*15;
         	}
         	$("#hzpoint").animate({ textIndent: 0 }, { 
-        		duration: "slow",
+        		duration: 10000,
 				step: function(now,fx) {
  				$(this).css('transform-origin','90% 50%'); 
 				$(this).css('transform','rotate('+WTGShz+'deg)'); 
@@ -363,7 +362,8 @@ const mapDispatchToProps = (dispatch) => {
  				$(this).css('transform-origin','90% 50%'); 
 				$(this).css('transform','rotate('+WTSpd*6+'deg)'); 
 				}, 
-        	},1000);
+				duration:'slow'
+        	}, 2000);
         	if(WTPwr>=180){
         		WTPwr = 180;
         	}
