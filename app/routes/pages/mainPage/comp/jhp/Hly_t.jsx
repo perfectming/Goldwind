@@ -14,7 +14,7 @@ let Component = React.createClass({
     render() {
 
 
-        let {barLoPowerValue,barLoTime,text,}=this.props;
+        let {x,barLoPowerValue,barLoTime,text,}=this.props;
         let configPie = {
             chart: {
                 height:400,
