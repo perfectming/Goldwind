@@ -44,7 +44,7 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:360,
+                height:300,
                 marginLeft:50,
             },
             title: {
@@ -115,7 +115,7 @@ let Component = React.createClass({
                   y:-15,
                   itemStyle:{
                     color: "#fff",
-                    fontSize:16,
+                    fontSize:12,
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                   }

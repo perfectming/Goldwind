@@ -6,6 +6,8 @@
   padding:0;
   padding-left:10px;
   position:relative;
+  display: flex;
+  align-items: center;
   background: linear-gradient(to bottom,#242a32 ,#1f2025);
   li{
     float:left;
@@ -20,20 +22,17 @@
     margin:25px 10px;
     font-weight:700;
     cursor:pointer;
-    &:hover{
-      background:#20FEFF;
-      color:black;
-      box-shadow:0px 0px 10px  #20FEFF;
-    }
+    //&:hover{
+    //  background:#20FEFF;
+    //  color:black;
+    //  box-shadow:0px 0px 10px  #20FEFF;
+    //}
   }
   li:last-child{
     color: #20FEFF;
-    position:absolute;
-    top:-5px;
-    right:412px;
     border:1px solid #20FEFF;
-    width:110px;
-    height:45px;
+    width:100px;
+    height:40px;
     line-height:45px;
     margin-bottom:25px;
     border-radius:45px;
@@ -45,5 +44,12 @@
   }
   li:last-child:hover{
     background:#156e74;
+  }
+  .red{
+    background:#20FEFF;
+    color:black;
+  }
+  .green{
+    color:white;
   }
 }

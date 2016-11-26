@@ -8,6 +8,9 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
+let areaRecordProfitT=data.areaRecordProfitT;
+let monthT=data.monthT;
+let text=data.text[2];
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -26,7 +29,7 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                               <Healtytimechart></Healtytimechart>
+                               <Healtytimechart areaRecordProfitT={areaRecordProfitT} monthT={monthT} text={text}></Healtytimechart>
                             </div>
                         </div>
                     </div>
@@ -70,4 +73,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(Component)

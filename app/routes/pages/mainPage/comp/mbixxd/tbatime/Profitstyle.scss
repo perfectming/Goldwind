@@ -1,5 +1,7 @@
 .box{
     overflow:hidden;
+     border:1px solid red;
+    height:100%;
     .monthbox{
     width: 100%;
     height: 80px;
@@ -48,15 +50,44 @@
       background:#156e74;
       }
     }
+    .shadow:hover{
+    box-shadow:0 0 15px #fff;
+    }
     .areabox{
-            width:100%;
+            width:99%;
+            margin:0 auto;
             height:300px;
             margin-bottom: 12px;
+            position:relative;
+             border-radius:10px;
+            .bgcc{
+            position:absolute;
+              top:4px;
+              left:48px;
+              z-index: 10;
+
+              img{
+                height:40px;
+                width:40px;
+              }
+            }
            }
     .windbox{
-       float: left;
-       width: 100%;
+       width: 99%;
+       margin:0 auto;
        height: 400px;
+       border-radius:10px;
+       position:relative;
+       .bgcc{
+       position:absolute;
+              top:4px;
+              left:48px;
+              z-index: 10;
+              img{
+              height:40px;
+                width:40px;
+              }
+       }
     }
     .buttons{
     height:46px;

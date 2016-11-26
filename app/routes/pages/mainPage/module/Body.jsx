@@ -23,9 +23,10 @@ import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
 import Fault from '../comp/yAll/Fault.jsx';
-import u865 from '../img/comp/u865.png';
-import u867 from '../img/comp/u867.png';
-import u869 from '../img/comp/u869.png';
+import u865 from '../img/comp/gz_icon.png';
+import u867 from '../img/comp/tx_icon.png';
+import u869 from '../img/comp/xx_icon.png';
+import u871 from '../img/comp/ss_icon.png';
 
 import Baotou from '../comp/ludi/branch/Baotou.jsx';
 import Windbtpage from '../comp/ludi/branch/Windbtpage.jsx';
@@ -60,8 +61,11 @@ import Healty from '../comp/mbixxd/Healty.jsx';
 import Healthytime from '../comp/mbixxd/Healthytime.jsx';
 import PBAtime from '../comp/mbixxd/PBAtime.jsx';
 import PBAspace from '../comp/mbixxd/PBAspace.jsx';
+import Profits from '../comp/mbixxd/earnings/Profits.jsx';
+import Profitss from '../comp/mbixxd/tba/Profitss.jsx';
+import Profitsss from '../comp/mbixxd/tbatime/Profitsss.jsx';
 
-
+import Legend from '../comp/super/tootipbox.jsx';
 
 
 
@@ -73,13 +77,15 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {showPage, tabOpt, tab, flag=true,cssif2} = this.props;
+        let {showPage, tabOpt, tab, flag=true,cssif2,legend=false,navlegend=false,changelegend} = this.props;
         return (
             <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2===true? styles.animate : styles.anmate2}`}>
                 <div className={styles.fiexd}>
+                    <img src={u871} onClick={()=>changelegend(legend)}/>
                     <img src={u865}/>
                     <img src={u867}/>
                     <img src={u869}/>
+                   {legend===true && <Legend></Legend>}
                 </div>
                 <Tab tabOpt={tabOpt} tab={tab}/>
                 {showPage === 'chart' && <Chart></Chart>}
@@ -113,7 +119,7 @@ let Component = React.createClass({
                 {showPage === 'areaKBA' && <AreaKBA></AreaKBA>}
                 {showPage === 'loseElectric' && <LoseElectric></LoseElectric>}
 
-
+				
 
                 {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
                 {showPage === 'healthy' && <Healthy></Healthy>}
@@ -138,7 +144,9 @@ let Component = React.createClass({
                 {showPage === 'healthytime' && <Healthytime></Healthytime>}
                 {showPage === 'pbatime' && <PBAtime></PBAtime>}
                 {showPage === 'pbaspace' && <PBAspace></PBAspace>}
-
+                {showPage === 'profits' && <Profits></Profits>}
+                {showPage === 'profitss' && <Profitss></Profitss>}
+                {showPage === 'profitsss' && <Profitsss></Profitsss>}
 
                 <div className={styles.clearbox}></div>
             </div>
@@ -152,6 +160,7 @@ const mapStateToProps = (state) => {
         showPage: state.vars.showPage,
         flag: state.vars.bodypage,
         cssif2: state.vars.cssif2,
+        legend: state.vars.legend,
     }
 };
 
@@ -159,7 +168,15 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
             dispatch(actions.setVars('bodypage', false));
+
+            
         },
+        changelegend:(legend)=>{
+            legend=true;
+            dispatch(actions.setVars('legend', legend));
+        },
+       
+       
     };
 };
 

@@ -3,26 +3,25 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Instrument-data');
-
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
+    	let {name,title,month,plan,unit,nameOne}=this.props;
         let configPie = {
             chart: {
-                height:390,
+                height:400,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                borderRadius:0
             },
             title: {
-                text: '年发电量',
+                text: title,
                 align:'left',
                  x : "0",
                 style:{
@@ -33,14 +32,7 @@ let Component = React.createClass({
             },
             //图例说明
             legend: {
-                align:"right",
-                verticalAlign: "top",
-                itemStyle: {
-                    color: "#fff",
-                    fontSize:"18px",
-                    fontWeight:"normal",
-                    fontFamily:"微软雅黑"
-                }
+            	enabled:false,
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -52,25 +44,10 @@ let Component = React.createClass({
             colors: [ '#1E664A', '#4CDB9D','#000','#134833', '#082B1F']
             ,
             plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
-                bar:{
-                    animation: true
-                }
-            },
-            plotOptions: {
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 15
+                    pointWidth: 30
                 }
             },
             xAxis: {
@@ -84,14 +61,23 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:data.yearelectric[0].month,
+                categories:month,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
+                title:{
+                	text:unit,
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -15,
+	                x:-10,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+                },
                 labels: {
-                	format:'{value}(kWh)',
+                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -100,13 +86,16 @@ let Component = React.createClass({
                 },
             },
             series: [{
-                name: '计划电量',
+            	name: name,
                 type: 'column',
-                data: data.yearelectric[0].plan,
-            },{
-            	name: '实际电量',
-                type: 'column',
-                data: data.yearelectric[0].actrul,
+                data: plan,
+                cursor: 'pointer',
+                events: {
+                    click: function(e) {
+                    	e.point.category;
+                    }
+                }
+
             }]
         };
         return (

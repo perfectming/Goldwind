@@ -7,30 +7,33 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
+console.log(data.wind)
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-
     render() {
+        let areaRecordProfit=data.areaRecordProfit;
+        let machine=data.machine;
+        let text =data.textHealty;
+      let{actbt=0,changpage,wind}=this.props;
         return (
+
             <div className={styles.box}>
-                <ul className={styles.monthbox}>
+                 <ul className={styles.monthbox}>
                     {
-                        month.map((value,key)=>{
-                            return(<li key={key}>{value}</li>)
+                        data.wind.map((value,key)=>{
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
                         })
                     }
                 </ul>
-                <div className={styles.bigbox}>
+                <div className={`${styles.bigbox} ${styles.shadow}`}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
-                            <div>
-                               <Healtychart></Healtychart>
-                            </div>
+                               <Healtychart machine={machine} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} ></Healtychart>
                         </div>
                          <div className={styles.tik}>
-                        <p>11月份各风机健康度</p>
+                        <p>{text[actbt]}</p>
                     </div>
                     </div>
                     <div className={styles.imgq}>
@@ -54,7 +57,11 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+         actbt:state.vars.actbt,
+         wind:state.vars.wind,
+
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -65,7 +72,13 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        changpage :(value,key)=>{
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('wind',value.plan));
+        }
+
     };
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

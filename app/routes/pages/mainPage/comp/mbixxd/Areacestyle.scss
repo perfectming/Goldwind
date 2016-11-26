@@ -1,8 +1,12 @@
 .box{
     overflow:hidden;
+     .shadow:hover{
+     box-shadow:0 0 15px #fff;
+     }
     .bigbox{
     height:100%;
-    width:100%;
+    width:98%;
+    margin:0 auto;
     border:1px solid #282F37;
     position:relative;
     border-radius:10px;
@@ -10,6 +14,7 @@
       .coverbox{
         margin-top:50px;
       }
+      
       .tik{
       color:#fff;
       position:absolute;
@@ -17,19 +22,18 @@
         top:25px;
         left:100px;
         font-weight:700;
-        line-height:auto
       }
       .imgq{
         width:50px;
         height:30px;
         position:absolute;
-        top:28px;
+        top:23px;
         left:50px;
         text-align:center;
         line-height:30px;
         img{
-          height:30px;
-          width:30px;
+          height:40px;
+          width:40px;
         }
       }
     }
@@ -41,6 +45,8 @@
     padding:0;
     padding-left:10px;
     position:relative;
+    display:flex;
+    align-item:center;
     background: linear-gradient(to bottom,#242a32 ,#1f2025);
     li{
      float:left;
@@ -76,10 +82,17 @@
        box-shadow:0px 0px 10px  #20FEFF;
      }
      li:nth-last-child(2){
-     
+
      }
       li:last-child:hover{
       background:#156e74;
+      }
+      .red{
+        background:#20FEFF;
+        color:black;
+      }
+      .green{
+        color:white;
       }
     }
     .windecbox{
@@ -116,5 +129,6 @@
             color:black;
           box-shadow:0px 0px 10px  #20FEFF;
       }
+     
     }
 }

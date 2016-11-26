@@ -25,7 +25,7 @@ let Component = React.createClass({
                 // borderRadius:10
             },
             title: {
-                text: '十月1区域一风场各风机收益率',
+                text: '',
                 align:'left',
                  x : "0",
                 style:{
@@ -103,19 +103,8 @@ let Component = React.createClass({
                 },
             },
               // 插入图片
-          labels:{
-             items:[{
-                 html:"<div>123</div>",
-                 style:{
-                    left:"-40px",
-                    top:'-35px',
-                    color:'red',
-                    fontSize:'30px',
-                 }
-                
-             }]
 
-          },
+
             series: [{
                 name: '收入',
                 type: 'column',

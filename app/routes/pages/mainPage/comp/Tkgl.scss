@@ -1,13 +1,19 @@
 .tkglBox{
   position: relative;
   .agc{
+    cursor: pointer;
+    color: #fff;
     margin-left: 85%;
-    width:12%;
+    width:8%;
     font-size: 20px;
     text-decoration: underline;
   }
-  .upBox{}
-  .downBox{}
+  .upBox{
+    margin-top: -10px;
+  }
+  .downBox{
+    margin-top: -10px;
+  }
   .tableBox {
     font-size: 16px;
     overflow: auto;
@@ -35,6 +41,9 @@
         color:#fff;
         background: #30343f;
         overflow: hidden;
+        input{
+          background: #30343f;
+        }
         &:hover{
           background:#676e82;
         }
@@ -46,8 +55,7 @@
           line-height:42px;
           border: none;
           position: relative;
-          .succ{
-            background: url("../img/icon/jyOn.png");
+          .turn{
             background-size: 50px 30px;
             height: 30px;
             width: 50px;
@@ -56,37 +64,6 @@
             top:50%;
             margin-left: -25px;
             margin-top: -15px;
-            display:none;
-            &:first-of-type{
-              display:block;
-            }
-            &:target{
-              display:none;
-            }
-            &:target + a{
-              display:block;
-            }
-          }
-          .defa{
-            background: url("../img/icon/jyOff.png");
-            background-size: 50px 30px;
-            height: 30px;
-            width: 50px;
-            left: 50%;
-            position: absolute;
-            top:50%;
-            margin-left: -25px;
-            margin-top: -15px;
-            display:none;
-            &:first-of-type{
-              display:block;
-            }
-            &:target{
-              display:none;
-            }
-            &:target + a{
-              display:block;
-            }
           }
         }
         .tableLineNum {
@@ -101,6 +78,9 @@
         color:#fff;
         background: #272b34;
         overflow: hidden;
+        input{
+          background: #272b34;
+        }
         &:hover{
           background:#676e82;
         }
@@ -112,8 +92,7 @@
           line-height:42px;
           border: none;
           position: relative;
-          .succ{
-            background: url("../img/icon/jyOn.png");
+          .turn{
             background-size: 50px 30px;
             height: 30px;
             width: 50px;
@@ -122,37 +101,6 @@
             top:50%;
             margin-left: -25px;
             margin-top: -15px;
-            display:none;
-            &:first-of-type{
-              display:block;
-            }
-            &:target{
-              display:none;
-            }
-            &:target + a{
-              display:block;
-            }
-          }
-          .defa{
-            background: url("../img/icon/jyOff.png");
-            background-size: 50px 30px;
-            height: 30px;
-            width: 50px;
-            left: 50%;
-            position: absolute;
-            top:50%;
-            margin-left: -25px;
-            margin-top: -15px;
-            display:none;
-            &:first-of-type{
-              display:block;
-            }
-            &:target{
-              display:none;
-            }
-            &:target + a{
-              display:block;
-            }
           }
         }
         .tableLineNum {

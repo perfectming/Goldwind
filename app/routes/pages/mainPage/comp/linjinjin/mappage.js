@@ -29,25 +29,23 @@ module.exports = {
             		rpage:'syzjs'
             	}
 
-            ]
+            ],
+           
         
         },
         {
             name: '风场2',
             page: 'fcone',
             rightpagge:[
-            	{
-                    tabname:'风机矩阵1',
+            	  {
+                    tabname:'光伏矩阵',
                     rpage:'fanmatrix'
                 },
                 {
-                    tabname:'数据列表1',
+                    tabname:'数据列表',
                     rpage:'sjlb'
                 },
-                {
-                    tabname:'风机馈线',
-                    rpage:'fjkx'
-                },
+               
                 {
                     tabname:'测风塔',
                     rpage:'cft'

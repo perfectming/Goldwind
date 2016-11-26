@@ -1,0 +1,62 @@
+.bodyBox{
+    width: 100%;
+    padding-right: 30px;
+    .content{
+        color: white;
+        font-size: 25px;
+        width: 100%;
+        .floorOne{
+            position: relative;
+            width: 100%;
+            .boxOne{
+                float: left;
+                width: 42%;
+                .boxText{
+                    float: left;
+                    width: 33%;
+                    background-color: #282f37;
+                    height: 400px;
+                } 
+                .chartBox{
+                    float: left;
+                    width: 67%;
+                }
+            }
+            .boxTwo{
+                float: left;
+                width: 29%;
+            }
+            .boxThree{
+                float: left;
+                width: 29%;
+            }
+        }
+        .floorTwo{
+            position: relative;
+            width: 100%;
+            .boxOne{
+                float: left;
+                width: 42%;
+                .boxText{
+                    float: left;
+                    width: 33%;
+                    background-color: #282f37;
+                    height: 400px;
+                    
+                }
+                .chartBox{
+                    float: left;
+                    width: 67%;
+                }
+            }
+            .boxTwo{
+                float: left;
+                width: 29%;
+            }
+            .boxThree{
+                float: left;
+                width: 29%;
+            }
+        }
+    }
+}
