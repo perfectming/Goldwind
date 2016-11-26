@@ -6,6 +6,9 @@ import Yearelectric from './Yearelectric.jsx';
 
 var actions = require('redux/actions');
 
+let data=Instrumentdata;
+let sort1=data.sort2;
+
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -13,8 +16,7 @@ let Component = React.createClass({
    
 
     render() {
-        let data=Instrumentdata;
-        let{changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{flag=true,changepageSort1,changepageSort,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         return (
            <div className={styles.box}>
            		<div className={styles.left}>
@@ -149,38 +151,38 @@ let Component = React.createClass({
                 			<tr>
 	                			<th>排名</th>
 	           					<th>区域名</th>
-	           					<th className={styles.click}>PBA ↑↓</th>
-	           					<th className={styles.click}>停机时间 ↑↓</th>
+	           					<th className={styles.click} onClick={()=>changepageSort1(flag)}>PBA ↑↓</th>
+	           					<th className={styles.click} onClick={()=>changepageSort(flag)}>停机时间 ↑↓</th>
                 			</tr>
                 			<tr>
-                				<th>1</th><th>区域1</th><th></th><th></th>
+                				<th>1</th><th>{sort1[0].name}</th><th>{sort1[0].PBA}</th><th>{sort1[0].time}分钟</th>
                 			</tr>
                 			<tr>
-                				<th>2</th><th>区域2</th><th></th><th></th>
+                				<th>2</th><th>{sort1[1].name}</th><th>{sort1[1].PBA}</th><th>{sort1[1].time}分钟</th>
                 			</tr>
                 			<tr>
-                				<th>3</th><th>区域3</th><th></th><th></th>
+                				<th>3</th><th>{sort1[2].name}</th><th>{sort1[2].PBA}</th><th>{sort1[2].time}分钟</th>
                 			</tr>
                 			<tr>
-                				<th>4</th><th>区域4</th><th></th><th></th>
+                				<th>4</th><th>{sort1[3].name}</th><th>{sort1[3].PBA}</th><th>{sort1[3].time}分钟</th>
                 			</tr>
                 			<tr>
-                				<th>5</th><th>区域5</th><th></th><th></th>
+                				<th>5</th><th>{sort1[4].name}</th><th>{sort1[4].PBA}</th><th>{sort1[4].time}分钟</th>
                 			</tr>
                 			<tr>
-                				<th>6</th><th>区域6</th><th></th><th></th>
+                				<th>6</th><th>{sort1[5].name}</th><th>{sort1[5].PBA}</th><th>{sort1[5].time}分钟</th>
                 			</tr>
                 			<tr>
-                				<th>7</th><th>区域7</th><th></th><th></th>
+                				<th>7</th><th>{sort1[6].name}</th><th>{sort1[6].PBA}</th><th>{sort1[6].time}分钟</th>
                 			</tr>
                 			<tr>
-                				<th>8</th><th>区域8</th><th></th><th></th>
+                				<th>8</th><th>{sort1[7].name}</th><th>{sort1[7].PBA}</th><th>{sort1[7].time}分钟</th>
                 			</tr>
                 			<tr>
-                				<th>9</th><th>区域9</th><th></th><th></th>
+                				<th>9</th><th>{sort1[8].name}</th><th>{sort1[8].PBA}</th><th>{sort1[8].time}分钟</th>
                 			</tr>
                 			<tr>
-                				<th>10</th><th>区域10</th><th></th><th></th>
+                				<th>10</th><th>{sort1[9].name}</th><th>{sort1[9].PBA}</th><th>{sort1[9].time}分钟</th>
                 			</tr>
                 		</tbody>	
                 	</table>
@@ -193,7 +195,10 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+    	sort1 : state.vars.sort2,
+    	flag : state.vars.flag1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -202,6 +207,14 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
+        },
+        changepageSort:(flag)=>{
+        	flag==true? dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return a.time-b.time}))):dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return b.time-a.time})));
+        	flag==true? dispatch(actions.setVars('flag1',false )):dispatch(actions.setVars('flag1',true ));
+        },
+        changepageSort1:(flag)=>{
+        	flag==true? dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return (a.PBA).slice(0,1)/1-(b.PBA).slice(0,1)/1}))):dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return (b.PBA).slice(0,1)/1-(a.PBA).slice(0,1)/1})));
+        	flag==true? dispatch(actions.setVars('flag1',false )):dispatch(actions.setVars('flag1',true ));
         },
         changepageHealthyT:()=>{
         	dispatch(actions.setVars('showPage', 'healthy'));

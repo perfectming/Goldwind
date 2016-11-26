@@ -23,7 +23,7 @@ let Component = React.createClass({
         let mod=model.Model;
         let  mat=matrix.Model;
         let matD=matData.ModelData;
-        let {clickNumber, showFlag, changeFlag, flag=true,play,map='fdg'} = this.props;
+        let {clickNumber, showFlag, changeFlag, flag=true,play,map,map1} = this.props;
         return (
             <div className={styles.bodyBox}>
                     <div className={`${styles.leftBox} ${flag===true? styles.animat1 : styles.animat}`}>
@@ -33,8 +33,8 @@ let Component = React.createClass({
                     <img src={flag===true? leftIcon:rightIcon} onClick={()=>{changeFlag(flag===true? true:false,flag )}}/>
                 </div>
                 <div className={`${styles.rightBox} ${flag===true? styles.animat3 : styles.animat2}`}>
-                    <div className={`${styles.bigimg} ${map==='small'? styles.animat4 : styles.animat5}`}>
-                        <div className={styles.place1}  onClick={()=>play(map)}></div>
+                    <div className={`${styles.bigimg} ${map===true? styles.animat4 : styles.animat6} ${map1===true? styles.animat5 : styles.animat6} `}>
+                        <div className={styles.place1}  onClick={()=>play(map,map1)}></div>
                     </div>
                     <div className={styles.mapitem}>
                     {
@@ -63,25 +63,29 @@ const mapStateToProps = (state) => {
         showFlag : state.vars.distributionLeftBox,
         flag:state.vars.flagff,
         map:state.vars.map,
+        map1:state.vars.map1,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('map', false));
+             dispatch(actions.setVars('map1', false));
             var obj = {
                 test:''
             }
         },
-        play:(map)=>{
-            if(map=='big'){
-                map='small';
-            }else if(map=='small'){
-                map='big';
-            }else{
-                map='big';
-            }
+        play:(map,map1)=>{
+                if(map){
+                    map=false;
+                    map1=true;
+                }else{
+                    map1=false;
+                    map=true;
+                }
              dispatch(actions.setVars('map', map));
+             dispatch(actions.setVars('map1', map1));
              console.log(map)
             
         },

@@ -1,5 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+var actions = require('redux/actions');
+var {getState} = require('../../../../redux/store');
+import _ from 'lodash';
 import styles from  './Tkgl.scss';
 import Column from './tkgl/Column.jsx';
 import Table from './tkgl/table.jsx';
@@ -15,10 +18,10 @@ let header=['场站名称', '有功自动控制','无功自动控制','计划值
 
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init();
+        this.props.init(data);
     },
     render() {
-        let {openAGC,closeAGC} = this.props;
+        let {table,openAGC,closeAGC,changeTableItem} = this.props;
         let arr1 = [];
         let arr2 = [];
         let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
@@ -30,6 +33,7 @@ let Component = React.createClass({
         for(let m in obj_pvd){
             arr2.push(m)
         }
+        let plan=0,power=0,allC=0;
         return (
             <div className={styles.tkglBox}>
                 <button onClick={openAGC} className={styles.agc}>AGC调节</button>
@@ -66,10 +70,12 @@ let Component = React.createClass({
                                                         )
                                                     }
                                                     else{
+                                                        keyC==2?plan+=(data[value][valueC]/1):power+=(data[value][valueC]/1);
                                                         return (
-                                                            <div className={styles.tableContentItem}
-                                                                 style={{width:1000/header.length}}
-                                                                 key={keyC}>{data[value][valueC]*10%1==0?data[value][valueC]:(data[value][valueC]/1).toFixed(2)}</div>
+                                                            <input className={styles.tableContentItem}
+                                                                   style={{width:1000/header.length}} key={keyC} contentEditable="true"
+                                                                   onChange={(e)=>changeTableItem(e.target.value,table,value,valueC)}
+                                                                   value={data[value][valueC]*10%1==0?data[value][valueC]:(data[value][valueC]/1).toFixed(2)}/>
                                                         )}
                                                 })
                                             }
@@ -96,10 +102,12 @@ let Component = React.createClass({
                                                     )
                                                 }
                                                 else{
+                                                    keyC==2?plan+=(data[value][valueC]/1):power+=(data[value][valueC]/1);
                                                     return (
-                                                        <div className={styles.tableContentItem}
-                                                             style={{width:1000/header.length}}
-                                                             key={keyC}>{data[value][valueC]*10%1==0?data[value][valueC]:(data[value][valueC]/1).toFixed(2)}</div>
+                                                        <input className={styles.tableContentItem}
+                                                    style={{width:1000/header.length}} key={keyC} contentEditable="true"
+                                                    onChange={(e)=>changeTableItem(e.target.value,table,value,valueC)}
+                                                    value={data[value][valueC]*10%1==0?data[value][valueC]:(data[value][valueC]/1).toFixed(2)}/>
                                                     )}
                                             })
                                         }
@@ -107,6 +115,27 @@ let Component = React.createClass({
                                 )
                             })
                             }
+                            <div className={arr2.length%2===0? styles.tableContentLine : styles.tableContentLine1}>
+                                <div className={styles.tableContentItem}
+                                     style={{width:1000/header.length}}>合计</div>
+                                {
+                                    nam.map((valueC, keyC)=> {
+                                        if(keyC<2){
+                                            return (
+                                                <div className={styles.tableContentItem} style={{width:1000/header.length}} key={keyC}>——</div>
+                                            )
+                                        }
+                                        else{
+                                            keyC==2? allC=plan : allC=power;
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:1000/header.length}} key={keyC}>
+                                                    {allC.toFixed(2)}
+                                                </div>
+                                            )}
+                                    })
+                                }
+                            </div>
                         </div>
                         <button onClick={closeAGC}>确定</button>
                     </div>
@@ -123,22 +152,27 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        table: state.objs.tableContent,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: () => {
-            var obj = {
-                test:''
-            }
+        init: (obj) => {
+            dispatch(actions.setObjs('tableContent', obj));
         },
         openAGC: () => {
             document.getElementById('AGC').style.display='block'
         },
         closeAGC: () => {
             document.getElementById('AGC').style.display='none'
-        }
+        },
+        changeTableItem: (value, table, i, j) => {
+            let tableV = _.clone(getState().objs.tableContent);
+            tableV[i][j] = value;
+            dispatch(actions.setObjs('tableContent', tableV));
+        },
     };
 };
 
