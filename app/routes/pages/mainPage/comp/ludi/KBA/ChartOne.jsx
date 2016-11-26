@@ -32,7 +32,7 @@ let Component = React.createClass({
             },
             //图例说明
             legend: {
-                align:"right",
+                align:"center",
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",

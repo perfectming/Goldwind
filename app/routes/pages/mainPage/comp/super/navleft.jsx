@@ -136,15 +136,16 @@ let Component = React.createClass({
                           {
                               arrayJy.indexOf(fc_info)==-1?
                                   namestat.map((value,key)=>{
+                                    console.log(date[fc_info][namestat[key]]);
                                       return(
                                           <div className={styles.pie} key={key}>
                                               <Pie2 num={datem[value].color}></Pie2>
                                               <div className={styles.allnum}><p>{date[fc_info][namestat[key]]}</p><p>{datem[value].name}</p></div>
                                           </div>
                                       )
+
                                   }):
                             namestatus.map((value,key)=>{
-                                console.log(datem[value].color)
                                 return(
                                 <div className={styles.pie} key={key}>
                                     <Pie2 num={datem[value].color}></Pie2>

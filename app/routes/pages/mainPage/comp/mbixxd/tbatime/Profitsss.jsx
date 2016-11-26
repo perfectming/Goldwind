@@ -28,13 +28,13 @@ let Component = React.createClass({
                         })
                     }
                 </ul>
-                <div className={styles.areabox}>
+                <div className={`${styles.areabox} ${styles.shadow}`}>
                 <div className={styles.bgcc}><img src={icono}/></div>
                    <div>
                      <AreaTable text={text} areaNamee={areaNamee} areaRecordCostss={areaRecordCostss} areaRecordProfitt={areaRecordProfitt}></AreaTable>
                    </div>
                 </div>
-               <div className={styles.windbox}>
+               <div className={`${styles.windbox} ${styles.shadow}`}>
                 <div className={styles.bgcc}><img src={icono}/></div>
                    <div>
                      <WindfieldTable></WindfieldTable>

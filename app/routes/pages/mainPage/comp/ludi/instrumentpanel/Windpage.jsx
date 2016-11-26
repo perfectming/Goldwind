@@ -35,12 +35,12 @@ let Component = React.createClass({
            						<span>健康度</span> 
            						<a onClick={()=>changepageHealthyT()}>图片</a>
            						<a onClick={()=>changepageHealthyS()}>图片</a>
-           						<span>{((small/big)*100).toFixed(1)}%</span>
+           						<span>{small==null? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%</span>
            					</div>
            					<div className={styles.sectiontwo}>
            						<div className={styles.big}>
-           							<div className={styles.small} style={{width:((small/big)*100).toFixed(1)+"%"}}>
-           								{((small/big)*100).toFixed(1)}%
+           							<div className={styles.small} style={{width:small==null? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1)+"%":((small/big)*100).toFixed(1)+"%"}}>
+           								{small==null? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%
            							</div>
            						</div>
            					</div>

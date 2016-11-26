@@ -48,7 +48,7 @@ let Component = React.createClass({
                 </ul>
                <div className={styles.covers}>
                    <div className={styles.bgc}> <img src={icono}/></div>
-                   <div className={styles.areabox}>
+                   <div className={`${styles.areabox} ${styles.shadow}`}>
                        <div>
                            <AreaTable areaRecordCosts={areaRecordCosts} areaName={areaName} areaRecordProfit={areaRecordProfit} text0={text0} text1={text1}></AreaTable>
                        </div>
@@ -56,13 +56,13 @@ let Component = React.createClass({
                </div>
                <div className={styles.covers}>
                    <div className={styles.bgc}> <img src={icono}/></div>
-                   <div className={styles.windbox}>
+                   <div className={`${styles.windbox} ${styles.shadow}`}>
                        <div>
                            <WindfieldTable areaNamee={areaNamee} text2={text2} windFiled={windFiled} areaRecordProfitt={areaRecordProfitt} areaRecordCostss={areaRecordCostss}  areaRecordCostsS1={areaRecordCostsS1}  areaRecordCostsS2={areaRecordCostsS2}  areaRecordCostsS3={areaRecordCostsS3} areaRecordCostsS4={areaRecordCostsS4}></WindfieldTable>
                        </div>
                    </div>
                </div>
-               <div className={styles.bigbox}>
+               <div className={`${styles.bigbox} ${styles.shadow}`}>
                    <div className={styles.coverbox}>
                        <div className={styles.windcebox}>
                            <div>

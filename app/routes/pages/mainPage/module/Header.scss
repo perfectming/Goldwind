@@ -1,30 +1,30 @@
 .navHeader {
   width: 100%;
   font-family: "Microsoft YaHei UI";
-  height: 80px;
+  height: 70px;
   background-color: #2A3241;
   font-size: 20px;
   .navIcon {
     width: 380px;
-    height: 60px;
-    padding: 10px 24px 10px;
-    line-height: 60px;
+    height: 70px;
+    line-height: 70px;
     float: left;
     color: #ffffff;
     img {
-      height: 60px;
+      height: 70px;
     }
   }
   .methodBox {
     text-align: right;
+    height:70px;
     .itemBox {
       display: inline-block;
       overflow: hidden;
-      height: 80px;
-      line-height: 80px;
+      height: 70px;
+      line-height: 70px;
       text-align: center;
       margin: 0 10px 0;
-      font-size:18px;
+      font-size:20px;
       cursor: pointer;
       img {
       margin-right:10px;
@@ -38,9 +38,9 @@
     .itemBoxAct {
       display: inline-block;
       overflow: hidden;
-      height: 80px;
-      font-size:18px;
-      line-height: 80px;
+      height: 70px;
+      font-size:20px;
+      line-height: 70px;
       text-align: center;
       padding:0 5px;
       margin: 0 10px 0;

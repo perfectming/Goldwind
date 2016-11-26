@@ -1,0 +1,35 @@
+.bodyBox{
+    width: 100%;
+    padding-right: 30px;
+    .content{
+        color: white;
+        font-size: 25px;
+        width: 100%;
+        .floorOne{
+            width: 100%;
+            .pie{
+                float: left;
+                width: 30%;
+                height: 400px;
+            }
+            .column{
+                float: left;
+                width: 70%;
+                height: 400px;
+            }
+        }
+        .floorTwo{
+            width: 100%;
+            .pie{
+                float: left;
+                width: 30%;
+                height: 400px;
+            }
+            .column{
+                float: left;
+                width: 70%;
+                height: 400px;
+            }
+        }
+    }
+}

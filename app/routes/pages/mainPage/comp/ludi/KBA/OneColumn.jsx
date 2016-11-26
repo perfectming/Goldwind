@@ -3,109 +3,100 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
-
 let Component = React.createClass({
     componentWillMount() {
     },
+
     render() {
-        let {areaName,areaRecordCost,areaRecordProfit,TBA,text}=this.props;
+    	let {name,title,month,plan,unit,nameOne}=this.props;
         let configPie = {
             chart: {
-                height:300,
+                height:400,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                borderRadius:0
             },
             title: {
-                text: text,
+                text: title,
                 align:'left',
                  x : "0",
                 style:{
                     color:"#fff",
                     fontSize:"25px",
-                    fontFamily:"微软雅黑",
-                     fontWeight:700,
+                    fontFamily:"微软雅黑"
                 }
             },
-            // 插入图片
-
             //图例说明
             legend: {
-                align:"right",
-                verticalAlign: "top",
-                itemStyle: {
-                    color: "#fff",
-                    fontSize:"18px",
-                    fontWeight:"normal",
-                    fontFamily:"微软雅黑",
-
-                }
+            	enabled:false,
             },
             tooltip: {
+                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
-                enabled: false
+                enabled: false //不显示highCharts版权信息
             },
-            //柱子颜色
-            colors: [ '#1E664A', '#4CDB9D']
+            colors: [ '#1E664A', '#4CDB9D','#000','#134833', '#082B1F']
             ,
             plotOptions: {
                 column: {
+                    pointPadding: 0.1,
+                    borderWidth: 0,
                     pointWidth: 30
-                },
-                series: {
-                    cursor: 'pointer',
-                    events: {
-                        click: function(e) {
-                            alert('X轴的值：'+e.point.category);
-                        }
-                    }
                 }
-
             },
-
             xAxis: {
                 lineWidth: 1,
+               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
-                    y: 20,
+                    y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',
-                        fontSize:'14px'
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
                     }
                 },
-                categories:areaName,
+                categories:month,
             },
             yAxis: {
+                title:{
+                	text:unit,
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -15,
+	                x:-10,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+                },
                 labels: {
-                    y: 10,
+                	format:'{value}',
+                    y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',
-                        fontSize:'14px'
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
                     }
                 },
             },
             series: [{
-                name: '实际收益',
+            	name: name,
                 type: 'column',
-                data: areaRecordProfit
-            },
-            {
-            	name: '收入成本',
-                type: 'column',
-                data: areaRecordCost
-            },{
-                    name:"TBA",
-                    type:'line',
-                    color:'blue',
-                    data:TBA,}
-                ]
+                data: plan,
+                cursor: 'pointer',
+                events: {
+                    click: function(e) {
+                    	e.point.category;
+                    }
+                }
+
+            }]
         };
         return (
             <ReactHighcharts config={configPie}/>
