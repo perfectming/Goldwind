@@ -430,11 +430,11 @@
 			}
 		}
 		.infoBox7{
-			
 			color:#999;
 			width: 940px;
 			height: 220px;
 			background:#292F36;
+			white-space:nowrap;
 			span{
 					display: inline-block;
 					text-align: center;
@@ -447,6 +447,7 @@
 					font-size: 16px;
 					margin-left: 5px;
 					position: relative;z-index: 100000;
+					white-space:nowrap;
 					span:nth-child(1){
 					width: 150px;
 					text-align: left;
