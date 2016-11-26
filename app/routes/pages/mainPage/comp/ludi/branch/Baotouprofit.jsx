@@ -49,7 +49,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#1E664A', '#4CDB9D','#000','#134833', '#082B1F']
+            colors: [ '#1E664A', '#4CDB9D','#082B1F','#134693', '#134833']
             ,
             plotOptions: {
                 pie: {
@@ -111,11 +111,7 @@ let Component = React.createClass({
             	name: '平均值',
                 type: 'spline',
                 data: data.yearelectric[0].actrul,
-                marker:{
-                	lineWidth:2,
-                	fillColor:"white",
-                	lineColor:"red"
-                }
+                
             }]
         };
         return (
