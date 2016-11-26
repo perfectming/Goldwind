@@ -37,6 +37,8 @@ import Windpage from '../comp/ludi/instrumentpanel/Windpage.jsx';
 import GroupKBA from '../comp/ludi/KBA/GroupKBA.jsx';
 import AreaKBA from '../comp/ludi/KBA/AreaKBA.jsx';
 import LoseElectric from '../comp/ludi/KBA/LoseElectric.jsx';
+import DeviceLose from '../comp/ludi/KBA/DeviceLose.jsx';
+import TopTen from '../comp/ludi/KBA/TopTen.jsx';
 
 import Healthy_one from '../comp/jhp/Healthy_one.jsx';
 import Healthy from '../comp/jhp/Healthy.jsx';
@@ -118,6 +120,8 @@ let Component = React.createClass({
                 {showPage === 'groupKBA' && <GroupKBA></GroupKBA>}
                 {showPage === 'areaKBA' && <AreaKBA></AreaKBA>}
                 {showPage === 'loseElectric' && <LoseElectric></LoseElectric>}
+                {showPage === 'deviceLose' && <DeviceLose></DeviceLose>}
+                {showPage === 'topTen' && <TopTen></TopTen>}
 
 
 

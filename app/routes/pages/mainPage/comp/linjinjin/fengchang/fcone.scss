@@ -4,8 +4,7 @@
       overflow:hidden; 
       .conleft{
         float:left;
-        width:27%;
-        padding-bottom:20px;
+        width:400px;
         position:relative;
         .spanleft{
             width:0; 
@@ -28,15 +27,15 @@
       }
        .conright{
         float:left;
-        width:73%;
-        height:1030px;
+        width:1388px;
+        height:854px;
         overflow-x:hidden;
         overflow-y:auto;
       }
 
 
       .animat{
-        margin-left:-25.5%;
+        margin-left:-377px;
         animation:myfirst 1s;
         -moz-animation:myfirst 1s; /* Firefox */
         -webkit-animation:myfirst 1s; /* Safari and Chrome */
@@ -50,14 +49,14 @@
         -o-animation:myfirst1 1s; /* Opera */
       }
       .animat2{
-        width:98.5%;
+        width:1765px;
         animation:myfirst2 1s;
         -moz-animation:myfirst2 1s; /* Firefox */
         -webkit-animation:myfirst2 1s; /* Safari and Chrome */
         -o-animation:myfirst2 1s; /* Opera */
       }
       .animat3{
-        width:73%;
+        width:1388px;
         animation:myfirst3 1s;
         -moz-animation:myfirst3 1s; /* Firefox */
         -webkit-animation:myfirst3 1s; /* Safari and Chrome */
@@ -70,50 +69,50 @@
 
   @keyframes myfirst
 {
-from {margin-left:0%;}
-to {margin-left:-25.5%;}
+from {margin-left:0;}
+to {margin-left:-377px;}
 }
 
 @-moz-keyframes myfirst /* Firefox */
 {
 from {margin-left:0%;}
-to {margin-left:-25.5%;}
+to {margin-left:-377px;}
 }
 
 @-webkit-keyframes myfirst /* Safari and Chrome */
 {
 from {margin-left:0%;}
-to {margin-left:-25.5%;}
+to {margin-left:-377px;}
 }
 
 @-o-keyframes myfirst /* Opera */
 {
 from {margin-left:0%;}
-to {margin-left:-25.5%;}
+to {margin-left:-377px;}
 }
 
 
 @keyframes myfirst1
 {
-from {margin-left:-25.5%;}
+from {margin-left:-377px;}
 to {margin-left:0;}
 }
 
 @-moz-keyframes myfirst1 /* Firefox */
 {
-from {margin-left:-25.5%;}
+from {margin-left:-377px;}
 to {margin-left:0;}
 }
 
 @-webkit-keyframes myfirst1 /* Safari and Chrome */
 {
-from {margin-left:-25.5%;}
+from {margin-left:-377px;}
 to {margin-left:0;}
 }
 
 @-o-keyframes myfirst1 /* Opera */
 {
-from {margin-left:-25.5%;}
+from {margin-left:-377px;}
 to {margin-left:0;}
 }
 
@@ -123,50 +122,50 @@ to {margin-left:0;}
 
 @keyframes myfirst2
 {
-from {width:73%;}
-to {width:98.5%;}
+from {width:1388px;}
+to {width:1765px;}
 }
 
 @-moz-keyframes myfirst2 /* Firefox */
 {
-from {width:73%;}
-to {width:98.5%;}
+from {width:1388px;}
+to {width:1765px;}
 }
 
 @-webkit-keyframes myfirst2 /* Safari and Chrome */
 {
-from {width:73%;}
-to {width:98.5%;}
+from {width:1388px;}
+to {width:1765px;}
 }
 
 @-o-keyframes myfirst2 /* Opera */
 {
-from {width:73%;}
-to {width:98.5%;}
+from {width:1388px;}
+to {width:1765px;}
 }
 
 
 
 @keyframes myfirst3
 {
-from {width:98.5%;}
-to {width:73%;}
+from {width:1765px;}
+to {width:1388px;}
 }
 
 @-moz-keyframes myfirst3 /* Firefox */
 {
-from {width:98.5%;}
-to {width:73%;}
+from {width:1765px;}
+to {width:1388px;}
 }
 
 @-webkit-keyframes myfirst3 /* Safari and Chrome */
 {
-from {width:98.5%;}
-to {width:73%;}
+from {width:1765px;}
+to {width:1388px;}
 }
 
 @-o-keyframes myfirst3 /* Opera */
 {
-from {width:98.5%;}
-to {width:73%;}
+from {width:1765px;}
+to {width:1388px;}
 }
