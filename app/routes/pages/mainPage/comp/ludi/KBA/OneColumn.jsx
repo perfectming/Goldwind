@@ -3,27 +3,27 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-    	let {text,lose,}=this.props;
+    	let {name,title,month,plan,unit,nameOne}=this.props;
         let configPie = {
             chart: {
-                height:450,
+                height:400,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                borderRadius:0
             },
             title: {
-                text: text+'<br>PBA',
+                text: title,
                 align:'left',
+                 x : "0",
                 style:{
                     color:"#fff",
                     fontSize:"25px",
@@ -32,14 +32,7 @@ let Component = React.createClass({
             },
             //图例说明
             legend: {
-                align:"center",
-                verticalAlign: "top",
-                itemStyle: {
-                    color: "#fff",
-                    fontSize:"18px",
-                    fontWeight:"normal",
-                    fontFamily:"微软雅黑"
-                }
+            	enabled:false,
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -48,40 +41,41 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#5b9bd5', '#ed7d31','#a5a5a5','#ffc000', '#ffd689','#5b9bd5'],
+            colors: [ '#1E664A', '#4CDB9D','#000','#134833', '#082B1F']
+            ,
             plotOptions: {
-                pie: {
-                	dataLabels: {
-	                    enabled: true,
-	                    distance: -50,
-	                    style: {
-	                        fontSize: '16',
-	                        color: 'white',
-	                        textShadow: '0px 1px 2px black'
-	                    }
-                	},
-	            startAngle: -180,
-	            endAngle: 180,
-	            center: ['50%', '45%']
-            	}
+                column: {
+                    pointPadding: 0.1,
+                    borderWidth: 0,
+                    pointWidth: 30
+                }
             },
             xAxis: {
                 lineWidth: 1,
                //lineColor: "red",
                 tickWidth: 0,
                 labels: {
-                    y: 0, //x轴刻度往下移动20px
+                    y: 20, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
                         fontSize:'14px'  //字体
                     }
                 },
-                
+                categories:month,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
+                title:{
+                	text:unit,
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -15,
+	                x:-10,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+                },
                 labels: {
                 	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
@@ -92,11 +86,17 @@ let Component = React.createClass({
                 },
             },
             series: [{
-            type: 'pie',
-            name: '集团区域1',
-            innerSize: '80%',
-            data: lose,
-        }]
+            	name: name,
+                type: 'column',
+                data: plan,
+                cursor: 'pointer',
+                events: {
+                    click: function(e) {
+                    	e.point.category;
+                    }
+                }
+
+            }]
         };
         return (
             <ReactHighcharts config={configPie}/>
