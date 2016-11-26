@@ -107,7 +107,7 @@ let Component = React.createClass({
                 // lineColor: "red",
                 //tickWidth: 4,
                 title:'小时',
-                max:400,
+
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {

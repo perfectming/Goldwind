@@ -56,16 +56,7 @@ let Component = React.createClass({
             colors: [ '#1E664A', '#4CDB9D','#000','#134833', '#082B1F']
             ,
             plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
+
                 bar:{
                     animation: true
                 }
@@ -75,22 +66,19 @@ let Component = React.createClass({
                     pointPadding: 0.1,
                     borderWidth: 0,
                     pointWidth: 15
+                },
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
                 }
+
             },
               // 插入图片
-          labels:{
-             items:[{
-                 html:"<div>123</div>",
-                 style:{
-                    left:"-40px",
-                    top:'-35px',
-                    color:'red',
-                    fontSize:'30px',
-                 }
-                
-             }]
-
-          },
+         
             xAxis: {
                 lineWidth: 1,
                //lineColor: "red",
@@ -125,7 +113,13 @@ let Component = React.createClass({
             	name: '成本',
                 type: 'column',
                 data: windCost
-            }]
+            },
+                {
+                    name:'TBA',
+                    type:'line',
+                    color:'blue',
+                    data:[2,6,7,9,12,6,2,6,7,9,12,6,]
+                }]
         };
         return (
             <ReactHighcharts config={configPie}/>

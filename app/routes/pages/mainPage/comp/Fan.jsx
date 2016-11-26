@@ -74,7 +74,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {changepage2,changepage3,Tofaninfo1,hiden=true}=this.props;
+        let {changepage2,changepage3,Tofaninfo1,Tofaninfo2}=this.props;
         return (
             <div className={styles.bodyBox}>
                 <div className={styles.leftBox}>
@@ -93,7 +93,7 @@ let Component = React.createClass({
                                         obj_wfd[value].map((valueA, keyA)=> {
                                             return (
                                                 
-                                                    <div className={styles.listoptbtn_2} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key,hiden)}><span>{valueA.Wtname}</span>
+                                                    <div className={styles.listoptbtn_2} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'风速:'+Math.ceil(model_data[value].WindSpeed_DevAverValue/3600)+'m/s'}</p>
@@ -122,7 +122,7 @@ let Component = React.createClass({
                                         obj_pvd[value].map((valueA, keyA)=> {
                                             return (
                                                 
-                                                    <div className={styles.listoptbtn_2}  key={keyA}><span>{valueA.Wtname}</span>
+                                                    <div className={styles.listoptbtn_2}  key={keyA} onClick = {()=> Tofaninfo2(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'辐照度:'+Math.ceil(model_data[value].PVTSI_Aver)+'W/㎡'}</p>
@@ -149,17 +149,14 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {
-        hiden : state.vars.hiden,
-            
+    return {         
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
 
-        init: (hiden) => {
-            dispatch(actions.setVars('hiden', false));
+        init: () => {
             var obj = {
                 test:''
             }
@@ -170,7 +167,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('valuepage', value));
           dispatch(actions.setVars('actbt',key ));
           dispatch(actions.setVars('actbt1','' ));
-
+          dispatch(actions.setVars('fan_page', 'allpage'));
              
         },
         changepage3:(value,key)=>{
@@ -179,15 +176,22 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('valuepage1', value));
           dispatch(actions.setVars('actbt1',key ));
           dispatch(actions.setVars('actbt',''));
-
+          dispatch(actions.setVars('fan_page', 'allpage'));
              
         },
-        Tofaninfo1: (value,valueA,key,hiden)=> {
-            dispatch(actions.setVars('hiden', false));
+        Tofaninfo1: (value,valueA,key)=> {
             dispatch(actions.setVars('value', valueA));
+            dispatch(actions.setVars('valueid', value));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('showPage', 'fan_matrix'));
-            dispatch(actions.setVars('numpage', 'faninfo'));
+            dispatch(actions.setVars('fan_page', 'faninfo'));
+        },
+        Tofaninfo2: (value,valueA,key)=> {
+            dispatch(actions.setVars('value', valueA));
+            dispatch(actions.setVars('valueid', value));
+            dispatch(actions.setVars('actbt', key));
+            dispatch(actions.setVars('showPage', 'fan_matrix'));
+            dispatch(actions.setVars('fan_page', 'faninfo'));
         }
     };
 };

@@ -16,8 +16,8 @@ let mode=model.Model.ens;
 let nam=['TransformerStatus','AVC','AGC','PlanActPower','Capacity','TActPower','Transformer_P'];
 let header=['场站名称','升压站状态', 'AVC状态','AGC状态','计划功率MW','装机容量MW','出力MW','负荷MW'];
 
-var arr1 = [];
-var arr2 = [];
+let arr1 = [];
+let arr2 = [];
 let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
 let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 
@@ -139,6 +139,7 @@ const mapDispatchToProps = (dispatch) => {
         changepage2:(value,key)=>{
             dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('numpage', 'fanmatrix'));
+            dispatch(actions.setVars('fan_page', 'allpage'));
             dispatch(actions.setVars('valuepage', value));
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('actbt1','' ));
@@ -146,6 +147,7 @@ const mapDispatchToProps = (dispatch) => {
         changepage3:(value,key)=>{
             dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('numpage', 'pvmatrix'));
+            dispatch(actions.setVars('fan_page', 'allpage'));
             dispatch(actions.setVars('valuepage1', value));
             dispatch(actions.setVars('actbt1',key ));
             dispatch(actions.setVars('actbt',''));

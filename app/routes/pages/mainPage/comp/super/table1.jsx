@@ -35,7 +35,7 @@ let fcnum=[];
              arr.push(point[o]);
             o++;
         }
-        if(i==6){
+        if(i==4){
             arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1));
         }
            arr.push(date[key][headername[i]]);
@@ -61,7 +61,7 @@ let Component = React.createClass({
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
-                            tabaleData.data.header.map((value, key)=> {
+                            tabaleData.data.header1.map((value, key)=> {
                                 return (
                                     <div className={styles.tableHeaderItem}
                                          style={{width:(tabaleData.data.width[key])+"%"}} key={key}>{value}</div>
@@ -79,7 +79,7 @@ let Component = React.createClass({
                                         {
                                             value.map((valueC, keyC)=> {
 
-                                                 if(keyC==7){
+                                                 if(keyC==5){
                                                         if(valueC<60){
                                                              return (
                                                             <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%",color:'#e72727'}}
@@ -109,7 +109,7 @@ let Component = React.createClass({
                                                     
                                                 }
 
-                                                if(keyC==9){
+                                                if(keyC==8){
 
                                                      return (
 

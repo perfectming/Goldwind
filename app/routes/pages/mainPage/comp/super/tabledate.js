@@ -2,25 +2,22 @@ module.exports ={
 	header:[
 		'Capacity',
 		'WTCount',
-		'InverterCount',
 		'WindSpeed_DevAverValue',
-		'PVTSI_Aver',
 		'TActPower',
 		'ONL',
-		'FaultCount',
 		'OfflineCount',
 		'RepairCount',
+		'FaultCount',
 		'WFStandbyCount',
+		'WFLIMCount',
 	],
 	header1:[
 		'Capacity',
-		'WTCount',
 		'InverterCount',
-		'WindSpeed_DevAverValue',
 		'PVTSI_Aver',
 		'TActPower',
 		'PVONL',
-		'PVFLT',
 		'PVOFL',
+		'PVFLT',
 	]
 }

@@ -227,13 +227,13 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/kizb1.png'),
                 page:[
                     {
-                        name:'业务分析2-1',
-                        page:'',
+                        name:'PBA分析',
+                        page:'groupKBA',
                     },{
-                        name:'业务分析2-2',
-                        page:'',
+                        name:'损失电量分析',
+                        page:'loseElectric',
                     },{
-                        name:'业务分析2-3',
+                        name:'可靠性分析',
                         page:'',
                     }]
             },{

@@ -10,13 +10,13 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barRotime,barLoPowerValue,text}= this.props;
+        let {barRotime,barLoPowerValue,text,height}= this.props;
 
 
 
         let configPie = {
             chart: {
-                height:500,
+                height:height,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -77,6 +77,17 @@ let Component = React.createClass({
                 }
             },
             plotOptions: {
+
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
+                },
+
+
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,

@@ -56,11 +56,11 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+
                 pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
-                enabled: false //不显示highCharts版权信息
+                enabled: false
             },
             //柱子颜色
             colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31', '#EB6B34','#2623FF'],
@@ -72,18 +72,25 @@ let Component = React.createClass({
                     stacking:'nomal',
                     pointWidth: 50,
 
+                }, series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
                 }
             },
 
             xAxis: {
                 lineWidth: 1,
-                //lineColor: "red",
+
                 tickWidth: 0,
                 labels: {
-                    y: 20, //x轴刻度往下移动20px
+                    y: 20,
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize:'14px'
                     }
                 },
                 categories:machine,
