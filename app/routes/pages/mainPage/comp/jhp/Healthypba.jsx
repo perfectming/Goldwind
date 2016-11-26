@@ -13,12 +13,12 @@ var actions = require('redux/actions');
 
 let data = require('./Healthy-data');
 let month = data.data.line_month;
-let button=data.data.button;
+let button = data.data.button;
 let barLoPowerValue1 = data.data.bar_roPowerses;
 let barLoPowerValues1 = data.data.bar_roPower;
 let barLdpowerValue1 = data.data.line_lpower;
-let barLotime1= data.data.bar_lotime;
-let text0=data.data.line_date;
+let barLotime1 = data.data.bar_lotime;
+let text0 = data.data.line_date;
 let barRotime2 = data.data.bar_rotime;
 let barLoPowerValue2 = data.data.bar_roPowerses;
 let barLoPowerValues2 = data.data.bar_roPower;
@@ -28,6 +28,22 @@ let barLoPowerValue3 = data.data.bar_roPowerses;
 let barLoPowerValues3 = data.data.bar_roPower;
 let barLdpowerValue3 = data.data.line_lpower;
 
+let sort0 = data.data.sort1;
+let x0 = [];
+let x1 = [];
+let x2 = [];
+let x3 = [];
+let x4 = [];
+let x5 = [];
+(function () {
+
+    for (var i = 0; i < 12; i++) {
+        x4[i] = sort0[i].name;
+        x5[i] = sort0[i].time;
+    }
+
+})();
+
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -35,7 +51,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wind,winds,windss,buttonAction,actbt=0,changecolor, inputOnChange, onFocus,changepageT} = this.props;
+        let {wind, winds, windss, buttonAction, actbt = 0, changecolor, gogogo,back,more, arr, arr2} = this.props;
         return (
 
 
@@ -48,7 +64,8 @@ let Component = React.createClass({
                     {
                         data.data.yearelectric[0].wind.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key)}>
+                                <div className={actbt === key ? styles.inmonth : styles.inmonth2} key={key}
+                                     onClick={() => changecolor(value, key)}>
                                     {value.name}
                                 </div>
                             )
@@ -60,7 +77,10 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_a text={text0[actbt]+"月份集团各区域PBA"} barLotime={barLotime1}  barLdpowerValue={winds==undefined? barLoPowerValue1:winds} barLoPowerValues={wind==undefined? barLoPowerValues1:wind} barLoPowerValue={windss==undefined? barLdpowerValue1:windss} ></Hly_a>
+                        <Hly_a text={text0[actbt] + "月份集团各区域PBA"} barLotime={barLotime1}
+                               barLdpowerValue={winds == undefined ? barLoPowerValue1 : winds}
+                               barLoPowerValues={wind == undefined ? barLoPowerValue2 : wind}
+                               barLoPowerValue={windss == undefined ? barLoPowerValue1 : windss}></Hly_a>
                         <div className={styles.logo}>
 
                         </div>
@@ -72,27 +92,27 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
-                        <Hly_pba height={500} text={text0[5]+"月份"+text0[4]+"区域各风场PBA"} barRotime={barRotime2} barLoPowerValue={barLoPowerValue2} barLoPowerValues={barLoPowerValues2} barLdpowerValue={barLdpowerValue2}></Hly_pba>
+                        <Hly_pba height={500} text={text0[5] + "月份" + text0[4] + "区域各风场PBA"} barRotime={barRotime2}
+                                 barLoPowerValue={barLoPowerValue2} barLoPowerValues={barLoPowerValue2}
+                                 barLdpowerValue={barLoPowerValue1}></Hly_pba>
                     </div>
 
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
                         <div className={styles.rbox3}>
-                            {
-                                button.map((value,key)=>{
-                                    return(
-
-                                        <button key={key} className={styles.button}>
-                                            {value}
-                                        </button>
-                                    )
-                                })
-                            }
+                            <div className={styles.rbox30}>
+                                <i></i>
+                                <span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机PBA"}</span>
+                            </div>
+                            <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
+                            <button className={styles.button} onClick={() => back(sort0)}>后10</button>
+                            <button className={styles.button} onClick={() => more()}>更多</button>
                         </div>
 
 
-
                         <div className={styles.rbox4}>
-                            <Hly_pbas  height={430} text={text0[3]+'区域'+text0[4]+'风场各风机PBA'} barRotimes={barRotimes3} barLoPowerValue={barLoPowerValue3} barLoPowerValues={barLoPowerValues3} barLdpowerValue={barLdpowerValue3}></Hly_pbas>
+                            <Hly_pbas height={430} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
+                                      barRotimes={arr2 == null ? x4 : arr2} barLoPowerValue={arr == null ? x5 : arr}
+                                      barLoPowerValues={arr == null ? x5 : arr} barLdpowerValue={arr == null ? x5 : arr}></Hly_pbas>
                             <div className={styles.logo}>
 
                             </div>
@@ -107,10 +127,12 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        actbt:state.vars.actbt,
-        wind:state.vars.wind,
-        winds:state.vars.winds,
-        windss:state.vars.windss,
+        actbt: state.vars.actbt,
+        wind: state.vars.wind,
+        winds: state.vars.winds,
+        windss: state.vars.windss,
+        arr: state.vars.arr,
+        arr2: state.vars.arr2,
     }
 };
 
@@ -121,11 +143,44 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor:(value,key)=>{
+        changecolor: (value, key) => {
             dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('wind',value.plan ));
-            dispatch(actions.setVars('winds',value.actrul ));
-            dispatch(actions.setVars('windss',value.actruls ));
+            dispatch(actions.setVars('wind', value.plan));
+            dispatch(actions.setVars('winds', value.actrul));
+            dispatch(actions.setVars('windss', value.actruls));
+        },
+        gogogo: (sort0) => {
+            (function () {
+                sort0.sort(function (a, b) {
+                    return b.time - a.time;
+                })
+                for (var i = 0; i < 12; i++) {
+                    x0[i] = sort0[i].name;
+                    x1[i] = sort0[i].time;
+                }
+
+            })();
+            dispatch(actions.setVars('arr', x1))
+            dispatch(actions.setVars('arr2', x0))
+
+
+        },
+        back: (sort0) => {
+            (function () {
+                sort0.sort(function (a, b) {
+                    return a.time - b.time;
+                })
+                for (var i = 0; i < 12; i++) {
+                    x2[i] = sort0[i].name;
+                    x3[i] = sort0[i].time;
+                }
+
+            })();
+            dispatch(actions.setVars('arr', x3))
+            dispatch(actions.setVars('arr2', x2))
+        },
+        more: () => {
+
         }
     };
 };
