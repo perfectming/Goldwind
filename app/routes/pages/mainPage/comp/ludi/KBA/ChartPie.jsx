@@ -12,18 +12,18 @@ let Component = React.createClass({
     	let {text,lose,}=this.props;
         let configPie = {
             chart: {
-                height:450,
+                height:400,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                borderRadius:0
             },
             title: {
-                text: text+'<br>PBA',
-                align:'left',
+                text: text+'PBA',
+                align:'center',
                 style:{
                     color:"#fff",
                     fontSize:"25px",
@@ -33,7 +33,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 align:"center",
-                verticalAlign: "top",
+                verticalAlign: "bottom",
                 itemStyle: {
                     color: "#fff",
                     fontSize:"18px",
@@ -50,21 +50,15 @@ let Component = React.createClass({
             },
             colors: [ '#5b9bd5', '#ed7d31','#a5a5a5','#ffc000', '#ffd689','#5b9bd5'],
             plotOptions: {
-                pie: {
-                	dataLabels: {
-	                    enabled: true,
-	                    distance: -50,
-	                    style: {
-	                        fontSize: '16',
-	                        color: 'white',
-	                        textShadow: '0px 1px 2px black'
-	                    }
-                	},
-	            startAngle: -180,
-	            endAngle: 180,
-	            center: ['50%', '45%']
-            	}
-            },
+	            pie: {
+	                allowPointSelect: true,
+	                cursor: 'pointer',
+	                dataLabels: {
+	                    enabled: false
+	                },
+	                showInLegend: true
+	            }
+	        },
             xAxis: {
                 lineWidth: 1,
                //lineColor: "red",
@@ -94,7 +88,6 @@ let Component = React.createClass({
             series: [{
             type: 'pie',
             name: '集团区域1',
-            innerSize: '80%',
             data: lose,
         }]
         };
