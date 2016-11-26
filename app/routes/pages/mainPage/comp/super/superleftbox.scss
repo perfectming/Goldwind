@@ -6,8 +6,9 @@
       .states{
         position:relative;
         width:100%;
-        height:143px;
+        height:140px;
         padding-top:35px;
+        padding-left:22px;
         margin-right:15px;
         border:1px solid #3e4c67;
         background: rgba(44,61,71,0.4);
@@ -17,9 +18,9 @@
       
           .gfzb{
             width:100%;
-            height:25px;
+            height:20px;
             padding-left:20px;
-            line-height:25px;
+            line-height:20px;
             font-size:16px;
             font-weight:bold;
             color:#fff;
@@ -28,16 +29,15 @@
           .num{
             width:100%;
             height:25px;
-            padding-left:20px;
             line-height:25px;
-            font-size:16px;
+            font-size:14px;
             color:#fff;
             display:block;
             a{ width:46%;}
             .anum1{
               font-family:'微软雅黑';
               display:inline-block;
-              font-size:16px;
+              font-size:14px;
               color:#fff;
             }
           
@@ -48,7 +48,7 @@
               color:#fff;
           
               b{
-                font-size:16px;
+                font-size:14px;
                 color:#31f3fb;
                 margin-right:5px;                              
                 font-weight:normal;
@@ -60,43 +60,36 @@
       }
       .states2{
        height:121px;
-       margin-top:20px;
+       margin-top:15px;
          .box{
           width:50%;
-          height:20px;
+          height:22px;
           display:inline-block;
          .block{
           float:left;
-            width:16px;
-            height:16px;
+            width:14px;
+            height:14px;
             border-radius:2px;
             color:#f00;
-            margin:4px 5px 10px 20px;
             img{
-            margin:0 0 0 -5px;
+            margin:-3px 0 0 -5px;
             }
-          
          }
          .contect{
-          height:16px;
-          line-heigh:16px;
-           float:left;
+          height:14px;
+          line-heigh:14px;
+          float:left;
           display:inline-block;
-            margin:7px 10px 0 0; 
-
+          margin:0px 10px 0 0; 
          }
          .numx{
-
           height:20px;
           line-heigh:20px;
            float:left;
            font-weight:bold;
-          display:inline-block;
-           
-            margin-top:8px; 
-
+           display:inline-block;
+           margin-top:0px; 
          }
-      
 }
       }
      
@@ -112,9 +105,9 @@
     .Speed{
       position:relative;
       width:100%;
-      height:121px;
+      height:120px;
       border:1px solid #3e4c67;
-      margin-top:22px;
+      margin-top:15px;
       padding-top:35px;
       background: rgba(44,61,71,0.4);
       .spedc{
@@ -125,37 +118,35 @@
        .box{
    
           width:50%;
-          height:14px;
+          height:20px;
           display:inline-block;
          .block{
           float:left;
-            width:16px;
-            height:16px;
+            width:14px;
+            height:14px;
             border-radius:2px;
             color:#f00;
-            margin:4px 5px 10px 20px;
+            margin:0px 5px 0px 0px;
             img{
             margin:0 0 0 -5px;
             }
           
          }
          .contect{
-          height:16px;
-          line-heigh:16px;
+          height:14px;
+          line-heigh:14px;
            float:left;
           display:inline-block;
-            margin:7px 10px 0 0; 
+            margin:0px 10px 0  3px; 
 
          }
          .num{
 
-          height:20px;
-          line-heigh:20px;
+          height:14px;
+          line-heigh:14px;
            float:left;
            font-weight:bold;
           display:inline-block;
-           
-            margin-top:8px; 
 
          }
       
@@ -189,9 +180,9 @@
       position:relative;
       width:100%;
       height:160px;
-      padding-top:36px;
+      padding-top:30px;
       border:1px solid #3e4c67;
-      margin-top:22px;
+      margin-top:15px;
       background: rgba(44,61,71,0.4);
       p{
         padding-left:45px;
@@ -240,9 +231,9 @@
     .Completion{
       position:relative;
       width:100%;
-      height:365px;
-      padding-top:12px;
-      margin-top:22px;
+      height:315px;
+      padding-top:5px;
+      margin-top:15px;
       border:1px solid #3e4c67;
       background: rgba(44,61,71,0.4);
 

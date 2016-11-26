@@ -4,22 +4,22 @@
       }
 overflow:hidden;
    .leftBox{
-      width: 478px;
+      width: 400px;
       float:left;
       padding-bottom:20px;
 }
  .rightBox{
     display:inline-block;
-    margin-left:25px;
-    width: 1222px;
+    margin-left:15px;
+    width: 1340px;
     padding-bottom:20px;
     .chart_pie{
       position:relative;
       width:100%;
       .ehart{
         position:relative;
-         width:450px;
-         height:280px;
+         width:410px;
+         height:275px;
          float:left;
          border:1px solid #3e4c67;
          background: rgba(44,61,71,0.4);
@@ -53,8 +53,8 @@ overflow:hidden;
        }
       }
       .spanL{
-      width:740px;
-      margin-left:25px;
+      width:915px;
+      margin-left:15px;
       padding-top:66px;
       }
 
@@ -62,12 +62,12 @@ overflow:hidden;
     .chart_bar{
       position:relative;
       width:100%;
-      margin-top:25px;
+      margin-top:15px;
      
    
       
       .linebox{
-         width:49%;
+         width:662px;
          position:relative;
          float:left;
          height:184px;
@@ -83,13 +83,13 @@ overflow:hidden;
     .table{ 
       position:relative;
       width:100%;
-      height:272px;
+      height:242px;
       overflow:hidden;
       border:1px solid #3e4c67;
-      margin-top:25px;
+      margin-top:15px;
       background: rgba(44,61,71,0.4);
     }
-    .bot{margin-top:0px; height:208px;}
+    .bot{margin-top:0px; height:186px;}
     
 
  }
