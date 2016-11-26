@@ -1,7 +1,8 @@
 .box{
+     
     overflow:hidden;
     .monthbox{
-    width: 100%;
+    width: 98%;
     height: 80px;
     list-style: none;
     background-color: #21242b;
@@ -48,6 +49,13 @@
       li:last-child:hover{
       background:#156e74;
       }
+      .red{
+    background:#20FEFF;
+    color:black;
+  }
+  .green{
+    color:white;
+  }
     }
   .bgc{
     position:absolute;
@@ -67,15 +75,21 @@
 
     .areabox{
       position:relative;
-            width:100%;
+            width:99%;
+            margin:0 auto;
             height:300px;
             margin-bottom: 12px;
-
+        border-radius:10px
            }
+       .shadow:hover{
+        box-shadow:0 0 15px #fff;
+      }
     .windbox{
        float: left;
-       width: 49%;
-       height: 400px;
+       width: 48%;
+       height: 398px;
+       margin-left:12px;
+        border-radius:10px;
     }
      .bigbox{
        float:right;
@@ -85,6 +99,7 @@
     position:relative;
     border-radius:10px;
     background-color: #282F37;
+    margin-right:10px;
     .coverbox{
       margin-top:50px;
 
@@ -170,5 +185,5 @@
       background-color:white;
       }
     }
-
+   
 }

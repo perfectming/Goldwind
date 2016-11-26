@@ -9,9 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaRecordProfit=data.areaRecordProfit;
+        let {areaName,areaRecordCost,areaRecordProfit,TBA,text}=this.props;
         let configPie = {
             chart: {
                 height:300,
@@ -24,7 +22,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '十月各区域收益率',
+                text: text,
                 align:'left',
                  x : "0",
                 style:{
@@ -106,7 +104,7 @@ let Component = React.createClass({
                     name:"TBA",
                     type:'line',
                     color:'blue',
-                    data:[5,6,6,7,4,5,6,7,7,9,1,9],}
+                    data:TBA,}
                 ]
         };
         return (

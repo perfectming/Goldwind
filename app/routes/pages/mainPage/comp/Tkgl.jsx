@@ -21,7 +21,7 @@ let Component = React.createClass({
         this.props.init(data);
     },
     render() {
-        let {table,openAGC,closeAGC,changeTableItem} = this.props;
+        let {change,change1,table,openAGC,closeAGC,changeTableItem} = this.props;
         let arr1 = [];
         let arr2 = [];
         let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
@@ -36,7 +36,7 @@ let Component = React.createClass({
         let plan=0,power=0,allC=0;
         return (
             <div className={styles.tkglBox}>
-                <button onClick={openAGC} className={styles.agc}>AGC调节</button>
+                <a onClick={openAGC} className={styles.agc}>AGC调节</a>
                     <div className={styles.tableBox} id="AGC">
                         <div className={styles.tableHeaderBox}>
                             {
@@ -60,12 +60,11 @@ let Component = React.createClass({
                                                 nam.map((valueC, keyC)=> {
                                                     if(keyC<2){
                                                         return (
-                                                            <div className={styles.tableContentItem}
+                                                            <div className={styles.tableContentItem} onClick={(e)=>change(key,keyC)}
                                                                  style={{width:1000/header.length}} key={keyC}>
-                                                                <a href={"#jya"+key+keyC} className={data[value][valueC]=='#669999'?styles.succ:styles.defa}
-                                                                   id={"jya"+key+keyC}></a>
-                                                                <a href={"#jyb"+key+keyC} className={data[value][valueC]=='#669999'?styles.defa:styles.succ}
-                                                                   id={"jyb"+key+keyC}></a>
+                                                                <img src={data[value][valueC]!=='#669999'?succ:defa} className={styles.turn}/>
+                                                                <img src={data[value][valueC]=='#669999'?succ:defa} className={styles.turn}
+                                                                   id={"jy"+key+keyC}/>
                                                             </div>
                                                         )
                                                     }
@@ -92,12 +91,11 @@ let Component = React.createClass({
                                             nam.map((valueC, keyC)=> {
                                                 if(keyC<2){
                                                     return (
-                                                        <div className={styles.tableContentItem}
+                                                        <div className={styles.tableContentItem} onClick={(e)=>change1(key,keyC)}
                                                              style={{width:1000/header.length}} key={keyC}>
-                                                            <a href={"#jyc"+key+keyC} className={data[value][valueC]=='#669999'?styles.succ:styles.defa}
-                                                               id={"jyc"+key+keyC}></a>
-                                                            <a href={"#jyd"+key+keyC} className={data[value][valueC]=='#669999'?styles.defa:styles.succ}
-                                                            id={"jyd"+key+keyC}></a>
+                                                            <img src={data[value][valueC]!=='#669999'?succ:defa} className={styles.turn}/>
+                                                            <img src={data[value][valueC]=='#669999'?succ:defa} className={styles.turn}
+                                                                 id={"jd"+key+keyC}/>
                                                         </div>
                                                     )
                                                 }
@@ -173,6 +171,16 @@ const mapDispatchToProps = (dispatch) => {
             tableV[i][j] = value;
             dispatch(actions.setObjs('tableContent', tableV));
         },
+        change:(i,j)=>{
+            document.getElementById("jy"+i+j).style.display=='none'?
+            document.getElementById("jy"+i+j).style.display='block':
+            document.getElementById("jy"+i+j).style.display='none';
+        },
+        change1:(i,j)=>{
+            document.getElementById("jd"+i+j).style.display=='none'?
+                document.getElementById("jd"+i+j).style.display='block':
+                document.getElementById("jd"+i+j).style.display='none';
+        }
     };
 };
 

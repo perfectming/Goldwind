@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Healtychart from './Healtychart.jsx';
 import icono from './wind_logo.png';
-import Month from './Month.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
+console.log(data.wind)
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -15,18 +15,25 @@ let Component = React.createClass({
     render() {
         let areaRecordProfit=data.areaRecordProfit;
         let machine=data.machine;
-        let text =data.text;
-
+        let text =data.textHealty;
+      let{actbt=0,changpage,wind}=this.props;
         return (
+
             <div className={styles.box}>
-                <Month month={['1月份','2月份','3月份','4月份','5月份','6月份','7月份','8月份','9月份','返回']}></Month>
-                <div className={styles.bigbox}>
+                 <ul className={styles.monthbox}>
+                    {
+                        data.wind.map((value,key)=>{
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
+                        })
+                    }
+                </ul>
+                <div className={`${styles.bigbox} ${styles.shadow}`}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
-                               <Healtychart machine={machine} areaRecordProfit={areaRecordProfit[0]}  ></Healtychart>
+                               <Healtychart machine={machine} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} ></Healtychart>
                         </div>
                          <div className={styles.tik}>
-                        <p>{text[3]}</p>
+                        <p>{text[actbt]}</p>
                     </div>
                     </div>
                     <div className={styles.imgq}>
@@ -51,7 +58,8 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-
+         actbt:state.vars.actbt,
+         wind:state.vars.wind,
 
     }
 };
@@ -66,7 +74,7 @@ const mapDispatchToProps = (dispatch) => {
         ,
         changpage :(value,key)=>{
             dispatch(actions.setVars('actbt',key ));
-            dispatch(actions.setVars('text',text[key] ));
+            dispatch(actions.setVars('wind',value.plan));
         }
 
     };

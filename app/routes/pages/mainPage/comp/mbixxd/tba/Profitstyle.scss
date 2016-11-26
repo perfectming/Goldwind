@@ -64,21 +64,28 @@
    .covers{
      position:relative;
    }
-
+  
     .areabox{
       position:relative;
-            width:100%;
+            width:99%;
             height:300px;
+           margin:0 auto;
             margin-bottom: 12px;
-
+            border-radius:10px;
+      
            }
+   .shadow:hover{
+    box-shadow:0 0 15px #fff;
+    }
     .windbox{
        float: left;
-       width: 49%;
+       width: 48%;
+       margin-left:10px;
        height: 400px;
+       border-radius:10px;
     }
      .bigbox{
-       float:right;
+     float:right;
     height:50%;
     width:50%;
     border:1px solid #282F37;

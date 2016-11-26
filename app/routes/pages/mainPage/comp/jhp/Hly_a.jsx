@@ -47,6 +47,7 @@ let Component = React.createClass({
             },
             //图例说明
             legend: {
+
                 align:"right",
                 verticalAlign: "top",
                 itemStyle: {
@@ -134,6 +135,7 @@ let Component = React.createClass({
             },
                 {
                     name: '停机时间',
+
                     color:'#A2D04D',
                     type: 'column',
                     data: barLoPowerValue,
