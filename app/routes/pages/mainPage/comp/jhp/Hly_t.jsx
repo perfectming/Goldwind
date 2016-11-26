@@ -14,7 +14,7 @@ let Component = React.createClass({
     render() {
 
 
-        let {barLoPowerValue,barLoTime,text}=this.props;
+        let {barLoPowerValue,barLoTime,text,}=this.props;
         let configPie = {
             chart: {
                 height:400,
@@ -65,6 +65,7 @@ let Component = React.createClass({
             colors: ['#4CDB9D', '#1E664A', '#000','#134833', '#082B1F']
             ,
             plotOptions: {
+
                 pie: {
                     allowPointSelect: false,
                     cursor: 'pointer',
@@ -80,6 +81,14 @@ let Component = React.createClass({
                 }
             },
             plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
+                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,

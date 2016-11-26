@@ -11,9 +11,8 @@ let Component = React.createClass({
 
     render() {
 
-        let barlotimes = data.data.bar_lotime;
-        let barlopowers = data.data.bar_loPowers;
-        let barlopowerp = data.data.bar_loPowerp;
+        let {barlotimes,barlopowers,barlopowerp,text} = this.props;
+
 
 
         let configPie = {
@@ -35,7 +34,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '五月集团各区域发电量',
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
@@ -104,7 +103,7 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
-                max:5000,
+
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {

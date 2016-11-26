@@ -10,9 +10,10 @@ let Component = React.createClass({
     },
 
     render() {
+    	let {title,month,actrul,plan,unit,nameOne,nameTwo}=this.props;
         let configPie = {
             chart: {
-                height:390,
+                height:370,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -22,7 +23,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '年发电量',
+                text: title,
                 align:'left',
                  x : "0",
                 style:{
@@ -52,21 +53,6 @@ let Component = React.createClass({
             colors: [ '#1E664A', '#4CDB9D','#000','#134833', '#082B1F']
             ,
             plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
-                bar:{
-                    animation: true
-                }
-            },
-            plotOptions: {
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
@@ -84,14 +70,23 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:data.yearelectric[0].month,
+                categories:month,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
+                title:{
+                	text:unit,
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -15,
+	                x:-10,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+                },
                 labels: {
-                	format:'{value}(kWh)',
+                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -100,13 +95,25 @@ let Component = React.createClass({
                 },
             },
             series: [{
-                name: '计划电量',
+                name: nameOne,
                 type: 'column',
-                data: data.yearelectric[0].plan,
+                data: plan,
+                cursor: 'pointer',
+                events: {
+                    click: function(e) {
+                    	e.point.category;
+                    }
+                }
+
             },{
-            	name: '实际电量',
+            	name: nameTwo,
                 type: 'column',
-                data: data.yearelectric[0].actrul,
+                data: actrul,
+                cursor: 'pointer',
+                events: {
+                    click: function(e) {}
+                    }
+
             }]
         };
         return (

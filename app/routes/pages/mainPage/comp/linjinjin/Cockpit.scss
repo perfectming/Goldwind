@@ -214,7 +214,8 @@
    		height:500px;
       position:relative;
    		float:left;
-      background:url('../../img/comp/gzbg.png')  100% 100%;
+      background:url('../../img/comp/gzbg.png') center center;
+      background-repeat:no-repeat;
      h6{
      font-weight:normal;
      padding:20px 0 0 20px;

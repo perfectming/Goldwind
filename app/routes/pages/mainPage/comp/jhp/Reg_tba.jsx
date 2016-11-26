@@ -10,12 +10,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let barRotime = data.data.bar_rotime;
-        let barLotime = data.data.bar_lotime;
-        let barLoPowerValue = data.data.bar_roPowerses;
-        let barLoPowerValues = data.data.bar_roPower;
-        let barLdpowerValue = data.data.line_lpower;
-        let barLpdpowerValue = data.data.line_pdate;
+
+        let {barLotime,barLoPowerValue,barLoPowerValues,barLdpowerValue,text} = this.props;
+
+
 
         let configPie = {
             chart: {
@@ -36,7 +34,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '11月份集团各风场TBA',
+                text: text,
 
                 align:'left',
                 x : "0",
@@ -109,7 +107,7 @@ let Component = React.createClass({
                 // lineColor: "red",
                 //tickWidth: 4,
                 title:'小时',
-                max:400,
+
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
@@ -119,7 +117,7 @@ let Component = React.createClass({
                 },
             },{
                 title:'PBA%',
-                max:100,
+
                 oppsite:true,
                 labels: {
                     y: 10, //x轴刻度往下移动20px
@@ -166,7 +164,7 @@ let Component = React.createClass({
                     name: 'TBA',
                     type: 'line',
                     color:'#0000ff',
-                    data: barLdpowerValue
+                    data: barLdpowerValue,
                 },
 
             ]

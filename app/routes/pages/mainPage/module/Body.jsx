@@ -6,7 +6,7 @@ import From from '../comp/From.jsx';
 import Table from '../comp/Table.jsx';
 import Super from '../comp/Super.jsx';
 import Test from '../comp/Test.jsx';
-import Distribution from '../comp/Distribution.jsx';
+import Distribution from '../comp/linjinjin/distribution.jsx';
 import Tkgl from '../comp/Tkgl.jsx';
 import Power from '../comp/power/Power.jsx';
 import Tab from './Tab.jsx';
@@ -23,9 +23,10 @@ import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
 import Fault from '../comp/yAll/Fault.jsx';
-import u865 from '../img/comp/u865.png';
-import u867 from '../img/comp/u867.png';
-import u869 from '../img/comp/u869.png';
+import u865 from '../img/comp/gz_icon.png';
+import u867 from '../img/comp/tx_icon.png';
+import u869 from '../img/comp/xx_icon.png';
+import u871 from '../img/comp/ss_icon.png';
 
 import Baotou from '../comp/ludi/branch/Baotou.jsx';
 import Windbtpage from '../comp/ludi/branch/Windbtpage.jsx';
@@ -49,6 +50,8 @@ import Healthygen from '../comp/jhp/Healthygen.jsx';
 import Healthygens from '../comp/jhp/Healthygens.jsx';
 import Regiopower from '../comp/jhp/Regiopower.jsx';
 import Regiopowers from '../comp/jhp/Regiopowers.jsx';
+import Regiotba from '../comp/jhp/Regiotba.jsx';
+import Regiotbas from '../comp/jhp/Regiotbas.jsx';
 
 import Areace from '../comp/mbixxd/Areace.jsx';
 import Areacet from '../comp/mbixxd/Areacet.jsx';
@@ -58,8 +61,11 @@ import Healty from '../comp/mbixxd/Healty.jsx';
 import Healthytime from '../comp/mbixxd/Healthytime.jsx';
 import PBAtime from '../comp/mbixxd/PBAtime.jsx';
 import PBAspace from '../comp/mbixxd/PBAspace.jsx';
+import Profits from '../comp/mbixxd/earnings/Profits.jsx';
+import Profitss from '../comp/mbixxd/tba/Profitss.jsx';
+import Profitsss from '../comp/mbixxd/tbatime/Profitsss.jsx';
 
-
+import Legend from '../comp/super/tootipbox.jsx';
 
 
 
@@ -71,13 +77,15 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {showPage, tabOpt, tab, flag=true,cssif2} = this.props;
+        let {showPage, tabOpt, tab, flag=true,cssif2,legend=false,navlegend=false,changelegend} = this.props;
         return (
             <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2===true? styles.animate : styles.anmate2}`}>
                 <div className={styles.fiexd}>
+                    <img src={u871} onClick={()=>changelegend(legend)}/>
                     <img src={u865}/>
                     <img src={u867}/>
                     <img src={u869}/>
+                   {legend===true && <Legend></Legend>}
                 </div>
                 <Tab tabOpt={tabOpt} tab={tab}/>
                 {showPage === 'chart' && <Chart></Chart>}
@@ -100,17 +108,16 @@ let Component = React.createClass({
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
                 {showPage === 'fault' && <Fault></Fault>} 
 
-                {showPage === 'baotou' && <Baotou></Baotou>};
-                {showPage === 'windbtpage' && <Windbtpage></Windbtpage>};
-                {showPage === 'xilin' && <Xilin></Xilin>};
-                {showPage === 'area' && <Area></Area>};
-                {showPage === 'group' && <Group></Group>};
-                {showPage === 'windpage' && <Windpage></Windpage>};
+                {showPage === 'baotou' && <Baotou></Baotou>}
+                {showPage === 'windbtpage' && <Windbtpage></Windbtpage>}
+                {showPage === 'xilin' && <Xilin></Xilin>}
+                {showPage === 'area' && <Area></Area>}
+                {showPage === 'group' && <Group></Group>}
+                {showPage === 'windpage' && <Windpage></Windpage>}
 
-                {showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
-                {showPage === 'areaKBA' && <AreaKBA></AreaKBA>};
-                {showPage === 'loseElectric' && <LoseElectric></LoseElectric>};
-				{showPage === 'groupKBA' && <GroupKBA></GroupKBA>};
+                {showPage === 'groupKBA' && <GroupKBA></GroupKBA>}
+                {showPage === 'areaKBA' && <AreaKBA></AreaKBA>}
+                {showPage === 'loseElectric' && <LoseElectric></LoseElectric>}
 
 
 
@@ -137,7 +144,9 @@ let Component = React.createClass({
                 {showPage === 'healthytime' && <Healthytime></Healthytime>}
                 {showPage === 'pbatime' && <PBAtime></PBAtime>}
                 {showPage === 'pbaspace' && <PBAspace></PBAspace>}
-
+                {showPage === 'profits' && <Profits></Profits>}
+                {showPage === 'profitss' && <Profitss></Profitss>}
+                {showPage === 'profitsss' && <Profitsss></Profitsss>}
 
                 <div className={styles.clearbox}></div>
             </div>
@@ -151,6 +160,7 @@ const mapStateToProps = (state) => {
         showPage: state.vars.showPage,
         flag: state.vars.bodypage,
         cssif2: state.vars.cssif2,
+        legend: state.vars.legend,
     }
 };
 
@@ -158,7 +168,15 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
             dispatch(actions.setVars('bodypage', false));
+
+            
         },
+        changelegend:(legend)=>{
+            legend=true;
+            dispatch(actions.setVars('legend', legend));
+        },
+       
+       
     };
 };
 

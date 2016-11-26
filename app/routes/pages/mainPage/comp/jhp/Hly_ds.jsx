@@ -10,14 +10,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let barRotime = data.data.bar_rotime;
-        let barLotime = data.data.bar_lotime;
-        let barLoPowerValue = data.data.bar_loPower;
-        let barLdpowerValue = data.data.line_date;
-        let barLpdpowerValue = data.data.line_pdate;
-        let barlinepdats = data.data.line_pdates;
-        let barlinepdat = data.data.line_pdatess;
-        let barLpdpowerValues = data.data.line_pdates;
+
+        let {barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
+
+
 
         let configPie = {
             chart: {
@@ -38,7 +34,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '集团11月每日PBA',
+                text: text,
                 align:'left',
                 x : "0",
                 style:{

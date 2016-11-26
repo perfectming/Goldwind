@@ -22,10 +22,9 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                // borderRadius:10
             },
             title: {
-                text: '11月1区域1风场各风机TBAA',
+                text: '11月1区域1风场各风机TBA',
                 align:'left',
                  x : "0",
                 style:{
@@ -35,7 +34,6 @@ let Component = React.createClass({
                     fontWeight:700
                 }
             },
-            //图例说明
             legend: {
                 align:"right",
                 verticalAlign: "top",
@@ -47,46 +45,37 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
-                enabled: false //不显示highCharts版权信息
+                enabled: false
             },
           colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31', '#EB6B34','#2623FF'],
 
-            plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
-                bar:{
-                    animation: true
-                }
-            },
+         
             plotOptions: {
                 column: {
                     pointPadding: 0,
                     borderWidth: 0,
                     pointWidth: 15,
                     stacking:'nomal',
+                }, series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
                 }
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
-                    y: 20, //x轴刻度往下移动20px
+                    y: 20,
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize:'14px'
                     }
                 },
                 categories:fan,
@@ -104,20 +93,7 @@ let Component = React.createClass({
                     opposite:true,
                 }
             ],
-              // 插入图片
-          labels:{
-             items:[{
-                 html:"<div>123</div>",
-                 style:{
-                    left:"-40px",
-                    top:'-35px',
-                    color:'red',
-                    fontSize:'30px',
-                 }
-                
-             }]
 
-          },
             series: [{
                 name: '收入',
                 type: 'column',

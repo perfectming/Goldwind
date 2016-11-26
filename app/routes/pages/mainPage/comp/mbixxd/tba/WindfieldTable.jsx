@@ -10,9 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let windFiled=data.windFiled;
-        let windCost=data.windCost;
-        let windProfit=data.windProfit;
+        let{ windFiled,areaRecordProfitt,areaRecordCostss,areaRecordCostsS1,areaRecordCostsS2,areaRecordCostsS3,areaRecordCostsS4,text2,}=this.props
         let configPie = {
             chart: {
                 height:400,
@@ -25,7 +23,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '11月份1区域各风场TBA',
+                text: text2,
                 align:'left',
                  x : "0",
                 style:{
@@ -35,7 +33,6 @@ let Component = React.createClass({
                       fontWeight:700,
                 }
             },
-            //图例说明
             legend: {
                 align:"right",
                 verticalAlign: "top",
@@ -47,24 +44,15 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
-                enabled: false //不显示highCharts版权信息
+                enabled: false
             },
-           
+            colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31','#EB6B34'],
+
             plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
+
                 bar:{
                     animation: true
                 }
@@ -73,31 +61,26 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    stacking: 'normal',
                     pointWidth: 15,
+                    stacking:'normal',
+                }, series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            alert('X轴的值：'+e.point.category);
+                        }
+                    }
                 }
-            },
-          colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31', '#EB6B34','#2623FF'],
-              // 插入图片
-          labels:{
-             items:[{
-                 html:"<div>123</div>",
-                 style:{
-                    left:"-40px",
-                    top:'-35px',
-                    color:'red',
-                    fontSize:'30px',
-                 }
-                
-             }]
 
-          },
+            },
+              // 插入图片
+         
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
+
                 tickWidth: 0,
                 labels: {
-                    y: 20, //x轴刻度往下移动20px
+                    y: 20,
                     style: {
                         color: '#fff',//颜色
                         fontSize:'14px'  //字体
@@ -105,68 +88,51 @@ let Component = React.createClass({
                 },
                 categories:windFiled,
             },
-            yAxis: [{
-              min:0,
-                title:{
-                    text:'kwh'
-                }
+            yAxis: {
+                labels: {
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
+                    }
+                },
             },
-                {
-                    title:{
-                        text:'TBA',
-                    },
-                    opposite:true,
-                }
-            ],
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
-            //     labels: {
-            //         y: 10, //x轴刻度往下移动20px
-            //         style: {
-            //             color: '#fff',//颜色
-            //             fontSize:'14px'  //字体
-            //         }
-            //     },
-            // },
-            series: [{
+            series:  [{
                 name: '实际发电量',
                 type: 'column',
-                data: windProfit
+                data: areaRecordProfitt,
             },
             {
-            	name: '四',
+                name: '四',
                 type: 'column',
-                data: windCost,
-                color:'#EB6B34',
-                stack:'waste'
+                data: areaRecordCostsS1,
+                stack:'first'
+            },
+            {
+                name: '大',
+                type: 'column',
+                data: areaRecordCostsS2,
+                stack:'first',
+            },
+            {
+                name: '损',
+                type: 'column',
+                data: areaRecordCostsS3,
+                stack:'first',
+            },
+            {
+                name: '失',
+                type: 'column',
+                data: areaRecordCostsS4,
+                stack:'first',
             },
                 {
-                    name: '大',
-                    type: 'column',
-                    data: windCost,
-                    stack:'waste'
+                    name: 'TBA',
+                    type: 'line',
+                    data: areaRecordCostss,
+                    stack:'first',
+                    color:'blue',
                 },
-                {
-                    name: '成',
-                    type: 'column',
-                    data: windCost,
-                    stack:'waste'
-                },
-                {
-                    name: '本',
-                    type: 'column',
-                    data: windCost,
-                    stack:'waste'
-                },{
-                    name:'TBA',
-                    type:'line',
-                    data:[80,30,3,36,70,70,70,70,80,80,80,80],
-                    yAxis:1,
-                }
-
-
-
 
             ]
         };

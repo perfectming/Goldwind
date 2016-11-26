@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Healtychart from './Healtychart.jsx';
 import icono from './wind_logo.png';
+import Month from './Month.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
@@ -11,26 +12,21 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-
     render() {
+        let areaRecordProfit=data.areaRecordProfit;
+        let machine=data.machine;
+        let text =data.text;
+
         return (
             <div className={styles.box}>
-                <ul className={styles.monthbox}>
-                    {
-                        month.map((value,key)=>{
-                            return(<li key={key}>{value}</li>)
-                        })
-                    }
-                </ul>
+                <Month month={['1月份','2月份','3月份','4月份','5月份','6月份','7月份','8月份','9月份','返回']}></Month>
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
-                            <div>
-                               <Healtychart></Healtychart>
-                            </div>
+                               <Healtychart machine={machine} areaRecordProfit={areaRecordProfit[0]}  ></Healtychart>
                         </div>
                          <div className={styles.tik}>
-                        <p>11月份各风机健康度</p>
+                        <p>{text[3]}</p>
                     </div>
                     </div>
                     <div className={styles.imgq}>
@@ -54,7 +50,10 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+
+
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -65,7 +64,13 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        changpage :(value,key)=>{
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('text',text[key] ));
+        }
+
     };
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

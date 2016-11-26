@@ -61,7 +61,7 @@ let Component = React.createClass({
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
-                            tabaleData.data.header.map((value, key)=> {
+                            tabaleData.data.header1.map((value, key)=> {
                                 return (
                                     <div className={styles.tableHeaderItem}
                                          style={{width:(tabaleData.data.width[key])+"%"}} key={key}>{value}</div>
