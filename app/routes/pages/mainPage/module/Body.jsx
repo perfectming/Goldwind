@@ -123,7 +123,7 @@ let Component = React.createClass({
                 {showPage === 'deviceLose' && <DeviceLose></DeviceLose>}
                 {showPage === 'topTen' && <TopTen></TopTen>}
 
-
+				
 
                 {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
                 {showPage === 'healthy' && <Healthy></Healthy>}

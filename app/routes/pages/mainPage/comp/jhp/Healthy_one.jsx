@@ -10,13 +10,31 @@ let data = require('./Healthy-data');
 let month = data.data.line_month;
 let button = data.data.button;
 let barLoTime1 = data.data.bar_lotime;
-let barLoPowerValue1 = data.data.bar_loPower;
+let barLoPowerValue1 = data.data.bar_roPower3;
 let text0 = data.data.line_date;
 let text2 = data.data.text3;
 let text3 = data.data.text4;
 let barRotime1 = data.data.bar_rotime;
 let barLoPowerValue2 = data.data.bar_loPower;
 let barLtPowerValue = data.data.bar_ltPower;
+
+
+let sort0=data.data.sort1;
+let x0=[];
+let x1=[];
+let x2=[];
+let x3=[];
+let x4=[];
+let x5=[];
+(function () {
+
+    for(var i=0;i<12;i++){
+        x4[i]=sort0[i].name;
+        x5[i]=sort0[i].time;
+    }
+
+})();
+
 
 
 
@@ -28,10 +46,11 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-
-
     render() {
-        let {wind,buttonAction,actbt=0, value0,inputOnChange, onFocus,changecolor} = this.props;
+
+        let {wind, buttonAction, actbt = 0,  value0, inputOnChange, onFocus, changecolor, gogogo, back, more, arr,arr2} = this.props;
+
+
         return (
 
 
@@ -44,7 +63,8 @@ let Component = React.createClass({
                     {
                         data.data.yearelectric[0].wind.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key)}>
+                                <div className={actbt === key ? styles.inmonth : styles.inmonth2} key={key}
+                                     onClick={() => changecolor(value, key)}>
                                     {value.name}
                                 </div>
                             )
@@ -56,7 +76,9 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_t barLoTime={barLoTime1} barLoPowerValue={wind==undefined? barLoPowerValue1:wind} text={text0[actbt]+"月集团各区域健康度"}></Hly_t>
+                        <Hly_t x={x0} barLoTime={barLoTime1}
+                               barLoPowerValue={wind == undefined ? barLoPowerValue1 : wind}
+                               text={text0[actbt] + "月集团各区域健康度"}></Hly_t>
                         <div className={styles.logo}>
 
                         </div>
@@ -66,22 +88,18 @@ let Component = React.createClass({
 
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
-                        <Hly_r height={500} barRotime={barRotime1} barLoPowerValue={barLoPowerValue2} text={text0[actbt]+"月"+text0[5]+"区域各风场健康度"}></Hly_r>
+                        <Hly_r height={500} barRotime={barRotime1} barLoPowerValue={barLoPowerValue2}
+                               text={text0[actbt] + "月" + text0[5] + "区域各风场健康度"}></Hly_r>
                     </div>
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
                         <div className={styles.rbox3}>
-                            {
-                                button.map((value, key) => {
-                                    return (
-                                        <button key={key} className={styles.button}>
-                                            {value}
-                                        </button>
-                                    )
-                                })
-                            }
+                            <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
+                            <button className={styles.button} onClick={() => back(sort0)}>后10</button>
+                            <button className={styles.button} onClick={() => more()}>更多</button>
                         </div>
                         <div className={styles.rbox4}>
-                            <Hly_rs height={430}  powerValue={barLoPowerValue2} barRotimes={barLtPowerValue} text={text0[actbt]+"月"+text0[5]+"区域"+text0[4]+"风场各风机健康度"}></Hly_rs>
+                            <Hly_rs height={430} powerValue={arr==null? x5:arr} barRotimes={arr2==null? x4:arr2}
+                                    text={text0[actbt] + "月" + text0[5] + "区域" + text0[4] + "风场各风机健康度"}></Hly_rs>
                             <div className={styles.logo}>
 
                             </div>
@@ -96,8 +114,11 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        actbt:state.vars.actbt,
-        wind:state.vars.wind,
+        actbt: state.vars.actbt,
+        wind: state.vars.wind,
+        arr: state.vars.arr,
+        arr2: state.vars.arr2,
+
 
     }
 };
@@ -108,13 +129,46 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test: ''
             }
+
         },
-        changecolor :(value,key)=>{
-            dispatch(actions.setVars('actbt',key ));
-            dispatch(actions.setVars('wind',value.plan ));
+        changecolor: (value, key) => {
+            dispatch(actions.setVars('actbt', key));
+            dispatch(actions.setVars('wind', value.plan));
+        },
+        gogogo: (sort0) => {
+            (function () {
+                sort0.sort(function (a,b) {
+                    return b.time - a.time;
+                })
+                for(var i=0;i<12;i++){
+                    x0[i]=sort0[i].name;
+                    x1[i]=sort0[i].time;
+                }
+
+            })();
+            dispatch(actions.setVars('arr', x1))
+            dispatch(actions.setVars('arr2', x0))
 
 
-    }
+        },
+        back: (sort0) => {
+            (function () {
+                sort0.sort(function (a,b) {
+                    return  a.time - b.time;
+                })
+                for(var i=0;i<12;i++){
+                    x2[i]=sort0[i].name;
+                    x3[i]=sort0[i].time;
+                }
+
+            })();
+            dispatch(actions.setVars('arr', x3))
+            dispatch(actions.setVars('arr2', x2))
+        },
+        more: () => {
+
+        }
+
 
         ,
     };
