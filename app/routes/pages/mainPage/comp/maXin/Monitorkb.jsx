@@ -15,6 +15,9 @@ import nlcojp from '../../img/comp/nianleicojp.png';
 import nlsojp from '../../img/comp/nianleisojp.png';
 import monBoardData from '../../../../../../config/MonitorBoardData';
 import model from '../../../../../../config/MonitorBoardModel';
+var $ = require('jquery');
+
+
 let arr=[];
 let arrname=[];
 let allnum=0;
@@ -42,7 +45,7 @@ let Component = React.createClass({
         let dni = Math.floor(ile / (1000 * 60 * 60 * 24));
         return(
             <div className={styles.bodyBox}>
-                <div className={styles.zhzb}>
+                <div className={`${styles.zhzb} ${styles.box_shadow}`}>
                     <Title title={['综合指标']}></Title>
                     <div className={styles.zhzbtop}>
                         <div className={styles.zhzbtopbox}><div>当前功率</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].TActPower}</span>MW</div>
@@ -59,7 +62,7 @@ let Component = React.createClass({
                         <span className={styles.daynum}> {dni}</span> 天
                     </div>
                 </div>
-                <div className={styles.zhzbgl}>
+                <div className={`${styles.zhzbgl} ${styles.box_shadow}`}>
                     <Title title={['综合指标概览']}></Title>
                     <div className={styles.zhzbglmain}>
                         <div className={styles.zhzbglbox}><Pie2 color={['#33BAC0','#33545C']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#33BAC0'}}>{(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2)}%</p>年发电完成率</span></div>
@@ -70,26 +73,26 @@ let Component = React.createClass({
                         <div className={styles.zhzbglbox}><Pie2 color={['#31BAC0','#32535C']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#31BAC0'}}>{(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2)}%</p>年发电完成率</span></div>
                     </div>
                 </div>
-                <div className={styles.czrlzb}>
+                <div className={`${styles.czrlzb} ${styles.box_shadow}`}>
                     <Title title={['场站容量占比']}></Title>
                     <div className={styles.czrlzdmain}>
                         <Pie1></Pie1>
                         <span className={styles.chartnum}><p>{allnum}</p><p>kWh</p></span>
                     </div>
                 </div>
-                <div className={styles.nfdlwcqk}>
+                <div className={`${styles.nfdlwcqk} ${styles.box_shadow}`}>
                     <Title title={['年发电量完成情况']}></Title>
                     <div className={styles.nfdlwcqkmain}>
                         <Column></Column>
                     </div>
                 </div>
-                <div className={styles.czydfdqk}>
+                <div className={`${styles.czydfdqk} ${styles.box_shadow}`}>
                     <Title title={['场站月度发电情况']}></Title>
                     <div className={styles.czydfdqkmain}>
                         <Column1></Column1>
                     </div>
                 </div>
-                <div className={styles.longbox}>
+                <div className={`${styles.longbox} ${styles.box_shadow}`}>
                     <div className={styles.navitem}>
                         <div className={styles.leftimg}><img src={jnjp}/></div>
                         <div className={styles.righttext}>节能减排</div>
@@ -111,13 +114,13 @@ let Component = React.createClass({
                         <div className={styles.righttext1}><h2>年累SO2减排</h2><h2><b>{mobd[8888800].YearCO2Emissions}</b>万吨</h2></div>
                     </div>
                 </div>
-                <div className={styles.fgzyfx}>
+                <div className={`${styles.fgzyfx} ${styles.box_shadow}`}>
                     <Title title={['风/光资源分析']}></Title>
                     <div className={styles.fgzyfxmain}>
                         <Polar></Polar>
                     </div>
                 </div>
-                <div className={styles.ssdlqkfx}>
+                <div className={`${styles.ssdlqkfx} ${styles.box_shadow}`}>
                     <Title title={['故障设备概览']}></Title>
                     <div className={styles.ssdlqkfxmain}>
                         <span className={styles.tsstyle1}>3<span className={styles.tsstyled1}>台</span></span>
@@ -127,7 +130,7 @@ let Component = React.createClass({
                         <span className={styles.timestyle}><span>0.2h</span><span>12h</span><span>36h</span><span>72h</span></span>
                     </div>
                 </div>
-                <div className={styles.gzsbgl}>
+                <div className={`${styles.gzsbgl} ${styles.box_shadow}`}>
                     <Title title={['损失电量情况分析']}></Title>
                     <div className={styles.gzsbglmain}>
                         <Column2></Column2>

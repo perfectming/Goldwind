@@ -1,4 +1,7 @@
 .bodyBox{
+  .box_shadow:hover{
+    box-shadow:0 0 20px #fff;
+  }
   overflow: hidden;
   margin-top: 50px;
   .zhzb{
@@ -23,7 +26,6 @@
         width:145px;
         height:55px;
         margin-top: 4px;
-        padding-left: 10px;
         display: inline-block;
         color: #ffffff;
         font-size: 14px;
@@ -31,7 +33,7 @@
         text-align: center;
         .zhzbtopboxg{
           color:#26f4ff;
-          font-size: 22px;
+          font-size: 18px;
         }
       }
     }
