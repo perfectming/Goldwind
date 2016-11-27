@@ -7,20 +7,24 @@
         width:400px;
         position:relative;
         .spanleft{
-            width:0; 
-            height:0; 
-            border-top:15px solid transparent;
-            border-bottom:15px solid transparent; 
-            border-right:15px solid #2ff4fb; 
-            position:absolute;top:5px; right:10px; cursor:pointer;
+            width:38px; 
+            height:24px; 
+            position:absolute;
+            top:0px; 
+            right:19px; 
+            cursor:pointer;
+            background:url('../../../img/icon/direct_icon.png') 100% 100%;
+            z-index:20;
+            
           }
           .spanright{
-            width:0; 
-            height:0; 
-            border-top:15px solid transparent;
-            border-bottom:15px solid transparent; 
-            border-left:15px solid #2ff4fb; 
-            position:absolute;top:5px; right:10px; cursor:pointer;
+             width:38px; 
+            height:24px; 
+            position:absolute;top:0px; right:-2px; 
+            cursor:pointer;
+            background:url('../../../img/icon/direct_icon1.png') 100% 100%;
+            z-index:20;
+           
           }
         
        

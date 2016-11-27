@@ -6,8 +6,8 @@ import model from '../../../../../../config/Model';
 import matrix from '../../../../../../config/MatrixModel';
 import matData from '../../../../../../config/MatrixData';
 import map1 from '../../img/comp/DistributionMap.jpg' ;
-import leftIcon from '../../img/comp/leftIcon.png' ;
-import rightIcon from '../../img/comp/rightIcon.png' ;
+import leftIcon from '../../img/icon/direct_icon.png' ;
+import rightIcon from '../../img/icon/direct_icon1.png' ;
 import Superleftbox from '../super/superleftbox.jsx';
 let Item = require('./date');
 
