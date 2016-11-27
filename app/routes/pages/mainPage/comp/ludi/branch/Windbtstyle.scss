@@ -2,6 +2,8 @@
     overflow:hidden;
     color: white;
     font-size: 16px;
+    width: 100%;
+    padding: 0 10px 30px 10px;
     .monthbox{
         width: 100%;
         height: 80px;
@@ -339,5 +341,7 @@
         }
         
     }
-    
+    .boxShadow:hover{
+       box-shadow:0 0 15px #fff;
+   }
 }

@@ -28,7 +28,7 @@ let Component = React.createClass({
            		<div className={styles.left}>
            			<div className={styles.firstfloor}>
            				
-           				<div className={styles.section}>
+           				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>健康度</span> 
            						<a>图片</a><a>图片</a>
@@ -43,7 +43,7 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.border}></div>
            				</div>
-           				<div className={styles.section}>
+           				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>PBA</span>
            						<a>图片</a><a>图片</a>
@@ -59,7 +59,7 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.border}></div>
            				</div>
-           				<div className={styles.section}>
+           				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>TBA</span>
            						<a>图片</a><a>图片</a>
@@ -77,7 +77,7 @@ let Component = React.createClass({
            				</div>
            			</div>
            			<div className={styles.secondfloor}>
-           				<div className={styles.electric}>
+           				<div className={`${styles.electric} ${styles.boxShadow}`}>
            					<div className={styles.electricHeader}><a>图片</a>发电量</div>
            					<div className={styles.electricFirst}>
            						<a>图片</a>
@@ -116,12 +116,12 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.electricThirdBorder}></div>
            				</div>
-           				<div className={styles.yearelectric}>
+           				<div className={`${styles.yearelectric} ${styles.boxShadow}`}>
            					<div>
            						<Yearelectric></Yearelectric>
            					</div>
            				</div>
-           				<div className={styles.yearprofit}>
+           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
            					<div>
            						<Yearprofit></Yearprofit>
            					</div>
@@ -129,7 +129,7 @@ let Component = React.createClass({
            			</div>
            			
            		</div>
-                <div className={styles.right}>
+                <div className={`${styles.right} ${styles.boxShadow}`}>
                 	<h3>
                 		<span>箭头</span> &nbsp; PBA排序
                 	</h3>

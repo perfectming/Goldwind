@@ -1,6 +1,6 @@
 .bodyBox{
     width: 100%;
-    padding-right: 30px;
+    padding-right: 0 30px 0 10px;
     .content{
         color: white;
         font-size: 25px;
@@ -14,11 +14,14 @@
             }
             .column{
                 float: left;
-                width: 70%;
+                width: 69%;
                 height: 400px;
+                margin-left: 1%;
             }
         }
         .floorTwo{
+            position: relative;
+            top: 10px;
             width: 100%;
             .pie{
                 float: left;
@@ -27,9 +30,13 @@
             }
             .column{
                 float: left;
-                width: 70%;
+                width: 69%;
                 height: 400px;
+                margin-left: 1%;
             }
         }
     }
+    .boxShadow:hover{
+       box-shadow:0 0 15px #fff;
+   }
 }
