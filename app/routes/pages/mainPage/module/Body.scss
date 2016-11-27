@@ -34,7 +34,6 @@
   min-height: 1010px;
   position:relative;
   padding-left: 30px;
-  padding-top:45px;
   .clearbox{
     clear:both
   }
@@ -45,6 +44,7 @@
     top:8px;
     right:27px;
     padding-top:10px;
+    display:none;
     z-index:999;
     img{
     margin-right:10px;
