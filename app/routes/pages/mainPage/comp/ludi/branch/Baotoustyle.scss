@@ -2,7 +2,8 @@
     overflow:hidden;
     color: white;
     font-size: 16px;
-    
+    width: 100%;
+    padding: 10px 10px 0 10px;
     .left{
         display: inline-block;
         width: 75%;
@@ -314,5 +315,7 @@
         }
         
     }
-    
+    .boxShadow:hover{
+       box-shadow:0 0 15px #fff;
+   }
 }

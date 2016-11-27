@@ -16,20 +16,19 @@ let Component = React.createClass({
     },
     
 	render() {
-		let data=PBAdata.data;
 		return(
 			<div className={styles.gbaBox}>
 				<TimeSelect></TimeSelect>
 				<div className={styles.content}>
-					<div className={styles.area}>
+					<div className={`${styles.area} ${styles.boxShadow}`}>
 						<div className={styles.img}><a>图片</a></div>
 						<TableF></TableF>
 					</div>
-					<div className={styles.wind}>
+					<div className={`${styles.wind} ${styles.boxShadow}`}>
 						<div className={styles.img}><a>图片</a></div>
 						<TableS></TableS>
 					</div>
-					<div className={styles.fan}>
+					<div className={`${styles.fan} ${styles.boxShadow}`}>
 						<div className={styles.img}><a>图片</a></div>
 						<TableT></TableT>
 					</div>
@@ -50,8 +49,7 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
-        }
-        ,
+        },
     };
 };
 

@@ -120,10 +120,13 @@ let Component = React.createClass({
                 {showPage === 'groupKBA' && <GroupKBA></GroupKBA>}
                 {showPage === 'areaKBA' && <AreaKBA></AreaKBA>}
                 {showPage === 'loseElectric' && <LoseElectric></LoseElectric>}
+
                 {showPage === 'deviceLose' && <DeviceLose></DeviceLose>}
                 {showPage === 'topTen' && <TopTen></TopTen>}
 
 				
+
+			
 
                 {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
                 {showPage === 'healthy' && <Healthy></Healthy>}

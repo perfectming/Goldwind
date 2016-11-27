@@ -1,10 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './TopTenStyle.scss';
+import styles from './MaintainLoseStyle.scss';
 import PBAdata from './TimeSelect-data';
 import TimeSelect from './TimeSelectTwo.jsx';
 import ChartPie from './ChartPie.jsx';
-import OneColumn from './OneColumn.jsx';
 
 
 var actions = require('redux/actions');
@@ -21,19 +20,31 @@ let Component = React.createClass({
 				<TimeSelect></TimeSelect>
 				<div className={styles.content}>
 					<div className={styles.floorOne}>
-						<div className={`${styles.pie} ${styles.boxShadow}`}>
+						<div className={`${styles.boxOne} ${styles.boxShadow}`}>
+							<div className={styles.boxText}>集团**区域1风场1<br/>损失电量分布图</div>
+							<div className={styles.chartBox}>
+								<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
+							</div>
+						</div>
+						<div className={`${styles.boxTwo} ${styles.boxShadow}`}>
 							<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
 						</div>
-						<div className={`${styles.column} ${styles.boxShadow}`}>
-							<OneColumn name={data.data[3].name} title={data.data[3].title} month={data.data[3].month} plan={data.data[3].plan} unit={data.data[3].unit}></OneColumn>
+						<div className={`${styles.boxThree} ${styles.boxShadow}`}>
+							<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
 						</div>
 					</div>
 					<div className={styles.floorTwo}>
-						<div className={`${styles.pie} ${styles.boxShadow}`}>
+						<div className={`${styles.boxOne} ${styles.boxShadow}`}>
+							<div className={styles.boxText}>集团**区域1风场2<br/>损失电量分布图</div>
+							<div className={styles.chartBox}>
+								<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
+							</div>
+						</div>
+						<div className={`${styles.boxTwo} ${styles.boxShadow}`}>
 							<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
 						</div>
-						<div className={`${styles.column} ${styles.boxShadow}`}>
-							<OneColumn name={data.data[3].name} title={data.data[3].title} month={data.data[3].month} plan={data.data[3].plan} unit={data.data[3].unit}></OneColumn>
+						<div className={`${styles.boxThree} ${styles.boxShadow}`}>
+							<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
 						</div>
 					</div>
 				</div>
