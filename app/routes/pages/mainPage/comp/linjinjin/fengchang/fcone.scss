@@ -169,3 +169,28 @@ to {width:1388px;}
 from {width:1765px;}
 to {width:1388px;}
 }
+
+
+.conright::-webkit-scrollbar {
+        width:12px;
+        height:12px;
+        border:1px solid #fff;
+    }
+.conright::-webkit-scrollbar-button    {
+        background-color:#272b34;
+        display:none;
+    }
+.conright::-webkit-scrollbar-track     {
+        background:#131619;
+
+    }
+.conright::-webkit-scrollbar-thumb{
+        background:#464c58;
+        border-radius:10px;
+    }
+.conright::-webkit-scrollbar-corner {
+        background:#131619;
+    }
+.conright::-webkit-scrollbar-resizer  {
+        background:#f00;
+    }

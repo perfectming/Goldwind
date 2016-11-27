@@ -57,8 +57,7 @@ let Component = React.createClass({
                 categories:arrname,
             
             tooltip: {
-                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                //pointFormat: "<b>{point.percentage:.0f}%</b>"
+                enabled: true,
             },
             credits: {
                 enabled: false //不显示highCharts版权信息

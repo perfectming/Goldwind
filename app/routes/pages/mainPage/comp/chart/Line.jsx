@@ -25,8 +25,8 @@ let Component = React.createClass({
                 text: ''
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                 pointFormat: "<b>{point.percentage:.0f}%</b>"
+                enabled: false
+     
             },
             credits: {
                 enabled: false //不显示highCharts版权信息

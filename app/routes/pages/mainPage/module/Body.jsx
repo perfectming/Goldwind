@@ -79,9 +79,9 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {showPage, tabOpt, tab, flag=true,cssif2,legend=false,navlegend=false,changelegend} = this.props;
+        let {showPage, tabOpt, tab, flag=true,cssif2='sdfdf',legend=false,navlegend=false,changelegend} = this.props;
         return (
-            <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2===true? styles.animate : styles.anmate2}`}>
+            <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2==='left'? styles.animate : styles.sdsd} ${cssif2==='right'? styles.animate1 : styles.sdsd}`}>
                 <div className={styles.fiexd}>
                     <img src={u871} onClick={()=>changelegend(legend)}/>
                     <img src={u865}/>
