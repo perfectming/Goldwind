@@ -49,7 +49,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#c5e0b4', '#c9c9c9','#f5b297','#a1c0e5', '#ffd689','#5b9bd5']
+            colors: [ '#4cdb9d', '#2e75b6','#e2ac00','#009a46', '#ff6600','#5b9bd5']
             ,
             plotOptions: {
                 pie: {
@@ -105,30 +105,48 @@ let Component = React.createClass({
             	type: 'column',
                 stack:"male",
                 data: data.data[0].should,
+                events: {
+                    click: function(e) {}
+                }
             },{
                 name: '故障损失',
                 type: 'column',
                 stack:"female",
                 data: data.data[0].g,
+                events: {
+                    click: function(e) {}
+                }
             },{
             	name: '维护损失',
             	type: 'column',
                 stack:"female",
                 data: data.data[0].w,
+                events: {
+                    click: function(e) {}
+                }
             },{
             	name: '性能损失',
             	type: 'column',
                 stack:"female",
                 data: data.data[0].x,
+                events: {
+                    click: function(e) {}
+                }
             },{
             	name: '其他损失',
             	type: 'column',
                 stack:"female",
                 data: data.data[0].q,
+                events: {
+                    click: function(e) {}
+                }
             },{
             	name: 'PBA',
             	type: 'spline',
                 data: data.data[0].l,
+                events: {
+                    click: function(e) {}
+                }
             }]
         };
         return (
