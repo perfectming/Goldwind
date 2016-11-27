@@ -18,6 +18,7 @@ let Component = React.createClass({
     },
     render() {
         let {add,table, changeTableItem,dele} = this.props;
+        let num=0;
         let newData=[];
         for(let i=0;i<tabaleData.as.header.length;i++){
             newData.push('')
@@ -45,23 +46,24 @@ let Component = React.createClass({
                     <div className={styles.tableContentBox}>
                         {
                             tabaleData.as.content.map((value, key)=> {
+                                num++;
                                 return (
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         {
                                             value.map((valueC, keyC)=> {
-                                                if(keyC==value.length-1){
+                                                if(keyC==0){
                                                     return (
                                                         <input className={styles.tableContentItem}
                                                                style={{width:(100/(tabaleData.as.header.length+1))+"%"}}
-                                                               key={keyC} contentEditable="true"
+                                                               key={keyC} readOnly="true"
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                               value={valueC}/>
+                                                               value={num}/>
                                                     )
                                                 }else{
                                                 return (
                                                     <input className={styles.tableContentItem}
                                                            style={{width:(100/(tabaleData.as.header.length+1))+"%"}}
-                                                           key={keyC} readOnly="true"
+                                                           key={keyC}
                                                            onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                            value={valueC}/>
                                                 )}

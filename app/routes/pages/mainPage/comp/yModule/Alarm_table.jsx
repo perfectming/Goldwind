@@ -39,11 +39,17 @@ let Component = React.createClass({
                                         
                                          {
                                             value.map((valueC, keyC)=> {
-                                                if(keyC <= 12){
+                                                if(keyC <= 12&&keyC!=10){
                                                     return (
                                                         <div className={styles.tableContentItem} style={{width:tabaleData.data.length[keyC]}} key={keyC}>
                                                              {valueC}
                                                         </div>
+                                                    )
+                                                }else if(keyC==10){
+                                                    return (
+                                                        <input className={styles.tableContentItem}
+                                                               style={{width:tabaleData.data.length[keyC]}}
+                                                               key={keyC} type="button" value={valueC==0?'否':'是'}/>
                                                     )
                                                 }else{
                                                     return (
