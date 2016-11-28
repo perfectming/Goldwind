@@ -19,23 +19,28 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-
-
     render() {
+        let{actbt=0,changpage,wind,windP}=this.props;
           return (
            <div className={styles.box}>
-               <Month month={['1月份','2月份','3月份','4月份','5月份','6月份','7月份','8月份','9月份','返回']}></Month>>
-               <div className={styles.bigbox}>
+            <ul className={styles.monthbox}>
+                    {
+                        data.wind.map((value,key)=>{
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
+                        })
+                    }
+                </ul>
+               <div className={`${styles.bigbox} ${styles.shadow}`}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <Windce areaNameX={areaName}  areaRecordCostT={areaRecordCost} areaRecordProfitO={areaRecordProfit} colorO={colorO} colorT={colorT} pointWidth={pointWidth}></Windce>
+                                <Windce areaNameX={areaName}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined? areaRecordProfit:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth}></Windce>
                             </div>
                         </div>
                          <div className={styles.tik}>
                         <p>{text0}</p>
                     </div>
-                    </div>
+                    </div>          
                 <div className={styles.imgq}>
                     <img src={icono}/>
                 </div>
@@ -57,7 +62,12 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+
+    return {
+        actbt:state.vars.actbt,
+         wind:state.vars.wind,
+         windP:state.vars.windP,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -68,6 +78,11 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        changpage :(value,key)=>{
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('wind',value.plan));
+            dispatch(actions.setVars('windP',value.actrul));
+        },
     };
 };
 

@@ -82,7 +82,7 @@ let Component = React.createClass({
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 },
-                y:-15,
+                y:-18,
             },
             credits: {
                 enabled: false //不显示highCharts版权信息

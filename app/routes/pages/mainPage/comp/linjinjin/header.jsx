@@ -38,11 +38,11 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ changpage, fcpage,actbt=0,backtop,changpage1,actbt1}=this.props;
+       let{ changpage, fcpage,actbt=0,backtop,changpage1,actbt1,befor_page='super',befor_page2}=this.props;
         return (
          
                 <div className={styles.bodynav}>
-                <img src={back} onClick={()=>backtop()}/>
+                <img src={back} onClick={()=>backtop(befor_page,befor_page2)}/>
                  {
                     arr1.map((value,key)=>{
                         return(
@@ -71,6 +71,8 @@ const mapStateToProps = (state) => {
 
         actbt : state.vars.actbt,
         actbt1 : state.vars.actbt1,
+        befor_page : state.vars.befor_page,
+        befor_page2 : state.vars.befor_page2,
 
     }
 };
@@ -105,10 +107,11 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('fc_info', value));
 
         },
-        backtop:()=>{
-            dispatch(actions.setVars('showPage','distribution'));
+        backtop:(befor_page,befor_page2)=>{
+            dispatch(actions.setVars('showPage',befor_page));
             dispatch(actions.setVars('navhide', true));
             dispatch(actions.setVars('numpage', 'fanmatrix'));
+            console.log(befor_page)
         }
    
     };

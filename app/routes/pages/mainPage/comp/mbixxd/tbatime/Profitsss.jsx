@@ -21,13 +21,7 @@ let Component = React.createClass({
         let text=data.text[0];
           return (
            <div className={styles.box}>
-                <ul className={styles.monthbox}>
-                    {
-                        month.map((value,key)=>{
-                            return(<li key={key}>{value}</li>)
-                        })
-                    }
-                </ul>
+               
                 <div className={`${styles.areabox} ${styles.shadow}`}>
                 <div className={styles.bgcc}><img src={icono}/></div>
                    <div>

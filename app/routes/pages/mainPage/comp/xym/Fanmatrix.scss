@@ -5,19 +5,24 @@
       font-size: 20px;
       color:#fff;
       float: left;
-      margin-left: 8px;
+      margin-left: 6px;
       margin-bottom: 10px;
-      width: 240px;
+      width: 255px;
       height: 112px;
       background: #292F34;
+      background-image:url(../../img/comp/fmatrix.png);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
       cursor: pointer;
+      
+      // border-left: 2px solid #00E438;
       .listitemL{
         float: left;
-        border-left: 2px solid #00E438;
+        
       }
       .listitemR{
         float: left;
-        margin-left: 10px;
+        margin-left: 85px;
         .listitemT{
           display: block;
           margin: 12px 0;
@@ -58,5 +63,26 @@
       div{
         float: left;
       }
-    }  
+    } 
+    .fault{
+      background-image: url(../../img/comp/faultbg.png),url(../../img/comp/fmatrix.png);
+      background-size: 100% 100%;
+      background-repeat: no-repeat; //故障
+      .listitemT{
+        color: red;
+      }
+    }
+    .online{
+      border-left: 2px solid #1fe005; //运行
+    }
+    .offline{
+      border: 2px solid #666; // 待机
+    }
+    .discomfor{
+      // border: 2px solid #f1a820; //离线
+    }
+    
+    .default{
+      border: 2px solid #c7b88c; //检修
+    } 
 }

@@ -1,12 +1,12 @@
 .gbaBox{
     width: 100%;
-    padding-right: 30px;
+    padding: 0 30px 0 10px;
     .content{
         position: relative;
         width: 100%;
         .wind{
             position: relative;
-            height: 500px;
+            height: 400px;
             width: 100%;
             .img{
                 z-index: 5;
@@ -18,7 +18,7 @@
         .fan{
             position: relative;
             top: 10px;
-            height: 500px;
+            height: 400px;
             width: 100%;
             .img{
                 z-index: 5;
@@ -28,4 +28,7 @@
             }
         }
     }
+    .boxShadow:hover{
+       box-shadow:0 0 15px #fff;
+   }
 }

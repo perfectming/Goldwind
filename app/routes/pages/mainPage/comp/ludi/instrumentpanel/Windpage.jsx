@@ -18,35 +18,35 @@ let Component = React.createClass({
     render() {
         
         
-        let{flag=true,changepageSort1,changepageSort,big,small,wind,actbt=0,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{flag=true,changepageSort1,changepageSort,big1,small1,wind,actbt=0,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         return (
            <div className={styles.box}>
            		<ul className={styles.monthbox}>
                     {
                     	data.yearelectric[0].wind.map((value,key)=>{
-                    		return(<li key={key} className={actbt===key? styles.bg1 : styles.bg} onClick={()=>changepage(value,key)}>{value.name}</li>)
+                    		return(<li key={key} className={actbt===key? styles.bg1 : styles.bg} onClick={()=>changepageW(value,key)}>{value.name}</li>)
                     	})
                     }
                 </ul>
            		<div className={styles.left}>
            			<div className={styles.firstfloor}>
-           				<div className={styles.section}>
+           				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>健康度</span> 
            						<a onClick={()=>changepageHealthyT()}>图片</a>
            						<a onClick={()=>changepageHealthyS()}>图片</a>
-           						<span>{small==null? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%</span>
+           						<span>{small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small1/big1)*100).toFixed(1)}%</span>
            					</div>
            					<div className={styles.sectiontwo}>
            						<div className={styles.big}>
-           							<div className={styles.small} style={{width:small==null? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1)+"%":((small/big)*100).toFixed(1)+"%"}}>
-           								{small==null? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%
+           							<div className={styles.small} style={{width:small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1)+"%":((small1/big1)*100).toFixed(1)+"%"}}>
+           								{small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small1/big1)*100).toFixed(1)}%
            							</div>
            						</div>
            					</div>
            					<div className={styles.border}></div>
            				</div>
-           				<div className={styles.section}>
+           				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>PBA</span>
            						<a onClick={()=>changepagePBAT()}>图片</a>
@@ -63,7 +63,7 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.border}></div>
            				</div>
-           				<div className={styles.section}>
+           				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>TBA</span>
            						<a onClick={()=>changepageTBAT()}>图片</a>
@@ -82,7 +82,7 @@ let Component = React.createClass({
            				</div>
            			</div>
            			<div className={styles.secondfloor}>
-           				<div className={styles.electric}>
+           				<div className={`${styles.electric} ${styles.boxShadow}`}>
            					<div className={styles.electricHeader}><a>图片</a>发电量</div>
            					<div className={styles.electricFirst}>
            						<a>图片</a>
@@ -121,7 +121,7 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.electricThirdBorder}></div>
            				</div>
-           				<div className={styles.yearelectric}>
+           				<div className={`${styles.yearelectric} ${styles.boxShadow}`}>
            					<div>
            						<div className={styles.logo}><a>logo</a></div>
            						<div className={styles.links}><a onClick={()=>changepageEleT()}>图片</a></div>
@@ -129,7 +129,7 @@ let Component = React.createClass({
            						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={wind==undefined? data.yearelectric[0].plan:wind} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            					</div>
            				</div>
-           				<div className={styles.yearprofit}>
+           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
            					<div>
            						<div className={styles.logo}><a>logo</a></div>
            						<Yearelectric title={data.yearelectric[0].title[1]} month={data.yearelectric[0].month} plan={wind==undefined? data.yearelectric[0].plan:wind} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[0]} nameOne={data.yearelectric[0].name[2]} nameTwo={data.yearelectric[0].name[3]}></Yearelectric>
@@ -138,7 +138,7 @@ let Component = React.createClass({
            			</div>
            			
            		</div>
-                <div className={styles.right}>
+                <div className={`${styles.right} ${styles.boxShadow}`}>
                 	<h3>
                 		<span>箭头</span> &nbsp; PBA排序
                 	</h3>
@@ -194,8 +194,8 @@ const mapStateToProps = (state) => {
     return {
     	actbt : state.vars.actbt,
     	wind : state.vars.wind,
-    	big : state.vars.big,
-    	small : state.vars.small,
+    	big1 : state.vars.big1,
+    	small1 : state.vars.small1,
     	sort1 : state.vars.sort2,
     	flag : state.vars.flag1,
     }
@@ -216,9 +216,9 @@ const mapDispatchToProps = (dispatch) => {
         	flag==true? dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return (a.PBA).slice(0,1)/1-(b.PBA).slice(0,1)/1}))):dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return (b.PBA).slice(0,1)/1-(a.PBA).slice(0,1)/1})));
         	flag==true? dispatch(actions.setVars('flag1',false )):dispatch(actions.setVars('flag1',true ));
         },
-        changepage :(value,key)=>{
-        	dispatch(actions.setVars('big',value.big ));
-            dispatch(actions.setVars('small',value.small ));
+        changepageW :(value,key)=>{
+        	dispatch(actions.setVars('big1',value.big ));
+            dispatch(actions.setVars('small1',value.small ));
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('wind',value.plan ));
         },
