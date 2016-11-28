@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 // import fmatrix from '../../img/comp/fmatrix.png';
-import styles from './Choesefan.scss';
+import styles from './Choosefan.scss';
 import fan_matrix from '../../linjinjin/Fan_matrix.jsx';
 var actions = require('redux/actions');
 // import dataBase from '../../../../../config/ModelData';
@@ -65,8 +65,8 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage,Tofaninfo,choesefans}=this.props;
-        // console.log(choesefans);
+        let{valuepage,Tofaninfo,choosefans}=this.props;
+        // console.log(choosefans);
         
         return (
             <div className={styles.listbodyBox}>
@@ -75,7 +75,7 @@ let Component = React.createClass({
                     // let bordercolor = value.WTStateColor;
                     let x;
                     let code = value.WTStateCode;
-                    // console.log(code);
+                    console.log(code);
                     switch(code)
                         {
                             case "DisComForPre":
@@ -112,7 +112,8 @@ let Component = React.createClass({
                                 x = "维护";
                                 break;
                         }
-                    if(choesefans== "ONL" && value.WTStateCode== "Online"){
+                    if(choosefans== "ONL" && value.WTStateCode== "Online"){
+                        console.log(choosefans);
                     return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default))))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
@@ -134,7 +135,7 @@ let Component = React.createClass({
                             </div>          
                         </div>  
                     )
-                    }else if(choesefans== "FaultCount" && value.WTStateCode== "Fault"){
+                    }else if(choosefans== "FaultCount" && value.WTStateCode== "Fault"){
                         return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default))))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
@@ -156,7 +157,7 @@ let Component = React.createClass({
                             </div>          
                         </div>  
                     )
-                    }else if(choesefans== "OfflineCount" && value.WTStateCode== "DisComForPre"){
+                    }else if(choosefans== "OfflineCount" && value.WTStateCode== "DisComForPre"){
                        return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default))))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
@@ -212,7 +213,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         valuepage : state.vars.valuepage,
-        choesefans : state.vars.choesefans,
+        choosefans : state.vars.choosefans,
     }
 };
 
