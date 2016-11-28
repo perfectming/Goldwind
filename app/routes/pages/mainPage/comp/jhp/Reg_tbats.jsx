@@ -11,13 +11,13 @@ let Component = React.createClass({
 
     render() {
 
-        let {barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
+        let {height,barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
 
 
 
         let configPie = {
             chart: {
-                height:500,
+                height:height,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -125,7 +125,7 @@ let Component = React.createClass({
                 ,
                 {
                     name: 'TBA',
-                    type: 'spline',
+                    type: 'line',
                     color:'#0000ff',
                     data: barlinepdats
                 }

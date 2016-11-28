@@ -23,14 +23,14 @@ let Component = React.createClass({
         let mod=model.Model;
         let  mat=matrix.Model;
         let matD=matData.ModelData;
-        let {clickNumber, showFlag, changeFlag, flag=true,play,map,map1} = this.props;
+        let {clickNumber, showFlag, changeFlag, flag,play,map,map1} = this.props;
         return (
             <div className={styles.bodyBox}>
                     <div className={`${styles.leftBox} ${flag===true? styles.animat1 : styles.animat}`}>
                         <Superleftbox></Superleftbox>
                     </div>
                 <div className={styles.changeBox}>
-                    <img src={flag===true? leftIcon:rightIcon} onClick={()=>{changeFlag(flag===true? true:false,flag )}}/>
+                      <img src={flag===true? leftIcon:rightIcon} onClick={()=>{changeFlag(flag===true? true:false,flag )}}/> 
                 </div>
                 <div className={`${styles.rightBox} ${flag===true? styles.animat3 : styles.animat2}`}>
                     <div className={`${styles.bigimg} ${map===true? styles.animat4 : styles.animat6} ${map1===true? styles.animat5 : styles.animat6} `}>

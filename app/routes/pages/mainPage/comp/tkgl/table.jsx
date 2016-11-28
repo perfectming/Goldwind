@@ -143,6 +143,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('valuepage', value));
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('actbt1','' ));
+            dispatch(actions.setVars('befor_page','tkgl' ));
         },
         changepage3:(value,key)=>{
             dispatch(actions.setVars('showPage', 'fan_matrix'));
@@ -151,6 +152,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('valuepage1', value));
             dispatch(actions.setVars('actbt1',key ));
             dispatch(actions.setVars('actbt',''));
+            dispatch(actions.setVars('befor_page','tkgl' ));
         },
     };
 };

@@ -20,6 +20,23 @@ let barRotime1 = data.data.bar_rotime;
 let barLoPowerValue2 = data.data.bar_loPower;
 let barLtPowerValue = data.data.bar_ltPower;
 
+let sort0=data.data.sort1;
+let x0=[];
+let x1=[];
+let x2=[];
+let x3=[];
+let x4=[];
+let x5=[];
+(function () {
+
+    for(var i=0;i<12;i++){
+        x4[i]=sort0[i].name;
+        x5[i]=sort0[i].time;
+    }
+
+})();
+
+
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -27,7 +44,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
+        let {arr,arr2,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
         return (
 
 
@@ -61,8 +78,18 @@ let Component = React.createClass({
                 </div>
 
                 <div className={`${styles.fbox}  ${styles.logofa}`}>
-                    <div className={`${styles.box_shadow}`}>
-                        <Hly_rs height={400}  powerValue={barLoPowerValue2} barRotimes={barLtPowerValue} text={text0[3]+"月"+text0[5]+"风场各风机健康度"}></Hly_rs>
+                    <div className={`${styles.box_shadow} ${styles.fbox2}`}>
+                        <div className={styles.rbox31}>
+                            <div></div>
+                            <span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</span>
+                        </div>
+                        <div className={styles.rbox3}>
+
+                            <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
+                            <button className={styles.button} onClick={() => back(sort0)}>后10</button>
+                            <button className={styles.button} onClick={() => more()}>更多</button>
+                        </div>
+                        <Hly_rs height={390}  powerValue={arr==null? x5:arr} barRotimes={arr2==null? x4:arr2} text={text0[3]+"月"+text0[5]+"风场各风机健康度"}></Hly_rs>
 
                         <div className={styles.logomini}>
 
@@ -79,6 +106,8 @@ const mapStateToProps = (state) => {
     return {
         actbt:state.vars.actbt,
         wind:state.vars.wind,
+        arr: state.vars.arr,
+        arr2: state.vars.arr2,
     }
 };
 
@@ -92,7 +121,40 @@ const mapDispatchToProps = (dispatch) => {
         changecolor:(value,key)=>{
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind',value.plan ));
-        }
+        },
+        gogogo: (sort0) => {
+            (function () {
+                sort0.sort(function (a,b) {
+                    return b.time - a.time;
+                })
+                for(var i=0;i<12;i++){
+                    x0[i]=sort0[i].name;
+                    x1[i]=sort0[i].time;
+                }
+
+            })();
+            dispatch(actions.setVars('arr', x1))
+            dispatch(actions.setVars('arr2', x0))
+
+
+        },
+        back: (sort0) => {
+            (function () {
+                sort0.sort(function (a,b) {
+                    return  a.time - b.time;
+                })
+                for(var i=0;i<12;i++){
+                    x2[i]=sort0[i].name;
+                    x3[i]=sort0[i].time;
+                }
+
+            })();
+            dispatch(actions.setVars('arr', x3))
+            dispatch(actions.setVars('arr2', x2))
+        },
+        more: () => {
+
+        },
     };
 };
 

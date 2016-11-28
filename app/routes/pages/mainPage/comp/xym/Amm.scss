@@ -59,77 +59,93 @@
   }
 }
 
-.tableBox {
-  overflow: hidden;
-  .tableHeaderBox {
+  .tableBox {
+
     overflow: hidden;
-    padding: 10px 0px 10px 10px;
-    /*.tableHeaderItem:nth-child(3){
-      width:400px !important;
-    }*/
-    .tableHeaderItem {
-      float: left;
-      background-color: #E4E5E6;
-      padding: 10px 0 10px;
-      margin-left: 5px;
+    .tableHeaderBox {
       overflow: hidden;
-      text-align: center;
-      span{
-        width:200px
+      background: #464c58;
+      .tableHeaderItem {
+        float: left;
+        height:40px;
+        line-height:40px;
+        overflow: hidden;
+        color:#fff;
+        text-align: center;
       }
     }
-  }
-
-  .tableContentBox {
-    padding: 5px 0px 5px 10px;
-  
-    .tableContentLine {
-      overflow: hidden;
-      margin-bottom: 5px;
-
-      /*.tableContentItem:nth-child(3){
-        width:400px !important;
-        size: 20 !important;
-      }*/
-      
-
-
-      .tableContentItem {
-        float: left;
-        background-color: #F5F6F7;
-        padding: 10px 0 10px;
-        margin-left: 5px;
+    .tableContentBox {
+      font-size: 14px;
+      .tableContentLine {
+        color:#fff;
+        background: #30343f;
         overflow: hidden;
-        text-align: center;
-        height: 40px;
-        border: none;
-        maxLength:'15' !important;
-      }
-      .tableContentItemdiv {
-        float: left;
-        background-color: #F5F6F7;
-        -padding: 0 0 10px;
-        margin-left: 5px;
-        overflow: hidden;
-        text-align: center;
-        height: 40px;
-        border: none;
+        &:hover{
+          background:rgba(183,195,224,.5);
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 40px;
+          line-height:40px;
+          border: none;
+          img{
+            height:20px;
+            width:20px;
+          }
+        }
         input{
-          height:100%
+          background: #30343f;
+          border:6px solid #fff;
+          &:hover{
+            box-shadow:0px 0px 8px 2px #fff;
+          }
+        }
+        .tableLineNum {
+          width: 65px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
         }
       }
-      
-   
-      .tableLineNum {
-        width: 45px;
-        padding: 10px 0 10px;
-        text-align: center;
-        background-color: #E4E5E6;
-        float: left;
+      .tableContentLine1 {
+        color:#fff;
+        overflow: hidden;
+        background: #272b34;
+        &:hover{
+          background:rgba(183,195,224,.5);
+        }
+        .tableContentItem {
+          float: left;
+          padding: 10px 0 10px;
+          overflow: hidden;
+          text-align: center;
+          height: 40px;
+          border: none;
+          img{
+            height:20px;
+            width:20px;
+          }
+        }
+        input{
+          background: #272b34;
+          border:6px solid #fff;
+          &:hover{
+            box-shadow:0px 0px 8px 2px #fff;
+          }
+        }
+        .tableLineNum {
+          width: 65px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
       }
     }
   }
-}
 
 
 }
