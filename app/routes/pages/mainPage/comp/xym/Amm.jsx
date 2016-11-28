@@ -94,7 +94,8 @@ let Component = React.createClass({
                                                            key={keyC} contentEditable="true"
                                                            onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
                                                            value={valueC}/>
-                                                )}
+                                                    )
+                                                }
                                             })
                                         }
                                         <input className={styles.tableContentItem}
