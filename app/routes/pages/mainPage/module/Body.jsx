@@ -37,6 +37,8 @@ import Windpage from '../comp/ludi/instrumentpanel/Windpage.jsx';
 import GroupKBA from '../comp/ludi/KBA/GroupKBA.jsx';
 import AreaKBA from '../comp/ludi/KBA/AreaKBA.jsx';
 import LoseElectric from '../comp/ludi/KBA/LoseElectric.jsx';
+import DeviceLose from '../comp/ludi/KBA/DeviceLose.jsx';
+import TopTen from '../comp/ludi/KBA/TopTen.jsx';
 
 import Healthy_one from '../comp/jhp/Healthy_one.jsx';
 import Healthy from '../comp/jhp/Healthy.jsx';
@@ -77,9 +79,9 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {showPage, tabOpt, tab, flag=true,cssif2,legend=false,navlegend=false,changelegend} = this.props;
+        let {showPage, tabOpt, tab, flag=true,cssif2='sdfdf',legend=false,navlegend=false,changelegend} = this.props;
         return (
-            <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2===true? styles.animate : styles.anmate2}`}>
+            <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2==='left'? styles.animate : styles.sdsd} ${cssif2==='right'? styles.animate1 : styles.sdsd}`}>
                 <div className={styles.fiexd}>
                     <img src={u871} onClick={()=>changelegend(legend)}/>
                     <img src={u865}/>
@@ -119,7 +121,12 @@ let Component = React.createClass({
                 {showPage === 'areaKBA' && <AreaKBA></AreaKBA>}
                 {showPage === 'loseElectric' && <LoseElectric></LoseElectric>}
 
+                {showPage === 'deviceLose' && <DeviceLose></DeviceLose>}
+                {showPage === 'topTen' && <TopTen></TopTen>}
 
+				
+
+			
 
                 {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
                 {showPage === 'healthy' && <Healthy></Healthy>}

@@ -235,6 +235,12 @@ module.exports = {
                     },{
                         name:'可靠性分析',
                         page:'',
+                    },{
+                        name:'设备损失分析',
+                        page:'deviceLose',
+                    },{
+                        name:'Top10故障损失分析',
+                        page:'topTen',
                     }]
             },{
                 name:'报表分析',

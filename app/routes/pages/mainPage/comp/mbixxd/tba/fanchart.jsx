@@ -13,7 +13,7 @@ let Component = React.createClass({
       let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA}=this.props;
         let configPie = {
             chart: {
-                height:345,
+                height:340,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -50,7 +50,7 @@ let Component = React.createClass({
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -115,13 +115,13 @@ let Component = React.createClass({
                     stack:'waste',
                 },
                 {
-                    name: '成',
+                    name: '损',
                     type: 'column',
                     data: fanCost2,
                     stack:'waste',
                 },
                 {
-                    name: '本',
+                    name: '失发电量',
                     type: 'column',
                     data: fanCost3,
                     stack:'waste',

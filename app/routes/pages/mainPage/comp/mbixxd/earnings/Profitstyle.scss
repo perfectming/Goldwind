@@ -1,7 +1,8 @@
 .box{
     overflow:hidden;
+    padding-bottom:10px;
     .monthbox{
-    width: 100%;
+    width: 98%;
     height: 80px;
     list-style: none;
     background-color: #21242b;
@@ -48,6 +49,13 @@
       li:last-child:hover{
       background:#156e74;
       }
+      .red{
+    background:#20FEFF;
+    color:black;
+  }
+  .green{
+    color:white;
+  }
     }
   .bgc{
     position:absolute;
@@ -67,24 +75,33 @@
 
     .areabox{
       position:relative;
-            width:100%;
-            height:300px;
-            margin-bottom: 12px;
+            width:98%;
+            margin-left:2px;
+            height:390px;
+            margin-bottom: 20px;
+            border-radius:10px;
 
            }
+       .shadow:hover{
+        box-shadow:0 0 15px #fff;
+      }
     .windbox{
        float: left;
-       width: 49%;
-       height: 400px;
+       width: 48%;
+       height: 390px;
+       margin-left:12px;
+        border-radius:10px;
     }
      .bigbox{
        float:right;
-    height:50%;
-    width:50%;
+    height:390px;
+    width:48%;
+    margin-right:50px;
     border:1px solid #282F37;
     position:relative;
     border-radius:10px;
     background-color: #282F37;
+    margin-right:33px;
     .coverbox{
       margin-top:50px;
 
@@ -152,7 +169,7 @@
         }
     .buttons{
     height:46px;
-    width:32%;
+    width:35%;
     float:right;
     }
     .buttons{
@@ -170,5 +187,53 @@
       background-color:white;
       }
     }
+    .morebox{
+     height:450px;
+     width:60%;
+     border:1px solid #282F37;
+     position:absolute;
+     border-radius:10px;
+     background-color: pink;
+     top:50%;
+     left:50%;
+     transform:translate(-50%,-50%);
+     display:none;
+     .imgq{
+     position:absolute;
+     top:7px;
+     left:7px;
 
+     img{
+     height:40px;
+     width:40px;
+     }
+     .tit{
+       position:absolute;
+       top:10%;
+       left:50px;
+       color:white;
+       font-weight:700;
+       width:300px;
+       font-size:20px;
+     }
+     }
+     .close{
+     position:absolute;
+     top:10px;
+     right:10px;
+     height:30px;
+     width:30px;
+     border:1px solid pink;
+     line-height:24px;
+     font-size:24px;
+     text-align:center;
+     cursor:pointer;
+     }
+     .windcebox{
+        margin-top:50px;
+     }
+
+    }
+
+   
 }

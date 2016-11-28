@@ -12,7 +12,7 @@ let Component = React.createClass({
     render() {
         let configPie = {
             chart: {
-                height:500,
+                height:400,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -49,7 +49,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#c5e0b4', '#c9c9c9','#f5b297','#a1c0e5', '#ffd689','#5b9bd5']
+            colors: [ '#1e664a', '#4cdb9d','#f5b297','#a1c0e5', '#ffd689','#5b9bd5']
             ,
             plotOptions: {
                 pie: {

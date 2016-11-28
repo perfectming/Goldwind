@@ -41,7 +41,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {border=true,changeborder,changeborder1,retlegend,closebox} = this.props;
+        let {border=true,changeborder,changeborder1,retlegend,closebox,Tofaninfo} = this.props;
         return (
            
                     <div className={styles.fiexdbox}>
@@ -49,18 +49,28 @@ let Component = React.createClass({
                        <div className={styles.inputbox}>
                        
                             <span className={styles.search}></span><input type='text' placeholder="查询" /><a></a>
-                            <div className={styles.line_title}  >风场</div>
-                            <div className={styles.line_title} >光伏场</div>
+                            <div className={`${styles.line_title} ${styles.add_border}`} id='fc' >风场</div>
+                            <div className={styles.line_title} id='gfc' >光伏场</div>
                        </div>
                        <div className={styles.listbox} id='list'>
-                            <ul>
+                            <ul id='fclist'>
                                 {  
                                     arr1.map((value,key)=>{
                                         return(
                                             <li key={key} >
                                                 <a>{model_ens[value].name}</a>
                                                 <div className={styles.list_span}>
-                                                    <span>C1-01</span>
+                                                {
+                                                    obj_wfd[value].map((valueC,key)=>{
+                                                        return(
+
+                                                            <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname}</span>
+
+                                                            )
+                                                    })
+
+                                                }
+
                                                 </div>
                                             </li>
                                         
@@ -69,14 +79,23 @@ let Component = React.createClass({
                                 }
 
                             </ul>
-                            <ul className={styles.show}>
+                            <ul className={styles.show} id='gflist'>
                                 { 
                                     arr2.map((value,key)=>{
                                         return(
                                             <li key={key}>
                                                 <a>{model_ens[value].name}</a>
                                                 <div className={styles.list_span}>
-                                                    <span>C1-01</span>
+                                                    {
+                                                    obj_pvd[value].map((valueC,key)=>{
+                                                        return(
+
+                                                            <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname}</span>
+
+                                                            )
+                                                    })
+
+                                                }
                                                 </div>
                                             </li>
                                         
@@ -101,8 +120,19 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            $('.place').on('click',function(){
-                alert(1);
+            $('#fc').on('click',function(){
+                $(this).css('border','1px solid #51a0bf');
+                $(this).css('border-bottom','1px solid #0a1b2d');
+                $("#gfc").css('border','none');
+                $('#fclist').show();
+                $("#gflist").hide();
+            })
+             $('#gfc').on('click',function(){
+                $(this).css('border','1px solid #51a0bf');
+                $(this).css('border-bottom','1px solid #0a1b2d');
+                $("#fc").css('border','none');
+                $("#gflist").show();
+                $("#fclist").hide();
             })
             $('#list ul li a').on('click',function(){
                 var bg=$(this).css("background-image");
@@ -126,6 +156,14 @@ const mapDispatchToProps = (dispatch) => {
         },
         closebox:()=>{
             dispatch(actions.setVars('legend', false));
+        },
+        Tofaninfo: (value,valuepage)=> {
+            dispatch(actions.setVars('value', value));
+            dispatch(actions.setVars('valueid', valuepage));
+            dispatch(actions.setVars('fan_page', 'faninfo'));
+            dispatch(actions.setVars('showPage', 'fan_matrix'));
+            dispatch(actions.setVars('legend', false));
+            dispatch(actions.setVars('headerItemActive', 1));
         }
        
     };

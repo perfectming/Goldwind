@@ -15,7 +15,7 @@ let Component = React.createClass({
         let windProfit=data.windProfit;
         let configPie = {
             chart: {
-                height:400,
+                height:390,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -25,7 +25,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '十月1区域各风场年收益率',
+                text: '10月1区域各风场年收益率',
                 align:'left',
                  x : "0",
                 style:{
@@ -47,8 +47,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -105,12 +104,12 @@ let Component = React.createClass({
                 },
             },
             series: [{
-                name: '收入',
+                name: '实际收益',
                 type: 'column',
                 data: windProfit
             },
             {
-            	name: '成本',
+            	name: '收益成本',
                 type: 'column',
                 data: windCost
             },

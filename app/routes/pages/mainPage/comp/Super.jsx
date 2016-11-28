@@ -50,7 +50,7 @@ let Component = React.createClass({
                             <Title title={['日发电量统计']}></Title>
                         </div>
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
-                            <Line1 date={date00} datename={datename00} height={220}></Line1>
+                            <Line1 date={date00} datename={datename00} height={220} name={'当日24小时功率曲线'}></Line1>
                    
                             <Title title={[mod.dis.CurDayPowerCurve.name+'('+mod.dis.CurDayPowerCurve.unit+')']}></Title>
                             
@@ -60,12 +60,12 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.chart_bar}>
                         <div className={`${styles.linebox} ${styles.box_shadow}`}>
-                            <Line1 date={date01} datename={datename01} height={150}></Line1>
+                            <Line1 date={date01} datename={datename01} height={150} name={'当日风速曲线'}></Line1>
                             <Title title={[mod.dis.CurDayWindSpeedCurve.name+'('+mod.dis.CurDayWindSpeedCurve.unit+')']}></Title>
                         </div>
 
                          <div className={`${styles.linebox} ${styles.linebox1} ${styles.box_shadow}`}>
-                            <Line1 date={date02} datename={datename02} height={150}></Line1>
+                            <Line1 date={date02} datename={datename02} height={150} name={'当日辐照度曲线'}></Line1>
                             <Title title={[mod.dis.CurDayPVTSICurve.name+'('+mod.dis.CurDayPVTSICurve.unit+')']}></Title>
 
                         </div>

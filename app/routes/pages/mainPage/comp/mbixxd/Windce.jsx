@@ -12,7 +12,7 @@ let Component = React.createClass({
         let {areaNameX,areaRecordCostT,areaRecordProfitO,colorO,colorT,pointWidth}=this.props
         let configPie = {
             chart: {
-                height:500,
+                height:700,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,

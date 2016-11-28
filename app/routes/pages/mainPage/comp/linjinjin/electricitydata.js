@@ -1,7 +1,7 @@
 module.exports = {
    
     xtext:['一月', '二月','三月','四月','五月','六月','七月'],
-    height:[450],
+    height:[350],
     duixiang:[
             {
                 type:'column',

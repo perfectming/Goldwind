@@ -7,7 +7,7 @@
    padding:5px 0;
    .Generating{
    	width: 270px;
-    height: 450px;
+    height: 410px;
     float:left;
     border:1px solid #ccc;
     background: rgba(44, 61, 71, 0.4);
@@ -49,7 +49,7 @@
    }
    .Plancurve{
    	width: 600px;
-    height: 450px;
+    height: 410px;
     float:left;
     border:1px solid #ccc;
     margin-right:15px;
@@ -68,7 +68,7 @@
    }
    .Electric{
    width: 600px;
-    height: 450px;
+    height: 410px;
      float:left;
     border:1px solid #ccc;
     margin-right:15px;
@@ -136,7 +136,7 @@
    }
    .Completion{
    	width: 335px;
-    height: 450px;
+    height: 410px;
      float:left;
     border:1px solid #ccc;
     background: rgba(44, 61, 71, 0.4);
@@ -154,23 +154,23 @@
    }
    .navitem{
    	width:20%;
-   	height:100px;
+   	height:80px;
    	float:left;
    	border-right:1px solid #ccc;
   	background: rgba(44, 61, 71, 0.4);
     .leftimg{
       width:40%;
       float:left;
-      height:100px;
+      height:80px;
       text-align:right;
-      img{margin:25px 20px 0 0;}
+      img{margin:13px 20px 0 0;}
 
     }
     .righttext{
       width:60%;
       float:left;
-      height:100px;
-      line-height:100px;
+      height:80px;
+      line-height:80px;
       font-size:24px;
       color:#fff;
     }
@@ -178,8 +178,8 @@
       width:60%;
       float:left;
       font-size:16px;
-      padding-top:24px;
-      height:100px;
+      padding-top:14px;
+      height:80px;
       color:#fff;
       h2{
         font-weight:normal;
@@ -194,7 +194,7 @@
    }
    .Loss{
    		width:50%;
-   		height:500px;
+   		height:400px;
    		float:left;
    		border-right:1px solid #ccc;
        h6{
@@ -211,10 +211,10 @@
    }
     .Fault{
    		width:50%;
-   		height:500px;
+   		height:400px;
       position:relative;
    		float:left;
-      background:url('../../img/comp/gzbg.png') center center;
+      background:url('../../img/comp/gzbg.png') center -80px;
       background-repeat:no-repeat;
      h6{
      font-weight:normal;
@@ -227,7 +227,7 @@
      margin-top:-5px;
      }
      }
-     .gznum{ float:left;margin:172px 65px 0 0;color: #fff; font-size:18px; width:80px; text-align:center}
+     .gznum{ float:left;margin:93px 65px 0 0;color: #fff; font-size:18px; width:80px; text-align:center}
      .gzmor{margin-left:230px;}
    		a{margin:180px 0 0 66px; float:left;color:#fff; font-size:14px; width:80px; text-align:center}
      .gza{ margin-left:154px;}

@@ -112,6 +112,7 @@ let Component = React.createClass({
                 name: '实际健康度',
                 type: 'column',
                 data: powerValue
+
             }
             // ,{
             //     name:'停机时间',
