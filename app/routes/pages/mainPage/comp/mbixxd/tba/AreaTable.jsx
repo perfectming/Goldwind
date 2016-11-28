@@ -11,7 +11,7 @@ let Component = React.createClass({
         let { areaName,areaRecordCosts,areaRecordProfit,text0}=this.props;
         let configPie = {
             chart: {
-                height:300,
+                height:390,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -43,7 +43,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false
@@ -118,7 +118,7 @@ let Component = React.createClass({
                 stack:'first',
             },
             {
-                name: '失',
+                name: '失发电量',
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',
