@@ -88,15 +88,24 @@ let Component = React.createClass({
                 },
                 categories:windFiled,
             },
-            yAxis: {
-                labels: {
-                    y: 10, //x轴刻度往下移动20px
-                    style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+            yAxis: [{
+                    title:{
+                        text:'KWH',
+                        align:'high',
+                        rotation:'0',
+                        y: -17,
+                        x: 36,
                     }
-                },
+                }, {
+            title: {
+                text: 'PBA',
+                align:'high',
+                rotation:'0',
+                 y: -17,
+                x: 136,
             },
+            opposite: true
+        }],
             series:  [{
                 name: '实际发电量',
                 type: 'column',

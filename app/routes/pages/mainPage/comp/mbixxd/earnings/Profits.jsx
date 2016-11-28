@@ -53,16 +53,19 @@ let Component = React.createClass({
                     }
                 </ul>
                <div className={styles.covers} >
-                   <div className={styles.bgc}> <img src={icono}/></div>
+                   <div className={styles.bgccc}> <img src={icono}/></div>
                    <div className={`${styles.areabox} ${styles.shadow}`}>
+                          <p className={styles.titleeee}>11月份各风机PBA</p>
                            <AreaTable text={text[actbt]} areaName={areaName} areaRecordCost={wind==undefined? areaRecordCost:wind} areaRecordProfit={windP==undefined? areaRecordProfit:windP} TBA={windPT==undefined? TBA:windPT}></AreaTable>
                     </div>
                 </div>
 
                <div className={styles.covers}>
-                   <div className={styles.bgc}> <img src={icono}/></div>
+                   <div className={styles.bgcccc}> <img src={icono}/></div>
                    <div className={`${styles.windbox} ${styles.shadow}`}>
-                       <div>
+            
+                       <p className={styles.tiw}>十月一区域各风场年收益率</p>
+                        <div>
                            <WindfieldTable></WindfieldTable>
                        </div>
                    </div>
@@ -73,7 +76,7 @@ let Component = React.createClass({
                    <div className={styles.coverbox}>
                        <div className={styles.windcebox}>
                            <div>
-                               <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee } height={340} TBAA={TBAA}></Fanchart>
+                               <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee } height={360} TBAA={TBAA}></Fanchart>
                            </div>
                        </div>
                        <div className={styles.tik}>
@@ -84,7 +87,7 @@ let Component = React.createClass({
                        <img src={icono}/>
                    </div>
                    <div className={styles.buttons}>
-                      <button onClick={()=>gogogo(windFJ)} > 前十</button>
+                      <button onClick={()=>gogogo(windFJ)} > 前10</button>
                       <button onClick={()=>back(windFJ)}>后10</button>
                       <button  onClick={()=>more()}>更多</button>
                    </div>
@@ -95,11 +98,11 @@ let Component = React.createClass({
                       <div className={styles.close} onClick={()=>close()}>x</div>
                        <div className={styles.windcebox}>
                            <div>
-                               <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee} TBAA={TBAA} height={440}></Fanchart>
+                               <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee} TBAA={TBAA} height={370}></Fanchart>
                            </div>
                        </div>
                    </div>
-                   <div className={styles.imgq}>
+                   <div className={styles.imgqa}>
                        <img src={icono}/>
                        <p className={styles.tit}>10月1区域1风场年收益率</p>
                    </div>
