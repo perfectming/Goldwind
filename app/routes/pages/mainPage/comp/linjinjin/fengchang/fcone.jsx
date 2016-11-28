@@ -10,7 +10,6 @@ import Fjkx from './fcright/fjkx.jsx';
 import Cft from './fcright/cft.jsx';
 import Gisdxt from './fcright/gisdxt.jsx';
 import Syzjs from './fcright/syzjs.jsx';
-import Choosefan from '../../xym/allinfo/Choosefan.jsx';
 var actions = require('redux/actions');
 
 
@@ -37,7 +36,6 @@ let Component = React.createClass({
                         { numpage==='cft' && <Cft></Cft>}
                         { numpage==='gisdxt' && <Gisdxt></Gisdxt>}
                         { numpage==='syzjs' && <Syzjs></Syzjs>}
-                        { numpage==='choesefan' && <Choosefan></Choosefan>}
 
                     </div>
                 </div>
