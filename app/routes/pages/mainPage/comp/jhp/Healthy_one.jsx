@@ -110,7 +110,7 @@ let Component = React.createClass({
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
                         <Hly_r height={400} barRotime={barRotime1} barLoPowerValue={barLoPowerValue2}
-                               text={text0[actbt] + "月" + text0[5] + "区域各风场健康度"}></Hly_r>
+                               text={text0[actbt] + "月" + text0[5] }></Hly_r>
                     </div>
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
                         <div className={styles.rbox30}>
@@ -158,8 +158,11 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         changecolor: (value, key) => {
+            dispatch(actions.setVars('mon', value.name));
+         ;
             dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('wind', value.plan));
+            dispatch(actions.setVars('windplan', value.plan));
+            dispatch(actions.setVars('windplan1', value.plan));
         },
         gogogo: (sort0) => {
             (function () {
