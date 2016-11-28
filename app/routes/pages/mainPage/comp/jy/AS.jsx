@@ -25,7 +25,8 @@ let Component = React.createClass({
         }
         return (
             <div>
-                <div className={styles.btn}><img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
+                <div className={styles.btn}>
+                    <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content))}/>
                     <img src={refresh}/>
                     <img src={tabAdd} onClick={()=>add(newData)}/>
                 </div>
@@ -69,7 +70,10 @@ let Component = React.createClass({
                                                 )}
                                             })
                                         }
-                                        <div className={styles.tableContentItem} style={{width:(100/(tabaleData.as.header.length+1))+"%"}}>
+                                        <div className={styles.tableContentItem} style={{width:(50/(tabaleData.as.header.length+1))+"%"}}>
+                                            <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content[key]))}/>
+                                        </div>
+                                        <div className={styles.tableContentItem} style={{width:(50/(tabaleData.as.header.length+1))+"%"}}>
                                             <img src={del} onClick={(e)=>dele(key)}/>
                                         </div>
                                     </div>
