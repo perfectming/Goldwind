@@ -37,8 +37,6 @@ let Component = React.createClass({
                         { numpage==='gisdxt' && <Gisdxt></Gisdxt>}
                         { numpage==='syzjs' && <Syzjs></Syzjs>}
 
-
-
                     </div>
                 </div>
             </div>
