@@ -4,7 +4,7 @@
       }
   .listrightBox{
     width:1260px;
-    height:900px;
+    height:920px;
     overflow:hidden;
     float:right;
     .listbodyBox1 {
@@ -45,66 +45,83 @@
       margin: 10px 0px 60px 170px;
       }
       .listopt{
-      display:inline-block;
-      margin: 10px 0px 10px 140px;
-      padding:5px 20px;
-      background-color:#1D2835;
-      width:1130px;
-      min-height:100px;
-     
-      
-      div{
-        font-size:14px;
-        cursor:pointer;
-        display:inline-table;
-        float:left;
-        width:58px;
-        height:25px;
-        border-radius:3px;
-        line-height:25px;
-        text-align:center;
-        padding:0 2px;
-        margin: 3px;
-        position:relative;
-        .listoptinfo{
-          width:150px;height:110px;background-color: #FFFFFF;display:none;
-          position:absolute;right:65px;top: -10px;
-          font-size:20px;
-          text-align:left;
-          color:#578D1E;
-          span{
-            
-            line-height:40px;
-            display:inline-block;
-            
-            width:100%;
-            height:40px;
-            border-bottom:1px solid #999;
+        display:inline-block;
+        margin: 10px 0px 10px 140px;
+        padding:5px 20px;
+        background-color:#1D2835;
+        width:1130px;
+        min-height:100px;
+       
+        
+        div{
+          font-size:14px;
+          cursor:pointer;
+          display:inline-table;
+          float:left;
+          width:58px;
+          height:25px;
+          border-radius:3px;
+          line-height:25px;
+          text-align:center;
+          padding:0 2px;
+          margin: 3px;
+          position:relative;
+          .listoptinfo{
+            width:150px;height:110px;background-color: #FFFFFF;display:none;
+            position:absolute;right:65px;top: -10px;
+            font-size:20px;
+            text-align:left;
+            color:#578D1E;
+            span{
+              
+              line-height:40px;
+              display:inline-block;
+              
+              width:100%;
+              height:40px;
+              border-bottom:1px solid #999;
+            }
+            p{
+              margin:0 auto;
+              display:block;
+              line-height:35px;
+              font-size:16px;
+            }
           }
-          p{
-            margin:0 auto;
+          
+        }
+        div:hover{
+          box-shadow:0px 0px 8px 2px #fff;
+          cursor:pointer;
+          .listoptinfo{
             display:block;
-            line-height:35px;
-            font-size:16px;
+            z-index:1000;
           }
+        }
+      #f1a820
+        .listoptbtn_2{
+          box-shadow:1px 1px 3px #87CB2D;
+        }
+        .listoptbtn_3{
+          box-shadow:1px 1px 3px #87CB2D;
+          background-color:#f1a820
+        }
+        .online{
+        background-color:#00ff00;/*绿色*/ //运行
+        }
+        .offline{
+          border: 2px solid #666; // 待机
+        }
+        .discomfor{
+          background-color:#f1a820 //离线
         }
         
-      }
-      div:hover{
-        box-shadow:0px 0px 8px 2px #fff;
-        cursor:pointer;
-        .listoptinfo{
-          display:block;
-          z-index:1000;
+        .default{
+          border: 2px solid #c7b88c; //检修
+        } 
+        .fault{
+          background-color:#ff0000;
         }
-      }
-    
-      .listoptbtn_2{
-        box-shadow:1px 1px 3px #87CB2D;
-        -background-color:#87CB2D;/*绿色*/
-        background-color:#f1a820
-      }
-      
       }
     }
     }
@@ -116,4 +133,5 @@
       
 
     }
+    
 }

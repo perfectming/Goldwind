@@ -36,6 +36,7 @@ let Component = React.createClass({
 
 	render() {
 		let {value,fanid} = this.props;
+		// console.log(fmvalue.StatusCode);
 		let x;
 		let code = value.WTStateCode;
 		switch(code)
@@ -43,35 +44,35 @@ let Component = React.createClass({
 				case "DisComForPre":
 					x = "离线";
 					break;
-				case 1:
+				case "DisComForPlc":
 					x = "离线";
 					break;
-				case 2:
+				case "Unknown":
 					x = "离线";
 					break;
-				case 3:
-					x = "离线";
+				case "Online":
+					x = "正常发电";
 					break;
-				case 4:
-					x = "离线";
+				case "LimitPow":
+					x = "正常发电";
 					break;
-				case 5:
-					x = "离线";
+				case "Alarm":
+					x = "正常发电";
 					break;
-				case 6:
-					x = "离线";
+				case "Fault":
+					x = "故障停机";
 					break;
-				case 7:
-					x = "离线";
+				case "Offline":
+					x = "待机";
 					break;
-				case 8:
-					x = "离线";
+				case "ProtoectStop":
+					x = "待机";
 					break;
-				case 9:
-					x = "离线";
+				case "LimitPowStop":
+					x = "待机";
 					break;
-				case 10:
-					x = "离线";
+				default:
+					x = "维护";
 					break;
 			}
 		// console.log(code);
@@ -346,7 +347,7 @@ const mapDispatchToProps = (dispatch) => {
         		WTGShz = (WTGShz-45)*15;
         	}
         	$("#hzpoint").animate({ textIndent: 0 }, { 
-        		duration: 10000,
+        		duration: 1000,
 				step: function(now,fx) {
  				$(this).css('transform-origin','90% 50%'); 
 				$(this).css('transform','rotate('+WTGShz+'deg)'); 
@@ -420,7 +421,7 @@ const mapDispatchToProps = (dispatch) => {
         	}, 1000 )
 //   $.ajax({
 //    type: 'GET',    
-//    url:'http://10.9.0.9:8081/gwbi/elec/getPower',    
+//    url:'http://10.9.96.148:8080/soam/user/getPower?username=123&password=123',    
 //    data:{name:'xuyuanming'},    
 //    dataType:"jsonp",    
 //    // jsonp:"callback",    
