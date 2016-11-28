@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Corner from '../super/Corner.jsx';
-import fmatrix from '../../img/comp/fmatrix.png';
+// import fmatrix from '../../img/comp/fmatrix.png';
 import styles from './Fanmatrix.scss';
 import fan_matrix from '../linjinjin/Fan_matrix.jsx';
 var actions = require('redux/actions');
@@ -65,19 +65,60 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage=650107,Tofaninfo}=this.props;
+        let{valuepage,Tofaninfo}=this.props;
+
+        
         return (
             <div className={styles.listbodyBox}>
                 {
                 obj_wfd[valuepage].map((value, key)=> {
+                    // let bordercolor = value.WTStateColor;
+                    let x;
+                    let code = value.WTStateCode;
+                    // console.log(code);
+                    switch(code)
+                        {
+                            case "DisComForPre":
+                                x = "离线";
+                                break;
+                            case "DisComForPlc":
+                                x = "离线";
+                                break;
+                            case "Unknown":
+                                x = "离线";
+                                break;
+                            case "Online":
+                                x = "正常发电";
+                                break;
+                            case "LimitPow":
+                                x = "正常发电";
+                                break;
+                            case "Alarm":
+                                x = "正常发电";
+                                break;
+                            case "Fault":
+                                x = "故障停机";
+                                break;
+                            case "Offline":
+                                x = "待机";
+                                break;
+                            case "ProtoectStop":
+                                x = "待机";
+                                break;
+                            case "LimitPowStop":
+                                x = "待机";
+                                break;
+                            default:
+                                x = "维护";
+                                break;
+                        }
                     return (
-                        <div className={styles.listBox} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
-                            <div className={styles.listitemL}><img src={fmatrix}/>
-                            </div>
+                        <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default))))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
+                           
                             <div className={styles.listitemR}>
                                 <span className={styles.listitemT}>
                                         <p className={styles.listitemTT}>{value.Wtname}</p>
-                                        <p className={styles.listitemTB}>正常发电</p>
+                                        <p className={styles.listitemTB}>{x}</p>
                                 </span>
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>

@@ -15,24 +15,19 @@ let Component = React.createClass({
 
     render() {
         return (
-            <div className={styles.box}>
-                <ul className={styles.monthbox}>
-                    {
-                        month.map((value,key)=>{
-                            return(<li key={key}>{value}</li>)
-                        })
-                    }
-                </ul>
+            <div className={`${styles.box} ${styles.shadow}`}>
+           
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
+                            <p className={styles.title}>风场TBA</p>>
                                 <TBAtimechart></TBAtimechart>
                             </div>
                         </div>
                     </div>
                     <div className={styles.imgq}>
-                        <img src={icono}/>
+                        <img  className={styles.img}src={icono}/>
                     </div>
                     
                 </div>
@@ -40,12 +35,13 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
+                             <p className={styles.title}>11月每日TBA</p>>
                                 <TBAtimechartt></TBAtimechartt>
                             </div>
                         </div>
                     </div>
-                    <div className={styles.imgq}>
-                        <img src={icono}/>
+                     <div className={styles.imgq}>
+                        <img  className={styles.img}src={icono}/>
                     </div>
                 </div>
             </div>

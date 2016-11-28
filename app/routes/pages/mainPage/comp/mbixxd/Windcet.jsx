@@ -14,7 +14,7 @@ let Component = React.createClass({
         let areaPlanDayT=data.areaPlanDayT;
         let configPie = {
             chart: {
-                height:500,
+                height:700,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -50,7 +50,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false //不显示highCharts版权信息

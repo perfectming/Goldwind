@@ -10,7 +10,7 @@
       width: 255px;
       height: 112px;
       background: #292F34;
-      background-image:url(../../img/comp/fmatrix.png);
+      background-image:url(../../../img/comp/fmatrix.png);
       background-size: 100% 100%;
       background-repeat: no-repeat;
       cursor: pointer;
@@ -65,7 +65,7 @@
       }
     } 
     .fault{
-      background-image: url(../../img/comp/faultbg.png),url(../../img/comp/fmatrix.png);
+      background-image: url(../../../img/comp/faultbg.png),url(../../../img/comp/fmatrix.png);
       background-size: 100% 100%;
       background-repeat: no-repeat; //故障
       .listitemT{

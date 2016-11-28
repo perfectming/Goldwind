@@ -11,9 +11,9 @@ let Component = React.createClass({
     render() {
         let {treeOpt, itemAct, changeTreeItem, trunleft,cssif} = this.props;
         return (
-            <div className={`${styles.navTree} ${cssif===true? styles.animate : styles.animate1}`}>
+            <div className={`${styles.navTree} ${cssif==='left'? styles.animate : styles.navTree} ${cssif==='right'? styles.animate1 : styles.navTree}`}>
                 {treeOpt && treeOpt.subPage.map((value, key)=> {
-                    if(cssif){
+                    if(cssif=='left'){
                     return (
                         <div key={key} className={itemAct === key ? styles.treeItemAct : styles.treeItem} onClick={()=>changeTreeItem(key,value.page[0].page)}>
                             <img src={itemAct === key ? value.iconActive : value.iconNormal}/>
@@ -48,24 +48,23 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('treeItemActive', 0));
             dispatch(actions.setVars('navhide', false));
+            dispatch(actions.setVars('cssif', ''));
         },
         changeTreeItem: (key,page) => {
             dispatch(actions.setVars('treeItemActive', key));
              dispatch(actions.setVars('tabItemActive', 0));
               dispatch(actions.setVars('showPage', page));
-               if(page=='monitorkb'){
-                dispatch(actions.setVars('navhide', false));
-             }else{
+              
                 dispatch(actions.setVars('navhide', true));
-             }
+             
               
         },
         trunleft:(flagv)=>{
-            if(flagv){
-                flagv=false;
+            if(flagv=='left'){
+                flagv='right';
                
             }else{
-                flagv=true;
+                flagv='left';
                 
             }
 

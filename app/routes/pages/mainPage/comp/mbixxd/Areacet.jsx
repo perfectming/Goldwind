@@ -16,26 +16,29 @@ let Component = React.createClass({
         let areaPlan=data.areaPlan;
         let areaPlanDay=data.areaPlanDay;
         let areaPlanDayT=data.areaPlanDayT;
-        let text=data.text[1]
+        let text=data.textT;
+        let{actbt=0,changpage,wind,windP}=this.props;
           return (
            <div className={styles.box}>
-                <ul className={styles.monthbox}>
+                 <ul className={styles.monthbox}>
                     {
-                        month.map((value,key)=>{
-                            return(<li key={key}>{value}</li>)
+                        data.wind.map((value,key)=>{
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
                         })
                     }
                 </ul>
-                <div className={styles.bigbox}>
+                <div className={`${styles.bigbox} ${styles.shadow}`}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <Windcet areaPlan={areaPlan} areaPlanDay={areaPlanDay} areaPlanDayT={areaPlanDayT}></Windcet>
+                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP}></Windcet>
                             </div>
                         </div>
                          <div className={styles.tik}>
-                        <p>{text}</p>
-                    </div>
+                        <p>{text[actbt]}</p>
+                           </div>
+                           <div className={styles.lkua}></div>
+                           <div className={styles.rkua}></div>
                     </div>
                 <div className={styles.imgq}>
                     <img src={icono}/>
@@ -58,7 +61,11 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        actbt:state.vars.actbt,
+         wind:state.vars.wind,
+         windP:state.vars.windP,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -69,6 +76,11 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+         changpage :(value,key)=>{
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('wind',value.plan));
+            dispatch(actions.setVars('windP',value.actrul));
+        },
     };
 };
 

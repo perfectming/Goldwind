@@ -15,14 +15,34 @@ let areaRecordCost=data.areaRecordCost;
 let areaRecordProfit=data.areaRecordProfit;
 let TBA=data.TBA;
 let text=data.text;
-let arr1=data.areaRecordCost;
+let x0=[];
+let x1=[];
+let x2=[];
+let x3=[];
+let x5=[];
+let machine=[];
+let areaRecordCostR=[];
+let areaRecordProfitR=[];
+let TBAA=[];
+let windFJ=data.windFJ;
+ (function(){
+             for(var i=0;i<12;i++){
+         machine[i]=data.windFJ[i].name;
+         areaRecordCostR[i]=data.windFJ[i].areaRecordCost;
+         areaRecordProfitR[i]=data.windFJ[i].areaRecordProfit;
+         TBAA[i]=data.windFJ[i].TBA;
+        }
+    })();
+  (function(){
+
+  })() 
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-       let{actbt=0,changpage,wind,windP,windPT}=this.props;
+       let{actbt=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban}=this.props;
           return (
            <div className={styles.box}>
                <ul className={styles.monthbox}>
@@ -53,22 +73,38 @@ let Component = React.createClass({
                    <div className={styles.coverbox}>
                        <div className={styles.windcebox}>
                            <div>
-                               <Fanchart></Fanchart>
+                               <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee } height={340} TBAA={TBAA}></Fanchart>
                            </div>
                        </div>
                        <div className={styles.tik}>
-                           <p>{text[actbt]}</p>
+                           <p>10月1区域1风场各风场收益率</p>
                        </div>
                    </div>
                    <div className={styles.imgq}>
                        <img src={icono}/>
                    </div>
                    <div className={styles.buttons}>
-                      <button onClick={()=>gogogo(x1,x2)} > 前十</button>
-                      <button>后10</button>
-                      <button>更多</button>
+                      <button onClick={()=>gogogo(windFJ)} > 前十</button>
+                      <button onClick={()=>back(windFJ)}>后10</button>
+                      <button  onClick={()=>more()}>更多</button>
                    </div>
                </div>
+               <p className={styles.clear}></p>
+               <div className={styles.morebox}>
+                 <div className={styles.coverbox}>
+                      <div className={styles.close} onClick={()=>close()}>x</div>
+                       <div className={styles.windcebox}>
+                           <div>
+                               <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee} TBAA={TBAA} height={440}></Fanchart>
+                           </div>
+                       </div>
+                   </div>
+                   <div className={styles.imgq}>
+                       <img src={icono}/>
+                       <p className={styles.tit}>10月1区域1风场年收益率</p>
+                   </div>
+
+                </div>
            </div>
         );
     }
@@ -82,10 +118,9 @@ const mapStateToProps = (state) => {
          wind:state.vars.wind,
          windP:state.vars.windP,
          windPT:state.vars.windPT,
-
+         ban:state.vars.ban,
     }
 };
-
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
@@ -101,7 +136,48 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('windPT',value.actruls));
 
         },
-        gogogo :(value,key)=>{'areaRecordCost',arr1},
+        gogogo : (windFJ)=>{
+          (function(){
+        
+             windFJ.sort(function(a,b){
+              return b.areaRecordCost - a.areaRecordCost;
+             })
+               for(var i=0;i<12;i++){
+                    x0[i]=data.windFJ[i].name;
+                    x1[i]=data.windFJ[i].areaRecordCost;
+                }
+
+          })()
+            dispatch(actions.setVars('machinee', x0))
+            dispatch(actions.setVars('areaRecordCostRR', x1))
+        },
+        back:(windFJ)=>{
+         alert(5e1);
+          (function(){
+             windFJ.sort(function(a,b){
+              return a.areaRecordCost - b.areaRecordCost;
+             })
+               for(var i=0;i<12;i++){
+                    x2[i]=data.windFJ[i].name;
+                    x3[i]=data.windFJ[i].areaRecordCost;
+                }
+
+          })()
+            dispatch(actions.setVars('machinee', x2))
+            dispatch(actions.setVars('areaRecordCostRR', x3))
+        },
+        more:()=>{
+          (function(){
+            let ban=document.getElementsByClassName('morebox');
+             ban.style.display='block';
+          })()
+       
+        },
+        close:()=>{
+          (function(){
+            document.getElementsByClassName('morebox').style.display=none
+          })()
+        }
 
     };
 

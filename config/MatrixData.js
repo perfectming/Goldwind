@@ -17,7 +17,7 @@ module.exports = {
                 {
                     "Wtid": "650107002",
                     "Wtname": "C1-02",
-                    "WTStateCode": "DisComForPre",
+                    "WTStateCode": "Online",
                     "WindSpeed": "14.31",
                     "ActPwr": "2057.77",
                     "WTStateColor": "#f1a820"
@@ -33,7 +33,7 @@ module.exports = {
                 {
                     "Wtid": "650107004",
                     "Wtname": "C2-04",
-                    "WTStateCode": "DisComForPre",
+                    "WTStateCode": "Online",
                     "WindSpeed": "3.61",
                     "ActPwr": "345.49",
                     "WTStateColor": "#f1a820"
@@ -57,7 +57,7 @@ module.exports = {
                 {
                     "Wtid": "650107007",
                     "Wtname": "C3-07",
-                    "WTStateCode": "DisComForPre",
+                    "WTStateCode": "Online",
                     "WindSpeed": "10.19",
                     "ActPwr": "2574.03",
                     "WTStateColor": "#f1a820"
@@ -81,7 +81,7 @@ module.exports = {
                 {
                     "Wtid": "650107010",
                     "Wtname": "C3-10",
-                    "WTStateCode": "DisComForPre",
+                    "WTStateCode": "Online",
                     "WindSpeed": "9.95",
                     "ActPwr": "2075.79",
                     "WTStateColor": "#f1a820"
@@ -113,7 +113,7 @@ module.exports = {
                 {
                     "Wtid": "650107014",
                     "Wtname": "C5-14",
-                    "WTStateCode": "DisComForPre",
+                    "WTStateCode": "Fault",
                     "WindSpeed": "10.92",
                     "ActPwr": "2336.69",
                     "WTStateColor": "#f1a820"
@@ -121,7 +121,7 @@ module.exports = {
                 {
                     "Wtid": "650107015",
                     "Wtname": "C5-15",
-                    "WTStateCode": "DisComForPre",
+                    "WTStateCode": "Online",
                     "WindSpeed": "7.68",
                     "ActPwr": "600.07",
                     "WTStateColor": "#f1a820"

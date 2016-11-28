@@ -57,7 +57,7 @@ let Component = React.createClass({
             },
             tooltip: {
 
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false

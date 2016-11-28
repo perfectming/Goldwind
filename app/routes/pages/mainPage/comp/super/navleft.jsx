@@ -3,6 +3,13 @@ import {connect} from 'react-redux';
 import styles from './navleft.scss';
 import name from '../linjinjin/date';
 import Pie2 from './pie2.jsx';
+let obj = require('../../../../../../config/MatrixData');
+let model = require('../../../../../../config/Model');
+let modeldata = require('../../../../../../config/ModelData');
+var model_data = modeldata.ModelData;
+var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
+var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+
 var actions = require('redux/actions');
 let dataBase=require('../../../../../../config/WTLeftData');
 let dataname=require('../../../../../../config/WTLeftModel');
@@ -36,7 +43,6 @@ let str=d.getDate();
     array2.push(array) //获取全部风场的对应字段数据
     } 
 }
-console.log(array2);
   
 }());
 
@@ -47,7 +53,7 @@ let Component = React.createClass({
 
     render() {
         
-    let{fc_info='650107'}=this.props;
+    let{fc_info='650107',choese}=this.props;
        
         return (
           <div className={ styles.navbox}>
@@ -147,7 +153,7 @@ let Component = React.createClass({
                                   }):
                             namestatus.map((value,key)=>{
                                 return(
-                                <div className={styles.pie} key={key}>
+                                <div className={styles.pie} key={key} onClick = {()=>choese(value)}>
                                     <Pie2 num={datem[value].color}></Pie2>
                                     <div className={styles.allnum}><p>{date[fc_info][namestatus[key]]}</p><p>{datem[value].name}</p></div>
                                 </div>
@@ -166,15 +172,22 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
        fc_info:state.vars.fc_info,
-
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+           
         },
+        choese: (value) => {
+            dispatch(actions.setVars('choesefans', value));
+            dispatch(actions.setVars('numpage', 'choesefan'));
+        }
     };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
+
+
+ 

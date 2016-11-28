@@ -31,19 +31,20 @@
   overflow-x: hidden;
   border-top: 1px solid #3BA9AE;
   border-left: 1px solid #3BA9AE;
-  min-height: 1200px;
+  min-height: 1010px;
   position:relative;
   padding-left: 30px;
-  padding-top:45px;
   .clearbox{
     clear:both
   }
   .fiexd{
-    width:200px;
+    width:169px;
     height:50px;
     position:absolute;
     top:8px;
-    right:40px;
+    right:27px;
+    padding-top:10px;
+    display:none;
     z-index:999;
     img{
     margin-right:10px;
@@ -55,6 +56,7 @@
 
 .animate{
 padding-left:55px;
+width: 1870px;
   animation:myfirst 1s;
 -moz-animation:myfirst 1s; 
 -webkit-animation:myfirst 1s; 
@@ -62,6 +64,7 @@ padding-left:55px;
 }
 .animate1{
 padding-left:30px;
+width: 1820px;
   animation:myfirst1 1s;
 -moz-animation:myfirst1 1s; 
 -webkit-animation:myfirst1 1s; 
@@ -69,26 +72,26 @@ padding-left:30px;
 }
 @keyframes myfirst
 {
-0%   {padding-left:30px;}
-100% {padding-left:55px;}
+0%   {padding-left:30px;width: 1820px;}
+100% {padding-left:55px;width: 1870px;}
 }
 
 @-moz-keyframes myfirst /* Firefox */
 {
-0%   {padding-left:30px;}
-100% {padding-left:55px;}
+0%   {padding-left:30px;width: 1820px;}
+100% {padding-left:55px;width: 1870px;}
 }
 
 @-webkit-keyframes myfirst /* Safari and Chrome */
 {
-0%   {padding-left:30px;}
-100% {padding-left:55px;}
+0%   {padding-left:30px;width: 1820px;}
+100% {padding-left:55px;width: 1870px;}
 }
 
 @-o-keyframes myfirst /* Opera */
 {
-0%   {padding-left:30px;}
-100% {padding-left:55px;}
+0%   {padding-left:30px;width: 1820px;}
+100% {padding-left:55px;width: 1870px;}
 }
 
 
