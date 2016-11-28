@@ -13,7 +13,7 @@ let Component = React.createClass({
         let {monthT,areaRecordProfitT,text}=this.props;
         let configPie = {
             chart: {
-                height:500,
+                height:370,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -23,7 +23,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '',
                 align:'left',
                 top:'-20px',
                 vertical:'top',
@@ -47,7 +47,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+                
             },
             credits: {
                 enabled: false
@@ -81,18 +81,28 @@ let Component = React.createClass({
                 },
                 categories:monthT,
             },
-            yAxis: {
-                labels: {
-                    y: 10,
-                    style: {
-                        color: '#fff',
-                        fontSize:'14px'
-                    }
-                },
+            yAxis: [{
+            title: {
+                text:'100%',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+            }
+        }, {
+            title: {
+                text: '',
+                 align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+
             },
+            opposite: true
+        }],
 
             series: [{
-                name: '实际健康度',
+                name: '健康度',
                 type: 'column',
                 data: areaRecordProfitT,
                 color:'#7DF59C',

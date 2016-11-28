@@ -30,23 +30,23 @@ let Component = React.createClass({
            		<div className={styles.left}>
            			<div className={styles.firstfloor}>
            				
-           				<div className={styles.section}>
+           				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>健康度</span> 
            						<a onClick={()=>changepageHealthyT()}>图片</a>
            						<a onClick={()=>changepageHealthyS()}>图片</a>
-           						<span>{small==null? ((data.yearelectric[0].area[0].small/data.yearelectric[0].area[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%</span>
+           						<span>{small==undefined? ((data.yearelectric[0].area[0].small/data.yearelectric[0].area[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%</span>
            					</div>
            					<div className={styles.sectiontwo}>
            						<div className={styles.big}>
-           							<div className={styles.small} style={{width:small==null? ((data.yearelectric[0].area[0].small/data.yearelectric[0].area[0].big)*100).toFixed(1)+"%":((small/big)*100).toFixed(1)+"%"}}>
-           								{small==null? ((data.yearelectric[0].area[0].small/data.yearelectric[0].area[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%
+           							<div className={styles.small} style={{width:small==undefined? ((data.yearelectric[0].area[0].small/data.yearelectric[0].area[0].big)*100).toFixed(1)+"%":((small/big)*100).toFixed(1)+"%"}}>
+           								{small==undefined? ((data.yearelectric[0].area[0].small/data.yearelectric[0].area[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%
            							</div>
            						</div>
            					</div>
            					<div className={styles.border}></div>
            				</div>
-           				<div className={styles.section}>
+           				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>PBA</span>
            						<a onClick={()=>changepagePBAT()}>图片</a>
@@ -62,7 +62,7 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.border}></div>
            				</div>
-           				<div className={styles.section}>
+           				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>TBA</span>
            						<a onClick={()=>changepageTBAT()}>图片</a>
@@ -80,7 +80,7 @@ let Component = React.createClass({
            				</div>
            			</div>
            			<div className={styles.secondfloor}>
-           				<div className={styles.electric}>
+           				<div className={`${styles.electric} ${styles.boxShadow}`}>
            					<div className={styles.electricHeader}><a>图片</a>发电量</div>
            					<div className={styles.electricFirst}>
            						<a>图片</a>
@@ -119,7 +119,7 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.electricThirdBorder}></div>
            				</div>
-           				<div className={styles.yearelectric}>
+           				<div className={`${styles.yearelectric} ${styles.boxShadow}`}>
            					<div>
            						<div className={styles.logo}><a>logo</a></div>
            						<div className={styles.links}><a onClick={()=>changepageEleT()}>图片</a></div>
@@ -127,7 +127,7 @@ let Component = React.createClass({
            						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={area==undefined? data.yearelectric[0].plan:area} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            					</div>
            				</div>
-           				<div className={styles.yearprofit}>
+           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
            					<div>
            						<div className={styles.logo}><a>logo</a></div>
            						<Yearelectric title={data.yearelectric[0].title[1]} month={data.yearelectric[0].month} plan={area==undefined? data.yearelectric[0].plan:area} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[0]} nameOne={data.yearelectric[0].name[2]} nameTwo={data.yearelectric[0].name[3]}></Yearelectric>
@@ -136,7 +136,7 @@ let Component = React.createClass({
            			</div>
            			
            		</div>
-                <div className={styles.right}>
+                <div className={`${styles.right} ${styles.boxShadow}`}>
                 	<h3>
                 		<span>箭头</span> &nbsp; PBA排序
                 	</h3>

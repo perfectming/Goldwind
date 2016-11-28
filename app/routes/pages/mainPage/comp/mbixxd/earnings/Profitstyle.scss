@@ -1,6 +1,6 @@
 .box{
-     
     overflow:hidden;
+    padding-bottom:10px;
     .monthbox{
     width: 98%;
     height: 80px;
@@ -69,17 +69,45 @@
     width:40px
   }
   }
+  .bgccc{
+    position:absolute;
+    height:40px;
+    width:40px;
+    top:9px;
+    left:46px;
+    z-index:5;
+    img{
+    height:30px;
+    width:40px
+  }
+  }
+  .bgcccc{
+    position:absolute;
+    height:40px;
+    width:40px;
+    top:9px;
+    left:55px;
+    z-index:5;
+    img{
+    height:30px;
+    width:40px
+  }
+  }
    .covers{
      position:relative;
+
    }
 
     .areabox{
       position:relative;
-            width:99%;
-            margin:0 auto;
-            height:300px;
-            margin-bottom: 12px;
-        border-radius:10px
+            width:98%;
+            margin-left:2px;
+            height:410px;
+            margin-bottom: 20px;
+            border-radius:10px;
+            padding-top:20px;
+            background-color:#282F37;
+
            }
        .shadow:hover{
         box-shadow:0 0 15px #fff;
@@ -87,19 +115,23 @@
     .windbox{
        float: left;
        width: 48%;
-       height: 398px;
+       height: 390px;
        margin-left:12px;
         border-radius:10px;
+        padding-top:20px;
+         background-color:#282F37;
+
     }
      .bigbox{
        float:right;
-    height:50%;
-    width:50%;
+    height:390px;
+    width:48%;
+    margin-right:50px;
     border:1px solid #282F37;
     position:relative;
     border-radius:10px;
     background-color: #282F37;
-    margin-right:10px;
+    margin-right:33px;
     .coverbox{
       margin-top:50px;
 
@@ -125,12 +157,46 @@
         width:40px;
       }
     }
+    .imgqa{
+      width:50px;
+      height:30px;
+      position:absolute;
+      top:25px;
+      left:40px;
+      text-align:center;
+      line-height:30px;
+      img{
+        height:30px;
+        width:40px;
+      }
+    }
   }
+
+  .tiw{
+  color:#fff;
+      position:absolute;
+        font-size:25px;
+        top:4px;
+        left:100px;
+        font-weight:700;
+        z-index:100;
+
+  }
+   .titleeee{
+    color:#fff;
+      position:absolute;
+        font-size:25px;
+        top:4px;
+        left:100px;
+        font-weight:700;
+        z-index:100;
+   }
   .windecbox{
     margin-top:50px;
     width:45%;
     height:300px;
     margin-bottom: 12px;
+
   }
   .buttons{
     width:271px;
@@ -167,7 +233,7 @@
         }
     .buttons{
     height:46px;
-    width:32%;
+    width:35%;
     float:right;
     }
     .buttons{
@@ -185,5 +251,53 @@
       background-color:white;
       }
     }
+    .morebox{
+     height:450px;
+     width:60%;
+     border:1px solid #282F37;
+     position:absolute;
+     border-radius:10px;
+     background-color: pink;
+     top:50%;
+     left:50%;
+     transform:translate(-50%,-50%);
+     display:none;
+     .imgq{
+     position:absolute;
+     top:7px;
+     left:7px;
+
+     img{
+     height:40px;
+     width:40px;
+     }
+     .tit{
+       position:absolute;
+       top:10%;
+       left:50px;
+       color:white;
+       font-weight:700;
+       width:300px;
+       font-size:20px;
+     }
+     }
+     .close{
+     position:absolute;
+     top:10px;
+     right:10px;
+     height:30px;
+     width:30px;
+     border:1px solid pink;
+     line-height:24px;
+     font-size:24px;
+     text-align:center;
+     cursor:pointer;
+     }
+     .windcebox{
+        margin-top:50px;
+     }
+
+    }
+
    
 }

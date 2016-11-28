@@ -48,6 +48,10 @@
         height: 40px;
         line-height:40px;
         border: none;
+        img{
+          height:20px;
+          width:20px;
+        }
       }
       input{
         background: #30343f;
@@ -73,11 +77,15 @@
       }
       .tableContentItem {
         float: left;
-        padding: 10px 0 10px;
+        line-height: 40px;
         overflow: hidden;
         text-align: center;
         height: 40px;
         border: none;
+        img{
+          height:20px;
+          width:20px;
+        }
       }
       input{
         background: #272b34;

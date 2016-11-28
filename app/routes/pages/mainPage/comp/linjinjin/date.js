@@ -47,9 +47,9 @@ module.exports = {
         
     ],
     wt_stat:[
-         "ONL",
-        "FaultCount",
-        "OfflineCount",
+        "PVONL",
+        "PVFLT",
+        "PVOFL",
     ],
     mapitem:[
         {

@@ -15,7 +15,7 @@ let Component = React.createClass({
         let windProfit=data.windProfit;
         let configPie = {
             chart: {
-                height:400,
+                height:405,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -47,7 +47,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+                
             },
             credits: {
                 enabled: false

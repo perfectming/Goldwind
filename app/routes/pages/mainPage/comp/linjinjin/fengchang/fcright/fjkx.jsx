@@ -15,8 +15,8 @@ let Component = React.createClass({
        let{ flag=true, changpage, fcpage }=this.props;
         return (
          
-                <div >
-                <img src={bg} style={{width:'100%',height:'1030px'}} />
+                <div style={{width:'100%',height:'100%'}} >
+                <img src={bg} style={{width:'100%',height:'100%'}} />
                 </div>
         );
     }

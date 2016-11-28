@@ -20,7 +20,7 @@ let Component = React.createClass({
 
         let configPie = {
             chart: {
-                height:500,
+                height:700,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -56,7 +56,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+                
             },
             credits: {
                 enabled: false
@@ -82,6 +82,7 @@ let Component = React.createClass({
             },
 
             xAxis: {
+
                 lineWidth: 1,
 
                 tickWidth: 0,
@@ -96,11 +97,20 @@ let Component = React.createClass({
             },
             yAxis: [{
             title: {
-                text: ''
+                text:'KWH',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
             }
         }, {
             title: {
-                text: ''
+                text: 'TBA%',
+                 align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+
             },
             opposite: true
         }],
@@ -130,7 +140,7 @@ let Component = React.createClass({
                     color:'#FD9C31',
                 },
                 {
-                    name: '成',
+                    name: '损',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
@@ -138,7 +148,7 @@ let Component = React.createClass({
                      pointWidth: 30,
                 },
                 {
-                    name: '本',
+                    name: '失发电量',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',

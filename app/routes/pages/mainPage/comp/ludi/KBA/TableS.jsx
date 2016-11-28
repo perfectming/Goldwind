@@ -10,6 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
+    	let {X1,changedata2,X2}=this.props;
         let configPie = {
             chart: {
                 height:400,
@@ -22,7 +23,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '**区域各风场PBA',
+                text: X1,
                 align:'left',
                  x : "0",
                 style:{
@@ -49,7 +50,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#c5e0b4', '#c9c9c9','#f5b297','#a1c0e5', '#ffd689','#5b9bd5']
+            colors: [ '#1e664a', '#4cdb9d','#f5b297','#a1c0e5', '#ffd689','#5b9bd5']
             ,
             plotOptions: {
                 pie: {
@@ -103,14 +104,32 @@ let Component = React.createClass({
             	name: '实际发电量',
             	type: 'column',
                 data: data.data[1].actrul,
+                events: {
+                    click: function(e) {
+                    	X2=e.point.category;
+                    	changedata2(X2);
+                    }
+                }
             },{
                 name: '损失发电量',
                 type: 'column',
                 data: data.data[1].lose,
+                events: {
+                    click: function(e) {
+                    	X2=e.point.category;
+                    	changedata2(X2);
+                    }
+                }
             },{
             	name: 'PBA',
             	type: 'spline',
                 data: data.data[1].PBA,
+                events: {
+                    click: function(e) {
+                    	X2=e.point.category;
+                    	changedata2(X2);
+                    }
+                }
             }]
         };
         return (
@@ -121,12 +140,20 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+    	X1 : state.vars.x1,
+    	X2 : state.vars.x2,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        	dispatch(actions.setVars('x1',X1 ));
+        	
+        },
+        changedata2 :(X2)=>{
+            dispatch(actions.setVars('x2',X2 ));
         },
     };
 };

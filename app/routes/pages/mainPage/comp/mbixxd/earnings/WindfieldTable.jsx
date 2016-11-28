@@ -15,7 +15,7 @@ let Component = React.createClass({
         let windProfit=data.windProfit;
         let configPie = {
             chart: {
-                height:400,
+                height:370,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -25,7 +25,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '十月1区域各风场年收益率',
+                text: '',
                 align:'left',
                  x : "0",
                 style:{
@@ -47,8 +47,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -92,25 +91,32 @@ let Component = React.createClass({
                 },
                 categories:windFiled,
             },
-            yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
-                labels: {
-                    y: 10, //x轴刻度往下移动20px
-                    style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
-                    }
-                },
+             yAxis: [{
+            title: {
+                text:'100%',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+            }
+        }, {
+            title: {
+                text: '',
+                 align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+
             },
+            opposite: true
+        }],
             series: [{
-                name: '收入',
+                name: '实际收益',
                 type: 'column',
                 data: windProfit
             },
             {
-            	name: '成本',
+            	name: '收益成本',
                 type: 'column',
                 data: windCost
             },

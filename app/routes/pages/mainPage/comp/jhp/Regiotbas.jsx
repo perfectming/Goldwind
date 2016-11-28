@@ -52,7 +52,7 @@ let Component = React.createClass({
                 </div>
                 <div className={`${styles.fbox} `}>
                     <div className={` ${styles.logofa} ${styles.box_shadow}`}>
-                        <Reg_tbats barlinepdat={barlinepdat2} barlinepdats={barlinepdats2}  barLpdpowerValue={barLpdpowerValue2} barLdpowerValue={barLdpowerValue2} text={text0[5]+"月每日TBA"}></Reg_tbats>
+                        <Reg_tbats height={450} barlinepdat={barlinepdat2} barlinepdats={barlinepdats2}  barLpdpowerValue={barlinepdats2} barLdpowerValue={barLoPowerValue1} text={text0[5]+"月每日TBA"}></Reg_tbats>
                         <div className={styles.logomini}>
 
                         </div>

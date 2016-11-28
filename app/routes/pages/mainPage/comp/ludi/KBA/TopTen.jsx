@@ -21,18 +21,18 @@ let Component = React.createClass({
 				<TimeSelect></TimeSelect>
 				<div className={styles.content}>
 					<div className={styles.floorOne}>
-						<div className={styles.pie}>
+						<div className={`${styles.pie} ${styles.boxShadow}`}>
 							<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
 						</div>
-						<div className={styles.column}>
+						<div className={`${styles.column} ${styles.boxShadow}`}>
 							<OneColumn name={data.data[3].name} title={data.data[3].title} month={data.data[3].month} plan={data.data[3].plan} unit={data.data[3].unit}></OneColumn>
 						</div>
 					</div>
 					<div className={styles.floorTwo}>
-						<div className={styles.pie}>
+						<div className={`${styles.pie} ${styles.boxShadow}`}>
 							<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
 						</div>
-						<div className={styles.column}>
+						<div className={`${styles.column} ${styles.boxShadow}`}>
 							<OneColumn name={data.data[3].name} title={data.data[3].title} month={data.data[3].month} plan={data.data[3].plan} unit={data.data[3].unit}></OneColumn>
 						</div>
 					</div>
