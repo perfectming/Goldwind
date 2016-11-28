@@ -1,15 +1,63 @@
 .box{
+     height: 940px;
 
 	overflow:hidden;
   background: linear-gradient(to bottom,#242a32 ,#1f2025);
+
+
+  .boxhidden{
+    border: 1px solid #1e8087;
+    overflow: hidden;
+    display: none;
+    width: 90%;
+    position: absolute;
+    z-index: 11;
+    height: 400px;
+    left: 5%;
+    background-color: #21242a;
+    top: 300px;
+
+    margin:10px;
+
+    .hidden_top{
+      color:#fff;
+      height: 50px;
+      background-color: #21242a;
+      font-size:30px;
+      font-weight:bold;
+      padding:4px 6px;
+      cursor:move;
+      .logo2{
+        background: url("./images/wind_logo.png") no-repeat;
+        background-size: 35px 35px;
+        width: 35px;
+        height: 35px;
+        float: left;
+      }
+      .logo3{
+        float: left;
+      }
+    }
+    span{
+      color: #16a7ad;
+      font-size: 40px;
+      font-weight: 600;
+      float: right;
+      cursor: pointer;
+    }
+  }
+
   .tbox{
       width:98%;
 	  height:300px;
-      margin-top: 90px;
+      margin-top: 20px;
       margin-left: 5px;
 
     .logofa{
       position: relative;
+
+
+
 
       .logo{
         position: absolute;
@@ -35,22 +83,75 @@
     }
     
 	}
+  .fbox2{
+    position: relative;
+
+    .rbox31{
+      height: 35px;
+      position: absolute;
+      left: 30px;
+      top: 10px;
+      z-index: 10;
+
+      div{
+        width: 30px;
+        height: 30px;
+        background: url("./images/wind_logo.png") no-repeat;
+        background-size: 30px;
+        // background: red;
+        float: left;
+
+        margin-top: 6px;
+      }
+      span{
+        color: #fff;
+        font-size: 30px;
+        font-family: "微软雅黑";
+        float: left;
+      }
+
+    }
+  }
 	.rbox{
 	float:left;
 	width:48%;
-	height:500px;
-	margin-top:20px;
+	height:400px;
+
       margin-left: 5px;
 	}
   .rbox2{
     background: #252930;
     float:left;
     width:48%;
-    height:500px;
-    margin-top:20px;
+    height:400px;
+    position: relative;
     margin-left: 3%;
     .rbox4{
       margin-top: 70px;
+    }
+
+  }
+  .rbox30{
+    height: 35px;
+    position: absolute;
+    left: 30px;
+    top: 20px;
+
+    div{
+      width: 30px;
+      height: 30px;
+      background: url("./images/wind_logo.png") no-repeat;
+      background-size: 30px;
+     // background: red;
+      float: left;
+
+      margin-top: 6px;
+    }
+    span{
+      color: #fff;
+      font-size: 30px;
+      font-family: "微软雅黑";
+      float: left;
     }
 
   }
@@ -60,8 +161,10 @@
     height: 50px;
     z-index: 10;
     position: absolute;
-    left: 85%;
-    top: 35px;
+    left: 70%;
+    top: 21px;
+
+
 
   }
   .button{
@@ -87,6 +190,13 @@
     width:98%;
     height: 600px;
     margin-top:120px;
+    margin-left: 5px;
+    position: relative;
+  }
+  .fbox10{
+    width:98%;
+    height: 700px;
+    margin-top:50px;
     margin-left: 5px;
     position: relative;
   }
@@ -116,7 +226,7 @@
         width:100px;
         border-radius:17px;
         margin:25px 10px;
-        font-weight:700;
+        font-weight:600;
         cursor:pointer;
         background: #20FEFF;
     }
@@ -146,7 +256,7 @@
         position:absolute;
         top:20px;
         right:207px;
-        font-size: 25px;
+        font-size: 20px;
         font-weight: 600;
         text-align:center;
         border:1px solid #20FEFF;
@@ -169,6 +279,7 @@
 
 }
 
+
 .clear{
   clear: both;
 }
@@ -176,6 +287,8 @@
 .box_shadow:hover{
   box-shadow:0 0 15px #fff;
 }
+
+
 
 
 

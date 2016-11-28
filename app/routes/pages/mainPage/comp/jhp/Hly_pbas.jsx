@@ -10,10 +10,11 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barRotimes,barLoPowerValue,barLoPowerValues,barLdpowerValue,text,height} = this.props;
+        let {widths,barRotimes,barLoPowerValue,barLoPowerValues,barLdpowerValue,text,height} = this.props;
         let configPie = {
             chart: {
                 height:height,
+                width:widths,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
