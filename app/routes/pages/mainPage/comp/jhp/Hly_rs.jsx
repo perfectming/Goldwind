@@ -100,6 +100,13 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                title: {
+                    text:'kW',
+                    align:'high',
+                    rotation:'0',
+                    y: -10,
+                    x: 40,
+                },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {

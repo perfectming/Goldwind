@@ -22,17 +22,19 @@
     .hidden_top{
       color:#fff;
       height: 50px;
+      line-height: 50px;
       background-color: #21242a;
-      font-size:30px;
+      font-size:16px;
       font-weight:bold;
       padding:4px 6px;
       cursor:move;
       .logo2{
         background: url("./images/wind_logo.png") no-repeat;
-        background-size: 35px 35px;
-        width: 35px;
-        height: 35px;
+        background-size: 16px 16px;
+        width: 16px;
+        height: 16px;
         float: left;
+        margin-top: 16px;
       }
       .logo3{
         float: left;
@@ -43,6 +45,7 @@
       font-size: 40px;
       font-weight: 600;
       float: right;
+      margin-right: 20px;
       cursor: pointer;
     }
   }
@@ -61,12 +64,12 @@
 
       .logo{
         position: absolute;
-        left: 60px;
-        top: 6px;
+        left: 76px;
+        top: 9px;
         background: url("./images/wind_logo.png") no-repeat;
-        background-size: 35px 35px;
-        width: 35px;
-        height: 35px;
+        background-size: 16px 16px;
+        width: 16px;
+        height: 16px;
         z-index: 1;
       }
       .logomini{
@@ -75,7 +78,7 @@
       top: 11px;
         background: url("./images/wind_logo.png") no-repeat;
       background-size: 25px 25px;
-      width: 25px;
+      width: 16px;
       height: 25px;
       z-index: 1000;
     }
@@ -94,18 +97,18 @@
       z-index: 10;
 
       div{
-        width: 30px;
-        height: 30px;
+        width: 16px;
+        height: 16px;
         background: url("./images/wind_logo.png") no-repeat;
-        background-size: 30px;
+        background-size: 16px;
         // background: red;
         float: left;
 
-        margin-top: 6px;
+        margin-top: 3px;
       }
       span{
         color: #fff;
-        font-size: 30px;
+        font-size: 16px;
         font-family: "微软雅黑";
         float: left;
       }
@@ -141,7 +144,7 @@
       width: 30px;
       height: 30px;
       background: url("./images/wind_logo.png") no-repeat;
-      background-size: 30px;
+      background-size: 16px;
      // background: red;
       float: left;
 
@@ -149,7 +152,7 @@
     }
     span{
       color: #fff;
-      font-size: 30px;
+      font-size: 16px;
       font-family: "微软雅黑";
       float: left;
     }
@@ -172,7 +175,7 @@
     height:30px;
     line-height:20px;
     text-align:center;
-    font-size:20px;
+    font-size:14px;
     border-radius:10px;
     font-family:'微软雅黑';
     margin-left:12px;
@@ -217,7 +220,7 @@
       background: linear-gradient(to bottom,#242a32 ,#1f2025);
       .inmonth{
         float:left;
-        font-size:20px;
+        font-size:16px;
         font-family: '微软雅黑';
         color:#282f37;
         height:35px;
@@ -232,7 +235,7 @@
     }
       .inmonth2{
         float:left;
-        font-size:20px;
+        font-size:16px;
         font-family: '微软雅黑';
         color:white;
         height:35px;
@@ -256,7 +259,7 @@
         position:absolute;
         top:20px;
         right:207px;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 600;
         text-align:center;
         border:1px solid #20FEFF;
