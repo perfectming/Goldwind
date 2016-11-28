@@ -39,8 +39,6 @@ let Component = React.createClass({
                         { numpage==='syzjs' && <Syzjs></Syzjs>}
                         { numpage==='choosefan' && <Choosefan></Choosefan>}
 
-
-
                     </div>
                 </div>
             </div>
