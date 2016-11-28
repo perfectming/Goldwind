@@ -39,15 +39,18 @@ module.exports = {
             rightpagge:[
             	  {
                     tabname:'光伏矩阵',
-                    rpage:'fanmatrix'
+                    rpage:'pvmatrix'
                 },
                 {
                     tabname:'数据列表',
                     rpage:'sjlb'
                 },
-               
+               {
+                    tabname:'光伏馈线',
+                    rpage:'fjkx'
+                },
                 {
-                    tabname:'测风塔',
+                    tabname:'测光塔',
                     rpage:'cft'
                 },
                 {

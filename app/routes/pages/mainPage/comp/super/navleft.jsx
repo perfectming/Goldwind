@@ -53,7 +53,7 @@ let Component = React.createClass({
 
     render() {
         
-    let{fc_info='650107'，choose}=this.props;
+    let{fc_info='650107',choose}=this.props;
        
         return (
           <div className={ styles.navbox}>

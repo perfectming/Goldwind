@@ -39,6 +39,10 @@ import AreaKBA from '../comp/ludi/KBA/AreaKBA.jsx';
 import LoseElectric from '../comp/ludi/KBA/LoseElectric.jsx';
 import DeviceLose from '../comp/ludi/KBA/DeviceLose.jsx';
 import TopTen from '../comp/ludi/KBA/TopTen.jsx';
+import ServiceLose from '../comp/ludi/KBA/ServiceLose.jsx';
+import PerformLose from '../comp/ludi/KBA/PerformLose.jsx';
+import MaintainLose from '../comp/ludi/KBA/MaintainLose.jsx';
+import LimitLose from '../comp/ludi/KBA/LimitLose.jsx';
 
 import Healthy_one from '../comp/jhp/Healthy_one.jsx';
 import Healthy from '../comp/jhp/Healthy.jsx';
@@ -116,7 +120,10 @@ let Component = React.createClass({
                 {showPage === 'area' && <Area></Area>}
                 {showPage === 'group' && <Group></Group>}
                 {showPage === 'windpage' && <Windpage></Windpage>}
-
+                {showPage === 'serviceLose' && <ServiceLose></ServiceLose>}
+                {showPage === 'performLose' && <PerformLose></PerformLose>}
+                {showPage === 'maintainLose' && <MaintainLose></MaintainLose>}
+                {showPage === 'limitLose' && <LimitLose></LimitLose>}
                 {showPage === 'groupKBA' && <GroupKBA></GroupKBA>}
                 {showPage === 'areaKBA' && <AreaKBA></AreaKBA>}
                 {showPage === 'loseElectric' && <LoseElectric></LoseElectric>}

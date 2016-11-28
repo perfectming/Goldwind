@@ -241,6 +241,18 @@ module.exports = {
                     },{
                         name:'Top10故障损失分析',
                         page:'topTen',
+                    },{
+                        name:'检修过程损失',
+                        page:'serviceLose',
+                    },{
+                        name:'发电性能损失',
+                        page:'performLose',
+                    },{
+                        name:'维护损失',
+                        page:'maintainLose',
+                    },{
+                        name:'限电损失',
+                        page:'limitLose',
                     }]
             },{
                 name:'报表分析',
