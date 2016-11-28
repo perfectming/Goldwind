@@ -15,7 +15,7 @@ let Component = React.createClass({
         let windProfit=data.windProfit;
         let configPie = {
             chart: {
-                height:390,
+                height:405,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,

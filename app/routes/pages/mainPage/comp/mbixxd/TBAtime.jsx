@@ -19,14 +19,14 @@ let Component = React.createClass({
            
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
+                        <div className={styles.windceebox}>
                             <div>
-                            <p className={styles.title}>风场TBA</p>>
+                            <p className={styles.titlee}>风场TBA</p>>
                                 <TBAtimechart></TBAtimechart>
                             </div>
                         </div>
                     </div>
-                    <div className={styles.imgq}>
+                    <div className={styles.imgqq}>
                         <img  className={styles.img}src={icono}/>
                     </div>
                     

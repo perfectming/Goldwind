@@ -54,11 +54,11 @@
     box-shadow:0 0 15px #fff;
     }
     .areabox{
-            width:99%;
+            width:98%;
             margin:0 auto;
-            height:390px;
+            height:405px;
             margin-bottom: 20px;
-            margin-top:20px;
+            margin-top:50px;
             position:relative;
              border-radius:10px;
             .bgcc{
@@ -73,11 +73,13 @@
             }
            }
     .windbox{
-       width: 99%;
+       width: 98%;
        margin:0 auto;
-       height: 390px;
+       height: 405px;
        border-radius:10px;
        position:relative;
+       margin-top:50px;
+
        .bgcc{
        position:absolute;
               top:4px;
