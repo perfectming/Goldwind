@@ -172,7 +172,6 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
        fc_info:state.vars.fc_info,
-
     }
 };
 

@@ -56,7 +56,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false
@@ -123,7 +123,7 @@ let Component = React.createClass({
                      pointWidth: 30,
                 },
                 {
-                    ame: '大',
+                    name: '大',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
@@ -131,7 +131,7 @@ let Component = React.createClass({
                     color:'#FD9C31',
                 },
                 {
-                    name: '成',
+                    name: '损',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
@@ -139,7 +139,7 @@ let Component = React.createClass({
                      pointWidth: 30,
                 },
                 {
-                    name: '本',
+                    name: '失发电量',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',

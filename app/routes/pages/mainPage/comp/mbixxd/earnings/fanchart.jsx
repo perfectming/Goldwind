@@ -3,20 +3,15 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
-
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let machine=data.machine;
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaRecordProfit=data.areaRecordProfit;
-      
+       
+     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height}=this.props
         let configPie = {
             chart: {
-                height:345,
+                height:height,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -52,7 +47,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -92,9 +87,7 @@ let Component = React.createClass({
                 categories:machine,
             },
             yAxis: {
-                // lineWidth: 1,
-                // lineColor: "red",
-                //tickWidth: 4,
+            
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
@@ -107,20 +100,21 @@ let Component = React.createClass({
             series: [{
                 name: '实际收益',
                 type: 'column',
-                data: areaRecordProfit,
+                data: areaRecordProfitR,
                 pointWidth:15
             },
             {
                 name: '收入成本',
                 type: 'column',
-                data: areaRecordCost,
+                data: areaRecordCostR,
                 pointWidth:15
             },
             {
                     name:"TBA",
                     type:'line',
                     color:'blue',
-                    data:[5,6,6,7,4,5,6,7,7,9,1,9],}]
+                    data:TBAA,
+             }]
         };
         return (
             <ReactHighcharts config={configPie}/>
@@ -130,7 +124,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

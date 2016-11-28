@@ -11,14 +11,14 @@ let Component = React.createClass({
         let {areaNamee,areaRecordCostss,areaRecordProfitt,text}=this.props;
         let configPie = {
             chart: {
-                height:300,
+                height:390,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                borderRadius:10,
             },
             title: {
                 text: text,
@@ -45,7 +45,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+            
             },
             credits: {
                 enabled: false
