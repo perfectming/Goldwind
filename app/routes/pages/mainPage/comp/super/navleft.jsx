@@ -47,7 +47,7 @@ let Component = React.createClass({
 
     render() {
         
-    let{fc_info='650107'}=this.props;
+    let{fc_info='650107'，choose}=this.props;
        
         return (
           <div className={ styles.navbox}>
@@ -147,7 +147,7 @@ let Component = React.createClass({
                                   }):
                             namestatus.map((value,key)=>{
                                 return(
-                                <div className={styles.pie} key={key}>
+                                <div className={styles.pie} key={key} onClick = {()=>choose(value)}>
                                     <Pie2 num={datem[value].color}></Pie2>
                                     <div className={styles.allnum}><p>{date[fc_info][namestatus[key]]}</p><p>{datem[value].name}</p></div>
                                 </div>
@@ -174,6 +174,11 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
+        choose: (value) => {
+            dispatch(actions.setVars('choosefans', value));
+            dispatch(actions.setVars('numpage', 'choosefan'));
+        }
+
     };
 };
 
