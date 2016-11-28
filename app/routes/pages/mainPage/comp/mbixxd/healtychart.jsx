@@ -79,16 +79,25 @@ let Component = React.createClass({
                 },
                 categories:machine,
             },
-            yAxis: {
-                
-                labels: {
-                    y: 10,
-                    style: {
-                        color: '#fff',
-                        fontSize:'14px'
-                    }
-                },
+            yAxis: [{
+            title: {
+                text:'100%',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+            }
+        }, {
+            title: {
+                text: '',
+                 align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+
             },
+            opposite: true
+        }],
             series: [{
                 name: '实际健康度',
                 type: 'column',

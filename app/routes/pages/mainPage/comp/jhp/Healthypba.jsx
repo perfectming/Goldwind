@@ -9,7 +9,7 @@ import Hly_r from './Hly_r.jsx';
 import Hly_rs from './Hly_rs.jsx';
 import Hly_d from './Hly_d.jsx';
 var actions = require('redux/actions');
-
+var $ = require('jquery');
 
 let data = require('./Healthy-data');
 let month = data.data.line_month;
@@ -35,11 +35,17 @@ let x2 = [];
 let x3 = [];
 let x4 = [];
 let x5 = [];
+let x6=[];
+let x7=[];
 (function () {
 
     for (var i = 0; i < 12; i++) {
         x4[i] = sort0[i].name;
         x5[i] = sort0[i].time;
+    }
+    for(var i=0;i<sort0.length;i++){
+        x6[i]=sort0[i].name;
+        x7[i]=sort0[i].time;
     }
 
 })();
@@ -51,13 +57,30 @@ let Component = React.createClass({
 
 
     render() {
-        let {wind, winds, windss, buttonAction, actbt = 0, changecolor, gogogo,back,more, arr, arr2} = this.props;
+        let {hideit,wind, winds, windss, buttonAction, actbt = 0, changecolor, gogogo,back,more, arr, arr2} = this.props;
         return (
 
 
 
 
             <div className={styles.box}>
+
+                <div className={`${styles.boxhidden} ${styles.box_shadow}`}   id="boxhidden">
+                    <div className={styles.hidden_top}>
+                        <div className={styles.logo2}></div>
+                        <div className={styles.logo3}>
+                            {text0[actbt] + "月份集团各区域PBA"}
+                            </div>
+                        <span onClick={()=>hideit()}>×</span>
+                    </div>
+                    <Hly_pbas height={320} widths={1600} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
+                              barRotimes={x6} barLoPowerValue={x7}
+                              barLoPowerValues={x7} barLdpowerValue={x7}></Hly_pbas>
+
+
+
+                </div>
+
 
 
                 <div className={styles.onmonth}>
@@ -92,17 +115,18 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
-                        <Hly_pba height={500} text={text0[5] + "月份" + text0[4] + "区域各风场PBA"} barRotime={barRotime2}
+                        <Hly_pba height={400} text={text0[actbt] + "月份" + text0[4] + "区域各风场PBA"} barRotime={barRotime2}
                                  barLoPowerValue={barLoPowerValue2} barLoPowerValues={barLoPowerValue2}
                                  barLdpowerValue={barLoPowerValue1}></Hly_pba>
                     </div>
 
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
+                        <div className={styles.rbox30}>
+                            <div></div>
+                            <span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机PBA"}</span>
+                        </div>
                         <div className={styles.rbox3}>
-                            <div className={styles.rbox30}>
-                                <i></i>
-                                <span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机PBA"}</span>
-                            </div>
+
                             <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
                             <button className={styles.button} onClick={() => back(sort0)}>后10</button>
                             <button className={styles.button} onClick={() => more()}>更多</button>
@@ -110,7 +134,7 @@ let Component = React.createClass({
 
 
                         <div className={styles.rbox4}>
-                            <Hly_pbas height={430} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
+                            <Hly_pbas height={330} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
                                       barRotimes={arr2 == null ? x4 : arr2} barLoPowerValue={arr == null ? x5 : arr}
                                       barLoPowerValues={arr == null ? x5 : arr} barLdpowerValue={arr == null ? x5 : arr}></Hly_pbas>
                             <div className={styles.logo}>
@@ -180,7 +204,10 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('arr2', x2))
         },
         more: () => {
-
+            $("#boxhidden").show();
+        },
+        hideit: () =>{
+            $("#boxhidden").hide();
         }
     };
 };
