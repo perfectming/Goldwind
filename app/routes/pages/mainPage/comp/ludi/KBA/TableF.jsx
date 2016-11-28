@@ -10,6 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
+    	let {X1,changedata1}=this.props
         let configPie = {
             chart: {
                 height:400,
@@ -106,7 +107,11 @@ let Component = React.createClass({
                 stack:"male",
                 data: data.data[0].should,
                 events: {
-                    click: function(e) {}
+                    click: function(e) {
+                    	X1=e.point.category;
+                    	changedata1(X1);
+                    	
+                    }
                 }
             },{
                 name: '故障损失',
@@ -114,7 +119,10 @@ let Component = React.createClass({
                 stack:"female",
                 data: data.data[0].g,
                 events: {
-                    click: function(e) {}
+                    click: function(e) {
+                    	X1=e.point.category;
+                    	changedata1(X1);
+                    }
                 }
             },{
             	name: '维护损失',
@@ -122,7 +130,10 @@ let Component = React.createClass({
                 stack:"female",
                 data: data.data[0].w,
                 events: {
-                    click: function(e) {}
+                    click: function(e) {
+                    	X1=e.point.category;
+                    	changedata1(X1);
+                    }
                 }
             },{
             	name: '性能损失',
@@ -130,7 +141,10 @@ let Component = React.createClass({
                 stack:"female",
                 data: data.data[0].x,
                 events: {
-                    click: function(e) {}
+                    click: function(e) {
+                    	X1=e.point.category;
+                    	changedata1(X1);
+                    }
                 }
             },{
             	name: '其他损失',
@@ -138,14 +152,20 @@ let Component = React.createClass({
                 stack:"female",
                 data: data.data[0].q,
                 events: {
-                    click: function(e) {}
+                    click: function(e) {
+                    	X1=e.point.category;
+                    	changedata1(X1);
+                    }
                 }
             },{
             	name: 'PBA',
             	type: 'spline',
                 data: data.data[0].l,
                 events: {
-                    click: function(e) {}
+                    click: function(e) {
+                    	X1=e.point.category;
+                    	changedata1(X1);
+                    }
                 }
             }]
         };
@@ -157,12 +177,17 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+    	X1 : state.vars.x1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+        changedata1 :(X1)=>{
+              dispatch(actions.setVars('x1',X1 ));
         },
     };
 };

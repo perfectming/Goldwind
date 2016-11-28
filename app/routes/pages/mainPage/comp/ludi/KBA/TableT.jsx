@@ -10,6 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
+    	let {X2}=this.props;
         let configPie = {
             chart: {
                 height:400,
@@ -22,7 +23,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '**区域各风场PBA',
+                text: X2,
                 align:'left',
                  x : "0",
                 style:{
@@ -121,12 +122,15 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+    	X2 : state.vars.x2,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        	dispatch(actions.setVars('x2',X2 ));
         },
     };
 };
