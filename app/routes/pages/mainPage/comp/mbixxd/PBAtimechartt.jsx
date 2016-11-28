@@ -27,7 +27,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '11月每日PBA',
+                text: '',
                 align:'left',
                 top:'-20px',
                 vertical:'top',
@@ -90,13 +90,22 @@ let Component = React.createClass({
                 },
                 categories:areaPlan,
             },
-            yAxis: [{
+           yAxis: [{
             title: {
-                text: ''
+                text:'100%',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
             }
         }, {
             title: {
-                text: ''
+                text: '',
+                 align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+
             },
             opposite: true
         }],

@@ -20,7 +20,7 @@ let Component = React.createClass({
 
         let configPie = {
             chart: {
-                height:500,
+                height:700,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -94,13 +94,22 @@ let Component = React.createClass({
                 },
                 categories:machine,
             },
-            yAxis: [{
+           yAxis: [{
             title: {
-                text: ''
+                text:'KWH',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
             }
         }, {
             title: {
-                text: ''
+                text: '',
+                 align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+
             },
             opposite: true
         }],
@@ -147,7 +156,7 @@ let Component = React.createClass({
                     color:'#AACE4A'
                 },
                 {
-                    name: 'TBA',
+                    name: 'PBA',
                     type: 'line',
                     data: fanCost,
                     color:'blue',
