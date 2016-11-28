@@ -18,13 +18,6 @@ let Component = React.createClass({
     render() {
         return (
             <div className={styles.box}>
-                <ul className={styles.monthbox}>
-                    {
-                        month.map((value,key)=>{
-                            return(<li key={key}>{value}</li>)
-                        })
-                    }
-                </ul>
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>

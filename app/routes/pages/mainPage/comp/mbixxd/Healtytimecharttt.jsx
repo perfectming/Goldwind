@@ -17,7 +17,7 @@ let Component = React.createClass({
         let areaPlan=data.areaPlan
         let configPie = {
             chart: {
-                height:370,
+                height:390,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -44,7 +44,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"16px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 

@@ -41,7 +41,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"16px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
                 }

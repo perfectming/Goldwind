@@ -13,7 +13,7 @@
     background: linear-gradient(to bottom,#242a32 ,#1f2025);
     li{
      float:left;
-     font-size:20px;
+     font-size:16px;
      font-family: '微软雅黑';
      color:white;
      height:35px;
@@ -56,11 +56,11 @@
     height:40px;
     width:40px;
     top:4px;
-    left:46px;
+    left:69px;
     z-index:5;
     img{
-    height:40px;
-    width:40px
+    height:16px;
+    width:16px
   }
   }
    .covers{
@@ -74,14 +74,13 @@
             height:390px;
            margin:0 auto;
             margin-bottom: 12px;
-            border-radius:10px;
             padding-top:20px;
       background:#282F37,
            }
            .titww{
     color:#fff;
       position:absolute;
-        font-size:25px;
+        font-size:16px;
         top:4px;
         left:86px;
         font-weight:700;
@@ -95,16 +94,14 @@
        width: 48%;
        margin-left:10px;
        height: 400px;
-       border-radius:10px;
     }
      .bigbox{
      float:right;
     height:390px;
-    width:49%;
-    margin-right:15px;
+    width:48.5%;
+    margin-right:18px;
     border:1px solid #282F37;
     position:relative;
-    border-radius:10px;
     background-color: #282F37;
     .coverbox{
       margin-top:50px;
@@ -113,9 +110,9 @@
     .tik{
       color:#fff;
       position:absolute;
-      font-size:25px;
+      font-size:16px;
       top:25px;
-      left:100px;
+      left:93px;
       font-weight:700;
       line-height:auto
     }
@@ -124,13 +121,13 @@
       width:50px;
       height:30px;
       position:absolute;
-      top:25px;
-      left:50px;
+      top:20px;
+      left:33px;
       text-align:center;
       line-height:30px;
       img{
-        height:40px;
-        width:40px;
+        height:16px;
+        width:16px;
       }
     }
   }
@@ -155,8 +152,8 @@
       height:30px;
       line-height:20px;
       text-align:center;
-      font-size:20px;
-      border-radius:10px;
+      font-size:16px;
+      border-radius:15px;
       font-family:'微软雅黑';
       margin-left:12px;
       background-color:white;
@@ -183,12 +180,12 @@
     height:60px;
     line-height:60px;
       button{
-      width:80px;
-      height:35px;
+      width:70px;
+      height:30px;
       line-height:20px;
       text-align:center;
-      font-size:20px;
-      border-radius:10px;
+      font-size:16px;
+      border-radius:15px;
       font-family:'微软雅黑';
       margin-left:12px;
       background-color:white;
