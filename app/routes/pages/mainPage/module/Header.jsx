@@ -28,7 +28,7 @@ let Component = React.createClass({
 
                     }
                     <div className={`${styles.itemBoxAct} ${styles.nobor}`}><span>|</span></div>
-                    <div className={styles.itemBox}><span onClick={()=>login()}>登录</span></div>
+                    <div className={styles.itemBox}><span onClick={()=>login()}>username</span></div>
                 </div>
             </div>
         );
