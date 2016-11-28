@@ -51,6 +51,7 @@ let Component = React.createClass({
                    <div className={`${styles.areabox} ${styles.shadow}`}>
                        <div>
                            <AreaTable areaRecordCosts={areaRecordCosts} areaName={areaName} areaRecordProfit={areaRecordProfit} text0={text0} text1={text1}></AreaTable>
+                           <p className={styles.titww}>十一月份各集团TBA</p>>
                        </div>
                    </div>
                </div>

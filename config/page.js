@@ -38,7 +38,7 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/yy_active.png'),
                 page:[
                     {
-                        name:'数据预览',
+                        name:'数据概览',
                         page:'super',
                     },{
                         name:'地理分布',
