@@ -41,7 +41,7 @@ let Component = React.createClass({
                 style:{
 
                     color:"#fff",
-                    fontSize:"20px",
+                    fontSize:"16px",
                     fontWight:'600',
                     fontFamily:"微软雅黑"
                 }
@@ -52,7 +52,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
@@ -107,7 +107,13 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
-                title:'小时',
+                title: {
+                    text:'小时',
+                    align:'high',
+                    rotation:'0',
+                    y: -10,
+                    x: 40,
+                },
 
                 labels: {
                     y: 10, //x轴刻度往下移动20px

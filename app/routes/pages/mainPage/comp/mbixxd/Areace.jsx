@@ -5,13 +5,12 @@ import Windce from './Windce.jsx';
 import icono from './wind_logo.png';
 import Month from './Month';
 var actions = require('redux/actions');
-let data=require('./Profit-data');
-let month=data.month;
+let data=require('./Profit-data')
 let button=data.button;
 let areaName=data.areaName;
 let areaRecordCost=data.areaRecordCost;
 let areaRecordProfit=data.areaRecordProfit[0];
-let text0=data.text[0];
+let text=data.textF;
 let colorO='#5B9BD5';
 let colorT='#ED7D31';
 let pointWidth=30;
@@ -38,7 +37,7 @@ let Component = React.createClass({
                             </div>
                         </div>
                          <div className={styles.tik}>
-                        <p>{text0}</p>
+                        <p>{text[actbt]+'月份各风机电量'}</p>
                     </div>
                     </div>          
                 <div className={styles.imgq}>

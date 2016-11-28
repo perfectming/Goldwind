@@ -23,7 +23,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '',
                 align:'left',
                 top:'-20px',
                 vertical:'top',
@@ -40,7 +40,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"16px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -81,18 +81,28 @@ let Component = React.createClass({
                 },
                 categories:monthT,
             },
-            yAxis: {
-                labels: {
-                    y: 10,
-                    style: {
-                        color: '#fff',
-                        fontSize:'14px'
-                    }
-                },
+            yAxis: [{
+            title: {
+                text:'100%',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+            }
+        }, {
+            title: {
+                text: '',
+                 align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+
             },
+            opposite: true
+        }],
 
             series: [{
-                name: '实际健康度',
+                name: '健康度',
                 type: 'column',
                 data: areaRecordProfitT,
                 color:'#7DF59C',

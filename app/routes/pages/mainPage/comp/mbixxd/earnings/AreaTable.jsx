@@ -12,7 +12,7 @@ let Component = React.createClass({
         let {areaName,areaRecordCost,areaRecordProfit,TBA,text}=this.props;
         let configPie = {
             chart: {
-                height:390,
+                height:370,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -22,7 +22,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '',
                 align:'left',
                  x : "0",
                 style:{
@@ -40,7 +40,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"16px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -82,15 +82,25 @@ let Component = React.createClass({
                 },
                 categories:areaName,
             },
-            yAxis: {
-                labels: {
-                    y: 10,
-                    style: {
-                        color: '#fff',
-                        fontSize:'14px'
-                    }
-                },
+            yAxis: [{
+            title: {
+                text:'100%h',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+            }
+        }, {
+            title: {
+                text: '',
+                 align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+
             },
+            opposite: true
+        }],
             series: [{
                 name: '实际收益',
                 type: 'column',

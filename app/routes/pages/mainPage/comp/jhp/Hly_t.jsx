@@ -4,7 +4,10 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 var $ = require('jQuery');
+let data = require('./Healthy-data');
 
+let winds = data.data.yearelectric[0].wind;
+let win  = winds[0].plan;
 
 
 let Component = React.createClass({
@@ -14,10 +17,11 @@ let Component = React.createClass({
     render() {
 
 
-        let {x,barLoPowerValue,barLoTime,text,}=this.props;
+        let {w0,changedata1,x,windplan1 = win,barLoTime,text,}=this.props;
         let configPie = {
             chart: {
                 height:400,
+
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -40,7 +44,7 @@ let Component = React.createClass({
                  x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
             },
@@ -50,7 +54,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
@@ -85,7 +89,8 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                            w0=e.point.category;
+                            changedata1(w0);
                         }
                     }
                 },
@@ -113,7 +118,17 @@ let Component = React.createClass({
                // lineColor: "red",
                 //tickWidth: 4,
 
-                labels: {
+            title: {
+                text:'100%',
+                    align:'high',
+                    rotation:'0',
+                    y: -10,
+                    x: 40,
+            },
+
+
+        labels: {
+                    title:'100%',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -124,7 +139,7 @@ let Component = React.createClass({
             series: [{
                 name: '实际健康度',
                 type: 'column',
-                data: barLoPowerValue
+                data: windplan1,
             }
             // ,{
             //     name: '实际健康度',
@@ -145,32 +160,25 @@ let Component = React.createClass({
         );
     },
 
-
-    // render(chart, point, text) {
-    //     chart.renderer.label(text + ': ' + point.y,  point.plotX + chart.plotLeft -20 , point.plotY + chart.plotTop - 60, 'callout', point.plotX + chart.plotLeft, point.plotY + chart.plotTop)
-    //         .css({
-    //             color: '#FFFFFF',
-    //             align: 'center',
-    //         })
-    //         .attr({
-    //             background:'red',
-    //             fill: 'red',
-    //             padding: 8,
-    //             r: 5,
-    //             zIndex: 6
-    //         })
-    //         .add();
-    // }
 });
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+        windplan1 : state.vars.windplan1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+        changedata1 :(w0)=>{
+            dispatch(actions.setVars('w1',w0 ));
+
+
+          
         },
     };
 };

@@ -9,18 +9,11 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaPlan=data.areaPlan;
-        let areaPlanDay=data.areaPlanDay;
-        let areaPlanDayT=data.areaPlanDayT;
-        let fanCost=data.fanCost;
-        let machine=data.machine;
-        let fanProfitQ=data.fanProfitQ;
 
+ let {machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC,PBA}=this.props;
         let configPie = {
             chart: {
-                height:500,
+                height:700,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -49,7 +42,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"16px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -94,13 +87,22 @@ let Component = React.createClass({
                 },
                 categories:machine,
             },
-            yAxis: [{
+           yAxis: [{
             title: {
-                text: ''
+                text:'KWH',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
             }
         }, {
             title: {
-                text: ''
+                text: '',
+                 align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+
             },
             opposite: true
         }],
@@ -131,7 +133,7 @@ let Component = React.createClass({
                     color:'#FD9C31',
                 },
                 {
-                    name: '损',
+                    name: '类',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
@@ -139,7 +141,7 @@ let Component = React.createClass({
                      pointWidth: 30,
                 },
                 {
-                    name: '失发电量',
+                    name: '损失发电量',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
@@ -147,9 +149,9 @@ let Component = React.createClass({
                     color:'#AACE4A'
                 },
                 {
-                    name: 'TBA',
+                    name: 'PBA',
                     type: 'line',
-                    data: fanCost,
+                    data: PBA,
                     color:'blue',
                     yAxis:1
                 },

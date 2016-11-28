@@ -8,12 +8,12 @@ let data = require('./Profit-data');
 let Component = React.createClass({
     componentWillMount() {
     },
-
     render() {
-        let{ windFiled,areaRecordProfitt,areaRecordCostss,areaRecordCostsS1,areaRecordCostsS2,areaRecordCostsS3,areaRecordCostsS4,text2,}=this.props
+
+      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA}=this.props;
         let configPie = {
             chart: {
-                height:390,
+                height:340,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -23,40 +23,42 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text2,
+                text: '',
                 align:'left',
-                 x : "0",
+                top:'-20px',
+                vertical:'top',
+                x : "0",
                 style:{
                     color:"#fff",
                     fontSize:"25px",
                     fontFamily:"微软雅黑",
-                      fontWeight:700,
+                    fontWeight:700,
                 }
             },
+            // 插入图片
+            //图例说明
             legend: {
                 align:"right",
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"16px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
+
                 }
             },
             tooltip: {
+                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                
             },
             credits: {
-                enabled: false
+                enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31','#EB6B34'],
+            //柱子颜色
+                colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31','#EB6B34'],
 
-            plotOptions: {
-
-                bar:{
-                    animation: true
-                }
-            },
+            // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
@@ -71,70 +73,76 @@ let Component = React.createClass({
                         }
                     }
                 }
-
             },
-              // 插入图片
-         
+
             xAxis: {
                 lineWidth: 1,
-
                 tickWidth: 0,
                 labels: {
-                    y: 20,
+                    y: 20, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:windFiled,
+                categories:machine,
             },
-            yAxis: {
-                labels: {
-                    y: 10, //x轴刻度往下移动20px
-                    style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+            yAxis:
+                [{
+                    title:{
+                        text:'KWH',
+                        align:'high',
+                        rotation:'0',
+                        y: -17,
+                        x: 36,
                     }
-                },
+                }, {
+            title: {
+                text: 'PBA',
+                align:'high',
+                rotation:'0',
+                 y: -17,
+                x: 136,
             },
-            series:  [{
+            opposite: true
+        }],
+            //几条数据
+            series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: areaRecordProfitt,
+                data: fanProfit
             },
             {
                 name: '四',
                 type: 'column',
-                data: areaRecordCostsS1,
-                stack:'first'
+                data: fanCost,
+                stack:'waste',
             },
-            {
-                name: '大',
-                type: 'column',
-                data: areaRecordCostsS2,
-                stack:'first',
-            },
-            {
-                name: '损',
-                type: 'column',
-                data: areaRecordCostsS3,
-                stack:'first',
-            },
-            {
-                name: '失发电量',
-                type: 'column',
-                data: areaRecordCostsS4,
-                stack:'first',
-            },
+                {
+                    name: '大',
+                    type: 'column',
+                    data: fanCost1,
+                    stack:'waste',
+                },
+                {
+                    name: '类',
+                    type: 'column',
+                    data: fanCost2,
+                    stack:'waste',
+                },
+                {
+                    name: '损失发电量',
+                    type: 'column',
+                    data: fanCost3,
+                    stack:'waste',
+                },
                 {
                     name: 'TBA',
                     type: 'line',
-                    data: areaRecordCostss,
-                    stack:'first',
+                    data: TBA,
                     color:'blue',
-                },
 
-            ]
+                },]
         };
         return (
             <ReactHighcharts config={configPie}/>

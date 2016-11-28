@@ -30,7 +30,7 @@ let Component = React.createClass({
 
                     }
                 })}
-                <span className={cssif==true? styles.trunleft : styles.trunright} id='direction' onClick={()=>trunleft(cssif)}></span>
+                <span className={cssif=='left'? styles.trunleft : styles.trunright} id='direction' onClick={()=>trunleft(cssif)}></span>
             </div>
         );
     }

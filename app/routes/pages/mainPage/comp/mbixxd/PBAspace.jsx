@@ -7,18 +7,26 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
+let fanCost=data.fanCost;
+let fanCostA=data.fanCostA;
+let fanCostB=data.fanCostB;
+let fanCostC=data.fanCostC;
+let PBA=data.PBA;
+let machine=data.machine;
+let fanProfitQ=data.fanProfitQ;
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
 
     render() {
+        let{actbt=0,changpage,wind,windP}=this.props;
         return (
             <div className={styles.box}>
                 <ul className={styles.monthbox}>
                     {
-                        month.map((value,key)=>{
-                            return(<li key={key}>{value}</li>)
+                        data.wind.map((value,key)=>{
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
                         })
                     }
                 </ul>
@@ -26,7 +34,7 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <PBAspacechart ></PBAspacechart>
+                                <PBAspacechart fanProfitQ={fanProfitQ} machine={machine} fanCost={fanCost}fanCostA={fanCostA} fanCostB={fanCostB} fanCostC={fanCostC} PBA={PBA}></PBAspacechart>
                             </div>
                         </div>
                          <div className={styles.tik}>
@@ -54,7 +62,12 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        actbt:state.vars.actbt,
+        wind:state.vars.wind,
+        windP:state.vars.windP,
+    
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -65,6 +78,11 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+         changpage :(value,key)=>{
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('wind',value.plan));
+            dispatch(actions.setVars('windP',value.actrul));
+        },
     };
 };
 

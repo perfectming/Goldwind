@@ -9,9 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaPlan=data.areaPlan;
-        let areaPlanDay=data.areaPlanDay;
-        let areaPlanDayT=data.areaPlanDayT;
+        let{areaPlan,areaPlanDay, areaPlanDayT}=this.props;
         let configPie = {
             chart: {
                 height:700,
@@ -43,7 +41,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -88,6 +86,9 @@ let Component = React.createClass({
                 categories:areaPlan,
             },
             yAxis: {
+                title:{
+                    text:'',
+                },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {

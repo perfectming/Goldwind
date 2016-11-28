@@ -45,7 +45,7 @@ let Component = React.createClass({
                 </div>
 
 
-                <div className={`${styles.fbox}`}>
+                <div className={`${styles.fbox10}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_genday   barLpdpowerValues={winds==undefined? barLpdpowerValue1:winds} barLpdpowerValue={wind==undefined? barLpdpowerValues1:wind} barLdpowerValue={barLdpowerValue1} text={text0[actbt]+'月每日集团发电量'}></Hly_genday>
                         <div className={styles.logo}>

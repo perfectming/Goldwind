@@ -1,126 +1,244 @@
-.tableBox {
-  font-size: 16px;
-  overflow: hidden;
-  .tableHeaderBox {
-    overflow: hidden;
-    background: #464c58;
-    .tableHeaderItem {
-      float: left;
-      height:58px;
-      line-height:58px;
-      overflow: hidden;
-      color:#fff;
+.bodyBox{
+  .infofL{
+    float: left;
+    margin-right: 15px;
+    margin-top: 15px;
+    position: relative;
+  }
+  .dialbox{
+    float: left;
+    margin-left: 28px;
+    padding-top: 50px;
+    .pwratbox{
+      width: 100px;
+      height: 50px;
+      margin: 0 auto;
+      padding-top: 20px;
       text-align: center;
-    }
-  }
-  .tableContentBox {
-    .tableContentLine {
-      color:#fff;
-      background: #30343f;
-      overflow: hidden;
-      &:hover{
-        background:rgba(183,195,224,.5);
+      line-height: 30px;
+      span:nth-child(1){
+        font-size: 18px;
+        color: #00F7FE;
       }
-      .tableContentItem {
-        float: left;
-        overflow: hidden;
-        text-align: center;
-        height: 42px;
-        line-height:42px;
-        border: none;
-        position: relative;
-        .succ{
-          background: url("../../img/comp/succ.png");
-          height: 18px;
-          width: 14px;
-          left: 50%;
-          position: absolute;
-          top:50%;
-          margin-left: -7px;
-          margin-top: -9px;
-        }
-        .defa{
-          background: url("../../img/comp/defa.png");
-          height: 18px;
-          width: 14px;
-          left: 50%;
-          position: absolute;
-          top:50%;
-          margin-left: -7px;
-          margin-top: -9px;
-        }
-        .cutD{
-          background: url("../../img/comp/cut.png");
-          height: 18px;
-          width: 14px;
-          left: 50%;
-          position: absolute;
-          top:50%;
-          margin-left: -7px;
-          margin-top: -9px;
-        }
-      }
-      .tableLineNum {
-        width: 45px;
-        padding: 10px 0 10px;
-        text-align: center;
-        background-color: #E4E5E6;
-        float: left;
+      span:nth-child(2){
+        color: #fff;
       }
     }
-    .tableContentLine1 {
-      color:#fff;
-      background: #272b34;
-      overflow: hidden;
-      &:hover{
-        background:rgba(183,195,224,.5);
-      }
-      .tableContentItem {
-        float: left;
-        overflow: hidden;
+    .boxtitle{
+      p{
+        width: 200px;
+        height: 50px;
+        color:#fff;
+        font-size: 16px;
+        margin: 0;
+        line-height: 50px;
         text-align: center;
-        height: 42px;
-        line-height:42px;
-        border: none;
-        position: relative;
-        .succ{
-          background: url("../../img/comp/succ.png");
-          height: 18px;
-          width: 14px;
-          left: 50%;
-          position: absolute;
-          top:50%;
-          margin-left: -7px;
-          margin-top: -9px;
-        }
-        .defa{
-          background: url("../../img/comp/defa.png");
-          height: 18px;
-          width: 14px;
-          left: 50%;
-          position: absolute;
-          top:50%;
-          margin-left: -7px;
-          margin-top: -9px;
-        }
-        .cutD{
-          background: url("../../img/comp/cut.png");
-          height: 18px;
-          width: 14px;
-          left: 50%;
-          position: absolute;
-          top:50%;
-          margin-left: -7px;
-          margin-top: -9px;
-        }
-      }
-      .tableLineNum {
-        width: 45px;
-        padding: 10px 0 10px;
-        text-align: center;
-        background-color: #E4E5E6;
-        float: left;
       }
     }
   }
+  .fanidbox{
+    color:#999;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    div{
+      float: left;
+      margin-right: 15px;
+    }
+  }
+  .fanidbox:after{
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+  }
+  .infoBox{
+    width: 1340px;
+
+    margin-right: 0;
+    margin-top: 0;
+
+    .infoBox6{
+      overflow: hidden;
+      color:#999;
+      width: 370px;
+      height: 220px;
+      background:#292F36;
+      white-space:nowrap;
+      span{
+        display: inline-block;
+        text-align: center;
+        line-height: 38px;
+        color:#fff;
+      }
+      .titlebox{
+        width: 350px;
+        height: 40px;
+        font-size: 16px;
+        margin-left: 5px;
+        position: relative;z-index: 100000;
+        white-space:nowrap;
+        span:nth-child(1){
+          width: 150px;
+          text-align: left;
+          padding-left: 10px;
+        }
+        span{
+          width: 100px;
+        }
+      }
+      .statusquery{
+        width: 370px;
+        height: 180px;
+        overflow-y:auto;
+        .bgbox{
+          background: #30343D;
+        }
+        .statusquerybox{
+          width: 100%;
+          height: 35px;
+          span:nth-child(1){
+            width: 155px;
+            padding-left: 10px;
+          }
+          span{
+            width: 100px;
+          }
+        }
+
+      }
+    }
+    .infoBox7{
+      color:#999;
+      width: 940px;
+      height: 220px;
+      background:#292F36;
+      white-space:nowrap;
+      span{
+        display: inline-block;
+        text-align: center;
+        line-height: 38px;
+        color:#fff;
+      }
+      .titlebox{
+        width: 100%;
+        height: 40px;
+        font-size: 16px;
+        margin-left: 5px;
+        position: relative;z-index: 100000;
+        white-space:nowrap;
+        span:nth-child(1){
+          width: 150px;
+          text-align: left;
+          padding-left: 10px;
+        }
+        span{
+          width: 100px;
+        }
+      }
+      .statusquery{
+        width: 100%;
+        height: 180px;
+        overflow-y:auto;
+        .bgbox{
+          background: #30343D;
+        }
+        .statusquerybox{
+          width: 100%;
+          height: 35px;
+          span:nth-child(1){
+            width: 155px;
+            padding-left: 10px;
+          }
+          span{
+            width: 100px;
+          }
+        }
+
+      }
+    }
+  }
+  .fanrightbox{
+    width: 400px;
+    height: 890px;
+    background:#292F36;
+    white-space:nowrap;
+    .fanaction{
+      width: 400px;
+      height: 430px;
+      position: relative;
+      background: url(../../img/comp/faninfo.png) no-repeat;
+      .actionbox{
+        position: absolute;
+        left: 0;bottom: 20px;
+        padding-left: 8px;
+        div{
+          float: left;
+          width: 71px;
+          height: 26px;
+          text-align: center;
+          font-size: 16px;
+          line-height: 26px;
+          border-radius: 13px;
+          cursor: pointer;
+          margin-left: 20px;
+          background: #5EB7BB;
+        }
+        div:hover{
+          box-shadow:0px 0px 8px 2px #fff;
+        }
+
+      }
+
+    }
+    .action1box{
+      width: 400px;
+      $height: 460px;
+      font-size: 14px;
+      color: #fff;
+      line-height: $height/17;
+      div:nth-child(2n-1){
+        background: #30343D;
+      }
+      .fandatabox{
+        width: 100%;
+        height: $height/16;
+        position: relative;
+        span:nth-child(1){
+          display: inline-block;
+          padding-left: 20px;
+          padding-right: 50px;
+          text-align: left;
+        }
+        .numbox{
+          position: absolute;right:20px;top: 0;
+          display: inline-block;
+          width: 200px;
+
+          white-space:nowrap;
+          text-align: right;
+          span{
+            display: inline-block;
+          }
+          span:nth-child(1){
+            padding-right: 5px;
+            text-align: right;
+            color: #00F7FE;
+            font-size: 16px;
+          }
+          span:nth-child(2){
+            padding-right: 20px;
+            text-align: left;
+            width: 40px;
+            font-size: 12px;
+          }
+        }
+      }
+
+    }
+  }
+
 }
+
+

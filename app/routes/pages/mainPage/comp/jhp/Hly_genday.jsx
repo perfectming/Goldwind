@@ -16,7 +16,7 @@ let Component = React.createClass({
 
         let configPie = {
             chart: {
-                height:500,
+                height:700,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -38,7 +38,7 @@ let Component = React.createClass({
                 x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"22px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
             },
@@ -48,7 +48,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
@@ -103,6 +103,13 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                title: {
+                    text:'Kwh',
+                    align:'high',
+                    rotation:'0',
+                    y: -10,
+                    x: 40,
+                },
 
                 labels: {
                     y: 10, //x轴刻度往下移动20px

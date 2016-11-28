@@ -18,17 +18,11 @@ let Component = React.createClass({
     render() {
         return (
             <div className={styles.box}>
-                <ul className={styles.monthbox}>
-                    {
-                        month.map((value,key)=>{
-                            return(<li key={key}>{value}</li>)
-                        })
-                    }
-                </ul>
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
+                            <p className={styles.titleee}>健康度</p>
                                <Healtytimechart areaRecordProfitT={areaRecordProfitT} monthT={monthT} text={text}></Healtytimechart>
                             </div>
                         </div>
@@ -41,6 +35,7 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
+                              <p className={styles.titleee}>11月每日健康度</p>
                                 <Healtytimecharttt></Healtytimecharttt>
                             </div>
                         </div>

@@ -10,13 +10,13 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barRotimes,powerValue,text,height} = this.props;
+        let {barRotimes,powerValue,text,height,widths} = this.props;
 
 
         let configPie = {
             chart: {
                 height:height,
-
+                width:widths,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -32,7 +32,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '',
                 align:'left',
                 x : "0",
                 style:{
@@ -100,6 +100,13 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                title: {
+                    text:'kW',
+                    align:'high',
+                    rotation:'0',
+                    y: -10,
+                    x: 40,
+                },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {

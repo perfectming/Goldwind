@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaRecordProfit,machine,}=this.props;
+        let {areaRecordProfit,machineE,}=this.props;
         let configPie = {
             chart: {
                 height:700,
@@ -39,7 +39,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -77,18 +77,27 @@ let Component = React.createClass({
                         fontSize:'14px'
                     }
                 },
-                categories:machine,
+                categories:machineE,
             },
-            yAxis: {
-                
-                labels: {
-                    y: 10,
-                    style: {
-                        color: '#fff',
-                        fontSize:'14px'
-                    }
-                },
+            yAxis: [{
+            title: {
+                text:'100%',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+            }
+        }, {
+            title: {
+                text: '',
+                 align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
+
             },
+            opposite: true
+        }],
             series: [{
                 name: '实际健康度',
                 type: 'column',

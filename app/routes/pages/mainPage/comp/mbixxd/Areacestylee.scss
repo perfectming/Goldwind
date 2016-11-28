@@ -6,10 +6,9 @@
     .bigbox{
     margin-top:50px;
     height:100%;
-    width:99%;
+    width:98%;
     border:1px solid #282F37;
     position:relative;
-    border-radius:10px;
     margin:10px auto;
     margin-top:35px;
       background-color: #282F37;
@@ -17,22 +16,35 @@
         margin-top:20px;
       }
       .imgq{
-        width:50px;
-        height:30px;
+        width:16px;
+        height:16px;
         position:absolute;
-        top:25px;
+        top:3px;
+        left:54px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:16px;
+          width:16px;
+        }
+      }
+      .imgqq{
+        width:16px;
+        height:16px;
+        position:absolute;
+        top:9px;
         left:43px;
         text-align:center;
         line-height:30px;
         img{
-          height:40px;
-          width:40px;
+          height:16px;
+          width:16px;
         }
       }
     }
     .img{
      position:absolute;
-        top:-7px;
+        top:15px;
         left:5px;
     }
     .monthbox{
@@ -46,7 +58,7 @@
     background: linear-gradient(to bottom,#242a32 ,#1f2025);
     li{
      float:left;
-     font-size:20px;
+     font-size:16px;
      font-family: '微软雅黑';
      color:white;
      height:35px;
@@ -91,17 +103,42 @@
             position:relative;  
            }
             .title{
-            font-size:20px;
+            font-size:16px;
             font-weight:700;
             color:white;
             font-family:'微软雅黑';
-            font-size:25px;
+            font-size:16px;
             display:inline-block;
             position:absolute;
             top:19px;
-            left:109px;
+            left:98px;
             z-index:10;
-
+            
+            }
+            .titlee{
+       
+            font-weight:700;
+            color:white;
+            font-family:'微软雅黑';
+            font-size:16px;
+            display:inline-block;
+            position:absolute;
+            top:19px;
+            left:98px;
+            z-index:10;
+            
+            }
+            .titleee{
+            font-size:16px;
+            font-weight:700;
+            color:white;
+            font-family:'微软雅黑';
+            font-size:16px;
+            display:inline-block;
+            position:absolute;
+            top:7px;
+            left:98px;
+            z-index:10;
             
             }
     .buttons{
@@ -119,8 +156,8 @@
       height:35px;
       line-height:20px;
       text-align:center;
-      font-size:20px;
-      border-radius:10px;
+      font-size:16px;
+      border-radius:15px;
       font-family:'微软雅黑';
       margin-left:12px;
       background-color:white;
