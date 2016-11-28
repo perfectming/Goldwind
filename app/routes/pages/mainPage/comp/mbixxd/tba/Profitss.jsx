@@ -54,15 +54,7 @@ let Component = React.createClass({
                        </div>
                    </div>
                </div>
-               <div className={styles.covers}>
-                   <div className={styles.bgc}> <img src={icono}/></div>
-                   <div className={`${styles.windbox} ${styles.shadow}`}>
-                       <div>
-                           <WindfieldTable areaNamee={areaNamee} text2={text2} windFiled={windFiled} areaRecordProfitt={areaRecordProfitt} areaRecordCostss={areaRecordCostss}  areaRecordCostsS1={areaRecordCostsS1}  areaRecordCostsS2={areaRecordCostsS2}  areaRecordCostsS3={areaRecordCostsS3} areaRecordCostsS4={areaRecordCostsS4}></WindfieldTable>
-                       </div>
-                   </div>
-               </div>
-               <div className={`${styles.bigbox} ${styles.shadow}`}>
+              <div className={`${styles.bigbox} ${styles.shadow}`}>
                    <div className={styles.coverbox}>
                        <div className={styles.windcebox}>
                            <div>
@@ -82,6 +74,21 @@ let Component = React.createClass({
                                return(<button key={key}>{value}</button>)
                            })
                        }
+                   </div>
+               </div>
+               <div className={`${styles.bigbox} ${styles.shadow}`}>
+                   <div className={styles.coverbox}>
+                       <div className={styles.windcebox}>
+                           <div>
+                               <Fanchart machine={machine} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} ></Fanchart>
+                           </div>
+                       </div>
+                       <div className={styles.tik}>
+                           <p>{text1}</p>
+                       </div>
+                   </div>
+                   <div className={styles.imgq}>
+                       <img src={icono}/>
                    </div>
                </div>
                

@@ -19,7 +19,7 @@ let text0=data.data.line_date;
 let barRotimes2 = data.data.bar_rotimes;
 let barLoPowerValue2 = data.data.bar_roPowerses;
 let barLoPowerValues2 = data.data.bar_roPower;
-let barLdpowerValue2 = data.data.line_lpower;
+let barLdpowerValue2 = data.data.bar_roPower4;
 
 let Component = React.createClass({
     componentDidMount() {
@@ -53,7 +53,7 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Reg_tba  barLdpowerValue={winds==undefined? barLoPowerValue1:winds} barLoPowerValues={wind==undefined? barLoPowerValues1:wind}  barLoPowerValue={windss==undefined? barLdpowerValue1:windss} barLotime={barLotime1} text={text0[actbt]+"月各区域TBA"}></Reg_tba>
+                        <Reg_tba  barLdpowerValue={winds==undefined? barLoPowerValue2:winds} barLoPowerValues={wind==undefined? barLoPowerValue2:wind}  barLoPowerValue={windss==undefined? barLoPowerValue2:windss} barLotime={barLotime1} text={text0[actbt]+"月各区域TBA"}></Reg_tba>
                         <div className={styles.logo}>
 
                         </div>
@@ -65,7 +65,7 @@ let Component = React.createClass({
                 </div>
                 <div className={`${styles.fbox}  ${styles.logofa}`}>
                     <div className={`${styles.box_shadow}`}>
-                        <Reg_tbas  barLdpowerValue={barLdpowerValue2} barLoPowerValues={barLoPowerValues1} barLoPowerValue={barLoPowerValue2} barRotimes={barRotimes2} text={text0[7]+"月份"+text0[7]+"风场各风机TBA"}></Reg_tbas>
+                        <Reg_tbas height={390}  barLdpowerValue={barLoPowerValue2} barLoPowerValues={barLoPowerValue2} barLoPowerValue={barLoPowerValue2} barRotimes={barRotimes2} text={text0[7]+"月份"+text0[7]+"风场各风机TBA"}></Reg_tbas>
                         <div className={styles.logomini}>
 
                         </div>

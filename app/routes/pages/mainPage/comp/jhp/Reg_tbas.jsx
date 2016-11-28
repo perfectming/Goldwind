@@ -11,13 +11,13 @@ let Component = React.createClass({
 
     render() {
 
-        let {barRotimes,barLoPowerValue,barLoPowerValues,barLdpowerValue,text} = this.props;
+        let {height,barRotimes,barLoPowerValue,barLoPowerValues,barLdpowerValue,text} = this.props;
 
 
 
         let configPie = {
             chart: {
-                height:500,
+                height:height,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,

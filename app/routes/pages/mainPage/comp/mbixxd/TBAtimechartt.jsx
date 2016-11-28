@@ -17,7 +17,7 @@ let Component = React.createClass({
 
         let configPie = {
             chart: {
-                height:500,
+                height:390,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -27,7 +27,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '11月每日TBA',
+                text: '',
                 align:'left',
                 top:'-20px',
                 vertical:'top',
@@ -53,7 +53,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false
@@ -92,7 +92,11 @@ let Component = React.createClass({
             },
             yAxis: [{
             title: {
-                text: ''
+                 text:'100%',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 40,
             }
         }, {
             title: {

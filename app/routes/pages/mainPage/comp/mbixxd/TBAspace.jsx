@@ -30,7 +30,7 @@ let Component = React.createClass({
                         </div>
                     </div>
                     <div className={styles.tik}>
-                        <p>11月份各风场TBA</p>
+                        <p>11月份各风机TBA</p>
                     </div>
                     <div className={styles.imgq}>
                         <img src={icono}/>

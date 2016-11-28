@@ -35,7 +35,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wind,winds,windss,buttonAction,actbt,changecolor, inputOnChange, onFocus} = this.props;
+        let {wind,winds,windss,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
         return (
 
 
@@ -60,7 +60,7 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_pba  height={400} text={text0[actbt]+"月份各风场PBA"} barRotime={barRotime2}  barLdpowerValue={winds==undefined? barLoPowerValue1:winds} barLoPowerValues={wind==undefined? barLoPowerValues1:wind} barLoPowerValue={windss==undefined? barLdpowerValue1:windss} ></Hly_pba>
+                        <Hly_pba  height={400} text={text0[actbt]+"月份各风场PBA"} barRotime={barRotime2}  barLdpowerValue={winds==undefined? barLoPowerValue1:winds} barLoPowerValues={wind==undefined? barLoPowerValue2:wind} barLoPowerValue={windss==undefined? barLoPowerValue2:windss} ></Hly_pba>
                         <div className={styles.logo}>
 
                         </div>
@@ -71,8 +71,12 @@ let Component = React.createClass({
 
                 </div>
                 <div className={`${styles.fbox}  ${styles.logofa}`}>
-                    <div className={`${styles.box_shadow}`}>
-                        <Hly_pbas  height={430} text={text0[3]+'区域'+text0[4]+'风场各风机PBA'} barRotimes={barRotimes3} barLoPowerValue={barLoPowerValue3} barLoPowerValues={barLoPowerValues3} barLdpowerValue={barLdpowerValue3}></Hly_pbas>
+                    <div className={`${styles.box_shadow} ${styles.fbox2}`}>
+                        <div className={styles.rbox31}>
+                            <div></div>
+                            <span>{text0[actbt]+"月"+text0[5]+"区域各风机PBA"}</span>
+                        </div>
+                        <Hly_pbas  height={390} text={text0[3]+'区域'+text0[4]+'风场各风机PBA'} barRotimes={barRotimes3} barLoPowerValue={barLoPowerValue1} barLoPowerValues={barLoPowerValue2} barLdpowerValue={barLoPowerValue2}></Hly_pbas>
                         <div className={styles.logomini}>
 
                         </div>

@@ -19,8 +19,6 @@ let Component = React.createClass({
                 <Headernav fcpage={page1.header}></Headernav>
                 { fan_page==='allpage' && <Bodymap tab={page1.header[changnav].rightpagge}></Bodymap>}
                 { fan_page==='faninfo' && <Faninfo></Faninfo>}
-
-
             </div>
         );
     }

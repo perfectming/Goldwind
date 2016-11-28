@@ -7,7 +7,6 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
-console.log(data.wind)
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();

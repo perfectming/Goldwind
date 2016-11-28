@@ -18,13 +18,13 @@ let Component = React.createClass({
     render() {
         
         
-        let{flag=true,changepageSort1,changepageSort,big,small,wind,actbt=0,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{flag=true,changepageSort1,changepageSort,big1,small1,wind,actbt=0,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         return (
            <div className={styles.box}>
            		<ul className={styles.monthbox}>
                     {
                     	data.yearelectric[0].wind.map((value,key)=>{
-                    		return(<li key={key} className={actbt===key? styles.bg1 : styles.bg} onClick={()=>changepage(value,key)}>{value.name}</li>)
+                    		return(<li key={key} className={actbt===key? styles.bg1 : styles.bg} onClick={()=>changepageW(value,key)}>{value.name}</li>)
                     	})
                     }
                 </ul>
@@ -35,12 +35,12 @@ let Component = React.createClass({
            						<span>健康度</span> 
            						<a onClick={()=>changepageHealthyT()}>图片</a>
            						<a onClick={()=>changepageHealthyS()}>图片</a>
-           						<span>{small==null? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%</span>
+           						<span>{small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small1/big1)*100).toFixed(1)}%</span>
            					</div>
            					<div className={styles.sectiontwo}>
            						<div className={styles.big}>
-           							<div className={styles.small} style={{width:small==null? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1)+"%":((small/big)*100).toFixed(1)+"%"}}>
-           								{small==null? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%
+           							<div className={styles.small} style={{width:small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1)+"%":((small1/big1)*100).toFixed(1)+"%"}}>
+           								{small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small1/big1)*100).toFixed(1)}%
            							</div>
            						</div>
            					</div>
@@ -194,8 +194,8 @@ const mapStateToProps = (state) => {
     return {
     	actbt : state.vars.actbt,
     	wind : state.vars.wind,
-    	big : state.vars.big,
-    	small : state.vars.small,
+    	big1 : state.vars.big1,
+    	small1 : state.vars.small1,
     	sort1 : state.vars.sort2,
     	flag : state.vars.flag1,
     }
@@ -216,9 +216,9 @@ const mapDispatchToProps = (dispatch) => {
         	flag==true? dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return (a.PBA).slice(0,1)/1-(b.PBA).slice(0,1)/1}))):dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return (b.PBA).slice(0,1)/1-(a.PBA).slice(0,1)/1})));
         	flag==true? dispatch(actions.setVars('flag1',false )):dispatch(actions.setVars('flag1',true ));
         },
-        changepage :(value,key)=>{
-        	dispatch(actions.setVars('big',value.big ));
-            dispatch(actions.setVars('small',value.small ));
+        changepageW :(value,key)=>{
+        	dispatch(actions.setVars('big1',value.big ));
+            dispatch(actions.setVars('small1',value.small ));
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('wind',value.plan ));
         },

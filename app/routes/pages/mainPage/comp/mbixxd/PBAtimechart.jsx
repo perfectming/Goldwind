@@ -18,7 +18,7 @@ let Component = React.createClass({
 
         let configPie = {
             chart: {
-                height:500,
+                height:390,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -52,7 +52,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false
