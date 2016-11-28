@@ -123,7 +123,7 @@ let Component = React.createClass({
                 ,
                 {
                     name: 'TBA',
-                    type: 'spline',
+                    type: 'line',
                     color:'#0000ff',
                     data: barLoPowerValue
                 }

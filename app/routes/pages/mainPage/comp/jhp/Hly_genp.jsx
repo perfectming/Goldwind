@@ -10,12 +10,13 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barRotime,barlopowers,barlopowerp,text,height} = this.props;
+        let {widths,barRotime,barlopowers,barlopowerp,text,height} = this.props;
 
 
         let configPie = {
             chart: {
                 height:height,
+                width:widths,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -31,7 +32,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '',
                 align:'left',
                 x : "0",
                 style:{
