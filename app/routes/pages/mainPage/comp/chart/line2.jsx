@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{date, datename,height}=this.props;
+        let{date, datename,height,name}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -44,8 +44,12 @@ let Component = React.createClass({
                 enabled:false
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                 pointFormat: "<b>{point.percentage:.0f}%</b>"
+                enabled: true,
+                style:{
+                    color: '#000',
+                    fontSize: '14px',
+                    fontWeight:'bold',
+                }
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -67,7 +71,7 @@ let Component = React.createClass({
             },
             series: [{
                 type:'spline',
-                name: "",
+                name: name,
                 data: date,
                    marker: {
                         enabled: false

@@ -2,6 +2,7 @@
     overflow:hidden;
     color: white;
     font-size: 16px;
+    padding:10px;
     .left{
         display: inline-block;
         width: 75%;
@@ -148,7 +149,7 @@
                 padding-left: 2%;
                 padding-top: 1%;
                 position: absolute;
-                height: 100%;
+                height: 99%;
                 width: 33%;
                 background-color: #282f37;
                 .electricHeader{
@@ -372,5 +373,7 @@
         }
         
     }
-    
+   .boxShadow:hover{
+       box-shadow:0 0 15px #fff;
+   }  
 }

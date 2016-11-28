@@ -30,7 +30,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: '',
 
                 align:'left',
                 x : "0",

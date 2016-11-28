@@ -13,7 +13,7 @@ let Component = React.createClass({
     	let {Xname,name,should,g,w,x,q,l,wind}=this.props;
         let configPie = {
             chart: {
-                height:500,
+                height:400,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
