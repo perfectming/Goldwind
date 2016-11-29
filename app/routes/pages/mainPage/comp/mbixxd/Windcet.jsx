@@ -61,7 +61,6 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 10,
                     borderWidth: 1,
-                    pointWidth: 50,
 
                 }, series: {
                     cursor: 'pointer',
@@ -79,8 +78,8 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        fontSize:'14px',
+                        color:'#fff'  //字体
                     }
                 },
                 categories:areaPlan,
@@ -92,7 +91,7 @@ let Component = React.createClass({
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                       color:"#fff",
                         fontSize:'14px'  //字体
                     }
                 },

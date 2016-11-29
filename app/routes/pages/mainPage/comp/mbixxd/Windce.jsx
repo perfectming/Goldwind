@@ -91,12 +91,15 @@ let Component = React.createClass({
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff'
+                    }
             },
                   labels: {
                     title:'100%',
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color:"white",
                         fontSize:'14px'  //字体
                     }
                 },

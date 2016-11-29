@@ -82,6 +82,7 @@ module.exports={
 
 },{
 	name:"10月份",
+
 	plan:[360,380,240,330,230,360,140,390,260,340,360,240],
 	actrul:[100,280,110,230,180,210,120,230,120,230,280,120],
 	actruls:[70,40,10,120,130,210,110,130,20,130,110,80],
@@ -105,6 +106,189 @@ module.exports={
 	actruls:[70,40,10,120,130,210,110,130,20,130,110,80],
 
 }],
+windFF:
+[{name:'机组1',
+plan:60},
+{name:'机组2',
+plan:70},
+{name:'机组3',
+plan:90},
+{name:'机组4',
+plan:60},
+{name:'机组5',
+plan:60},
+{name:'机组6',
+plan:70},
+{name:'机组7',
+plan:90},
+{name:'机组8',
+plan:60},
+{name:'机组9',
+plan:60},
+{name:'机组10',
+plan:70},
+{name:'机组11',
+plan:90},
+{name:'机组12',
+plan:60}],
+windFJJ:[
+   {name:'1011',
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:'1021',
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+    {name:3012,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:9021,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+    {name:2190,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:1231,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+   {name:2323,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:2327,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+   {name:7899,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:7897,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+   {name:7878,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:9098,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },{name:1011,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:1021,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+    {name:3012,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:9021,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+    {name:2190,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },{name:1011,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:1021,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+    {name:3012,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:9021,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+    {name:2190,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },{name:1011,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:1021,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+    {name:3012,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:9021,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+    {name:2190,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },{name:1011,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:1021,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+    {name:3012,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+     {name:9021,
+    areaRecordCost:1600,
+    areaRecordProfit:15,
+    TBA:14
+    },
+    {name:2190,
+    areaRecordCost:1900,
+    areaRecordProfit:17,
+    TBA:16
+    },
+],
  profits:[{
 	name:"1月份",
 	plan:[180,360,240,260,340,360,220,330,250,240,260,340],
@@ -118,6 +302,7 @@ module.exports={
 
 },{
 	name:"3月份",
+
 	plan:[180,220,330,250,360,240,260,340,360,240,260,340],
 	actrul:[170,210,310,230,340,210,220,330,320,230,210,320],
 	actruls:[70,40,10,120,130,210,110,130,20,130,110,80],
@@ -170,7 +355,212 @@ module.exports={
 	actrul:[100,280,110,230,180,210,120,230,120,230,280,120],
 	actruls:[70,40,10,120,130,210,110,130,20,130,110,80],
 
-}]
+}],
 
+healthy:[
+{
+	name:'1月份',
+	plan:[
+	{name:'机组1',plan:150},
+	{name:'机组2',plan:120},
+	{name:'机组3',plan:123},
+	{name:'机组4',plan:150},
+	{name:'机组5',plan:120},
+	{name:'机组6',plan:123},
+	{name:'机组7',plan:150},
+	{name:'机组8',plan:120},
+	{name:'机组9',plan:123},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+ 
+},
+{
+	name:'2月份',
+	plan:[
+	{name:'机组1',plan:50},
+	{name:'机组2',plan:20},
+	{name:'机组3',plan:23},
+	{name:'机组4',plan:50},
+	{name:'机组5',plan:20},
+	{name:'机组6',plan:23},
+	{name:'机组7',plan:50},
+	{name:'机组8',plan:20},
+	{name:'机组9',plan:23},
+	{name:'机组10',plan:50},
+	{name:'机组11',plan:20},
+	{name:'机组12',plan:23}]
 
+},
+{
+	name:'3月份',
+	plan:[
+	{name:'机组1',plan:150},
+	{name:'机组2',plan:120},
+	{name:'机组3',plan:123},
+	{name:'机组4',plan:150},
+	{name:'机组5',plan:120},
+	{name:'机组6',plan:123},
+	{name:'机组7',plan:150},
+	{name:'机组8',plan:120},
+	{name:'机组9',plan:123},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+
+},
+{
+	name:'4月份',
+	plan:[
+	{name:'机组1',plan:150},
+	{name:'机组2',plan:120},
+	{name:'机组3',plan:123},
+	{name:'机组4',plan:150},
+	{name:'机组5',plan:120},
+	{name:'机组6',plan:123},
+	{name:'机组7',plan:150},
+	{name:'机组8',plan:120},
+	{name:'机组9',plan:123},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+
+},
+{
+	name:'5月份',
+	plan:[
+	{name:'机组1',plan:50},
+	{name:'机组2',plan:20},
+	{name:'机组3',plan:23},
+	{name:'机组4',plan:50},
+	{name:'机组5',plan:20},
+	{name:'机组6',plan:23},
+	{name:'机组7',plan:50},
+	{name:'机组8',plan:20},
+	{name:'机组9',plan:23},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+
+},
+{
+	name:'6月份',
+	plan:[
+	{name:'机组1',plan:150},
+	{name:'机组2',plan:120},
+	{name:'机组3',plan:123},
+	{name:'机组4',plan:150},
+	{name:'机组5',plan:120},
+	{name:'机组6',plan:123},
+	{name:'机组7',plan:150},
+	{name:'机组8',plan:120},
+	{name:'机组9',plan:123},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+
+},
+{
+	name:'7月份',
+	plan:[
+	{name:'机组1',plan:50},
+	{name:'机组2',plan:20},
+	{name:'机组3',plan:23},
+	{name:'机组4',plan:50},
+	{name:'机组5',plan:20},
+	{name:'机组6',plan:23},
+	{name:'机组7',plan:50},
+	{name:'机组8',plan:20},
+	{name:'机组9',plan:23},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+
+},
+{
+	name:'8月份',
+	plan:[
+	{name:'机组1',plan:50},
+	{name:'机组2',plan:20},
+	{name:'机组3',plan:23},
+	{name:'机组4',plan:50},
+	{name:'机组5',plan:20},
+	{name:'机组6',plan:23},
+	{name:'机组7',plan:50},
+	{name:'机组8',plan:20},
+	{name:'机组9',plan:23},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+
+},
+{
+	name:'9月份',
+	plan:[
+	{name:'机组1',plan:50},
+	{name:'机组2',plan:20},
+	{name:'机组3',plan:23},
+	{name:'机组4',plan:50},
+	{name:'机组5',plan:20},
+	{name:'机组6',plan:23},
+	{name:'机组7',plan:50},
+	{name:'机组8',plan:20},
+	{name:'机组9',plan:123},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+},
+{
+	name:'10月份',
+	plan:[
+	{name:'机组1',plan:150},
+	{name:'机组2',plan:120},
+	{name:'机组3',plan:123},
+	{name:'机组4',plan:150},
+	{name:'机组5',plan:120},
+	{name:'机组6',plan:123},
+	{name:'机组7',plan:150},
+	{name:'机组8',plan:120},
+	{name:'机组9',plan:123},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+
+},
+{
+	name:'11月份',
+	plan:[
+	{name:'机组1',plan:150},
+	{name:'机组2',plan:120},
+	{name:'机组3',plan:123},
+	{name:'机组4',plan:150},
+	{name:'机组5',plan:120},
+	{name:'机组6',plan:123},
+	{name:'机组7',plan:150},
+	{name:'机组8',plan:120},
+	{name:'机组9',plan:123},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+
+},
+{
+	name:'12月份',
+	plan:[
+	{name:'机组1',plan:150},
+	{name:'机组2',plan:120},
+	{name:'机组3',plan:123},
+	{name:'机组4',plan:150},
+	{name:'机组5',plan:120},
+	{name:'机组6',plan:123},
+	{name:'机组7',plan:150},
+	{name:'机组8',plan:120},
+	{name:'机组9',plan:123},
+	{name:'机组10',plan:150},
+	{name:'机组11',plan:120},
+	{name:'机组12',plan:123}]
+},{
+	name:'返回',
+
+},]
 }

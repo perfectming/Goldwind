@@ -45,7 +45,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"16px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -89,16 +89,34 @@ let Component = React.createClass({
                 categories:monthT,
             },
             yAxis: [{
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
             }
         }, {
+            labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
-                text: '',
+                text: 'PBA',
                  align:'high',
                 rotation:'0',
                 y: -20,
@@ -109,7 +127,7 @@ let Component = React.createClass({
         }],
 
             series: [{
-                name: '实际运行时间',
+                name: '实际发电量',
                 type: 'column',
                 data: profit,
                 color:'#64DC83',
@@ -118,7 +136,7 @@ let Component = React.createClass({
                 borderWidth: 0,
             },
                 {
-                    name: '停机时间',
+                    name: '理论发电量',
                     type: 'column',
                     data:cost,
                     color:'#ccc',
@@ -126,7 +144,7 @@ let Component = React.createClass({
                     shadow:'true',
                 },
                 {
-                    name: 'TBA',
+                    name: 'PBA',
                     type: 'line',
                     data:cost,
                     color:'blue',

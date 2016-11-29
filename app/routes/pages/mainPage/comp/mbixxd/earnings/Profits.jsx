@@ -19,7 +19,7 @@ let x0=[];
 let x1=[];
 let x2=[];
 let x3=[];
-let x5=[];
+let x4=[];
 let machine=[];
 let areaRecordCostR=[];
 let areaRecordProfitR=[];
@@ -98,7 +98,7 @@ let Component = React.createClass({
                       <div className={styles.close} onClick={()=>close()}>x</div>
                        <div className={styles.windcebox}>
                            <div>
-                               <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee} TBAA={TBAA} height={370}></Fanchart>
+                               <Fanchart areaRecordCostR={areaRecordCostR} areaRecordProfitR={areaRecordProfitR} machine={machine} TBAA={TBAA} height={370}></Fanchart>
                            </div>
                        </div>
                    </div>
@@ -122,6 +122,9 @@ const mapStateToProps = (state) => {
          windP:state.vars.windP,
          windPT:state.vars.windPT,
          ban:state.vars.ban,
+         machinee:state.vars.machinee,
+         areaRecordCostRR:state.vars.areaRecordCostRR,
+
     }
 };
 const mapDispatchToProps = (dispatch) => {
@@ -140,14 +143,16 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         gogogo : (windFJ)=>{
+         
           (function(){
+
         
              windFJ.sort(function(a,b){
               return b.areaRecordCost - a.areaRecordCost;
              })
                for(var i=0;i<12;i++){
-                    x0[i]=data.windFJ[i].name;
-                    x1[i]=data.windFJ[i].areaRecordCost;
+                    x0[i]=windFJ[i].name;
+                    x1[i]=windFJ[i].areaRecordCost;
                 }
 
           })()
@@ -155,32 +160,31 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('areaRecordCostRR', x1))
         },
         back:(windFJ)=>{
-         alert(5e1);
           (function(){
              windFJ.sort(function(a,b){
               return a.areaRecordCost - b.areaRecordCost;
              })
                for(var i=0;i<12;i++){
-                    x2[i]=data.windFJ[i].name;
-                    x3[i]=data.windFJ[i].areaRecordCost;
+                    x2[i]=windFJ[i].name;
+                    x3[i]=windFJ[i].areaRecordCost;
                 }
 
           })()
             dispatch(actions.setVars('machinee', x2))
             dispatch(actions.setVars('areaRecordCostRR', x3))
         },
-        more:()=>{
-          (function(){
-            let ban=document.getElementsByClassName('morebox');
-             ban.style.display='block';
-          })()
+        // more:()=>{
+        //   (function(){
+        //     let ban=document.getElementsByClassName('morebox');
+        //      ban.style.display='block';
+        //   })()
        
-        },
-        close:()=>{
-          (function(){
-            document.getElementsByClassName('morebox').style.display=none
-          })()
-        }
+        // },
+        // close:()=>{
+        //   (function(){
+        //     document.getElementsByClassName('morebox').style.display=none
+        //   })()
+        // }
 
     };
 
