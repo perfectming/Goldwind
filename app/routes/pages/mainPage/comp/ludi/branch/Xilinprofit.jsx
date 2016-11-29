@@ -91,7 +91,7 @@ let Component = React.createClass({
                // lineColor: "red",
                 //tickWidth: 4,
                 labels: {
-                	format:'{value}万元',
+                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
