@@ -72,17 +72,7 @@ module.exports = {
                 name:'批量控制',
                 iconNormal: require('../app/routes/pages/mainPage/img/comp/pl.png'),
                 iconActive: require('../app/routes/pages/mainPage/img/comp/pl_active.png'),
-                page:[
-                     {
-                        name:'批量控制1',
-                        page:'',
-                    },{
-                        name:'批量控制2',
-                        page:'',
-                    },{
-                        name:'批量控制3',
-                        page:'',
-                    }]
+                
             },{
                 name:'业务报表',
                 iconNormal: require('../app/routes/pages/mainPage/img/comp/yw.png'),

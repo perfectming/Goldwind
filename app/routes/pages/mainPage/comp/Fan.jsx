@@ -208,6 +208,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('actbt1','' ));
           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('befor_page','fan' ));
+          dispatch(actions.setVars('fc_info', value));
         },
         pageTo_2:(value,key)=>{
           dispatch(actions.setVars('showPage', 'fan_matrix'));
@@ -217,6 +218,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('actbt',''));
           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('befor_page','fan' ));
+          dispatch(actions.setVars('fc_info', value));
         },
         Tofaninfo1: (value,valueA,key)=> {
             dispatch(actions.setVars('value', valueA));
