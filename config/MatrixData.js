@@ -8515,7 +8515,7 @@ module.exports = {
                 {
                     "Wtid": "652303002",
                     "Wtname": "逆变器1-2",
-                    "WTStateCode": "DisComForPre",
+                    "WTStateCode": "Online",
                     "ActPwr": "2932.32",
                     "WTStateColor": "#f1a820"
                 },
@@ -8529,7 +8529,7 @@ module.exports = {
                 {
                     "Wtid": "652303004",
                     "Wtname": "逆变器2-2",
-                    "WTStateCode": "DisComForPre",
+                    "WTStateCode": "Fault",
                     "ActPwr": "2720.49",
                     "WTStateColor": "#f1a820"
                 },

@@ -1,7 +1,7 @@
-.listbodyBox{
+.slistbodyBox{
   float: left;
 
-    .listBox{
+    .slistBox{
       font-size: 20px;
       color:#fff;
       float: left;
@@ -10,50 +10,48 @@
       width: 260px;
       height: 112px;
       background: #292F34;
-      background-image:url(../../img/comp/fmatrix.png);
+      background-image:url(../../../img/comp/smatrix.png);
       background-size: 100% 100%;
       background-repeat: no-repeat;
       cursor: pointer;
-      
-      // border-left: 2px solid #00E438;
-      .listitemL{
+      .slistitemL{
         float: left;
-        
+        border-left: 2px solid #00E438;
       }
-      .listitemR{
+      .slistitemR{
         float: left;
         margin-left: 90px;
-        .listitemT{
+        .slistitemT{
           display: block;
           margin: 12px 0;
-          .listitemTT{
+          .slistitemTT{
             font-size: 18px;
             line-height: 16px;
           }
-          .listitemTB{
+          .slistitemTB{
             font-size: 14px;
             line-height: 14px;
           }
         }
-        .listitemB{
+        .slistitemB{
           padding-top: 10px;
           font-size: 14px;
            p{
               margin:0;
             }
-          .listitemBLL{
+          .slistitemBLL{
               color:#00F7FE;
               line-height: 25px;
           }
-          .listitemBLR{
+          .slistitemBLR{
               font-size: 12px;
               padding:2px 0 0 2px;
           }
           span{
             float: left;
           }
-          .listitemBL{
-            width: 60px;
+          .slistitemBL{
+            width: 80px;
             p{
               margin:0;
             }
@@ -63,12 +61,12 @@
       div{
         float: left;
       }
-    } 
+    }
     .fault{
-      background-image: url(../../img/comp/faultbg.png),url(../../img/comp/fmatrix.png);
+      background-image: url(../../../img/comp/faultbg.png),url(../../../img/comp/smatrix.png);
       background-size: 100% 100%;
       background-repeat: no-repeat; //故障
-      .listitemT{
+      .slistitemT{
         color: red;
       }
     }
@@ -82,7 +80,7 @@
       // border: 2px solid #f1a820; //离线
     }
     
-    .default{
-      border: 2px solid #c7b88c; //检修
-    } 
+    // .default{
+    //   border: 2px solid #c7b88c; //检修
+    // }   
 }
