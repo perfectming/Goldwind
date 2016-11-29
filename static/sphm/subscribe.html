@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>智能运营SOAM平台2.0</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="css/jqtransform.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="js/jquery.jqtransform-min.js"></script>
+
+</head>
+<body>
+    <div class="container subscribe clearfix">
+    <form class="form">
+
+        <div class="left mana yj_form">
+            <h1>订阅人管理</h1>
+            <dl class="clearfix">
+                <dt>当前选择</dt>
+                <dd>
+                    <select id="yj_source" name="yj_source">
+                        <option value="张成（01554）">张成（01554）</option>
+                        <option value="李剑锋（01555）">李剑锋（01555）</option>
+                    </select>
+                    <a href="javascript:;" class="a_btn">新建订阅人</a>
+                    <a href="javascript:;" class="a_btn">删除</a>
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>姓名</dt>
+                <dd>
+                    <input name="name" id="name" type="text" class="txt" />
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>手机号</dt>
+                <dd>
+                    <input name="mobile" id="mobile" type="text" class="txt" />
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>邮箱</dt>
+                <dd>
+                    <input name="email" id="email" type="text" class="txt" />
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>微信</dt>
+                <dd>
+                    <input name="wx" id="wx" type="text" class="txt" />
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>工号</dt>
+                <dd>
+                    <input name="code" id="code" type="text" class="txt" />
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>备注</dt>
+                <dd><textarea name="remark" id="remark"></textarea></dd>
+            </dl>
+            <dl class="clearfix" style="margin-top:0px;">
+                <dt>接收方式</dt>
+                <dd><label><input type="checkbox" class="chk" /> 邮箱</label></dd>
+            </dl>
+            <button type="button">保存</button>
+        </div>
+
+        <div class="left push">
+            <div class="pp">
+                <h1>报告推送</h1>
+                <div class="box">
+                    <div class="wrap">
+                        <p>CMS监测报告 <span><input type="checkbox" class="chk" /></span></p>
+                    </div>
+                    <div class="wrap">
+                        <p>金风预警信息报告 <span><label>月报 <input type="checkbox" class="chk" /></label><label>年报 <input type="checkbox" class="chk" /></label></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="pp mt15">
+                <h1>各风场预警消息推送</h1>
+                <div class="box">
+                    <div class="wrap">
+                        <p>风场一 <span><input type="checkbox" class="chk" /></span></p>
+                    </div>
+                    <div class="wrap">
+                        <p>风场一 <span><input type="checkbox" class="chk" /></span></p>
+                    </div>
+                    <div class="wrap">
+                        <p>风场一 <span><input type="checkbox" class="chk" /></span></p>
+                    </div>
+                    <div class="wrap">
+                        <p>风场一 <span><input type="checkbox" class="chk" /></span></p>
+                    </div>
+                    <div class="wrap">
+                        <p>风场一 <span><input type="checkbox" class="chk" /></span></p>
+                    </div>
+                    <div class="wrap">
+                        <p>风场一 <span><input type="checkbox" class="chk" /></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        $(".form").Validform({
+            tiptype: function (msg, o, cssctl) {
+            },
+            usePlugin: {
+                jqtransform: {
+                    //会在当前表单下查找这些元素;
+                    selector: "select"
+                }
+            }
+        });
+    </script>
+</div>
+</body>
+</html>

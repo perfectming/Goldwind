@@ -26,7 +26,7 @@ let Component = React.createClass({
                  x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
             },
@@ -47,7 +47,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 30
+                    pointWidth: 40
                 }
             },
             xAxis: {

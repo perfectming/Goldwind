@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestylee.scss';
@@ -67,5 +68,4 @@ const mapDispatchToProps = (dispatch) => {
         ,
     };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Component)
