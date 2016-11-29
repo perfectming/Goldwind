@@ -68,10 +68,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('treeItemActive', 0));
             dispatch(actions.setVars('navhide', false));
             dispatch(actions.setVars('cssif', ''));
-            $("#plkz").on('click',function(){
-                $("#fc").toggle();
-                $("#gfc").toggle();
-            })
+            
 
 
         },
@@ -81,7 +78,7 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('showPage', page));
               dispatch(actions.setVars('colorAct', false));
                 dispatch(actions.setVars('navhide', true));
-                if(page=='monitorkb'){
+                if(page=='monitorkb' || page=='health_main'){
                     dispatch(actions.setVars('navhide', false));
                 }
              
