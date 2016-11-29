@@ -90,8 +90,20 @@ let Component = React.createClass({
                // lineWidth: 1,
                // lineColor: "red",
                 //tickWidth: 4,
+                title:{
+                	text:"万元",
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -15,
+	                x:-14,
+	                style:{
+	                	fontSize:'10px',
+	                	color:'white',
+	                }
+                },
                 labels: {
-                	format:'{value}万元',
+                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色

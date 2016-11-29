@@ -10,6 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
+    	let {name1,data1,name2,data2,}=this.props;
         let configPie = {
             chart: {
                 height:340,
@@ -90,8 +91,21 @@ let Component = React.createClass({
                // lineWidth: 1,
                // lineColor: "red",
                 //tickWidth: 4,
+                title:{
+                	text:"kWh",
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -15,
+	                x:-14,
+	                style:{
+	                	fontSize:'10px',
+	                	color:'white',
+	                }
+                },
+                
                 labels: {
-                	format:'{value}(kWh)',
+                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
