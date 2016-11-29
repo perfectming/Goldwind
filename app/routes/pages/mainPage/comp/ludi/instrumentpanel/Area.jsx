@@ -96,7 +96,7 @@ let Component = React.createClass({
 	           						<div className={styles.links}><a onClick={()=>changepageEleT()}>图片</a></div>
 	           						<div className={styles.links}><a onClick={()=>changepageEleS()}>图片</a></div>
            						</div>
-           						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
+           						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={area==undefined? data.yearelectric[0].wind[0].plan:area} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            					</div>
            				</div>
            				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
