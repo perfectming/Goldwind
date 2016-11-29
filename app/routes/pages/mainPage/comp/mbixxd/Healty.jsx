@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
     render() {
         let areaRecordProfit=data.areaRecordProfit;
-        let machine=data.machine;
+        let machineE=data.machineE;
         let text =data.textHealty;
       let{actbt=0,changpage,wind}=this.props;
         return (
@@ -29,7 +29,7 @@ let Component = React.createClass({
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
-                               <Healtychart machine={machine} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} ></Healtychart>
+                               <Healtychart machineE={machineE} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} ></Healtychart>
                         </div>
                          <div className={styles.tik}>
                         <p>{text[actbt]}</p>

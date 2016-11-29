@@ -26,7 +26,7 @@ let Component = React.createClass({
                 align:'center',
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
             },
@@ -36,7 +36,7 @@ let Component = React.createClass({
                 verticalAlign: "bottom",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }

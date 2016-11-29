@@ -7,7 +7,7 @@ import Column from '../mxx/Column.jsx';
 import Column1 from '../mxx/Column1.jsx';
 import Column2 from '../mxx/Column2.jsx';
 import Polar from '../mxx/Polar1';
-import Pie2 from '../mxx/Pie2';
+import Pie2 from '../mxx/Pie2.jsx';
 import jnjp from '../../img/comp/jienengjp.png';
 import nljys from '../../img/comp/nianleijys.png';
 import nljybm from '../../img/comp/nianleijybm.png';

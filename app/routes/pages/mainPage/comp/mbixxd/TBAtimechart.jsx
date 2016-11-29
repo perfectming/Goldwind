@@ -12,10 +12,9 @@ let Component = React.createClass({
         let areaName=data.areaName;
         let areaRecordCost=data.areaRecordCost;
         let areaPlan=data.areaPlan;
-        let montht=data.montht;
+        let montht=data.monthT;
         let profit=data.windProfit;
         let cost=data.windCost;
-
         let configPie = {
             chart: {
                 height:390,
@@ -48,7 +47,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -92,20 +91,33 @@ let Component = React.createClass({
                 },
                 categories:montht,
             },
-            yAxis:[{
+            yAxis: {
+               // lineWidth: 1,
+               // lineColor: "red",
+                //tickWidth: 4,
+
             title: {
                 text:'100%',
-                align:'high',
-                rotation:'0',
-                y: -20,
-                x: 40,
-            }
-        }, {
-            title: {
-                text: ''
+                    align:'high',
+                    rotation:'0',
+                    y: -20,
+                    x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px',
+                    }
             },
-            opposite: true
-        }],
+
+
+        labels: {
+                    title:'100%',
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
+                    }
+                },
+            },
 
             series: [{
                 name: '实际运行时间',

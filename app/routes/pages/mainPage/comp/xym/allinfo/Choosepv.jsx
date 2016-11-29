@@ -1,12 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Corner from '../super/Corner.jsx';
-import styles from './Pvmatrix.scss';
+import styles from './Choosepv.scss';
 var actions = require('redux/actions');
 // import dataBase from '../../../../../config/ModelData';
-let obj = require('../../../../../../config/MatrixData');
-let model = require('../../../../../../config/Model');
-let modeldata = require('../../../../../../config/ModelData');
+let obj = require('../../../../../../../config/MatrixData');
+let model = require('../../../../../../../config/Model');
+let modeldata = require('../../../../../../../config/ModelData');
 var model_data = modeldata.ModelData;
 var model_ens = model.Model.ens;
 var arr1 = [];
@@ -39,7 +38,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage1=652303,Topvinfo}=this.props;
+        let{valuepage1=652303,Topvinfo,choosefans1}=this.props;
         return (
             <div className={styles.slistbodyBox}>
                 {
@@ -82,7 +81,7 @@ let Component = React.createClass({
                                 x = "维护";
                                 break;
                         }
-                 
+                    if(choosefans1 == "PVONL" && value.WTStateCode== "Online"){
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -103,7 +102,49 @@ let Component = React.createClass({
                             </div>          
                         </div>  
                         )
-                    
+                    }else if(choosefans1 == "PVFLT" && value.WTStateCode== "Fault"){
+                        return (
+                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
+                            <div className={styles.slistitemR}>
+                                <span className={styles.slistitemT}>
+                                        <p className={styles.slistitemTT}>{value.Wtname}</p>
+                                        <p className={styles.slistitemTB}>{x}</p>
+                                </span>
+                                <span className={styles.slistitemB}>
+                                    <span className={styles.slistitemBL}>
+                                        <p>辐照度:</p>
+                                        <p><span className={styles.slistitemBLL}>{Math.floor((model_data[valuepage1].PVTSI_Aver))}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                    </span>
+                                    <span className={styles.slistitemBR}>
+                                        <p>功率:</p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(model_data[valuepage1].TActPower)/100).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
+                                    </span>
+                                </span>
+                            </div>          
+                        </div>  
+                        )
+                    }else if(choosefans1 == "PVOFL" && value.WTStateCode== "DisComForPre"){
+                        return (
+                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
+                            <div className={styles.slistitemR}>
+                                <span className={styles.slistitemT}>
+                                        <p className={styles.slistitemTT}>{value.Wtname}</p>
+                                        <p className={styles.slistitemTB}>{x}</p>
+                                </span>
+                                <span className={styles.slistitemB}>
+                                    <span className={styles.slistitemBL}>
+                                        <p>辐照度:</p>
+                                        <p><span className={styles.slistitemBLL}>{Math.floor((model_data[valuepage1].PVTSI_Aver))}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                    </span>
+                                    <span className={styles.slistitemBR}>
+                                        <p>功率:</p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(model_data[valuepage1].TActPower)/100).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
+                                    </span>
+                                </span>
+                            </div>          
+                        </div>  
+                        )
+                    }
                     
                         
                 })
@@ -117,6 +158,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         valuepage1 : state.vars.valuepage1,
+        choosefans1 : state.vars.choosefans1,
     }
 };
 

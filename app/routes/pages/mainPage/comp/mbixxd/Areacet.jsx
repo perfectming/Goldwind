@@ -17,6 +17,7 @@ let Component = React.createClass({
         let areaPlanDay=data.areaPlanDay;
         let areaPlanDayT=data.areaPlanDayT;
         let text=data.textT;
+
         let{actbt=0,changpage,wind,windP}=this.props;
           return (
            <div className={styles.box}>
