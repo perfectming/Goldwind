@@ -10,6 +10,7 @@ import $ from 'jquery';
 
 let tabaleData = require('../../../../../../config/super_table');
 let dataBase=require('../../../../../../config/ModelData');
+let matrixdata = require('../../../../../../config/MatrixData');
 let place=require('../../../../../../config/Model');
 let header=require('./tabledate');
 let headername=header.header;
@@ -18,6 +19,10 @@ let placename=place.Model.ens;
 let arrname=[];
 let point=[];
 let fcnum=[];
+let number=[];
+let obj = matrixdata;
+let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
+let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 (function(){
     let o=0;
     for(let name in placename){ 
@@ -28,6 +33,7 @@ let fcnum=[];
             }
   for(let key in date){
     let arr=[];
+    let num=[];
   if(date[key].WTCount!='0' && date[key].InverterCount=='0'){
      fcnum.push(key);
     for(let i=0;i<headername.length;i++){
@@ -40,7 +46,11 @@ let fcnum=[];
              }
              arr.push(date[key][headername[i]]);
             }
+             for(let number in obj_wfd){
+            num.push(number);
+        }
             arrname.push(arr);
+            number.push(num);
          }
        }
      
@@ -165,6 +175,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('actbt1','' ));
           dispatch(actions.setVars('valuepage', fcnum[key]));
           dispatch(actions.setVars('befor_page','super' ));
+          dispatch(actions.setVars('fc_info', number[0][key]));
 
         }
     };

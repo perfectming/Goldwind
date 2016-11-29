@@ -9,7 +9,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {treeOpt, itemAct, changeTreeItem, trunleft,cssif,colorAct,changecolor} = this.props;
+        let {treeOpt, itemAct, changeTreeItem, trunleft,cssif,colorAct=false,changecolor} = this.props;
         return (
             <div className={`${styles.navTree} ${cssif==='left'? styles.animate : styles.navTree} ${cssif==='right'? styles.animate1 : styles.navTree}`}>
                 {treeOpt && treeOpt.subPage.map((value, key)=> {
@@ -18,7 +18,7 @@ let Component = React.createClass({
                         if(value.name=='批量控制'){
 
                             return (
-                                <div key={key} className={colorAct === true ? styles.treeItemAct : styles.treeItem} onClick={()=>changecolor()}>
+                                <div key={key} className={colorAct === true ? styles.treeItemAct : styles.treeItem} onClick={()=>changecolor(colorAct)} id='plkz'>
                                     <img src={colorAct === true ? value.iconActive : value.iconNormal}/>
                                 </div>
                             )
@@ -31,7 +31,7 @@ let Component = React.createClass({
                     }else{
                         if(value.name=='批量控制'){
                             return (
-                                <div key={key} className={colorAct === true ? styles.treeItemAct : styles.treeItem} onClick={()=>changecolor()}>
+                                <div key={key} className={colorAct === true ? styles.treeItemAct : styles.treeItem} onClick={()=>changecolor(colorAct)} id='plkz'>
                                     <img src={colorAct === true ? value.iconActive : value.iconNormal}/>
                                     <p>{value.name}</p>
                                 </div>
@@ -47,7 +47,8 @@ let Component = React.createClass({
                     }
                 })}
                 <span className={cssif=='left'? styles.trunleft : styles.trunright} id='direction' onClick={()=>trunleft(cssif)}></span>
-                
+                <div className={styles.fc_search} id='fc'></div>
+                <div className={styles.fc_search} style={{top:'283px'}} id='gfc'></div>
             </div>
         );
     }
@@ -67,6 +68,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('treeItemActive', 0));
             dispatch(actions.setVars('navhide', false));
             dispatch(actions.setVars('cssif', ''));
+            $("#plkz").on('click',function(){
+                $("#fc").toggle();
+                $("#gfc").toggle();
+            })
+
+
         },
         changeTreeItem: (key,page) => {
             dispatch(actions.setVars('treeItemActive', key));
@@ -74,6 +81,9 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('showPage', page));
               dispatch(actions.setVars('colorAct', false));
                 dispatch(actions.setVars('navhide', true));
+                if(page=='monitorkb'){
+                    dispatch(actions.setVars('navhide', false));
+                }
              
               
         },
@@ -90,8 +100,15 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('cssif2', flagv));
           
         },
-        changecolor:()=>{
-            dispatch(actions.setVars('colorAct', true));
+        changecolor:(colorAct)=>{
+            
+            if(colorAct){
+
+                colorAct=false
+            }else{
+                colorAct=true
+            }
+             dispatch(actions.setVars('colorAct', colorAct));
           
         }
      
