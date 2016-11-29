@@ -41,7 +41,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -84,14 +84,23 @@ let Component = React.createClass({
                 },
                 categories:areaNameX,
             },
-            yAxis: {
-                labels: {
+            yAxis:{
+                 title: {
+                text:'',
+                    align:'high',
+                    rotation:'0',
+                    y: -10,
+                    x: 40,
+            },
+                  labels: {
+                    title:'100%',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
                         fontSize:'14px'  //字体
                     }
                 },
+
             },
             series: [{
                 name: '计划发电量',

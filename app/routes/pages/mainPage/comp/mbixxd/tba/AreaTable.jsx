@@ -37,7 +37,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"16px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -115,13 +115,13 @@ let Component = React.createClass({
                 stack:'first',
             },
             {
-                name: '损',
+                name: '类',
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',
             },
             {
-                name: '失发电量',
+                name: '损失发电量',
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',

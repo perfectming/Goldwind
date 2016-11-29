@@ -11,22 +11,21 @@ let Component = React.createClass({
         let {areaNamee,areaRecordCostss,areaRecordProfitt,text}=this.props;
         let configPie = {
             chart: {
-                height:400,
+                height:405,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10,
             },
             title: {
-                text: text,
+                text: '风场TBA',
                 align:'left',
                  x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                      fontWeight:700,
                 }
@@ -36,7 +35,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"16px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
                     itemMarginBottom: 100,
@@ -79,11 +78,24 @@ let Component = React.createClass({
                 },
                 categories:areaNamee,
             },
-            yAxis: [{
-                title:'KWH',
-            },{
-                title:"TBA"
-            }],
+            yAxis:  [{
+                    title:{
+                        text:'100%',
+                        align:'high',
+                        rotation:'0',
+                        y: -17,
+                        x: 40,
+                    }
+                }, {
+            title: {
+                text: '',
+                align:'high',
+                rotation:'0',
+                 y: -17,
+                x: 150,
+            },
+            opposite: true
+        }],
             series: [{
                 name: '停机时间',
                 type: 'column',

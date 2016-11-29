@@ -1,6 +1,6 @@
      .fiexdbox{
       width:300px;
-      height:300px;
+      height:420px;
       background:#0a1b2b;
       margin-top:2px;
       margin-left:-267px;
@@ -61,12 +61,30 @@
       }
       .listbox{
       width:100%;
-      height:215px;
+      height:330px;
       border:1px solid #2b5d76;
       border-top:none;
       overflow-x:hidden;
       overflow-y:auto;
       ul{padding:0px;}
+      .search_anser{
+         width:100%;
+         display:none;
+         overflow:hidden;
+          span{
+                width:100%;
+                height:30px;
+                line-height:30px;
+                 font-size:14px;
+                 padding-left:50px;
+                 display:inline-block;
+                 cursor:pointer;
+                 color:#fff;
+                  background-image:url('../../img/comp/son_line.png');
+                   background-repeat: no-repeat;
+                   background-position: 15px center;
+              }
+      }
       .show{
       display:none;
       }

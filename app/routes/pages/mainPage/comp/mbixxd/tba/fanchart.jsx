@@ -42,7 +42,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"16px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -87,18 +87,28 @@ let Component = React.createClass({
                 },
                 categories:machine,
             },
-            yAxis: {
-                labels: {
-                    y: 10, //x轴刻度往下移动20px
-                    style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+             yAxis:
+                [{
+                    title:{
+                        text:'KWH',
+                        align:'high',
+                        rotation:'0',
+                        y: -17,
+                        x: 36,
                     }
-                },
+                }, {
+            title: {
+                text: 'PBA',
+                align:'high',
+                rotation:'0',
+                 y: -17,
+                x: 136,
             },
+            opposite: true
+        }],
             //几条数据
             series: [{
-                name: '收入',
+                name: '实际发电量',
                 type: 'column',
                 data: fanProfit
             },
@@ -115,13 +125,13 @@ let Component = React.createClass({
                     stack:'waste',
                 },
                 {
-                    name: '损',
+                    name: '类',
                     type: 'column',
                     data: fanCost2,
                     stack:'waste',
                 },
                 {
-                    name: '失发电量',
+                    name: '损失发电量',
                     type: 'column',
                     data: fanCost3,
                     stack:'waste',

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
-import icono from './wind_logo.png';
+import icono from '../wind_logo.png';
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
@@ -20,6 +20,7 @@ let Component = React.createClass({
         let areaRecordProfit=data.areaRecordProfit;
         let text0=data.text[0];
         let machine=data.machine;
+        let machineee=data.machineee;
         let fanProfit=data.fanProfit;
         let fanCost=data.fanCost;
         let fanCost1=data.fanCost1;
@@ -51,7 +52,7 @@ let Component = React.createClass({
                    <div className={`${styles.areabox} ${styles.shadow}`}>
                        <div>
                            <AreaTable areaRecordCosts={areaRecordCosts} areaName={areaName} areaRecordProfit={areaRecordProfit} text0={text0} text1={text1}></AreaTable>
-                           <p className={styles.titww}>十一月份各集团TBA</p>>
+                           <p className={styles.titww}>11月份集团各区域TBA</p>>
                        </div>
                    </div>
                </div>
@@ -59,11 +60,11 @@ let Component = React.createClass({
                    <div className={styles.coverbox}>
                        <div className={styles.windcebox}>
                            <div>
-                               <Fanchart machine={machine} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} ></Fanchart>
+                               <WindfieldTable machine={machineee} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} ></WindfieldTable>
                            </div>
                        </div>
                        <div className={styles.tik}>
-                           <p>{text1}</p>
+                           <p>{text2}</p>
                        </div>
                    </div>
                    <div className={styles.imgq}>

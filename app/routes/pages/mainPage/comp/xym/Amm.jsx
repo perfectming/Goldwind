@@ -18,7 +18,6 @@ let Component = React.createClass({
         this.props.init(tabaleData.ammData);
     },
     buttonAction (){
-
         var tContent = this.refs.textContent5.value;
         alert(tContent);
         // 在这个下边获取这个时间段的数据就行了
@@ -33,8 +32,8 @@ let Component = React.createClass({
         }
         let comp=tabaleData.comps.from;
         return (
-           
-        <div className={styles.bodyBox}> 
+
+        <div className={styles.bodyBox}>
             <div className={styles.roleputBox}>
                 <div className={styles.inquireBox}>
                     {
@@ -94,7 +93,8 @@ let Component = React.createClass({
                                                            key={keyC} contentEditable="true"
                                                            onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
                                                            value={valueC}/>
-                                                )}
+                                                    )
+                                                }
                                             })
                                         }
                                         <input className={styles.tableContentItem}
@@ -114,8 +114,8 @@ let Component = React.createClass({
                 </div>
             </div>
         </div>
-                
-         
+
+
         );
     }
 });

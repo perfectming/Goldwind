@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Groupstyle.scss';
 import Instrumentdata from './Instrument-data';
 import Yearelectric from './Yearelectric.jsx';
+import Pie2 from '../../mxx/Pie2';
 
 var actions = require('redux/actions');
 
@@ -20,116 +21,89 @@ let Component = React.createClass({
         return (
            <div className={styles.box}>
            		<div className={styles.left}>
-           			<div className={styles.firstfloor}>
-           				<div className={`${styles.section} ${styles.boxShadow}`}>
-           					<div className={styles.sectionbar}>
-           						<span>收益率</span>
-           						<span>{data.firstfloor[0].profit/data.firstfloor[0].investment*100}%</span>
+           			<div className={`${styles.firstfloor} ${styles.boxShadow}`}>
+           				<div className={styles.section}>
+           					<div className={styles.text1}>收益:{data.firstfloor[0].profit}万·投资:{data.firstfloor[0].investment}万</div>
+           					<div className={styles.sectionBox}>
+           						<span className={styles.numBox}><p style={{color:'#33BAC0'}}>{((data.firstfloor[0].profit/data.firstfloor[0].investment)*100).toFixed(1)}%</p>收益率</span>
+           						<Pie2 color={['#33BAC0','#33545C']} num={[23,30]}></Pie2>
            					</div>
-           					<div className={styles.sectionone}>
-           						<div className={styles.profit}>
-           							<div className={styles.investment} style={{width:((data.firstfloor[0].profit/data.firstfloor[0].investment)*100).toFixed(1)+"%"}}>
-           							</div>
-           							<div className={styles.text1}>收益:{data.firstfloor[0].profit}万 &nbsp; 投资:{data.firstfloor[0].investment}万</div>
-           							
-           						</div>
-           					</div>
-           					<div className={styles.border}></div>
            				</div>
-           				<div className={`${styles.section} ${styles.boxShadow}`}>
-           					<div className={styles.sectionbar}>
-           						<span>健康度</span> 
+           				<div className={styles.section}>
+           					<div className={styles.border}></div>
+           					<div className={styles.text1}>当前30分·总分100分</div>
+           					<div className={styles.alink}>
            						<a onClick={()=>changepageHealthyT()}>图片</a>
            						<a onClick={()=>changepageHealthyS()}>图片</a>
-           						<span>{data.firstfloor[1].small/data.firstfloor[1].big*100}%</span>
            					</div>
-           					<div className={styles.sectiontwo}>
-           						<div className={styles.big}>
-           							<div className={styles.small} style={{width:((data.firstfloor[1].small/data.firstfloor[1].big)*100).toFixed(1)+"%"}}>
-           							</div>
-           							<div className={styles.text1}>{data.firstfloor[1].small/data.firstfloor[1].big*100}%</div>
-           						</div>
+           					<div className={styles.sectionBox}>
+           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{((data.firstfloor[1].small/data.firstfloor[1].big)*100).toFixed(1)}%</p>健康度</span>
+           						<Pie2 color={['#E9C75C','#A69263']} num={[27,73]}></Pie2>	
            					</div>
-           					<div className={styles.border}></div>
            				</div>
-           				<div className={`${styles.section} ${styles.boxShadow}`}>
-           					<div className={styles.sectionbar}>
-           						<span>PBA</span>
+           				<div className={styles.section}>
+           					<div className={styles.border}></div>
+           					<div className={styles.text1}>实发{data.firstfloor[2].actrul}kWh·应发{data.firstfloor[2].should}kWh</div>
+           					<div className={styles.alink}>
            						<a onClick={()=>changepagePBAT()}>图片</a>
            						<a onClick={()=>changepagePBAS()}>图片</a>
-           						<span>{data.firstfloor[2].actrul/data.firstfloor[2].should*100}%</span>
            					</div>
-           					<div className={styles.sectionthree}>
-           						<div className={styles.should}>
-           							<div className={styles.actrul} style={{width:((data.firstfloor[2].actrul/data.firstfloor[2].should)*100).toFixed(1)+"%"}}>
-           							</div>
-           							<div className={styles.text1}>实发:{data.firstfloor[2].actrul}kWh &nbsp; 应发:{data.firstfloor[2].should}kWh</div>
-           						</div>
+           					<div className={styles.sectionBox}>
+           						<span className={styles.numBox}><p style={{color:'#D06960'}}>{((data.firstfloor[2].actrul/data.firstfloor[2].should)*100).toFixed(1)}%</p>PBA</span>
+           						<Pie2 color={['#D06960','#954A45']} num={[85,15]}></Pie2>	
            					</div>
-           					<div className={styles.border}></div>
            				</div>
-           				<div className={`${styles.section} ${styles.boxShadow}`}>
-           					<div className={styles.sectionbar}>
-           						<span>TBA</span>
+           				<div className={styles.section}>
+           					<div className={styles.border}></div>
+           					<div className={styles.text1}>可用{data.firstfloor[3].usable}h·统计{data.firstfloor[3].count}h</div>
+           					<div className={styles.alink}>
            						<a onClick={()=>changepageTBAT()}>图片</a>
            						<a onClick={()=>changepageTBAS()}>图片</a>
-           						<span>{data.firstfloor[3].usable/data.firstfloor[3].count*100}%</span>
            					</div>
-           					<div className={styles.sectionfour}>
-           						<div className={styles.count}>
-           							<div className={styles.usable} style={{width:((data.firstfloor[3].usable/data.firstfloor[3].count)*100).toFixed(1)+"%"}}>
-           							</div>
-           							<div className={styles.text1}>可用时间:{data.firstfloor[3].usable}h &nbsp; 统计时间:{data.firstfloor[3].count}h</div>
-           						</div>
+           					<div className={styles.sectionBox}>
+           						<span className={styles.numBox}><p style={{color:'#70C080'}}>{((data.firstfloor[3].usable/data.firstfloor[3].count)*100).toFixed(1)}%</p>TBA</span>
+           						<Pie2 color={['#70C080','#4A7A59']} num={[25,75]}></Pie2>
            					</div>
-           					<div className={styles.border}></div>
            				</div>
            			</div>
+           			
            			<div className={styles.secondfloor}>
            				<div className={`${styles.electric} ${styles.boxShadow}`}>
            					<div className={styles.electricHeader}><a>图片</a>发电量</div>
            					<div className={styles.electricFirst}>
-           						<a>图片</a>
-           						<div className={styles.electricNum}>
-           							<div>{data.electric[0].name}</div>
-           							<div className={styles.electricTotal}>{data.electric[0].actrul}kWh</div>
-           							<div className={styles.electricPercent}>
-           								<div style={{width:((data.electric[0].actrul/data.electric[0].should*100).toFixed(1))+"%"}}>{(data.electric[0].actrul/data.electric[0].should*100).toFixed(1)}%</div>
-           							</div>
-           							<div className={styles.border}></div>
+           					
+           						<a>图片</a><span>{data.electric[0].name}</span>
+           						<div className={styles.electricTotal}>{data.electric[0].actrul}kWh</div>
+           						<div className={styles.electricPercent}>
+           							<div style={{width:((data.electric[0].actrul/data.electric[0].should*100).toFixed(1))+"%"}}>{(data.electric[0].actrul/data.electric[0].should*100).toFixed(1)}%</div>
            						</div>
+           						
            					</div>
-           					<div className={styles.electricFirstBorder}></div>
            					<div className={styles.electricSecond}>
-           						<a>图片</a>
-           						<div className={styles.electricNum}>
-           							<div>{data.electric[1].name}</div>
-           							<div className={styles.electricTotal}>{data.electric[1].actrul}kWh</div>
-           							<div className={styles.electricPercent}>
-           								<div style={{width:((data.electric[1].actrul/data.electric[1].should*100).toFixed(1))+"%"}}>{(data.electric[1].actrul/data.electric[1].should*100).toFixed(1)}%</div>
-           							</div>
-           							<div className={styles.border}></div>
+           					
+           						<a>图片</a><span>{data.electric[1].name}</span>
+           						<div className={styles.electricTotal}>{data.electric[1].actrul}kWh</div>
+           						<div className={styles.electricPercent}>
+           							<div style={{width:((data.electric[1].actrul/data.electric[1].should*100).toFixed(1))+"%"}}>{(data.electric[1].actrul/data.electric[1].should*100).toFixed(1)}%</div>
            						</div>
+           						
            					</div>
-           					<div className={styles.electricSecondBorder}></div>
            					<div className={styles.electricThird}>
-           						<a>图片</a>
-           						<div className={styles.electricNum}>
-           							<div>{data.electric[2].name}</div>
-           							<div className={styles.electricTotal}>{data.electric[2].actrul}kWh</div>
-           							<div className={styles.electricPercent}>
-           								<div style={{width:((data.electric[2].actrul/data.electric[2].should*100).toFixed(1))+"%"}}>{(data.electric[2].actrul/data.electric[2].should*100).toFixed(1)}%</div>
-           							</div>
-           							<div className={styles.border}></div>
+           						<a>图片</a><span>{data.electric[2].name}</span>
+           						<div className={styles.electricTotal}>{data.electric[2].actrul}kWh</div>
+           						<div className={styles.electricPercent}>
+           							<div style={{width:((data.electric[2].actrul/data.electric[2].should*100).toFixed(1))+"%"}}>{(data.electric[2].actrul/data.electric[2].should*100).toFixed(1)}%</div>
            						</div>
+           						
            					</div>
-           					<div className={styles.electricThirdBorder}></div>
            				</div>
            				<div className={`${styles.yearelectric} ${styles.boxShadow}`}>
            					<div>
-           						<div className={styles.logo}><a>logo</a></div>
-           						<div className={styles.links}><a onClick={()=>changepageEleT()}>图片</a></div>
-           						<div className={styles.links}><a onClick={()=>changepageEleS()}>图片</a></div>
+           						<div className={styles.header}>
+           							<div className={styles.logo}><a>logo</a></div>
+	           						<div className={styles.links}><a onClick={()=>changepageEleT()}>图片</a></div>
+	           						<div className={styles.links}><a onClick={()=>changepageEleS()}>图片</a></div>
+           						</div>
            						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            					</div>
            				</div>

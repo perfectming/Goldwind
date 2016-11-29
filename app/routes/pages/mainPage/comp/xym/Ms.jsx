@@ -88,8 +88,7 @@ let Component = React.createClass({
                                                    readOnly="true" value={num}/>
                                             {
                                                 value.map((valueC, keyC)=> {
-
-
+                                                    if(keyC<2){
                                                     return (
                                                         <input className={styles.tableContentItem}
                                                                style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}
@@ -97,6 +96,13 @@ let Component = React.createClass({
                                                                onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
                                                                value={valueC}/>
                                                     )
+                                                    }else {
+                                                        return (
+                                                            <input className={styles.tableContentItem}
+                                                                   style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}
+                                                                   key={keyC} type="button" value='设置'/>
+                                                        )
+                                                    }
                                                 })
                                             }
                                             <div className={styles.tableContentItem} style={{width:(50/(tabaleData.msData.header.length+2))+"%"}}>

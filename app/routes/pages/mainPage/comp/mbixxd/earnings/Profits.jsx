@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
-import icono from './wind_logo.png';
+import icono from '../wind_logo.png';
 import Fanchart from './fanchart.jsx';
 import Month from '../Month.jsx';
 var actions = require('redux/actions');
@@ -55,16 +55,16 @@ let Component = React.createClass({
                <div className={styles.covers} >
                    <div className={styles.bgccc}> <img src={icono}/></div>
                    <div className={`${styles.areabox} ${styles.shadow}`}>
-                          <p className={styles.titleeee}>11月份各风机PBA</p>
+                          <p className={styles.titleeee}>10月集团各区域收益率</p>
                            <AreaTable text={text[actbt]} areaName={areaName} areaRecordCost={wind==undefined? areaRecordCost:wind} areaRecordProfit={windP==undefined? areaRecordProfit:windP} TBA={windPT==undefined? TBA:windPT}></AreaTable>
                     </div>
                 </div>
 
                <div className={styles.covers}>
-                   <div className={styles.bgcccc}> <img src={icono}/></div>
+                   <div className={styles.bgccc}> <img src={icono}/></div>
                    <div className={`${styles.windbox} ${styles.shadow}`}>
             
-                       <p className={styles.tiw}>十月一区域各风场年收益率</p>
+                       <p className={styles.tiw}>10月一区域各风场年收益率</p>
                         <div>
                            <WindfieldTable></WindfieldTable>
                        </div>

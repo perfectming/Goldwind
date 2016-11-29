@@ -12,7 +12,7 @@
     background: linear-gradient(to bottom,#242a32 ,#1f2025);
     li{
      float:left;
-     font-size:20px;
+     font-size:16px;
      font-family: '微软雅黑';
      color:white;
      height:35px;
@@ -71,14 +71,14 @@
   }
   .bgccc{
     position:absolute;
-    height:40px;
-    width:40px;
-    top:9px;
-    left:46px;
+    height:16px;
+    width:16px;
+    top:3px;
+    left:57px;
     z-index:5;
     img{
-    height:30px;
-    width:40px
+    height:16px;
+    width:16px
   }
   }
   .bgcccc{
@@ -104,7 +104,6 @@
             margin-left:2px;
             height:410px;
             margin-bottom: 20px;
-            border-radius:10px;
             padding-top:20px;
             background-color:#282F37;
 
@@ -117,7 +116,6 @@
        width: 48%;
        height: 390px;
        margin-left:12px;
-        border-radius:10px;
         padding-top:20px;
          background-color:#282F37;
 
@@ -129,7 +127,6 @@
     margin-right:50px;
     border:1px solid #282F37;
     position:relative;
-    border-radius:10px;
     background-color: #282F37;
     margin-right:33px;
     .coverbox{
@@ -139,7 +136,7 @@
     .tik{
       color:#fff;
       position:absolute;
-      font-size:25px;
+      font-size:16px;
       top:25px;
       left:100px;
       font-weight:700;
@@ -148,13 +145,13 @@
       width:50px;
       height:30px;
       position:absolute;
-      top:25px;
-      left:50px;
+      top:20px;
+      left:32px;
       text-align:center;
       line-height:30px;
       img{
-        height:40px;
-        width:40px;
+        height:16px;
+        width:16px;
       }
     }
     .imgqa{
@@ -166,8 +163,8 @@
       text-align:center;
       line-height:30px;
       img{
-        height:30px;
-        width:40px;
+        height:16px;
+        width:16px;
       }
     }
   }
@@ -175,7 +172,7 @@
   .tiw{
   color:#fff;
       position:absolute;
-        font-size:25px;
+        font-size:16px;
         top:4px;
         left:100px;
         font-weight:700;
@@ -185,7 +182,7 @@
    .titleeee{
     color:#fff;
       position:absolute;
-        font-size:25px;
+        font-size:16px;
         top:4px;
         left:100px;
         font-weight:700;
@@ -212,8 +209,8 @@
       height:30px;
       line-height:20px;
       text-align:center;
-      font-size:20px;
-      border-radius:10px;
+      font-size:16px;
+      border-radius:15px;
       font-family:'微软雅黑';
       margin-left:12px;
       background-color:white;
@@ -240,12 +237,12 @@
     height:60px;
     line-height:60px;
       button{
-      width:80px;
-      height:35px;
+      width:70px;
+      height:30px;
       line-height:20px;
       text-align:center;
-      font-size:20px;
-      border-radius:10px;
+      font-size:16px;
+      border-radius:15px;
       font-family:'微软雅黑';
       margin-left:12px;
       background-color:white;
@@ -256,7 +253,6 @@
      width:60%;
      border:1px solid #282F37;
      position:absolute;
-     border-radius:10px;
      background-color: pink;
      top:50%;
      left:50%;
@@ -264,12 +260,11 @@
      display:none;
      .imgq{
      position:absolute;
-     top:7px;
+     top:9px;
      left:7px;
-
      img{
-     height:40px;
-     width:40px;
+     height:16px;
+     width:16px;
      }
      .tit{
        position:absolute;
@@ -278,7 +273,7 @@
        color:white;
        font-weight:700;
        width:300px;
-       font-size:20px;
+       font-size:16px;
      }
      }
      .close{
@@ -289,7 +284,7 @@
      width:30px;
      border:1px solid pink;
      line-height:24px;
-     font-size:24px;
+     font-size:16px;
      text-align:center;
      cursor:pointer;
      }
