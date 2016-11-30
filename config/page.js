@@ -110,6 +110,8 @@ module.exports = {
             iconActive: require('../app/routes/pages/mainPage/img/comp/jkgl_active.png'),
             subPage: [{
                 name:'健康总览',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/jkzl.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/jkzl_active.png'),
                 page:[
                      {
                         name:'总览',
@@ -117,6 +119,8 @@ module.exports = {
                     }]
             },{
                 name:'预警处理',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/yjcl.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/yjcl_active.png'),
                 page:[
                     {
                         name:'预警处理',
@@ -130,19 +134,6 @@ module.exports = {
                     },{
                         name:'报告',
                         page:'manaport',
-                    }]
-            },{
-                name:'健康管理-3',
-                page:[
-                     {
-                        name:'健康管理3-1',
-                        page:'',
-                    },{
-                        name:'健康管理3-2',
-                        page:'',
-                    },{
-                        name:'健康管理3-3',
-                        page:'',
                     }]
             }],
         },{

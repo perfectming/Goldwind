@@ -35,7 +35,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"16px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
                     itemMarginBottom: 100,
@@ -79,14 +79,32 @@ let Component = React.createClass({
                 categories:areaNamee,
             },
             yAxis:  [{
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
                     title:{
                         text:'100%',
                         align:'high',
                         rotation:'0',
-                        y: -17,
-                        x: 40,
+                        y: -10,
+                        x: 47,
+                        style:{
+                            color:'#fff',
+                            fontSize:'14px'
+                        }
                     }
                 }, {
+                    labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text: '',
                 align:'high',

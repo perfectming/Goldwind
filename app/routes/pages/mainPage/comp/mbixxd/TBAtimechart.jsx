@@ -92,10 +92,6 @@ let Component = React.createClass({
                 categories:montht,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
-
             title: {
                 text:'100%',
                     align:'high',
@@ -103,8 +99,8 @@ let Component = React.createClass({
                     y: -20,
                     x: 40,
                     style:{
-                        color:'#fff',
                         fontSize:'14px',
+                        color:'white',
                     }
             },
 
@@ -113,7 +109,7 @@ let Component = React.createClass({
                     title:'100%',
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                       color:'white',
                         fontSize:'14px'  //字体
                     }
                 },

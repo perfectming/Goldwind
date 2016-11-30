@@ -1,10 +1,276 @@
-﻿//chart_1
+﻿function BarOption(title, xAxisData, seriesTitle, seriesData, triggerOn) {
+    //图标开始
+    option = {
+        title: {
+            text: title,
+            left: '3%',
+            top: '2%',
+            textStyle: {
+                fontSize: 14, color: '#ffffff'
+            }
+        },
+        tooltip: {
+            trigger: 'axis',
+            triggerOn: triggerOn,
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            top:'12%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxisData,
+                axisLine: {
+                    lineStyle: {
+                        color: '#747484'
+                    }
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                min: 0,
+                max: 100,
+                axisLine: {
+                    lineStyle: {
+                        color: '#747484'
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#747484'
+                    }
+                }
+            }
+        ],
+        textStyle: {
+            fontSize: 14, color: '#ffffff'
+        },
+        series: [
+            {
+                name: seriesTitle,
+                type: 'bar',
+                barMaxWidth: 20,
+                data: seriesData,
+                itemStyle: {
+                    normal: {
+                        color: '#31f3fb',
+                        barBorderRadius: [15, 15, 0, 0]
+                    }
+                }
+            }
+        ]
+
+    };
+    return option;
+}
+
+//横向
+function BarOption_orientation(title, yAxisData, seriesTitle, seriesData) {
+    option = {
+        title: {
+            text: title,
+            left: '3%',
+            top: '2%',
+            textStyle: {
+                fontSize: 14, color: '#74767a'
+            }
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        grid: {
+            left: '5%',
+            right: '7%',
+            bottom: '0%',
+            top: '5%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            axisLabel: { show: false },
+            axisLine: {
+                lineStyle: {
+                    color: '#747484'
+                }
+            },
+            splitLine: {
+                show: false
+            }
+        },
+        yAxis: {
+            type: 'category',
+            data: yAxisData,
+            axisLine: {
+                lineStyle: {
+                    color: '#747484'
+                }
+            }
+        },
+        textStyle: {
+            fontSize: 14, color: '#ffffff'
+        },
+        series: [
+            {
+                name: seriesTitle,
+                type: 'bar',
+                barMaxWidth: 20,
+                data: seriesData,
+                label: {
+                    normal: {
+                        position: ['102%', '8%'],
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#31f3fb',
+                        barBorderRadius: [0, 15, 15, 0]
+                    }
+                }
+            }
+        ]
+    };
+    return option;
+}
+
+function LineOption(title, xAxisData, yAxisName, yAxisMin, yAxisMax, seriesTitle, seriesData) {
+    option = {
+        title: {
+            text: title,
+            left: '3%',
+            top: '2%',
+            textStyle: {
+                fontSize: 14, color: '#74767a'
+            }
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            top:'12%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: xAxisData,
+                axisLine: {
+                    lineStyle: {
+                        color: '#747484'
+                    }
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: seriesTitle,
+                min: yAxisMin,
+                max: yAxisMax,
+                axisLine: {
+                    lineStyle: {
+                        color: '#747484'
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#747484'
+                    }
+                }
+            }
+        ],
+        textStyle: {
+            fontSize: 14, color: '#ffffff'
+        },
+        series: [
+            {
+                name: seriesTitle,
+                type: 'line',
+                data: seriesData,
+                itemStyle: {
+                    normal: {
+                        color: '#31f3fb'
+                    }
+                }
+            }
+        ]
+    };
+    return option;
+}
+
+//空心圆
+function Pie_hollow(legendData, seriesData) {
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            x: 'center',
+            y: '90%',
+            data: legendData,
+            textStyle: {
+                fontSize: 14, color: '#fff'
+            }
+        },
+        series: [
+			{
+			    name: '访问来源',
+			    type: 'pie',
+			    radius: ['50%', '70%'],
+			    avoidLabelOverlap: false,
+			    label: {
+			        normal: {
+			            show: false,
+			            position: 'center'
+			        },
+			        emphasis: {
+			            show: true,
+			            textStyle: {
+			                fontSize: '30',
+			                fontWeight: 'bold'
+			            }
+			        }
+			    },
+			    labelLine: {
+			        normal: {
+			            show: false
+			        }
+			    },
+			    data: seriesData
+			}
+        ]
+    };
+
+    return option;
+}
+
+
+//chart_1
 option = {
     title: {
         text: '健康指数°H',
-        bottom: '1%',
+        top: '3%',
         textStyle: {
-            fontSize: 14, color: '#74767a'
+            fontSize: 14, color: '#ffffff'
         }
     },
     tooltip: {
@@ -14,8 +280,9 @@ option = {
         }
     },
     grid: {
-        left: '8%',
+        left: '5%',
         right: '7%',
+        top:'10%',
         bottom: '3%',
         containLabel: true
     },
@@ -44,7 +311,7 @@ option = {
         }
     },
     textStyle: {
-        fontSize: 14, color: '#74767a'
+        fontSize: 14, color: '#ffffff'
     },
     series: [
         {
@@ -125,7 +392,7 @@ option = {
         }
     ],
     textStyle: {
-        fontSize: 14, color: '#74767a'
+        fontSize: 14, color: '#ffffff'
     },
     series: [
         {
@@ -161,24 +428,36 @@ option = BarOption_orientation('', ['人工新增', '5级', '4级', '3级', '2�
 
 var myChart = echarts.init(document.getElementById('chart_3'));
 myChart.setOption(option);
+myChart.on('click', function (params) {
+    alert(params.name)
+});
 
 //预警处理统计
 option = BarOption_orientation('', ['回退', '已审核', '待审核'], '数量', [500, 250, 620])
 
 var myChart = echarts.init(document.getElementById('chart_4'));
 myChart.setOption(option);
+myChart.on('click', function (params) {
+    alert(params.name)
+});
 
 //故障派工统计
 option = BarOption_orientation('', ['人工新增', '已派工', '待派工'], '数量', [500, 250, 620])
 
 var myChart = echarts.init(document.getElementById('chart_5'));
 myChart.setOption(option);
+myChart.on('click', function (params) {
+    alert(params.name)
+});
 
 //任务执行统计
 option = BarOption_orientation('', ['已结项', '已执行', '带执行'], '数量', [500, 250, 620])
 
 var myChart = echarts.init(document.getElementById('chart_6'));
 myChart.setOption(option);
+myChart.on('click', function (params) {
+    alert(params.name)
+});
 
 //各风场健康情况总览
 function jkzl() {
@@ -218,7 +497,7 @@ function fc_wjl() {
             left: '3%',
             top: '2%',
             textStyle: {
-                fontSize: 14, color: '#74767a'
+                fontSize: 14, color: '#ffffff'
             }
         },
         tooltip: {
@@ -235,6 +514,7 @@ function fc_wjl() {
             left: '3%',
             right: '4%',
             bottom: '3%',
+            top:'12%',
             containLabel: true
         },
         xAxis: [
@@ -266,7 +546,7 @@ function fc_wjl() {
             }
         ],
         textStyle: {
-            fontSize: 14, color: '#74767a'
+            fontSize: 14, color: '#ffffff'
         },
         series: [
             {
@@ -322,6 +602,7 @@ function sel_wjl_zl() {
             left: '3%',
             right: '4%',
             bottom: '3%',
+            top:'12%',
             containLabel: true
         },
         xAxis: [
@@ -354,7 +635,7 @@ function sel_wjl_zl() {
             }
         ],
         textStyle: {
-            fontSize: 14, color: '#74767a'
+            fontSize: 14, color: '#ffffff'
         },
         series: [
             {
@@ -383,6 +664,7 @@ function sel_wjl() {
         grid: {
             left: '3%',
             right: '4%',
+            top:'12%',
             bottom: '3%',
             containLabel: true
         },
@@ -416,7 +698,7 @@ function sel_wjl() {
             }
         ],
         textStyle: {
-            fontSize: 14, color: '#74767a'
+            fontSize: 14, color: '#ffffff'
         },
         series: [
             {
@@ -443,7 +725,7 @@ function fc_zql() {
             left: '3%',
             top: '2%',
             textStyle: {
-                fontSize: 14, color: '#74767a'
+                fontSize: 14, color: '#ffffff'
             }
         },
         tooltip: {
@@ -459,6 +741,7 @@ function fc_zql() {
         grid: {
             left: '3%',
             right: '4%',
+            top: '12%',
             bottom: '3%',
             containLabel: true
         },
@@ -491,7 +774,7 @@ function fc_zql() {
             }
         ],
         textStyle: {
-            fontSize: 14, color: '#74767a'
+            fontSize: 14, color: '#ffffff'
         },
         series: [
             {
@@ -532,6 +815,7 @@ function sel_zql_zl() {
             left: '3%',
             right: '4%',
             bottom: '3%',
+            top: '12%',
             containLabel: true
         },
         xAxis: [
@@ -564,7 +848,7 @@ function sel_zql_zl() {
             }
         ],
         textStyle: {
-            fontSize: 14, color: '#74767a'
+            fontSize: 14, color: '#ffffff'
         },
         series: [
             {
@@ -594,6 +878,7 @@ function sel_zql() {
             left: '3%',
             right: '4%',
             bottom: '3%',
+            top: '12%',
             containLabel: true
         },
         xAxis: [
@@ -626,7 +911,7 @@ function sel_zql() {
             }
         ],
         textStyle: {
-            fontSize: 14, color: '#74767a'
+            fontSize: 14, color: '#ffffff'
         },
         series: [
             {
@@ -709,7 +994,7 @@ function mtbf() {
 
         ],
         textStyle: {
-            fontSize: 14, color: '#74767a'
+            fontSize: 14, color: '#ffffff'
         },
         series: [
             {
