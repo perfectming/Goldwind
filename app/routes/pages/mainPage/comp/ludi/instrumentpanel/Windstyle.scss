@@ -62,7 +62,9 @@
                     width: 40%;
                     height: 100%;
                     padding-top: 50px;
-                    cursor: pointer;
+                    a{
+                        cursor: pointer;
+                    }
                 }
                 .sectionfour{
                     height: 100%;
@@ -104,6 +106,9 @@
                     height: 100%;
                     padding-top: 50px;
                     float: left;
+                    a{
+                        cursor: pointer;
+                    }
                 }.sectiontwo{
                     height: 100%;
                     width: 60%;
@@ -189,7 +194,7 @@
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
-                            background-color: #E9C75C;
+                            background-color: #00ff33;
                             }
                         }
                 }.electricSecond{
@@ -213,7 +218,7 @@
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
-                            background-color: #33BAC0;
+                            background-color: #f33;
                         }
                     }
                     
@@ -237,7 +242,7 @@
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
-                            background-color: #D06960;
+                            background-color: #f33;
                         }
                     }
                 }
@@ -279,9 +284,13 @@
         background-color: #282B34;
         float: right;
         h3{
+            margin: 0;
+            height: 35px;
+            line-height: 35px;
             font-size: 16px;
             font-weight: 900;
             padding-left: 30px;
+            background-color: #464C58;
         }
         table{
             font-size: 16px;

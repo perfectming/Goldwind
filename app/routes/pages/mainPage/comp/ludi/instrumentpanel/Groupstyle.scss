@@ -73,7 +73,7 @@
                     height: 35px;
                     width: 100%;
                     background:  #464C58;
-                    line-height: 30px;
+                    line-height: 35px;
                 }.electricFirst{
                     z-index: 3;
                     height: 201px;
@@ -94,7 +94,7 @@
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
-                            background-color: #E9C75C;
+                            background-color: #00ff33;
                             }
                         }
                 }.electricSecond{
@@ -118,7 +118,7 @@
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
-                            background-color: #33BAC0;
+                            background-color:#f33;
                         }
                     }
                     
@@ -142,7 +142,7 @@
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
-                            background-color: #D06960;
+                            background-color: #f33;
                         }
                     }
                 }
@@ -183,9 +183,13 @@
         background-color: #282B34;
         float: left;
         h3{
+            margin: 0;
             font-size: 16px;
+            height: 35px;
+            line-height: 35px;
             font-weight: 900;
             padding-left: 30px;
+            background-color: #464C58;
         }
         table{
             width: 100%;

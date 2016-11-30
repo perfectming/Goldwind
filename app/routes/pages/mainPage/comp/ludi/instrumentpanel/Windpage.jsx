@@ -39,7 +39,7 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.sectiontwo}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small1/big1)*100).toFixed(1)}%</p>健康度</span>
-           						<Pie2 color={['#E9C75C','#A69263']} num={[35,15]}></Pie2>
+           						<Pie2 color={small1==undefined? ['#E9C75C','#A69263']:big1-small1>0?['#E9C75C','#A69263']:['#f00','#E9C75C']} num={small1==undefined? [data.yearelectric[0].wind[0].small,data.yearelectric[0].wind[0].big-data.yearelectric[0].wind[0].small]:big1-small1>0? [small1,big1-small1]:[small1-big1,2*big1-small1]}></Pie2>
            					</div>
            				</div>
            				<div className={`${styles.section} ${styles.boxShadow}`}>
