@@ -15,6 +15,7 @@
     <script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
     <script type="text/javascript" src="js/jquery.jqtransform-min.js"></script>
     <script type="text/javascript" src="laydate/laydate.js"></script>
+    <script src="layer/layer.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -184,9 +185,9 @@
                         <label>等级</label>
                         <span class="tab" id="level">
                             <input type="button" class="active" value="全部" />
-                            <input type="button" value="正常" />
-                            <input type="button" value="预警" />
-                            <input type="button" value="报警" />
+                            <input type="button" key="0" value="正常" />
+                            <input type="button" key="1" value="预警" />
+                            <input type="button" key="2" value="报警" />
                         </span>
 
                     </div>
@@ -207,68 +208,7 @@
                         <td>附件</td>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
-                        <td>2016-01-02 20:33</td>
-                        <td>李正峰</td>
-                        <td>状态监测_1478142855223_贵州中广核贵麻风电场C04振动监测报告</td>
-                        <td>巴盟</td>
-                        <td>29</td>
-                        <td>2016/01/01-2016/01/31</td>
-                        <td>aaaaaaaaaaaaaaa</td>
-                        <td class="red">报警</td>
-                        <td>下载</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
-                        <td>2016-01-02 20:33</td>
-                        <td>李正峰</td>
-                        <td>状态监测_1478142855223_贵州中广核贵麻风电场C04振动监测报告</td>
-                        <td>巴盟</td>
-                        <td>29</td>
-                        <td>2016/01/01-2016/01/31</td>
-                        <td>aaaaaaaaaaaaaaa</td>
-                        <td class="yellow">预警</td>
-                        <td>下载</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
-                        <td>2016-01-02 20:33</td>
-                        <td>李正峰</td>
-                        <td>状态监测_1478142855223_贵州中广核贵麻风电场C04振动监测报告</td>
-                        <td>巴盟</td>
-                        <td>29</td>
-                        <td>2016/01/01-2016/01/31</td>
-                        <td>aaaaaaaaaaaaaaa</td>
-                        <td>正常</td>
-                        <td>下载</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
-                        <td>2016-01-02 20:33</td>
-                        <td>李正峰</td>
-                        <td>状态监测_1478142855223_贵州中广核贵麻风电场C04振动监测报告</td>
-                        <td>巴盟</td>
-                        <td>29</td>
-                        <td>2016/01/01-2016/01/31</td>
-                        <td>aaaaaaaaaaaaaaa</td>
-                        <td>正常</td>
-                        <td>下载</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
-                        <td>2016-01-02 20:33</td>
-                        <td>李正峰</td>
-                        <td>状态监测_1478142855223_贵州中广核贵麻风电场C04振动监测报告</td>
-                        <td>巴盟</td>
-                        <td>29</td>
-                        <td>2016/01/01-2016/01/31</td>
-                        <td>aaaaaaaaaaaaaaa</td>
-                        <td>正常</td>
-                        <td>下载</td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
             <div id="page" class="pt15"></div>
         </div>
@@ -369,7 +309,45 @@
         laydate(d_start);
         laydate(d_end);
 
+        function init() {
+            loadPage(0);
+        }
+
+        function loadPage(pageIndex) {
+            $.ajax({
+                type: "post",
+                url: window.ApiDomian + '/report/list.json?page='+(pageIndex)+'&size=20',
+                cache: false,
+                dataType: 'json',
+                success: function (json) {
+                    if (json.state == 1) {
+                        $(".grid tbody tr").remove();
+
+                        for (var o in json.pagination.list) {
+
+                        }
+
+                        var html = '<tr><td><input type="checkbox" value="1" class="chk" name="chk" /></td>'
+                                    + '<td>2016-01-02 20:33</td>'
+                                    + '<td>李正峰</td>'
+                                    + '<td>状态监测_1478142855223_贵州中广核贵麻风电场C04振动监测报告</td>'
+                                    + '<td>巴盟</td><td>29</td><td>2016/01/01-2016/01/31</td><td>aaaaaaaaaaaaaaa</td><td class="red">报警</td><td>下载</td></tr>';
+
+                        layer.closeAll();
+                    }
+                },
+                error: function () {
+                    alert('载入数据失败！');
+                }
+            });
+        }
+
         $(function () {
+            layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
+            LoginPage(function () {
+                init();
+            })
+
             $(".manaport .pos span").click(function () {
                 $(".tab_conn").hide();
                 $(this).addClass("active").siblings().removeClass("active");

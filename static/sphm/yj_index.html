@@ -15,7 +15,8 @@
     <script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
     <script type="text/javascript" src="js/jquery.jqtransform-min.js"></script>
 	<script type="text/javascript" src="laydate/laydate.js"></script>
-
+    <script src="uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+    <link href="uploadify/uploadify.css" rel="stylesheet" type="text/css" />  
 </head>
 <body>
     <div class="container yj_index">
@@ -71,7 +72,7 @@
 					<p>1860</p>
 				</div>
 				<div class="wrap clearfix">
-					<label>新增补办</label>
+					<label>人工新增</label>
 					<div class="pgrop">
 						<div style="width:20%;"></div>
 					</div>
@@ -435,55 +436,70 @@
         <div class="content" style="width:600px;margin-left:-300px;">
             <a class="close"></a>
             <h1>提交大部件监测报告</h1>
-			<form class="form">
-				<dl class="clearfix">
-					<dt>上传文件</dt>
-					<dd>
-						<input type="file" class="txt" style="width:380px;padding:0px;" />
-					</dd>
-				</dl>
-				<dl class="clearfix">
-					<dt><i class="red">*</i>选择区域</dt>
-					<dd>
-						<select id="yj_source" name="yj_source" disabled>
-							<option value="巴盟">巴盟</option>
-						</select>
-					</dd>
-				</dl>
-				<dl class="clearfix">
-					<dt><i class="red">*</i>风场名称</dt>
-					<dd>
-						<select id="yj_source" name="yj_source">
-							<option value="阿勒泰">阿勒泰</option>
-						</select>
-					</dd>
-				</dl>
-				<dl class="clearfix">
-					<dt><i class="red">*</i>预警等级</dt>
-					<dd>
-						<select id="yj_source" name="yj_source">
-							<option value="正常">正常</option>
-							<option value="预警">预警</option>
-							<option value="报警">报警</option>
-						</select>
-					</dd>
-				</dl>
-				<dl class="clearfix">
-					<dt>报告周期</dt>
-					<dd>
-						<input type="text" class="txt" id="beginDate" name="beginDate" style="width: 100px;"  /> -
-						<input type="text" class="txt" id="endDate" name="endDate" style="width: 100px;"  />
-					</dd>
-				</dl>
-				<dl class="clearfix">
-					<dt>备注</dt>
-					<dd><textarea name="remark" id="remark" ></textarea></dd>
-				</dl>
-				<div class="btn">
-					<button type="button" class="cancle" for="dialog_4">取消</button>
-					<button type="button" class="ml15">确认</button>
-				</div>
-			</form>
+            <form class="form">
+                <dl class="clearfix">
+                    <dt>上传文件</dt>
+                    <dd style="position:relative;">
+                        <input type="text" readonly class="txt" style="width:380px;padding:0px;" />
+						<div class="litpic_span"><button id="litpic" type="button">上传</button></div>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>选择区域</dt>
+                    <dd>
+                        <select id="yj_source" name="yj_source" disabled>
+                            <option value="巴盟">巴盟</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>风场名称</dt>
+                    <dd>
+                        <select id="yj_source" name="yj_source">
+                            <option value="阿勒泰">阿勒泰</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>预警等级</dt>
+                    <dd>
+                        <select id="yj_source" name="yj_source">
+                            <option value="正常">正常</option>
+                            <option value="预警">预警</option>
+                            <option value="报警">报警</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>报告周期</dt>
+                    <dd>
+                        <input type="text" class="txt" id="beginDate" name="beginDate" style="width: 100px;" /> -
+                        <input type="text" class="txt" id="endDate" name="endDate" style="width: 100px;" />
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>备注</dt>
+                    <dd><textarea name="remark" id="remark"></textarea></dd>
+                </dl>
+                <div class="btn">
+                    <button type="button" class="cancle" for="dialog_4">取消</button>
+                    <button type="button" class="ml15">确认</button>
+                </div>
+            </form>
+			<script type="text/javascript">
+                $(function () {
+                    $('#litpic').uploadify({
+                        'swf': 'uploadify/uploadify.swf',
+                        'uploader': window.ApiDomian+'/report/upload.json',
+                        'onUploadError': function (file, errorCode, errorMsg, errorString) {
+                            alert(errorString)
+                        },
+                        'onUploadSuccess': function (file, data, response) {
+                            alert(JSON.stringify(data))
+                        }
+                    });
+                });
+	        </script>
         </div>
     </div>
 
@@ -791,9 +807,27 @@
                 <div style="margin:0px 20px;"><textarea name="jx_remark" id="jx_remark"></textarea></div>
 
                 <div class="btn">
-                    <button type="button" class="cancle" for="jx_detail">取消</button>
-                    <button type="button" class="ml15">未结项</button>
+                    <button type="button" class="cancle" for="jx_detail">关闭</button>
+                    <button type="button" class="ml15" onclick="$('.jx_detail_info').show(); $('#jx_detail').hide();">结项</button>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog jx_detail_info" id="jx_detail">
+        <div class="opacity"></div>
+        <div class="content" style="width:1000px;margin-left:-500px;">
+            <a class="close"></a>
+            <h1>结项</h1>
+            <div class="d_zql clearfix">
+                <label>预警准确率</label>
+                <p><span><a></a><a></a><a></a><a></a><a></a></span></p>
+            </div>
+            <h1 style="text-align:center;margin:15px 20px 0;">结项备注</h1>
+            <div style="margin:0px 20px;"><textarea name="jx_remark" id="jx_remark"></textarea></div>
+
+            <div class="btn">
+                <button type="button" class="cancle" onclick="$('.jx_detail_info').hide()">关闭</button>
+                <button type="button" class="ml15">结项</button>
             </div>
         </div>
     </div>
@@ -822,118 +856,123 @@
 	    istime: true
 	});
 
-		$(function(){
-			$(".row_1 .btn_b a").click(function(){
-				$(this).addClass("active").siblings().removeClass("active");
-				if($(this).hasClass('a1')){
-					$(".chart_1").show();
-					$(".chart_2").hide();
-					$(".row_3 .table_1").show();
-					$(".row_3 .table_3").hide();
-				}else{
-					$(".chart_2").show();
-					$(".chart_1").hide();
-					$(".row_3 .table_1").hide();
-					$(".row_3 .table_3").show();
-				}
-			})
-			
-			$(".row_3 .table_1 a:eq(0)").click(function(){
-				$("#dialog_1").show();
-				$("#dialog_1 .form").Validform({
-					tiptype:function(msg,o,cssctl){
-					},
-					usePlugin:{
-						jqtransform:{
-							//会在当前表单下查找这些元素;
-							selector:"select"	
-						}
-					}
-				});
-			})
-			
-			$(".row_3 .table_1 a:eq(2)").click(function(){
-				$("#dialog_2").show();
-				$("#dialog_2 .form").Validform({
-					tiptype:function(msg,o,cssctl){
-					},
-					usePlugin:{
-						jqtransform:{
-							//会在当前表单下查找这些元素;
-							selector:"select"	
-						}
-					}
-				});
-			})
-			$(".row_3 .table_1 a:eq(1)").click(function(){
-			    $("#dialog_3").show();
+	$(function () {
 
-			    var clickDate = new Date();
-			    //设定预警时间
-			    $("#pg_yj_time").val(clickDate.getFullYear() + "-" + (clickDate.getMonth() + 1) + "-" + clickDate.getDate() + " " + (clickDate.getHours() < 10 ? "0" + clickDate.getHours() : clickDate.getHours()) + ":" + (clickDate.getMinutes() < 10 ? "0" + clickDate.getMinutes() : clickDate.getMinutes()));			    
-
-				$("#dialog_3 .form").Validform({
-					tiptype:function(msg,o,cssctl){
-					},
-					usePlugin:{
-						jqtransform:{
-							//会在当前表单下查找这些元素;
-							selector:"select"	
-						}
-					}
-				});
-			})
-			$(".row_3 .table_2 a:eq(1)").click(function () {
-			    $("#dialog_4").show();
-			    $("#dialog_4 .form").Validform({
-			        tiptype: function (msg, o, cssctl) {
-			        },
-			        usePlugin: {
-			            jqtransform: {
-			                //会在当前表单下查找这些元素;
-			                selector: "select"
-			            }
-			        }
-			    });
-			})
-			$(".row_3 .table_3 a").click(function () {
-			    $("#scroll_h .clearfix:eq(0)").css("width", $("#scroll_h .clearfix > div").length * $("#scroll_h .clearfix > div").width() + $("#scroll_h .clearfix > div").length*10)
-			    $("#jx_detail").show();
-			})
-
-			$(".page_1").Page({
-				  totalPages: 9,//分页总数
-				  liNums: 7,//分页的数字按钮数(建议取奇数)
-				  activeClass: 'activP', //active 类样式定义
-				  callBack : function(page){
-					//alert(page)
-				  }
-			});
-			$(".page_2").Page({
-				  totalPages: 5,//分页总数
-				  liNums: 3,//分页的数字按钮数(建议取奇数)
-				  activeClass: 'activS', //active 类样式定义
-				  prv:'<<',
-				  next:'>>',
-				  hasFirstPage:false,
-				  hasLastPage:false,
-				  callBack : function(page){
-					//alert(page)
-				  }
-			});
-
-			$(".grid tr").on("dblclick",function(event){
-				var _id = $(this).find("input[type='checkbox']").val();
-				
-				$(".gd_detail").show();
-				event.stopPropagation();
-			})
-
-			$(".d_zql a").click(function () {
-			    $(".d_zql a").removeClass("active");
-			    $(".d_zql a").slice(0, $(this).index() + 1).addClass("active");
-			})
+		$(".row_1 .btn_b a").click(function(){
+			$(this).addClass("active").siblings().removeClass("active");
+			if($(this).hasClass('a1')){
+				$(".chart_1").show();
+				$(".chart_2").hide();
+				$(".row_3 .table_1").show();
+				$(".row_3 .table_3").hide();
+			}else{
+				$(".chart_2").show();
+				$(".chart_1").hide();
+				$(".row_3 .table_1").hide();
+				$(".row_3 .table_3").show();
+			}
 		})
+			
+		$(".row_3 .table_1 a:eq(0)").click(function(){
+			$("#dialog_1").show();
+			$("#dialog_1 .form").Validform({
+				tiptype:function(msg,o,cssctl){
+				},
+				usePlugin:{
+					jqtransform:{
+						//会在当前表单下查找这些元素;
+						selector:"select"	
+					}
+				}
+			});
+		})
+		
+		$(".row_3 .table_1 a:eq(2)").click(function(){
+			$("#dialog_2").show();
+			$("#dialog_2 .form").Validform({
+				tiptype:function(msg,o,cssctl){
+				},
+				usePlugin:{
+					jqtransform:{
+						//会在当前表单下查找这些元素;
+						selector:"select"	
+					}
+				}
+			});
+		})
+		$(".row_3 .table_1 a:eq(1)").click(function(){
+			$("#dialog_3").show();
+
+			var clickDate = new Date();
+			//设定预警时间
+			$("#pg_yj_time").val(clickDate.getFullYear() + "-" + (clickDate.getMonth() + 1) + "-" + clickDate.getDate() + " " + (clickDate.getHours() < 10 ? "0" + clickDate.getHours() : clickDate.getHours()) + ":" + (clickDate.getMinutes() < 10 ? "0" + clickDate.getMinutes() : clickDate.getMinutes()));			    
+
+			$("#dialog_3 .form").Validform({
+				tiptype:function(msg,o,cssctl){
+				},
+				usePlugin:{
+					jqtransform:{
+						//会在当前表单下查找这些元素;
+						selector:"select"	
+					}
+				}
+			});
+		})
+		$(".row_3 .table_2 a:eq(1)").click(function () {
+			$("#dialog_4").show();
+			$("#dialog_4 .form").Validform({
+			    tiptype: function (msg, o, cssctl) {
+			    },
+			    usePlugin: {
+			        jqtransform: {
+			            //会在当前表单下查找这些元素;
+			            selector: "select"
+			        }
+			    }
+			});
+		})
+		$(".row_3 .table_3 a").click(function () {
+			$("#scroll_h .clearfix:eq(0)").css("width", $("#scroll_h .clearfix > div").length * $("#scroll_h .clearfix > div").width() + $("#scroll_h .clearfix > div").length*10)
+			$("#jx_detail").show();
+		})
+
+		$(".page_1").Page({
+				totalPages: 9,//分页总数
+				liNums: 7,//分页的数字按钮数(建议取奇数)
+				activeClass: 'activP', //active 类样式定义
+				callBack: function (page) {
+				//alert(page)
+				}
+		});
+		$(".page_2").Page({
+				totalPages: 5,//分页总数
+				liNums: 3,//分页的数字按钮数(建议取奇数)
+				activeClass: 'activS', //active 类样式定义
+				prv:'<<',
+				next:'>>',
+				hasFirstPage:false,
+				hasLastPage:false,
+				callBack : function(page){
+				//alert(page)
+				}
+		});
+
+		$(".grid tr").on("dblclick",function(event){
+			var _id = $(this).find("input[type='checkbox']").val();
+				
+			$(".gd_detail").show();
+			event.stopPropagation();
+		})
+
+		$(".jx_detail_info .d_zql a").click(function () {
+			$(".jx_detail_info .d_zql a").removeClass("active");
+			$(".jx_detail_info .d_zql a").slice(0, $(this).index() + 1).addClass("active");
+		})
+
+		if (getQueryString('op') == '2') {
+		    $(".row_1 .btn_b a:eq(1)").trigger("click");
+		}
+	})
 	</script>
 </body>
 </html>
