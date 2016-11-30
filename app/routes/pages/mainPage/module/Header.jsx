@@ -51,6 +51,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('treeItemActive', 0));
              dispatch(actions.setVars('showPage', page));
              dispatch(actions.setVars('tabItemActive', 0));
+             dispatch(actions.setVars('show', false));
+             dispatch(actions.setVars('colorAct', false));
              if(page=='cockpit'){
 
              }else if(page=='monitorkb' || page=='health_main'){
