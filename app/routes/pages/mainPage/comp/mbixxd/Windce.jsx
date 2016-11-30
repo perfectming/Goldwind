@@ -40,11 +40,11 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
-                    color:'red',
+                    color:'#31f3fb',
                 },
                 navigation:{
                    activeColor: "#fff",
-                   inactiveColor: "red",
+                   inactiveColor: "blue",
                 },
                 itemStyle: {
                     color: "#fff",
@@ -66,7 +66,7 @@ let Component = React.createClass({
 
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
+                    pointPadding: 0.05,
                     borderWidth: 0,
                     pointWidth: pointWidth,
                 }, series: {
@@ -82,6 +82,7 @@ let Component = React.createClass({
             xAxis: {
                 lineWidth: 1,
                 tickWidth: 0,
+                pointPadding:0,
                 labels: {
                     y: 20,
                     style: {
@@ -117,14 +118,16 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordProfitO,
                 color:colorO,
-                borderRadius: 7
+                borderRadius: 7,
+             
             },
             {
             	name: '实际发电量',
                 type: 'column',
                 data: areaRecordCostT,
                 color:colorT,
-                borderRadius: 7
+                borderRadius: 7,
+              
             }]
         };
         return (
