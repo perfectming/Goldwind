@@ -1,6 +1,15 @@
 .box{
     overflow:hidden;
     padding-bottom:10px;
+    .boxcover{
+    position:fixed;
+    height:100%;
+    width:100%;
+    z-index:1000;
+    background:black;
+    display:none;
+    opacity:0.6;
+    }
      .shadow:hover{
       box-shadow:0 0 15px #fff;
      }
@@ -153,5 +162,52 @@
           box-shadow:0px 0px 10px  #20FEFF;
       }
      
+    }
+    .more:hover{
+     box-shadow:0 0 15px #fff;
+    }
+    .more{
+    background:#21242a;
+    position:absolute;
+    z-index:1200;
+    width:96%;
+    margin-left:-5px;
+    top:50%;
+    left:51%;
+    overflow:hidden;
+    transform:translate(-50%,-50%);
+    box-sizing:border-box;
+    display:none;
+    .moretitle{
+    width:100%;
+    height:60px;
+    background:#21242a;
+    position:relative;
+    z-index:2000;
+    height:60px;
+    div{
+    display:inline-block;
+    font-size:16px;
+    float:right;
+    line-height:60px;
+    cursor:pointer;
+    margin-right:50px;
+       color:#fff;
+    }
+    p{
+    position:absolute;
+    top:18px;
+    left:7%;
+    font-size:16px;
+    color:#fff;
+    }
+    img{
+    position:absolute;
+    top:22px;
+    left:5%;
+    height:16px;
+    width:16px;
+    }
+    }
     }
 }

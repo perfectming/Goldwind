@@ -9,10 +9,11 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let{areaPlan,areaPlanDay, areaPlanDayT}=this.props;
+        let{areaPlan,areaPlanDay, areaPlanDayT,width,height}=this.props;
         let configPie = {
             chart: {
-                height:700,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -105,6 +106,7 @@ let Component = React.createClass({
                 borderColor:'#5B9BD5',
                 pointWidth: 15,
                 borderWidth: 4,
+                borderRadius: 3
             },
             {
             	name: '实际发电量',
@@ -114,6 +116,7 @@ let Component = React.createClass({
                 pointWidth: 15,
                 borderWidth: 4,
                 borderColor:'#ED7D31',
+                borderRadius: 3
             },
             ]
         };

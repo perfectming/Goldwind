@@ -165,7 +165,8 @@ module.exports = {
             },{
                 name:'资产管理-2',
                 page:[
-                     {
+                        
+                        {
                         name:'资产管理2-1',
                         page:'',
                     },{

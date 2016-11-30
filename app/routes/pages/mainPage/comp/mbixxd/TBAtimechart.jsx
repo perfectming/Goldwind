@@ -67,6 +67,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 10,
                     pointWidth: 50,
+                    borderRadius: 7
 
                 }, series: {
                     cursor: 'pointer',

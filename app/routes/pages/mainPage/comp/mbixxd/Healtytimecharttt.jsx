@@ -24,7 +24,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                
             },
             title: {
                 text: '',
@@ -64,7 +64,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30
+                    pointWidth: 30,
+                    borderRadius: 7,
                 }, series: {
                     cursor: 'pointer',
                     events: {

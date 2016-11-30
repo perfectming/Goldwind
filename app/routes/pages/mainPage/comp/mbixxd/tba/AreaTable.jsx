@@ -122,12 +122,14 @@ let Component = React.createClass({
                 name: '实际发电量',
                 type: 'column',
                 data: areaRecordProfit,
+                borderRadius: 7,
             },
             {
                 name: '四',
                 type: 'column',
                 data: areaRecordCosts,
-                stack:'first'
+                stack:'first',
+                borderRadius: 2,
             },
             {
                 name: '大',
@@ -146,6 +148,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',
+                borderRadius: 2,
             },
                 {
                     name: 'TBA',

@@ -10,10 +10,11 @@ let Component = React.createClass({
     },
     render() {
 
-      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA}=this.props;
+      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width}=this.props;
         let configPie = {
             chart: {
-                height:340,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -131,13 +132,15 @@ let Component = React.createClass({
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: fanProfit
+                data: fanProfit,
+                borderRadius: 4,
             },
             {
                 name: '四',
                 type: 'column',
                 data: fanCost,
                 stack:'waste',
+                borderRadius: 2,
             },
                 {
                     name: '大',

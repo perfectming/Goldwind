@@ -132,13 +132,15 @@ let Component = React.createClass({
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: fanProfit
+                data: fanProfit,
+                borderRadius: 3,
             },
             {
                 name: '四',
                 type: 'column',
                 data: fanCost,
                 stack:'waste',
+                borderRadius: 3,
             },
                 {
                     name: '大',

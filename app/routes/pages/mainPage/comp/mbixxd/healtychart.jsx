@@ -9,10 +9,11 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaRecordProfit,machineE,}=this.props;
+        let {areaRecordProfit,machineE,width,height}=this.props;
         let configPie = {
             chart: {
-                height:700,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -56,7 +57,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30
+                    pointWidth: 30,
+                    borderRadius: 7,
                 }, series: {
                     cursor: 'pointer',
                     events: {

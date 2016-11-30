@@ -9,17 +9,17 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {fanCost,machine,fanProfitQ}=this.props;
+        let {fanCost,machine,fanProfitQ,width,height}=this.props;
         let configPie = {
             chart: {
-                height:700,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
             },
             title: {
                 text: '',
@@ -62,6 +62,7 @@ let Component = React.createClass({
                     pointPadding: 10,
                    stacking:'nomal',
                     pointWidth: 50,
+
 
                 }, series: {
                     cursor: 'pointer',
@@ -131,7 +132,8 @@ let Component = React.createClass({
                 color:'#64DC83',
                 shadow:true,
                 pointWidth: 30,
-                borderWidth: 0,
+                borderWidth: 0, 
+                borderRadius: 7
             },
                 {
                     name: '四',
@@ -139,7 +141,8 @@ let Component = React.createClass({
                     color:'#FC794E',
                     data: fanCost,
                     stack:'waste',
-                     pointWidth: 30,
+                    pointWidth: 30,
+                    borderRadius: 3
                 },
                 {
                     name: '大',
@@ -163,7 +166,8 @@ let Component = React.createClass({
                     data: fanCost,
                     stack:'waste',
                      pointWidth: 30,
-                    color:'#AACE4A'
+                    color:'#AACE4A',
+                     borderRadius: 3
                 },
                 {
                     name: 'TBA',

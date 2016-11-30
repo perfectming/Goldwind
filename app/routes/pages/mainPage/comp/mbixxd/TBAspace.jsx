@@ -21,10 +21,20 @@ let Component = React.createClass({
     },
     render() {
        
-        let{actbt=0,changpage,wind,windP,gogogo,back,machinee}=this.props;
+        let{actbt=0,changpage,wind,windP,gogogo,back,machinee,more,close}=this.props;
         return (
            
             <div className={styles.box}>
+             <div className={styles.boxcover} id='boxcover'></div>
+             <div className={styles.more} id="sss">
+                <div className={styles.moretitle}>
+                <img src={icono}/>
+                <p>11月份各风机PBA</p>
+                <div onClick={()=>close()}>x</div>
+                </div>
+            <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP} width={1750} height={500}></TBAspacechart>
+
+             </div>
                 <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
@@ -36,7 +46,7 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP}></TBAspacechart>
+                                <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP} height={700}></TBAspacechart>
                             </div>
                         </div>
                     </div>
@@ -112,6 +122,15 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('windP',x3))
 
         },
+         more:()=>{
+             $("#sss").show();
+             $('#boxcover').show();
+             // $('.box').css('opacity',".5")
+        },
+        close:()=>{
+            $("#sss").hide();
+              $('#boxcover').hide();
+        }
     };
 };
 

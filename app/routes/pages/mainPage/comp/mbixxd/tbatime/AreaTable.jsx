@@ -55,6 +55,7 @@ let Component = React.createClass({
                     pointPadding:0,
                     borderWidth: 0,
                     pointWidth:30,
+                    borderRadius: 7,
                     stacking: 'normal',
                 }, series: {
                     cursor: 'pointer',

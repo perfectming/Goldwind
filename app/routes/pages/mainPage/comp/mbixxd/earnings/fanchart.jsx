@@ -8,17 +8,17 @@ let Component = React.createClass({
     },
     render() {
        
-     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height}=this.props
+     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,width}=this.props
         let configPie = {
             chart: {
-                height:340,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
             },
             title: {
                 text: '',
@@ -60,7 +60,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 15
+                    pointWidth: 15,
+                    borderRadius: 4,
                 },
                 series: {
                     cursor: 'pointer',
@@ -121,13 +122,15 @@ let Component = React.createClass({
                 name: '实际收益',
                 type: 'column',
                 data: areaRecordProfitR,
-                pointWidth:15
+                pointWidth:15,
+                borderRadius: 4,
             },
             {
                 name: '收入成本',
                 type: 'column',
                 data: areaRecordCostR,
-                pointWidth:15
+                pointWidth:15,
+                borderRadius: 4,
             },
             {
                     name:"TBA",

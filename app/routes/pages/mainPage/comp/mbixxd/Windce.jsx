@@ -9,16 +9,16 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaNameX,areaRecordCostT,areaRecordProfitO,colorO,colorT,pointWidth}=this.props
+        let {areaNameX,areaRecordCostT,areaRecordProfitO,colorO,colorT,pointWidth,width,height}=this.props
         let configPie = {
             chart: {
-                height:700,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                paddingLeft:100,
                 borderRadius:10
             },
             title: {
@@ -39,6 +39,13 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'red',
+                },
+                navigation:{
+                   activeColor: "#fff",
+                   inactiveColor: "red",
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -110,12 +117,14 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordProfitO,
                 color:colorO,
+                borderRadius: 7
             },
             {
             	name: '实际发电量',
                 type: 'column',
                 data: areaRecordCostT,
                 color:colorT,
+                borderRadius: 7
             }]
         };
         return (
