@@ -80,12 +80,23 @@ let Component = React.createClass({
                 categories:machineE,
             },
             yAxis: [{
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                }
             }
         }, {
             title: {
