@@ -32,13 +32,13 @@ let Component = React.createClass({
            			<div className={styles.firstfloor}>
            				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
-           						<span>当前30分<br/>总分100分</span><br/> 
+           						<span>当前{small==undefined? data.yearelectric[0].area[0].small:small}分<br/>总分100分</span><br/> 
            						<a onClick={()=>changepageHealthyT()}>图片</a>
            						<a onClick={()=>changepageHealthyS()}>图片</a>
            					</div>
            					<div className={styles.sectiontwo}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{small==undefined? ((data.yearelectric[0].area[0].small/data.yearelectric[0].area[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%</p>健康度</span>
-           						<Pie2 color={['#E9C75C','#A69263']} num={[35,15]}></Pie2>
+           						<Pie2 color={small==undefined? ['#E9C75C','#A69263']:(big-small)>0? ['#E9C75C','#A69263']:['#f00','#E9C75C']} num={small==undefined? [data.yearelectric[0].area[0].small,data.yearelectric[0].area[0].big-data.yearelectric[0].area[0].small]:(big-small)>0?[small,big-small]:[small-big,2*big-small]}></Pie2>
            					</div>
            				</div>
            				<div className={`${styles.section} ${styles.boxShadow}`}>
