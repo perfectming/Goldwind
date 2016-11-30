@@ -42,7 +42,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"16px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -88,20 +88,42 @@ let Component = React.createClass({
                 categories:machine,
             },
            yAxis: [{
+            labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text:'KWH',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
             }
         }, {
+            labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text: '',
                  align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
 
             },
             opposite: true

@@ -90,20 +90,28 @@ let Component = React.createClass({
                 },
                 categories:areaPlan,
             },
-            yAxis: [{
-            title: {
+           yAxis:{
+             title: {
                  text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                 style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                 },
+
+                 },
+                 labels:{
+                    title:'100%',
+                    y: 10,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
             }
-        }, {
-            title: {
-                text: ''
-            },
-            opposite: true
-        }],
+        },
             //几条数据
             series: [{
                 name: '实际运行时间',

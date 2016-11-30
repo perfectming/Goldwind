@@ -1,8 +1,6 @@
-$(function () {
-    if (screen.width < 1920) {
-        $("body").css("transform", "scale(0.701562, 0.701562)")
-    }
+window.ApiDomian = 'http://211.90.87.226:8080/sphm';
 
+$(function () {
 	$(".grid input[type='checkbox']").on('click',function(event){
 		if($(this).get(0).checked == true){
 			$(this).parent().parent().addClass("active");
@@ -21,265 +19,149 @@ $(function () {
 	})
 })
 
-function BarOption(title, xAxisData,seriesTitle, seriesData,triggerOn) {
-    //图标开始
-    option = {
-        title: {
-            text: title,
-            left: '3%',
-            top: '2%',
-            textStyle: {
-                fontSize: 14, color: '#74767a'
-            }
-        },
-        tooltip: {
-            trigger: 'axis',
-			triggerOn:triggerOn,
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: xAxisData,
-                axisLine: {
-                    lineStyle: {
-                        color: '#747484'
-                    }
-                }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                min: 0,
-                max: 100,
-                axisLine: {
-                    lineStyle: {
-                        color: '#747484'
-                    }
-                },
-                splitLine: {
-                    lineStyle: {
-                        color: '#747484'
-                    }
-                }
-            }
-        ],
-        textStyle: {
-            fontSize: 14, color: '#74767a'
-        },
-        series: [
-            {
-                name: seriesTitle,
-                type: 'bar',
-                barMaxWidth: 20,
-                data: seriesData,
-                itemStyle: {
-                    normal: {
-                        color: '#31f3fb',
-                        barBorderRadius: [15, 15, 0, 0]
-                    }
-                }
-            }
-        ]
-
-    };
-    return option;
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]); return "";
 }
 
-//横向
-function BarOption_orientation(title, yAxisData, seriesTitle, seriesData) {
-    option = {
-        title: {
-            text: title,
-            left: '3%',
-            top: '2%',
-            textStyle: {
-                fontSize: 14, color: '#74767a'
+function LoginPage(callback) {
+    $.ajax({
+        type: "post",
+        url: window.ApiDomian + "/account_login.do?userId=123&leveltype=123",
+        cache: false,
+        dataType:'jsonp',
+        success: function (json) {
+            if (json.state == 1) {
+                if (callback != undefined)
+                    callback();
             }
         },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
+        error: function () {
+            alert('登陆失败');
+        }
+    });
+}
+
+
+function CmsUpload(sender) {
+
+    
+    LoginPage(function () {
+        $.ajax({
+            type: "GET",
+            url: window.ApiDomian + "/report/list.json",
+            dataType: "jsonp",
+            success: function (json) {
+                alert(1)
             }
-        },
-        grid: {
-            left: '5%',
-            right: '7%',
-            bottom: '0%',
-            top: '5%',
-            containLabel: true
-        },
-        xAxis: {
-            type: 'value',
-            axisLabel: { show: false },
-            axisLine: {
-                lineStyle: {
-                    color: '#747484'
+        });
+        return;
+        $("#uploadForm").ajaxSubmit({
+            type: 'post',
+            url: window.ApiDomian + "/report/upload.json",
+            beforeSerialize: function () {
+                if (!sender.value.toUpperCase().match(/.JPG|.GIF|.PNG|.BMP/i)) {
+                    alert('图片格式无效，请上传.JPG|.GIF|.PNG|.BMP格式的图片！');
+                    return false;
                 }
             },
-            splitLine: {
-                show: false
+            success: function (json) {
+                alert(JSON.stringify(json))
+            },
+            error: function (XmlHttpRequest, textStatus, errorThrown) {
+                console.log(XmlHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrown);
             }
-        },
-        yAxis: {
-            type: 'category',
-            data: yAxisData,
-            axisLine: {
-                lineStyle: {
-                    color: '#747484'
-                }
-            }
-        },
-        textStyle: {
-            fontSize: 14, color: '#74767a'
-        },
-        series: [
-            {
-                name: seriesTitle,
-                type: 'bar',
-                barMaxWidth: 20,
-                data: seriesData,
-                label: {
-                    normal: {
-                        position: ['102%', '8%'],
-                        show: true
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        color: '#31f3fb',
-                        barBorderRadius: [0, 15, 15, 0]
-                    }
-                }
-            }
-        ]
-    };
-    return option;
+        });
+
+        //var formData = new FormData();
+        //formData.append('file', $('#file')[0].files[0]);
+        //$.ajax({
+        //    url: window.ApiDomian + "/report/upload.json",
+        //    type: 'POST',
+        //    cache: false,
+        //    data: formData,
+        //    dataType: 'jsonp',
+        //    processData: false,
+        //    contentType: false
+        //}).done(function (json) {
+        //    alert(JSON.stringify(json))
+        //}, 'json').fail(function () {
+        //    alert(1);
+        //});
+
+    });
 }
 
-function LineOption(title, xAxisData,yAxisName,yAxisMin,yAxisMax, seriesTitle, seriesData) {
-    option = {
-        title: {
-            text: title,
-            left: '3%',
-            top: '2%',
-            textStyle: {
-                fontSize: 14, color: '#74767a'
-            }
-        },
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: xAxisData,
-                axisLine: {
-                    lineStyle: {
-                        color: '#747484'
-                    }
-                }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                name: seriesTitle,
-                min: yAxisMin,
-                max: yAxisMax,
-                axisLine: {
-                    lineStyle: {
-                        color: '#747484'
-                    }
-                },
-                splitLine: {
-                    lineStyle: {
-                        color: '#747484'
-                    }
-                }
-            }
-        ],
-        textStyle: {
-            fontSize: 14, color: '#74767a'
-        },
-        series: [
-            {
-                name: seriesTitle,
-                type: 'line',
-                data: seriesData,
-                itemStyle: {
-                    normal: {
-                        color: '#31f3fb'
-                    }
-                }
-            }
-        ]
-    };
-    return option;
+//得到字符总数  
+function getChars(str) {
+    var i = 0;
+    var c = 0.0;
+    var unicode = 0;
+    var len = 0;
+
+    if (str == null || str == "") {
+        return 0;
+    }
+    len = str.length;
+    for (i = 0; i < len; i++) {
+        unicode = str.charCodeAt(i);
+        if (unicode < 127) { //判断是单字符还是双字符  
+            c += 1;
+        } else {  //chinese  
+            c += 2;
+        }
+    }
+    return c;
 }
 
-//空心圆
-function Pie_hollow(legendData,seriesData){
-	option = {
-		tooltip: {
-			trigger: 'item',
-			formatter: "{a} <br/>{b}: {c} ({d}%)"
-		},
-		legend: {
-			x : 'center',
-			y : '90%',
-			data:legendData,
-			textStyle: {
-				fontSize: 14, color: '#fff'
-			}
-		},
-		series: [
-			{
-				name:'访问来源',
-				type:'pie',
-				radius: ['50%', '70%'],
-				avoidLabelOverlap: false,
-				label: {
-					normal: {
-						show: false,
-						position: 'center'
-					},
-					emphasis: {
-						show: true,
-						textStyle: {
-							fontSize: '30',
-							fontWeight: 'bold'
-						}
-					}
-				},
-				labelLine: {
-					normal: {
-						show: false
-					}
-				},
-				data:seriesData
-			}
-		]
-	};
+function sb_strlen(str) {
+    return getChars(str);
+}
+//截取字符  
+function sb_substr(str, startp, endp) {
+    if (sb_strlen(str) <= endp)
+        return str;
+    var i = 0; c = 0; unicode = 0; rstr = '';
+    var len = str.length;
+    var sblen = sb_strlen(str);
 
-	return option;
+    if (startp < 0) {
+        startp = sblen + startp;
+    }
+
+    if (endp < 1) {
+        endp = sblen + endp;// - ((str.charCodeAt(len-1) < 127) ? 1 : 2);  
+    }
+    // 寻找起点  
+    for (i = 0; i < len; i++) {
+        if (c >= startp) {
+            break;
+        }
+        var unicode = str.charCodeAt(i);
+        if (unicode < 127) {
+            c += 1;
+        } else {
+            c += 2;
+        }
+    }
+
+    // 开始取  
+    for (i = i; i < len; i++) {
+        var unicode = str.charCodeAt(i);
+        if (unicode < 127) {
+            c += 1;
+        } else {
+            c += 2;
+        }
+        rstr += str.charAt(i);
+
+        if (c >= endp) {
+            break;
+        }
+    }
+
+    return rstr+"...";
 }
