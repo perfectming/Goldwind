@@ -45,6 +45,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -67,6 +70,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 10,
                     pointWidth: 50,
+                    borderRadius: 7
 
                 }, series: {
                     cursor: 'pointer',
@@ -92,10 +96,6 @@ let Component = React.createClass({
                 categories:montht,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
-
             title: {
                 text:'100%',
                     align:'high',
@@ -103,8 +103,8 @@ let Component = React.createClass({
                     y: -20,
                     x: 40,
                     style:{
-                        color:'#fff',
                         fontSize:'14px',
+                        color:'white',
                     }
             },
 
@@ -113,7 +113,7 @@ let Component = React.createClass({
                     title:'100%',
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                       color:'white',
                         fontSize:'14px'  //字体
                     }
                 },

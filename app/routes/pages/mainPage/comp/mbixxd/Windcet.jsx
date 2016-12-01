@@ -9,10 +9,11 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let{areaPlan,areaPlanDay, areaPlanDayT}=this.props;
+        let{areaPlan,areaPlanDay, areaPlanDayT,width,height}=this.props;
         let configPie = {
             chart: {
-                height:700,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -39,6 +40,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                 itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -61,7 +65,6 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 10,
                     borderWidth: 1,
-                    pointWidth: 50,
 
                 }, series: {
                     cursor: 'pointer',
@@ -79,8 +82,8 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        fontSize:'14px',
+                        color:'#fff'  //字体
                     }
                 },
                 categories:areaPlan,
@@ -92,7 +95,7 @@ let Component = React.createClass({
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                       color:"#fff",
                         fontSize:'14px'  //字体
                     }
                 },
@@ -106,6 +109,7 @@ let Component = React.createClass({
                 borderColor:'#5B9BD5',
                 pointWidth: 15,
                 borderWidth: 4,
+                borderRadius: 3
             },
             {
             	name: '实际发电量',
@@ -115,6 +119,7 @@ let Component = React.createClass({
                 pointWidth: 15,
                 borderWidth: 4,
                 borderColor:'#ED7D31',
+                borderRadius: 3
             },
             ]
         };

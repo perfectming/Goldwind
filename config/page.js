@@ -109,30 +109,27 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/jkgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/jkgl_active.png'),
             subPage: [{
-                name:'健康管理-1',
+                name:'健康总览',
                 page:[
                      {
-                        name:'健康管理1-1',
-                        page:'',
-                    },{
-                        name:'健康管理1-2',
-                        page:'',
-                    },{
-                        name:'健康管理1-3',
-                        page:'',
+                        name:'总览',
+                        page:'health_main',
                     }]
             },{
-                name:'健康管理-2',
+                name:'预警处理',
                 page:[
                     {
-                        name:'健康管理2-1',
-                        page:'',
+                        name:'预警处理',
+                        page:'yujing',
                     },{
-                        name:'健康管理2-2',
-                        page:'',
+                        name:'历史查询',
+                        page:'history_list',
                     },{
-                        name:'健康管理2-3',
-                        page:'',
+                        name:'订阅管理',
+                        page:'subscribe',
+                    },{
+                        name:'报告',
+                        page:'manaport',
                     }]
             },{
                 name:'健康管理-3',
@@ -168,7 +165,8 @@ module.exports = {
             },{
                 name:'资产管理-2',
                 page:[
-                     {
+                        
+                        {
                         name:'资产管理2-1',
                         page:'',
                     },{
@@ -224,7 +222,7 @@ module.exports = {
                         page:'loseElectric',
                     },{
                         name:'可靠性分析',
-                        page:'',
+                        page:'topTen',
                     },{
                         name:'设备损失分析',
                         page:'deviceLose',

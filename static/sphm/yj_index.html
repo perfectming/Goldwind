@@ -1,0 +1,978 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>智能运营SOAM平台2.0</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="css/jquery.page.css" type="text/css">
+	<link rel="stylesheet" href="css/jqtransform.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/jquery.page.js"></script>
+    <script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="js/jquery.jqtransform-min.js"></script>
+	<script type="text/javascript" src="laydate/laydate.js"></script>
+    <script src="uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+    <link href="uploadify/uploadify.css" rel="stylesheet" type="text/css" />  
+</head>
+<body>
+    <div class="container yj_index">
+		<div class="row_1 clearfix">
+			<div class="chart_1">
+				<div class="wrap clearfix">
+					<label>待审核</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+				<div class="wrap clearfix">
+					<label>已审核</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+				<div class="wrap clearfix">
+					<label>1级</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+				<div class="wrap clearfix">
+					<label>2级</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+				<div class="wrap clearfix">
+					<label>3级</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+				<div class="wrap clearfix">
+					<label>4级</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+				<div class="wrap clearfix">
+					<label>5级</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+				<div class="wrap clearfix">
+					<label>人工新增</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+				<div class="wrap clearfix">
+					<label>回退</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+			</div>
+			<div class="chart_2">
+				<div class="wrap clearfix">
+					<label>待执行</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+				<div class="wrap clearfix">
+					<label>已执行</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+				<div class="wrap clearfix">
+					<label>已结项</label>
+					<div class="pgrop">
+						<div style="width:20%;"></div>
+					</div>
+					<p>1860</p>
+				</div>
+			</div>
+			<div class="cms">
+				<div class="logo"><p>CMS监测报告</p></div>
+			</div>
+			<div class="btn_b">
+				<a href='javascript:;' class="a1 active">审核派工</a><a href='javascript:;' class="a2">执行结果</a>
+			</div>
+		</div>
+		<div class="row_3 clearfix" style="padding:10px 0px;background-color: #3A414C;">
+			<div class="table_1">
+				<a href='javascript:;' class="ml15">审核回退</a>
+				<a href='javascript:;' class="right">开始派工</a>
+				<a href='javascript:;' class="right mr15">新增预警</a>
+			</div>
+			<div class="table_3">
+				<a href='javascript:;' class="right">结项</a>
+			</div>
+			<div class="table_2">
+				<a href='manaport.html'>管理报告</a>
+				<a href='javascript:;' class="right">提交预警</a>
+			</div>
+		</div>
+		<div class="row_2 clearfix">
+			<div class="table_1">
+                <table class="grid" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td style="width:50px;">&nbsp;</td>
+                            <td>预警时间</td>
+                            <td>区域</td>
+                            <td>风场</td>
+                            <td>机组</td>
+                            <td>隐患点</td>
+                            <td>等级</td>
+                            <td>处理方案</td>
+                            <td>状态</td>
+                            <td>流程</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
+                            <td>2016-01-02 20:33</td>
+                            <td>巴盟</td>
+                            <td>吉木乃</td>
+                            <td>29</td>
+                            <td>发动机温度异常</td>
+                            <td>2级</td>
+                            <td>检查柜体</td>
+                            <td>未处理</td>
+                            <td class="red">待派工</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
+                            <td>2016-01-02 20:33</td>
+                            <td>巴盟</td>
+                            <td>吉木乃</td>
+                            <td>29</td>
+                            <td>发动机温度异常</td>
+                            <td>2级</td>
+                            <td>检查柜体</td>
+                            <td>未处理</td>
+                            <td class="red">待派工</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
+                            <td>2016-01-02 20:33</td>
+                            <td>巴盟</td>
+                            <td>吉木乃</td>
+                            <td>29</td>
+                            <td>发动机温度异常</td>
+                            <td>2级</td>
+                            <td>检查柜体</td>
+                            <td>未处理</td>
+                            <td class="red">待派工</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
+                            <td>2016-01-02 20:33</td>
+                            <td>巴盟</td>
+                            <td>吉木乃</td>
+                            <td>29</td>
+                            <td>发动机温度异常</td>
+                            <td>2级</td>
+                            <td>检查柜体</td>
+                            <td>未处理</td>
+                            <td class="red">待派工</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
+                            <td>2016-01-02 20:33</td>
+                            <td>巴盟</td>
+                            <td>吉木乃</td>
+                            <td>29</td>
+                            <td>发动机温度异常</td>
+                            <td>2级</td>
+                            <td>检查柜体</td>
+                            <td>未处理</td>
+                            <td class="red">待派工</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" value="1" class="chk" name="chk" /></td>
+                            <td>2016-01-02 20:33</td>
+                            <td>巴盟</td>
+                            <td>吉木乃</td>
+                            <td>29</td>
+                            <td>发动机温度异常</td>
+                            <td>2级</td>
+                            <td>检查柜体</td>
+                            <td>未处理</td>
+                            <td class="red">待派工</td>
+                        </tr>
+                    </tbody>
+                </table>
+				<div id="page" class="pt15 page_1"></div>
+			</div>
+			<div class="table_2">
+                <table class="grid" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td>上传时间</td>
+                            <td>状态</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="red">
+                            <td>2016-01-02 20:33</td>
+                            <td>报警</td>
+                        </tr>
+                        <tr class="yellow">
+                            <td>2016-01-02 20:33</td>
+                            <td>预警</td>
+                        </tr>
+                        <tr>
+                            <td>2016-01-02 20:33</td>
+                            <td>正常</td>
+                        </tr>
+                        <tr>
+                            <td>2016-01-02 20:33</td>
+                            <td>正常</td>
+                        </tr>
+                        <tr>
+                            <td>2016-01-02 20:33</td>
+                            <td>正常</td>
+                        </tr>
+                        <tr>
+                            <td>2016-01-02 20:33</td>
+                            <td>正常</td>
+                        </tr>
+                    </tbody>
+                </table>
+				<div id="page" class="pt15 page_2"></div>
+			</div>
+		</div>
+    </div>
+	<div class="dialog yj_form" id="dialog_1">
+        <div class="opacity"></div>
+        <div class="content" style="width:600px;margin-left:-300px;">
+            <a class="close"></a>
+            <h1>审核回退</h1>
+			<form class="form">
+				<dl class="clearfix">
+					<dt>回退理由</dt>
+					<dd><select id="reason" name="reason">
+						<option selected="" value="请选择">请选择</option>
+						<option value="数据不准确">数据不准确</option>
+						<option value="轻微故障，暂不处理">轻微故障，暂不处理</option>
+						<option value="预警过晚，已完成处理">预警过晚，已完成处理</option>
+					</select></dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>备注<dt>
+					<dd><textarea name="remark" id="remark" ></textarea></dd>
+				</dl>
+				<div class="btn">
+					<button type="button" class="cancle" for="dialog_1">取消</button>
+					<button type="button" class="ml15">确认</button>
+				</div>
+			</form>
+        </div>
+    </div>
+	<div class="dialog yj_form" id="dialog_2">
+        <div class="opacity"></div>
+        <div class="content" style="width:600px;margin-left:-300px;">
+            <a class="close"></a>
+            <h1>预警工单</h1>
+			<form class="form">
+				<dl class="clearfix">
+					<dt><i class="red">*</i>预警来源</dt>
+					<dd>
+						<select id="yj_source" name="yj_source">
+							<option selected="" value="请选择">请选择</option>
+							<option value="巡检发现异常">巡检发现异常</option>
+							<option value="生产系统预警">生产系统预警</option>
+							<option value="监测报告预警">监测报告预警</option>
+						</select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>区域名称</dt>
+					<dd>
+                        <select id="yj_source" name="yj_source" disabled>
+                            <option value="巴盟">巴盟</option>
+                        </select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt><i class="red">*</i>风场名称</dt>
+					<dd>
+						<select id="yj_source" name="yj_source">
+							<option value="风场一">风场一</option>
+							<option value="风场二">风场二</option>
+						</select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt><i class="red">*</i>机组名称</dt>
+					<dd>
+						<select id="yj_source" name="yj_source">
+							<option value="A001">A001</option>
+							<option value="A002">A002</option>
+							<option value="A003">A003</option>
+						</select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt><i class="red">*</i>隐患名称</dt>
+					<dd>
+						<select id="yj_source" name="yj_source">
+							<option value="发电机温度异常">发电机温度异常</option>
+						</select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>预警级别</dt>
+					<dd>
+						<select id="yj_source" name="yj_source" disabled>
+							<option value="1级">1级</option>
+						</select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>备注</dt>
+					<dd><textarea name="remark" id="remark" ></textarea></dd>
+				</dl>
+				<div class="btn">
+					<button type="button" class="cancle" for="dialog_2">取消</button>
+					<button type="button" class="ml15">安排派工</button>
+				</div>
+			</form>
+        </div>
+    </div>
+	
+	<div class="dialog yj_form" id="dialog_3">
+        <div class="opacity"></div>
+        <div class="content" style="width:600px;margin-left:-300px;">
+            <a class="close"></a>
+            <h1>派工（故障告知单）</h1>
+			<form class="form">
+				<dl class="clearfix">
+					<dt>工单编号</dt>
+					<dd>
+						<input type="text" class="txt" id="areaName" name="areaName" style="width: 380px;" readonly="true" value="11165542466874（自动生成一条）" />
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>预警时间</dt>
+					<dd>
+                        <input type="text" class="txt" id="pg_yj_time" name="pg_yj_time" style="width: 380px;" value="" />
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>来源</dt>
+					<dd>
+						<select id="yj_source" name="yj_source" disabled>
+							<option value="巡逻发现异常">巡逻发现异常</option>
+						</select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>风场名称</dt>
+					<dd>
+						<select id="yj_source" name="yj_source" disabled>
+							<option value="阿勒泰">阿勒泰</option>
+						</select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>机组名称</dt>
+					<dd>
+						<select id="yj_source" name="yj_source" disabled>
+							<option value="A001">A001</option>
+						</select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>隐患名称</dt>
+					<dd>
+						<select id="yj_source" name="yj_source" disabled>
+							<option value="叶片损伤">叶片损伤</option>
+						</select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>预警级别</dt>
+					<dd>
+						<select id="yj_source" name="yj_source" disabled>
+							<option value="1级">1级</option>
+						</select>
+					</dd>
+				</dl>
+				<dl class="clearfix">
+					<dt>备注</dt>
+					<dd><textarea name="remark" id="remark" ></textarea></dd>
+				</dl>
+				<div class="btn">
+					<button type="button" class="cancle" for="dialog_3">取消</button>
+					<button type="button" class="ml15">提交派工</button>
+				</div>
+			</form>
+        </div>
+    </div>
+
+	<div class="dialog yj_form" id="dialog_4">
+        <div class="opacity"></div>
+        <div class="content" style="width:600px;margin-left:-300px;">
+            <a class="close"></a>
+            <h1>提交大部件监测报告</h1>
+            <form class="form">
+                <dl class="clearfix">
+                    <dt>上传文件</dt>
+                    <dd style="position:relative;">
+                        <input type="text" readonly class="txt" style="width:380px;padding:0px;" />
+						<div class="litpic_span"><button id="litpic" type="button">上传</button></div>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>选择区域</dt>
+                    <dd>
+                        <select id="yj_source" name="yj_source" disabled>
+                            <option value="巴盟">巴盟</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>风场名称</dt>
+                    <dd>
+                        <select id="yj_source" name="yj_source">
+                            <option value="阿勒泰">阿勒泰</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>预警等级</dt>
+                    <dd>
+                        <select id="yj_source" name="yj_source">
+                            <option value="正常">正常</option>
+                            <option value="预警">预警</option>
+                            <option value="报警">报警</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>报告周期</dt>
+                    <dd>
+                        <input type="text" class="txt" id="beginDate" name="beginDate" style="width: 100px;" /> -
+                        <input type="text" class="txt" id="endDate" name="endDate" style="width: 100px;" />
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>备注</dt>
+                    <dd><textarea name="remark" id="remark"></textarea></dd>
+                </dl>
+                <div class="btn">
+                    <button type="button" class="cancle" for="dialog_4">取消</button>
+                    <button type="button" class="ml15">确认</button>
+                </div>
+            </form>
+			<script type="text/javascript">
+                $(function () {
+                    $('#litpic').uploadify({
+                        'swf': 'uploadify/uploadify.swf',
+                        'uploader': window.ApiDomian+'/report/upload.json',
+                        'onUploadError': function (file, errorCode, errorMsg, errorString) {
+                            alert(errorString)
+                        },
+                        'onUploadSuccess': function (file, data, response) {
+                            alert(JSON.stringify(data))
+                        }
+                    });
+                });
+	        </script>
+        </div>
+    </div>
+
+	<div class="dialog gd_detail">
+        <div class="opacity"></div>
+        <div class="content" style="width:1000px;margin-left:-500px;">
+            <a class="close"></a>
+            <h1><span>审核退回</span><span>开始派工</span></h1>
+            <div class="scroll" style="height:750px;overflow:auto;">
+				<div class="wrap">
+					<label>工单编号</label><span>123456789789</span>
+					<label>状态</label><span>未处理</span>
+					<label>流程</label><span class="red">待审核</span>
+					<label>隐患点</label><span>发电机温度异常</span>
+					<label>预警等级</label><span>4级</span>
+				</div>
+				<div class="wrap">
+					<label>区域</label><span>巴盟</span>
+					<label>风电场</label><span>吉木乃</span>
+					<label>机组</label><span>XJJMN002-SW766</span>
+					<label>预警时间</label><span>2016年11月10日 15:22</span>
+				</div>
+				<div class="wrap">
+					<label>处理时间</label><span>2016年11月10日 15:22</span>
+					<label>处理结果</label><span>111213231231346</span>
+					<label>预警准确度</label><span class='x'>&nbsp;<p><a></a><a></a><a></a><a></a></p></span>
+				</div>
+				<div class="wrap">
+					<label>备注</label>
+					<div class="mul_text">
+						<p>2016年11月22日 19:15:12     李晓娟（45554）   现场巡检时发现异常情况，建立一条工单有待跟踪</p>
+					</div>
+				</div>
+				<div class="wrap">
+					<label>系统推荐处理方案</label>
+					<div class="mul_text">
+						
+					</div>
+				</div>
+				<div class="wrap">
+					<label>推荐专家</label>
+					<div class="zj clearfix">
+						<div class="item">
+							<img src="images/u1421.png" />
+							<h2>李长峰李长峰李长峰李长峰李长峰李长峰</h2>
+							<h3>金风科技</h3>
+							<p>十年维护经验，擅长处理大部件发电机温度异常、水流量低等故障。</p>
+						</div>
+						<div class="item">
+							<img src="images/u1421.png" />
+							<h2>李长峰</h2>
+							<h3>金风科技</h3>
+							<p>十年维护经验，擅长处理大部件发电机温度异常、水流量低等故障。</p>
+						</div>
+						<div class="item">
+							<img src="images/u1421.png" />
+							<h2>李长峰</h2>
+							<h3>金风科技</h3>
+							<p>十年维护经验，擅长处理大部件发电机温度异常、水流量低等故障。</p>
+						</div>
+					</div>
+				</div>
+				<div class="wrap">
+					<label>流程记录</label>
+					<div class="liucheng">
+						<div class="line"><i></i></div>
+						<div class="wrap">
+							<i></i>
+							<label>2016年11月10日 15:22</label>
+							<label class="yellow">金风 - 生成预警工单</label>
+						</div>
+						<div class="wrap">
+							<i></i>
+							<label>2016年11月10日 15:22</label>
+							<label class="yellow">金风 - 生成预警工单</label>
+							<div class="mul_text">
+								<p>2016年11月22日 19:15:12     李晓娟（45554）   现场巡检时发现异常情况，建立一条工单有待跟踪</p>
+								<p>2016年11月22日 19:15:12     李晓娟（45554）   现场巡检时发现异常情况，建立一条工单有待跟踪</p>
+								<p>2016年11月22日 19:15:12     李晓娟（45554）   现场巡检时发现异常情况，建立一条工单有待跟踪</p>
+							</div>
+						</div>
+						<div class="wrap">
+							<i></i>
+							<label>2016年11月10日 15:22</label>
+							<label>审核通过</label>
+						</div>
+						<div class="wrap">
+							<i></i>
+							<label>2016年11月10日 15:22</label>
+							<label>审核通过</label>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+    <div class="dialog" id="jx_detail">
+        <div class="opacity"></div>
+        <div class="content" style="width:1000px;margin-left:-500px;">
+            <a class="close"></a>
+            <h1></h1>
+            <div class="scroll" style="height:750px;overflow:auto;padding-bottom:30px;">
+                <table class="grid" border="0" cellpadding="0" cellspacing="0" style="margin-top:5px;border:0px;">
+                    <thead>
+                        <tr>
+                            <td>预警时间</td>
+                            <td>区域</td>
+                            <td>风场</td>
+                            <td>机组</td>
+                            <td>隐患点</td>
+                            <td>等级</td>
+                            <td>处理方案</td>
+                            <td>状态</td>
+                            <td>流程</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2016-01-02 20:33</td>
+                            <td>巴盟</td>
+                            <td>吉木乃</td>
+                            <td>29</td>
+                            <td>发动机温度异常</td>
+                            <td>2级</td>
+                            <td>检查柜体</td>
+                            <td>未处理</td>
+                            <td class="red">待派工</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h1 style="text-align:center;margin-top:15px;">执行结果查看</h1>
+                <div class="clearfix mt15" style="padding:0px 20px">
+                    <div id="scroll_h" style="overflow:auto;">
+                        <div style="white-space:nowrap;" class="clearfix">
+                            <div class="left_result">
+                                <h1>执行结果记录单001</h1>
+                                <dl class="clearfix">
+                                    <dt>执行单ID</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>创建时间</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>创建人</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>处理人</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>处理时间</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>备注</dt>
+                                    <dd><textarea name="remark" id="remark"></textarea></dd>
+                                </dl>
+                                <dl class="clearfix" style="margin-top:0px;">
+                                    <dt>是否更换部件</dt>
+                                </dl>
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td>备件名称</td>
+                                        <td>数量</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="left_result">
+                                <h1>执行结果记录单001</h1>
+                                <dl class="clearfix">
+                                    <dt>执行单ID</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>创建时间</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>创建人</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>处理人</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>处理时间</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>备注</dt>
+                                    <dd><textarea name="remark" id="remark"></textarea></dd>
+                                </dl>
+                                <dl class="clearfix" style="margin-top:0px;">
+                                    <dt>是否更换部件</dt>
+                                </dl>
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td>备件名称</td>
+                                        <td>数量</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="left_result">
+                                <h1>执行结果记录单001</h1>
+                                <dl class="clearfix">
+                                    <dt>执行单ID</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>创建时间</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>创建人</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>处理人</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>处理时间</dt>
+                                    <dd>
+                                        <input type="text" class="txt" id="areaName" name="areaName" readonly>
+                                    </dd>
+                                </dl>
+                                <dl class="clearfix">
+                                    <dt>备注</dt>
+                                    <dd><textarea name="remark" id="remark"></textarea></dd>
+                                </dl>
+                                <dl class="clearfix" style="margin-top:0px;">
+                                    <dt>是否更换部件</dt>
+                                </dl>
+                                <table cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td>备件名称</td>
+                                        <td>数量</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d_zql clearfix">
+                    <label>预警准确率</label>
+                    <p><span><a></a><a></a><a></a><a></a><a></a></span></p>
+                </div>
+                <h1 style="text-align:center;margin:15px 20px 0;">结项备注</h1>
+                <div style="margin:0px 20px;"><textarea name="jx_remark" id="jx_remark"></textarea></div>
+
+                <div class="btn">
+                    <button type="button" class="cancle" for="jx_detail">关闭</button>
+                    <button type="button" class="ml15" onclick="$('.jx_detail_info').show(); $('#jx_detail').hide();">结项</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog jx_detail_info" id="jx_detail">
+        <div class="opacity"></div>
+        <div class="content" style="width:1000px;margin-left:-500px;">
+            <a class="close"></a>
+            <h1>结项</h1>
+            <div class="d_zql clearfix">
+                <label>预警准确率</label>
+                <p><span><a></a><a></a><a></a><a></a><a></a></span></p>
+            </div>
+            <h1 style="text-align:center;margin:15px 20px 0;">结项备注</h1>
+            <div style="margin:0px 20px;"><textarea name="jx_remark" id="jx_remark"></textarea></div>
+
+            <div class="btn">
+                <button type="button" class="cancle" onclick="$('.jx_detail_info').hide()">关闭</button>
+                <button type="button" class="ml15">结项</button>
+            </div>
+        </div>
+    </div>
+	<script>
+	var start = {
+	  elem: '#beginDate',
+	  format: 'YYYY-MM-DD',
+	  choose: function(datas){
+		 end.min = datas; //开始日选好后，重置结束日的最小日期
+		 end.start = datas //将结束日的初始值设定为开始日
+	  }
+	};
+	var end = {
+	  elem: '#endDate',
+	  format: 'YYYY-MM-DD',
+	  choose: function(datas){
+		start.max = datas; //结束日选好后，重置开始日的最大日期
+	  }
+	};
+	laydate(start);
+	laydate(end);
+
+	laydate({
+	    elem: '#pg_yj_time',
+	    format: 'YYYY-MM-DD hh:mm',
+	    istime: true
+	});
+
+	$(function () {
+
+		$(".row_1 .btn_b a").click(function(){
+			$(this).addClass("active").siblings().removeClass("active");
+			if($(this).hasClass('a1')){
+				$(".chart_1").show();
+				$(".chart_2").hide();
+				$(".row_3 .table_1").show();
+				$(".row_3 .table_3").hide();
+			}else{
+				$(".chart_2").show();
+				$(".chart_1").hide();
+				$(".row_3 .table_1").hide();
+				$(".row_3 .table_3").show();
+			}
+		})
+			
+		$(".row_3 .table_1 a:eq(0)").click(function(){
+			$("#dialog_1").show();
+			$("#dialog_1 .form").Validform({
+				tiptype:function(msg,o,cssctl){
+				},
+				usePlugin:{
+					jqtransform:{
+						//会在当前表单下查找这些元素;
+						selector:"select"	
+					}
+				}
+			});
+		})
+		
+		$(".row_3 .table_1 a:eq(2)").click(function(){
+			$("#dialog_2").show();
+			$("#dialog_2 .form").Validform({
+				tiptype:function(msg,o,cssctl){
+				},
+				usePlugin:{
+					jqtransform:{
+						//会在当前表单下查找这些元素;
+						selector:"select"	
+					}
+				}
+			});
+		})
+		$(".row_3 .table_1 a:eq(1)").click(function(){
+			$("#dialog_3").show();
+
+			var clickDate = new Date();
+			//设定预警时间
+			$("#pg_yj_time").val(clickDate.getFullYear() + "-" + (clickDate.getMonth() + 1) + "-" + clickDate.getDate() + " " + (clickDate.getHours() < 10 ? "0" + clickDate.getHours() : clickDate.getHours()) + ":" + (clickDate.getMinutes() < 10 ? "0" + clickDate.getMinutes() : clickDate.getMinutes()));			    
+
+			$("#dialog_3 .form").Validform({
+				tiptype:function(msg,o,cssctl){
+				},
+				usePlugin:{
+					jqtransform:{
+						//会在当前表单下查找这些元素;
+						selector:"select"	
+					}
+				}
+			});
+		})
+		$(".row_3 .table_2 a:eq(1)").click(function () {
+			$("#dialog_4").show();
+			$("#dialog_4 .form").Validform({
+			    tiptype: function (msg, o, cssctl) {
+			    },
+			    usePlugin: {
+			        jqtransform: {
+			            //会在当前表单下查找这些元素;
+			            selector: "select"
+			        }
+			    }
+			});
+		})
+		$(".row_3 .table_3 a").click(function () {
+			$("#scroll_h .clearfix:eq(0)").css("width", $("#scroll_h .clearfix > div").length * $("#scroll_h .clearfix > div").width() + $("#scroll_h .clearfix > div").length*10)
+			$("#jx_detail").show();
+		})
+
+		$(".page_1").Page({
+				totalPages: 9,//分页总数
+				liNums: 7,//分页的数字按钮数(建议取奇数)
+				activeClass: 'activP', //active 类样式定义
+				callBack: function (page) {
+				//alert(page)
+				}
+		});
+		$(".page_2").Page({
+				totalPages: 5,//分页总数
+				liNums: 3,//分页的数字按钮数(建议取奇数)
+				activeClass: 'activS', //active 类样式定义
+				prv:'<<',
+				next:'>>',
+				hasFirstPage:false,
+				hasLastPage:false,
+				callBack : function(page){
+				//alert(page)
+				}
+		});
+
+		$(".grid tr").on("dblclick",function(event){
+			var _id = $(this).find("input[type='checkbox']").val();
+				
+			$(".gd_detail").show();
+			event.stopPropagation();
+		})
+
+		$(".jx_detail_info .d_zql a").click(function () {
+			$(".jx_detail_info .d_zql a").removeClass("active");
+			$(".jx_detail_info .d_zql a").slice(0, $(this).index() + 1).addClass("active");
+		})
+
+		if (getQueryString('op') == '2') {
+		    $(".row_1 .btn_b a:eq(1)").trigger("click");
+		}
+	})
+	</script>
+</body>
+</html>

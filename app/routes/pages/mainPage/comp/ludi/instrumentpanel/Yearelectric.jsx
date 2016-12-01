@@ -14,8 +14,8 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:280,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                backgroundColor: '#262a32',
+                plotBackgroundColor: '#262a32',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,

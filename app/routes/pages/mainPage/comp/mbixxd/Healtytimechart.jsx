@@ -20,7 +20,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                 
             },
             title: {
                 text: '',
@@ -38,9 +38,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"16px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -58,7 +61,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30
+                    pointWidth: 30,
+                    borderRadius: 7,
                 }, series: {
                     cursor: 'pointer',
                     events: {
@@ -82,14 +86,32 @@ let Component = React.createClass({
                 categories:monthT,
             },
             yAxis: [{
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                }
             }
         }, {
+            labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text: '',
                  align:'high',

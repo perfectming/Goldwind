@@ -47,9 +47,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 

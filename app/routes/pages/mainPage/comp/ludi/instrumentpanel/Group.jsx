@@ -26,7 +26,7 @@ let Component = React.createClass({
            					<div className={styles.text1}>收益:{data.firstfloor[0].profit}万·投资:{data.firstfloor[0].investment}万</div>
            					<div className={styles.sectionBox}>
            						<span className={styles.numBox}><p style={{color:'#33BAC0'}}>{((data.firstfloor[0].profit/data.firstfloor[0].investment)*100).toFixed(1)}%</p>收益率</span>
-           						<Pie2 color={['#33BAC0','#33545C']} num={[23,30]}></Pie2>
+           						<Pie2 color={['#33BAC0','#33545C']} num={[100,200]}></Pie2>
            					</div>
            				</div>
            				<div className={styles.section}>

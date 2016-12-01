@@ -35,9 +35,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"16px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -79,21 +82,42 @@ let Component = React.createClass({
                 categories:areaName,
             },
             yAxis:
-                [{
+                [{labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
                     title:{
                         text:'KWH',
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 36,
+                        x: 40,
+                        style:{
+                            fontSize:'14px',
+                            color:'#fff'
+                        }
                     }
                 }, {
+                    labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text: 'PBA',
                 align:'high',
                 rotation:'0',
                  y: -17,
                 x: 136,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
             },
             opposite: true
         }],
@@ -101,12 +125,14 @@ let Component = React.createClass({
                 name: '实际发电量',
                 type: 'column',
                 data: areaRecordProfit,
+                borderRadius: 7,
             },
             {
                 name: '四',
                 type: 'column',
                 data: areaRecordCosts,
-                stack:'first'
+                stack:'first',
+                borderRadius: 2,
             },
             {
                 name: '大',
@@ -125,6 +151,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',
+                borderRadius: 2,
             },
                 {
                     name: 'TBA',
