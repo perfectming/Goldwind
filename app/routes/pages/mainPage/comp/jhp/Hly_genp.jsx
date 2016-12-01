@@ -4,13 +4,15 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Healthy-data');
-
+let text0 = data.data.line_date;
+let winds = data.data.yearelectric[0].wind;
+let win  = winds[0].plan;
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let {widths,barRotime,barlopowers,barlopowerp,text,height} = this.props;
+        let {w0="一区域",w10="风场1",mon="一月份",widths,barRotime,barlopowers,barlopowerp,text,height} = this.props;
 
 
         let configPie = {
@@ -32,7 +34,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '',
+                text: mon+w0+w10+"各风机PBA",
                 align:'left',
                 x : "0",
                 style:{
@@ -45,6 +47,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -80,7 +85,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth:20
+                    pointWidth:20,
+                    borderRadius: 4,
                 }
             },
             xAxis: {
@@ -101,12 +107,18 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#898688',
                 title: {
                     text:'kWh',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
                 },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
@@ -139,12 +151,18 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+        w10 : state.vars.w11,
+        mon : state.vars.mon,
+        windplan : state.vars.windplan,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('w11',w10 ));
         },
     };
 };

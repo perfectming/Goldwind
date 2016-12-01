@@ -65,6 +65,8 @@ let Component = React.createClass({
 
             <div className={styles.box}>
 
+                <div className={styles.light} id="light"> </div>
+
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}   id="boxhidden">
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
@@ -73,7 +75,7 @@ let Component = React.createClass({
                             </div>
                         <span onClick={()=>hideit()}>×</span>
                     </div>
-                    <Hly_pbas height={320} widths={1600} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
+                    <Hly_pbas height={500} widths={1620} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
                               barRotimes={x6} barLoPowerValue={x7}
                               barLoPowerValues={x7} barLdpowerValue={x7}></Hly_pbas>
 
@@ -123,9 +125,9 @@ let Component = React.createClass({
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
                         <div className={styles.rbox30}>
                             <div></div>
-                            <span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机PBA"}</span>
+                            <span>{"各风机PBA"}</span>
                         </div>
-                        <div className={styles.rbox3}>
+                        <div className={styles.rbox33}>
 
                             <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
                             <button className={styles.button} onClick={() => back(sort0)}>后10</button>
@@ -168,6 +170,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor: (value, key) => {
+            dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind', value.plan));
             dispatch(actions.setVars('winds', value.actrul));
@@ -204,10 +207,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('arr2', x2))
         },
         more: () => {
+            $("#light").show();
             $("#boxhidden").show();
         },
         hideit: () =>{
             $("#boxhidden").hide();
+            $("#light").hide();
         }
     };
 };

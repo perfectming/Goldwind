@@ -25,6 +25,28 @@ let Component = React.createClass({
         }
         return (
             <div>
+                <div className={styles.inquireBox}>
+                    {
+                        tabaleData.as.comps.map((value, key,valueName)=> {
+                            if (value.type === 'input') {
+                                return (
+                                    <div className={styles.inputBox} key={key}>
+                                        <span>{tabaleData.as.comps[key].valueName}</span>
+                                        <input ref={'textContent'+key} placeholder={value.content}
+                                               onChange={(e)=>inputOnChange(e.target.value, value.id)}
+                                               onFocus={()=>onFocus} style={{width:value.width}}/>
+                                    </div>
+                                )
+                            }else if (value.type === 'button') {
+                                return (
+                                    <div className={styles.btnBox} key={key}>
+                                        <button onClick={this.buttonAction}>{value.title}</button>
+                                    </div>
+                                )
+                            }
+                        })
+                    }
+                </div>
                 <div className={styles.btn}>
                     <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content))}/>
                     <img src={refresh}/>

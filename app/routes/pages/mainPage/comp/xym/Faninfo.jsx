@@ -228,7 +228,7 @@ let Component = React.createClass({
 					</div>
 					<div className={`${styles.infoBox7} ${styles.infofL}`}>
 						<Title></Title>
-						<div className={styles.titlebox}><span>风机描述</span><span>风机状态</span><span>状态时长</span></div>
+						<div className={styles.titlebox}><span>风机报警时间</span><span>报警描述</span><span>等级</span><span>报警类型</span><span>报警码</span></div>
 						<div className={styles.statusquery}>
 							{
 								fmvalue.DevStatusQuery.Value.map((value, key)=>{
@@ -236,6 +236,8 @@ let Component = React.createClass({
 											<div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
 												<span>{(value.StatusDate).slice(0,-4)}</span>
 												<span>{value.StatusDescr}</span>
+												<span>{value.StatusTime}</span>
+												<span>{value.StatusTime}</span>
 												<span>{value.StatusTime}</span>
 											</div>
 										)
@@ -419,25 +421,19 @@ const mapDispatchToProps = (dispatch) => {
         		height:WGENTemp+50,
         		duration: "slow",
         	}, 1000 )
-//   $.ajax({
-//    type: 'GET',    
-//    url:'http://10.9.96.148:8080/soam/user/getPower?username=123&password=123',    
-//    data:{name:'xuyuanming'},    
-//    dataType:"jsonp",    
-//    // jsonp:"callback",    
-//    // jsonpCallback:"data",    
-//    timeout:30000,    
-//    // dataFilter:function(json){    
-//    //     console.log("jsonp.filter:"+json);    
-//    //     return json;    
-//    // },    
-//    success:function(json){    
-//        console.log(json);    
-//    },    
-//    // error:function(XMLHttpRequest,textStatus,errorThrown){    
-//    //     console.log("jsonp.error:"+textStatus);    
-//    // }    
-// });
+  $.ajax({
+   type: 'post',    
+   url:'http://54.223.200.134/System/data.aspx?mdid=Model&ScId=2015032011&EnId=654208001&EnKey=Screen&PkId=&ModelKey=6C5002D3-1566-414a-8834-5077940C78E1&dhs=UISys&AspxAutoDetectCookieSupport=1',    
+   data:{name:'xuyuanming'},    
+   dataType:"json",
+    
+   timeout:3000,    
+   
+   success:function(data){    
+       console.log(data.data);    
+   },    
+   
+});
 				// function jsonp(data){console.log(data)};
 // 				$.jsonp({  
 //    url:'http://10.9.0.9:8081/gwbi/elec/getPower',  

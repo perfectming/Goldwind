@@ -58,7 +58,13 @@
 }input{
   
  }
-
+.newBox{
+  overflow: hidden;
+  bBox{
+    height: 300px;
+    width: 300px;
+  }
+}
   .tableBox {
 
     overflow: hidden;
@@ -97,9 +103,9 @@
         }
         input{
           background: #30343f;
-          border:6px solid #fff;
           &:hover{
-            border-radius: 15px;
+            border:6px solid #1b1e28;
+            line-height:36px;
           }
         }
         .tableLineNum {
@@ -119,10 +125,10 @@
         }
         .tableContentItem {
           float: left;
-          padding: 10px 0 10px;
           overflow: hidden;
           text-align: center;
           height: 40px;
+          line-height:40px;
           border: none;
           img{
             height:20px;
@@ -131,9 +137,9 @@
         }
         input{
           background: #272b34;
-          border:6px solid #fff;
           &:hover{
-            border-radius: 15px;
+            border:6px solid #1b1e28;
+            line-height:36px;
           }
         }
         .tableLineNum {
