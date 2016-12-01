@@ -47,6 +47,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -93,6 +96,7 @@ let Component = React.createClass({
 
 
                 column: {
+                    borderRadius: 4,
                     pointPadding: 0.2,
                     borderWidth: 0,
                     pointWidth:20
@@ -116,6 +120,9 @@ let Component = React.createClass({
                // lineWidth: 1,
                // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#898688',
+
                 title: {
                     text:'',
                     align:'high',
@@ -136,6 +143,7 @@ let Component = React.createClass({
                 name: '实际健康度',
                 type: 'column',
                 data: windplan,
+
             }
             // ,{
             //     name:'停机时间',

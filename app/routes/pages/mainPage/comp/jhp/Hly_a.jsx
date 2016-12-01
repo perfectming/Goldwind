@@ -53,6 +53,9 @@ let Component = React.createClass({
 
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -98,7 +101,7 @@ let Component = React.createClass({
                 },
                 column: {
                     stacking: 'normal',
-
+                    borderRadius: 7,
                     borderWidth: 0,
 
                 }
@@ -120,6 +123,8 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#898688',
                 title: {
                     text:'小时',
                     align:'high',
