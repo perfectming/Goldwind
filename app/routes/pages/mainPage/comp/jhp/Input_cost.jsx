@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Inputc.scss';
+
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
 import del from '../../img/icon/tabDel.png';
@@ -30,9 +31,12 @@ let Component = React.createClass({
         this.props.init(comp);
     },
     render() {
-        let {deleData,addData,table, changeTableItem1} = this.props;
+        let {deleData,addData,table, changeTableItem1,page=1,nextpage,lastpage,theone,thelast} = this.props;
         let newData=[];
         let num=0;
+        let pagingOptions = {
+            showNumber: 3
+        }
         for(let i=0;i<comp.data.header.length;i++){
             newData.push('');
         }
@@ -52,7 +56,7 @@ let Component = React.createClass({
                                 comp.data.header.map((value, key)=> {
                                     return (
                                         <div className={styles.tableHeaderItem}
-                                             style={{width:(100/(comp.data.header.length+2))+"%"}} key={key}>{value}</div>
+                                             style={{width:(100/(comp.data.header.length+1))+"%"}} key={key}>{value}</div>
                                     )
                                 })
                             }
@@ -61,6 +65,7 @@ let Component = React.createClass({
                             {
                                 comp.data.content.map((value, key)=> {
                                     num++;
+                                    if(16*(page-1)<=key&&key<(16*(page-1)+16)){
                                     return (
                                         <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                             <input className={styles.tableContentItem}
@@ -72,7 +77,7 @@ let Component = React.createClass({
 
                                                     return (
                                                         <input className={styles.tableContentItem}
-                                                               style={{width:(100/(comp.data.header.length+2))+"%"}}
+                                                               style={{width:(100/(comp.data.header.length+1))+"%"}}
                                                                key={keyC} contentEditable="true"
                                                                onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
                                                                value={valueC}/>
@@ -86,16 +91,30 @@ let Component = React.createClass({
                                                 <img src={del} onClick={(e)=>deleData(key)}/>
                                             </div>
                                         </div>
-                                    )
+                                    )}
                                 })
                             }
                         </div>
 
 
 
+
+
+
                     </div>
+
+
+
                 </div>
+                <div className={styles.pageplus}>
+                    <button onClick={()=>theone(page)}>首页</button>
+                    <button onClick={()=>lastpage(page)}>上一页</button>
+                    <button onClick={()=>nextpage(page)}>下一页</button>
+                    <button onClick={()=>thelast(page)}>末页</button>
+                </div>
+
             </div>
+
         );
     }
 });
@@ -104,6 +123,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
+        page: state.vars.page1,
     }
 };
 
@@ -119,14 +139,31 @@ const mapDispatchToProps = (dispatch) => {
         },
         addData:(i) => {
             let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.content.push(i);
+            tableV.data.content.push(i.splice(0,6));
             dispatch(actions.setObjs('tableContent', tableV));
         },
         deleData:(j) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.data.content.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
-        }
+        },
+        lastpage:(page)=>{
+            page>1 ? page--:page;
+            dispatch(actions.setVars('page1', page));
+        },
+        nextpage:(page)=>{
+            (page<(comp.data.content.length/16)) ? page++:page;
+            dispatch(actions.setVars('page1', page));
+
+        },
+        theone :(page)=>{
+            page=1;
+            dispatch(actions.setVars('page1', page));
+        },
+        thelast :(page)=>{
+            page=comp.data.content.length/16;
+            dispatch(actions.setVars('page1', page));
+        },
     };
 };
 

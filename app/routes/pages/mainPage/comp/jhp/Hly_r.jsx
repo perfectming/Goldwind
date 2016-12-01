@@ -124,11 +124,15 @@ let Component = React.createClass({
                 gridLineColor: '#898688',
 
                 title: {
-                    text:'',
+                    text:'kW',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
                 },
                 labels: {
                     title:'kW',

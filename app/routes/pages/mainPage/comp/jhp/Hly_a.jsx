@@ -101,7 +101,7 @@ let Component = React.createClass({
                 },
                 column: {
                     stacking: 'normal',
-                    borderRadius: 7,
+
                     borderWidth: 0,
 
                 }
@@ -155,7 +155,8 @@ let Component = React.createClass({
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: barLoPowerValues
+                data: barLoPowerValues,
+                borderRadius: 2,
             },
                 {
                     name: '理论发电量',
@@ -163,7 +164,8 @@ let Component = React.createClass({
                     color:'#A2D04D',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+                    borderRadius: 2,
                 },
                 {
                     name: '理论发电量',
@@ -184,7 +186,8 @@ let Component = React.createClass({
                     color:'#FF6124',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+
                 },
                 {
                     name: 'PBA',
