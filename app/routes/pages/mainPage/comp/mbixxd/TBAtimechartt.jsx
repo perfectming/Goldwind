@@ -24,7 +24,6 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
             },
             title: {
                 text: '',
@@ -44,9 +43,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -67,6 +69,7 @@ let Component = React.createClass({
                     pointPadding: 10,
                     borderWidth: 1,
                     pointWidth: 50,
+                    borderRadius: 4
 
                 }, series: {
                     cursor: 'pointer',
@@ -90,20 +93,28 @@ let Component = React.createClass({
                 },
                 categories:areaPlan,
             },
-            yAxis: [{
-            title: {
+           yAxis:{
+             title: {
                  text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                 style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                 },
+
+                 },
+                 labels:{
+                    title:'100%',
+                    y: 10,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
             }
-        }, {
-            title: {
-                text: ''
-            },
-            opposite: true
-        }],
+        },
             //几条数据
             series: [{
                 name: '实际运行时间',

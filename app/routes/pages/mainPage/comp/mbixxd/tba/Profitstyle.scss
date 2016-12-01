@@ -1,6 +1,62 @@
 .box{
     overflow:hidden;
     padding-bottom:10px;
+    position:relative;
+    .boxcover{
+    position:fixed;
+    height:100%;
+    width:100%;
+    z-index:1200;
+    background:black;
+    display:none;
+    opacity:0.6;
+    }
+    .more:hover{
+     box-shadow:0 0 15px #fff;
+    }
+    .more{
+    background:#21242a;
+    position:absolute;
+    z-index:1600;
+    width:98%;
+    top:50%;
+    left:49%;
+    overflow:hidden;
+    transform:translate(-50%,-50%);
+    box-sizing:border-box;
+    display:none;
+    .moretitle{
+    width:100%;
+    height:60px;
+    background:#21242a;
+    position:relative;
+    z-index:2000;
+    height:60px;
+    div{
+    display:inline-block;
+    font-size:16px;
+    float:right;
+    line-height:60px;
+    cursor:pointer;
+    margin-right:50px;
+       color:#fff;
+    }
+    p{
+    position:absolute;
+    top:18px;
+    left:7%;
+    font-size:16px;
+    color:#fff;
+    }
+    img{
+    position:absolute;
+    top:22px;
+    left:5%;
+    height:16px;
+    width:16px;
+    }
+    }
+    }
     .monthbox{
     width: 100%;
     height: 80px;
@@ -13,9 +69,8 @@
     background: linear-gradient(to bottom,#242a32 ,#1f2025);
     li{
      float:left;
-     font-size:20px;
+     font-size:16px;
      font-family: '微软雅黑';
-     color:white;
      height:35px;
      line-height:33px;
      text-align:center;
@@ -24,11 +79,6 @@
      margin:25px 10px;
      font-weight:700;
      cursor:pointer;
-      &:hover{
-                background:#20FEFF;
-     color:black;
-    box-shadow:0px 0px 10px  #20FEFF;
-            }
      }
      li:last-child{
      color: #20FEFF;
@@ -47,20 +97,18 @@
      li:nth-last-child(2){
      
      }
-      li:last-child:hover{
-      background:#156e74;
-      }
+      
     }
   .bgc{
     position:absolute;
     height:40px;
     width:40px;
     top:4px;
-    left:46px;
+    left:69px;
     z-index:5;
     img{
-    height:40px;
-    width:40px
+    height:16px;
+    width:16px
   }
   }
    .covers{
@@ -74,14 +122,13 @@
             height:390px;
            margin:0 auto;
             margin-bottom: 12px;
-            border-radius:10px;
             padding-top:20px;
       background:#282F37,
            }
            .titww{
     color:#fff;
       position:absolute;
-        font-size:25px;
+        font-size:16px;
         top:4px;
         left:86px;
         font-weight:700;
@@ -95,16 +142,14 @@
        width: 48%;
        margin-left:10px;
        height: 400px;
-       border-radius:10px;
     }
      .bigbox{
      float:right;
     height:390px;
-    width:49%;
-    margin-right:15px;
+    width:48.5%;
+    margin-right:18px;
     border:1px solid #282F37;
     position:relative;
-    border-radius:10px;
     background-color: #282F37;
     .coverbox{
       margin-top:50px;
@@ -113,9 +158,9 @@
     .tik{
       color:#fff;
       position:absolute;
-      font-size:25px;
+      font-size:16px;
       top:25px;
-      left:100px;
+      left:93px;
       font-weight:700;
       line-height:auto
     }
@@ -124,13 +169,13 @@
       width:50px;
       height:30px;
       position:absolute;
-      top:25px;
-      left:50px;
+      top:20px;
+      left:33px;
       text-align:center;
       line-height:30px;
       img{
-        height:40px;
-        width:40px;
+        height:16px;
+        width:16px;
       }
     }
   }
@@ -155,8 +200,8 @@
       height:30px;
       line-height:20px;
       text-align:center;
-      font-size:20px;
-      border-radius:10px;
+      font-size:16px;
+      border-radius:15px;
       font-family:'微软雅黑';
       margin-left:12px;
       background-color:white;
@@ -183,15 +228,22 @@
     height:60px;
     line-height:60px;
       button{
-      width:80px;
-      height:35px;
+      width:70px;
+      height:30px;
       line-height:20px;
       text-align:center;
-      font-size:20px;
-      border-radius:10px;
+      font-size:16px;
+      border-radius:15px;
       font-family:'微软雅黑';
       margin-left:12px;
       background-color:white;
       }
     }
+     .red{
+    background:#20FEFF;
+    color:black;
+  }
+  .green{
+    color:white;
+  }
 }

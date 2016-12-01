@@ -24,7 +24,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+               
             },
             title: {
                 text: '',
@@ -44,9 +44,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -66,6 +69,7 @@ let Component = React.createClass({
                     pointPadding: 10,
                     borderWidth: 1,
                     pointWidth: 50,
+                    borderRadius: 4,
 
                 }, series: {
                     cursor: 'pointer',
@@ -91,40 +95,63 @@ let Component = React.createClass({
                 categories:areaPlan,
             },
            yAxis: [{
+            labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                }
             }
         }, {
+            labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text: '',
                  align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    fontSize:'14px',
+
+                    color:'#fff'
+                }
 
             },
             opposite: true
         }],
             //几条数据
             series: [{
-                name: '实际运行时间',
+                name: '实际发电量',
                 type: 'column',
                 data: areaPlanDay,
                 color:'#64DC83',
                 pointWidth: 15,
             },
             {
-            	name: '停机时间',
+            	name: '理论发电量',
                 type: 'column',
                 data:areaPlanDayT,
                 color:'#ccc',
                 pointWidth: 15,
             },{
-                    name: 'TBA',
+                    name: 'PBA',
                     type: 'line',
                     data:areaPlanDayT,
                     color:'blue',

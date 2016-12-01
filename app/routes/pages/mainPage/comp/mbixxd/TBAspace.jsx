@@ -7,17 +7,38 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
+let machine=data.machine;
+let x0=[];
+let x1=[];
+let x2=[];
+let x3=[];
+let windFF=data.windFF;
+ let fanCost=data.fanCost;
+ let fanProfitQ=data.fanProfitQ;
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
     render() {
+       
+        let{actbt=0,changpage,wind,windP,gogogo,back,machinee,more,close}=this.props;
         return (
+           
             <div className={styles.box}>
+             <div className={styles.boxcover} id='boxcover'></div>
+             <div className={styles.more} id="sss">
+                <div className={styles.moretitle}>
+                <img src={icono}/>
+                <p>11月份各风机PBA</p>
+                <div onClick={()=>close()}>x</div>
+                </div>
+            <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP} width={1750} height={500}></TBAspacechart>
+
+             </div>
                 <ul className={styles.monthbox}>
                     {
-                        month.map((value,key)=>{
-                            return(<li key={key}>{value}</li>)
+                        data.wind.map((value,key)=>{
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
                         })
                     }
                 </ul>
@@ -25,7 +46,7 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <TBAspacechart></TBAspacechart>
+                                <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP} height={700}></TBAspacechart>
                             </div>
                         </div>
                     </div>
@@ -37,12 +58,10 @@ let Component = React.createClass({
                     </div>
 
                     <div className={styles.buttons}>
-                        {
-                            button.map((value,key)=>{
-                                return(<button key={key}>{value}</button>)
-                            })
-                        }
-                    </div>
+                      <button onClick={()=>gogogo(windFF)} > 前10</button>
+                      <button onClick={()=>back(wind)}>后10</button>
+                      <button  onClick={()=>more()}>更多</button>
+                   </div>
                 </div>
             </div>
 
@@ -54,7 +73,12 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+         actbt:state.vars.actbt,
+         wind:state.vars.wind,
+         windP:state.vars.windP,
+         machinee:state.vars.machinee,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -65,6 +89,48 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+         changpage :(value,key)=>{
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('wind',value.plan));
+            dispatch(actions.setVars('windP',value.actrul));
+        },
+         gogogo:(wind)=>{
+            (function(){
+                windFF.sort(function(a,b){
+                    return b.plan - a.plan;
+                })
+                for(var i=0;i<12;i++){
+                    x0[i]=windFF[i].name;
+                    x1[i]=windFF[i].plan;
+                }
+            })()
+              dispatch(actions.setVars('machinee', x0));
+              dispatch(actions.setVars('windP',x1))
+
+        },
+       back:(wind)=>{
+            (function(){
+                windFF.sort(function(a,b){
+                    return a.plan - b.plan;
+                })
+                for(var i=0;i<12;i++){
+                    x2[i]=windFF[i].name;
+                    x3[i]=windFF[i].plan;
+                }
+            })()
+              dispatch(actions.setVars('machinee', x2));
+              dispatch(actions.setVars('windP',x3))
+
+        },
+         more:()=>{
+             $("#sss").show();
+             $('#boxcover').show();
+             // $('.box').css('opacity',".5")
+        },
+        close:()=>{
+            $("#sss").hide();
+              $('#boxcover').hide();
+        }
     };
 };
 

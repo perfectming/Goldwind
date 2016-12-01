@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import del from '../../img/icon/tabDel.png';
 import add from '../../img/icon/tabAdd.png';
 var actions = require('redux/actions');
-
 import styles from './Ms.scss';
 var {getState} = require('../../../../../redux/store');
 
@@ -64,10 +63,13 @@ let Component = React.createClass({
                         <img src={refresh}/>
                         <img src={add} onClick={()=>addData(newData)}/>
                     </div>
+                <div className={styles.newBox}>
+
+                </div>
                     <div className={styles.tableBox}>
                         <div className={styles.tableHeaderBox}>
                             <div className={styles.tableHeaderItem}
-                                 style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}>序号</div>
+                                 style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}>角色编号</div>
                             {
                                 tabaleData.msData.header.map((value, key)=> {
                                     return (

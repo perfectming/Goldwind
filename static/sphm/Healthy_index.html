@@ -1,0 +1,538 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>智能运营SOAM平台2.0</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="css/jquery.page.css" type="text/css">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/jquery.page.js"></script>
+</head>
+<body>
+    <div class="container" style="height:1000px;">
+        <div class="pl_r30">
+            <div class="column_4 zl_t">
+                <div><img src="images/ico.png" /><p>健康度</p><i>80.3°H</i></div>
+                <div><img src="images/ico1.png" /><p>工单完结率</p><i>80.3%</i></div>
+                <div><img src="images/ico3.png" /><p>预警准确率</p><i>80.3%</i></div>
+                <div><img src="images/ico4.png" /><p>MTBF</p><i>80.3%</i></div>
+            </div>
+            <div class="column_3_chart mt15 clearfix">
+                <div class="box">
+                    <h1>各风场健康情况</h1>
+                    <div id="chart_1" class="border" style="height:350px;"></div>
+                </div>
+                <div class="box ml15" style="position:relative;">
+                    <div class="chart_2_title" style="position:absolute;left:0px;width:100%;top:60px;height:290px;z-index:55;"></div>
+                    <h1>各风场预警概况</h1>
+                    <div id="chart_2" class="border" style="height:350px;"></div>
+                </div>
+                <div class="box ml15" id="jryh">
+                    <h1 style="cursor:pointer;">今日风机隐患&gt;&gt;<span class="right mr15"></span></h1>
+                    <div class="border list_r4_c3" style="height:350px;">
+                        <ul class="clearfix">
+                            <li class="c_1">风场</li>
+                            <li class="c_1">机组</li>
+                            <li class="c_2">隐患名称</li>
+                            <li class="c_1">等级</li>
+                        </ul>
+                        <div style="height:300px;overflow-y:auto;">
+                            <ul class="clearfix">
+                                <li class="c_1">风场1</li>
+                                <li class="c_1">29</li>
+                                <li class="c_2">发动机温度异常</li>
+                                <li class="c_1">2级</li>
+                            </ul>
+                            <ul class="clearfix">
+                                <li class="c_1">风场1</li>
+                                <li class="c_1">29</li>
+                                <li class="c_2">发动机温度异常</li>
+                                <li class="c_1">2级</li>
+                            </ul>
+                            <ul class="clearfix">
+                                <li class="c_1">风场1</li>
+                                <li class="c_1">29</li>
+                                <li class="c_2">发动机温度异常</li>
+                                <li class="c_1">2级</li>
+                            </ul>
+                            <ul class="clearfix">
+                                <li class="c_1">风场1</li>
+                                <li class="c_1">29</li>
+                                <li class="c_2">发动机温度异常</li>
+                                <li class="c_1">2级</li>
+                            </ul>
+                            <ul class="clearfix">
+                                <li class="c_1">风场1</li>
+                                <li class="c_1">29</li>
+                                <li class="c_2">发动机温度异常</li>
+                                <li class="c_1">2级</li>
+                            </ul>
+                            <ul class="clearfix">
+                                <li class="c_1">风场1</li>
+                                <li class="c_1">29</li>
+                                <li class="c_2">发动机温度异常</li>
+                                <li class="c_1">2级</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column_4_chart mt15 clearfix">
+                <div class="box">
+                    <h1 onclick="location.href = 'yj_index.html?op=1';">预警接受统计</h1>
+                    <div class="border">
+                        <div id="chart_3" style="height:320px;"></div>
+                        <div class="top3"><a>总数TOP3</a><a>风场一</a><a>风场二</a><a>风场三</a></div>
+                    </div>
+                </div>
+                <div class="box ml15">
+                    <h1 onclick="location.href = 'yj_index.html?op=1';">预警处理统计</h1>
+                    <div class="border">
+                        <div id="chart_4" style="height:320px;"></div>
+                        <div class="top3"><a>审核TOP3</a><a>风场一</a><a>风场二</a><a>风场三</a></div>
+                    </div>
+                </div>
+                <div class="box ml15">
+                    <h1 onclick="location.href = 'yj_index.html?op=2';">故障派工统计</h1>
+                    <div class="border">
+                        <div id="chart_5" style="height:320px;"></div>
+                        <div class="top3"><a>派工TOP3</a><a>风场一</a><a>风场二</a><a>风场三</a></div>
+                    </div>
+                </div>
+                <div class="box ml15">
+                    <h1 onclick="location.href = 'yj_index.html?op=2';">任务执行统计</h1>
+                    <div class="border">
+                        <div id="chart_6" style="height:320px;"></div>
+                        <div class="top3"><a>执行TOP3</a><a>风场一</a><a>风场二</a><a>风场三</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog" id="dialog_1">
+        <div class="opacity"></div>
+        <div class="content">
+            <a class="close"></a>
+            <h1>xx场站 各风场 健康度<i class="zl_btn">总览</i></h1>
+            <div class="chart_bg">
+                <div id="dialog_1_chart_1" style="height:350px;"></div>
+            </div>
+            <div class="clearfix mt15">
+                <div class="left" style="width:1000px;">
+                    <h1>2016年1月-11月 风场一 健康度</h1>
+                    <div class="chart_bg">
+                        <div id="dialog_1_chart_2" style="height:350px;"></div>
+                    </div>
+                </div>
+                <div class="right" style="width:385px;">
+                    <h1>健康度对比图</h1>
+                    <div class="chart_bg" style="height:350px;padding:20px 40px 0;">
+                        <p class="font14 font_fff mt15">风场一（50°H）</p>
+                        <div class="pgrop">
+                            <div style="width:20%;"></div>
+                        </div>
+                        <p class="font14 font_fff mt15">风场二（50°H）</p>
+                        <div class="pgrop">
+                            <div style="width:20%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog" id="dialog_2">
+        <div class="opacity"></div>
+        <div class="content">
+            <a class="close"></a>
+            <h1>xx场站 各风场 完结率<i class="zl_btn">总览</i></h1>
+            <div class="chart_bg">
+                <div id="dialog_2_chart_1" style="height:350px;"></div>
+            </div>
+            <div class="clearfix mt15">
+                <div class="left" style="width:1000px;">
+                    <h1>2016年1月-11月 风场一 完结率</h1>
+                    <div class="chart_bg">
+                        <div id="dialog_2_chart_2" style="height:350px;"></div>
+                    </div>
+                </div>
+                <div class="right" style="width:385px;">
+                    <h1>完结率对比图</h1>
+                    <div class="chart_bg" style="height:350px;padding:20px 40px 0;">
+                        <p class="font14 font_fff mt15">风场一（5.89%）</p>
+                        <div class="pgrop">
+                            <div style="width:20%;"></div>
+                        </div>
+                        <p class="font14 font_fff mt15">风场二（5.89%）</p>
+                        <div class="pgrop">
+                            <div style="width:20%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog" id="dialog_3">
+        <div class="opacity"></div>
+        <div class="content">
+            <a class="close"></a>
+            <h1>xx场站 各风场 预警准确率<i class="zl_btn">总览</i></h1>
+            <div class="chart_bg">
+                <div id="dialog_3_chart_1" style="height:350px;"></div>
+            </div>
+            <div class="clearfix mt15">
+                <div class="left" style="width:1000px;">
+                    <h1>2016年1月-11月 风场一 准确率</h1>
+                    <div class="chart_bg">
+                        <div id="dialog_3_chart_2" style="height:350px;"></div>
+                    </div>
+                </div>
+                <div class="right" style="width:385px;">
+                    <h1>准确率对比图</h1>
+                    <div class="chart_bg" style="height:350px;padding:20px 40px 0;">
+                        <p class="font14 font_fff mt15">风场一（5.89%）</p>
+                        <div class="pgrop">
+                            <div style="width:20%;"></div>
+                        </div>
+                        <p class="font14 font_fff mt15">风场二（5.89%）</p>
+                        <div class="pgrop">
+                            <div style="width:20%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog" id="dialog_4">
+        <div class="opacity"></div>
+        <div class="content">
+            <a class="close"></a>
+            <h1>前12个月 MTBF 对比变化趋势</h1>
+			<div class="chart_bg mtbf">
+				<ul class="clearfix">
+					<li>
+						<div class="row_1 clearfix">
+							<p class="month">1</p>
+							<p class="sheng"><span>24%</span></p>
+							<p class="sheng"><span>0%</span></p>
+						</div>
+						<div class="row_2 clearfix">
+							<p class="month">月</p>
+							<p>同比</p>
+							<p>环比</p>
+						</div>
+					</li>
+					<li>
+						<div class="row_1 clearfix">
+							<p class="month">2</p>
+							<p class="sheng"><span>24%</span></p>
+							<p class="jiang"><span>0%</span></p>
+						</div>
+						<div class="row_2 clearfix">
+							<p class="month">月</p>
+							<p>同比</p>
+							<p>环比</p>
+						</div>
+					</li>
+					<li>
+						<div class="row_1 clearfix">
+							<p class="month">3</p>
+							<p class="jiang"><span>24%</span></p>
+							<p class="jiang"><span>0%</span></p>
+						</div>
+						<div class="row_2 clearfix">
+							<p class="month">月</p>
+							<p>同比</p>
+							<p>环比</p>
+						</div>
+					</li>
+					<li>
+						<div class="row_1 clearfix">
+							<p class="month">4</p>
+							<p class="sheng"><span>24%</span></p>
+							<p class="sheng"><span>0%</span></p>
+						</div>
+						<div class="row_2 clearfix">
+							<p class="month">月</p>
+							<p>同比</p>
+							<p>环比</p>
+						</div>
+					</li>
+					<li>
+						<div class="row_1 clearfix">
+							<p class="month">5</p>
+							<p class="sheng"><span>24%</span></p>
+							<p class="jiang"><span>0%</span></p>
+						</div>
+						<div class="row_2 clearfix">
+							<p class="month">月</p>
+							<p>同比</p>
+							<p>环比</p>
+						</div>
+					</li>
+					<li>
+						<div class="row_1 clearfix">
+							<p class="month">6</p>
+							<p class="jiang"><span>24%</span></p>
+							<p class="jiang"><span>0%</span></p>
+						</div>
+						<div class="row_2 clearfix">
+							<p class="month">月</p>
+							<p>同比</p>
+							<p>环比</p>
+						</div>
+					</li>
+					<li>
+						<div class="row_1 clearfix">
+							<p class="month">7</p>
+							<p class="sheng"><span>24%</span></p>
+							<p class="sheng"><span>0%</span></p>
+						</div>
+						<div class="row_2 clearfix">
+							<p class="month">月</p>
+							<p>同比</p>
+							<p>环比</p>
+						</div>
+					</li>
+					<li>
+						<div class="row_1 clearfix">
+							<p class="month">8</p>
+							<p class="sheng"><span>24%</span></p>
+							<p class="jiang"><span>0%</span></p>
+						</div>
+						<div class="row_2 clearfix">
+							<p class="month">月</p>
+							<p>同比</p>
+							<p>环比</p>
+						</div>
+					</li>
+					<li>
+						<div class="row_1 clearfix">
+							<p class="month">9</p>
+							<p class="jiang"><span>24%</span></p>
+							<p class="jiang"><span>0%</span></p>
+						</div>
+						<div class="row_2 clearfix">
+							<p class="month">月</p>
+							<p>同比</p>
+							<p>环比</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+            <div class="chart_bg">
+                <div id="dialog_4_chart_1" style="height:550px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="dialog jryh_dialog" id="dialog_5">
+		<div class="opacity"></div>
+        <div class="content">
+            <a class="close"></a>
+			<div class="clearfix">
+				<div class="radius">
+					<div class="item">
+						<h2>128</h2>
+						<p>今日预警总数</p>
+					</div>
+					<div class="item">
+						<h2>128</h2>
+						<p>预警风场</p>
+					</div>
+					<div class="item">
+						<h2>128</h2>
+						<p>预警风机</p>
+					</div>
+				</div>
+                <div class="left ml15" style="width:612px;">
+                    <h1>xx场站  各风场  隐患明细</h1>
+                    <div class="chart_bg">
+                        <div id="dialog_5_chart_1" style="height:415px;"></div>
+                    </div>
+                </div>
+                <div class="left ml15" style="width:612px;">
+                    <h1>xx场站  各风场  不同机型  隐患明细</h1>
+                    <div class="chart_bg">
+                        <div id="dialog_5_chart_2" style="height:415px;"></div>
+                    </div>
+                </div>
+			</div>
+			<div class="clearfix mt15">
+                <div class="left" style="width:900px;">
+                    <h1>明细列表</h1>
+					<div class="chart_bg">
+						<div class="yhmx_list_box" style="height:365px;">
+							<ul class="clearfix">
+								<li class="c_1">序号</li>
+								<li class="c_1">区域</li>
+								<li class="c_2">风电场</li>
+								<li class="c_1">机组</li>
+								<li class="c_2">隐患明细</li>
+								<li class="c_1">等级</li>
+							</ul>
+							<div id="yhmx_list">
+								<ul class="clearfix">
+									<li class="c_1">1</li>
+									<li class="c_1">巴盟</li>
+									<li class="c_2">马伊塔斯</li>
+									<li class="c_1">55（1）</li>
+									<li class="c_2">发动机温度异常</li>
+									<li class="c_1">1级</li>
+								</ul>
+								<ul class="clearfix">
+									<li class="c_1">2</li>
+									<li class="c_1">巴盟</li>
+									<li class="c_2">马伊塔斯</li>
+									<li class="c_1">55（1）</li>
+									<li class="c_2">发动机温度异常</li>
+									<li class="c_1">1级</li>
+								</ul>
+								<ul class="clearfix">
+									<li class="c_1">3</li>
+									<li class="c_1">巴盟</li>
+									<li class="c_2">马伊塔斯</li>
+									<li class="c_1">55（1）</li>
+									<li class="c_2">发动机温度异常</li>
+									<li class="c_1">1级</li>
+								</ul>
+								<ul class="clearfix">
+									<li class="c_1">4</li>
+									<li class="c_1">巴盟</li>
+									<li class="c_2">马伊塔斯</li>
+									<li class="c_1">55（1）</li>
+									<li class="c_2">发动机温度异常</li>
+									<li class="c_1">1级</li>
+								</ul>
+								<ul class="clearfix">
+									<li class="c_1">5</li>
+									<li class="c_1">巴盟</li>
+									<li class="c_2">马伊塔斯</li>
+									<li class="c_1">55（1）</li>
+									<li class="c_2">发动机温度异常</li>
+									<li class="c_1">1级</li>
+								</ul>
+								<ul class="clearfix">
+									<li class="c_1">6</li>
+									<li class="c_1">巴盟</li>
+									<li class="c_2">马伊塔斯</li>
+									<li class="c_1">55（1）</li>
+									<li class="c_2">发动机温度异常</li>
+									<li class="c_1">1级</li>
+								</ul>
+							</div>
+						</div>
+						<div id="page"></div>
+					</div>
+                </div>
+                <div class="left ml15" style="width:485px;">
+                    <h1>隐患等级分布</h1>
+                    <div class="chart_bg">
+                        <div id="dialog_5_chart_3" style="height:415px;"></div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+    <script src="js/mychart.js"></script>
+    <script>
+        var wjl_json = [{ name: '风场1', value1: 10, value2: 10 }, { name: '风场2', value1: 30, value2: 50 }]
+        //弹出
+        $(function () {
+            //显示当前日期
+            var date = new Date();
+            $("#jryh h1 span").text((date.getMonth() + 1) + '月' + date.getDate() + '日');
+
+            $(".zl_t > div:eq(0),#chart_1,#dialog_1 .zl_btn").click(function () {
+                $("#dialog_1").show();
+                $("#dialog_1 .zl_btn").removeClass("noColor");
+
+                //健康总览
+                jkzl();
+            })
+			
+			
+            $(".zl_t > div:eq(1),.chart_2_title,#dialog_2 .zl_btn").click(function () {
+                $("#dialog_2").show();
+				$("#dialog_2 .zl_btn").removeClass("noColor");
+				
+                //完结率
+				fc_wjl();
+            })
+
+			
+            $(".zl_t > div:eq(2),#dialog_3 .zl_btn").click(function () {
+                $("#dialog_3").show();
+				$("#dialog_3 .zl_btn").removeClass("noColor");
+
+				fc_zql();
+            })
+
+			$(".zl_t > div:eq(3)").click(function () {
+                $("#dialog_4").show();
+                mtbf();
+            })
+
+			$("#jryh").click(function () {
+				$("#dialog_5").show();
+
+				option = BarOption('↑', ['风场1', '风场2', '风场3', '风场4'], '隐患数', [50, 60, 70, 80],"mousemove");
+
+				var myChart = echarts.init(document.getElementById('dialog_5_chart_1'));
+				myChart.setOption(option);
+
+
+				option = BarOption('↑', ['GW82-1500', 'GW70-1500', 'GW77-1500', 'GW87-1500'], '隐患数', [50, 60, 70, 80],"mousemove");
+
+				var myChart = echarts.init(document.getElementById('dialog_5_chart_2'));
+				myChart.setOption(option);
+
+				$("#page").Page({
+					  totalPages: 9,//分页总数
+					  liNums: 7,//分页的数字按钮数(建议取奇数)
+					  activeClass: 'activP', //active 类样式定义
+					  callBack : function(page){
+						//alert(page)
+					  }
+				  });
+				
+					option = Pie_hollow(['2级','3级','4级'],
+					[
+						{
+							value:335, 
+							name:'2级',
+							itemStyle: {
+								normal: {
+									color: '#0ea2fe'
+								}
+							}
+						},{
+							value:435, 
+							name:'3级',
+							itemStyle: {
+								normal: {
+									color: '#3cf384'
+								}
+							}
+						},{
+							value:235, 
+							name:'4级',
+							itemStyle: {
+								normal: {
+									color: '#ff7809'
+								}
+							}
+						},
+					]);
+
+					var myChart = echarts.init(document.getElementById('dialog_5_chart_3'));
+					myChart.setOption(option);
+			})
+        })
+    </script>
+</body>
+</html>

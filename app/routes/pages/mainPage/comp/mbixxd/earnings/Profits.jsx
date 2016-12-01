@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
-import icono from './wind_logo.png';
+import icono from '../wind_logo.png';
 import Fanchart from './fanchart.jsx';
 import Month from '../Month.jsx';
 var actions = require('redux/actions');
@@ -19,7 +19,7 @@ let x0=[];
 let x1=[];
 let x2=[];
 let x3=[];
-let x5=[];
+let x4=[];
 let machine=[];
 let areaRecordCostR=[];
 let areaRecordProfitR=[];
@@ -45,6 +45,16 @@ let Component = React.createClass({
        let{actbt=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban}=this.props;
           return (
            <div className={styles.box}>
+            <div className={styles.boxcover} id='boxcover'></div>
+             <div className={styles.more} id="sss">
+                <div className={styles.moretitle}>
+                <img src={icono}/>
+                <p>11月份各风机PBA</p>
+                <div onClick={()=>close()}>x</div>
+                </div>
+                <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee } height={500} TBAA={TBAA} width={1750}></Fanchart>
+
+                 </div>
                <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
@@ -55,16 +65,16 @@ let Component = React.createClass({
                <div className={styles.covers} >
                    <div className={styles.bgccc}> <img src={icono}/></div>
                    <div className={`${styles.areabox} ${styles.shadow}`}>
-                          <p className={styles.titleeee}>11月份各风机PBA</p>
+                          <p className={styles.titleeee}>10月集团各区域收益率</p>
                            <AreaTable text={text[actbt]} areaName={areaName} areaRecordCost={wind==undefined? areaRecordCost:wind} areaRecordProfit={windP==undefined? areaRecordProfit:windP} TBA={windPT==undefined? TBA:windPT}></AreaTable>
                     </div>
                 </div>
 
                <div className={styles.covers}>
-                   <div className={styles.bgcccc}> <img src={icono}/></div>
+                   <div className={styles.bgccc}> <img src={icono}/></div>
                    <div className={`${styles.windbox} ${styles.shadow}`}>
             
-                       <p className={styles.tiw}>十月一区域各风场年收益率</p>
+                       <p className={styles.tiw}>10月一区域各风场年收益率</p>
                         <div>
                            <WindfieldTable></WindfieldTable>
                        </div>
@@ -98,7 +108,7 @@ let Component = React.createClass({
                       <div className={styles.close} onClick={()=>close()}>x</div>
                        <div className={styles.windcebox}>
                            <div>
-                               <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee} TBAA={TBAA} height={370}></Fanchart>
+                               <Fanchart areaRecordCostR={areaRecordCostR} areaRecordProfitR={areaRecordProfitR} machine={machine} TBAA={TBAA} height={370}></Fanchart>
                            </div>
                        </div>
                    </div>
@@ -122,6 +132,9 @@ const mapStateToProps = (state) => {
          windP:state.vars.windP,
          windPT:state.vars.windPT,
          ban:state.vars.ban,
+         machinee:state.vars.machinee,
+         areaRecordCostRR:state.vars.areaRecordCostRR,
+
     }
 };
 const mapDispatchToProps = (dispatch) => {
@@ -140,14 +153,16 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         gogogo : (windFJ)=>{
+         
           (function(){
+
         
              windFJ.sort(function(a,b){
               return b.areaRecordCost - a.areaRecordCost;
              })
                for(var i=0;i<12;i++){
-                    x0[i]=data.windFJ[i].name;
-                    x1[i]=data.windFJ[i].areaRecordCost;
+                    x0[i]=windFJ[i].name;
+                    x1[i]=windFJ[i].areaRecordCost;
                 }
 
           })()
@@ -155,31 +170,27 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('areaRecordCostRR', x1))
         },
         back:(windFJ)=>{
-         alert(5e1);
           (function(){
              windFJ.sort(function(a,b){
               return a.areaRecordCost - b.areaRecordCost;
              })
                for(var i=0;i<12;i++){
-                    x2[i]=data.windFJ[i].name;
-                    x3[i]=data.windFJ[i].areaRecordCost;
+                    x2[i]=windFJ[i].name;
+                    x3[i]=windFJ[i].areaRecordCost;
                 }
 
           })()
             dispatch(actions.setVars('machinee', x2))
             dispatch(actions.setVars('areaRecordCostRR', x3))
         },
-        more:()=>{
-          (function(){
-            let ban=document.getElementsByClassName('morebox');
-             ban.style.display='block';
-          })()
-       
+         more:()=>{
+             $("#sss").show();
+             $('#boxcover').show();
+             // $('.box').css('opacity',".5")
         },
         close:()=>{
-          (function(){
-            document.getElementsByClassName('morebox').style.display=none
-          })()
+            $("#sss").hide();
+              $('#boxcover').hide();
         }
 
     };

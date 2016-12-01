@@ -9,10 +9,11 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaRecordProfit,machine,}=this.props;
+        let {areaRecordProfit,machineE,width,height}=this.props;
         let configPie = {
             chart: {
-                height:700,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -37,9 +38,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -56,7 +60,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30
+                    pointWidth: 30,
+                    borderRadius: 7,
                 }, series: {
                     cursor: 'pointer',
                     events: {
@@ -77,15 +82,26 @@ let Component = React.createClass({
                         fontSize:'14px'
                     }
                 },
-                categories:machine,
+                categories:machineE,
             },
             yAxis: [{
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                }
             }
         }, {
             title: {

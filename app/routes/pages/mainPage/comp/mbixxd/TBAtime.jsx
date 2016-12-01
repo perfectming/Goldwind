@@ -35,12 +35,12 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                             <p className={styles.title}>11月每日TBA</p>>
+                             <p className={styles.titlee}>11月每日TBA</p>>
                                 <TBAtimechartt></TBAtimechartt>
                             </div>
                         </div>
                     </div>
-                     <div className={styles.imgq}>
+                     <div className={styles.imgqq}>
                         <img  className={styles.img}src={icono}/>
                     </div>
                 </div>

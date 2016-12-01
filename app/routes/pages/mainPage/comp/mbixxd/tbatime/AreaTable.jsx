@@ -18,15 +18,14 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10,
             },
             title: {
-                text: text,
+                text: '风场TBA',
                 align:'left',
                  x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                      fontWeight:700,
                 }
@@ -34,9 +33,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
                     itemMarginBottom: 100,
@@ -56,6 +58,7 @@ let Component = React.createClass({
                     pointPadding:0,
                     borderWidth: 0,
                     pointWidth:30,
+                    borderRadius: 7,
                     stacking: 'normal',
                 }, series: {
                     cursor: 'pointer',
@@ -79,11 +82,42 @@ let Component = React.createClass({
                 },
                 categories:areaNamee,
             },
-            yAxis: [{
-                title:'KWH',
-            },{
-                title:"TBA"
-            }],
+            yAxis:  [{
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
+                    title:{
+                        text:'100%',
+                        align:'high',
+                        rotation:'0',
+                        y: -10,
+                        x: 47,
+                        style:{
+                            color:'#fff',
+                            fontSize:'14px'
+                        }
+                    }
+                }, {
+                    labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
+            title: {
+                text: '',
+                align:'high',
+                rotation:'0',
+                 y: -17,
+                x: 150,
+            },
+            opposite: true
+        }],
             series: [{
                 name: '停机时间',
                 type: 'column',

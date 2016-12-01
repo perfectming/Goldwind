@@ -3,10 +3,11 @@
        box-shadow:0 0 15px #fff;
       }
   .listrightBox{
-    width:1260px;
+    width:1348px;
     height:920px;
     overflow:hidden;
-    float:right;
+    float:left;
+    margin-left: 15px;
     .listbodyBox1 {
     overflow-y:scroll;
   
@@ -35,7 +36,7 @@
       font-size:16px;
       font-weight: bold;  
       position:absolute;
-      top:38%;left:10px;
+      top:38%;left:15px;
       box-shadow:1px 1px 3px #292929
     }
     .listbtnitem{
@@ -45,14 +46,12 @@
       margin: 10px 0px 60px 170px;
       }
       .listopt{
+        width:1230px;
+        min-height:100px;
         display:inline-block;
         margin: 10px 0px 10px 140px;
         padding:5px 20px;
         background-color:#1D2835;
-        width:1130px;
-        min-height:100px;
-       
-        
         div{
           font-size:14px;
           cursor:pointer;
@@ -64,11 +63,11 @@
           line-height:25px;
           text-align:center;
           padding:0 2px;
-          margin: 3px;
+          margin: 2px;
           position:relative;
           .listoptinfo{
             width:150px;height:110px;background-color: #FFFFFF;display:none;
-            position:absolute;right:65px;top: -10px;
+            position:absolute;right:62px;top: -10px;
             font-size:20px;
             text-align:left;
             color:#578D1E;
@@ -127,7 +126,7 @@
     }
   }
     .leftBox{
-      width: 478px;
+      width: 400px;
       float:left;
       padding-bottom:20px;
       

@@ -26,13 +26,11 @@ let Component = React.createClass({
         let {clickNumber, showFlag, changeFlag, flag,play,map,map1} = this.props;
         return (
             <div className={styles.bodyBox}>
-                    <div className={`${styles.leftBox} ${flag===true? styles.animat1 : styles.animat}`}>
+                    <div className={styles.leftBox}>
                         <Superleftbox></Superleftbox>
                     </div>
-                <div className={styles.changeBox}>
-                      <img src={flag===true? leftIcon:rightIcon} onClick={()=>{changeFlag(flag===true? true:false,flag )}}/> 
-                </div>
-                <div className={`${styles.rightBox} ${flag===true? styles.animat3 : styles.animat2}`}>
+               
+                <div className={styles.rightBox}>
                     <div className={`${styles.bigimg} ${map===true? styles.animat4 : styles.animat6} ${map1===true? styles.animat5 : styles.animat6} `}>
                         <div className={styles.place1}  onClick={()=>play(map,map1)}></div>
                     </div>

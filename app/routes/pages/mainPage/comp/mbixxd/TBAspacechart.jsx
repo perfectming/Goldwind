@@ -9,25 +9,17 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaPlan=data.areaPlan;
-        let areaPlanDay=data.areaPlanDay;
-        let areaPlanDayT=data.areaPlanDayT;
-        let fanCost=data.fanCost;
-        let machine=data.machine;
-        let fanProfitQ=data.fanProfitQ;
-
+        let {fanCost,machine,fanProfitQ,width,height}=this.props;
         let configPie = {
             chart: {
-                height:700,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
             },
             title: {
                 text: '',
@@ -47,9 +39,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -70,6 +65,7 @@ let Component = React.createClass({
                     pointPadding: 10,
                    stacking:'nomal',
                     pointWidth: 50,
+
 
                 }, series: {
                     cursor: 'pointer',
@@ -96,14 +92,32 @@ let Component = React.createClass({
                 categories:machine,
             },
             yAxis: [{
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text:'KWH',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                }
             }
         }, {
+             labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text: 'TBA%',
                  align:'high',
@@ -121,7 +135,8 @@ let Component = React.createClass({
                 color:'#64DC83',
                 shadow:true,
                 pointWidth: 30,
-                borderWidth: 0,
+                borderWidth: 0, 
+                borderRadius: 7
             },
                 {
                     name: '四',
@@ -129,7 +144,8 @@ let Component = React.createClass({
                     color:'#FC794E',
                     data: fanCost,
                     stack:'waste',
-                     pointWidth: 30,
+                    pointWidth: 30,
+                    borderRadius: 3
                 },
                 {
                     name: '大',
@@ -140,7 +156,7 @@ let Component = React.createClass({
                     color:'#FD9C31',
                 },
                 {
-                    name: '损',
+                    name: '类',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
@@ -148,12 +164,13 @@ let Component = React.createClass({
                      pointWidth: 30,
                 },
                 {
-                    name: '失发电量',
+                    name: '损失发电量',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
                      pointWidth: 30,
-                    color:'#AACE4A'
+                    color:'#AACE4A',
+                     borderRadius: 3
                 },
                 {
                     name: 'TBA',

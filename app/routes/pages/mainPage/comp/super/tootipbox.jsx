@@ -41,14 +41,14 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {border=true,changeborder,changeborder1,retlegend,closebox,Tofaninfo} = this.props;
+        let {border=true,changeborder,changeborder1,retlegend,closebox,Tofaninfo,changtext} = this.props;
         return (
            
                     <div className={styles.fiexdbox}>
                         <img src={close} className={styles.close} onClick={()=>closebox()}/>
                        <div className={styles.inputbox}>
                        
-                            <span className={styles.search}></span><input type='text' placeholder="查询" /><a></a>
+                            <span className={styles.search}></span><input type='text' placeholder="查询" id='seachtext'  /><a></a>
                             <div className={`${styles.line_title} ${styles.add_border}`} id='fc' >风场</div>
                             <div className={styles.line_title} id='gfc' >光伏场</div>
                        </div>
@@ -62,6 +62,7 @@ let Component = React.createClass({
                                                 <div className={styles.list_span}>
                                                 {
                                                     obj_wfd[value].map((valueC,key)=>{
+
                                                         return(
 
                                                             <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname}</span>
@@ -104,6 +105,31 @@ let Component = React.createClass({
 
                                 }  
                             </ul>
+                            <div className={styles.search_anser} id='searcg_anser'>
+                                {  
+                                    arr1.map((value,key)=>{
+                                        return(
+                                            obj_wfd[value].map((valueC,key)=>{
+                                                return(
+                                                    <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname}</span>
+                                                )
+                                            })
+                                        )
+                                    })
+                                },
+                                {
+                                    arr2.map((value,key)=>{
+                                        return(   
+                                            obj_pvd[value].map((valueC,key)=>{
+                                                return(
+                                                    <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname}</span>
+                                                )
+                                            })
+
+                                        )
+                                    })
+                                }
+                            </div>
                        </div>
                     </div>   
         );
@@ -126,6 +152,7 @@ const mapDispatchToProps = (dispatch) => {
                 $("#gfc").css('border','none');
                 $('#fclist').show();
                 $("#gflist").hide();
+                $("#searcg_anser").hide();
             })
              $('#gfc').on('click',function(){
                 $(this).css('border','1px solid #51a0bf');
@@ -133,6 +160,7 @@ const mapDispatchToProps = (dispatch) => {
                 $("#fc").css('border','none');
                 $("#gflist").show();
                 $("#fclist").hide();
+                $("#searcg_anser").hide();
             })
             $('#list ul li a').on('click',function(){
                 var bg=$(this).css("background-image");
@@ -144,6 +172,22 @@ const mapDispatchToProps = (dispatch) => {
                 
                 $(this).siblings('div').toggle();
             })
+            $("#seachtext").keyup(function(){
+                console.log(1);
+                $('#searcg_anser').show();
+                $('#searcg_anser span').show();
+                $("#fclist").hide();
+                $("#gflist").hide();
+                $("#searcg_anser span").each(function(){
+                       if($(this).text().indexOf($("#seachtext").val())== -1){
+                          $(this).hide();
+                    }
+                });
+             
+              
+                
+            })
+
                
         },
         changeborder:(border)=>{
@@ -164,7 +208,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('legend', false));
             dispatch(actions.setVars('headerItemActive', 1));
-        }
+        },
+       
        
     };
 };

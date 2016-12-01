@@ -22,7 +22,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+               
             },
             title: {
                 text: '',
@@ -39,9 +39,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
                 }
@@ -64,7 +67,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 15
+                    pointWidth: 15,
+                    borderRadius: 4,
                 },
                 series: {
                     cursor: 'pointer',
@@ -92,12 +96,23 @@ let Component = React.createClass({
                 categories:windFiled,
             },
              yAxis: [{
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
             }
         }, {
             title: {

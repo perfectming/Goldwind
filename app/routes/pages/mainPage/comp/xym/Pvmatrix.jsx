@@ -1,43 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Corner from '../super/Corner.jsx';
-import smatrix from '../../img/comp/smatrix.png';
 import styles from './Pvmatrix.scss';
 var actions = require('redux/actions');
 // import dataBase from '../../../../../config/ModelData';
-let matrixdata = require('../../../../../../config/MatrixData');
+let obj = require('../../../../../../config/MatrixData');
 let model = require('../../../../../../config/Model');
 let modeldata = require('../../../../../../config/ModelData');
-
-       
-
 var model_data = modeldata.ModelData;
-// console.log(model_data);
-// var arrdata = model_data[650107].PVTSI_Aver;
-// console.log(arrdata);
-// var arr3 = [];
-// var arr4 = [];
 var model_ens = model.Model.ens;
-// for(var j in model_ens){
-//     arr3.push(model_ens[j])
-// }
-// arr3.map((valueE,keyE)=> {
-//     return (
-//         console.log(valueE.name)
-//         )
-// });
-
-
- var arr1 = [];
- var arr2 = [];
- // var arr3 = [];
- // var arr4 = [];
- var obj = matrixdata;
-    var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-    var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-
-
-    // console.log(obj_pvd[652303]);
+var arr1 = [];
+var arr2 = [];
+var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
+var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
     for(var x in obj_wfd){
         arr1.push(x)
         // for(var y in obj_wfd[x]){
@@ -64,19 +39,56 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage1=652303,Tofaninfo}=this.props;
+        let{valuepage1=652303,Topvinfo}=this.props;
         return (
             <div className={styles.slistbodyBox}>
                 {
                 obj_pvd[valuepage1].map((value, key)=> {
-                    return (
-                        <div className={styles.slistBox} key={key} onClick = {()=> Tofaninfo(value, key)}>
-                            <div className={styles.slistitemL}><img src={smatrix}/>
-                            </div>
+                    let x;
+                    let code = value.WTStateCode;
+                    switch(code)
+                        {
+                            case "DisComForPre":
+                                x = "离线";
+                                break;
+                            case "DisComForPlc":
+                                x = "离线";
+                                break;
+                            case "Unknown":
+                                x = "离线";
+                                break;
+                            case "Online":
+                                x = "正常发电";
+                                break;
+                            case "LimitPow":
+                                x = "正常发电";
+                                break;
+                            case "Alarm":
+                                x = "正常发电";
+                                break;
+                            case "Fault":
+                                x = "故障停机";
+                                break;
+                            case "Offline":
+                                x = "待机";
+                                break;
+                            case "ProtoectStop":
+                                x = "待机";
+                                break;
+                            case "LimitPowStop":
+                                x = "待机";
+                                break;
+                            default:
+                                x = "维护";
+                                break;
+                        }
+                 
+                        return (
+                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
                                 <span className={styles.slistitemT}>
                                         <p className={styles.slistitemTT}>{value.Wtname}</p>
-                                        <p className={styles.slistitemTB}>正常发电</p>
+                                        <p className={styles.slistitemTB}>{x}</p>
                                 </span>
                                 <span className={styles.slistitemB}>
                                     <span className={styles.slistitemBL}>
@@ -91,6 +103,8 @@ let Component = React.createClass({
                             </div>          
                         </div>  
                         )
+                    
+                    
                         
                 })
                 }
@@ -113,9 +127,9 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        Tofaninfo: (value)=> {
+        Topvinfo: (value)=> {
             dispatch(actions.setVars('value', value));
-            dispatch(actions.setVars('fan_page', 'faninfo'));
+            dispatch(actions.setVars('fan_page', 'pvinfo'));
         }
     };
 };
