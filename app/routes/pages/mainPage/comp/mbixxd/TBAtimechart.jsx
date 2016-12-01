@@ -12,10 +12,9 @@ let Component = React.createClass({
         let areaName=data.areaName;
         let areaRecordCost=data.areaRecordCost;
         let areaPlan=data.areaPlan;
-        let montht=data.montht;
+        let montht=data.monthT;
         let profit=data.windProfit;
         let cost=data.windCost;
-
         let configPie = {
             chart: {
                 height:390,
@@ -46,9 +45,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -68,6 +70,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 10,
                     pointWidth: 50,
+                    borderRadius: 7
 
                 }, series: {
                     cursor: 'pointer',
@@ -92,20 +95,29 @@ let Component = React.createClass({
                 },
                 categories:montht,
             },
-            yAxis:[{
+            yAxis: {
             title: {
                 text:'100%',
-                align:'high',
-                rotation:'0',
-                y: -20,
-                x: 40,
-            }
-        }, {
-            title: {
-                text: ''
+                    align:'high',
+                    rotation:'0',
+                    y: -20,
+                    x: 40,
+                    style:{
+                        fontSize:'14px',
+                        color:'white',
+                    }
             },
-            opposite: true
-        }],
+
+
+        labels: {
+                    title:'100%',
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                       color:'white',
+                        fontSize:'14px'  //字体
+                    }
+                },
+            },
 
             series: [{
                 name: '实际运行时间',

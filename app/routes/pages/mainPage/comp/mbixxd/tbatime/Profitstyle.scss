@@ -12,7 +12,7 @@
     background: linear-gradient(to bottom,#242a32 ,#1f2025);
     li{
      float:left;
-     font-size:20px;
+     font-size:16px;
      font-family: '微软雅黑';
      color:white;
      height:35px;
@@ -60,15 +60,14 @@
             margin-bottom: 20px;
             margin-top:50px;
             position:relative;
-             border-radius:10px;
             .bgcc{
             position:absolute;
               top:4px;
-              left:48px;
+              left:61px;
               z-index: 10;
               img{
-                height:40px;
-                width:40px;
+                height:16px;
+                width:16px;
               }
             }
            }
@@ -76,18 +75,18 @@
        width: 98%;
        margin:0 auto;
        height: 405px;
-       border-radius:10px;
+      
        position:relative;
        margin-top:50px;
 
        .bgcc{
        position:absolute;
               top:4px;
-              left:48px;
+              left:61px;
               z-index: 10;
               img{
-              height:40px;
-                width:40px;
+              height:16px;
+                width:16px;
               }
        }
     }
@@ -104,8 +103,8 @@
       height:35px;
       line-height:20px;
       text-align:center;
-      font-size:20px;
-      border-radius:10px;
+      font-size:16px;
+      border-radius:15px;
       font-family:'微软雅黑';
       margin-left:12px;
       background-color:white;

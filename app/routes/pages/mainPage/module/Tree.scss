@@ -48,6 +48,35 @@
    cursor:pointer;
 
   }
+  .fc_search{
+    width:80px;
+    height:30px;
+    line-height:30px;
+    padding-left:10px;
+    position:absolute;
+    top:243px;
+    right:-80px;
+    border:1px solid #2ff4fb;
+    border-left:none;
+    border-radius:0 20px 20px 0;
+    background:#252932;
+    background-image:url('../img/comp/treefc.png');
+    background-position:right center;
+    background-repeat:no-repeat;
+    z-index:25;
+    display:block;
+    span{padding-right:25px;}
+    &:hover{color:#2ff4fb;}
+  }
+  .fc_search1{
+
+    display:none;
+  }
+  .gfcbg{
+    top:283px;
+    background-image:url('../img/comp/treegfc.png');
+  }
+
 }
 .animate{
   width:50px;

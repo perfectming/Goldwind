@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Windstyle.scss';
 import Instrumentdata from './Instrument-data';
 import Yearelectric from './Yearelectric.jsx';
+import Pie2 from '../../mxx/Pie2';
 
 var actions = require('redux/actions');
 
@@ -32,111 +33,80 @@ let Component = React.createClass({
            			<div className={styles.firstfloor}>
            				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
-           						<span>健康度</span> 
+           						<span>当前30分<br/>总分100分</span><br/>
            						<a onClick={()=>changepageHealthyT()}>图片</a>
            						<a onClick={()=>changepageHealthyS()}>图片</a>
-           						<span>{small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small1/big1)*100).toFixed(1)}%</span>
            					</div>
            					<div className={styles.sectiontwo}>
-           						<div className={styles.big}>
-           							<div className={styles.small} style={{width:small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1)+"%":((small1/big1)*100).toFixed(1)+"%"}}>
-           								{small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small1/big1)*100).toFixed(1)}%
-           							</div>
-           						</div>
+           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small1/big1)*100).toFixed(1)}%</p>健康度</span>
+           						<Pie2 color={small1==undefined? ['#E9C75C','#A69263']:big1-small1>0?['#E9C75C','#A69263']:['#f00','#E9C75C']} num={small1==undefined? [data.yearelectric[0].wind[0].small,data.yearelectric[0].wind[0].big-data.yearelectric[0].wind[0].small]:big1-small1>0? [small1,big1-small1]:[small1-big1,2*big1-small1]}></Pie2>
            					</div>
-           					<div className={styles.border}></div>
            				</div>
            				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
-           						<span>PBA</span>
+           						<span>实发122kWh<br/>应发200kWh</span><br/>
            						<a onClick={()=>changepagePBAT()}>图片</a>
            						<a onClick={()=>changepagePBAS()}>图片</a>
-           						<span>{data.firstfloor[2].actrul/data.firstfloor[2].should*100}%</span>
            					</div>
            					<div className={styles.sectionthree}>
-           						<div className={styles.should}>
-           							<div className={styles.actrul} style={{width:((data.firstfloor[2].actrul/data.firstfloor[2].should)*100).toFixed(1)+"%"}}>
-           								<div className={styles.text1}><span>实发:2000kWh</span>&nbsp;&nbsp;<span>应发:3333</span></div>
-           							</div>
-           							
-           						</div>
+           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{data.firstfloor[2].actrul/data.firstfloor[2].should*100}%</p>PBA</span>
+           						<Pie2 color={['#D06960','#954A45']} num={[85,15]}></Pie2>
            					</div>
-           					<div className={styles.border}></div>
            				</div>
-           				<div className={`${styles.section} ${styles.boxShadow}`}>
+           				<div className={`${styles.sectionSmall} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
-           						<span>TBA</span>
+           						<span>可用100h <br/>统计200h</span><br/>
            						<a onClick={()=>changepageTBAT()}>图片</a>
            						<a onClick={()=>changepageTBAS()}>图片</a>
-           						<span>{data.firstfloor[3].usable/data.firstfloor[3].count*100}%</span>
            					</div>
            					<div className={styles.sectionfour}>
-           						<div className={styles.count}>
-           							<div className={styles.usable} style={{width:((data.firstfloor[3].usable/data.firstfloor[3].count)*100).toFixed(1)+"%"}}>
-           								<div className={styles.text1}><span>可用时间:2000000</span>&nbsp;&nbsp;<span>统计时间:3333</span></div>
-           							</div>
-           							
-           						</div>
+           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{data.firstfloor[3].usable/data.firstfloor[3].count*100}%</p>TBA</span>
+           						<Pie2 color={['#70C080','#4A7A59']} num={[65,15]}></Pie2>
            					</div>
-           					<div className={styles.border}></div>
            				</div>
            			</div>
            			<div className={styles.secondfloor}>
            				<div className={`${styles.electric} ${styles.boxShadow}`}>
            					<div className={styles.electricHeader}><a>图片</a>发电量</div>
            					<div className={styles.electricFirst}>
-           						<a>图片</a>
-           						<div className={styles.electricNum}>
-           							<div>{data.electric[0].name}</div>
-           							<div className={styles.electricTotal}>{data.electric[0].actrul}kWh</div>
-           							<div className={styles.electricPercent}>
-           								<div style={{width:((data.electric[0].actrul/data.electric[0].should*100).toFixed(1))+"%"}}>{(data.electric[0].actrul/data.electric[0].should*100).toFixed(1)}%</div>
-           							</div>
-           							<div className={styles.border}></div>
+           						<a>图片</a><span>{data.electric[0].name}</span>
+           						<div className={styles.electricTotal}>{data.electric[0].actrul}kWh</div>
+           						<div className={styles.electricPercent}>
+           							<div style={{width:((data.electric[0].actrul/data.electric[0].should*100).toFixed(1))+"%"}}>{(data.electric[0].actrul/data.electric[0].should*100).toFixed(1)}%</div>
            						</div>
            					</div>
-           					<div className={styles.electricFirstBorder}></div>
            					<div className={styles.electricSecond}>
-           						<a>图片</a>
-           						<div className={styles.electricNum}>
-           							<div>{data.electric[1].name}</div>
-           							<div className={styles.electricTotal}>{data.electric[1].actrul}kWh</div>
-           							<div className={styles.electricPercent}>
-           								<div style={{width:((data.electric[1].actrul/data.electric[1].should*100).toFixed(1))+"%"}}>{(data.electric[1].actrul/data.electric[1].should*100).toFixed(1)}%</div>
-           							</div>
-           							<div className={styles.border}></div>
+           						<a>图片</a><span>{data.electric[1].name}</span>
+           						<div className={styles.electricTotal}>{data.electric[1].actrul}kWh</div>
+           						<div className={styles.electricPercent}>
+           							<div style={{width:((data.electric[1].actrul/data.electric[1].should*100).toFixed(1))+"%"}}>{(data.electric[1].actrul/data.electric[1].should*100).toFixed(1)}%</div>
            						</div>
            					</div>
-           					<div className={styles.electricSecondBorder}></div>
            					<div className={styles.electricThird}>
-           						<a>图片</a>
-           						<div className={styles.electricNum}>
-           							<div>{data.electric[2].name}</div>
-           							<div className={styles.electricTotal}>{data.electric[2].actrul}kWh</div>
-           							<div className={styles.electricPercent}>
-           								<div style={{width:((data.electric[2].actrul/data.electric[2].should*100).toFixed(1))+"%"}}>{(data.electric[2].actrul/data.electric[2].should*100).toFixed(1)}%</div>
-           							</div>
-           							<div className={styles.border}></div>
+           						<a>图片</a><span>{data.electric[2].name}</span>
+           						<div className={styles.electricTotal}>{data.electric[2].actrul}kWh</div>
+           						<div className={styles.electricPercent}>
+           							<div style={{width:((data.electric[2].actrul/data.electric[2].should*100).toFixed(1))+"%"}}>{(data.electric[2].actrul/data.electric[2].should*100).toFixed(1)}%</div>
            						</div>
            					</div>
-           					<div className={styles.electricThirdBorder}></div>
            				</div>
            				<div className={`${styles.yearelectric} ${styles.boxShadow}`}>
            					<div>
-           						<div className={styles.logo}><a>logo</a></div>
-           						<div className={styles.links}><a onClick={()=>changepageEleT()}>图片</a></div>
-           						<div className={styles.links}><a onClick={()=>changepageEleS()}>图片</a></div>
-           						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={wind==undefined? data.yearelectric[0].plan:wind} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
+           						<div className={styles.header}>
+           							<div className={styles.logo}><a>logo</a></div>
+	           						<div className={styles.links}><a onClick={()=>changepageEleT()}>图片</a></div>
+	           						<div className={styles.links}><a onClick={()=>changepageEleS()}>图片</a></div>
+           						</div>
+           						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={wind==undefined? data.yearelectric[0].wind[0].plan:wind} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            					</div>
            				</div>
            				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
            					<div>
            						<div className={styles.logo}><a>logo</a></div>
-           						<Yearelectric title={data.yearelectric[0].title[1]} month={data.yearelectric[0].month} plan={wind==undefined? data.yearelectric[0].plan:wind} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[0]} nameOne={data.yearelectric[0].name[2]} nameTwo={data.yearelectric[0].name[3]}></Yearelectric>
+           						<Yearelectric title={data.yearelectric[0].title[1]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[0]} nameOne={data.yearelectric[0].name[2]} nameTwo={data.yearelectric[0].name[3]}></Yearelectric>
            					</div>
            				</div>
            			</div>
-           			
            		</div>
                 <div className={`${styles.right} ${styles.boxShadow}`}>
                 	<h3>

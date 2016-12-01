@@ -1,6 +1,15 @@
 .box{
     overflow:hidden;
     padding-bottom:10px;
+    .boxcover{
+    position:fixed;
+    height:100%;
+    width:100%;
+    z-index:1000;
+    background:black;
+    display:none;
+    opacity:0.6;
+    }
      .shadow:hover{
       box-shadow:0 0 15px #fff;
      }
@@ -13,24 +22,23 @@
     margin:0 auto;
     border:1px solid #282F37;
     position:relative;
-    border-radius:10px;
       background-color: #282F37;
       .lkua{
       border:3px solid #5B9BD5;
-      height:18px;
-      width:18px;
+      height:14px;
+      width:14px;
       position:absolute;
-      right:247px;
-      top:69px;
+      right:204px;
+      top:68px;
       z-index:100;
       }
       .rkua{
       border:3px solid #ED7D31;
-      height:18px;
-      width:18px;
+      height:14px;
+      width:14px;
       position:absolute;
-      right:113px;
-      top:69px;
+      right:92px;
+      top:68px;
       z-index:100;
       }
       .coverbox{
@@ -40,22 +48,22 @@
       .tik{
       color:#fff;
       position:absolute;
-        font-size:25px;
+        font-size:16px;
         top:25px;
-        left:100px;
+        left:70px;
         font-weight:700;
       }
       .imgq{
-        width:50px;
+        width:16px;
         height:30px;
         position:absolute;
-        top:23px;
-        left:40px;
+        top:20px;
+        left:46px;
         text-align:center;
         line-height:30px;
         img{
-          height:40px;
-          width:40px;
+          height:16px;
+          width:16px;
         }
       }
     }
@@ -73,7 +81,7 @@
     background: linear-gradient(to bottom,#242a32 ,#1f2025);
     li{
      float:left;
-     font-size:20px;
+     font-size:16px;
      font-family: '微软雅黑';
      color:white;
      height:35px;
@@ -87,13 +95,11 @@
      }
      li:last-child{
      color: #20FEFF;
-       position:absolute;
-       top:-5px;
-       right:412px;
+      
        border:1px solid #20FEFF;
-       width:110px;
-       height:45px;
-       line-height:45px;
+       width:100px;
+       height:40px;
+       line-height:40px;
        margin-bottom:25px;
        border-radius:45px;
        background:radial-gradient(#1c444a, #1c3f46);
@@ -127,10 +133,11 @@
             margin-bottom: 12px;
            }
     .buttons{
-    width:271px;
+    width:254px;
     position:absolute;
     top:0px;
     right:0px;
+
     }
     .buttons{
     height:60px;
@@ -140,14 +147,14 @@
       height:30px;
       line-height:20px;
       text-align:center;
-      font-size:20px;
-      border-radius:10px;
+      font-size:16px;
       font-family:'微软雅黑';
       margin-left:12px;
       background-color:white;
       color: #20FEFF;
       border:1px solid #20FEFF;
       background:radial-gradient(#1c444a, #1c3f46);
+         border-radius:15px;
       }
       button:hover{
                 background:#20FEFF;
@@ -155,5 +162,52 @@
           box-shadow:0px 0px 10px  #20FEFF;
       }
      
+    }
+    .more:hover{
+     box-shadow:0 0 15px #fff;
+    }
+    .more{
+    background:#21242a;
+    position:absolute;
+    z-index:1200;
+    width:96%;
+    margin-left:-5px;
+    top:50%;
+    left:51%;
+    overflow:hidden;
+    transform:translate(-50%,-50%);
+    box-sizing:border-box;
+    display:none;
+    .moretitle{
+    width:100%;
+    height:60px;
+    background:#21242a;
+    position:relative;
+    z-index:2000;
+    height:60px;
+    div{
+    display:inline-block;
+    font-size:16px;
+    float:right;
+    line-height:60px;
+    cursor:pointer;
+    margin-right:50px;
+       color:#fff;
+    }
+    p{
+    position:absolute;
+    top:18px;
+    left:7%;
+    font-size:16px;
+    color:#fff;
+    }
+    img{
+    position:absolute;
+    top:22px;
+    left:5%;
+    height:16px;
+    width:16px;
+    }
+    }
     }
 }

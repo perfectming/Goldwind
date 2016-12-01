@@ -10,10 +10,11 @@ let Component = React.createClass({
     },
     render() {
 
-      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA}=this.props;
+      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width}=this.props;
         let configPie = {
             chart: {
-                height:340,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -40,9 +41,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -87,26 +91,59 @@ let Component = React.createClass({
                 },
                 categories:machine,
             },
-            yAxis: {
-                labels: {
-                    y: 10, //x轴刻度往下移动20px
-                    style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
-                    }
-                },
+             yAxis:
+                [{labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
             },
+                    title:{
+                        text:'KWH',
+                        align:'high',
+                        rotation:'0',
+                        y: -17,
+                        x: 36,
+                        style:{
+                            color:'#fff',
+                            fontSize:'14px'
+                        }
+                    }
+                }, {
+                    labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
+            title: {
+                text: 'PBA',
+                align:'high',
+                rotation:'0',
+                 y: -17,
+                x: 136,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
+            },
+            opposite: true
+        }],
             //几条数据
             series: [{
-                name: '收入',
+                name: '实际发电量',
                 type: 'column',
-                data: fanProfit
+                data: fanProfit,
+                borderRadius: 4,
             },
             {
                 name: '四',
                 type: 'column',
                 data: fanCost,
                 stack:'waste',
+                borderRadius: 2,
             },
                 {
                     name: '大',
@@ -115,13 +152,13 @@ let Component = React.createClass({
                     stack:'waste',
                 },
                 {
-                    name: '损',
+                    name: '类',
                     type: 'column',
                     data: fanCost2,
                     stack:'waste',
                 },
                 {
-                    name: '失发电量',
+                    name: '损失发电量',
                     type: 'column',
                     data: fanCost3,
                     stack:'waste',

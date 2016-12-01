@@ -13,9 +13,9 @@ let Component = React.createClass({
     	let {title,month,actrul,plan,unit,nameOne,nameTwo}=this.props;
         let configPie = {
             chart: {
-                height:320,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:280,
+                backgroundColor: '#262a32',
+                plotBackgroundColor: '#262a32',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -28,7 +28,7 @@ let Component = React.createClass({
                  x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
             },
@@ -38,7 +38,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
@@ -50,7 +50,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#1E664A', '#4CDB9D','#000','#134833', '#082B1F']
+            colors: [ '#33BAC0', '#5298D3','#31BAC0','#134833', '#082B1F']
             ,
             plotOptions: {
                 column: {
@@ -67,7 +67,7 @@ let Component = React.createClass({
                     y: 20, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        fontSize:'10px'  //字体
                     }
                 },
                 categories:month,
@@ -81,7 +81,7 @@ let Component = React.createClass({
 	                y: -15,
 	                x:-10,
 	                style:{
-	                	fontSize:'14px',
+	                	fontSize:'10px',
 	                	color:'white',
 	                }
                 },

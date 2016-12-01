@@ -31,7 +31,7 @@ import u871 from '../img/comp/ss_icon.png';
 import Baotou from '../comp/ludi/branch/Baotou.jsx';
 import Windbtpage from '../comp/ludi/branch/Windbtpage.jsx';
 import Xilin from '../comp/ludi/branch/Xilin.jsx';
-import Area from '../comp/ludi/instrumentpanel/Area.jsx';
+import Areaa from '../comp/ludi/instrumentpanel/Area.jsx';
 import Group from '../comp/ludi/instrumentpanel/Group.jsx';
 import Windpage from '../comp/ludi/instrumentpanel/Windpage.jsx';
 import GroupKBA from '../comp/ludi/KBA/GroupKBA.jsx';
@@ -39,6 +39,10 @@ import AreaKBA from '../comp/ludi/KBA/AreaKBA.jsx';
 import LoseElectric from '../comp/ludi/KBA/LoseElectric.jsx';
 import DeviceLose from '../comp/ludi/KBA/DeviceLose.jsx';
 import TopTen from '../comp/ludi/KBA/TopTen.jsx';
+import ServiceLose from '../comp/ludi/KBA/ServiceLose.jsx';
+import PerformLose from '../comp/ludi/KBA/PerformLose.jsx';
+import MaintainLose from '../comp/ludi/KBA/MaintainLose.jsx';
+import LimitLose from '../comp/ludi/KBA/LimitLose.jsx';
 
 import Healthy_one from '../comp/jhp/Healthy_one.jsx';
 import Healthy from '../comp/jhp/Healthy.jsx';
@@ -68,6 +72,13 @@ import Profitss from '../comp/mbixxd/tba/Profitss.jsx';
 import Profitsss from '../comp/mbixxd/tbatime/Profitsss.jsx';
 
 import Legend from '../comp/super/tootipbox.jsx';
+
+import Health_main from '../comp/healthManagement/Health_main.jsx';
+import History_list from '../comp/healthManagement/history.jsx';
+import Manaport from '../comp/healthManagement/manaport.jsx';
+import Subscribe from '../comp/healthManagement/subscribe.jsx';
+import Yujing from '../comp/healthManagement/yujing.jsx';
+
 
 
 
@@ -113,10 +124,13 @@ let Component = React.createClass({
                 {showPage === 'baotou' && <Baotou></Baotou>}
                 {showPage === 'windbtpage' && <Windbtpage></Windbtpage>}
                 {showPage === 'xilin' && <Xilin></Xilin>}
-                {showPage === 'area' && <Area></Area>}
+                {showPage === 'area' && <Areaa></Areaa>}
                 {showPage === 'group' && <Group></Group>}
                 {showPage === 'windpage' && <Windpage></Windpage>}
-
+                {showPage === 'serviceLose' && <ServiceLose></ServiceLose>}
+                {showPage === 'performLose' && <PerformLose></PerformLose>}
+                {showPage === 'maintainLose' && <MaintainLose></MaintainLose>}
+                {showPage === 'limitLose' && <LimitLose></LimitLose>}
                 {showPage === 'groupKBA' && <GroupKBA></GroupKBA>}
                 {showPage === 'areaKBA' && <AreaKBA></AreaKBA>}
                 {showPage === 'loseElectric' && <LoseElectric></LoseElectric>}
@@ -154,6 +168,13 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
+
+                {showPage === 'health_main' && <Health_main></Health_main>}
+                {showPage === 'history_list' && <History_list></History_list>}
+                {showPage === 'manaport' && <Manaport></Manaport>}
+                {showPage === 'subscribe' && <Subscribe></Subscribe>}
+                {showPage === 'yujing' && <Yujing></Yujing>}
+
 
                 <div className={styles.clearbox}></div>
             </div>

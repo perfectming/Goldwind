@@ -8,17 +8,17 @@ let Component = React.createClass({
     },
     render() {
        
-     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height}=this.props
+     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,width}=this.props
         let configPie = {
             chart: {
-                height:340,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
             },
             title: {
                 text: '',
@@ -38,9 +38,12 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
 
@@ -60,7 +63,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 15
+                    pointWidth: 15,
+                    borderRadius: 4,
                 },
                 series: {
                     cursor: 'pointer',
@@ -87,12 +91,23 @@ let Component = React.createClass({
                 categories:machine,
             },
              yAxis: [{
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 40,
+                style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                }
             }
         }, {
             title: {
@@ -110,13 +125,15 @@ let Component = React.createClass({
                 name: '实际收益',
                 type: 'column',
                 data: areaRecordProfitR,
-                pointWidth:15
+                pointWidth:15,
+                borderRadius: 4,
             },
             {
                 name: '收入成本',
                 type: 'column',
                 data: areaRecordCostR,
-                pointWidth:15
+                pointWidth:15,
+                borderRadius: 4,
             },
             {
                     name:"TBA",

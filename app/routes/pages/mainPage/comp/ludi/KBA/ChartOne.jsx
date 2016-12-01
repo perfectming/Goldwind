@@ -26,17 +26,17 @@ let Component = React.createClass({
                 align:'left',
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
             },
             //图例说明
             legend: {
                 align:"center",
-                verticalAlign: "top",
+                verticalAlign: "bottom",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
@@ -50,21 +50,15 @@ let Component = React.createClass({
             },
             colors: [ '#4cdb9d', '#2e75b6','#e2ac00','#009a46', '#ff6600','#5b9bd5'],
             plotOptions: {
-                pie: {
-                	dataLabels: {
-	                    enabled: true,
-	                    distance: -50,
-	                    style: {
-	                        fontSize: '16',
-	                        color: 'white',
-	                        textShadow: '0px 1px 2px black'
-	                    }
-                	},
-	            startAngle: -180,
-	            endAngle: 180,
-	            center: ['50%', '45%']
-            	}
-            },
+	            pie: {
+	                allowPointSelect: true,
+	                cursor: 'pointer',
+	                dataLabels: {
+	                    enabled: false
+	                },
+	                showInLegend: true
+	            }
+	        },
             xAxis: {
                 lineWidth: 1,
                //lineColor: "red",
@@ -94,7 +88,6 @@ let Component = React.createClass({
             series: [{
             type: 'pie',
             name: '集团区域1',
-            innerSize: '80%',
             data: lose,
         }]
         };

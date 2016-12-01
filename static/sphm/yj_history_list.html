@@ -1,0 +1,426 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>智能运营SOAM平台2.0</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="css/jquery.page.css" type="text/css">
+	<link rel="stylesheet" href="css/jqtransform.css" />
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/jquery.page.js"></script>
+	<script type="text/javascript" src="laydate/laydate.js"></script>
+    <script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="js/jquery.jqtransform-min.js"></script>
+
+</head>
+<body>
+    <div class="container history_list">
+		<div class="search">
+			<div class="right_btn">
+				<button type="button">查询</button>
+				<button class="export" type="button">数据导出</button>
+			</div>
+			<div class="box">
+				<div class="wrap">
+					<label>工作编号</label>
+					<input type="text" name="workcode" class="txt" id="workcode" />
+					<label class="ml15">执行单编号</label>
+					<input type="text" name="zxdcode" class="txt" id="zxdcode" />
+					<label class="ml15">处理状态</label>
+					<span class="tab" id="cl_status">
+						<input type="button" class="active" value="全部" />
+						<input type="button" value="未处理" />
+						<input type="button" value="处理中" />
+						<input type="button" value="处理完成" />
+					</span>
+					<label class="ml15">审核状态</label>
+					<span class="tab" id="sh_status">
+						<input type="button" class="active" value="全部" />
+						<input type="button" value="待审核" />
+						<input type="button" value="待派工" />
+						<input type="button" value="执行中" />
+						<input type="button" value="已结项" />
+						<input type="button" value="已回退" />
+					</span>
+				</div>
+				<div class="wrap">
+					<label>预警时间</label>
+					<span class="tab" id="yj_time">
+						<input type="button" class="active" value="全部" />
+						<input type="button" value="今天" />
+						<input type="button" value="昨天" />
+						<input type="button" value="近一周" />
+						<input type="button" value="本月" />
+						<input type="button" value="本年" />
+					</span>
+					<input type="text" name="begindate" class="txt date" id="begindate" /> - <input type="text" name="enddate" class="txt date" id="enddate" />
+					<label class="ml15">等级</label>
+					<span class="tab" id="level">
+						<input type="button" class="active" value="全部" />
+						<input type="button" value="1级" />
+						<input type="button" value="2级" />
+						<input type="button" value="3级" />
+						<input type="button" value="4级" />
+						<input type="button" value="5级" />
+					</span>
+				</div>
+				<div class="wrap"><form class="form">
+					<label>预警来源</label>
+					<select id="yj_source" name="yj_source">
+						<option selected="" value="请选择">请选择</option>
+						<option value="发电机温度异常">发电机温度异常</option>
+						<option value="水流量低警告">水流量低警告</option>
+						<option value="发电机温度异常">发电机温度异常</option>
+						<option value="水流量低警告">水流量低警告</option>
+					</select>
+					<span class="ml15">隐患点</span>
+					<select id="yhd" name="yhd">
+						<option selected="" value="请选择">请选择</option>
+						<option value="发电机温度异常">发电机温度异常</option>
+						<option value="水流量低警告">水流量低警告</option>
+						<option value="发电机温度异常">发电机温度异常</option>
+						<option value="水流量低警告">水流量低警告</option>
+					</select>
+					<span class="ml15">风场</span>
+					<select id="fengchang" name="fengchang">
+						<option selected="" value="请选择">请选择</option>
+						<option value="发电机温度异常">发电机温度异常</option>
+						<option value="水流量低警告">水流量低警告</option>
+						<option value="发电机温度异常">发电机温度异常</option>
+						<option value="水流量低警告">水流量低警告</option>
+					</select>
+					<span class="ml15">机组</span>
+					<select id="jizu" name="jizu">
+						<option selected="" value="请选择">请选择</option>
+						<option value="发电机温度异常">发电机温度异常</option>
+						<option value="水流量低警告">水流量低警告</option>
+						<option value="发电机温度异常">发电机温度异常</option>
+						<option value="水流量低警告">水流量低警告</option>
+					</select>
+					<span class="ml15">准确度</span>
+					<span class="tab" id="zqd">
+						<input type="button" class="active" value="全部" />
+						<input type="button" value="1星" />
+						<input type="button" value="2星" />
+						<input type="button" value="3星" />
+						<input type="button" value="4星" />
+						<input type="button" value="5星" />
+					</span></form>
+				</div>
+			</div>
+		</div>
+		<table class="grid" border="0" border-collapse="0" border-spacing="0">
+			<thead>
+				<tr>
+					<td style="width:50px;">&nbsp;</td>
+					<td>预警时间</td>
+					<td>区域</td>
+					<td>风场</td>
+					<td>机组</td>
+					<td>隐患点</td>
+					<td>等级</td>
+					<td><p class="w300">处理方案</p></td>
+					<td>状态</td>
+					<td>流程</td>
+					<td>准确</td>
+					<td>执行单编号</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" value="1" class="chk" name="chk" /></td>
+					<td>2016-01-02 20:33</td>
+					<td>巴盟</td>
+					<td>吉木乃</td>
+					<td>29</td>
+					<td>发动机温度异常</td>
+					<td>2级</td>
+					<td><p class="substr w300">检查柜体</p></td>
+					<td class="red">未处理</td>
+					<td>待派工</td>
+					<td>5星</td>
+					<td>123456789</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" class="chk" name="chk" /></td>
+					<td>2016-01-02 20:33</td>
+					<td>巴盟</td>
+					<td>吉木乃</td>
+					<td>29</td>
+					<td>发动机温度异常</td>
+					<td>2级</td>
+					<td><p class="substr w300">检查柜体</p></td>
+					<td class="red">未处理</td>
+					<td>待派工</td>
+					<td>5星</td>
+					<td>123456789</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" class="chk" name="chk" /></td>
+					<td>2016-01-02 20:33</td>
+					<td>巴盟</td>
+					<td>吉木乃</td>
+					<td>29</td>
+					<td>发动机温度异常</td>
+					<td>2级</td>
+					<td><p class="substr w300">检查柜体</p></td>
+					<td class="red">未处理</td>
+					<td>待派工</td>
+					<td>5星</td>
+					<td>123456789</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" class="chk" name="chk" /></td>
+					<td>2016-01-02 20:33</td>
+					<td>巴盟</td>
+					<td>吉木乃</td>
+					<td>29</td>
+					<td>发动机温度异常</td>
+					<td>2级</td>
+					<td><p class="substr w300">检查柜体</p></td>
+					<td class="red">未处理</td>
+					<td>待派工</td>
+					<td>5星</td>
+					<td>123456789</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" class="chk" name="chk" /></td>
+					<td>2016-01-02 20:33</td>
+					<td>巴盟</td>
+					<td>吉木乃</td>
+					<td>29</td>
+					<td>发动机温度异常</td>
+					<td>2级</td>
+					<td><p class="substr w300">检查柜体</p></td>
+					<td class="red">未处理</td>
+					<td>待派工</td>
+					<td>5星</td>
+					<td>123456789</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" class="chk" name="chk" /></td>
+					<td>2016-01-02 20:33</td>
+					<td>巴盟</td>
+					<td>吉木乃</td>
+					<td>29</td>
+					<td>发动机温度异常</td>
+					<td>2级</td>
+					<td><p class="substr w300">检查柜体</p></td>
+					<td class="red">未处理</td>
+					<td>待派工</td>
+					<td>5星</td>
+					<td>123456789</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" class="chk" name="chk" /></td>
+					<td>2016-01-02 20:33</td>
+					<td>巴盟</td>
+					<td>吉木乃</td>
+					<td>29</td>
+					<td>发动机温度异常</td>
+					<td>2级</td>
+					<td><p class="substr w300">检查柜体</p></td>
+					<td class="red">未处理</td>
+					<td>待派工</td>
+					<td>5星</td>
+					<td>123456789</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" class="chk" name="chk" /></td>
+					<td>2016-01-02 20:33</td>
+					<td>巴盟</td>
+					<td>吉木乃</td>
+					<td>29</td>
+					<td>发动机温度异常</td>
+					<td>2级</td>
+					<td><p class="substr w300">检查柜体</p></td>
+					<td class="red">未处理</td>
+					<td>待派工</td>
+					<td>5星</td>
+					<td>123456789</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" class="chk" name="chk" /></td>
+					<td>2016-01-02 20:33</td>
+					<td>巴盟</td>
+					<td>吉木乃</td>
+					<td>29</td>
+					<td>发动机温度异常</td>
+					<td>2级</td>
+					<td><p class="substr w300">检查柜体</p></td>
+					<td class="red">未处理</td>
+					<td>待派工</td>
+					<td>5星</td>
+					<td>123456789</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" class="chk" name="chk" /></td>
+					<td>2016-01-02 20:33</td>
+					<td>巴盟</td>
+					<td>吉木乃</td>
+					<td>29</td>
+					<td>发动机温度异常</td>
+					<td>2级</td>
+					<td><p class="substr w300">检查柜体</p></td>
+					<td class="red">未处理</td>
+					<td>待派工</td>
+					<td>5星</td>
+					<td>123456789</td>
+				</tr>
+			</tbody>
+		</table>
+		<div id="page" class="pt15"></div>
+
+	</div>
+	<div class="dialog gd_detail">
+        <div class="opacity"></div>
+        <div class="content" style="width:1000px;margin-left:-500px;">
+            <a class="close"></a>
+            <h1><span>审核退回</span><span>开始派工</span></h1>
+            <div class="scroll" style="height:750px;overflow:auto;">
+				<div class="wrap">
+					<label>工单编号</label><span>123456789789</span>
+					<label>状态</label><span>未处理</span>
+					<label>流程</label><span class="red">待审核</span>
+					<label>隐患点</label><span>发电机温度异常</span>
+					<label>预警等级</label><span>4级</span>
+				</div>
+				<div class="wrap">
+					<label>区域</label><span>巴盟</span>
+					<label>风电场</label><span>吉木乃</span>
+					<label>机组</label><span>XJJMN002-SW766</span>
+					<label>预警时间</label><span>2016年11月10日 15:22</span>
+				</div>
+				<div class="wrap">
+					<label>处理时间</label><span>2016年11月10日 15:22</span>
+					<label>处理结果</label><span>111213231231346</span>
+					<label>预警准确度</label><span class='x'>&nbsp;<p><a></a><a></a><a></a><a></a></p></span>
+				</div>
+				<div class="wrap">
+					<label>备注</label>
+					<div class="mul_text">
+						<p>2016年11月22日 19:15:12     李晓娟（45554）   现场巡检时发现异常情况，建立一条工单有待跟踪</p>
+					</div>
+				</div>
+				<div class="wrap">
+					<label>系统推荐处理方案</label>
+					<div class="mul_text">
+						
+					</div>
+				</div>
+				<div class="wrap">
+					<label>推荐专家</label>
+					<div class="zj clearfix">
+						<div class="item">
+							<img src="images/u1421.png" />
+							<h2>李长峰李长峰李长峰李长峰李长峰李长峰</h2>
+							<h3>金风科技</h3>
+							<p>十年维护经验，擅长处理大部件发电机温度异常、水流量低等故障。</p>
+						</div>
+						<div class="item">
+							<img src="images/u1421.png" />
+							<h2>李长峰</h2>
+							<h3>金风科技</h3>
+							<p>十年维护经验，擅长处理大部件发电机温度异常、水流量低等故障。</p>
+						</div>
+						<div class="item">
+							<img src="images/u1421.png" />
+							<h2>李长峰</h2>
+							<h3>金风科技</h3>
+							<p>十年维护经验，擅长处理大部件发电机温度异常、水流量低等故障。</p>
+						</div>
+					</div>
+				</div>
+				<div class="wrap">
+					<label>流程记录</label>
+					<div class="liucheng">
+						<div class="line"><i></i></div>
+						<div class="wrap">
+							<i></i>
+							<label>2016年11月10日 15:22</label>
+							<label class="yellow">金风 - 生成预警工单</label>
+						</div>
+						<div class="wrap">
+							<i></i>
+							<label>2016年11月10日 15:22</label>
+							<label class="yellow">金风 - 生成预警工单</label>
+							<div class="mul_text">
+								<p>2016年11月22日 19:15:12     李晓娟（45554）   现场巡检时发现异常情况，建立一条工单有待跟踪</p>
+								<p>2016年11月22日 19:15:12     李晓娟（45554）   现场巡检时发现异常情况，建立一条工单有待跟踪</p>
+								<p>2016年11月22日 19:15:12     李晓娟（45554）   现场巡检时发现异常情况，建立一条工单有待跟踪</p>
+							</div>
+						</div>
+						<div class="wrap">
+							<i></i>
+							<label>2016年11月10日 15:22</label>
+							<label>审核通过</label>
+						</div>
+						<div class="wrap">
+							<i></i>
+							<label>2016年11月10日 15:22</label>
+							<label>审核通过</label>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+	<script>
+	var start = {
+	  elem: '#begindate',
+	  format: 'YYYY-MM-DD',
+	  choose: function(datas){
+		 end.min = datas; //开始日选好后，重置结束日的最小日期
+		 end.start = datas //将结束日的初始值设定为开始日
+	  }
+	};
+	var end = {
+	  elem: '#enddate',
+	  format: 'YYYY-MM-DD',
+	  choose: function(datas){
+		start.max = datas; //结束日选好后，重置开始日的最大日期
+	  }
+	};
+	laydate(start);
+	laydate(end);
+
+	$(".form").Validform({
+		tiptype:function(msg,o,cssctl){
+		},
+		usePlugin:{
+			jqtransform:{
+				//会在当前表单下查找这些元素;
+				selector:"select"	
+			}
+		}
+	});
+
+	$(function(){
+		$(".search .tab input").click(function(){
+			$(this).addClass("active").siblings().removeClass("active");
+		})
+
+		$("#page").Page({
+			  totalPages: 9,//分页总数
+			  liNums: 7,//分页的数字按钮数(建议取奇数)
+			  activeClass: 'activP', //active 类样式定义
+			  callBack : function(page){
+				//alert(page)
+			  }
+		});
+	
+		$(".grid tr").on("dblclick",function(event){
+			var _id = $(this).find("input[type='checkbox']").val();
+			
+			$(".dialog").show();
+			event.stopPropagation();
+		})
+	})
+	</script>
+</body>
+</html>
