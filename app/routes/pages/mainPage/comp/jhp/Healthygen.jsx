@@ -60,16 +60,17 @@ let Component = React.createClass({
 
 
             <div className={styles.box}>
+                <div className={styles.light} id="light"> </div>
 
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
                         <div className={styles.logo3}>
-                            {text0[3]+"月"+text0[3]+"区域各风机发电量"}
+                            {"各风机发电量"}
                         </div>
                         <span onClick={()=>hideit()}>×</span>
                     </div>
-                    <Hly_genp    height={330} widths={1600} barlopowerp={x7}
+                    <Hly_genp    height={500} widths={1620} barlopowerp={x7}
                                  barlopowers={x7}  barRotime={x6}  text={text0[3]+"月"+text0[3]+"区域各风机发电量"}></Hly_genp>
 
 
@@ -111,7 +112,7 @@ let Component = React.createClass({
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
                         <div className={styles.rbox30}>
                             <div></div>
-                            <span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机PBA"}</span>
+                            <span>{"各风机发电量"}</span>
                         </div>
                         <div className={styles.rbox3}>
                             <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
@@ -153,6 +154,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor:(value,key)=>{
+            dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind',value.plan ));
             dispatch(actions.setVars('winds',value.actrul ));
@@ -190,9 +192,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         more: () => {
             $("#boxhidden").show();
+            $("#light").show();
         },
         hideit: () =>{
             $("#boxhidden").hide();
+            $("#light").hide();
         }
 
     };

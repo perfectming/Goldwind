@@ -45,6 +45,16 @@ let Component = React.createClass({
        let{actbt=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban}=this.props;
           return (
            <div className={styles.box}>
+            <div className={styles.boxcover} id='boxcover'></div>
+             <div className={styles.more} id="sss">
+                <div className={styles.moretitle}>
+                <img src={icono}/>
+                <p>11月份各风机PBA</p>
+                <div onClick={()=>close()}>x</div>
+                </div>
+                <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee } height={500} TBAA={TBAA} width={1750}></Fanchart>
+
+                 </div>
                <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
@@ -173,18 +183,15 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('machinee', x2))
             dispatch(actions.setVars('areaRecordCostRR', x3))
         },
-        // more:()=>{
-        //   (function(){
-        //     let ban=document.getElementsByClassName('morebox');
-        //      ban.style.display='block';
-        //   })()
-       
-        // },
-        // close:()=>{
-        //   (function(){
-        //     document.getElementsByClassName('morebox').style.display=none
-        //   })()
-        // }
+         more:()=>{
+             $("#sss").show();
+             $('#boxcover').show();
+             // $('.box').css('opacity',".5")
+        },
+        close:()=>{
+            $("#sss").hide();
+              $('#boxcover').hide();
+        }
 
     };
 

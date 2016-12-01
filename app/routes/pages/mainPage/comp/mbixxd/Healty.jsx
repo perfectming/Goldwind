@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Healtychart from './Healtychart.jsx';
 import icono from './wind_logo.png';
+var $=require('jquery');
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
@@ -19,10 +20,19 @@ let Component = React.createClass({
         let areaRecordProfit=data.areaRecordProfit;
         let machineE=data.machineE;
         let text =data.textHealty;
-      let{actbt=0,changpage,wind,gogogo,windP,actbtt}=this.props;
+      let{actbt=0,changpage,wind,gogogo,windP,actbtt,more,close}=this.props;
         return (
 
             <div className={styles.box}>
+            <div className={styles.boxcover} id='boxcover'></div>
+             <div className={styles.more} id="sss">
+                <div className={styles.moretitle}>
+                <img src={icono}/>
+                <p>11月份各风机PBA</p>
+                <div onClick={()=>close()}>x</div>
+                </div>
+          <Healtychart machineE={windP==null?machineE:windP} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} width={1750} height={500}></Healtychart>
+             </div>
                  <ul className={styles.monthbox}>
                     {
                         data.healthy.map((value,key)=>{
@@ -33,7 +43,7 @@ let Component = React.createClass({
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
-                               <Healtychart machineE={windP==null?machineE:windP} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind}></Healtychart>
+                               <Healtychart machineE={windP==null?machineE:windP} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} height={700}></Healtychart>
                         </div>
                          <div className={styles.tik}>
                         <p>{text[actbt]}</p>
@@ -89,8 +99,7 @@ const mapDispatchToProps = (dispatch) => {
         },
          gogogo:(healthy)=>{
               (function(){
-                var liL=document.getElementsByClassName('red')[0];
-                console.log(liL);
+               console.log($('.red').eq(1));
                 healthy[key].plan.sort(function(a,b){
                       return b.plan - a.plan;
                   })
@@ -102,7 +111,16 @@ const mapDispatchToProps = (dispatch) => {
               })()
                   dispatch(actions.setVars('wind', x2));
                   dispatch(actions.setVars('windP',x1));
-          }
+          },
+          more:()=>{
+             $("#sss").show();
+             $('#boxcover').show();
+             // $('.box').css('opacity',".5")
+        },
+        close:()=>{
+            $("#sss").hide();
+              $('#boxcover').hide();
+        }
 
     }
      

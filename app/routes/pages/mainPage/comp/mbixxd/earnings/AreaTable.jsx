@@ -19,7 +19,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+               
             },
             title: {
                 text: '',
@@ -38,6 +38,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -115,12 +118,14 @@ let Component = React.createClass({
             series: [{
                 name: '实际收益',
                 type: 'column',
-                data: areaRecordProfit
+                data: areaRecordProfit,
+                borderRadius: 7,
             },
             {
             	name: '收入成本',
                 type: 'column',
-                data: areaRecordCost
+                data: areaRecordCost,
+                borderRadius: 7,
             },{
                     name:"TBA",
                     type:'line',

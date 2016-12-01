@@ -1,15 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Hly_t from './Hly_t.jsx';
-import Hly_a from './Hly_a.jsx';
-import Hly_pba from './Hly_pba.jsx';
-import Hly_pbas from './Hly_pbas.jsx';
-import Hly_r from './Hly_r.jsx';
-import Hly_rs from './Hly_rs.jsx';
-import Hly_d from './Hly_d.jsx';
-var actions = require('redux/actions');
+import Hly_pbaone from './Hly_pbaone.jsx';
+import Hly_pbatwo from './Hly_pbatwo.jsx';
 
+var actions = require('redux/actions');
+var $ = require("jquery");
 
 let data = require('./Healthy-data');
 let month = data.data.line_month;
@@ -28,6 +24,28 @@ let barLoPowerValue3 = data.data.bar_roPowerses;
 let barLoPowerValues3 = data.data.bar_roPower;
 let barLdpowerValue3 = data.data.line_lpower;
 
+let sort0 = data.data.sort1;
+let x0 = [];
+let x1 = [];
+let x2 = [];
+let x3 = [];
+let x4 = [];
+let x5 = [];
+let x6=[];
+let x7=[];
+(function () {
+
+    for (var i = 0; i < 12; i++) {
+        x4[i] = sort0[i].name;
+        x5[i] = sort0[i].time;
+    }
+    for(var i=0;i<sort0.length;i++){
+        x6[i]=sort0[i].name;
+        x7[i]=sort0[i].time;
+    }
+
+})();
+
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -35,13 +53,31 @@ let Component = React.createClass({
 
 
     render() {
-        let {wind,winds,windss,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
+        let {mon,wind,winds,windss,buttonAction,actbt=0,changecolor, inputOnChange, hideit,gogogo,back,more,arr,arr2} = this.props;
         return (
 
 
 
 
             <div className={styles.box}>
+
+                <div className={styles.light} id="light"> </div>
+
+                <div className={`${styles.boxhidden} ${styles.box_shadow}`}   id="boxhidden">
+                    <div className={styles.hidden_top}>
+                        <div className={styles.logo2}></div>
+                        <div className={styles.logo3}>
+                            {text0[actbt] + "月份集团各区域PBA"}
+                        </div>
+                        <span onClick={()=>hideit()}>×</span>
+                    </div>
+                    <Hly_pbatwo height={500} widths={1620} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
+                              barRotimes={x6} barLoPowerValue={x7}
+                              barLoPowerValues={x7} barLdpowerValue={x7}></Hly_pbatwo>
+
+
+
+                </div>
 
 
                 <div className={styles.onmonth}>
@@ -60,7 +96,7 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_pba  height={400} text={text0[actbt]+"月份各风场PBA"} barRotime={barRotime2}  barLdpowerValue={winds==undefined? barLoPowerValue1:winds} barLoPowerValues={wind==undefined? barLoPowerValue2:wind} barLoPowerValue={windss==undefined? barLoPowerValue2:windss} ></Hly_pba>
+                        <Hly_pbaone  height={400} text={text0[actbt]+"月份各风场PBA"} barRotime={barRotime2}  barLdpowerValue={winds==undefined? barLoPowerValue1:winds} barLoPowerValues={wind==undefined? barLoPowerValue2:wind} barLoPowerValue={windss==undefined? barLoPowerValue2:windss} ></Hly_pbaone>
                         <div className={styles.logo}>
 
                         </div>
@@ -74,9 +110,19 @@ let Component = React.createClass({
                     <div className={`${styles.box_shadow} ${styles.fbox2}`}>
                         <div className={styles.rbox31}>
                             <div></div>
-                            <span>{text0[actbt]+"月"+text0[5]+"区域各风机PBA"}</span>
+                            <span></span>
                         </div>
-                        <Hly_pbas  height={390} text={text0[3]+'区域'+text0[4]+'风场各风机PBA'} barRotimes={barRotimes3} barLoPowerValue={barLoPowerValue1} barLoPowerValues={barLoPowerValue2} barLdpowerValue={barLoPowerValue2}></Hly_pbas>
+                        <div className={styles.rbox33}>
+
+                            <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
+                            <button className={styles.button} onClick={() => back(sort0)}>后10</button>
+                            <button className={styles.button} onClick={() => more()}>更多</button>
+                        </div>
+
+                        <Hly_pbatwo  height={390} text={text0[3]+'区域'+text0[4]+'风场各风机PBA'} barRotimes={arr2 == null ? x4 : arr2}
+                                     barLoPowerValue={arr == null ? x5 : arr}
+                                     barLoPowerValues={arr == null ? x5 : arr}
+                                     barLdpowerValue={arr == null ? x5 : arr}></Hly_pbatwo>
                         <div className={styles.logomini}>
 
                         </div>
@@ -94,6 +140,8 @@ const mapStateToProps = (state) => {
         wind:state.vars.wind,
         winds:state.vars.winds,
         windss:state.vars.windss,
+        arr: state.vars.arr,
+        arr2: state.vars.arr2,
     }
 };
 
@@ -105,10 +153,49 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor:(value,key)=>{
+            dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind',value.plan ));
             dispatch(actions.setVars('winds',value.actrul ));
             dispatch(actions.setVars('windss',value.actruls ));
+        },
+        gogogo: (sort0) => {
+            (function () {
+                sort0.sort(function (a, b) {
+                    return b.time - a.time;
+                })
+                for (var i = 0; i < 12; i++) {
+                    x0[i] = sort0[i].name;
+                    x1[i] = sort0[i].time;
+                }
+
+            })();
+            dispatch(actions.setVars('arr', x1))
+            dispatch(actions.setVars('arr2', x0))
+
+
+        },
+        back: (sort0) => {
+            (function () {
+                sort0.sort(function (a, b) {
+                    return a.time - b.time;
+                })
+                for (var i = 0; i < 12; i++) {
+                    x2[i] = sort0[i].name;
+                    x3[i] = sort0[i].time;
+                }
+
+            })();
+            dispatch(actions.setVars('arr', x3))
+            dispatch(actions.setVars('arr2', x2))
+        },
+        more: () => {
+            $("#light").show();
+            $("#boxhidden").show();
+        },
+        hideit: () =>{
+            $("#boxhidden").hide();
+            $("#light").hide();
         }
     };
 };

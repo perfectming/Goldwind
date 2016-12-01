@@ -38,6 +38,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -56,6 +59,8 @@ let Component = React.createClass({
                     pointPadding: 0,
                     borderWidth: 0,
                     pointWidth: 15,
+                    borderRadius: 3,
+                    pointPadding:0.1,
                 }, series: {
                     cursor: 'pointer',
                     events: {

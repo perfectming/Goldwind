@@ -45,6 +45,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -67,6 +70,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 10,
                     pointWidth: 50,
+                    borderRadius: 7
 
                 }, series: {
                     cursor: 'pointer',
@@ -123,6 +127,7 @@ let Component = React.createClass({
                 shadow:true,
                 pointWidth: 25,
                 borderWidth: 0,
+                pointPlacement: 0,
             },
                 {
                     name: '停机时间',
@@ -131,6 +136,7 @@ let Component = React.createClass({
                     color:'#ccc',
                     pointWidth: 25,
                     shadow:'true',
+                    pointPlacement: -0.1,
                 },
                 {
                     name: 'TBA',

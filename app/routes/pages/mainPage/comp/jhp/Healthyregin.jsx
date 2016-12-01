@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
 
-import Hly_r from './Hly_r.jsx';
-import Hly_rs from './Hly_rs.jsx';
-;
+import Hly_rone from './Hly_rone.jsx';
+import Hly_rtwo from './Hly_rtwo.jsx';
+var $ = require('jquery');
 var actions = require('redux/actions');
 
 
@@ -27,12 +27,19 @@ let x2=[];
 let x3=[];
 let x4=[];
 let x5=[];
+let x6=[];
+let x7=[];
 (function () {
 
     for(var i=0;i<12;i++){
         x4[i]=sort0[i].name;
         x5[i]=sort0[i].time;
     }
+    for(var i=0;i<sort0.length;i++){
+        x6[i]=sort0[i].name;
+        x7[i]=sort0[i].time;
+    }
+
 
 })();
 
@@ -44,13 +51,26 @@ let Component = React.createClass({
 
 
     render() {
-        let {arr,arr2,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
+        let {hideit,arr,arr2,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
         return (
 
 
 
 
             <div className={styles.box}>
+                <div className={styles.light} id="light"> </div>
+
+                <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
+                    <div className={styles.hidden_top}>
+                        <div className={styles.logo2}></div>
+                        <div className={styles.logo3}>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</div>
+                        <span onClick={()=>hideit()}>×</span>
+                    </div>
+                    <Hly_rtwo height={500} powerValue={x7} barRotimes={x6} widths={1620}
+                            text={text0[actbt] + "月" + text0[5] + "区域" + text0[4] + "风场各风机健康度"}></Hly_rtwo>
+
+
+                </div>
 
 
                 <div className={styles.onmonth}>
@@ -69,7 +89,7 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_r  height={400} barRotime={barLoTime1} barLoPowerValue={wind==undefined? barLoPowerValue1:wind} text={text0[actbt]+"月各风场健康度"}></Hly_r>
+                        <Hly_rone  height={400} barRotime={barLoTime1} barLoPowerValue={wind==undefined? barLoPowerValue1:wind} text={text0[actbt]+"月各风场健康度"}></Hly_rone>
 
                         <div className={styles.logo}>
 
@@ -81,15 +101,15 @@ let Component = React.createClass({
                     <div className={`${styles.box_shadow} ${styles.fbox2}`}>
                         <div className={styles.rbox31}>
                             <div></div>
-                            <span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</span>
+                            {/*<span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</span>*/}
                         </div>
-                        <div className={styles.rbox3}>
+                        <div className={styles.rbox33}>
 
                             <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
                             <button className={styles.button} onClick={() => back(sort0)}>后10</button>
                             <button className={styles.button} onClick={() => more()}>更多</button>
                         </div>
-                        <Hly_rs height={390}  powerValue={arr==null? x5:arr} barRotimes={arr2==null? x4:arr2} text={text0[3]+"月"+text0[5]+"风场各风机健康度"}></Hly_rs>
+                        <Hly_rtwo height={390}  powerValue={arr==null? x5:arr} barRotimes={arr2==null? x4:arr2} ></Hly_rtwo>
 
                         <div className={styles.logomini}>
 
@@ -119,8 +139,10 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor:(value,key)=>{
+            dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('wind',value.plan ));
+            dispatch(actions.setVars('windplan',value.plan ));
+            dispatch(actions.setVars('windplan1', value.plan));
         },
         gogogo: (sort0) => {
             (function () {
@@ -153,8 +175,13 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('arr2', x2))
         },
         more: () => {
-
+            $("#boxhidden").show();
+            $("#light").show();
         },
+        hideit: () =>{
+            $("#boxhidden").hide();
+            $("#light").hide();
+        }
     };
 };
 

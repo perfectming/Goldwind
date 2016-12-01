@@ -42,7 +42,7 @@ let Component = React.createClass({
 
                 <div className={styles.tbox}>
                     <div className={styles.box_shadow}>
-                        <Hly_tsa text={"集团每月PBA"} barLoTime1={barLoTime1} barLoPowerValue={barLoPowerValue1} barRoPowerValue={barRoPowerValue1} barRoPowerValues={barRoPowerValues1}></Hly_tsa>
+                        <Hly_tsa text={"集团每月PBA"} barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1} barRoPowerValue={barRoPowerValue1} barRoPowerValues={barRoPowerValues1}></Hly_tsa>
                     </div>
                 </div>
 

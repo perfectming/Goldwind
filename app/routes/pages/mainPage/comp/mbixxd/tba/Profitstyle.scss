@@ -1,6 +1,62 @@
 .box{
     overflow:hidden;
     padding-bottom:10px;
+    position:relative;
+    .boxcover{
+    position:fixed;
+    height:100%;
+    width:100%;
+    z-index:1200;
+    background:black;
+    display:none;
+    opacity:0.6;
+    }
+    .more:hover{
+     box-shadow:0 0 15px #fff;
+    }
+    .more{
+    background:#21242a;
+    position:absolute;
+    z-index:1600;
+    width:98%;
+    top:50%;
+    left:49%;
+    overflow:hidden;
+    transform:translate(-50%,-50%);
+    box-sizing:border-box;
+    display:none;
+    .moretitle{
+    width:100%;
+    height:60px;
+    background:#21242a;
+    position:relative;
+    z-index:2000;
+    height:60px;
+    div{
+    display:inline-block;
+    font-size:16px;
+    float:right;
+    line-height:60px;
+    cursor:pointer;
+    margin-right:50px;
+       color:#fff;
+    }
+    p{
+    position:absolute;
+    top:18px;
+    left:7%;
+    font-size:16px;
+    color:#fff;
+    }
+    img{
+    position:absolute;
+    top:22px;
+    left:5%;
+    height:16px;
+    width:16px;
+    }
+    }
+    }
     .monthbox{
     width: 100%;
     height: 80px;
@@ -15,7 +71,6 @@
      float:left;
      font-size:16px;
      font-family: '微软雅黑';
-     color:white;
      height:35px;
      line-height:33px;
      text-align:center;
@@ -24,11 +79,6 @@
      margin:25px 10px;
      font-weight:700;
      cursor:pointer;
-      &:hover{
-                background:#20FEFF;
-     color:black;
-    box-shadow:0px 0px 10px  #20FEFF;
-            }
      }
      li:last-child{
      color: #20FEFF;
@@ -36,9 +86,9 @@
        top:-5px;
        right:412px;
        border:1px solid #20FEFF;
-       width:110px;
-       height:45px;
-       line-height:45px;
+       width:100px;
+       height:40px;
+       line-height:40px;
        margin-bottom:25px;
        border-radius:45px;
        background:radial-gradient(#1c444a, #1c3f46);
@@ -47,9 +97,7 @@
      li:nth-last-child(2){
      
      }
-      li:last-child:hover{
-      background:#156e74;
-      }
+      
     }
   .bgc{
     position:absolute;
@@ -191,4 +239,11 @@
       background-color:white;
       }
     }
+     .red{
+    background:#20FEFF;
+    color:black;
+  }
+  .green{
+    color:white;
+  }
 }
