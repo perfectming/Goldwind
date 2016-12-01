@@ -137,6 +137,7 @@ let Component = React.createClass({
                 shadow:true,
                 pointWidth: 25,
                 borderWidth: 0,
+                pointPlacement: 0,
             },
                 {
                     name: '理论发电量',
@@ -145,6 +146,7 @@ let Component = React.createClass({
                     color:'#ccc',
                     pointWidth: 25,
                     shadow:'true',
+                    pointPlacement: -0.1,
                 },
                 {
                     name: 'PBA',

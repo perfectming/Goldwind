@@ -100,11 +100,11 @@ let Component = React.createClass({
                 }
             },
                     title:{
-                        text:'KWH',
+                        text:'(KWH)',
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 36,
+                        x: 45,
                         style:{
                             color:'#fff',
                             fontSize:'14px'
