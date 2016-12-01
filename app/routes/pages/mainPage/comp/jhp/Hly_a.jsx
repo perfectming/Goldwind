@@ -5,13 +5,16 @@ var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Healthy-data');
 
+let winds = data.data.yearelectric[0].wind;
+let win  = winds[0].plan;
+
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
 
-        let {barLotime,barLoPowerValue,barLoPowerValues,barLdpowerValue,text} = this.props;
+        let {changedata1,win,w0,barLotime,barLoPowerValue,barLoPowerValues,barLdpowerValue,text} = this.props;
 
 
 
@@ -83,6 +86,16 @@ let Component = React.createClass({
                 }
             },
             plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            w0=e.point.category;
+                            changedata1(w0,win);
+
+                        }
+                    }
+                },
                 column: {
                     stacking: 'normal',
 
@@ -135,12 +148,12 @@ let Component = React.createClass({
                 },
             }],
             series: [{
-                name: '实际运行时间量',
+                name: '实际发电量',
                 type: 'column',
                 data: barLoPowerValues
             },
                 {
-                    name: '停机时间',
+                    name: '理论发电量',
 
                     color:'#A2D04D',
                     type: 'column',
@@ -148,21 +161,21 @@ let Component = React.createClass({
                     stack:'time'
                 },
                 {
-                    name: '停机时间',
+                    name: '理论发电量',
                     color:'#FFD927',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '停机时间',
+                    name: '理论发电量',
                     color:'#FF9424',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '停机时间',
+                    name: '理论发电量',
                     color:'#FF6124',
                     type: 'column',
                     data: barLoPowerValue,
@@ -185,12 +198,21 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+        win : state.vars.win1,
+        windplan1 : state.vars.windplan1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+        changedata1 :(w0,win)=>{
+            dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('win1',win ));
+
         },
     };
 };

@@ -1,14 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Hly_gen from './Hly_gen.jsx';
-import Hly_gens from './Hly_gens.jsx';
-import Hly_genp from './Hly_genp.jsx';
-import Hly_r from './Hly_r.jsx';
-import Hly_rs from './Hly_rs.jsx';
-import Hly_d from './Hly_d.jsx';
-var actions = require('redux/actions');
 
+import Hly_genone from './Hly_genone.jsx';
+import Hly_gentwo from './Hly_gentwo.jsx';
+
+var actions = require('redux/actions');
+var $ = require('jquery');
 
 let data = require('./Healthy-data');
 let month = data.data.line_month;
@@ -31,12 +29,19 @@ let x2=[];
 let x3=[];
 let x4=[];
 let x5=[];
+let x6=[];
+let x7=[];
 (function () {
 
     for(var i=0;i<12;i++){
         x4[i]=sort0[i].name;
         x5[i]=sort0[i].time;
     }
+    for(var i=0;i<sort0.length;i++){
+        x6[i]=sort0[i].name;
+        x7[i]=sort0[i].time;
+    }
+
 
 })();
 
@@ -48,13 +53,27 @@ let Component = React.createClass({
 
 
     render() {
-        let {arr,arr2,gogogo,back,more,wind,winds,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
+        let {hideit,arr,arr2,gogogo,back,more,wind,winds,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
         return (
 
 
 
 
             <div className={styles.box}>
+
+                <div className={styles.light} id="light"> </div>
+
+
+                <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
+                    <div className={styles.hidden_top}>
+                        <div className={styles.logo2}></div>
+                        <div className={styles.logo3}>{"各风机健康度"}</div>
+                        <span onClick={()=>hideit()}>×</span>
+                    </div>
+                    <Hly_gentwo    widths={1620}  height={500}  barlopowerp={arr==null? x5:arr}  barlopowers={arr==null? x5:arr}  barRotime={arr2==null? x4:arr2}  text={text0[3]+"月"+text0[3]+"区域各风机发电量"}></Hly_gentwo>
+
+
+                </div>
 
 
                 <div className={styles.onmonth}>
@@ -73,7 +92,7 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_gens height={400}  barlopowerp={wind==undefined? barlotimes1:wind} barlopowers={winds==undefined? barlopowers1:winds}  barRotime={barRotime2} text={text0[3]+"月"+text0[1]+"区域发电量"}></Hly_gens>
+                        <Hly_genone height={400}  barlopowerp={wind==undefined? barlopowers1:wind} barlopowers={winds==undefined? barlopowerp1:winds}  barRotime={barRotime2} text={text0[3]+"月"+text0[1]+"区域发电量"}></Hly_genone>
                         <div className={styles.logo}>
 
                         </div>
@@ -87,15 +106,15 @@ let Component = React.createClass({
                     <div className={`${styles.box_shadow} ${styles.fbox2}`}>
                         <div className={styles.rbox31}>
                             <div></div>
-                            <span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</span>
+                            <span></span>
                         </div>
-                        <div className={styles.rbox3}>
+                        <div className={styles.rbox33}>
 
                             <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
                             <button className={styles.button} onClick={() => back(sort0)}>后10</button>
                             <button className={styles.button} onClick={() => more()}>更多</button>
                         </div>
-                        <Hly_genp    height={390}  barlopowerp={arr==null? x5:arr}  barlopowers={arr==null? x5:arr}  barRotime={arr2==null? x4:arr2}  text={text0[3]+"月"+text0[3]+"区域各风机发电量"}></Hly_genp>
+                        <Hly_gentwo    height={390}  barlopowerp={arr==null? x5:arr}  barlopowers={arr==null? x5:arr}  barRotime={arr2==null? x4:arr2}  text={text0[3]+"月"+text0[3]+"区域各风机发电量"}></Hly_gentwo>
                         <div className={styles.logomini}>
 
                         </div>
@@ -125,6 +144,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor:(value,key)=>{
+            dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind',value.plan ));
             dispatch(actions.setVars('winds',value.actrul ));
@@ -160,8 +180,13 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('arr2', x2))
         },
         more: () => {
-
+            $("#boxhidden").show();
+            $("#light").show();
         },
+        hideit: () =>{
+            $("#boxhidden").hide();
+            $("#light").hide();
+        }
     };
 };
 

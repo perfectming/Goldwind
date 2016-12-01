@@ -11,7 +11,7 @@ let Component = React.createClass({
 
     render() {
 
-        let {barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
+        let {w0='一月份',barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
 
 
 
@@ -34,7 +34,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text,
+                text: w0+"每日PBA",
                 align:'left',
                 x : "0",
                 style:{
@@ -147,12 +147,15 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('w1',w0 ));
         },
     };
 };

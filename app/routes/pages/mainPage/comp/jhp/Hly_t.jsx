@@ -90,7 +90,8 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                             w0=e.point.category;
-                            changedata1(w0);
+                            changedata1(w0,win);
+
                         }
                     }
                 },
@@ -166,6 +167,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         w0 : state.vars.w1,
+        win : state.vars.win1,
         windplan1 : state.vars.windplan1,
     }
 };
@@ -174,12 +176,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1 :(w0)=>{
+        changedata1 :(w0,win)=>{
             dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('win1',win ));
 
-
-          
         },
+
     };
 };
 
