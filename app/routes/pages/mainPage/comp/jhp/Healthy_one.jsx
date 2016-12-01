@@ -73,7 +73,7 @@ let Component = React.createClass({
                         <span onClick={()=>hideit()}>×</span>
                     </div>
                     <Hly_rs height={500} powerValue={x7} barRotimes={x6} widths={1620}
-                            text={text0[actbt] + "月" + text0[5] + "区域" + text0[4] + "风场各风机健康度"}></Hly_rs>
+                            text={"风场各风机健康度"}></Hly_rs>
 
 
                 </div>  
