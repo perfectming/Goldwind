@@ -1,13 +1,13 @@
 .box{
     overflow:hidden;
-    color: white;
+    color: #E6E7E8;
     font-size: 16px;
     padding:10px 40px 10px 10px;
     .left{
         width: 75%;
         float: left;
         .firstfloor{
-            background-color: #282B34;
+            background-color: rgba(44, 61, 71, 0.4);
             height: 250px;
             width: 99%;
             .section{
@@ -17,10 +17,16 @@
                 height: 100%;
                 .alink{
                     position: absolute;
-                    left: 10px;
+                    left: 40%;
+                    top: 88%;
                     z-index: 9;
                     a{
                         cursor: pointer;
+                        text-decoration: underline;
+                        color: #E6E7E8;
+                        &:hover{
+                            color: #31f3fb;
+                        }
                     }
                 }
                 .sectionBox{
@@ -61,19 +67,19 @@
             } 
         }.secondfloor{
             position: relative;
-            top: 10px;
-            height: 640px;
+            top: 15px;
+            height: 650px;
             width: 99%;
             .electric{
                 position: absolute;
-                height: 100%;
-                width: 24%;
-                background-color: #282B34;
+                height: 98.5%;
+                width: 24.5%;
+                background-color: rgba(44, 61, 71, 0.4);
                 .electricHeader{
-                    height: 35px;
+                    height: 30px;
                     width: 100%;
                     background:  #464C58;
-                    line-height: 35px;
+                    line-height: 30px;
                 }.electricFirst{
                     z-index: 3;
                     height: 201px;
@@ -148,45 +154,54 @@
                 }
             }.yearelectric{
                 .header{
-                    height: 35px;
+                    height: 30px;
+                    line-height: 30px;
+                    padding-left: 20px;
                     background-color: #464C58;
                    .logo{
-                        margin-left: 20px;
                         cursor: pointer;
                         float: left; 
                     }
                     .links{
-                        cursor: pointer; 
                         float: left;
                         margin-left: 20px;
+                        a{
+                            cursor: pointer;
+                            text-decoration: underline; 
+                            color: #E6E7E8;
+                            &:hover{
+                                color: #31f3fb;
+                            }  
+                        }
+                        
                     } 
                 }
                 position: absolute;
-                left: 25%;
-                width: 75%;
-                background-color: #282B34;
+                left: 25.5%;
+                width: 74.5%;
             }.yearprofit{
                 .logo{
-                    height: 35px;
+                    height: 30px;
+                    line-height: 30px;
+                    padding-left: 20px;
                     background-color: #464C58;
                 }
                 position: absolute;
-                left: 25%;
-                top: 325px;
-                width: 75%;
-                background-color: #282B34;
+                left: 25.5%;
+                top: 327px;
+                width: 74.5%;
             }
         }
     }.right{
         width: 25%;
-        height: 900px;
-        background-color: #282B34;
+        height: 905px;
+        background-color: rgba(44, 61, 71, 0.4);
         float: left;
         h3{
             margin: 0;
             font-size: 16px;
-            height: 35px;
-            line-height: 35px;
+            height: 30px;
+            line-height: 30px;
             font-weight: 900;
             padding-left: 30px;
             background-color: #464C58;
@@ -195,21 +210,41 @@
             width: 100%;
             tr{
                 display: inline-block;
-                height: 50px;
+                height: 30px;
                 width: 100%;
                 margin-top: 20px;
-                background-color: #262A32;
+                background-color: rgba(41, 61, 71, 0.2);
+                &:not(:first-child):hover{
+                    border: 1px solid #31F3FB;
+                }
                 th{
                     display: inline-block;
                     text-align: center;
                     width: 25%;
-                    height: 50px;
-                    line-height: 50px;
+                    height: 30px;
+                    line-height: 30px;
                     &:first-child{
                         width: 20%;
                     }
+                }.click1{
+                   color: #20FEFF; 
+                   .bottom{
+                      color: #20FEFF; 
+                   }
+                   .top{
+                      color: white; 
+                   }
+                }.click1:hover{
+                    cursor: pointer;
+                    background-color: #39454e;
                 }.click{
                    color: #20FEFF; 
+                   .bottom{
+                      color: #20FEFF; 
+                   }
+                   .top{
+                      color: white; 
+                   }
                 }.click:hover{
                     cursor: pointer;
                     background-color: #39454e;
