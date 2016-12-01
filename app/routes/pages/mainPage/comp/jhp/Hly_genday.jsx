@@ -109,6 +109,10 @@ let Component = React.createClass({
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
                 },
 
                 labels: {

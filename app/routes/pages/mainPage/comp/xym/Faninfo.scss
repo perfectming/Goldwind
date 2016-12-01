@@ -54,7 +54,7 @@
      visibility:hidden;        
 	}
 	.infoBox{
-		width: 1340px;
+		width: 1350px;
 		
 		margin-right: 0;
 		margin-top: 0;
@@ -186,7 +186,7 @@
 		}
 		.infoBox2{
 			color:#999;
-			width: 940px;
+			width: 945px;
 			height: 290px;
 			background:#292F36;
 			.wsbox1{
@@ -353,7 +353,7 @@
 		.infoBox4{
 			
 			color:#999;
-			width: 465px;
+			width: 470px;
 			height: 350px;
 			background:#292F36;
 			.box4Cahrt{
@@ -431,7 +431,7 @@
 		}
 		.infoBox7{
 			color:#999;
-			width: 940px;
+			width: 945px;
 			height: 220px;
 			background:#292F36;
 			white-space:nowrap;
@@ -448,12 +448,27 @@
 					margin-left: 5px;
 					position: relative;z-index: 100000;
 					white-space:nowrap;
+					span{
+						text-align: left;
+						display: inline-block;
+					}
 					span:nth-child(1){
-					width: 150px;
-					text-align: left;
 					padding-left: 10px;
 					}
-					span{
+					span:nth-child(2){
+						margin-left: 100px;
+						width: 400px;
+					}
+					span:nth-child(3){
+						margin-left: 10px;
+						width: 70px;
+					}
+					span:nth-child(4){
+						margin-left: 20px;
+						width: 100px;
+					}
+					span:nth-child(5){
+						margin-left: 30px;
 						width: 100px;
 					}
 				}
@@ -467,11 +482,28 @@
 				.statusquerybox{
 					width: 100%;
 					height: 35px;
+					span{
+						text-align: left;
+						display: inline-block;
+					}
 					span:nth-child(1){
 						width: 155px;
-						padding-left: 10px;
+						padding-left: 15px;
 					}
-					span{
+					span:nth-child(2){
+						margin-left: 57px;
+						width: 400px;
+					}
+					span:nth-child(3){
+						margin-left: 10px;
+						width: 70px;
+					}
+					span:nth-child(4){
+						margin-left: 20px;
+						width: 100px;
+					}
+					span:nth-child(5){
+						margin-left: 30px;
 						width: 100px;
 					}
 				}
@@ -559,6 +591,14 @@
 		}
 	}
 
+
 }
+.bodyBox:after{
+     content:".";        
+     display:block;        
+     height:0;        
+     clear:both;        
+     visibility:hidden;        
+	}
 
 

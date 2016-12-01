@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barLoTime,barLoPowerValue,barRoPowerValue,barRoPowerValues,text} = this.props;
+        let {barLoTime,barLoPowerValue,barRoPowerValue,barRoPowerValues,text,changedata1,w0,win} = this.props;
 
 
         let configPie = {
@@ -78,6 +78,16 @@ let Component = React.createClass({
                 }
             },
             plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            w0=e.point.category;
+                            changedata1(w0,win);
+
+                        }
+                    }
+                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
@@ -120,19 +130,41 @@ let Component = React.createClass({
             series: [{
                 name: '实际运行时间',
                 type: 'column',
-                data: barRoPowerValue}
+                data: barRoPowerValue,
+                events: {
+                    click: function(e) {
+                        w0=e.point.category;
+                        changedata1(w0,win);
+
+                    }
+                }
+            }
                 ,{
                     name: '停机时间',
                     type: 'column',
                     color:'#cccccc',
-                    data: barRoPowerValues
+                    data: barRoPowerValues,
+                    events: {
+                        click: function(e) {
+                            w0=e.point.category;
+                            changedata1(w0,win);
+
+                        }
+                    }
                 }
                 ,
                 {
                     name: 'TBA',
                     type: 'line',
                     color:'#0000ff',
-                    data: barLoPowerValue
+                    data: barLoPowerValue,
+                    events: {
+                        click: function(e) {
+                            w0=e.point.category;
+                            changedata1(w0,win);
+
+                        }
+                    },
                 }
 
 
@@ -146,13 +178,21 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
+        changedata1 :(w0,win)=>{
+            dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('win1',win ));
+
+        },
+
     };
 };
 
