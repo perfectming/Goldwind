@@ -26,6 +26,7 @@ var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
     for(var x in obj_wfd){
         arr1.push(x)
     }
+    arr1.splice(1,arr1.length-1);
     for(var m in obj_pvd){
         arr2.push(m)
 
@@ -52,7 +53,7 @@ let Component = React.createClass({
                             arr1.map((value,key)=>{
                                 return(
                                     <li key={key} >
-                                        <a>{model_ens[value].name}</a>
+                                        <a>所有</a>
                                         <div className={styles.list_span}>
                                             {
                                                 obj_wfd[value].map((valueC,key)=>{

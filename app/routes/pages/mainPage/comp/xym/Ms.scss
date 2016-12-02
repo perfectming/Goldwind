@@ -167,6 +167,9 @@
       background: rgb(100, 100, 110);
       span{
         margin-right: 300px;
+        &:last-child{
+          cursor: pointer;
+        }
       }
     }
   }
