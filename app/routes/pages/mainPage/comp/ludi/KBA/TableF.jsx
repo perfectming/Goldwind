@@ -52,7 +52,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#4cdb9d', '#2e75b6','#e2ac00','#009a46', '#ff6600','#5b9bd5']
+            colors: [ '#33BAC0', '#33545c','#5298d3','#537388', '#464d59','#5298d3']
             ,
             plotOptions: {
                 column: {
@@ -60,7 +60,7 @@ let Component = React.createClass({
                     pointPadding: 0.1,
                     borderWidth: 0,
                     pointWidth: 30,
-                    borderRadius:5
+                    borderRadius:2
                 }
             },
             xAxis: {

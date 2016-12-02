@@ -59,6 +59,7 @@
                 height: 100%;
                 background-color:rgba(44, 61, 71, 0.4);
                 padding-top: 10px;
+                border:1px solid #3e4c67;
                 .sectionbar{
                     text-align: center;
                     width: 40%;
@@ -108,6 +109,7 @@
                 background-color: rgba(44, 61, 71, 0.4);
                 margin-right: 1%;
                 padding-top: 10px;
+                border:1px solid #3e4c67;
                 .sectionbar{
                     text-align: center;
                     width: 40%;
@@ -181,6 +183,7 @@
                 position: absolute;
                 height: 100%;
                 width: 33%;
+                border:1px solid #3e4c67;
                 background-color: rgba(44, 61, 71, 0.4);
                 .electricHeader{
                     height: 30px;
@@ -285,6 +288,7 @@
                 position: absolute;
                 left: 34%;
                 width: 66%;
+                border:1px solid #3e4c67;
             }.yearprofit{
                 .logo{
                     height: 30px;
@@ -296,6 +300,7 @@
                 left: 34%;
                 top: 325px;
                 width: 66%;
+                border:1px solid #3e4c67;
             }
         }
     }.right{
@@ -304,11 +309,13 @@
         height: 850px;
         background-color: rgba(44, 61, 71, 0.4);
         float: right;
+        border:1px solid #3e4c67;
         h3{
             margin: 0;
-            height: 30px;
+            height:30px;
             line-height: 30px;
             font-size: 16px;
+            font-weight: 900;
             padding-left: 30px;
             background-color: #464C58;
         }

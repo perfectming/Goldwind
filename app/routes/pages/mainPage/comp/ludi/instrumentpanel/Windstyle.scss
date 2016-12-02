@@ -51,6 +51,7 @@
             height: 200px;
             width: 100%;
             .sectionSmall{
+                border:1px solid #3e4c67;
                 position: relative;
                 width: 32%;
                 height: 100%;
@@ -99,6 +100,7 @@
                 }
             }
             .section{
+                border:1px solid #3e4c67;
                 float: left;
                 position: relative;
                 width: 33%;
@@ -176,6 +178,7 @@
             height: 640px;
             width: 100%;
             .electric{
+                border:1px solid #3e4c67;
                 position: absolute;
                 height: 100%;
                 width: 33%;
@@ -284,6 +287,7 @@
                 position: absolute;
                 left: 34%;
                 width: 66%;
+                border:1px solid #3e4c67;
             }.yearprofit{
                 .logo{
                     height: 30px;
@@ -295,9 +299,11 @@
                 left: 34%;
                 top: 325px;
                 width: 66%;
+                border:1px solid #3e4c67;
             }
         }
     }.right{
+        border:1px solid #3e4c67;
         position: relative;
         width: 27.5%;
         height: 850px;

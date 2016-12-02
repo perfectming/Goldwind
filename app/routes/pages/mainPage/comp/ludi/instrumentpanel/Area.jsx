@@ -109,7 +109,7 @@ let Component = React.createClass({
            		</div>
                 <div className={`${styles.right} ${styles.boxShadow}`}>
                 	<h3>
-                		<span>箭头</span> &nbsp; PBA排序
+                		<span><a>logo</a></span> &nbsp; PBA排序
                 	</h3>
                 	<table>
                 		<tbody>
