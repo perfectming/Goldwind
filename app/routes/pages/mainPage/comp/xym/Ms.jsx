@@ -244,9 +244,9 @@ let Component = React.createClass({
                             <span onClick={()=>{$('#box2').parent().css('display','block')}}>点击</span>
                         </div>
                     </div>
-                    <Abox style={{top: 100, left:600}}></Abox>
-                    <Bbox style={{top: 200, left:600}}></Bbox>
-                    <Cbox style={{top: 100, left:700}}></Cbox>
+                    <Abox></Abox>
+                    <Bbox></Bbox>
+                    <Cbox></Cbox>
                 </div>
             </div>
 

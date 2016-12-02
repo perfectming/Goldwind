@@ -28,8 +28,8 @@ var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
     }
     for(var m in obj_pvd){
         arr2.push(m)
-
     }
+    arr2.splice(1,arr1.length-1);
 
 }());
 
@@ -43,19 +43,19 @@ let Component = React.createClass({
         let {border1=true,closebox2,Tofaninfo1} = this.props;
         return (
 
-            <div className={styles.fiexdbox}>
+            <div className={styles.fiexdbox}  style={{top: 130, left:734}}>
                 <span>设备选择</span>
                 <img src={close} className={styles.close} onClick={()=>closebox2()}/>
                 <div className={styles.listbox} id='box2'>
                     <ul id='fclist'>
                         {
-                            arr1.map((value,key)=>{
+                            arr2.map((value,key)=>{
                                 return(
                                     <li key={key} >
-                                        <a>{model_ens[value].name}</a>
+                                        <a>所有</a>
                                         <div className={styles.list_span}>
                                             {
-                                                obj_wfd[value].map((valueC,key)=>{
+                                                obj_pvd[value].map((valueC,key)=>{
 
                                                     return(
 
