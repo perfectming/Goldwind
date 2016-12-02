@@ -1,4 +1,6 @@
 .bodyBox{
+  background: url("../../img/comp/cft.jpg");
+  overflow: hidden;
   .infofL{
     float: left;
     margin-right: 15px;
@@ -55,7 +57,6 @@
   }
   .infoBox{
     width: 1340px;
-
     margin-right: 0;
     margin-top: 0;
 
@@ -106,56 +107,6 @@
             width: 100px;
           }
         }
-
-      }
-    }
-    .infoBox7{
-      color:#999;
-      width: 940px;
-      height: 220px;
-      background:#292F36;
-      white-space:nowrap;
-      span{
-        display: inline-block;
-        text-align: center;
-        line-height: 38px;
-        color:#fff;
-      }
-      .titlebox{
-        width: 100%;
-        height: 40px;
-        font-size: 16px;
-        margin-left: 5px;
-        position: relative;z-index: 100000;
-        white-space:nowrap;
-        span:nth-child(1){
-          width: 150px;
-          text-align: left;
-          padding-left: 10px;
-        }
-        span{
-          width: 100px;
-        }
-      }
-      .statusquery{
-        width: 100%;
-        height: 180px;
-        overflow-y:auto;
-        .bgbox{
-          background: #30343D;
-        }
-        .statusquerybox{
-          width: 100%;
-          height: 35px;
-          span:nth-child(1){
-            width: 155px;
-            padding-left: 10px;
-          }
-          span{
-            width: 100px;
-          }
-        }
-
       }
     }
   }
@@ -166,9 +117,9 @@
     white-space:nowrap;
     .fanaction{
       width: 400px;
-      height: 430px;
+      height: 380px;
       position: relative;
-      background: url(../../img/comp/faninfo.png) no-repeat;
+      background: url(../../img/icon/u1606.jpg) no-repeat -150px 0px;
       .actionbox{
         position: absolute;
         left: 0;bottom: 20px;
@@ -188,9 +139,7 @@
         div:hover{
           box-shadow:0px 0px 8px 2px #fff;
         }
-
       }
-
     }
     .action1box{
       width: 400px;

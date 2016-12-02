@@ -97,9 +97,9 @@
         }
         input{
           background: #30343f;
-          border:6px solid #fff;
+          border:6px solid transparent;
           &:hover{
-            border-radius: 15px;
+            background:#485b7b;
           }
         }
         .tableLineNum {
@@ -119,8 +119,8 @@
         }
         .tableContentItem {
           float: left;
-          padding: 10px 0 10px;
           overflow: hidden;
+          line-height:40px;
           text-align: center;
           height: 40px;
           border: none;
@@ -131,9 +131,9 @@
         }
         input{
           background: #272b34;
-          border:6px solid #fff;
+          border:6px solid transparent;
           &:hover{
-            border-radius: 15px;
+            background:#485b7b;
           }
         }
         .tableLineNum {

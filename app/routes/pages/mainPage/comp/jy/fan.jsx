@@ -8,7 +8,9 @@ var $ = require('jquery');
 let header=['发电机转速','发电机定子U组烧组温度','发电机定子V组烧组温度','发电机定子W组烧组温度','发电机转子烧组温度1','发电机转子烧组温度2','发电机转子烧组温度3','发电机驱动端轴承温度','发电机非驱动端轴承温度','发电机冷却空气(水)入口温度','发电机滑环温度','A相电压','B相电压','C相电压','A相电流','B相电流','C相电流'];
 let content=['发电机超速','有功功率超限','发电机烧组1过热','过大压','发电机烧组温度高','风机转子转速与发电机转速不一致','发电机烧组2过热','低电压','发电机轴承温度高','发电机碳刷磨损','发电机烧组3过热','功率低','变频不同步','风机转子旋转方向错误','发电机转速突变','相电压瞬时过高'];
 let modelvalue = require('../../../../../../config/WTDetailData.js');
-
+let addtest = require('../../../../../../config/MatrixData');
+let adisdfa= require('./data');
+let adsI=adisdfa.fan;
 let fmvalue = modelvalue.ModelData[652113028];
 // console.log(value.Wtid);
 // let qwer = "WTGS.PPV.Ra.F32.A";
@@ -34,7 +36,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {value,fanid} = this.props;
+        let {value=addtest.ModelData[8888801].WFDevsStatus[650107][0],fanid} = this.props;
         // console.log(fmvalue.StatusCode);
         let x;
         let code = value.WTStateCode;
@@ -102,99 +104,24 @@ let Component = React.createClass({
                             }
                         </div>
                     </div>
-                    <div className={`${styles.infoBox7} ${styles.infofL}`}>
-                        <Title></Title>
-                        <div className={styles.titlebox}><span>风机描述</span><span>风机状态</span><span>状态时长</span></div>
-                        <div className={styles.statusquery}>
-                            {
-                                fmvalue.DevStatusQuery.Value.map((value, key)=>{
-                                    return (
-                                        <div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
-                                            <span>{(value.StatusDate).slice(0,-4)}</span>
-                                            <span>{value.StatusDescr}</span>
-                                            <span>{value.StatusTime}</span>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
                 </div>
                 <div className={`${styles.fanrightbox} ${styles.infofL}`}>
                     <Title title={['状态统计']}></Title>
                     <div className={`${styles.fanaction} ${styles.infofL11111111}`}>
-                        <div className={styles.actionbox}>
-                            <div>启动</div>
-                            <div>停机</div>
-                            <div>复位</div>
-                            <div>测试</div>
-                        </div>
                     </div>
                     <div className={styles.action1box}>
-                        <div className={styles.fandatabox}>
-                            <span>日发电量</span>
-                            <span className={styles.numbox}><span>{Math.ceil(fmvalue["DayEgyAt"])}</span><span>万kWh</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>月发电量</span>
-                            <span className={styles.numbox}><span>{Math.ceil(fmvalue["MonthEgyAt"])}</span><span>万kWh</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>年发电量</span>
-                            <span className={styles.numbox}><span>{Math.ceil(fmvalue["YearEgyAt"])}</span><span>万kWh</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>累计发电量</span>
-                            <span className={styles.numbox}><span>{Math.ceil(fmvalue["TotalEgyAt"])}</span><span>万kWh</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>无功功率</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WTUR.PwrReact.Ra.F32"]).toFixed(1)}</span><span>kVar</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>偏航位置</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WYAW.Posi.Ra.F32"]).toFixed(1)}</span><span>°</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>对风角度</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WYAW.Wdir.Ra.F32"]).toFixed(1)}</span><span>°</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>叶片1角度</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade1"]).toFixed(1)}</span><span>°</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>叶片2角度</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade2"]).toFixed(1)}</span><span>°</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>叶片3角度</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade3"]).toFixed(1)}</span><span>°</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>1号变桨柜体温度</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox1"]).toFixed(1)}</span><span>℃</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>2号变桨柜体温度</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox2"]).toFixed(1)}</span><span>℃</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>3号变桨柜体温度</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox3"]).toFixed(1)}</span><span>℃</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>1号变桨逆变器温度</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>2号变桨逆变器温度</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
-                        </div>
-                        <div className={styles.fandatabox}>
-                            <span>3号变桨逆变器温度</span>
-                            <span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
-                        </div>
+                        {
+                            adsI.header.map((value,key)=>{
+                                return(
+                                    <div className={styles.fandatabox}>
+                                        <span>{value}</span>
+                                        <span className={styles.numbox}><span>0</span><span>{adsI.unit[key]}</span></span>
+                                    </div>
+                                )
+                            })
+                        }
+
+
                     </div>
                 </div>
             </div>

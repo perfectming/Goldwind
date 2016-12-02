@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barLoTime,barLoPowerValue,barRoPowerValue,barRoPowerValues,text} = this.props;
+        let {barLoTime,barLoPowerValue,barRoPowerValue,barRoPowerValues,text,changedata1,w0,win} = this.props;
 
 
         let configPie = {
@@ -46,6 +46,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -78,10 +81,21 @@ let Component = React.createClass({
                 }
             },
             plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            w0=e.point.category;
+                            changedata1(w0,win);
+
+                        }
+                    }
+                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 40
+                    pointWidth: 40,
+
                 }
             },
             xAxis: {
@@ -101,12 +115,18 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
                 title: {
                     text:'100%',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
                 },
                 max:100,
                 labels: {
@@ -120,19 +140,43 @@ let Component = React.createClass({
             series: [{
                 name: '实际运行时间',
                 type: 'column',
-                data: barRoPowerValue}
+                data: barRoPowerValue,
+                borderRadius: 7,
+                events: {
+                    click: function(e) {
+                        w0=e.point.category;
+                        changedata1(w0,win);
+
+                    }
+                }
+            }
                 ,{
                     name: '停机时间',
                     type: 'column',
                     color:'#cccccc',
-                    data: barRoPowerValues
+                    data: barRoPowerValues,
+                    borderRadius: 7,
+                    events: {
+                        click: function(e) {
+                            w0=e.point.category;
+                            changedata1(w0,win);
+
+                        }
+                    }
                 }
                 ,
                 {
                     name: 'TBA',
                     type: 'line',
                     color:'#0000ff',
-                    data: barLoPowerValue
+                    data: barLoPowerValue,
+                    events: {
+                        click: function(e) {
+                            w0=e.point.category;
+                            changedata1(w0,win);
+
+                        }
+                    },
                 }
 
 
@@ -146,13 +190,21 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
+        changedata1 :(w0,win)=>{
+            dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('win1',win ));
+
+        },
+
     };
 };
 

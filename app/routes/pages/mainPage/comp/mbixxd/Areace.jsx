@@ -24,9 +24,18 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let{actbt=0,changpage,wind,windP,gogogo,areaNamee,back}=this.props;
+        let{actbt=0,changpage,wind,windP,gogogo,areaNamee,back,more,close}=this.props;
           return (
            <div className={styles.box}>
+              <div className={styles.boxcover} id='boxcover'></div>
+             <div className={styles.more} id="sss">
+                <div className={styles.moretitle}>
+                <img src={icono}/>
+                <p>11月份各风机PBA</p>
+                <div className={styles.xx} onClick={()=>close()}>x</div>
+                </div>
+        <Windce areaNameX={areaName}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined? areaRecordCost:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} width={1750} height={500}></Windce>
+             </div>
             <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
@@ -38,7 +47,7 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <Windce areaNameX={areaName}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined? areaRecordCost:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth}></Windce>
+                                <Windce areaNameX={areaName}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined? areaRecordCost:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} height={700}></Windce>
                             </div>
                         </div>
                          <div className={styles.tik}>
@@ -114,6 +123,15 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('windP',x3))
 
         },
+        more:()=>{
+             $("#sss").show();
+             $('#boxcover').show();
+             // $('.box').css('opacity',".5")
+        },
+        close:()=>{
+            $("#sss").hide();
+              $('#boxcover').hide();
+        }
     };
 };
 

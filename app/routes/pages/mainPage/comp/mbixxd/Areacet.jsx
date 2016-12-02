@@ -23,9 +23,19 @@ let Component = React.createClass({
         let areaPlanDayT=data.areaPlanDayT;
         let text=data.textT;
 
-        let{actbt=0,changpage,wind,windP,gogogo,back}=this.props;
+        let{actbt=0,changpage,wind,windP,gogogo,back,more,close}=this.props;
           return (
            <div className={styles.box}>
+            <div className={styles.boxcover} id='boxcover'></div>
+             <div className={styles.more} id="sss">
+                <div className={styles.moretitle}>
+                <img src={icono}/>
+                <p>11月份各风机PBA</p>
+                <div onClick={()=>close()}>x</div>
+                </div>
+         <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP} width={1750} height={500}></Windcet>
+
+             </div>
                  <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
@@ -37,7 +47,7 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP}></Windcet>
+                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP} height={700}></Windcet>
                             </div>
                         </div>
                          <div className={styles.tik}>
@@ -113,6 +123,15 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('windP',x3))
 
         },
+         more:()=>{
+             $("#sss").show();
+             $('#boxcover').show();
+             // $('.box').css('opacity',".5")
+        },
+        close:()=>{
+            $("#sss").hide();
+              $('#boxcover').hide();
+        }
     };
 };
 

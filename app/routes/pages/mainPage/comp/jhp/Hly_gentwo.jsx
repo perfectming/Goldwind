@@ -3,28 +3,40 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Instrument-data');
-
+let data = require('./Healthy-data');
+let text0 = data.data.line_date;
+let winds = data.data.yearelectric[0].wind;
+let win  = winds[0].plan;
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
+        let {w0="一区域",w10="风场1",mon="一月份",widths,barRotime,barlopowers,barlopowerp,text,height} = this.props;
+
+
         let configPie = {
             chart: {
-                height:390,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:height,
+                width:widths,
+                backgroundColor: "rgba(46, 46, 65, 0)",
+                plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                paddingLeft:100,
+                backgroundColor: {
+                    linearGradient: [0, 0, 500, 500],
+                    stops: [
+                        //[0, 'rgb(56, 85, 94)'],
+                        [0, 'rgb(37, 41, 48)']
+                    ]
+                },
                 borderRadius:10
             },
             title: {
-                text: '年发电量',
+                text: mon+w10+"各风机PBA",
                 align:'left',
-                 x : "0",
+                x : "0",
                 style:{
                     color:"#fff",
                     fontSize:"16px",
@@ -35,6 +47,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -44,12 +59,12 @@ let Component = React.createClass({
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+                // pointFormat: "<b>{point.percentage:.yf}%</b>"
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#1E664A', '#4CDB9D','#000','#134833', '#082B1F']
+            colors: ['#4CDB9D', '#1E664A', '#000','#134833', '#082B1F']
             ,
             plotOptions: {
                 pie: {
@@ -68,14 +83,14 @@ let Component = React.createClass({
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0.1,
+                    pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 15
+                    pointWidth:20
                 }
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
+                //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -84,14 +99,27 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:data.yearelectric[0].month,
+                categories:barRotime,
+
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
+                // lineWidth: 1,
+                // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+                title: {
+                    text:'kWh',
+                    align:'high',
+                    rotation:'0',
+                    y: -10,
+                    x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    },
+                },
                 labels: {
-                	format:'{value}(kWh)',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -100,14 +128,21 @@ let Component = React.createClass({
                 },
             },
             series: [{
-                name: '计划电量',
+                name: '计划发电量',
                 type: 'column',
-                data: data.yearelectric[0].plan,
-            },{
-            	name: '实际电量',
-                type: 'column',
-                data: data.yearelectric[0].actrul,
-            }]
+                color:'#5B9BD5',
+                data: barlopowers,
+                borderRadius: 4,
+            }
+                ,{
+                    name:'实际发电量',
+                    color:'#ED7D31',
+                    type:'column',
+                    data: barlopowerp,
+                    borderRadius: 4,
+                }
+
+            ]
         };
         return (
             <ReactHighcharts config={configPie}/>
@@ -117,12 +152,18 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+        w10 : state.vars.w11,
+        mon : state.vars.mon,
+        windplan : state.vars.windplan,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('w11',w10 ));
         },
     };
 };

@@ -64,7 +64,7 @@ let Component = React.createClass({
 
             <div className={styles.box}>
 
-
+             <div className={styles.light} id="light"> </div>
 
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
                     <div className={styles.hidden_top}>
@@ -72,11 +72,11 @@ let Component = React.createClass({
                         <div className={styles.logo3}>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</div>
                         <span onClick={()=>hideit()}>×</span>
                     </div>
-                    <Hly_rs height={320} powerValue={x7} barRotimes={x6} widths={1600}
-                            text={text0[actbt] + "月" + text0[5] + "区域" + text0[4] + "风场各风机健康度"}></Hly_rs>
+                    <Hly_rs height={500} powerValue={x7} barRotimes={x6} widths={1620}
+                            text={"风场各风机健康度"}></Hly_rs>
 
 
-                </div>
+                </div>  
 
 
 
@@ -115,7 +115,7 @@ let Component = React.createClass({
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
                         <div className={styles.rbox30}>
                             <div></div>
-                            <span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</span>
+                            <span>{"各风机健康度"}</span>
                         </div>
                         <div className={styles.rbox3}>
 
@@ -132,6 +132,9 @@ let Component = React.createClass({
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
         );
     }
@@ -159,7 +162,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         changecolor: (value, key) => {
             dispatch(actions.setVars('mon', value.name));
-         ;
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('windplan', value.plan));
             dispatch(actions.setVars('windplan1', value.plan));
@@ -196,9 +198,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         more: () => {
             $("#boxhidden").show();
+            $("#light").show();
         },
         hideit: () =>{
             $("#boxhidden").hide();
+            $("#light").hide();
         }
 
 

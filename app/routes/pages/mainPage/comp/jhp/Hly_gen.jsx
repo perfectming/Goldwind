@@ -4,6 +4,8 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Healthy-data');
+let winds = data.data.yearelectric[0].wind;
+let win  = winds[0].plan;
 
 let Component = React.createClass({
     componentWillMount() {
@@ -11,7 +13,7 @@ let Component = React.createClass({
 
     render() {
 
-        let {barlotimes,barlopowers,barlopowerp,text} = this.props;
+        let {w0,changedata1,windplan1 = win,barlotimes,barlopowers,barlopowerp,text} = this.props;
 
 
 
@@ -48,6 +50,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -80,10 +85,21 @@ let Component = React.createClass({
                 }
             },
             plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            w0=e.point.category;
+                            changedata1(w0,win);
+
+                        }
+                    }
+                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 40
+                    //pointWidth: 20,
+                    borderRadius: 5,
                 }
             },
             xAxis: {
@@ -103,12 +119,18 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
                 title: {
                     text:'kWh',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
                 },
 
                 labels: {
@@ -123,13 +145,28 @@ let Component = React.createClass({
                 name: '计划发电量',
                 color:'#5B9BD5',
                 type: 'column',
-                data: barlopowers
+                data: barlopowers,
+                events: {
+                    click: function(e) {
+                        w0=e.point.category;
+                        changedata1(w0,win);
+
+                    }
+                },
+
             }
                 ,{
                     name: '实际发电量',
                     type: 'column',
                     color:'#ED7D31',
-                    data: barlopowerp
+                    data: barlopowerp,
+                    events: {
+                        click: function(e) {
+                            w0=e.point.category;
+                            changedata1(w0,win);
+
+                        }
+                    },
                 }
 
 
@@ -144,12 +181,22 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+        win : state.vars.win1,
+        windplan1 : state.vars.windplan1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+
+        },
+        changedata1 :(w0,win)=>{
+            dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('win1',win ));
+
         },
     };
 };

@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",barRotime,height,actbt,mon="一月份",windplan=win}= this.props;
+        let {w0="一区域",barRotime,height,actbt,mon="一月份",windplan=win,w10,changedata1}= this.props;
 
 
 
@@ -34,7 +34,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: mon+w0+"区域风场健康度",
+                text: mon+w0+"各风场健康度",
                 align:'left',
                  x : "0",
                 style:{
@@ -47,6 +47,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -84,13 +87,16 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                            w10=e.point.category;
+                            changedata1(w10,e);
+
                         }
                     }
                 },
 
 
                 column: {
+                    borderRadius: 4,
                     pointPadding: 0.2,
                     borderWidth: 0,
                     pointWidth:20
@@ -114,12 +120,19 @@ let Component = React.createClass({
                // lineWidth: 1,
                // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
                 title: {
-                    text:'',
+                    text:'kW',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
                 },
                 labels: {
                     title:'kW',
@@ -134,6 +147,7 @@ let Component = React.createClass({
                 name: '实际健康度',
                 type: 'column',
                 data: windplan,
+
             }
             // ,{
             //     name:'停机时间',
@@ -153,6 +167,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         w0 : state.vars.w1,
+        w10 : state.vars.w11,
         mon : state.vars.mon,
         windplan : state.vars.windplan,
     }
@@ -163,7 +178,12 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('w1',w0 ));
         },
+        changedata1 :(w10,e)=> {
+            dispatch(actions.setVars('w11', w10,e));
+
+        },
     };
+
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

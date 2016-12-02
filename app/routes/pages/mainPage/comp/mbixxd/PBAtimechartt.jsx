@@ -24,7 +24,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+               
             },
             title: {
                 text: '',
@@ -44,6 +44,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -66,6 +69,7 @@ let Component = React.createClass({
                     pointPadding: 10,
                     borderWidth: 1,
                     pointWidth: 50,
+                    borderRadius: 4,
 
                 }, series: {
                     cursor: 'pointer',
@@ -97,13 +101,15 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 45,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -116,7 +122,9 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text: '',
                  align:'high',
@@ -152,7 +160,7 @@ let Component = React.createClass({
                     data:areaPlanDayT,
                     color:'blue',
                     opposite:true,
-                    yAxis:1
+                   
                 }
 
             ]

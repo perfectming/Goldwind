@@ -10,17 +10,18 @@ let Component = React.createClass({
     },
     render() {
 
-      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA}=this.props;
+      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width}=this.props;
         let configPie = {
             chart: {
-                height:340,
+                height:height,
+                width:width,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+               
             },
             title: {
                 text: '',
@@ -38,8 +39,12 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                 x:-75,
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -94,13 +99,15 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
                     title:{
-                        text:'KWH',
+                        text:'(KWH)',
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 36,
+                        x: 45,
                         style:{
                             color:'#fff',
                             fontSize:'14px'
@@ -113,13 +120,15 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text: 'PBA',
+                text: 'TBA%',
                 align:'high',
                 rotation:'0',
                  y: -17,
-                x: 136,
+                x: -40,
                 style:{
                     color:'#fff',
                     fontSize:'14px'
@@ -131,13 +140,15 @@ let Component = React.createClass({
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: fanProfit
+                data: fanProfit,
+                borderRadius: 4,
             },
             {
                 name: '四',
                 type: 'column',
                 data: fanCost,
                 stack:'waste',
+                borderRadius: 2,
             },
                 {
                     name: '大',
@@ -160,8 +171,9 @@ let Component = React.createClass({
                 {
                     name: 'TBA',
                     type: 'line',
-                    data: TBA,
+                    data: [20,40,50,20,20,60,60,80,70,50,34,99],
                     color:'blue',
+                    yAxis:1
 
                 },]
         };

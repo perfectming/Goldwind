@@ -13,24 +13,16 @@ let Component = React.createClass({
     	let {title,month,actrul,plan,unit,nameOne,nameTwo}=this.props;
         let configPie = {
             chart: {
-                height:281,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:282,
+                backgroundColor: 'rgba(44, 61, 71, 0.4)',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                borderRadius:10,
             },
             title: {
-                text: title,
-                align:'left',
-                 x : "0",
-                style:{
-                    color:"#fff",
-                    fontSize:"16px",
-                    fontFamily:"微软雅黑"
-                }
+                text: null
             },
             //图例说明
             legend: {
@@ -41,7 +33,11 @@ let Component = React.createClass({
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
-                }
+                },
+                itemHoverStyle: {
+                color: '#31f3fb'
+            	},
+            	itemMarginTop: 0,
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -50,13 +46,14 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#5298D3','#31BAC0','#134833', '#082B1F']
+            colors: [ '#33BAC0', '#33545c','#31BAC0','#134833', '#082B1F']
             ,
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 15
+                    pointWidth: 18,
+                    borderRadius:5,
                 }
             },
             xAxis: {
@@ -73,6 +70,7 @@ let Component = React.createClass({
                 categories:month,
             },
             yAxis: {
+            	lineWidth: 1,
                 title:{
                 	text:unit,
                 	align: 'high',
@@ -85,6 +83,7 @@ let Component = React.createClass({
 	                	color:'white',
 	                }
                 },
+                gridLineWidth:0,
                 labels: {
                 	format:'{value}',
                     y: 10, //x轴刻度往下移动20px

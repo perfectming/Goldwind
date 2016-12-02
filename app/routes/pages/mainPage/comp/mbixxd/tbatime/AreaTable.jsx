@@ -33,6 +33,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -55,6 +58,7 @@ let Component = React.createClass({
                     pointPadding:0,
                     borderWidth: 0,
                     pointWidth:30,
+                    borderRadius: 7,
                     stacking: 'normal',
                 }, series: {
                     cursor: 'pointer',
@@ -85,7 +89,9 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
                     title:{
                         text:'100%',
                         align:'high',
@@ -104,7 +110,9 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text: '',
                 align:'high',

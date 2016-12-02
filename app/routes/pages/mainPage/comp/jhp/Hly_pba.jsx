@@ -4,13 +4,16 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Healthy-data');
+let text0 = data.data.line_date;
+let winds = data.data.yearelectric[0].wind;
+let win  = winds[0].plan;
 
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let {barRotime,barLdpowerValue,barLoPowerValues,barLoPowerValue,text,height} = this.props;
+        let {changedata1,w0='一区域',mon='一月份',windplan=win,w10,barRotime,barLdpowerValue,barLoPowerValues,barLoPowerValue,text,height} = this.props;
 
 
 
@@ -34,7 +37,7 @@ let Component = React.createClass({
             },
 
             title: {
-                text: text,
+                text: mon+w0+"各风场PBA",
 
                 align:'left',
                 x : "0",
@@ -50,6 +53,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -83,6 +89,16 @@ let Component = React.createClass({
                 }
             },
             plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            w10=e.point.category;
+                            changedata1(w10,e);
+
+                        }
+                    }
+                },
                 column: {
                     stacking: 'normal',
 
@@ -107,12 +123,19 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
                 title: {
                     text:'小时',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    },
+
                 },
 
                 labels: {
@@ -137,41 +160,86 @@ let Component = React.createClass({
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: barLoPowerValues
+                data: barLoPowerValues,
+                borderRadius: 4,
+                events: {
+                    click: function(e) {
+                        w10=e.point.category;
+                        changedata1(w10,e);
+
+                    }
+                }
+
             },
                 {
-                    name: '四',
+                    name: '理论',
                     color:'#A2D04D',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+                    borderRadius: 2,
+                    events: {
+                        click: function(e) {
+                            w10=e.point.category;
+                            changedata1(w10,e);
+
+                        }
+                    }
                 },
                 {
-                    name: '大',
+                    name: '理论',
                     color:'#FFD927',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+                    events: {
+                        click: function(e) {
+                            w10=e.point.category;
+                            changedata1(w10,e);
+
+                        }
+                    }
                 },
                 {
-                    name: '类',
+                    name: '理论',
                     color:'#FF9424',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+                    events: {
+                        click: function(e) {
+                            w10=e.point.category;
+                            changedata1(w10,e);
+
+                        }
+                    }
                 },
                 {
-                    name: '损失发电量',
+                    name: '理论发电量',
                     color:'#FF6124',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+                    events: {
+                        click: function(e) {
+                            w10=e.point.category;
+                            changedata1(w10,e);
+
+                        }
+                    }
                 },
                 {
                     name: 'PBA',
                     type: 'line',
                     color:'#0000ff',
-                    data: barLdpowerValue
+                    data: barLdpowerValue,
+                    events: {
+                        click: function(e) {
+                            w10=e.point.category;
+                            changedata1(w10,e);
+
+                        }
+                    }
                 },
 
             ]
@@ -189,12 +257,22 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+        w10 : state.vars.w11,
+        mon : state.vars.mon,
+        windplan : state.vars.windplan,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('w1',w0 ));
+        },
+        changedata1 :(w10,e)=> {
+            dispatch(actions.setVars('w11', w10,e));
+
         },
     };
 };

@@ -5,13 +5,16 @@ var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Healthy-data');
 
+let winds = data.data.yearelectric[0].wind;
+let win  = winds[0].plan;
+
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
 
-        let {barLotime,barLoPowerValue,barLoPowerValues,barLdpowerValue,text} = this.props;
+        let {changedata1,win,w0,barLotime,barLoPowerValue,barLoPowerValues,barLdpowerValue,text} = this.props;
 
 
 
@@ -50,6 +53,9 @@ let Component = React.createClass({
 
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -83,9 +89,19 @@ let Component = React.createClass({
                 }
             },
             plotOptions: {
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            w0=e.point.category;
+                            changedata1(w0,win);
+
+                        }
+                    }
+                },
                 column: {
                     stacking: 'normal',
-
+                    pointWidth: 20,
                     borderWidth: 0,
 
                 }
@@ -107,12 +123,18 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
                 title: {
                     text:'小时',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    },
                 },
 
                 labels: {
@@ -135,38 +157,41 @@ let Component = React.createClass({
                 },
             }],
             series: [{
-                name: '实际运行时间量',
+                name: '实际发电量',
                 type: 'column',
-                data: barLoPowerValues
+                data: barLoPowerValues,
+                borderRadius: 4,
             },
                 {
-                    name: '停机时间',
+                    name: '理论发电量',
 
                     color:'#A2D04D',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+                    borderRadius: 2,
                 },
                 {
-                    name: '停机时间',
+                    name: '理论发电量',
                     color:'#FFD927',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '停机时间',
+                    name: '理论发电量',
                     color:'#FF9424',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '停机时间',
+                    name: '理论发电量',
                     color:'#FF6124',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+
                 },
                 {
                     name: 'PBA',
@@ -185,12 +210,21 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+        win : state.vars.win1,
+        windplan1 : state.vars.windplan1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+        changedata1 :(w0,win)=>{
+            dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('win1',win ));
+
         },
     };
 };
