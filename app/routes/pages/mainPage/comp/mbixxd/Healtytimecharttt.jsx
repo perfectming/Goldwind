@@ -104,7 +104,7 @@ let Component = React.createClass({
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 45,
                 style:{
                     color:'#fff',
                     fontSize:'14px'

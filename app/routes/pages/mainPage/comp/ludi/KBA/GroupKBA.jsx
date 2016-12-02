@@ -21,7 +21,7 @@ let Component = React.createClass({
 				<TimeSelect></TimeSelect>
 				<div className={styles.content}>
 					<div className={`${styles.area} ${styles.boxShadow}`}>
-						<div className={styles.img}><a>图片</a></div>
+						<div className={styles.img}><a>logo</a></div>
 						<TableF></TableF>
 					</div>
 					<div className={`${styles.wind} ${styles.boxShadow}`}>
