@@ -49,6 +49,7 @@ let Component = React.createClass({
 					</div>
 				</div>
 			</div>
+			
 		)
 		
 }

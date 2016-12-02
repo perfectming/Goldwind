@@ -18,22 +18,24 @@ let Component = React.createClass({
 	render() {
 		return(
 			<div className={styles.gbaBox}>
-				<TimeSelect></TimeSelect>
-				<div className={styles.content}>
-					<div className={`${styles.area} ${styles.boxShadow}`}>
-						<div className={styles.img}><a>logo</a></div>
-						<TableF></TableF>
+					<TimeSelect></TimeSelect>
+					<div className={styles.content}>
+						<div className={`${styles.area} ${styles.boxShadow}`}>
+							<div className={styles.img}><a>logo</a></div>
+							<TableF></TableF>
+						</div>
+						<div className={`${styles.wind} ${styles.boxShadow}`}>
+							<div className={styles.img}><a>图片</a></div>
+							<TableS></TableS>
+						</div>
+						<div className={`${styles.fan} ${styles.boxShadow}`}>
+							<div className={styles.img}><a>图片</a></div>
+							<TableT></TableT>
+						</div>
 					</div>
-					<div className={`${styles.wind} ${styles.boxShadow}`}>
-						<div className={styles.img}><a>图片</a></div>
-						<TableS></TableS>
-					</div>
-					<div className={`${styles.fan} ${styles.boxShadow}`}>
-						<div className={styles.img}><a>图片</a></div>
-						<TableT></TableT>
-					</div>
-				</div>
 			</div>
+			
+			
 		)
 		
 }
