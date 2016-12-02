@@ -233,7 +233,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('valueid', value));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('showPage', 'fan_matrix'));
-            dispatch(actions.setVars('fan_page', 'faninfo'));
+            dispatch(actions.setVars('fan_page', 'pvinfo'));
             dispatch(actions.setVars('befor_page','fan' ));
         }
     };

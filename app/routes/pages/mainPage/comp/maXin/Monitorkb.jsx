@@ -92,28 +92,6 @@ let Component = React.createClass({
                         <Column1></Column1>
                     </div>
                 </div>
-                <div className={`${styles.longbox} ${styles.box_shadow}`}>
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={jnjp}/></div>
-                        <div className={styles.righttext}>节能减排</div>
-                    </div>
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={nljys}/></div>
-                        <div className={styles.righttext1}><h2>年累节约水</h2><h2><b>{mobd[8888800].YearWaterSaved}</b>万吨</h2></div>
-                    </div>
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={nljybm}/></div>
-                        <div className={styles.righttext1}><h2>年累节约标煤</h2><h2><b>{mobd[8888800].YearCoalSaved} </b>万吨</h2></div>
-                    </div>
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={nlcojp}/></div>
-                        <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{mobd[8888800].YearSO2Emissions}</b>万吨</h2></div>
-                    </div>
-                    <div className={`${styles.navitem} ${styles.bore}`}>
-                        <div className={styles.leftimg}><img src={nlsojp}/></div>
-                        <div className={styles.righttext1}><h2>年累SO2减排</h2><h2><b>{mobd[8888800].YearCO2Emissions}</b>万吨</h2></div>
-                    </div>
-                </div>
                 <div className={`${styles.fgzyfx} ${styles.box_shadow}`}>
                     <Title title={['风/光资源分析']}></Title>
                     <div className={styles.fgzyfxmain}>
@@ -134,6 +112,28 @@ let Component = React.createClass({
                     <Title title={['损失电量情况分析']}></Title>
                     <div className={styles.gzsbglmain}>
                         <Column2></Column2>
+                    </div>
+                </div>
+                <div className={`${styles.longbox} ${styles.box_shadow}`}>
+                    <div className={styles.navitem}>
+                        <div className={styles.leftimg}><img src={jnjp}/></div>
+                        <div className={styles.righttext}>节能减排</div>
+                    </div>
+                    <div className={styles.navitem}>
+                        <div className={styles.leftimg}><img src={nljys}/></div>
+                        <div className={styles.righttext1}><h2>年累节约水</h2><h2><b>{mobd[8888800].YearWaterSaved}</b>万吨</h2></div>
+                    </div>
+                    <div className={styles.navitem}>
+                        <div className={styles.leftimg}><img src={nljybm}/></div>
+                        <div className={styles.righttext1}><h2>年累节约标煤</h2><h2><b>{mobd[8888800].YearCoalSaved} </b>万吨</h2></div>
+                    </div>
+                    <div className={styles.navitem}>
+                        <div className={styles.leftimg}><img src={nlcojp}/></div>
+                        <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{mobd[8888800].YearSO2Emissions}</b>万吨</h2></div>
+                    </div>
+                    <div className={`${styles.navitem} ${styles.bore}`}>
+                        <div className={styles.leftimg}><img src={nlsojp}/></div>
+                        <div className={styles.righttext1}><h2>年累SO2减排</h2><h2><b>{mobd[8888800].YearCO2Emissions}</b>万吨</h2></div>
                     </div>
                 </div>
             </div>

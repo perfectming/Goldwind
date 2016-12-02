@@ -1,12 +1,13 @@
 .gbaBox{
     width: 100%;
-    padding: 0 30px 0 10px;
+    padding: 0 40px 0 10px;
     .content{
         position: relative;
         width: 100%;
         .area{
             position: relative;
             height: 380px;
+            overflow: hidden;
             .img{
                 position: absolute;
                 z-index: 5;
@@ -16,6 +17,7 @@
         }
         .wind{
             position: relative;
+            overflow: hidden;
             top: 15px;
             float: left;
             height: 380px;
@@ -30,6 +32,7 @@
         }
         .fan{
             position: relative;
+            overflow: hidden;
             top: 15px;
             float: left;
             height: 380px;

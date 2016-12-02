@@ -26,6 +26,19 @@ let WTSpd = Number(fmvalue["WTUR.WSpd.Ra.F32"]);
 let WTPwr = Math.ceil(fmvalue["WTUR.PwrAt.Ra.F32"]);
 let WROTSpd = Math.ceil(fmvalue["WROT.Spd.Ra.F32"]);
 let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
+			function setData(rdata, time) {
+                //var date = new Date();
+                //date.setTime(time);
+                // $(".info").text(time + ":" + JSON.stringify(rdata));
+                // console.log(TY);
+                // console.log(JSON.stringify(rdata));
+                //$(".info").text(JSON.stringify(rdata));
+            }
+
+          
+                //获取模型，适用于综合指标界面的初始化
+                    //          此参数固定          “”文档中指定的
+                // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", "652113028", "WTDetail", setData, "Screen", 0);
 
 // console.log(WNACTemp);
 // console.log(fmvalue);
@@ -36,7 +49,35 @@ let Component = React.createClass({
 
 	render() {
 		let {value,fanid} = this.props;
+		let val = value.Wtid;
+
 		// console.log(fmvalue.StatusCode);
+		function setData(rdata, time) {
+                //var date = new Date();
+                //date.setTime(time);
+                // $(".info").text(time + ":" + JSON.stringify(rdata));
+                // console.log(TY);
+                var data = JSON.stringify(rdata);
+                // console.log(data);
+                
+                //$(".info").text(JSON.stringify(rdata));
+            }
+           function setData1(rdata, time) {
+                //var date = new Date();
+                //date.setTime(time);
+                // $(".info").text(time + ":" + JSON.stringify(rdata));
+                // console.log(TY);
+                // var data = JSON.stringify(rdata);
+                // console.log(rdata.ModelData);
+                
+                //$(".info").text(JSON.stringify(rdata));
+            }
+          
+                //获取模型，适用于综合指标界面的初始化
+                    //          此参数固定          “”文档中指定的
+                // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", val, "WTDetail", setData, "Screen", 0);
+
+                // TY.getRtData("WTDetail", val, setData1);
 		let x;
 		let code = value.WTStateCode;
 		switch(code)
@@ -421,19 +462,19 @@ const mapDispatchToProps = (dispatch) => {
         		height:WGENTemp+50,
         		duration: "slow",
         	}, 1000 )
-  $.ajax({
-   type: 'post',    
-   url:'http://54.223.200.134/System/data.aspx?mdid=Model&ScId=2015032011&EnId=654208001&EnKey=Screen&PkId=&ModelKey=6C5002D3-1566-414a-8834-5077940C78E1&dhs=UISys&AspxAutoDetectCookieSupport=1',    
-   data:{name:'xuyuanming'},    
-   dataType:"json",
+//   $.ajax({
+//    type: 'post',    
+//    url:'http://54.223.200.134/System/data.aspx?mdid=Model&ScId=2015032011&EnId=654208001&EnKey=Screen&PkId=&ModelKey=6C5002D3-1566-414a-8834-5077940C78E1&dhs=UISys&AspxAutoDetectCookieSupport=1',    
+//    data:{name:'xuyuanming'},    
+//    dataType:"json",
     
-   timeout:3000,    
+//    timeout:3000,    
    
-   success:function(data){    
-       console.log(data.data);    
-   },    
+//    success:function(data){    
+//        console.log(data.data);    
+//    },    
    
-});
+// });
 				// function jsonp(data){console.log(data)};
 // 				$.jsonp({  
 //    url:'http://10.9.0.9:8081/gwbi/elec/getPower',  
