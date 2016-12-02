@@ -37,6 +37,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -91,7 +92,8 @@ let Component = React.createClass({
                 },
                 categories:machine,
             },
-            yAxis: [{
+            yAxis: [
+            {
                 labels: {
                 format: '',
                 style: {
@@ -99,6 +101,9 @@ let Component = React.createClass({
                     fontSize:'14px'
                 }
             },
+             gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'(KWH)',
                 align:'high',
@@ -117,13 +122,19 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text: 'TBA%',
                  align:'high',
                 rotation:'0',
-                y: -20,
-                x: 40,
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
 
             },
             opposite: true

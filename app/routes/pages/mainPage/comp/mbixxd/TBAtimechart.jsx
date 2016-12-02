@@ -96,6 +96,9 @@ let Component = React.createClass({
                 categories:montht,
             },
             yAxis: {
+                 gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%',
                     align:'high',

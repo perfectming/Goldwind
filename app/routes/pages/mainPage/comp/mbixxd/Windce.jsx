@@ -93,6 +93,9 @@ let Component = React.createClass({
                 categories:areaNameX,
             },
             yAxis:{
+                 gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
                  title: {
                 text:'',
                     align:'high',

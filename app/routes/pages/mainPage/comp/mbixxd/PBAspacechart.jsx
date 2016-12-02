@@ -98,13 +98,15 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text:'KWH',
+                text:'(KWH)',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 45,
                 style:{
                     color:'#fff',
                     fontSize:'14px'
@@ -117,7 +119,9 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text: '',
                  align:'high',
@@ -181,7 +185,7 @@ let Component = React.createClass({
                     type: 'line',
                     data: PBA,
                     color:'blue',
-                    yAxis:1
+                    
                 },
                 ]
         };

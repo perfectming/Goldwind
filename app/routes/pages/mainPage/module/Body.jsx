@@ -170,7 +170,8 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
-               
+                
+              
                
 
                 {showPage === 'health_main' && <Health_main></Health_main>}

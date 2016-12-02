@@ -115,6 +115,10 @@ let Component = React.createClass({
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
                 },
                 max:100,
                 labels: {
@@ -128,12 +132,14 @@ let Component = React.createClass({
             series: [{
                 name: '实际运行时间',
                 type: 'column',
-                data: barLpdpowerValue
+                data: barLpdpowerValue,
+                borderRadius: 4,
             },{
                 name: '停机时间',
                 type: 'column',
                 color:'#cccccc',
-                data: barlinepdat
+                data: barlinepdat,
+                borderRadius: 4,
             }
                 ,
                 {
