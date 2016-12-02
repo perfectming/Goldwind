@@ -1,45 +1,46 @@
 .box{
     overflow:hidden;
-    color: white;
+    color: #E6E7E8;
     font-size: 16px;
     padding: 0 40px 10px 10px;
     height: 930px;
     .monthbox{
         width: 100%;
         height: 60px;
+        color: #E6E7E8;
         list-style: none;
-        background-color: #21242b;
         padding-top: 10px;
+        padding-left: 0;
+        border-bottom: 1px solid #31F3FB;
         .bg{
             height: 40px;
-            line-height: 30px;
-            padding: 5px 10px;
+            width: 100px;
+            border: 1px solid #31F3FB;
+            line-height: 38px;
             float: left;
-            color: white;
             font-family: "微软雅黑";
-            font-weight: 900;
             text-align: center;
-            margin-right: 20px;
-            border-radius:20px;
+            margin-right: 10px;
+            border-radius:5px;
             cursor: pointer;
             &:hover{
-                color: #000000;
-                background-color: #26f4ff;
+                color: #31F3FB;
+                box-shadow:0 0 10px #fff;
             }
         }
         .bg1{
             height: 40px;
-            line-height: 30px;
-            padding: 5px 10px;
+            width: 100px;
+            border: 1px solid #31F3FB;
+            line-height: 38px;
             float: left;
             font-family: "微软雅黑";
-            font-weight: 900;
             text-align: center;
-            margin-right: 20px;
-            border-radius:20px;
+            margin-right: 10px;
+            border-radius:5px;
             cursor: pointer;
-            color: #000000;
-            background-color: #26f4ff;
+            color: #31F3FB;
+            box-shadow:0 0 10px #fff;
         }
     }
     .left{
@@ -50,10 +51,11 @@
             height: 200px;
             width: 100%;
             .sectionSmall{
+                border:1px solid #3e4c67;
                 position: relative;
                 width: 32%;
                 height: 100%;
-                background-color: #282B34;
+                background-color: rgba(44, 61, 71, 0.4);
                 float: left;
                 padding-top: 10px ;
                 .sectionbar{
@@ -64,6 +66,11 @@
                     padding-top: 50px;
                     a{
                         cursor: pointer;
+                        text-decoration: underline;
+                        color: #E6E7E8;
+                        &:hover{
+                            color: #31f3fb;
+                        }
                     }
                 }
                 .sectionfour{
@@ -93,11 +100,12 @@
                 }
             }
             .section{
+                border:1px solid #3e4c67;
                 float: left;
                 position: relative;
                 width: 33%;
                 height: 100%;
-                background-color: #282B34;
+                background-color: rgba(44, 61, 71, 0.4);
                 margin-right: 1%;
                 padding-top: 10px;
                 .sectionbar{
@@ -108,6 +116,11 @@
                     float: left;
                     a{
                         cursor: pointer;
+                        text-decoration: underline;
+                        color: #E6E7E8;
+                        &:hover{
+                            color: #31f3fb;
+                        }
                     }
                 }.sectiontwo{
                     height: 100%;
@@ -165,12 +178,13 @@
             height: 640px;
             width: 100%;
             .electric{
+                border:1px solid #3e4c67;
                 position: absolute;
                 height: 100%;
                 width: 33%;
-                background-color: #282B34;
+                background-color: rgba(44, 61, 71, 0.4);
                 .electricHeader{
-                    height: 35px;
+                    height: 30px;
                     width: 100%;
                     background:  #464C58;
                     line-height: 30px;
@@ -248,45 +262,57 @@
                 }
             }.yearelectric{
                 .header{
-                    height: 35px;
+                    height: 30px;
+                    line-height: 30px;
+                    padding-left: 20px;
                     background-color: #464C58;
                    .logo{
-                        margin-left: 20px;
                         cursor: pointer;
                         float: left; 
                     }
                     .links{
-                        cursor: pointer; 
                         float: left;
                         margin-left: 20px;
+                        a{
+                            cursor: pointer; 
+                            color: #E6E7E8;
+                            text-decoration: underline;
+                            &:hover{
+                                color: #31f3fb;
+                            } 
+                        }
+                        
                     } 
                 }
                 position: absolute;
                 left: 34%;
                 width: 66%;
-                background-color: #282B34;
+                border:1px solid #3e4c67;
             }.yearprofit{
                 .logo{
-                    height: 35px;
+                    height: 30px;
+                    line-height: 30px;
+                    padding-left: 20px;
                     background-color: #464C58;
                 }
                 position: absolute;
                 left: 34%;
                 top: 325px;
                 width: 66%;
-                background-color: #282B34;
+                border:1px solid #3e4c67;
             }
         }
     }.right{
+        border:1px solid #3e4c67;
         position: relative;
-        width: 27%;
+        width: 27.5%;
         height: 850px;
-        background-color: #282B34;
+        background-color: rgba(44, 61, 71, 0.4);
         float: right;
         h3{
             margin: 0;
-            height: 35px;
-            line-height: 35px;
+            height: 30px;
+            line-height: 30px;
             font-size: 16px;
             font-weight: 900;
             padding-left: 30px;
@@ -297,21 +323,41 @@
             width: 100%;
             tr{
                 display: inline-block;
-                height: 45px;
+                height: 30px;
                 width: 100%;
                 margin-top: 20px;
-                background-color: #262A32;
+                background-color: rgba(41, 61, 71, 0.2);
+                &:not(:first-child):hover{
+                    border: 1px solid #31F3FB;
+                }
                 th{
                     display: inline-block;
                     text-align: center;
                     width: 25%;
-                    height: 45px;
-                    line-height: 45px;
+                    height: 30px;
+                    line-height: 30px;
                     &:first-child{
                         width: 20%;
                     }
+                }.click1{
+                   color: #20FEFF; 
+                   .bottom{
+                      color: #20FEFF; 
+                   }
+                   .top{
+                      color: #E6E7E8;
+                   }
+                }.click1:hover{
+                    cursor: pointer;
+                    background-color: #39454e;
                 }.click{
                    color: #20FEFF; 
+                   .bottom{
+                      color: #20FEFF; 
+                   }
+                   .top{
+                      color: #E6E7E8; 
+                   }
                 }.click:hover{
                     cursor: pointer;
                     background-color: #39454e;

@@ -48,7 +48,7 @@ let Component = React.createClass({
                 style:{
                     color: '#000',
                     fontSize: '14px',
-                    fontWeight:'bold',
+                    fontFamily:"微软雅黑"
                 }
             },
             credits: {

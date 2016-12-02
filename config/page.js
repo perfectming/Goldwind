@@ -80,7 +80,7 @@ module.exports = {
                 page:[
                     {
                         name:'业务报表1',
-                        page:'',
+                        page:'ywbb',
                     },{
                         name:'故障报表',
                         page:'fault',
@@ -130,19 +130,6 @@ module.exports = {
                     },{
                         name:'报告',
                         page:'manaport',
-                    }]
-            },{
-                name:'健康管理-3',
-                page:[
-                     {
-                        name:'健康管理3-1',
-                        page:'',
-                    },{
-                        name:'健康管理3-2',
-                        page:'',
-                    },{
-                        name:'健康管理3-3',
-                        page:'',
                     }]
             }],
         },{

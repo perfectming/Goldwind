@@ -12,15 +12,14 @@ let Component = React.createClass({
     	let {text,lose,}=this.props;
         let configPie = {
             chart: {
-                height:450,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:360,
+                backgroundColor: 'rgba(44, 61, 71, 0.4)',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
             },
+            
             title: {
                 text: text+'<br>PBA',
                 align:'left',
@@ -39,7 +38,10 @@ let Component = React.createClass({
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
-                }
+                },
+                itemHoverStyle: {
+                color: '#31f3fb'
+            	}
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -48,7 +50,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#4cdb9d', '#2e75b6','#e2ac00','#009a46', '#ff6600','#5b9bd5'],
+            colors: [ '#33BAC0', '#5298d3', '#31f3fb','#856ffe','#009a46',],
             plotOptions: {
 	            pie: {
 	                allowPointSelect: true,

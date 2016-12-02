@@ -47,7 +47,7 @@ module.exports = {
                 },
                {
                     tabname:'光伏馈线',
-                    rpage:'fjkx'
+                    rpage:'gfkx'
                 },
                 {
                     tabname:'测光塔',

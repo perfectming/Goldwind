@@ -121,7 +121,7 @@ let Component = React.createClass({
                // lineColor: "red",
                 //tickWidth: 4,
                 gridLineDashStyle: 'Solid',
-                gridLineColor: '#898688',
+                gridLineColor: '#6d6a6c',
 
                 title: {
                     text:'kW',

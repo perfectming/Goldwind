@@ -13,9 +13,8 @@ let Component = React.createClass({
     	let {X1,changedata1}=this.props
         let configPie = {
             chart: {
-                height:400,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:380,
+                backgroundColor: 'rgba(44, 61, 71, 0.4)',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -41,7 +40,10 @@ let Component = React.createClass({
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
-                }
+                },
+                itemHoverStyle: {
+                color: '#31f3fb'
+            	}
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -50,29 +52,15 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#4cdb9d', '#2e75b6','#e2ac00','#009a46', '#ff6600','#5b9bd5']
+            colors: [ '#33BAC0', '#33545c','#5298d3','#537388', '#464d59','#5298d3']
             ,
-            plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
-                bar:{
-                    animation: true
-                }
-            },
             plotOptions: {
                 column: {
                 	stacking:"normal",
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 30
+                    pointWidth: 30,
+                    borderRadius:2
                 }
             },
             xAxis: {

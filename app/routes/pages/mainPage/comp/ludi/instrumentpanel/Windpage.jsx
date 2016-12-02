@@ -19,7 +19,7 @@ let Component = React.createClass({
     render() {
         
         
-        let{flag=true,changepageSort1,changepageSort,big1,small1,wind,actbt=0,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{flag3,flag4,flag=true,changepageSort1,changepageSort,big1,small1,wind,actbt=0,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         return (
            <div className={styles.box}>
            		<ul className={styles.monthbox}>
@@ -34,19 +34,19 @@ let Component = React.createClass({
            				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>当前30分<br/>总分100分</span><br/>
-           						<a onClick={()=>changepageHealthyT()}>图片</a>
-           						<a onClick={()=>changepageHealthyS()}>图片</a>
+           						<a onClick={()=>changepageHealthyS()}>空间</a>&nbsp;
+           						<a onClick={()=>changepageHealthyT()}>时间</a>
            					</div>
            					<div className={styles.sectiontwo}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small1/big1)*100).toFixed(1)}%</p>健康度</span>
-           						<Pie2 color={small1==undefined? ['#E9C75C','#A69263']:big1-small1>0?['#E9C75C','#A69263']:['#f00','#E9C75C']} num={small1==undefined? [data.yearelectric[0].wind[0].small,data.yearelectric[0].wind[0].big-data.yearelectric[0].wind[0].small]:big1-small1>0? [small1,big1-small1]:[small1-big1,2*big1-small1]}></Pie2>
+           						<Pie2 color={small1==undefined? ['#E9C75C','#A69263']:big1-small1>0?['#E9C75C','#A69263']:['#00ff33','#E9C75C']} num={small1==undefined? [data.yearelectric[0].wind[0].small,data.yearelectric[0].wind[0].big-data.yearelectric[0].wind[0].small]:big1-small1>0? [small1,big1-small1]:[small1-big1,2*big1-small1]}></Pie2>
            					</div>
            				</div>
            				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>实发122kWh<br/>应发200kWh</span><br/>
-           						<a onClick={()=>changepagePBAT()}>图片</a>
-           						<a onClick={()=>changepagePBAS()}>图片</a>
+           						<a onClick={()=>changepagePBAS()}>空间</a>&nbsp;
+           						<a onClick={()=>changepagePBAT()}>时间</a>
            					</div>
            					<div className={styles.sectionthree}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{data.firstfloor[2].actrul/data.firstfloor[2].should*100}%</p>PBA</span>
@@ -56,8 +56,8 @@ let Component = React.createClass({
            				<div className={`${styles.sectionSmall} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>可用100h <br/>统计200h</span><br/>
-           						<a onClick={()=>changepageTBAT()}>图片</a>
-           						<a onClick={()=>changepageTBAS()}>图片</a>
+           						<a onClick={()=>changepageTBAS()}>空间</a>&nbsp;
+           						<a onClick={()=>changepageTBAT()}>时间</a>
            					</div>
            					<div className={styles.sectionfour}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{data.firstfloor[3].usable/data.firstfloor[3].count*100}%</p>TBA</span>
@@ -93,16 +93,16 @@ let Component = React.createClass({
            				<div className={`${styles.yearelectric} ${styles.boxShadow}`}>
            					<div>
            						<div className={styles.header}>
-           							<div className={styles.logo}><a>logo</a></div>
-	           						<div className={styles.links}><a onClick={()=>changepageEleT()}>图片</a></div>
-	           						<div className={styles.links}><a onClick={()=>changepageEleS()}>图片</a></div>
+           							<div className={styles.logo}><a>logo</a><span>年发电量</span></div>
+           							<div className={styles.links}><a onClick={()=>changepageEleS()}>空间</a></div>
+           							<div className={styles.links}><a onClick={()=>changepageEleT()}>时间</a></div>
            						</div>
            						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={wind==undefined? data.yearelectric[0].wind[0].plan:wind} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            					</div>
            				</div>
            				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
            					<div>
-           						<div className={styles.logo}><a>logo</a></div>
+           						<div className={styles.logo}><a>logo</a><span>年收益</span></div>
            						<Yearelectric title={data.yearelectric[0].title[1]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[0]} nameOne={data.yearelectric[0].name[2]} nameTwo={data.yearelectric[0].name[3]}></Yearelectric>
            					</div>
            				</div>
@@ -110,15 +110,15 @@ let Component = React.createClass({
            		</div>
                 <div className={`${styles.right} ${styles.boxShadow}`}>
                 	<h3>
-                		<span>箭头</span> &nbsp; PBA排序
+                		<span><a>logo</a></span> &nbsp; PBA排序
                 	</h3>
                 	<table>
                 		<tbody>
                 			<tr>
 	                			<th>排名</th>
 	           					<th>风机名</th>
-	           					<th className={styles.click} onClick={()=>changepageSort1(flag)}>PBA ↑↓</th>
-	           					<th className={styles.click} onClick={()=>changepageSort(flag)}>停机时间 ↑↓</th>
+	           					<th className={styles.click} onClick={()=>changepageSort1(flag)}>PBA <span className={flag3==undefined? null:flag3==true?styles.top:styles.bottom}>↑</span><span className={flag3==undefined? null:flag3==false?styles.top:styles.bottom}>↓</span></th>
+	           					<th className={styles.click} onClick={()=>changepageSort(flag)}>停机时间<span className={flag4==undefined? null:flag4==true?styles.top:styles.bottom}>↑</span><span className={flag4==undefined? null:flag4==false?styles.top:styles.bottom}>↓</span></th>
                 			</tr>
                 			<tr>
                 				<th>1</th><th>{sort1[0].name}</th><th>{sort1[0].PBA}</th><th>{sort1[0].time}分钟</th>
@@ -168,6 +168,8 @@ const mapStateToProps = (state) => {
     	small1 : state.vars.small1,
     	sort1 : state.vars.sort2,
     	flag : state.vars.flag1,
+    	flag3: state.vars.flag3,
+    	flag4: state.vars.flag4,
     }
 };
 
@@ -181,10 +183,12 @@ const mapDispatchToProps = (dispatch) => {
         changepageSort:(flag)=>{
         	flag==true? dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return a.time-b.time}))):dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return b.time-a.time})));
         	flag==true? dispatch(actions.setVars('flag1',false )):dispatch(actions.setVars('flag1',true ));
+        	flag==true? dispatch(actions.setVars('flag4',false )):dispatch(actions.setVars('flag4',true ));
         },
         changepageSort1:(flag)=>{
         	flag==true? dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return (a.PBA).slice(0,1)/1-(b.PBA).slice(0,1)/1}))):dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return (b.PBA).slice(0,1)/1-(a.PBA).slice(0,1)/1})));
         	flag==true? dispatch(actions.setVars('flag1',false )):dispatch(actions.setVars('flag1',true ));
+        	flag==true? dispatch(actions.setVars('flag3',false )):dispatch(actions.setVars('flag3',true ));
         },
         changepageW :(value,key)=>{
         	dispatch(actions.setVars('big1',value.big ));

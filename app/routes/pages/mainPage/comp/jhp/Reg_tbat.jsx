@@ -46,6 +46,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -101,12 +104,18 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
                 title: {
                     text:'小时',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    },
                 },
                 max:100,
                 labels: {
@@ -120,12 +129,16 @@ let Component = React.createClass({
             series: [{
                 name: '实际运行时间',
                 type: 'column',
-                data: barRoPowerValue}
+                data: barRoPowerValue,
+                borderRadius: 4,
+
+                }
                 ,{
                     name: '停机时间',
                     type: 'column',
                     color:'#cccccc',
-                    data: barRoPowerValues
+                    data: barRoPowerValues,
+                    borderRadius: 4,
                 }
                 ,
                 {

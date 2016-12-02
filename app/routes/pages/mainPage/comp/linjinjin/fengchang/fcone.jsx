@@ -8,6 +8,7 @@ import Pvmatrix from '../../xym/Pvmatrix.jsx';
 import Sjlb from '../../jy/fanDataList.jsx';
 import Fjkx from './fcright/fjkx.jsx';
 import Cft from './fcright/cft.jsx';
+import Gfkx from './fcright/gfkx.jsx';
 import Gisdxt from './fcright/gisdxt.jsx';
 import Syzjs from './fcright/syzjs.jsx';
 import Choosefan from '../../xym/allinfo/Choosefan.jsx';
@@ -35,6 +36,7 @@ let Component = React.createClass({
                         { numpage==='pvmatrix' && <Pvmatrix></Pvmatrix>}
                         { numpage==='sjlb' && <Sjlb></Sjlb>}
                         { numpage==='fjkx' && <Fjkx></Fjkx>}
+                        { numpage==='gfkx' && <Gfkx></Gfkx>}
                         { numpage==='cft' && <Cft></Cft>}
                         { numpage==='gisdxt' && <Gisdxt></Gisdxt>}
                         { numpage==='syzjs' && <Syzjs></Syzjs>}

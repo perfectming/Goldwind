@@ -5,11 +5,16 @@
   height:60px;
   width:100%;
   .first{
+  display:inline-block;
+  cursor:pointer;
   width:70px;
   height:30px;
-  background-color:#ccc;
+  background-color:none;
   margin-left:23px;
   border-radius:3px;
+  border:none;
+  color:#fff;
+  font-size:14px;
   }
   }
   .inquireBox{

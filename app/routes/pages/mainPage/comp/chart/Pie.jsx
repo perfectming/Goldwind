@@ -58,6 +58,11 @@ let Component = React.createClass({
             
             tooltip: {
                 enabled: true,
+                 style:{
+                    color: '#000',
+                    fontSize: '14px',
+                    fontFamily:"微软雅黑"
+                }
             },
             credits: {
                 enabled: false //不显示highCharts版权信息

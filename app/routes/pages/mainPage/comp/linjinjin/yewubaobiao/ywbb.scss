@@ -1,0 +1,93 @@
+.faultBox{
+   width:100%;
+   background: #464d59;
+   overflow:hidden;
+   .search_tit{
+    width:100%;
+    hieght:46px;
+    line-height:46px;
+    background:#369;
+    margin-bottom:20px;
+    overflow:hidden;
+    .seleBox{
+            float:left;
+            color:#fff;
+            span{margin:0 10px 0 15px;}
+            select{width:150px;color:#333;}
+        }
+        .inputBox{
+            float:left;
+        }
+        .dateBox{
+            float:left;
+            input{height:25px;}
+        }
+        .btnBox{
+            float:left;
+            margin-left:20px;
+            font-size:16px;
+            button{
+            height:25px;
+            line-height:20px;
+                &:hover{
+                    background:#485b7b;
+                    color:#fff;
+                }
+            }
+            
+        }
+    }
+    .leftlist{
+        width:400px;
+        float:left;
+        height:840px;
+        background: #0a1b2b;
+        .place{
+            width:100%;
+            line-height:35px;
+            overflow:hidden;
+            margin-top:3px;
+            
+
+            .ca{
+                width:100%;
+                height:35px; 
+                cursor:pointer;
+                font-size:16px;
+                display:inline-block;
+                color:#fff;
+                padding-left:35px;
+                background-color: #0d293f;
+                background-image:url('../../../img/comp/add_icon.png');
+                background-repeat: no-repeat;
+                background-position: 15px center;
+                }
+            .placename{
+                width:100%;
+                line-height:35px;
+                overflow:hidden;
+                a{
+                width:100%;
+                height:35px; 
+                cursor:pointer;
+                font-size:16px;
+                display:inline-block;
+                color:#fff;
+                padding-left:70px;
+                background: #0a1b2b;
+                background-image:url('../../../img/comp/son_addicon.png');
+                background-repeat: no-repeat;
+                background-position: 15px center;
+                }
+
+            }
+        }
+    }
+    .righttable{
+        width:1355px;
+        float:left;
+        height:840px;
+        background: #0f0;
+    }
+   
+}
