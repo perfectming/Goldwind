@@ -10,7 +10,7 @@ import refresh from '../../img/comp/refresh.png';
 import del from '../../img/icon/tabDel.png';
 import add from '../../img/icon/tabAdd.png';
 import _ from 'lodash';
-
+import Ambox from '../jy/boxAm.jsx';
 let tabaleData = require('./data');
 
 let Component = React.createClass({
@@ -122,6 +122,7 @@ let Component = React.createClass({
                         }
                     </div>
                 </div>
+                <Ambox></Ambox>
             </div>
         </div>
         );

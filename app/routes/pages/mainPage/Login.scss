@@ -12,24 +12,24 @@
     overflow: hidden;
     font-size: 20px;
     padding: 0.1%;
+    color: #ddd;
     span{
       display: inline-block;
       width: 22%;
       height: 40%;
-      border:1px solid #ccc;
-      background: #0192d8;
+      border:0;
+      background: #3c3636;
       margin: 1%;
       text-align: center;
       padding-top:3px;
     }
     .int{
-      color: #fff;
       display: inline-block;
       width: 58%;
       height: 40%;
       border:1px solid #ccc;
       background:transparent;
-      outline: 1px solid #0192d8;
+      outline: 1px solid #3c3636;
       vertical-align: top;
       margin: 1%;
       &:focus{
@@ -38,7 +38,7 @@
     }
     .submit{
       float: right;
-      background: #0192d8;
+      background: #3c3636;
       text-align: center;
       width: 15%;
       height:93%;

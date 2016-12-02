@@ -44,10 +44,13 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 style:{
-                    fontSize:'15px'
+                    color: '#333',
+                    fontSize: '13px',
+                    fontFamily:'微软雅黑'
                 }
+                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                // pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             xAxis: {
                 labels: {
@@ -66,7 +69,7 @@ let Component = React.createClass({
             plotOptions: {
                 series: {
                     grouping: false,
-                    borderRadius: 20,
+                    borderRadius: 10,
                     allowPointSelect: false,
                     cursor: 'pointer',
                     borderWidth: 0,
@@ -75,11 +78,22 @@ let Component = React.createClass({
                     }
                 }
             },
+            legend: {
+                align:"right",
+                verticalAlign: "top",
+                y:-10,
+                itemStyle: {
+                    color: "#fff",
+                    fontSize:"14px",
+                    fontWeight:"normal",
+                    fontFamily:"微软雅黑"
+                }
+            },
             series: [{
-                name: '<span style="color:#fff;font-size: 18px">装机容量</span>',
+                name: '装机容量',
                 data: arr1
             },{
-                name: '<span style="color:#fff;font-size: 18px">负荷</span>',
+                name: '负荷',
                 data: arr2
             }]
         };
