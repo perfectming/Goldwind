@@ -47,6 +47,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -103,12 +106,18 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
                 title: {
                     text:'kWh',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    },
                 },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
@@ -122,13 +131,15 @@ let Component = React.createClass({
                 name: '计划发电量',
                 type: 'column',
                 color:'#5B9BD5',
-                data: barlopowers
+                data: barlopowers,
+                borderRadius: 4,
             }
                 ,{
                     name:'实际发电量',
                     color:'#ED7D31',
                     type:'column',
-                    data: barlopowerp
+                    data: barlopowerp,
+                    borderRadius: 4,
                 }
 
             ]
