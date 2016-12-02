@@ -24,11 +24,6 @@
                     z-index: 9;
                     a{
                         cursor: pointer;
-                        text-decoration: underline;
-                        color: #E6E7E8;
-                        &:hover{
-                            color: #31f3fb;
-                        }
                     }
                 }
                 .sectionBox{
@@ -165,7 +160,7 @@
                 border:1px solid #3e4c67;
                 .header{
                     height: 30px;
-                    line-height: 30px;
+                    line-height: 25px;
                     padding-left: 20px;
                     background-color: #464C58;
                    .logo{
@@ -179,12 +174,7 @@
                             float: left;
                             margin-left: 20px;
                             a{
-                                cursor: pointer;
-                                text-decoration: underline; 
-                                color: #E6E7E8;
-                                &:hover{
-                                    color: #31f3fb;
-                                }  
+                                cursor: pointer; 
                             }
                         }
                     } 
