@@ -22,6 +22,7 @@ import AS from '../comp/jy/AS.jsx';
 import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
+import Ywbb from '../comp/linjinjin/yewubaobiao/ywbb.jsx';
 import Fault from '../comp/yAll/Fault.jsx';
 import u865 from '../img/comp/gz_icon.png';
 import u867 from '../img/comp/tx_icon.png';
@@ -90,10 +91,10 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {showPage, tabOpt, tab, flag=true,cssif2='sdfdf',legend=false,navlegend=false,changelegend} = this.props;
+        let {showPage, tabOpt, tab, flag=true,cssif2='sdfdf',legend=false,navlegend=false,changelegend,ifshow=false} = this.props;
         return (
             <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2==='left'? styles.animate : styles.sdsd} ${cssif2==='right'? styles.animate1 : styles.sdsd}`}>
-                <div className={styles.fiexd}>
+                <div className={ifshow===true? styles.fiexd :styles.ifshow}>
                     <img src={u871} onClick={()=>changelegend(legend)}/>
                     <img src={u865}/>
                     <img src={u867}/>
@@ -119,6 +120,7 @@ let Component = React.createClass({
                 {showPage === 'amm' && <Amm></Amm>}
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
+                {showPage === 'ywbb' && <Ywbb></Ywbb>} 
                 {showPage === 'fault' && <Fault></Fault>} 
 
                 {showPage === 'baotou' && <Baotou></Baotou>}
@@ -189,6 +191,7 @@ const mapStateToProps = (state) => {
         flag: state.vars.bodypage,
         cssif2: state.vars.cssif2,
         legend: state.vars.legend,
+        ifshow: state.vars.ifshow,//是否显示右上角告警查询按钮
     }
 };
 

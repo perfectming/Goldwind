@@ -1,241 +1,227 @@
-.bodyBox {
- 
-  .topbox{
-   width:98%;
-   margin-top:15px;
-   overflow:hidden;
-   padding:5px 0;
-   .Generating{
-   	width: 270px;
-    height: 410px;
-    float:left;
-    border:1px solid #ccc;
-    background: rgba(44, 61, 71, 0.4);
-    margin-right:15px;
-    h6{
-    font-weight:normal;
-     padding:20px 0 0 20px;
-     margin:0;
-     color:#fff;
-     font-size:20px;
-     img{
-     margin-right:10px;
-     }
-     }
-     p{
-      padding:30px;
-      margin:0;
-      color:#fff;
-      margin-bottom:20px;
-     font-size:18px;
-     b{
-     margin-left:20px;
-     }
-     }
-     .gbox{
-     	width:185px;
-     	height:100px;
-     	line-height:100px;
-     	border:1px solid #ccc;
-     	margin:auto;
-     	margin-bottom:30px;
-     	color:#fff;
-     	font-size:20px;
-     	 img{
-     		margin-right:10px;
-     		}
-     }
-    
-   }
-   .Plancurve{
-   	width: 600px;
-    height: 410px;
-    float:left;
-    border:1px solid #ccc;
-    margin-right:15px;
-    background: rgba(44, 61, 71, 0.4);
-     h6{
-     font-weight:normal;
-     padding:20px 0 0 20px;
-     margin:0 0 30px 0;
-     color:#fff;
-     font-size:20px;
-     img{
-     margin-right:10px;
-     margin-top:-5px;
-     }
-     }
-   }
-   .Electric{
-   width: 600px;
-    height: 410px;
-     float:left;
-    border:1px solid #ccc;
-    margin-right:15px;
-    background: rgba(44, 61, 71, 0.4);
-     h6{
-     font-weight:normal;
-     padding:20px 0 0 20px;
-     margin:0 0 20px 0;
-     color:#fff;
-     font-size:20px;
-     img{
-     margin-right:10px;
-     margin-top:-5px;
-     }
-     }
-     .elediv{
-        width:100%;
-        overflow:hidden;
-        a{
-          float:right;
-          color: #fff;
-          line-height:20px;
-          margin:-3px 30px 0 10px;
-          font-size:16px;
-        }
-        span{
-          width:25px;
-          height:15px;
-          float:right;
-          background:#33c4cc;
-        }
-     }
-     .elebox{
-        width:80%;
-        height:120px;
-        border-radius:10px;
-        border:1px solid #ccc;
-        margin:37px auto;
-        overflow:hidden;
-        span{
-          width:25%;
-          height:120px;
-          float:left;
-          color:#fff;
-          text-align:center;
-          img{margin-top:20px;}
-        }
-        .speedbox{
-          width:75%;
-          padding:10px 15px 0 0px;
-          height:120px;
-          float:left;
-          .spedtit{
-            overflow:hidden;
-            color:#fff;
-            a{float:left;line-height:20px;color:#fff; }
-            b{float:right; line-height:20px; font-weight:normal;}
-          }
-          .planspeed{width:100%;height:22px; background:#5693d0;margin-bottom:10px;}
-          .mor{width:60%; background:#33c4cc;}
-          .mor1{width:40%; background:#33c4cc;}
-        }
-     }
-
-   }
-   .Completion{
-   	width: 335px;
-    height: 410px;
-     float:left;
-    border:1px solid #ccc;
-    background: rgba(44, 61, 71, 0.4);
-      h6{
-     font-weight:normal;
-     padding:20px 0 0 20px;
-     margin:0 0 20px 0;
-     color:#fff;
-     font-size:20px;
-     img{
-     margin-right:10px;
-     margin-top:-5px;
-     }
-     }
-   }
-   .navitem{
-   	width:20%;
-   	height:80px;
-   	float:left;
-   	border-right:1px solid #ccc;
-  	background: rgba(44, 61, 71, 0.4);
-    .leftimg{
-      width:40%;
-      float:left;
-      height:80px;
-      text-align:right;
-      img{margin:13px 20px 0 0;}
-
-    }
-    .righttext{
-      width:60%;
-      float:left;
-      height:80px;
-      line-height:80px;
-      font-size:24px;
-      color:#fff;
-    }
-    .righttext1{
-      width:60%;
-      float:left;
-      font-size:16px;
-      padding-top:14px;
-      height:80px;
-      color:#fff;
-      h2{
-        font-weight:normal;
-        font-size:16px;
-         margin:0px 0 10px 0;
-         b{font-size:22px; margin-right:15px;}
-         }
-    }
-   }
-   .bore{
-   border-right:none;
-   }
-   .Loss{
-   		width:50%;
-   		height:400px;
-   		float:left;
-   		border-right:1px solid #ccc;
-       h6{
-     font-weight:normal;
-     padding:20px 0 0 20px;
-     margin:0 0 20px 0;
-     color:#fff;
-     font-size:20px;
-     img{
-     margin-right:10px;
-     margin-top:-5px;
-     }
-     }
-   }
-    .Fault{
-   		width:50%;
-   		height:400px;
-      position:relative;
-   		float:left;
-      background:url('../../img/comp/gzbg.png') center -80px;
-      background-repeat:no-repeat;
-     h6{
-     font-weight:normal;
-     padding:20px 0 0 20px;
-     margin:0 0 20px 0;
-     color:#fff;
-     font-size:20px;
-     img{
-     margin-right:10px;
-     margin-top:-5px;
-     }
-     }
-     .gznum{ float:left;margin:93px 65px 0 0;color: #fff; font-size:18px; width:80px; text-align:center}
-     .gzmor{margin-left:230px;}
-   		a{margin:180px 0 0 66px; float:left;color:#fff; font-size:14px; width:80px; text-align:center}
-     .gza{ margin-left:154px;}
-   }
+.bodyBox{
+  .box_shadow:hover{
+    box-shadow:0 0 20px #fff;
   }
-  .bortop{
-  	   border:1px solid #ccc;
-  	   border-top:none;
-  	   background: rgba(44, 61, 71, 0.4);
+  overflow: hidden;
+  padding-top: 50px;
+  padding-left: 50px;
+  .zhzb{
+    width:480px;
+    height:215px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:2px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+    .zhzbtop{
+      width:440px;
+      height:136px;
+      margin-left: 20px;
+      margin-top: 35px;
+      overflow: hidden;
+      background: url(../../img/comp/zhzbgb1.png) no-repeat;
+      background-size: 100% 93%;
+      background-position:bottom center;
+      .zhzbtopbox {
+        width:145px;
+        height:55px;
+        margin-top: 4px;
+        display: inline-block;
+        color: #ffffff;
+        font-size: 14px;
+        overflow: hidden;
+        text-align: center;
+        .zhzbtopboxg{
+          color:#26f4ff;
+          font-size: 18px;
+        }
+      }
+    }
+    .zhzbdown{
+      width:440px;
+      height:45px;
+      margin-left: 20px;
+      padding: 3px;
+      color: #ffffff;
+      text-align: center;
+      font-size: 16px;
+      overflow: hidden;
+      .anquan{margin:-5px 8px 0 0;}
+      .daynum{
+        font-size: 20px;
+        color:#1fe005;
+      }
+    }
+  }
+  .zhzbgl{
+    width:1252px;
+    height:215px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+    .zhzbglmain{
+      margin-top: 18px;
+      .zhzbglbox{
+        width: 195px;
+        height:190px;
+        display: inline-block;
+        margin-left: 10px;
+        img{position:absolute;bottom:30px;right:10px;z-index:3;}
+        margin-top: 23px;
+        position: relative;
+        p{margin-bottom:0;text-align:center; color:#fff;}
+        .zhzbglboxnum{
+          position:absolute;
+          top:42%;
+          left:37%;
+          width:110px;
+          text-align: center;
+          height:40px;
+          line-height:18px;
+          font-size: 16px;
+          z-index:11;
+          margin-left:-30px;
+          margin-top:-15px;
+          display:inline-block;
+          padding:0 5px;
+          color: #ffffff;
+          p{
+            font-size: 22px;
+            margin-top:15px;
+
+          }
+        }
+      }
+    }
+  }
+ 
+  .nfdlwcqk{
+    width:618px;
+    height:275px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+    .nfdlwcqkmain{
+      margin-top: 20px;
+    }
+  }
+  .columbox{
+    width:1763px;
+    padding:5px 5px 5px 8px;
+    overflow:hidden;
+    .leftcolum{
+      float:left;
+      width:865px;
+      height:300px;
+      position:relative;
+      padding-top:30px;
+      background: rgba(44,61,71,0.4);
+    }
+    .rightcolum{
+      float:right;
+      width:865px;
+      height:300px;
+      position:relative;
+      padding-top:30px;
+      background: rgba(44,61,71,0.4);
+    }
+  }
+ 
+  .longbox{
+    width:1748px;
+    height:75px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.5);
+    .navitem{
+      width:25%;
+      height:60px;
+      float:left;
+      border-right:1px solid #111;
+      .leftimg{
+        width:40%;
+        float:left;
+        height:70px;
+        line-height:70px;
+        font-size:24px;
+        color:#fff;
+        text-align:right;
+        img{margin:0px 18px 0 0;}
+
+      }
+      .righttext{
+        width:60%;
+        float:left;
+        height:70px;
+        line-height:70px;
+        font-size:24px;
+        color:#fff;
+      }
+      .righttext1{
+        width:60%;
+        float:left;
+        font-size:16px;
+        padding-top:10px;
+        height:90px;
+        color:#fff;
+        h2{
+          font-weight:normal;
+          font-size:16px;
+          margin:0px 0 10px 0;
+          b{font-size:22px; margin-right:15px;
+            color: #2ff4fb;}
+        }
+      }
+    }
+    .bore{
+      border-right:none;
+    }
+  }
+  .fgzyfx{
+    width:622px;
+    height:265px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+    .fgzyfxmain{
+      margin-top: 30px;
+    }
+  }
+  .ssdlqkfx{
+    width:500px;
+    height:265px;
+    margin:8px;
+    padding-top:40px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+   
+  }
+  .gzsbgl{
+    width:595px;
+    height:265px;
+    margin:8px;
+    padding-top:30px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #3e4c67;
+    background: rgba(44,61,71,0.4);
+   
   }
 }

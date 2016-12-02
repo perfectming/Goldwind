@@ -53,14 +53,14 @@
         -o-animation:myfirst1 1s; /* Opera */
       }
       .animat2{
-        width:1765px;
+        width:1742px;
         animation:myfirst2 1s;
         -moz-animation:myfirst2 1s; /* Firefox */
         -webkit-animation:myfirst2 1s; /* Safari and Chrome */
         -o-animation:myfirst2 1s; /* Opera */
       }
       .animat3{
-        width:1388px;
+        width:1362px;
         animation:myfirst3 1s;
         -moz-animation:myfirst3 1s; /* Firefox */
         -webkit-animation:myfirst3 1s; /* Safari and Chrome */
@@ -126,52 +126,52 @@ to {margin-left:0;}
 
 @keyframes myfirst2
 {
-from {width:1388px;}
-to {width:1765px;}
+from {width:1362px;}
+to {width:1742px;}
 }
 
 @-moz-keyframes myfirst2 /* Firefox */
 {
-from {width:1388px;}
-to {width:1765px;}
+from {width:1362px;}
+to {width:1742px;}
 }
 
 @-webkit-keyframes myfirst2 /* Safari and Chrome */
 {
-from {width:1388px;}
-to {width:1765px;}
+from {width:1362px;}
+to {width:1742px;}
 }
 
 @-o-keyframes myfirst2 /* Opera */
 {
-from {width:1388px;}
-to {width:1765px;}
+from {width:1362px;}
+to {width:1742px;}
 }
 
 
 
 @keyframes myfirst3
 {
-from {width:1765px;}
-to {width:1388px;}
+from {width:1742px;}
+to {width:1362px;}
 }
 
 @-moz-keyframes myfirst3 /* Firefox */
 {
-from {width:1765px;}
-to {width:1388px;}
+from {width:1742px;}
+to {width:1362px;}
 }
 
 @-webkit-keyframes myfirst3 /* Safari and Chrome */
 {
-from {width:1765px;}
-to {width:1388px;}
+from {width:1742px;}
+to {width:1362px;}
 }
 
 @-o-keyframes myfirst3 /* Opera */
 {
-from {width:1765px;}
-to {width:1388px;}
+from {width:1742px;}
+to {width:1362px;}
 }
 
 

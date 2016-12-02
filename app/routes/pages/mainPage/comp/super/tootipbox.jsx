@@ -31,7 +31,6 @@ var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
         arr2.push(m)
         
     }
-
 }());
 
 
@@ -111,7 +110,7 @@ let Component = React.createClass({
                                         return(
                                             obj_wfd[value].map((valueC,key)=>{
                                                 return(
-                                                    <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname}</span>
+                                                    <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname+'      (  '+model_ens[value].name+'  )'}</span>
                                                 )
                                             })
                                         )
@@ -175,13 +174,14 @@ const mapDispatchToProps = (dispatch) => {
             $("#seachtext").keyup(function(){
                 console.log(1);
                 $('#searcg_anser').show();
-                $('#searcg_anser span').show();
+                $('#searcg_anser span').hide();
                 $("#fclist").hide();
                 $("#gflist").hide();
                 $("#searcg_anser span").each(function(){
-                       if($(this).text().indexOf($("#seachtext").val())== -1){
-                          $(this).hide();
-                    }
+                    var reg = new RegExp($("#seachtext").val(), 'i');
+                       if($(this).text().match(reg)){
+                          $(this).show();
+                     }
                 });
              
               

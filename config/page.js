@@ -80,7 +80,7 @@ module.exports = {
                 page:[
                     {
                         name:'业务报表1',
-                        page:'',
+                        page:'ywbb',
                     },{
                         name:'故障报表',
                         page:'fault',

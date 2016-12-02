@@ -3,13 +3,15 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let{date, datename,height,name}=this.props;
+
+        let{color,num}=this.props;
+
+
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -17,66 +19,50 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:height,
-
+                height:145
             },
             title: {
                 text: ''
             },
-            xAxis:{
-                 categories:datename,
-                 
-                 labels: {
-                        style: {
-                            color: '#fff',//颜色
-                            fontFamily:"微软雅黑"
-
-                        }
-                }
-            },
-             yAxis:{
-                title:{
-                    enabled:false
-                }
-                 
-            },
             legend:{
-                enabled:false
+                enabled: false
             },
+
             tooltip: {
-                enabled: true,
-                style:{
-                    color: '#000',
-                    fontSize: '14px',
-                    fontFamily:"微软雅黑"
-                }
+                enabled: false,
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                //pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#2faab2', '#0f0',]
-            ,
+            colors: color,
             plotOptions: {
                 pie: {
                     allowPointSelect: false,
                     cursor: 'pointer',
                     borderWidth: 0,
-                    size: '80%',
+                    size: '120%',
                     innerSize: '80%',
                     dataLabels: {
-                        enabled: false
+                        enabled: false,
+                        format: '{point.name}',
+                        style: {
+                            color: "#d1d2d3",
+                            fontSize: '14px',
+                            fontFamily:"微软雅黑"
+
+                        },
+
                     },
-                 
+
                 }
             },
             series: [{
-                type:'spline',
-                name: name,
-                data: date,
-                   marker: {
-                        enabled: false
-                       
-                    }
+                type: 'pie',
+                name: "发电量占比",
+                data: num,
+                style: {     fontSize:"20px",  }
             }]
         };
         return (

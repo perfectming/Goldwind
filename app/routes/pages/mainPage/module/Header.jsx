@@ -64,7 +64,11 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(actions.setVars('bodypage', true));
                 dispatch(actions.setVars('navhide', true));
              }
-              
+              if(key==1){
+                dispatch(actions.setVars('ifshow', true));
+              }else{
+                dispatch(actions.setVars('ifshow', false));
+              }
         },
         login:(userInfo)=>{
             console.log(userInfo);
