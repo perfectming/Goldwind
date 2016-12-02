@@ -92,26 +92,22 @@ let Component = React.createClass({
            					</div>
            				</div>
            				<div className={`${styles.yearelectric} ${styles.boxShadow}`}>
-           					<div>
-           						<div className={styles.header}>
+           					<div className={styles.header}>
            							<div className={styles.logo}><a>logo</a><span>年发电量</span></div>
 	           						<div className={styles.links}><a onClick={()=>changepageEleS()}>空间</a></div>&nbsp;
 	           						<div className={styles.links}><a onClick={()=>changepageEleT()}>时间</a></div>
-           						</div>
-           						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            					</div>
+           					<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            				</div>
            				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
-           					<div>
-           						<div className={styles.logo}><a>logo</a><span>年收益</span></div>
-           						<Yearelectric title={data.yearelectric[0].title[1]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[0]} nameOne={data.yearelectric[0].name[2]} nameTwo={data.yearelectric[0].name[3]}></Yearelectric>
-           					</div>
+           					<div className={styles.logo}><a>logo</a><span>年收益</span></div>
+           					<div className={styles.index}><Yearelectric title={data.yearelectric[0].title[1]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[0]} nameOne={data.yearelectric[0].name[2]} nameTwo={data.yearelectric[0].name[3]}></Yearelectric></div>
            				</div>
            			</div>
            		</div>
                 <div className={`${styles.right} ${styles.boxShadow}`}>
                 	<h3>
-                		<span>箭头</span> &nbsp; PBA排序
+                		<span><a>logo</a></span> &nbsp; PBA排序
                 	</h3>
                 	<table>
                 		<tbody>

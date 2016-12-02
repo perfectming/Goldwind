@@ -19,7 +19,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10,
+                marginTop: 50,
             },
             title: {
                 text: null
@@ -37,7 +37,7 @@ let Component = React.createClass({
                 itemHoverStyle: {
                 color: '#31f3fb'
             	},
-            	itemMarginTop: 0,
+            	y: 0,
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -76,7 +76,7 @@ let Component = React.createClass({
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
-	                y: -15,
+	                y: -10,
 	                x:-10,
 	                style:{
 	                	fontSize:'10px',
