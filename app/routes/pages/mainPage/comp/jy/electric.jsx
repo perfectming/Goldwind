@@ -11,13 +11,14 @@ import tabAdd from '../../img/icon/tabAdd.png';
 import _ from 'lodash';
 
 let tabaleData = require('./data');
+let elect=tabaleData.electric;
 
 let Component = React.createClass({
     componentDidMount() {
         this.props.init(tabaleData.electric);
     },
     render() {
-        let {add,table, changeTableItem,dele} = this.props;
+        let {add,table, changeTableItem,dele,page=1,nextpage,lastpage,theone,thelast} = this.props;
         let num=0;
         let newData=[];
         for(let i=0;i<tabaleData.electric.header.length;i++){
@@ -27,7 +28,7 @@ let Component = React.createClass({
             <div>
                 <div className={styles.inquireBox}>
                     {
-                        tabaleData.electric.comps.map((value, key,valueName)=> {
+                        elect.comps.map((value, key,valueName)=> {
                             if (value.type === 'date') {
                                 return (
                                     <div className={styles.dateBox} key={key}>
@@ -38,7 +39,7 @@ let Component = React.createClass({
                             } else  if (value.type === 'input') {
                                 return (
                                     <div className={styles.inputBox} key={key}>
-                                        <span>{comp[key].valueName}</span>
+                                        <span>{elect.comps[key].valueName}</span>
                                         <input ref={'textContent'+key} placeholder={value.content}
                                                onChange={(e)=>inputOnChange(e.target.value, value.id)}
                                                onFocus={()=>onFocus} style={{width:value.width}}/>
@@ -47,7 +48,7 @@ let Component = React.createClass({
                             }else if (value.type === 'select') {
                                 return (
                                     <div className={styles.seleBox} key={key}>
-                                        <span>{comp[key].valueName}</span>
+                                        <span>{elect.comps[key].valueName}</span>
                                         <select ref={'selectType'+key}>
                                             {value.select.map((value, key)=> {
                                                 return (
@@ -75,54 +76,59 @@ let Component = React.createClass({
 
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
+                        <div className={styles.tableHeaderItem}
+                             style={{width:(100/(tabaleData.electric.header.length+2))+"%"}}>序号</div>
                         {
                             tabaleData.electric.header.map((value, key)=> {
                                 return (
                                     <div className={styles.tableHeaderItem}
-                                         style={{width:(100/(tabaleData.electric.header.length+1))+"%"}} key={key}>{value}</div>
+                                         style={{width:(100/(tabaleData.electric.header.length+2))+"%"}} key={key}>{value}</div>
                                 )
                             })
                         }
                         <div className={styles.tableHeaderItem}
-                             style={{width:(100/(tabaleData.electric.header.length+1))+"%"}} key={tabaleData.electric.header.length}>删除</div>
+                             style={{width:(100/(tabaleData.electric.header.length+2))+"%"}} key={tabaleData.electric.header.length}></div>
                     </div>
                     <div className={styles.tableContentBox}>
                         {
                             tabaleData.electric.content.map((value, key)=> {
                                 num++;
+                                if(16*(page-1)<=key&&key<(16*(page-1)+16)){
                                 return (
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
+                                        <input className={styles.tableContentItem}
+                                               style={{width:(100/(tabaleData.electric.header.length+2))+"%"}}
+                                               readOnly="true"
+                                               onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                               value={num}/>
                                         {
                                             value.map((valueC, keyC)=> {
-                                                if(keyC==0){
                                                     return (
                                                         <input className={styles.tableContentItem}
-                                                               style={{width:(100/(tabaleData.electric.header.length+1))+"%"}}
-                                                               key={keyC} readOnly="true"
-                                                               onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                               value={num}/>
-                                                    )
-                                                }else{
-                                                    return (
-                                                        <input className={styles.tableContentItem}
-                                                               style={{width:(100/(tabaleData.electric.header.length+1))+"%"}}
+                                                               style={{width:(100/(tabaleData.electric.header.length+2))+"%"}}
                                                                key={keyC}
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                value={valueC}/>
-                                                    )}
+                                                    )
                                             })
                                         }
-                                        <div className={styles.tableContentItem} style={{width:(50/(tabaleData.electric.header.length+1))+"%"}}>
+                                        <div className={styles.tableContentItem} style={{width:(50/(tabaleData.electric.header.length+2))+"%"}}>
                                             <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content[key]))}/>
                                         </div>
-                                        <div className={styles.tableContentItem} style={{width:(50/(tabaleData.electric.header.length+1))+"%"}}>
+                                        <div className={styles.tableContentItem} style={{width:(50/(tabaleData.electric.header.length+2))+"%"}}>
                                             <img src={del} onClick={(e)=>dele(key)}/>
                                         </div>
                                     </div>
-                                )
+                                )}
                             })
                         }
                     </div>
+                </div>
+                <div className={styles.pageplus}>
+                    <button onClick={()=>theone(page)}>首页</button>
+                    <button onClick={()=>lastpage(page)}>上一页</button>
+                    <button onClick={()=>nextpage(page)}>下一页</button>
+                    <button onClick={()=>thelast(page)}>末页</button>
                 </div>
             </div>
         )
@@ -133,6 +139,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
+        page: state.vars.page1,
     }
 };
 
@@ -155,7 +162,24 @@ const mapDispatchToProps = (dispatch) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.content.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
-        }
+        },
+        lastpage:(page)=>{
+            page>1 ? page--:page;
+            dispatch(actions.setVars('page1', page));
+        },
+        nextpage:(page)=>{
+            (page<(elect.content.length/16)) ? page++:page;
+            dispatch(actions.setVars('page1', page));
+
+        },
+        theone :(page)=>{
+            page=1;
+            dispatch(actions.setVars('page1', page));
+        },
+        thelast :(page)=>{
+            page=elect.content.length/16;
+            dispatch(actions.setVars('page1', page));
+        },
     };
 };
 
