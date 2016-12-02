@@ -43,7 +43,7 @@ let Component = React.createClass({
         let {border1=true,closebox3,Tofaninfo1} = this.props;
         return (
 
-            <div className={styles.fiexdbox}>
+            <div className={styles.fiexdbox} style={{top: 294, left:672}}>
                 <span>设置功率预测权限</span>
                 <img src={close} className={styles.close} onClick={()=>closebox3()}/>
                 <div className={styles.listbox} id='box3'>
