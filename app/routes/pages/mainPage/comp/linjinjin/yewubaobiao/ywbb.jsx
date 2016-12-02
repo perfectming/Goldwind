@@ -76,7 +76,7 @@ let Component = React.createClass({
                                 valueC.arr.map((valueD,keyD)=>{
                                     return(
                                         <div className={styles.placename} key={keyD}>
-                                            <a>{valueD.name}</a>
+                                            <a className={styles.da}>{valueD.name}</a>
                                         </div>
                                         )
                                 })
