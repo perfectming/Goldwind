@@ -109,6 +109,7 @@ let Component = React.createClass({
                 <div className={styles.pageplus}>
                     <button onClick={()=>theone(page)}>首页</button>
                     <button onClick={()=>lastpage(page)}>上一页</button>
+                    <button>{page+"/"+Math.ceil(comp.data.content.length / 16)}</button>
                     <button onClick={()=>nextpage(page)}>下一页</button>
                     <button onClick={()=>thelast(page)}>末页</button>
                 </div>
@@ -161,7 +162,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('page1', page));
         },
         thelast :(page)=>{
-            page=comp.data.content.length/16;
+            page=Math.ceil(comp.data.content.length / 16);
             dispatch(actions.setVars('page1', page));
         },
     };

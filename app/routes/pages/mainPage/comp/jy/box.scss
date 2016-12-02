@@ -1,27 +1,39 @@
+
 .fiexdbox{
   width:300px;
-  height:300px;
-  background:#0a1b2b;
-  margin-top:2px;
-  margin-left:-267px;
+  height:420px;
+  background:#102b46;
+  margin-top:-30px;
+  margin-left:73px;
+  border:1px solid #2ff4fb;
   position:relative;
+  .fctitle{
+    text-align:center;
+    line-height:40px;
+    font-size:16px;
+    margin:0px;
+    border-bottom: 1px solid #2ff4fb;
+    background: #102b46;
+  }
   .close{
     position:absolute;
     top:5px;
     right:5px;
     margin-rignt:0px;
+    cursor:pointer;
   }
   color:#fff;
   .listbox{
     width:100%;
-    height:215px;
+    height:330px;
     border:1px solid #2b5d76;
+    background: #0a1b2b;
     border-top:none;
     overflow-x:hidden;
     overflow-y:auto;
     ul{padding:0px;}
     .show{
-      display:block;
+      display:none;
     }
     ul li{
       width:300px;
@@ -52,25 +64,48 @@
       }
       .list_span{
         width:100%;
-        display:block;
-        span{
+        display:none;
+        .listitem{
           width:100%;
           height:30px;
-          line-height:30px;
+          line-height:33px;
           font-size:14px;
           padding-left:50px;
-          display:inline-block;
-          cursor:pointer;
+
           color:#fff;
           background-image:url('../../img/comp/son_line.png');
           background-repeat: no-repeat;
           background-position: 15px center;
+          input{
+            width:15px;
+            height:15px;
+            cursor:pointer;
+            vertical-align:middle;
+            margin:0px;
+          }
         }
 
       }
 
     }
   }
+  .btnbox{
+    width:100%;
+    overflow:hidden;
+    a{
+      width:50px;
+      height:30px;
+      line-height:30px;
+      float:left;
+      cursor:pointer;
+      margin:9px 0 0 18px;
+      border:1px solid #2ff4fb;
+      text-align:center;
+      border-radius:5px;color:#fff;
+      &:hover{color:#2ff4fb;box-shadow:0px 0px 5px #2ff4fb;}
+    }
+  }
+
 
 }
 

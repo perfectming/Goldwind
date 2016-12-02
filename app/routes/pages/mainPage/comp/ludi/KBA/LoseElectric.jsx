@@ -33,7 +33,6 @@ let Component = React.createClass({
 							<ChartOne text={data.data[0].text[3]} lose={data.lose}></ChartOne>
 						</div>
 					</div>
-					<div className={styles.border}></div>
 					<div className={`${styles.lose} ${styles.boxShadow}`}>
 						<ChartFive></ChartFive>
 					</div>

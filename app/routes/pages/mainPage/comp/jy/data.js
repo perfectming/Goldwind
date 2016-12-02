@@ -432,6 +432,66 @@ module.exports = {
     },
     electric:{
         header:['区域','风场','开水时间','结束时间','阶段上网电价（元）','备注'],
+        comps:[
+            {
+                type: 'select',
+                content: '这是一个下拉选择框',
+                id: 'input3',
+                valueName:'区域',
+                select: [
+                    '区域1',
+                    '区域2',
+                    '区域3',
+                    '区域4',
+                ]
+            },
+            {
+                type: 'select',
+                content: '这是一个下拉选择框',
+                id: 'input4',
+                valueName:'风场',
+                select: [
+                    '风场1',
+                    '风场2',
+                    '风场3',
+                    '风场4',
+                    '风场5',
+                ]
+            },
+            {
+                type: 'date',
+                content: '这是一个时间选择框',
+                id: 'date',
+                width: 120,
+                height:30,
+            },
+            {
+                type: 'input',
+                valueName:'阶段上网电价',
+                content: '可输入关键字',
+                id: 'input7',
+                width:120
+            },
+            {
+                type: 'input',
+                valueName:'备注',
+                content: '可输入关键字',
+                id: 'input8',
+                width:120
+            },
+            {
+                type: 'button',
+                content: '这是一个button',
+                id: 'button',
+                title: '查询',
+            },
+            {
+                type: 'chcekBox',
+                content: '这是一个确认框',
+                id: 'input3',
+                title: '这是一个确认框'
+            },
+        ],
         content:[
             ['华北','风场1','2016-10-10','2021-10-10','0.50','12213113'],
             ['华北','风场1','2016-10-10','2021-10-10','0.50','12213113'],

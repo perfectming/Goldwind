@@ -11,9 +11,8 @@ let Component = React.createClass({
     	let {name,title,month,plan,unit,nameOne}=this.props;
         let configPie = {
             chart: {
-                height:400,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:380,
+                backgroundColor: 'rgba(44, 61, 71, 0.4)',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -33,6 +32,9 @@ let Component = React.createClass({
             //图例说明
             legend: {
             	enabled:false,
+            	itemHoverStyle: {
+                color: '#31f3fb'
+            	}
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -41,13 +43,14 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#1E664A', '#4CDB9D','#000','#134833', '#082B1F']
+            colors: [ '#33BAC0', '#33545c','#000','#134833', '#082B1F']
             ,
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 40
+                    pointWidth: 30,
+                    borderRadius:8
                 }
             },
             xAxis: {
