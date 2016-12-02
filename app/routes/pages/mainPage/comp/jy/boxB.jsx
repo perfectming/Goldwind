@@ -6,6 +6,32 @@ import add from '../../img/comp/add_icon.png';
 import close from '../../img/comp/close_icon.png';
 let $ =require('jquery');
 var actions = require('redux/actions');
+let matrixdata = require('../../../../../../config/MatrixData');
+let model = require('../../../../../../config/Model');
+let modeldata = require('../../../../../../config/ModelData');
+let data=modeldata.ModelData;
+let mod=model.Model;
+let mat=model.Model;
+let matD=matrixdata.ModelData;
+let model_data = modeldata.ModelData;
+var model_ens = model.Model.ens;
+let arr1 = [];
+let arr2 = [];
+var obj = matrixdata;
+var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
+var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+
+
+(function(){
+    for(var x in obj_wfd){
+        arr1.push(x)
+    }
+    for(var m in obj_pvd){
+        arr2.push(m)
+
+    }
+
+}());
 
 
 
@@ -14,22 +40,22 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {border1=true,retlegend,closebox1,Tofaninfo1,legend1,name,ens,wfd,ptitle} = this.props;
+        let {border1=true,closebox2,Tofaninfo1} = this.props;
         return (
 
             <div className={styles.fiexdbox}>
-                <img src={close} className={styles.close} onClick={()=>closebox1()}/>
-                <p className={styles.fctitle}>{ptitle}</p>
-                <div className={styles.listbox} id='list'>
+                <span>设备选择</span>
+                <img src={close} className={styles.close} onClick={()=>closebox2()}/>
+                <div className={styles.listbox} id='box2'>
                     <ul id='fclist'>
                         {
-                            name.map((value,key)=>{
+                            arr1.map((value,key)=>{
                                 return(
                                     <li key={key} >
-                                        <a>{ens[value].name}</a>
+                                        <a>{model_ens[value].name}</a>
                                         <div className={styles.list_span}>
                                             {
-                                                wfd[value].map((valueC,key)=>{
+                                                obj_wfd[value].map((valueC,key)=>{
 
                                                     return(
 
@@ -56,10 +82,8 @@ let Component = React.createClass({
 
                 </div>
                 <div className={styles.btnbox}>
-                    <a id='sent'>启动</a>
-                    <a>停机</a>
-                    <a>复位</a>
-                    <a>测试</a>
+                    <a id='sent'>确定</a>
+                    <a>取消</a>
                 </div>
             </div>
         );
@@ -77,7 +101,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            $('#list ul li a').on('click',function(){
+            $('#box2 ul li a').on('click',function(){
                 var bg=$(this).css("background-image");
                 if(bg=='url("'+add+'")'){
                     $(this).css("background-image",'url('+jian+')');
@@ -100,9 +124,8 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        closebox1:()=>{
-            dispatch(actions.setVars('legend1', false));
-            dispatch(actions.setVars('legend2', false));
+        closebox2:()=>{
+            $("#box2").parent().css("display","none");
         },
         Tofaninfo1: (value)=> {
 

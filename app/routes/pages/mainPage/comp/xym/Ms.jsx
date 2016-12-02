@@ -6,8 +6,11 @@ var actions = require('redux/actions');
 import styles from './Ms.scss';
 var $ = require('jquery');
 var {getState} = require('../../../../../redux/store');
-
+import Abox from '../jy/boxA';
+import Bbox from '../jy/boxB';
+import Cbox from '../jy/boxC';
 import save from '../../img/comp/save.png';
+import close from '../../img/comp/close_down.png';
 import refresh from '../../img/comp/refresh.png';
 import _ from 'lodash';
 
@@ -26,7 +29,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {closeCenter,closeAids,aids,center3,powerCount,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem1} = this.props;
+        let {deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem1} = this.props;
         let newData=[];
         let num=0;
         let num1=0;
@@ -103,21 +106,21 @@ let Component = React.createClass({
                                                             <input className={styles.tableContentItem}
                                                                    style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}
                                                                    key={keyC} type="button" value='设置'
-                                                                   onClick={aids}/>
+                                                                   onClick={()=>{$('#aids').css('display','block');}}/>
                                                         )
                                                     }else if(keyC==3){
                                                         return (
                                                             <input className={styles.tableContentItem}
                                                                    style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}
                                                                    key={keyC} type="button" value='设置'
-                                                                   onClick={center3}/>
+                                                                   onClick={()=>{$('#center3').css('display','block')}}/>
                                                         )
                                                     }else{
                                                         return (
                                                             <input className={styles.tableContentItem}
                                                                    style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}
                                                                    key={keyC} type="button" value='设置'
-                                                                   onClick={powerCount}/>
+                                                                   onClick={()=>{$('#box3').parent().css('display','block')}}/>
                                                         )
                                                     }
                                                 })
@@ -134,8 +137,8 @@ let Component = React.createClass({
                             }
                         </div>
                     </div>
-                    <div className={styles.tanC} id="aids" key='3'>
-                        <div className={styles.upName}>角色菜单<span className={styles.wrong} onClick={closeAids}>&times;</span></div>
+                    <div className={styles.tanC} id="aids" key='3' style={{top: 200, left:400}}>
+                        <div className={styles.upName}>角色菜单<img src={close} className={styles.wrong} onClick={()=>{$('#aids').css('display','none')}}/></div>
                         <div className={styles.tableHeaderBox}>
                             <div className={styles.tableHeaderItem}
                                  style={{width:(100/(tabaleData.msData.aids.header.length+1)-10)+"%"}}>序号</div>
@@ -184,11 +187,11 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.downCount}>
                             <span>{'记录合计：'+num1}</span>
-                            <span>点击</span>
+                            <span onClick={()=>{$('#box1').parent().css('display','block')}}>点击</span>
                         </div>
                     </div>
-                    <div className={styles.tanCo} id="center3" key='4'>
-                        <div className={styles.upName}>角色权限<span className={styles.wrong} onClick={closeCenter}>&times;</span></div>
+                    <div className={styles.tanC} id="center3" key='4' style={{top: 100, left:300}}>
+                        <div className={styles.upName}>角色权限<img src={close} className={styles.wrong} onClick={()=>{$('#center3').css('display','none')}}/></div>
                         <div className={styles.tableHeaderBox}>
                             <div className={styles.tableHeaderItem}
                                  style={{width:(100/(tabaleData.msData.center.header.length+1)-10)+"%"}}>序号</div>
@@ -238,12 +241,15 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.downCount}>
                             <span>{'记录合计：'+num2}</span>
-                            <span>点击</span>
+                            <span onClick={()=>{$('#box2').parent().css('display','block')}}>点击</span>
                         </div>
                     </div>
+                    <Abox style={{top: 100, left:600}}></Abox>
+                    <Bbox style={{top: 200, left:600}}></Bbox>
+                    <Cbox style={{top: 100, left:700}}></Cbox>
                 </div>
             </div>
-                
+
          
         );
     }
@@ -279,19 +285,6 @@ const mapDispatchToProps = (dispatch) => {
             tableV.content.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
         },
-        aids:()=>{
-            $('#aids').css('display','block');
-        },
-        closeAids:()=>{
-            $('#aids').css('display','none');
-        },
-        center3:()=>{
-            $('#center3').css('display','block');
-        },
-        closeCenter:()=>{
-            $('#center3').css('display','none');
-        }
-
     };
 };
 
