@@ -38,6 +38,8 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                x:-40,
+                
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -90,12 +92,14 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
                     title:{
                         text:'100%',
                         align:'high',
                         rotation:'0',
-                        y: -15,
+                        y: -13,
                         x: 47,
                         style:{
                             fontSize:'14px',
@@ -109,16 +113,17 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
 
                 text: '',
                 align:'high',
                 rotation:'0',
-                 y: -10,
-                x: 150,
+                
             },
-            opposite: true
+            opposite: true,
         }],
             series: [{
                 name: '实际发电量',
@@ -134,7 +139,7 @@ let Component = React.createClass({
                     name:'TBA',
                     type:'line',
                     data:[80,30,3,36,70,70,70,70,80,80,80,80],
-                    yAxis:1,
+                    
                     color:'blue'
                 }
 

@@ -22,17 +22,17 @@ let Component = React.createClass({
     render() {
         let {itemHeaderActive, itemTreeAct, flag=true}=this.props;
         return (
-            
+
             <FixedContent mode="fullWidth" width={1920}>
                 <div className={styles.bgbox}>
-                <Header headerInfo={page.header}></Header>
-                {
-                flag && <Tree treeOpt={page.header[itemHeaderActive]} style={{overflow:'hidden'}}></Tree>
-            }
-                <Body tabOpt={page.header[itemHeaderActive]} tab={itemTreeAct}></Body>
+                    <Header headerInfo={page.header}></Header>
+                    {
+                        flag && <Tree treeOpt={page.header[itemHeaderActive]} style={{overflow:'hidden'}}></Tree>
+                    }
+                    <Body tabOpt={page.header[itemHeaderActive]} tab={itemTreeAct}></Body>
                 </div>
             </FixedContent>
-           
+
         );
     }
 });
@@ -51,8 +51,8 @@ const mapDispatchToProps = (dispatch) => {
         init: (userInfo)=> {
             // console.log(userInfo);
             if(!userInfo){
-               browserHistory.push('/app/all/page/login')  ;
-             }
+                browserHistory.push('/app/all/page/login')  ;
+            }
             dispatch(actions.setVars('headerItemActive', 0));
             dispatch(actions.setVars('putpage', false));
 

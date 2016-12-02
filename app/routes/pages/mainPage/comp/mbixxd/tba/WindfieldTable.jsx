@@ -20,7 +20,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+               
             },
             title: {
                 text: '',
@@ -38,6 +38,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -98,7 +99,9 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
                     title:{
                         text:'(KWH)',
                         align:'high',
@@ -109,27 +112,32 @@ let Component = React.createClass({
                             color:'#fff',
                             fontSize:'14px'
                         }
-                    }
+                    },
+                    
                 }, {
-            title: {
-                labels: {
+                    labels: {
                 format: '',
                 style: {
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
-                text: 'PBA',
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+            title: {
+                
+                text: 'TBA%',
                 align:'high',
                 rotation:'0',
                  y: -17,
-                x: 136,
+                x: -40,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
                 }
             },
-            opposite: true
+            opposite: true,
+
         }],
             //几条数据
             series: [{
@@ -166,8 +174,9 @@ let Component = React.createClass({
                 {
                     name: 'TBA',
                     type: 'line',
-                    data: TBA,
+                    data: [10,20,30,40,50,60,70,80,90,99],
                     color:'blue',
+                     yAxis:1
 
                 },]
         };

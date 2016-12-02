@@ -53,6 +53,9 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -120,12 +123,18 @@ let Component = React.createClass({
                 // lineWidth: 1,
                 // lineColor: "red",
                 //tickWidth: 4,
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
                 title: {
                     text:'小时',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    },
                 },
 
                 labels: {
@@ -151,6 +160,7 @@ let Component = React.createClass({
                 name: '实际发电量',
                 type: 'column',
                 data: barLoPowerValues,
+                borderRadius: 4,
                 events: {
                     click: function(e) {
                         w10=e.point.category;
@@ -165,6 +175,7 @@ let Component = React.createClass({
                     color:'#A2D04D',
                     type: 'column',
                     data: barLoPowerValue,
+                    borderRadius: 2,
                     stack:'time',
                     events: {
                         click: function(e) {

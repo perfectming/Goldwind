@@ -40,6 +40,7 @@ let Component = React.createClass({
                 }
             },
             legend: {
+                
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -98,7 +99,9 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%',
                 align:'high',
@@ -117,9 +120,11 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text: 'PBA',
+                text: '',
                  align:'high',
                 rotation:'0',
                 y: -20,
@@ -155,8 +160,8 @@ let Component = React.createClass({
                     color:'blue',
                     pointWidth: 15,
                     shadow:'true',
-                    opposite:true,
-                    yAxis:1
+                    
+                  
                 },
             ]
         };

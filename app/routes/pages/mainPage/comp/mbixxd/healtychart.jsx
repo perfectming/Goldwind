@@ -91,7 +91,9 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%',
                 align:'high',
@@ -112,6 +114,9 @@ let Component = React.createClass({
                 x: 40,
 
             },
+             gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             opposite: true
         }],
             series: [{
