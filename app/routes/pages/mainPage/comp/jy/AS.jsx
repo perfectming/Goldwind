@@ -27,7 +27,7 @@ let Component = React.createClass({
             <div>
                 <div className={styles.inquireBox}>
                     {
-                        tabaleData.as.comps.map((value, key,valueName)=> {
+                        tabaleData.as.comps.map((value, key)=> {
                             if (value.type === 'input') {
                                 return (
                                     <div className={styles.inputBox} key={key}>

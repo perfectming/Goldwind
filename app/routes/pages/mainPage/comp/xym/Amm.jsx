@@ -32,7 +32,6 @@ let Component = React.createClass({
         }
         let comp=tabaleData.comps.from;
         return (
-
         <div className={styles.bodyBox}>
             <div className={styles.roleputBox}>
                 <div className={styles.inquireBox}>
@@ -91,12 +90,12 @@ let Component = React.createClass({
                                                         <input className={styles.tableContentItem}
                                                                style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                                key={keyC} contentEditable="true"
-                                                               onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                               onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                value={valueC} type="password"/>
                                                     )
                                                 }else if (keyC==tabaleData.ammData.header.length-1){
                                                 return (
-                                                    <input className={styles.tableContentItem}
+                                                    <input className={styles.tableContentItem} key={keyC}
                                                            style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                            type="button" value='设置'/>
                                                     )
@@ -105,7 +104,7 @@ let Component = React.createClass({
                                                         <input className={styles.tableContentItem}
                                                                style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                                key={keyC} contentEditable="true"
-                                                               onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                               onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                value={valueC}/>
                                                     )
                                                 }
@@ -125,8 +124,6 @@ let Component = React.createClass({
                 </div>
             </div>
         </div>
-
-
         );
     }
 });

@@ -40,6 +40,7 @@ let Component = React.createClass({
                 }
             },
             legend: {
+                
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -98,7 +99,9 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%',
                 align:'high',
@@ -117,9 +120,11 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text: 'PBA',
+                text: '',
                  align:'high',
                 rotation:'0',
                 y: -20,
@@ -137,6 +142,7 @@ let Component = React.createClass({
                 shadow:true,
                 pointWidth: 25,
                 borderWidth: 0,
+                pointPlacement: 0,
             },
                 {
                     name: '理论发电量',
@@ -145,6 +151,7 @@ let Component = React.createClass({
                     color:'#ccc',
                     pointWidth: 25,
                     shadow:'true',
+                    pointPlacement: -0.1,
                 },
                 {
                     name: 'PBA',
@@ -153,8 +160,8 @@ let Component = React.createClass({
                     color:'blue',
                     pointWidth: 15,
                     shadow:'true',
-                    opposite:true,
-                    yAxis:1
+                    
+                  
                 },
             ]
         };

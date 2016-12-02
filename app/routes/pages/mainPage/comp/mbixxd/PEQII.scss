@@ -1,21 +1,50 @@
 .powerBox{
   //padding-right:40px;
+  .buttonss{
+  text-align:center;
+  height:60px;
+  width:100%;
+  .first{
+  display:inline-block;
+  cursor:pointer;
+  width:70px;
+  height:30px;
+  background-color:none;
+  margin-left:23px;
+  border-radius:3px;
+  border:none;
+  color:#fff;
+  font-size:14px;
+  }
+  }
   .inquireBox{
+  display:flex;
+  justify-content: space-around;
+  border:1px solid red;
     width:100%;
     height:80px;
     padding-top:20px;
     border-top:1px solid #ccc;
     overflow:hidden;
     font-size:16px;
+    input{
+    background-color:#181A25;
+    outline:none;
+    padding-left:5px;
+    border-width:2px;
+    }
     .seleBox{
+    border:1px solid blue;
       float:left;
+
       margin-right:40px;
       font-size: 16px;
       color: #fff;
       select{
-        margin-left: 20px;
+    border: 1px solid green;
+        margin-left: 40px;
         color: #fff;
-        width:240px;
+        width:300px;
         background: #181a25;
         height:40px;
         line-height:30px;
@@ -39,7 +68,7 @@
   }
   .table{
     width:100%;
-    height:800px;
+    height:850px;
     padding-top:20px;
     border-top:1px solid #ccc;
     overflow:hidden;
@@ -137,26 +166,6 @@
           }
         }
       }
-
-
-    }
-
-  }
-  .pageplus{
-    text-align:center;
-    height:60px;
-    width:100%;
-    margin-top: 20px;
-    button{
-      width:70px;
-      height:30px;
-      background: none;
-      border: none;
-      margin-left:23px;
-      border-radius:3px;
-      color: #FFFFFF;
-      cursor: pointer;
-
     }
   }
 }

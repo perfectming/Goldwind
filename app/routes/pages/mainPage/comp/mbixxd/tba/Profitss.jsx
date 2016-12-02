@@ -60,7 +60,7 @@ let Component = React.createClass({
                    <div className={`${styles.areabox} ${styles.shadow}`}>
                        <div>
                            <AreaTable areaRecordCosts={areaRecordCosts} areaName={areaName} areaRecordProfit={areaRecordProfit} text0={text0} text1={text1}></AreaTable>
-                           <p className={styles.titww}>11月份集团各区域TBA</p>>
+                           <p className={styles.titww}>11月份集团各区域TBA</p>
                        </div>
                    </div>
                </div>
@@ -122,6 +122,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        
          more:()=>{
              $("#sss").show();
              $('#boxcover').show();

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Inputc.scss';
+import styles from './PEQII.scss';
 
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
@@ -11,7 +11,7 @@ import _ from 'lodash';
 import mod from '../../../../../../config/Model';
 var $ = require("jquery");
 var actions = require('redux/actions');
-let comps = require('./datas');
+let comps = require('./data');
 let ssg2=mod.Model.ens;
 let arr3=[];
 let years=[];
@@ -106,12 +106,12 @@ let Component = React.createClass({
 
 
                 </div>
-                <div className={styles.pageplus}>
-                    <button onClick={()=>theone(page)}>首页</button>
-                    <button onClick={()=>lastpage(page)}>上一页</button>
-                    <button>{page+"/"+Math.ceil(comp.data.content.length / 16)}</button>
-                    <button onClick={()=>nextpage(page)}>下一页</button>
-                    <button onClick={()=>thelast(page)}>末页</button>
+                <div className={styles.buttonss}>
+                    <span  className={styles.first} onClick={()=>theone(page)}>首页</span>
+                    <span className={styles.first}  onClick={()=>lastpage(page)}>上一页</span>
+                    <span className={styles.first}>{page}/{Math.ceil(comps.peqi.table.data.content.length/16)}</span>
+                    <span className={styles.first} onClick={()=>nextpage(page)}>下一页</span>
+                    <span className={styles.first} onClick={()=>thelast(page)}>末页</span>
                 </div>
 
             </div>
@@ -162,7 +162,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('page1', page));
         },
         thelast :(page)=>{
-            page=Math.ceil(comp.data.content.length / 16);
+            page=comp.data.content.length/16;
             dispatch(actions.setVars('page1', page));
         },
     };

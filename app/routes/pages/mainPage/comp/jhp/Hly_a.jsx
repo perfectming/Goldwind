@@ -101,7 +101,7 @@ let Component = React.createClass({
                 },
                 column: {
                     stacking: 'normal',
-                    borderRadius: 7,
+                    pointWidth: 20,
                     borderWidth: 0,
 
                 }
@@ -124,13 +124,17 @@ let Component = React.createClass({
                 // lineColor: "red",
                 //tickWidth: 4,
                 gridLineDashStyle: 'Solid',
-                gridLineColor: '#898688',
+                gridLineColor: '#6d6a6c',
                 title: {
                     text:'小时',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    },
                 },
 
                 labels: {
@@ -155,7 +159,8 @@ let Component = React.createClass({
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: barLoPowerValues
+                data: barLoPowerValues,
+                borderRadius: 4,
             },
                 {
                     name: '理论发电量',
@@ -163,7 +168,8 @@ let Component = React.createClass({
                     color:'#A2D04D',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+                    borderRadius: 2,
                 },
                 {
                     name: '理论发电量',
@@ -184,7 +190,8 @@ let Component = React.createClass({
                     color:'#FF6124',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+
                 },
                 {
                     name: 'PBA',

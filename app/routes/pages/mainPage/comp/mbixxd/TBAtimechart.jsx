@@ -96,6 +96,9 @@ let Component = React.createClass({
                 categories:montht,
             },
             yAxis: {
+                 gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%',
                     align:'high',
@@ -127,6 +130,7 @@ let Component = React.createClass({
                 shadow:true,
                 pointWidth: 25,
                 borderWidth: 0,
+                pointPlacement: 0,
             },
                 {
                     name: '停机时间',
@@ -135,6 +139,7 @@ let Component = React.createClass({
                     color:'#ccc',
                     pointWidth: 25,
                     shadow:'true',
+                    pointPlacement: -0.1,
                 },
                 {
                     name: 'TBA',

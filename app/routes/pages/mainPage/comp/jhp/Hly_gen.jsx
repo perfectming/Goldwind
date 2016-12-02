@@ -98,8 +98,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 20,
-                    borderRadius: 4,
+                    //pointWidth: 20,
+                    borderRadius: 5,
                 }
             },
             xAxis: {
@@ -120,13 +120,17 @@ let Component = React.createClass({
                 // lineColor: "red",
                 //tickWidth: 4,
                 gridLineDashStyle: 'Solid',
-                gridLineColor: '#898688',
+                gridLineColor: '#6d6a6c',
                 title: {
                     text:'kWh',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
                 },
 
                 labels: {

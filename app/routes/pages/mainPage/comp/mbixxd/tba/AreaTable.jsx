@@ -18,7 +18,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10,
+               
 
             },
             title: {
@@ -33,6 +33,7 @@ let Component = React.createClass({
                 }
             },
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -88,13 +89,15 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
                     title:{
-                        text:'KWH',
+                        text:'(KWH)',
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 40,
+                        x: 50,
                         style:{
                             fontSize:'14px',
                             color:'#fff'
@@ -102,18 +105,20 @@ let Component = React.createClass({
                     }
                 }, {
                     labels: {
-                format: '',
+               
                 style: {
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text: 'PBA',
+                text: 'TBA%',
                 align:'high',
                 rotation:'0',
-                 y: -17,
-                x: 136,
+               y:-15,
+               x:-40,
                 style:{
                     color:'#fff',
                     fontSize:'14px'

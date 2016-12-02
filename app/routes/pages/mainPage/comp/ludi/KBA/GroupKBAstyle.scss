@@ -6,39 +6,39 @@
         width: 100%;
         .area{
             position: relative;
-            height: 400px;
+            height: 380px;
             .img{
                 position: absolute;
                 z-index: 5;
-                top: 10px;
-                left: 10px;
+                top: 5px;
+                left: 50px;
             }
         }
         .wind{
             position: relative;
-            top: 10px;
+            top: 15px;
             float: left;
-            height: 400px;
-            margin-right: 2%;
-            width: 49%;
+            height: 380px;
+            margin-right: 1%;
+            width: 49.5%;
             .img{
                 position: absolute;
                 z-index: 5;
-                top: 10px;
-                left: 10px;
+                top: 5px;
+                left: 50px;
             }
         }
         .fan{
             position: relative;
-            top: 10px;
+            top: 15px;
             float: left;
-            height: 400px;
-            width: 49%;
+            height: 380px;
+            width: 49.5%;
             .img{
                 position: absolute;
                 z-index: 5;
-                top: 10px;
-                left: 10px;
+                top: 5px;
+                left: 50px;
             }
         }
     }
