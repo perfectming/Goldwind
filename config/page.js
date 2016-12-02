@@ -131,19 +131,6 @@ module.exports = {
                         name:'报告',
                         page:'manaport',
                     }]
-            },{
-                name:'健康管理-3',
-                page:[
-                     {
-                        name:'健康管理3-1',
-                        page:'',
-                    },{
-                        name:'健康管理3-2',
-                        page:'',
-                    },{
-                        name:'健康管理3-3',
-                        page:'',
-                    }]
             }],
         },{
             name: '资产管理',
