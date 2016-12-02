@@ -1,73 +1,75 @@
 .bodyBox{
-    width: 100%;
-    padding: 0 30px 0 10px;
-    .content{
-        color: white;
-        font-size: 16px;
-        width: 100%;
-        .floorOne{
-            margin-bottom: 20px;
-            position: relative;
-            width: 100%;
-            .boxOne{
-                float: left;
-                width: 40%;
-                .boxText{
-                    padding-top: 150px;
-                    text-align: center;
-                    float: left;
-                    width: 33%;
-                    background-color: rgba(44, 61, 71, 0.4);
-                    height: 380px;
-                } 
-                .chartBox{
-                    float: left;
-                    width: 67%;
+            width: 1780px;
+            padding: 0 30px 0 10px;
+            .content{
+                color: white;
+                font-size: 16px;
+                width: 100%;
+                .floorOne{
+                    margin-bottom: 20px;
+                    position: relative;
+                    width: 100%;
+                    .boxOne{
+                        float: left;
+                        width: 40%;
+                        .boxText{
+                            padding-top: 150px;
+                            text-align: center;
+                            float: left;
+                            width: 33%;
+                            background-color: rgba(44, 61, 71, 0.4);
+                            height: 380px;
+                        } 
+                        .chartBox{
+                            float: left;
+                            width: 67%;
+                        }
+                    }
+                    .boxTwo{
+                        margin: 0 1%;
+                        float: left;
+                        width: 29%;
+                    }
+                    .boxThree{
+                        float: left;
+                        width: 29%;
+                    }
+                }
+                .floorTwo{
+                    position: relative;
+                    top: 15px;
+                    width: 100%;
+                    .boxOne{
+                        float: left;
+                        width: 40%;
+                        .boxText{
+                            padding-top: 150px;
+                            text-align: center;
+                            float: left;
+                            width: 33%;
+                            background-color: rgba(44, 61, 71, 0.4);
+                            height: 380px;
+                            
+                        }
+                        .chartBox{
+                            float: left;
+                            width: 67%;
+                        }
+                    }
+                    .boxTwo{
+                        margin: 0 1%;
+                        float: left;
+                        width: 29%;
+                    }
+                    .boxThree{
+                        float: left;
+                        width: 29%;
+                    }
                 }
             }
-            .boxTwo{
-                margin: 0 1%;
-                float: left;
-                width: 29%;
-            }
-            .boxThree{
-                float: left;
-                width: 29%;
-            }
-        }
-        .floorTwo{
-            position: relative;
-            top: 15px;
-            width: 100%;
-            .boxOne{
-                float: left;
-                width: 40%;
-                .boxText{
-                    padding-top: 150px;
-                    text-align: center;
-                    float: left;
-                    width: 33%;
-                    background-color: rgba(44, 61, 71, 0.4);
-                    height: 380px;
-                    
-                }
-                .chartBox{
-                    float: left;
-                    width: 67%;
-                }
-            }
-            .boxTwo{
-                margin: 0 1%;
-                float: left;
-                width: 29%;
-            }
-            .boxThree{
-                float: left;
-                width: 29%;
-            }
-        }
-    }
-    .boxShadow:hover{
-       box-shadow:0 0 15px #fff;
-   } 
+            .boxShadow:hover{
+               box-shadow:0 0 15px #fff;
+           } 
 }
+
+
