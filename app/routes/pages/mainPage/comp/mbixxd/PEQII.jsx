@@ -107,10 +107,11 @@ let Component = React.createClass({
 
                 </div>
                 <div className={styles.buttonss}>
-                    <button  className={styles.first} onClick={()=>theone(page)}>首页</button>
-                    <button className={styles.first}  onClick={()=>lastpage(page)}>上一页</button>
-                    <button className={styles.first} onClick={()=>nextpage(page)}>下一页</button>
-                    <button className={styles.first} onClick={()=>thelast(page)}>末页</button>
+                    <span  className={styles.first} onClick={()=>theone(page)}>首页</span>
+                    <span className={styles.first}  onClick={()=>lastpage(page)}>上一页</span>
+                    <span className={styles.first}>{page}/{Math.ceil(comps.peqi.table.data.content.length/16)}</span>
+                    <span className={styles.first} onClick={()=>nextpage(page)}>下一页</span>
+                    <span className={styles.first} onClick={()=>thelast(page)}>末页</span>
                 </div>
 
             </div>

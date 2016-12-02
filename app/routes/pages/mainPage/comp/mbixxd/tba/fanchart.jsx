@@ -21,7 +21,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+               
             },
             title: {
                 text: '',
@@ -39,6 +39,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                 x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -98,7 +99,9 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
                     title:{
                         text:'(KWH)',
                         align:'high',
@@ -117,13 +120,15 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text: 'PBA',
+                text: 'TBA%',
                 align:'high',
                 rotation:'0',
                  y: -17,
-                x: 136,
+                x: -40,
                 style:{
                     color:'#fff',
                     fontSize:'14px'
@@ -166,8 +171,9 @@ let Component = React.createClass({
                 {
                     name: 'TBA',
                     type: 'line',
-                    data: TBA,
+                    data: [20,40,50,20,20,60,60,80,70,50,34,99],
                     color:'blue',
+                    yAxis:1
 
                 },]
         };
