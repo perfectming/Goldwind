@@ -28,8 +28,14 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init(comp);
     },
+    buttonAction (){
+        // 获取select 选择的内容
+        var tContent = this.refs.textContent5.value;
+        var tContent1 = this.refs.textContent6.value;
+        alert(tContent+tContent1);
+    },
     render() {
-        let {deleData,addData,table, changeTableItem1} = this.props;
+        let {buttonAction,deleData,addData,table, changeTableItem1} = this.props;
         let newData=[];
         let num=0;
         for(let i=0;i<comp.data.header.length;i++){
@@ -40,7 +46,7 @@ let Component = React.createClass({
                 <div className={styles.inquireBox}>
                     <div className={styles.seleBox}>
                         <span>年度</span>
-                        <select>
+                        <select ref='textContent5'>
                             {years.map((value, key)=> {
                                     return (
                                     <option value={value} key={key}>{value}</option>
@@ -51,7 +57,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.seleBox}>
                         <span>场站</span>
-                        <select>
+                        <select ref='textContent6'>
                             {arr3.map((value, key)=> {
                                 return (
                                     <option className={styles.opt} value={value} key={key}>{value}</option>
@@ -60,6 +66,9 @@ let Component = React.createClass({
                             }
                         </select>
                     </div>
+                    <div className={styles.inputBox}>
+                    <button onClick={this.buttonAction}>查询</button>
+                    </div>
                     <div className={styles.btnBox}>
                         <div>单位：万kWh</div>
                     </div>
@@ -67,7 +76,6 @@ let Component = React.createClass({
                 <div className={styles.table}>
                     <div className={styles.actionBox}>
                         <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
-                        <img src={refresh}/>
                         <img src={add} onClick={()=>addData(newData)}/>
                     </div>
                     <div className={styles.tableBox}>

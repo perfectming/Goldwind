@@ -66,7 +66,6 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.actionBox} key='1'>
                         <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
-                        <img src={refresh}/>
                         <img src={add} onClick={()=>addData(newData)}/>
                     </div>
                     <div className={styles.tableBox} key='2'>
@@ -244,9 +243,9 @@ let Component = React.createClass({
                             <span onClick={()=>{$('#box2').parent().css('display','block')}}>点击</span>
                         </div>
                     </div>
-                    <Abox style={{top: 100, left:600}}></Abox>
-                    <Bbox style={{top: 200, left:600}}></Bbox>
-                    <Cbox style={{top: 100, left:700}}></Cbox>
+                    <Abox></Abox>
+                    <Bbox></Bbox>
+                    <Cbox></Cbox>
                 </div>
             </div>
 
