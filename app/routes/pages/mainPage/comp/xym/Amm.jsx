@@ -58,7 +58,6 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.actionBox}>
                     <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
-                    <img src={refresh}/>
                     <img src={add} onClick={()=>addData(newData)}/>
                 </div>
                 <div className={styles.tableBox}>
@@ -97,6 +96,7 @@ let Component = React.createClass({
                                                 return (
                                                     <input className={styles.tableContentItem} key={keyC}
                                                            style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                           onClick={()=>{$('#boxAm').parent().css('display','block')}}
                                                            type="button" value='设置'/>
                                                     )
                                                 }else {

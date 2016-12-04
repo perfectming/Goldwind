@@ -7,11 +7,6 @@
     width:8%;
     font-size: 20px;
     text-decoration: underline;
-  }
-  .upBox{
-    margin-top: -20px;
-  }
-  .downBox{
     margin-top: -40px;
   }
   .tableBox {
@@ -24,6 +19,11 @@
     display: none;
     z-index:100;
     background:#000;
+    .closeA{
+      position: absolute;
+      top:5px;
+      right: 5px;
+    }
     .tableHeaderBox {
       overflow: hidden;
       background: #464c58;

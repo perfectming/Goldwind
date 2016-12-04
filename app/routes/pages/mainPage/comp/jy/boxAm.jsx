@@ -9,55 +9,41 @@ var actions = require('redux/actions');
 let matrixdata = require('../xym/data');
 
 let arr1 = [];
-var obj = matrixdata.ammData;
-var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-
-(function(){
-    for(var x in obj_wfd){
-        arr1.push(x)
-    }
-    arr1.splice(1,arr1.length-1);
-
-}());
-
+var obj = matrixdata.ammData.content;
+obj.map((value,key)=>{
+    arr1.push(value[0])
+});
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
     render() {
-        let {border1=true,closebox3,Tofaninfo1} = this.props;
+        let {border1=true,closeboxAm,Tofaninfo1} = this.props;
         return (
 
             <div className={styles.fiexdbox} style={{top: 294, left:672}}>
-                <span>设置功率预测权限</span>
-                <div className={styles.listbox} id='box3'>
+                <span>角色名称</span>
+                <img src={close} className={styles.close} onClick={()=>closeboxAm()}/>
+                <div className={styles.listbox} id='boxAm'>
                     <ul id='fclist'>
-                        {
-                            arr1.map((value,key)=>{
-                                return(
-                                    <li key={key} >
-                                        <div className={styles.list_span}>
-                                            {
-                                                obj_wfd[value].map((valueC,key)=>{
+                        <li>
+                            <a>所有</a>
+                            <div className={styles.list_span}>
+                                {
+                                    arr1.map((valueC,key)=>{
 
-                                                    return(
-                                                        <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC,value)}>
-                                                            <input type='checkbox' name='checkname' value={valueC.Wtname} />
-                                                            {valueC.Wtname}
-                                                        </div>
+                                        return(
+                                            <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC)}>
+                                                <input type='checkbox' name='checkname' value={valueC} />
+                                                {valueC}
+                                            </div>
 
-                                                    )
-                                                })
+                                        )
+                                    })
 
-                                            }
-
+                                }
                                         </div>
                                     </li>
-
-                                )
-                            })
-                        }
-
                     </ul>
 
 
@@ -82,7 +68,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            $('#box3 ul li a').on('click',function(){
+            $('#boxAm ul li a').on('click',function(){
                 var bg=$(this).css("background-image");
                 if(bg=='url("'+add+'")'){
                     $(this).css("background-image",'url('+jian+')');
@@ -100,13 +86,11 @@ const mapDispatchToProps = (dispatch) => {
                     if(obj[k].checked)
                         check_val.push(obj[k].value);
                 }
-                alert('您发送的风机为'+check_val);
+                alert('选中角色'+check_val);
             })
-
-
         },
-        closebox3:()=>{
-            $("#box3").parent().css("display","none");
+        closeboxAm:()=>{
+            $("#boxAm").parent().css("display","none");
         },
         Tofaninfo1: (value)=> {
 

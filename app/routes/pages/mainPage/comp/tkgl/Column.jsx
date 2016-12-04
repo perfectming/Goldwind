@@ -98,7 +98,7 @@ let Component = React.createClass({
             }]
         };
         return (
-            <ReactHighcharts config={configPie}/>
+                <ReactHighcharts config={configPie}/>
         );
     }
 });

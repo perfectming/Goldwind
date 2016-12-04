@@ -61,7 +61,7 @@ let Component = React.createClass({
 
 
                                                         <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC,value)}>
-                                                            <input type='checkbox' name='checkname' value={valueC.Wtname} />
+                                                            <input type='checkbox' name='checknameB' value={valueC.Wtname} />
                                                             {valueC.Wtname}
                                                         </div>
 
@@ -82,7 +82,7 @@ let Component = React.createClass({
 
                 </div>
                 <div className={styles.btnbox}>
-                    <a id='sent'>确定</a>
+                    <a id='sentB'>确定</a>
                     <a>取消</a>
                 </div>
             </div>
@@ -112,24 +112,20 @@ const mapDispatchToProps = (dispatch) => {
                 $(this).siblings('div').toggle();
             })
             //获取选中风机的信息
-            $("#sent").on('click',function(){
-                var obj = document.getElementsByName("checkname");
-                var check_val = [];
-                for(var k in obj){
-                    if(obj[k].checked)
-                        check_val.push(obj[k].value);
+            $("#sentB").on('click',function(){
+                let objB = document.getElementsByName("checknameB");
+                var check_valB = [];
+                for(let k in objB){
+                    if(objB[k].checked)
+                        check_valB.push(objB[k].value);
                 }
-                alert('您发送的风机为'+check_val);
+                alert(check_valB);
             })
-
-
         },
         closebox2:()=>{
             $("#box2").parent().css("display","none");
         },
         Tofaninfo1: (value)=> {
-
-
 
         },
 
