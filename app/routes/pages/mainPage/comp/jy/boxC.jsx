@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './box.scss';
-import jian from '../../img/comp/jian_icon.png';
-import add from '../../img/comp/add_icon.png';
-import close from '../../img/comp/close_icon.png';
+import jian from '../../img/comp/jian_down.png';
+import add from '../../img/comp/add_down.png';
+import close from '../../img/comp/close_down.png';
 let $ =require('jquery');
 var actions = require('redux/actions');
 let matrixdata = require('../../../../../../config/MatrixData');
@@ -84,7 +84,7 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.btnbox}>
                     <a id='sentC'>确定</a>
-                    <a>取消</a>
+                    <a onClick={()=>closebox3()}>取消</a>
                 </div>
             </div>
         );
