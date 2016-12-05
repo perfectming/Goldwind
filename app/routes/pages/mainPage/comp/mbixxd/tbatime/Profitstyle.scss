@@ -1,7 +1,7 @@
 .box{
     overflow:hidden;
-    height:100%;
-    padding-bottom:20px;
+    padding:10px;
+    padding-right:40px;
     .monthbox{
     width: 100%;
     height: 80px;
@@ -54,11 +54,12 @@
     box-shadow:0 0 15px #fff;
     }
     .areabox{
-            width:98%;
+            overflow:hidden;
+            width:100%;
             margin:0 auto;
             height:405px;
             margin-bottom: 20px;
-            margin-top:50px;
+            margin-top:32px;
             position:relative;
             .bgcc{
             position:absolute;
@@ -72,10 +73,10 @@
             }
            }
     .windbox{
-       width: 98%;
+       width: 100%;
        margin:0 auto;
        height: 405px;
-      
+       overflow:hidden;
        position:relative;
        margin-top:50px;
 

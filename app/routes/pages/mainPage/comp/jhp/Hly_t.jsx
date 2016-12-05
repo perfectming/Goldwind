@@ -21,7 +21,6 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:400,
-
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -31,7 +30,7 @@ let Component = React.createClass({
                 backgroundColor: {
                     linearGradient: [0, 0, 500, 500],
                     stops: [
-                      //  [0, 'rgb(56, 85, 94)'],
+                    
                         [0, 'rgb(37, 41, 48)']
                     ]
                 },
@@ -74,7 +73,6 @@ let Component = React.createClass({
             colors: ['#4CDB9D', '#1E664A', '#000','#134833', '#082B1F']
             ,
             plotOptions: {
-
                 pie: {
                     allowPointSelect: false,
                     cursor: 'pointer',
@@ -190,6 +188,8 @@ const mapDispatchToProps = (dispatch) => {
         changedata1 :(w0,win)=>{
             dispatch(actions.setVars('w1',w0 ));
             dispatch(actions.setVars('win1',win ));
+            console.log(win);
+
 
         },
 

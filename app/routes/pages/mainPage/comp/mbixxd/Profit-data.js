@@ -6,7 +6,21 @@ module.exports={
 	areaRecordProfitT:[4000,3800,4300,5000,3800,3400,4600,4000,5400,6000,5400,3000],
 	areaRecordCost:[3555,3100,3555,3100,3555,3100,3555,3100,3555,3100,5300,2800],
 	areaPlanDay:[200,300,200,300,200,300,300,200,300,200,300,200,300,200,300,200,300,200,200,300,200,200,250,240,250,230.220,210,200,210],
-	areaPlanDayT:[150,140,130,140,120,110,150,140,130,140,120,110,150,140,130,140,120,110,150,140,130,140,120,110,230,220,210,190,180],
+	areaPlanDay:[200,300,200,300,200,300,300,200,300,200,300,200,300,200,300,200,300,200,200,300,200,200,250,240,250,230.220,210,200,210],
+	areaPlanDayY:[[50,300,200,300,200,300,300,200,300,200,300,200,300,200,300,200,300,200,200,300,200,200,250,240,250,230.220,210,200,210],
+	[50,30,20,30,20,30,30,20,30,20,30,20,30,20,30,20,30,20,20,30,20,20,25,20,25,30.22,21,20,21],
+	[50,30,60,90,60,50,70,40,90,20,30,200,30,20,30,20,30,20,20,30,20,20,50,20,50,30.20,10,20,10],
+	[50,300,20,300,200,300,300,200,300,20,300,200,300,200,300,200,300,200,200,300,200,200,250,20,250,23.220,210,20,210],
+	[90,32,20,300,200,300,300,200,300,20,300,200,300,200,300,200,300,200,200,300,200,200,250,20,250,23.220,210,20,210],
+	[50,32,40,30,200,300,300,200,300,20,300,20,300,200,300,200,300,200,200,300,200,200,250,24,250,23.220,210,20,210],
+	[90,37,200,30,200,300,300,200,300,20,300,20,300,200,300,200,300,200,200,300,200,200,250,24,250,23.220,210,20,210],
+	[50,36,40,30,200,300,300,200,300,20,300,200,300,200,300,200,300,200,200,300,200,200,250,20,20,230.220,210,200,20],
+	[50,38,200,30,200,300,300,200,300,20,300,200,300,200,300,200,300,200,200,300,200,200,250,20,20,230.220,210,200,20],
+	[50,32,4,300,20,300,300,200,300,20,300,200,300,200,300,200,300,200,200,300,200,200,250,20,20,230.220,210,200,20],
+	[90,32,200,300,20,300,300,200,300,20,300,200,300,200,300,200,300,200,200,300,200,200,250,20,20,230.220,210,200,20],
+	[50,32,40,300,200,30,300,20,300,200,300,200,300,200,300,200,300,200,200,300,200,200,250,20,20,230.20,21,200,20],
+	[50,32,20,300,20,300,300,20,30,90,30,20,30,20,30,20,30,20,20,30,20,20,20,20,20,20.20,21,20,21],],
+	areaPlanDayT:[150,140,130,140,120,110,150,140,130,140,120,110,150,140,130,140,120,110,10,140,10,140,10,110,230,20,210,190,180],
 	windFiled:["1风场","2风场","3风场","4风场","5风场","6风场","7风场","8风场","9风场","10风场","11风场","12风场"],
 	windProfit:[18,8,12,14,7,12,10,18,19,10,11,18],
 	windCost:[17,7,11,12,5,11,4,15,13,5,6,13],
@@ -99,13 +113,7 @@ module.exports={
 	actrul:[100,280,110,230,180,210,120,230,120,230,280,120],
 	actruls:[70,40,10,120,130,210,110,130,20,130,110,80],
 
-},{
-	name:"返回",
-	plan:[360,380,240,330,230,360,140,390,260,340,360,240],
-	actrul:[100,280,110,230,180,210,120,230,120,230,280,120],
-	actruls:[70,40,10,120,130,210,110,130,20,130,110,80],
-
-}],
+},],
 windFF:
 [{name:'机组1',
 plan:60},
@@ -133,57 +141,57 @@ plan:90},
 plan:60}],
 windFJJ:[
    {name:'1011',
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
      {name:'1021',
-    areaRecordCost:1600,
+    areaRecordCost:600,
     areaRecordProfit:15,
     TBA:14
     },
     {name:3012,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
      {name:9021,
-    areaRecordCost:1600,
+    areaRecordCost:600,
     areaRecordProfit:15,
     TBA:14
     },
     {name:2190,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
      {name:1231,
-    areaRecordCost:1600,
+    areaRecordCost:600,
     areaRecordProfit:15,
     TBA:14
     },
    {name:2323,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
      {name:2327,
-    areaRecordCost:1600,
+    areaRecordCost:600,
     areaRecordProfit:15,
     TBA:14
     },
    {name:7899,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
      {name:7897,
-    areaRecordCost:1600,
+    areaRecordCost:600,
     areaRecordProfit:15,
     TBA:14
     },
    {name:7878,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
@@ -192,7 +200,7 @@ windFJJ:[
     areaRecordProfit:15,
     TBA:14
     },{name:1011,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
@@ -202,45 +210,45 @@ windFJJ:[
     TBA:14
     },
     {name:3012,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
      {name:9021,
-    areaRecordCost:1600,
+    areaRecordCost:600,
     areaRecordProfit:15,
     TBA:14
     },
     {name:2190,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },{name:1011,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
      {name:1021,
-    areaRecordCost:1600,
+    areaRecordCost:600,
     areaRecordProfit:15,
     TBA:14
     },
     {name:3012,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
      {name:9021,
-    areaRecordCost:1600,
+    areaRecordCost:600,
     areaRecordProfit:15,
     TBA:14
     },
     {name:2190,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },{name:1011,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
@@ -250,31 +258,31 @@ windFJJ:[
     TBA:14
     },
     {name:3012,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
      {name:9021,
-    areaRecordCost:1600,
+    areaRecordCost:600,
     areaRecordProfit:15,
     TBA:14
     },
     {name:2190,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },{name:1011,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
      {name:1021,
-    areaRecordCost:1600,
+    areaRecordCost:600,
     areaRecordProfit:15,
     TBA:14
     },
     {name:3012,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
@@ -284,7 +292,7 @@ windFJJ:[
     TBA:14
     },
     {name:2190,
-    areaRecordCost:1900,
+    areaRecordCost:900,
     areaRecordProfit:17,
     TBA:16
     },
@@ -559,9 +567,6 @@ healthy:[
 	{name:'机组10',plan:150},
 	{name:'机组11',plan:120},
 	{name:'机组12',plan:123}]
-},{
-	name:'返回',
-
 },],
  form:{
                 header:[
@@ -591,4 +596,5 @@ healthy:[
                 ['华北','风场1','2016-10-10','2016-11-11','0.5元',11122211],
                 ],
             },
+  text:['1月份',"2月份","3月份","4月份","5月份",'6月份',"7月份","8月份","9月份","10月份",'11月份',"12月份"]
 }

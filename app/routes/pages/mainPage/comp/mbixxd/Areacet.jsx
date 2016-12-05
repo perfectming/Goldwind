@@ -23,14 +23,14 @@ let Component = React.createClass({
         let areaPlanDayT=data.areaPlanDayT;
         let text=data.textT;
 
-        let{actbt=0,changpage,wind,windP,gogogo,back,more,close}=this.props;
+        let{actbt=0,changpage,wind,windP,gogogo,back,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
           return (
            <div className={styles.box}>
             <div className={styles.boxcover} id='boxcover'></div>
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>11月份各风机PBA</p>
+                <p>{text[actbt]}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
          <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP} width={1750} height={500}></Windcet>
@@ -42,6 +42,8 @@ let Component = React.createClass({
                             return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
                         })
                     }
+              <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
+
                 </ul>
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                     <div className={styles.coverbox}>
@@ -51,7 +53,7 @@ let Component = React.createClass({
                             </div>
                         </div>
                          <div className={styles.tik}>
-                        <p>{text[actbt]}</p>
+                        <p className={styles.Ff}>{text[actbt]}</p>
                            </div>
                            <div className={styles.lkua}></div>
                            <div className={styles.rkua}></div>
@@ -79,6 +81,8 @@ const mapStateToProps = (state) => {
         actbt:state.vars.actbt,
          wind:state.vars.wind,
          windP:state.vars.windP,
+           befor_pagee : state.vars.befor_pagee,
+        befor_page2 : state.vars.befor_page2,
     }
 };
 
@@ -131,7 +135,10 @@ const mapDispatchToProps = (dispatch) => {
         close:()=>{
             $("#sss").hide();
               $('#boxcover').hide();
-        }
+        },
+        backtop:(befor_pagee,befor_page2)=>{
+            dispatch(actions.setVars('showPage',befor_pagee));
+        },
     };
 };
 
