@@ -1,25 +1,28 @@
 .bodyBox{
-    width: 100%;
-    padding: 0 30px 0 10px;
-    .content{
-        width: 100%;
-        .areaLose{
-            height: 360px;
+        width: 1780px;
+        padding: 0 30px 0 10px;
+        .content{
             width: 100%;
-            .areaSection{
-                float: left;
-                width: 24%;
-                margin-right: 1%;
+            .areaLose{
                 height: 360px;
+                width: 100%;
+                .areaSection{
+                    float: left;
+                    width: 24.2%;
+                    height: 360px;
+                }
+                .areaSection:not(:last-child){
+                    margin-right: 1%;
+                }
+            }
+            .lose{
+                margin-top: 15px;
+                height: 380px;
+                width: 100%;
             }
         }
-        .lose{
-            margin-top: 15px;
-            height: 380px;
-            width: 100%;
-        }
-    }
-    .boxShadow:hover{
-       box-shadow:0 0 15px #fff;
-   } 
+        .boxShadow:hover{
+           box-shadow:0 0 15px #fff;
+       } 
 }
+

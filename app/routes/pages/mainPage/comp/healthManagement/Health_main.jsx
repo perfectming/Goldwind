@@ -11,8 +11,9 @@ let Component = React.createClass({
     },
 
     render() {
+        let {key1,} = this.props;
         return(
-            <iframe className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
+            <iframe name="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
             )
 
     }
@@ -30,7 +31,11 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-    };
+        changeTableItem: (key1) => {
+
+
+        }
+};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

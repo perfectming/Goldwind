@@ -23,7 +23,11 @@
         float: left;
         select{
             color: #fff;
-            background: #181a25;  
+            font-size: 16px;
+            background: #181a25; 
+            option{
+                font-size: 10px;
+            } 
         }
     }
     .radioBox{

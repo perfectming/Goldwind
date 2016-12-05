@@ -50,7 +50,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#5298d3', '#31f3fb','#856ffe','#009a46',],
+            colors: [ '#33BAC0', '#5298d3', '#31f3fb','#70c080','#856ffe','#009a46',],
             plotOptions: {
 	            pie: {
 	                allowPointSelect: true,

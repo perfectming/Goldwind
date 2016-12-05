@@ -8,7 +8,7 @@ module.exports={
 		},{
 			name:'健康度',
 			big:100,
-			small:80
+			small:40
 		},{
 			name:'PBA',
 			actrul:1050,
@@ -205,7 +205,7 @@ module.exports={
 			}],
 			title:["年发电量","年收益"],
 			name:["计划电量","实际电量","收入","成本"],
-			unit:["(万元)","(kWh)"]
+			unit:["万元","kWh"]
 		}
 	],
 	table:[

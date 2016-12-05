@@ -16,6 +16,7 @@ let Component = React.createClass({
 	render() {
 		let data=PBAdata;
 		return(
+			
 			<div className={styles.bodyBox}>
 				<TimeSelect></TimeSelect>
 				<div className={styles.content}>
@@ -49,6 +50,7 @@ let Component = React.createClass({
 					</div>
 				</div>
 			</div>
+			
 		)
 		
 }
