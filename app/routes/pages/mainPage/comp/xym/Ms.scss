@@ -60,7 +60,7 @@
   .tanC {
     background: #000;
     position: absolute;
-    display: block;
+    display: none;
     color: #fff;
     overflow: hidden;
     width: 506px;
@@ -167,6 +167,9 @@
       background: rgb(100, 100, 110);
       span{
         margin-right: 300px;
+        &:last-child{
+          cursor: pointer;
+        }
       }
     }
   }

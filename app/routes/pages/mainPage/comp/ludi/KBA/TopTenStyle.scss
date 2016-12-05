@@ -1,42 +1,42 @@
 .bodyBox{
-    width: 100%;
-    padding: 0 30px 0 10px;
-    .content{
-        color: white;
-        font-size: 16px;
-        width: 100%;
-        .floorOne{
+        width: 1780px;
+        padding: 0 30px 0 10px;
+        .content{
+            color: white;
+            font-size: 16px;
             width: 100%;
-            .pie{
-                float: left;
-                width: 30%;
-                height: 380px;
+            .floorOne{
+                width: 100%;
+                .pie{
+                    float: left;
+                    width: 30%;
+                    height: 380px;
+                }
+                .column{
+                    float: left;
+                    width: 69%;
+                    height: 380px;
+                    margin-left: 1%;
+                }
             }
-            .column{
-                float: left;
-                width: 69%;
-                height: 380px;
-                margin-left: 1%;
+            .floorTwo{
+                position: relative;
+                top: 15px;
+                width: 100%;
+                .pie{
+                    float: left;
+                    width: 30%;
+                    height: 380px;
+                }
+                .column{
+                    float: left;
+                    width: 69%;
+                    height: 380px;
+                    margin-left: 1%;
+                }
             }
         }
-        .floorTwo{
-            position: relative;
-            top: 15px;
-            width: 100%;
-            .pie{
-                float: left;
-                width: 30%;
-                height: 380px;
-            }
-            .column{
-                float: left;
-                width: 69%;
-                height: 380px;
-                margin-left: 1%;
-            }
-        }
-    }
-    .boxShadow:hover{
-       box-shadow:0 0 15px #fff;
-   }
+        .boxShadow:hover{
+           box-shadow:0 0 15px #fff;
+       }
 }

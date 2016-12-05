@@ -1,4 +1,5 @@
 .box{
+    width: 1780px;
     overflow:hidden;
     color: #E6E7E8;
     font-size: 16px;
@@ -18,24 +19,21 @@
                 height: 100%;
                 .alink{
                     position: absolute;
-                    left: 40%;
-                    top: 88%;
+                    left: 80%;
+                    top: 50%;
                     z-index: 9;
                     a{
                         cursor: pointer;
-                        text-decoration: underline;
-                        color: #E6E7E8;
-                        &:hover{
-                            color: #31f3fb;
-                        }
                     }
                 }
                 .sectionBox{
                     position: relative;
+                    width: 44%;
+                    margin-left: 28%;
                     .numBox{
                         position:absolute;
-                        top:42%;
-                        left:43%;
+                        top:48%;
+                        left:35%;
                         width:110px;
                         text-align: center;
                         height:40px;
@@ -60,6 +58,7 @@
                     border-right: 2px solid #191c26;
                 }
                 .text1{
+                    margin-top: 20px;
                     line-height: 40px;
                     height: 40px;
                     width: 100%;
@@ -161,25 +160,23 @@
                 border:1px solid #3e4c67;
                 .header{
                     height: 30px;
-                    line-height: 30px;
+                    line-height: 25px;
                     padding-left: 20px;
                     background-color: #464C58;
                    .logo{
                         cursor: pointer;
                         float: left; 
                     }
-                    .links{
+                    .linkBox{
                         float: left;
-                        margin-left: 20px;
-                        a{
-                            cursor: pointer;
-                            text-decoration: underline; 
-                            color: #E6E7E8;
-                            &:hover{
-                                color: #31f3fb;
-                            }  
+                        margin-left: 75%;
+                        .links{
+                            float: left;
+                            margin-left: 20px;
+                            a{
+                                cursor: pointer; 
+                            }
                         }
-                        
                     } 
                 }
             }.yearprofit{
