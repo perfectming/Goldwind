@@ -62,10 +62,19 @@ let Component = React.createClass({
             yAxis: {
                 title: {
                     text: '(万kMw)',
+                    style: {
+                        color: '#ffffff'
+                    },
                     align: 'high',
                     rotation: 1,
                     y: -5,
                     x: 86
+                },
+                labels: {
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'12px'  //字体
+                    }
                 },
                 lineWidth: 1,
                 gridLineWidth: 0
