@@ -209,7 +209,7 @@ module.exports = {
                         page:'loseElectric',
                     },{
                         name:'可靠性分析',
-                        page:'topTen',
+                        page:'reliability',
                     },{
                         name:'设备损失分析',
                         page:'deviceLose',
