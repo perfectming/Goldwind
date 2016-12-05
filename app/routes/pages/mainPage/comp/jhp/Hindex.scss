@@ -72,7 +72,7 @@
 
       .logo{
         position: absolute;
-        left: 76px;
+        left: 63px;
         top: 9px;
         background: url("./images/wind_logo.png") no-repeat;
         background-size: 16px 16px;
@@ -80,22 +80,16 @@
         height: 16px;
         z-index: 1;
       }
-      .logomini{
-      position: absolute;
-      left: 68px;
-      top: 11px;
-        background: url("./images/wind_logo.png") no-repeat;
-      background-size: 25px 25px;
-      width: 16px;
-      height: 25px;
-      z-index: 1000;
-    }
+
 
     }
     
 	}
   .fbox2{
+
     position: relative;
+
+
 
     .rbox31{
       height: 35px;
@@ -125,7 +119,7 @@
   }
 	.rbox{
 	float:left;
-	width:48%;
+	width:49%;
 	height:400px;
 
       margin-left: 5px;
@@ -133,12 +127,12 @@
   .rbox2{
     background: #252930;
     float:left;
-    width:48%;
+    width:49.2%;
     height:400px;
     position: relative;
-    margin-left: 3%;
+    margin-left: 15px;
     .rbox4{
-      margin-top: 70px;
+
     }
 
   }
@@ -181,7 +175,7 @@
     height: 50px;
     z-index: 10;
     position: absolute;
-    left: 55%;
+    left: 70%;
     top: 10px;
   }
   .button{
@@ -206,7 +200,7 @@
   .fbox{
     width:98%;
     height: 600px;
-    margin-top:120px;
+    margin-top:115px;
     margin-left: 5px;
     position: relative;
   }
@@ -268,23 +262,21 @@
         color: #282f37;
       }
       .return{
-        cursor:pointer;
-        color: #FFF;
-        position:absolute;
-        top:20px;
-        right:207px;
-        font-size: 16px;
-        font-weight: 600;
-        text-align:center;
+        float:left;
+        align-items:center;
+        color: #20FEFF;
         border:1px solid #20FEFF;
-        width:110px;
-        height:45px;
-        line-height:45px;
-        margin-bottom:25px;
+        width:100px;
+        height:40px;
+        line-height:40px;
+        position:relative;
+        top:21px;
         border-radius:45px;
         background:radial-gradient(#1c444a, #1c3f46);
         box-shadow:0px 0px 10px  #20FEFF;
+        text-align:center;
       }
+
       .return:hover{
         background:#156e74;
       }
@@ -304,7 +296,16 @@
 .box_shadow:hover{
   box-shadow:0 0 15px #fff;
 }
-
+.logomini{
+  position: absolute;
+  left: 59px;
+  top: 8px;
+  background: url("./images/wind_logo.png") no-repeat;
+  background-size: 16px 16px;
+  width: 16px;
+  height: 16px;
+  z-index: 2;
+}
 
 
 

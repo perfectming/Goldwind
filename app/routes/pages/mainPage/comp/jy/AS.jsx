@@ -16,8 +16,16 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init(tabaleData.as);
     },
+    buttonAction (){
+        // 获取select 选择的内容
+        var tContent = this.refs.textContent5.value;
+        var tContent1 = this.refs.textContent6.value;
+        alert(tContent+tContent1);
+        // 在这个下边获取这个时间段的数据就行了
+        // 然后去更新图表
+    },
     render() {
-        let {add,table, changeTableItem,dele} = this.props;
+        let {onFocus,inputOnChange,add,table, changeTableItem,dele} = this.props;
         let num=0;
         let newData=[];
         for(let i=0;i<tabaleData.as.header.length;i++){
@@ -49,7 +57,6 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.btn}>
                     <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content))}/>
-                    <img src={refresh}/>
                     <img src={tabAdd} onClick={()=>add(newData)}/>
                 </div>
 
@@ -135,6 +142,9 @@ const mapDispatchToProps = (dispatch) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.content.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
+        },
+        inputOnChange:(value,id)=>{
+
         }
     };
 };

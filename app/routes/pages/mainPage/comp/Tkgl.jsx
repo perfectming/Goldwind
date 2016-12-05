@@ -4,10 +4,12 @@ var actions = require('redux/actions');
 var {getState} = require('../../../../redux/store');
 import _ from 'lodash';
 import styles from  './Tkgl.scss';
+var $ = require('jquery');
 import Column from './tkgl/Column.jsx';
 import Table from './tkgl/table.jsx';
 import succ from '../img/icon/jyOn.png';
 import defa from '../img/icon/jyOff.png';
+import close from '../img/comp/close_down.png';
 let tabaleData = require('../../../../../config/RegulationData');
 let model=require('../../../../../config/RegulationModel');
 let obj=require('../../../../../config/MatrixData');
@@ -36,8 +38,9 @@ let Component = React.createClass({
         let plan=0,power=0,allC=0;
         return (
             <div className={styles.tkglBox}>
-                <a onClick={openAGC} className={styles.agc}>AGC调节</a>
+                <span onClick={openAGC} className={styles.agc}>AGC调节</span>
                     <div className={styles.tableBox} id="AGC">
+                        <img src={close} className={styles.closeA} onClick={closeAGC}/>
                         <div className={styles.tableHeaderBox}>
                             {
                                 header.map((value, key)=> {
@@ -81,7 +84,8 @@ let Component = React.createClass({
                                         </div>
                                     )
                                 })}
-                            {arr2.map((value, key)=> {
+                            {
+                                arr2.map((value, key)=> {
                                 return (
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         <div className={styles.tableContentItem}
@@ -135,8 +139,8 @@ let Component = React.createClass({
                                 }
                             </div>
                         </div>
-                        <button onClick={closeAGC}>确定</button>
                     </div>
+                <div className={styles.columnTitle}></div>
                 <div className={styles.upBox}>
                     <Column></Column>
                 </div>
@@ -161,10 +165,10 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('tableContent', obj));
         },
         openAGC: () => {
-            document.getElementById('AGC').style.display='block'
+            $('#AGC').css('display','block');
         },
         closeAGC: () => {
-            document.getElementById('AGC').style.display='none'
+            $('#AGC').css('display','none');
         },
         changeTableItem: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);

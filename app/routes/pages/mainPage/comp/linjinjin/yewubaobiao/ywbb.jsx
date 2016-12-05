@@ -1,27 +1,37 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './ywbb.scss';
+import jian from '../../../img/comp/jian_icon.png';
+import add from '../../../img/comp/add_icon.png';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
 var actions = require('redux/actions');
-let $=require('jquery');
+var $ =require('jquery');
 
 let Component = React.createClass({
-    componentWillMount() {
+    componentDidMount() {
         this.props.init();
     },
      buttonAction (){
-        // 获取select 选择的内容
-        var sType = this.refs.selectType0.value;
+        //开始时间
+        var sTime = this.refs.startTime.value;
+        //结束时间时间
+        var eTime = this.refs.endTime.value;
+
+        if(sTime == '' || eTime == ''){
+            alert('请选择开始或者结束时间');
+            return false;
+        }
         
     },
    
 
     render() {
-         let {changeselect,select_list} = this.props;
+         let {changeselect,select_list,sent_info,tabarr} = this.props;
         return (
             <div className={styles.faultBox}>
                 <div className={styles.search_tit}>
+
 
                     {
                         btype.map((value, key,valueName)=> {
@@ -55,28 +65,51 @@ let Component = React.createClass({
                                         </select>
                                     </div>
                                 )
-                            } else if (value.type === 'button') {
-                                return (
-                                    <div className={styles.btnBox} key={key}>
-                                        <button onClick={this.buttonAction}>{value.title}</button>
-                                    </div>
-                                )
                             }
+                                   
+                           
                         })
                     }
-
+                     <div className={styles.btnBox}>
+                        <button onClick={this.buttonAction}>查询</button>
+                    </div>
+                    <div className={styles.btnBox}>
+                        <button>设置参数</button>
+                    </div>
+                    <div className={styles.btnBox}>
+                        <button>导出Excel</button>
+                    </div>
                 </div>
-                <div className={styles.leftlist}>
+                <div className={styles.leftlist} id='leftlist'>
                     {
                       select_list !== undefined && select_list.arr.map((valueC,keyC)=>{
                         return(
                             <div key={keyC} className={styles.place}>
-                            <a className={styles.ca}>{valueC.name}</a>
+                            <a className={styles.ca}><img src={add} /><span>{valueC.name}</span><input type='checkbox' onClick={(e)=>sent_info(valueC,e.target)} /></a>
                             {
                                 valueC.arr.map((valueD,keyD)=>{
                                     return(
                                         <div className={styles.placename} key={keyD}>
-                                            <a>{valueD.name}</a>
+                                            <a className={styles.da}><img src={add} /><span>{valueD.name}</span><input type='checkbox' onClick={(e)=>sent_info(valueD,e.target)} /></a>
+                                             {
+                                                valueD.arr.map((valueE,keyE)=>{
+                                                    return(
+                                                        <div className={styles.placeline} key={keyE}>
+                                                            <a className={styles.ea}><img src={add} /><span>{valueE.name}</span><input type='checkbox' onClick={(e)=>sent_info(valueE,e.target)}/></a>
+                                                                {
+                                                                    valueE.arr.map((valueF,keyF)=>{
+                                                                        return(
+                                                                            <div className={styles.placefan} key={keyF}>
+                                                                                <a className={styles.fa}><span>{valueF.name}</span><input type='checkbox' onClick={(e)=>sent_info(valueF,e.target)} /></a>
+                                            
+                                                                            </div>
+                                                                        )
+                                                                    })
+                                                                }
+                                                        </div>
+                                                    )
+                                                })
+                                            }
                                         </div>
                                         )
                                 })
@@ -87,7 +120,49 @@ let Component = React.createClass({
                         
                     }
                 </div>
-                <div className={styles.righttable}></div>
+                <div className={styles.righttable}>
+                    <div className={styles.tablebox}>
+                        <div className={styles.tabtit} id='tablist'>
+                        {
+                            select_list !== undefined && select_list.param.map((value,key)=>{
+                                if(key==0){
+                                        return(
+                                        <span key={key} style={{width:'80px'}}>{value}</span>
+                                        ) 
+                                    }else if(key==1){
+                                        return(
+                                        <span key={key} style={{width:'300px'}}>{value}</span>
+                                        ) 
+                                    }else{
+                                        return(
+                                        <span key={key}>{value}</span>
+                                        ) 
+                                    }
+                            })
+                        }
+                        </div>
+                        <div className={styles.tabline} id='tabline'>
+                            {
+                                console.log(tabarr),
+                               tabarr!== undefined && tabarr.map((value,key)=>{
+                                    if(key==0){
+                                        return(
+                                        <span key={key} style={{width:'80px'}}>{value}</span>
+                                        ) 
+                                    }else if(key==1){
+                                        return(
+                                        <span key={key} style={{width:'300px'}}>{value}</span>
+                                        ) 
+                                    }else{
+                                        return(
+                                        <span key={key}>{value}</span>
+                                        ) 
+                                    }
+                                })
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -97,23 +172,97 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         select_list:state.vars.select_list,
+        tabarr:state.vars.tabarr,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            //select选择事件隐藏DIV
+            $('#selectop').change(function(){
+                $("#leftlist>div div").hide();
+                $("#leftlist>div img").attr('src', add);
+            })
+            //表格宽度等于span宽度的和
+            var i=$('#tablist span').length;
+            $('#tablist').width((i-2)*150+380)
+            $('#tabline').width((i-2)*150+380)
+            //复选框状态跟随
+            $("#leftlist input").change(function(){
+                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
+            })
+            //select下拉事件
+            $("#leftlist span").on('click',function(){
+                $(this).parent().siblings().toggle();
+                if($(this).siblings('img').attr('src') == add){
+                    $(this).siblings('img').attr('src', jian);
+                }else{
+                    $(this).siblings('img').attr('src', add);
+                }
+            })
+            //select初始化option个数
             dispatch(actions.setVars('select_list', btype[0].select[0]));
-            var obj = {
-                test:''
-            }
         },
          inputOnChange:(value,id)=>{
            console.log(value,id)
         },
         changeselect:(value)=>{
             dispatch(actions.setVars('select_list', value[$('#selectop').val()]));
+        },
+        sent_info:(value,even)=>{
+            if(even.checked){
+            let num=[];
+
+            if(value.name){
+                value.arr.map((valueA,keyA)=>{
+                    if(valueA.name){
+                       valueA.arr.map((valueB,keyB)=>{
+                          if(valueB.name){
+                            valueB.arr.map((valueC,keyC)=>{
+                                if(valueC.name){  
+                                    valueC.arr.map((valueD,keyD)=>{
+                                        num.push(valueD);
+
+                                       if(keyD==valueC.arr.length-1){
+                                        console.log(num);
+                                        dispatch(actions.setVars('tabarr', num));
+                                         num=[];
+                                       }
+                                    })
+                                }else{
+                                    num.push(valueC);
+                                     if(keyC==valueB.arr.length-1){
+                                        console.log(num);
+                                        dispatch(actions.setVars('tabarr', num));
+                                         num=[];
+                                       }
+                                }
+                            }) 
+                            }else{
+                                    num.push(valueB);
+                                    if(keyB==valueA.arr.length-1){
+                                        console.log(num);
+                                        dispatch(actions.setVars('tabarr', num));
+                                         num=[];
+                                       }
+                                }
+                        }) 
+                    }else{
+                                    num.push(valueA);
+                                    if(keyA==value.arr.length-1){
+                                        console.log(num);
+                                        dispatch(actions.setVars('tabarr', num));
+                                         num=[];
+                                       }
+                                }
+                })
+            }
+            
+           }
+          
         }
+    
        
        
     };

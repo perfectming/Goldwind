@@ -51,6 +51,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                y:20,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -101,7 +102,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 40
+                    pointWidth: 30
                 }
             },
             xAxis: {

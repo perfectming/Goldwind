@@ -1,19 +1,20 @@
 
 .fiexdbox{
+  display: none;
   width:300px;
-  height:420px;
-  background:#102b46;
+  height:400px;
+  background:#50545f;
   margin-top:-30px;
   margin-left:73px;
-  border:1px solid #2ff4fb;
+  border:1px solid #10141f;
   position:absolute;
   .fctitle{
     text-align:center;
     line-height:40px;
     font-size:16px;
     margin:0px;
-    border-bottom: 1px solid #2ff4fb;
-    background: #102b46;
+    border-bottom: 1px solid #485b7b;
+    background: #000;
   }
   .close{
     position:absolute;
@@ -26,8 +27,8 @@
   .listbox{
     width:100%;
     height:330px;
-    border:1px solid #2b5d76;
-    background: #0a1b2b;
+    border:1px solid #202030;
+    background: #223;
     border-top:none;
     overflow-x:hidden;
     overflow-y:auto;
@@ -54,12 +55,12 @@
         font-size:14px;
         cursor:pointer;
         color:#fff;
-        background-color:#0d293f;
-        background-image:url('../../img/comp/add_icon.png');
+        background-color:#272b34;
+        background-image:url('../../img/comp/add_down.png');
         background-repeat: no-repeat;
         background-position: 15px center;
         &:hover{
-          background-color:#225074;
+          background-color:#345;
         }
       }
       .list_span{
@@ -73,7 +74,7 @@
           padding-left:50px;
 
           color:#fff;
-          background-image:url('../../img/comp/son_line.png');
+          background-image:url('../../img/comp/son_down.png');
           background-repeat: no-repeat;
           background-position: 15px center;
           input{
@@ -99,10 +100,10 @@
       float:left;
       cursor:pointer;
       margin:9px 10px 0 50px;
-      border:1px solid #2ff4fb;
+      border:1px solid #000;
       text-align:center;
       border-radius:5px;color:#fff;
-      &:hover{color:#2ff4fb;box-shadow:0px 0px 5px #2ff4fb;}
+      &:hover{color:#272b34;box-shadow:0px 0px 5px #346;}
     }
   }
 
@@ -112,21 +113,21 @@
 .listbox::-webkit-scrollbar {
   width:10px;
   height:10px;
-  border:1px solid #51a0bf;
+  border:1px solid #346;
 }
 .listbox::-webkit-scrollbar-button    {
-  background-color:#0b1c2e;
+  background-color:#272b34;
   display:none;
 }
 .listbox::-webkit-scrollbar-track     {
   background:#091a2a;
 }
 .listbox::-webkit-scrollbar-thumb{
-  background:#114f6f;
+  background:#272b34;
   border-radius:10px;
 }
 .listbox::-webkit-scrollbar-corner {
-  background:#82AFFF;
+  background:#346;
 }
 .listbox::-webkit-scrollbar-resizer  {
   background:#FF0BEE;

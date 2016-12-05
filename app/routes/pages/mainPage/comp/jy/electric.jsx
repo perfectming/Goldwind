@@ -70,7 +70,6 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.btn}>
                     <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content))}/>
-                    <img src={refresh}/>
                     <img src={tabAdd} onClick={()=>add(newData)}/>
                 </div>
 

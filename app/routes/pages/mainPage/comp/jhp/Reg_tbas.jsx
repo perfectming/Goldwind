@@ -49,6 +49,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                y:30,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -149,7 +150,7 @@ let Component = React.createClass({
                 borderRadius: 4,
             },
                 {
-                    name: '四',
+                    name: '理论发电量',
                     color:'#A2D04D',
                     type: 'column',
                     data: barLoPowerValue,
@@ -158,14 +159,14 @@ let Component = React.createClass({
 
                 },
                 {
-                    name: '大',
+                    name: '理论发电量',
                     color:'#FFD927',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '类',
+                    name: '理论发电量',
                     color:'#FF9424',
                     type: 'column',
                     data: barLoPowerValue,

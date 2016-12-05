@@ -42,8 +42,11 @@ let Component = React.createClass({
 
 
                 <div className={styles.tbox}>
-                    <div className={styles.box_shadow}>
+                    <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Reg_tbat   barRoPowerValues={barRoPowerValues1}  barRoPowerValue={barRoPowerValue1} barLoPowerValue={barLoPowerValue1}  barLoTime={barLoTime1} text={"每月TBA"}></Reg_tbat>
+                        <div className={styles.logo}>
+
+                        </div>
                     </div>
                 </div>
 

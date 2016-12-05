@@ -13,6 +13,10 @@ import nljys from '../../img/comp/nianleijys.png';
 import nljybm from '../../img/comp/nianleijybm.png';
 import nlcojp from '../../img/comp/nianleicojp.png';
 import nlsojp from '../../img/comp/nianleisojp.png';
+import up from '../../img/comp/up_icon.png';
+import down from '../../img/comp/down_icon.png';
+
+
 import monBoardData from '../../../../../../config/MonitorBoardData';
 import model from '../../../../../../config/MonitorBoardModel';
 var $ = require('jquery');
@@ -65,12 +69,12 @@ let Component = React.createClass({
                 <div className={`${styles.zhzbgl} ${styles.box_shadow}`}>
                     <Title title={['综合指标概览']}></Title>
                     <div className={styles.zhzbglmain}>
-                        <div className={styles.zhzbglbox}><Pie2 color={['#33BAC0','#33545C']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#33BAC0'}}>{(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2)}%</p>年发电完成率</span></div>
-                        <div className={styles.zhzbglbox}><Pie2 color={['#E9C75C','#A69263']} num={[27,73]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#E9C75C'}}>{(mobd[8888800].YearEgyAt/(mobd[8888800].YearPlanTotEgyAt/1+(mobd[8888800].YearLossElec.Sum/1))*100).toFixed(2)}%</p>年发电能力</span></div>
-                        <div className={styles.zhzbglbox}><Pie2 color={['#D06960','#954A45']} num={[85,15]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#D06960'}}>{(mobd[8888800].MonthEgyAt/mobd[8888800].CurMonthPlanEgyAt*100).toFixed(2)}%</p>月发电完成率</span></div>
-                        <div className={styles.zhzbglbox}><Pie2 color={['#70C080','#4A7A59']} num={[25,75]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#70C080'}}>{(mobd[8888801].MonthLossElec.Sum/mobd[8888801].MonthEgyAt*100).toFixed(2)}%</p>弃风率</span></div>
-                        <div className={styles.zhzbglbox}><Pie2 color={['#5298D3','#537388']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#5298D3'}}>{(mobd[8888802].MonthLossElec.Sum/mobd[8888802].MonthEgyAt*100).toFixed(2)}%</p>弃光率</span></div>
-                        <div className={styles.zhzbglbox}><Pie2 color={['#31BAC0','#32535C']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#31BAC0'}}>{(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2)}%</p>年发电完成率</span></div>
+                        <div className={styles.zhzbglbox}><img src={up}/><p>年发电完成率</p><Pie2 color={['#33BAC0','#33545C']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#33BAC0'}}>{(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2)}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={up}/><p>年发电能力</p><Pie2 color={['#E9C75C','#A69263']} num={[27,73]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#E9C75C'}}>{(mobd[8888800].YearEgyAt/(mobd[8888800].YearPlanTotEgyAt/1+(mobd[8888800].YearLossElec.Sum/1))*100).toFixed(2)}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={down}/><p>月发电完成率</p><Pie2 color={['#D06960','#954A45']} num={[85,15]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#D06960'}}>{(mobd[8888800].MonthEgyAt/mobd[8888800].CurMonthPlanEgyAt*100).toFixed(2)}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={up}/><p>弃风率</p><Pie2 color={['#70C080','#4A7A59']} num={[25,75]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#70C080'}}>{(mobd[8888801].MonthLossElec.Sum/mobd[8888801].MonthEgyAt*100).toFixed(2)}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={down}/><p>弃光率</p><Pie2 color={['#5298D3','#537388']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#5298D3'}}>{(mobd[8888802].MonthLossElec.Sum/mobd[8888802].MonthEgyAt*100).toFixed(2)}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={up}/><p>年发电完成率</p><Pie2 color={['#31BAC0','#32535C']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#31BAC0'}}>{(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2)}%</p></span></div>
                     </div>
                 </div>
                 <div className={`${styles.czrlzb} ${styles.box_shadow}`}>
