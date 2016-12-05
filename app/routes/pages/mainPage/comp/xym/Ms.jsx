@@ -66,7 +66,6 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.actionBox} key='1'>
                         <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
-                        <img src={refresh}/>
                         <img src={add} onClick={()=>addData(newData)}/>
                     </div>
                     <div className={styles.tableBox} key='2'>

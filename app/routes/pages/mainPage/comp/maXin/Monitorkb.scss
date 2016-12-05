@@ -62,14 +62,16 @@
     border:1px solid #3e4c67;
     background: rgba(44,61,71,0.4);
     .zhzbglmain{
-      margin-top: 35px;
+      margin-top: 18px;
       .zhzbglbox{
         width: 195px;
         height:190px;
         display: inline-block;
         margin-left: 10px;
-        margin-top: 23px;
+        img{position:absolute;bottom:-10px;right:0px;z-index:3;}
+        margin-top: 30px;
         position: relative;
+        p{margin-bottom:0;text-align:center; color:#fff;}
         .zhzbglboxnum{
           position:absolute;
           top:42%;
@@ -86,7 +88,8 @@
           padding:0 5px;
           color: #ffffff;
           p{
-            font-size: 26px;
+            font-size: 24px;
+            margin-top:30px;
 
           }
         }
