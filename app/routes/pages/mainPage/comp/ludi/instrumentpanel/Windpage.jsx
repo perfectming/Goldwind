@@ -19,7 +19,7 @@ let Component = React.createClass({
     render() {
         
         
-        let{flag3,flag4,flag=true,changepageSort1,changepageSort,big1,small1,wind,actbt=0,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{flag3,flag4,flag=true,changepageSort1,changepageProT,changepageProS,changepageSort,big1,small1,wind,actbt=0,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         return (
            <div className={styles.box}>
            		<ul className={styles.monthbox}>
@@ -50,7 +50,7 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.sectionthree}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{data.firstfloor[2].actrul/data.firstfloor[2].should*100}%</p>PBA</span>
-           						<Pie2 color={['#D06960','#954A45']} num={[85,15]}></Pie2>
+           						<Pie2 color={['#D06960','#954A45']} num={[20,17]}></Pie2>
            					</div>
            				</div>
            				<div className={`${styles.sectionSmall} ${styles.boxShadow}`}>
@@ -61,7 +61,7 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.sectionfour}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{data.firstfloor[3].usable/data.firstfloor[3].count*100}%</p>TBA</span>
-           						<Pie2 color={['#70C080','#4A7A59']} num={[65,15]}></Pie2>
+           						<Pie2 color={['#70C080','#4A7A59']} num={[15,15]}></Pie2>
            					</div>
            				</div>
            			</div>
@@ -94,15 +94,21 @@ let Component = React.createClass({
            					<div>
            						<div className={styles.header}>
            							<div className={styles.logo}><a></a><span>年发电量</span></div>
-           							<div className={styles.space}><a onClick={()=>changepageEleS()}></a></div>
-           							<div className={styles.time}><a onClick={()=>changepageEleT()}></a></div>
+           							<div className={styles.space} onClick={()=>changepageEleS()}></div>
+           							<div className={styles.time} onClick={()=>changepageEleT()}></div>
            						</div>
            						<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={wind==undefined? data.yearelectric[0].wind[0].plan:wind} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            					</div>
            				</div>
            				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
            					<div>
-           						<div className={styles.logo}><a></a><span>年收益</span></div>
+           						<div className={styles.header}>
+           							<div className={styles.logo}><a></a><span>年收益</span></div>
+           							<div className={styles.linkBox}>
+           								<div className={styles.links}><a className={styles.space} onClick={()=>changepageProS()}></a></div>
+	           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
+           							</div>
+	           					</div>
            						<Yearelectric title={data.yearelectric[0].title[1]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[0]} nameOne={data.yearelectric[0].name[2]} nameTwo={data.yearelectric[0].name[3]}></Yearelectric>
            					</div>
            				</div>
@@ -219,7 +225,14 @@ const mapDispatchToProps = (dispatch) => {
         },
         changepageEleS:()=>{
         	dispatch(actions.setVars('showPage', 'areace'));
-        }
+        },
+        changepageProS:()=>{
+        	
+        },
+        changepageProT:()=>{
+        	
+        },
+        
     };
 };
 

@@ -143,7 +143,7 @@ let Component = React.createClass({
                 {showPage === 'topTen' && <TopTen></TopTen>}
 
 				
-
+		
 			
 
                 {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}

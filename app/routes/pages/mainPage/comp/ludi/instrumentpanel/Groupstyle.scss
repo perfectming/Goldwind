@@ -272,20 +272,55 @@
                 top: 327px;
                 width: 74.5%;
                 border:1px solid #3e4c67;
-                .logo{
-                    position: relative;
+                .header{
                     height: 30px;
-                    line-height: 30px;
+                    line-height: 25px;
                     padding-left: 20px;
                     background-color: #464C58;
-                    a{
+                    position: relative;
+                   .logo{
+                        float: left; 
+                        a{
                         display: inline-block;
                         height: 20px;
                         width: 20px;
                         position: relative;
                         top: 4px;
                         background: url(../../../img/comp/profit.png);
+                        background-size: 20px 20px;
                     }
+                    }
+                    .linkBox{
+                        float: left;
+                        margin-left: 77%;
+                        position: relative;
+                        .links{
+                            float: left;
+                            margin-left: 20px;
+                            position: relative;
+                            top: 2px;
+                            .space{
+                                cursor: pointer; 
+                                display: inline-block;
+                                height: 25px;
+                                width: 25px;
+                                background: url(../../../img/comp/space.gif);
+                                &:hover{
+                                    background: url(../../../img/comp/spaceA.gif);
+                                }
+                            }
+                            .time{
+                                cursor: pointer;
+                                display: inline-block;
+                                height: 25px;
+                                width: 25px;
+                                background: url(../../../img/comp/time1.png);
+                                &:hover{
+                                    background: url(../../../img/comp/timeA.gif);
+                                }
+                            }
+                        }
+                    } 
                 }
             }
         }

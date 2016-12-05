@@ -8,7 +8,7 @@ module.exports={
 		},{
 			name:'健康度',
 			big:100,
-			small:80
+			small:40
 		},{
 			name:'PBA',
 			actrul:1050,
