@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",barRotime,height,actbt,mon="一月份",windplan=win,w10,changedata1}= this.props;
+        let {w0="一区域",barRotime,height,actbt,mon="一月份",windplan=win,w10,changedata1,text,barLoPowerValue}= this.props;
 
 
 
@@ -34,7 +34,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: mon+w0+"各风场健康度",
+                text: text,
                 align:'left',
                  x : "0",
                 style:{
@@ -47,6 +47,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                y:20,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -146,7 +147,7 @@ let Component = React.createClass({
             series: [{
                 name: '实际健康度',
                 type: 'column',
-                data: windplan,
+                data: barLoPowerValue,
 
             }
             // ,{

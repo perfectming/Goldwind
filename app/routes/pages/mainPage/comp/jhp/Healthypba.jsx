@@ -57,7 +57,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {hideit,wind, winds, windss, buttonAction, actbt = 0, changecolor, gogogo,back,more, arr, arr2} = this.props;
+        let {befor_pages='group', returnit,hideit,wind, winds, windss, buttonAction, actbt = 0, changecolor, gogogo,back,more, arr, arr2} = this.props;
         return (
 
 
@@ -96,7 +96,7 @@ let Component = React.createClass({
                             )
                         })
                     }
-                    <div className={styles.return}>返回</div>
+                    <div className={styles.return}  onClick={()=>returnit(befor_pages)}>返回</div>
                 </div>
 
 
@@ -120,6 +120,9 @@ let Component = React.createClass({
                         <Hly_pba height={400} text={text0[actbt] + "月份" + text0[4] + "区域各风场PBA"} barRotime={barRotime2}
                                  barLoPowerValue={barLoPowerValue2} barLoPowerValues={barLoPowerValue2}
                                  barLdpowerValue={barLoPowerValue1}></Hly_pba>
+                        <div className={styles.logomini}>
+
+                        </div>
                     </div>
 
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
@@ -136,10 +139,10 @@ let Component = React.createClass({
 
 
                         <div className={styles.rbox4}>
-                            <Hly_pbas height={330} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
+                            <Hly_pbas height={400} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
                                       barRotimes={arr2 == null ? x4 : arr2} barLoPowerValue={arr == null ? x5 : arr}
                                       barLoPowerValues={arr == null ? x5 : arr} barLdpowerValue={arr == null ? x5 : arr}></Hly_pbas>
-                            <div className={styles.logo}>
+                            <div className={styles.logomini}>
 
                             </div>
                         </div>
@@ -213,7 +216,11 @@ const mapDispatchToProps = (dispatch) => {
         hideit: () =>{
             $("#boxhidden").hide();
             $("#light").hide();
-        }
+        },
+        returnit:(befor_pages)=>{
+            dispatch(actions.setVars('showPage',befor_pages));
+
+        },
     };
 };
 

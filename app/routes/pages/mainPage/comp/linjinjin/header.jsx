@@ -115,7 +115,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('showPage',befor_page));
             dispatch(actions.setVars('navhide', true));
             dispatch(actions.setVars('numpage', 'fanmatrix'));
-            console.log(befor_page)
+            console.log(befor_page2)
         }
    
     };

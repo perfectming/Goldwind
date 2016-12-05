@@ -144,7 +144,7 @@ let Component = React.createClass({
                 {showPage === 'topTen' && <TopTen></TopTen>}
 
 				
-
+		
 			
 
                 {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
@@ -176,6 +176,8 @@ let Component = React.createClass({
 
                 {showPage === 'peqii' && <PEQII></PEQII>}
                 {showPage === 'reliability' && <Reliability></Reliability>}
+               
+
               
                
 

@@ -8,10 +8,11 @@ let Component = React.createClass({
     },
     render() {
 
-        let { areaName,areaRecordCosts,areaRecordProfit,text0}=this.props;
+        let {areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
         let configPie = {
             chart: {
-                height:370,
+                height:360,
+                width:1763,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -34,6 +35,7 @@ let Component = React.createClass({
             },
             legend: {
                 x:-75,
+                y:30,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -64,7 +66,10 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                        w0=e.point.category;
+                        var  a=w0.toString().split("");
+                        var b=a[0];
+                        changedata1(w0,b);
                         }
                     }
                 }
@@ -177,12 +182,19 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+          w0 : state.vars.w1,
+        wins: state.vars.wins1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+         changedata1 :(w0,b)=>{
+            dispatch(actions.setVars('w1',w0)); 
+           
         },
     };
 };

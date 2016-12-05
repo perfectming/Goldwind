@@ -53,7 +53,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {hideit,arr,arr2,gogogo,back,more,wind,winds,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
+        let {befor_pages='area', returnit,hideit,arr,arr2,gogogo,back,more,wind,winds,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
         return (
 
 
@@ -86,7 +86,7 @@ let Component = React.createClass({
                             )
                         })
                     }
-                    <div className={styles.return}>返回</div>
+                    <div className={styles.return} onClick={()=>returnit(befor_pages)}>返回</div>
                 </div>
 
 
@@ -105,8 +105,7 @@ let Component = React.createClass({
                 <div className={`${styles.fbox}  ${styles.logofa}`}>
                     <div className={`${styles.box_shadow} ${styles.fbox2}`}>
                         <div className={styles.rbox31}>
-                            <div></div>
-                            <span></span>
+
                         </div>
                         <div className={styles.rbox33}>
 
@@ -186,7 +185,11 @@ const mapDispatchToProps = (dispatch) => {
         hideit: () =>{
             $("#boxhidden").hide();
             $("#light").hide();
-        }
+        },
+        returnit:(befor_pages)=>{
+            dispatch(actions.setVars('showPage',befor_pages));
+
+        },
     };
 };
 

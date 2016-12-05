@@ -66,6 +66,12 @@ let Component = React.createClass({
                 title: {
                     text: ''
                 },
+                labels: {
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'12px'  //字体
+                    }
+                },
                 gridLineWidth: 0
             },
             credits: {

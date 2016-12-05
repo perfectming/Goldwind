@@ -76,8 +76,8 @@ let Component = React.createClass({
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
-	                y: -10,
-	                x:-10,
+	                y: -15,
+	                x:-14,
 	                style:{
 	                	fontSize:'10px',
 	                	color:'white',
