@@ -53,7 +53,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {mon,wind,winds,windss,buttonAction,actbt=0,changecolor, inputOnChange, hideit,gogogo,back,more,arr,arr2} = this.props;
+        let {befor_pages='area', returnit,mon,wind,winds,windss,buttonAction,actbt=0,changecolor, inputOnChange, hideit,gogogo,back,more,arr,arr2} = this.props;
         return (
 
 
@@ -67,7 +67,7 @@ let Component = React.createClass({
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
                         <div className={styles.logo3}>
-                            {text0[actbt] + "月份集团各区域PBA"}
+                            {"集团各区域PBA"}
                         </div>
                         <span onClick={()=>hideit()}>×</span>
                     </div>
@@ -90,7 +90,7 @@ let Component = React.createClass({
                             )
                         })
                     }
-                    <div className={styles.return}>返回</div>
+                    <div className={styles.return} onClick={()=>returnit(befor_pages)}>返回</div>
                 </div>
 
 
@@ -109,8 +109,8 @@ let Component = React.createClass({
                 <div className={`${styles.fbox}  ${styles.logofa}`}>
                     <div className={`${styles.box_shadow} ${styles.fbox2}`}>
                         <div className={styles.rbox31}>
-                            <div></div>
-                            <span></span>
+
+
                         </div>
                         <div className={styles.rbox33}>
 
@@ -196,7 +196,11 @@ const mapDispatchToProps = (dispatch) => {
         hideit: () =>{
             $("#boxhidden").hide();
             $("#light").hide();
-        }
+        },
+        returnit:(befor_pages)=>{
+            dispatch(actions.setVars('showPage',befor_pages));
+
+        },
     };
 };
 
