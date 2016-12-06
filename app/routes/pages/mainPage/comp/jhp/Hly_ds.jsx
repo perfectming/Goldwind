@@ -11,26 +11,19 @@ let Component = React.createClass({
 
     render() {
 
-        let {w0='一月份',barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
+        let {names,w0='一月份',barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
 
 
 
         let configPie = {
             chart: {
                 height:450,
-                backgroundColor: "rgba(46, 46, 65, 0)",
-                plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                    stops: [
-                        //[0, 'rgb(56, 85, 94)'],
-                        [0, 'rgb(37, 41, 48)'],
 
-                    ]
-                },
                 borderRadius:10
             },
             title: {
@@ -144,7 +137,7 @@ let Component = React.createClass({
             }
                 ,
                 {
-                    name: 'TBA',
+                    name: names,
                     type: 'line',
                     color:'#0000ff',
                     data: barlinepdats

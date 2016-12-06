@@ -141,7 +141,7 @@ module.exports = {
                 page:[
                     {
                         name:'资产管理1-1',
-                        page:'',
+                        page:'input_cost',
                     },{
                         name:'资产管理1-2',
                         page:'',
