@@ -138,7 +138,7 @@ let Component = React.createClass({
         }],
             //几条数据
             series: [{
-                name: '实际发电量收益',
+                name: '实际发电量',
                 type: 'column',
                 data: fanProfitQ,
                 color:'#64DC83',

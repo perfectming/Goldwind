@@ -123,7 +123,7 @@ let Component = React.createClass({
                 name: '实际健康度',
                 type: 'column',
                 data: areaRecordProfit,
-                color:'#7DF59C',
+                color:'#4CDB9D',
             },
                 ]
         };

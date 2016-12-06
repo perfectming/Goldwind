@@ -25,6 +25,7 @@ for(let i=0;i<=30;i++){
         arr3.push(ssg2[x].name);
     }}());
 arr3.splice(-2,2);
+let arr=[15,16,14,11,28,8];
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
@@ -51,12 +52,12 @@ let Component = React.createClass({
                     <div className={styles.tableBox}>
                         <div className={styles.tableHeaderBox}>
                             <div className={styles.tableHeaderItem}
-                                 style={{width:(100/(comp.data.header.length+2))+"%"}}>序号</div>
+                                 style={{width:8+'%'}}>序号</div>
                             {
                                 comp.data.header.map((value, key)=> {
                                     return (
                                         <div className={styles.tableHeaderItem}
-                                             style={{width:(100/(comp.data.header.length+1))+"%"}} key={key}>{value}</div>
+                                             style={{width:arr[key]+"%"}} key={key}>{value}</div>
                                     )
                                 })
                             }
@@ -69,7 +70,7 @@ let Component = React.createClass({
                                     return (
                                         <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                             <input className={styles.tableContentItem}
-                                                   style={{width:(100/(comp.data.header.length+2))+"%"}}
+                                                   style={{width:8+"%"}}
                                                    readOnly="true" value={num}/>
                                             {
                                                 value.map((valueC, keyC)=> {
@@ -77,17 +78,17 @@ let Component = React.createClass({
 
                                                     return (
                                                         <input className={styles.tableContentItem}
-                                                               style={{width:(100/(comp.data.header.length+1))+"%"}}
+                                                               style={{width:arr[keyC]+'%'}}
                                                                key={keyC} contentEditable="true"
                                                                onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
                                                                value={valueC}/>
                                                     )
                                                 })
                                             }
-                                            <div className={styles.tableContentItem} style={{width:(50/(comp.data.header.length+2))+"%"}}>
+                                            <div className={styles.tableContentItem} style={{width:(40/(comp.data.header.length+4))+"%"}}>
                                                 <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.data.content[key]))}/>
                                             </div>
-                                            <div className={styles.tableContentItem} style={{width:(50/(comp.data.header.length+2))+"%"}}>
+                                            <div className={styles.tableContentItem} style={{width:(40/(comp.data.header.length+4))+"%"}}>
                                                 <img src={del} onClick={(e)=>deleData(key)}/>
                                             </div>
                                         </div>
@@ -137,11 +138,15 @@ const mapDispatchToProps = (dispatch) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.data.content[i][j] = value;
             dispatch(actions.setObjs('tableContent', tableV));
+
         },
-        addData:(i) => {
+        addData:(i,page) => {
+            
             let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.content.push(i.splice(0,6));
+            tableV.data.content.push(i.splice(0,5));
             dispatch(actions.setObjs('tableContent', tableV));
+            page=Math.ceil(comps.peqi.table.data.content.length/16);
+            dispatch(actions.setVars('page1', page));
         },
         deleData:(j) => {
             let tableV = _.clone(getState().objs.tableContent);
@@ -167,5 +172,4 @@ const mapDispatchToProps = (dispatch) => {
         },
     };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

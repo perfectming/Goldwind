@@ -19,7 +19,7 @@ let x0=[];
 let x1=[];
 let x2=[];
 let x3=[];
-let windPT=data.windFJJ;
+let windPT=data.windareace;
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();

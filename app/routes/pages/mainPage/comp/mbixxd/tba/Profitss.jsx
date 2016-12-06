@@ -62,14 +62,14 @@ let Component = React.createClass({
                    <div className={styles.bgc}> <img src={icono}/></div>
                    <div className={`${styles.areabox} ${styles.shadow}`}>
                        <div>
-                           <AreaTable areaRecordCosts={wind==null?areaRecordCosts:wind} areaName={areaName} areaRecordProfit={windP=null?areaRecordProfit:windP} text0={text0} text1={text1}></AreaTable>
+                           <AreaTable areaRecordCosts={wind==null?areaRecordCostss:wind} areaName={areaName} areaRecordProfit={windP=null?areaRecordProfit:windP} text0={text0} text1={text1}></AreaTable>
                            <p className={styles.titww}>{[actbt+1]+'月份集团各区域TBA'}</p>
                        </div>
                    </div>
                </div>
               <div className={`${styles.bigbox} ${styles.shadow}`}>
                    <div className={styles.coverbox}>
-                       <div className={styles.windcebox}>
+                       <div className={styles.windceebox}>
                            <div>
                                <WindfieldTable machine={machineee} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} ></WindfieldTable>
                            </div>

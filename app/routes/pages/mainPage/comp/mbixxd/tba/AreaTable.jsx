@@ -11,10 +11,8 @@ let Component = React.createClass({
         let {areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
         let configPie = {
             chart: {
-                height:360,
-                width:1763,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:400,
+              backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -60,7 +58,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding:0,
                     borderWidth: 0,
-                    pointWidth:30,
+                    pointWidth:25,
                     stacking: 'normal',
                 }, series: {
                     cursor: 'pointer',
@@ -143,18 +141,21 @@ let Component = React.createClass({
                 data: areaRecordCosts,
                 stack:'first',
                 borderRadius: 2,
+                pointPlacement:-0.1,
             },
             {
                 name: '大',
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',
+                pointPlacement:-0.1,
             },
             {
                 name: '类',
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',
+                pointPlacement:-0.1,
             },
             {
                 name: '损失发电量',
@@ -162,6 +163,7 @@ let Component = React.createClass({
                 data: areaRecordCosts,
                 stack:'first',
                 borderRadius: 2,
+                pointPlacement:-0.1,
             },
                 {
                     name: 'TBA',

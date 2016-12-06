@@ -4,17 +4,16 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Profit-data');
-
+let sqy =data.areaRecordCostQY;
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaName,areaRecordCost,areaRecordProfit,TBA,text}=this.props;
+        let {areaName,areaRecordCost,areaRecordProfit,TBA,text,w11,changedataq,}=this.props;
         let configPie = {
             chart: {
                 height:370,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -56,17 +55,20 @@ let Component = React.createClass({
                 enabled: false
             },
             //柱子颜色
-            colors: [ '#1E664A', '#4CDB9D']
-            ,
+            colors: [ '#33BAC0', '#70c080'],
+            
             plotOptions: {
                 column: {
-                    pointWidth: 30
+                    pointWidth: 25
                 },
                 series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            
+                            w11=e.point.category;
+                        var  a=w11.toString().split("");
+                        var b=a[0];
+                        changedataq(w11,sqy,b);
                         }
                     }
                 }
@@ -98,7 +100,7 @@ let Component = React.createClass({
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 49,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -120,12 +122,18 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordProfit,
                 borderRadius: 7,
+                color:'#33BAC0',
+                pointPlacement: 0,
+                borderWidth:0,
             },
             {
             	name: '收入成本',
                 type: 'column',
                 data: areaRecordCost,
                 borderRadius: 7,
+                color:'#70c080',
+                pointPlacement: -0.11,
+                 borderWidth:0,
             },{
                     name:"TBA",
                     type:'line',
@@ -141,12 +149,20 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+         w11 : state.vars.w1,
+         sqy : state.vars.wins1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+         changedataq :(w11,sqy,b)=>{
+            dispatch(actions.setVars('w1',w11)); 
+            dispatch(actions.setVars('wins1',sqy[b-1]));
+            console.log(sqy[b-1])
         },
     };
 };

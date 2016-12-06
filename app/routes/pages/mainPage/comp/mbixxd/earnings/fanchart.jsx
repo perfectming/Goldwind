@@ -8,13 +8,12 @@ let Component = React.createClass({
     },
     render() {
        
-     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,width}=this.props
+     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,width,pointPlacement}=this.props
         let configPie = {
             chart: {
                 height:height,
                 width:width,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -56,8 +55,7 @@ let Component = React.createClass({
                 enabled: false //不显示highCharts版权信息
             },
             //柱子颜色
-            colors: [ '#1E664A', '#4CDB9D']
-            ,
+             colors: [ '#33BAC0', '#70c080'],
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
@@ -127,6 +125,8 @@ let Component = React.createClass({
                 data: areaRecordProfitR,
                 pointWidth:15,
                 borderRadius: 4,
+                pointPlacement:0,
+
             },
             {
                 name: '收入成本',
@@ -134,6 +134,7 @@ let Component = React.createClass({
                 data: areaRecordCostR,
                 pointWidth:15,
                 borderRadius: 4,
+                pointPlacement:pointPlacement,
             },
             {
                     name:"TBA",

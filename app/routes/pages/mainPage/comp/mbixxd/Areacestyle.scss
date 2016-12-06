@@ -72,30 +72,32 @@
       }
     }
     .monthbox{
-    margin-bottom:50px;
+    margin-bottom:10px;
     width: 100%;
     height: 80px;
     list-style: none;
-    background-color: #21242b;
+    background-color: transparent;
     padding:0;
-    padding-left:10px;
+    padding-left:0px;
     position:relative;
     display:flex;
-    align-item:center;
-    background: linear-gradient(to bottom,#242a32 ,#1f2025);
+    align-items:center;
+   
     li{
-     float:left;
-     font-size:16px;
-     font-family: '微软雅黑';
-     color:white;
-     height:35px;
-     line-height:33px;
-     text-align:center;
-     width:100px;
-     border-radius:17px;
-     margin:25px 10px;
-     font-weight:700;
-     cursor:pointer;
+      height: 40px;
+            width: 100px;
+            border: 1px solid #31F3FB;
+            line-height: 38px;
+            float: left;
+            font-family: "微软雅黑";
+            text-align: center;
+            margin-right: 10px;
+            border-radius:5px;
+            cursor:pointer;
+              &:hover{
+                color: #31F3FB;
+                box-shadow:0 0 10px #fff;
+            }
      }
       .back{
       float:left;
@@ -106,22 +108,22 @@
        height:40px;
        line-height:40px;
        position:relative;
-       top:-3px;
+       top:px;
        border-radius:45px;
-       background:radial-gradient(#1c444a, #1c3f46);
+    
        box-shadow:0px 0px 10px  #20FEFF;
        text-align:center;
     }
        .red{
-    background:#20FEFF;
+    
     color:black;
   }
   .green{
     color:white;
   }
       .red{
-        background:#20FEFF;
-        color:black;
+       
+        color: #31F3FB;
       }
       .green{
         color:white;
@@ -153,13 +155,14 @@
       margin-left:12px;
       background-color:white;
       color: #20FEFF;
+      color:#fff;
       border:1px solid #20FEFF;
-      background:radial-gradient(#1c444a, #1c3f46);
+      background:transparent;
          border-radius:15px;
       }
       button:hover{
-                background:#20FEFF;
-            color:black;
+               
+             color: #31F3FB;
           box-shadow:0px 0px 10px  #20FEFF;
       }
      

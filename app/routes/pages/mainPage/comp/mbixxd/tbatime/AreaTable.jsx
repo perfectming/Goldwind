@@ -12,8 +12,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:410,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -57,7 +56,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding:0,
                     borderWidth: 0,
-                    pointWidth:30,
+                    pointWidth:25,
                     borderRadius: 7,
                     stacking: 'normal',
                 }, series: {
@@ -126,17 +125,18 @@ let Component = React.createClass({
             opposite: true
         }],
             series: [{
-                name: '停机时间',
+                name: '实际运行时间',
                 type: 'column',
                 data: areaRecordProfitt,
                
             },
             {
-            	name: '实际运行时间',
+            	name: '停机时间',
                 type: 'column',
                 data: areaRecordCostss,
                 stack:'first',
                 color:'#ccc',
+                pointPlacement:-0.1,
                 
             },
 

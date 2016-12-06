@@ -1,7 +1,7 @@
 .box{
     overflow:hidden;
     padding:10px;
-    padding-right:10px;
+    padding-right:40px;
     position:relative;
     .boxcover{
     position:fixed;
@@ -59,29 +59,29 @@
     }
     }
     .monthbox{
-    display:flex;
+    
     align-items:center;
     width: 100%;
-    height: 80px;
+    height: 40px;
     list-style: none;
-    background-color: #21242b;
     padding:0;
-    padding-left:10px;
+    padding-left:0px;
     position:relative;
-
-    background: linear-gradient(to bottom,#242a32 ,#1f2025);
     li{
-     float:left;
-     font-size:16px;
-     font-family: '微软雅黑';
-     height:35px;
-     line-height:33px;
-     text-align:center;
-     width:100px;
-     border-radius:17px;
-     margin:25px 10px;
-     font-weight:700;
-     cursor:pointer;
+     height: 40px;
+            width: 100px;
+            border: 1px solid #31F3FB;
+            line-height: 38px;
+            float: left;
+            font-family: "微软雅黑";
+            text-align: center;
+            margin-right: 10px;
+            border-radius:5px;
+            cursor:pointer;
+              &:hover{
+                color: #31F3FB;
+                box-shadow:0 0 10px #fff;
+            }
      }
      .back{
      float:left;
@@ -90,11 +90,11 @@
        border:1px solid #20FEFF;
        width:100px;
        height:40px;
-       line-height:40px;
+       line-height:38px;
        position:relative;
        top:0px;
        border-radius:45px;
-       background:radial-gradient(#1c444a, #1c3f46);
+      
        box-shadow:0px 0px 10px  #20FEFF;
        text-align:center;
      }
@@ -105,10 +105,10 @@
     }
   .bgc{
     position:absolute;
-    height:40px;
-    width:40px;
-    top:26px;
-    left:69px;
+    height:16px;
+    width:16px;
+    top:3px;
+    left:57px;
     z-index:5;
     img{
     height:16px;
@@ -117,27 +117,25 @@
   }
    .covers{
      position:relative;
-     margin-top:30px;
+     margin-top:0px;
 
    }
   
     .areabox{
-   
-      position:relative;
-            width:100%;
-            height:390px;
-           margin:0 auto;
-            margin-bottom: 15px;
-            padding-top:20px;
-            overflow:hidden;
-      background:#282F37,
+    position: relative;
+    width: 98%;
+    margin-left: 2px;
+    height: 410px;
+    margin-bottom: 15px;
+    
+    background: rgba(44, 61, 71, 0.4);
            }
            .titww{
     color:#fff;
       position:absolute;
         font-size:16px;
-        top:26px;
-        left:110px;
+        top:4px;
+        left:100px;
         font-weight:700;
         z-index:100;
     }
@@ -154,11 +152,11 @@
      overflow:hidden;
      float:right;
     height:390px;
-    width:49.5%;
-    margin-right:0px;
+    width:48.5%;
+    margin-right:30px;
     border:1px solid #282F37;
     position:relative;
-    background-color: #282F37;
+    background:rgba(44, 61, 71,0.4);
     .coverbox{
       margin-top:50px;
       overflow:hidden;
@@ -168,7 +166,7 @@
       color:#fff;
       position:absolute;
       font-size:16px;
-      top:25px;
+      top:5px;
       left:100px;
       font-weight:700;
       line-height:auto
@@ -178,7 +176,7 @@
       width:50px;
       height:30px;
       position:absolute;
-      top:20px;
+      top:-1px;
       left:45px;
       text-align:center;
       line-height:30px;
@@ -252,8 +250,8 @@
       }
     }
      .red{
-    background:#20FEFF;
-    color:black;
+   
+    color: #31F3FB;
   }
   .green{
     color:white;

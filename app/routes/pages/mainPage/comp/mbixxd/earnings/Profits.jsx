@@ -24,6 +24,9 @@ let machine=[];
 let areaRecordCostR=[];
 let areaRecordProfitR=[];
 let TBAA=[];
+ let windFiled=data.windFiled;
+        let windCost=data.windCost;
+        let windProfit=data.windProfit;
 let windFJ=data.windFJ;
  (function(){
              for(var i=0;i<12;i++){
@@ -42,17 +45,17 @@ let Component = React.createClass({
     },
 
     render() {
-       let{actbt=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban}=this.props;
+       let{actbt=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban,backtop,befor_pagee='group',befor_page2,w11='1区域',w111='风机1',sqy,pointPlacement}=this.props;
           return (
            <div className={styles.box}>
             <div className={styles.boxcover} id='boxcover'></div>
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>11月份各风机PBA</p>
+                <p>{[actbt+1]+'月'+w11+w111+'各风机收益率'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
-                <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee } height={500} TBAA={TBAA} width={1750}></Fanchart>
+                <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee } height={500} TBAA={TBAA} width={1750} pointPlacement={-0.2}></Fanchart>
 
                  </div>
                <ul className={styles.monthbox}>
@@ -61,11 +64,12 @@ let Component = React.createClass({
                             return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
                         })
                     }
+                     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
                 </ul>
                <div className={styles.covers} >
                    <div className={styles.bgccc}> <img src={icono}/></div>
                    <div className={`${styles.areabox} ${styles.shadow}`}>
-                          <p className={styles.titleeee}>10月集团各区域收益率</p>
+                          <p className={styles.titleeee}>{actbt+1+'月集团各区域收益率'}</p>
                            <AreaTable text={text[actbt]} areaName={areaName} areaRecordCost={wind==undefined? areaRecordCost:wind} areaRecordProfit={windP==undefined? areaRecordProfit:windP} TBA={windPT==undefined? TBA:windPT}></AreaTable>
                     </div>
                 </div>
@@ -74,9 +78,9 @@ let Component = React.createClass({
                    <div className={styles.bgccc}> <img src={icono}/></div>
                    <div className={`${styles.windbox} ${styles.shadow}`}>
             
-                       <p className={styles.tiw}>10月一区域各风场年收益率</p>
+                       <p className={styles.tiw}>{[actbt+1]+'月'+w11+'各风场年收益率'}</p>
                         <div>
-                           <WindfieldTable></WindfieldTable>
+                           <WindfieldTable windFiled={windFiled} windCost={sqy==null?windCost:sqy} windProfit={windProfit}></WindfieldTable>
                        </div>
                    </div>
                </div>
@@ -86,11 +90,11 @@ let Component = React.createClass({
                    <div className={styles.coverbox}>
                        <div className={styles.windcebox}>
                            <div>
-                               <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee } height={360} TBAA={TBAA}></Fanchart>
+                               <Fanchart areaRecordCostR={areaRecordCostRR==null?areaRecordCostR:areaRecordCostRR} areaRecordProfitR={areaRecordProfitR} machine={machinee==null?machine:machinee } height={340} TBAA={TBAA} pointPlacement={-0.06}></Fanchart>
                            </div>
                        </div>
                        <div className={styles.tik}>
-                           <p>10月1区域1风场各风场收益率</p>
+                           <p>{[actbt+1]+'月'+w11+w111+'各风机收益率'}</p>
                        </div>
                    </div>
                    <div className={styles.imgq}>
@@ -108,7 +112,7 @@ let Component = React.createClass({
                       <div className={styles.close} onClick={()=>close()}>x</div>
                        <div className={styles.windcebox}>
                            <div>
-                               <Fanchart areaRecordCostR={areaRecordCostR} areaRecordProfitR={areaRecordProfitR} machine={machine} TBAA={TBAA} height={370}></Fanchart>
+                               <Fanchart areaRecordCostR={areaRecordCostR} areaRecordProfitR={areaRecordProfitR} machine={machine} TBAA={TBAA} height={370} pointPlacement={-0.06}></Fanchart>
                            </div>
                        </div>
                    </div>
@@ -134,6 +138,11 @@ const mapStateToProps = (state) => {
          ban:state.vars.ban,
          machinee:state.vars.machinee,
          areaRecordCostRR:state.vars.areaRecordCostRR,
+         w11: state.vars.w1,
+         w111: state.vars.w12,
+          sqy: state.vars.wins1,
+        
+
 
     }
 };
@@ -191,7 +200,10 @@ const mapDispatchToProps = (dispatch) => {
         close:()=>{
             $("#sss").hide();
               $('#boxcover').hide();
-        }
+        },
+         backtop:(befor_pagee,befor_page2)=>{
+            dispatch(actions.setVars('showPage',befor_pagee));
+        },
 
     };
 

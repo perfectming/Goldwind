@@ -127,7 +127,7 @@ let Component = React.createClass({
                 name: '健康度',
                 type: 'column',
                 data: areaPlanDay,
-                color:'#7DF59C',
+                color:'#4CDB9D',
             },
             ]
         };
