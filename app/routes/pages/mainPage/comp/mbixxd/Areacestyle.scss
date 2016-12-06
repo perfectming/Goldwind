@@ -1,6 +1,8 @@
 .box{
+     box-sizing:border-box;
     overflow:hidden;
-    padding-bottom:10px;
+    padding:10px;
+    padding-right:40px;
     .boxcover{
     position:fixed;
     height:100%;
@@ -18,7 +20,7 @@
      }
     .bigbox{
     height:100%;
-    width:98%;
+    width:100%;
     margin:0 auto;
     border:1px solid #282F37;
     position:relative;
@@ -44,13 +46,15 @@
       .coverbox{
         margin-top:50px;
       }
-      
+      .Ff{
+      margin-left:20px;
+      }
       .tik{
       color:#fff;
       position:absolute;
         font-size:16px;
         top:25px;
-        left:70px;
+        left:108px;
         font-weight:700;
       }
       .imgq{
@@ -58,7 +62,7 @@
         height:30px;
         position:absolute;
         top:20px;
-        left:46px;
+        left:70px;
         text-align:center;
         line-height:30px;
         img{
@@ -93,21 +97,21 @@
      font-weight:700;
      cursor:pointer;
      }
-     li:last-child{
-     color: #20FEFF;
-      
+      .back{
+      float:left;
+       align-items:center;
+       color: #20FEFF;
        border:1px solid #20FEFF;
        width:100px;
        height:40px;
        line-height:40px;
-       margin-bottom:25px;
+       position:relative;
+       top:-3px;
        border-radius:45px;
        background:radial-gradient(#1c444a, #1c3f46);
        box-shadow:0px 0px 10px  #20FEFF;
-     }
-     li:nth-last-child(2){
-
-     }
+       text-align:center;
+    }
        .red{
     background:#20FEFF;
     color:black;
@@ -115,9 +119,6 @@
   .green{
     color:white;
   }
-      li:last-child:hover{
-      background:#156e74;
-      }
       .red{
         background:#20FEFF;
         color:black;
@@ -170,10 +171,10 @@
     background:#21242a;
     position:absolute;
     z-index:1200;
-    width:96%;
-    margin-left:-5px;
+    width:95.5%;
+    margin-left:0px;
     top:50%;
-    left:51%;
+    left:50%;
     overflow:hidden;
     transform:translate(-50%,-50%);
     box-sizing:border-box;
@@ -197,17 +198,18 @@
     p{
     position:absolute;
     top:18px;
-    left:7%;
+    left:5%;
     font-size:16px;
     color:#fff;
     }
     img{
     position:absolute;
     top:22px;
-    left:5%;
+    left:2%;
     height:16px;
     width:16px;
     }
     }
     }
+
 }

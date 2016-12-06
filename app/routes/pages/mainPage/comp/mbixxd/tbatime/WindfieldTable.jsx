@@ -10,12 +10,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let windFiled=data.windFiled;
-        let windCost=data.windCost;
-        let windProfit=data.windProfit;
+        let{windFiled,windCost,windProfit,w0='1月份'}=this.props;
         let configPie = {
             chart: {
-                height:405,
+                height:410,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -24,7 +22,7 @@ let Component = React.createClass({
                 paddingLeft:100,
             },
             title: {
-                text: '11月份每日TBA',
+                text:w0+'每日TBA',
                 align:'left',
                  x : "0",
                 style:{
@@ -67,7 +65,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                           
                         }
                     }
                 }
@@ -156,7 +154,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+         w0 : state.vars.w1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

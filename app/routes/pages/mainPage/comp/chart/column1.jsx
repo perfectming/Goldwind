@@ -1,31 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
-var ReactHighstock = require('react-highcharts/bundle/ReactHighstock.src');
-
-
-let base = require('../../../../../../config/Model');
-let data = require('../../../../../../config/ModelData');
-let dat = data.ModelData;
-let bas = base.Model.ens;
-let arr=[];
-let nam=[];
-(function(){
-    for(let i in dat){
-    arr.push(dat[i].YearEgyAt/dat[i].YearPlanTotEgyAt);
-
-    }
-    arr.sort(function(a, b){return (a < b) ? 1 : -1})
-})();
-arr.pop();
-(function(){
-
-    for(let i in bas){
-    nam.push(bas[i].name);
-    }
-
-})();
-nam.pop();
+var ReactHighcharts = require('react-highcharts');
 
 
 
@@ -44,35 +20,20 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:300,
-                marginLeft:50,
+                height:320,
+                marginTop:60,
             },
             title: {
                 text: ''
             },
-             scrollbar: {
-            barBackgroundColor: 'gray',
-            barBorderRadius: 7,
-            barBorderWidth: 0,
-            buttonBackgroundColor: 'gray',
-            buttonBorderWidth: 0,
-            buttonArrowColor: '#2ff4fb',
-            buttonBorderRadius: 7,
-            rifleColor: '#2ff4fb',
-            trackBackgroundColor: '#30343f',
-            trackBorderWidth: 1,
-            trackBorderColor: 'silver',
-            trackBorderRadius: 7
-        },
-             xAxis: {
+               xAxis: {
 
                 tickInterval: 1,
-                max:5,
 
-                categories: nam,
+                categories: ['华冉','雪湖','小草湖','草湖','大连胡'],
                  labels: {
 
-                       rotation: 0,
+                       rotation:0,
                         y: 20, //x轴刻度往下移动20px
                         style: {
                             color: '#fff',//颜色
@@ -83,12 +44,10 @@ let Component = React.createClass({
                 }
             }, 
             yAxis: {  
-            tickPixelInterval: 500, 
                     lineWidth:1,
                     //dashStyle:"Dot",
-                    tickInterval:0.1,//刻度线间距
+                    tickInterval:30,//刻度线间距
                     gridLineWidth: 0,//虚线粗细
-                    dashStyles: "ShortDot",//轴线样式：点状线
                     title: {
                         align: 'high',
                         rotation: 0,
@@ -121,8 +80,9 @@ let Component = React.createClass({
                   }
             },
             tooltip: {
+                shared:true,
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+                //pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             rangeSelector: {
                 enabled: false //不显示选项按钮
@@ -159,13 +119,13 @@ let Component = React.createClass({
                 type: 'column',
                 color:"#33c5cd",
                 name: "站场发电完成率",
-                data: arr,
+                data: [129,100,80,60,40],
             },
              {
                 type: 'line',
                 color:"#59e481",
                 name: "公司发电完成率",
-                data: 0,
+                data: [100,100,100,100,100],
                  marker: {
                         enabled: false
                        
@@ -173,7 +133,7 @@ let Component = React.createClass({
             }]
         };
         return (
-            <ReactHighstock config={configPie}/>
+            <ReactHighcharts config={configPie}/>
         );
     }
 });

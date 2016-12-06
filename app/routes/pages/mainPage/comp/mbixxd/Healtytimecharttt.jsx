@@ -9,12 +9,8 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaRecordProfit=data.areaRecordProfit;
-        let machine=data.machine;
-        let areaPlanDay=data.areaPlanDay
-        let areaPlan=data.areaPlan
+        
+        let {w0,areaName,areaRecordCost,areaRecordProfit,machine,areaPlanDay,areaPlan}=this.props;
         let configPie = {
             chart: {
                 height:390,
@@ -67,13 +63,13 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30,
+                    pointWidth: 20,
                     borderRadius: 7,
                 }, series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                           
                         }
                     }
                 }
@@ -143,12 +139,15 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('w1',w0 ));
         },
     };
 };

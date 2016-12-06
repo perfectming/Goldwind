@@ -20,7 +20,7 @@ let Component = React.createClass({
         let areaRecordProfit=data.areaRecordProfit;
         let machineE=data.machineE;
         let text =data.textHealty;
-      let{actbt=0,changpage,wind,gogogo,windP,actbtt,more,close}=this.props;
+      let{actbt=0,changpage,wind,gogogo,windP,actbtt,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
         return (
 
             <div className={styles.box}>
@@ -28,7 +28,7 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>11月份各风机PBA</p>
+                <p>{text[actbt]}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
           <Healtychart machineE={windP==null?machineE:windP} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} width={1750} height={500}></Healtychart>
@@ -39,6 +39,7 @@ let Component = React.createClass({
                             return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
                         })
                     }
+                    <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
                 </ul>
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                     <div className={styles.coverbox}>
@@ -72,7 +73,9 @@ const mapStateToProps = (state) => {
          actbt:state.vars.actbt,
          wind:state.vars.wind,
          windP:state.vars.windP,
-         actbt:state.vars.actbt
+         actbt:state.vars.actbt,
+         befor_pagee : state.vars.befor_pagee,
+        befor_page2 : state.vars.befor_page2,
 
 
     }
@@ -120,7 +123,10 @@ const mapDispatchToProps = (dispatch) => {
         close:()=>{
             $("#sss").hide();
               $('#boxcover').hide();
-        }
+        },
+         backtop:(befor_pagee,befor_page2)=>{
+            dispatch(actions.setVars('showPage',befor_pagee));
+        },
 
     }
      

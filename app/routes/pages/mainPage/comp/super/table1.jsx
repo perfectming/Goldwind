@@ -174,11 +174,13 @@ const mapDispatchToProps = (dispatch) => {
         changepage:(key) => {
            dispatch(actions.setVars('showPage', 'fan_matrix'));
            dispatch(actions.setVars('numpage', 'pvmatrix'));
+           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('actbt1',key ));
           dispatch(actions.setVars('actbt','' ));
           dispatch(actions.setVars('valuepage1', fcnum[key]));
           dispatch(actions.setVars('befor_page','super' ));
            dispatch(actions.setVars('fc_info', number[0][key]));
+           dispatch(actions.setVars('Changnav', 1));
         
                
          

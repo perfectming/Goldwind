@@ -6,7 +6,7 @@ var actions = require('redux/actions');
 let matrixdata = require('../../../../../../config/MatrixData');
 let model = require('../../../../../../config/Model');
 let modeldata = require('../../../../../../config/ModelData');
-
+var $ =require('jquery');
 let data=modeldata.ModelData;
 let mod=model.Model;
 let  mat=model.Model;
@@ -80,6 +80,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: (flag) => {
+          
             var obj = {
                 test:'',
                 }
@@ -111,7 +112,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('showPage',befor_page));
             dispatch(actions.setVars('navhide', true));
             dispatch(actions.setVars('numpage', 'fanmatrix'));
-            console.log(befor_page)
+            console.log(befor_page2)
         }
    
     };
