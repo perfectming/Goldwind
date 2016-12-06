@@ -21,7 +21,7 @@ let Component = React.createClass({
                 borderRadius:0
             },
             title: {
-                text: text+'PBA',
+                text: text,
                 align:'center',
                 style:{
                     color:"#fff",
@@ -50,7 +50,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [   '#33BAC0', '#5298d3', '#856ffe','#31f3fb', '#856ffe','#4cdb9d','#5b9bd5'],
+            colors: [   '#33BAC0', '#5298d3', '#856ffe','#31f3fb', '#4cdb9d','#5b9bd5'],
             plotOptions: {
 	            pie: {
 	                allowPointSelect: true,
@@ -89,7 +89,6 @@ let Component = React.createClass({
             },
             series: [{
             type: 'pie',
-            name: '集团区域1',
             data: lose,
         }]
         };

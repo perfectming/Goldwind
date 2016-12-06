@@ -33,34 +33,40 @@ let Component = React.createClass({
            				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>当前{small==undefined? data.yearelectric[0].area[0].small:small}分<br/><br/>总分100分</span><br/><br/>
-           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a>&nbsp;
-           						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
            					</div>
            					<div className={styles.sectiontwo}>
+           						<div className={styles.pie}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{small==undefined? ((data.yearelectric[0].area[0].small/data.yearelectric[0].area[0].big)*100).toFixed(1):((small/big)*100).toFixed(1)}%</p>健康度</span>
-           						<Pie2 color={small==undefined? ['#E9C75C','#A69263']:(big-small)>0? ['#E9C75C','#A69263']:['#00ff33','#E9C75C']} num={small==undefined? [data.yearelectric[0].area[0].small,data.yearelectric[0].area[0].big-data.yearelectric[0].area[0].small]:(big-small)>0?[small,big-small]:[small-big,2*big-small]}></Pie2>
+           						<Pie2 color={small==undefined? ['#E9C75C','#39565e']:(small/big)>1? ['#1fe005','#fbd500']:(small/big)>0.8?['#fbd500','#39565e']:(small/big)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={small==undefined? [data.yearelectric[0].area[0].small,data.yearelectric[0].area[0].big-data.yearelectric[0].area[0].small]:(big-small)>0?[small,big-small]:[small-big,2*big-small]}></Pie2>
+           						</div>
+           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
+           						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
            					</div>
            				</div>
            				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>实发122kWh<br/><br/>应发200kWh</span><br/><br/>
-           						<a className={styles.space} onClick={()=>changepagePBAS()}></a>&nbsp;
-           						<a className={styles.time} onClick={()=>changepagePBAT()}></a>
            					</div>
            					<div className={styles.sectionthree}>
+           						<div className={styles.pie}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{data.firstfloor[2].actrul/data.firstfloor[2].should*100}%</p>PBA</span>
-           						<Pie2 color={['#D06960','#954A45']} num={[20,18]}></Pie2>
+           						<Pie2 color={['#ff3333','#39565e']} num={[20,18]}></Pie2>
+           						</div>
+           						<a className={styles.space} onClick={()=>changepagePBAS()}></a><br/>
+           						<a className={styles.time} onClick={()=>changepagePBAT()}></a>
            					</div>
            				</div>
            				<div className={`${styles.sectionSmall} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
            						<span>可用100h <br/><br/>统计200h</span><br/><br/>
-           						<a className={styles.space} onClick={()=>changepageTBAS()}></a>&nbsp;
-           						<a className={styles.time} onClick={()=>changepageTBAT()}></a>
            					</div>
            					<div className={styles.sectionfour}>
+           						<div className={styles.pie}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{data.firstfloor[3].usable/data.firstfloor[3].count*100}%</p>TBA</span>
-           						<Pie2 color={['#70C080','#4A7A59']} num={[15,15]}></Pie2>
+           						<Pie2 color={['#d06960','#39565e']} num={[15,15]}></Pie2>
+           						</div>
+           						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>
+           						<a className={styles.time} onClick={()=>changepageTBAT()}></a>
            					</div>
            				</div>
            			</div>
@@ -122,8 +128,8 @@ let Component = React.createClass({
                 			<tr>
 	                			<th>排名</th>
 	           					<th>风场名</th>
-	           					<th className={styles.click1} onClick={()=>changepageSort1(flag)}>PBA <span className={flag3==undefined? null:flag3==true?styles.top:styles.bottom}>↑</span><span className={flag3==undefined? null:flag3==false?styles.top:styles.bottom}>↓</span></th>
-	           					<th className={styles.click} onClick={()=>changepageSort(flag)}>停机时间<span className={flag4==undefined? null:flag4==true?styles.top:styles.bottom}>↑</span><span className={flag4==undefined? null:flag4==false?styles.top:styles.bottom}>↓</span></th>
+	           					<th className={styles.click1} onClick={()=>changepageSort1(flag)}>PBA <span className={flag3==undefined? styles.init:flag3==true?styles.top:styles.bottom}></span></th>
+	           					<th className={styles.click} onClick={()=>changepageSort(flag)}>停机时间<span className={flag4==undefined? styles.init:flag4==true?styles.top:styles.bottom}></span></th>
                 			</tr>
                 			<tr>
                 				<th>1</th><th>{sort1[0].name}</th><th>{sort1[0].PBA}</th><th>{sort1[0].time}分钟</th>

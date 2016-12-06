@@ -8,7 +8,10 @@ import time from '../../../img/comp/time1.png';
 import space from '../../../img/comp/space.gif';
 import sphm from '../../../../../../../static/sphm/images/ico_3.png';
 
+
 var actions = require('redux/actions');
+var $ =require("jQuery");
+
 
 let data=Instrumentdata;
 let sort1=data.sort2;
@@ -31,8 +34,8 @@ let Component = React.createClass({
            						<a className={styles.space} onClick={()=>changepageProfitS()}></a>
            					</div>
            					<div className={styles.sectionBox}>
-           						<span className={styles.numBox}><p style={{color:'#33BAC0'}}>{((data.firstfloor[0].profit/data.firstfloor[0].investment)*100).toFixed(1)}%</p>收益率</span>
-           						<Pie2 color={['#33BAC0','#33545C']} num={[100,200]}></Pie2>
+           						<span className={styles.numBox}><p style={{color:'#e9c75c'}}>{((data.firstfloor[0].profit/data.firstfloor[0].investment)*100).toFixed(1)}%</p>收益率</span>
+           						<Pie2 color={['#d06960','#39565e']} num={[100,200]}></Pie2>
            					</div>
            				</div>
            				<div className={styles.section}>
@@ -43,8 +46,8 @@ let Component = React.createClass({
            						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
            					</div>
            					<div className={styles.sectionBox}>
-           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{((data.firstfloor[1].small/data.firstfloor[1].big)*100).toFixed(1)}%</p>健康度</span>
-           						<Pie2 color={['#E9C75C','#A69263']} num={[27,73]}></Pie2>	
+           						<span className={styles.numBox}><p style={{color:'#e9c75c'}}>{((data.firstfloor[1].small/data.firstfloor[1].big)*100).toFixed(1)}%</p>健康度</span>
+           						<Pie2 color={['#E9C75C','#39565e']} num={[253,73]}></Pie2>	
            					</div>
            				</div>
            				<div className={styles.section}>
@@ -55,8 +58,8 @@ let Component = React.createClass({
            						<a className={styles.time} onClick={()=>changepagePBAT()}></a>
            					</div>
            					<div className={styles.sectionBox}>
-           						<span className={styles.numBox}><p style={{color:'#D06960'}}>{((data.firstfloor[2].actrul/data.firstfloor[2].should)*100).toFixed(1)}%</p>PBA</span>
-           						<Pie2 color={['#D06960','#954A45']} num={[15,10]}></Pie2>	
+           						<span className={styles.numBox}><p style={{color:'#e9c75c'}}>{((data.firstfloor[2].actrul/data.firstfloor[2].should)*100).toFixed(1)}%</p>PBA</span>
+           						<Pie2 color={['#ff3333','#39565e']} num={[20,10]}></Pie2>	
            					</div>
            				</div>
            				<div className={styles.section}>
@@ -67,8 +70,8 @@ let Component = React.createClass({
            						<a className={styles.time} onClick={()=>changepageTBAT()}></a>
            					</div>
            					<div className={styles.sectionBox}>
-           						<span className={styles.numBox}><p style={{color:'#70C080'}}>{((data.firstfloor[3].usable/data.firstfloor[3].count)*100).toFixed(1)}%</p>TBA</span>
-           						<Pie2 color={['#70C080','#4A7A59']} num={[25,75]}></Pie2>
+           						<span className={styles.numBox}><p style={{color:'#e9c75c'}}>{((data.firstfloor[3].usable/data.firstfloor[3].count)*100).toFixed(1)}%</p>TBA</span>
+           						<Pie2 color={['#d06960','#39565e']} num={[25,75]}></Pie2>
            					</div>
            				</div>
            			</div>
@@ -128,8 +131,8 @@ let Component = React.createClass({
                 			<tr>
 	                			<th>排名</th>
 	           					<th>区域名</th>
-	           					<th className={styles.click1} onClick={()=>changepageSort1(flag1)}>PBA <span className={flag3==undefined? null:flag3==true?styles.top:styles.bottom}>↑</span><span className={flag3==undefined? null:flag3==false?styles.top:styles.bottom}>↓</span></th>
-	           					<th className={styles.click} onClick={()=>changepageSort(flag)}>停机时间 <span className={flag4==undefined? null:flag4==true?styles.top:styles.bottom}>↑</span><span className={flag4==undefined? null:flag4==false?styles.top:styles.bottom}>↓</span></th>
+	           					<th className={styles.click1} onClick={()=>changepageSort1(flag1)}>PBA <span className={flag3==undefined? styles.init:flag3==true?styles.top:styles.bottom}></span></th>
+	           					<th className={styles.click} onClick={()=>changepageSort(flag)}>停机时间 <span className={flag4==undefined? styles.init:flag4==true?styles.top:styles.bottom}></span></th>
                 			</tr>
                 			<tr>
                 				<th>1</th><th>{sort1[0].name}</th><th>{sort1[0].PBA}</th><th>{sort1[0].time}分钟</th>
