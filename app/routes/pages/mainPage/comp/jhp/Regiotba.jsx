@@ -28,7 +28,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wind,winds,windss,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
+        let {befor_pages='area', returnit,wind,winds,windss,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
         return (
 
 
@@ -47,7 +47,7 @@ let Component = React.createClass({
                             )
                         })
                     }
-                    <div className={styles.return}>返回</div>
+                    <div className={styles.return} onClick={()=>returnit(befor_pages)}>返回</div>
                 </div>
 
 
@@ -98,7 +98,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('wind',value.plan ));
             dispatch(actions.setVars('winds',value.actrul ));
             dispatch(actions.setVars('windss',value.actruls ));
-        }
+        },
+        returnit:(befor_pages)=>{
+            dispatch(actions.setVars('showPage',befor_pages));
+
+        },
     };
 };
 

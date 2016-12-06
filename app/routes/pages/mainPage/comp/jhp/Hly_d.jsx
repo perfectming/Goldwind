@@ -46,6 +46,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                y:20,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -114,6 +115,10 @@ let Component = React.createClass({
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    },
                 },
 
                 labels: {

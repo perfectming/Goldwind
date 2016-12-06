@@ -54,7 +54,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {hideit,wind, buttonAction, actbt = 0,  value0, inputOnChange, onFocus, changecolor, gogogo, back, more, arr,arr2} = this.props;
+        let {w0="一区域",w10="风场1",mon="一月份",win,windplan=win,befor_pages='group', returnit,hideit,wind, buttonAction, actbt = 0,  value0, inputOnChange, onFocus, changecolor, gogogo, back, more, arr,arr2} = this.props;
 
 
         return (
@@ -69,11 +69,11 @@ let Component = React.createClass({
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
-                        <div className={styles.logo3}>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</div>
+                        <div className={styles.logo3}>{"各风机健康度"}</div>
                         <span onClick={()=>hideit()}>×</span>
                     </div>
                     <Hly_rs height={500} powerValue={x7} barRotimes={x6} widths={1620}
-                            text={"风场各风机健康度"}></Hly_rs>
+                            text={mon+w0+w10+"各风机健康度"}></Hly_rs>
 
 
                 </div>  
@@ -91,7 +91,7 @@ let Component = React.createClass({
                             )
                         })
                     }
-                    <div className={styles.return}>返回</div>
+                    <div className={styles.return} onClick={()=>returnit(befor_pages)}>返回</div>
                 </div>
 
 
@@ -99,7 +99,7 @@ let Component = React.createClass({
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_t x={x0} barLoTime={barLoTime1}
                                barLoPowerValue={wind == undefined ? barLoPowerValue1 : wind}
-                               text={text0[actbt] + "月集团各区域健康度"}></Hly_t>
+                               text={mon+ "集团各区域健康度"}></Hly_t>
                         <div className={styles.logo}>
 
                         </div>
@@ -109,8 +109,11 @@ let Component = React.createClass({
 
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
-                        <Hly_r height={400} barRotime={barRotime1} barLoPowerValue={barLoPowerValue2}
-                               text={text0[actbt] + "月" + text0[5] }></Hly_r>
+                        <Hly_r height={400} barRotime={barRotime1} barLoPowerValue={windplan==null? barLoPowerValue2:windplan}
+                               text={mon+w0+"各风场健康度" }></Hly_r>
+                        <div className={styles.logomini}>
+
+                        </div>
                     </div>
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
                         <div className={styles.rbox30}>
@@ -124,11 +127,12 @@ let Component = React.createClass({
                             <button className={styles.button} onClick={() => more()}>更多</button>
                         </div>
                         <div className={styles.rbox4}>
-                            <Hly_rs height={330} powerValue={arr==null? x5:arr} barRotimes={arr2==null? x4:arr2}
-                                    text={text0[actbt] + "月" + text0[5] + "区域" + text0[4] + "风场各风机健康度"}></Hly_rs>
-                            <div className={styles.logo}>
+                            <Hly_rs height={400} powerValue={arr==null? x5:arr} barRotimes={arr2==null? x4:arr2}
+                                    text={mon+w0+w10+"各风机健康度"}></Hly_rs>
+                            <div className={styles.logomini}>
 
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -147,6 +151,10 @@ const mapStateToProps = (state) => {
         wind: state.vars.wind,
         arr: state.vars.arr,
         arr2: state.vars.arr2,
+        w0 : state.vars.w1,
+        w10 : state.vars.w11,
+        mon : state.vars.mon,
+        windplan : state.vars.windplan,
 
 
     }
@@ -158,6 +166,7 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test: ''
             }
+
 
         },
         changecolor: (value, key) => {
@@ -203,7 +212,11 @@ const mapDispatchToProps = (dispatch) => {
         hideit: () =>{
             $("#boxhidden").hide();
             $("#light").hide();
-        }
+        },
+        returnit:(befor_pages)=>{
+            dispatch(actions.setVars('showPage',befor_pages));
+
+        },
 
 
 

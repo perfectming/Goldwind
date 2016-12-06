@@ -2,22 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
 let data = require('./Profit-data');
-
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaPlan=data.areaPlan;
-        let areaPlanDay=data.areaPlanDay;
-        let areaPlanDayT=data.areaPlanDayT;
-
+        
+       let {areaPlan,areaPlanDay,areaPlanDayT}=this.props;
         let configPie = {
             chart: {
-                height:390,
+                height:380,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -75,7 +69,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                           
                         }
                     }
                 }

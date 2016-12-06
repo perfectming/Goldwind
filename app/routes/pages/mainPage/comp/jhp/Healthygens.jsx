@@ -22,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wind,winds,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
+        let {befor_pages='group', returnit,wind,winds,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
         return (
 
 
@@ -41,14 +41,14 @@ let Component = React.createClass({
                             )
                         })
                     }
-                    <div className={styles.return}>返回</div>
+                    <div className={styles.return} onClick={()=>returnit(befor_pages)}>返回</div>
                 </div>
 
 
                 <div className={`${styles.fbox10}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_genday   barLpdpowerValues={winds==undefined? barLpdpowerValue1:winds} barLpdpowerValue={wind==undefined? barLpdpowerValues1:wind} barLdpowerValue={barLdpowerValue1} text={text0[actbt]+'月每日集团发电量'}></Hly_genday>
-                        <div className={styles.logo}>
+                        <div className={styles.logomini}>
 
                         </div>
                     </div>
@@ -81,7 +81,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('wind',value.plan ));
             dispatch(actions.setVars('winds',value.actrul ));
-        }
+        },
+        returnit:(befor_pages)=>{
+            dispatch(actions.setVars('showPage',befor_pages));
+
+        },
     };
 };
 

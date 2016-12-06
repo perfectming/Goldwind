@@ -140,6 +140,7 @@ let Component = React.createClass({
                             </div>
                         </div>
                     </div>
+                <div className={styles.columnTitle}></div>
                 <div className={styles.upBox}>
                     <Column></Column>
                 </div>

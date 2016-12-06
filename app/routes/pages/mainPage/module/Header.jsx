@@ -54,7 +54,8 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('show', false));
              dispatch(actions.setVars('colorAct', false));
              if(page=='cockpit'){
-
+                 dispatch(actions.setVars('putpage', false));
+                 dispatch(actions.setVars('navhide', false));
              }else if(page=='monitorkb' || page=='health_main'){
                  dispatch(actions.setVars('navhide', false));
                  dispatch(actions.setVars('putpage', true));

@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",w10="风场1",mon="一月份",barRotimes,powerValue,windplan=win,height,widths} = this.props;
+        let {w0="一区域",w10="风场1",mon="一月份",barRotimes,powerValue,windplan=win,height,widths,text} = this.props;
 
 
         let configPie = {
@@ -34,7 +34,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: mon+w0+w10+"各风机健康度",
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
@@ -47,6 +47,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                y:40,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },

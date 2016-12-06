@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
     render() {
 
-      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width}=this.props;
+      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -74,7 +74,10 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                           wq=e.point.category;
+                        var  a=wq.toString().split("");
+                        var b=a[0];
+                        changedata10(wq,b);
                         }
                     }
                 }
@@ -185,12 +188,19 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+          wq : state.vars.wr,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+        changedata10 :(wq,b)=>{
+            dispatch(actions.setVars('wr',wq)); 
+            console.log(wq)
+           
         },
     };
 };
