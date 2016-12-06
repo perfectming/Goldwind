@@ -208,7 +208,7 @@ TY.writeInfo = function (msg, flag, lock,wt)
 }
 TY.writeError = function (error)
 {
-    msg = 1;
+    window.status = msg;
     $(".error").text("error:"+error.msg+" 故障号:"+error.code);
 }
 
