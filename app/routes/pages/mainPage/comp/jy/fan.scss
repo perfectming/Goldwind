@@ -1,5 +1,5 @@
 .bodyBox{
-  background: url("../../img/comp/cft.jpg");
+  background: url("../../img/icon/bujian.png") no-repeat;
   overflow: hidden;
   .infofL{
     float: left;
@@ -43,9 +43,36 @@
     font-size: 14px;
     height: 20px;
     line-height: 20px;
-    div{
-      float: left;
-      margin-right: 15px;
+    .actspan{
+      width:100px;
+      height:40px;
+      line-height:40px;
+      cursor:pointer;
+      border-radius:5px;
+      color:#fff;
+      font-size:16px;
+      border:1px solid #2ff4fb;
+      margin:10px 13px 0 0;
+      float:left;
+      text-align:center;
+      &:hover{
+        box-shadow:0px 0px 8px #fff;
+        color:#2ff4fb;
+      }
+    }
+    .active{
+      box-shadow:0px 0px 8px #fff;
+      color:#2ff4fb;
+      width:100px;
+      height:40px;
+      line-height:40px;
+      cursor:pointer;
+      border-radius:5px;
+      font-size:16px;
+      border:1px solid #2ff4fb;
+      margin:10px 13px 0 0;
+      float:left;
+      text-align:center;
     }
   }
   .fanidbox:after{
@@ -61,6 +88,7 @@
     margin-top: 0;
 
     .infoBox6{
+      margin-top: 700px;
       overflow: hidden;
       color:#999;
       width: 370px;
@@ -72,22 +100,6 @@
         text-align: center;
         line-height: 38px;
         color:#fff;
-      }
-      .titlebox{
-        width: 350px;
-        height: 40px;
-        font-size: 16px;
-        margin-left: 5px;
-        position: relative;z-index: 100000;
-        white-space:nowrap;
-        span:nth-child(1){
-          width: 150px;
-          text-align: left;
-          padding-left: 10px;
-        }
-        span{
-          width: 100px;
-        }
       }
       .statusquery{
         width: 370px;
