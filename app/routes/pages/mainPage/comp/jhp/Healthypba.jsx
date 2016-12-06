@@ -57,7 +57,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='group', returnit,hideit,wind, winds, windss, buttonAction, actbt = 0, changecolor, gogogo,back,more, arr, arr2} = this.props;
+        let {w0="一区域",w10="风场1",mon="一月份",win,windplan=win,befor_pages='group', returnit,hideit,wind, winds, windss, buttonAction, actbt = 0, changecolor, gogogo,back,more, arr, arr2} = this.props;
         return (
 
 
@@ -71,11 +71,11 @@ let Component = React.createClass({
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
                         <div className={styles.logo3}>
-                            {text0[actbt] + "月份集团各区域PBA"}
+                            {mon+w0+w10+"各风机健康度"}
                             </div>
                         <span onClick={()=>hideit()}>×</span>
                     </div>
-                    <Hly_pbas height={500} widths={1620} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
+                    <Hly_pbas height={500} widths={1620} text={''}
                               barRotimes={x6} barLoPowerValue={x7}
                               barLoPowerValues={x7} barLdpowerValue={x7}></Hly_pbas>
 
@@ -117,7 +117,7 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
-                        <Hly_pba height={400} text={text0[actbt] + "月份" + text0[4] + "区域各风场PBA"} barRotime={barRotime2}
+                        <Hly_pba height={400} text={mon+w0+"各风场PBA"} barRotime={barRotime2}
                                  barLoPowerValue={barLoPowerValue2} barLoPowerValues={barLoPowerValue2}
                                  barLdpowerValue={barLoPowerValue1}></Hly_pba>
                         <div className={styles.logomini}>
@@ -127,8 +127,7 @@ let Component = React.createClass({
 
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
                         <div className={styles.rbox30}>
-                            <div></div>
-                            <span>{"各风机PBA"}</span>
+
                         </div>
                         <div className={styles.rbox33}>
 
@@ -139,7 +138,7 @@ let Component = React.createClass({
 
 
                         <div className={styles.rbox4}>
-                            <Hly_pbas height={400} text={text0[3] + '区域' + text0[4] + '风场各风机PBA'}
+                            <Hly_pbas height={400} text={mon+w0+w10+"各风机PBA"}
                                       barRotimes={arr2 == null ? x4 : arr2} barLoPowerValue={arr == null ? x5 : arr}
                                       barLoPowerValues={arr == null ? x5 : arr} barLdpowerValue={arr == null ? x5 : arr}></Hly_pbas>
                             <div className={styles.logomini}>
@@ -162,6 +161,10 @@ const mapStateToProps = (state) => {
         windss: state.vars.windss,
         arr: state.vars.arr,
         arr2: state.vars.arr2,
+        w0 : state.vars.w1,
+        w10 : state.vars.w11,
+        mon : state.vars.mon,
+        windplan : state.vars.windplan,
     }
 };
 
