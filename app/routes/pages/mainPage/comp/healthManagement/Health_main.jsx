@@ -5,15 +5,23 @@ import styles from './Health_main.scss';
 
 var actions = require('redux/actions');
 
-let Component = React.createClass({
-    componentDidMount() {
-        this.props.init();
-    },
 
+let Component = React.createClass({
+    componentWillMount() {
+        localStorage.keyone=0;
+    },
+    componentDidMount() {
+        let {changekey} = this.props;
+        this.props.init();
+        setInterval(function(){
+            changekey()
+        },3000)
+    },
     render() {
-        let {key1,} = this.props;
+        let {} = this.props;
+
         return(
-            <iframe name="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
+            <iframe id="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
             )
 
     }
@@ -21,20 +29,20 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            var obj = {
-                test:''
-            }
+
         },
-        changeTableItem: (key1) => {
-
-
-        }
+        changekey: () => {
+            dispatch(actions.setVars('treeItemActive', localStorage.keyone));
+            console.log(localStorage.keyone);
+        },
 };
 };
 
