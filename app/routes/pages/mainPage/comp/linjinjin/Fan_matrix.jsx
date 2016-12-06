@@ -42,7 +42,6 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:'',
                 }
-             dispatch(actions.setVars('Changnav', 0));
              dispatch(actions.setVars('navhide', false));
              
 

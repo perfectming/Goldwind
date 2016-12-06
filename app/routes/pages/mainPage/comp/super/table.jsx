@@ -176,6 +176,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('valuepage', fcnum[key]));
           dispatch(actions.setVars('befor_page','super' ));
           dispatch(actions.setVars('fc_info', number[0][key]));
+          dispatch(actions.setVars('Changnav', 0));
 
         }
     };

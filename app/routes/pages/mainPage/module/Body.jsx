@@ -82,6 +82,7 @@ import History_list from '../comp/healthManagement/history.jsx';
 import Manaport from '../comp/healthManagement/manaport.jsx';
 import Subscribe from '../comp/healthManagement/subscribe.jsx';
 import Yujing from '../comp/healthManagement/yujing.jsx';
+import Input_cost from '../comp/jhp/Input_cost.jsx';
 
 
 
@@ -174,7 +175,7 @@ let Component = React.createClass({
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
 
-                {showPage === 'peqii' && <PEQII></PEQII>}
+                
                 {showPage === 'reliability' && <Reliability></Reliability>}
                
 
@@ -186,6 +187,8 @@ let Component = React.createClass({
                 {showPage === 'manaport' && <Manaport></Manaport>}
                 {showPage === 'subscribe' && <Subscribe></Subscribe>}
                 {showPage === 'yujing' && <Yujing></Yujing>}
+                {showPage === 'peqii' && <PEQII></PEQII>}
+                {showPage === 'input_cost' && <Input_cost></Input_cost>}
 
 
                 <div className={styles.clearbox}></div>

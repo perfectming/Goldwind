@@ -18,12 +18,16 @@ import monBoardData from '../../../../../../config/MonitorBoardData';
 import model from '../../../../../../config/MonitorBoardModel';
 let comp = require('./date');
 var $ = require('jquery');
-
-
 let arr=[];
 let arrname=[];
 let allnum=0;
 let num=[];
+Model:TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+function setData(rdata){
+
+    console.log(rdata)
+}
+
 for(let i in monBoardData.ModelData){
     arr.push(monBoardData.ModelData[i].DayEgyAt/1);
 }
