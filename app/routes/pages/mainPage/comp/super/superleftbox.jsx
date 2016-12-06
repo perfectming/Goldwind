@@ -31,7 +31,6 @@ let Component = React.createClass({
         let {all,zhzb,bbs}=this.props;
         let mod1=zhzb.Model;
         let data2=bbs.ModelData;
-        console.log(bbs)
 
         return (
 
