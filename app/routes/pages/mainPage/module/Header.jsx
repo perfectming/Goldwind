@@ -49,7 +49,8 @@ const mapDispatchToProps = (dispatch) => {
         changeHeaderItem: (key,page) => {
             dispatch(actions.setVars('headerItemActive', key));
             dispatch(actions.setVars('treeItemActive', 0));
-             dispatch(actions.setVars('showPage', page));
+             dispatch(actions.setVars('showPage', 'cs'));
+             dispatch(actions.setVars('pagename', page));
              dispatch(actions.setVars('tabItemActive', 0));
              dispatch(actions.setVars('show', false));
              dispatch(actions.setVars('colorAct', false));

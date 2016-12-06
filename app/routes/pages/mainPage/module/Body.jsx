@@ -83,6 +83,7 @@ import Manaport from '../comp/healthManagement/manaport.jsx';
 import Subscribe from '../comp/healthManagement/subscribe.jsx';
 import Yujing from '../comp/healthManagement/yujing.jsx';
 import Input_cost from '../comp/jhp/Input_cost.jsx';
+import CS from '../comp/linjinjin/cs.jsx';
 
 
 
@@ -189,6 +190,7 @@ let Component = React.createClass({
                 {showPage === 'yujing' && <Yujing></Yujing>}
                 {showPage === 'peqii' && <PEQII></PEQII>}
                 {showPage === 'input_cost' && <Input_cost></Input_cost>}
+                {showPage === 'cs' && <CS></CS>}
 
 
                 <div className={styles.clearbox}></div>
