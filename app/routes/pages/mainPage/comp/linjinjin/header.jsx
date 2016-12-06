@@ -43,7 +43,6 @@ let Component = React.createClass({
          
                 <div className={styles.bodynav}>
                 <img src={back} onClick={()=>backtop(befor_page,befor_page2)}/>
-                <img src={back} id='back'/>
                  {
                     arr1.map((value,key)=>{
                         return(
@@ -81,9 +80,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: (flag) => {
-          $('#back').on('click',function(){
-            alert(1)
-          })
+          
             var obj = {
                 test:'',
                 }

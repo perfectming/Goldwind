@@ -6,8 +6,9 @@ import add from '../../../img/comp/add_icon.png';
 import Column from './colum.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
-var actions = require('redux/actions');
 var $ =require('jquery');
+var actions = require('redux/actions');
+
 let allnum=[];
 let chartnum=[];
 let chartname=[];
@@ -15,44 +16,12 @@ let chartname=[];
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
-        $(document).ready(function(){
-            $('#searchall').on('click',function(){
-                $('#tabline').empty();
 
-                if($('#startTime').val() == '' || $('#endTime').val() == ''){
-                    alert('请选择开始或者结束时间');
-                }else{
-                allnum.map(function(value,key){
-                    $('#tabline').append('<div></div>');
-                   
-                    value.map(function(valueC,keyC){
-                        $('#tabline>div').eq(key).append('<span>'+valueC+'</span>')
-                        $('#tabline>div').eq(key).find('span').eq(0).width(80);
-                        $('#tabline>div').eq(key).find('span').eq(1).width(300);
-                    })
-                    if(key%2==0){
-                        $('#tabline>div').eq(key).css('background','#30343f')
-                    }else{
-                        $('#tabline>div').eq(key).css('background','#272b34')
-                    }
-                
-                     
-                })
-            }
-
-
-                
-            })
-            //表格宽度等于span宽度的和
-            // var i=$('#tablist span').length;
-            // $('#tablist').width((i-2)*150+381)
-            // $('#tabline').width((i-2)*150+380)
-        })
     },
    
 
     render() {
-         let {changeselect,select_list,sent_info,tabarr,clickitem,chtnum,chtname} = this.props;
+         let {changeselect,select_list,sent_info,tabarr,clickitem,chtnum,chtname,chtit} = this.props;
         return (
             <div className={styles.faultBox}>
                 <div className={styles.search_tit}>
@@ -169,7 +138,7 @@ let Component = React.createClass({
                         <div  className={styles.tabline} id='tabline'></div>
                     </div>
                     <div className={styles.columnbox}>
-                     { chtnum !==undefined && <Column cnum={chtnum} cname={chtname} ></Column> }
+                     { chtnum !==undefined && <Column cnum={chtnum} cname={chtname} ctit={chtit} ></Column> }
                     </div>
                 </div>
             </div>
@@ -184,17 +153,16 @@ const mapStateToProps = (state) => {
         tabarr:state.vars.tabarr,
         chtnum:state.vars.chtnum,
         chtname:state.vars.chtname,
+        chtit:state.vars.chtit,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            //初始化highchart数据与表格数据
-                dispatch(actions.setVars('chtnum',''));
-                 dispatch(actions.setVars('chtname',''));
-                 dispatch(actions.setVars('tabarr',''));
-            //select选择事件隐藏DIV
+
+            console.log('执行init()函数')
+             //select选择事件隐藏DIV
             $('#selectop').change(function(){
                 $("#leftlist>div div").hide();
                 $("#leftlist>div img").attr('src', add);
@@ -203,10 +171,12 @@ const mapDispatchToProps = (dispatch) => {
 
             //复选框状态跟随
             $("#leftlist input").change(function(){
+                console.log('点击了input')
                 $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
             })
             //select下拉事件
             $("#leftlist span").on('click',function(){
+                console.log('点击了span')
                 $(this).parent().siblings().toggle();
                 if($(this).siblings('img').attr('src') == add){
                     $(this).siblings('img').attr('src', jian);
@@ -214,6 +184,39 @@ const mapDispatchToProps = (dispatch) => {
                     $(this).siblings('img').attr('src', add);
                 }
             })
+            //查询按钮功能
+            $('#searchall').on('click',function(){
+                console.log('点击了查询')
+                $('#tabline').empty();
+                $('#tablist span').css('background','#464c58');
+                if($('#startTime').val() == '' || $('#endTime').val() == ''){
+                    alert('请选择开始或者结束时间');
+                }else{
+                allnum.map(function(value,key){
+                    $('#tabline').append('<div></div>');
+                   
+                    value.map(function(valueC,keyC){
+                        $('#tabline>div').eq(key).append('<span>'+valueC+'</span>')
+                        $('#tabline>div').eq(key).find('span').eq(0).width(80);
+                        $('#tabline>div').eq(key).find('span').eq(1).width(300);
+                    })
+                    if(key%2==0){
+                        $('#tabline>div').eq(key).css('background','#30343f')
+                    }else{
+                        $('#tabline>div').eq(key).css('background','#272b34')
+                    }
+                
+                     
+                })
+            }
+
+            })
+            //初始化highchart数据与表格数据
+                dispatch(actions.setVars('chtnum',''));
+                 dispatch(actions.setVars('chtname',''));
+                 dispatch(actions.setVars('tabarr',''));
+                 dispatch(actions.setVars('chtit',''));
+           
             //select初始化option个数
             dispatch(actions.setVars('select_list', btype[0].select[0]));
         },
@@ -320,12 +323,21 @@ const mapDispatchToProps = (dispatch) => {
             
             // console.log(allnum)
            }
+           // for(var one=0;one<allnum.length-1;one++){
+           //      for(var two=one+1;two<allnum.length;two++){
+           //         if( allnum[one][0]===allnum[two][0]){
+           //          allnum.splice(allnum[two],1);
+           //        }
+           //      }
+                
+           //  }
           dispatch(actions.setVars('tabarr', allnum));
         },
         clickitem:(kk,even)=>{
             //点击初始化数据
             dispatch(actions.setVars('chtnum',''));
             dispatch(actions.setVars('chtname',''));
+
             //初始化对应数组
             chartnum=[];
             chartname=[];
@@ -336,12 +348,12 @@ const mapDispatchToProps = (dispatch) => {
                   // console.log(chartnum);
                   // console.log(chartname) 
                  dispatch(actions.setVars('chtnum',chartnum));
-                 dispatch(actions.setVars('chtname',chartname)); 
+                 dispatch(actions.setVars('chtname',chartname));
+                 dispatch(actions.setVars('chtit',$('#'+even.id).text()));  
                 
             })
             $('#'+even.id).css('background','#333').siblings('span').css('background','#464c58')
 
-            
         }
     
        
