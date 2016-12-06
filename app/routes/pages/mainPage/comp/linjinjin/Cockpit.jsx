@@ -18,12 +18,11 @@ import monBoardData from '../../../../../../config/MonitorBoardData';
 import model from '../../../../../../config/MonitorBoardModel';
 let comp = require('./date');
 var $ = require('jquery');
-
-
 let arr=[];
 let arrname=[];
 let allnum=0;
 let num=[];
+
 for(let i in monBoardData.ModelData){
     arr.push(monBoardData.ModelData[i].DayEgyAt/1);
 }

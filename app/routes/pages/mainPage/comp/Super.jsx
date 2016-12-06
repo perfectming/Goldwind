@@ -20,7 +20,7 @@ let datename01=dataBase.ModelData[8888801].CurDayWindSpeedCurve.Time;
 let date01=dataBase.ModelData[8888801].CurDayWindSpeedCurve.Value;
 let datename02=dataBase.ModelData[8888802].CurDayPVTSICurve.Time;
 let date02=dataBase.ModelData[8888802].CurDayPVTSICurve.Value;
-
+let zhzb=[];
 
 
 let Component = React.createClass({

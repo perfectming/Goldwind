@@ -9,7 +9,6 @@ import Column from './tkgl/Column.jsx';
 import Table from './tkgl/table.jsx';
 import succ from '../img/icon/jyOn.png';
 import defa from '../img/icon/jyOff.png';
-import close from '../img/comp/close_down.png';
 let tabaleData = require('../../../../../config/RegulationData');
 let model=require('../../../../../config/RegulationModel');
 let obj=require('../../../../../config/MatrixData');
@@ -40,7 +39,6 @@ let Component = React.createClass({
             <div className={styles.tkglBox}>
                 <span onClick={openAGC} className={styles.agc}>AGC调节</span>
                     <div className={styles.tableBox} id="AGC">
-                        <img src={close} className={styles.closeA} onClick={closeAGC}/>
                         <div className={styles.tableHeaderBox}>
                             {
                                 header.map((value, key)=> {
@@ -119,16 +117,17 @@ let Component = React.createClass({
                             }
                             <div className={arr2.length%2===0? styles.tableContentLine : styles.tableContentLine1}>
                                 <div className={styles.tableContentItem}
-                                     style={{width:1000/header.length}}>合计</div>
+                                     style={{width:2000/header.length}}>
+                                    <button className={styles.close} onClick={closeAGC}>确定</button>
+                                </div>
                                 {
                                     nam.map((valueC, keyC)=> {
-                                        if(keyC<2){
+                                        if(keyC==0){
                                             return (
-                                                <div className={styles.tableContentItem} style={{width:1000/header.length}} key={keyC}>——</div>
+                                                <div className={styles.tableContentItem} style={{width:1000/header.length}} key={keyC}>合计</div>
                                             )
-                                        }
-                                        else{
-                                            keyC==2? allC=plan : allC=power;
+                                        }else if(keyC<3){
+                                            keyC==1? allC=plan : allC=power;
                                             return (
                                                 <div className={styles.tableContentItem}
                                                      style={{width:1000/header.length}} key={keyC}>

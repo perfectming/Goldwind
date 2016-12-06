@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{cnum,cname}=this.props;
+        let{cnum,cname,ctit}=this.props;
         let configPie = {
             chart: {
                 type: 'column',
@@ -46,7 +46,7 @@ let Component = React.createClass({
                     title: {
                         align: 'high',
                         rotation: 0,
-                        text: "万(wh)",
+                        text: "",
                         style:{
                             color: "#fff",
                             },
@@ -112,7 +112,7 @@ let Component = React.createClass({
             {
                 type: 'column',
                 color:"#33c5cd",
-                name: "站场发电完成率",
+                name: ctit,
                 data: cnum
             }]
         };
