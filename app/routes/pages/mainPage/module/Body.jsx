@@ -14,6 +14,7 @@ import Booster from '../comp/Booster.jsx';
 import Tree from './Tree.jsx';
 import Header from './Header.jsx';
 import Fan from '../comp/Fan.jsx';
+import FanJy from '../comp/jy/fan';
 import Cockpit from '../comp/linjinjin/Cockpit.jsx';
 import Fan_matrix from '../comp/linjinjin/Fan_matrix.jsx';
 import Alarm from '../comp/yAll/Alarm.jsx';
@@ -115,6 +116,7 @@ let Component = React.createClass({
                 {showPage === 'tkgl' && <Tkgl></Tkgl>}
                 {showPage === 'distribution' && <Distribution></Distribution>}
                 {showPage === 'fan' && <Fan></Fan>}
+                {showPage === 'fanJy' && <FanJy></FanJy>}
                 {showPage === 'power' && <Power></Power>}
                 {showPage === 'test' && <Test></Test>}
                 {showPage === 'cockpit' && <Cockpit></Cockpit>}

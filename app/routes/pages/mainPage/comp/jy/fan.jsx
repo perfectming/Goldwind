@@ -1,42 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './fan.scss';
-import Header from '../linjinjin/header';
 import Title from '../super/Title.jsx';
+import bg1 from '../../img/icon/1.png';
+import bg2 from '../../img/icon/2.png';
+import bg3 from '../../img/icon/3.png';
+import bg4 from '../../img/icon/4.png';
+import bg5 from '../../img/icon/5.png';
+import bg6 from '../../img/icon/6.png';
+import bg7 from '../../img/icon/7.png';
+import bg8 from '../../img/icon/8.png';
+
 var actions = require('redux/actions');
 var $ = require('jquery');
-let modelvalue = require('../../../../../../config/WTDetailData.js');
 let addtest = require('../../../../../../config/MatrixData');
 let adisdfa= require('./data');
 let adsI=adisdfa.fan;
-let fmvalue = modelvalue.ModelData[652113028];
-// console.log(value.Wtid);
-// let qwer = "WTGS.PPV.Ra.F32.A";
-// console.log(fmvalue["WTUR.WSpd.Ra.F32"]);
-let WTURTemp = Math.ceil(fmvalue["WTUR.Temp.Ra.F32"]);
-let WNACTemp = Math.ceil(fmvalue["WNAC.Temp.Ra.F32"]);
-let WGENTemp = Math.ceil(fmvalue["WGEN.Temp.Ra.F32.1"]);
-
-// console.log(WGENTemp);
-let WTGShz = Math.ceil(fmvalue["WTGS.HZ.Ra.F32"]);
-
-
-let WTSpd = Number(fmvalue["WTUR.WSpd.Ra.F32"]);
-let WTPwr = Math.ceil(fmvalue["WTUR.PwrAt.Ra.F32"]);
-let WROTSpd = Math.ceil(fmvalue["WROT.Spd.Ra.F32"]);
-let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
-
-// console.log(WNACTemp);
-// console.log(fmvalue);
+let arr=[bg1,bg2,bg3,bg4,bg5,bg6,bg7,bg8];
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-        let {changetab,act1=0,value=addtest.ModelData[8888801].WFDevsStatus[650107][0],fanid} = this.props;
+        let {changetab,act1,value=addtest.ModelData[8888801].WFDevsStatus[650107][0],fanid} = this.props;
         return (
-            <div className={styles.bodyBox}>
+            <div className={styles.bodyBox} id="fanJy">
                 <div className={styles.fanidbox}>
                     {
                         adsI.title.map((value,key)=>{
@@ -44,12 +33,9 @@ let Component = React.createClass({
                                 <span className={ act1==key? styles.active : styles.actspan } key={key} onClick={()=>changetab(key)}>{value}</span>
                             )
                         })
-
                     }
                 </div>
-                <div className={`${styles.infoBox} ${styles.infofL}`}>
-                    <div className={`${styles.infoBox6} ${styles.infofL}`}>
-                        <Title></Title>
+                    <div className={`${styles.infoBox} ${styles.infofL}`}>
                         <div className={styles.statusquery}>
                             {
                                 adsI.content.map((value, key)=>{
@@ -63,11 +49,7 @@ let Component = React.createClass({
                             }
                         </div>
                     </div>
-                </div>
                 <div className={`${styles.fanrightbox} ${styles.infofL}`}>
-                    <Title title={['状态统计']}></Title>
-                    <div className={`${styles.fanaction} ${styles.infofL11111111}`}>
-                    </div>
                     <div className={styles.action1box}>
                         {
                             adsI.header.map((value,key)=>{
@@ -110,6 +92,8 @@ const mapDispatchToProps = (dispatch) => {
         },
         changetab:(act)=>{
             dispatch(actions.setVars('val', act));
+            arr[act] &&
+            $('#fanJy').css('background-image','url('+arr[act]+')');
         }
 
     };
