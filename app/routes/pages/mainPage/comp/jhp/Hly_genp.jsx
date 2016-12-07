@@ -105,7 +105,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'kWh',
+                    text:'(kWh)',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -126,12 +126,12 @@ let Component = React.createClass({
             series: [{
                 name: '计划发电量',
                 type: 'column',
-                color:'#5B9BD5',
+                color:'#33BAC0',
                 data: barlopowers
             }
                 ,{
                     name:'实际发电量',
-                    color:'#ED7D31',
+                    color:'#70c080',
                     type:'column',
                     data: barlopowerp
                 }

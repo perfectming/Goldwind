@@ -123,7 +123,7 @@ let Component = React.createClass({
                     }
                 },
             },{
-                title:'TBA%',
+                title:'(TBA)',
                 max:100,
                 oppsite:true,
                 labels: {
@@ -137,12 +137,13 @@ let Component = React.createClass({
             series: [{
                 name: '实际发电量',
                 type: 'column',
+                color:"#33BAC0",
                 data: barLoPowerValues,
                 borderRadius: 4,
             },
                 {
                     name: '故障损失',
-                    color:'#FF6124',
+                    color:'#5298d3',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time',
@@ -150,21 +151,21 @@ let Component = React.createClass({
                 },
                 {
                     name: '维护损失',
-                    color:'#FF9424',
+                    color:'#ffffff',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
                     name: '限功率损失',
-                    color:'#FFD927',
+                    color:'#e9c75c',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
                     name: '非设备原因损失',
-                    color:'#A2D04D',
+                    color:'#d06960',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'

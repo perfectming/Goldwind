@@ -25,7 +25,7 @@ let Component = React.createClass({
 
                 backgroundColor: "rgba(44, 61, 71, 0.4)",
 
-                backgroundColor: "rgba(46, 46, 65, 0)",
+
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
 
                 plotBorderWidth: 0,
@@ -33,13 +33,7 @@ let Component = React.createClass({
                 plotShadow: false,
                 paddingLeft:100,
 
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                    stops: [
-                    
-                        [0, 'rgb(37, 41, 48)']
-                    ]
-                },
+
 
                 borderRadius:10
             },
@@ -132,7 +126,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
             title: {
-                text:'100%',
+                text:'(100%)',
                     align:'high',
                     rotation:'0',
                     y: -10,
