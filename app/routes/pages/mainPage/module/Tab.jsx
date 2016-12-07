@@ -16,7 +16,7 @@ let Component = React.createClass({
                       
                         return (
                             <div key={key}>
-                                <span className={itemActive === key ? styles.tabItemAct : styles.tabItem}
+                                <span className={itemActive == key ? styles.tabItemAct : styles.tabItem}
                                      onClick={()=>changeTabItem(key,value.page)}>
                                      {value.name}
                                 </span>
@@ -46,8 +46,9 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('navhide', false));
         },
         changeTabItem: (key, page) => {
-            dispatch(actions.setVars('showPage', page));
+            dispatch(actions.setVars('showPage', 'cs'));
             dispatch(actions.setVars('tabItemActive', key));
+            dispatch(actions.setVars('pagename', page));
            
         },
     };

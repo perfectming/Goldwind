@@ -22,13 +22,15 @@ let Component = React.createClass({
            			<div className={styles.firstfloor}>
            				<div className={`${styles.section} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
-           						<span>当前{data.firstfloor[1].small}分</span><br/>
-           						<span>总分{data.firstfloor[1].big}分</span><br/>
-           						<a>图片</a><a>图片</a>
+           						<span>当前{data.firstfloor[1].small}分</span><br/><br/>
+           						<span>总分{data.firstfloor[1].big}分</span>
            					</div>
            					<div className={styles.sectiontwo}>
+           						<div className={styles.pie}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{((data.firstfloor[1].small/data.firstfloor[1].big)*100).toFixed(1)}%</p>健康度</span>
            						<Pie2 color={['#E9C75C','#A69263']} num={[35,15]}></Pie2>
+           						</div>
+           						<span className={styles.linkS}></span><br/><span className={styles.linkT}></span>
            					</div>
            				</div>
            				<div className={`${styles.section} ${styles.boxShadow}`}>

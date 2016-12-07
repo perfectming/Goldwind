@@ -137,7 +137,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('tableContent', obj));
         },
         changepage2:(value,key)=>{
-            dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('numpage', 'fanmatrix'));
             dispatch(actions.setVars('fan_page', 'allpage'));
             dispatch(actions.setVars('valuepage', value));
@@ -145,9 +144,10 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('actbt1','' ));
             dispatch(actions.setVars('befor_page','tkgl' ));
             dispatch(actions.setVars('fc_info', value));
+            dispatch(actions.setVars('showPage', 'cs'));
+            dispatch(actions.setVars('pagename', 'fan_matrix'));
         },
         changepage3:(value,key)=>{
-            dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('numpage', 'pvmatrix'));
             dispatch(actions.setVars('fan_page', 'allpage'));
             dispatch(actions.setVars('valuepage1', value));
@@ -155,6 +155,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('actbt',''));
             dispatch(actions.setVars('befor_page','tkgl' ));
             dispatch(actions.setVars('fc_info', value));
+            dispatch(actions.setVars('showPage', 'cs'));
+            dispatch(actions.setVars('pagename', 'fan_matrix'));
         },
     };
 };
