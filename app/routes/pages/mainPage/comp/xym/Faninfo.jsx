@@ -289,8 +289,8 @@ let Component = React.createClass({
 				</div>
 				<div className={`${styles.fanrightbox} ${styles.infofL}`}>
 					<Title title={['状态统计']}></Title>
-					<div className={`${styles.fanaction} ${styles.infofL11111111}`}>
-						<div className={styles.actionbox} onclick{()=> tobujian()}>
+					<div className={`${styles.fanaction} ${styles.infofL11111111}`} onClick = {()=> tobujian()}>
+						<div className={styles.actionbox}>
 							<div>启动</div>
 							<div>停机</div>
 							<div>复位</div>
@@ -498,8 +498,9 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        tobujian():=>{
-        	dispatch(actions.setVars('fan_page', 'fanobj'))
+        tobujian:()=>{
+        	dispatch(actions.setVars('fan_page', 'fanobj'));
+
         }
         
     };
