@@ -14,7 +14,7 @@
             height: 250px;
             width: 100%;
             .sectionSmall{
-               position: relative;
+                position: relative;
                 display: inline-block;
                 width: 32%;
                 height: 100%;
@@ -81,7 +81,8 @@
                        width: 25px;
                        position: absolute;
                        left: 80%;
-                       top: 50%; 
+                       top: 50%;
+                       background: url(../../../img/comp/time1.png)no-repeat; 
                     }
                     .linkS{
                        display: inline-block;
@@ -89,7 +90,8 @@
                        width: 25px;
                        position: absolute;
                        left: 80%;
-                       top: 25%; 
+                       top: 33%; 
+                       background: url(../../../img/comp/space.gif)no-repeat;
                     }
                     .pie{
                         height: 100%;

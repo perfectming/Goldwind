@@ -4,9 +4,6 @@ import styles from './Groupstyle.scss';
 import Instrumentdata from './Instrument-data';
 import Yearelectric from './Yearelectric.jsx';
 import Pie2 from '../../mxx/Pie2';
-import time from '../../../img/comp/time1.png';
-import space from '../../../img/comp/space.gif';
-import sphm from '../../../../../../../static/sphm/images/ico_3.png';
 
 
 var actions = require('redux/actions');

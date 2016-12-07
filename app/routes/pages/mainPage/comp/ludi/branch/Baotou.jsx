@@ -30,7 +30,7 @@ let Component = React.createClass({
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{((data.firstfloor[1].small/data.firstfloor[1].big)*100).toFixed(1)}%</p>健康度</span>
            						<Pie2 color={['#E9C75C','#A69263']} num={[35,15]}></Pie2>
            						</div>
-           						<span className={styles.linkS}>空间</span><br/><span className={styles.linkT}>图片</span>
+           						<span className={styles.linkS}></span><br/><span className={styles.linkT}></span>
            					</div>
            				</div>
            				<div className={`${styles.section} ${styles.boxShadow}`}>

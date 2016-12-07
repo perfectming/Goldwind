@@ -22,7 +22,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '**集团各区域PBA',
+                text: '集团各区域PBA',
                 align:'left',
                  x : "0",
                 style:{
@@ -52,14 +52,14 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#70c080','#5298d3','#537388', '#464d59','#5298d3']
+            colors: [ '#33BAC0', '#5298d3', '#ffffff', '#e9c75c','#d06960','#5298d3']
             ,
             plotOptions: {
                 column: {
                 	stacking:"normal",
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 30,
+                    pointWidth: 25,
                     borderRadius:2
                 }
             },
@@ -77,9 +77,18 @@ let Component = React.createClass({
                 categories:data.data[0].area,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
+                title:{
+                	text:'kW',
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -10,
+	                x:-13,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+                },
                 labels: {
                 	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
@@ -124,7 +133,7 @@ let Component = React.createClass({
                     }
                 }
             },{
-            	name: '性能损失',
+            	name: '限功率损失',
             	type: 'column',
                 stack:"female",
                 data: data.data[0].x,
@@ -135,7 +144,7 @@ let Component = React.createClass({
                     }
                 }
             },{
-            	name: '其他损失',
+            	name: '非设备原因损失',
             	type: 'column',
                 stack:"female",
                 data: data.data[0].q,

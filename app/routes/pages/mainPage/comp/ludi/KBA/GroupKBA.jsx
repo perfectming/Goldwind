@@ -21,15 +21,15 @@ let Component = React.createClass({
 					<TimeSelect></TimeSelect>
 					<div className={styles.content}>
 						<div className={`${styles.area} ${styles.boxShadow}`}>
-							<div className={styles.img}><a>logo</a></div>
+							<div className={styles.img}><a></a></div>
 							<TableF></TableF>
 						</div>
 						<div className={`${styles.wind} ${styles.boxShadow}`}>
-							<div className={styles.img}><a>图片</a></div>
+							<div className={styles.img}><a></a></div>
 							<TableS></TableS>
 						</div>
 						<div className={`${styles.fan} ${styles.boxShadow}`}>
-							<div className={styles.img}><a>图片</a></div>
+							<div className={styles.img}><a></a></div>
 							<TableT></TableT>
 						</div>
 					</div>

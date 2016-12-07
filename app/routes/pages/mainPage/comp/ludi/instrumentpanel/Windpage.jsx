@@ -38,7 +38,7 @@ let Component = React.createClass({
            					<div className={styles.sectiontwo}>
            						<div className={styles.pie}>
            						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{small1==undefined? ((data.yearelectric[0].wind[0].small/data.yearelectric[0].wind[0].big)*100).toFixed(1):((small1/big1)*100).toFixed(1)}%</p>健康度</span>
-           						<Pie2 color={small1==undefined? ['#E9C75C','#39565e']:(small1/big1)>1? ['#1fe005','#fbd500']:(small1/big1)>0.8?['#fbd500','#39565e']:(small1/big1)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={small1==undefined? [data.yearelectric[0].wind[0].small,data.yearelectric[0].wind[0].big-data.yearelectric[0].wind[0].small]:big1-small1>0? [small1,big1-small1]:[small1-big1,2*big1-small1]}></Pie2>
+           						<Pie2 color={small1==undefined? ['#d06960','#39565e']:(small1/big1)>1? ['#1fe005','#fbd500']:(small1/big1)>0.8?['#fbd500','#39565e']:(small1/big1)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={small1==undefined? [data.yearelectric[0].wind[0].small,data.yearelectric[0].wind[0].big-data.yearelectric[0].wind[0].small]:big1-small1>0? [small1,big1-small1]:[small1-big1,2*big1-small1]}></Pie2>
            						</div>
            						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
            						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
