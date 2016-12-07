@@ -1,11 +1,12 @@
 .box{
     overflow:hidden;
-    padding-bottom:10px;
+    padding:10px;
+    padding-right:10px;
     position:relative;
     .boxcover{
     position:fixed;
     height:100%;
-    width:100%;
+    width:93%;
     z-index:1200;
     background:black;
     display:none;
@@ -18,11 +19,11 @@
     background:#21242a;
     position:absolute;
     z-index:1600;
-    width:98%;
+     transform:translate(-50%,-50%);
+    width:%;
     top:50%;
-    left:49%;
+    left:50%;
     overflow:hidden;
-    transform:translate(-50%,-50%);
     box-sizing:border-box;
     display:none;
     .moretitle{
@@ -58,6 +59,8 @@
     }
     }
     .monthbox{
+    display:flex;
+    align-items:center;
     width: 100%;
     height: 80px;
     list-style: none;
@@ -80,19 +83,20 @@
      font-weight:700;
      cursor:pointer;
      }
-     li:last-child{
-     color: #20FEFF;
-       position:absolute;
-       top:-5px;
-       right:412px;
+     .back{
+     float:left;
+       align-items:center;
+       color: #20FEFF;
        border:1px solid #20FEFF;
        width:100px;
        height:40px;
        line-height:40px;
-       margin-bottom:25px;
+       position:relative;
+       top:0px;
        border-radius:45px;
        background:radial-gradient(#1c444a, #1c3f46);
        box-shadow:0px 0px 10px  #20FEFF;
+       text-align:center;
      }
      li:nth-last-child(2){
      
@@ -103,7 +107,7 @@
     position:absolute;
     height:40px;
     width:40px;
-    top:4px;
+    top:26px;
     left:69px;
     z-index:5;
     img{
@@ -113,24 +117,27 @@
   }
    .covers{
      position:relative;
+     margin-top:30px;
 
    }
   
     .areabox{
+   
       position:relative;
-            width:98%;
+            width:100%;
             height:390px;
            margin:0 auto;
             margin-bottom: 15px;
             padding-top:20px;
+            overflow:hidden;
       background:#282F37,
            }
            .titww{
     color:#fff;
       position:absolute;
         font-size:16px;
-        top:4px;
-        left:86px;
+        top:26px;
+        left:110px;
         font-weight:700;
         z-index:100;
     }
@@ -139,20 +146,22 @@
     }
     .windbox{
        float: left;
-       width: 48%;
+       width: 50%;
        margin-left:10px;
        height: 400px;
     }
      .bigbox{
+     overflow:hidden;
      float:right;
     height:390px;
-    width:48.65%;
-    margin-right:15px;
+    width:49.5%;
+    margin-right:0px;
     border:1px solid #282F37;
     position:relative;
     background-color: #282F37;
     .coverbox{
       margin-top:50px;
+      overflow:hidden;
 
     }
     .tik{
@@ -160,7 +169,7 @@
       position:absolute;
       font-size:16px;
       top:25px;
-      left:93px;
+      left:100px;
       font-weight:700;
       line-height:auto
     }
@@ -170,7 +179,7 @@
       height:30px;
       position:absolute;
       top:20px;
-      left:33px;
+      left:45px;
       text-align:center;
       line-height:30px;
       img{
@@ -178,6 +187,9 @@
         width:16px;
       }
     }
+  }
+  .bigboxx{
+  margin-right:15px;
   }
   .windecbox{
     margin-top:50px;

@@ -4,13 +4,14 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Profit-data');
-
+let win=data.areaRecordProfitT;
+let wins=data.areaPlanDayY;
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
 
-        let {monthT,areaRecordProfitT,text}=this.props;
+        let {w0,wins,monthT,areaRecordProfitT=win,text,changedata1}=this.props;
         let configPie = {
             chart: {
                 height:390,
@@ -67,7 +68,10 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                        w0=e.point.category;
+                        var  a=w0.toString().split("");
+                        var b=a[0];
+                        changedata1(w0,win,b);
                         }
                     }
                 }
@@ -143,12 +147,23 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+         w0 : state.vars.w1,
+        wins: state.vars.wins1,
+         windplan1 : state.vars.windplan1,
+
+        
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+        changedata1 :(w0,win,b)=>{
+            dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('wins1',wins[b-1]));
+            console.log(wins[b-1]);
         },
     };
 };

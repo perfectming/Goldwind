@@ -73,7 +73,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                           
                         }
                     }
                 }

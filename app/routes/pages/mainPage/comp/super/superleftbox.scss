@@ -112,7 +112,7 @@
       background: rgba(44,61,71,0.4);
       .spedc{
         width:50%;
-        font-size:16px;
+        font-size:14px;
         display:inline-block; 
 
        .box{
@@ -198,6 +198,7 @@
       .boxone{
         width:83%;
         height:25px;
+        overflow:hidden;
         margin:auto;
         border-radius:10px;
         background: #37555e;
@@ -206,7 +207,7 @@
            position:absolute;
            height:25px;
            line-height:25px;
-           color:#33c4cc;
+           color:#fff;
            right:20px;
            top:0px;
         }

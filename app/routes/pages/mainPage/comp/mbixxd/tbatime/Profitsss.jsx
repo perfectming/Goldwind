@@ -8,16 +8,20 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
+ let areaNamee=data.areaNamee;
+let areaRecordCostss=data.areaRecordCostss;
+let areaRecordProfitt=data.areaRecordProfitt;
+let text=data.text[0];
+let windFiled=data.windFiled;
+  let windCost=data.windCost;
+  let windProfit=data.windProfit;
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-        let areaNamee=data.areaNamee;
-        let areaRecordCostss=data.areaRecordCostss;
-        let areaRecordProfitt=data.areaRecordProfitt;
-        let text=data.text[0];
+       
           return (
            <div className={styles.box}>
                
@@ -30,7 +34,7 @@ let Component = React.createClass({
                <div className={`${styles.windbox} ${styles.shadow}`}>
                 <div className={styles.bgcc}><img src={icono}/></div>
                    <div>
-                     <WindfieldTable></WindfieldTable>
+                     <WindfieldTable windFiled={windFiled} windCost={windCost} windProfit={windProfit}></WindfieldTable>
                    </div>
                </div>
                

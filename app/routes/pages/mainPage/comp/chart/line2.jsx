@@ -19,6 +19,7 @@ let Component = React.createClass({
                 plotShadow: false,
                 height:height,
 
+
             },
             title: {
                 text: ''
@@ -67,7 +68,12 @@ let Component = React.createClass({
                         enabled: false
                     },
                  
+                },
+                series:{
+                    animation:false
                 }
+
+
             },
             series: [{
                 type:'spline',

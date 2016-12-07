@@ -55,7 +55,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+               
             },
             credits: {
                 enabled: false
@@ -73,7 +73,8 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                            w0=e.point.category;
+                            changedata1(w0,win);
                         }
                     }
                 }
@@ -141,7 +142,11 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+        win : state.vars.win1,
+        windplan1 : state.vars.windplan1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -149,6 +154,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
         },
     };
+    
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

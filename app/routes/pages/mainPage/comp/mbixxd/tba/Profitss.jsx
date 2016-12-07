@@ -36,17 +36,17 @@ let Component = React.createClass({
     },
 
     render() {
-      let{more,close,actbt}=this.props;
+      let{wq='风场1',more,changpage,wind,windP,close,actbt=0,backtop,befor_pagee='group',befor_page2,w0='1区域',ww="1月份",}=this.props;
           return (
            <div className={styles.box}>
            <div className={styles.boxcover} id='boxcover'></div>
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>11月份各风机PBA</p>
+                <p>11月份1区域1风场各风机TBA</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
-                <Fanchart machine={machine} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} height={500} width={1750}></Fanchart>
+                <Fanchart machine={machine} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} height={500} width={1760}></Fanchart>
                  </div>
                  <ul className={styles.monthbox}>
                     {
@@ -54,13 +54,16 @@ let Component = React.createClass({
                             return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
                         })
                     }
+        <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
+
                 </ul>
+
                <div className={styles.covers}>
                    <div className={styles.bgc}> <img src={icono}/></div>
                    <div className={`${styles.areabox} ${styles.shadow}`}>
                        <div>
-                           <AreaTable areaRecordCosts={areaRecordCosts} areaName={areaName} areaRecordProfit={areaRecordProfit} text0={text0} text1={text1}></AreaTable>
-                           <p className={styles.titww}>11月份集团各区域TBA</p>
+                           <AreaTable areaRecordCosts={wind==null?areaRecordCosts:wind} areaName={areaName} areaRecordProfit={windP=null?areaRecordProfit:windP} text0={text0} text1={text1}></AreaTable>
+                           <p className={styles.titww}>{[actbt+1]+'月份集团各区域TBA'}</p>
                        </div>
                    </div>
                </div>
@@ -72,7 +75,7 @@ let Component = React.createClass({
                            </div>
                        </div>
                        <div className={styles.tik}>
-                           <p>{text2}</p>
+                           <p>{ww+w0+wq+'各风机TBA'}</p>
                        </div>
                    </div>
                    <div className={styles.imgq}>
@@ -84,7 +87,7 @@ let Component = React.createClass({
                       <button  onClick={()=>more()}>更多</button>
                    </div>
                </div>
-               <div className={`${styles.bigbox} ${styles.shadow}`}>
+               <div className={`${styles.bigbox} ${styles.shadow} ${styles.bigboxx}`}>
                    <div className={styles.coverbox}>
                        <div className={styles.windcebox}>
                            <div>
@@ -92,7 +95,7 @@ let Component = React.createClass({
                            </div>
                        </div>
                        <div className={styles.tik}>
-                           <p>{text1}</p>
+                           <p>{ww+w0+''+'各风场TBA'}</p>
                        </div>
                    </div>
                    <div className={styles.imgq}>
@@ -111,7 +114,15 @@ const mapStateToProps = (state) => {
       actbt:state.vars.actbt,
          wind:state.vars.wind,
          windP:state.vars.windP,
-         areaNamee:state.vars.areaNamee
+         areaNamee:state.vars.areaNamee,
+         befor_pagee : state.vars.befor_pagee,
+        befor_page2 : state.vars.befor_page2,
+         w0: state.vars.w1,
+        winss: state.vars.wins1,
+         ww: state.vars.ww,
+         wq: state.vars.wr,
+
+
     }
 };
 const mapDispatchToProps = (dispatch) => {
@@ -130,7 +141,16 @@ const mapDispatchToProps = (dispatch) => {
         close:()=>{
             $("#sss").hide();
               $('#boxcover').hide();
-        }
+        },
+        backtop:(befor_pagee,befor_page2)=>{
+            dispatch(actions.setVars('showPage',befor_pagee));
+        },
+        changpage :(value,key)=>{
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('wind',value.plan));
+            dispatch(actions.setVars('windP',value.actrul));
+            dispatch(actions.setVars('ww',value.name))
+        },
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

@@ -91,7 +91,6 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
 
-
     }
 };
 
