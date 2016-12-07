@@ -188,7 +188,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {         
+    return {   
+            zhzb: state.vars.zhzb,
+            bbs: state.vars.bbs,      
     }
 };
 
