@@ -139,7 +139,7 @@ module.exports = {
                 page:[
                     {
                         name:'资产管理1-1',
-                        page:'',
+                        page:'monica',
                     },{
                         name:'资产管理1-2',
                         page:'',
