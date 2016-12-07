@@ -52,7 +52,7 @@ let Component = React.createClass({
                             )
                         }
                             return (
-                                <div key={key} className={itemAct === key ? styles.treeItemAct : styles.treeItem} onClick={()=>changeTreeItem(key,value.page[0].page)}>
+                                <div key={key} className={itemAct == key ? styles.treeItemAct : styles.treeItem} onClick={()=>changeTreeItem(key,value.page[0].page)}>
                                     <img src={itemAct === key ? value.iconActive : value.iconNormal}/>
                                 </div>
                             )
@@ -66,7 +66,7 @@ let Component = React.createClass({
                             )
                         }
                             return (
-                                <div key={key} className={itemAct === key ? styles.treeItemAct : styles.treeItem} onClick={()=>changeTreeItem(key,value.page[0].page)}>
+                                <div key={key} className={itemAct == key ? styles.treeItemAct : styles.treeItem} onClick={()=>changeTreeItem(key,value.page[0].page)}>
                                     <img src={itemAct === key ? value.iconActive : value.iconNormal}/>
                                     <p>{value.name}</p>
                                 </div>

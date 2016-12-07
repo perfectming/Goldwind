@@ -1,25 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Health_main.scss';
-
+let timer;
 var actions = require('redux/actions');
 
 
 let Component = React.createClass({
     componentWillMount() {
         localStorage.setItem("keyone", 0);
+        localStorage.setItem("keytwo", 0);
     },
     componentDidMount() {
         let {changekey} = this.props;
         this.props.init();
-        // setInterval(function(){
-        //     changekey()
-        // },5000)
+        timer = setInterval(function(){
+            changekey()
+        },200)
     },
-    // componentWillUnmount(){
-    //     console.log(localStorage.keyone);
-    //     clearInterval();
-    // },
+    componentWillUnmount: function(){
+        clearInterval(timer);
+    },
     render() {
         let {} = this.props;
 
@@ -33,6 +33,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        timeflag: state.objs.timeflag,
     }
 };
 
@@ -47,8 +48,10 @@ const mapDispatchToProps = (dispatch) => {
             }else {
                 dispatch(actions.setVars('tabItem', true));
                 dispatch(actions.setVars('navhide', true));
+                dispatch(actions.setVars('tabItemActive', localStorage.keytwo));
             }
-            console.log(localStorage.keyone);
+            // console.log(localStorage.keyone);
+            // console.log(localStorage.keytwo);
 
         },
 };
