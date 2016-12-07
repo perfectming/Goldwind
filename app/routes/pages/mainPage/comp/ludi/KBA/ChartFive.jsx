@@ -51,14 +51,14 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#33545c','#5298d3','#537388', '#ff6600','#5b9bd5'],
+            colors: [ '#33BAC0', '#70c080','#5298d3','#537388', '#ff6600','#5b9bd5'],
             
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 40,
-                    borderRadius:10
+                    pointWidth: 25,
+                    borderRadius:5
                 }
             },
             xAxis: {
@@ -75,11 +75,20 @@ let Component = React.createClass({
                 categories:data.data[2].name,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
+                title:{
+                	text:'kW',
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -10,
+	                x:-15,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+                },
                 labels: {
-                	format:'{value}万元',
+                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色

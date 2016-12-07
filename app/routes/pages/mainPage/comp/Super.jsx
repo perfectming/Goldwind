@@ -14,13 +14,7 @@ import dataBase from '../../../../../config/ModelData';
 import model from '../../../../../config/Model';
 import matrix from '../../../../../config/MatrixModel';
 import matData from '../../../../../config/MatrixData';
-let datename00=dataBase.ModelData[8888800].CurDayPowerCurve.Time;
-let date00=dataBase.ModelData[8888800].CurDayPowerCurve.Value;
-let datename01=dataBase.ModelData[8888801].CurDayWindSpeedCurve.Time;
-let date01=dataBase.ModelData[8888801].CurDayWindSpeedCurve.Value;
-let datename02=dataBase.ModelData[8888802].CurDayPVTSICurve.Time;
-let date02=dataBase.ModelData[8888802].CurDayPVTSICurve.Value;
-let zhzb=[];
+
 
 
 let Component = React.createClass({
@@ -29,11 +23,52 @@ let Component = React.createClass({
     },
 
     render() {
-         let data=dataBase.ModelData;
-        let mod=model.Model;
+         
+        let {zhzb,bbs,all}=this.props;
+        let data=bbs.ModelData;
+        let mod=zhzb.Model;
         let  mat=matrix.Model;
         let matD=matData.ModelData;
-        let {all}=this.props;
+        let datename00=bbs.ModelData[8888800].CurDayPowerCurve.Time;
+        let date00=bbs.ModelData[8888800].CurDayPowerCurve.Value;
+        let datename01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Time;
+        let date01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Value;
+        let datename02=bbs.ModelData[8888802].CurDayPVTSICurve.Time;
+        let date02=bbs.ModelData[8888802].CurDayPVTSICurve.Value;
+
+            let datename=zhzb.Model.ens;
+            let arr=[];
+            let arrname=[];
+            let allnum=0;
+            let num=[];
+
+            (function(){
+                for(let i in data){
+                if(data[i].WTCount=='0' || data[i].InverterCount =='0'){
+                arr.push(data[i].DayEgyAt/1);
+                }
+                }
+                for(let x=0;x<arr.length;x++){
+                    allnum+=arr[x]
+                }  
+   
+            }());
+            (function(){
+                for(let i in datename){
+                    if(datename[i].wft){
+                    arrname.push(datename[i].name);
+                    }
+                }    
+    
+                play();
+
+            }())
+            function play(){
+                for(let i=0;i<arr.length;i++){
+                    num.push([arrname[i],arr[i]])
+                }
+
+            }
         return (
             <div className={styles.bodyBox}>
 
@@ -44,10 +79,10 @@ let Component = React.createClass({
                     <div className={styles.chart_pie} >
                         <div className={`${styles.ehart} ${styles.box_shadow}`}>  
                         <div className={styles.dingwei}>
-                            <Pie></Pie>
+                            <Pie arn={arrname} nu={num}></Pie>
                         </div>
-                        <span className={styles.chartnum}><p>{all}</p><p>kWh</p></span>
-                            <Title title={['日发电量统计']}></Title>
+                        <span className={styles.chartnum}><p>{allnum}</p><p>kWh</p></span>
+                            <Title title={['日发电量统计(kWh)']}></Title>
                         </div>
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
                             <Line1 date={date00} datename={datename00} height={220} name={'当日24小时功率曲线'}></Line1>
@@ -92,7 +127,8 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        all: state.vars.allnumber,
+        zhzb: state.vars.zhzb,
+        bbs: state.vars.bbs,
     }
 };
 

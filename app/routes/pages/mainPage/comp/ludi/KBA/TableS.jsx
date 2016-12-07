@@ -76,9 +76,18 @@ let Component = React.createClass({
                 categories:data.data[1].wind,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
+                title:{
+                	text:'kW',
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -10,
+	                x:-15,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+                },
                 labels: {
                 	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
