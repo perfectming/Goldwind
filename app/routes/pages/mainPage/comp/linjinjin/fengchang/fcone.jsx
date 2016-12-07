@@ -5,9 +5,11 @@ import Navleft from '../../super/navleft.jsx';
 import Fanmatrix from '../../xym/Fanmatrix.jsx';
 import Pvmatrix from '../../xym/Pvmatrix.jsx';
 
+import Fan from '../../jy/fan.jsx';
 import Sjlb from '../../jy/fanDataList.jsx';
 import Fjkx from './fcright/fjkx.jsx';
 import Cft from './fcright/cft.jsx';
+import Cgt from './fcright/cgt.jsx';
 import Gfkx from './fcright/gfkx.jsx';
 import Gisdxt from './fcright/gisdxt.jsx';
 import Syzjs from './fcright/syzjs.jsx';
@@ -37,7 +39,9 @@ let Component = React.createClass({
                         { numpage==='sjlb' && <Sjlb></Sjlb>}
                         { numpage==='fjkx' && <Fjkx></Fjkx>}
                         { numpage==='gfkx' && <Gfkx></Gfkx>}
+                        { numpage==='fanobj' && <Fan></Fan>}
                         { numpage==='cft' && <Cft></Cft>}
+                        { numpage==='cgt' && <Cgt></Cgt>}
                         { numpage==='gisdxt' && <Gisdxt></Gisdxt>}
                         { numpage==='syzjs' && <Syzjs></Syzjs>}
                         { numpage==='choosefan' && <Choosefan></Choosefan>}

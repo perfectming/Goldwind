@@ -7,35 +7,35 @@ import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
 import _ from 'lodash';
 import $ from 'jquery';
-
 let tabaleData = require('../../../../../../config/super_table');
-let dataBase=require('../../../../../../config/ModelData');
-let matrixdata = require('../../../../../../config/MatrixData');
-let place=require('../../../../../../config/Model');
 let header=require('./tabledate');
 let headername=header.header;
-let date=dataBase.ModelData;
-let placename=place.Model.ens;
-let arrname=[];
-let point=[];
-let fcnum=[];
-let number=[];
-let obj = matrixdata;
-let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+
+
+let Component = React.createClass({
+    componentDidMount() {
+        this.props.init(tabaleData);
+    },
+    render() {
+        let {table, changeTableItem,changepage,zhzb,bbs} = this.props;
+        let date=bbs.ModelData;
+        let placename=zhzb.Model.ens;
+        let arrname=[];
+        let point=[];
+        let fcnum=[];
+        let number=[];
 (function(){
-    let o=0;
+        let o=0;
     for(let name in placename){ 
       if(placename[name].wft=='Wf')  {  
-               point.push(placename[name].name)
-             }
+            point.push(placename[name].name)
+        }
            
-            }
+    }
   for(let key in date){
     let arr=[];
     let num=[];
   if(date[key].WTCount!='0' && date[key].InverterCount=='0'){
-     fcnum.push(key);
     for(let i=0;i<headername.length;i++){
          if(i==0){
              arr.push(point[o]);
@@ -46,9 +46,7 @@ let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
              }
              arr.push(date[key][headername[i]]);
             }
-             for(let number in obj_wfd){
-            num.push(number);
-        }
+ 
             arrname.push(arr);
             number.push(num);
          }
@@ -58,12 +56,15 @@ let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 
 
 
-let Component = React.createClass({
-    componentDidMount() {
-        this.props.init(tabaleData);
-    },
-    render() {
-        let {table, changeTableItem,changepage} = this.props;
+
+
+
+
+
+
+
+
+
         return (
             <div>
                 
@@ -154,6 +155,8 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
+        zhzb: state.vars.zhzb,
+        bbs: state.vars.bbs,
     }
 };
 
@@ -168,14 +171,15 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('tableContent', tableV));
         },
         changepage:(key) => {
-           dispatch(actions.setVars('showPage', 'fan_matrix'));
+           dispatch(actions.setVars('showPage', 'cs'));
+           dispatch(actions.setVars('pagename', 'fan_matrix'));
            dispatch(actions.setVars('numpage', 'fanmatrix'));
            dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('actbt',key ));
           dispatch(actions.setVars('actbt1','' ));
-          dispatch(actions.setVars('valuepage', fcnum[key]));
+           dispatch(actions.setVars('valuepage', '650107'));
           dispatch(actions.setVars('befor_page','super' ));
-          dispatch(actions.setVars('fc_info', number[0][key]));
+           //dispatch(actions.setVars('fc_info', number[0][key]));
           dispatch(actions.setVars('Changnav', 0));
 
         }

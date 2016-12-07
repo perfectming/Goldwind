@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch) => {
 
         }
 
-        },1000)
+        },3000)
         
         
 
