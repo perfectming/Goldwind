@@ -102,7 +102,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'小时',
+                    text:'(h)',
                     align:'high',
                     rotation:'0',
                     y: -10,

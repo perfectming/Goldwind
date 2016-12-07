@@ -105,7 +105,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'小时',
+                    text:'(kWh)',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -142,42 +142,43 @@ let Component = React.createClass({
                 },
             }],
             series: [{
-                name: '实际运行时间量',
+                name: '实际发电量',
                 type: 'column',
+                color:"#33BAC0",
                 data: barLoPowerValues,
                 borderRadius: 4,
             },
                 {
-                    name: '停机时间',
-                    color:'#A2D04D',
+                    name: '故障损失',
+                    color:'#5298d3',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time',
                     borderRadius: 4,
                 },
                 {
-                    name: '停机时间',
-                    color:'#FFD927',
+                    name: '维护损失',
+                    color:'#ffffff',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '停机时间',
-                    color:'#FF9424',
+                    name: '限功率损失',
+                    color:'#e9c75c',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '停机时间',
-                    color:'#FF6124',
+                    name: '非设备原因损失',
+                    color:'#d06960',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: 'TBA',
+                    name: 'PBA',
                     type: 'line',
                     color:'#0000ff',
                     data: barLdpowerValue,

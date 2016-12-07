@@ -55,13 +55,12 @@ let Component = React.createClass({
                          <div className={styles.tik}>
                         <p className={styles.Ff}>{text[actbt]}</p>
                            </div>
-                           <div className={styles.lkua}></div>
-                           <div className={styles.rkua}></div>
+                           
                     </div>
                 <div className={styles.imgq}>
                     <img src={icono}/>
                 </div>
-              <div className={styles.buttons}>
+              <div className={`${styles.buttons} ${styles.buttonss}`}>
                       <button onClick={()=>gogogo(windPT)} > 前10</button>
                       <button onClick={()=>back(windPT)}>后10</button>
                       <button  onClick={()=>more()}>更多</button>

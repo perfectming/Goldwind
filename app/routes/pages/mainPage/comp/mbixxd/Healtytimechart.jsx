@@ -15,8 +15,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:390,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -135,7 +134,7 @@ let Component = React.createClass({
                 name: '健康度',
                 type: 'column',
                 data: areaRecordProfitT,
-                color:'#7DF59C',
+                color:'#4CDB9D',
             },
             ]
         };
@@ -163,7 +162,7 @@ const mapDispatchToProps = (dispatch) => {
         changedata1 :(w0,win,b)=>{
             dispatch(actions.setVars('w1',w0 ));
             dispatch(actions.setVars('wins1',wins[b-1]));
-            console.log(wins[b-1]);
+           
         },
     };
 };

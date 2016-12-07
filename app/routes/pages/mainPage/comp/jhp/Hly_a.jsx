@@ -139,7 +139,7 @@ let Component = React.createClass({
                     }
                 },
             },{
-                title:'TBA%',
+                title:'(TBA)',
                 max:100,
                 oppsite:true,
                 labels: {
@@ -153,40 +153,42 @@ let Component = React.createClass({
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: barLoPowerValues,
+                color:"#33BAC0",
+        data: barLoPowerValues,
                 borderRadius: 4,
+            },{
+                name: '故障损失',
+                color:'#5298d3',
+                type: 'column',
+                data: barLoPowerValue,
+                stack:'time',
+
             },
                 {
-                    name: '理论发电量',
+                    name: '维护损失',
+                    color:'#ffffff',
+                    type: 'column',
+                    data: barLoPowerValue,
+                    stack:'time'
+                },
+                {
+                    name: '限功率损失',
+                    color:'#e9c75c',
+                    type: 'column',
+                    data: barLoPowerValue,
+                    stack:'time'
+                },
 
-                    color:'#A2D04D',
+                {
+                    name: '非设备原因损失',
+                    color:'#d06960',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time',
                     borderRadius: 2,
                 },
-                {
-                    name: '理论发电量',
-                    color:'#FFD927',
-                    type: 'column',
-                    data: barLoPowerValue,
-                    stack:'time'
-                },
-                {
-                    name: '理论发电量',
-                    color:'#FF9424',
-                    type: 'column',
-                    data: barLoPowerValue,
-                    stack:'time'
-                },
-                {
-                    name: '理论发电量',
-                    color:'#FF6124',
-                    type: 'column',
-                    data: barLoPowerValue,
-                    stack:'time',
 
-                },
+
                 {
                     name: 'PBA',
                     type: 'line',

@@ -10,14 +10,13 @@ let Component = React.createClass({
     },
 
     render() {
-        let windFiled=data.windFiled;
-        let windCost=data.windCost;
-        let windProfit=data.windProfit;
+        let {windFiled,windCost,windProfit,w111,changedata1}=this.props;
         let configPie = {
             chart: {
                 height:370,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                width:850,
+             backgroundColor: "rgba(44, 61, 71,0)",
+            
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -37,6 +36,7 @@ let Component = React.createClass({
             },
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -55,8 +55,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#1E664A', '#4CDB9D','#000','#134833', '#082B1F']
-            ,
+            colors: [ '#33BAC0', '#70c080'],
             plotOptions: {
 
                 bar:{
@@ -74,7 +73,10 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            
+                               w111=e.point.category;
+                        var  a=w111.toString().split("");
+                        var b=a[0];
+                        changedata1(w111,b);
                         }
                     }
                 }
@@ -95,51 +97,70 @@ let Component = React.createClass({
                 },
                 categories:windFiled,
             },
-             yAxis: [{
-                labels: {
+            yAxis: [{
+            labels: {
                 format: '',
                 style: {
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 45,
                 style:{
-                    color:'#fff',
-                    fontSize:'14px'
+                    fontSize:'14px',
+                    color:'#fff'
                 }
             }
         }, {
+             labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text: '',
+                text: 'TBA%',
                  align:'high',
                 rotation:'0',
-                y: -20,
-                x: 40,
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
 
             },
             opposite: true
         }],
+
             series: [{
                 name: '实际收益',
                 type: 'column',
-                data: windProfit
+                data: windProfit,
+                pointPlacement:0,
             },
             {
             	name: '收益成本',
                 type: 'column',
-                data: windCost
+                data: windCost,
+                pointPlacement: -0.06,
             },
                 {
                     name:'TBA',
                     type:'line',
                     color:'blue',
-                    data:[2,6,7,9,12,6,2,6,7,9,12,6,]
+                    data:[2,6,7,9,12,6,2,6,7,9,12,6,],
+                    yAxis:1
                 }]
         };
         return (
@@ -150,12 +171,18 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+         w111 : state.vars.w12,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+         changedata1 :(w111,b)=>{
+            dispatch(actions.setVars('w12',w111)); 
+           
         },
     };
 };
