@@ -14,7 +14,8 @@ import icon3 from '../../img/comp/icon3.png';
 import icon4 from '../../img/comp/icon4.png';
 import icon5 from '../../img/comp/icon5.png';
 import Column from '../chart/column1.jsx';
-
+var $ = require('jquery');
+var actions = require('redux/actions');
 
 
 let Component = React.createClass({
@@ -27,17 +28,21 @@ let Component = React.createClass({
         let mod=model.Model;
         let  mat=matrix.Model;
         let matD=matData.ModelData;
-        let {all}=this.props;
+        let {all,zhzb,bbs}=this.props;
+        let mod1=zhzb.Model;
+        let data2=bbs.ModelData;
+
         return (
+
             <div className={styles.bodyBox}>
 
                 
                     <div  className={`${styles.states} ${styles.box_shadow}`}>
                     
                          <Title title={['综合指标']}></Title>
-
                          <div className={styles.wind}>
-                           <span className={styles.num}><a className={styles.anum1}>{mod.dis.TActPower.name}</a><a className={styles.anum}><b>{data[8888800].TActPower}</b>{mod.dis.TActPower.unit}</a></span>
+
+                           <span className={styles.num}><a className={styles.anum1}>{mod1.dis.TActPower.name}</a><a className={styles.anum}><b>{data[8888800].TActPower}</b>{mod.dis.TActPower.unit}</a></span>
                             <span className={styles.num}><a className={styles.anum1}>{mod.dis.Capacity.name}</a><a className={styles.anum}><b>{data[8888800].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
                             <span className={styles.num}><a className={styles.anum1}>风电容量</a><a className={styles.anum}><b>{data[8888801].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
                             <span className={styles.num}><a className={styles.anum1}>光伏容量</a><a className={styles.anum}><b>{data[8888802].Capacity}</b>{mod.dis.Capacity.unit}</a></span>
@@ -55,7 +60,7 @@ let Component = React.createClass({
                          <div className={styles.wind}>
                             <span className={styles.num}><a className={styles.anum1}>{mod.dis.WFCount.name}</a><a className={styles.anum}><b>{data[8888800].WFCount}</b>{mod.dis.WFCount.unit}</a></span>
                             <span className={styles.num}><a className={styles.anum1}>{mod.dis.WTCount.name}</a><a className={styles.anum}><b>{data[8888800].WTCount}</b>{mod.dis.WTCount.unit}</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{data[8888800].WindSpeed_DevAverValue}</b>{mod.dis.WindSpeed_DevAverValue.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{Number(data2[8888800].WindSpeed_DevAverValue).toFixed(2)}</b>{mod.dis.WindSpeed_DevAverValue.unit}</a></span>
                           
                          </div>
                           <div className={styles.wind}>
@@ -167,17 +172,32 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         all: state.vars.allnumber,
+        zhzb: state.vars.zhzb,
+        bbs: state.vars.bbs,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+
         init: () => {
+
+        
+
+        
+            
+        
+        
+
+
+
+
             var obj = {
                 test:''
             }
-        }
-        ,
+        },
+
+       
     };
 };
 

@@ -12,29 +12,23 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",w10="风场1",mon="一月份",barRotimes,powerValue,windplan=win,height,widths} = this.props;
+        let {w0="一区域",w10="风场1",mon="一月份",barRotimes,powerValue,windplan=win,height,widths,text} = this.props;
 
 
         let configPie = {
             chart: {
                 height:height,
                 width:widths,
-                backgroundColor: "rgba(46, 46, 65, 0)",
-                plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                    stops: [
-                        //[0, 'rgb(56, 85, 94)'],
-                        [0, 'rgb(37, 41, 48)']
-                    ]
-                },
+
                 borderRadius:10
             },
             title: {
-                text: mon+w0+w10+"各风机健康度",
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
@@ -47,6 +41,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                y:40,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },

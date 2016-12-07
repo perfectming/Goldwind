@@ -18,12 +18,11 @@ import monBoardData from '../../../../../../config/MonitorBoardData';
 import model from '../../../../../../config/MonitorBoardModel';
 let comp = require('./date');
 var $ = require('jquery');
-
-
 let arr=[];
 let arrname=[];
 let allnum=0;
 let num=[];
+
 for(let i in monBoardData.ModelData){
     arr.push(monBoardData.ModelData[i].DayEgyAt/1);
 }
@@ -49,18 +48,19 @@ let Component = React.createClass({
             <div className={styles.bodyBox}>
                 <div className={`${styles.zhzb} ${styles.box_shadow}`}>
                     <Title title={['综合指标']}></Title>
-                    <div className={styles.zhzbtop}>
-                        <div className={styles.zhzbtopbox}><div>全年发电量</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].TActPower}</span>MW</div>
-                        <div className={styles.zhzbtopbox}><div>弃风率</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].Capacity}</span>{mod.dis.Capacity.unit}</div>
-                        <div className={styles.zhzbtopbox}><div>弃光率</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].DayEgyAt}</span>{mod.dis.DayEgyAt.unit}</div>
-                        <div className={styles.zhzbtopbox}><div>上网电量</div> <span className={styles.zhzbtopboxg}>{mobd[8888801].TActPower}</span>MW</div>
-                        <div className={styles.zhzbtopbox}><div>厂用电量</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].WindSpeed_DevAverValue}</span>m/s</div>
-                        <div className={styles.zhzbtopbox}><div>购网电量</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].MonthEgyAt}</span>{mod.dis.MonthEgyAt.unit}</div>
-                        
-                    </div>
                     <div className={styles.zhzbdown}><img src={anquan} className={styles.anquan}/>安全运行
                         <span className={styles.daynum}> 1026</span> 天
                     </div>
+                    <div className={styles.zhzbtop}>
+                        <div className={styles.zhzbtopbox}><div>全年发电量</div> <span className={styles.zhzbtopboxg}>71070.53</span>万kWh</div>
+                        <div className={styles.zhzbtopbox}><div>弃风率</div> <span className={styles.zhzbtopboxg}>38</span>%</div>
+                        <div className={styles.zhzbtopbox}><div>弃光率</div> <span className={styles.zhzbtopboxg}>46</span>%</div>
+                        <div className={styles.zhzbtopbox}><div>上网电量</div> <span className={styles.zhzbtopboxg}>6430.45</span>万kWh</div>
+                        <div className={styles.zhzbtopbox}><div>厂用电量</div> <span className={styles.zhzbtopboxg}>2255.21</span>万kWh</div>
+                        <div className={styles.zhzbtopbox}><div>购网电量</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].MonthEgyAt}</span>万kWh</div>
+                        
+                    </div>
+                    
                 </div>
                 <div className={`${styles.zhzbgl} ${styles.box_shadow}`}>
                     <Title title={['综合指标概览']}></Title>
@@ -108,17 +108,23 @@ let Component = React.createClass({
                         <div className={styles.righttext}>节能减排</div>
                     </div>
                     <div className={styles.navitem}>
-                        <div className={styles.leftimg} style={{width:'52%'}}>区域内场站数量:</div>
-                        <div className={styles.righttext} style={{width:'48%'}}>12个</div>
+                        <div className={styles.leftimg} style={{width:'100%',textAlign:'center'}}>区域内场站数量:12个</div>
                     </div>
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg} style={{width:'52%'}}>纳入CDM场站数量:</div>
-                        <div className={styles.righttext} style={{width:'48%'}}>6个</div>
+                    <div className={`${styles.navitem} ${styles.bore1}`}>
+                        <div className={styles.leftimg} style={{width:'100%'}}>纳入CDM场站数量:8个</div>
                     </div>
                     
                     <div className={styles.navitem}>
                         <div className={styles.leftimg}><img src={nlcojp}/></div>
                         <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{mobd[8888800].YearSO2Emissions}</b>万吨</h2></div>
+                    </div>
+                     <div className={`${styles.navitem} ${styles.bore1}`}>
+                        <div className={styles.leftimg} style={{width:'100%'}}>未纳入CDM场站数量:4个</div>
+                    </div>
+                    
+                    <div className={styles.navitem}>
+                        <div className={styles.leftimg}><img src={nlcojp}/></div>
+                        <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>24408</b>万吨</h2></div>
                     </div>
                  
                 </div>

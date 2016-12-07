@@ -13,16 +13,8 @@ module.exports = {
             		rpage:'sjlb'
             	},
             	{
-            		tabname:'风机馈线',
-            		rpage:'fjkx'
-            	},
-            	{
             		tabname:'测风塔',
             		rpage:'cft'
-            	},
-            	{
-            		tabname:'GIS地形图',
-            		rpage:'gisdxt'
             	},
             	{
             		tabname:'升压站监视',
@@ -45,17 +37,9 @@ module.exports = {
                     tabname:'数据列表',
                     rpage:'sjlb'
                 },
-               {
-                    tabname:'光伏馈线',
-                    rpage:'gfkx'
-                },
                 {
                     tabname:'测光塔',
                     rpage:'cft'
-                },
-                {
-                    tabname:'GIS地形图',
-                    rpage:'gisdxt'
                 },
                 {
                     tabname:'升压站监视',

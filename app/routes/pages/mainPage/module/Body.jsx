@@ -75,12 +75,15 @@ import Profitsss from '../comp/mbixxd/tbatime/Profitsss.jsx';
 
 
 import Legend from '../comp/super/tootipbox.jsx';
-
+import Reliability from '../comp/ludi/KBA/Reliability.jsx';
+import PEQII from '../comp/mbixxd/PEQII.jsx';
 import Health_main from '../comp/healthManagement/Health_main.jsx';
 import History_list from '../comp/healthManagement/history.jsx';
 import Manaport from '../comp/healthManagement/manaport.jsx';
 import Subscribe from '../comp/healthManagement/subscribe.jsx';
 import Yujing from '../comp/healthManagement/yujing.jsx';
+import Input_cost from '../comp/jhp/Input_cost.jsx';
+import CS from '../comp/linjinjin/cs.jsx';
 
 
 
@@ -172,7 +175,11 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
+
                 
+                {showPage === 'reliability' && <Reliability></Reliability>}
+               
+
               
                
 
@@ -181,6 +188,9 @@ let Component = React.createClass({
                 {showPage === 'manaport' && <Manaport></Manaport>}
                 {showPage === 'subscribe' && <Subscribe></Subscribe>}
                 {showPage === 'yujing' && <Yujing></Yujing>}
+                {showPage === 'peqii' && <PEQII></PEQII>}
+                {showPage === 'input_cost' && <Input_cost></Input_cost>}
+                {showPage === 'cs' && <CS></CS>}
 
 
                 <div className={styles.clearbox}></div>

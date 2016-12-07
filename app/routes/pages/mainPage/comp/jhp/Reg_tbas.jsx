@@ -18,19 +18,11 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:height,
-                backgroundColor: "rgba(46, 46, 65, 0)",
-                plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                    stops: [
-
-                        [0, 'rgb(37, 41, 48)'],
-
-                    ]
-                },
                 borderRadius:10
             },
             title: {
@@ -49,6 +41,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                y:30,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -149,7 +142,7 @@ let Component = React.createClass({
                 borderRadius: 4,
             },
                 {
-                    name: '四',
+                    name: '理论发电量',
                     color:'#A2D04D',
                     type: 'column',
                     data: barLoPowerValue,
@@ -158,14 +151,14 @@ let Component = React.createClass({
 
                 },
                 {
-                    name: '大',
+                    name: '理论发电量',
                     color:'#FFD927',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '类',
+                    name: '理论发电量',
                     color:'#FF9424',
                     type: 'column',
                     data: barLoPowerValue,

@@ -17,19 +17,12 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:450,
-                backgroundColor: "rgba(46, 46, 65, 0)",
-                plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                    stops: [
-                        //[0, 'rgb(56, 85, 94)'],
-                        [0, 'rgb(37, 41, 48)'],
 
-                    ]
-                },
                 borderRadius:10
             },
             title: {
@@ -46,6 +39,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                y:20,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -114,6 +108,10 @@ let Component = React.createClass({
                     rotation:'0',
                     y: -10,
                     x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    },
                 },
 
                 labels: {

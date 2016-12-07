@@ -19,18 +19,12 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:height,
-                backgroundColor: "rgba(46, 46, 65, 0)",
-                plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                    stops: [
-                        //[0, 'rgb(56, 85, 94)'],
-                        [0, 'rgb(37, 41, 48)']
-                    ]
-                },
+
                 borderRadius:10
             },
             title: {
@@ -47,6 +41,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                y:20,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -98,7 +93,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth:40
+                    pointWidth:30,
                 }
             },
             xAxis: {
@@ -122,7 +117,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'',
+                    text:'100%',
                     align:'high',
                     rotation:'0',
                     y: -10,

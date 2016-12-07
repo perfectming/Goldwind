@@ -1,16 +1,18 @@
 .box{
     overflow:hidden;
+    padding:10px;
+    padding-right:40px;
     .bigbox:hover{
     box-shadow:0 0 15px #fff;
     }
     .bigbox{
     margin-top:50px;
     height:100%;
-    width:98%;
+    width:100%;
     border:1px solid #282F37;
     position:relative;
     margin:10px auto;
-    margin-top:35px;
+    margin-top:32px;
       background-color: #282F37;
       .coverbox{
         margin-top:20px;

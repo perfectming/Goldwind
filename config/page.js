@@ -96,12 +96,6 @@ module.exports = {
                     {
                         name:'计划电量录入',
                         page:'PEQI',
-                    },{
-                        name:'数据整理2',
-                        page:'',
-                    },{
-                        name:'数据整理3',
-                        page:'',
                     }]
             }],
         },{
@@ -110,6 +104,8 @@ module.exports = {
             iconActive: require('../app/routes/pages/mainPage/img/comp/jkgl_active.png'),
             subPage: [{
                 name:'健康总览',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/jkzl.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/jkzl_active.png'),
                 page:[
                      {
                         name:'总览',
@@ -117,6 +113,8 @@ module.exports = {
                     }]
             },{
                 name:'预警处理',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/yjcl.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/yjcl_active.png'),
                 page:[
                     {
                         name:'预警处理',
@@ -209,7 +207,7 @@ module.exports = {
                         page:'loseElectric',
                     },{
                         name:'可靠性分析',
-                        page:'topTen',
+                        page:'reliability',
                     },{
                         name:'设备损失分析',
                         page:'deviceLose',
@@ -265,14 +263,11 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/sjtb1.png'),
                 page:[
                      {
-                        name:'业务分析3-1',
-                        page:'',
+                        name:'阶段上网电量',
+                        page:'peqii',
                     },{
-                        name:'业务分析3-2',
-                        page:'',
-                    },{
-                        name:'业务分析3-3',
-                        page:'',
+                        name:'成本录入',
+                        page:'input_cost',
                     }]
             }],
         },{

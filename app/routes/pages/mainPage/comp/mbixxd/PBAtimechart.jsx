@@ -4,21 +4,15 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Profit-data');
-
+let winss=data.areaPlanDayY;
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaPlan=data.areaPlan;
-        let monthT=data.monthT;
-        let profit=data.windProfit;
-        let cost=data.windCost;
-
+        let {monthT,profit,cost,w0,winsss,changedata3}=this.props;
         let configPie = {
             chart: {
-                height:390,
+                height:395,
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -73,7 +67,10 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                           w0=e.point.category;
+                        var  a=w0.toString().split("");
+                        var b=a[0];
+                        changedata3(w0,winss,b);
                         }
                     }
                 }
@@ -173,12 +170,20 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+          w0 : state.vars.w1,
+        winsss: state.vars.wins1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+         changedata3 :(w0,winss,b)=>{
+            dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('wins1',winss[b-1]));
+           
         },
     };
 };
