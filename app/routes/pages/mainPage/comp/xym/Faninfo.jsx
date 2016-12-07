@@ -48,7 +48,7 @@ let Component = React.createClass({
 	},
 
 	render() {
-		let {value,fanid} = this.props;
+		let {value,fanid,tobujian} = this.props;
 		let val = value.Wtid;
 
 		// console.log(fmvalue.StatusCode);
@@ -289,7 +289,7 @@ let Component = React.createClass({
 				</div>
 				<div className={`${styles.fanrightbox} ${styles.infofL}`}>
 					<Title title={['状态统计']}></Title>
-					<div className={`${styles.fanaction} ${styles.infofL11111111}`}>
+					<div className={`${styles.fanaction} ${styles.infofL11111111}`} onClick = {()=> tobujian()}>
 						<div className={styles.actionbox}>
 							<div>启动</div>
 							<div>停机</div>
@@ -498,6 +498,10 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
+        tobujian:()=>{
+        	dispatch(actions.setVars('fan_page', 'fanobj'));
+
+        }
         
     };
 };

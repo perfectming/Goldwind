@@ -4,6 +4,7 @@ import styles from './Fan_matrix.scss';
 import Headernav from './header.jsx';
 import Faninfo from '../xym/Faninfo.jsx';
 import Bodymap from './mapbody.jsx';
+import Fan from '../jy/fan.jsx';
 import Pvinfo from '../xym/Pvinfo.jsx';
 var actions = require('redux/actions');
 let page1 = require('./mappage');
@@ -21,6 +22,7 @@ let Component = React.createClass({
                 { fan_page==='allpage' && <Bodymap tab={page1.header[changnav].rightpagge}></Bodymap>}
                 { fan_page==='faninfo' && <Faninfo></Faninfo>}
                 { fan_page==='pvinfo' && <Pvinfo></Pvinfo>}
+                { fan_page==='fanobj' && <Fan></Fan>}
             </div>
         );
     }

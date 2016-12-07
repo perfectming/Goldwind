@@ -77,7 +77,6 @@ import Profitsss from '../comp/mbixxd/tbatime/Profitsss.jsx';
 import Legend from '../comp/super/tootipbox.jsx';
 import Reliability from '../comp/ludi/KBA/Reliability.jsx';
 import PEQII from '../comp/mbixxd/PEQII.jsx';
-import Monica from '../comp/jy/monica';
 import Health_main from '../comp/healthManagement/Health_main.jsx';
 import History_list from '../comp/healthManagement/history.jsx';
 import Manaport from '../comp/healthManagement/manaport.jsx';
@@ -114,7 +113,6 @@ let Component = React.createClass({
                 {showPage === 'super' && <Super></Super>}
                 {showPage === 'booster' && <Booster></Booster>}
                 {showPage === 'tkgl' && <Tkgl></Tkgl>}
-                {showPage === 'monica' && <Monica></Monica>}
                 {showPage === 'distribution' && <Distribution></Distribution>}
                 {showPage === 'fan' && <Fan></Fan>}
                 {showPage === 'power' && <Power></Power>}
