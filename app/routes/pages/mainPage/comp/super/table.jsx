@@ -177,9 +177,9 @@ const mapDispatchToProps = (dispatch) => {
            dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('actbt',key ));
           dispatch(actions.setVars('actbt1','' ));
-          // dispatch(actions.setVars('valuepage', fcnum[key]));
+           dispatch(actions.setVars('valuepage', '650107'));
           dispatch(actions.setVars('befor_page','super' ));
-          // dispatch(actions.setVars('fc_info', number[0][key]));
+           //dispatch(actions.setVars('fc_info', number[0][key]));
           dispatch(actions.setVars('Changnav', 0));
 
         }
