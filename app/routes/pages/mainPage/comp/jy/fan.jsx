@@ -37,19 +37,19 @@ let Component = React.createClass({
                         })
                     }
                 </div>
-                    <div className={`${styles.infoBox} ${styles.infofL}`}>
-                        <div className={styles.statusquery}>
-                            {
-                                adsI.content.map((value, key)=>{
-                                    return (
-                                        <div key={key} className={`${key%8<4 ? styles.bgbox : styles.nomalbox} ${styles.statusquerybox}`}>
-                                            <span><img src={value[1]==0?Jerry:Tom}/>{value[0]}</span>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
+                <div className={`${styles.infoBox} ${styles.infofL}`}>
+                    <div className={styles.statusquery}>
+                        {
+                            adsI.content.map((value, key)=>{
+                                return (
+                                    <div key={key} className={`${key%8<4 ? styles.bgbox : styles.nomalbox} ${styles.statusquerybox}`}>
+                                        <span><img src={value[1]==0?Jerry:Tom}/>{value[0]}</span>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
+                </div>
                 <div className={`${styles.fanrightbox} ${styles.infofL}`}>
                     <div className={styles.action1box}>
                         {
