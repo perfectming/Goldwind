@@ -39,7 +39,7 @@ module.exports = {
                 },
                 {
                     tabname:'测光塔',
-                    rpage:'cft'
+                    rpage:'cgt'
                 },
                 {
                     tabname:'升压站监视',

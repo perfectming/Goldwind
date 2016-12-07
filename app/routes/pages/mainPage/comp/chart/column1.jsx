@@ -12,6 +12,56 @@ let Component = React.createClass({
     },
 
     render() {
+        let arr=[];
+        let key=[];
+        let allname=[];
+        let allname1=[];
+        let{mod,date}=this.props;
+        
+        for(let num in date){
+             if(date[num].WTCount=='0' || date[num].InverterCount =='0'){
+                
+                arr.push(Number(((date[num].MonthEgyAt/date[num].CurMonthPlanEgyAt)*100).toFixed(2)));
+                key.push([num,Number(((date[num].MonthEgyAt/date[num].CurMonthPlanEgyAt)*100).toFixed(2))]);
+                }
+
+        }
+         arr.sort(function(a,b){return b-a})//数据排列
+         key.sort(function(a,b){
+            return b[1]-a[1]
+        })
+        for(let name in mod.ens){
+            if(mod.ens[name].wft){
+            allname.push(mod.ens[name].name)
+            }
+        }
+        var i=0;
+        var one,two,three;
+         for(let na in mod.ens){
+
+            if(na==key[0][0]){
+            one=mod.ens[na].name
+            }
+             if(na==key[1][0]){
+            two=mod.ens[na].name
+            }
+             if(na==key[2][0]){
+            three=mod.ens[na].name
+            }
+
+         }
+         allname1.push(one,two,three)
+        
+           
+
+            
+            
+            
+            
+        
+   
+       
+
         let configPie = {
             chart: {
                 type: 'bar',
@@ -30,7 +80,7 @@ let Component = React.createClass({
 
                 tickInterval: 1,
 
-                categories: ['华冉','雪湖','小草湖','草湖','大连胡'],
+                categories: allname1,
                  labels: {
 
                        rotation:0,
@@ -46,7 +96,6 @@ let Component = React.createClass({
             yAxis: {  
                     lineWidth:1,
                     //dashStyle:"Dot",
-                    tickInterval:30,//刻度线间距
                     gridLineWidth: 0,//虚线粗细
                     title: {
                         align: 'high',
@@ -90,9 +139,6 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-           navigator: {
-                enabled: false //不显示滚动条周围的进度
-            },
 
             colors: ['#59e481', '#339C70', '#1E664A', '#134833', '#082B1F']
             ,
@@ -119,17 +165,7 @@ let Component = React.createClass({
                 type: 'column',
                 color:"#33c5cd",
                 name: "站场发电完成率",
-                data: [129,100,80,60,40],
-            },
-             {
-                type: 'line',
-                color:"#59e481",
-                name: "公司发电完成率",
-                data: [100,100,100,100,100],
-                 marker: {
-                        enabled: false
-                       
-                    }
+                data: arr,
             }]
         };
         return (

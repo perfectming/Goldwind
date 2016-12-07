@@ -109,7 +109,8 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         backtop:(befor_page,befor_page2)=>{
-            dispatch(actions.setVars('showPage',befor_page));
+            dispatch(actions.setVars('showPage','cs'));
+            dispatch(actions.setVars('pagename',befor_page));
             dispatch(actions.setVars('navhide', true));
             dispatch(actions.setVars('numpage', 'fanmatrix'));
             console.log(befor_page2)
