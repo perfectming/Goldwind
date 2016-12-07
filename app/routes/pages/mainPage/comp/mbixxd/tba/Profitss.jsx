@@ -43,7 +43,7 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>11月份1区域1风场各风机TBA</p>
+                <p>11月份1区域1风场各风机PBA</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <Fanchart machine={machine} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} height={500} width={1760}></Fanchart>
@@ -63,7 +63,7 @@ let Component = React.createClass({
                    <div className={`${styles.areabox} ${styles.shadow}`}>
                        <div>
                            <AreaTable areaRecordCosts={wind==null?areaRecordCostss:wind} areaName={areaName} areaRecordProfit={windP=null?areaRecordProfit:windP} text0={text0} text1={text1}></AreaTable>
-                           <p className={styles.titww}>{[actbt+1]+'月份集团各区域TBA'}</p>
+                           <p className={styles.titww}>{[actbt+1]+'月份集团各区域PBA'}</p>
                        </div>
                    </div>
                </div>
@@ -75,7 +75,7 @@ let Component = React.createClass({
                            </div>
                        </div>
                        <div className={styles.tik}>
-                           <p>{ww+w0+wq+'各风机TBA'}</p>
+                           <p>{ww+w0+wq+'各风机PBA'}</p>
                        </div>
                    </div>
                    <div className={styles.imgq}>
@@ -91,11 +91,11 @@ let Component = React.createClass({
                    <div className={styles.coverbox}>
                        <div className={styles.windcebox}>
                            <div>
-                               <Fanchart machine={machine} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} height={340} ></Fanchart>
+                               <Fanchart machine={machine} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} height={340} width={880}></Fanchart>
                            </div>
                        </div>
                        <div className={styles.tik}>
-                           <p>{ww+w0+''+'各风场TBA'}</p>
+                           <p>{ww+w0+''+'各风场PBA'}</p>
                        </div>
                    </div>
                    <div className={styles.imgq}>

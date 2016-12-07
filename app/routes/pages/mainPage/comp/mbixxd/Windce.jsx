@@ -9,13 +9,12 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaNameX,areaRecordCostT,areaRecordProfitO,colorO,colorT,pointWidth,width,height}=this.props
+        let {areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props
         let configPie = {
             chart: {
                 height:height,
                 width:width,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -98,13 +97,14 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                  title: {
-                text:'',
+                text:'(kWh)',
                     align:'high',
                     rotation:'0',
                     y: -10,
-                    x: 40,
+                    x: 45,
                     style:{
-                        color:'#fff'
+                        color:'#fff',
+                        fontSize:'14px',
                     }
             },
                   labels: {
@@ -121,7 +121,7 @@ let Component = React.createClass({
                 name: '计划发电量',
                 type: 'column',
                 data: areaRecordProfitO,
-                color:colorO,
+                color:'#33BAC0',
                 borderRadius: 7,
              
             },
@@ -129,8 +129,9 @@ let Component = React.createClass({
             	name: '实际发电量',
                 type: 'column',
                 data: areaRecordCostT,
-                color:colorT,
+                color:'#70c080',
                 borderRadius: 7,
+                pointPlacement:-0.07,
               
             }]
         };

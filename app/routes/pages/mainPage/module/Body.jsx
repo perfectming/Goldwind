@@ -75,6 +75,8 @@ import Profitsss from '../comp/mbixxd/tbatime/Profitsss.jsx';
 
 
 
+
+
 import Legend from '../comp/super/tootipbox.jsx';
 
 import Health_main from '../comp/healthManagement/Health_main.jsx';
@@ -173,6 +175,7 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
+                
                
                
                 

@@ -24,7 +24,7 @@
     margin:0 auto;
     border:1px solid #282F37;
     position:relative;
-      background-color: #282F37;
+     background: rgba(44, 61, 71,0.4);
       .lkua{
       border:3px solid #5B9BD5;
       height:14px;
@@ -139,6 +139,13 @@
     width:254px;
     position:absolute;
     top:0px;
+    right:78px;
+
+    }
+     .buttonss{
+    width:254px;
+    position:absolute;
+    top:0px;
     right:0px;
 
     }
@@ -160,6 +167,7 @@
       background:transparent;
          border-radius:15px;
       }
+
       button:hover{
                
              color: #31F3FB;

@@ -14,8 +14,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:380,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -39,6 +38,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -94,40 +94,60 @@ let Component = React.createClass({
                 },
                 categories:montht,
             },
-            yAxis: {
-                 gridLineDashStyle: 'Solid',
+            yAxis: [
+            {
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
+             gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'100%',
-                    align:'high',
-                    rotation:'0',
-                    y: -20,
-                    x: 40,
-                    style:{
-                        fontSize:'14px',
-                        color:'white',
-                    }
+                text:'（h）',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 45,
+                style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                }
+            }
+        }, {
+             labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+            title: {
+                text: 'TBA%',
+                 align:'high',
+                rotation:'0',
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+
             },
-
-
-        labels: {
-                    title:'100%',
-                    y: 10, //x轴刻度往下移动20px
-                    style: {
-                       color:'white',
-                        fontSize:'14px'  //字体
-                    }
-                },
-            },
-
+            opposite: true
+        }],
             series: [{
                 name: '实际运行时间',
                 type: 'column',
                 data: profit,
-                color:'#64DC83',
+                color:'#33BAC0',
                 shadow:true,
-                pointWidth: 25,
+                pointWidth: 30,
                 borderWidth: 0,
                 pointPlacement: 0,
             },
@@ -136,9 +156,9 @@ let Component = React.createClass({
                     type: 'column',
                     data:cost,
                     color:'#ccc',
-                    pointWidth: 25,
+                    pointWidth: 30,
                     shadow:'true',
-                    pointPlacement: -0.1,
+                    pointPlacement: -0.07,
                 },
                 {
                     name: 'TBA',
@@ -147,6 +167,7 @@ let Component = React.createClass({
                     color:'blue',
                     pointWidth: 15,
                     shadow:'true',
+                    yAxis:1,
                    
                 },
             ]

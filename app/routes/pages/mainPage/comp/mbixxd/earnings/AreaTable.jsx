@@ -35,6 +35,7 @@ let Component = React.createClass({
 
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -87,36 +88,52 @@ let Component = React.createClass({
                 },
                 categories:areaName,
             },
-            yAxis: [{
-                labels: {
+           yAxis: [{
+            labels: {
                 format: '',
                 style: {
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%h',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 49,
+                x: 45,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
                 }
             }
         }, {
+             labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text: '',
+                text: 'TBA%',
                  align:'high',
                 rotation:'0',
-                y: -20,
-                x: 40,
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
 
             },
             opposite: true
         }],
+
             series: [{
                 name: '实际收益',
                 type: 'column',
@@ -138,7 +155,9 @@ let Component = React.createClass({
                     name:"TBA",
                     type:'line',
                     color:'blue',
-                    data:TBA,}
+                    data:TBA,
+                    yAxis:1,
+                }
                 ]
         };
         return (

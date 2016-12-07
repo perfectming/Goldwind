@@ -14,6 +14,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:370,
+                width:850,
              backgroundColor: "rgba(44, 61, 71,0)",
             
                 plotBorderWidth: 0,
@@ -35,6 +36,7 @@ let Component = React.createClass({
             },
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -95,36 +97,52 @@ let Component = React.createClass({
                 },
                 categories:windFiled,
             },
-             yAxis: [{
-                labels: {
+            yAxis: [{
+            labels: {
                 format: '',
                 style: {
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 45,
                 style:{
-                    color:'#fff',
-                    fontSize:'14px'
+                    fontSize:'14px',
+                    color:'#fff'
                 }
             }
         }, {
+             labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text: '',
+                text: 'TBA%',
                  align:'high',
                 rotation:'0',
-                y: -20,
-                x: 40,
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
 
             },
             opposite: true
         }],
+
             series: [{
                 name: '实际收益',
                 type: 'column',
@@ -141,7 +159,8 @@ let Component = React.createClass({
                     name:'TBA',
                     type:'line',
                     color:'blue',
-                    data:[2,6,7,9,12,6,2,6,7,9,12,6,]
+                    data:[2,6,7,9,12,6,2,6,7,9,12,6,],
+                    yAxis:1
                 }]
         };
         return (

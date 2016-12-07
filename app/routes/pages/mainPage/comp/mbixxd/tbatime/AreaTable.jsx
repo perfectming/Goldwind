@@ -30,6 +30,8 @@ let Component = React.createClass({
                 }
             },
             legend: {
+                x:-75,
+                y:10,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -84,8 +86,8 @@ let Component = React.createClass({
                 },
                 categories:areaNamee,
             },
-            yAxis:  [{
-                labels: {
+            yAxis:
+                [{labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -95,19 +97,19 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'100%',
+                        text:'(小时)',
                         align:'high',
                         rotation:'0',
-                        y: -10,
-                        x: 47,
+                        y: -17,
+                        x: 50,
                         style:{
-                            color:'#fff',
-                            fontSize:'14px'
+                            fontSize:'14px',
+                            color:'#fff'
                         }
                     }
                 }, {
                     labels: {
-                format: '',
+               
                 style: {
                     color: '#fff',
                     fontSize:'14px'
@@ -116,11 +118,15 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: '',
+                text: 'TBA%',
                 align:'high',
                 rotation:'0',
-                 y: -17,
-                x: 150,
+               y:-15,
+               x:-40,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
             },
             opposite: true
         }],
@@ -146,6 +152,7 @@ let Component = React.createClass({
                     data: areaRecordCostss,
                     stack:'first',
                     color:'blue',
+                    yAxis:1,
                 },
 
             ]

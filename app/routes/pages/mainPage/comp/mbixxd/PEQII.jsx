@@ -17,6 +17,7 @@ let arr3=[];
 let years=[];
 let thDate=new Date();
 let thYear=thDate.getFullYear();
+ 
 for(let i=0;i<=30;i++){
     years.push(thYear-15+i)
 }
@@ -25,7 +26,7 @@ for(let i=0;i<=30;i++){
         arr3.push(ssg2[x].name);
     }}());
 arr3.splice(-2,2);
-let arr=[15,16,14,11,28,8];
+let arr=[15,16,28,11,14,8];
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
@@ -74,21 +75,66 @@ let Component = React.createClass({
                                                    readOnly="true" value={num}/>
                                             {
                                                 value.map((valueC, keyC)=> {
+                                                    if(keyC==0){
+                                                            return(
+                                                            <select name="" id=""  className={styles.tableContentItemm} style={{width:arr[keyC]+'%'}}>
+                                                            <option value="" className={styles.tableContentItemm}>华北</option>
+                                                            <option value="" className={styles.tableContentItemm}>华南</option>
+                                                            <option value="" className={styles.tableContentItemm}>东北</option></select>
 
+                                                            )
+                                                        }       
+                                                      if(keyC==1){
+                                                            return(
+                                                            <select name="" id=""  className={styles.tableContentItemm} style={{width:arr[keyC]+'%'}}>
+                                                            <option value="" className={styles.tableContentItemm}>风场1</option>
+                                                            <option value="" className={styles.tableContentItemm}>风场2</option>
+                                                            <option value="" className={styles.tableContentItemm}>风场3</option></select>
 
-                                                    return (
-                                                        <input className={styles.tableContentItem}
-                                                               style={{width:arr[keyC]+'%'}}
+                                                            )
+                                                        }                                                
+                                                        if(keyC==2){
+                                                            return(
+                                                               <div className={styles.tableContentItemm} style={{width:8+'%'}}>
+                                                               <select name="" id=""   className={styles.tableContentItemm} style={{width:50+'%'}}>
+                                                            <option value="" className={styles.tableContentItemm}>2015</option>
+                                                            <option value="" className={styles.tableContentItemm}>2016</option>
+                                                            <option value="" className={styles.tableContentItemm}>2017</option></select><span>年</span>
+                                                               </div>
+                         
+                                                            )
+                                                        }
+                                                          if(keyC==3){
+                                                            return(
+                                                               <div className={styles.tableContentItemm} style={{width:8+'%'}}>
+                                                               <select name="" id=""   className={styles.tableContentItemm} style={{width:50+'%'}}>
+                                                            <option value="" className={styles.tableContentItemm}>1</option>
+                                                            <option value="" className={styles.tableContentItemm}>2</option>
+                                                            <option value="" className={styles.tableContentItemm}>3</option>
+                                                        
+                                                            <option value="" className={styles.tableContentItemm}>4</option></select><span>月</span>
+                                                               </div>
+                         
+                                                            )
+                                                        }
+                                                        
+                                                        else{
+                                                            return(
+                                                            <input className={styles.tableContentItem}
+                                                             style={{width:arr[keyC]+'%'}}
                                                                key={keyC} contentEditable="true"
                                                                onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
                                                                value={valueC}/>
-                                                    )
+                                                            )
+                                                        }
+
+                                                   
                                                 })
                                             }
-                                            <div className={styles.tableContentItem} style={{width:(40/(comp.data.header.length+4))+"%"}}>
+                                            <div className={styles.tableContentItemm} style={{width:4+"%"}}>
                                                 <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.data.content[key]))}/>
                                             </div>
-                                            <div className={styles.tableContentItem} style={{width:(40/(comp.data.header.length+4))+"%"}}>
+                                            <div className={styles.tableContentItemm} style={{width:4+"%"}}>
                                                 <img src={del} onClick={(e)=>deleData(key)}/>
                                             </div>
                                         </div>

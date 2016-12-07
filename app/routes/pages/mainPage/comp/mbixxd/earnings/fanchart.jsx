@@ -8,11 +8,11 @@ let Component = React.createClass({
     },
     render() {
        
-     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,width,pointPlacement}=this.props
+     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement}=this.props
         let configPie = {
             chart: {
                 height:height,
-                width:width,
+                width:850,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -35,6 +35,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -89,35 +90,51 @@ let Component = React.createClass({
                 categories:machine,
             },
              yAxis: [{
-                labels: {
+            labels: {
                 format: '',
                 style: {
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 45,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
                 }
             }
         }, {
+             labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text: '',
+                text: 'TBA%',
                  align:'high',
                 rotation:'0',
-                y: -20,
-                x: 40,
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
 
             },
             opposite: true
         }],
+
             //几条数据
             series: [{
                 name: '实际收益',
@@ -141,6 +158,7 @@ let Component = React.createClass({
                     type:'line',
                     color:'blue',
                     data:TBAA,
+                    yAxis:1,
              }]
         };
         return (
