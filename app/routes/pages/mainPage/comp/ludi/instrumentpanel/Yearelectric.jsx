@@ -52,7 +52,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 18,
+                    pointWidth: 15,
                     borderRadius:5,
                 }
             },

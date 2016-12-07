@@ -25,13 +25,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                    stops: [
-                        //  [0, 'rgb(56, 85, 94)'],
-                        [0, 'rgb(37, 41, 48)']
-                    ]
-                },
+
                 borderRadius:10
             },
 

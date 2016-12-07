@@ -23,7 +23,7 @@ let Component = React.createClass({
             alert('请选择开始或者结束时间');
             return false;
         }
-        
+        alert(sTime+'到'+eTime)
         // 在这个下边获取这个时间段的数据就行了
         // 然后去更新图表
     },

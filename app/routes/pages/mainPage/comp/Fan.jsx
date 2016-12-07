@@ -188,7 +188,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {         
+    return {   
+            zhzb: state.vars.zhzb,
+            bbs: state.vars.bbs,      
     }
 };
 
@@ -201,7 +203,6 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         pageTo_1:(value,key)=>{
-          dispatch(actions.setVars('showPage', 'fan_matrix'));
           dispatch(actions.setVars('numpage', 'fanmatrix'));
           dispatch(actions.setVars('valuepage', value));
           dispatch(actions.setVars('actbt',key ));
@@ -209,9 +210,10 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('befor_page','fan' ));
           dispatch(actions.setVars('fc_info', value));
+          dispatch(actions.setVars('showPage', 'cs'));
+          dispatch(actions.setVars('pagename', 'fan_matrix'));
         },
         pageTo_2:(value,key)=>{
-          dispatch(actions.setVars('showPage', 'fan_matrix'));
           dispatch(actions.setVars('numpage', 'pvmatrix'));
           dispatch(actions.setVars('valuepage1', value));
           dispatch(actions.setVars('actbt1',key ));
@@ -219,6 +221,8 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('befor_page','fan' ));
           dispatch(actions.setVars('fc_info', value));
+          dispatch(actions.setVars('showPage', 'cs'));
+          dispatch(actions.setVars('pagename', 'fan_matrix'));
         },
         Tofaninfo1: (value,valueA,key)=> {
             dispatch(actions.setVars('value', valueA));

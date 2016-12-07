@@ -53,7 +53,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='group', returnit,hideit,arr,arr2,gogogo,back,more,wind,winds,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
+        let {w0="一区域",w10="风场1",mon="一月份",befor_pages='group', returnit,hideit,arr,arr2,gogogo,back,more,wind,winds,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
         return (
 
 
@@ -66,12 +66,12 @@ let Component = React.createClass({
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
                         <div className={styles.logo3}>
-                            {"各风机发电量"}
+                            {mon+w0+w10+"各风机发电量"}
                         </div>
                         <span onClick={()=>hideit()}>×</span>
                     </div>
                     <Hly_genp    height={500} widths={1620} barlopowerp={x7}
-                                 barlopowers={x7}  barRotime={x6}  text={text0[3]+"月"+text0[3]+"区域各风机发电量"}></Hly_genp>
+                                 barlopowers={x7}  barRotime={x6}  text={''}></Hly_genp>
 
 
 
@@ -94,7 +94,7 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_gen text={text0[actbt]+"月集团各区域发电量"}  barlopowerp={winds==undefined? barlopowerp1:winds}  barlopowers={wind==undefined? barlopowers1:wind} barlotimes={barlotimes1}></Hly_gen>
+                        <Hly_gen text={mon+ "集团各区域发电量"}  barlopowerp={winds==undefined? barlopowerp1:winds}  barlopowers={wind==undefined? barlopowers1:wind} barlotimes={barlotimes1}></Hly_gen>
                         <div className={styles.logo}>
 
                         </div>
@@ -106,7 +106,7 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
-                        <Hly_gens height={400}  barlopowerp={barlopowerp2}  barlopowers={barlopowers2}  barRotime={barRotime2} text={text0[3]+"月"+text0[1]+"区域发电量"}></Hly_gens>
+                        <Hly_gens height={400}  barlopowerp={barlopowerp2}  barlopowers={barlopowers2}  barRotime={barRotime2} text={mon+w0+"各风场发电量" }></Hly_gens>
                         <div className={styles.logomini}>
 
                         </div>
@@ -114,8 +114,7 @@ let Component = React.createClass({
 
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
                         <div className={styles.rbox30}>
-                            <div></div>
-                            <span>{"各风机发电量"}</span>
+
                         </div>
                         <div className={styles.rbox3}>
                             <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
@@ -126,7 +125,7 @@ let Component = React.createClass({
 
 
                         <div className={styles.rbox4}>
-                            <Hly_genp    height={400}  barlopowerp={arr == null ? x5 : arr}  barlopowers={arr == null ? x5 : arr}  barRotime={arr2 == null ? x4 : arr2}  text={text0[3]+"月"+text0[3]+"区域各风机发电量"}></Hly_genp>
+                            <Hly_genp    height={400}  barlopowerp={arr == null ? x5 : arr}  barlopowers={arr == null ? x5 : arr}  barRotime={arr2 == null ? x4 : arr2}  text={mon+w0+w10+"各风机发电量"}></Hly_genp>
                             <div className={styles.logomini}>
 
                             </div>
@@ -146,6 +145,10 @@ const mapStateToProps = (state) => {
         winds:state.vars.winds,
         arr: state.vars.arr,
         arr2: state.vars.arr2,
+        w0 : state.vars.w1,
+        w10 : state.vars.w11,
+        mon : state.vars.mon,
+        windplan : state.vars.windplan,
     }
 };
 
