@@ -10,6 +10,8 @@ import bg5 from '../../img/icon/5.png';
 import bg6 from '../../img/icon/6.png';
 import bg7 from '../../img/icon/7.png';
 import bg8 from '../../img/icon/8.png';
+import Tom from '../../img/comp/succ.png';
+import Jerry from '../../img/comp/defa.png';
 
 var actions = require('redux/actions');
 var $ = require('jquery');
@@ -40,9 +42,8 @@ let Component = React.createClass({
                             {
                                 adsI.content.map((value, key)=>{
                                     return (
-                                        <div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
-                                            <span>{key}</span>
-                                            <span>{value}</span>
+                                        <div key={key} className={`${key%8<4 ? styles.bgbox : styles.nomalbox} ${styles.statusquerybox}`}>
+                                            <span><img src={value[1]==0?Jerry:Tom}/>{value[0]}</span>
                                         </div>
                                     )
                                 })

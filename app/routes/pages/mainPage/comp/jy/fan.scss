@@ -96,20 +96,16 @@
       }
       .statusquery{
         width: 1300px;
-        height: 180px;
+        overflow: hidden;
         .bgbox{
           background: #30343D;
         }
         .statusquerybox{
-          display: inline-block;
+          float: left;
           width: 25%;
           height: 35px;
-          span:nth-child(1){
-            width: 155px;
-            padding-left: 10px;
-          }
           span{
-            width: 100px;
+            padding-left: 30px;
           }
         }
       }
@@ -121,7 +117,7 @@
     white-space:nowrap;
     .action1box{
       width: 400px;
-      $height: 460px;
+      $height: 600px;
       font-size: 14px;
       color: #fff;
       line-height: $height/17;
