@@ -8,10 +8,10 @@ module.exports={
 		},{
 			name:'健康度',
 			big:100,
-			small:40
+			small:82
 		},{
 			name:'PBA',
-			actrul:1050,
+			actrul:1250,
 			should:2000
 		},{
 			name:'TBA',
@@ -22,7 +22,7 @@ module.exports={
 	electric:[
 		{
 			name:'年累计发电量',
-			actrul:130000,
+			actrul:140000,
 			should:130000
 		},{
 			name:'月累计发电量',
@@ -145,7 +145,7 @@ module.exports={
 				plan:[360,380,240,330,230,360,140,390,260,340,360,240],
 				actrul:[100,280,110,230,180,210,120,230,120,230,280,120],
 				big:100,
-				small:140,
+				small:340,
 				
 			},{
 				name:"区域5",

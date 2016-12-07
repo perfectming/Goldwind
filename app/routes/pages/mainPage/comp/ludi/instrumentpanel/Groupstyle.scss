@@ -50,7 +50,7 @@
                     .numBox{
                         position:absolute;
                         top:48%;
-                        left:35%;
+                        left:34%;
                         width:110px;
                         text-align: center;
                         height:40px;
@@ -351,7 +351,9 @@
         }
         table{
             width: 100%;
+            user-select:none;
             tr{
+                position: relative;
                 display: inline-block;
                 height: 30px;
                 width: 100%;
@@ -370,27 +372,69 @@
                         width: 20%;
                     }
                 }.click1{
-                   color: #20FEFF; 
+                   color: #20FEFF;
+                   .init{
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sort.gif) no-repeat;
+                      background-size: 20px 20px;  
+                   }
                    .bottom{
-                      color: #20FEFF; 
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sortB.gif) no-repeat;
+                      background-size: 20px 20px; 
                    }
                    .top{
-                      color: white; 
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sortT.gif) no-repeat;
+                      background-size: 20px 20px;  
                    }
                 }.click1:hover{
                     cursor: pointer;
-                    background-color: #39454e;
+                    border: 2px solid #20FEFF;
                 }.click{
                    color: #20FEFF; 
+                   .init{
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sort.gif) no-repeat;
+                      background-size: 20px 20px;  
+                   }
                    .bottom{
-                      color: #20FEFF; 
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sortB.gif) no-repeat;
+                      background-size: 20px 20px; 
                    }
                    .top{
-                      color: white; 
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sortT.gif) no-repeat;
+                      background-size: 20px 20px;  
                    }
                 }.click:hover{
                     cursor: pointer;
-                    background-color: #39454e;
+                    border: 2px solid #20FEFF;
                 }
             } 
         }

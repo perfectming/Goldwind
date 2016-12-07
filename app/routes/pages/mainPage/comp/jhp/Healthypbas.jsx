@@ -42,7 +42,7 @@ let Component = React.createClass({
 
                 <div className={styles.tbox}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_tsa text={"集团每月PBA"} barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1} barRoPowerValue={barRoPowerValue1} barRoPowerValues={barRoPowerValues1}></Hly_tsa>
+                        <Hly_tsa text={"集团每月PBA"} names={'PBA'} barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1} barRoPowerValue={barRoPowerValue1} barRoPowerValues={barRoPowerValues1}></Hly_tsa>
                         <div className={styles.logo}>
 
                         </div>
@@ -56,7 +56,7 @@ let Component = React.createClass({
                 </div>
                 <div className={`${styles.fbox} `}>
                     <div className={` ${styles.logofa} ${styles.box_shadow}`}>
-                        <Hly_ds text={"集团"+text222[1]+"月每日PBA"} barLdpowerValue={barLdpowerValue2} barLpdpowerValue={barLpdpowerValue2} barlinepdats={barlinepdats2} barlinepdat={barlinepdat2}></Hly_ds>
+                        <Hly_ds text={"集团"+text222[1]+"月每日PBA"} names={"PBA"} barLdpowerValue={barLdpowerValue2} barLpdpowerValue={barLpdpowerValue2} barlinepdats={barlinepdats2} barlinepdat={barlinepdat2}></Hly_ds>
                         <div className={styles.logomini}>
 
                         </div>

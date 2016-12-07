@@ -69,11 +69,11 @@ let Component = React.createClass({
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
-                        <div className={styles.logo3}>{"各风机健康度"}</div>
+                        <div className={styles.logo3}>{mon+w0+w10+"各风机健康度"}</div>
                         <span onClick={()=>hideit()}>×</span>
                     </div>
-                    <Hly_rs height={500} powerValue={x7} barRotimes={x6} widths={1620}
-                            text={mon+w0+w10+"各风机健康度"}></Hly_rs>
+                    <Hly_rs height={500} powerValue={x7} barRotimes={x6} widths={1635}
+                            text={''}></Hly_rs>
 
 
                 </div>  
@@ -117,8 +117,7 @@ let Component = React.createClass({
                     </div>
                     <div className={`${styles.rbox2} ${styles.box_shadow} ${styles.logofa}`}>
                         <div className={styles.rbox30}>
-                            <div></div>
-                            <span>{"各风机健康度"}</span>
+
                         </div>
                         <div className={styles.rbox3}>
 

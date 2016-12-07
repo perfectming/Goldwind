@@ -59,13 +59,28 @@
                 background-color: rgba(44, 61, 71, 0.4);
                 float: left;
                 padding-top: 10px ;
+                padding-left: 30px;
                 .sectionbar{
                     float: left;
                     text-align: center;
-                    width: 40%;
+                    width: 30%;
                     height: 100%;
-                    padding-top: 30px;
+                    padding-top: 50px;
+                    
+                }
+                .sectionfour{
+                    height: 100%;
+                    width: 55%;
+                    float: left; 
+                    position: relative;
+                    .pie{
+                        height: 65%;
+                        width: 70%
+                    }
                     .space{
+                        position: absolute;
+                        left: 85%;
+                        top: 25%;
                         cursor: pointer;
                         display: inline-block;
                         height: 25px;
@@ -76,7 +91,9 @@
                         }
                     }
                     .time{
-                        margin-left: 20px;
+                        position: absolute;
+                        left: 85%;
+                        top: 50%;
                         cursor: pointer;
                         display: inline-block;
                         height: 25px;
@@ -86,16 +103,10 @@
                             background: url(../../../img/comp/timeA.gif);
                         }
                     }
-                }
-                .sectionfour{
-                    height: 100%;
-                    width: 60%;
-                    float: left; 
-                    position: relative;
                     .numBox{
                         position:absolute;
                         top:43%;
-                        left:41%;
+                        left:24%;
                         width:110px;
                         text-align: center;
                         height:40px;
@@ -122,13 +133,26 @@
                 background-color: rgba(44, 61, 71, 0.4);
                 margin-right: 1%;
                 padding-top: 10px;
+                padding-left: 30px;
                 .sectionbar{
                     text-align: center;
-                    width: 40%;
+                    width: 30%;
                     height: 100%;
-                    padding-top: 30px;
+                    padding-top: 50px;
                     float: left;
+                }.sectiontwo{
+                    height: 100%;
+                    width: 53%;
+                    float: left;
+                    position: relative;
+                    .pie{
+                        height: 65%;
+                        width: 70%;
+                    }
                     .space{
+                        position: absolute;
+                        left: 85%;
+                        top: 25%;
                         cursor: pointer;
                         display: inline-block;
                         height: 25px;
@@ -139,7 +163,9 @@
                         }
                     }
                     .time{
-                        margin-left: 20px;
+                        position: absolute;
+                        left: 85%;
+                        top: 50%;
                         cursor: pointer;
                         display: inline-block;
                         height: 25px;
@@ -149,15 +175,10 @@
                             background: url(../../../img/comp/timeA.gif);
                         }
                     }
-                }.sectiontwo{
-                    height: 100%;
-                    width: 60%;
-                    float: left;
-                    position: relative;
                     .numBox{
                         position:absolute;
                         top:43%;
-                        left:41%;
+                        left:24%;
                         width:110px;
                         text-align: center;
                         height:40px;
@@ -175,13 +196,43 @@
                     }
                 }.sectionthree{
                     height: 100%;
-                    width: 60%;
+                    width: 53%;
                     float: left;
                     position: relative;
+                    .pie{
+                        height: 65%;
+                        width: 70%;
+                    }
+                    .space{
+                        position: absolute;
+                        left: 85%;
+                        top: 25%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../img/comp/space.gif); 
+                        &:hover{
+                            background: url(../../../img/comp/spaceA.gif);
+                        }
+                    }
+                    .time{
+                        position: absolute;
+                        left: 85%;
+                        top: 50%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../img/comp/time1.png);
+                        &:hover{
+                            background: url(../../../img/comp/timeA.gif);
+                        }
+                    }
                     .numBox{
                         position:absolute;
                         top:43%;
-                        left:41%;
+                        left:24%;
                         width:110px;
                         text-align: center;
                         height:40px;
@@ -435,7 +486,7 @@
     }.right{
         border:1px solid #3e4c67;
         position: relative;
-        width: 27.5%;
+        width: 27%;
         height: 850px;
         background-color: rgba(44, 61, 71, 0.4);
         float: right;
@@ -460,6 +511,7 @@
         table{
             font-size: 16px;
             width: 100%;
+            user-select:none;
             tr{
                 display: inline-block;
                 height: 30px;
@@ -480,26 +532,68 @@
                     }
                 }.click1{
                    color: #20FEFF; 
+                   .init{
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sort.gif) no-repeat;
+                      background-size: 20px 20px;  
+                   }
                    .bottom{
-                      color: #20FEFF; 
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sortB.gif) no-repeat;
+                      background-size: 20px 20px; 
                    }
                    .top{
-                      color: #E6E7E8;
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sortT.gif) no-repeat;
+                      background-size: 20px 20px;  
                    }
                 }.click1:hover{
                     cursor: pointer;
-                    background-color: #39454e;
+                    border: 1px solid #20FEFF;
                 }.click{
                    color: #20FEFF; 
+                   .init{
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sort.gif) no-repeat;
+                      background-size: 20px 20px;  
+                   }
                    .bottom{
-                      color: #20FEFF; 
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sortB.gif) no-repeat;
+                      background-size: 20px 20px; 
                    }
                    .top{
-                      color: #E6E7E8; 
+                      display: inline-block;
+                      position: relative;
+                      top: 3px;
+                      height: 20px;
+                      width: 20px;
+                      background: url(../../../img/comp/sortT.gif) no-repeat;
+                      background-size: 20px 20px;  
                    }
                 }.click:hover{
                     cursor: pointer;
-                    background-color: #39454e;
+                    border: 1px solid #20FEFF;
                 }
             } 
         }
