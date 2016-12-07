@@ -24,7 +24,6 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-
                 borderRadius:10
             },
             title: {

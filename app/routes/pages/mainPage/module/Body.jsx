@@ -59,7 +59,6 @@ import Regiopower from '../comp/jhp/Regiopower.jsx';
 import Regiopowers from '../comp/jhp/Regiopowers.jsx';
 import Regiotba from '../comp/jhp/Regiotba.jsx';
 import Regiotbas from '../comp/jhp/Regiotbas.jsx';
-import Input_cost from '../comp/jhp/Input_cost.jsx';
 
 import Areace from '../comp/mbixxd/Areace.jsx';
 import Areacet from '../comp/mbixxd/Areacet.jsx';
@@ -161,7 +160,6 @@ let Component = React.createClass({
                 {showPage === 'regiopowers' && <Regiopowers></Regiopowers>}
                 {showPage === 'regiotba' && <Regiotba></Regiotba>}
                 {showPage === 'regiotbas' && <Regiotbas></Regiotbas>}
-                {showPage === 'input_cost' && <Input_cost></Input_cost>}
 
                 {showPage === 'areace' && <Areace></Areace>}
                 {showPage === 'areacet' && <Areacet></Areacet>}

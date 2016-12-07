@@ -78,12 +78,26 @@
             background:rgba(183,195,224,.5);
           }
           .tableContentItem {
+             float: left;
+             overflow: hidden;
+             text-align: center;
+             height: 40px;
+             line-height:40px;
+             border: none;
+             img{
+               height:20px;
+               width:20px;
+             }
+           }
+          .tableContentItems {
             float: left;
             overflow: hidden;
             text-align: center;
             height: 40px;
             line-height:40px;
             border: none;
+            background: #30343f;
+            align: center;
             img{
               height:20px;
               width:20px;
@@ -118,6 +132,20 @@
             line-height: 40px;
             height: 40px;
             border: none;
+            img{
+              height:20px;
+              width:20px;
+            }
+          }
+          .tableContentItems {
+            float: left;
+            overflow: hidden;
+            text-align: center;
+            line-height: 40px;
+            height: 40px;
+            border: none;
+            background: #272b34;
+            align: center;
             img{
               height:20px;
               width:20px;

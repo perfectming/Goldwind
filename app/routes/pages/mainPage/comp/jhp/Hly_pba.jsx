@@ -166,8 +166,8 @@ let Component = React.createClass({
 
             },
                 {
-                    name: '理论',
-                    color:'#A2D04D',
+                    name: '故障损失',
+                    color:'#FF6124',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time',
@@ -181,21 +181,7 @@ let Component = React.createClass({
                     }
                 },
                 {
-                    name: '理论',
-                    color:'#FFD927',
-                    type: 'column',
-                    data: barLoPowerValue,
-                    stack:'time',
-                    events: {
-                        click: function(e) {
-                            w10=e.point.category;
-                            changedata1(w10,e);
-
-                        }
-                    }
-                },
-                {
-                    name: '理论',
+                    name: '维护损失',
                     color:'#FF9424',
                     type: 'column',
                     data: barLoPowerValue,
@@ -209,8 +195,22 @@ let Component = React.createClass({
                     }
                 },
                 {
-                    name: '理论发电量',
-                    color:'#FF6124',
+                    name: '限功率损失',
+                    color:'#FFD927',
+                    type: 'column',
+                    data: barLoPowerValue,
+                    stack:'time',
+                    events: {
+                        click: function(e) {
+                            w10=e.point.category;
+                            changedata1(w10,e);
+
+                        }
+                    }
+                },
+                {
+                    name: '非设备原因损失',
+                    color:'#A2D04D',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time',

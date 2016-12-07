@@ -155,38 +155,39 @@ let Component = React.createClass({
                 type: 'column',
                 data: barLoPowerValues,
                 borderRadius: 4,
+            },{
+                name: '故障损失',
+                color:'#FF6124',
+                type: 'column',
+                data: barLoPowerValue,
+                stack:'time',
+
             },
                 {
-                    name: '理论发电量',
-
-                    color:'#A2D04D',
-                    type: 'column',
-                    data: barLoPowerValue,
-                    stack:'time',
-                    borderRadius: 2,
-                },
-                {
-                    name: '理论发电量',
-                    color:'#FFD927',
-                    type: 'column',
-                    data: barLoPowerValue,
-                    stack:'time'
-                },
-                {
-                    name: '理论发电量',
+                    name: '维护损失',
                     color:'#FF9424',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '理论发电量',
-                    color:'#FF6124',
+                    name: '限功率损失',
+                    color:'#FFD927',
+                    type: 'column',
+                    data: barLoPowerValue,
+                    stack:'time'
+                },
+
+                {
+                    name: '非设备原因损失',
+                    color:'#A2D04D',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time',
-
+                    borderRadius: 2,
                 },
+
+
                 {
                     name: 'PBA',
                     type: 'line',
