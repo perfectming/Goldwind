@@ -42,7 +42,9 @@ let Component = React.createClass({
     render() {
         let{moname,modata}=this.props;
         let mobd=modata.ModelData;
-        let mod=moname.Model;
+        let mod=moname.Model.dis;
+        console.log(mobd);
+        console.log(mod);
         let urodz = new Date("11/12/2015");
         let now = new Date();let ile = now.getTime() - urodz.getTime();
         let dni = Math.floor(ile / (1000 * 60 * 60 * 24));
@@ -54,15 +56,15 @@ let Component = React.createClass({
                         <span className={styles.daynum}> {dni}</span> 天
                     </div>
                     <div className={styles.zhzbtop}>
-                        <div className={styles.zhzbtopbox}><div>当前功率</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].TActPower}</span>{mod.dis.TActPower.unit}</div>
-                        <div className={styles.zhzbtopbox}><div>{mod.dis.Capacity.name}</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].Capacity}</span>{mod.dis.Capacity.unit}</div>
-                        <div className={styles.zhzbtopbox}><div>{mod.dis.DayEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].DayEgyAt}</span>{mod.dis.DayEgyAt.unit}</div>
-                        <div className={styles.zhzbtopbox}><div>风机功率</div> <span className={styles.zhzbtopboxg}>{mobd[8888801].TActPower}</span>{mod.dis.TActPower.unit}</div>
-                        <div className={styles.zhzbtopbox}><div>{mod.dis.WindSpeed_DevAverValue.name}</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].WindSpeed_DevAverValue}</span>m/s</div>
-                        <div className={styles.zhzbtopbox}><div>{mod.dis.MonthEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].MonthEgyAt}</span>{mod.dis.MonthEgyAt.unit}</div>
-                        <div className={styles.zhzbtopbox}><div>光伏功率</div> <span className={styles.zhzbtopboxg}>{mobd[8888802].TActPower}</span>{mod.dis.TActPower.unit}</div>
-                        <div className={styles.zhzbtopbox}><div>{mod.dis.PVTSI_Aver.name}</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].PVTSI_Aver}</span>W/㎡</div>
-                        <div className={styles.zhzbtopbox}><div>{mod.dis.YearEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].YearEgyAt}</span>{mod.dis.YearEgyAt.unit}</div>
+                        <div className={styles.zhzbtopbox}><div>当前功率</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].TActPower)*mod.TActPower.coeff).toFixed(mod.TActPower.place)}</span>{mod.TActPower.unit}</div>
+                        <div className={styles.zhzbtopbox}><div>{mod.Capacity.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].Capacity)*mod.Capacity.coeff).toFixed(mod.Capacity.place)}</span>{mod.Capacity.unit}</div>
+                        <div className={styles.zhzbtopbox}><div>{mod.DayEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].DayEgyAt)*mod.DayEgyAt.coeff).toFixed(mod.DayEgyAt.place)}</span>{mod.DayEgyAt.unit}</div>
+                        <div className={styles.zhzbtopbox}><div>风机功率</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].TActPower)*mod.TActPower.coeff).toFixed(mod.TActPower.place)}</span>{mod.TActPower.unit}</div>
+                        <div className={styles.zhzbtopbox}><div>{mod.WindSpeed_DevAverValue.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].WindSpeed_DevAverValue)*mod.WindSpeed_DevAverValue.coeff).toFixed(mod.WindSpeed_DevAverValue.place)}</span>{mod.WindSpeed_DevAverValue.unit}</div>
+                        <div className={styles.zhzbtopbox}><div>{mod.MonthEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].MonthEgyAt)*mod.MonthEgyAt.coeff).toFixed(mod.MonthEgyAt.place)}</span>{mod.MonthEgyAt.unit}</div>
+                        <div className={styles.zhzbtopbox}><div>光伏功率</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888802].TActPower)*mod.TActPower.coeff).toFixed(mod.TActPower.place)}</span>{mod.TActPower.unit}</div>
+                        <div className={styles.zhzbtopbox}><div>{mod.PVTSI_Aver.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].PVTSI_Aver)*mod.PVTSI_Aver.coeff).toFixed(mod.PVTSI_Aver.place)}</span>W/㎡</div>
+                        <div className={styles.zhzbtopbox}><div>{mod.YearEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].YearEgyAt)*mod.YearEgyAt.coeff).toFixed(mod.YearEgyAt.place)}</span>{mod.YearEgyAt.unit}</div>
                     </div>
 
                 </div>
