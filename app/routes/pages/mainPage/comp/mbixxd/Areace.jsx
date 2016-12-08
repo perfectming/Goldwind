@@ -19,7 +19,7 @@ let x0=[];
 let x1=[];
 let x2=[];
 let x3=[];
-let windPT=data.windFJJ;
+let windPT=data.windareace;
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -60,7 +60,7 @@ let Component = React.createClass({
                 <div className={styles.imgq}>
                     <img src={icono}/>
                 </div>
-                <div className={styles.buttons}>
+                <div className={`${styles.buttons} ${styles.buttonss}`}>
                       <button onClick={()=>gogogo(windPT)} > 前10</button>
                       <button onClick={()=>back(windPT)}>后10</button>
                       <button  onClick={()=>more()}>更多</button>

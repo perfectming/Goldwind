@@ -14,8 +14,7 @@ let Component = React.createClass({
             chart: {
                 height:height,
                 width:width,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -123,7 +122,7 @@ let Component = React.createClass({
                 name: '实际健康度',
                 type: 'column',
                 data: areaRecordProfit,
-                color:'#7DF59C',
+                color:'#4CDB9D',
             },
                 ]
         };

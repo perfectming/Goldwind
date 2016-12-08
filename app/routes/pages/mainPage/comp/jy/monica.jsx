@@ -20,7 +20,7 @@ let thYear=thDate.getFullYear();
 for(let i=0;i<=30;i++){
     years.push(thYear-15+i)
 }
-let arr=[15,16,14,11,28,8];
+let arr=[10,10,14,14,11,28,8];
 (function(){
     for(let x in ssg2){
         arr3.push(ssg2[x].name);
@@ -69,9 +69,6 @@ let Component = React.createClass({
                     <div className={styles.inputBox}>
                         <button onClick={this.buttonAction}>查询</button>
                     </div>
-                    <div className={styles.btnBox}>
-                        <div>单位：万kWh</div>
-                    </div>
                 </div>
                 <div className={styles.table}>
                     <div className={styles.actionBox}>
@@ -82,7 +79,7 @@ let Component = React.createClass({
                     <div className={styles.tableBox}>
                         <div className={styles.tableHeaderBox}>
                             <div className={styles.tableHeaderItem}
-                                 style={{width:8+"%"}}>序号</div>
+                                 style={{width:5+"%"}}>序号</div>
                             {
                                 comp.data.header.map((value, key)=> {
                                     return (
@@ -100,7 +97,7 @@ let Component = React.createClass({
                                         return (
                                             <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                                 <input className={styles.tableContentItem}
-                                                       style={{width:8+'%'}}
+                                                       style={{width:5+'%'}}
                                                        readOnly="true" value={num}/>
                                                 {
                                                     value.map((valueC, keyC)=> {

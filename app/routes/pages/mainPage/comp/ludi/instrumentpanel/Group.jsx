@@ -17,22 +17,60 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-   
-
+  
+	
     render() {
+    	
         let{flag4,flag3,flag1=true,flag=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
-        return (
+        let profit,electric,arrPlan,arrAct,month;
+        $.ajax({
+        		url:'http://10.9.100.53:8080/gwbi/yield/getMaxYie',
+		        type: 'post',
+		        async:false,
+		        dataType: 'json',
+		        timeout : 3000, 
+		        success:function (data) {
+		        	profit = data.data;
+		        	return profit; 
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		    });
+		$.ajax({
+        		url:'http://10.9.101.99:8080/gwbi/ELEC/getKongElec',
+		        type: 'get',
+		        async:false,
+		        dataType: 'json',
+		        timeout : 3000, 
+		        success:function (data) {
+		        	electric = data.data;
+		        	arrPlan=[electric[2][0].monthpowerplan,electric[2][1].monthpowerplan,electric[2][2].monthpowerplan,electric[2][3].monthpowerplan,electric[2][4].monthpowerplan,electric[2][5].monthpowerplan,electric[2][6].monthpowerplan,electric[2][7].monthpowerplan,electric[2][8].monthpowerplan,electric[2][9].monthpowerplan];
+		        	month=[electric[2][0].month,electric[2][1].month,electric[2][2].month,electric[2][3].month,electric[2][4].month,electric[2][5].month,electric[2][6].month,electric[2][7].month,electric[2][8].month,electric[2][9].month];
+		        	arrAct=[electric[2][0].monthpoweract,electric[2][1].monthpoweract,electric[2][2].monthpoweract,electric[2][3].monthpoweract,electric[2][4].monthpoweract,electric[2][5].monthpoweract,electric[2][6].monthpoweract,electric[2][7].monthpoweract,electric[2][8].monthpoweract,electric[2][9].monthpoweract];
+		        	console.log(electric);
+		        	return electric,arrPlan,arrAct,month; 
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		    });
+   		return (
            <div className={styles.box}>
            		<div className={styles.left}>
            			<div className={`${styles.firstfloor} ${styles.boxShadow}`}>
            				<div className={styles.section}>
-           					<div className={styles.text1}>收益:{data.firstfloor[0].profit}万·投资:{data.firstfloor[0].investment}万</div>
+           					<div className={styles.text1}>收益:{(profit.incomes).toFixed(1)}万·投资:{(profit.amounts).toFixed(1)}万</div>
            					<div className={styles.alink}>
            						<a className={styles.space} onClick={()=>changepageProfitS()}></a>
            					</div>
            					<div className={styles.sectionBox}>
-           						<span className={styles.numBox}><p style={{color:'#e9c75c'}}>{((data.firstfloor[0].profit/data.firstfloor[0].investment)*100).toFixed(1)}%</p>收益率</span>
-           						<Pie2 color={['#d06960','#39565e']} num={[100,200]}></Pie2>
+           						<span className={styles.numBox}><p style={{color:'#e9c75c'}}>{((profit.rate)*100).toFixed(1)}%</p>收益率</span>
+           						<Pie2 color={(profit.rate)>1? ['#1fe005','#fbd500']:(profit.rate)>0.8?['#fbd500','#39565e']:(profit.rate)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[profit.incomes,profit.amounts-profit.incomes]}></Pie2>
            					</div>
            				</div>
            				<div className={styles.section}>
@@ -76,22 +114,22 @@ let Component = React.createClass({
            				<div className={`${styles.electric} ${styles.boxShadow}`}>
            					<div className={styles.electricHeader}><a></a>发电量</div>
            					<div className={styles.electricFirst}>
-           						<a></a><span>{data.electric[0].name}</span>
-           						<div className={styles.electricTotal}>{data.electric[0].actrul}kWh</div>
+           						<a></a><span>年累计发电量</span>
+           						<div className={styles.electricTotal}>{electric[0][0].yearpoweract}kWh</div>
            						<div className={styles.electricPercent}>
-           							<div style={{width:((data.electric[0].actrul/data.electric[0].should*100).toFixed(1))+"%"}}>{(data.electric[0].actrul/data.electric[0].should*100).toFixed(1)}%</div>
+           							<div style={{width:((electric[0][0].yearpoweract/electric[0][0].yearpowerplan*100).toFixed(1))+"%"}}>{(electric[0][0].yearpoweract/electric[0][0].yearpowerplan*100).toFixed(1)}%</div>
            						</div>
            					</div>
            					<div className={styles.electricSecond}>
-           						<a></a><span>{data.electric[1].name}</span>
-           						<div className={styles.electricTotal}>{data.electric[1].actrul}kWh</div>
+           						<a></a><span>月累计发电量</span>
+           						<div className={styles.electricTotal}>{electric[1][0].monthpoweract}kWh</div>
            						<div className={styles.electricPercent}>
-           							<div style={{width:((data.electric[1].actrul/data.electric[1].should*100).toFixed(1))+"%"}}>{(data.electric[1].actrul/data.electric[1].should*100).toFixed(1)}%</div>
+           							<div style={{width:((electric[1][0].monthpoweract/electric[1][0].monthpowerplan*100).toFixed(1))+"%"}}>{(electric[1][0].monthpoweract/electric[1][0].monthpowerplan*100).toFixed(1)}%</div>
            						</div>
            					</div>
            					<div className={styles.electricThird}>
-           						<a></a><span>{data.electric[2].name}</span>
-           						<div className={styles.electricTotal}>{data.electric[2].actrul}kWh</div>
+           						<a></a><span>日累计发电量</span>
+           						<div className={styles.electricTotal}>{electric[3]}kWh</div>
            						<div className={styles.electricPercent}>
            							<div style={{width:((data.electric[2].actrul/data.electric[2].should*100).toFixed(1))+"%"}}>{(data.electric[2].actrul/data.electric[2].should*100).toFixed(1)}%</div>
            						</div>
@@ -105,7 +143,7 @@ let Component = React.createClass({
 	           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageEleT()}></a></div>
            							</div>
 	           				</div>
-           					<Yearelectric title={data.yearelectric[0].title[0]} month={data.yearelectric[0].month} plan={data.yearelectric[0].plan} actrul={data.yearelectric[0].actrul} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
+           					<Yearelectric month={month} plan={arrPlan} actrul={arrAct} unit={data.yearelectric[0].unit[1]} nameOne={data.yearelectric[0].name[0]} nameTwo={data.yearelectric[0].name[1]}></Yearelectric>
            				</div>
            				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
            					<div className={styles.header}>
@@ -183,11 +221,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: () => {
-            var obj = {
-                test:''
-            }
+        init: (gdata) => {
+        	
+            
+		    
         },
+        
         changepageSort:(flag)=>{
         	flag==true? dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return a.time-b.time}))):dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return b.time-a.time})));
         	flag==true? dispatch(actions.setVars('flag1',false )):dispatch(actions.setVars('flag1',true ));
@@ -202,28 +241,36 @@ const mapDispatchToProps = (dispatch) => {
         	
         },
         changepageHealthyT:()=>{
-        	dispatch(actions.setVars('showPage', 'healthy'));
+        	dispatch(actions.setVars('showPage', 'cs'));
+            dispatch(actions.setVars('pagename', 'healthy'));
         },
         changepageHealthyS:()=>{
-        	dispatch(actions.setVars('showPage', 'healthy_one'));
+        	dispatch(actions.setVars('showPage', 'cs'));
+            dispatch(actions.setVars('pagename', 'healthy_one'));
         },
         changepageTBAT:()=>{
-        	dispatch(actions.setVars('showPage', 'profitsss'));
+        	dispatch(actions.setVars('showPage', 'cs'));
+            dispatch(actions.setVars('pagename', 'profitsss'));
         },
         changepageTBAS:()=>{
-        	dispatch(actions.setVars('showPage', 'profitss'));
+        	dispatch(actions.setVars('showPage', 'cs'));
+            dispatch(actions.setVars('pagename', 'profitss'));
         },
         changepagePBAT:()=>{
-        	dispatch(actions.setVars('showPage', 'healthypbas'));
+        	dispatch(actions.setVars('showPage', 'cs'));
+            dispatch(actions.setVars('pagename', 'healthypbas'));
         },
         changepagePBAS:()=>{
-        	dispatch(actions.setVars('showPage', 'healthypba'));
+        	dispatch(actions.setVars('showPage', 'cs'));
+            dispatch(actions.setVars('pagename', 'healthypba'));
         },
         changepageEleT:()=>{
-        	dispatch(actions.setVars('showPage', 'healthygens'));
+        	dispatch(actions.setVars('showPage', 'cs'));
+            dispatch(actions.setVars('pagename', 'healthygens'));
         },
         changepageEleS:()=>{
-        	dispatch(actions.setVars('showPage', 'healthygen'));
+        	dispatch(actions.setVars('showPage', 'cs'));
+            dispatch(actions.setVars('pagename', 'healthygen'));
         },
         changepageProT:()=>{
         	

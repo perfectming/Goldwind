@@ -8,13 +8,12 @@ let Component = React.createClass({
     },
     render() {
        
-     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,width}=this.props
+     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement}=this.props
         let configPie = {
             chart: {
                 height:height,
-                width:width,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                width:850,
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -36,6 +35,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -56,8 +56,7 @@ let Component = React.createClass({
                 enabled: false //不显示highCharts版权信息
             },
             //柱子颜色
-            colors: [ '#1E664A', '#4CDB9D']
-            ,
+             colors: [ '#33BAC0', '#70c080'],
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
@@ -91,35 +90,51 @@ let Component = React.createClass({
                 categories:machine,
             },
              yAxis: [{
-                labels: {
+            labels: {
                 format: '',
                 style: {
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
                 text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 45,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
                 }
             }
         }, {
+             labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
             title: {
-                text: '',
+                text: 'TBA%',
                  align:'high',
                 rotation:'0',
-                y: -20,
-                x: 40,
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
 
             },
             opposite: true
         }],
+
             //几条数据
             series: [{
                 name: '实际收益',
@@ -127,6 +142,8 @@ let Component = React.createClass({
                 data: areaRecordProfitR,
                 pointWidth:15,
                 borderRadius: 4,
+                pointPlacement:0,
+
             },
             {
                 name: '收入成本',
@@ -134,12 +151,14 @@ let Component = React.createClass({
                 data: areaRecordCostR,
                 pointWidth:15,
                 borderRadius: 4,
+                pointPlacement:pointPlacement,
             },
             {
                     name:"TBA",
                     type:'line',
                     color:'blue',
                     data:TBAA,
+                    yAxis:1,
              }]
         };
         return (
