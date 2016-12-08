@@ -12,8 +12,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:380,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -35,6 +34,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -87,37 +87,59 @@ let Component = React.createClass({
                 },
                 categories:areaPlan,
             },
-           yAxis:{
+            yAxis: [
+            {
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
              gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
-             title: {
-                 text:'100%',
+            title: {
+                text:'（h）',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 45,
-                 style:{
+                style:{
                     fontSize:'14px',
                     color:'#fff'
-                 },
-
-                 },
-                 labels:{
-                    title:'100%',
-                    y: 10,
-                    style:{
-                        color:'#fff',
-                        fontSize:'14px'
-                    }
+                }
             }
-        },
+        }, {
+             labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+            title: {
+                text: 'TBA%',
+                 align:'high',
+                rotation:'0',
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+
+            },
+            opposite: true
+        }],
             //几条数据
             series: [{
                 name: '实际运行时间',
                 type: 'column',
                 data: areaPlanDay,
-                color:'#64DC83',
+                color:'#33BAC0',
                 pointWidth: 15,
             },
             {
@@ -131,7 +153,8 @@ let Component = React.createClass({
                     type: 'line',
                     data:areaPlanDayT,
                     color:'blue',
-                    opposite:true
+                    opposite:true,
+                    yAxis:1,
                 }
 
             ]

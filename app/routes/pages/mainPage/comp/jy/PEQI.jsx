@@ -38,6 +38,7 @@ let Component = React.createClass({
         let {buttonAction,deleData,addData,table, changeTableItem1} = this.props;
         let newData=[];
         let num=0;
+        let arr=[13,13,13,13,10,24,6];
         for(let i=0;i<comp.data.header.length;i++){
             newData.push('');
         }
@@ -81,12 +82,12 @@ let Component = React.createClass({
                     <div className={styles.tableBox}>
                         <div className={styles.tableHeaderBox}>
                             <div className={styles.tableHeaderItem}
-                                 style={{width:(100/(comp.data.header.length+2))+"%"}}>序号</div>
+                                 style={{width:8+"%"}}>序号</div>
                             {
                                 comp.data.header.map((value, key)=> {
                                     return (
                                         <div className={styles.tableHeaderItem}
-                                             style={{width:(100/(comp.data.header.length+2))+"%"}} key={key}>{value}</div>
+                                             style={{width:arr[key]+"%"}} key={key}>{value}</div>
                                     )
                                 })
                             }
@@ -98,25 +99,40 @@ let Component = React.createClass({
                                     return (
                                         <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                             <input className={styles.tableContentItem}
-                                                   style={{width:(100/(comp.data.header.length+2))+"%"}}
+                                                   style={{width:8+"%"}}
                                                    readOnly="true" value={num}/>
                                             {
                                                 value.map((valueC, keyC)=> {
-
-
+                                                    if(keyC<2){
+                                                        return(
+                                                            <select className={styles.tableContentItem}
+                                                                    style={{width:arr[keyC]+"%"}} key={keyC}
+                                                                    onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}>
+                                                                <option value="">{valueC}</option>
+                                                            </select>
+                                                        )
+                                                    }else if(keyC<4){
+                                                        return (
+                                                            <div className={styles.tableContentItem}
+                                                                          style={{width:arr[keyC]+"%"}} key={keyC}>
+                                                            <input onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                                   type="date"/>
+                                                            </div>
+                                                        )
+                                                    }else{
                                                     return (
                                                         <input className={styles.tableContentItem}
-                                                               style={{width:(100/(comp.data.header.length+2))+"%"}}
+                                                               style={{width:arr[keyC]+"%"}}
                                                                key={keyC} contentEditable="true"
                                                                onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
                                                                value={valueC}/>
-                                                    )
+                                                    )}
                                                 })
                                             }
-                                            <div className={styles.tableContentItem} style={{width:(50/(comp.data.header.length+2))+"%"}}>
+                                            <div className={styles.tableContentItem} style={{width:3+"%"}}>
                                                 <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.data.content[key]))}/>
                                             </div>
-                                            <div className={styles.tableContentItem} style={{width:(50/(comp.data.header.length+2))+"%"}}>
+                                            <div className={styles.tableContentItem} style={{width:3+"%"}}>
                                                 <img src={del} onClick={(e)=>deleData(key)}/>
                                             </div>
                                         </div>

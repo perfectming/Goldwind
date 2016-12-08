@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
 import Hly_tsa from './Hly_tsa.jsx';
-import Hly_r from './Hly_r.jsx';
+
 import Hly_ds from './Hly_ds.jsx';
 var actions = require('redux/actions');
 
@@ -42,13 +42,11 @@ let Component = React.createClass({
 
                 <div className={styles.tbox}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_tsa text={"集团每月PBA"} names={'PBA'} barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1} barRoPowerValue={barRoPowerValue1} barRoPowerValues={barRoPowerValues1}></Hly_tsa>
+                        <Hly_tsa text={"区域每月TBA"}  names={'TBA'} barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1} barRoPowerValue={barRoPowerValue1} barRoPowerValues={barRoPowerValues1}></Hly_tsa>
                         <div className={styles.logo}>
 
                         </div>
-
                     </div>
-
                 </div>
 
                 <div className={styles.clear}>
@@ -56,7 +54,7 @@ let Component = React.createClass({
                 </div>
                 <div className={`${styles.fbox} `}>
                     <div className={` ${styles.logofa} ${styles.box_shadow}`}>
-                        <Hly_ds text={"集团"+text222[1]+"月每日PBA"} names={"PBA"} barLdpowerValue={barLdpowerValue2} barLpdpowerValue={barLpdpowerValue2} barlinepdats={barlinepdats2} barlinepdat={barlinepdat2}></Hly_ds>
+                        <Hly_ds text={"集团"+text222[4]+"月每日TBA"} names={'TBA'} barLdpowerValue={barLdpowerValue2} barLpdpowerValue={barLpdpowerValue2} barlinepdats={barlinepdats2} barlinepdat={barlinepdat2}></Hly_ds>
                         <div className={styles.logomini}>
 
                         </div>

@@ -20,6 +20,23 @@ let Component = React.createClass({
         
         
         let{flag3,flag4,flag=true,changepageSort1,changepageProT,changepageProS,changepageSort,big1,small1,wind,actbt=0,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let profit;
+        $.ajax({
+        		url: 'http://10.9.100.53:8080/gwbi/yield/getAllWfYield',
+		        type: 'post',
+		        data: 'startdate=2016-11-10&enddate=2016-11-18',
+		        dataType: 'json',//here
+		        success:function (data) {
+		        	profit=data.data;
+		        	console.log(profit);
+		        	return profit;
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		    });
         return (
            <div className={styles.box}>
            		<ul className={styles.monthbox}>

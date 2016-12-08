@@ -289,7 +289,8 @@ let Component = React.createClass({
 				</div>
 				<div className={`${styles.fanrightbox} ${styles.infofL}`}>
 					<Title title={['状态统计']}></Title>
-					<div className={`${styles.fanaction} ${styles.infofL11111111}`} onClick = {()=> tobujian()}>
+					<div className={styles.fanaction}>
+						<div className={styles.parts} onClick = {()=> tobujian()}></div>
 						<div className={styles.actionbox}>
 							<div>启动</div>
 							<div>停机</div>

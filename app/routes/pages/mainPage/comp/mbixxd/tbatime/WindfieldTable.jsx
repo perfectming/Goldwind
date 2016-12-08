@@ -14,8 +14,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:410,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -36,7 +35,8 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
-                x:-40,
+                x:-75,
+                y:10,
                 
                 itemHoverStyle:{
                     color:'#31f3fb',
@@ -83,8 +83,8 @@ let Component = React.createClass({
                 },
                 categories:windFiled,
             },
-            yAxis:  [{
-                labels: {
+            yAxis:
+                [{labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -94,11 +94,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'100%',
+                        text:'(小时)',
                         align:'high',
                         rotation:'0',
-                        y: -13,
-                        x: 47,
+                        y: -17,
+                        x: 50,
                         style:{
                             fontSize:'14px',
                             color:'#fff'
@@ -106,7 +106,7 @@ let Component = React.createClass({
                     }
                 }, {
                     labels: {
-                format: '',
+               
                 style: {
                     color: '#fff',
                     fontSize:'14px'
@@ -115,16 +115,20 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-
-                text: '',
+                text: 'TBA%',
                 align:'high',
                 rotation:'0',
-                
+               y:-15,
+               x:-40,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
             },
-            opposite: true,
+            opposite: true
         }],
             series: [{
-                name: '实际发电量',
+                name: '实际运行时间',
                 type: 'column',
                 data: windProfit
             },
@@ -137,6 +141,7 @@ let Component = React.createClass({
                     name:'TBA',
                     type:'line',
                     data:[80,30,3,36,70,70,70,70,80,80,80,80],
+                    yAxis:1,
                     
                     color:'blue'
                 }

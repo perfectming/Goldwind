@@ -15,8 +15,7 @@ let Component = React.createClass({
             chart: {
                 height:height,
                 width:width,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -39,6 +38,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -52,6 +52,7 @@ let Component = React.createClass({
 
                 }
             },
+            
             tooltip: {
                
             },
@@ -102,18 +103,18 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'(KWH)',
+                text:'(kWh)',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 45,
                 style:{
-                    color:'#fff',
-                    fontSize:'14px'
+                    fontSize:'14px',
+                    color:'#fff'
                 }
             }
         }, {
-            labels: {
+             labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -123,13 +124,13 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: '',
+                text: 'PBA%',
                  align:'high',
                 rotation:'0',
-                y: -20,
-                x: 40,
+                y: -15,
+                x: -40,
                 style:{
-                    color:'#fff',
+                    color: '#fff',
                     fontSize:'14px'
                 }
 
@@ -138,53 +139,59 @@ let Component = React.createClass({
         }],
             //几条数据
             series: [{
-                name: '实际发电量收益',
+                name: '实际发电量',
                 type: 'column',
                 data: fanProfitQ,
-                color:'#64DC83',
+                color:'#33BAC0',
                 shadow:true,
                 pointWidth: 30,
                 borderWidth: 0,
                 borderRadius: 7,
             },
                 {
-                    name: '四',
+                    name: '故障损失',
                     type: 'column',
                     color:'#FC794E',
                     data: fanCost,
                     stack:'waste',
                      pointWidth: 30,
                      borderRadius: 3,
+                     color:'#5298d3',
+                     pointPlacement:-0.07,
                 },
                 {
-                    name: '大',
+                    name: '维护损失',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
                      pointWidth: 30,
-                    color:'#FD9C31',
+                    color:'#ffffff',
+                    pointPlacement:-0.07,
                 },
                 {
-                    name: '类',
+                    name: '限功率损失',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
-                    color:'#FFD924',
+                    color:'#e9c75c',
                      pointWidth: 30,
+                     pointPlacement:-0.07,
                 },
                 {
-                    name: '损失发电量',
+                    name: '非设备原因损失',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
                      pointWidth: 30,
-                    color:'#AACE4A'
+                    color:'#d06960',
+                    pointPlacement:-0.07,
                 },
                 {
                     name: 'PBA',
                     type: 'line',
                     data: PBA,
                     color:'blue',
+                    yAxis:1,
                     
                 },
                 ]

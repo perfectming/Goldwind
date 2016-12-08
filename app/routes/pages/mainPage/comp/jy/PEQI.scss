@@ -86,9 +86,6 @@
           color:#fff;
           background: #30343f;
           overflow: hidden;
-          &:hover{
-            background:rgba(183,195,224,.5);
-          }
           .tableContentItem {
             float: left;
             overflow: hidden;
@@ -101,9 +98,11 @@
               width:20px;
             }
           }
-          input{
+          select,input{
+            text-align: center;
             background: #30343f;
-            border:6px solid #fff;
+            height: 30px;
+            border:0px solid #fff;
             &:hover{
               box-shadow:0px 0px 8px 2px #fff;
             }
@@ -120,9 +119,6 @@
           color:#fff;
           overflow: hidden;
           background: #272b34;
-          &:hover{
-            background:rgba(183,195,224,.5);
-          }
           .tableContentItem {
             float: left;
             overflow: hidden;
@@ -135,9 +131,11 @@
               width:20px;
             }
           }
-          input{
+          select,input{
+            text-align: center;
             background: #272b34;
-            border:6px solid #fff;
+            height: 30px;
+            border:0px solid #fff;
             &:hover{
               box-shadow:0px 0px 8px 2px #fff;
             }
