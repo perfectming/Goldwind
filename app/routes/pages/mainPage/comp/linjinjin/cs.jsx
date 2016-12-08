@@ -88,16 +88,16 @@ const mapDispatchToProps = (dispatch) => {
              console.log(pagename);
              TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
                     function momo(rdata){
-                        
+                        console.log(rdata);
                         dispatch(actions.setVars('moname', rdata));
                         TY.getRtData("MonitorBoard", 8888800, ppo);
                         function ppo(rdata){
-                        
+                        console.log(rdata);
                         dispatch(actions.setVars('bool', true));
                         dispatch(actions.setVars('modata', rdata));
-                        
+                            dispatch(actions.setVars('showPage', pagename));
                         }
-                        dispatch(actions.setVars('showPage', pagename));
+
                     }
 
                     console.log(5)
