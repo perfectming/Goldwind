@@ -8,31 +8,40 @@ var {getState} = require('../../../../../redux/store');
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
 import _ from 'lodash';
-let tabaleData = require('../../../../../../config/RegulationData');
-let model=require('../../../../../../config/RegulationModel');
 let obj=require('../../../../../../config/MatrixData');
-let data=tabaleData.ModelData;
-let mode=model.Model.ens;
+
 let nam=['TransformerStatus','AVC','AGC','PlanActPower','Capacity','TActPower','Transformer_P'];
 let header=['场站名称','升压站状态', 'AVC状态','AGC状态','计划功率MW','装机容量MW','出力MW','负荷MW'];
 
 let arr1 = [];
 let arr2 = [];
-let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-
-for(let x in obj_wfd){
-    arr1.push(x)
-}
-for(let m in obj_pvd){
-    arr2.push(m)
-}
+// let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
+// let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+//
+// for(let x in obj_wfd){
+//     arr1.push(x)
+// }
+// for(let m in obj_pvd){
+//     arr2.push(m)
+// }
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init(tabaleData);
+        this.props.init();
     },
     render() {
-        let {table,changepage2,changepage3,title} = this.props;
+        let {table,changepage2,changepage3,model,tabaleData} = this.props;
+        if(model&&tabaleData) {
+            let data = tabaleData.ModelData;
+            let mode = model.Model.ens;
+            for (let i in mode){
+                if(mode[i].wft=='Gf'){
+                    arr1.push(i);
+                }
+                if(mode[i].wft=='Wf'){
+                    arr2.push(i);
+                }
+            }
+            console.log(mode,arr1,arr2);
         return (
             <div>
                 <div className={styles.actionBox}>
@@ -84,7 +93,8 @@ let Component = React.createClass({
                                     </div>
                                 )
                             })}
-                        {arr2.map((value, key)=> {
+                        {
+                            arr2.map((value, key)=> {
                             return (
                             <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                 <div className={styles.tableContentItem}
@@ -120,7 +130,7 @@ let Component = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        );}else {return(<div></div>)}
     }
 });
 

@@ -23,7 +23,7 @@ for(let i=0;i<=30;i++){
         arr3.push(ssg2[x].name);
     }}());
 arr3.splice(-2,2);
-let arr1=['datetype','wfid','operationtime','rectime','operator','planelec'];
+let arr1=['name','wfid','operationtime','rectime','operator','planelec'];
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
@@ -173,7 +173,7 @@ let Component = React.createClass({
                                     })
                                 }
                                 <div className={styles.tableContentItem} style={{width:3+"%"}}>
-                                    <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.data[key]))}/>
+                                    <img src={save} onClick={()=>(e)=>saveTableItem(num)}/>
                                 </div>
                                 <div className={styles.tableContentItem} style={{width:3+"%"}}>
                                     <img src={del} onClick={(e)=>deleData(key)}/>
@@ -200,7 +200,7 @@ const mapDispatchToProps = (dispatch) => {
             $.ajax({
                 url: 'http://10.9.99.213:8080/soam/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize=6&&nowPage=1',
+                data:'pageSize=8&&nowPage=1',
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data);
@@ -214,12 +214,15 @@ const mapDispatchToProps = (dispatch) => {
         saveTableItem:(line)=>{
             let tableV = _.clone(getState().objs.tableContent);
             let asd=tableV.data[line];
-            console.log(`wfp= ${JSON.stringify(asd)}`);
+            let wfp;
+            wfp=JSON.stringify(asd);
+            console.log(wfp);
             $.ajax({
-                url: 'http://10.9.99.213:8080/soam/ELEC/uppWfelec',
+                url: 'http://10.9.99.213:8080/soam/ELEC/uppWfelec?newwfp=data&groupid=100001',
                 type: 'post',
-                data: `wfp= ${JSON.stringify(asd)}`,
+                data: wfp,
                 dataType: 'json',//here,
+                contentType:'application/json;charset=UTF-8',
                 success:function (data) {
                     console.log(data);
                 },

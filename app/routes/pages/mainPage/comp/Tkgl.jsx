@@ -27,8 +27,8 @@ let Component = React.createClass({
     },
     render() {
         let {change,change1,table,openAGC,closeAGC,changeTableItem,jyname,jydata} = this.props;
-        console.log(jyname)
-        console.log(jydata)
+        console.log(jyname);
+        console.log(jydata);
         let arr1 = [];
         let arr2 = [];
         let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
@@ -147,10 +147,10 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.columnTitle}></div>
                 <div className={styles.upBox}>
-                    <Column title={jyname}></Column>
+                    <Column model={jyname} tabaleData={jydata}></Column>
                 </div>
                 <div className={styles.downBox}>
-                    <Table title={jyname}></Table>
+                    <Table model={jyname} tabaleData={jydata}></Table>
                 </div>
             </div>
         );
