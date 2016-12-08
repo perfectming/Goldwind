@@ -15,7 +15,7 @@ let Component = React.createClass({
     render() {
          let{valuepage1,Tofaninfo,zhzb,fModel,fData}=this.props;
         // let model_ens = zhzb.Model.ens;
-        // let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
         let arr1 = [];
         let arr2 = [];
