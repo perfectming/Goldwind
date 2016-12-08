@@ -50,19 +50,20 @@ const mapDispatchToProps = (dispatch) => {
                         TY.getRtData("DevicesMatrix", 8888800, setfData)
                         function setfData(rdata){
                         dispatch(actions.setVars('fData', rdata));
-                        
+                            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "WTLeftOverview", setDatas, "Screen", 0);
+                            function setDatas(rdata){
+                                dispatch(actions.setVars('leftm', rdata));
+                                TY.getRtData("WTLeftOverview", 8888800, setlData)
+                                function setlData(rdata){
+                                dispatch(actions.setVars('leftd', rdata));
+                                
+                                }
+                            }
+                            dispatch(actions.setVars('showPage', pagename));
                         }
                     }
-                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "WTLeftOverview", setDatas, "Screen", 0);
-                    function setDatas(rdata){
-                        dispatch(actions.setVars('leftm', rdata));
-                        TY.getRtData("WTLeftOverview", 8888800, setlData)
-                        function setlData(rdata){
-                        dispatch(actions.setVars('leftd', rdata));
-                        
-                        }
-                    }
-                    dispatch(actions.setVars('showPage', pagename));
+                     
+                    
 
                 }
                 
@@ -87,16 +88,16 @@ const mapDispatchToProps = (dispatch) => {
              console.log(pagename);
              TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
                     function momo(rdata){
-                        
+                        console.log(rdata);
                         dispatch(actions.setVars('moname', rdata));
                         TY.getRtData("MonitorBoard", 8888800, ppo);
                         function ppo(rdata){
-                        
+                        console.log(rdata);
                         dispatch(actions.setVars('bool', true));
                         dispatch(actions.setVars('modata', rdata));
-                        
+                            dispatch(actions.setVars('showPage', pagename));
                         }
-                        dispatch(actions.setVars('showPage', pagename));
+
                     }
 
                     console.log(5)
@@ -146,7 +147,6 @@ const mapDispatchToProps = (dispatch) => {
         // }
 
         // }
-
 
 
         // },3000)
