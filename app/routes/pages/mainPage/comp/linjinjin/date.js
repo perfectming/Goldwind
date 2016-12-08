@@ -38,7 +38,7 @@ module.exports = {
         
     ],
     wt_status:[
-         "ONL",
+         "RunCount_SOAM",
         "FaultCount",
         "RepairCount",
         "OfflineCount",
