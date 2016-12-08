@@ -74,9 +74,6 @@ import Profitsss from '../comp/mbixxd/tbatime/Profitsss.jsx';
 
 
 
-
-
-
 import Legend from '../comp/super/tootipbox.jsx';
 import Reliability from '../comp/ludi/KBA/Reliability.jsx';
 import PEQII from '../comp/mbixxd/PEQII.jsx';

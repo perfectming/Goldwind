@@ -25,6 +25,7 @@ let Component = React.createClass({
     render() {
          
         let {zhzb,bbs,all}=this.props;
+       
         let data=bbs.ModelData;
         let mod=zhzb.Model;
         let  mat=matrix.Model;

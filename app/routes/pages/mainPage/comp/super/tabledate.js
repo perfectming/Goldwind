@@ -4,7 +4,7 @@ module.exports ={
 		'WTCount',
 		'WindSpeed_DevAverValue',
 		'TActPower',
-		'ONL',
+		'RunCount_SOAM',
 		'OfflineCount',
 		'RepairCount',
 		'FaultCount',
