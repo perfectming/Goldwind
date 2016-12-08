@@ -74,9 +74,6 @@ import Profitsss from '../comp/mbixxd/tbatime/Profitsss.jsx';
 
 
 
-
-
-
 import Legend from '../comp/super/tootipbox.jsx';
 import Reliability from '../comp/ludi/KBA/Reliability.jsx';
 import PEQII from '../comp/mbixxd/PEQII.jsx';
@@ -178,13 +175,7 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
-<<<<<<< HEAD
-                
-               
-               
-=======
 
->>>>>>> fb257799b1e08d410a418d49c51ab5ec0ec10535
                 
                 {showPage === 'reliability' && <Reliability></Reliability>}
                
