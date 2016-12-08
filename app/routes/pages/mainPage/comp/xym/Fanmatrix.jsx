@@ -66,13 +66,9 @@ let Component = React.createClass({
 
     render() {
         let{valuepage,Tofaninfo,zhzb,fModel,fData}=this.props;
-        // let {pageTo_1,pageTo_2,Tofaninfo1,Tofaninfo2,zhzb,fModel,fData}=this.props;
-        // console.log(fModel);
-        // console.log(fData);
-        // console.log(zhzb);
         let model_ens = zhzb.Model.ens;
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
-        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        // let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
         let arr1 = [];
         let arr2 = [];
         for(var x in obj_wfd){
@@ -144,11 +140,11 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed_DevAverValue)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.listitemBLL}>{Number(value.TActPower).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          

@@ -95,7 +95,7 @@ let Component = React.createClass({
             //     arr2.push(obj_wfd[m][n])
             // }
         }
-        // console.log(arr1,arr2)
+        console.log(arr1,arr2)
         return (
 
             <div className={styles.bodyBox}>
@@ -132,10 +132,10 @@ let Component = React.createClass({
                                                         i = "正常发电";
                                                         break;
                                                     case "LimitPow":
-                                                        i = "正常发电";
+                                                        i = "限功率";
                                                         break;
                                                     case "Alarm":
-                                                        i = "正常发电";
+                                                        i = "告警";
                                                         break;
                                                     case "Fault":
                                                         i = "故障停机";
@@ -155,11 +155,11 @@ let Component = React.createClass({
                                                 }
                                             return (
                                                 
-                                                    <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                    <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
-                                                                <p>{'风速:'+Math.ceil(valueA.WindSpeed_DevAverValue)+'m/s'}</p>
-                                                                <p>{'功率:'+Number(valueA.TActPower).toFixed(2)+'KW'}</p>
+                                                                <p>{'风速:'+Math.ceil(valueA.WindSpeed)+'m/s'}</p>
+                                                                <p>{'功率:'+Number(valueA.ActPwr).toFixed(2)+'KW'}</p>
                                                         </div>
                                                     </div>
                                             )
@@ -188,7 +188,7 @@ let Component = React.createClass({
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'辐照度:'+Math.ceil(valueA.PVTSI_Aver)+'W/㎡'}</p>
-                                                                <p>{'功率:'+Number(valueA.TActPower).toFixed(2)+'KW'}</p>
+                                                                <p>{'功率:'+Number(valueA.ActPwr).toFixed(2)+'KW'}</p>
                                                         </div>
                                                     </div>
                                             )

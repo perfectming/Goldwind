@@ -39,7 +39,24 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage1=652303,Topvinfo}=this.props;
+         let{valuepage1,Tofaninfo,zhzb,fModel,fData}=this.props;
+        let model_ens = zhzb.Model.ens;
+        // let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let arr1 = [];
+        let arr2 = [];
+        for(var x in obj_wfd){
+            arr1.push(x);
+            // for(var y in obj_wfd[x]){
+            //     arr2.push(obj_wfd[x][y])
+            // }
+        }
+        for(var m in obj_pvd){
+            arr2.push(m);
+            // for(var n in obj_wfd[m]){
+            //     arr2.push(obj_wfd[m][n])
+            // }
+        }
         return (
             <div className={styles.slistbodyBox}>
                 {
@@ -93,11 +110,11 @@ let Component = React.createClass({
                                 <span className={styles.slistitemB}>
                                     <span className={styles.slistitemBL}>
                                         <p>辐照度:</p>
-                                        <p><span className={styles.slistitemBLL}>{Math.floor((model_data[valuepage1].PVTSI_Aver))}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                        <p><span className={styles.slistitemBLL}>{Math.floor(value.ActPwr)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
                                     </span>
                                     <span className={styles.slistitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.slistitemBLL}>{(Number(model_data[valuepage1].TActPower)/100).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(value.ActPwr)).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
