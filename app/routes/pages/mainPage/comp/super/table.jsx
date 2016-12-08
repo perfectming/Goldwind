@@ -10,7 +10,7 @@ import $ from 'jquery';
 let tabaleData = require('../../../../../../config/super_table');
 let header=require('./tabledate');
 let headername=header.header;
-
+let fcnum=[];
 
 let Component = React.createClass({
     componentDidMount() {
@@ -22,8 +22,9 @@ let Component = React.createClass({
         let placename=zhzb.Model.ens;
         let arrname=[];
         let point=[];
-        let fcnum=[];
+        
         let number=[];
+
 (function(){
         let o=0;
     for(let name in placename){ 
@@ -33,9 +34,11 @@ let Component = React.createClass({
            
     }
   for(let key in date){
+    
     let arr=[];
     let num=[];
   if(date[key].WTCount!='0' && date[key].InverterCount=='0'){
+    fcnum.push(key)
     for(let i=0;i<headername.length;i++){
          if(i==0){
              arr.push(point[o]);
@@ -51,7 +54,7 @@ let Component = React.createClass({
             number.push(num);
          }
        }
-     
+    console.log(fcnum)
 }());
 
 
@@ -82,7 +85,7 @@ let Component = React.createClass({
                     <div className={styles.tableContentBox}>
                         {
                             arrname.map((value, key)=> {
-                                
+                            
                                 return (
 
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key} onClick={()=>changepage(key)}>
@@ -177,7 +180,7 @@ const mapDispatchToProps = (dispatch) => {
            dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('actbt',key ));
           dispatch(actions.setVars('actbt1','' ));
-           dispatch(actions.setVars('valuepage', '650107'));
+           dispatch(actions.setVars('valuepage', fcnum[key]));
           dispatch(actions.setVars('befor_page','super' ));
            //dispatch(actions.setVars('fc_info', number[0][key]));
           dispatch(actions.setVars('Changnav', 0));

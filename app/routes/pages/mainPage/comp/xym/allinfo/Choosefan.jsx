@@ -65,12 +65,14 @@ let Component = React.createClass({
 
     render() {
         let{valuepage,Tofaninfo,choosefans}=this.props;
-        // console.log(choosefans);
+        console.log(valuepage);
+        console.log(choosefans);
         
         return (
             <div className={styles.listbodyBox}>
                 {
                 obj_wfd[valuepage].map((value, key)=> {
+
                     // let bordercolor = value.WTStateColor;
                     let x;
                     let code = value.WTStateCode;
@@ -111,7 +113,7 @@ let Component = React.createClass({
                                 x = "维护";
                                 break;
                         }
-                    if(choosefans == "ONL" && value.WTStateCode== "Online"){
+                    if(choosefans == "RunCount_SOAM" && value.WTStateCode== "Online"){
                         // console.log(choosefans);
                     return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>

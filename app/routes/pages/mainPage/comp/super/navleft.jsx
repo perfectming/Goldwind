@@ -3,23 +3,27 @@ import {connect} from 'react-redux';
 import styles from './navleft.scss';
 import name from '../linjinjin/date';
 import Pie2 from './pie2.jsx';
-let obj = require('../../../../../../config/MatrixData');
-let model = require('../../../../../../config/Model');
-let modeldata = require('../../../../../../config/ModelData');
-var model_data = modeldata.ModelData;
-var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-
 var actions = require('redux/actions');
-let dataBase=require('../../../../../../config/WTLeftData');
-let dataname=require('../../../../../../config/WTLeftModel');
 let wttitle=require('../linjinjin/date');
-let date=dataBase.ModelData;
-let datem=dataname.Model.dis;
+
+let Component = React.createClass({
+    componentDidMount() {
+        this.props.init();
+    },
+
+    render() {
+        
+    let{fc_info='150801',choose,choose1,leftm,leftd}=this.props;
+     console.log(leftm)
+       console.log(leftd)
+
+let date=leftd.ModelData;
+let datem=leftm.Model.dis;
 let namestatus=wttitle.wt_status;
 let namestat=wttitle.wt_stat;
 let title=wttitle.wt_title;
 let wtname=wttitle.wt_name;
+let wtcolor=wttitle.pie;
 let array2=[];
 let arrayJy=[];
 let uint=wttitle.wt_unit;
@@ -45,17 +49,7 @@ let str=d.getDate();
 }
   
 }());
-
-let Component = React.createClass({
-    componentDidMount() {
-        this.props.init();
-    },
-
-    render() {
-        
-    let{fc_info='650107',choose,choose1,leftm,leftd}=this.props;
-       console.log(leftm)
-       console.log(leftd)
+      
         return (
           <div className={ styles.navbox}>
                      <div className={styles.tit}>
@@ -63,7 +57,7 @@ let Component = React.createClass({
                      </div>
                     {    
                         
-                         array2.map((value, key)=> {
+                         wtname.map((value, key)=> {
                              if(key==0){
                                  return (
                                      <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
@@ -145,8 +139,8 @@ let Component = React.createClass({
                                   namestat.map((value,key)=>{
                                       return(
                                           <div className={styles.pie} key={key} onClick = {()=>choose1(value)}>
-                                              <Pie2 num={datem[value].color}></Pie2>
-                                              <div className={styles.allnum}><p>{date[fc_info][namestat[key]]}</p><p>{datem[value].name}</p></div>
+                                              <Pie2 num={wtcolor[key].color}></Pie2>
+                                              <div className={styles.allnum}><p>{date[fc_info][namestat[key]]}</p><p>{wtcolor[key].title}</p></div>
                                           </div>
                                       )
 
@@ -154,8 +148,8 @@ let Component = React.createClass({
                             namestatus.map((value,key)=>{
                                 return(
                                 <div className={styles.pie} key={key} onClick = {()=>choose(value)}>
-                                    <Pie2 num={datem[value].color}></Pie2>
-                                    <div className={styles.allnum}><p>{date[fc_info][namestatus[key]]}</p><p>{datem[value].name}</p></div>
+                                    <Pie2 num={wtcolor[key].color}></Pie2>
+                                    <div className={styles.allnum}><p>{date[fc_info][namestatus[key]]}</p><p>{wtcolor[key].title}</p></div>
                                 </div>
                                 )
                             })

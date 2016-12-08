@@ -65,8 +65,25 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage,Tofaninfo}=this.props;
-
+        let{valuepage,Tofaninfo,zhzb,fModel,fData}=this.props;
+        let model_ens = zhzb.Model.ens;
+        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let arr1 = [];
+        let arr2 = [];
+        for(var x in obj_wfd){
+            arr1.push(x);
+            // for(var y in obj_wfd[x]){
+            //     arr2.push(obj_wfd[x][y])
+            // }
+        }
+        for(var m in obj_pvd){
+            arr2.push(m);
+            // for(var n in obj_wfd[m]){
+            //     arr2.push(obj_wfd[m][n])
+            // }
+        }
+        // console.log(arr1,arr2)
         
         return (
             <div className={styles.listbodyBox}>
@@ -123,11 +140,11 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(model_data[valuepage].WindSpeed_DevAverValue/3600)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.listitemBLL}>{Number(model_data[valuepage].WindSpeed_DevAverValue).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
@@ -145,6 +162,9 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         valuepage : state.vars.valuepage,
+        zhzb : state.vars.zhzb,
+        fModel : state.vars.fModel,
+        fData : state.vars.fData,
     }
 };
 
