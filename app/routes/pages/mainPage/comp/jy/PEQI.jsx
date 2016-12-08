@@ -36,12 +36,14 @@ let Component = React.createClass({
     },
     render() {
         let {buttonAction,deleData,addData,table, changeTableItem1} = this.props;
+        let arr1=['datetype','wfid','operationtime','rectime','operator','planelec'];
         let newData=[];
         let num=0;
         let arr=[13,13,13,13,10,24,6];
         for(let i=0;i<comp.data.header.length;i++){
             newData.push('');
-        }
+        };
+        if (table){
         return (
             <div className={styles.powerBox}>
                 <div className={styles.inquireBox}>
@@ -76,7 +78,7 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.table}>
                     <div className={styles.actionBox}>
-                        <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
+                        <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.data))}/>
                         <img src={add} onClick={()=>addData(newData)}/>
                     </div>
                     <div className={styles.tableBox}>
@@ -94,7 +96,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.tableContentBox}>
                             {
-                                comp.data.content.map((value, key)=> {
+                                table.data.map((value, key)=> {
                                     num++;
                                     return (
                                         <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
@@ -102,13 +104,13 @@ let Component = React.createClass({
                                                    style={{width:8+"%"}}
                                                    readOnly="true" value={num}/>
                                             {
-                                                value.map((valueC, keyC)=> {
+                                                arr1.map((valueC, keyC)=> {
                                                     if(keyC<2){
                                                         return(
                                                             <select className={styles.tableContentItem}
                                                                     style={{width:arr[keyC]+"%"}} key={keyC}
                                                                     onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}>
-                                                                <option value="">{valueC}</option>
+                                                                <option value="">{value[valueC]}</option>
                                                             </select>
                                                         )
                                                     }else if(keyC<4){
@@ -116,7 +118,7 @@ let Component = React.createClass({
                                                             <div className={styles.tableContentItem}
                                                                           style={{width:arr[keyC]+"%"}} key={keyC}>
                                                             <input onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
-                                                                   type="date"/>
+                                                                   type="date" value={value[valueC].slice(0,10)}/>
                                                             </div>
                                                         )
                                                     }else{
@@ -125,7 +127,7 @@ let Component = React.createClass({
                                                                style={{width:arr[keyC]+"%"}}
                                                                key={keyC} contentEditable="true"
                                                                onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
-                                                               value={valueC}/>
+                                                               value={value[valueC]}/>
                                                     )}
                                                 })
                                             }
@@ -139,11 +141,49 @@ let Component = React.createClass({
                                     )
                                 })
                             }
+                            <div className={styles.tableContentLine1}>
+                                <input className={styles.tableContentItem}
+                                       style={{width:8+"%"}}
+                                       readOnly="true" value={num+1}/>
+                                {
+                                    arr1.map((valueC, keyC)=> {
+                                        if(keyC<2){
+                                            return(
+                                                <select className={styles.tableContentItem}
+                                                        style={{width:arr[keyC]+"%"}} key={keyC}
+                                                        onChange={(e)=>changeTableItem1(e.target.value,table,keyC)}>
+                                                    <option value=""></option>
+                                                </select>
+                                            )
+                                        }else if(keyC<4){
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:arr[keyC]+"%"}} key={keyC}>
+                                                    <input onChange={(e)=>changeTableItem1(e.target.value,table,keyC)}
+                                                           type="date"/>
+                                                </div>
+                                            )
+                                        }else{
+                                            return (
+                                                <input className={styles.tableContentItem}
+                                                       style={{width:arr[keyC]+"%"}}
+                                                       key={keyC} contentEditable="true"
+                                                       onChange={(e)=>changeTableItem1(e.target.value,table,keyC)}/>
+                                            )}
+                                    })
+                                }
+                                <div className={styles.tableContentItem} style={{width:3+"%"}}>
+                                    <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.data[key+1]))}/>
+                                </div>
+                                <div className={styles.tableContentItem} style={{width:3+"%"}}>
+                                    <img src={del} onClick={(e)=>deleData(key)}/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        );
+        );}else{return(<div></div>)}
     }
 });
 
@@ -156,8 +196,20 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: (obj) => {
-            dispatch(actions.setObjs('tableContent', obj));
+        init: () => {
+            $.ajax({
+                url: 'http://10.9.99.213:8080/soam/ELEC/getWfelec',
+                type: 'post',
+                data:'pageSize=6&&nowPage=1',
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContent', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
         changeTableItem1: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);
@@ -166,7 +218,20 @@ const mapDispatchToProps = (dispatch) => {
         },
         addData:(i) => {
             let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.content.push(i);
+            $.ajax({
+                url: 'http://10.9.99.213:8080/soam/ELEC/addWfelec',
+                type: 'post',
+                data:'wfp={}',
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContent', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+            table.data.push(i);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         deleData:(j) => {

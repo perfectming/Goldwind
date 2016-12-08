@@ -32,7 +32,7 @@ let Component = React.createClass({
         this.props.init(tabaleData);
     },
     render() {
-        let {table,changepage2,changepage3} = this.props;
+        let {table,changepage2,changepage3,title} = this.props;
         return (
             <div>
                 <div className={styles.actionBox}>

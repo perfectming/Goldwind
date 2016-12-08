@@ -22,7 +22,9 @@ let Component = React.createClass({
         this.props.init(data);
     },
     render() {
-        let {change,change1,table,openAGC,closeAGC,changeTableItem} = this.props;
+        let {change,change1,table,openAGC,closeAGC,changeTableItem,jyname,jydata} = this.props;
+        console.log(jyname)
+        console.log(jydata)
         let arr1 = [];
         let arr2 = [];
         let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
@@ -141,10 +143,10 @@ let Component = React.createClass({
                     </div>
                 <div className={styles.columnTitle}></div>
                 <div className={styles.upBox}>
-                    <Column></Column>
+                    <Column title={jyname}></Column>
                 </div>
                 <div className={styles.downBox}>
-                    <Table></Table>
+                    <Table title={jyname}></Table>
                 </div>
             </div>
         );
@@ -155,6 +157,9 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
+        abcd: state.vars.abcd,
+        jyname: state.vars.jyname,
+        jydata: state.vars.jydata,
     }
 };
 
