@@ -95,7 +95,7 @@ let Component = React.createClass({
             //     arr2.push(obj_wfd[m][n])
             // }
         }
-        console.log(arr1,arr2)
+        // console.log(arr1,arr2)
         return (
 
             <div className={styles.bodyBox}>
@@ -182,9 +182,48 @@ let Component = React.createClass({
                                 <div className={styles.listopt}>
                                     {
                                         obj_pvd[value].map((valueA, keyA)=> {
+                                            let i;
+                                            let code = valueA.WTStateCode;
+                                            // console.log(code);
+                                            switch(code)
+                                                {
+                                                    case "DisComForPre":
+                                                        i = "离线";
+                                                        break;
+                                                    case "DisComForPlc":
+                                                        i = "离线";
+                                                        break;
+                                                    case "Unknown":
+                                                        i = "离线";
+                                                        break;
+                                                    case "Online":
+                                                        i = "正常发电";
+                                                        break;
+                                                    case "LimitPow":
+                                                        i = "限功率";
+                                                        break;
+                                                    case "Alarm":
+                                                        i = "告警";
+                                                        break;
+                                                    case "Fault":
+                                                        i = "故障停机";
+                                                        break;
+                                                    case "Offline":
+                                                        i = "待机";
+                                                        break;
+                                                    case "ProtoectStop":
+                                                        i = "待机";
+                                                        break;
+                                                    case "LimitPowStop":
+                                                        i = "待机";
+                                                        break;
+                                                    default:
+                                                        i = "维护";
+                                                        break;
+                                                }
                                             return (
                                                 
-                                                    <div className={styles.listoptbtn_3}  key={keyA} onClick = {()=> Tofaninfo2(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                    <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Tofaninfo2(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'辐照度:'+Math.ceil(valueA.PVTSI_Aver)+'W/㎡'}</p>
@@ -230,7 +269,6 @@ const mapDispatchToProps = (dispatch) => {
         pageTo_1:(value,key)=>{
           dispatch(actions.setVars('numpage', 'fanmatrix'));
           dispatch(actions.setVars('valuepage', value));
-          console.log(value);
           dispatch(actions.setVars('actbt',key ));
           dispatch(actions.setVars('actbt1','' ));
           dispatch(actions.setVars('fan_page', 'allpage'));
