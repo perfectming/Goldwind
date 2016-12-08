@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {title,month,actrul,plan,unit,nameOne,nameTwo}=this.props;
+    	let {month,actrul,plan,unit,nameOne,nameTwo}=this.props;
         let configPie = {
             chart: {
                 height:282,

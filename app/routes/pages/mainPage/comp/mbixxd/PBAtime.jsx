@@ -11,6 +11,8 @@ let button=data.button;
 let monthT=data.monthT;
 let profit=data.windProfit;
 let cost=data.windCost;
+let fanCost=data.fanCost;
+let fanCostA=data.fanCostA;
 let areaPlan=data.areaPlan;
 let areaPlanDay=data.areaPlanDay;
 let areaPlanDayT=data.areaPlanDayT;
@@ -28,7 +30,7 @@ let Component = React.createClass({
                         <div className={styles.windcebox}>
                             <div>
                             <p className={styles.titleee}>每月PBA</p>
-                                <PBAtimechart monthT={monthT} profit={profit} cost={cost}></PBAtimechart>
+                                <PBAtimechart monthT={monthT} profit={profit} cost={cost} fanCost={fanCost}></PBAtimechart>
                             </div>
                            
                         </div>
@@ -44,7 +46,7 @@ let Component = React.createClass({
                            
                             <div>
                              <p className={styles.titleee}>{w0+'每日PBA'}</p>
-                                <PBAtimechartt areaPlan={areaPlan} areaPlanDay={winsss==null?areaPlanDay:winsss} areaPlanDayT={areaPlanDayT}></PBAtimechartt>
+                                <PBAtimechartt areaPlan={areaPlan} areaPlanDay={winsss==null?areaPlanDay:winsss} areaPlanDayT={areaPlanDayT} fanCost={fanCostA}></PBAtimechartt>
                             </div>
                         </div>
                     </div>

@@ -14,8 +14,7 @@ let Component = React.createClass({
             chart: {
                 height:height,
                 width:width,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -88,13 +87,21 @@ let Component = React.createClass({
                 },
                 categories:areaPlan,
             },
-            yAxis: {
+            yAxis:{
                  gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
-                title:{
-                    text:'',
-                },
+                 title: {
+                text:'(kWh)',
+                    align:'high',
+                    rotation:'0',
+                    y: -10,
+                    x: 45,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px',
+                    }
+            },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
@@ -108,20 +115,19 @@ let Component = React.createClass({
                 name: '计划发电量',
                 type: 'column',
                 data: areaPlanDay,
-                color:'none',
+                color:'#33BAC0',
                 borderColor:'#5B9BD5',
-                pointWidth: 15,
-                borderWidth: 4,
+               pointWidth: 20,
                 borderRadius: 3
             },
             {
             	name: '实际发电量',
                 type: 'column',
                 data:areaPlanDayT,
-                color:'none',
-                pointWidth: 15,
-                borderWidth: 4,
-                borderColor:'#ED7D31',
+               color:'#70c080',
+                pointWidth: 20,
+                
+               
                 borderRadius: 3
             },
             ]

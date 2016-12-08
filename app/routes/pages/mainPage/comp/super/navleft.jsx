@@ -53,8 +53,9 @@ let Component = React.createClass({
 
     render() {
         
-    let{fc_info='650107',choose,choose1}=this.props;
-       
+    let{fc_info='650107',choose,choose1,leftm,leftd}=this.props;
+       console.log(leftm)
+       console.log(leftd)
         return (
           <div className={ styles.navbox}>
                      <div className={styles.tit}>
@@ -171,6 +172,8 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
        fc_info:state.vars.fc_info,
+       leftm:state.vars.leftm,
+       leftd:state.vars.leftd,
     }
 };
 

@@ -53,7 +53,7 @@ let Component = React.createClass({
                         }
                             return (
                                 <div key={key} className={itemAct == key ? styles.treeItemAct : styles.treeItem} onClick={()=>changeTreeItem(key,value.page[0].page)}>
-                                    <img src={itemAct === key ? value.iconActive : value.iconNormal}/>
+                                    <img src={itemAct == key ? value.iconActive : value.iconNormal}/>
                                 </div>
                             )
                     }else{
@@ -67,7 +67,7 @@ let Component = React.createClass({
                         }
                             return (
                                 <div key={key} className={itemAct == key ? styles.treeItemAct : styles.treeItem} onClick={()=>changeTreeItem(key,value.page[0].page)}>
-                                    <img src={itemAct === key ? value.iconActive : value.iconNormal}/>
+                                    <img src={itemAct == key ? value.iconActive : value.iconNormal}/>
                                     <p>{value.name}</p>
                                 </div>
                             )
@@ -114,6 +114,11 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('tabItemActive', 0));
               dispatch(actions.setVars('showPage', 'cs'));
               dispatch(actions.setVars('pagename', page));
+              console.log(page);
+              if(page=='super'){
+                dispatch(actions.setVars('numtype', page));
+              }
+              
               dispatch(actions.setVars('colorAct', false));
                 dispatch(actions.setVars('navhide', true));
                 if(page=='monitorkb' || page=='health_main'){

@@ -3,33 +3,7 @@ import {connect} from 'react-redux';
 import styles from './header.scss';
 import back from '../../img/comp/back.png';
 var actions = require('redux/actions');
-let matrixdata = require('../../../../../../config/MatrixData');
-let model = require('../../../../../../config/Model');
-let modeldata = require('../../../../../../config/ModelData');
 var $ =require('jquery');
-let data=modeldata.ModelData;
-let mod=model.Model;
-let  mat=model.Model;
-let matD=matrixdata.ModelData;
-let model_data = modeldata.ModelData;
-var model_ens = model.Model.ens;
-let arr1 = [];
-let arr2 = [];
-var obj = matrixdata;
-var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-
-
-(function(){
-    for(var x in obj_wfd){
-        arr1.push(x)
-    }
-     for(var m in obj_pvd){
-        arr2.push(m)
-        
-    }
-   
-}());
 
 
 let Component = React.createClass({
@@ -38,7 +12,47 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ changpage, fcpage,actbt=0,backtop,changpage1,actbt1,befor_page='super',befor_page2}=this.props;
+       let{ changpage, fcpage,actbt=0,backtop,changpage1,actbt1,befor_page='super',befor_page2,zhzb,bbs}=this.props;
+
+
+          let matrixdata = require('../../../../../../config/MatrixData');
+          let model = require('../../../../../../config/Model');
+          let modeldata = require('../../../../../../config/ModelData');
+          let data=modeldata.ModelData;
+          let mod=model.Model;
+          let  mat=model.Model;
+          let matD=matrixdata.ModelData;
+          let model_data = bbs.ModelData;
+          var model_ens = zhzb.Model.ens;
+          let arr1 = [];
+          let arr2 = [];
+          var obj = matrixdata;
+          var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
+          var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+
+
+(function(){
+
+    for(var x in model_ens){
+      if(model_ens[x].wft=='Wf')  {  
+        arr1.push(x)
+      }else if(model_ens[x].wft=='Gf'){
+        arr2.push(x)
+      }
+    }
+   
+}());
+
+
+
+
+
+
+
+
+
+
+
         return (
          
                 <div className={styles.bodynav}>
@@ -73,6 +87,8 @@ const mapStateToProps = (state) => {
         actbt1 : state.vars.actbt1,
         befor_page : state.vars.befor_page,
         befor_page2 : state.vars.befor_page2,
+        zhzb: state.vars.zhzb,
+        bbs: state.vars.bbs,
 
     }
 };

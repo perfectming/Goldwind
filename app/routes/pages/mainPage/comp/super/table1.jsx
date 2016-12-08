@@ -120,7 +120,7 @@ let number=[];
                                                     
                                                 }
 
-                                                if(keyC==7){
+                                                if(keyC==8){
 
                                                      return (
 

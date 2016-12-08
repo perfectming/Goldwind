@@ -31,7 +31,6 @@ let Component = React.createClass({
         let {all,zhzb,bbs}=this.props;
         let mod1=zhzb.Model;
         let data2=bbs.ModelData;
-
         return (
 
             <div className={styles.bodyBox}>
@@ -42,15 +41,15 @@ let Component = React.createClass({
                          <Title title={['综合指标']}></Title>
                          <div className={styles.wind}>
 
-                           <span className={styles.num}><a className={styles.anum1}>{mod1.dis.TActPower.name}</a><a className={styles.anum}><b>{Number((data2[8888800].TActPower)/10000).toFixed(3)}</b>{mod1.dis.TActPower.unit}</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.Capacity.name}</a><a className={styles.anum}><b>{data2[8888800].Capacity}</b>{mod1.dis.Capacity.unit}</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>风电容量</a><a className={styles.anum}><b>{data2[8888801].Capacity}</b>{mod1.dis.Capacity.unit}</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>光伏容量</a><a className={styles.anum}><b>{data2[8888802].Capacity}</b>{mod1.dis.Capacity.unit}</a></span>
+                           <span className={styles.num}><a className={styles.anum1}>{mod1.dis.TActPower.name}</a><a className={styles.anum}><b>{Number((data2[8888800].TActPower)*zhzb.Model.dis.TActPower.coeff).toFixed(zhzb.Model.dis.TActPower.place)}</b>{mod1.dis.TActPower.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.Capacity.name}</a><a className={styles.anum}><b>{Number((data2[8888800].Capacity)*zhzb.Model.dis.Capacity.coeff).toFixed(zhzb.Model.dis.Capacity.place)}</b>{mod1.dis.Capacity.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>风电容量</a><a className={styles.anum}><b>{Number((data2[8888801].Capacity)*zhzb.Model.dis.Capacity.coeff).toFixed(zhzb.Model.dis.Capacity.place)}</b>{mod1.dis.Capacity.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>光伏容量</a><a className={styles.anum}><b>{Number((data2[8888802].Capacity)*zhzb.Model.dis.Capacity.coeff).toFixed(zhzb.Model.dis.Capacity.place)}</b>{mod1.dis.Capacity.unit}</a></span>
                          </div>
                           <div className={styles.wind}>
-                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.YearEgyAt.name}</a><a className={styles.anum}><b>{data2[8888800].YearEgyAt}</b>{mod1.dis.YearEgyAt.unit}</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.MonthEgyAt.name}</a><a className={styles.anum}><b>{data2[8888800].MonthEgyAt}</b>{mod1.dis.MonthEgyAt.unit}</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.DayEgyAt.name}</a><a className={styles.anum}><b>{data2[8888800].DayEgyAt}</b>{mod1.dis.DayEgyAt.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.YearEgyAt.name}</a><a className={styles.anum}><b>{Number((data2[8888800].YearEgyAt)*zhzb.Model.dis.YearEgyAt.coeff).toFixed(zhzb.Model.dis.YearEgyAt.place)}</b>{mod1.dis.YearEgyAt.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.MonthEgyAt.name}</a><a className={styles.anum}><b>{Number((data2[8888800].MonthEgyAt)*zhzb.Model.dis.MonthEgyAt.coeff).toFixed(zhzb.Model.dis.MonthEgyAt.place)}</b>{mod1.dis.MonthEgyAt.unit}</a></span>
+                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.DayEgyAt.name}</a><a className={styles.anum}><b>{Number((data2[8888800].DayEgyAt)*zhzb.Model.dis.DayEgyAt.coeff).toFixed(zhzb.Model.dis.DayEgyAt.place)}</b>{mod1.dis.DayEgyAt.unit}</a></span>
                             
                          </div>
                     </div>
@@ -58,16 +57,16 @@ let Component = React.createClass({
                     
                          <Title title={['风场指标',]}></Title>
                          <div className={styles.wind}>
-                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.WFCount.name}</a><a className={styles.anum}><b>{data2[8888800].WFCount}</b>{mod1.dis.WFCount.unit}</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.WTCount.name}</a><a className={styles.anum}><b>{data2[8888800].WTCount}</b>{mod1.dis.WTCount.unit}</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{Number(data2[8888800].WindSpeed_DevAverValue).toFixed(2)}</b>{mod.dis.WindSpeed_DevAverValue.unit}</a></span>
+                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.WFCount.name}</a><a className={styles.anum}><b>{data2[8888800].WFCount}</b>个</a></span>
+                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.WTCount.name}</a><a className={styles.anum}><b>{data2[8888800].WTCount}</b>台</a></span>
+                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{Number(data2[8888800].WindSpeed_DevAverValue).toFixed(2)}</b>{mod1.dis.WindSpeed_DevAverValue.unit}</a></span>
                           
                          </div>
                           <div className={styles.wind}>
                              <div className={styles.box} style={{color:mod.dis.ONL.color}}>
                                 <span className={styles.block}><img src={icon0}/></span>
                                 <span className={styles.contect}>{mod.dis.ONL.name}</span>
-                                <span className={styles.numx}>23</span>
+                                <span className={styles.numx}>{data2[8888801].RunCount_SOAM}</span>
                              </div>
 
                              <div className={styles.box} style={{color:mod.dis.FaultCount.color}}>
@@ -107,9 +106,9 @@ let Component = React.createClass({
                       
                         <Title title={['光伏指标']}></Title>
                          <div className={styles.wind}>
-                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.PVCount.name}</a><a className={styles.anum}><b>{data2[8888802].PVCount}</b>个</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.InverterCount.name}</a><a className={styles.anum}><b>{data2[8888802].InverterCount}</b>台</a></span>
-                            <span className={styles.num}><a className={styles.anum1}>{mod1.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{data2[8888802].PVTSI_Aver}</b>W/m<sup>2</sup></a></span>
+                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVCount.name}</a><a className={styles.anum}><b>{data2[8888802].PVCount}</b>个</a></span>
+                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.InverterCount.name}</a><a className={styles.anum}><b>{data2[8888802].InverterCount}</b>台</a></span>
+                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{data2[8888802].PVTSI_Aver ==='null' ? 0:data2[8888802].PVTSI_Aver}</b>W/m<sup>2</sup></a></span>
                           
                          </div>
                         <div className={styles.spedc}>

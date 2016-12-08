@@ -14,8 +14,8 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:340,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                width:880,
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -103,7 +103,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'(KWH)',
+                        text:'(kWh)',
                         align:'high',
                         rotation:'0',
                         y: -17,
@@ -126,7 +126,7 @@ let Component = React.createClass({
 
             title: {
                 
-                text: 'TBA%',
+                text: 'PBA%',
                 align:'high',
                 rotation:'0',
                  y: -17,
@@ -145,34 +145,39 @@ let Component = React.createClass({
                 type: 'column',
                 data: fanProfit,
                 borderRadius: 3,
+                color:'#33BAC0',
             },
             {
-                name: '四',
+                name: '故障损失',
                 type: 'column',
                 data: fanCost,
                 stack:'waste',
                 borderRadius: 3,
+                color:'#5298d3',
             },
                 {
-                    name: '大',
+                    name: '维护损失',
                     type: 'column',
                     data: fanCost1,
                     stack:'waste',
+                     color:'#ffffff'
                 },
                 {
-                    name: '类',
+                    name: '限功率损失',
                     type: 'column',
                     data: fanCost2,
                     stack:'waste',
+                    color:'#e9c75c',
                 },
                 {
-                    name: '损失发电量',
+                    name: '非设备原因损失',
                     type: 'column',
                     data: fanCost3,
                     stack:'waste',
+                    color:'#d06960'
                 },
                 {
-                    name: 'TBA',
+                    name: 'PBA',
                     type: 'line',
                     data: [10,20,30,40,50,60,70,80,90,99],
                     color:'blue',
