@@ -103,7 +103,7 @@ let Component = React.createClass({
                 //tickWidth: 4,
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-                title:'小时',
+                title:'(h)',
 
                 labels: {
                     y: 10, //x轴刻度往下移动20px

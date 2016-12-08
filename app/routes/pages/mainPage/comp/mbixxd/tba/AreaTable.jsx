@@ -11,10 +11,8 @@ let Component = React.createClass({
         let {areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
         let configPie = {
             chart: {
-                height:360,
-                width:1763,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:400,
+              backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -60,7 +58,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding:0,
                     borderWidth: 0,
-                    pointWidth:30,
+                    pointWidth:25,
                     stacking: 'normal',
                 }, series: {
                     cursor: 'pointer',
@@ -98,7 +96,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'(KWH)',
+                        text:'(kWh)',
                         align:'high',
                         rotation:'0',
                         y: -17,
@@ -119,7 +117,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: 'TBA%',
+                text: 'PBA%',
                 align:'high',
                 rotation:'0',
                y:-15,
@@ -136,35 +134,44 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordProfit,
                 borderRadius: 7,
+                color:'#33BAC0',
             },
             {
-                name: '四',
+                name: '故障损失',
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',
                 borderRadius: 2,
+                pointPlacement:-0.1,
+                color:'#5298d3',
             },
             {
-                name: '大',
+                name: '维护损失',
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',
+                pointPlacement:-0.1,
+                color:'#ffffff'
             },
             {
-                name: '类',
+                name: '限功率损失',
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',
+                pointPlacement:-0.1,
+                color:'#e9c75c',
             },
             {
-                name: '损失发电量',
+                name: '非设备原因损失',
                 type: 'column',
                 data: areaRecordCosts,
                 stack:'first',
                 borderRadius: 2,
+                pointPlacement:-0.1,
+                color:'#d06960'
             },
                 {
-                    name: 'TBA',
+                    name: 'PBA',
                     type: 'line',
                     data: areaRecordCosts,
                     stack:'first',

@@ -12,8 +12,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:410,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -31,6 +30,8 @@ let Component = React.createClass({
                 }
             },
             legend: {
+                x:-75,
+                y:10,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -57,7 +58,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding:0,
                     borderWidth: 0,
-                    pointWidth:30,
+                    pointWidth:25,
                     borderRadius: 7,
                     stacking: 'normal',
                 }, series: {
@@ -85,8 +86,8 @@ let Component = React.createClass({
                 },
                 categories:areaNamee,
             },
-            yAxis:  [{
-                labels: {
+            yAxis:
+                [{labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -96,19 +97,19 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'100%',
+                        text:'(小时)',
                         align:'high',
                         rotation:'0',
-                        y: -10,
-                        x: 47,
+                        y: -17,
+                        x: 50,
                         style:{
-                            color:'#fff',
-                            fontSize:'14px'
+                            fontSize:'14px',
+                            color:'#fff'
                         }
                     }
                 }, {
                     labels: {
-                format: '',
+               
                 style: {
                     color: '#fff',
                     fontSize:'14px'
@@ -117,26 +118,31 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: '',
+                text: 'TBA%',
                 align:'high',
                 rotation:'0',
-                 y: -17,
-                x: 150,
+               y:-15,
+               x:-40,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
             },
             opposite: true
         }],
             series: [{
-                name: '停机时间',
+                name: '实际运行时间',
                 type: 'column',
                 data: areaRecordProfitt,
                
             },
             {
-            	name: '实际运行时间',
+            	name: '停机时间',
                 type: 'column',
                 data: areaRecordCostss,
                 stack:'first',
                 color:'#ccc',
+                pointPlacement:-0.1,
                 
             },
 
@@ -146,6 +152,7 @@ let Component = React.createClass({
                     data: areaRecordCostss,
                     stack:'first',
                     color:'blue',
+                    yAxis:1,
                 },
 
             ]
