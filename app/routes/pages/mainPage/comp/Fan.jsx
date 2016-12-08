@@ -230,11 +230,12 @@ const mapDispatchToProps = (dispatch) => {
         pageTo_1:(value,key)=>{
           dispatch(actions.setVars('numpage', 'fanmatrix'));
           dispatch(actions.setVars('valuepage', value));
+          console.log(value);
           dispatch(actions.setVars('actbt',key ));
           dispatch(actions.setVars('actbt1','' ));
           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('befor_page','fan' ));
-          // dispatch(actions.setVars('fc_info', value));
+          dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'cs'));
           dispatch(actions.setVars('pagename', 'fan_matrix'));
         },
@@ -245,7 +246,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('actbt',''));
           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('befor_page','fan' ));
-          // dispatch(actions.setVars('fc_info', value));
+          dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'cs'));
           dispatch(actions.setVars('pagename', 'fan_matrix'));
         },
