@@ -178,13 +178,7 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
-<<<<<<< HEAD
-                
-               
-               
-=======
 
->>>>>>> fb257799b1e08d410a418d49c51ab5ec0ec10535
                 
                 {showPage === 'reliability' && <Reliability></Reliability>}
                

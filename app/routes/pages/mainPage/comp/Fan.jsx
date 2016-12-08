@@ -14,7 +14,7 @@ var actions = require('redux/actions');
 var { Router, Route, browserHistory} = require('react-router');
 // let fanData = require('../../../../../config/fan-data');
 let matrixdata = require('../../../../../config/MatrixData');
-let model = require('../../../../../config/Model');
+let model = require('../../../../../config/Model'); 
 let modeldata = require('../../../../../config/ModelData');
 
         let data=modeldata.ModelData;
@@ -74,9 +74,32 @@ let Component = React.createClass({
     },
 
     render() {
-        let {pageTo_1,pageTo_2,Tofaninfo1,Tofaninfo2}=this.props;
+        let {pageTo_1,pageTo_2,Tofaninfo1,Tofaninfo2,zhzb,fModel,fData}=this.props;
+        console.log(fModel);
+        console.log(fData);
+        console.log(zhzb);
+        let model_ens = zhzb.Model.ens;
+        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let arr1 = [];
+        let arr2 = [];
+        for(var x in obj_wfd){
+            arr1.push(x);
+            // for(var y in obj_wfd[x]){
+            //     arr2.push(obj_wfd[x][y])
+            // }
+        }
+        for(var m in obj_pvd){
+            arr2.push(m);
+            // for(var n in obj_wfd[m]){
+            //     arr2.push(obj_wfd[m][n])
+            // }
+        }
+        console.log(arr1,arr2)
         return (
+
             <div className={styles.bodyBox}>
+
                 <div className={styles.leftBox}>
                     <Superleftbox></Superleftbox>
                 </div>
@@ -135,8 +158,8 @@ let Component = React.createClass({
                                                     <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
-                                                                <p>{'风速:'+Math.ceil(model_data[value].WindSpeed_DevAverValue/3600)+'m/s'}</p>
-                                                                <p>{'功率:'+Number(model_data[value].TActPower).toFixed(2)+'KW'}</p>
+                                                                <p>{'风速:'+Math.ceil(valueA.WindSpeed_DevAverValue)+'m/s'}</p>
+                                                                <p>{'功率:'+Number(valueA.TActPower).toFixed(2)+'KW'}</p>
                                                         </div>
                                                     </div>
                                             )
@@ -164,8 +187,8 @@ let Component = React.createClass({
                                                     <div className={styles.listoptbtn_3}  key={keyA} onClick = {()=> Tofaninfo2(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
-                                                                <p>{'辐照度:'+Math.ceil(model_data[value].PVTSI_Aver)+'W/㎡'}</p>
-                                                                <p>{'功率:'+Number(model_data[value].TActPower).toFixed(2)+'KW'}</p>
+                                                                <p>{'辐照度:'+Math.ceil(valueA.PVTSI_Aver)+'W/㎡'}</p>
+                                                                <p>{'功率:'+Number(valueA.TActPower).toFixed(2)+'KW'}</p>
                                                         </div>
                                                     </div>
                                             )
@@ -190,7 +213,9 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {   
             zhzb: state.vars.zhzb,
-            bbs: state.vars.bbs,      
+            bbs: state.vars.bbs,
+            fModel: state.vars.fModel,
+            fData: state.vars.fData,    
     }
 };
 
