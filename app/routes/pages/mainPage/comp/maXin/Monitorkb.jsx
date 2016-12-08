@@ -34,11 +34,15 @@ for(let x=0;x<arr.length;x++){
 var actions = require('redux/actions');
 
 let Component = React.createClass({
+
     componentDidMount() {
         this.props.init();
     },
 
     render() {
+        let{moname,modata}=this.props;
+        console.log(moname)
+        console.log(modata)
         let mobd=monBoardData.ModelData;
         let mod=model.Model;
         let urodz = new Date("11/12/2015");
@@ -149,11 +153,24 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        moname:state.vars.moname,
+        modata:state.vars.modata,
+        bool:state.vars.bool,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        // changedate:(bool)=>{
+        //     console.log(bool)
+
+        //     if(!bool){
+        //         dispatch(actions.setVars('showPage','cs'));
+        //     }
+        //      dispatch(actions.setVars('numtype','monitor'));
+        //     dispatch(actions.setVars('pagename','monitorkb'));
+        // },
         init: () => {
             dispatch(actions.setVars('navhide', false));
             dispatch(actions.setVars('putpage', true));

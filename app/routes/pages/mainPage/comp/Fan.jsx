@@ -13,58 +13,58 @@ import matrix from '../../../../../config/MatrixModel';
 var actions = require('redux/actions');
 var { Router, Route, browserHistory} = require('react-router');
 // let fanData = require('../../../../../config/fan-data');
-let matrixdata = require('../../../../../config/MatrixData');
-let model = require('../../../../../config/Model');
-let modeldata = require('../../../../../config/ModelData');
+// let matrixdata = require('../../../../../config/MatrixData');
+// let model = require('../../../../../config/Model'); 
+// let modeldata = require('../../../../../config/ModelData');
 
-        let data=modeldata.ModelData;
-        let mod=model.Model;
-        let  mat=matrix.Model;
-        let matD=matrixdata.ModelData;
+//         let data=modeldata.ModelData;
+//         let mod=model.Model;
+//         let  mat=matrix.Model;
+//         let matD=matrixdata.ModelData;
 
-var model_data = modeldata.ModelData;
+// var model_data = modeldata.ModelData;
 
-var arr3 = [];
-var arr4 = [];
-var model_ens = model.Model.ens;
-for(var j in model_ens){
-    arr3.push(model_ens[j])
-}
-// arr3.map((valueE,keyE)=> {
-//     return (
-//         console.log(valueE.name)
-//         )
-// });
-
-
- var arr1 = [];
- var arr2 = [];
- // var arr3 = [];
- // var arr4 = [];
- var obj = matrixdata;
-    var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-    var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+// var arr3 = [];
+// var arr4 = [];
+// // var model_ens = model.Model.ens;
+// for(var j in model_ens){
+//     arr3.push(model_ens[j])
+// }
+// // arr3.map((valueE,keyE)=> {
+// //     return (
+// //         console.log(valueE.name)
+// //         )
+// // });
 
 
-    // console.log(obj_pvd);
-    for(var x in obj_wfd){
-        arr1.push(x);
-        // for(var y in obj_wfd[x]){
-        //     arr2.push(obj_wfd[x][y])
-        // }
-    }
-    for(var m in obj_pvd){
-        arr2.push(m);
-        // for(var n in obj_wfd[m]){
-        //     arr2.push(obj_wfd[m][n])
-        // }
-    }
-    // console.log(arr2);
-    // console.log(arr1);
-    // console.log(arr2);
-// arr2.map((valueZ, keyZ)=> {
-//     console.log( )
-// })
+//  var arr1 = [];
+//  var arr2 = [];
+//  // var arr3 = [];
+//  // var arr4 = [];
+//  var obj = matrixdata;
+//     var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
+//     var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+
+
+//     // console.log(obj_pvd);
+//     for(var x in obj_wfd){
+//         arr1.push(x);
+//         // for(var y in obj_wfd[x]){
+//         //     arr2.push(obj_wfd[x][y])
+//         // }
+//     }
+//     for(var m in obj_pvd){
+//         arr2.push(m);
+//         // for(var n in obj_wfd[m]){
+//         //     arr2.push(obj_wfd[m][n])
+//         // }
+//     }
+//     // console.log(arr2);
+//     // console.log(arr1);
+//     // console.log(arr2);
+// // arr2.map((valueZ, keyZ)=> {
+// //     console.log( )
+// // })
 
 
 
@@ -74,9 +74,32 @@ let Component = React.createClass({
     },
 
     render() {
-        let {pageTo_1,pageTo_2,Tofaninfo1,Tofaninfo2}=this.props;
+        let {pageTo_1,pageTo_2,Tofaninfo1,Tofaninfo2,zhzb,fModel,fData}=this.props;
+        // console.log(fModel);
+        // console.log(fData);
+        // console.log(zhzb);
+        let model_ens = zhzb.Model.ens;
+        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let arr1 = [];
+        let arr2 = [];
+        for(var x in obj_wfd){
+            arr1.push(x);
+            // for(var y in obj_wfd[x]){
+            //     arr2.push(obj_wfd[x][y])
+            // }
+        }
+        for(var m in obj_pvd){
+            arr2.push(m);
+            // for(var n in obj_wfd[m]){
+            //     arr2.push(obj_wfd[m][n])
+            // }
+        }
+        // console.log(arr1,arr2)
         return (
+
             <div className={styles.bodyBox}>
+
                 <div className={styles.leftBox}>
                     <Superleftbox></Superleftbox>
                 </div>
@@ -135,8 +158,8 @@ let Component = React.createClass({
                                                     <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
-                                                                <p>{'风速:'+Math.ceil(model_data[value].WindSpeed_DevAverValue/3600)+'m/s'}</p>
-                                                                <p>{'功率:'+Number(model_data[value].TActPower).toFixed(2)+'KW'}</p>
+                                                                <p>{'风速:'+Math.ceil(valueA.WindSpeed_DevAverValue)+'m/s'}</p>
+                                                                <p>{'功率:'+Number(valueA.TActPower).toFixed(2)+'KW'}</p>
                                                         </div>
                                                     </div>
                                             )
@@ -164,8 +187,8 @@ let Component = React.createClass({
                                                     <div className={styles.listoptbtn_3}  key={keyA} onClick = {()=> Tofaninfo2(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
-                                                                <p>{'辐照度:'+Math.ceil(model_data[value].PVTSI_Aver)+'W/㎡'}</p>
-                                                                <p>{'功率:'+Number(model_data[value].TActPower).toFixed(2)+'KW'}</p>
+                                                                <p>{'辐照度:'+Math.ceil(valueA.PVTSI_Aver)+'W/㎡'}</p>
+                                                                <p>{'功率:'+Number(valueA.TActPower).toFixed(2)+'KW'}</p>
                                                         </div>
                                                     </div>
                                             )
@@ -190,7 +213,9 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {   
             zhzb: state.vars.zhzb,
-            bbs: state.vars.bbs,      
+            bbs: state.vars.bbs,
+            fModel: state.vars.fModel,
+            fData: state.vars.fData,    
     }
 };
 
@@ -209,7 +234,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('actbt1','' ));
           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('befor_page','fan' ));
-          dispatch(actions.setVars('fc_info', value));
+          // dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'cs'));
           dispatch(actions.setVars('pagename', 'fan_matrix'));
         },
@@ -220,7 +245,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('actbt',''));
           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('befor_page','fan' ));
-          dispatch(actions.setVars('fc_info', value));
+          // dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'cs'));
           dispatch(actions.setVars('pagename', 'fan_matrix'));
         },
