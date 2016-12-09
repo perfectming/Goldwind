@@ -34,10 +34,10 @@ let Component = React.createClass({
             let data = tabaleData.ModelData;
             let mode = model.Model.ens;
             for (let i in mode){
-                if(mode[i].wft=='Gf'){
+                if(mode[i].wft=='Gf'&&arr1.indexOf(i)==-1){
                     arr1.push(i);
                 }
-                if(mode[i].wft=='Wf'){
+                if(mode[i].wft=='Wf'&&arr2.indexOf(i)==-1){
                     arr2.push(i);
                 }
             }
