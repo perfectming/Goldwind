@@ -18,8 +18,8 @@ module.exports = {
         "当月上网电量",
         "当年上网电量",
         "当年上网电量完成率",
-        "顺时风速",
-        "顺时功率",
+        "瞬时风速",
+        "瞬时功率",
         "当年累计等效利用小时",
         "当月时间可利用率",
         
@@ -38,7 +38,7 @@ module.exports = {
         
     ],
     wt_status:[
-         "ONL",
+         "RunCount_SOAM",
         "FaultCount",
         "RepairCount",
         "OfflineCount",

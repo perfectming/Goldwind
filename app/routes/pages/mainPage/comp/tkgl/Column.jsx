@@ -3,29 +3,32 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('../../../../../../config/RegulationData');
-let mod = require('../../../../../../config/RegulationModel');
 let arr1 = [];
 let arr2=[];
 let arr3=[];
-let ssg1 = data.ModelData;
-let ssg2=mod.Model.ens;
-for(let x in ssg1){
-    arr1.push(ssg1[x].Capacity/1);
-}
-arr1.splice(-2,2);
-for(let x in ssg1){
-    arr2.push((ssg1[x].Transformer_P/1).toFixed(0)/1);
-}
-arr2.splice(-2,2);
-for(let x in ssg2){
-    arr3.push(ssg2[x].name);
-}
-arr3.pop();
+
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
+        let {model,tabaleData} = this.props;
+        if (model&&tabaleData){
+        let ssg1 = tabaleData.ModelData;
+        let ssg2=model.Model.ens;
+        for(let x in ssg1){
+            arr1.push(ssg1[x].Capacity/1);
+        }
+        arr1.splice(-2,2);
+        for(let x in ssg1){
+            arr2.push((ssg1[x].Transformer_P/1).toFixed(0)/1);
+        }
+        arr2.splice(-2,2);
+        for(let x in ssg2){
+            arr3.push(ssg2[x].name);
+        }
+        arr3.pop();}else{
+            console.log('获取数据失败');
+        }
         let configPie = {
             chart: {
                 type: 'column',
