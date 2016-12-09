@@ -41,7 +41,6 @@ let Component = React.createClass({
                     arr2.push(i);
                 }
             }
-            console.log(mode,arr1,arr2);
         return (
             <div>
                 <div className={styles.actionBox}>
@@ -65,7 +64,7 @@ let Component = React.createClass({
                                 return (
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         <div className={styles.tableContentItem}
-                                             style={{width:(100/header.length)+'%'}}
+                                             style={{width:(100/header.length)+'%',cursor:'pointer'}}
                                              key={key} onClick={()=>changepage3(value,key)}>{mode[value]['name']}</div>
                                         {
                                             nam.map((valueC, keyC)=> {
@@ -98,7 +97,7 @@ let Component = React.createClass({
                             return (
                             <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                 <div className={styles.tableContentItem}
-                                     style={{width:(100/header.length)+'%'}}
+                                     style={{width:(100/header.length)+'%',cursor:'pointer'}}
                                      key={key} onClick={()=>changepage2(value,key)}>{mode[value]['name']}</div>
                                 {
                                 nam.map((valueC, keyC)=> {

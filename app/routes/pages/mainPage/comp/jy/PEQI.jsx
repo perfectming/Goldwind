@@ -23,7 +23,9 @@ for(let i=0;i<=30;i++){
         arr3.push(ssg2[x].name);
     }}());
 arr3.splice(-2,2);
-let arr1=['name','wfid','rectime','operationtime','operator','planelec'];
+let arr1=[
+    // 'name',
+    'wfid','rectime','operationtime','operator','planelec'];
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
@@ -39,7 +41,7 @@ let Component = React.createClass({
         let {saveTableItem,buttonAction,deleData,addData,table, changeTableItem1} = this.props;
         let newData=[];
         let num=0;
-        let arr=[13,13,13,13,10,24,6];
+        let arr=[16,16,16,16,16,10];
         for(let i=0;i<comp.data.header.length;i++){
             newData.push('');
         };
@@ -105,18 +107,25 @@ let Component = React.createClass({
                                                    readOnly="true" value={num}/>
                                             {
                                                 arr1.map((valueC, keyC)=> {
-                                                    if(keyC<2){
-                                                        return(
-                                                            <select className={styles.tableContentItem}
-                                                                    style={{width:arr[keyC]+"%"}} key={keyC}
-                                                                    onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}>
-                                                                <option value="">{value[valueC]}</option>
-                                                            </select>
-                                                        )
-                                                    }else if(keyC<4){
+                                                    if(keyC==0){
                                                         return (
                                                             <div className={styles.tableContentItem}
-                                                                          style={{width:arr[keyC]+"%"}} key={keyC}>
+                                                                    style={{width:arr[keyC]+"%"}} key={keyC}>
+                                                               {value[valueC]}
+                                                            </div>
+                                                        )
+                                                    }else if(keyC==1){
+                                                        return (
+                                                            <div className={styles.tableContentItem}
+                                                                 style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
+                                                                <input onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                                       type="date" readOnly="readOnly" value={value[valueC].slice(0,10)}/>
+                                                            </div>
+                                                        )
+                                                    }else if(keyC<3){
+                                                        return (
+                                                            <div className={styles.tableContentItem}
+                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
                                                             <input onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
                                                                    type="date" value={value[valueC].slice(0,10)}/>
                                                             </div>
@@ -131,23 +140,23 @@ let Component = React.createClass({
                                                     )}
                                                 })
                                             }
-                                            <div className={styles.tableContentItem} style={{width:3+"%"}}>
+                                            <div className={styles.tableContentItem} style={{width:5+"%"}}>
                                                 <img src={save} onClick={(e)=>saveTableItem(key)}/>
                                             </div>
-                                            <div className={styles.tableContentItem} style={{width:3+"%"}}>
+                                            <div className={styles.tableContentItem} style={{width:5+"%"}}>
                                                 <img src={del} onClick={(e)=>deleData(key)}/>
                                             </div>
                                         </div>
                                     )
                                 })
                             }
-                            <div className={styles.tableContentLine1}>
+                            <div className={styles.tableContentLine1} id="addData">
                                 <input className={styles.tableContentItem}
                                        style={{width:8+"%"}}
                                        readOnly="true" value={num+1}/>
                                 {
                                     arr1.map((valueC, keyC)=> {
-                                        if(keyC<2){
+                                        if(keyC<1){
                                             return(
                                                 <select className={styles.tableContentItem}
                                                         style={{width:arr[keyC]+"%"}} key={keyC}
@@ -155,10 +164,10 @@ let Component = React.createClass({
                                                     <option value=""></option>
                                                 </select>
                                             )
-                                        }else if(keyC<4){
+                                        }else if(keyC<3){
                                             return (
                                                 <div className={styles.tableContentItem}
-                                                     style={{width:arr[keyC]+"%"}} key={keyC}>
+                                                     style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
                                                     <input onChange={(e)=>changeTableItem1(e.target.value,table,keyC)}
                                                            type="date"/>
                                                 </div>
@@ -172,10 +181,10 @@ let Component = React.createClass({
                                             )}
                                     })
                                 }
-                                <div className={styles.tableContentItem} style={{width:3+"%"}}>
+                                <div className={styles.tableContentItem} style={{width:5+"%"}}>
                                     <img src={save} onClick={()=>(e)=>saveTableItem(num)}/>
                                 </div>
-                                <div className={styles.tableContentItem} style={{width:3+"%"}}>
+                                <div className={styles.tableContentItem} style={{width:5+"%"}}>
                                     <img src={del} onClick={(e)=>deleData(key)}/>
                                 </div>
                             </div>
@@ -203,7 +212,6 @@ const mapDispatchToProps = (dispatch) => {
                 data:'pageSize=8&&nowPage=1',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
                     dispatch(actions.setObjs('tableContent', data));
                 },
                 error:function(){
@@ -217,7 +225,7 @@ const mapDispatchToProps = (dispatch) => {
             let wfp;
             wfp=JSON.stringify(asd);
             $.ajax({
-                url: 'http://10.9.99.213:8080/soam/ELEC/uppWfelec?newwfp=data&groupid=100001',
+                url: 'http://10.9.99.213:8080/soam/ELEC/uppWfelec?newwfp=data',
                 type: 'post',
                 data: wfp,
                 dataType: 'json',//here,
@@ -257,7 +265,8 @@ const mapDispatchToProps = (dispatch) => {
             let tableV = _.clone(getState().objs.tableContent);
             let fid=tableV.data[j]['wfid'];
             let rection=tableV.data[j]['rectime'];
-            let daytype=tableV.data[j]['rectime'];
+            let daytype=tableV.data[j]['datetype'];
+            console.log('wfid='+fid+'&rectime='+rection+'&datetype='+daytype);
             $.ajax({
                 url: 'http://10.9.99.213:8080/soam/ELEC/delWfelec',
                 type: 'post',

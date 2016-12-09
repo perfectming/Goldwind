@@ -157,7 +157,6 @@ module.exports = {
         table:{
             data:{
                 header:[
-                    '区域',
                     '风场',
                     '开始时间',
                     '结束时间',

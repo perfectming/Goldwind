@@ -26,9 +26,7 @@ let Component = React.createClass({
         for(let x in ssg2){
             arr3.push(ssg2[x].name);
         }
-        arr3.pop();}else{
-            console.log('获取数据失败');
-        }
+        arr3.pop();}
         let configPie = {
             chart: {
                 type: 'column',
@@ -64,6 +62,11 @@ let Component = React.createClass({
                 },
                 categories: arr3
             },
+            yAxis: {
+                title:{
+                    text:''
+                }
+            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -71,6 +74,7 @@ let Component = React.createClass({
             ,
             plotOptions: {
                 series: {
+                    pointWidth: 40,
                     grouping: false,
                     borderRadius: 10,
                     allowPointSelect: false,
