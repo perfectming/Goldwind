@@ -18,16 +18,17 @@ let Component = React.createClass({
 
     render() {
         let{flag3,flag4,flag=true,changepageProT,changepageProS,changepageSort1,changepageSort,value,small,big,area,actb=0,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
-        let profit;
+        let areaName=[],areaId=[];
         $.ajax({
-        		url: 'http://10.9.100.53:8080/gwbi/yield/getAllGroupYield',
+        		url: 'http://10.9.100.53:8080/wbi/BaseData/getGroup',
 		        type: 'post',
-		        data: 'startdate=2016-11-10&enddate=2016-11-18',
+		        async:false,
 		        dataType: 'json',//here
 		        success:function (data) {
-		        	profit=data.data;
-		        	console.log(profit);
-		        	return profit;
+		        	for(var i in data.data){
+		        		areaName.push(data.data[i]);
+		        		areaId.push(i);
+		        	}
 		        },
 		        complete : function(XMLHttpRequest,status){ 
 			　　　　if(status=='timeout'){
@@ -40,8 +41,8 @@ let Component = React.createClass({
            <div className={styles.box}>
            		<ul className={styles.monthbox}>
                     {
-                    	data.yearelectric[0].area.map((value,key)=>{
-                    		return(<li key={key} className={actb===key? styles.bg1 : styles.bg} onClick={()=>changepage(value,key)}>{value.name}</li>)
+                    	areaName.map((value,key)=>{
+                    		return(<li key={key} className={actb===key? styles.bg1 : styles.bg} onClick={()=>changepage(value,key)}>{value}</li>)
                     	})
                     }
                 </ul>
