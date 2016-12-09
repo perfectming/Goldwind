@@ -23,7 +23,7 @@ for(let i=0;i<=30;i++){
         arr3.push(ssg2[x].name);
     }}());
 arr3.splice(-2,2);
-let arr1=['name','wfid','operationtime','rectime','operator','planelec'];
+let arr1=['name','wfid','rectime','operationtime','operator','planelec'];
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
@@ -216,7 +216,6 @@ const mapDispatchToProps = (dispatch) => {
             let asd=tableV.data[line];
             let wfp;
             wfp=JSON.stringify(asd);
-            console.log(wfp);
             $.ajax({
                 url: 'http://10.9.99.213:8080/soam/ELEC/uppWfelec?newwfp=data&groupid=100001',
                 type: 'post',
@@ -256,7 +255,22 @@ const mapDispatchToProps = (dispatch) => {
         },
         deleData:(j) => {
             let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.content.splice(j,1);
+            let fid=tableV.data[j]['wfid'];
+            let rection=tableV.data[j]['rectime'];
+            let daytype=tableV.data[j]['rectime'];
+            $.ajax({
+                url: 'http://10.9.99.213:8080/soam/ELEC/delWfelec',
+                type: 'post',
+                data:'wfid='+fid+'&rectime='+rection+'&datetype='+daytype,
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContent', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
             dispatch(actions.setObjs('tableContent', tableV));
         }
     };
