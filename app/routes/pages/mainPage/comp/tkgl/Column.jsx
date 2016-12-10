@@ -3,16 +3,15 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let arr1 = [];
-let arr2=[];
-let arr3=[];
-
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
         let {model,tabaleData} = this.props;
         if (model&&tabaleData){
+        let arr1 = [];
+        let arr2=[];
+        let arr3=[];
         let ssg1 = tabaleData.ModelData;
         let ssg2=model.Model.ens;
         for(let x in ssg1){
