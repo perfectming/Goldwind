@@ -29,7 +29,6 @@ let Component = React.createClass({
         let {change,change1,table,openAGC,closeAGC,changeTableItem,jyname,jydata} = this.props;
         let arr1 = [];
         let arr2 = [];
-        console.log(jyname,jydata);
         let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
         let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 

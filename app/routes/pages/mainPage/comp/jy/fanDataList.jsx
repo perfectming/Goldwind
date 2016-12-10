@@ -10,38 +10,48 @@ var actions = require('redux/actions');
 let database = require('./data');
 import _ from 'lodash';
 let data=database.fanDataList;
-
-var run=0;
-var fau=0;
-var offL=0;
-var stand=0;
-var haul=0;
-for(let i=0;i<data.content.length;i++){
-    switch ((data.content[i][5])%5){
-        case 0:
-            run++;
-            break;
-        case 1:
-            fau++;
-            break;
-        case 2:
-            offL++;
-            break;
-        case 3:
-            stand++;
-            break;
-        case 4:
-            haul++;
-            break;
-    }
-}
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-        let {next,previous,page=1} = this.props;
+        let {valuepage,Tofaninfo,zhzb,fModel,fData,next,previous,page=1,} = this.props;
+        let model_ens = zhzb.Model.ens;
+        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let arr1 = [];
+        let arr2 = [];
+        for(var x in obj_wfd){
+            arr1.push(x);
+        }
+        for(var m in obj_pvd){
+            arr2.push(m);
+        }
+        let run=0;
+        let fau=0;
+        let offL=0;
+        let stand=0;
+        let haul=0;
+        for(let i=0;i<data.content.length;i++){
+            switch ((data.content[i][5])%5){
+                case 0:
+                    run++;
+                    break;
+                case 1:
+                    fau++;
+                    break;
+                case 2:
+                    offL++;
+                    break;
+                case 3:
+                    stand++;
+                    break;
+                case 4:
+                    haul++;
+                    break;
+            }
+        }
         return (
             <div className={css.toBox}>
                 <div className={css.leftBox}>
@@ -199,6 +209,11 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         page: state.vars.page1,
+        valuepage : state.vars.valuepage,
+        zhzb : state.vars.zhzb,
+        fModel : state.vars.fModel,
+        fData : state.vars.fData,
+
     }
 };
 
