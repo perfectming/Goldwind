@@ -9,9 +9,9 @@ let Component = React.createClass({
     render() {
         let {model,tabaleData} = this.props;
         if (model&&tabaleData){
-        let arr1 = [];
-        let arr2=[];
-        let arr3=[];
+        var arr1 = [];
+        var arr2=[];
+        var arr3=[];
         let ssg1 = tabaleData.ModelData;
         let ssg2=model.Model.ens;
         for(let x in ssg1){
