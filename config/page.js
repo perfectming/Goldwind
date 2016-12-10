@@ -79,13 +79,31 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/yw_active.png'),
                 page:[
                     {
-                        name:'业务报表1',
+                        name:'发电量报表',
                         page:'ywbb',
+                    },{
+                        name:'损失电量报表',
+                        page:'',
+                    },{
+                        name:'可靠性报表',
+                        page:'',
+                    },{
+                        name:'状态统计报表',
+                        page:'',
+                    },{
+                        name:'功率曲线报表',
+                        page:'',
                     },{
                         name:'故障报表',
                         page:'fault',
                     },{
-                        name:'业务报表3',
+                        name:'功率调控报表',
+                        page:'',
+                    },{
+                        name:'集合预报报表',
+                        page:'',
+                    },{
+                        name:'告警报表',
                         page:'',
                     }]
             },{

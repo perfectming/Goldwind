@@ -278,7 +278,7 @@ module.exports = {
                 shared: true,
                 style:{
                     color: '#333',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     fontFamily:'微软雅黑'
                 },
                  //pointFormat: '{series.name}: <b>{point.y}</b>',
@@ -343,6 +343,9 @@ module.exports = {
             type: 'column',
          
             data:  [35000,50000,43000,45000,42000,35000,46000,48000,48000,46000,50000,47000],
+              tooltip: {
+                valueSuffix: '万kWh'
+            }
             
         }, { //第一个Y轴的数据
             name: '月计划发电量',
@@ -350,6 +353,9 @@ module.exports = {
             type: 'column',
              
             data: [30000,36000,38000,35000,32000,29000,26000,38000,38000,36000,40000,37000],
+             tooltip: {
+                valueSuffix: '万kWh'
+            }
             
         },
         { //第一个Y轴的数据
@@ -358,6 +364,9 @@ module.exports = {
             type: 'line',
             yAxis: 1,//坐标轴序号
             data:[26,29,27,28,26,24,28,26,26,25,24,29],
+             tooltip: {
+                valueSuffix: '%'
+            }
             
         }]  
      },
@@ -367,7 +376,7 @@ module.exports = {
                 shared: true,
                 style:{
                     color: '#333',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     fontFamily:'微软雅黑'
                 },
                  //pointFormat: '{series.name}: <b>{point.y}</b>',
@@ -431,6 +440,9 @@ module.exports = {
             type: 'column',
          
             data:  [35000,50000,43000,45000,42000,35000,46000,48000,48000,46000,50000,47000],
+             tooltip: {
+                valueSuffix: '万元'
+            }
             
         }, { //第一个Y轴的数据
             name: '收入',
@@ -438,6 +450,9 @@ module.exports = {
             type: 'column',
              
             data: [30000,36000,38000,35000,32000,29000,26000,38000,38000,36000,40000,37000],
+            tooltip: {
+                valueSuffix: '万元',
+            }
             
         },
         { //第一个Y轴的数据
@@ -446,6 +461,9 @@ module.exports = {
             type: 'line',
             yAxis: 1,//坐标轴序号
             data:[26,29,27,28,26,24,28,26,26,25,24,29],
+            tooltip: {
+                valueSuffix: '%'
+            }
             
         }]  
      },
@@ -455,7 +473,7 @@ module.exports = {
                 shared: true,
                 style:{
                     color: '#333',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     fontFamily:'微软雅黑'
                 },
                 // pointFormat: '{series.name}: <b>{point.y}</b>',
@@ -503,7 +521,7 @@ module.exports = {
                 shared: true,
                 style:{
                     color: '#333',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     fontFamily:'微软雅黑'
                 },
                 // pointFormat: '{series.name}: <b>{point.y}</b>',
@@ -561,7 +579,7 @@ module.exports = {
                 shared: true,
                 style:{
                     color: '#333',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     fontFamily:'微软雅黑'
                 },
                 pointFormat: '{series.name}: <b>{point.percentage:.0f}%</b>',
