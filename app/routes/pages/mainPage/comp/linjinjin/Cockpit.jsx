@@ -5,6 +5,7 @@ import Title from '../super/Title.jsx';
 import Polar from '../mxx/Polar1';
 import Pie2 from './Pie2.jsx';
 import Tuchart from './Tuchart.jsx';
+import Tuchart1 from './tuchar1.jsx';
 
 import jnjp from '../../img/comp/jienengjp.png';
 import nljys from '../../img/comp/nianleijys.png';
@@ -65,12 +66,12 @@ let Component = React.createClass({
                 <div className={`${styles.zhzbgl} ${styles.box_shadow}`}>
                     <Title title={['综合指标概览']}></Title>
                     <div className={styles.zhzbglmain}>
-                        <div className={styles.zhzbglbox}><img src={up}/><p>投资收益率</p><Pie2 color={['#33BAC0','#33545C']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#31BAC0'}}>{(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2)}%</p></span></div>
-                        <div className={styles.zhzbglbox}><img src={up}/><p>年发电计划完成率</p><Pie2 color={['#E9C75C','#A69263']} num={[27,73]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#E9C75C'}}>{(mobd[8888800].YearEgyAt/(mobd[8888800].YearPlanTotEgyAt/1+(mobd[8888800].YearLossElec.Sum/1))*100).toFixed(2)}%</p></span></div>
-                        <div className={styles.zhzbglbox}><img src={down}/><p>年度PBA</p><Pie2 color={['#D06960','#954A45']} num={[85,15]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#D06960'}}>{(mobd[8888800].MonthEgyAt/mobd[8888800].CurMonthPlanEgyAt*100).toFixed(2)}%</p></span></div>
-                        <div className={styles.zhzbglbox}><img src={up}/><p>设备健康度</p><Pie2 color={['#70C080','#4A7A59']} num={[25,75]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#70C080'}}>{(mobd[8888801].MonthLossElec.Sum/mobd[8888801].MonthEgyAt*100).toFixed(2)}%</p></span></div>
-                        <div className={styles.zhzbglbox}><img src={down}/><p>任务完成度</p><Pie2 color={['#5298D3','#537388']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#5298D3'}}>{(mobd[8888802].MonthLossElec.Sum/mobd[8888802].MonthEgyAt*100).toFixed(2)}%</p></span></div>
-                        <div className={styles.zhzbglbox}><img src={up}/><p>年度MTBF</p><Pie2 color={['#31BAC0','#32535C']} num={[50,50]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#31BAC0'}}>{(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2)}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={up}/><p>投资收益率</p><Pie2 color={['#1fe005']} num={[100]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#1fe005'}}>{126.3}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={up}/><p>年发电计划完成率</p><Pie2 color={['#fbd500','#32535C']} num={[89,11]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#fbd500'}}>{89.6}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={down}/><p>年度PBA</p><Pie2 color={['#ff0000','#32535C']} num={[68,32]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#ff0000'}}>{68}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={up}/><p>设备健康度</p><Pie2 color={['#d06960','#32535C']} num={[57,43]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#d06960'}}>{57}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={down}/><p>任务完成度</p><Pie2 color={['#fbd500','#32535C']} num={[82,18]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#fbd500'}}>{82}%</p></span></div>
+                        <div className={styles.zhzbglbox}><img src={up}/><p>年度MTBF</p><Pie2 color={['#d06960','#32535C']} num={[30,70]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#d06960'}}>30h</p></span></div>
                     </div>
                 </div>
                 <div className={styles.columbox}>
@@ -88,7 +89,7 @@ let Component = React.createClass({
 
                     <Title title={['场站等效利用小时数']}></Title>
                     <div className={styles.fgzyfxmain}>
-                        <Tuchart shuju={comp.jscnum.hour}></Tuchart>
+                        <Tuchart shuju={comp.jscnum.mtbf}></Tuchart>
                     </div>
                 </div>
                
@@ -97,8 +98,8 @@ let Component = React.createClass({
                     <Tuchart shuju={comp.jscnum.mtbf}></Tuchart>
                 </div>
                  <div className={`${styles.ssdlqkfx} ${styles.box_shadow}`}>
-                    <Title title={['损失电量情况分析']}></Title>
-                    <Tuchart shuju={comp.jscnum.elect}></Tuchart>
+                    <Title title={['损失电量情况分析(万kWh)']}></Title>
+                    <Tuchart1 shuju={comp.jscnum.elect}></Tuchart1>
                 </div>
 
 
@@ -107,8 +108,12 @@ let Component = React.createClass({
                         <div className={styles.leftimg}><img src={jnjp}/></div>
                         <div className={styles.righttext}>节能减排</div>
                     </div>
-                    <div className={styles.navitem}>
+                    <div className={`${styles.navitem} ${styles.bore1}`}>
                         <div className={styles.leftimg} style={{width:'100%',textAlign:'center'}}>区域内场站数量:12个</div>
+                    </div>
+                    <div className={styles.navitem}>
+                        <div className={styles.leftimg}><img src={nlcojp}/></div>
+                        <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>73225</b>万吨</h2></div>
                     </div>
                     <div className={`${styles.navitem} ${styles.bore1}`}>
                         <div className={styles.leftimg} style={{width:'100%'}}>纳入CDM场站数量:8个</div>

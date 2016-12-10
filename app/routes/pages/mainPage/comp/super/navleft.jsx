@@ -14,8 +14,6 @@ let Component = React.createClass({
     render() {
         
     let{fc_info='150801',choose,choose1,leftm,leftd}=this.props;
-     console.log(leftm)
-       console.log(leftd)
 
 let date=leftd.ModelData;
 let datem=leftm.Model.dis;
@@ -24,13 +22,29 @@ let namestat=wttitle.wt_stat;
 let title=wttitle.wt_title;
 let wtname=wttitle.wt_name;
 let wtcolor=wttitle.pie;
+let wtcolor1=wttitle.pie1;
 let array2=[];
 let arrayJy=[];
+let point=[];
 let uint=wttitle.wt_unit;
 var d = new Date();
 let str=d.getDate();
 (function(){
  
+    // console.log(datem)
+
+     // for(let abs in datem){ 
+     //    console.log(datem.abs)
+        // if(datem.name){
+        //     point.push(datem.nam)
+            
+        // }else{
+        //     point.push('空')
+        // }  console.log(point)
+        // console.log(point)
+    // }
+    
+  
   for(let key in date){
     if(date[key].WTCount!='0' && date[key].InverterCount=='0'){ //开始遍历风场数据
         let array=[];arrayJy.push(key);
@@ -47,7 +61,7 @@ let str=d.getDate();
     array2.push(array) //获取全部风场的对应字段数据
     } 
 }
-  
+  console.log(array2)
 }());
       
         return (
@@ -64,10 +78,21 @@ let str=d.getDate();
                                          <div className={styles.leftname}>{wtname[key]}</div>
                                          <div className={styles.leftnum}>
                                              <a>{uint[key]}</a>
-
                                              <span className={styles.tabnum}>{arrayJy.indexOf(fc_info)!==-1?date[fc_info][title[key]]:date[fc_info]["InverterCount"]}</span>
                                          </div>
                                      </div>
+                                 )
+                             }
+                             if(key==1){
+                                 return (
+                                     <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
+                                        <div className={styles.leftname}>{wtname[key]}</div>
+                                        <div className={styles.leftnum}>
+                                            <a>{uint[key]}</a>
+                                            
+                                            <span className={styles.tabnum}>{(date[fc_info][title[key]]/1000).toFixed(2)}</span>
+                                        </div>
+                                    </div>
                                  )
                              }
                             if(key==5){      
@@ -84,13 +109,25 @@ let str=d.getDate();
                              if(key==6){
                                  return (
                                      <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
-                                         <div className={styles.leftname}>{arrayJy.indexOf(fc_info)!==-1?wtname[key]:'辐照度'}</div>
+                                         <div className={styles.leftname}>{arrayJy.indexOf(fc_info)!==-1 ? wtname[key]:'辐照度'}</div>
                                          <div className={styles.leftnum}>
-                                             <a>{arrayJy.indexOf(fc_info)==-1?'W/m2':uint[key]}</a>
+                                             <a>{arrayJy.indexOf(fc_info)==-1?'W㎡':uint[key]}</a>
 
-                                             <span className={styles.tabnum}>{arrayJy.indexOf(fc_info)!==-1?date[fc_info][title[key]]:(date[fc_info]["PVTSI_Aver"]/1).toFixed(2)}</span>
+                                             <span className={styles.tabnum}>{arrayJy.indexOf(fc_info)!==-1 ? (date[fc_info][title[key]]=='null'? '--' : date[fc_info][title[key]] ) : ( (date[fc_info]["PVTSI_Aver"]/1).toFixed(2)=='NaN'? '--' :(date[fc_info]["PVTSI_Aver"]/1).toFixed(2))}</span>
                                          </div>
                                      </div>
+                                 )
+                             }
+                              if(key==7){
+                                 return (
+                                    <div className={key%2===0? styles.tabdiv : styles.tabdiv1} key={key}>
+                                        <div className={styles.leftname}>{wtname[key]}</div>
+                                        <div className={styles.leftnum}>
+                                            <a>{uint[key]}</a>
+                                            
+                                            <span className={styles.tabnum}>{date[fc_info][title[key]]==''? 0 : date[fc_info][title[key]] }</span>
+                                        </div>
+                                    </div>
                                  )
                              }
                              if(key==8){
@@ -128,6 +165,7 @@ let str=d.getDate();
                             })
                        
                     }  
+      
                     <div className={styles.tit}>
                         <div className={styles.elect}>状态统计</div> 
                     </div>
@@ -139,8 +177,8 @@ let str=d.getDate();
                                   namestat.map((value,key)=>{
                                       return(
                                           <div className={styles.pie} key={key} onClick = {()=>choose1(value)}>
-                                              <Pie2 num={wtcolor[key].color}></Pie2>
-                                              <div className={styles.allnum}><p>{date[fc_info][namestat[key]]}</p><p>{wtcolor[key].title}</p></div>
+                                              <Pie2 num={wtcolor1[key].color}></Pie2>
+                                              <div className={styles.allnum}><p>{date[fc_info][namestat[key]]}</p><p>{wtcolor1[key].title}</p></div>
                                           </div>
                                       )
 

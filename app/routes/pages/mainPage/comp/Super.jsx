@@ -102,7 +102,7 @@ let Component = React.createClass({
 
                          <div className={`${styles.linebox} ${styles.linebox1} ${styles.box_shadow}`}>
                             <Line1 date={date02} datename={datename02} height={150} name={'当日辐照度曲线'}></Line1>
-                            <Title title={[mod.dis.CurDayPVTSICurve.name+'('+mod.dis.CurDayPVTSICurve.unit+')']}></Title>
+                            <Title title={[mod.dis.CurDayPVTSICurve.name+'(W/㎡)']}></Title>
 
                         </div>
                         <div style={{"clear":"both"}}></div>
