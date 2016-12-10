@@ -41,7 +41,6 @@ let Component = React.createClass({
                     arr2.push(i);
                 }
             }
-            console.log(mode,arr1,arr2);
         return (
             <div>
                 <div className={styles.actionBox}>
@@ -65,8 +64,8 @@ let Component = React.createClass({
                                 return (
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         <div className={styles.tableContentItem}
-                                             style={{width:(100/header.length)+'%'}}
-                                             key={key} onClick={()=>changepage2(value,key)}>{mode[value]['name']}</div>
+                                             style={{width:(100/header.length)+'%',cursor:'pointer'}}
+                                             key={key} onClick={()=>changepage3(value,key)}>{mode[value]['name']}</div>
                                         {
                                             nam.map((valueC, keyC)=> {
                                                 if(keyC==0){
@@ -98,8 +97,8 @@ let Component = React.createClass({
                             return (
                             <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                 <div className={styles.tableContentItem}
-                                     style={{width:(100/header.length)+'%'}}
-                                     key={key} onClick={()=>changepage3(value,key)}>{mode[value]['name']}</div>
+                                     style={{width:(100/header.length)+'%',cursor:'pointer'}}
+                                     key={key} onClick={()=>changepage2(value,key)}>{mode[value]['name']}</div>
                                 {
                                 nam.map((valueC, keyC)=> {
                                     if(keyC==0){
@@ -147,6 +146,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('tableContent', obj));
         },
         changepage2:(value,key)=>{
+            dispatch(actions.setVars('Changnav', 0));
             dispatch(actions.setVars('numpage', 'fanmatrix'));
             dispatch(actions.setVars('fan_page', 'allpage'));
             dispatch(actions.setVars('valuepage', value));
@@ -158,6 +158,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('pagename', 'fan_matrix'));
         },
         changepage3:(value,key)=>{
+            dispatch(actions.setVars('Changnav', 0));
             dispatch(actions.setVars('numpage', 'pvmatrix'));
             dispatch(actions.setVars('fan_page', 'allpage'));
             dispatch(actions.setVars('valuepage1', value));
