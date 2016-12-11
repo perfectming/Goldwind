@@ -8,11 +8,13 @@ let boosterData = require('../../../../../config/booster-data');
 
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init(boosterData);
+        this.props.init();
     },
 
     render() {
-        let{arr,jb}=this.props;
+        let{arr,jb,jyname,jydata}=this.props;
+        console.log(jyname);
+        console.log(jydata);
         return(
             <div className={styles.bodyBox}>
                 {
@@ -48,7 +50,10 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        jyname: state.vars.jyname,
+        jydata: state.vars.jydata,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

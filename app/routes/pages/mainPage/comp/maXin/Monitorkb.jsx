@@ -235,15 +235,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // changedate:(bool)=>{
-        //     console.log(bool)
-
-        //     if(!bool){
-        //         dispatch(actions.setVars('showPage','cs'));
-        //     }
-        //      dispatch(actions.setVars('numtype','monitor'));
-        //     dispatch(actions.setVars('pagename','monitorkb'));
-        // },
         init: () => {
             dispatch(actions.setVars('navhide', false));
             dispatch(actions.setVars('putpage', true));
