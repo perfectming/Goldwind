@@ -64,9 +64,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage,Tofaninfo,choosefans}=this.props;
-        console.log(valuepage);
-        console.log(choosefans);
+        let{valuepage,Tofaninfo,choosefans,fData}=this.props;
+        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+        // console.log(valuepage);
+        // console.log(choosefans);
         
         return (
             <div className={styles.listbodyBox}>
@@ -126,11 +127,11 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(model_data[valuepage].WindSpeed_DevAverValue/3600)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.listitemBLL}>{Number(model_data[valuepage].WindSpeed_DevAverValue).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
@@ -148,11 +149,11 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(model_data[valuepage].WindSpeed_DevAverValue/3600)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.listitemBLL}>{Number(model_data[valuepage].WindSpeed_DevAverValue).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
@@ -170,11 +171,99 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(model_data[valuepage].WindSpeed_DevAverValue/3600)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.listitemBLL}>{Number(model_data[valuepage].WindSpeed_DevAverValue).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                    </span>
+                                </span>
+                            </div>          
+                        </div>  
+                    ) 
+                    }else if(choosefans== "OfflineCount" && value.WTStateCode== "DisComForPlc"){
+                       return (
+                        <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
+                           
+                            <div className={styles.listitemR}>
+                                <span className={styles.listitemT}>
+                                        <p className={styles.listitemTT}>{value.Wtname}</p>
+                                        <p className={styles.listitemTB}>{x}</p>
+                                </span>
+                                <span className={styles.listitemB}>
+                                    <span className={styles.listitemBL}>
+                                        <p>风速:</p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                    </span>
+                                    <span className={styles.listitemBR}>
+                                        <p>功率:</p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                    </span>
+                                </span>
+                            </div>          
+                        </div>  
+                    ) 
+                    }else if(choosefans== "OfflineCount" && value.WTStateCode== "Unknown"){
+                       return (
+                        <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
+                           
+                            <div className={styles.listitemR}>
+                                <span className={styles.listitemT}>
+                                        <p className={styles.listitemTT}>{value.Wtname}</p>
+                                        <p className={styles.listitemTB}>{x}</p>
+                                </span>
+                                <span className={styles.listitemB}>
+                                    <span className={styles.listitemBL}>
+                                        <p>风速:</p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                    </span>
+                                    <span className={styles.listitemBR}>
+                                        <p>功率:</p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                    </span>
+                                </span>
+                            </div>          
+                        </div>  
+                    ) 
+                    }else if(choosefans== "WFStandbyCount" && value.WTStateCode== "Offline"){
+                       return (
+                        <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.offline : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
+                           
+                            <div className={styles.listitemR}>
+                                <span className={styles.listitemT}>
+                                        <p className={styles.listitemTT}>{value.Wtname}</p>
+                                        <p className={styles.listitemTB}>{x}</p>
+                                </span>
+                                <span className={styles.listitemB}>
+                                    <span className={styles.listitemBL}>
+                                        <p>风速:</p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                    </span>
+                                    <span className={styles.listitemBR}>
+                                        <p>功率:</p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                    </span>
+                                </span>
+                            </div>          
+                        </div>  
+                    ) 
+                    }else if(choosefans== "WFLIMCount" && value.WTStateCode== "Alarm"){
+                       return (
+                        <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
+                           
+                            <div className={styles.listitemR}>
+                                <span className={styles.listitemT}>
+                                        <p className={styles.listitemTT}>{value.Wtname}</p>
+                                        <p className={styles.listitemTB}>{x}</p>
+                                </span>
+                                <span className={styles.listitemB}>
+                                    <span className={styles.listitemBL}>
+                                        <p>风速:</p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                    </span>
+                                    <span className={styles.listitemBR}>
+                                        <p>功率:</p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
@@ -193,6 +282,7 @@ const mapStateToProps = (state) => {
     return {
         valuepage : state.vars.valuepage,
         choosefans : state.vars.choosefans,
+        fData : state.vars.fData,
     }
 };
 

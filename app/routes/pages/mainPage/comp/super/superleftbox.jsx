@@ -57,9 +57,9 @@ let Component = React.createClass({
                     
                          <Title title={['风场指标',]}></Title>
                          <div className={styles.wind}>
-                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.WFCount.name}</a><a className={styles.anum}><b>{data2[8888800].WFCount}</b>个</a></span>
+                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.WFCount.name}</a><a className={styles.anum}><b>{data2[8888801].WFCount}</b>个</a></span>
                             <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.WTCount.name}</a><a className={styles.anum}><b>{data2[8888800].WTCount}</b>台</a></span>
-                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{Number(data2[8888800].WindSpeed_DevAverValue).toFixed(2)}</b>{mod1.dis.WindSpeed_DevAverValue.unit}</a></span>
+                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{Number(data2[8888800].WindSpeed_DevAverValue).toFixed(2)=='NaN' ? '--' : Number(data2[8888800].WindSpeed_DevAverValue).toFixed(2)}</b>{mod1.dis.WindSpeed_DevAverValue.unit}</a></span>
                           
                          </div>
                           <div className={styles.wind}>
@@ -108,7 +108,7 @@ let Component = React.createClass({
                          <div className={styles.wind}>
                             <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVCount.name}</a><a className={styles.anum}><b>{data2[8888802].PVCount}</b>个</a></span>
                             <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.InverterCount.name}</a><a className={styles.anum}><b>{data2[8888802].InverterCount}</b>台</a></span>
-                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{data2[8888802].PVTSI_Aver ==='null' ? 0:data2[8888802].PVTSI_Aver}</b>W/m<sup>2</sup></a></span>
+                            <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{data2[8888802].PVTSI_Aver ==='null' ? '--':Number(data2[8888802].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></span>
                           
                          </div>
                         <div className={styles.spedc}>
@@ -144,12 +144,12 @@ let Component = React.createClass({
                         <Title title={['发电量完成情况']}></Title>
                         <p>{mod1.dis.YearEgyAt.name}<span className={styles.pspan}>({mod1.dis.YearEgyAt.unit})</span></p>
                         <div className={styles.boxone}>
-                            <div className={styles.absbox1} style={{width:((data2[8888800].YearEgyAt/data2[8888800].YearPlanTotEgyAt)*100).toFixed(1)+"%"}}>{data2[8888800].YearEgyAt}</div>
+                            <div className={styles.absbox1} style={{width:((data2[8888800].YearEgyAt/data2[8888800].YearPlanTotEgyAt)*100).toFixed(1)+"%"}}>{Number((data2[8888800].YearEgyAt)*zhzb.Model.dis.YearEgyAt.coeff).toFixed(zhzb.Model.dis.YearEgyAt.place)}</div>
                             <span className={styles.absnum} >{((data2[8888800].YearEgyAt/data2[8888800].YearPlanTotEgyAt)*100).toFixed(1)}%</span>
                         </div>
                          <p>{mod1.dis.MonthEgyAt.name}<span className={styles.pspan}>({mod1.dis.MonthEgyAt.unit})</span></p>
                         <div className={styles.boxone}>
-                            <div className={`${styles.absbox1} ${styles.absbox2}`} style={{width:((data2[8888800].MonthEgyAt/data2[8888800].CurMonthPlanEgyAt)*100).toFixed(2)+"%"}} >{data2[8888800].MonthEgyAt}</div>
+                            <div className={`${styles.absbox1} ${styles.absbox2}`} style={{width:((data2[8888800].MonthEgyAt/data2[8888800].CurMonthPlanEgyAt)*100).toFixed(2)+"%"}} >{Number((data2[8888800].MonthEgyAt)*zhzb.Model.dis.MonthEgyAt.coeff).toFixed(zhzb.Model.dis.MonthEgyAt.place)}</div>
                             <span className={styles.absnum}>{((data2[8888800].MonthEgyAt/data2[8888800].CurMonthPlanEgyAt)*100).toFixed(2)}%</span>
                         </div>
                         

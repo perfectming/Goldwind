@@ -22,7 +22,7 @@ import AS from '../comp/jy/AS.jsx';
 import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
-import Ywbb from '../comp/linjinjin/yewubaobiao/ywbb.jsx';
+import Ywbb from '../comp/linjinjin/yewubaobiao/allywbb.jsx';
 import Fault from '../comp/yAll/Fault.jsx';
 import u865 from '../img/comp/gz_icon.png';
 import u867 from '../img/comp/tx_icon.png';

@@ -118,10 +118,9 @@ const mapDispatchToProps = (dispatch) => {
               if(page=='super'){
                 dispatch(actions.setVars('numtype', page));
               }
-              
               dispatch(actions.setVars('colorAct', false));
                 dispatch(actions.setVars('navhide', true));
-                if(page=='monitorkb' || page=='health_main'){
+                if(page=='monitorkb' || page=='health_main' || page=='ywbb'){
                     dispatch(actions.setVars('navhide', false));
                 }
                 dispatch(actions.setVars('show', false));

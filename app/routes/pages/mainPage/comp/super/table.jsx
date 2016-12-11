@@ -22,8 +22,6 @@ let Component = React.createClass({
         let placename=zhzb.Model.ens;
         let arrname=[];
         let point=[];
-        
-        let number=[];
 
 (function(){
         let o=0;
@@ -36,7 +34,6 @@ let Component = React.createClass({
   for(let key in date){
     
     let arr=[];
-    let num=[];
   if(date[key].WTCount!='0' && date[key].InverterCount=='0'){
     fcnum.push(key)
     for(let i=0;i<headername.length;i++){
@@ -44,17 +41,18 @@ let Component = React.createClass({
              arr.push(point[o]);
             o++;
         }
+
+
         if(i==4){
             arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1));
              }
              arr.push(date[key][headername[i]]);
             }
- 
+            
             arrname.push(arr);
-            number.push(num);
          }
        }
-    console.log(fcnum)
+
 }());
 
 
@@ -91,7 +89,22 @@ let Component = React.createClass({
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key} onClick={()=>changepage(key)}>
                                         {
                                             value.map((valueC, keyC)=> {
-
+                                                 if(keyC==3){
+                                                    if(valueC=='null'){
+                                                        return(
+                                                                <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%"}}
+                                                           key={keyC}>--</div>
+                                                            )
+                                                    }
+                                                 }
+                                                 if(keyC==4){
+                                                    if(valueC==''){
+                                                        return(
+                                                                <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%"}}
+                                                           key={keyC}>--</div>
+                                                            )
+                                                    }
+                                                 }
                                                  if(keyC==5){
                                                         if(valueC<60){
                                                              return (
@@ -182,7 +195,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('actbt1','' ));
            dispatch(actions.setVars('valuepage', fcnum[key]));
           dispatch(actions.setVars('befor_page','super' ));
-           //dispatch(actions.setVars('fc_info', number[0][key]));
+           dispatch(actions.setVars('fc_info', fcnum[key]));
           dispatch(actions.setVars('Changnav', 0));
 
         }

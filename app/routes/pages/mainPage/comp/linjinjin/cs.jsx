@@ -32,12 +32,17 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: (pagename,numtype) => {
 
+           
+
 
 
 
 
 
         if(numtype=='super' || numtype=='distribution' || numtype=='fan'){
+             clearInterval(time);
+
+            // time=setInterval(function(){
         TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
             function setData(rdata){
                 dispatch(actions.setVars('zhzb', rdata));
@@ -68,7 +73,9 @@ const mapDispatchToProps = (dispatch) => {
                 }
                 
             }
+              // },3000)
         }else if(numtype=='tkgl'){
+            clearInterval(time);
             console.log(numtype);
             dispatch(actions.setVars('abcd', true));
              TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", setDatas, "Screen", 0);
@@ -84,6 +91,7 @@ const mapDispatchToProps = (dispatch) => {
                     }
                     
         }else if(numtype=='monitorkb'){
+            clearInterval(time);
             console.log(numtype);
              console.log(pagename);
              TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
@@ -102,6 +110,7 @@ const mapDispatchToProps = (dispatch) => {
 
                     console.log(5)
         }else{
+            clearInterval(time);
              dispatch(actions.setVars('showPage', pagename));
         }
 

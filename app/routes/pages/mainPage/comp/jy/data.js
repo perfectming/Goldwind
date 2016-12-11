@@ -157,12 +157,11 @@ module.exports = {
         table:{
             data:{
                 header:[
-                    '区域',
                     '风场',
                     '开始时间',
                     '结束时间',
+                    '录入人',
                     '计划电量(KWH)',
-                    '备注',
                     '操作'
                 ],
                 content:[
