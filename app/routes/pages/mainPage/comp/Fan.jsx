@@ -304,7 +304,7 @@ const mapDispatchToProps = (dispatch) => {
             //     }
             // }, 3000)
             
-                console.log(value,valueA);
+                // console.log(value,valueA);
                 dispatch(actions.setVars('valuepage', value));
                 dispatch(actions.setVars('value', valueA));
                 dispatch(actions.setVars('valueid', value));
@@ -333,7 +333,7 @@ const mapDispatchToProps = (dispatch) => {
 
             dispatch(actions.setVars('showPage', 'turning'));
             dispatch(actions.setVars('pagename', 'fan_matrix')); 
-               dispatch(actions.setVars('numtype', 'pvinfo')); 
+            dispatch(actions.setVars('numtype', 'pvinfo')); 
             
         }
     };

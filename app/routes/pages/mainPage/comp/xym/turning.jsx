@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch) => {
             
            
                 if(numtype === 'faninfo'){
-                    console.log(pagename,numtype);
+                    // console.log(pagename,numtype);
                     // console.log(hehe);
                      // s = setInterval(function(){
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
@@ -69,14 +69,14 @@ const mapDispatchToProps = (dispatch) => {
                     }
                      // }, 3000)
                 }else if(numtype === 'fanmatrix'){
-                    console.log(numtype,pagename);
+                    // console.log(numtype,pagename);
                     clearInterval(s);
                     // dispatch(actions.setVars('showPage', 'fan_matrix'));
                     dispatch(actions.setVars('numpage', 'fanmatrix'));
                     dispatch(actions.setVars('fan_page', 'allpage'));
                     dispatch(actions.setVars('befor_page','fan' ));
                 }else if(numtype === 'pvinfo'){
-                    console.log(numtype,pagename);
+                    // console.log(numtype,pagename);
                      TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData11, "Screen", 0);
                     function setData11(rdata){
                         dispatch(actions.setVars('infopmodel', rdata));

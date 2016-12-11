@@ -35,7 +35,7 @@ let Component = React.createClass({
 		let {value,fanid,infofmodel,infofdata,tobujian} = this.props;
 		
 		let val = value.Wtid;
-		console.log(123,infofmodel);
+		// console.log(123,infofmodel);
 		let sp = infofmodel.Model.ens[val].sp;
 		let PPVplace = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].place;
 		let PPVcoeff = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].coeff;
@@ -55,7 +55,7 @@ let Component = React.createClass({
 		// 	alert('数据获取失败，请重新登录');
 		// }
 		// console.log(1,infofmodel);
-		console.log(2,infofdata);
+		// console.log(2,infofdata);
 
 let fmvalue = infofdata.ModelData[val];
 	// console.log(value.Wtid);
@@ -478,7 +478,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: (value,fanid,infofmodel,infofdata) => {
         let s;
-        	console.log(value)
+        	// console.log(value)
 		 s = setTimeout(function(){
                    // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
                     	// function setData3(rdata){
