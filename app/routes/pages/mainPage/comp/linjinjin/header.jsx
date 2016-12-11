@@ -104,7 +104,7 @@ const mapDispatchToProps = (dispatch) => {
         },
          changpage :(value,key)=>{
               dispatch(actions.setVars('fan_page', 'allpage'));
-              dispatch(actions.setVars('numpage', 'fanmatrix'));
+              dispatch(actions.setVars('numpage', 'fanmatrix')); 
               dispatch(actions.setVars('actbt',key ));
               dispatch(actions.setVars('actbt1','' ));
               dispatch(actions.setVars('valuepage', value));
