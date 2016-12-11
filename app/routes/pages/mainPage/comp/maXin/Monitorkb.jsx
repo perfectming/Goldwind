@@ -215,7 +215,7 @@ let Component = React.createClass({
 
                     <div className={styles.navitem}>
                         <div className={styles.leftimg}><img src={nlcojp}/></div>
-                        <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>24408</b>t</h2></div>
+                        <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>0</b>t</h2></div>
                     </div>
 
                 </div>

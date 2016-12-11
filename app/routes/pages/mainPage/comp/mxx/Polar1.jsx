@@ -103,6 +103,7 @@ let Component = React.createClass({
             },
             plotOptions: {
                 column: {
+                    pointWidth:25,
                     stacking: 'normal',//柱状图堆叠属性
                     borderWidth: 0
                 }
