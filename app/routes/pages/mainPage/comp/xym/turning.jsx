@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch) => {
             
            
                 if(numtype === 'faninfo'){
-                    // console.log(pagename,numtype);
+                    console.log(pagename,numtype);
                     // console.log(hehe);
                      // s = setInterval(function(){
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
