@@ -166,6 +166,7 @@ let Component = React.createClass({
                     borderColor:"",
                     },
                    series: {
+                    animation:false,
                 borderRadius: 7//圆角
             },
                 pie: {

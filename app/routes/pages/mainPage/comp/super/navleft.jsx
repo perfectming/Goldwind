@@ -61,7 +61,6 @@ let str=d.getDate();
     array2.push(array) //获取全部风场的对应字段数据
     } 
 }
-  console.log(array2)
 }());
       
         return (
