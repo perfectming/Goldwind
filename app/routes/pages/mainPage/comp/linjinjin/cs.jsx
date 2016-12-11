@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch) => {
                 
             }
               // },3000)
-        }else if(numtype=='tkgl'){
+        }else if(numtype=='tkgl' || numtype=='booster'){
             clearInterval(time);
             console.log(numtype);
             dispatch(actions.setVars('abcd', true));
