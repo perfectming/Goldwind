@@ -93,7 +93,7 @@ let Component = React.createClass({
                                 x = "正常发电";
                                 break;
                             case "LimitPow":
-                                x = "正常发电";
+                                x = "限功率";
                                 break;
                             case "Alarm":
                                 x = "正常发电";
@@ -247,9 +247,31 @@ let Component = React.createClass({
                             </div>          
                         </div>  
                     ) 
-                    }else if(choosefans== "WFLIMCount" && value.WTStateCode== "Alarm"){
+                    }else if(choosefans== "WFLIMCount" && value.WTStateCode== "LimitPow"){
                        return (
-                        <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
+                        <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
+                           
+                            <div className={styles.listitemR}>
+                                <span className={styles.listitemT}>
+                                        <p className={styles.listitemTT}>{value.Wtname}</p>
+                                        <p className={styles.listitemTB}>{x}</p>
+                                </span>
+                                <span className={styles.listitemB}>
+                                    <span className={styles.listitemBL}>
+                                        <p>风速:</p>
+                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                    </span>
+                                    <span className={styles.listitemBR}>
+                                        <p>功率:</p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
+                                    </span>
+                                </span>
+                            </div>          
+                        </div>  
+                    ) 
+                    }else if(choosefans== "RepairCount" && value.WTStateColor== "#c7b88c"){
+                       return (
+                        <div className={`${styles.listBox} ${styles.repair} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
                             <div className={styles.listitemR}>
                                 <span className={styles.listitemT}>
