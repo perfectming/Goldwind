@@ -18,10 +18,6 @@ let nam=['AVC','AGC','PlanActPower','TActPower'];
 let header=['场站名称', '有功自动控制','无功自动控制','计划值','出力'];
 
 let Component = React.createClass({
-    componentWillMount() {
-        let{abcd=false}=this.props;
-        this.props.changedate(abcd);
-    },
     componentDidMount() {
         this.props.init(data);
     },
@@ -159,7 +155,6 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.vars.tableContent,
-        abcd: state.vars.abcd,
         jyname: state.vars.jyname,
         jydata: state.vars.jydata,
     }
@@ -167,13 +162,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changedate:(abcd)=>{
-            dispatch(actions.setVars('numtype', 'tkgl'));
-            dispatch(actions.setVars('pagename', 'tkgl'));
-            if(!abcd){
-                dispatch(actions.setVars('showPage', 'cs'));
-            }
-        },
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
         },
