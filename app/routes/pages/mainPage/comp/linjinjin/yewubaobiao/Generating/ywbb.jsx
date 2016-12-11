@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './ywbb.scss';
-import jian from '../../../img/comp/jian_icon.png';
-import add from '../../../img/comp/add_icon.png';
+import jian from '../../../../img/comp/jian_icon.png';
+import add from '../../../../img/comp/add_icon.png';
 import Column from './colum.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
@@ -22,6 +22,7 @@ let Component = React.createClass({
 
     render() {
          let {changeselect,select_list,sent_info,tabarr,clickitem,chtnum,chtname,chtit} = this.props;
+         
         return (
             <div className={styles.faultBox}>
                 <div className={styles.search_tit}>

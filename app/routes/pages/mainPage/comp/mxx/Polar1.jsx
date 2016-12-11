@@ -3,71 +3,76 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('../../../../../../config/chart-data');
-
+let data = require('../../../../../../config/RegulationData');
+let mod = require('../../../../../../config/Model');
+let arr1 = [];
+let arr2=[];
+let arr3=[];
+let ssg1 = data.ModelData;
+let ssg2=mod.Model.ens;
+(function(){
+    for(let x in ssg1){
+        arr1.push(ssg1[x].Capacity/1);
+    }}());
+arr1.splice(-2,2);
+(function(){
+    for(let x in ssg1){
+        arr2.push((ssg1[x].Transformer_P/1).toFixed(0)/1);
+    }}());
+arr2.splice(-2,2);
+(function(){
+    for(let x in ssg2){
+        arr3.push(ssg2[x].name);
+    }}());
+arr3.splice(-2,2);
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let doughnutValue = data.data.column;
-        let doughnutValue1 = data.data.column2;
-        let coltext = data.data.texto;
+        let{czname,czndxly}=this.props;
         let configPie = {
             chart: {
+                type: 'column',
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:250,
-                width:600,
-                marginTop: 40,
-                marginBottom:50,
-                marginLeft:50,
-                type: 'column',
+                height:270,
+                marginTop: 60,
+                marginBottom:45,
+                marginLeft:55,
             },
             title: {
-                text: ''
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 1,
-                    borderWidth: 0,
-                    pointWidth: 15
+                text: '',
+                style:{
+                    color:"#fff",
+                    fontSize:"24px",
+                    fontFamily:"Microsoft YaHei"
                 }
             },
             xAxis: {
-                type: 'high',
                 labels: {
                     style: {
-                        fontSize: '',
-                        color: '#ffffff',
+                        color: '#fff',//颜色
+                        fontSize:'12px'  //字体
                     },
                     rotation: 0
                 },
-                categories: [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,2.0],
-                title: {
-                    text: '风速(10m/s)',
-                    align: 'high',
-                    rotation: 1,
-                    y: -10,
-                    x:10,
-                    style:{
-                        color: "#fff"
-                    },
-                }
+                tickLength: 0,
+                categories: czname
             },
             yAxis: {
                 title: {
-                    text: '次数(次)',
+                    text:  '(h)',
                     style: {
                         color: '#ffffff'
                     },
                     align: 'high',
                     rotation: 1,
                     y: -5,
-                    x: 86
+                    x: 70
                 },
                 labels: {
                     style: {
@@ -78,20 +83,36 @@ let Component = React.createClass({
                 lineWidth: 1,
                 gridLineWidth: 0
             },
-            colors: ['#62DE86', '#1E664A', '#134833', '#082B1F','#000']
-            ,
             legend: {
-                enabled: false
-            },
-            tooltip: {
-                pointFormat: ''
+                itemHoverStyle:{color:'#2ff4fb'},
+                align:"right",
+                verticalAlign: "top",
+                itemStyle: {
+                    color: "#fff",
+                    //fontSize:"14px",
+                    fontWeight:"normal",
+                    fontFamily:"微软雅黑"
+                },
+                y:-18,
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
+            tooltip: {
+                shared: true,
+            },
+            plotOptions: {
+                column: {
+                    pointWidth:25,
+                    stacking: 'normal',//柱状图堆叠属性
+                    borderWidth: 0
+                }
+            },
+            colors: ['#32C5CD','#37545C','#D06960']
+            ,
             series: [{
-                name: '',
-                data:[340,370,350,345,300,320,326,329,370,345,300,320,326,300,320,326,329,340,370,300],
+                name:'年等效利用小时数',
+                data: czndxly,
                 borderRadius: 5
             }]
         };
@@ -108,9 +129,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: () => {
-        },
-
+        init: () => {},
     };
 };
 

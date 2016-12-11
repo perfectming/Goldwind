@@ -5,6 +5,7 @@ import Navleft from '../../super/navleft.jsx';
 import Fanmatrix from '../../xym/Fanmatrix.jsx';
 import Pvmatrix from '../../xym/Pvmatrix.jsx';
 import Sjlb from '../../jy/fanDataList.jsx';
+import Sjlb1 from '../../jy/fanDataList1.jsx';
 import Fjkx from './fcright/fjkx.jsx';
 import Cft from './fcright/cft.jsx';
 import Cgt from './fcright/cgt.jsx';
@@ -35,6 +36,7 @@ let Component = React.createClass({
                         { numpage==='fanmatrix' && <Fanmatrix></Fanmatrix>}
                         { numpage==='pvmatrix' && <Pvmatrix></Pvmatrix>}
                         { numpage==='sjlb' && <Sjlb></Sjlb>}
+                        { numpage==='sjlb1' && <Sjlb1></Sjlb1>}
                         { numpage==='fjkx' && <Fjkx></Fjkx>}
                         { numpage==='gfkx' && <Gfkx></Gfkx>}
                         { numpage==='cft' && <Cft></Cft>}

@@ -39,10 +39,6 @@ let Component = React.createClass({
             	},
             	y: 0,
             },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -76,8 +72,8 @@ let Component = React.createClass({
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
-	                y: -15,
-	                x:-14,
+	                y: -20,
+	                x:10,
 	                style:{
 	                	fontSize:'10px',
 	                	color:'white',

@@ -138,6 +138,7 @@ let Component = React.createClass({
             verticalAlign: 'top',
                   x:0,
                   y:-15,
+                  itemHoverStyle:{color:'#2ff4fb'},
                   itemStyle:{
                     color: "#fff",
                     fontSize:12,
@@ -147,6 +148,7 @@ let Component = React.createClass({
             },
             tooltip: {
                 shared:true,
+
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 //pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
@@ -164,6 +166,7 @@ let Component = React.createClass({
                     borderColor:"",
                     },
                    series: {
+                    animation:false,
                 borderRadius: 7//圆角
             },
                 pie: {
@@ -186,7 +189,7 @@ let Component = React.createClass({
             }, {
                 type: 'line',
                 color:"#0f0",
-                name: "总发电完成率",
+                name: "集团发电完成率",
                 data: line,
                 marker: {
                         enabled: false

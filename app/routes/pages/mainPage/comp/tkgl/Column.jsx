@@ -3,15 +3,15 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let arr1 = [];
-let arr2=[];
-let arr3=[];
-
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
         let {model,tabaleData} = this.props;
+        if (model&&tabaleData){
+        var arr1 = [];
+        var arr2=[];
+        var arr3=[];
         let ssg1 = tabaleData.ModelData;
         let ssg2=model.Model.ens;
         for(let x in ssg1){
@@ -25,7 +25,7 @@ let Component = React.createClass({
         for(let x in ssg2){
             arr3.push(ssg2[x].name);
         }
-        arr3.pop();
+        arr3.pop();}
         let configPie = {
             chart: {
                 type: 'column',
@@ -61,6 +61,11 @@ let Component = React.createClass({
                 },
                 categories: arr3
             },
+            yAxis: {
+                title:{
+                    text:''
+                }
+            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -68,6 +73,7 @@ let Component = React.createClass({
             ,
             plotOptions: {
                 series: {
+                    pointWidth: 40,
                     grouping: false,
                     borderRadius: 10,
                     allowPointSelect: false,
@@ -97,12 +103,9 @@ let Component = React.createClass({
                 data: arr2
             }]
         };
-        if(ssg1){
         return (
                 <ReactHighcharts config={configPie}/>
-        );}else {
-            return(<div></div>)
-        }
+        );
     }
 });
 

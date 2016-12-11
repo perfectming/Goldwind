@@ -18,7 +18,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                marginTop:60,
+                marginTop:10,
             },
             title: {
                 text:'',
@@ -38,7 +38,16 @@ let Component = React.createClass({
                 }
             },
             colors: ['#D06960','#E9C75C','#fff','#5298D3'],
-            tooltip: shuju.tooltip,
+            tooltip: {
+                shared: true,
+                style:{
+                    color: '#333',
+                    fontSize: '14px',
+                    fontFamily:'微软雅黑'
+                }
+                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                // pointFormat: "<b>{point.percentage:.0f}%</b>"
+            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             }

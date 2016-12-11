@@ -6,21 +6,20 @@ import add from '../../img/comp/add_icon.png';
 import close from '../../img/comp/close_icon.png';
 let $ =require('jquery');
 var actions = require('redux/actions');
-let matrixdata = require('../../../../../../config/MatrixData');
-let model = require('../../../../../../config/Model');
-let modeldata = require('../../../../../../config/ModelData');
-
-let data=modeldata.ModelData;
-let mod=model.Model;
-let mat=model.Model;
-let matD=matrixdata.ModelData;
-let model_data = modeldata.ModelData;
-var model_ens = model.Model.ens;
+let Component = React.createClass({
+    componentDidMount() {
+        this.props.init();
+    },
+    render() {
+        let {border=true,changeborder,changeborder1,retlegend,closebox,Tofaninfo,changtext,zhzb,bbs,fData} = this.props;
+let mod=zhzb.Model;
+let mat=zhzb.Model;
+let model_data = bbs.ModelData;
+var model_ens = zhzb.Model.ens;
 let arr1 = [];
 let arr2 = [];
-var obj = matrixdata;
-var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+var obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
 
 
 (function(){
@@ -35,12 +34,11 @@ var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 
 
 
-let Component = React.createClass({
-    componentDidMount() {
-        this.props.init();
-    },
-    render() {
-        let {border=true,changeborder,changeborder1,retlegend,closebox,Tofaninfo,changtext} = this.props;
+
+
+
+
+
         return (
            
                     <div className={styles.fiexdbox}>
@@ -139,6 +137,9 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         border: state.vars.bordershow,
+        zhzb: state.vars.zhzb,
+        bbs: state.vars.bbs,
+        fData: state.vars.fData,
     }
 };
 

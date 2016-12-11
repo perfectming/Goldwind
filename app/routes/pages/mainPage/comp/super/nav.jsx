@@ -14,7 +14,8 @@ let Component = React.createClass({
     render() {
 
 
-       let {title,arr, changetab, act=0} = this.props;
+       let {title,arr, changetab, act=0,leftm,leftd,fc_info='150801'} = this.props;
+       let date=leftd.ModelData;
 
        
         return (
@@ -29,8 +30,8 @@ let Component = React.createClass({
                     })
 
                    }
-                    <div className={`${styles.numtai} ${styles.nummor}`}><div className={styles.numname}>华瑞SL1500x</div><b>15</b><a>台</a></div>
-                    <div className={styles.numtai}><div className={styles.numname}>总计</div><b>500</b><a>台</a></div>
+                    <div className={`${styles.numtai} ${styles.nummor}`}><div className={styles.numname}>华瑞SL1500x</div><b>--</b><a>台</a></div>
+                    <div className={styles.numtai}><div className={styles.numname}>总计</div><b>{date[fc_info].WTCount==0?date[fc_info].InverterCount:date[fc_info].WTCount}</b><a>台</a></div>
                     
 
                 </div>
@@ -38,19 +39,19 @@ let Component = React.createClass({
                     <div className={styles.userinfo}>
                         <span>
                             <p>手机</p>
-                            <p className={styles.username}>13333333333</p>
+                            <p className={styles.username}>---</p>
                         </span>
                     </div>
                     <div className={styles.userinfo}>
                          <span>
                             <p>电话</p>
-                            <p className={styles.username}>0475-0101011</p>
+                            <p className={styles.username}>---</p>
                         </span>
                     </div>
                     <div className={`${styles.userinfo} ${styles.usericon}`}>
                         <span className={styles.usmar}>
                             <p>场长</p>
-                            <p className={styles.username}>王晓敏</p>
+                            <p className={styles.username}>---</p>
                         </span>
                     </div>
                     
@@ -64,6 +65,9 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         act: state.vars.actbtn,
+        leftd: state.vars.leftd,
+        leftm: state.vars.leftm,
+        fc_info:state.vars.fc_info,
        
     }
 };
