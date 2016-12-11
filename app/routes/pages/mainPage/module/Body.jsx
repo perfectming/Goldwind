@@ -84,6 +84,7 @@ import Subscribe from '../comp/healthManagement/subscribe.jsx';
 import Yujing from '../comp/healthManagement/yujing.jsx';
 import Input_cost from '../comp/jhp/Input_cost.jsx';
 import CS from '../comp/linjinjin/cs.jsx';
+import Turning from '../comp/xym/turning.jsx';
 
 
 
@@ -191,6 +192,7 @@ let Component = React.createClass({
                 {showPage === 'peqii' && <PEQII></PEQII>}
                 {showPage === 'input_cost' && <Input_cost></Input_cost>}
                 {showPage === 'cs' && <CS></CS>}
+                {showPage === 'turning' && <Turning></Turning>}
 
 
                 <div className={styles.clearbox}></div>

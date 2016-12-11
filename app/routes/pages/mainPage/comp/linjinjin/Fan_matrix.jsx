@@ -6,6 +6,7 @@ import Faninfo from '../xym/Faninfo.jsx';
 import Bodymap from './mapbody.jsx';
 import Fan from '../jy/fan.jsx';
 import Pvinfo from '../xym/Pvinfo.jsx';
+import Turning from '../xym/turning.jsx';
 var actions = require('redux/actions');
 let page1 = require('./mappage');
 let Component = React.createClass({
@@ -23,6 +24,7 @@ let Component = React.createClass({
                 { fan_page==='faninfo' && <Faninfo></Faninfo>}
                 { fan_page==='pvinfo' && <Pvinfo></Pvinfo>}
                 { fan_page==='fanobj' && <Fan></Fan>}
+                { fan_page==='turning' && <Turning></Turning>}
             </div>
         );
     }
