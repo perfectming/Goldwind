@@ -217,7 +217,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
             $.ajax({
-                url: 'http://10.9.0.7:8081/soam/ELEC/getWfelec',
+                url: 'http://10.9.99.213:8080/soam/ELEC/getWfelec',
                 type: 'post',
                 data:'pageSize=9&&nowPage=1',
                 dataType: 'json',//here,
@@ -271,7 +271,7 @@ const mapDispatchToProps = (dispatch) => {
             ddv=JSON.stringify(wfs);
             console.log(wfs,ddv);
             $.ajax({
-                url: 'http://10.9.0.7:8081/soam/ELEC/addWfelec?wfp=data',
+                url: 'http://10.9.99.213:8080/soam/ELEC/addWfelec?wfp=data',
                 type: 'post',
                 data: ddv,
                 dataType: 'json',//here,
@@ -284,7 +284,7 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
             $.ajax({
-                url: 'http://10.9.0.7:8081/soam/ELEC/getWfelec',
+                url: 'http://10.9.99.213:8080/soam/ELEC/getWfelec',
                 type: 'post',
                 data:'pageSize=9&&nowPage=1',
                 dataType: 'json',//here,
