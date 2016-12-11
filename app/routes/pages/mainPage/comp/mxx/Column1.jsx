@@ -30,6 +30,7 @@ let Component = React.createClass({
     },
 
     render() {
+        let{unit,czname,sjfdl,jhfdl,czwcl,gswcl}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -40,7 +41,8 @@ let Component = React.createClass({
                 height:270,
                 marginTop: 60,
                 marginBottom:45,
-                marginLeft:40,
+                marginLeft:55,
+                marginRight:55,
             },
             title: {
                 text: ''
@@ -57,11 +59,11 @@ let Component = React.createClass({
                     rotation: 0
                 },
                 tickLength: 0,
-                categories: ['十一月','十二月','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月']
+                categories: czname
             },
-            yAxis: {
+            yAxis: [{
                 title: {
-                    text: '(万kMw)',
+                    text:  '('+unit+')',
                     style: {
                         color: '#ffffff'
                     },
@@ -78,8 +80,29 @@ let Component = React.createClass({
                 },
                 lineWidth: 1,
                 gridLineWidth: 0
-            },
+            },{
+                title: {
+                    text:  '(%)',
+                    style: {
+                        color: '#ffffff'
+                    },
+                    align: 'high',
+                    rotation: 1,
+                    y:-5,
+                    x:-50
+                },
+                labels: {
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'12px'  //字体
+                    }
+                },
+                lineWidth: 1,
+                opposite: true,
+                gridLineWidth: 0,
+            }],
             legend: {
+                itemHoverStyle:{color:'#2ff4fb'},
                 align:"right",
                 verticalAlign: "top",
                 itemStyle: {
@@ -105,21 +128,23 @@ let Component = React.createClass({
             series: [{
                 name:'计划发电量',
                 type: 'column',
-                data: [300,320,360,330,260,380,290,320,360,340,280,340],
+                data: jhfdl,
                 borderRadius: 5
             },{
                 name:'实际发电量',
                 type: 'column',
-                data: [350,300,280,310,250,300,280,320,340,300,200,320],
+                data: sjfdl,
                 borderRadius: 5
             },{
                 name:'场站完成率',
                 type: 'line',
-                data: [200,200,200,200,200,200,200,200,200,200,200,200]
+                data: czwcl,
+                yAxis: 1
             },{
-                name:'公司完成率',
+                name:'集团完成率',
                 type: 'line',
-                data: [200,150,250,180,260,100,220,250,180,190,200,180]
+                data: gswcl,
+                yAxis: 1
             }]
         };
         return (
