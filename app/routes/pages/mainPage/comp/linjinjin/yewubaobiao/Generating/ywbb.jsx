@@ -22,6 +22,7 @@ let Component = React.createClass({
 
     render() {
          let {changeselect,select_list,sent_info,tabarr,clickitem,chtnum,chtname,chtit} = this.props;
+         
         return (
             <div className={styles.faultBox}>
                 <div className={styles.search_tit}>
