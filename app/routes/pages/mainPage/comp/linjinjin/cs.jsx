@@ -39,10 +39,10 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-        if(numtype=='super' || numtype=='distribution' || numtype=='fan'){
+        if(numtype=='super' || numtype=='distribution' || numtype=='fan' || numtype=='tkgl' || numtype=='booster' || numtype=='monitorkb'){
              clearInterval(time);
 
-            // time=setInterval(function(){
+             // time=setInterval(function(){
         TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
             function setData(rdata){
                 dispatch(actions.setVars('zhzb', rdata));
@@ -61,10 +61,31 @@ const mapDispatchToProps = (dispatch) => {
                                 TY.getRtData("WTLeftOverview", 8888800, setlData)
                                 function setlData(rdata){
                                 dispatch(actions.setVars('leftd', rdata));
+                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", setDatas, "Screen", 0);
+                                    function setDatas(rdata){
+                                        dispatch(actions.setVars('jyname', rdata));
+                                        TY.getRtData("RegulationOverview", 8888800, setfData)
+                                            function setfData(rdata){
+                                                dispatch(actions.setVars('jydata', rdata));
+                                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
+                                                    function momo(rdata){
+                                                      
+                                                        dispatch(actions.setVars('moname', rdata));
+                                                        TY.getRtData("MonitorBoard", 8888800, ppo);
+                                                            function ppo(rdata){
+                                                              
+                                                                dispatch(actions.setVars('bool', true));
+                                                                dispatch(actions.setVars('modata', rdata));
+                                                                dispatch(actions.setVars('showPage', pagename));
+                                                            }
+
+                                                    }
+                                            }
+                                    }
                                 
                                 }
                             }
-                            dispatch(actions.setVars('showPage', pagename));
+                           
                         }
                     }
                      
@@ -73,42 +94,8 @@ const mapDispatchToProps = (dispatch) => {
                 }
                 
             }
-              // },3000)
-        }else if(numtype=='tkgl' || numtype=='booster'){
-            clearInterval(time);
-            console.log(numtype);
-            dispatch(actions.setVars('abcd', true));
-             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", setDatas, "Screen", 0);
-                    function setDatas(rdata){
-                        console.log(rdata)
-                        dispatch(actions.setVars('jyname', rdata));
-                        TY.getRtData("RegulationOverview", 8888800, setfData)
-                        function setfData(rdata){
-                            console.log(rdata)
-                        dispatch(actions.setVars('jydata', rdata));
-                        dispatch(actions.setVars('showPage', pagename));
-                        }
-                    }
-                    
-        }else if(numtype=='monitorkb'){
-            clearInterval(time);
-            console.log(numtype);
-             console.log(pagename);
-             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
-                    function momo(rdata){
-                        console.log(rdata);
-                        dispatch(actions.setVars('moname', rdata));
-                        TY.getRtData("MonitorBoard", 8888800, ppo);
-                        function ppo(rdata){
-                        console.log(rdata);
-                        dispatch(actions.setVars('bool', true));
-                        dispatch(actions.setVars('modata', rdata));
-                            dispatch(actions.setVars('showPage', pagename));
-                        }
-
-                    }
-
-                    console.log(5)
+               // },3000)
+        
         }else{
             clearInterval(time);
              dispatch(actions.setVars('showPage', pagename));
