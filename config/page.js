@@ -79,14 +79,8 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/yw_active.png'),
                 page:[
                     {
-                        name:'业务报表1',
+                        name:'发电量报表',
                         page:'ywbb',
-                    },{
-                        name:'故障报表',
-                        page:'fault',
-                    },{
-                        name:'业务报表3',
-                        page:'',
                     }]
             },{
                 name:'数据管理',
@@ -135,43 +129,43 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/zcgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/zcgl_active.png'),
             subPage: [{
-                name:'资产管理-1',
+                name:'',
                 page:[
                     {
-                        name:'资产管理1-1',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理1-2',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理1-3',
+                        name:'',
                         page:'',
                     }]
             },{
-                name:'资产管理-2',
+                name:'',
                 page:[
                         
                         {
-                        name:'资产管理2-1',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理2-2',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理2-3',
+                        name:'',
                         page:'',
                     }]
             },{
-                name:'资产管理-3',
+                name:'',
                 page:[
                     {
-                        name:'资产管理3-1',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理3-2',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理3-3',
+                        name:'',
                         page:'',
                     }]
             }],
