@@ -87,7 +87,7 @@ let Component = React.createClass({
         let {pageTo_1,pageTo_2,Tofaninfo1,Topvinfo1,zhzb,fModel,fData,fanbool=false}=this.props;
         // console.log(fModel);
         // console.log(fData);
-        // console.log(zhzb);
+        console.log(zhzb);
         if(fanbool){
         let model_ens = zhzb.Model.ens;
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
@@ -279,7 +279,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         changedate: () => {
-            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+            time = setInterval(function(){
+                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                 function setData(rdata){
                     dispatch(actions.setVars('zhzb', rdata));
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
@@ -290,11 +291,16 @@ const mapDispatchToProps = (dispatch) => {
                             TY.getRtData("DevicesMatrix", 8888800, setfData1)
                             function setfData1(rdata){
                                 dispatch(actions.setVars('fData', rdata));
-                                dispatch(actions.setVars('fanbool', true));
+                                setTimeout(function(){
+                                    dispatch(actions.setVars('fanbool', true));
+                                },100)
+                                
                             }
                         }
                     }
                 }
+            },3000)
+            
         },
         init: () => {
             var obj = {
@@ -311,6 +317,9 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('befor_page','fan' ));
           dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'fan_matrix'));
+          dispatch(actions.setVars('fModel', fModel));
+          dispatch(actions.setVars('zhzb', zhzb));
+
         },
         pageTo_2:(value,key)=>{
           dispatch(actions.setVars('numpage', 'pvmatrix'));
@@ -321,6 +330,8 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('befor_page','fan' ));
           dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'fan_matrix'));
+          dispatch(actions.setVars('fDodel', fDodel));
+          dispatch(actions.setVars('zhzb', zhzb));
         },
         Tofaninfo1: (value,valueA,key)=> {
             dispatch(actions.setVars('valuepage', value));
