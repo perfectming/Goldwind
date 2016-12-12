@@ -69,14 +69,15 @@ const mapDispatchToProps = (dispatch) => {
                                                 dispatch(actions.setVars('jydata', rdata));
                                                 TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
                                                     function momo(rdata){
-                                                      
                                                         dispatch(actions.setVars('moname', rdata));
                                                         TY.getRtData("MonitorBoard", 8888800, ppo);
                                                             function ppo(rdata){
-                                                              
-                                                                dispatch(actions.setVars('bool', true));
-                                                                dispatch(actions.setVars('modata', rdata));
-                                                                dispatch(actions.setVars('showPage', pagename));
+                                                                 TY.getRtData("MonitorBoard", 8888800, ppo);
+                                                                function ppo(rdata){
+                                                                    dispatch(actions.setVars('bool', true));
+                                                                    dispatch(actions.setVars('modata', rdata));
+                                                                    dispatch(actions.setVars('showPage', pagename));
+                                                                }
                                                             }
 
                                                     }

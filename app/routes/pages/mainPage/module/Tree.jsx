@@ -116,6 +116,8 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('pagename', page));
               console.log(page);
               if(page=='super'){
+                // dispatch(actions.setVars('showPage', 'turning'));
+
                 dispatch(actions.setVars('numtype', page));
               }
               dispatch(actions.setVars('colorAct', false));

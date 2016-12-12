@@ -269,42 +269,24 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/zhfx.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/zhfx_active.png'),
             subPage: [{
-                name:'综合查询-1',
+                name:'',
                 page:[
                      {
-                        name:'综合查询1-1',
-                        page:'',
-                    },{
-                        name:'综合查询1-2',
-                        page:'',
-                    },{
-                        name:'综合查询1-3',
+                        name:'',
                         page:'',
                     }]
             },{
-                name:'综合查询-2',
+                name:'',
                 page:[
                     {
-                        name:'综合查询2-1',
-                        page:'',
-                    },{
-                        name:'综合查询2-2',
-                        page:'',
-                    },{
-                        name:'综合查询2-3',
+                        name:'',
                         page:'',
                     }]
             },{
-                name:'综合查询-3',
+                name:'',
                 page:[
                      {
-                        name:'综合查询3-1',
-                        page:'',
-                    },{
-                        name:'综合查询3-2',
-                        page:'',
-                    },{
-                        name:'综合查询3-3',
+                        name:'',
                         page:'',
                     }]
             }],

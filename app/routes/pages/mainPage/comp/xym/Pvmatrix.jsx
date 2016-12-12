@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-         let{valuepage1,Tofaninfo,zhzb,fModel,fData}=this.props;
+         let{valuepage1,Topvinfo,zhzb,fModel,fData}=this.props;
         // let model_ens = zhzb.Model.ens;
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
@@ -75,7 +75,7 @@ let Component = React.createClass({
                         }
                  
                         return (
-                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
+                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, valuepage1)}>
                             <div className={styles.slistitemR}>
                                 <span className={styles.slistitemT}>
                                         <p className={styles.slistitemTT}>{value.Wtname}</p>
@@ -121,9 +121,15 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        Topvinfo: (value)=> {
+        Topvinfo: (value,valuepage1)=> {
             dispatch(actions.setVars('value', value));
-            dispatch(actions.setVars('fan_page', 'pvinfo'));
+            dispatch(actions.setVars('valueid', valuepage1));
+            dispatch(actions.setVars('showPage', 'turning'));
+            dispatch(actions.setVars('pagename', 'fan_matrix')); 
+            dispatch(actions.setVars('numtype', 'pvinfo')); 
+            
+            
+            // dispatch(actions.setVars('fan_page', 'pvinfo'));
         }
     };
 };

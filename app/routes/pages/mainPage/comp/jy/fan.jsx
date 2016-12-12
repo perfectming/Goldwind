@@ -25,7 +25,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {changetab,act1,value=addtest.ModelData[8888801].WFDevsStatus[650107][0],fanid} = this.props;
+        let {changetab,act1=0,value=addtest.ModelData[8888801].WFDevsStatus[650107][0],fanid} = this.props;
         return (
             <div className={styles.bodyBox} id="fanJy">
                 <div className={styles.fanidbox}>

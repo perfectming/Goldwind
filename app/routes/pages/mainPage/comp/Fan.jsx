@@ -150,12 +150,12 @@ let Component = React.createClass({
                                                         i = "待机";
                                                         break;
                                                     default:
-                                                        i = "维护";
+                                                        i = "暂无状态";
                                                         break;
                                                 }
                                             return (
                                                 
-                                                    <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                    <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'风速:'+Math.ceil(valueA.WindSpeed)+'m/s'}</p>
@@ -218,12 +218,12 @@ let Component = React.createClass({
                                                         i = "待机";
                                                         break;
                                                     default:
-                                                        i = "维护";
+                                                        i = "暂无状态";
                                                         break;
                                                 }
                                             return (
                                                 
-                                                    <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Tofaninfo2(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                    <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Tofaninfo2(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'辐照度:'+Math.ceil(valueA.PVTSI_Aver)+'W/㎡'}</p>
@@ -289,20 +289,52 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('pagename', 'fan_matrix'));
         },
         Tofaninfo1: (value,valueA,key)=> {
-            dispatch(actions.setVars('value', valueA));
-            dispatch(actions.setVars('valueid', value));
-            dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('showPage', 'fan_matrix'));
-            dispatch(actions.setVars('fan_page', 'faninfo'));
-            dispatch(actions.setVars('befor_page','fan' ));
+            
+            //     let s;
+            //     clearInterval(s);
+            // s = setInterval(function(){
+            //     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", valueA.Wtid, "WTDetail", setData, "Screen", 0);
+            //     function setData(rdata){
+            //         dispatch(actions.setVars('infofmodel', rdata)); 
+            //         TY.getRtData("WTDetail", valueA.Wtid, setData1)  
+            //         function setData1(rdata){
+            //             dispatch(actions.setVars('infofdata', rdata)); 
+            //             console.log(2,rdata)
+            //         }
+            //     }
+            // }, 3000)
+            
+                // console.log(value,valueA);
+                dispatch(actions.setVars('valuepage', value));
+                dispatch(actions.setVars('value', valueA));
+                dispatch(actions.setVars('valueid', value));
+                dispatch(actions.setVars('actbt', key));
+                dispatch(actions.setVars('befor_page','fan' ));
+                
+                
+               
+        
+               dispatch(actions.setVars('showPage', 'turning'));
+               dispatch(actions.setVars('pagename', 'fan_matrix')); 
+               dispatch(actions.setVars('numtype', 'faninfo')); 
+
+
+        
+
+            
         },
         Tofaninfo2: (value,valueA,key)=> {
+            dispatch(actions.setVars('valuepage1', value));
             dispatch(actions.setVars('value', valueA));
             dispatch(actions.setVars('valueid', value));
             dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('showPage', 'fan_matrix'));
-            dispatch(actions.setVars('fan_page', 'pvinfo'));
             dispatch(actions.setVars('befor_page','fan' ));
+
+
+            dispatch(actions.setVars('showPage', 'turning'));
+            dispatch(actions.setVars('pagename', 'fan_matrix')); 
+            dispatch(actions.setVars('numtype', 'pvinfo')); 
+            
         }
     };
 };
