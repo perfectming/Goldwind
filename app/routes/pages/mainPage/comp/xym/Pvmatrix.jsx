@@ -84,7 +84,7 @@ let Component = React.createClass({
                                 <span className={styles.slistitemB}>
                                     <span className={styles.slistitemBL}>
                                         <p>辐照度:</p>
-                                        <p><span className={styles.slistitemBLL}>{Math.floor(value.ActPwr)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                        <p><span className={styles.slistitemBLL}>{value.PVTSI_Aver == undefined ? '--' : Math.ceil(value.PVTSI_Aver)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
                                     </span>
                                     <span className={styles.slistitemBR}>
                                         <p>功率:</p>
@@ -122,6 +122,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         Topvinfo: (value,valuepage1)=> {
+            console.log(value,valuepage1)
             dispatch(actions.setVars('value', value));
             dispatch(actions.setVars('valueid', valuepage1));
             dispatch(actions.setVars('showPage', 'turning'));
