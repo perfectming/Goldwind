@@ -66,6 +66,7 @@ let Component = React.createClass({
 
     render() {
         let{valuepage,Tofaninfo,zhzb,fModel,fData}=this.props;
+        console.log(valuepage);
         let model_ens = zhzb.Model.ens;
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
@@ -83,7 +84,7 @@ let Component = React.createClass({
             //     arr2.push(obj_wfd[m][n])
             // }
         }
-        // console.log(arr1,arr2)
+        console.log(arr1,arr2)
         
         return (
             <div className={styles.listbodyBox}>

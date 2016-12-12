@@ -150,7 +150,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
          changedate:()=>{
-            // time=setInterval(function(){
+             time=setInterval(function(){
             //     console.log('刷新')
 
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
@@ -158,13 +158,19 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('zhzb', rdata));
                     TY.getRtData("DataOverview", 8888800, setData1)
                         function setData1(rdata){
-                            dispatch(actions.setVars('bbs', rdata));
-                            dispatch(actions.setVars('boolsuper', true));
+                            TY.getRtData("DataOverview", 8888800, setData1)
+                                function setData1(rdata){
+                                    dispatch(actions.setVars('bbs', rdata));
+                                    setTimeout(function(){
+                                         dispatch(actions.setVars('boolsuper', true));
+                                     },100)
+                                   
+                                }
                         }
                 }
 
                                                    
-            // },2000)
+             },2000)
         },
         init: () => {
             var obj = {
