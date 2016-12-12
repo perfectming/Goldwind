@@ -112,14 +112,7 @@ const mapDispatchToProps = (dispatch) => {
         changeTreeItem: (key,page) => {
             dispatch(actions.setVars('treeItemActive', key));
              dispatch(actions.setVars('tabItemActive', 0));
-              dispatch(actions.setVars('showPage', 'cs'));
-              dispatch(actions.setVars('pagename', page));
-              console.log(page);
-              if(page=='super'){
-                // dispatch(actions.setVars('showPage', 'turning'));
-
-                dispatch(actions.setVars('numtype', page));
-              }
+              dispatch(actions.setVars('showPage', page));
               dispatch(actions.setVars('colorAct', false));
                 dispatch(actions.setVars('navhide', true));
                 if(page=='monitorkb' || page=='health_main' || page=='ywbb'){
