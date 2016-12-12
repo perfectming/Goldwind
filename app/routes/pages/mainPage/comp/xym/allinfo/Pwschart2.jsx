@@ -2,20 +2,26 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
+var $ = require('jquery');
 let data = require('../../../../../../../config/WTDetailData.js');
 
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
+        let {data,value} = this.props;
+        // console.log(data);
+        // let xdata = data.ModelData[value]["DevCurDayPowerCurve"]["Time"];
+        let pwdata = (data.ModelData[value]["DevCurDayPowerCurve"]["Value"]).sort(function(a,b){return a-b});
+        let spdata = (data.ModelData[value]["CurDayWindSpeedCurve_Device"]["Value"]).sort(function(a,b){return a-b});
+            // console.log(pwdata)
         let configpie = {
             chart: {
 
                 type: 'spline',
                 width:460,
                 height:310,
-                margin: [20,35,25,35],
+                margin: [20,35,45,35],
                 backgroundColor: '#282f37',
                 plotBackgroundColor: '#282f37',
                 plotBorderWidth: 0,
@@ -36,6 +42,9 @@ let Component = React.createClass({
                 itemMarginTop:-15,
                 align:"center",
                 verticalAlign: "top",
+                itemHoverStyle: {
+                    color:"#00F7FE"
+                },
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
@@ -61,7 +70,7 @@ let Component = React.createClass({
                 rotation: 0,
                 x: 30,
                     style: {
-                        color: '#4572A7',
+                        color: '#fff', //#4572A7
                         top:0,
                         right:0,
                     }
@@ -73,7 +82,7 @@ let Component = React.createClass({
                     color: '#fff'
                 }
                 },
-                categories: [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]
+                categories: spdata,
             },
             yAxis:[{ //第一个Y轴，序号为0
             labels: {
@@ -86,11 +95,11 @@ let Component = React.createClass({
             title: {
                 align: 'high',
                 offset: 0,
-                text: '(MW)',
+                text: '(kW)',
                 rotation: 0,
                 y: -10,
                 style: {
-                    color: '#4572A7',
+                    color: '#fff',
                     top:0,
                     right:0,
                 }
@@ -109,7 +118,11 @@ let Component = React.createClass({
                 marker: {
                     enabled: false
                 },
+
            }, 
+            series:{
+                    animation:false
+                }
 
         },
         series: [{ //第二个Y轴的数据
@@ -117,7 +130,7 @@ let Component = React.createClass({
             color: '#29D0CF',
             type: 'spline',
          
-            data: [4,49.2,146.6,278.2,466.9,716.4,1030.9,1364.7,1500,1500,1500,1500,1500,1500,1500,1500,1500,1500,1500,1500,1500,1500,1500],
+            data: pwdata,
         
 
 
@@ -128,7 +141,7 @@ let Component = React.createClass({
             color: '#3BB6FF',
             type: 'spline',
                yAxis: 0,//坐标轴序号
-            data: [119,175,263,401,596,655,1278,1455,1692,1700,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800],
+            // data: [119,175,263,401,596,655,1278,1455,1692,1700,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800],
             
         }]
 

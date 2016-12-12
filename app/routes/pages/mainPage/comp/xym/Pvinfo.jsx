@@ -20,8 +20,8 @@ let Component = React.createClass({
 	},
 
 	render() {
-		let {value,fanid} = this.props;
-		// console.log(fmvalue.StatusCode);
+		let {value,fanid,infopmodel,infopdata} = this.props;
+		console.log(1111,infopmodel);
 		let x;
 		let code = value.WTStateCode;
 		switch(code)
@@ -144,6 +144,8 @@ const mapStateToProps = (state) => {
     return {
         value : state.vars.value,
         fanid : state.vars.valueid,
+        infopmodel : state.vars.infopmodel,
+        infopdata : state.vars.infopdata,
     }
 };
 

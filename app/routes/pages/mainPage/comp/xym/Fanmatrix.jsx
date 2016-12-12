@@ -6,56 +6,56 @@ import styles from './Fanmatrix.scss';
 import fan_matrix from '../linjinjin/Fan_matrix.jsx';
 var actions = require('redux/actions');
 // import dataBase from '../../../../../config/ModelData';
-let matrixdata = require('../../../../../../config/MatrixData');
-let model = require('../../../../../../config/Model');
-let modeldata = require('../../../../../../config/ModelData');
+// let matrixdata = require('../../../../../../config/MatrixData');
+// let model = require('../../../../../../config/Model');
+// let modeldata = require('../../../../../../config/ModelData');
 
        
 
-var model_data = modeldata.ModelData;
-// console.log(model_data);
-var arrdata = model_data[650107].WindSpeed_DevAverValue;
+// var model_data = modeldata.ModelData;
+// // console.log(model_data);
+// var arrdata = model_data[650107].WindSpeed_DevAverValue;
 
-var arr3 = [];
-var arr4 = [];
-var model_ens = model.Model.ens;
-for(var j in model_ens){
-    arr3.push(model_ens[j])
-}
-// arr3.map((valueE,keyE)=> {
-//     return (
-//         console.log(valueE.name)
-//         )
-// });
-
-
- var arr1 = [];
- var arr2 = [];
- // var arr3 = [];
- // var arr4 = [];
- var obj = matrixdata;
-    var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-    var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+// var arr3 = [];
+// var arr4 = [];
+// var model_ens = model.Model.ens;
+// for(var j in model_ens){
+//     arr3.push(model_ens[j])
+// }
+// // arr3.map((valueE,keyE)=> {
+// //     return (
+// //         console.log(valueE.name)
+// //         )
+// // });
 
 
-    // console.log(obj_wfd);
-    for(var x in obj_wfd){
-        arr1.push(x)
-        // for(var y in obj_wfd[x]){
-        //     arr2.push(obj_wfd[x][y])
-        // }
-    }
-    for(var m in obj_pvd){
-        arr2.push(m)
-        // for(var n in obj_wfd[m]){
-        //     arr2.push(obj_wfd[m][n])
-        // }
-    }
-    // console.log(arr1);
-    // console.log(arr2);
-// arr1.map((valueZ, keyZ)=> {
-//     // console.log(valueZ)
-// })  
+//  var arr1 = [];
+//  var arr2 = [];
+//  // var arr3 = [];
+//  // var arr4 = [];
+//  var obj = matrixdata;
+//     var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
+//     var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+
+
+//     // console.log(obj_wfd);
+//     for(var x in obj_wfd){
+//         arr1.push(x)
+//         // for(var y in obj_wfd[x]){
+//         //     arr2.push(obj_wfd[x][y])
+//         // }
+//     }
+//     for(var m in obj_pvd){
+//         arr2.push(m)
+//         // for(var n in obj_wfd[m]){
+//         //     arr2.push(obj_wfd[m][n])
+//         // }
+//     }
+//     // console.log(arr1);
+//     // console.log(arr2);
+// // arr1.map((valueZ, keyZ)=> {
+// //     // console.log(valueZ)
+// // })  
 
 
 
@@ -66,6 +66,7 @@ let Component = React.createClass({
 
     render() {
         let{valuepage,Tofaninfo,zhzb,fModel,fData}=this.props;
+        console.log(valuepage);
         let model_ens = zhzb.Model.ens;
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
@@ -83,7 +84,7 @@ let Component = React.createClass({
             //     arr2.push(obj_wfd[m][n])
             // }
         }
-        // console.log(arr1,arr2)
+        console.log(arr1,arr2)
         
         return (
             <div className={styles.listbodyBox}>
@@ -108,7 +109,7 @@ let Component = React.createClass({
                                 x = "正常发电";
                                 break;
                             case "LimitPow":
-                                x = "正常发电";
+                                x = "限功率";
                                 break;
                             case "Alarm":
                                 x = "正常发电";
@@ -130,7 +131,7 @@ let Component = React.createClass({
                                 break;
                         }
                     return (
-                        <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.offline : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
+                        <div className={`${styles.listBox} ${value.WTStateColor == "#c7b88c" ? styles.repair : styles.default}  ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.offline : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
                             <div className={styles.listitemR}>
                                 <span className={styles.listitemT}>
@@ -178,7 +179,11 @@ const mapDispatchToProps = (dispatch) => {
         Tofaninfo: (value,valuepage)=> {
             dispatch(actions.setVars('value', value));
             dispatch(actions.setVars('valueid', valuepage));
-            dispatch(actions.setVars('fan_page', 'faninfo'));
+            
+
+            dispatch(actions.setVars('showPage', 'turning'));
+            dispatch(actions.setVars('pagename', 'fan_matrix')); 
+            dispatch(actions.setVars('numtype', 'faninfo')); 
         }
     };
 };

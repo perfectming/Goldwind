@@ -30,6 +30,7 @@ let Component = React.createClass({
     },
 
     render() {
+        let{czname,unit,czgzss,czwhss,czxdss}=this.props;
         let configPie = {
             chart: {
                 type: 'column',
@@ -41,7 +42,7 @@ let Component = React.createClass({
                 height:270,
                 marginTop: 60,
                 marginBottom:45,
-                marginLeft:40,
+                marginLeft:55,
             },
             title: {
                 text: '',
@@ -60,11 +61,11 @@ let Component = React.createClass({
                     rotation: 0
                 },
                 tickLength: 0,
-                categories: ['十一月','十二月','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月']
+                categories: czname
             },
             yAxis: {
                 title: {
-                    text: '(万kMw)',
+                    text:  '('+unit+')',
                     style: {
                         color: '#ffffff'
                     },
@@ -83,6 +84,7 @@ let Component = React.createClass({
                 gridLineWidth: 0
             },
             legend: {
+                itemHoverStyle:{color:'#2ff4fb'},
                 align:"right",
                 verticalAlign: "top",
                 itemStyle: {
@@ -101,8 +103,8 @@ let Component = React.createClass({
             },
             plotOptions: {
                 column: {
-                    grouping: false,
-                    shadow: false,
+                    pointWidth:25,
+                    stacking: 'normal',//柱状图堆叠
                     borderWidth: 0
                 }
             },
@@ -110,15 +112,15 @@ let Component = React.createClass({
             ,
             series: [{
                 name:'故障损失',
-                data: [300,320,360,330,260,380,290,320,360,340,280,340],
+                data: czgzss,
                 borderRadius: 5
             },{
                 name:'维护损失',
-                data: [350,300,280,310,250,300,280,320,340,300,200,320],
+                data: czwhss,
                 borderRadius: 5
             },{
                 name:'限电损失',
-                data: [140,140,140,140,140,140,140,140,140,140,140,140],
+                data: czxdss,
                 borderRadius: 5
             }]
         };
