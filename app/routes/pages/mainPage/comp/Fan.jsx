@@ -87,7 +87,7 @@ let Component = React.createClass({
         let {pageTo_1,pageTo_2,Tofaninfo1,Topvinfo1,zhzb,fModel,fData,fanbool=false}=this.props;
         // console.log(fModel);
         // console.log(fData);
-        console.log(zhzb);
+        // console.log(zhzb);
         if(fanbool){
         let model_ens = zhzb.Model.ens;
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
@@ -121,7 +121,7 @@ let Component = React.createClass({
                     arr1.map((value, key)=> {
                         return (
                             <div className={styles.listheaderBox} key={key}>
-                                <button className={styles.listbtn} onClick={()=>pageTo_1(value,key)}>{model_ens[value].name}</button>
+                                <button className={styles.listbtn} onClick={()=>pageTo_1(value,key,fData)}>{model_ens[value].name}</button>
                                 <div className={styles.listopt}>
                                     {
                                         obj_wfd[value].map((valueA, keyA)=> {
@@ -189,7 +189,7 @@ let Component = React.createClass({
                     arr2.map((value, key)=> {
                         return (
                             <div className={styles.listheaderBox} key={key}>
-                                <button className={styles.listbtn} onClick={()=>pageTo_2(value,key)}>{model_ens[value].name}</button>
+                                <button className={styles.listbtn} onClick={()=>pageTo_2(value,key,fData)}>{model_ens[value].name}</button>
                                 <div className={styles.listopt}>
                                     {
                                         obj_pvd[value].map((valueA, keyA)=> {
@@ -303,12 +303,10 @@ const mapDispatchToProps = (dispatch) => {
             
         },
         init: () => {
-            var obj = {
-                test:''
-            }
+            
         },
 
-        pageTo_1:(value,key)=>{
+        pageTo_1:(value,key,fData)=>{
           dispatch(actions.setVars('numpage', 'fanmatrix'));
           dispatch(actions.setVars('valuepage', value));
           dispatch(actions.setVars('actbt',key ));
@@ -317,11 +315,11 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('befor_page','fan' ));
           dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'fan_matrix'));
-          dispatch(actions.setVars('fModel', fModel));
-          dispatch(actions.setVars('zhzb', zhzb));
+          dispatch(actions.setVars('fData', fData));
+          
 
         },
-        pageTo_2:(value,key)=>{
+        pageTo_2:(value,key,fData)=>{
           dispatch(actions.setVars('numpage', 'pvmatrix'));
           dispatch(actions.setVars('valuepage1', value));
           dispatch(actions.setVars('actbt1',key ));
@@ -330,8 +328,8 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('befor_page','fan' ));
           dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'fan_matrix'));
-          dispatch(actions.setVars('fDodel', fDodel));
-          dispatch(actions.setVars('zhzb', zhzb));
+          dispatch(actions.setVars('fData', fData));
+
         },
         Tofaninfo1: (value,valueA,key)=> {
             dispatch(actions.setVars('valuepage', value));
