@@ -7,6 +7,7 @@ import Column from './chart/Column.jsx';
 import Pie from './chart/Pie.jsx';
 import Line from './chart/Line.jsx';
 import styles from './Fan.scss';
+import Login from '../../../../components/common/Loading.jsx';
 import Superleftbox from './super/superleftbox.jsx';
 // import dataBase from '../../../../../config/ModelData';
 import matrix from '../../../../../config/MatrixModel';
@@ -67,17 +68,27 @@ var { Router, Route, browserHistory} = require('react-router');
 // // })
 
 
-
+let time;
 let Component = React.createClass({
+    componentWillMount() {
+        this.props.changedate();
+    },
+     componentWillUnmount() {
+       clearInterval(time)
+    },
     componentDidMount() {
         this.props.init();
     },
-
+    
     render() {
-        let {pageTo_1,pageTo_2,Tofaninfo1,Topvinfo1,zhzb,fModel,fData}=this.props;
+       
+
+
+        let {pageTo_1,pageTo_2,Tofaninfo1,Topvinfo1,zhzb,fModel,fData,fanbool=false}=this.props;
         // console.log(fModel);
         // console.log(fData);
         // console.log(zhzb);
+        if(fanbool){
         let model_ens = zhzb.Model.ens;
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
@@ -246,6 +257,11 @@ let Component = React.createClass({
                 </div>
             </div>
         );
+        }else{
+        return (
+            <Login></Login>
+        )
+        }
     }
 });
 
@@ -253,20 +269,39 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {   
             zhzb: state.vars.zhzb,
-            bbs: state.vars.bbs,
+            // bbs: state.vars.bbs,
             fModel: state.vars.fModel,
             fData: state.vars.fData,    
+            fanbool: state.vars.fanbool,   
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        changedate: () => {
+            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                function setData(rdata){
+                    dispatch(actions.setVars('zhzb', rdata));
+                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
+                    function setDatas(rdata){
+                        dispatch(actions.setVars('fModel', rdata));
+                        TY.getRtData("DevicesMatrix", 8888800, setfData)
+                        function setfData(rdata){
+                            TY.getRtData("DevicesMatrix", 8888800, setfData1)
+                            function setfData1(rdata){
+                                dispatch(actions.setVars('fData', rdata));
+                                dispatch(actions.setVars('fanbool', true));
+                            }
+                        }
+                    }
+                }
+        },
         init: () => {
             var obj = {
                 test:''
             }
         },
+
         pageTo_1:(value,key)=>{
           dispatch(actions.setVars('numpage', 'fanmatrix'));
           dispatch(actions.setVars('valuepage', value));
@@ -275,8 +310,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('befor_page','fan' ));
           dispatch(actions.setVars('fc_info', value));
-          dispatch(actions.setVars('showPage', 'cs'));
-          dispatch(actions.setVars('pagename', 'fan_matrix'));
+          dispatch(actions.setVars('showPage', 'fan_matrix'));
         },
         pageTo_2:(value,key)=>{
           dispatch(actions.setVars('numpage', 'pvmatrix'));
@@ -286,8 +320,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('befor_page','fan' ));
           dispatch(actions.setVars('fc_info', value));
-          dispatch(actions.setVars('showPage', 'cs'));
-          dispatch(actions.setVars('pagename', 'fan_matrix'));
+          dispatch(actions.setVars('showPage', 'fan_matrix'));
         },
         Tofaninfo1: (value,valueA,key)=> {
             dispatch(actions.setVars('valuepage', value));
@@ -319,3 +352,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
+
