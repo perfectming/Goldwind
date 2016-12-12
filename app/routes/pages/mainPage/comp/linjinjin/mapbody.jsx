@@ -70,7 +70,9 @@ const mapDispatchToProps = (dispatch) => {
                                 TY.getRtData("WTLeftOverview", 8888800, setlData)
                                 function setlData(rdata){
                                 dispatch(actions.setVars('leftd', rdata));
-                                    dispatch(actions.setVars('boolmapbody', true));
+                                    setTimeout(function(){
+                                         dispatch(actions.setVars('boolmapbody', true));
+                                     },100)
                                 }
                             }
                         }
