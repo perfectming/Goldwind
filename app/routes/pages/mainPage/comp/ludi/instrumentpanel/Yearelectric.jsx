@@ -54,7 +54,6 @@ let Component = React.createClass({
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px

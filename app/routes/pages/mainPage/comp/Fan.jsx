@@ -121,7 +121,7 @@ let Component = React.createClass({
                     arr1.map((value, key)=> {
                         return (
                             <div className={styles.listheaderBox} key={key}>
-                                <button className={styles.listbtn} onClick={()=>pageTo_1(value,key)}>{model_ens[value].name}</button>
+                                <button className={styles.listbtn} onClick={()=>pageTo_1(value,key,fData)}>{model_ens[value].name}</button>
                                 <div className={styles.listopt}>
                                     {
                                         obj_wfd[value].map((valueA, keyA)=> {
@@ -189,7 +189,7 @@ let Component = React.createClass({
                     arr2.map((value, key)=> {
                         return (
                             <div className={styles.listheaderBox} key={key}>
-                                <button className={styles.listbtn} onClick={()=>pageTo_2(value,key)}>{model_ens[value].name}</button>
+                                <button className={styles.listbtn} onClick={()=>pageTo_2(value,key,fData)}>{model_ens[value].name}</button>
                                 <div className={styles.listopt}>
                                     {
                                         obj_pvd[value].map((valueA, keyA)=> {
@@ -279,7 +279,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         changedate: () => {
-            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+            time = setInterval(function(){
+                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                 function setData(rdata){
                     dispatch(actions.setVars('zhzb', rdata));
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
@@ -290,19 +291,22 @@ const mapDispatchToProps = (dispatch) => {
                             TY.getRtData("DevicesMatrix", 8888800, setfData1)
                             function setfData1(rdata){
                                 dispatch(actions.setVars('fData', rdata));
-                                dispatch(actions.setVars('fanbool', true));
+                                setTimeout(function(){
+                                    dispatch(actions.setVars('fanbool', true));
+                                },100)
+                                
                             }
                         }
                     }
                 }
+            },3000)
+            
         },
         init: () => {
-            var obj = {
-                test:''
-            }
+            
         },
 
-        pageTo_1:(value,key)=>{
+        pageTo_1:(value,key,fData)=>{
           dispatch(actions.setVars('numpage', 'fanmatrix'));
           dispatch(actions.setVars('valuepage', value));
           dispatch(actions.setVars('actbt',key ));
@@ -311,8 +315,11 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('befor_page','fan' ));
           dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'fan_matrix'));
+          dispatch(actions.setVars('fData', fData));
+          
+
         },
-        pageTo_2:(value,key)=>{
+        pageTo_2:(value,key,fData)=>{
           dispatch(actions.setVars('numpage', 'pvmatrix'));
           dispatch(actions.setVars('valuepage1', value));
           dispatch(actions.setVars('actbt1',key ));
@@ -321,6 +328,8 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('befor_page','fan' ));
           dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'fan_matrix'));
+          dispatch(actions.setVars('fData', fData));
+
         },
         Tofaninfo1: (value,valueA,key)=> {
             dispatch(actions.setVars('valuepage', value));

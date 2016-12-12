@@ -21,7 +21,7 @@ let Component = React.createClass({
 
 	render() {
 		let {value,fanid,infopmodel,infopdata} = this.props;
-		console.log(1111,infopmodel);
+		// console.log(1111,infopmodel);
 		let x;
 		let code = value.WTStateCode;
 		switch(code)

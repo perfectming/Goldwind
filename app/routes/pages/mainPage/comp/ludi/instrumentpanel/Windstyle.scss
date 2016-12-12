@@ -530,70 +530,104 @@
                     &:first-child{
                         width: 20%;
                     }
-                }.click1{
-                   color: #20FEFF; 
-                   .init{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sort.gif) no-repeat;
-                      background-size: 20px 20px;  
-                   }
-                   .bottom{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sortB.gif) no-repeat;
-                      background-size: 20px 20px; 
-                   }
-                   .top{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sortT.gif) no-repeat;
-                      background-size: 20px 20px;  
-                   }
-                }.click1:hover{
+                }
+                .clickPba1{
+                    color: #20FEFF;
+                    .arrow{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortT.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickPba1:hover{
                     cursor: pointer;
-                    border: 1px solid #20FEFF;
-                }.click{
-                   color: #20FEFF; 
-                   .init{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sort.gif) no-repeat;
-                      background-size: 20px 20px;  
-                   }
-                   .bottom{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sortB.gif) no-repeat;
-                      background-size: 20px 20px; 
-                   }
-                   .top{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sortT.gif) no-repeat;
-                      background-size: 20px 20px;  
-                   }
-                }.click:hover{
+                    border: 2px solid #20FEFF;
+                }
+                .clickPba4{
+                    .arrow{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickPba4:hover{
                     cursor: pointer;
-                    border: 1px solid #20FEFF;
+                    border: 2px solid #20FEFF;
+                }
+                .clickTime1{
+                    .arrow{
+                    display: inline-block;
+                    position: relative;
+                    top: 3px;
+                    height: 20px;
+                    width: 20px;
+                    background: url(../../../img/comp/sortAB.gif) no-repeat;
+                    background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickTime1:hover{
+                    cursor: pointer;
+                    border: 2px solid #20FEFF;
+                }
+                .clickTime4{
+                    color: #20FEFF;
+                    .arrow{
+                    display: inline-block;
+                    position: relative;
+                    top: 3px;
+                    height: 20px;
+                    width: 20px;
+                    background: url(../../../img/comp/sortT.gif) no-repeat;
+                    background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickTime4:hover{
+                    cursor: pointer;
+                    border: 2px solid #20FEFF;
                 }
             } 
         }
