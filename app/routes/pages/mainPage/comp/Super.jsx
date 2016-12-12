@@ -161,7 +161,10 @@ const mapDispatchToProps = (dispatch) => {
                             TY.getRtData("DataOverview", 8888800, setData1)
                                 function setData1(rdata){
                                     dispatch(actions.setVars('bbs', rdata));
-                                    dispatch(actions.setVars('boolsuper', true));
+                                    setTimeout(function(){
+                                         dispatch(actions.setVars('boolsuper', true));
+                                     },100)
+                                   
                                 }
                         }
                 }
