@@ -49,8 +49,7 @@ const mapDispatchToProps = (dispatch) => {
         changeHeaderItem: (key,page) => {
             dispatch(actions.setVars('headerItemActive', key));
             dispatch(actions.setVars('treeItemActive', 0));
-             dispatch(actions.setVars('showPage', 'cs'));
-             dispatch(actions.setVars('pagename', page));
+             dispatch(actions.setVars('showPage', page));
              dispatch(actions.setVars('tabItemActive', 0));
              dispatch(actions.setVars('show', false));
              dispatch(actions.setVars('colorAct', false));
@@ -58,7 +57,6 @@ const mapDispatchToProps = (dispatch) => {
                  dispatch(actions.setVars('putpage', false));
                  dispatch(actions.setVars('navhide', false));
              }else if(page=='monitorkb'){
-                 dispatch(actions.setVars('numtype', 'monitorkb'));
                  dispatch(actions.setVars('navhide', false));
                  dispatch(actions.setVars('putpage', true));
                  dispatch(actions.setVars('bodypage', true));
