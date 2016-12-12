@@ -248,7 +248,9 @@ const mapDispatchToProps = (dispatch) => {
                     TY.getRtData("MonitorBoard", 8888800, ppo);
                     function ppo(rdata){
                         dispatch(actions.setVars('modata', rdata));
-                        dispatch(actions.setVars('boole', true));
+                        setTimeout(function () {
+                            dispatch(actions.setVars('boole', true));
+                        },100)
                     }
                 }
 

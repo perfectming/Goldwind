@@ -15,7 +15,7 @@ let Component = React.createClass({
         this.props.init();
         timer = setInterval(function(){
             changekey()
-        },200)
+        },5000)
     },
     componentWillUnmount: function(){
         clearInterval(timer);
@@ -25,7 +25,7 @@ let Component = React.createClass({
 
         return(
             <iframe id="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
-            )
+        )
 
     }
 });
@@ -45,11 +45,12 @@ const mapDispatchToProps = (dispatch) => {
             if( localStorage.keyone == 0 ){
                 dispatch(actions.setVars('navhide',false ));
             }else {
+                // dispatch(actions.setVars('tabItem', true));
                 dispatch(actions.setVars('navhide', true));
                 dispatch(actions.setVars('tabItemActive', localStorage.keytwo));
             }
         },
-};
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
