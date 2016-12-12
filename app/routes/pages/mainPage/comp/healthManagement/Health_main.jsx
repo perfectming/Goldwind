@@ -15,7 +15,7 @@ let Component = React.createClass({
         this.props.init();
         timer = setInterval(function(){
             changekey()
-        },5000)
+        },200)
     },
     componentWillUnmount: function(){
         clearInterval(timer);
