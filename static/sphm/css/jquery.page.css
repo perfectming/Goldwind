@@ -3,7 +3,7 @@
     text-decoration: none;
 }
 
-#page {
+#page,#page_2 {
     height: 50px;
     display: table;
     margin: 0 auto;

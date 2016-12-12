@@ -3,14 +3,24 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Booster.scss';
 var actions = require('redux/actions');
+import Login from '../../../../components/common/Loading.jsx';
+let time;
+var $ = require('jquery');
 
 let Component = React.createClass({
+    componentWillMount() {
+        this.props.changedate();
+    },
+    componentWillUnmount() {
+        clearInterval(time)
+    },
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-        let{jyname,jydata,changepage,changepage2}=this.props;
+        let{jyname,jydata,changepage,changepage2,boolebooster=false}=this.props;
+        if(boolebooster){
         let modens=jyname.Model.ens;
         let moddis=jyname.Model.dis;
         let moddata=jydata.ModelData;
@@ -77,8 +87,13 @@ let Component = React.createClass({
                     })
                 }
             </div>
-
         )
+        }else{
+            return(
+                  <Login></Login>
+             )
+
+        }
     }
 });
 
@@ -87,11 +102,29 @@ const mapStateToProps = (state) => {
     return {
         jyname: state.vars.jyname,
         jydata: state.vars.jydata,
+        boolebooster: state.vars.boolebooster,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        changedate:()=>{
+            time=setInterval(function(){
+                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", momo, "Screen", 0);
+                function momo(rdata){
+                    dispatch(actions.setVars('jyname', rdata));
+                    TY.getRtData("RegulationOverview", 8888800, ppo);
+                    function ppo(rdata){
+                        TY.getRtData("RegulationOverview", 8888800, ppo);
+                        function ppo(rdata){
+                            dispatch(actions.setVars('jydata', rdata));
+                            dispatch(actions.setVars('boolebooster', true));
+                        }
+                    }
+
+                }
+            },2000)
+        },
         init: () => {
         },
         changepage:(value,key)=>{

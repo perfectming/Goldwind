@@ -45,7 +45,6 @@ const mapDispatchToProps = (dispatch) => {
             if( localStorage.keyone == 0 ){
                 dispatch(actions.setVars('navhide',false ));
             }else {
-                // dispatch(actions.setVars('tabItem', true));
                 dispatch(actions.setVars('navhide', true));
                 dispatch(actions.setVars('tabItemActive', localStorage.keytwo));
             }
