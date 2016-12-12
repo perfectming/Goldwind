@@ -198,8 +198,6 @@ let str=d.getDate();
         );
     }
 });
-
-
 const mapStateToProps = (state) => {
     return {
        fc_info:state.vars.fc_info,

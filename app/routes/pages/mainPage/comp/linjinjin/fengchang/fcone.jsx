@@ -24,7 +24,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ flag=true, changeFlag,numpage='fanmatrix',hiden=true}=this.props;
+       let{ flag=true, changeFlag,numpage,hiden=true}=this.props;
         return (
             <div className={styles.bodyBox}>
                 
