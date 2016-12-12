@@ -12,23 +12,11 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ changpage, fcpage,actbt=0,backtop,changpage1,actbt1,befor_page='super',befor_page2,zhzb,bbs}=this.props;
-
-
-          let matrixdata = require('../../../../../../config/MatrixData');
-          let model = require('../../../../../../config/Model');
-          let modeldata = require('../../../../../../config/ModelData');
-          let data=modeldata.ModelData;
-          let mod=model.Model;
-          let  mat=model.Model;
-          let matD=matrixdata.ModelData;
-          let model_data = bbs.ModelData;
-          var model_ens = zhzb.Model.ens;
+       let{ changpage, fcpage,actbt=0,backtop,changpage1,actbt1,befor_page='super',befor_page2,zhz,bs}=this.props;
+          let model_data = bs.ModelData;
+          var model_ens = zhz.Model.ens;
           let arr1 = [];
           let arr2 = [];
-          var obj = matrixdata;
-          var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-          var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 
 
 (function(){
@@ -87,8 +75,7 @@ const mapStateToProps = (state) => {
         actbt1 : state.vars.actbt1,
         befor_page : state.vars.befor_page,
         befor_page2 : state.vars.befor_page2,
-        zhzb: state.vars.zhzb,
-        bbs: state.vars.bbs,
+        
 
     }
 };
@@ -125,8 +112,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         backtop:(befor_page,befor_page2)=>{
-            dispatch(actions.setVars('showPage','cs'));
-            dispatch(actions.setVars('pagename',befor_page));
+            dispatch(actions.setVars('showPage',befor_page));
             dispatch(actions.setVars('navhide', true));
             dispatch(actions.setVars('numpage', 'fanmatrix'));
             console.log(befor_page2)
