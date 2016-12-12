@@ -61,7 +61,6 @@ let str=d.getDate();
     array2.push(array) //获取全部风场的对应字段数据
     } 
 }
-  console.log(array2)
 }());
       
         return (
@@ -199,8 +198,6 @@ let str=d.getDate();
         );
     }
 });
-
-
 const mapStateToProps = (state) => {
     return {
        fc_info:state.vars.fc_info,
@@ -215,6 +212,7 @@ const mapDispatchToProps = (dispatch) => {
            
         },
         choose: (value) => {
+            console.log(value)
             dispatch(actions.setVars('choosefans', value));
             dispatch(actions.setVars('numpage', 'choosefan'));
             dispatch(actions.setVars('actbtn', 0));

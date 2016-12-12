@@ -8,9 +8,12 @@ import Pie2 from '../../mxx/Pie2';
 var actions = require('redux/actions');
 
 let data=Instrumentdata;
-let sort1=data.sort; 
+let sortArr; 
 
 let Component = React.createClass({
+	componentWillMount() {
+        this.props.ajax();
+    },
     componentDidMount() {
         this.props.init();
     },
@@ -19,24 +22,9 @@ let Component = React.createClass({
     render() {
         
         
-        let{flag3,flag4,flag=true,changepageSort1,changepageProT,changepageProS,changepageSort,big1,small1,wind,actbt=0,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{flagTime=true,flagPba=true,flag=true,changepageSort1,changepageProT,changepageProS,changepageSort,big1,small1,wind,actbt=0,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         let profit;
-        $.ajax({
-        		url: 'http://10.9.100.53:8080/gwbi/yield/getAllWfYield',
-		        type: 'post',
-		        data: 'startdate=2016-11-10&enddate=2016-11-18',
-		        dataType: 'json',//here
-		        success:function (data) {
-		        	profit=data.data;
-		        	console.log(profit);
-		        	return profit;
-		        },
-		        complete : function(XMLHttpRequest,status){ 
-			　　　　if(status=='timeout'){
-			　　　　　 alert('超时');
-			　　　　}
-			　　},
-		    });
+        
         return (
            <div className={styles.box}>
            		<ul className={styles.monthbox}>
@@ -145,40 +133,15 @@ let Component = React.createClass({
                 		<tbody>
                 			<tr>
 	                			<th>排名</th>
-	           					<th>风机名</th>
-	           					<th className={styles.click} onClick={()=>changepageSort1(flag)}>PBA <span className={flag3==undefined? styles.init:flag3==true?styles.top:styles.bottom}></span></th>
-	           					<th className={styles.click} onClick={()=>changepageSort(flag)}>停机时间<span className={flag4==undefined? styles.init:flag4==true?styles.top:styles.bottom}></span></th>
+	           					<th>区域名</th>
+	           					<th onClick={()=>changepageSort1(flag,flagPba,sortArr)} className={flag==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba==true? styles.arrow:styles.bottom}></span></th>
+	           					<th onClick={()=>changepageSort(flag,flagTime,sortArr)} className={flag==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime==true? styles.arrow:styles.bottom}></span></th>
                 			</tr>
-                			<tr>
-                				<th>1</th><th>{sort1[0].name}</th><th>{sort1[0].PBA}</th><th>{sort1[0].time}分钟</th>
-                			</tr>
-                			<tr>
-                				<th>2</th><th>{sort1[1].name}</th><th>{sort1[1].PBA}</th><th>{sort1[1].time}分钟</th>
-                			</tr>
-                			<tr>
-                				<th>3</th><th>{sort1[2].name}</th><th>{sort1[2].PBA}</th><th>{sort1[2].time}分钟</th>
-                			</tr>
-                			<tr>
-                				<th>4</th><th>{sort1[3].name}</th><th>{sort1[3].PBA}</th><th>{sort1[3].time}分钟</th>
-                			</tr>
-                			<tr>
-                				<th>5</th><th>{sort1[4].name}</th><th>{sort1[4].PBA}</th><th>{sort1[4].time}分钟</th>
-                			</tr>
-                			<tr>
-                				<th>6</th><th>{sort1[5].name}</th><th>{sort1[5].PBA}</th><th>{sort1[5].time}分钟</th>
-                			</tr>
-                			<tr>
-                				<th>7</th><th>{sort1[6].name}</th><th>{sort1[6].PBA}</th><th>{sort1[6].time}分钟</th>
-                			</tr>
-                			<tr>
-                				<th>8</th><th>{sort1[7].name}</th><th>{sort1[7].PBA}</th><th>{sort1[7].time}分钟</th>
-                			</tr>
-                			<tr>
-                				<th>9</th><th>{sort1[8].name}</th><th>{sort1[8].PBA}</th><th>{sort1[8].time}分钟</th>
-                			</tr>
-                			<tr>
-                				<th>10</th><th>{sort1[9].name}</th><th>{sort1[9].PBA}</th><th>{sort1[9].time}分钟</th>
-                			</tr>
+                			{
+//              				sortArr.map((value,key)=>{
+//		                    		return(<tr key={key}><th>{key+1}</th><th>{value.groupname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{value.downtime}小时</th></tr>)
+//		                    	})
+                			}
                 		</tbody>	
                 	</table>
                 </div>
@@ -195,29 +158,49 @@ const mapStateToProps = (state) => {
     	wind : state.vars.wind,
     	big1 : state.vars.big1,
     	small1 : state.vars.small1,
-    	sort1 : state.vars.sort2,
-    	flag : state.vars.flag1,
-    	flag3: state.vars.flag3,
-    	flag4: state.vars.flag4,
+    	sortArr : state.vars.sortArr,
+    	flag : state.vars.flag,
+    	flagPba : state.vars.flagPba,
+    	flagTime : state.vars.flagTime,
+    	
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+    	
+    	ajax: () => {
+    		$.ajax({
+        		url: 'http://10.9.99.173:8080/wbi/PBA/getCompanyAreaPBA',//风场列表
+		        type: 'post',
+		        async:false,
+		        data:{'groupid':clickAreaId},
+		        dataType: 'json',//here
+		        success:function (data) {
+		        	console.log(data)
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		    });
+    	},
         init: () => {
             var obj = {
                 test:''
             }
         },
-        changepageSort:(flag)=>{
-        	flag==true? dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return a.time-b.time}))):dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return b.time-a.time})));
-        	flag==true? dispatch(actions.setVars('flag1',false )):dispatch(actions.setVars('flag1',true ));
-        	flag==true? dispatch(actions.setVars('flag4',false )):dispatch(actions.setVars('flag4',true ));
+        changepageSort:(flag,flagTime,sortArr)=>{
+//      	flagTime==false? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.downtime-a.downtime})));
+        	dispatch(actions.setVars('flag',false ));
+        	dispatch(actions.setVars('flagTime',!flagTime ));
+        	
         },
-        changepageSort1:(flag)=>{
-        	flag==true? dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return (a.PBA).slice(0,1)/1-(b.PBA).slice(0,1)/1}))):dispatch(actions.setVars('sort2', sort1.sort(function(a,b){return (b.PBA).slice(0,1)/1-(a.PBA).slice(0,1)/1})));
-        	flag==true? dispatch(actions.setVars('flag1',false )):dispatch(actions.setVars('flag1',true ));
-        	flag==true? dispatch(actions.setVars('flag3',false )):dispatch(actions.setVars('flag3',true ));
+        changepageSort1:(flag,flagPba,sortArr)=>{
+//      	flagPba==true? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
+        	dispatch(actions.setVars('flag',true ));
+        	dispatch(actions.setVars('flagPba',!flagPba ));
         },
         changepageW :(value,key)=>{
         	dispatch(actions.setVars('big1',value.big ));

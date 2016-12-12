@@ -18,7 +18,7 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:420
+                height:400
             },
             title: {
                 text: ''

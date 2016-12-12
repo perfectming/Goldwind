@@ -14,6 +14,7 @@ import Gisdxt from './fcright/gisdxt.jsx';
 import Syzjs from './fcright/syzjs.jsx';
 import Choosefan from '../../xym/allinfo/Choosefan.jsx';
 import Choosepv from '../../xym/allinfo/Choosepv.jsx';
+import Turning from '../../xym/turning.jsx';
 var actions = require('redux/actions');
 
 
@@ -23,7 +24,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ flag=true, changeFlag,numpage='fanmatrix',hiden=true}=this.props;
+       let{ flag=true, changeFlag,numpage,hiden=true}=this.props;
         return (
             <div className={styles.bodyBox}>
                 
@@ -45,6 +46,7 @@ let Component = React.createClass({
                         { numpage==='syzjs' && <Syzjs></Syzjs>}
                         { numpage==='choosefan' && <Choosefan></Choosefan>}
                         { numpage==='choosepv' && <Choosepv></Choosepv>}
+                        { numpage==='turning' && <Turning></Turning>}
 
                     </div>
                 </div>

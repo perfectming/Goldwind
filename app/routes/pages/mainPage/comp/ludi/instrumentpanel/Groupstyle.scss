@@ -125,12 +125,11 @@
                         background-size: 20px 20px;
                     }
                     .electricTotal{
-                        margin: 10px 0;
-                        color:#f23333; 
+                        margin: 10px 0; 
                     }.electricPercent{
                         width: 90%;
                         height: 25px;
-                        background-color: #33BAC0;
+                        background-color: #39565e;
                         border-radius: 12px;
                         overflow: hidden;
                         .green{
@@ -140,8 +139,33 @@
                             height: 25px;
                             border-radius: 12px;
                             background-color: #00ff33;
-                            }
                         }
+                        .yellow{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #fbd500;
+                        }
+                        .red{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #ff0000
+;
+                        }
+                        .redS{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #d06960;
+                        }   
+                    }
                 }.electricSecond{
                     position: relative;
                     z-index: 3;
@@ -158,8 +182,7 @@
                         background-size: 20px 20px;
                     }
                     .electricTotal{
-                            margin: 10px 0;
-                           color: #ffff41; 
+                            margin: 10px 0; 
                     }
                     .electricPercent{
                         width: 90%;
@@ -173,7 +196,32 @@
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
-                            background-color:#f33;
+                            background-color:#00ff33;
+                        }
+                        .yellow{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #fbd500;
+                        }
+                        .red{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #ff0000;
+;
+                        }
+                        .redS{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #d06960;
                         }
                     }
                     
@@ -194,7 +242,6 @@
                     }
                     .electricTotal{
                         margin: 10px 0;
-                        color: #00ff33;
                     }.electricPercent{
                         width: 90%;
                         height: 25px;
@@ -202,12 +249,37 @@
                         border-radius: 12px;
                         overflow: hidden;
                         .green{
-                            color:   black;
+                            color: black;
                             padding-left: 10px;
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
-                            background-color: #f33;
+                            background-color: #00ff33;
+                        }
+                        .yellow{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #fbd500;
+                        }
+                        .red{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #ff0000;
+
+                        }
+                        .redS{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #d06960;
                         }
                     }
                 }
@@ -355,7 +427,6 @@
             tr{
                 position: relative;
                 display: inline-block;
-                height: 30px;
                 width: 100%;
                 margin-top: 20px;
                 background-color: rgba(41, 61, 71, 0.2);
@@ -366,73 +437,106 @@
                     display: inline-block;
                     text-align: center;
                     width: 25%;
-                    height: 30px;
                     line-height: 30px;
                     &:first-child{
                         width: 20%;
                     }
-                }.click1{
-                   color: #20FEFF;
-                   .init{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sort.gif) no-repeat;
-                      background-size: 20px 20px;  
-                   }
-                   .bottom{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sortB.gif) no-repeat;
-                      background-size: 20px 20px; 
-                   }
-                   .top{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sortT.gif) no-repeat;
-                      background-size: 20px 20px;  
-                   }
-                }.click1:hover{
+                }
+                .clickPba1{
+                    color: #20FEFF;
+                    .arrow{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortT.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickPba1:hover{
                     cursor: pointer;
                     border: 2px solid #20FEFF;
-                }.click{
-                   color: #20FEFF; 
-                   .init{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sort.gif) no-repeat;
-                      background-size: 20px 20px;  
-                   }
-                   .bottom{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sortB.gif) no-repeat;
-                      background-size: 20px 20px; 
-                   }
-                   .top{
-                      display: inline-block;
-                      position: relative;
-                      top: 3px;
-                      height: 20px;
-                      width: 20px;
-                      background: url(../../../img/comp/sortT.gif) no-repeat;
-                      background-size: 20px 20px;  
-                   }
-                }.click:hover{
+                }
+                .clickPba4{
+                    .arrow{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickPba4:hover{
+                    cursor: pointer;
+                    border: 2px solid #20FEFF;
+                }
+                .clickTime1{
+                    .arrow{
+                    display: inline-block;
+                    position: relative;
+                    top: 3px;
+                    height: 20px;
+                    width: 20px;
+                    background: url(../../../img/comp/sortAB.gif) no-repeat;
+                    background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickTime1:hover{
+                    cursor: pointer;
+                    border: 2px solid #20FEFF;
+                }
+                .clickTime4{
+                    color: #20FEFF;
+                    .arrow{
+                    display: inline-block;
+                    position: relative;
+                    top: 3px;
+                    height: 20px;
+                    width: 20px;
+                    background: url(../../../img/comp/sortT.gif) no-repeat;
+                    background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickTime4:hover{
                     cursor: pointer;
                     border: 2px solid #20FEFF;
                 }

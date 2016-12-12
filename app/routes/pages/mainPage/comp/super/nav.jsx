@@ -14,7 +14,7 @@ let Component = React.createClass({
     render() {
 
 
-       let {title,arr, changetab, act=0,leftm,leftd,fc_info='150801'} = this.props;
+       let {title,arr, changetab, act=0,leftd,fc_info='150801'} = this.props;
        let date=leftd.ModelData;
 
        
@@ -65,8 +65,6 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         act: state.vars.actbtn,
-        leftd: state.vars.leftd,
-        leftm: state.vars.leftm,
         fc_info:state.vars.fc_info,
        
     }
@@ -79,7 +77,6 @@ const mapDispatchToProps = (dispatch) => {
              
         },
         changetab:(page,act)=>{
-            console.log(page)
             dispatch(actions.setVars('numpage', page));
             dispatch(actions.setVars('actbtn', act));
         }

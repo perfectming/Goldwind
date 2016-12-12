@@ -122,6 +122,9 @@ let Component = React.createClass({
                     grouping: false,
                     shadow: false,
                     borderWidth: 0
+                },
+                series:{
+                    animation:false
                 }
             },
             colors: ['#37545C','#32C5CD','#1fe005','#D06960']

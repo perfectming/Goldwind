@@ -25,7 +25,7 @@ let Component = React.createClass({
 
         return(
             <iframe id="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
-            )
+        )
 
     }
 });
@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(actions.setVars('tabItemActive', localStorage.keytwo));
             }
         },
-};
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
