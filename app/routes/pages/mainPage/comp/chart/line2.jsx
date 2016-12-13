@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{date, datename,height,name}=this.props;
+        let{date, datename,height,name,unit}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -48,7 +48,7 @@ let Component = React.createClass({
                 enabled: true,
                 style:{
                     color: '#000',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     fontFamily:"微软雅黑"
                 }
             },
@@ -79,6 +79,9 @@ let Component = React.createClass({
                 type:'spline',
                 name: name,
                 data: date,
+                  tooltip: {
+                valueSuffix: unit,
+            },
                    marker: {
                         enabled: false
                        

@@ -33,7 +33,7 @@ let Component = React.createClass({
                  //pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
                  style:{
                     color: '#000',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     fontFamily:"微软雅黑"
                 }
             },
@@ -67,6 +67,9 @@ let Component = React.createClass({
                 type: 'pie',
                 name: "日发电量",
                 data: nu,
+                tooltip: {
+                valueSuffix: 'kWh'
+            },
                 style: {     fontSize:"20px",  } 
             }]
         };

@@ -44,7 +44,6 @@ let Component = React.createClass({
         let date01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Value;
         let datename02=bbs.ModelData[8888802].CurDayPVTSICurve.Time;
         let date02=bbs.ModelData[8888802].CurDayPVTSICurve.Value;
-
             let datename=zhzb.Model.ens;
             let arr=[];
             let arrname=[];
@@ -94,7 +93,7 @@ let Component = React.createClass({
                             <Title title={['日发电量统计(kWh)']}></Title>
                         </div>
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
-                            <Line1 date={date00} datename={datename00} height={220} name={'当日24小时功率曲线'}></Line1>
+                            <Line1 date={date00} datename={datename00} height={220} name={'当前出力'} unit={mod.dis.CurDayPowerCurve.unit}></Line1>
                    
                             <Title title={[mod.dis.CurDayPowerCurve.name+'('+mod.dis.CurDayPowerCurve.unit+')']}></Title>
                             
@@ -104,12 +103,12 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.chart_bar}>
                         <div className={`${styles.linebox} ${styles.box_shadow}`}>
-                            <Line1 date={date01} datename={datename01} height={150} name={'当日风速曲线'}></Line1>
+                            <Line1 date={date01} datename={datename01} height={150} name={'当前风速'} unit={mod.dis.CurDayWindSpeedCurve.unit}></Line1>
                             <Title title={[mod.dis.CurDayWindSpeedCurve.name+'('+mod.dis.CurDayWindSpeedCurve.unit+')']}></Title>
                         </div>
 
                          <div className={`${styles.linebox} ${styles.linebox1} ${styles.box_shadow}`}>
-                            <Line1 date={date02} datename={datename02} height={150} name={'当日辐照度曲线'}></Line1>
+                            <Line1 date={date02} datename={datename02} height={150} name={'当前辐照度'} unit={['(W/㎡)']}></Line1>
                             <Title title={[mod.dis.CurDayPVTSICurve.name+'(W/㎡)']}></Title>
 
                         </div>
@@ -150,7 +149,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
          changedate:()=>{
-             time=setInterval(function(){
+
+              // time=setInterval(function(){
             //     console.log('刷新')
 
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
@@ -162,15 +162,24 @@ const mapDispatchToProps = (dispatch) => {
                                 function setData1(rdata){
                                     dispatch(actions.setVars('bbs', rdata));
                                     setTimeout(function(){
-                                         dispatch(actions.setVars('boolsuper', true));
-                                     },100)
-                                   
+                                       dispatch(actions.setVars('boolsuper', true));  
+
+                                   },500)
+                                     
                                 }
                         }
                 }
 
+
+                time=setInterval(function(){
+                    TY.getRtData("DataOverview", 8888800, setData1)
+                        function setData1(rdata){
+                            dispatch(actions.setVars('bbs', rdata));
+   
+                        }
+                },2000)
                                                    
-             },2000)
+              // },500)
         },
         init: () => {
             var obj = {

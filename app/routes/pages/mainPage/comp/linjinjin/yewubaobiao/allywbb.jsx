@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './allywbb.scss';
 import Generating1 from './Generating/ywbb.jsx';
+import Electric_table from './Generating/Electric_table.jsx';
 var $ =require('jquery');
 var actions = require('redux/actions');
 let paged = require('./pagedate');
@@ -41,6 +42,7 @@ let Component = React.createClass({
                 </div>
 
                { showbb==='ywbb' && <Generating1></Generating1>}
+               { showbb==='Electric_table' && <Electric_table></Electric_table>}
             </div>
         );
     }
