@@ -424,6 +424,7 @@
         table{
             width: 100%;
             user-select:none;
+            overflow: hidden;
             tr{
                 position: relative;
                 display: inline-block;
