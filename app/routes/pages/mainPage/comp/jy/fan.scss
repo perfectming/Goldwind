@@ -1,5 +1,5 @@
 .bodyBox{
-  background: url("../../img/icon/bujian.png") 0px 40px no-repeat;
+  background: url("../../img/icon/1.png") -10px 0px no-repeat;
   overflow: hidden;
   .infofL{
     float: left;
@@ -83,10 +83,9 @@
     visibility:hidden;
   }
     .infoBox{
-      margin-top: 700px;
       overflow: hidden;
       color:#999;
-      background:#292F36;
+      background:#202030;
       white-space:nowrap;
       span{
         display: inline-block;
@@ -95,14 +94,17 @@
         color:#fff;
       }
       .statusquery{
-        width: 1300px;
+        width: 1700px;
         overflow: hidden;
         .bgbox{
           background: #30343D;
         }
+        .nomalbox{
+          background: #292F36;
+        }
         .statusquerybox{
           float: left;
-          width: 25%;
+          width: 16.6666%;
           height: 35px;
           span{
             padding-left: 30px;
@@ -111,8 +113,11 @@
       }
     }
   .fanrightbox{
-    margin-top: 100px;
-    overflow: hidden;
+    margin-top: 10px;
+    margin-left: 263px;
+    overflow-y: scroll;
+    overflow-x:hidden;
+    height:650px;
     background:#292F36;
     white-space:nowrap;
     .action1box{
