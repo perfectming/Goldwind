@@ -10,7 +10,7 @@ module.exports = {
             	},
                 {
                     tabname:'电能表码表用例规划',
-                    rpage:''
+                    rpage:'Electric_table'
                 },
                 {
                     tabname:'完成率统计用例规划',

@@ -30,7 +30,7 @@ let Component = React.createClass({
                     })
 
                    }
-                    <div className={`${styles.numtai} ${styles.nummor}`}><div className={styles.numname}>华瑞SL1500x</div><b>--</b><a>台</a></div>
+                    <div className={`${styles.numtai} ${styles.nummor}`}><div className={styles.numname}>型号：</div><b>--</b><a>台</a></div>
                     <div className={styles.numtai}><div className={styles.numname}>总计</div><b>{date[fc_info].WTCount==0?date[fc_info].InverterCount:date[fc_info].WTCount}</b><a>台</a></div>
                     
 

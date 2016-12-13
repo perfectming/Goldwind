@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
          changedate:()=>{
-             time=setInterval(function(){
+             
             //     console.log('刷新')
 
 
@@ -70,14 +70,23 @@ const mapDispatchToProps = (dispatch) => {
                                 TY.getRtData("WTLeftOverview", 8888800, setlData)
                                 function setlData(rdata){
                                 dispatch(actions.setVars('leftd', rdata));
-                                    setTimeout(function(){
-                                         dispatch(actions.setVars('boolmapbody', true));
-                                     },100)
+                                        setTimeout(function(){
+                                       dispatch(actions.setVars('boolmapbody', true));  
+                                   },1000)
                                 }
                             }
                         }
                     }
-                                                   
+            time=setInterval(function(){  
+                         TY.getRtData("DevicesMatrix", 8888800, setfData)
+                        function setfData(rdata){
+                            dispatch(actions.setVars('fData', rdata));
+                             TY.getRtData("WTLeftOverview", 8888800, setlData)
+                                function setlData(rdata){
+                                    dispatch(actions.setVars('leftd', rdata));
+                                }
+
+                        }                  
              },2000)
         },
         init: () => {

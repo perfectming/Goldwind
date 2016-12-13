@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: (pagename,numtype) => {
 
-           
+
 
 
 

@@ -133,22 +133,34 @@ let Component = React.createClass({
                 name:'计划发电量',
                 type: 'column',
                 data: jhfdl,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
             },{
                 name:'实际发电量',
                 type: 'column',
                 data: sjfdl,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
             },{
                 name:'场站完成率',
                 type: 'line',
                 data: czwcl,
-                yAxis: 1
+                yAxis: 1,
+                tooltip: {
+                    valueSuffix: '%'
+                }
             },{
                 name:'集团完成率',
                 type: 'line',
                 data: gswcl,
-                yAxis: 1
+                yAxis: 1,
+                tooltip: {
+                    valueSuffix: '%'
+                }
             }]
         };
         return (

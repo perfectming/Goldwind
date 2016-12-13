@@ -17,13 +17,13 @@ import down from '../../img/comp/down_icon.png';
 import anquan from '../../img/comp/anquan_icon.png';
 import monBoardData from '../../../../../../config/MonitorBoardData';
 import model from '../../../../../../config/MonitorBoardModel';
+import Login from '../../../../../components/common/Loading.jsx';
 let comp = require('./date');
 var $ = require('jquery');
 let arr=[];
 let arrname=[];
 let allnum=0;
 let num=[];
-
 for(let i in monBoardData.ModelData){
     arr.push(monBoardData.ModelData[i].DayEgyAt/1);
 }
@@ -35,11 +35,16 @@ for(let x=0;x<arr.length;x++){
 var actions = require('redux/actions');
 
 let Component = React.createClass({
+   componentWillMount() {
+        this.props.changedate();
+    },
     componentDidMount() {
         this.props.init();
     },
 
     render() {
+        let{bloo=false}=this.props;
+        if(bloo){
         let mobd=monBoardData.ModelData;
         let mod=model.Model;
         let urodz = new Date("11/12/2015");
@@ -136,16 +141,47 @@ let Component = React.createClass({
             </div>
 
         )
+    }else{
+        return(
+            <Login></Login>
+            )
+    }
     }
 });
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+
+         bloo:state.vars.bloo,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        changedate:()=>{
+          
+            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+            function setData(rdata){
+                dispatch(actions.setVars('zhzb', rdata));
+                TY.getRtData("DataOverview", 8888800, setData1)
+                function setData1(rdata){
+                    dispatch(actions.setVars('bbs', rdata));
+                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
+                    function setDatas(rdata){
+                        dispatch(actions.setVars('fModel', rdata));
+                        TY.getRtData("DevicesMatrix", 8888800, setfData)
+                        function setfData(rdata){
+                        dispatch(actions.setVars('fData', rdata));
+                            setTimeout(function () {
+                                dispatch(actions.setVars('bloo', true));
+                            },500)
+                        }
+                    }
+                }
+            }
+      
+        },
         init: () => {
                 dispatch(actions.setVars('putpage', false));
                 dispatch(actions.setVars('bodypage', false));

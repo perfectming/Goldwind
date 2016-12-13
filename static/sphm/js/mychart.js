@@ -23,7 +23,10 @@ function BarOption(title, xAxisData, seriesTitle, seriesData, triggerOn) {
                 triggerOn: triggerOn,
                 axisPointer: {            // 坐标轴指示器，坐标轴触发有效
                     type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                }
+                },
+				formatter: function (params, ticket, callback) {
+					return params[0].name + "<br />"+params[1].seriesName+"：" + params[1].data;
+				}
             },
             grid: {
                 left: '3%',
@@ -486,9 +489,13 @@ function jkzl_index() {
 
     $.ajax({
         type: "post",
-        url: window.ApiDomian + '/alarm/health.json?beginTime=' + now.getFullYear() + '-01-01&endTime=' + getDay()+"&userId="+userId,
+        url: GetAllUrl(window.ApiDomian + '/alarm/health.json?beginTime=' + now.getFullYear() + '-01-01&endTime=' + getDay()),
         cache: false,
         dataType: 'json',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function (json) {
             json_jkzl = json; 
             var yAxisData = new Array();
@@ -589,9 +596,13 @@ function yjgk_index() {
 
     $.ajax({
         type: "post",
-        url: window.JFApiDomian + '/main_getWfAlarmInfoByWtType.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501",
+        url: GetAllUrl(window.JFApiDomian + '/main_getWfAlarmInfoByWtType.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501"),
         cache: false,
         dataType: 'jsonp',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function (json) {
             json_yjgk = json;
             var xAxisData = new Array();
@@ -720,9 +731,13 @@ function yjjstj() {
     var yjjstjlay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: window.JFApiDomian + '/main_getAlarmInfo.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay()+' 23:59:59',
+        url: GetAllUrl(window.JFApiDomian + '/main_getAlarmInfo.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay()+' 23:59:59'),
         cache: false,
         dataType: 'jsonp',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function (json) {
             var yAxisData = new Array();
             var seriesData = new Array();
@@ -766,9 +781,13 @@ function yjcltj(page, chart, index) {
     var yjclay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: window.JFApiDomian + page + '?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay()+' 23:59:59',
+        url: GetAllUrl(window.JFApiDomian + page + '?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay()+' 23:59:59'),
         cache: false,
         dataType: 'jsonp',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function (json) {
             var yAxisData = new Array();
             var seriesData = new Array();
@@ -811,17 +830,21 @@ function rwzxtj() {
     var rwzxtjlay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: window.JFApiDomian + '/main_getExecuteInfo.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + ' 23:59:59',
+        url: GetAllUrl(window.JFApiDomian + '/main_getExecuteInfo.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + ' 23:59:59'),
         cache: false,
         dataType: 'jsonp',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function (json) {
             var yAxisData = new Array();
             var seriesData = new Array();
             for (var o in json.listData) {
-                if (json.listData[o].name == '待执行区域排序') {
+                if (json.listData[o].name == '已结项区域排序') {
                     if (json.listData[o].data != null) {
                         for (var i = 0; i < json.listData[o].data.length;i++) {
-                            $(".yjtj .top3:eq(3)").append('<a title="' + json.listData[o].data[i].areaOrWfName + '">' + sb_substr(json.listData[o].data[i].areaOrWfName, 0, 10) + '</a>');
+                            $(".yjtj .top3:eq(3)").append('<a title="' + json.listData[o].data[i].dicsName + '">' + sb_substr(json.listData[o].data[i].dicsName, 0, 10) + '</a>');
                             if(i >= 2)
                                 break;
                         }
@@ -1095,9 +1118,13 @@ function sel_wjl_zl() {
     var lay_wjl_zl = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: window.JFApiDomian + '/main_getAlarmInfoByTime.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501",
+        url: GetAllUrl(window.JFApiDomian + '/main_getAlarmInfoByTime.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501"),
         cache: false,
         dataType: 'jsonp',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         complete: function () {
             layer.close(lay_wjl_zl);
         },
@@ -1209,9 +1236,13 @@ function sel_wjl(index) {
     var lay_wjl = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: window.JFApiDomian + '/main_getAlarmInfoByTime.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501&wfId=" + json_yjgk.listData[index].dicsID,
+        url: GetAllUrl(window.JFApiDomian + '/main_getAlarmInfoByTime.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501&wfId=" + json_yjgk.listData[index].dicsID),
         cache: false,
         dataType: 'jsonp',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         complete: function () {
             layer.close(lay_wjl);
         },
@@ -1328,9 +1359,13 @@ function fc_zql_get() {
     $.ajax({
         type: "post",
         timeout: 1000*60*60,
-        url: window.ApiDomian + '/alarm/precision.json?beginTime=' + now.getFullYear() + '01&endTime=' + (now.getFullYear()+1)+'01',
+        url: GetAllUrl(window.ApiDomian + '/alarm/precision.json?beginTime=' + now.getFullYear() + '01&endTime=' + (now.getFullYear()+1)+'01'),
         cache: false,
         dataType: 'json',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         complete: function () {
             layer.close(index_zql_get);
         },
@@ -1658,9 +1693,13 @@ function mtbf_get() {
     var mtbflay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "get",
-        url: window.ApiDomian + '/alarm/mtbf.json?beginTime=' + now.getFullYear(),
+        url: GetAllUrl(window.ApiDomian + '/alarm/mtbf.json?beginTime=' + now.getFullYear()),
         cache: false,
         dataType: 'json',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function (json) {
             json_mtbf = json;
             $(".zl_t i:eq(3)").text(json.data.mtbf.total);
@@ -1826,11 +1865,15 @@ function gdwjl_top() {
     var gdwjllay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: window.JFApiDomian + '/main_getEndRate.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501",
+        url: GetAllUrl(window.JFApiDomian + '/main_getEndRate.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501"),
         cache: false,
         dataType: 'jsonp',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function (json) {
-            $(".zl_t i:eq(1)").text((json.data.data * 100) + '%');
+            $(".zl_t i:eq(1)").text(parseFloat((json.data.data * 100)).toFixed(2) + '%');
             layer.close(gdwjllay);
         },
         error: function () {
@@ -1845,9 +1888,13 @@ function jrfjyh_index() {
     var nday = getDay();
     $.ajax({
         type: "post",
-        url: window.JFApiDomian + '/alarmInfo_searchWorkPub.do?pageid=0&pagecount=7&beginTime=' + nday + ' 00:00:00&endTime=' + nday + " 23:59:59&userid=" + userId,
+        url: GetAllUrl(window.JFApiDomian + '/alarmInfo_searchWorkPub.do?pageid=1&pagecount=6&beginTime=' + nday + ' 00:00:00&endTime=' + nday + " 23:59:59"),
         cache: false,
         dataType: 'jsonp',
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function (json) {
             for(var o in json.pagination.list){
                 $(".jryh_list").append('<ul class="clearfix"><li class="c_1">'+json.pagination.list[o].wfName+'</li><li class="c_1">'+json.pagination.list[o].wtName+'</li><li class="c_2">'+json.pagination.list[o].alarmName_CN+'</li><li class="c_1">'+json.pagination.list[o].alarmGrade_CN+'</li></ul>');

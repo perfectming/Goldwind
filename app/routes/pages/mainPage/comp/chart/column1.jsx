@@ -148,6 +148,11 @@ let Component = React.createClass({
             },
             tooltip: {
                 shared:true,
+                style:{
+                    color: '#000',
+                    fontSize: '12px',
+                    fontFamily:"微软雅黑"
+                }
 
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 //pointFormat: "<b>{point.percentage:.0f}%</b>"
@@ -185,12 +190,18 @@ let Component = React.createClass({
                 type: 'column',
                 color:"#33c5cd",
                 name: "站场发电完成率",
+                tooltip: {
+                valueSuffix: '%'
+            },
                 data: arr,
             }, {
                 type: 'line',
                 color:"#0f0",
                 name: "集团发电完成率",
                 data: line,
+                tooltip: {
+                valueSuffix: '%'
+                },
                 marker: {
                         enabled: false
                        

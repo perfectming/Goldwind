@@ -34,6 +34,9 @@
           color:#26f4ff;
           font-size: 18px;
         }
+        .danweicc{
+          font-size: 10px;
+        }
       }
     }
     .zhzbdown{
@@ -49,6 +52,9 @@
       .daynum{
         font-size: 20px;
         color:#1fe005;
+      }
+      .danweicc{
+        font-size: 10px;
       }
     }
   }
@@ -90,7 +96,9 @@
           p{
             font-size: 24px;
             margin-top:30px;
-
+            .danweicc{
+              font-size: 10px;
+            }
           }
         }
       }
@@ -121,9 +129,12 @@
         padding:0 5px;
         color: #07a3ff;
         p{
+          font-size: 16px;
           text-align:center;
           margin:0;
-
+        }
+        .danweicc{
+          font-size: 10px;
         }
       }
     }
@@ -251,7 +262,7 @@
         position: absolute;
         overflow: hidden;
         .tsstyled1{
-          font-size: 12px;
+          font-size: 10px;
         }
       }
       .tsstyle2{
@@ -263,7 +274,7 @@
         position: absolute;
         overflow: hidden;
         .tsstyled2{
-          font-size: 12px;
+          font-size: 10px;
         }
       }
       .tsstyle3{
@@ -275,7 +286,7 @@
         position: absolute;
         overflow: hidden;
         .tsstyled3{
-          font-size: 12px;
+          font-size: 10px;
         }
       }
       .tsstyle4{
@@ -287,7 +298,7 @@
         position: absolute;
         overflow: hidden;
         .tsstyled4{
-          font-size: 12px;
+          font-size: 10px;
         }
       }
       .timestyle{
@@ -298,8 +309,11 @@
         display: inline-block;
         position: absolute;
         overflow: hidden;
-        span{
+        .timestylee{
           margin-right: 59px;
+          .danweicc{
+            font-size: 10px;
+          }
         }
       }
     }
