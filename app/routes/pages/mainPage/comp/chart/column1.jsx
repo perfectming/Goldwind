@@ -13,6 +13,10 @@ let Component = React.createClass({
 
     render() {
         let arr=[];
+        let line=[];
+        let lineplan=[];
+        let partent=0;
+        let partentplan=0;
         let key=[];
         let allname=[];
         let allname1=[];
@@ -21,11 +25,24 @@ let Component = React.createClass({
         for(let num in date){
              if(date[num].WTCount=='0' || date[num].InverterCount =='0'){
                 
-                arr.push(Number(((date[num].MonthEgyAt/date[num].CurMonthPlanEgyAt)*100).toFixed(2)));
+                line.push(Number(date[num].MonthEgyAt));
+                 lineplan.push(Number(date[num].CurMonthPlanEgyAt));
+                 arr.push(Number(((date[num].MonthEgyAt/date[num].CurMonthPlanEgyAt)*100).toFixed(2)));
                 key.push([num,Number(((date[num].MonthEgyAt/date[num].CurMonthPlanEgyAt)*100).toFixed(2))]);
                 }
 
         }
+        //获取总发电量和计划发电量
+        line.map((value,key)=>{
+            partent+=value;
+            partentplan+=lineplan[key];
+        })
+        //清空数组
+        line.splice(0,line.length);
+        lineplan.map((value,key)=>{
+            line.push(Number(((partent/partentplan)*100).toFixed(2)))
+        })
+        
          arr.sort(function(a,b){return b-a})//数据排列
          key.sort(function(a,b){
             return b[1]-a[1]
@@ -121,6 +138,7 @@ let Component = React.createClass({
             verticalAlign: 'top',
                   x:0,
                   y:-15,
+                  itemHoverStyle:{color:'#2ff4fb'},
                   itemStyle:{
                     color: "#fff",
                     fontSize:12,
@@ -130,6 +148,12 @@ let Component = React.createClass({
             },
             tooltip: {
                 shared:true,
+                style:{
+                    color: '#000',
+                    fontSize: '12px',
+                    fontFamily:"微软雅黑"
+                }
+
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 //pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
@@ -147,6 +171,7 @@ let Component = React.createClass({
                     borderColor:"",
                     },
                    series: {
+                    animation:false,
                 borderRadius: 7//圆角
             },
                 pie: {
@@ -165,7 +190,22 @@ let Component = React.createClass({
                 type: 'column',
                 color:"#33c5cd",
                 name: "站场发电完成率",
+                tooltip: {
+                valueSuffix: '%'
+            },
                 data: arr,
+            }, {
+                type: 'line',
+                color:"#0f0",
+                name: "集团发电完成率",
+                data: line,
+                tooltip: {
+                valueSuffix: '%'
+                },
+                marker: {
+                        enabled: false
+                       
+                    }
             }]
         };
         return (

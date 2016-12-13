@@ -35,6 +35,7 @@
             display:block;
             a{ width:46%;}
             .anum1{
+            width:36%;
               font-family:'微软雅黑';
               display:inline-block;
               font-size:14px;
@@ -42,10 +43,42 @@
             }
           
             .anum{
-          
+            width:56%;
               display:inline-block;
               font-size:10px;
               color:#fff;
+              text-align:right;
+          
+              b{
+                font-size:14px;
+                color:#31f3fb;
+                margin-right:5px;                              
+                font-weight:normal;
+              }
+            }
+          }
+          .num2{
+            width:100%;
+            height:25px;
+            line-height:25px;
+            font-size:14px;
+            color:#fff;
+            display:block;
+            a{ width:46%;}
+            .anum1{
+            width:46%;
+              font-family:'微软雅黑';
+              display:inline-block;
+              font-size:14px;
+              color:#fff;
+            }
+          
+            .anum{
+            width:46%;
+              display:inline-block;
+              font-size:10px;
+              color:#fff;
+              text-align:right;
           
               b{
                 font-size:14px;
@@ -89,6 +122,8 @@
            font-weight:bold;
            display:inline-block;
            margin-top:0px; 
+           .anum2{width:46%}
+           
          }
 }
       }

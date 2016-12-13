@@ -10,7 +10,7 @@ import $ from 'jquery';
 let tabaleData = require('../../../../../../config/super_table');
 let header=require('./tabledate');
 let headername=header.header1;
-
+let fcnum=[];
 
 let Component = React.createClass({
     componentDidMount() {
@@ -22,7 +22,7 @@ let date=bbs.ModelData;
 let placename=zhzb.Model.ens;
 let arrname=[];
 let point=[];
-let fcnum=[];
+
 let number=[];
 (function(){
     let o=0;
@@ -89,7 +89,22 @@ let number=[];
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key} onClick={()=>changepage(key)}>
                                         {
                                             value.map((valueC, keyC)=> {
-
+                                                 if(keyC==3){
+                                                    if(valueC=='null'){
+                                                        return(
+                                                                <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%"}}
+                                                           key={keyC}>--</div>
+                                                            )
+                                                    }
+                                                 }
+                                                 if(keyC==4){
+                                                    if(valueC==''){
+                                                        return(
+                                                                <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%"}}
+                                                           key={keyC}>--</div>
+                                                            )
+                                                    }
+                                                 }
                                                  if(keyC==5){
                                                         if(valueC<60){
                                                              return (
@@ -120,7 +135,7 @@ let number=[];
                                                     
                                                 }
 
-                                                if(keyC==7){
+                                                if(keyC==8){
 
                                                      return (
 
@@ -172,15 +187,15 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('tableContent', tableV));
         },
         changepage:(key) => {
-           dispatch(actions.setVars('showPage', 'cs'));
-           dispatch(actions.setVars('pagename', 'fan_matrix'));
+            console.log(fcnum[key])
+           dispatch(actions.setVars('showPage', 'fan_matrix'));
            dispatch(actions.setVars('numpage', 'pvmatrix'));
            dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('actbt1',key ));
           dispatch(actions.setVars('actbt','' ));
-          dispatch(actions.setVars('valuepage1', '652303'));
+          dispatch(actions.setVars('valuepage1', fcnum[key]));
           dispatch(actions.setVars('befor_page','super' ));
-           //dispatch(actions.setVars('fc_info', number[0][key]));
+           dispatch(actions.setVars('fc_info', fcnum[key]));
            dispatch(actions.setVars('Changnav', 1));
         
                

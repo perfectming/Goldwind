@@ -3,29 +3,27 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('../../../../../../config/RegulationData');
-let mod = require('../../../../../../config/RegulationModel');
-let arr1 = [];
-let arr2=[];
-let arr3=[];
-let ssg1 = data.ModelData;
-let ssg2=mod.Model.ens;
-for(let x in ssg1){
-    arr1.push(ssg1[x].Capacity/1);
-}
-arr1.splice(-2,2);
-for(let x in ssg1){
-    arr2.push((ssg1[x].Transformer_P/1).toFixed(0)/1);
-}
-arr2.splice(-2,2);
-for(let x in ssg2){
-    arr3.push(ssg2[x].name);
-}
-arr3.pop();
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
+        let {model,tabaleData} = this.props;
+        if (model&&tabaleData){
+        var arr1 = [];
+        var arr2=[];
+        var arr3=[];
+        let ssg1 = tabaleData.ModelData;
+        let ssg2=model.Model.ens;
+        for(let x in ssg1){
+            (!x[6]&&x[5])&&arr1.push(ssg1[x].Capacity/1000);
+        }
+        for(let x in ssg1){
+            (!x[6]&&x[5])&&arr2.push((ssg1[x].Transformer_P/1000).toFixed(0)/1);
+        }
+        for(let x in ssg2){
+            (!x[6]&&x[5])&&arr3.push(ssg2[x].name);
+        }
+        }
         let configPie = {
             chart: {
                 type: 'column',
@@ -44,6 +42,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
+                valueSuffix:'MW',
                 style:{
                     color: '#333',
                     fontSize: '13px',
@@ -61,6 +60,11 @@ let Component = React.createClass({
                 },
                 categories: arr3
             },
+            yAxis: {
+                title:{
+                    text:''
+                }
+            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -68,6 +72,7 @@ let Component = React.createClass({
             ,
             plotOptions: {
                 series: {
+                    pointWidth: 40,
                     grouping: false,
                     borderRadius: 10,
                     allowPointSelect: false,

@@ -38,7 +38,9 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage1=652303,Topvinfo,choosefans1}=this.props;
+        let{valuepage1,Topvinfo,choosefans1,fData}=this.props;
+        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+
         return (
             <div className={styles.slistbodyBox}>
                 {
@@ -63,7 +65,7 @@ let Component = React.createClass({
                                 x = "正常发电";
                                 break;
                             case "Alarm":
-                                x = "正常发电";
+                                x = "告警";
                                 break;
                             case "Fault":
                                 x = "故障停机";
@@ -81,7 +83,7 @@ let Component = React.createClass({
                                 x = "维护";
                                 break;
                         }
-                    if(choosefans1 == "PVONL" && value.WTStateCode== "Online"){
+                    if(choosefans1 == "PVONL" && (value.WTStateCode== "Online" || value.WTStateCode== "LimitPow")){
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -92,11 +94,11 @@ let Component = React.createClass({
                                 <span className={styles.slistitemB}>
                                     <span className={styles.slistitemBL}>
                                         <p>辐照度:</p>
-                                        <p><span className={styles.slistitemBLL}>{Math.floor((model_data[valuepage1].PVTSI_Aver))}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                        <p><span className={styles.slistitemBLL}>{value.PVTSI_Aver == undefined ? '--' : (Math.ceil(value.PVTSI_Aver)).toFixed(2)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
                                     </span>
                                     <span className={styles.slistitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.slistitemBLL}>{(Number(model_data[valuepage1].TActPower)/100).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(value.ActPwr)).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
@@ -113,11 +115,11 @@ let Component = React.createClass({
                                 <span className={styles.slistitemB}>
                                     <span className={styles.slistitemBL}>
                                         <p>辐照度:</p>
-                                        <p><span className={styles.slistitemBLL}>{Math.floor((model_data[valuepage1].PVTSI_Aver))}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                        <p><span className={styles.slistitemBLL}>{value.PVTSI_Aver == undefined ? '--' : (Math.ceil(value.PVTSI_Aver)).toFixed(2)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
                                     </span>
                                     <span className={styles.slistitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.slistitemBLL}>{(Number(model_data[valuepage1].TActPower)/100).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(value.ActPwr)).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
@@ -134,11 +136,11 @@ let Component = React.createClass({
                                 <span className={styles.slistitemB}>
                                     <span className={styles.slistitemBL}>
                                         <p>辐照度:</p>
-                                        <p><span className={styles.slistitemBLL}>{Math.floor((model_data[valuepage1].PVTSI_Aver))}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                        <p><span className={styles.slistitemBLL}>{value.PVTSI_Aver == undefined ? '--' : (Math.ceil(value.PVTSI_Aver)).toFixed(2)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
                                     </span>
                                     <span className={styles.slistitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.slistitemBLL}>{(Number(model_data[valuepage1].TActPower)/100).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(value.ActPwr)).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
@@ -159,6 +161,8 @@ const mapStateToProps = (state) => {
     return {
         valuepage1 : state.vars.valuepage1,
         choosefans1 : state.vars.choosefans1,
+        fData : state.vars.fData,
+
     }
 };
 

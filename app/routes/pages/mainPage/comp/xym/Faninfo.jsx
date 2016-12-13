@@ -8,24 +8,7 @@ import Pwschart2 from './allinfo/Pwschart2.jsx';
 var actions = require('redux/actions');
 var $ = require('jquery');
 
-let modelvalue = require('../../../../../../config/WTDetailData.js');
 
-let fmvalue = modelvalue.ModelData[652113028];
-	// console.log(value.Wtid);
-// let qwer = "WTGS.PPV.Ra.F32.A";
-// console.log(fmvalue["WTUR.WSpd.Ra.F32"]);
-let WTURTemp = Math.ceil(fmvalue["WTUR.Temp.Ra.F32"]);
-let WNACTemp = Math.ceil(fmvalue["WNAC.Temp.Ra.F32"]);
-let WGENTemp = Math.ceil(fmvalue["WGEN.Temp.Ra.F32.1"]);
-
-// console.log(WGENTemp);
-let WTGShz = Math.ceil(fmvalue["WTGS.HZ.Ra.F32"]);
-
-
-let WTSpd = Number(fmvalue["WTUR.WSpd.Ra.F32"]);
-let WTPwr = Math.ceil(fmvalue["WTUR.PwrAt.Ra.F32"]);
-let WROTSpd = Math.ceil(fmvalue["WROT.Spd.Ra.F32"]);
-let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
 			function setData(rdata, time) {
                 //var date = new Date();
                 //date.setTime(time);
@@ -44,40 +27,147 @@ let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
 // console.log(fmvalue);
 let Component = React.createClass({
 	componentDidMount() {
-		this.props.init();
+		
 	},
 
 	render() {
-		let {value,fanid,tobujian} = this.props;
+
+		let {value,fanid,infofmodel,infofdata,tobujian} = this.props;
+		
 		let val = value.Wtid;
+		// console.log(123,infofmodel);
+		let sp = infofmodel.Model.ens[val].sp;
+		let PPVplace = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].place;
+		let PPVcoeff = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].coeff;
+		let PPVunit = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].unit;
+		let ACunit = infofmodel.Model.dis["WTGS.AC.Ra.F32.A"].unit;
 
-		// console.log(fmvalue.StatusCode);
-		function setData(rdata, time) {
-                //var date = new Date();
-                //date.setTime(time);
-                // $(".info").text(time + ":" + JSON.stringify(rdata));
-                // console.log(TY);
-                var data = JSON.stringify(rdata);
-                // console.log(data);
-                
-                //$(".info").text(JSON.stringify(rdata));
-            }
-           function setData1(rdata, time) {
-                //var date = new Date();
-                //date.setTime(time);
-                // $(".info").text(time + ":" + JSON.stringify(rdata));
-                // console.log(TY);
-                // var data = JSON.stringify(rdata);
-                // console.log(rdata.ModelData);
-                
-                //$(".info").text(JSON.stringify(rdata));
-            }
-          
-                //获取模型，适用于综合指标界面的初始化
-                    //          此参数固定          “”文档中指定的
-                // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", val, "WTDetail", setData, "Screen", 0);
+		let Hzplace = infofmodel.Model.dis["WTGS.HZ.Ra.F32"].place;
+		let Hzcoeff = infofmodel.Model.dis["WTGS.HZ.Ra.F32"].coeff;
+		let Hzunit = infofmodel.Model.dis["WTGS.HZ.Ra.F32"].unit;
 
-                // TY.getRtData("WTDetail", val, setData1);
+		let EgyAtplace = infofmodel.Model.dis["DayEgyAt"].place;
+		let EgyAtcoeff = infofmodel.Model.dis["DayEgyAt"].coeff;
+		let EgyAtunit = infofmodel.Model.dis["DayEgyAt"].unit;
+		// if(infofmodel.Model == undefined){
+		// 	alert('数据获取失败，请重新登录');
+		// }else if(infofdata.ModelData == undefined){
+		// 	alert('数据获取失败，请重新登录');
+		// }
+		// console.log(1,infofmodel);
+		// console.log(2,infofdata);
+
+let fmvalue = infofdata.ModelData[val];
+	// console.log(value.Wtid);
+	// console.log(fmvalue["WROT.Spd.Ra.F32"]);
+// let qwer = "WTGS.PPV.Ra.F32.A";
+let Value = [];
+// let  fdv = fmvalue["DevStatusQuery"];
+// if(fdv.Value == undefined){
+// 	fdv[Value] = Value
+// }
+// console.log(3,fmvalue);
+let WTURTemp = Math.ceil(fmvalue["WTUR.Temp.Ra.F32"]);
+let WNACTemp = Math.ceil(fmvalue["WNAC.Temp.Ra.F32"]);
+let WGENTemp = Math.ceil(fmvalue["WGEN.Temp.Ra.F32.1"]);
+
+// console.log(WGENTemp);
+let WTGShz = Math.ceil(fmvalue["WTGS.HZ.Ra.F32"]);
+
+
+let WTSpd = Number(fmvalue["WTUR.WSpd.Ra.F32"]);
+let WTPwr = Math.ceil(fmvalue["WTUR.PwrAt.Ra.F32"]);
+let WROTSpd = Math.ceil(fmvalue["WROT.Spd.Ra.F32"]);
+let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
+		
+			setTimeout(function(){
+				if(WTGShz <=44){
+        		WTGShz = 20;
+	        	}else if(WTGShz >= 67){
+	        		WTGShz = 160;
+	        	}else{
+	        		WTGShz = 20+(WTGShz-44)*6.5;
+	        	}
+
+	        	$("#hzpoint").animate({ textIndent: 0 }, { 
+	        		duration: 1000,
+					step: function(now,fx) {
+	 				$(this).css('transform-origin','90% 50%'); 
+					$(this).css('transform','rotate('+WTGShz+'deg)'); 
+					},
+	        	}, 1000 )
+	        	
+
+	        	if(WTSpd>=30){
+	        		WTSpd = 30;
+	        	}
+	        	$("#wspoint").animate({ textIndent: 0 }, { 
+					step: function(now,fx) {
+	 				$(this).css('transform-origin','90% 50%'); 
+					$(this).css('transform','rotate('+WTSpd*6+'deg)'); 
+					}, 
+					duration:'slow'
+	        	}, 2000);
+	        	if(WTPwr>=180){
+	        		WTPwr = 180;
+	        	}else{
+
+	        	}
+	        	$("#pwratpoint").animate({ textIndent: 0 }, { 
+					step: function(now,fx) {
+	 				$(this).css('transform-origin','90% 50%'); 
+					$(this).css('transform','rotate('+WTPwr+'deg)'); 
+					}, 
+	        	},1000)
+	        	if(WROTSpd>=180){
+	        		WROTSpd = 180;
+	        	}
+	        	$("#rspdpoint").animate({ textIndent: 0 }, { 
+					step: function(now,fx) {
+	 				$(this).css('transform-origin','90% 50%'); 
+					$(this).css('transform','rotate('+WROTSpd+'deg)'); 
+					}, 
+	        	},1000)
+	        	if(WGENSpd>=30){
+	        		WGENSpd = 30;
+	        	}
+	        	$("#gspdpoint").animate({ textIndent: 0 }, { 
+					step: function(now,fx) {
+	 				$(this).css('transform-origin','90% 50%'); 
+					$(this).css('transform','rotate('+WGENSpd*6+'deg)'); 
+					}, 
+	        	},1000)
+
+	        	// $("#WGENtemp").animate({ 
+	        	// 	height:WNACTemp+50,
+	        	// 	duration: "slow",
+	        	// }, 1000 )
+				if(WTURTemp>=150){
+	        		WTURTemp = 150;
+	        	}
+
+	        	if(WNACTemp>=150){
+	        		WNACTemp = 150;
+	        	}
+	        	if(WGENTemp>=150){
+	        		WGENTemp = 150;
+	        	}
+				$("#WTURTemp").animate({ 
+	        		height:(WTURTemp+30)*3.2,
+	        		duration: "slow",
+	        	}, 1000 )		
+				$("#WNACTemp").animate({ 
+	        		height:WNACTemp+50,
+	        		duration: "slow",
+	        	}, 1000 )
+	        	$("#WGENTemp").animate({ 
+	        		height:WGENTemp+50,
+	        		duration: "slow",
+	        	}, 1000 )
+
+	        }, )
+			
+
 		let x;
 		let code = value.WTStateCode;
 		switch(code)
@@ -95,10 +185,10 @@ let Component = React.createClass({
 					x = "正常发电";
 					break;
 				case "LimitPow":
-					x = "正常发电";
+					x = "限功率";
 					break;
 				case "Alarm":
-					x = "正常发电";
+					x = "告警";
 					break;
 				case "Fault":
 					x = "故障停机";
@@ -113,17 +203,18 @@ let Component = React.createClass({
 					x = "待机";
 					break;
 				default:
-					x = "维护";
+					x = "暂无状态";
 					break;
 			}
 		// console.log(code);
+		this.props.init(value,fanid,infofmodel,infofdata);
 		return (
 			<div className={styles.bodyBox}>
 				<div className={styles.fanidbox}>
 					<div>风机名称：{value.Wtname}</div>
-					<div>风机型号：{value.Wtid}</div>
+					<div>风机型号：{sp}</div>
 					<div>运行状态：{x}</div>
-					<div>首次并网日期：{value.Wtname}</div>
+					<div>首次并网日期：</div>
 				</div>
 				<div className={`${styles.infoBox} ${styles.infofL}`}>
 					<div className={`${styles.infoBox1} ${styles.infofL}`}>
@@ -131,18 +222,18 @@ let Component = React.createClass({
 						<div className={`${styles.hzBoxt} ${styles.infofL11}`}>
 							<div className={`${styles.hzBoxtA} ${styles.hzBoxtall}`}>
 								<div>A相</div>
-								<div><span>{Number(fmvalue["WTGS.PPV.Ra.F32.A"]).toFixed(2)}</span><span className={styles.hzunit}>V</span></div>
-								<div><span>{Number(fmvalue["WTGS.AC.Ra.F32.A"]).toFixed(2)}</span><span className={styles.hzunit}>A</span></div>
+								<div><span>{(Number(fmvalue["WTGS.PPV.Ra.F32.A"])*PPVcoeff).toFixed(PPVplace)}</span><span className={styles.hzunit}>{PPVunit}</span></div>
+								<div><span>{(Number(fmvalue["WTGS.AC.Ra.F32.A"])*PPVcoeff).toFixed(PPVplace)}</span><span className={styles.hzunit}>{ACunit}</span></div>
 							</div>
 							<div className={`${styles.hzBoxtB} ${styles.hzBoxtall}`}>
 								<div>B相</div>
-								<div><span>{Number(fmvalue["WTGS.PPV.Ra.F32.B"]).toFixed(2)}</span><span className={styles.hzunit}>V</span></div>
-								<div><span>{Number(fmvalue["WTGS.AC.Ra.F32.B"]).toFixed(2)}</span><span className={styles.hzunit}>A</span></div>
+								<div><span>{(Number(fmvalue["WTGS.PPV.Ra.F32.B"])*PPVcoeff).toFixed(PPVplace)}</span><span className={styles.hzunit}>{PPVunit}</span></div>
+								<div><span>{(Number(fmvalue["WTGS.AC.Ra.F32.B"])*PPVcoeff).toFixed(PPVplace)}</span><span className={styles.hzunit}>{ACunit}</span></div>
 							</div>
 							<div className={`${styles.hzBoxtC} ${styles.hzBoxtall}`}>
 								<div>C相</div>
-								<div><span>{Number(fmvalue["WTGS.PPV.Ra.F32.C"]).toFixed(2)}</span><span className={styles.hzunit}>V</span></div>
-								<div><span>{Number(fmvalue["WTGS.AC.Ra.F32.C"]).toFixed(2)}</span><span className={styles.hzunit}>A</span></div>
+								<div><span>{(Number(fmvalue["WTGS.PPV.Ra.F32.C"])*PPVcoeff).toFixed(PPVplace)}</span><span className={styles.hzunit}>{PPVunit}</span></div>
+								<div><span>{(Number(fmvalue["WTGS.AC.Ra.F32.C"])*PPVcoeff).toFixed(PPVplace)}</span><span className={styles.hzunit}>{ACunit}</span></div>
 							</div>
 							
 						</div>
@@ -150,11 +241,11 @@ let Component = React.createClass({
 							<div className={`${styles.Boxbdial} ${styles.infofL111111}`}>
 								<div id="hzpoint" className={styles.hzBoxbdial}></div>
 								<p>电网频率</p>
-								<div className={styles.hz}><span>{Math.ceil(fmvalue["WTGS.HZ.Ra.F32"])}</span><span>Hz</span></div>
+								<div className={styles.hz}><span>{(Number(fmvalue["WTGS.HZ.Ra.F32"])*Hzcoeff).toFixed(Hzplace)}</span><span>{Hzunit}</span></div>
 							</div>
 							<div className={`${styles.hzfactor} ${styles.infofL111111}`}>
 								<div>功率因数</div>
-								<div>{Number(fmvalue["WTGS.PF.Ra.F32"]).toFixed(1)}</div>
+								<div>{(Number(fmvalue["WTGS.PF.Ra.F32"])*Hzcoeff).toFixed(Hzplace)}</div>
 								
 							</div>
 						</div>	
@@ -168,7 +259,7 @@ let Component = React.createClass({
 
 								</div>
 							</div>
-							<div className={styles.pwratbox}><span>{Number(fmvalue["WTUR.WSpd.Ra.F32"]).toFixed(1)}</span><span>m/s</span></div>
+							<div className={styles.pwratbox}><span>{Number(fmvalue["WTUR.WSpd.Ra.F32"]).toFixed(2)}</span><span>m/s</span></div>
 						</div>
 						<div className={`${styles.wsbox2} ${styles.dialbox}`}>
 							<div className={styles.boxtitle}><p>有功功率</p></div>
@@ -178,7 +269,7 @@ let Component = React.createClass({
 								
 								</div>
 							</div>
-							<div className={styles.pwratbox}><span>{Math.ceil(fmvalue["WTUR.PwrAt.Ra.F32"])}</span><span>kW</span></div>
+							<div className={styles.pwratbox}><span>{Number(fmvalue["WTUR.PwrAt.Ra.F32"]).toFixed(2)}</span><span>kW</span></div>
 						</div>
 						<div className={`${styles.wsbox3} ${styles.dialbox}`}>
 							<div className={styles.boxtitle}><p>叶轮转速</p></div>
@@ -197,7 +288,7 @@ let Component = React.createClass({
 
 								</div>
 							</div>
-							<div className={styles.pwratbox}><span>{Math.ceil(fmvalue["WGEN.Spd.Ra.F32"])}</span><span>rpm</span></div>
+							<div className={styles.pwratbox}><span>{Number(fmvalue["WGEN.Spd.Ra.F32"]).toFixed(2)}</span><span>rpm</span></div>
 						</div>
 						
 					</div>
@@ -240,30 +331,31 @@ let Component = React.createClass({
 					<div className={`${styles.infoBox4} ${styles.infofL}`}>
 						<Title title={['当日功率与风速实时曲线']}></Title>
 						<div className={`${styles.box4Cahrt} ${styles.infofL000}`}>
-							<Pwschart className={styles.box4Cahrt1}></Pwschart>
+							<Pwschart className={styles.box4Cahrt1} data = {infofdata} value = {val}></Pwschart>
 						</div>
 					</div>
 					<div className={`${styles.infoBox5} ${styles.infofL}`}>
 						<Title title={['风功率曲线']}></Title>
 						<div className={`${styles.box5Cahrt} ${styles.infofL000}`}>
-							<Pwschart2 className={styles.box4Cahrt1}></Pwschart2>
+							<Pwschart2 className={styles.box4Cahrt1} data = {infofdata} value = {val}></Pwschart2>
 						</div>
 					</div>
 					<div className={`${styles.infoBox6} ${styles.infofL}`}>
 						<Title></Title>
 						
-						<div className={styles.titlebox}><span>风机描述</span><span>风机状态</span><span>状态时长(min)</span></div>
+						<div className={styles.titlebox}><span>风机描述</span><span>风机状态</span><span>状态时长(分钟)</span></div>
 						<div className={styles.statusquery}>
 							{
-								fmvalue.DevStatusQuery.Value.map((value, key)=>{
-									return (
-											<div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
-												<span>{(value.StatusDate).slice(0,-4)}</span>
-												<span>{value.StatusDescr}</span>
-												<span>{value.StatusTime}</span>
-											</div>
-										)
-								})
+								
+								// fdv.map((value, key)=>{
+								// 	return (
+								// 			<div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
+								// 				<span>{value.StatusDate}</span>
+								// 				<span>{value.StatusDescr}</span>
+								// 				<span>{value.StatusTime}</span>
+								// 			</div>
+								// 		)
+								// })
 							}
 						</div>
 					</div>
@@ -272,24 +364,25 @@ let Component = React.createClass({
 						<div className={styles.titlebox}><span>风机报警时间</span><span>报警描述</span><span>等级</span><span>报警类型</span><span>报警码</span></div>
 						<div className={styles.statusquery}>
 							{
-								fmvalue.DevStatusQuery.Value.map((value, key)=>{
-									return (
-											<div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
-												<span>{(value.StatusDate).slice(0,-4)}</span>
-												<span>{value.StatusDescr}</span>
-												<span>{value.StatusTime}</span>
-												<span>{value.StatusTime}</span>
-												<span>{value.StatusTime}</span>
-											</div>
-										)
-								})
+								// fmvalue.DevStatusQuery.Value.map((value, key)=>{
+								// 	return (
+								// 			<div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
+								// 				<span>{value.StatusDate}</span>
+								// 				<span>{value.StatusDescr}</span>
+								// 				<span>{value.StatusTime}</span>
+								// 				<span>{value.StatusTime}</span>
+								// 				<span>{value.StatusTime}</span>
+								// 			</div>
+								// 		)
+								// })
 							}
 						</div>
 					</div>
 				</div>
 				<div className={`${styles.fanrightbox} ${styles.infofL}`}>
 					<Title title={['状态统计']}></Title>
-					<div className={`${styles.fanaction} ${styles.infofL11111111}`} onClick = {()=> tobujian()}>
+					<div className={styles.fanaction}>
+						<div className={styles.parts} onClick = {()=> tobujian(val)}></div>
 						<div className={styles.actionbox}>
 							<div>启动</div>
 							<div>停机</div>
@@ -300,67 +393,67 @@ let Component = React.createClass({
 					<div className={styles.action1box}>
 						<div className={styles.fandatabox}>
 							<span>日发电量</span>
-							<span className={styles.numbox}><span>{Math.ceil(fmvalue["DayEgyAt"])}</span><span>万kWh</span></span>
+							<span className={styles.numbox}><span>{(Number(fmvalue["DayEgyAt"])*EgyAtcoeff).toFixed(EgyAtplace)}</span><span>{EgyAtunit}</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>月发电量</span>
-							<span className={styles.numbox}><span>{Math.ceil(fmvalue["MonthEgyAt"])}</span><span>万kWh</span></span>
+							<span className={styles.numbox}><span>{(Number(fmvalue["MonthEgyAt"])*EgyAtcoeff).toFixed(EgyAtplace)}</span><span>{EgyAtunit}</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>年发电量</span>
-							<span className={styles.numbox}><span>{Math.ceil(fmvalue["YearEgyAt"])}</span><span>万kWh</span></span>
+							<span className={styles.numbox}><span>{(Number(fmvalue["YearEgyAt"])*EgyAtcoeff).toFixed(EgyAtplace)}</span><span>{EgyAtunit}</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>累计发电量</span>
-							<span className={styles.numbox}><span>{Math.ceil(fmvalue["TotalEgyAt"])}</span><span>万kWh</span></span>
+							<span className={styles.numbox}><span>{(Number(fmvalue["TotalEgyAt"])*EgyAtcoeff).toFixed(EgyAtplace)}</span><span>{EgyAtunit}</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>无功功率</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTUR.PwrReact.Ra.F32"]).toFixed(1)}</span><span>kVar</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTUR.PwrReact.Ra.F32"]).toFixed(2)}</span><span>kVar</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>偏航位置</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WYAW.Posi.Ra.F32"]).toFixed(1)}</span><span>°</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WYAW.Posi.Ra.F32"]).toFixed(2)}</span><span>°</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>对风角度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WYAW.Wdir.Ra.F32"]).toFixed(1)}</span><span>°</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WYAW.Wdir.Ra.F32"]).toFixed(2)}</span><span>°</span></span>
 						</div>
 						<div className={styles.fandatabox}>
-							<span>叶片1角度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade1"]).toFixed(1)}</span><span>°</span></span>
+							<span>1号变桨桨距角</span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade1"]).toFixed(2)}</span><span>°</span></span>
 						</div>
 						<div className={styles.fandatabox}>
-							<span>叶片2角度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade2"]).toFixed(1)}</span><span>°</span></span>
+							<span>2号变桨桨距角</span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade2"]).toFixed(2)}</span><span>°</span></span>
 						</div>
 						<div className={styles.fandatabox}>
-							<span>叶片3角度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade3"]).toFixed(1)}</span><span>°</span></span>
+							<span>3号变桨桨距角</span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Ang.Ra.F32.blade3"]).toFixed(2)}</span><span>°</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>1号变桨柜体温度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox1"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox1"]).toFixed(2)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>2号变桨柜体温度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox2"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox2"]).toFixed(2)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>3号变桨柜体温度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox3"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.Pbox3"]).toFixed(2)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>1号变桨逆变器温度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(2)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>2号变桨逆变器温度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(2)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>3号变桨逆变器温度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(1)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(2)}</span><span>℃</span></span>
 						</div>	
 					</div>
 				</div>
@@ -376,92 +469,33 @@ const mapStateToProps = (state) => {
     return {
         value : state.vars.value,
         fanid : state.vars.valueid,
+        infofmodel : state.vars.infofmodel,
+        infofdata : state.vars.infofdata,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: () => {
-        	if(WTGShz <=45){
-        		WTGShz = 45;
-        	}else if(WTGShz >= 56){
-        		WTGShz = (56-45)*15;
-        	}else{
-        		WTGShz = (WTGShz-45)*15;
-        	}
-        	$("#hzpoint").animate({ textIndent: 0 }, { 
-        		duration: 1000,
-				step: function(now,fx) {
- 				$(this).css('transform-origin','90% 50%'); 
-				$(this).css('transform','rotate('+WTGShz+'deg)'); 
-				},
-        	}, 1000 )
-        	
-        	var WTSpd = 45;
-        	if(WTSpd>=30){
-        		WTSpd = 30;
-        	}
-        	$("#wspoint").animate({ textIndent: 0 }, { 
-				step: function(now,fx) {
- 				$(this).css('transform-origin','90% 50%'); 
-				$(this).css('transform','rotate('+WTSpd*6+'deg)'); 
-				}, 
-				duration:'slow'
-        	}, 2000);
-        	if(WTPwr>=180){
-        		WTPwr = 180;
-        	}
-        	$("#pwratpoint").animate({ textIndent: 0 }, { 
-				step: function(now,fx) {
- 				$(this).css('transform-origin','90% 50%'); 
-				$(this).css('transform','rotate('+WTPwr+'deg)'); 
-				}, 
-        	},1000)
-        	if(WROTSpd>=180){
-        		WROTSpd = 180;
-        	}
-        	$("#rspdpoint").animate({ textIndent: 0 }, { 
-				step: function(now,fx) {
- 				$(this).css('transform-origin','90% 50%'); 
-				$(this).css('transform','rotate('+WROTSpd+'deg)'); 
-				}, 
-        	},1000)
-        	if(WGENSpd>=30){
-        		WGENSpd = 30;
-        	}
-        	$("#gspdpoint").animate({ textIndent: 0 }, { 
-				step: function(now,fx) {
- 				$(this).css('transform-origin','90% 50%'); 
-				$(this).css('transform','rotate('+WGENSpd*6+'deg)'); 
-				}, 
-        	},1000)
-
-        	// $("#WGENtemp").animate({ 
-        	// 	height:WNACTemp+50,
-        	// 	duration: "slow",
-        	// }, 1000 )
-			if(WTURTemp>=150){
-        		WTURTemp = 150;
-        	}
-
-        	if(WNACTemp>=150){
-        		WNACTemp = 150;
-        	}
-        	if(WGENTemp>=150){
-        		WGENTemp = 150;
-        	}
-			$("#WTURTemp").animate({ 
-        		height:(WTURTemp+30)*3.2,
-        		duration: "slow",
-        	}, 1000 )		
-			$("#WNACTemp").animate({ 
-        		height:WNACTemp+50,
-        		duration: "slow",
-        	}, 1000 )
-        	$("#WGENTemp").animate({ 
-        		height:WGENTemp+50,
-        		duration: "slow",
-        	}, 1000 )
+        init: (value,fanid,infofmodel,infofdata) => {
+        let s;
+        	// console.log(value)
+		 s = setTimeout(function(){
+                   // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
+                    	// function setData3(rdata){
+                         	// dispatch(actions.setVars('infofmodel', rdata));
+                        	// console.log(0,rdata); 
+                        	  
+                     			function setData4(rdata){
+	                            dispatch(actions.setVars('infofdata', rdata));
+	                            // console.log(1,rdata);
+                           
+                            
+                        }
+                        TY.getRtData("WTDetail", value.Wtid, setData4)
+                    // }
+         
+           }, 3000)
+		 s = null;
 //   $.ajax({
 //    type: 'post',    
 //    url:'http://54.223.200.134/System/data.aspx?mdid=Model&ScId=2015032011&EnId=654208001&EnKey=Screen&PkId=&ModelKey=6C5002D3-1566-414a-8834-5077940C78E1&dhs=UISys&AspxAutoDetectCookieSupport=1',    
@@ -498,9 +532,9 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        tobujian:()=>{
+        tobujian:(val)=>{
         	dispatch(actions.setVars('fan_page', 'fanobj'));
-
+        	dispatch(actions.setVars('Wtid', val));
         }
         
     };

@@ -18,7 +18,7 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:420
+                height:400
             },
             title: {
                 text: ''
@@ -93,6 +93,7 @@ let Component = React.createClass({
             plotOptions: {
                  column: {
                     borderColor:"",
+                    maxPointWidth: 100 // 设置最大宽度
                     },
                    series: {
                 borderRadius: 10

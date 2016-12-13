@@ -22,10 +22,11 @@ let Component = React.createClass({
     },
     render() {
         let {} = this.props;
-
-        return(
-            <iframe id="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
+            return(
+                <iframe id="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
             )
+
+
 
     }
 });
@@ -33,7 +34,6 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        timeflag: state.objs.timeflag,
     }
 };
 
@@ -46,15 +46,12 @@ const mapDispatchToProps = (dispatch) => {
             if( localStorage.keyone == 0 ){
                 dispatch(actions.setVars('navhide',false ));
             }else {
-                dispatch(actions.setVars('tabItem', true));
+                // dispatch(actions.setVars('tabItem', true));
                 dispatch(actions.setVars('navhide', true));
                 dispatch(actions.setVars('tabItemActive', localStorage.keytwo));
             }
-            // console.log(localStorage.keyone);
-            // console.log(localStorage.keytwo);
-
         },
-};
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

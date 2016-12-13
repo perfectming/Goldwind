@@ -1,19 +1,39 @@
 .bodyBox {
+  height:937px;
   .box_shadow:hover{
     box-shadow:0 0 20px #fff;
   }
   overflow:hidden;
+  overflow-y: auto;
   position: relative;
   .station {
     width:855px;
     display: inline-block;
     float:left;
-    height:450px;
+    height:448px;
     overflow: hidden;
     margin: 10px;
     margin-left: 15px;
     position: relative;
     border:3px solid #464c58;
+    .titlep{
+      position:absolute;
+      top:0px;
+      left:0px;
+      width:100%;
+      height:30px;
+      line-height:20px;
+      padding-left:20px;
+      background: #464c58;
+      color:#fffeff;
+      font-size:16px;
+      span{
+        height:30px;
+        line-height:30px;
+        display:inline-block;
+        cursor:pointer;
+      }
+    }
     .mainn{
       width:100%;
       height: 100%;
@@ -23,53 +43,47 @@
       background:url("../img/comp/boosterBg.png") no-repeat;
       background-size: 850px 414px;
     }
-      .hongde{
-        width: 30px;
-        height: 30px;
-        background:url("../img/comp/defa.png") no-repeat;
+    .lastt{
+        width:750px;
+        margin-left: 190px;
+        margin-top: 4px;
         position: absolute;
-        margin-top: 7px;
-        margin-left: 600px;
-        animation: blink .75s linear infinite;
-        -webkit-animation: blink .75s linear infinite;
-      }
-      .lvde{
-        width: 30px;
-        height: 30px;
-        background:url("../img/comp/succ.png") no-repeat;
-        position: absolute;
-        margin-top: 7px;
-        margin-left: 600px;
-      }
-      .hongdee{
-        width: 30px;
-        height: 30px;
-        background:url("../img/comp/defa.png") no-repeat;
-        position: absolute;
-        margin-top: 7px;
-        margin-left: 650px;
-        animation: blink .75s linear infinite;
-        -webkit-animation: blink .75s linear infinite;
-      }
-      .lvdee{
-        width: 30px;
-        height: 30px;
-        background:url("../img/comp/succ.png") no-repeat;
-        position: absolute;
-        margin-top: 7px;
-        margin-left: 650px;
-      }
-      .lastt{
-        width:130px;
-        margin-left: 695px;
-        margin-top: 7px;
-        position: absolute;
-        div{
-          margin: 0px;
-          width: 40px;
+        .lasttt{
+          margin-right: 12px;
+          width:150px;
           height:25px;
           display: inline-block;
           color:#ffffff;
+          .lastttt{
+            font-size:10px;
+          }
+          .succ{
+            background: url("../img/comp/succ.png")no-repeat;
+            height: 18px;
+            width: 14px;
+            top: 3px;
+            margin-left: 25px;
+            display: inline-block;
+            vertical-align:middle;
+          }
+          .defa{
+            background: url("../img/comp/defa.png")no-repeat;
+            height: 18px;
+            width: 14px;
+            top: 3px;
+            margin-left: 25px;
+            display: inline-block;
+            vertical-align:middle;
+          }
+          .cutD{
+            background: url("../img/comp/cut.png")no-repeat;
+            height: 18px;
+            width: 14px;
+            top: 3px;
+            margin-left: 25px;
+            display: inline-block;
+            vertical-align:middle;
+          }
         }
       }
 
@@ -81,4 +95,25 @@
   50% { opacity: 1; }
   50.01% { opacity: 0; }
   100% { opacity: 0; }
+}
+.bodyBox::-webkit-scrollbar {
+  width:12px;
+  height:12px;
+  border:1px solid #fff;
+  border-radius:10px;
+}
+.bodyBox::-webkit-scrollbar-button    {
+  background-color:#272b34;
+  display:none;
+}
+.bodyBox::-webkit-scrollbar-track     {
+  background:#131619;
+
+}
+.bodyBox::-webkit-scrollbar-thumb{
+  background:#464c58;
+  border-radius:10px;
+}
+.bodyBox::-webkit-scrollbar-corner {
+  background:#131619;
 }

@@ -19,8 +19,8 @@
       margin-left: 20px;
       overflow: hidden;
       background: url(../../img/comp/zhzbgb.png) no-repeat;
-      background-size: 100% 93%;
-      background-position:top center;
+      background-size: 96% 93%;
+      background-position:top left;
       .zhzbtopbox {
         width:145px;
         height:50px;
@@ -33,6 +33,9 @@
         .zhzbtopboxg{
           color:#26f4ff;
           font-size: 18px;
+        }
+        .danweicc{
+          font-size: 10px;
         }
       }
     }
@@ -49,6 +52,9 @@
       .daynum{
         font-size: 20px;
         color:#1fe005;
+      }
+      .danweicc{
+        font-size: 10px;
       }
     }
   }
@@ -71,7 +77,7 @@
         img{position:absolute;bottom:-10px;right:0px;z-index:3;}
         margin-top: 30px;
         position: relative;
-        p{margin-bottom:0;text-align:center; color:#fff;}
+        p{margin-bottom:5px;text-align:center; color:#fff;}
         .zhzbglboxnum{
           position:absolute;
           top:42%;
@@ -89,8 +95,10 @@
           color: #ffffff;
           p{
             font-size: 24px;
-            margin-top:28px;
-
+            margin-top:30px;
+            .danweicc{
+              font-size: 10px;
+            }
           }
         }
       }
@@ -121,9 +129,12 @@
         padding:0 5px;
         color: #07a3ff;
         p{
+          font-size: 16px;
           text-align:center;
           margin:0;
-
+        }
+        .danweicc{
+          font-size: 10px;
         }
       }
     }
@@ -138,7 +149,7 @@
     border:1px solid #3e4c67;
     background: rgba(44,61,71,0.4);
     .nfdlwcqkmain{
-      margin-top: 20px;
+      margin-top: 10px;
     }
   }
   .czydfdqk{
@@ -164,17 +175,17 @@
     border:1px solid #3e4c67;
     background: rgba(44,61,71,0.5);
     .navitem{
-      width:16.6%;
+      width:14.2%;
       height:60px;
+      margin-top: 5px;
       float:left;
-      margin-top: 8px;
       border-right:1px solid #111;
       .leftimg{
         width:40%;
         float:left;
         height:70px;
-        line-height:65px;
-        font-size:22px;
+        line-height:70px;
+        font-size:20px;
         color:#fff;
         text-align:right;
         img{margin:0px 18px 0 0;}
@@ -184,7 +195,7 @@
         width:60%;
         float:left;
         height:70px;
-        line-height:65px;
+        line-height:70px;
         font-size:22px;
         color:#fff;
       }
@@ -192,7 +203,7 @@
         width:60%;
         float:left;
         font-size:16px;
-        padding-top:5px;
+        padding-top:10px;
         height:90px;
         color:#fff;
         h2{
@@ -221,7 +232,7 @@
     border:1px solid #3e4c67;
     background: rgba(44,61,71,0.4);
     .fgzyfxmain{
-      margin-top: 30px;
+      margin-top: 10px;
     }
   }
   .ssdlqkfx{
@@ -251,7 +262,7 @@
         position: absolute;
         overflow: hidden;
         .tsstyled1{
-          font-size: 12px;
+          font-size: 10px;
         }
       }
       .tsstyle2{
@@ -263,7 +274,7 @@
         position: absolute;
         overflow: hidden;
         .tsstyled2{
-          font-size: 12px;
+          font-size: 10px;
         }
       }
       .tsstyle3{
@@ -275,7 +286,7 @@
         position: absolute;
         overflow: hidden;
         .tsstyled3{
-          font-size: 12px;
+          font-size: 10px;
         }
       }
       .tsstyle4{
@@ -287,7 +298,7 @@
         position: absolute;
         overflow: hidden;
         .tsstyled4{
-          font-size: 12px;
+          font-size: 10px;
         }
       }
       .timestyle{
@@ -298,8 +309,11 @@
         display: inline-block;
         position: absolute;
         overflow: hidden;
-        span{
+        .timestylee{
           margin-right: 59px;
+          .danweicc{
+            font-size: 10px;
+          }
         }
       }
     }

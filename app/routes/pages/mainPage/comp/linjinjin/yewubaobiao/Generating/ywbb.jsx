@@ -1,13 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './ywbb.scss';
-import jian from '../../../img/comp/jian_icon.png';
-import add from '../../../img/comp/add_icon.png';
+import jian from '../../../../img/comp/jian_icon.png';
+import add from '../../../../img/comp/add_icon.png';
 import Column from './colum.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
 var $ =require('jquery');
 var actions = require('redux/actions');
+
 
 let allnum=[];
 let chartnum=[];
@@ -16,12 +17,17 @@ let chartname=[];
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
-
+        let{playjq}=this.props;
+        //初始化jquery方法
+        setTimeout(function(){
+            playjq();
+        },100)
     },
    
 
     render() {
          let {changeselect,select_list,sent_info,tabarr,clickitem,chtnum,chtname,chtit} = this.props;
+            
         return (
             <div className={styles.faultBox}>
                 <div className={styles.search_tit}>
@@ -49,7 +55,7 @@ let Component = React.createClass({
                                 return (
                                     <div className={styles.seleBox} key={key}>
                                         <span>{btype[key].valueName}</span>
-                                        <select ref={'selectType'+key} onChange={()=>changeselect(value.select)} id='selectop'>
+                                        <select ref={'selectType'+key} onChange={()=>changeselect(value.select)}  id='selectop'>
                                             {value.select.map((value, key)=> {
                         
                                                 return (
@@ -141,6 +147,7 @@ let Component = React.createClass({
                      { chtnum !==undefined && <Column cnum={chtnum} cname={chtname} ctit={chtit} ></Column> }
                     </div>
                 </div>
+
             </div>
         );
     }
@@ -159,9 +166,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: () => {
-
-            console.log('执行init()函数')
+        playjq:()=>{
              //select选择事件隐藏DIV
             $('#selectop').change(function(){
                 $("#leftlist>div div").hide();
@@ -171,12 +176,10 @@ const mapDispatchToProps = (dispatch) => {
 
             //复选框状态跟随
             $("#leftlist input").change(function(){
-                console.log('点击了input')
                 $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
             })
             //select下拉事件
             $("#leftlist span").on('click',function(){
-                console.log('点击了span')
                 $(this).parent().siblings().toggle();
                 if($(this).siblings('img').attr('src') == add){
                     $(this).siblings('img').attr('src', jian);
@@ -186,8 +189,8 @@ const mapDispatchToProps = (dispatch) => {
             })
             //查询按钮功能
             $('#searchall').on('click',function(){
-                console.log('点击了查询')
                 $('#tabline').empty();
+                //初始化按钮颜色
                 $('#tablist span').css('background','#464c58');
                 if($('#startTime').val() == '' || $('#endTime').val() == ''){
                     alert('请选择开始或者结束时间');
@@ -211,6 +214,24 @@ const mapDispatchToProps = (dispatch) => {
             }
 
             })
+        },
+        init: () => {
+           
+            //初始化日期
+            var date = new Date();
+            var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+            var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1);
+            //获取今天与明天的日期
+            $('#startTime').val(dateString);
+            $('#endTime').val(dateString1)
+           
+
+
+
+
+
+            //初始化选中数组
+            allnum=[];
             //初始化highchart数据与表格数据
                 dispatch(actions.setVars('chtnum',''));
                  dispatch(actions.setVars('chtname',''));
@@ -224,9 +245,21 @@ const mapDispatchToProps = (dispatch) => {
            console.log(value,id)
         },
         changeselect:(value)=>{
+            //初始化按钮颜色
+            $('#tablist span').css('background','#464c58');
+            //初始化选中数组
+            allnum=[];
+            //初始化显示条目数组
+            $('#tabline').empty();
+            //初始化highchart数据与表格数据
+                dispatch(actions.setVars('chtnum',''));
+                 dispatch(actions.setVars('chtname',''));
+                 dispatch(actions.setVars('tabarr',''));
+                 dispatch(actions.setVars('chtit',''));
             dispatch(actions.setVars('select_list', value[$('#selectop').val()]));
         },
         sent_info:(value,even)=>{
+          
             if(even.checked){
             let num=[];
             if(value.name){
@@ -240,7 +273,6 @@ const mapDispatchToProps = (dispatch) => {
                                         num.push(valueD);
                                        if(keyD==valueC.arr.length-1){
                                         allnum.push(num);
-                                        
                                          num=[];
                                        }
                                     })
@@ -248,7 +280,6 @@ const mapDispatchToProps = (dispatch) => {
                                     num.push(valueC);
                                      if(keyC==valueB.arr.length-1){
                                         allnum.push(num);
-                                        
                                          num=[];
                                        }
                                 }
@@ -257,7 +288,6 @@ const mapDispatchToProps = (dispatch) => {
                                     num.push(valueB);
                                     if(keyB==valueA.arr.length-1){
                                         allnum.push(num);
-                                       
                                          num=[];
                                        }
                                 }
@@ -334,7 +364,9 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('tabarr', allnum));
         },
         clickitem:(kk,even)=>{
-            //点击初始化数据
+
+            if($('#tabline').has('div').length){
+                //点击初始化数据
             dispatch(actions.setVars('chtnum',''));
             dispatch(actions.setVars('chtname',''));
 
@@ -352,6 +384,10 @@ const mapDispatchToProps = (dispatch) => {
                  dispatch(actions.setVars('chtit',$('#'+even.id).text()));  
                 
             })
+            }else{
+                 alert('没有查询到数据！')
+            }
+            
             $('#'+even.id).css('background','#333').siblings('span').css('background','#464c58')
 
         }

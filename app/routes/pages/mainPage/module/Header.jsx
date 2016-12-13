@@ -49,19 +49,26 @@ const mapDispatchToProps = (dispatch) => {
         changeHeaderItem: (key,page) => {
             dispatch(actions.setVars('headerItemActive', key));
             dispatch(actions.setVars('treeItemActive', 0));
-             dispatch(actions.setVars('showPage', 'cs'));
-             dispatch(actions.setVars('pagename', page));
              dispatch(actions.setVars('tabItemActive', 0));
              dispatch(actions.setVars('show', false));
              dispatch(actions.setVars('colorAct', false));
              if(page=='cockpit'){
+                 dispatch(actions.setVars('showPage', page));
                  dispatch(actions.setVars('putpage', false));
                  dispatch(actions.setVars('navhide', false));
-             }else if(page=='monitorkb' || page=='health_main'){
+             }else if(page=='monitorkb'){
+                 dispatch(actions.setVars('showPage', page));
+                 dispatch(actions.setVars('navhide', false));
+                 dispatch(actions.setVars('putpage', true));
+                 dispatch(actions.setVars('bodypage', true));
+             }else if(page=='health_main'){
+                 dispatch(actions.setVars('showPage', 'cs'));
+                 dispatch(actions.setVars('pagename', page));
                  dispatch(actions.setVars('navhide', false));
                  dispatch(actions.setVars('putpage', true));
                  dispatch(actions.setVars('bodypage', true));
              }else{
+                 dispatch(actions.setVars('showPage', page));
                 dispatch(actions.setVars('putpage', true));
                 dispatch(actions.setVars('bodypage', true));
                 dispatch(actions.setVars('navhide', true));
@@ -72,6 +79,7 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(actions.setVars('ifshow', false));
               }
         },
+
         login:(userInfo)=>{
             console.log(userInfo);
             if(!userInfo){

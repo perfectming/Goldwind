@@ -97,24 +97,31 @@
             z-index:1000;
           }
         }
-      #f1a820
         .listoptbtn_2{
-          box-shadow:1px 1px 3px #87CB2D;
+          // box-shadow:1px 1px 3px #87CB2D;
         }
         .listoptbtn_3{
-          box-shadow:1px 1px 3px #87CB2D;
-          background-color:#f1a820
+          // box-shadow:1px 1px 3px #87CB2D;
+          // background-color:#f1a820
         }
         .online{
-        background-color:#00ff00;/*绿色*/ //运行
+        background-color:#049304;/*绿色*/ //运行
+        }
+        .Alarm{
+        background-color:#990000;/**/ //告警
+        }
+        .limitPow{
+          background-color:#328DEF;    //限功率
         }
         .offline{
-          border: 2px solid #666; // 待机
+         background-color: #bfbfbf; // 待机
         }
         .discomfor{
-          background-color:#f1a820 //离线
+          background-color:#e1dc92 //离线#f1a820
         }
-        
+        .discomforpre{
+          background-color:#f1a820;
+        }
         .default{
           border: 2px solid #c7b88c; //检修
         } 
