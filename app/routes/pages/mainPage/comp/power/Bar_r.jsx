@@ -11,7 +11,10 @@ let Component = React.createClass({
 
     render() {
         let barRoTime = data.data.bar_rotime;
+<<<<<<< HEAD
         let barRoPowerValue = data.data.bar_roPower;
+=======
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
         let barRtPowerValue = data.data.bar_rtPower;
         let configPie = {
             chart: {
@@ -21,17 +24,10 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                backgroundColor: {
-                    linearGradient: [0, 0, 500, 500],
-                    stops: [
-                        [0, 'rgb(56, 85, 94)'],
-                        [1, 'rgb(37, 41, 48)']
-                    ]
-                },
-                borderRadius:10
+                
             },
             title: {
-                text: '上报率',
+                text: '',
                 style:{
                     color:"#fff",
                     fontSize:"22px",
@@ -45,7 +41,6 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
@@ -57,10 +52,11 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#4CDB9D', '#1E664A', '#134833', '#082B1F','#000']
+            colors: ['#62de88', '#1E664A', '#134833', '#082B1F','#000']
             ,
             plotOptions: {
-                pie: {
+                column: {
+                    pointWidth: 38,
                     allowPointSelect: false,
                     cursor: 'pointer',
                     borderWidth: 0,
@@ -76,6 +72,10 @@ let Component = React.createClass({
                 fontSize: 28,
             },
             xAxis: {
+<<<<<<< HEAD
+=======
+                tickWidth: 0,
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
                 categories: barRoTime,
                  labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -98,11 +98,15 @@ let Component = React.createClass({
                 },
             },
             series: [{
+<<<<<<< HEAD
                 name: '发生次数',
                 type: 'column',
                 data: barRoPowerValue
             },{
                 name: '状态时长(s)',
+=======
+                name: '上报率',
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
                 type: 'column',
                 data: barRtPowerValue
             }]

@@ -2,10 +2,23 @@
 	padding-right:40px;
 	.inquireBox{
 		width:100%;
+<<<<<<< HEAD
 		height:60px;
 		background:#464d59;
 		margin-bottom:40px;
 		overflow:hidden;
+=======
+		height:80px;
+		border-top: 1px solid #676971;
+		border-bottom: 1px solid #676971;
+		margin-bottom:40px;
+		padding: 10px;
+		overflow:hidden;
+		color: #fff;
+		input,select,button,option{
+			background: #181a25;
+		}
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
 		span{
 			color:#fff;
 			margin-right:10px;
@@ -14,6 +27,17 @@
 		}
 		.seleBox{
 			float:left;
+<<<<<<< HEAD
+=======
+			select {
+				height: 30px;
+				font-size: 16px;
+				width: 68px;
+				option {
+					font-size: 6px;
+				}
+			}
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
 		}
 		.inputBox{
 			float:left;
@@ -23,9 +47,29 @@
 		}
 		.btnBox{
 			float:left;
+<<<<<<< HEAD
 			margin-top:17px;
 			margin-left:20px;
 		}
 	}
 
 }
+=======
+			margin-top:16px;
+			margin-left:20px;
+			font-size:16px;
+			button{
+				&:hover{
+					background:#485b7b;
+					color:#fff;
+				}
+			}
+			
+		}
+	}
+	.tableBox{
+		height:500px;
+	}
+}
+
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43

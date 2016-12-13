@@ -3,11 +3,20 @@
        box-shadow:0 0 15px #fff;
       }
   .listrightBox{
+<<<<<<< HEAD
     width:1260px;
     height:1140px;
     overflow:hidden;
     float:right;
     .listbodyBox {
+=======
+    width:1348px;
+    height:920px;
+    overflow:hidden;
+    float:left;
+    margin-left: 15px;
+    .listbodyBox1 {
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
     overflow-y:scroll;
   
     padding-right:10px;
@@ -17,7 +26,11 @@
     display:inline-block;
     background-color: #2EA6AF;
     .listheaderBox:last-child{
+<<<<<<< HEAD
       padding-bottom:55px;
+=======
+      padding-bottom:25px;
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
       }
     .listheaderBox{
       width:100%;
@@ -35,7 +48,11 @@
       font-size:16px;
       font-weight: bold;  
       position:absolute;
+<<<<<<< HEAD
       top:38%;left:10px;
+=======
+      top:38%;left:15px;
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
       box-shadow:1px 1px 3px #292929
     }
     .listbtnitem{
@@ -45,6 +62,7 @@
       margin: 10px 0px 60px 170px;
       }
       .listopt{
+<<<<<<< HEAD
       display:inline-block;
       margin: 10px 0px 10px 140px;
       padding:5px 20px;
@@ -80,23 +98,68 @@
             width:100%;
             height:40px;
             border-bottom:1px solid #999;
+=======
+        width:1230px;
+        min-height:100px;
+        display:inline-block;
+        margin: 10px 0px 10px 140px;
+        padding:5px 20px;
+        background-color:#1D2835;
+        div{
+          font-size:14px;
+          cursor:pointer;
+          display:inline-table;
+          float:left;
+          width:58px;
+          height:25px;
+          border-radius:3px;
+          line-height:25px;
+          text-align:center;
+          padding:0 2px;
+          margin: 2px;
+          position:relative;
+          .listoptinfo{
+            width:150px;height:110px;background-color: #FFFFFF;display:none;
+            position:absolute;right:62px;top: -10px;
+            font-size:20px;
+            text-align:left;
+            color:#578D1E;
+            span{
+              
+              line-height:40px;
+              display:inline-block;
+              
+              width:100%;
+              height:40px;
+              border-bottom:1px solid #999;
+            }
+            p{
+              margin:0 auto;
+              display:block;
+              line-height:35px;
+              font-size:16px;
+            }
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
           }
-          p{
-            margin:0 auto;
+          
+        }
+        div:hover{
+          box-shadow:0px 0px 8px 2px #fff;
+          cursor:pointer;
+          .listoptinfo{
             display:block;
+<<<<<<< HEAD
             line-height:35px;
             font-size:16px;
+=======
+            z-index:1000;
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
           }
         }
-        
-      }
-      div:hover{
-        box-shadow:0px 0px 8px 2px #fff;
-        cursor:pointer;
-        .listoptinfo{
-          display:block;
-          z-index:1000;
+        .listoptbtn_2{
+          // box-shadow:1px 1px 3px #87CB2D;
         }
+<<<<<<< HEAD
       }
     
       .listoptbtn_2{
@@ -356,4 +419,46 @@
       }
 
     }
+=======
+        .listoptbtn_3{
+          // box-shadow:1px 1px 3px #87CB2D;
+          // background-color:#f1a820
+        }
+        .online{
+        background-color:#049304;/*绿色*/ //运行
+        }
+        .Alarm{
+        background-color:#990000;/**/ //告警
+        }
+        .limitPow{
+          background-color:#328DEF;    //限功率
+        }
+        .offline{
+         background-color: #bfbfbf; // 待机
+        }
+        .discomfor{
+          background-color:#e1dc92 //离线#f1a820
+        }
+        .discomforpre{
+          background-color:#f1a820;
+        }
+        .default{
+          border: 2px solid #c7b88c; //检修
+        } 
+        .fault{
+          background-color:#ff0000;
+        }
+      }
+    }
+    }
+  }
+    .leftBox{
+      width: 400px;
+      float:left;
+      padding-bottom:20px;
+      
+
+    }
+    
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
 }

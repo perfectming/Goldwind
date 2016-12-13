@@ -12,7 +12,11 @@
 .tableBox {
   overflow-y: scroll;
   overflow-x:hidden;                                                                                                                            
+<<<<<<< HEAD
   height:1000px;
+=======
+  height:800px;
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
   display:block;
   .tableHeaderBox {
     overflow: hidden;
@@ -31,6 +35,12 @@
        color:#fff;
        background: #30343f;
       overflow: hidden;
+<<<<<<< HEAD
+=======
+      &:hover{
+        background:rgba(183,195,224,.5);
+      }
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
       .tableContentItem {
         float: left;
         overflow: hidden;
@@ -39,6 +49,13 @@
         line-height:40px;
         border: none;
       }
+<<<<<<< HEAD
+=======
+      input{
+        background:#30343f;
+        border:6px solid #fff;
+      }
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
       .tableLineNum {
         width: 65px;
         padding: 10px 0 10px;
@@ -51,6 +68,12 @@
        color:#fff;
       overflow: hidden;
       background: #272b34;
+<<<<<<< HEAD
+=======
+      &:hover{
+        background:rgba(183,195,224,.5);
+      }
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
       .tableContentItem {
         float: left;
         padding: 10px 0 10px;
@@ -59,6 +82,13 @@
         height: 40px;
         border: none;
       }
+<<<<<<< HEAD
+=======
+      input{
+        background: #272b34;
+        border:6px solid #fff;
+      }
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
       .tableLineNum {
         width: 65px;
         padding: 10px 0 10px;

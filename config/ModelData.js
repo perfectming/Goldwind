@@ -17,6 +17,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "17",
             "WFStandbyCount": "0",
+            "WFLIMCount":'3',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "0",
@@ -42,6 +43,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "33",
             "WFStandbyCount": "0",
+            "WFLIMCount":'3',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "0",
@@ -58,7 +60,11 @@ module.exports ={
             "WindSpeed_DevAverValue": "7136.3461",
             "PVTSI_Aver": "40201.9531",
             "Capacity": "49500",
+<<<<<<< HEAD
             "TActPower": "4624.440",
+=======
+            "TActPower": "40624.440",
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
             "DayEgyAt": "4098",
             "MonthEgyAt": "33795",
             "YearEgyAt": "94304",
@@ -67,6 +73,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "33",
             "WFStandbyCount": "0",
+            "WFLIMCount":'0',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "0",
@@ -92,6 +99,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "126",
             "WFStandbyCount": "0",
+            "WFLIMCount":'3',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "0",
@@ -117,6 +125,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "99",
             "WFStandbyCount": "0",
+            "WFLIMCount":'3',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "0",
@@ -142,6 +151,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "33",
             "WFStandbyCount": "0",
+            "WFLIMCount":'3',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "0",
@@ -167,6 +177,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "0",
             "WFStandbyCount": "0",
+            "WFLIMCount":'0',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "40",
@@ -192,6 +203,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "0",
             "WFStandbyCount": "0",
+            "WFLIMCount":'0',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "40",
@@ -217,6 +229,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "0",
             "WFStandbyCount": "0",
+            "WFLIMCount":'0',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "40",
@@ -242,6 +255,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "33",
             "WFStandbyCount": "0",
+            "WFLIMCount":'3',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "0",
@@ -267,6 +281,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "33",
             "WFStandbyCount": "0",
+            "WFLIMCount":'0',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "0",
@@ -292,6 +307,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "33",
             "WFStandbyCount": "0",
+            "WFLIMCount":'0',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "0",
@@ -317,6 +333,7 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "58",
             "WFStandbyCount": "0",
+            "WFLIMCount":'0',
             "PVONL": "0",
             "PVFLT": "0",
             "PVOFL": "0",
@@ -330,13 +347,21 @@ module.exports ={
             "PVCount": "13",
             "WTCount": "498",
             "InverterCount": "120",
+<<<<<<< HEAD
             "WindSpeed_DevAverValue": "20619.7615",
+=======
+            "WindSpeed_DevAverValue": "206.76",
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
             "PVTSI_Aver": "44291.5872",
             "Capacity": "685500",
             "TActPower": "6499.220",
             "DayEgyAt": "6114",
             "MonthEgyAt": "12050",
+<<<<<<< HEAD
             "YearEgyAt": "97726",
+=======
+            "YearEgyAt": "57726",
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
             "ONL": "0",
             "FaultCount": "0",
             "RepairCount": "0",
@@ -643,6 +668,10 @@ module.exports ={
             "RepairCount": "0",
             "OfflineCount": "498",
             "WFStandbyCount": "0",
+<<<<<<< HEAD
+=======
+            "WFLIMCount": "0",
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
             "CurMonthPlanEgyAt": "38571",
             "YearPlanTotEgyAt": "3634104",
             "WfsStateCode": "Disconnect"
@@ -789,7 +818,11 @@ module.exports ={
         },
         "PVCount": "3",
             "InverterCount": "120",
+<<<<<<< HEAD
             "PVTSI_Aver": "49835.255",
+=======
+            "PVTSI_Aver": "498.25",
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
             "Capacity": "42000",
             "TActPower": "91895.350",
             "DayEgyAt": "2937",

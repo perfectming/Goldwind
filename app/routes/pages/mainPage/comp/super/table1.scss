@@ -1,0 +1,118 @@
+.actionBox {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 30px;
+  overflow: hidden;
+  img {
+    width: 30px;
+    margin-left: 50px;
+  }
+}
+
+.tableBox {
+  overflow: hidden;
+  .tableHeaderBox {
+    overflow: hidden;
+    background: #464c58;
+    .tableHeaderItem {
+      float: left;
+      height:30px;
+      line-height:30px;
+      overflow: hidden;
+      color:#fff;
+      text-align: center;
+    }
+  }
+  .tableContentBox {
+    height:153px;
+    overflow:auto;
+    .tableContentLine {
+       color:#fff;
+       cursor:pointer;
+       background: #30343f;
+      overflow: hidden;
+        &:hover{
+         border:1px solid #2ff4fb;
+        .tableContentItem {
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        height: 28px;
+        line-height:28px;
+        border: none;
+        }
+       }
+      .tableContentItem {
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        height: 30px;
+        line-height:30px;
+        border: none;
+      }
+      .tableLineNum {
+        width: 45px;
+        padding: 10px 0 10px;
+        text-align: center;
+        background-color: #E4E5E6;
+        float: left;
+      }
+    }
+     .tableContentLine1 {
+       color:#fff;
+      overflow: hidden;
+      background: #272b34;
+      cursor:pointer;
+        &:hover{
+         border:1px solid #2ff4fb;
+        .tableContentItem {
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        height: 40px;
+        line-height:20px;
+        border: none;
+        }
+       }
+      .tableContentItem {
+        float: left;
+        padding: 10px 0 10px;
+        overflow: hidden;
+        text-align: center;
+        height: 40px;
+        border: none;
+      }
+      .tableLineNum {
+        width: 45px;
+        padding: 10px 0 10px;
+        text-align: center;
+        background-color: #E4E5E6;
+        float: left;
+      }
+    }
+  }
+}
+
+.tableContentBox::-webkit-scrollbar {
+        width:12px;
+        height:12px;
+        border:1px solid #fff;
+    }
+.tableContentBox::-webkit-scrollbar-button    {
+        background-color:#272b34;
+        display:none;
+    }
+.tableContentBox::-webkit-scrollbar-track     {
+        background:#131619;
+
+    }
+.tableContentBox::-webkit-scrollbar-thumb{
+        background:#464c58;
+        border-radius:10px;
+    }
+.tableContentBox::-webkit-scrollbar-corner {
+        background:#131619;
+    }
+.tableContentBox::-webkit-scrollbar-resizer  {
+        background:#f00;
+    }

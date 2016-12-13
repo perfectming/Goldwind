@@ -25,8 +25,8 @@ let Component = React.createClass({
                 text: ''
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                 pointFormat: "<b>{point.percentage:.0f}%</b>"
+                enabled: false
+     
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -38,7 +38,7 @@ let Component = React.createClass({
                     allowPointSelect: false,
                     cursor: 'pointer',
                     borderWidth: 0,
-                    size: '80%',
+                    size: '50%',
                     innerSize: '80%',
                     dataLabels: {
                         enabled: false

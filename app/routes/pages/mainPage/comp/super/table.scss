@@ -24,9 +24,24 @@
     }
   }
   .tableContentBox {
+    height:210px;
+    overflow:auto;
+   
     .tableContentLine {
        color:#fff;
        background: #30343f;
+       cursor:pointer;
+       &:hover{
+         border:1px solid #2ff4fb;
+        .tableContentItem {
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        height: 28px;
+        line-height:28px;
+        border: none;
+        }
+       }
       overflow: hidden;
       .tableContentItem {
         float: left;
@@ -48,6 +63,18 @@
        color:#fff;
       overflow: hidden;
       background: #272b34;
+      cursor:pointer;
+      &:hover{
+         border:1px solid #2ff4fb;
+        .tableContentItem {
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        height: 38px;
+        line-height:20px;
+        border: none;
+        }
+       }
       .tableContentItem {
         float: left;
         padding: 10px 0 10px;
@@ -66,3 +93,27 @@
     }
   }
 }
+
+.tableContentBox::-webkit-scrollbar {
+        width:12px;
+        height:12px;
+        border:1px solid #fff;
+    }
+.tableContentBox::-webkit-scrollbar-button    {
+        background-color:#272b34;
+        display:none;
+    }
+.tableContentBox::-webkit-scrollbar-track     {
+        background:#131619;
+
+    }
+.tableContentBox::-webkit-scrollbar-thumb{
+        background:#464c58;
+        border-radius:10px;
+    }
+.tableContentBox::-webkit-scrollbar-corner {
+        background:#131619;
+    }
+.tableContentBox::-webkit-scrollbar-resizer  {
+        background:#f00;
+    }

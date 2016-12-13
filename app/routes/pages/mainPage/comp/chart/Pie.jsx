@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
+<<<<<<< HEAD
 let data = require('../../../../../../config/chart-data');
 let dataBase=require('../../../../../../config/ModelData');
 let dataName=require('../../../../../../config/Model');
@@ -13,6 +14,8 @@ let arrname=[];
 let num=[];
 (function(){
     for(let i in date){
+=======
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
 
     arr.push(date[i].DayEgyAt/1);
     }
@@ -32,10 +35,17 @@ let num=[];
     }
  }
 let Component = React.createClass({
-    componentWillMount() {
+    componentDidMount() {
+        this.props.init();
     },
 
     render() {
+<<<<<<< HEAD
+=======
+
+            let {arn,nu}=this.props;
+            
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -49,11 +59,20 @@ let Component = React.createClass({
                 text: ''
             },
            
+<<<<<<< HEAD
                 categories:arrname,
+=======
+                categories:arn,
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
             
             tooltip: {
-                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                //pointFormat: "<b>{point.percentage:.0f}%</b>"
+                enabled: true,
+                 //pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+                 style:{
+                    color: '#000',
+                    fontSize: '12px',
+                    fontFamily:"微软雅黑"
+                }
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -66,7 +85,11 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     borderWidth: 0,
                     size: '50%',
+<<<<<<< HEAD
                     innerSize: '40%',
+=======
+                    innerSize: '60%',
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
                     dataLabels: {
                         enabled: true,
                         format: '{point.name}',
@@ -83,8 +106,16 @@ let Component = React.createClass({
             },
             series: [{
                 type: 'pie',
+<<<<<<< HEAD
                 name: "发电量占比",
                 data: num,
+=======
+                name: "日发电量",
+                data: nu,
+                tooltip: {
+                valueSuffix: 'kWh'
+            },
+>>>>>>> 9f1a2c4903f5ad6c45ec995e413fedb506a23e43
                 style: {     fontSize:"20px",  } 
             }]
         };
@@ -96,13 +127,20 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+
         },
+        getall:(allnum)=>{
+            dispatch(actions.setVars('allnum',allnum ));
+        }
+ 
     };
 };
 

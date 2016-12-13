@@ -1,0 +1,431 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>智能运营SOAM平台2.0</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/jquery.page.css" type="text/css">
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/jquery.page.js"></script>
+    <script type="text/javascript" src="laydate/laydate.js"></script>
+    <script src="layer/layer.js" type="text/javascript"></script>
+    <script src="js/jquery.form.js" type="text/javascript"></script>
+    <script src="js/full-validator.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container manaport">
+        <div class="pos"><i>|</i><span class="active">预警信息月报</span><i>|</i><span>预警信息年报</span><i>|</i><span>CMS监测报告</span><i>|</i></div>
+        <div class="tab_conn m_y_port">
+            <ul class="clearfix"></ul>
+        </div>
+        <div class="tab_conn m_y_port hide">
+            <ul class="clearfix"></ul>
+        </div>
+        <div class="tab_conn hide port">
+            <div class="search">
+                <div class="right_btn">
+                    <button type="button">查询</button>
+                </div>
+                <div class="left_btn">
+                    <button type="button">新增报告</button>
+                </div>
+                <div class="box" style="height:90px;">
+                    <div class="wrap" style="padding-top:20px;">
+                        <form class="form">
+                            <label>上传时间</label>
+                            <input type="text" name="sbegindate" class="txt date" id="sbegindate" /> - <input type="text" name="senddate" class="txt date" id="senddate" />
+                            <span class="ml15">风场</span>
+                            <select id="swfName" name="swfName">
+                                <option value="0">请选择</option>
+                            </select>
+                            <label class="ml15">等级</label>
+                            <span class="tab" id="level">
+                                <input type="button" class="active" value="全部" />
+                                <input type="button" key="0" value="正常" />
+                                <input type="button" key="1" value="预警" />
+                                <input type="button" key="2" value="报警" />
+                            </span>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <table class="grid" border="0" border-collapse="0" border-spacing="0">
+                <thead>
+                    <tr>
+                        <td>上传时间</td>
+                        <td>上传人</td>
+                        <td>文件名</td>
+                        <td>区域</td>
+                        <td>风场</td>
+                        <td>报告周期</td>
+                        <td>备注信息</td>
+                        <td>等级</td>
+                        <td>附件</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div id="page" class="pt15"></div>
+        </div>
+    </div>
+
+    <div class="dialog yj_form" id="dialog_1">
+        <div class="opacity"></div>
+        <div class="content" style="width:600px;margin-left:-300px;">
+            <a class="close"></a>
+            <h1>提交大部件监测报告</h1>
+            <form id="uploadForm">
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>上传文件</dt>
+                    <dd>
+                        <input type="file" id="file" name="file" class="txt" onchange="CmsUpload(this)" style="width:380px;padding:0px;" />
+                    </dd>
+                </dl>
+            </form>
+            <form id="form2">
+                <input type="hidden" id="hidfile" datatype="Require" msg="请上传文件" />
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>选择区域</dt>
+                    <dd>
+                        <select id="yj_source" name="yj_source" disabled>
+                            <option value="巴盟">巴盟</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>风场名称</dt>
+                    <dd>
+                        <select id="wfName" name="wfName">
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>预警等级</dt>
+                    <dd>
+                        <select id="yj_grade" name="yj_grade">
+                            <option value="0">正常</option>
+                            <option value="1">预警</option>
+                            <option value="2">报警</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><i class="red">*</i>报告周期</dt>
+                    <dd>
+                        <input type="text" class="txt" id="beginDate" name="beginDate" style="width: 100px;" datatype="Require" msg="请选择报告周期开始日期" /> -
+                        <input type="text" class="txt" id="endDate" name="endDate" style="width: 100px;" datatype="Require" msg="请选择报告周期结束日期" />
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>备注</dt>
+                    <dd><textarea name="remark" id="remark"></textarea></dd>
+                </dl>
+                <div class="btn">
+                    <button type="button" class="cancle" for="dialog_1">取消</button>
+                    <button type="button" class="ml15 submitBtn">确认</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var start = {
+            elem: '#sbegindate',
+            format: 'YYYY-MM-DD',
+            choose: function (datas) {
+                end.min = datas; //开始日选好后，重置结束日的最小日期
+                end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+        var end = {
+            elem: '#senddate',
+            format: 'YYYY-MM-DD',
+            choose: function (datas) {
+                start.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+        laydate(start);
+        laydate(end);
+
+
+        var d_start = {
+            elem: '#beginDate',
+            format: 'YYYY-MM-DD',
+            choose: function (datas) {
+                d_end.min = datas; //开始日选好后，重置结束日的最小日期
+                d_end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+        var d_end = {
+            elem: '#endDate',
+            format: 'YYYY-MM-DD',
+            choose: function (datas) {
+                d_start.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+        laydate(d_start);
+        laydate(d_end);
+
+        function init() {
+            loadPage(0);
+            LoginPage(function () {
+                //读取月报
+                $.ajax({
+                    type: "post",
+                    url: window.ApiDomian + '/report/list.json?reportType=3&reportBegin=' + GetYear() + "-01-01" + "&reportEnd=" + GetYear() + "-" + GetMonth() + "-" + getLastDay(GetYear(), GetMonth()),
+                    cache: false,
+                    dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
+                    success: function (json) {
+                        for (var o in json.pagination.list) {
+                            $(".tab_conn:eq(0) ul").append('<li><h2>' + json.pagination.list[o].reportTypeDesc + '<span>月</span></h2><div class="btn"><a target="_blank" href="' + window.ApiDomian + '/report/preview.json?fileName=' + json.pagination.list[o].reportPath + '">预览</a><a target="_blank" href="' + window.ApiDomian + '/report/download.json?fileName=' + json.pagination.list[o].reportPath + '" class="ml15">导出</a></div></li>');
+                        }
+                    },
+                    error: function () {
+                        alert('载入数据失败！');
+                    }
+                });
+                //读取年报
+                $.ajax({
+                    type: "post",
+                    url: window.ApiDomian + '/report/list.json?reportType=2',
+                    cache: false,
+                    dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
+                    success: function (json) {
+                        for (var o in json.pagination.list) {
+                            $(".tab_conn:eq(1) ul").append('<li><h2>' + json.pagination.list[o].reportTypeDesc + '<span>年</span></h2><div class="btn"><a target="_blank" href="' + window.ApiDomian + '/report/preview.json?fileName=' + json.pagination.list[o].reportPath + '">预览</a><a target="_blank" href="' + window.ApiDomian + '/report/download.json?fileName=' + json.pagination.list[o].reportPath + '" class="ml15">导出</a></div></li>');
+                        }
+                    },
+                    error: function () {
+                        alert('载入数据失败！');
+                    }
+                });
+            })
+            LoginJFPage(function () {
+                bindWF();
+            })
+        }
+
+        function bindWF() {
+            var lay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
+            
+            $.ajax({
+                type: "post",
+                url: window.JFApiDomian + '/alarmInfo_getWfName.do',
+                cache: false,
+                dataType: 'jsonp',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                complete: function () {
+                    layer.close(lay);
+                },
+                success: function (json) {
+                    for (var o in json.listData) {
+                        $("#swfName").append('<option value="' + json.listData[o].wfid + '">' + json.listData[o].wfName + '</option>');
+                        $("#wfName").append('<option value="' + json.listData[o].wfid + '">' + json.listData[o].wfName + '</option>');
+                    }
+                },
+                error: function () {
+                    alert('载入数据失败！');
+                }
+            });
+        }
+
+        function bindWT(to, source) {
+            var lay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
+            $.ajax({
+                type: "post",
+                url: window.JFApiDomian + '/alarmInfo_getWtIDOrName.do?wfID=' + $(source).val()+"&userId="+userId,
+                cache: false,
+                dataType: 'jsonp',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                complete: function () {
+                    layer.close(lay);
+                },
+                success: function (json) {
+                    $("#swtName").html('');
+                    $("#swtName").append('<option value="0">请选择</option>');
+                    for (var i = 0; i < json.listData.length; i++) {
+                        $("#swtName").append('<option value="' + json.listData[i].wtID + '">' + json.listData[i].wtName + '</option>');
+                    }
+
+                },
+                error: function () {
+                    alert('载入数据失败！');
+                }
+            });
+        }
+
+        var pageLayer;
+        function loadPage(pageIndex) {
+            pageLayer = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
+            $.ajax({
+                type: "post",
+                url: window.ApiDomian + '/report/list.json?page=' + (pageIndex) + '&size=17' + GetFilter(),
+                cache: false,
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                complete:function(){
+                    layer.close(pageLayer);
+                },
+                success: function (json) {
+                    if (json.state == 1 && json.pagination.pageNo == (pageIndex+1)) {
+                        $(".grid tbody tr").remove();
+
+                        var jsonList = json.pagination.list;
+                        for (var o in jsonList) {
+                            var html = '<tr><td>' + jsonList[o].addTime + '</td><td>' + jsonList[o].userID + '</td><td>' + jsonList[o].reportName + '</td>'
+                                    + '<td>巴盟</td><td>' + jsonList[o].wfName + '</td><td>' + jsonList[o].reportBeginTime + '至' + jsonList[o].reportEndTime
+                                    + '</td><td title="' + jsonList[o].reportRemark + '">' + (jsonList[o].reportRemark == null ? "&nbsp;" : sb_substr(jsonList[o].reportRemark, 0, 20)) + '</td>'
+                                    +'<td';
+                            switch (jsonList[o].reportGrade) {
+                                case 0:
+                                    html += '>正常';
+                                    break;
+                                case 1:
+                                    html += ' class="yellow">预警';
+                                    break;
+                                case 2:
+                                    html += ' class="red">报警';
+                                    break;
+                            }
+
+                            html += '</td><td><a href="' + window.ApiDomian + '/report/download.json?fileName=' + jsonList[o].reportPath + '" target="_blank">下载</a></td></tr>';
+
+                            $(".grid tbody").append(html);
+                        }
+                        bindRowBgColor();
+
+                        if ($("#page").text() == '') {
+                            $("#page").Page({
+                                totalPages: json.pagination.totalPage,
+                                liNums: 7,
+                                activeClass: 'activP', 
+                                callBack: function (page) {
+                                    loadPage(page-1)
+                                }
+                            });
+                        }
+                    }
+                },
+                error: function () {
+                    alert('载入数据失败！');
+                }
+            });
+        }
+
+        function GetFilter() {
+            var filter = '';
+            if ($("#sbegindate").val() != '')
+                filter += '&addBeginTime=' + $("#sbegindate").val();
+            if ($("#senddate").val() != '')
+                filter += '&addEndTime=' + $("#senddate").val();
+            if ($("#swfName").val() != '0')
+                filter += '&wfID=' + $("#swfName").val();
+            if($("#level .active").attr("key") != undefined)
+                filter += '&reportGrade=' + $("#level .active").attr("key");
+            
+            return filter;
+        }
+
+        $(function () {
+            pageLayer = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
+            LoginPage(function () {
+                init();
+            })
+
+            $(".search .right_btn button").click(function () {
+                pageLayer = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
+                $("#page").html('');
+                loadPage(0);
+            })
+
+            $(".manaport .pos span").click(function () {
+                $(".tab_conn").hide();
+                $(this).addClass("active").siblings().removeClass("active");
+                $(".tab_conn").eq(Math.floor($(this).index() / 2)).show();
+            })
+
+            $(".search .tab input").click(function () {
+                $(this).addClass("active").siblings().removeClass("active");
+            })
+
+
+            $(".left_btn button").click(function () {
+                $("#dialog_1").show();
+            })
+
+            if (getQueryString("tab") != "") {
+                $(".pos span").eq(getQueryString("tab")).trigger("click");
+                localStorage.setItem('keytwo', 3);
+            }
+
+            $("#dialog_1 .submitBtn").click(function () {
+                if (!Validator.Validate(document.getElementById('form2'))) return false;
+
+                var json = ',"wfID":' + $("#wfName").val();
+                json += ',"reportType":1';
+                json += ',"reportGrade":' + $("#yj_grade").val();
+                json += ',"reportBeginTime":"' + $("#beginDate").val() + '"';
+                json += ',"reportEndTime":"' + $("#endDate").val() + '"';
+                json += ',"reportRemark":"' + $("#remark").val() + '"';
+                json += ',"reportPath":"' + $("#hidfile").val() + '"';
+                json += ',"partName":""';
+                json = '{' + json.substr(1) + '}';
+
+                layer.msg('数据提交中...', { icon: 16, shade: 0.01, time: 999999 });
+                $.ajax({
+                    type: "post",
+                    url: window.ApiDomian + '/report/add.json',
+                    cache: false,
+                    data: json,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
+                    complete: function () {
+                        layer.closeAll();
+                    },
+                    success: function (jsondate) {
+                        if (jsondate.state == 1) {
+                            $("#dialog_1").hide();
+                            layer.msg('数据提交成功', { time: 1000 }, function () {
+                                $("#form2").get(0).reset();
+                                loadPage(parseInt($("#page a.activP").text()) - 1);
+                            });
+                        } else {
+                            alert(jsondate.message)
+                        }
+                        
+                    },
+                    error: function () {
+                        alert('数据提交失败！');
+                    }
+                });
+            })
+        })
+    </script>
+</body>
+</html>

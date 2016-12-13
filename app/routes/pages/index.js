@@ -1,5 +1,5 @@
 module.exports = {
-  path: 'page/',
+  path: 'all/',
   childRoutes: [
     require('./mainPage'),
   ]

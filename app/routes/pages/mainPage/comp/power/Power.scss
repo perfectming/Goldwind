@@ -1,16 +1,18 @@
 .powerBox{
-	//padding-right:40px;
 	.inquireBox{
 		width:100%;
-		height:80px;
-		padding-top:20px;
-		border-top:1px solid #ccc;
+		margin:10px 0;
+		//border-top:1px solid #ccc;
 		overflow:hidden;
 		.seleBox{
 			float:left;
 			margin-right:40px;
+			span{
+				color:#fff;
+				margin-right:10px;
+			}
 			select{
-				width:223px;
+				width:220px;
 				height:30px;
 				font-size:14px;
 				line-height:30px;
@@ -28,6 +30,7 @@
 				width:120px;
 				height:30px;
 				border-radius:4px;
+				background:#fff url(../../img/comp/calendar.png) no-repeat right;
 			}
 
 		}
@@ -42,61 +45,18 @@
 	}
 	.chartBox{
 		overflow:hidden;
-		.barOne{
+
+		.charChildren{
+			position:relative;
 			float:left;
-			width:45%;
-			height:400px;
-			margin-left:40px;
-			margin-bottom:80px;
-			margin-top:20px;
-			opacity:0.9;
-			transition:all 1s;
+			width:48%;
+			height:380px;
+			margin-left:10px;
+			margin-right:20px;
+			margin-bottom:40px;
+			background:rgba(40,44,53,.5);
 			&:hover{
-				transform:scale(1.1,1.1);
-				opacity:1;
-			}
-		}
-		.barTwo{
-			float:right;
-			width:45%;
-			height:400px;
-			margin-bottom:80px;
-			margin-right:60px;
-			margin-top:20px;
-			opacity:0.9;
-			transition:all 1s;
-			&:hover{
-				transform:scale(1.1,1.1);
-				opacity:1;
-			}
-		}
-		.lineOne{
-			float:left;
-			width:45%;
-			height:400px;
-			margin-left:40px;
-			margin-bottom:80px;
-			//margin-top:20px;
-			opacity:0.9;
-			transition:all 1s;
-			&:hover{
-				transform:scale(1.1,1.1);
-				opacity:1;
-			}
-			
-		}
-		.lineTwo{
-			float:right;
-			width:45%;
-			height:400px;
-			margin-bottom:80px;
-			margin-right:60px;
-			//margin-top:20px;
-			opacity:0.9;
-			transition:all 1s;
-			&:hover{
-				transform:scale(1.1,1.1);
-				opacity:1;
+				box-shadow:0 0 15px #fff;
 			}
 		}
 	}

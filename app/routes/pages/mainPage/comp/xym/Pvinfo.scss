@@ -1,0 +1,215 @@
+.bodyBox{
+	.infofL{
+		float: left;
+		margin-right: 15px;
+		margin-top: 15px;
+		position: relative;
+		}
+	
+	.fanidbox{
+		color:#999;
+		font-size: 14px;
+		height: 20px;
+		line-height: 20px;
+		div{
+			float: left;
+			margin-right: 15px;
+		}
+	}
+	.fanidbox:after{
+     content:".";        
+     display:block;        
+     height:0;        
+     clear:both;        
+     visibility:hidden;        
+	}
+	.pvleftbox{
+		width: 400px;
+		height: 890px;
+		background:#292F36;
+		white-space:nowrap;
+		.pvoption{
+			width: 400px;
+			height: 425px;
+			margin-top: 30px;
+			position: relative;
+			background: url(../../img/comp/pvinfo_1.png) no-repeat;
+			// .actionbox{
+			// 	position: absolute;
+			// 	left: 0;bottom: 20px;
+			// 	padding-left: 8px;
+			// 	div{
+			// 		float: left;
+			// 		width: 71px;
+			// 		height: 26px;
+			// 		text-align: center;
+			// 		font-size: 16px;
+			// 		line-height: 26px;
+			// 		border-radius: 13px;
+			// 		cursor: pointer;
+			// 		margin-left: 20px;
+			// 		background: #5EB7BB;
+			// 	}
+			// 	div:hover{
+   //      			box-shadow:0px 0px 8px 2px #fff;
+   //      		}
+
+			// }
+			
+		}
+		.option1box{
+			width: 400px;
+			$height: 460px;
+			font-size: 14px;
+			color: #fff;
+			line-height: $height/18;
+			div:nth-child(2n-1){
+				background: #30343D;
+			}
+			.pvdatabox{
+				width: 100%;
+				height: $height/18;
+				position: relative;
+				span:nth-child(1){
+					display: inline-block;
+					padding-left: 20px;
+					padding-right: 50px;
+					text-align: left;
+				}
+				.numbox{
+					position: absolute;right:20px;top: 0;
+					display: inline-block;
+					width: 200px;
+					
+					white-space:nowrap;
+					text-align: right;
+					span{
+						display: inline-block;
+					}
+					span:nth-child(1){
+						padding-right: 5px;
+						text-align: right;
+						color: #00F7FE;
+						font-size: 16px;
+					}
+					span:nth-child(2){
+						padding-right: 20px;
+						text-align: left;
+						width: 40px;
+						font-size: 12px;
+					}
+				}
+			}
+				
+		}
+	}
+	.pvmidbox{
+		$width: 396px;
+		height: 890px;
+		background:#292F36;
+		.midtitlebox{
+			margin-top: 30px;
+			width: 100%;
+			height: 60px;
+			line-height: 60px;
+			color:#00F7FE;
+					span{
+				display: inline-block;
+				width: $width/3;
+				text-align: center;
+				font-size: 16px;
+			}
+
+		}
+		.midoptionbox{
+			width: 100%;
+			$height: 800px;
+			font-size: 14px;
+			color: #fff;
+			line-height: $height/20;
+			span{
+				display: inline-block;
+				width: $width/3;
+				text-align: center;
+				font-size: 16px;
+			}
+			div:nth-child(2n-1){
+				background: #30343D;
+			}
+			.pvdatabox2{
+				width: 100%;
+				height: $height/20;
+				span{
+				font-size: 14px;
+				color:#999
+				}	
+				
+			}
+				
+		}
+	}
+	.pvrightbox{
+		width: 922px;
+		.itembox{
+			width: 218px;
+			height: 112px;
+			float: left;margin: 0 12px 12px 0;
+			background: url(../../img/comp/pvinfo_2.png) no-repeat;
+			position: relative;
+			.namebox{
+				width: 42px;
+				height: 20px;
+				color:#000;
+				font-size: 14px;
+				position: absolute;top: 60px;left: 32px;
+			}
+			.itemrightbox{
+				margin-left: 125px;
+				color:#fff;
+					p{
+						margin:0;
+					}
+				.itemrightT{
+					p:nth-child(1){
+						margin-top: 8px;
+					}
+					p:nth-child(2){
+						span:nth-child(1){
+							font-size: 18px;
+							color: #00F7FE;
+						}
+						span:nth-child(2){
+							display: inline-block;
+							font-size: 12px;
+							color: #fff;
+						}
+					}
+				}
+				.itemrightB{
+					p:nth-child(1){
+						margin-top: 8px;
+					}
+					p:nth-child(2){
+						span:nth-child(1){
+							font-size: 18px;
+							color: #00F7FE;
+						}
+						span:nth-child(2){
+							display: inline-block;
+							font-size: 12px;
+							color: #fff;
+						}
+					}
+				}
+			}
+		}
+	}
+	.pvrightbox:after{
+     content:".";        
+     display:block;        
+     height:0;        
+     clear:both;        
+     visibility:hidden;        
+	}
+}
+

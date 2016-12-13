@@ -1,0 +1,13 @@
+.box{
+	overflow:hidden;
+	.tbox{
+	width:100%;
+	height:300px;
+	}
+	.rbox{
+	float:left;
+	width:47%;
+	height:400px;
+	margin-top:10px;
+	}
+}
