@@ -113,7 +113,10 @@ let Component = React.createClass({
             series: [{
                 name:'年等效利用小时数',
                 data: czndxly,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: 'h'
+                }
             }]
         };
         return (

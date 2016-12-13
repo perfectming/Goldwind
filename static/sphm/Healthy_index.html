@@ -16,7 +16,7 @@
     <script src="layer/layer.js" type="text/javascript"></script>
 </head>
 <body>
-    <div class="container" style="height:997px;margin-top:30px;">
+    <div class="container" style="height:918px;margin-top:30px;">
         <div class="pl_r30">
             <div class="column_4 zl_t">
                 <div><img src="images/ico.png" /><p>健康度</p><i style="color: rgb(112, 192, 128);">0°H</i></div>
@@ -27,15 +27,15 @@
             <div class="column_3_chart mt15 clearfix">
                 <div class="box">
                     <h1>各风场健康情况</h1>
-                    <div id="chart_1" class="border" style="height:400px;"></div>
+                    <div id="chart_1" class="border" style="height:348px;"></div>
                 </div>
                 <div class="box ml15" style="position:relative;">
                     <h1>各风场预警概况</h1>
-                    <div id="chart_2" class="border" style="height:400px;"></div>
+                    <div id="chart_2" class="border" style="height:348px;"></div>
                 </div>
                 <div class="box ml15" id="jryh">
                     <h1 style="cursor:pointer;">今日风机隐患<button type="button">总览</button></h1>
-                    <div class="border list_r4_c3" style="height:400px;">
+                    <div class="border list_r4_c3" style="height:348px;">
                         <ul class="clearfix">
                             <li class="c_1">风场</li>
                             <li class="c_1">机组</li>
@@ -51,28 +51,28 @@
                 <div class="box">
                     <h1 onclick="location.href = 'yj_index.html?op=1';">预警接收统计</h1>
                     <div class="border">
-                        <div id="chart_3" style="height:350px;"></div>
+                        <div id="chart_3" style="height:300px;"></div>
                         <div class="top3"><a>总数TOP3</a></div>
                     </div>
                 </div>
                 <div class="box ml15">
                     <h1 onclick="location.href = 'yj_index.html?op=1';">预警处理统计</h1>
                     <div class="border">
-                        <div id="chart_4" style="height:350px;"></div>
+                        <div id="chart_4" style="height:300px;"></div>
                         <div class="top3"><a>审核TOP3</a></div>
                     </div>
                 </div>
                 <div class="box ml15">
                     <h1 onclick="location.href = 'yj_index.html?op=2';">故障派工统计</h1>
                     <div class="border">
-                        <div id="chart_5" style="height:350px;"></div>
+                        <div id="chart_5" style="height:300px;"></div>
                         <div class="top3"><a>派工TOP3</a></div>
                     </div>
                 </div>
                 <div class="box ml15">
                     <h1 onclick="location.href = 'yj_index.html?op=2';">任务执行统计</h1>
                     <div class="border">
-                        <div id="chart_6" style="height:350px;"></div>
+                        <div id="chart_6" style="height:300px;"></div>
                         <div class="top3"><a>执行TOP3</a></div>
                     </div>
                 </div>
@@ -304,9 +304,13 @@
                 var index_3 = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
                 $.ajax({
                     type: "post",
-                    url: window.JFApiDomian + '/main_getAlarmTotal.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate+' 23:59:59',
+                    url: GetAllUrl(window.JFApiDomian + '/main_getAlarmTotal.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate+' 23:59:59'),
                     cache: false,
                     dataType: 'jsonp',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     complete: function () {
                         layer.close(index_3);
                     },
@@ -321,9 +325,13 @@
                 var index_4 = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
                 $.ajax({
                     type: "post",
-                    url: window.JFApiDomian + '/main_getAlarmWFTotal.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate + ' 23:59:59',
+                    url: GetAllUrl(window.JFApiDomian + '/main_getAlarmWFTotal.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate + ' 23:59:59'),
                     cache: false,
                     dataType: 'jsonp',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     complete: function () {
                         layer.close(index_4);
                     },
@@ -337,9 +345,13 @@
                 var index_5 = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
                 $.ajax({
                     type: "post",
-                    url: window.JFApiDomian + '/main_getAlarmWTTotal.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate + ' 23:59:59',
+                    url: GetAllUrl(window.JFApiDomian + '/main_getAlarmWTTotal.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate + ' 23:59:59'),
                     cache: false,
                     dataType: 'jsonp',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     complete: function () {
                         layer.close(index_5);
                     },
@@ -353,9 +365,13 @@
 
                 $.ajax({
                     type: "post",
-                    url: window.JFApiDomian + '/main_getWfAlarmInfoByWtType.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate + ' 23:59:59&areaId=201409110342501',
+                    url: GetAllUrl(window.JFApiDomian + '/main_getWfAlarmInfoByWtType.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate + ' 23:59:59&areaId=201409110342501'),
                     cache: false,
                     dataType: 'jsonp',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     success: function (json) {
                         json_yjgk = json;
                         var xAxisData = new Array();
@@ -377,9 +393,13 @@
                 var index_2 = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
                 $.ajax({
                     type: "post",
-                    url: window.JFApiDomian + '/main_getAllWtTypeAlarmInfo.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate + ' 23:59:59',
+                    url: GetAllUrl(window.JFApiDomian + '/main_getAllWtTypeAlarmInfo.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate + ' 23:59:59'),
                     cache: false,
                     dataType: 'jsonp',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     complete: function () {
                         layer.close(index_2);
                     },
@@ -409,9 +429,13 @@
                 var index_1 = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
                 $.ajax({
                     type: "post",
-                    url: window.JFApiDomian + '/main_getGradeByWtType.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate+' 23:59:59',
+                    url: GetAllUrl(window.JFApiDomian + '/main_getGradeByWtType.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate+' 23:59:59'),
                     cache: false,
                     dataType: 'jsonp',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     complete: function () {
                         layer.close(index_1);
                     },
@@ -440,9 +464,13 @@
             var nday = getDay();
             $.ajax({
                 type: "post",
-                url: window.JFApiDomian + '/alarmInfo_searchWorkPub.do?pageid=' + pageIndex + '&pagecount=5&userId=' + userId + '&beginTime=' + nday + ' 00:00:00&endTime=' + nday+" 23:59:59&userid="+userId,
+                url: GetAllUrl(window.JFApiDomian + '/alarmInfo_searchWorkPub.do?pageid=' + pageIndex + '&pagecount=5&userId=' + userId + '&beginTime=' + nday + ' 00:00:00&endTime=' + nday+" 23:59:59"),
                 cache: false,
                 dataType: 'jsonp',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 complete: function () {
                     layer.close(page_layer);
                 },

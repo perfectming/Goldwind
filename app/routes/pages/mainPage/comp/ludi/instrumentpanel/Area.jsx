@@ -5,10 +5,9 @@ import Yearelectric from './Yearelectric.jsx';
 import Pie2 from '../../mxx/Pie2';
 
 var actions = require('redux/actions');
-var $ = require('jquery');
 let ipUrl='10.68.100.32:8080';
 
-let actb=0,areaName=[],areaId=[],areaCost=[],areaProfit=[],areaMonth=[],runTime,downTime,TBA,sortArr;
+let clickAreaId,areaName=[],areaId=[],areaCost=[],areaProfit=[],areaMonth=[],runTime,downTime,TBA,sortArr;
 let elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month=[],elecPlan=[],elecAct=[];
 
 
@@ -22,14 +21,14 @@ let Component = React.createClass({
    
 
     render() {
-        let{actb,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{actb=0,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
             
 		return (
            <div className={styles.box}>
            		<ul className={styles.monthbox}>
                     {
                     	areaName.map((value,key)=>{
-                    		return(<li key={key} className={actb===key? styles.bg1 : styles.bg} onClick={()=>changepage(value,key,areaId,areaMonth,areaProfit,areaCost)}>{value}</li>)
+                    		return(<li key={key} className={actb===key? styles.bg1 : styles.bg} onClick={()=>changepage(value,key,areaId,areaMonth,areaProfit,areaCost,clickAreaId)}>{value}</li>)
                     	})
                     }
                 </ul>
@@ -55,7 +54,7 @@ let Component = React.createClass({
            					</div>
            					<div className={styles.sectionthree}>
            						<div className={styles.pie}>
-           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{(elecActPBA/elecPlanPBA).toFixed(1)*100}%</p>PBA</span>
+           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{elecPlanPBA==0? 0:(elecActPBA/elecPlanPBA).toFixed(1)*100}%</p>PBA</span>
            						<Pie2 color={elecActPBA/elecPlanPBA>1? ['#1fe005','#fbd500']:elecActPBA/elecPlanPBA>0.8?['#fbd500','#39565e']:elecActPBA/elecPlanPBA>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[elecActPBA,elecPlanPBA-elecActPBA]}></Pie2>
            						</div>
            						<a className={styles.space} onClick={()=>changepagePBAS()}></a><br/>
@@ -81,21 +80,21 @@ let Component = React.createClass({
            					<div className={styles.electricHeader}><a></a>发电量</div>
            					<div className={styles.electricFirst}>
            						<a></a><span>年累计发电量</span>
-           						<div className={styles.electricTotal}>{yearElec}kWh</div>
+           						<div className={styles.electricTotal}>{(yearElec/10000).toFixed(1)}万kWh</div>
            						<div className={styles.electricPercent}>
            							<div className={yearElec/yearPlanElec>1? styles.green:yearElec/yearPlanElec>.8? styles.yellow:yearElec/yearPlanElec>.6? styles.red:styles.redS} style={{width:((yearElec/yearPlanElec*100).toFixed(1))+"%"}}>{(yearElec/yearPlanElec*100).toFixed(1)}%</div>
            						</div>
            					</div>
            					<div className={styles.electricSecond}>
            						<a></a><span>月累计发电能量</span>
-           						<div className={styles.electricTotal}>{monthElec}kWh</div>
+           						<div className={styles.electricTotal}>{(monthElec/10000).toFixed(1)}万kWh</div>
            						<div className={styles.electricPercent}>
            							<div className={monthElec/monthPlanElec>1? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:((monthElec/monthPlanElec*100).toFixed(1))+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
            						</div>
            					</div>
            					<div className={styles.electricThird}>
            						<a></a><span>日累计发电量</span>
-           						<div className={styles.electricTotal}>{dayElec}kWh</div>
+           						<div className={styles.electricTotal}>{(dayElec/10000).toFixed(1)}万kWh</div>
            						<div className={styles.electricPercent}>
            							<div className={dayElec/dayPlanElec>1? styles.green:dayElec/dayPlanElec>.8? styles.yellow:dayElec/dayPlanElec>.6? styles.red:styles.redS} style={{width:((dayElec/dayPlanElec*100).toFixed(1))+"%"}}>{(dayElec/dayPlanElec*100).toFixed(1)}%</div>
            						</div>
@@ -108,7 +107,7 @@ let Component = React.createClass({
 	           						<div className={styles.space} onClick={()=>changepageEleS()}></div>&nbsp;
 	           						<div className={styles.time} onClick={()=>changepageEleT()}></div>
            						</div>
-           						<Yearelectric month={month} plan={elecPlan} actrul={elecAct} unit={'kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+           						<Yearelectric month={month} plan={elecPlan} actrul={elecAct} unit={'万kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
            					</div>
            				</div>
            				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
@@ -120,7 +119,7 @@ let Component = React.createClass({
 	           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
            							</div>
 	           					</div>
-           						<Yearelectric month={areaMonth} plan={areaCost} actrul={areaProfit} unit={'元'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
+           						<Yearelectric month={areaMonth} plan={areaCost} actrul={areaProfit} unit={'万元'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
            					</div>
            				</div>
            			</div>
@@ -155,37 +154,12 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
     	actb : state.vars.actb,
-    	big : state.vars.big,
-    	small : state.vars.small,
     	
     	flag : state.vars.flag,
     	flagPba : state.vars.flagPba,
     	flagTime : state.vars.flagTime,
-    	
-    	areaName: state.vars.areaName,
-    	areaId: state.vars.areaId,
-    	
-    	areaMonth: state.vars.areaMonth,
-    	areaProfit: state.vars.areaProfit,
-    	areaCost: state.vars.areaCost,
-    	
-    	runTime:state.vars.runTime,
-    	downTime:state.vars.downTime,
-    	TBA:state.vars.TBA,
-    	
-    	yearElec: state.vars.yearElec,
-    	monthElec: state.vars.monthElec,
-    	dayElec: state.vars.dayElec,
-    	yearPlanElec: state.vars.yearPlanElec,
-    	monthPlanElec: state.vars.monthPlanElec,
-    	dayPlanElec: state.vars.dayPlanElec,
-    	month:state.vars.month,
-    	elecPlan:state.vars.elecPlan,
-    	elecAct:state.vars.elecAct,
-    	
-    	elecPlanPBA:state.vars.elecPlanPBA,
-    	elecActPBA:state.vars.elecActPBA,
     	sortArr : state.vars.sortArr,
+    	clickAreaId:state.vars.clickAreaId,
     }
 };
 
@@ -212,10 +186,7 @@ const mapDispatchToProps = (dispatch) => {
 				　　　　　 console.log('超时');
 				　　　}
 				},
-			});	
-			dispatch(actions.setVars('areaId', areaId));
-			dispatch(actions.setVars('areaName', areaName));
-			
+			});
 			$.ajax({
         		url: 'http://'+ipUrl+'/wbi/yield/getGroupAllRate',//初始年收益表-YES
 		        type: 'post',
@@ -225,7 +196,7 @@ const mapDispatchToProps = (dispatch) => {
 		        success:function (data) {
 		        	areaMonth=[],areaProfit=[],areaCost=[];
 		        	for(var i in data.data){
-		        		areaMonth.push(data.data[i].month);
+		        		areaMonth.push(data.data[i].month+"月");
 		        		areaProfit.push(data.data[i].incomes);
 		        		areaCost.push(data.data[i].costs);
 		        	}
@@ -235,10 +206,7 @@ const mapDispatchToProps = (dispatch) => {
 			　　　　　 alert('超时');
 			　　　　}
 			　　},
-		    });
-		    dispatch(actions.setVars('areaMonth', areaMonth));
-		    dispatch(actions.setVars('areaProfit', areaProfit));
-		    dispatch(actions.setVars('areaCost', areaCost));
+		   });
 		    
 		    $.ajax({
         		url: 'http://'+ipUrl+'/wbi/ELEC/getAreaElec',//初始电量--YES
@@ -247,6 +215,7 @@ const mapDispatchToProps = (dispatch) => {
 		        data:{'groupid':areaId[0]},
 		        dataType: 'json',//here
 		        success:function (data) {
+		        	console.log(data);
 		        	yearElec=data.data.areasyearElec;
 		        	monthElec=data.data.areaMonthsElec;
 		        	dayElec=data.data.dayelec;
@@ -255,8 +224,11 @@ const mapDispatchToProps = (dispatch) => {
 		        	dayPlanElec=data.data.dayPlanElec;
 		        	month=[],elecPlan=[],elecAct=[];
 		        	for(var i in data.data.twAreaMonthElec){
-		        		month.push(data.data.twAreaMonthElec[i].month);
-		        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
+		        		elecAct.push(data.data.twAreaMonthElec[i].poweract/10000);
+		        		month.push(data.data.twAreaMonthElec[i].month+"月");
+		        	}
+		        	for(var i in data.data.twAreaMonthPlanElec){
+		        		elecPlan.push(data.data.twAreaMonthPlanElec[i]/10000);
 		        	}
 		        },
 		        complete : function(XMLHttpRequest,status){ 
@@ -264,13 +236,7 @@ const mapDispatchToProps = (dispatch) => {
 			　　　　　 alert('超时');
 			　　　　}
 			　　},
-		    });
-		    dispatch(actions.setVars('yearElec', yearElec));
-		    dispatch(actions.setVars('monthElec', monthElec));
-		    dispatch(actions.setVars('dayElec', dayElec));
-		    dispatch(actions.setVars('month', month));
-		    dispatch(actions.setVars('elecPlan', elecPlan));
-		    dispatch(actions.setVars('elecAct', elecAct));
+		   });
 		    
 		    $.ajax({
         		url: 'http://'+ipUrl+'/wbi/PBA/getAreaPBA',//PBA
@@ -288,10 +254,7 @@ const mapDispatchToProps = (dispatch) => {
 			　　　　　 alert('超时');
 			　　　　}
 			　　},
-		    });
-		    dispatch(actions.setVars('elecActPBA', elecActPBA));
-		    dispatch(actions.setVars('elecPlanPBA', elecPlanPBA));
-		    dispatch(actions.setVars('sortArr', sortArr));
+		   });
 		    
 //		    $.ajax({
 //      		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA-YES
@@ -310,9 +273,6 @@ const mapDispatchToProps = (dispatch) => {
 //			　　　　}
 //			　　},
 //		    });
-//		    dispatch(actions.setVars('runTime', runTime));
-//		    dispatch(actions.setVars('downTime', downTime));
-//		    dispatch(actions.setVars('TBA', TBA));
     	},
         init: () => {
             var obj = {
@@ -330,7 +290,7 @@ const mapDispatchToProps = (dispatch) => {
         	dispatch(actions.setVars('flag',true ));
         	dispatch(actions.setVars('flagPba',!flagPba ));
         },
-        changepage :(value,key,areaId,areaMonth,areaProfit,areaCost)=>{
+        changepage :(value,key,areaId,areaMonth,areaProfit,areaCost,clickAreaId)=>{
         	$.ajax({
         		url: 'http://'+ipUrl+'/wbi/yield/getGroupAllRate',
 		        type: 'post',
@@ -341,7 +301,7 @@ const mapDispatchToProps = (dispatch) => {
 		        	clickAreaId=areaId[key];
 		        	areaMonth=[],areaProfit=[],areaCost=[];
 		        	for(var i in data.data){
-		        		areaMonth.push(data.data[i].month);
+		        		areaMonth.push(data.data[i].month+"月");
 		        		areaProfit.push(data.data[i].incomes);
 		        		areaCost.push(data.data[i].costs);
 		        	}
@@ -352,43 +312,15 @@ const mapDispatchToProps = (dispatch) => {
 			　　　　}
 			　　},
 		    });
-		    dispatch(actions.setVars('areaMonth', areaMonth));
-		    dispatch(actions.setVars('areaProfit', areaProfit));
-		    dispatch(actions.setVars('areaCost', areaCost));
 		    dispatch(actions.setVars('clickAreaId', clickAreaId));
 		    
 		    $.ajax({
-        		url: 'http://'+ipUrl+'/wbi/yield/getGroupAllRate',//初始年收益表-YES
+        		url: 'http://'+ipUrl+'/wbi/ELEC/getAreaElec',//查询ID电量--YES
 		        type: 'post',
 		        async:false,
 		        data:{'groupid':areaId[key]},
 		        dataType: 'json',//here
 		        success:function (data) {
-		        	areaMonth=[],areaProfit=[],areaCost=[];
-		        	for(var i in data.data){
-		        		areaMonth.push(data.data[i].month);
-		        		areaProfit.push(data.data[i].incomes);
-		        		areaCost.push(data.data[i].costs);
-		        	}
-		        },
-		        complete : function(XMLHttpRequest,status){ 
-			　　　　if(status=='timeout'){
-			　　　　　 alert('超时');
-			　　　　}
-			　　},
-		    });
-		    dispatch(actions.setVars('areaMonth', areaMonth));
-		    dispatch(actions.setVars('areaProfit', areaProfit));
-		    dispatch(actions.setVars('areaCost', areaCost));
-		    
-		    $.ajax({
-        		url: 'http://'+ipUrl+'/wbi/ELEC/getAreaElec',//初始电量--YES
-		        type: 'post',
-		        async:false,
-		        data:{'groupid':areaId[key]},
-		        dataType: 'json',//here
-		        success:function (data) {
-		        	console.log(data);
 		        	yearElec=data.data.areasyearElec;
 		        	monthElec=data.data.areaMonthsElec;
 		        	dayElec=data.data.dayelec;
@@ -397,8 +329,11 @@ const mapDispatchToProps = (dispatch) => {
 		        	dayPlanElec=data.data.dayPlanElec;
 		        	month=[],elecPlan=[],elecAct=[];
 		        	for(var i in data.data.twAreaMonthElec){
-		        		month.push(data.data.twAreaMonthElec[i].month);
-		        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
+		        		elecAct.push(data.data.twAreaMonthElec[i].poweract/10000);
+		        		month.push(data.data.twAreaMonthElec[i].month+"月");
+		        	}
+		        	for(var i in data.data.twAreaMonthPlanElec){
+		        		elecPlan.push(data.data.twAreaMonthPlanElec[i]/10000);
 		        	}
 		        },
 		        complete : function(XMLHttpRequest,status){ 
@@ -407,15 +342,9 @@ const mapDispatchToProps = (dispatch) => {
 			　　　　}
 			　　},
 		    });
-		    dispatch(actions.setVars('yearElec', yearElec));
-		    dispatch(actions.setVars('monthElec', monthElec));
-		    dispatch(actions.setVars('dayElec', dayElec));
-		    dispatch(actions.setVars('month', month));
-		    dispatch(actions.setVars('elecPlan', elecPlan));
-		    dispatch(actions.setVars('elecAct', elecAct));
 		    
 		    $.ajax({
-        		url: 'http://'+ipUrl+'/wbi/PBA/getAreaPBA',//PBA
+        		url: 'http://'+ipUrl+'/wbi/PBA/getAreaPBA',//查询ID-PBA
 		        type: 'post',
 		        async:false,
 		        data:{'groupid':areaId[key],'type':1},
@@ -431,34 +360,26 @@ const mapDispatchToProps = (dispatch) => {
 			　　　　}
 			　　},
 		    });
-		    dispatch(actions.setVars('elecActPBA', elecActPBA));
-		    dispatch(actions.setVars('elecPlanPBA', elecPlanPBA));
-		    dispatch(actions.setVars('sortArr', sortArr));
 		    
-		    $.ajax({
-        		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA-YES
-		        type: 'post',
-		        async:false,
-		        data:{'groupid':areaId[key]},
-		        dataType: 'json',//here
-		        success:function (data) {
-		        	runTime=data.data[0].runtimes;
-		        	downTime=data.data[0].downtimes;
-		        	TBA=data.data[0].tba;
-		        },
-		        complete : function(XMLHttpRequest,status){ 
-			　　　　if(status=='timeout'){
-			　　　　　 alert('超时');
-			　　　　}
-			　　},
-		    });
-		    dispatch(actions.setVars('runTime', runTime));
-		    dispatch(actions.setVars('downTime', downTime));
-		    dispatch(actions.setVars('TBA', TBA));
+//		    $.ajax({
+//      		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA-YES
+//		        type: 'post',
+//		        async:false,
+//		        data:{'groupid':areaId[key]},
+//		        dataType: 'json',//here
+//		        success:function (data) {
+//		        	runTime=data.data[0].runtimes;
+//		        	downTime=data.data[0].downtimes;
+//		        	TBA=data.data[0].tba;
+//		        },
+//		        complete : function(XMLHttpRequest,status){ 
+//			　　　　if(status=='timeout'){
+//			　　　　　 alert('超时');
+//			　　　　}
+//			　　},
+//		    });
         	
             dispatch(actions.setVars('actb',key ));
-            dispatch(actions.setVars('big',value.big ));
-            dispatch(actions.setVars('small',value.small ));
         },
         changepageHealthyT:()=>{
         	dispatch(actions.setVars('showPage', 'healthyregins'));

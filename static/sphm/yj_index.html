@@ -532,6 +532,10 @@
 	                url: window.JFApiDomian + '/alarmInfo_getWfName.do',
 	                cache: false,
 	                dataType: 'jsonp',
+	                xhrFields: {
+	                    withCredentials: true
+	                },
+	                crossDomain: true,
 	                complete: function () {
 	                    layer.closeAll();
 	                },
@@ -626,6 +630,10 @@
 	                url: window.JFApiDomian + '/alarmInfo_getWfName.do',
 	                cache: false,
 	                dataType: 'jsonp',
+	                xhrFields: {
+	                    withCredentials: true
+	                },
+	                crossDomain: true,
 	                complete: function () {
 	                    layer.closeAll();
 	                },
@@ -676,6 +684,10 @@
 	            cache: false,
 	            data: data,
 	            dataType: 'jsonp',
+	            xhrFields: {
+	                withCredentials: true
+	            },
+	            crossDomain: true,
 	            complete: function () {
 	                layer.close(load);
 	            },
@@ -713,6 +725,10 @@
 	            data: json,
 	            contentType: "application/json; charset=utf-8",
 	            dataType: 'json',
+	            xhrFields: {
+	                withCredentials: true
+	            },
+	            crossDomain: true,
 	            complete: function () {
 	                layer.closeAll();
 	            },
@@ -747,6 +763,10 @@
 	        cache: false,
 	        async: true,
 	        dataType: 'jsonp',
+	        xhrFields: {
+	            withCredentials: true
+	        },
+	        crossDomain: true,
 	        complete: function () {
 	            layer.close(index);
 	        },
@@ -884,6 +904,10 @@
 	                url: window.JFApiDomian + '/alarmInfo_getAlarmFallback.do?alarmID=' + currPageJson.pagination.list[Index].alarmID,
 	                cache: false,
 	                dataType: 'jsonp',
+	                xhrFields: {
+	                    withCredentials: true
+	                },
+	                crossDomain: true,
 	                complete: function () {
 	                    layer.close(index)
 	                },
@@ -917,6 +941,10 @@
 	                url: window.JFApiDomian + '/alarmInfo_getAlarmWork.do?customAlarmID=' + currPageJson.pagination.list[Index].customAlarmID,
 	                cache: false,
 	                dataType: 'jsonp',
+	                xhrFields: {
+	                    withCredentials: true
+	                },
+	                crossDomain: true,
 	                success: function (json) {
 	                    var workHtml = '';
 	                    for (var i = 0; i < json.listData[0].works.length; i++) {
@@ -992,6 +1020,10 @@
 	                url: window.JFApiDomian + '/alarmInfo_getAlarmWork.do?customAlarmID=' + currPageJson.pagination.list[Index].customAlarmID,
 	                cache: false,
 	                dataType: 'jsonp',
+	                xhrFields: {
+	                    withCredentials: true
+	                },
+	                crossDomain: true,
 	                success: function (json) {
 	                    var workHtml = '';
 	                    for (var i = 0; i < json.listData[0].works.length; i++) {
@@ -1028,9 +1060,7 @@
 	                                workHtml += '</div>';
 	                        }
 	                    }
-	                    if (json.listData[0].works.length > 1) {
-	                        $(".gd_detail .wrap:eq(2) span:eq(1)").html(currPageJson.pagination.list[Index].customAlarmID == null ? "&nbsp;" : ('<a class="blue" onclick="openjxDetail(' + Index + ')">查看结果</a>'));
-	                    }
+	                    $(".gd_detail .wrap:eq(2) span:eq(1)").html(currPageJson.pagination.list[Index].customAlarmID == null ? "&nbsp;" : ('<a class="blue" onclick="openjxDetail(' + Index + ')">查看结果</a>'));
 	                    $(".liucheng").append(workHtml);
 
 	                    var html = '<div class="wrap"><i></i><label>' + getjfLocalTime(currPageJson.pagination.list[Index].overTime.time) + '</label> <label>完成结项</label><div class="mul_text"><p>结项时间：' + getjfLocalTime(currPageJson.pagination.list[Index].overTime.time)
@@ -1093,6 +1123,10 @@
 	        url: url,
 	        cache: false,
 	        dataType: 'jsonp',
+	        xhrFields: {
+	            withCredentials: true
+	        },
+	        crossDomain: true,
 	        success: function (json) {
 	            if (pageIndex == json.pagination.pageNo) {
 	                currPageJson = json;
@@ -1181,6 +1215,10 @@
             url: window.ApiDomian + '/report/list.json?page=' + (pageIndex) + '&size=10',
             cache: false,
             dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success: function (json) {
                 if (json.state == 1 && json.pagination.pageNo == (pageIndex + 1)) {
                     $(".table_2 .grid tbody tr").remove();
@@ -1254,6 +1292,10 @@
 	        url: window.JFApiDomian + '/alarmInfo_getWtIDOrName.do?wfID=' + $(o).val()+"&userId="+userId,
 	        cache: false,
 	        dataType: 'jsonp',
+	        xhrFields: {
+	            withCredentials: true
+	        },
+	        crossDomain: true,
 	        complete: function () {
 	            layer.close(lay);
 	        },
@@ -1277,9 +1319,13 @@
 	    var index = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
 	    $.ajax({
 	        type: "post",
-	        url: window.JFApiDomian + '/file_getAlarmFileLevel.action',
+	        url: window.JFApiDomian + '/alarmInfo_getAlarmFileLevel.action',
 	        cache: false,
 	        dataType: 'jsonp',
+	        xhrFields: {
+	            withCredentials: true
+	        },
+	        crossDomain: true,
 	        complete: function () {
 	            layer.close(index);
 	        },
@@ -1326,6 +1372,10 @@
             cache: false,
             data: data,
             dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             complete: function () {
                 layer.close(load);
             },
@@ -1358,6 +1408,10 @@
             cache: false,
             data: data,
             dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             complete: function () {
                 layer.close(load);
             },
@@ -1388,6 +1442,10 @@
             url: window.JFApiDomian + '/main_getAlarmInfo.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay()+' 23:59:59',
             cache: false,
             dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success: function (json) {
                 var yAxisData = new Array();
                 var seriesData = new Array();
@@ -1419,6 +1477,10 @@
             url: window.JFApiDomian + '/main_getAlarmSupport.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + ' 23:59:59',
             cache: false,
             dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success: function (json) {
                 for (var o in json.listData) {
                     if (json.listData[o].name == '退回') {
@@ -1449,6 +1511,10 @@
             url: window.JFApiDomian + '/main_getDispatchJob.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + ' 23:59:59',
             cache: false,
             dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success: function (json) {
                 for (var o in json.listData) {
                     if (json.listData[o].name == '待派工' || json.listData[o].name == '已派工') {
@@ -1477,11 +1543,15 @@
             url: window.JFApiDomian + '/main_getExecuteInfo.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + ' 23:59:59',
             cache: false,
             dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success: function (json) {
                 var yAxisData = new Array();
                 var seriesData = new Array();
                 for (var o in json.listData) {
-                    if (json.listData[o].name != '待执行区域排序' && json.listData[o].name != '待执行') {
+                    if (json.listData[o].name == '已执行' || json.listData[o].name == '已结项') {
                         yAxisData.push(json.listData[o].name);
                         seriesData.push(json.listData[o].data);
                     }
@@ -1517,6 +1587,10 @@
             url: window.JFApiDomian + '/alarmInfo_setOverAlarm.do?alarmID=' + currPageJson.pagination.list[currRow.index()].alarmID + '&overUser=' + userId + "&wfState=4&isRight=" + isRight + "&remark=" + remark,
             cache: false,
             dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             complete: function () {
                 layer.close(lay);
             },
@@ -1576,7 +1650,7 @@
         if (currPageJson.pagination.list[index].wfState == 4) {
 
             var isRight = currPageJson.pagination.list[index].isRight || 0;
-
+			$("#jx_detail .d_zql span").html('');
             if (isRight != 0) {
                 for (var i = 0; i < isRight; i = i + 2)
                     $("#jx_detail .d_zql span").append("<a class='active'></a>");
@@ -1592,6 +1666,10 @@
             url: window.JFApiDomian + '/alarmInfo_getAlarmWork.do?customAlarmID=' + currPageJson.pagination.list[index].customAlarmID,
             cache: false,
             dataType: 'jsonp',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success: function (json) {
                 var html, bjhtml, isBj, isRight;
                 for (var i = 1; i < json.listData[0].works.length; i++) {
