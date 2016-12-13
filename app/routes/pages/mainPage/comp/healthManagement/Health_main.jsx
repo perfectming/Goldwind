@@ -15,17 +15,18 @@ let Component = React.createClass({
         this.props.init();
         timer = setInterval(function(){
             changekey()
-        },5000)
+        },200)
     },
     componentWillUnmount: function(){
         clearInterval(timer);
     },
     render() {
         let {} = this.props;
+            return(
+                <iframe id="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
+            )
 
-        return(
-            <iframe id="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
-        )
+
 
     }
 });

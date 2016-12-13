@@ -382,7 +382,7 @@ let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
 				<div className={`${styles.fanrightbox} ${styles.infofL}`}>
 					<Title title={['状态统计']}></Title>
 					<div className={styles.fanaction}>
-						<div className={styles.parts} onClick = {()=> tobujian()}></div>
+						<div className={styles.parts} onClick = {()=> tobujian(val)}></div>
 						<div className={styles.actionbox}>
 							<div>启动</div>
 							<div>停机</div>
@@ -493,8 +493,7 @@ const mapDispatchToProps = (dispatch) => {
                         }
                         TY.getRtData("WTDetail", value.Wtid, setData4)
                     // }
-                    
-                    
+         
            }, 3000)
 		 s = null;
 //   $.ajax({
@@ -533,9 +532,9 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        tobujian:()=>{
+        tobujian:(val)=>{
         	dispatch(actions.setVars('fan_page', 'fanobj'));
-
+        	dispatch(actions.setVars('Wtid', val));
         }
         
     };

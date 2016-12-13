@@ -45,7 +45,8 @@ let Component = React.createClass({
                 title: {
                     text: '('+unit+')',
                     style: {
-                        color: '#ffffff'
+                        color: '#ffffff',
+                        fontSize:'10px'
                     },
                     align: 'high',
                     rotation: 1,
@@ -91,11 +92,18 @@ let Component = React.createClass({
             series: [{
                 name:'计划发电量',
                 data: njhfdl,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
             },{
                 name:'实际发电量',
                 data: nsjfdl,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
+
             }]
         };
         return (

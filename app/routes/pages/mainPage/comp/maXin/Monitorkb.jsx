@@ -73,17 +73,17 @@ let Component = React.createClass({
             (function(){
                 for(let i in mobd){
                     if(mobd[i].YearCO2Emissions){
-                        gswcl1=(Number((mobd[i].MonthEgyAt/mobd[i].CurMonthPlanEgyAt).toFixed(2)));
+                        gswcl1=(Number((mobd[i].MonthEgyAt/mobd[i].CurMonthPlanEgyAt*100).toFixed(2)));
                     }
                 }
             }());
             (function(){
                 for(let i in mobd){
                     if (mobd[i].PVTSI_Aver && !mobd[i].YearCO2Emissions){
-                        arr.push(mobd[i].Capacity/1);
+                        arr.push(Number((mobd[i].Capacity*mod.Capacity.coeff).toFixed(mod.Capacity.place)));
                         czjhfdl.push(Number((mobd[i].CurMonthPlanEgyAt*mod.CurMonthPlanEgyAt.coeff).toFixed(mod.CurMonthPlanEgyAt.place)));
                         czsjfdl.push(Number((mobd[i].MonthEgyAt*mod.MonthEgyAt.coeff).toFixed(mod.MonthEgyAt.place)));
-                        czwcl1.push(Number((mobd[i].MonthEgyAt/mobd[i].CurMonthPlanEgyAt).toFixed(2)));
+                        czwcl1.push(Number((mobd[i].MonthEgyAt/mobd[i].CurMonthPlanEgyAt*100).toFixed(2)));
                         gswcl2.push(gswcl1);
                         czgzss1.push(Number((mobd[i].MonthLossElec.Fault*mod.MonthLossElec.coeff).toFixed(mod.MonthLossElec.place)));
                         czwhss1.push(Number((mobd[i].MonthLossElec.Maintain*mod.MonthLossElec.coeff).toFixed(mod.MonthLossElec.place)));
@@ -113,42 +113,42 @@ let Component = React.createClass({
             let urodz = new Date("11/12/2015");
             let now = new Date();let ile = now.getTime() - urodz.getTime();
             let dni = Math.floor(ile / (1000 * 60 * 60 * 24));
-
             return(
                 <div className={styles.bodyBox}>
                     <div className={`${styles.zhzb} ${styles.box_shadow}`}>
                         <Title title={['综合指标']}></Title>
                         <div className={styles.zhzbdown}>安全运行天数
-                            <span className={styles.daynum}> {dni}</span> 天
+                            <span className={styles.daynum}> {dni}</span>
+                            <span className={styles.danweicc}>天</span>
                         </div>
                         <div className={styles.zhzbtop}>
-                            <div className={styles.zhzbtopbox}><div>当前功率</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].TActPower)*mod.TActPower.coeff).toFixed(mod.TActPower.place)}</span>{mod.TActPower.unit}</div>
-                            <div className={styles.zhzbtopbox}><div>{mod.Capacity.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].Capacity)*mod.Capacity.coeff).toFixed(mod.Capacity.place)}</span>{mod.Capacity.unit}</div>
-                            <div className={styles.zhzbtopbox}><div>{mod.DayEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].DayEgyAt)*mod.DayEgyAt.coeff).toFixed(mod.DayEgyAt.place)}</span>{mod.DayEgyAt.unit}</div>
-                            <div className={styles.zhzbtopbox}><div>风机功率</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].TActPower)*mod.TActPower.coeff).toFixed(mod.TActPower.place)}</span>{mod.TActPower.unit}</div>
-                            <div className={styles.zhzbtopbox}><div>{mod.WindSpeed_DevAverValue.name}</div> <span className={styles.zhzbtopboxg}>{ kbpjfs === "NaN" ? "--": kbpjfs}</span>{mod.WindSpeed_DevAverValue.unit}</div>
-                            <div className={styles.zhzbtopbox}><div>{mod.MonthEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].MonthEgyAt)*mod.MonthEgyAt.coeff).toFixed(mod.MonthEgyAt.place)}</span>{mod.MonthEgyAt.unit}</div>
-                            <div className={styles.zhzbtopbox}><div>光伏功率</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888802].TActPower)*mod.TActPower.coeff).toFixed(mod.TActPower.place)}</span>{mod.TActPower.unit}</div>
-                            <div className={styles.zhzbtopbox}><div>{mod.PVTSI_Aver.name}</div> <span className={styles.zhzbtopboxg}>{kbpjfzd === "NaN" ? "--": kbpjfzd}</span>W/㎡</div>
-                            <div className={styles.zhzbtopbox}><div>{mod.YearEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].YearEgyAt)*mod.YearEgyAt.coeff).toFixed(mod.YearEgyAt.place)}</span>{mod.YearEgyAt.unit}</div>
+                            <div className={styles.zhzbtopbox}><div>当前功率</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].TActPower)*mod.TActPower.coeff).toFixed(mod.TActPower.place)}</span><span className={styles.danweicc}>{mod.TActPower.unit}</span></div>
+                            <div className={styles.zhzbtopbox}><div>{mod.Capacity.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].Capacity)*mod.Capacity.coeff).toFixed(mod.Capacity.place)}</span><span className={styles.danweicc}>{mod.Capacity.unit}</span></div>
+                            <div className={styles.zhzbtopbox}><div>{mod.DayEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].DayEgyAt)*mod.DayEgyAt.coeff).toFixed(mod.DayEgyAt.place)}</span><span className={styles.danweicc}>{mod.DayEgyAt.unit}</span></div>
+                            <div className={styles.zhzbtopbox}><div>风机功率</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].TActPower)*mod.TActPower.coeff).toFixed(mod.TActPower.place)}</span><span className={styles.danweicc}>{mod.TActPower.unit}</span></div>
+                            <div className={styles.zhzbtopbox}><div>{mod.WindSpeed_DevAverValue.name}</div> <span className={styles.zhzbtopboxg}>{ kbpjfs === "NaN" ? "--": kbpjfs}</span><span className={styles.danweicc}>{mod.WindSpeed_DevAverValue.unit}</span></div>
+                            <div className={styles.zhzbtopbox}><div>{mod.MonthEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].MonthEgyAt)*mod.MonthEgyAt.coeff).toFixed(mod.MonthEgyAt.place)}</span><span className={styles.danweicc}>{mod.MonthEgyAt.unit}</span></div>
+                            <div className={styles.zhzbtopbox}><div>光伏功率</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888802].TActPower)*mod.TActPower.coeff).toFixed(mod.TActPower.place)}</span><span className={styles.danweicc}>{mod.TActPower.unit}</span></div>
+                            <div className={styles.zhzbtopbox}><div>{mod.PVTSI_Aver.name}</div> <span className={styles.zhzbtopboxg}>{kbpjfzd === "NaN" ? "--": kbpjfzd}</span><span className={styles.danweicc}>W/㎡</span></div>
+                            <div className={styles.zhzbtopbox}><div>{mod.YearEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].YearEgyAt)*mod.YearEgyAt.coeff).toFixed(mod.YearEgyAt.place)}</span><span className={styles.danweicc}>{mod.YearEgyAt.unit}</span></div>
                         </div>
 
                     </div>
                     <div className={`${styles.zhzbgl} ${styles.box_shadow}`}>
                         <Title title={['综合指标概览']}></Title>
                         <div className={styles.zhzbglmain}>
-                            <div className={styles.zhzbglbox}><p>年发电完成率</p><Pie2 color={zhzbgl1>100? ['#1fe005','#39565e']:zhzbgl1>80?['#fbd500','#39565e']:zhzbgl1>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl1>100? {color:'#1fe005'} :zhzbgl1>80?{color:'#fbd500'}:zhzbgl1>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl1}%</p></span></div>
-                            <div className={styles.zhzbglbox}><p>年发电能力</p><Pie2 color={zhzbgl2>100? ['#1fe005','#39565e']:zhzbgl2>80?['#fbd500','#39565e']:zhzbgl2>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1+mobd[8888800].YearLossElec.Sum/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl2>100? {color:'#1fe005'} :zhzbgl2>80?{color:'#fbd500'}:zhzbgl2>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl2}%</p></span></div>
-                            <div className={styles.zhzbglbox}><p>月发电完成率</p><Pie2 color={zhzbgl3>100? ['#1fe005','#39565e']:zhzbgl3>80?['#fbd500','#39565e']:zhzbgl3>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].MonthEgyAt),Number(mobd[8888800].CurMonthPlanEgyAt/1-mobd[8888800].MonthEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl3>100? {color:'#1fe005'} :zhzbgl3>80?{color:'#fbd500'}:zhzbgl3>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl3}%</p></span></div>
-                            <div className={styles.zhzbglbox}><p>弃风率</p><Pie2 color={zhzbgl4>100? ['#d06960','#39565e']:zhzbgl4>80?['#ff0000','#39565e']:zhzbgl4>60?['#fbd500','#39565e']:['#1fe005','#39565e']} num={[Number(mobd[8888801].MonthLossElec.Sum),Number(mobd[8888801].MonthEgyAt/1-mobd[8888801].MonthLossElec.Sum/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl4>100? {color:'#d06960'} :zhzbgl4>80?{color:'#ff0000'}:zhzbgl4>60?{color:'#fbd500'}:{color:'#1fe005'}}>{zhzbgl4}%</p></span></div>
-                            <div className={styles.zhzbglbox}><p>弃光率</p><Pie2 color={zhzbgl5>100? ['#d06960','#39565e']:zhzbgl5>80?['#ff0000','#39565e']:zhzbgl5>60?['#fbd500','#39565e']:['#1fe005','#39565e']} num={[Number(mobd[8888802].MonthLossElec.Sum),Number(mobd[8888802].MonthEgyAt/1-mobd[8888802].MonthLossElec.Sum/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl5>100? {color:'#d06960'} :zhzbgl5>80?{color:'#ff0000'}:zhzbgl5>60?{color:'#fbd500'}:{color:'#1fe005'}}>{zhzbgl5}%</p></span></div>
+                            <div className={styles.zhzbglbox}><p>年发电完成率</p><Pie2 color={zhzbgl1>100? ['#1fe005','#39565e']:zhzbgl1>80?['#fbd500','#39565e']:zhzbgl1>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl1>100? {color:'#1fe005'} :zhzbgl1>80?{color:'#fbd500'}:zhzbgl1>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl1}<span className={styles.danweicc}>%</span></p></span></div>
+                            <div className={styles.zhzbglbox}><p>年发电能力</p><Pie2 color={zhzbgl2>100? ['#1fe005','#39565e']:zhzbgl2>80?['#fbd500','#39565e']:zhzbgl2>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1+mobd[8888800].YearLossElec.Sum/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl2>100? {color:'#1fe005'} :zhzbgl2>80?{color:'#fbd500'}:zhzbgl2>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl2}<span className={styles.danweicc}>%</span></p></span></div>
+                            <div className={styles.zhzbglbox}><p>月发电完成率</p><Pie2 color={zhzbgl3>100? ['#1fe005','#39565e']:zhzbgl3>80?['#fbd500','#39565e']:zhzbgl3>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].MonthEgyAt),Number(mobd[8888800].CurMonthPlanEgyAt/1-mobd[8888800].MonthEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl3>100? {color:'#1fe005'} :zhzbgl3>80?{color:'#fbd500'}:zhzbgl3>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl3}<span className={styles.danweicc}>%</span></p></span></div>
+                            <div className={styles.zhzbglbox}><p>弃风率</p><Pie2 color={zhzbgl4>100? ['#d06960','#39565e']:zhzbgl4>80?['#ff0000','#39565e']:zhzbgl4>60?['#fbd500','#39565e']:['#1fe005','#39565e']} num={[Number(mobd[8888801].MonthLossElec.Sum),Number(mobd[8888801].MonthEgyAt/1-mobd[8888801].MonthLossElec.Sum/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl4>100? {color:'#d06960'} :zhzbgl4>80?{color:'#ff0000'}:zhzbgl4>60?{color:'#fbd500'}:{color:'#1fe005'}}>{zhzbgl4}<span className={styles.danweicc}>%</span></p></span></div>
+                            <div className={styles.zhzbglbox}><p>弃光率</p><Pie2 color={zhzbgl5>100? ['#d06960','#39565e']:zhzbgl5>80?['#ff0000','#39565e']:zhzbgl5>60?['#fbd500','#39565e']:['#1fe005','#39565e']} num={[Number(mobd[8888802].MonthLossElec.Sum),Number(mobd[8888802].MonthEgyAt/1-mobd[8888802].MonthLossElec.Sum/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl5>100? {color:'#d06960'} :zhzbgl5>80?{color:'#ff0000'}:zhzbgl5>60?{color:'#fbd500'}:{color:'#1fe005'}}>{zhzbgl5}<span className={styles.danweicc}>%</span></p></span></div>
                         </div>
                     </div>
                     <div className={`${styles.czrlzb} ${styles.box_shadow}`}>
                         <Title title={['场站容量占比']}></Title>
                         <div className={styles.czrlzdmain}>
-                            <Pie1 arrname1={arrname} num1={num}></Pie1>
-                            <span className={styles.chartnum}><p>{Number(allnum*mod.Capacity.coeff).toFixed(mod.Capacity.place)}</p><p>{mod.Capacity.unit}</p></span>
+                            <Pie1 arrname1={arrname} num1={num} unit={mod.Capacity.unit}></Pie1>
+                            <span className={styles.chartnum}><p>{Number(allnum)}</p><p className={styles.danweicc}>{mod.Capacity.unit}</p></span>
                         </div>
                     </div>
                     <div className={`${styles.nfdlwcqk} ${styles.box_shadow}`}>
@@ -177,7 +177,12 @@ let Component = React.createClass({
                             <span className={styles.tsstyle2}>12<span className={styles.tsstyled2}>台</span></span>
                             <span className={styles.tsstyle3}>13<span className={styles.tsstyled3}>台</span></span>
                             <span className={styles.tsstyle4}>19<span className={styles.tsstyled4}>台</span></span>
-                            <span className={styles.timestyle}><span>0.2h</span><span>12h</span><span>36h</span><span>72h</span></span>
+                            <span className={styles.timestyle}>
+                                <span className={styles.timestylee}>0.2<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>12<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>36<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>72<span className={styles.danweicc}>h</span></span>
+                            </span>
                         </div>
                     </div>
                     <div className={`${styles.gzsbgl} ${styles.box_shadow}`}>
@@ -239,7 +244,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         changedate:()=>{
-            time=setInterval(function(){
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
             function momo(rdata){
                 dispatch(actions.setVars('moname', rdata));
@@ -253,9 +257,14 @@ const mapDispatchToProps = (dispatch) => {
                         },100)
                     }
                 }
-
             }
-            },2000)
+            time=setInterval(function(){
+                TY.getRtData("MonitorBoard", 8888800, ppo);
+                function ppo(rdata){
+                    dispatch(actions.setVars('modata', rdata));
+                    dispatch(actions.setVars('boole', true));
+                }
+            },1000)
         },
         init: () => {
             dispatch(actions.setVars('navhide', false));
