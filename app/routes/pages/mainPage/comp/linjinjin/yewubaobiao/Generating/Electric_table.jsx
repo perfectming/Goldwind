@@ -5,7 +5,7 @@ import jian from '../../../../img/comp/jian_icon.png';
 import add from '../../../../img/comp/add_icon.png';
 import Column from './colum.jsx';
 let type = require('./ywbb_date');
-let btype = type.comps.from;
+let btype = type.comps.elect_table;
 var $ =require('jquery');
 var actions = require('redux/actions');
 
@@ -122,7 +122,7 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.righttable}>
                     <div className={styles.tablebox} id='tablebox'>
-                        <div className={styles.tabtit} id='tablist'>
+                        <div className={styles.tabtit} id='tablist' style={{width:'100%'}}>
                         {
                             select_list !== undefined && select_list.param.map((value,key)=>{
                                 if(key==0){
@@ -131,7 +131,7 @@ let Component = React.createClass({
                                         ) 
                                     }else if(key==1){
                                         return(
-                                        <span key={key} style={{width:'301px'}}>{value}</span>
+                                        <span key={key} style={{width:'401px'}}>{value}</span>
                                         ) 
                                     }else{
                                         return(
@@ -141,7 +141,7 @@ let Component = React.createClass({
                             })
                         }
                         </div>
-                        <div  className={styles.tabline} id='tabline'></div>
+                        <div  className={styles.tabline} id='tabline' style={{width:'100%'}}></div>
                     </div>
                     <div className={styles.columnbox}>
                      { chtnum !==undefined && <Column cnum={chtnum} cname={chtname} ctit={chtit} ></Column> }
@@ -196,12 +196,12 @@ const mapDispatchToProps = (dispatch) => {
                     alert('请选择开始或者结束时间');
                 }else{
                 allnum.map(function(value,key){
-                    $('#tabline').append('<div></div>');
+                    $('#tabline').append('<div style="width:100%"></div>');
                    
                     value.map(function(valueC,keyC){
                         $('#tabline>div').eq(key).append('<span>'+valueC+'</span>')
                         $('#tabline>div').eq(key).find('span').eq(0).width(80);
-                        $('#tabline>div').eq(key).find('span').eq(1).width(300);
+                        $('#tabline>div').eq(key).find('span').eq(1).width(400);
                     })
                     if(key%2==0){
                         $('#tabline>div').eq(key).css('background','#30343f')
@@ -216,7 +216,6 @@ const mapDispatchToProps = (dispatch) => {
             })
         },
         init: () => {
-           
             //初始化日期
             var date = new Date();
             var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
@@ -224,12 +223,6 @@ const mapDispatchToProps = (dispatch) => {
             //获取今天与明天的日期
             $('#startTime').val(dateString);
             $('#endTime').val(dateString1)
-           
-
-
-
-
-
             //初始化选中数组
             allnum=[];
             //初始化highchart数据与表格数据

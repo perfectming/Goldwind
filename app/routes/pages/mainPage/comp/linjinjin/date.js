@@ -510,7 +510,9 @@ module.exports = {
             name: '场站等效利用小时数',
             color: '#70C080',
             type: 'column',
-         
+            tooltip: {
+                valueSuffix: 'h'
+            },
             data:  [20437,21805,24247,25271,27383,29653],
             
         }],
@@ -558,7 +560,9 @@ module.exports = {
             name: '场站MTBF',
             color: '#70C080',
             type: 'column',
-         
+            tooltip: {
+                valueSuffix: 'h'
+            },
             data:  [20437,21805,24247,25271,27383,29653],
             
         }],
@@ -604,7 +608,9 @@ module.exports = {
             name: '故障类型占比',
             
             type: 'pie',
-         
+            tooltip: {
+                valueSuffix: '%'
+            },
             data: [['故障',10],['维护',20],['限功率',10],['非设备原因',60]]
             
         }],

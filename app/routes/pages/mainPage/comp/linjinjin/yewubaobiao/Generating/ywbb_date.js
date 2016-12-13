@@ -1,5 +1,113 @@
 module.exports = {
 	 comps:{
+        elect_table:[
+            {
+                type: 'select',
+                content: '这是一个下拉选择框',
+                id: 'input3',
+                valueName:'设备类型',
+                select: [
+                    {
+                        name:'电能表',
+                        param:[
+                            '序号',
+                            '设备名称',
+                            '有功统计',
+                            '无功统计',
+                            ],
+                        arr:[
+                           {
+                            name:'中国',
+                            arr:[
+                                {
+                                  name:'巴盟风电场集合',
+                                  arr:[
+                                        {
+                                            name:'川井风电场',
+                                            arr:[
+                                                {
+                                                    name:'35601风机',
+                                                    arr:[
+                                                            '1',
+                                                            '中国/巴盟风电场集合/川井风电场/35601风机',
+                                                            25642,
+                                                            33500,
+                                                        ]
+                                                },
+                                                {
+                                                    name:'35602风机',
+                                                    arr:[
+                                                            '2',
+                                                            '中国/巴盟风电场集合/川井风电场/35601风机',
+                                                            36254,
+                                                            24562,
+                                                        ]
+                                                },
+                                            ]
+                                        },
+                                         {
+                                            name:'敖包风电场',
+                                            arr:[
+                                                {
+                                                    name:'35101风机',
+                                                    arr:[
+                                                            '3',
+                                                            '中国/巴盟风电场集合/川井风电场/35101风机',
+                                                            45625,
+                                                            33500,
+                                                        ]
+                                                },
+                                                {
+                                                    name:'35102风机',
+                                                    arr:[
+                                                            '4',
+                                                            '中国/巴盟风电场集合/川井风电场/35102风机',
+                                                            33265,
+                                                            55421,
+                                                        ]
+                                                },
+                                            ]
+                                        },
+                                         
+                                    ]
+                                
+                                },
+                               
+                            ] 
+                          },
+                           
+                        ],
+                    }]
+            },
+           
+            {
+                type: 'date',
+                content: '这是一个时间选择框',
+                id: 'date',
+                width: 140,
+                height:30,
+            },
+            
+            {
+                type: 'button',
+                content: '这是一个button',
+                id: 'button',
+                title: '查询',
+            },
+            {
+                type: 'button',
+                content: '这是一个button',
+                id: 'button',
+                title: '设置参数',
+            },
+            {
+                type: 'button',
+                content: '这是一个button',
+                id: 'button',
+                title: '导出Excel',
+            },
+            
+        ],
         from:[
             
             {
@@ -643,7 +751,7 @@ module.exports = {
                 type: 'date',
                 content: '这是一个时间选择框',
                 id: 'date',
-                width: 120,
+                width: 140,
                 height:30,
             },
             
