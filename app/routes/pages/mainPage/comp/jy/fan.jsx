@@ -18,12 +18,7 @@ var $ = require('jquery');
 let pack=['pack_WROT','pack_WNAC','pack_WGEN','pack_WTPS','pack_WYAW','pack_WTCS','pack_WCNV','pack_WTRF','pack_WTUR','pack_WTGS'];
 let arr=[bg1,bg2,bg3,bg4,bg5,bg6,bg7,bg8];
 let Component = React.createClass({
-    componentWillMount() {
-        let{vid,act1=0}=this.props;
-        this.props.changeDate(vid,act1);
-    },
     componentWillUnmount() {
-        // clearInterval(time)
     },
     componentDidMount() {
         this.props.init();
@@ -31,20 +26,19 @@ let Component = React.createClass({
 
     render() {
         let {vid,  changetab, act1=0, boolFan = false, bujianModel, bujianData} = this.props;
+        this.props.changeDate(vid,act1);
         if (boolFan) {
-            console.log(bujianModel, bujianData,pack[act1]);
             var forIn=[];
             var forOut=[];
             for(let key in bujianData.ModelData){
                 var diks=key;
             }
             for(let key in bujianModel.Model.dis){
-                ((key.slice(0,4)=='WCNV')&&(key.slice(0,9)!='WCNV.Bool'))&& forIn.push(key);
+                (key[14]&&key.slice(5,9)!='Bool')&& forIn.push(key);
             }
             for(let key in bujianModel.Model.dis){
-                (key.slice(0,9)=='WCNV.Bool')&& forOut.push(key);
+                (key.slice(5,9)==='Bool')&& forOut.push(key);
             }
-            console.log(forIn,forOut);
             return (
                 <div className={styles.bodyBox} id="fanJy">
                     <div className={styles.fanidbox}>
@@ -61,13 +55,22 @@ let Component = React.createClass({
                         <div className={styles.action1box}>
                             {
                                 forIn.map((value, key)=> {
+                                    if(bujianData.ModelData){
                                     return (
                                         <div className={styles.fandatabox} key={key}>
                                             <span>{bujianModel.Model.dis[value].name}</span>
                                             <span
                                                 className={styles.numbox}><span>{(bujianData.ModelData[diks][bujianModel.Model.dis[value].path])?(bujianData.ModelData[diks][bujianModel.Model.dis[value].path]):'--'}</span><span>单位</span></span>
                                         </div>
-                                    )
+                                    )}else {
+                                        return(
+                                            <div className={styles.fandatabox} key={key}>
+                                                <span>{bujianModel.Model.dis[value].name}</span>
+                                                <span
+                                                    className={styles.numbox}><span>--</span><span>单位</span></span>
+                                            </div>
+                                        )
+                                    }
                                 })
                             }
                         </div>
@@ -113,13 +116,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         changeDate:(vid,act1)=>{
-            console.log(vid,act1)
-            // time=setInterval(function(){
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, "WTDetail", setData, "Screen", 0);
             function setData(rdata) {
                 // dispatch(actions.setVars('bool', true));
                 // dispatch(actions.setVars('modata', rdata));
                 // dispatch(actions.setVars('fan_page', 'fanobj'));
+                if (rdata.Model){
                 var sk = rdata.Model.ens[vid].sk;
                 TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, sk, setDatas, "Screen", 0);
                 function setDatas(rdata) {
@@ -130,18 +132,15 @@ const mapDispatchToProps = (dispatch) => {
                     var pkscs = rdata.Model.prs[key].pkscs;
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, pkscs[pack[act1]].scid, setDataDo, "Screen", 0);
                     function setDataDo(rdata) {
-                        console.log(rdata);
                         dispatch(actions.setVars('bujianModel', rdata));
                         TY.getRtData(pkscs[pack[act1]].scid, vid, setDatafin);
                         function setDatafin(rdata) {
-                            console.log(rdata);
                             dispatch(actions.setVars('bujianData', rdata));
                             dispatch(actions.setVars('boolFan', true));
                         }
                     }
-                }
+                }}
             }
-            // },2000)
         },
         init: () => {
         },

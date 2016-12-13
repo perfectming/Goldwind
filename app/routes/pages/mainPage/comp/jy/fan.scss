@@ -85,7 +85,7 @@
     .infoBox{
       overflow: hidden;
       color:#999;
-      background:#292F36;
+      background:#202030;
       white-space:nowrap;
       span{
         display: inline-block;
@@ -94,10 +94,13 @@
         color:#fff;
       }
       .statusquery{
-        width: 100%;
+        width: 1700px;
         overflow: hidden;
         .bgbox{
           background: #30343D;
+        }
+        .nomalbox{
+          background: #292F36;
         }
         .statusquerybox{
           float: left;
