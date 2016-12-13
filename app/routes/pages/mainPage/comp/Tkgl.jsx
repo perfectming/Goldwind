@@ -46,7 +46,7 @@ let Component = React.createClass({
             let plan=0,power=0,allC=0;
             return (
                 <div className={styles.tkglBox}>
-                    <span onClick={openAGC} className={styles.agc}>AGC调节</span>
+                    <span className={styles.mw}>(MW)</span><span onClick={openAGC} className={styles.agc}>AGC调节</span>
                     <div className={styles.tableBox} id="AGC">
                         <div className={styles.tableHeaderBox}>
                             {
