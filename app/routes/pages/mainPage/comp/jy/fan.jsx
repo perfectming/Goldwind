@@ -10,13 +10,14 @@ import bg5 from '../../img/icon/5.png';
 import bg6 from '../../img/icon/6.png';
 import bg7 from '../../img/icon/7.png';
 import bg8 from '../../img/icon/8.png';
+import bg9 from '../../img/icon/9.png';
 import Tom from '../../img/comp/succ.png';
 import Jerry from '../../img/comp/defa.png';
 
 var actions = require('redux/actions');
 var $ = require('jquery');
-let pack=['pack_WROT','pack_WNAC','pack_WGEN','pack_WTPS','pack_WYAW','pack_WTCS','pack_WCNV','pack_WTRF','pack_WTUR','pack_WTGS'];
-let arr=[bg1,bg2,bg3,bg4,bg5,bg6,bg7,bg8];
+let pack=['pack_WROT','pack_WNAC','pack_WGEN','pack_WTPS','pack_WYAW','pack_WTCS','pack_WCNV','pack_WTRF','pack_WTGS'];
+let arr=[bg1,bg2,bg3,bg4,bg5,bg6,bg7,bg8,bg9];
 let Component = React.createClass({
     componentWillUnmount() {
     },
@@ -81,7 +82,7 @@ let Component = React.createClass({
                                 forOut.map((value, key)=> {
                                     return (
                                         <div key={key}
-                                             className={`${key % 10 < 5 ? styles.bgbox : styles.nomalbox} ${styles.statusquerybox}`}>
+                                             className={`${key % 12 < 6 ? styles.bgbox : styles.nomalbox} ${styles.statusquerybox}`}>
                                             <span><img src={value[1] == 0 ? Jerry : Tom}/>{bujianModel.Model.dis[value].name}</span>
                                         </div>
                                     )
