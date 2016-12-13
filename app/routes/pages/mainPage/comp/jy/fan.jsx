@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './fan.scss';
-import Title from '../super/Title.jsx';
 import Login from '../../../../../components/common/Loading.jsx';
 import bg1 from '../../img/icon/1.png';
 import bg2 from '../../img/icon/2.png';
@@ -16,10 +15,6 @@ import Jerry from '../../img/comp/defa.png';
 
 var actions = require('redux/actions');
 var $ = require('jquery');
-let addtest = require('../../../../../../config/MatrixData');
-let adisdfa= require('./data');
-let adsI=adisdfa.fan;
-let time;
 let pack=['pack_WROT','pack_WNAC','pack_WGEN','pack_WTPS','pack_WYAW','pack_WTCS','pack_WCNV','pack_WTRF','pack_WTUR','pack_WTGS'];
 let arr=[bg1,bg2,bg3,bg4,bg5,bg6,bg7,bg8];
 let Component = React.createClass({
@@ -35,7 +30,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {vid,  changetab, act1=0, boolFan = false, fanid, bujianModel, bujianData} = this.props;
+        let {vid,  changetab, act1=0, boolFan = false, bujianModel, bujianData} = this.props;
         if (boolFan) {
             console.log(bujianModel, bujianData,pack[act1]);
             var forIn=[];
