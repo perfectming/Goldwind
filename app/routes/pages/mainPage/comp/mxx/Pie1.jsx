@@ -11,7 +11,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{arrname1,num1}=this.props;
+        let{arrname1,num1,unit}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -61,7 +61,10 @@ let Component = React.createClass({
                 type: 'pie',
                 name: "场站容量",
                 data: num1,
-                style: {     fontSize:"20px",  }
+                style: {     fontSize:"20px",  },
+                tooltip: {
+                    valueSuffix: unit
+                }
             }]
         };
         return (

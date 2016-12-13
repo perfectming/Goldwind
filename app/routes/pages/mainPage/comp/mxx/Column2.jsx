@@ -113,15 +113,24 @@ let Component = React.createClass({
             series: [{
                 name:'故障损失',
                 data: czgzss,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
             },{
                 name:'维护损失',
                 data: czwhss,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
             },{
                 name:'限电损失',
                 data: czxdss,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
             }]
         };
         return (

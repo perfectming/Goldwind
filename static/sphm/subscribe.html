@@ -102,6 +102,10 @@
                     url: window.JFApiDomian + '/alarmInfo_getWfName.do',
                     cache: false,
                     dataType: 'jsonp',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     success: function (json) {
                         for (var o in json.listData) {
                             $(".pp:eq(1) .wrap").append('<p>' + json.listData[o].wfName + '<span><input type="checkbox" value="' + json.listData[o].wfid + '" name="fc" class="chk" /></span></p>');
@@ -126,6 +130,10 @@
                     url: window.ApiDomian + '/subscribe/list.json?page=0&size=9999999',
                     cache: false,
                     dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     success: function (json) {
                         if (json.state == 1) {
                             jsonList = json.pagination.list;
@@ -212,6 +220,10 @@
                     url: window.ApiDomian + "/subscribe/delete.json?id=" + _id,
                     cache: false,
                     dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     complete: function () {
                         layer.close(delLayer);
                     },
@@ -287,6 +299,10 @@
                 contentType: "application/json; charset=utf-8",
                 cache: false,
                 dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 complete: function () {
                     layer.close(infoLayer);
                 },

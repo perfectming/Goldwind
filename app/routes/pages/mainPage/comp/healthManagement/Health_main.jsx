@@ -22,10 +22,11 @@ let Component = React.createClass({
     },
     render() {
         let {} = this.props;
+            return(
+                <iframe id="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
+            )
 
-        return(
-            <iframe id="myFrame" className={styles.bodyBox} src="../../../static/sphm/Healthy_index.html" scrolling="no"></iframe>
-        )
+
 
     }
 });

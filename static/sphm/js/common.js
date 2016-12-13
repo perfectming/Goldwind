@@ -267,3 +267,8 @@ function getjfLocalTime(nS) {
 
     return getLocalTime(nS.substr(1, nS.length - 5));
 }
+
+
+function GetAllUrl(url){
+	return url+"&userId="+userId;
+}
