@@ -8,8 +8,6 @@ import Pie2 from '../../mxx/Pie2';
 
 var actions = require('redux/actions');
 var $ =require("jQuery");
-
-
 let data=Instrumentdata;
 let sort1=data.sort2;
 

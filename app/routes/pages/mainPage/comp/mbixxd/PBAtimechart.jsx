@@ -53,7 +53,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-               
+                valueSuffix:'kWh'
             },
             credits: {
                 enabled: false
@@ -106,11 +106,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'(kWh)',
+                text:'kWh',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 45,
+                x: 40,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -197,6 +197,9 @@ let Component = React.createClass({
                     pointWidth: 15,
                     shadow:'true',
                     yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
                   
                 },
             ]

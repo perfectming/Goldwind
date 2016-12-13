@@ -2,17 +2,43 @@
     overflow:hidden;
     padding:10px;
     padding-right:40px;
+  
     .bigbox:hover{
     box-shadow:0 0 15px #fff;
     }
+    .padding{
+  
+    height:23px;
+    }
+    .back{
+   float:right;
+    
+       align-items:center;
+       color: #20FEFF;
+       color:#fff;
+       border:1px solid #20FEFF;
+       width:100px;
+       height:40px;
+       line-height:40px;
+       position:relative;
+       top:-8px;
+       right:0;
+       border-radius:45px;
+
+      cursor:pointer;
+       text-align:center;
+    }
+    .back:hover{
+     box-shadow:0px 0px 10px  #20FEFF;
+     color:#20FEFF
+    }
     .bigbox{
-    margin-top:50px;
     height:100%;
     width:100%;
     border:1px solid #282F37;
     position:relative;
     margin:10px auto;
-    margin-top:32px;
+    margin-top:15px;
      background: rgba(44, 61, 71,0.4);
       .coverbox{
         margin-top:20px;

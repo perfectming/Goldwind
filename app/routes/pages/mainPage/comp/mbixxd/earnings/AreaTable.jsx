@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
+var $=require('jquery');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Profit-data');
@@ -9,15 +10,18 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaName,areaRecordCost,areaRecordProfit,TBA,text,w11,changedataq,}=this.props;
+        let {areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,}=this.props;
+       
+        
         let configPie = {
             chart: {
                 height:370,
+
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                paddingLeft:100,
+                paddingLeft:0,
                
             },
             title: {
@@ -35,7 +39,7 @@ let Component = React.createClass({
 
             //图例说明
             legend: {
-                x:-75,
+               x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -50,7 +54,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-              
+              valueSuffix:'元'
             },
             credits: {
                 enabled: false
@@ -60,16 +64,141 @@ let Component = React.createClass({
             
             plotOptions: {
                 column: {
-                    pointWidth: 25
+                    pointWidth: 30
                 },
                 series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            w11=e.point.category;
+                            
+                             w11=e.point.category;
+                         var     index=e.point.index;
+                            var w111=windFiedN;
+                            // console.log(e.point.index+"qwe");
                         var  a=w11.toString().split("");
                         var b=a[0];
-                        changedataq(w11,sqy,b);
+                        // console.log(arr5[index]);
+                        var areaWindCosts=[];
+                         var areaWindEarnings=[];
+                         var areaWindRates=[];
+                         var areaWindids=[];
+                         var areaWindNames=[];
+                         var areaWindCosts1=[];
+                         var areaWindEarnings1=[];
+                         var areaWindRates1=[];
+                         var areaWindids1=[];
+                         var areaWindNames1=[];
+                        // 点击第一张图第二张变
+                         $.ajax({
+                     type:'post',
+                     url:'http://10.68.100.32:8080/wbi/yield/getYieldByGroupid',
+                     async:false,
+                    data:{
+                      
+                   'startdate':year+"-"+(keyy)+"-"+'1',
+                 'enddate':year+"-"+(keyy)+"-"+daycount,
+                'groupid':arr5[index],
+
+                    },
+                     dataType:'json',
+                     timeout:'3000',
+                     success:function(data){
+                      
+                     
+
+                          console.log(year+"-"+(keyy)+"-"+daycount);
+                           console.log(year+"-"+(keyy)+"-"+'1');
+
+                console.log(arr5[index]);
+                         var dataA=data.data;
+                         for (var i in dataA)
+                         {
+                             var areaWindCost=dataA[i].costs;
+                             areaWindCosts.push(areaWindCost);
+                             var areaWindEarning=dataA[i].earning;
+                             areaWindEarnings.push(areaWindEarning);
+                             var areaWindRate=Number(dataA[i].rate.toFixed(2));
+                             areaWindRates.push(areaWindRate);
+                             var areaWindid=dataA[i].wfid;
+                             areaWindids.push(areaWindid);
+                             var areaWindName =dataA[i].wfname;
+                             areaWindNames.push(areaWindName)
+
+                         }
+                     console.log('下面是areaWindids')
+                     console.log(areaWindids);
+                     console.log('面试是阿容')
+                     console.log(arr5)
+
+
+                       
+                      
+                     // 获取x轴的值内蒙达茂天润风电场
+                    
+                    
+            
+            },
+            error:function(){
+               
+                console.log(year+"-"+(keyy+1)+"-"+daycount);
+                console.log(arr5[index]);
+                
+            },
+          });
+                         // 点击第一张图第三张图变
+      $.ajax({
+                      type:'post',
+                      url:'http://10.68.100.32:8080/wbi/yield/getYieldByWfid',
+                      async:false,
+                     data:{
+                   
+                    'startdate':year+"-"+(keyy)+"-"+'1',
+                  'enddate':year+"-"+(keyy)+"-"+daycount,
+                 'wfid':areaWindids[0],
+                 'methods':'desc',
+  
+                     },
+                      dataType:'json',
+                      timeout:'3000',
+                      success:function(data){
+              
+                        // console.log('第三张数据')
+                          var dataA=data.data;
+                          for (var i in dataA)
+                          {
+                              var areaWindCost=dataA[i].costs;
+                              areaWindCosts1.push(areaWindCost);
+                              var areaWindEarning=dataA[i].earning;
+                              areaWindEarnings1.push(areaWindEarning);
+                              var areaWindRate=dataA[i].rate;
+                              areaWindRates1.push(areaWindRate);
+                              var areaWindid=dataA[i].wtid;
+                              areaWindids1.push(areaWindid);
+                              var areaWindName =dataA[i].wtname;
+                              areaWindNames1.push(areaWindName) 
+
+                          }
+                   
+ 
+
+                       
+                      
+     // //                 // 获取x轴的值内蒙达茂天润风电场
+                    
+                    
+            
+            },
+            error:function(){
+                alert(666666);
+                console.log(year+"-"+(keyy)+"-"+'1');
+                console.log(year+"-"+(keyy)+"-"+daycount);
+                console.log(areaWindids[0])
+
+
+            
+              },
+            });
+                        changedataq(w11,sqy,b,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNames1,areaWindCosts1,areaWindEarnings1,areaWindRates1);
                         }
                     }
                 }
@@ -99,11 +228,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'100%h',
+                text:'元',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 45,
+                x:45,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -118,9 +247,11 @@ let Component = React.createClass({
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+                
+               
 
             title: {
-                text: 'TBA%',
+                text: '100%',
                  align:'high',
                 rotation:'0',
                 y: -15,
@@ -135,28 +266,31 @@ let Component = React.createClass({
         }],
 
             series: [{
-                name: '实际收益',
+                name: '收益',
                 type: 'column',
                 data: areaRecordProfit,
                 borderRadius: 7,
                 color:'#33BAC0',
-                pointPlacement: 0,
+                
                 borderWidth:0,
             },
             {
-            	name: '收入成本',
+            	name: '成本',
                 type: 'column',
                 data: areaRecordCost,
                 borderRadius: 7,
                 color:'#70c080',
-                pointPlacement: -0.11,
+                
                  borderWidth:0,
             },{
-                    name:"TBA",
+                    name:"收益率",
                     type:'line',
                     color:'blue',
                     data:TBA,
                     yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
                 }
                 ]
         };
@@ -171,6 +305,9 @@ const mapStateToProps = (state) => {
     return {
          w11 : state.vars.w1,
          sqy : state.vars.wins1,
+      
+         
+        
     }
 };
 
@@ -178,10 +315,23 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-         changedataq :(w11,sqy,b)=>{
+         changedataq :(w11,sqy,b,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNames1,areaWindCosts1,areaWindEarnings1,areaWindRates1)=>{
             dispatch(actions.setVars('w1',w11)); 
-            dispatch(actions.setVars('wins1',sqy[b-1]));
-            console.log(sqy[b-1])
+          
+             dispatch(actions.setVars('areaWindNamess',areaWindNames));
+             dispatch(actions.setVars('areaWindCostss',areaWindCosts));
+             dispatch(actions.setVars('areaWindEarningss',areaWindEarnings));
+             dispatch(actions.setVars('areaWindRatess',areaWindRates));
+             dispatch(actions.setVars('areaWindidss',areaWindids));
+             dispatch(actions.setVars('areaWindidsss',areaWindids));
+
+             dispatch(actions.setVars('areaWindNamesss',areaWindNames1));
+             dispatch(actions.setVars('areaWindCostsss',areaWindCosts1));
+             dispatch(actions.setVars('areaWindEarningsss',areaWindEarnings1));
+             dispatch(actions.setVars('areaWindRatesss',areaWindRates1));
+            
+
+          
         },
     };
 };

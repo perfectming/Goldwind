@@ -3,6 +3,10 @@
     overflow:hidden;
     padding:10px;
     padding-right:40px;
+    .paddingtop{
+    margin-top:0px;
+   
+    }
     .boxcover{
     position:fixed;
     height:100%;
@@ -11,6 +15,10 @@
     background:black;
     display:none;
     opacity:0.6;
+    overflow:hidden;
+    }
+    .long{
+   
     }
      .shadow:hover{
       box-shadow:0 0 15px #fff;
@@ -18,10 +26,12 @@
      .bigbox:hover{
      box-shadow:0 0 15px #fff;
      }
+     
     .bigbox{
     height:100%;
     width:100%;
     margin:0 auto;
+    margin-top:40px;
     border:1px solid #282F37;
     position:relative;
      background: rgba(44, 61, 71,0.4);
@@ -74,14 +84,14 @@
     .monthbox{
     margin-bottom:10px;
     width: 100%;
-    height: 80px;
+    height: 50px;
     list-style: none;
     background-color: transparent;
     padding:0;
     padding-left:0px;
     position:relative;
-    display:flex;
-    align-items:center;
+    
+    border-bottom: 1px solid #31F3FB;
    
     li{
       height: 40px;
@@ -142,6 +152,13 @@
     right:78px;
 
     }
+    .buttonsh{
+    width:254px;
+    position:absolute;
+    top:0px;
+    right:0px;
+
+    }
      .buttonss{
     width:254px;
     position:absolute;
@@ -175,10 +192,37 @@
       }
      
     }
+    .buttonsh{
+    height:60px;
+    line-height:60px;
+      button{
+      width:70px;
+      height:30px;
+      line-height:20px;
+      text-align:center;
+      font-size:16px;
+      font-family:'微软雅黑';
+      margin-left:12px;
+      background-color:white;
+      color: #20FEFF;
+      color:#fff;
+      border:1px solid #20FEFF;
+      background:transparent;
+         border-radius:15px;
+      }
+
+      button:hover{
+               
+             color: #31F3FB;
+          box-shadow:0px 0px 10px  #20FEFF;
+      }
+     
+    }
     .more:hover{
      box-shadow:0 0 15px #fff;
     }
     .more{
+    padding-top:0px;
     background:#21242a;
     position:absolute;
     z-index:1200;
@@ -186,17 +230,24 @@
     margin-left:0px;
     top:50%;
     left:50%;
-    overflow:hidden;
+    height:540px;
+    overflow-x:scroll;
     transform:translate(-50%,-50%);
     box-sizing:border-box;
     display:none;
     .moretitle{
     width:100%;
     height:60px;
-    background:#21242a;
+    background:#15181B;
     position:relative;
+    top:0;
+    left:0;
+    ;
+
+   
     z-index:2000;
     height:60px;
+
     div{
     display:inline-block;
     font-size:16px;

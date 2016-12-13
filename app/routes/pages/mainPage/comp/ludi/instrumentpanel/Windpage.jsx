@@ -207,6 +207,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('small1',value.small ));
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('wind',value.plan ));
+           
         },
         changepageHealthyT:()=>{
         	dispatch(actions.setVars('showPage', 'healthytime'));

@@ -13,7 +13,7 @@ let Component = React.createClass({
         let {w0,areaName,areaRecordCost,areaRecordProfit,machine,areaPlanDay,areaPlan}=this.props;
         let configPie = {
             chart: {
-                height:390,
+                height:410,
                  backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -127,6 +127,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaPlanDay,
                 color:'#4CDB9D',
+                
             },
             ]
         };
