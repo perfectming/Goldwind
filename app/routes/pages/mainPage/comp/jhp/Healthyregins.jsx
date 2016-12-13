@@ -29,21 +29,15 @@ let Component = React.createClass({
 
 
     render() {
-        let {buttonAction, inputOnChange, onFocus} = this.props;
+        let { befor_pages = 'area', returnit,ip="10.68.100.32",} = this.props;
         return (
 
 
 
 
             <div className = {styles.box}>
-
-
-
-
-
-
-
-                <div className={styles.tbox}>
+                <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
+                <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_t barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1}  text={"集团每月健康度"} ></Hly_t>
 
@@ -80,8 +74,10 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
-        }
-        ,
+        } ,
+        returnit: (befor_pages) => {
+            dispatch(actions.setVars('showPage', befor_pages));
+        },
     };
 };
 

@@ -51,7 +51,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area', returnit,hideit,arr,arr2,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
+        let {ip="10.68.100.32",befor_pages='area', returnit,hideit,arr,arr2,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
         return (
 
 

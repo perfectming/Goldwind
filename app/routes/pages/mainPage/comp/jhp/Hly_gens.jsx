@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",mon="一月份",w10,barRotime,text,barlopowers,barlopowerp,height,changedata1,windplan=win} = this.props;
+        let {w0="一区域",mon="一月份",w10,barRotime,text,barlopowers,barlopowerp,height,changedata1,windplan=win,power2,power1,name0} = this.props;
 
 
         let configPie = {
@@ -90,7 +90,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth:20,
+                    maxPointWidth: 40,
                     borderRadius: 4,
                 }
             },
@@ -137,7 +137,7 @@ let Component = React.createClass({
                 name: '计划发电量',
                 type: 'column',
                 color:'#5B9BD5',
-                data: barlopowers,
+                data: power1,
                 events: {
                     click: function(e) {
                         w10=e.point.category;
@@ -148,9 +148,9 @@ let Component = React.createClass({
             }
                 ,{
                     name:'实际发电量',
-                    color:'#ED7D31',
+                    color:'#70c080',
                     type:'column',
-                    data: barlopowerp,
+                    data: power2,
                     events: {
                         click: function(e) {
                             w10=e.point.category;

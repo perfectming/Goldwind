@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0='一区域',w10='风场1',mon="一月份",windplan=mon,widths,barRotimes,barLoPowerValue,barLoPowerValues,barLdpowerValue,text,height} = this.props;
+        let {w0='一区域',w10='风场1',mon="一月份",windplan=mon,widths, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3,text,height} = this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -42,6 +42,7 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 y:40,
+                x:-75,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -81,6 +82,9 @@ let Component = React.createClass({
                 column: {
                     stacking: 'normal',
                     borderWidth: 0,
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
 
                 }
             },
@@ -95,85 +99,95 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotimes,
+                categories:barLotime3,
             },
             yAxis: [{
-                // lineWidth: 1,
-                // lineColor: "red",
-                //tickWidth: 4,
-                gridLineDashStyle: 'Solid',
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-                title: {
-                    text:'小时',
-                    align:'high',
-                    rotation:'0',
-                    y: -10,
-                    x: 40,
-                    style:{
-                        color:'#fff',
-                        fontSize:'14px'
-                    },
-                },
 
-                labels: {
-                    y: 10, //x轴刻度往下移动20px
+                title: {
+                    text: 'kWh',
+                    align: 'high',
+                    rotation: '0',
+                    y: -20,
+                    x: 45,
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        fontSize: '14px',
+                        color: '#fff'
                     }
-                },
-            },{
-                title:'TBA%',
-                max:100,
-                oppsite:true,
+                }
+            }, {
                 labels: {
-                    y: 10, //x轴刻度往下移动20px
+                    format: '',
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize: '14px'
                     }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+                title: {
+                    text: 'PBA%',
+                    align: 'high',
+                    rotation: '0',
+                    y: -15,
+                    x: -40,
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+
                 },
+                opposite: true
             }],
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: barLoPowerValues,
+                color: "#33BAC0",
+                data: power3,
                 borderRadius: 4,
             },
                 {
                     name: '故障损失',
-                    color:'#FF6124',
+                    color: '#5298d3',
                     type: 'column',
-                    data: barLoPowerValue,
+                    data: wrong30,
                     stack:'time',
                     borderRadius: 2,
                 },
                 {
                     name: '维护损失',
-                    color:'#FF9424',
+                    color: '#ffffff',
                     type: 'column',
-                    data: barLoPowerValue,
+                    data: wrong31,
                     stack:'time'
                 },
                 {
                     name: '限功率损失',
-                    color:'#FFD927',
+                    color: '#e9c75c',
                     type: 'column',
-                    data: barLoPowerValue,
+                    data: wrong32,
                     stack:'time'
                 },
                 {
                     name: '非设备原因损失',
-                    color:'#A2D04D',
+                    color: '#d06960',
                     type: 'column',
-                    data: barLoPowerValue,
+                    data: wrong33,
                     stack:'time'
                 },
                 {
                     name: 'PBA',
                     type: 'line',
                     color:'#0000ff',
-                    data: barLdpowerValue
+                    data: pba3,
+                    yAxis:1,
                 },
 
             ]
@@ -191,6 +205,7 @@ const mapStateToProps = (state) => {
         w10 : state.vars.w11,
         mon : state.vars.mon,
         windplan : state.vars.windplan,
+
     }
 };
 

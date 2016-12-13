@@ -79,7 +79,10 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 40
+                    pointWidth: 40,
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
                 }
             },
             xAxis: {

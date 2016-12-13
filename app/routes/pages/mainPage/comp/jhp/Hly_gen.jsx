@@ -13,7 +13,7 @@ let Component = React.createClass({
 
     render() {
 
-        let {w0,changedata1,windplan1 = win,barlotimes,barlopowers,barlopowerp,text} = this.props;
+        let {ip="10.68.100.32",actbt,w0,changedata1,windplan1 = win,barlotimes,barlopowers,barlopowerp,text,hhdata,wc1,power2,power1,name0} = this.props;
 
 
 
@@ -56,8 +56,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.0f}%</b>"
+                valueSuffix:'kWh'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -85,7 +84,7 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                             w0=e.point.category;
-                            changedata1(w0,win);
+                            changedata1(w0,win,actbt);
 
                         }
                     }
@@ -93,7 +92,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    //pointWidth: 20,
+                    maxPointWidth: 40,
+
                     borderRadius: 5,
                 }
             },
@@ -108,7 +108,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barlotimes,
+                categories:name0,
             },
             yAxis: {
                 // lineWidth: 1,
@@ -117,7 +117,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'kWh',
+                    text:'(kWh)',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -138,13 +138,14 @@ let Component = React.createClass({
             },
             series: [{
                 name: '计划发电量',
-                color:'#5B9BD5',
+                color:'#33BAC0',
                 type: 'column',
-                data: barlopowers,
+                data: power1,
                 events: {
                     click: function(e) {
                         w0=e.point.category;
-                        changedata1(w0,win);
+                        wc1 = e.point.index;
+                        changedata1(w0,hhdata,wc1,actbt);
 
                     }
                 },
@@ -153,12 +154,13 @@ let Component = React.createClass({
                 ,{
                     name: '实际发电量',
                     type: 'column',
-                    color:'#ED7D31',
-                    data: barlopowerp,
+                    color:'#70c080',
+                    data: power2,
                     events: {
                         click: function(e) {
-                            w0=e.point.category;
-                            changedata1(w0,win);
+                            var w0=e.point.category;
+                            var wc1 = e.point.index;
+                            changedata1(w0,hhdata,wc1,actbt);
 
                         }
                     },
@@ -178,8 +180,12 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         w0 : state.vars.w1,
+        wc1 : state.vars.wc1,
         win : state.vars.win1,
         windplan1 : state.vars.windplan1,
+        hhdata : state.vars.hhdata,
+        hhdata1 : state.vars.hhdata1,
+
     }
 };
 
@@ -188,7 +194,35 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(w0,win)=>{
+        changedata1 :(w0,hhdata,wc1,actbt)=>{
+            let grid=hhdata.data[2][wc1].groupid;
+            console.log(actbt)
+            console.log(grid)
+            $.ajax({
+                type:'post',
+                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceByGroupidElec',
+                async:false,
+                data:{
+                    "months":actbt+1,
+                    "groupid":grid,
+                    "wfid":'',
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                    dispatch(actions.setVars('hhdata1',  data));
+
+
+
+
+
+
+                },
+                error:function(){
+
+                },
+            });
+
             dispatch(actions.setVars('w1',w0 ));
             dispatch(actions.setVars('win1',win ));
 

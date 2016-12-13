@@ -41,6 +41,7 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 y:20,
+                x:-75,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -52,8 +53,9 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
+
+                    valueSuffix:'h'
+
 
             },
             credits: {
@@ -97,32 +99,51 @@ let Component = React.createClass({
                 },
                 categories:barLdpowerValue,
             },
-            yAxis: {
-                // lineWidth: 1,
-                // lineColor: "red",
-                //tickWidth: 4,
-                gridLineDashStyle: 'Solid',
-                gridLineColor: '#898688',
-                title: {
-                    text:'100%',
-                    align:'high',
-                    rotation:'0',
-                    y: -10,
-                    x: 40,
-                    style:{
-                        color:'#fff',
-                        fontSize:'14px'
-                    }
-                },
-                max:100,
+            yAxis: [{
                 labels: {
-                    y: 10, //x轴刻度往下移动20px
+                    format: '',
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize: '14px'
                     }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+                title: {
+                    text: 'h',
+                    align: 'high',
+                    rotation: '0',
+                    y: -20,
+                    x: 45,
+                    style: {
+                        fontSize: '14px',
+                        color: '#fff'
+                    }
+                }
+            }, {
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+                title: {
+                    text: 'TBA%',
+                    align: 'high',
+                    rotation: '0',
+                    y: -15,
+                    x: -40,
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+
                 },
-            },
+                opposite: true
+            }],
             series: [{
                 name: '实际运行时间',
                 type: 'column',
@@ -140,7 +161,8 @@ let Component = React.createClass({
                     name: names,
                     type: 'line',
                     color:'#0000ff',
-                    data: barlinepdats
+                    data: barlinepdats,
+                    yAxis:1,
                 }
 
             ]

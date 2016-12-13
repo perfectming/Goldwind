@@ -53,8 +53,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.yf}%</b>"
+                valueSuffix:'kWh'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -136,7 +135,7 @@ let Component = React.createClass({
             series: [{
                 name: '计划发电量',
                 type: 'column',
-                color:'#5B9BD5',
+                color:'#33BAC0',
                 data: barlopowers,
                 events: {
                     click: function(e) {
@@ -148,7 +147,7 @@ let Component = React.createClass({
             }
                 ,{
                     name:'实际发电量',
-                    color:'#ED7D31',
+                    color:'#70c080',
                     type:'column',
                     data: barlopowerp,
                     events: {

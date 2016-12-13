@@ -42,6 +42,7 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 y:20,
+                x:-75,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -82,7 +83,9 @@ let Component = React.createClass({
                     stacking: 'normal',
 
                     borderWidth: 0,
-
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
                 }
             },
             xAxis: {
@@ -99,85 +102,88 @@ let Component = React.createClass({
                 categories:barLotime,
             },
             yAxis: [{
-                // lineWidth: 1,
-                // lineColor: "red",
-                //tickWidth: 4,
-                gridLineDashStyle: 'Solid',
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+
                 title: {
-                    text:'小时',
-                    align:'high',
-                    rotation:'0',
-                    y: -10,
-                    x: 40,style:{
-                        color:'#fff',
-                        fontSize:'14px'
-                    },
-
-                },
-
-                labels: {
-                    y: 10, //x轴刻度往下移动20px
+                    text: 'kWh',
+                    align: 'high',
+                    rotation: '0',
+                    y: -20,
+                    x: 45,
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        fontSize: '14px',
+                        color: '#fff'
                     }
-                },
-            },{
+                }
+            }, {
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
                 title: {
-                    text:'',
-                    align:'high',
-                    rotation:'0',
-                    y: -10,
-                    x: 40,
-                },
-
-                oppsite:true,
-                labels: {
-                    y: 10, //x轴刻度往下移动20px
+                    text: 'PBA%',
+                    align: 'high',
+                    rotation: '0',
+                    y: -15,
+                    x: -40,
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize: '14px'
                     }
+
                 },
+                opposite: true
             }],
             series: [{
-                name: '实际运行时间量',
+                name: '实际发电量',
                 type: 'column',
+                color: "#33BAC0",
                 data: barLoPowerValues,
                 borderRadius: 4,
             },
                 {
-                    name: '停机时间',
-                    color:'#A2D04D',
+                    name: '故障损失',
+                    color: '#5298d3',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time',
                     borderRadius: 4,
                 },
                 {
-                    name: '停机时间',
-                    color:'#FFD927',
+                    name: '维护损失',
+                    color: '#ffffff',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '停机时间',
-                    color:'#FF9424',
+                    name: '限功率损失',
+                    color: '#e9c75c',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: '停机时间',
-                    color:'#FF6124',
+                    name: '非设备原因损失',
+                    color: '#d06960',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
                 },
                 {
-                    name: 'TBA',
+                    name: 'PBA',
                     type: 'line',
                     color:'#0000ff',
                     data: barLdpowerValue,

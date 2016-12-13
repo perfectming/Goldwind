@@ -41,6 +41,7 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 y:20,
+                x:-75,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -52,8 +53,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.0f}%</b>"
+                valueSuffix:'h'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -106,32 +106,51 @@ let Component = React.createClass({
                 },
                 categories:barLoTime,
             },
-            yAxis: {
-                // lineWidth: 1,
-                // lineColor: "red",
-                //tickWidth: 4,
-                gridLineDashStyle: 'Solid',
-                gridLineColor: '#6d6a6c',
-                title: {
-                    text:'100%',
-                    align:'high',
-                    rotation:'0',
-                    y: -10,
-                    x: 40,
-                    style:{
-                        color:'#fff',
-                        fontSize:'14px'
-                    }
-                },
-                max:100,
+            yAxis: [{
                 labels: {
-                    y: 10, //x轴刻度往下移动20px
+                    format: '',
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize: '14px'
                     }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+                title: {
+                    text: 'h',
+                    align: 'high',
+                    rotation: '0',
+                    y: -20,
+                    x: 45,
+                    style: {
+                        fontSize: '14px',
+                        color: '#fff'
+                    }
+                }
+            }, {
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+                title: {
+                    text: 'TBA%',
+                    align: 'high',
+                    rotation: '0',
+                    y: -15,
+                    x: -40,
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+
                 },
-            },
+                opposite: true
+            }],
             series: [{
                 name: '实际运行时间',
                 type: 'column',
@@ -165,13 +184,8 @@ let Component = React.createClass({
                     type: 'line',
                     color:'#0000ff',
                     data: barLoPowerValue,
-                    events: {
-                        click: function(e) {
-                            w0=e.point.category;
-                            changedata1(w0,win);
+                    yAxis:1,
 
-                        }
-                    },
                 }
 
 

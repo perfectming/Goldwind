@@ -4,76 +4,77 @@ import styles from './Hindex.scss';
 import Hly_gen from './Hly_gen.jsx';
 import Hly_gens from './Hly_gens.jsx';
 import Hly_genp from './Hly_genp.jsx';
-import Hly_r from './Hly_r.jsx';
-import Hly_rs from './Hly_rs.jsx';
-import Hly_d from './Hly_d.jsx';
+
 var actions = require('redux/actions');
 var $ = require('jquery');
 
-let data = require('./Healthy-data');
-let month = data.data.line_month;
-let button = data.data.button;
-let barlotimes1 = data.data.bar_lotime;
-let barlopowers1 = data.data.bar_loPowers;
-let barlopowerp1 = data.data.bar_loPowerp;
-let text0=data.data.line_date;
-let barRotime2 = data.data.bar_rotime;
-let barlopowers2 = data.data.bar_loPowers;
-let barlopowerp2 = data.data.bar_loPowerp;
-let barRotime3 = data.data.bar_rotimes;
-let barlopowers3 = data.data.bar_loPowers;
-let barlopowerp3 = data.data.bar_loPowerp;
-
-let sort0 = data.data.sort1;
-let x0 = [];
-let x1 = [];
-let x2 = [];
-let x3 = [];
-let x4 = [];
-let x5 = [];
-let x6=[];
-let x7=[];
-(function () {
-
-    for (var i = 0; i < 12; i++) {
-        x4[i] = sort0[i].name;
-        x5[i] = sort0[i].time;
-    }
-    for(var i=0;i<sort0.length;i++){
-        x6[i]=sort0[i].name;
-        x7[i]=sort0[i].time;
-    }
-
-})();
 
 let Component = React.createClass({
+    componentWillMount(ip) {
+        this.props.ajax(ip);
+    },
     componentDidMount() {
         this.props.init();
     },
 
 
     render() {
-        let {w0="一区域",w10="风场1",mon="一月份",befor_pages='group', returnit,hideit,arr,arr2,gogogo,back,more,wind,winds,buttonAction,actbt=0,changecolor, inputOnChange, onFocus} = this.props;
+        let {ip="10.68.100.32",barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,barlotimes3,barlopowers3,barlopowerp3,hhdata,hhdata1, w0 = "", w10 = "风场1", mon = "一月份", befor_pages = 'group', returnit, hideit, arr, arr2,arr3, gogogo, back, more, actbt = 10, changecolor,} = this.props;
+
+        let data = require('./Healthy-data');
+        let month = data.data.line_month;
+        let button = data.data.button;
+
+
+
+        // let sort0 = hhdata.data[0];
+        // let x4 = [];
+        // let x5 = [];
+        // let x45=[];
+        // let x6 = [];
+        // let x7 = [];
+        // let x67 = [];
+        //
+        //
+        // (function () {
+        //     // console.log(sort0)
+        //     for (var i = 0; i < 12; i++) {
+        //         x4[i] = sort0[i].wtname;
+        //         x5[i] = sort0[i].poweract;
+        //         x45[i] = sort0[i].powerplan;
+        //     }
+        //     for (var i = 0; i < sort0.length; i++) {
+        //         x6[i] = sort0[i].wtname;
+        //         x7[i] = sort0[i].poweract;
+        //         x67[i] =sort0[i].powerplan;
+        //     }
+        //
+        // })();
+
+
         return (
 
 
 
 
             <div className={styles.box}>
-                <div className={styles.light} id="light"> </div>
+                <div className={styles.light} id="light"></div>
 
-                <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
+                <div className={`${styles.boxhidden} ${styles.box_shadow}`} id="boxhidden">
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
                         <div className={styles.logo3}>
-                            {mon+w0+w10+"各风机发电量"}
+                            {mon + w0 + w10 + "各风机发电量"}
                         </div>
-                        <span onClick={()=>hideit()}>×</span>
+                        <span onClick={() => hideit()}>×</span>
                     </div>
-                    <Hly_genp    height={500} widths={1620} barlopowerp={x7}
-                                 barlopowers={x7}  barRotime={x6}  text={''}></Hly_genp>
-
-
+                    <div className={styles.hidden_bottom}>
+                    <Hly_genp height={450}  widths={4500}
+                              name0={barlotimes3}
+                              power1={barlopowers3}
+                              power2={barlopowerp3}
+                              text={''}></Hly_genp>
+                    </div>
 
                 </div>
 
@@ -82,19 +83,24 @@ let Component = React.createClass({
                     {
                         data.data.yearelectric[0].wind.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key)}>
+                                <div className={actbt === key ? styles.inmonth : styles.inmonth2} key={key}
+                                     onClick={() => changecolor(value, key)}>
                                     {value.name}
                                 </div>
                             )
                         })
                     }
-                    <div className={styles.return} onClick={()=>returnit(befor_pages)}>返回</div>
+                    <div className={styles.return} onClick={() => returnit(befor_pages)}>返回</div>
                 </div>
 
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_gen text={mon+ "集团各区域发电量"}  barlopowerp={winds==undefined? barlopowerp1:winds}  barlopowers={wind==undefined? barlopowers1:wind} barlotimes={barlotimes1}></Hly_gen>
+                        <Hly_gen text={mon + "集团各区域发电量"}
+                                 name0={barlotimes1}
+                                 power1={barlopowers1}
+                                 power2={barlopowerp1}
+                                 pengpeng = {hhdata}></Hly_gen>
                         <div className={styles.logo}>
 
                         </div>
@@ -106,7 +112,11 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
-                        <Hly_gens height={400}  barlopowerp={barlopowerp2}  barlopowers={barlopowers2}  barRotime={barRotime2} text={mon+w0+"各风场发电量" }></Hly_gens>
+                        <Hly_gens height={400}
+                                  name0={barlotimes2}
+                                  power1={barlopowers2}
+                                  power2={barlopowerp2}
+                                  text={mon + w0 + "各风场发电量" }></Hly_gens>
                         <div className={styles.logomini}>
 
                         </div>
@@ -123,9 +133,12 @@ let Component = React.createClass({
                         </div>
 
 
-
                         <div className={styles.rbox4}>
-                            <Hly_genp    height={400}  barlopowerp={arr == null ? x5 : arr}  barlopowers={arr == null ? x5 : arr}  barRotime={arr2 == null ? x4 : arr2}  text={mon+w0+w10+"各风机发电量"}></Hly_genp>
+                            <Hly_genp height={400}
+                                      name0={barlotimes3}
+                                      power1={barlopowers3}
+                                      power2={barlopowerp3}
+                                      text={mon + w0 + w10 + "各风机发电量"}></Hly_genp>
                             <div className={styles.logomini}>
 
                             </div>
@@ -140,72 +153,185 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        actbt:state.vars.actbt,
-        wind:state.vars.wind,
-        winds:state.vars.winds,
+        hhdata: state.vars.hhdata,
+        hhdata1: state.vars.hhdata1,
+        actbt: state.vars.actbt,
+        wind: state.vars.wind,
+        winds: state.vars.winds,
         arr: state.vars.arr,
         arr2: state.vars.arr2,
-        w0 : state.vars.w1,
-        w10 : state.vars.w11,
-        mon : state.vars.mon,
-        windplan : state.vars.windplan,
+        arr3: state.vars.arr3,
+        w0: state.vars.w1,
+        w10: state.vars.w11,
+        mon: state.vars.mon,
+        windplan: state.vars.windplan,
+        barlotimes1: state.vars.barlotimes1,
+        barlopowers1: state.vars.barlopowers1,
+        barlopowerp1: state.vars.barlopowerp1,
+        barlotimes2: state.vars.barlotimes2,
+        barlopowers2: state.vars.barlopowers2,
+        barlopowerp2: state.vars.barlopowerp2,
+        barlotimes3: state.vars.barlotimes3,
+        barlopowers3: state.vars.barlopowers3,
+        barlopowerp3: state.vars.barlopowerp3,
+
+
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        ajax: (ip) => {
+            $.ajax({
+                type:'post',
+                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceElec',
+                async:false,
+                data:'month=11',
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                    dispatch(actions.setVars('hhdata',  data));
+
+                    let barlotimes1 = [];
+                    let barlopowers1 = [];
+                    let barlopowerp1 = [];
+                    for (var i in data.data[2]) {
+                        barlotimes1.push(data.data[2][i].groupname);    //区域的横坐标
+                        barlopowers1.push(data.data[2][i].powerplan);   //计划发电量
+                        barlopowerp1.push(data.data[2][i].poweract);   //实际发电量
+                    }
+                    let w0=data.data[2][0].groupname;
+                    let barlotimes2 = [];
+                    let barlopowers2 = [];
+                    let barlopowerp2 = [];
+                    for (var i in data.data[1]) {
+                        barlotimes2.push(data.data[1][i].wfname);    //区域的横坐标
+                        barlopowers2.push(data.data[1][i].powerplan);   //计划发电量
+                        barlopowerp2.push(data.data[1][i].poweract);   //实际发电量
+                    }
+                    let barlotimes3 = [];
+                    let barlopowers3 = [];
+                    let barlopowerp3 = [];
+                    for (var i in data.data[2]) {
+                        barlotimes3.push(data.data[2][i].wtname);    //区域的横坐标
+                        barlopowers3.push(data.data[2][i].powerplan);   //计划发电量
+                        barlopowerp3.push(data.data[2][i].poweract);   //实际发电量
+                    }
+
+                    dispatch(actions.setVars('barlotimes1', barlotimes1));
+                    dispatch(actions.setVars('barlopowers1', barlopowers1));
+                    dispatch(actions.setVars('barlopowerp1', barlopowerp1));
+
+                    dispatch(actions.setVars('barlotimes2', barlotimes2));
+                    dispatch(actions.setVars('barlopowers2', barlopowers2));
+                    dispatch(actions.setVars('barlopowerp2', barlopowerp2));
+
+                    dispatch(actions.setVars('barlotimes3', barlotimes3));
+                    dispatch(actions.setVars('barlopowers3', barlopowers3));
+                    dispatch(actions.setVars('barlopowerp3', barlopowerp3));
+
+
+                    dispatch(actions.setVars('w1', w0));
+
+
+
+                },
+                error:function(){
+
+                },
+            })
+            var obj = {
+                test: ''
+            }
+        },
         init: () => {
             var obj = {
                 test: ''
             }
         },
-        changecolor:(value,key)=>{
+        changecolor: (value, key) => {
             dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('wind',value.plan ));
-            dispatch(actions.setVars('winds',value.actrul ));
+            dispatch(actions.setVars('wind', value.plan));
+            dispatch(actions.setVars('winds', value.actrul));
+
+            $.ajax({
+                type:'post',
+                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceElec',
+                async:false,
+                data:{"month":key+1},
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                    let barlotimes1 = [];
+                    let barlopowers1 = [];
+                    let barlopowerp1 = [];
+                    for (var i in data.data[2]) {
+                        barlotimes1.push(data.data[2][i].groupname);    //区域的横坐标
+                        barlopowers1.push(data.data[2][i].powerplan);   //计划发电量
+                        barlopowerp1.push(data.data[2][i].poweract);   //实际发电量
+                    }
+                    let w0=data.data[2][0].groupname;
+                    let barlotimes2 = [];
+                    let barlopowers2 = [];
+                    let barlopowerp2 = [];
+                    for (var i in data.data[1]) {
+                        barlotimes2.push(data.data[1][i].wfname);    //区域的横坐标
+                        barlopowers2.push(data.data[1][i].powerplan);   //计划发电量
+                        barlopowerp2.push(data.data[1][i].poweract);   //实际发电量
+                    }
+                    let barlotimes3 = [];
+                    let barlopowers3 = [];
+                    let barlopowerp3 = [];
+                    for (var i in data.data[2]) {
+                        barlotimes3.push(data.data[2][i].wtname);    //区域的横坐标
+                        barlopowers3.push(data.data[2][i].powerplan);   //计划发电量
+                        barlopowerp3.push(data.data[2][i].poweract);   //实际发电量
+                    }
+
+                    dispatch(actions.setVars('barlotimes1', barlotimes1));
+                    dispatch(actions.setVars('barlopowers1', barlopowers1));
+                    dispatch(actions.setVars('barlopowerp1', barlopowerp1));
+
+                    dispatch(actions.setVars('barlotimes2', barlotimes2));
+                    dispatch(actions.setVars('barlopowers2', barlopowers2));
+                    dispatch(actions.setVars('barlopowerp2', barlopowerp2));
+
+                    dispatch(actions.setVars('barlotimes3', barlotimes3));
+                    dispatch(actions.setVars('barlopowers3', barlopowers3));
+                    dispatch(actions.setVars('barlopowerp3', barlopowerp3));
+                },
+                error:function(){
+
+                },
+            })
 
         },
-        gogogo: (sort0) => {
-            (function () {
-                sort0.sort(function (a, b) {
-                    return b.time - a.time;
-                })
-                for (var i = 0; i < 12; i++) {
-                    x0[i] = sort0[i].name;
-                    x1[i] = sort0[i].time;
-                }
-
-            })();
-            dispatch(actions.setVars('arr', x1))
-            dispatch(actions.setVars('arr2', x0))
+        gogogo: (x4,x5,x45,i) => {
+            console.log(x4);
+            dispatch(actions.setVars('arr', x4[i].wtname));
+            dispatch(actions.setVars('arr2', x5[i].poweract))
+            dispatch(actions.setVars('arr3', x45[i].powerplan))
 
 
         },
-        back: (sort0) => {
-            (function () {
-                sort0.sort(function (a, b) {
-                    return a.time - b.time;
-                })
-                for (var i = 0; i < 12; i++) {
-                    x2[i] = sort0[i].name;
-                    x3[i] = sort0[i].time;
-                }
+        back: (x6,x7,x67,i) => {
 
-            })();
-            dispatch(actions.setVars('arr', x3))
-            dispatch(actions.setVars('arr2', x2))
+
+            dispatch(actions.setVars('arr', x6[i].wtname))
+            dispatch(actions.setVars('arr2', x7[i].poweract))
+            dispatch(actions.setVars('arr3', x67[i].powerplan))
         },
         more: () => {
             $("#boxhidden").show();
             $("#light").show();
         },
-        hideit: () =>{
+        hideit: () => {
             $("#boxhidden").hide();
             $("#light").hide();
         },
-        returnit:(befor_pages)=>{
-            dispatch(actions.setVars('showPage',befor_pages));
+        returnit: (befor_pages) => {
+            dispatch(actions.setVars('showPage', befor_pages));
 
         },
 
