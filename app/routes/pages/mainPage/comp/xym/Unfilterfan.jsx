@@ -318,7 +318,7 @@ let Component = React.createClass({
                                                         </div>
                                                     </div>
                                                 )
-                                            }else if(chooses2 == "PVOFL" && (code == "Offline" || code == "ProtoectStop" || code == "LimitPowStop")){
+                                            }else if(chooses2 == "PVOFL" && (code == "Offline" || code == "DisComForPre" || code == "DisComForPlc")){
                                                 return (                                                
                                                     <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Topvinfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
@@ -425,6 +425,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('fc_info', value));
           dispatch(actions.setVars('showPage', 'fan_matrix'));
           dispatch(actions.setVars('fData', fData));
+          // dispatch(actions.setVars('fModel', fModel));
           
 
         },
@@ -441,29 +442,29 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         Tofaninfo1: (value,valueA,key)=> {
+            // console.log(2);
+            // console.log(valueA.Wtid);
             dispatch(actions.setVars('valuepage', value));
             dispatch(actions.setVars('value', valueA));
             dispatch(actions.setVars('valueid', value));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('befor_page','fan' ));
                 
-            dispatch(actions.setVars('showPage', 'turning'));
-            dispatch(actions.setVars('pagename', 'fan_matrix')); 
-            dispatch(actions.setVars('numtype', 'faninfo'));     
+            dispatch(actions.setVars('showPage', 'fan_matrix'));
+            dispatch(actions.setVars('fan_page', 'faninfo'));     
         },
         Topvinfo1: (value,valueA,key)=> {
-            console.log(value,valueA,key)
+            // console.log(value,valueA,key)
             // dispatch(actions.setVars('valuepage1', value));
-            dispatch(actions.setVars('value', valueA));
+            dispatch(actions.setVars('value', valueA.Wtid));
             dispatch(actions.setVars('valueid', value));
             dispatch(actions.setVars('actbt1',key ));
             dispatch(actions.setVars('actbt',''));
             dispatch(actions.setVars('befor_page','fan' ));
 
 
-            dispatch(actions.setVars('showPage', 'turning'));
-            dispatch(actions.setVars('pagename', 'fan_matrix')); 
-            dispatch(actions.setVars('numtype', 'pvinfo')); 
+            dispatch(actions.setVars('showPage', 'fan_matrix'));
+            dispatch(actions.setVars('fan_page', 'pvinfo'));  
             
         }
     };

@@ -84,7 +84,7 @@ let Component = React.createClass({
     },
     
     render() {
-        let {pageTo_1,pageTo_2,Tofaninfo1,Topvinfo1,zhzb,fModel,fData,fanbool=false,choosepage = 'unfilterfan'}=this.props;
+        let {zhzb,fModel,fData,fanbool=false,choosepage = 'unfilterfan'}=this.props;
         // console.log(fModel);
         // console.log(fData);
         // console.log(zhzb);
@@ -187,69 +187,19 @@ const mapDispatchToProps = (dispatch) => {
                                 // setTimeout(function(){
                                     dispatch(actions.setVars('bbs', rdata));
                                 // },100)
-                               console.log(1) 
+                               // console.log(1) 
                             }
                         }
                     // }
                 // }
-            },2000)
+            },3000)
             
         },
         init: () => {
             
         },
 
-        pageTo_1:(value,key,fData)=>{
-          dispatch(actions.setVars('numpage', 'fanmatrix'));
-          dispatch(actions.setVars('valuepage', value));
-          dispatch(actions.setVars('actbt',key ));
-          dispatch(actions.setVars('actbt1','' ));
-          dispatch(actions.setVars('fan_page', 'allpage'));
-          dispatch(actions.setVars('befor_page','fan' ));
-          dispatch(actions.setVars('fc_info', value));
-          dispatch(actions.setVars('showPage', 'fan_matrix'));
-          dispatch(actions.setVars('fData', fData));
-          
-
-        },
-        pageTo_2:(value,key,fData)=>{
-          dispatch(actions.setVars('numpage', 'pvmatrix'));
-          dispatch(actions.setVars('valuepage1', value));
-          dispatch(actions.setVars('actbt1',key ));
-          dispatch(actions.setVars('actbt',''));
-          dispatch(actions.setVars('fan_page', 'allpage'));
-          dispatch(actions.setVars('befor_page','fan' ));
-          dispatch(actions.setVars('fc_info', value));
-          dispatch(actions.setVars('showPage', 'fan_matrix'));
-          dispatch(actions.setVars('fData', fData));
-
-        },
-        Tofaninfo1: (value,valueA,key)=> {
-            dispatch(actions.setVars('valuepage', value));
-            dispatch(actions.setVars('value', valueA));
-            dispatch(actions.setVars('valueid', value));
-            dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('befor_page','fan' ));
-                
-            dispatch(actions.setVars('showPage', 'turning'));
-            dispatch(actions.setVars('pagename', 'fan_matrix')); 
-            dispatch(actions.setVars('numtype', 'faninfo'));     
-        },
-        Topvinfo1: (value,valueA,key)=> {
-            console.log(value,valueA,key)
-            // dispatch(actions.setVars('valuepage1', value));
-            dispatch(actions.setVars('value', valueA));
-            dispatch(actions.setVars('valueid', value));
-            dispatch(actions.setVars('actbt1',key ));
-            dispatch(actions.setVars('actbt',''));
-            dispatch(actions.setVars('befor_page','fan' ));
-
-
-            dispatch(actions.setVars('showPage', 'turning'));
-            dispatch(actions.setVars('pagename', 'fan_matrix')); 
-            dispatch(actions.setVars('numtype', 'pvinfo')); 
-            
-        }
+        
     };
 };
 
