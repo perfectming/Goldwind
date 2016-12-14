@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Windcet from './Windcet.jsx';
-import icono from './wind_logo.png';
+import icono from './img/ele.png';
 var actions = require('redux/actions');
 var $=require('jquery');
 let data=require('./Profit-data');
@@ -17,7 +17,6 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-
     render() {
         let areaPlan=data.areaPlan;
         let areaPlanDay=data.areaPlanDay;

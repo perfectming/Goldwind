@@ -6,6 +6,13 @@ import Pie2 from '../../mxx/Pie2';
 
 let ipUrl='10.68.100.32:8080';
 
+
+
+var actions = require('redux/actions');
+var $ =require("jQuery");
+// let data=Instrumentdata;
+// let sort1=data.sort2;
+
 let profit,amounts,rate,yearPro,month2,cost,incomes,shouldElec,actrulElec,sortArr,yearELec,yearPlanELec,monthElec,monthPlanElec,dayelec,dayPlanElec,arrPlan=[],month1=[],arrAct=[],runTime,downTime,tba;
 
 var actions = require('redux/actions');
@@ -132,7 +139,7 @@ let Component = React.createClass({
 	           					<th onClick={()=>changepageSort(flag1,flagTime1,sortArr)} className={flag1==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime1==true? styles.arrow:styles.bottom}></span></th>
                 			</tr>
                 			{
-                				sortArr.map((value,key)=>{
+                				sortArr.slice(0,15).map((value,key)=>{
 		                    		return(<tr key={key}><th>{key+1}</th><th>{value.groupname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{value.downtime}小时</th></tr>)
 		                    	})
                 			}
@@ -253,11 +260,9 @@ const mapDispatchToProps = (dispatch) => {
 		        dataType: 'json',
 		        timeout : 60000, 
 		        success:function (data) {
-		        	console.log(data);
-		        	console.log('TBA');
-//		        	runTime=data.data[0].runtimes;
-//		        	downTime=data.data[0].downtimes;
-//		        	tba=data.data[0].tba;
+		        	runTime=data.data[0].runtimes;
+		        	downTime=data.data[0].downtimes;
+		        	tba=data.data[0].tba;
 		        	
 		        },
 		        complete : function(XMLHttpRequest,status){ 

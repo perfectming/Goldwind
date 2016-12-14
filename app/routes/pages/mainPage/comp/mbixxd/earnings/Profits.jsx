@@ -3,15 +3,14 @@ import {connect} from 'react-redux';
 import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
-import icono from '../wind_logo.png';
+import icono from '../img/收益率1.png';
+var url="10.9.99.239";
 import Fanchart from './fanchart.jsx';
-import Month from '../Month.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let button=data.button;
 let actbt=0;
 let text=data.text;
-
 var date=new Date
 var year=date.getFullYear();
  var day = new Date(year,9,0); 
@@ -426,7 +425,7 @@ const mapDispatchToProps = (dispatch) => {
                      success:function(data){
                        
                
-
+ // console.log(data);
                      
 
                          var dataA=data.data;
