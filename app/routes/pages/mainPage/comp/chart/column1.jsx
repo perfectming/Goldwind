@@ -21,7 +21,6 @@ let Component = React.createClass({
         let allname=[];
         let allname1=[];
         let{mod,date}=this.props;
-        
         for(let num in date){
              if(date[num].WTCount=='0' || date[num].InverterCount =='0'){
                 
@@ -32,7 +31,7 @@ let Component = React.createClass({
                 }
 
         }
-        //获取总发电量和计划发电量
+        //获取总发电量和总计划发电量
         line.map((value,key)=>{
             partent+=value;
             partentplan+=lineplan[key];
@@ -47,11 +46,16 @@ let Component = React.createClass({
          key.sort(function(a,b){
             return b[1]-a[1]
         })
+         //根据数据排列风场光伏名字
+         var aq=0;
         for(let name in mod.ens){
             if(mod.ens[name].wft){
-            allname.push(mod.ens[name].name)
+               
+            allname.push(mod.ens[key[aq][0]].name)
+             aq++;
             }
         }
+
         var i=0;
         var one,two,three,foure;
          for(let na in mod.ens){
@@ -100,7 +104,7 @@ let Component = React.createClass({
 
                 tickInterval: 1,
 
-                categories: allname1,
+                categories: allname,
                  labels: {
 
                        rotation:0,

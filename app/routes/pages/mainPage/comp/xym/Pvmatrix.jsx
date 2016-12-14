@@ -125,9 +125,8 @@ const mapDispatchToProps = (dispatch) => {
     
             dispatch(actions.setVars('value', value));
             dispatch(actions.setVars('valueid', valuepage1));
-            dispatch(actions.setVars('showPage', 'turning'));
-            dispatch(actions.setVars('pagename', 'fan_matrix')); 
-            dispatch(actions.setVars('numtype', 'pvinfo')); 
+            dispatch(actions.setVars('showPage', 'fan_matrix'));
+            dispatch(actions.setVars('fan_page', 'pvinfo')); 
             
             
             // dispatch(actions.setVars('fan_page', 'pvinfo'));

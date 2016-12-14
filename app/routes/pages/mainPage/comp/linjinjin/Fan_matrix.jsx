@@ -6,7 +6,6 @@ import Faninfo from '../xym/Faninfo.jsx';
 import Bodymap from './mapbody.jsx';
 import Fan from '../jy/fan.jsx';
 import Pvinfo from '../xym/Pvinfo.jsx';
-import Turning from '../xym/turning.jsx';
 var actions = require('redux/actions');
 let page1 = require('./mappage');
 
@@ -18,7 +17,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ flag=true, changeFlag, changnav=0,fan_page='allpage',zhzb,bbs}=this.props;
+       let{ flag=true, changeFlag, changnav=0,fan_page,zhzb,bbs}=this.props;
       
         return (
             <div className={styles.bodyBox}>
@@ -27,7 +26,6 @@ let Component = React.createClass({
                 { fan_page==='faninfo' && <Faninfo></Faninfo>}
                 { fan_page==='pvinfo' && <Pvinfo></Pvinfo>}
                 { fan_page==='fanobj' && <Fan></Fan>}
-                { fan_page==='turning' && <Turning></Turning>}
             </div>
         );
    
