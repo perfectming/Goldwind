@@ -17,6 +17,21 @@
     background: #464c58;
     .tableHeaderItem {
       float: left;
+      height:72px;
+      line-height:72px;
+      overflow: hidden;
+      color:#fff;
+      text-align: center;
+    }
+    .tableHeaderAGCItem {
+      height:36px;
+      line-height:36px;
+      overflow: hidden;
+      color:#fff;
+      text-align: center;
+    }
+    .tableAGCItem{
+      float: left;
       height:36px;
       line-height:36px;
       overflow: hidden;

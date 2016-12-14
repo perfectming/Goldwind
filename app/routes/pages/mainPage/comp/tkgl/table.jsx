@@ -8,7 +8,7 @@ var {getState} = require('../../../../../redux/store');
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
 
-let nam=['Capacity','AGCState','zd','PlanActPower','TActPower','AVCState','zd','jh','fh'];
+let nam=['Capacity','AGCState','zd','AGCActPower','TActPower','AVCState','zd','jh','fh'];
 let header=['场站名称','装机容量MW','AGC系统','AVC系统'];
 let headerSize=[14,14,36,36];
 let contentSize=[14,9,9,9,9,9,9,9,9];
@@ -49,7 +49,7 @@ let Component = React.createClass({
                                         <div className={styles.tableHeaderItem}
                                              style={{width:headerSize[key]+'%'}} key={key}>
                                             <div className={styles.tableHeaderAGCItem}
-                                                 style={{width:headerSize[key]+'%'}}>{value}</div>
+                                                 style={{width:100+'%'}}>{value}</div>
                                             {
                                                 agc.map((valueC,keyC)=>{
                                                     return(
@@ -65,7 +65,7 @@ let Component = React.createClass({
                                         <div className={styles.tableHeaderItem}
                                              style={{width:headerSize[key]+'%'}} key={key}>
                                             <div className={styles.tableHeaderAGCItem}
-                                                 style={{width:headerSize[key]+'%'}}>{value}</div>
+                                                 style={{width:100+'%'}}>{value}</div>
                                             {
                                                 avc.map((valueC,keyC)=>{
                                                     return(
@@ -94,17 +94,17 @@ let Component = React.createClass({
                                              key={key} onClick={()=>changepage3(value,key)}>{mode[value]['name']}</div>
                                         {
                                             nam.map((valueC, keyC)=> {
-                                                if(keyC==0){
-                                                    return (
-                                                        <div className={styles.tableContentItem}
-                                                               style={{width:contentSize[keyC]+'%'}}
-                                                               key={keyC}><div className={data[value][valueC]/1?styles.succ:styles.defa}></div></div>
-                                                    )
-                                                }else if(keyC==5||keyC==6){
+                                                if(keyC==5||keyC==6){
                                                     return (
                                                         <div className={styles.tableContentItem}
                                                              style={{width:contentSize[keyC]+'%'}}
                                                              key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#FF0000'?styles.succ:(data[value+'801'][valueC]=='#669999'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                    )
+                                                }else if(keyC==3){
+                                                    return (
+                                                        <div className={styles.tableContentItem}
+                                                             style={{width:contentSize[keyC]+'%'}}
+                                                             key={keyC}>{value=='150811'?data['150801704'][valueC]:data['150812801'][valueC]}</div>
                                                     )
                                                 }else if(keyC==1||keyC==2){
                                                     return (
@@ -137,13 +137,7 @@ let Component = React.createClass({
                                      key={key} onClick={()=>changepage2(value,key)}>{mode[value]['name']}</div>
                                 {
                                     nam.map((valueC, keyC)=> {
-                                        if(keyC==0){
-                                            return (
-                                                <div className={styles.tableContentItem}
-                                                     style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}><div className={data[value][valueC]/1?styles.succ:styles.defa}></div></div>
-                                            )
-                                        }else if(keyC==5||keyC==6){
+                                        if(keyC==5||keyC==6){
                                             return (
                                                 <div className={styles.tableContentItem}
                                                      style={{width:contentSize[keyC]+'%'}}
