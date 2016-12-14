@@ -8,7 +8,7 @@ var {getState} = require('../../../../../redux/store');
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
 
-let nam=['TransformerStatus','AGCState','zd','PlanActPower','fh','AVCState','zd','jh','fh'];
+let nam=['Capacity','AGCState','zd','PlanActPower','TActPower','AVCState','zd','jh','fh'];
 let header=['场站名称','装机容量MW','AGC系统','AVC系统'];
 let headerSize=[14,14,36,36];
 let contentSize=[14,9,9,9,9,9,9,9,9];
