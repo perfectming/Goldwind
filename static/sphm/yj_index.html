@@ -1330,11 +1330,9 @@
 	            layer.close(index);
 	        },
 	        success: function (json) {
-	            yhjson = json.data.itemList;
-	            for (var o in json.data.itemList) {
-	                for (var t in json.data.itemList[o].items) {
-	                    $("#addYhd").append('<option value="' + json.data.itemList[o].items[t].ruleID + '">' + json.data.itemList[o].items[t].partName + '</option>');
-	                }
+	            yhjson = json.listData;
+	            for (var o in yhjson) {
+	                $("#addYhd").append('<option value="' + yhjson[o].ruleID + '">' + yhjson[o].alarmName_CN + '</option>');
 	            }
 	        },
 	        error: function () {
@@ -1349,11 +1347,9 @@
 	        return;
 	    }
 	    for (var o in yhjson) {
-	        for (var t in yhjson[o].items) {
-	            if (yhjson[o].items[t].ruleID == $(obj).val()) {
-	                $("#addLevel").html('<option>' + yhjson[o].grade + '</option>');
-                    break;
-                }
+	        if (yhjson[o].ruleID == $(obj).val()) {
+	            $("#addLevel").html('<option>' + yhjson[o].grade + '</option>');
+                break;
             }
         }
     }
@@ -1439,7 +1435,7 @@
     function chart_1() {
         $.ajax({
             type: "post",
-            url: window.JFApiDomian + '/main_getAlarmInfo.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay()+' 23:59:59',
+            url: window.JFApiDomian + '/main_getAlarmInfo.action',
             cache: false,
             dataType: 'jsonp',
             xhrFields: {
@@ -1474,7 +1470,7 @@
         
         $.ajax({
             type: "post",
-            url: window.JFApiDomian + '/main_getAlarmSupport.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + ' 23:59:59',
+            url: window.JFApiDomian + '/main_getAlarmSupport.action',
             cache: false,
             dataType: 'jsonp',
             xhrFields: {
@@ -1508,7 +1504,7 @@
         var nseriesData = new Array();
         $.ajax({
             type: "post",
-            url: window.JFApiDomian + '/main_getDispatchJob.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + ' 23:59:59',
+            url: window.JFApiDomian + '/main_getDispatchJob.action',
             cache: false,
             dataType: 'jsonp',
             xhrFields: {
@@ -1540,7 +1536,7 @@
     function chart_2() {
         $.ajax({
             type: "post",
-            url: window.JFApiDomian + '/main_getExecuteInfo.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + ' 23:59:59',
+            url: window.JFApiDomian + '/main_getExecuteInfo.action',
             cache: false,
             dataType: 'jsonp',
             xhrFields: {

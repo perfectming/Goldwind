@@ -94,6 +94,7 @@ let Component = React.createClass({
                     pointPadding: 0.2,
                     borderWidth: 0,
                     maxPointWidth: 40,
+
                     borderRadius: 5,
                 }
             },

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import styles from './Areacestylee.scss';
 import Healtytimechart from './Healtytimechart.jsx';
 import Healtytimecharttt from './Healtytimecharttt.jsx';
-import icono from './wind_logo.png';
+import icono from './img/健康度1.png';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;

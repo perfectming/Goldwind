@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var $=require('jquery');
 var ReactHighcharts = require('react-highcharts');
-
+var url="10.9.99.239";
 let data = require('./Profit-data');
 let sqy =data.areaRecordCostQY;
 let Component = React.createClass({
@@ -148,7 +148,7 @@ let Component = React.createClass({
                          // 点击第一张图第三张图变
       $.ajax({
                       type:'post',
-                      url:'http://10.68.100.32:8080/wbi/yield/getYieldByWfid',
+                      url:'http://10.68.100.32/wbi/yield/getYieldByWfid',
                       async:false,
                      data:{
                    

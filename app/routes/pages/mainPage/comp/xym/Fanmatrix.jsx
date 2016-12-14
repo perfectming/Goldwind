@@ -65,7 +65,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage,Tofaninfo,zhzb,fData}=this.props;
+        let{valuepage,Tofaninfo,zhzb,fData,fModel}=this.props;
         // console.log(fData);
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
@@ -178,9 +178,9 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('valueid', valuepage));
             
 
-            dispatch(actions.setVars('showPage', 'turning'));
-            dispatch(actions.setVars('pagename', 'fan_matrix')); 
-            dispatch(actions.setVars('numtype', 'faninfo')); 
+            dispatch(actions.setVars('showPage', 'fan_matrix'));
+            dispatch(actions.setVars('fan_page', 'faninfo')); 
+            dispatch(actions.setVars('faninfobool', false)); 
         }
     };
 };

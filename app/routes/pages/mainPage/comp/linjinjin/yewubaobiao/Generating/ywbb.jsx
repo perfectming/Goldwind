@@ -143,7 +143,7 @@ let Component = React.createClass({
                         </div>
                         <div  className={styles.tabline} id='tabline'></div>
                     </div>
-                    <div className={styles.columnbox}>
+                    <div className={styles.columnbox} id='colum'>
                      { chtnum !==undefined && <Column cnum={chtnum} cname={chtname} ctit={chtit} ></Column> }
                     </div>
                 </div>
@@ -189,28 +189,50 @@ const mapDispatchToProps = (dispatch) => {
             })
             //查询按钮功能
             $('#searchall').on('click',function(){
+                 //初始化对应数组
+                    chartnum=[];
+                    chartname=[];
+                //初始化highchart数据与表格数据
+                dispatch(actions.setVars('chtnum',''));
+                 dispatch(actions.setVars('chtname',''));
+                 dispatch(actions.setVars('tabarr',''));
+                 dispatch(actions.setVars('chtit',''));
                 $('#tabline').empty();
                 //初始化按钮颜色
                 $('#tablist span').css('background','#464c58');
                 if($('#startTime').val() == '' || $('#endTime').val() == ''){
                     alert('请选择开始或者结束时间');
+                }else if(allnum.length==0){
+                    alert('请选择要查询的字段')
                 }else{
                 allnum.map(function(value,key){
                     $('#tabline').append('<div></div>');
-                   
                     value.map(function(valueC,keyC){
                         $('#tabline>div').eq(key).append('<span>'+valueC+'</span>')
                         $('#tabline>div').eq(key).find('span').eq(0).width(80);
                         $('#tabline>div').eq(key).find('span').eq(1).width(300);
+
                     })
                     if(key%2==0){
                         $('#tabline>div').eq(key).css('background','#30343f')
                     }else{
                         $('#tabline>div').eq(key).css('background','#272b34')
                     }
-                
+                    
+                     //默认显示第一条数据
+                $('#tablist span').eq(2).css('background','#333');
+                 //初始化默认收集第一层数据
+                chartnum.push(value[2]);
+                chartname.push(value[1]); 
+                        
+                //显示highchart图标 
+                $('#colum').css('display','block');
                      
                 })
+                         //初始化默认显示第一层数据
+                        dispatch(actions.setVars('chtnum',chartnum));
+                        dispatch(actions.setVars('chtname',chartname));
+                        dispatch(actions.setVars('chtit','平均风速(m/s)')); 
             }
 
             })
@@ -256,6 +278,7 @@ const mapDispatchToProps = (dispatch) => {
                  dispatch(actions.setVars('chtname',''));
                  dispatch(actions.setVars('tabarr',''));
                  dispatch(actions.setVars('chtit',''));
+            //将数据绑定在下拉菜单中
             dispatch(actions.setVars('select_list', value[$('#selectop').val()]));
         },
         sent_info:(value,even)=>{
@@ -364,7 +387,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('tabarr', allnum));
         },
         clickitem:(kk,even)=>{
-
+            //判断数据表里是否有数据
             if($('#tabline').has('div').length){
                 //点击初始化数据
             dispatch(actions.setVars('chtnum',''));
@@ -374,21 +397,20 @@ const mapDispatchToProps = (dispatch) => {
             chartnum=[];
             chartname=[];
             allnum.map((valueC,keyC)=>{
-               
+               //获取某一列的数据
                  chartnum.push(valueC[kk]);
-                 chartname.push(valueC[1]);
-                  // console.log(chartnum);
-                  // console.log(chartname) 
+                 chartname.push(valueC[1]); 
                  dispatch(actions.setVars('chtnum',chartnum));
                  dispatch(actions.setVars('chtname',chartname));
                  dispatch(actions.setVars('chtit',$('#'+even.id).text()));  
                 
             })
+            $('#'+even.id).css('background','#333').siblings('span').css('background','#464c58')
             }else{
                  alert('没有查询到数据！')
             }
             
-            $('#'+even.id).css('background','#333').siblings('span').css('background','#464c58')
+            
 
         }
     

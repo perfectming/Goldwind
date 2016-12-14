@@ -7,20 +7,13 @@ var {getState} = require('../../../../../redux/store');
 
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
-import _ from 'lodash';
-let obj=require('../../../../../../config/MatrixData');
 
-let nam=['TransformerStatus','AVC','AGC','PlanActPower','Capacity','TActPower','Transformer_P'];
-let header=['场站名称','升压站状态', 'AVC状态','AGC状态','计划功率MW','装机容量MW','出力MW','负荷MW'];
-// let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-// let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-//
-// for(let x in obj_wfd){
-//     arr1.push(x)
-// }
-// for(let m in obj_pvd){
-//     arr2.push(m)
-// }
+let nam=['Capacity','AGCState','zd','PlanActPower','TActPower','AVCState','zd','jh','fh'];
+let header=['场站名称','装机容量MW','AGC系统','AVC系统'];
+let headerSize=[14,14,36,36];
+let contentSize=[14,9,9,9,9,9,9,9,9];
+let agc=['AGC状态','有功自动状态','有功计划值','上网有功负荷'];
+let avc=['AVC状态','无功自动状态','无功计划值','上网无功负荷'];
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -40,6 +33,7 @@ let Component = React.createClass({
                     arr2.push(i);
                 }
             }
+            console.log(data,mode);
         return (
             <div>
                 <div className={styles.actionBox}>
@@ -50,10 +44,43 @@ let Component = React.createClass({
                     <div className={styles.tableHeaderBox}>
                         {
                             header.map((value, key)=> {
+                                if (key==2){
+                                    return (
+                                        <div className={styles.tableHeaderItem}
+                                             style={{width:headerSize[key]+'%'}} key={key}>
+                                            <div className={styles.tableHeaderAGCItem}
+                                                 style={{width:headerSize[key]+'%'}}>{value}</div>
+                                            {
+                                                agc.map((valueC,keyC)=>{
+                                                    return(
+                                                        <div className={styles.tableAGCItem} key={keyC}
+                                                             style={{width:(100/agc.length)+'%'}}>{valueC}</div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    )
+                                }else if(key==3){
+                                    return (
+                                        <div className={styles.tableHeaderItem}
+                                             style={{width:headerSize[key]+'%'}} key={key}>
+                                            <div className={styles.tableHeaderAGCItem}
+                                                 style={{width:headerSize[key]+'%'}}>{value}</div>
+                                            {
+                                                avc.map((valueC,keyC)=>{
+                                                    return(
+                                                        <div className={styles.tableAGCItem} key={keyC}
+                                                             style={{width:(100/avc.length)+'%'}}>{valueC}</div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    )
+                                }else {
                                 return (
                                     <div className={styles.tableHeaderItem}
-                                         style={{width:(100/header.length)+'%'}} key={key}>{value}</div>
-                                )
+                                         style={{width:headerSize[key]+'%'}} key={key}>{value}</div>
+                                )}
                             })
                         }
                     </div>
@@ -63,29 +90,39 @@ let Component = React.createClass({
                                 return (
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         <div className={styles.tableContentItem}
-                                             style={{width:(100/header.length)+'%',cursor:'pointer'}}
+                                             style={{width:'14%',cursor:'pointer'}}
                                              key={key} onClick={()=>changepage3(value,key)}>{mode[value]['name']}</div>
                                         {
                                             nam.map((valueC, keyC)=> {
                                                 if(keyC==0){
                                                     return (
                                                         <div className={styles.tableContentItem}
-                                                               style={{width:(100/header.length)+'%'}}
+                                                               style={{width:contentSize[keyC]+'%'}}
                                                                key={keyC}><div className={data[value][valueC]/1?styles.succ:styles.defa}></div></div>
+                                                    )
+                                                }else if(keyC==5||keyC==6){
+                                                    return (
+                                                        <div className={styles.tableContentItem}
+                                                             style={{width:contentSize[keyC]+'%'}}
+                                                             key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#FF0000'?styles.succ:(data[value+'801'][valueC]=='#669999'?styles.defa:styles.cutD)):styles.cutD}></div></div>
                                                     )
                                                 }else if(keyC==1||keyC==2){
                                                     return (
                                                         <div className={styles.tableContentItem}
-                                                             style={{width:(100/header.length)+'%'}}
-                                                             key={keyC}><div className={data[value][valueC]=='#669999'?styles.succ:(data[value][valueC]=='#FF0000'?styles.defa:styles.cutD)}></div></div>
+                                                             style={{width:contentSize[keyC]+'%'}}
+                                                             key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#FF0000'?styles.succ:(data[value+'801'][valueC]=='#669999'?styles.defa:styles.cutD)):(data['150801704'][valueC]=='#FF0000'?styles.succ:(data['150801704'][valueC]=='#669999'?styles.defa:styles.cutD))}></div></div>
                                                     )
-                                                }
-                                                else{
+                                                }else if(keyC==4){
                                                 return (
                                                     <div className={styles.tableContentItem}
-                                                           style={{width:(100/header.length)+'%'}}
-                                                           key={keyC}>{data[value][valueC]*10%1000==0?data[value][valueC]/1000:(data[value][valueC]/1000).toFixed(2)}</div>
-                                                )}
+                                                           style={{width:contentSize[keyC]+'%'}}
+                                                           key={keyC}>{value=='150811'?(data['150801301'][valueC]*10%1000==0?data['150801301'][valueC]/1000:(data['150801301'][valueC]/1000).toFixed(2)):(data['150812901'][valueC]*10%1000==0?data['150812901'][valueC]/1000:(data['150812901'][valueC]/1000).toFixed(2))}</div>
+                                                )}else{
+                                                    return (
+                                                        <div className={styles.tableContentItem}
+                                                             style={{width:contentSize[keyC]+'%'}}
+                                                             key={keyC}>{data[value][valueC]%100==0?data[value][valueC]/1000:(data[value][valueC]/1000).toFixed(2)}</div>
+                                                    )}
                                             })
                                         }
                                     </div>
@@ -96,31 +133,41 @@ let Component = React.createClass({
                             return (
                             <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                 <div className={styles.tableContentItem}
-                                     style={{width:(100/header.length)+'%',cursor:'pointer'}}
+                                     style={{width:14+'%',cursor:'pointer'}}
                                      key={key} onClick={()=>changepage2(value,key)}>{mode[value]['name']}</div>
                                 {
-                                nam.map((valueC, keyC)=> {
-                                    if(keyC==0){
-                                        return (
-                                            <div className={styles.tableContentItem}
-                                                 style={{width:(100/header.length)+'%'}}
-                                                 key={keyC}><div className={data[value][valueC]?styles.succ:styles.defa}></div></div>
-                                        )
-                                    }else if(keyC==1||keyC==2){
-                                        return (
-                                            <div className={styles.tableContentItem}
-                                                 style={{width:(100/header.length)+'%'}}
-                                                 key={keyC}><div className={data[value][valueC]=='#669999'?styles.succ:(data[value][valueC]=='#FF0000'?styles.defa:styles.cutD)}></div></div>
-                                        )
-                                    }
-                                    else{
-                                        return (
-                                            <div className={styles.tableContentItem}
-                                                 style={{width:(100/header.length)+'%'}}
-                                                 key={keyC}>{data[value][valueC]*10%1000==0?data[value][valueC]/1000:(data[value][valueC]/1000).toFixed(2)}</div>
-                                        )}
-                                })
-                            }
+                                    nam.map((valueC, keyC)=> {
+                                        if(keyC==0){
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:contentSize[keyC]+'%'}}
+                                                     key={keyC}><div className={data[value][valueC]/1?styles.succ:styles.defa}></div></div>
+                                            )
+                                        }else if(keyC==5||keyC==6){
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:contentSize[keyC]+'%'}}
+                                                     key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#FF0000'?styles.succ:(data[value+'801'][valueC]=='#669999'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                            )
+                                        }else if(keyC==1||keyC==2){
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:contentSize[keyC]+'%'}}
+                                                     key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#FF0000'?styles.succ:(data[value+'801'][valueC]=='#669999'?styles.defa:styles.cutD)):(data['150801704'][valueC]=='#FF0000'?styles.succ:(data['150801704'][valueC]=='#669999'?styles.defa:styles.cutD))}></div></div>
+                                            )
+                                        }else if(keyC==4){
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:contentSize[keyC]+'%'}}
+                                                     key={keyC}>{value=='150811'?(data['150801301'][valueC]*10%1000==0?data['150801301'][valueC]/1000:(data['150801301'][valueC]/1000).toFixed(2)):(data['150812901'][valueC]*10%1000==0?data['150812901'][valueC]/1000:(data['150812901'][valueC]/1000).toFixed(2))}</div>
+                                            )}else{
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:contentSize[keyC]+'%'}}
+                                                     key={keyC}>{data[value][valueC]%100==0?data[value][valueC]/1000:(data[value][valueC]/1000).toFixed(2)}</div>
+                                            )}
+                                    })
+                                }
                             </div>
                             )
                         })

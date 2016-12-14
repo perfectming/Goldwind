@@ -3,6 +3,9 @@
     overflow:hidden;
     padding:10px;
     padding-right:40px;
+  .scroll{
+    overflow-x: scroll;
+  }
     .paddingtop{
     margin-top:0px;
    
@@ -34,6 +37,7 @@
     margin-top:40px;
     border:1px solid #282F37;
     position:relative;
+    overflow:hidden;
      background: rgba(44, 61, 71,0.4);
       .lkua{
       border:3px solid #5B9BD5;
@@ -231,7 +235,7 @@
     top:50%;
     left:50%;
     height:540px;
-    overflow-x:scroll;
+
     transform:translate(-50%,-50%);
     box-sizing:border-box;
     display:none;
@@ -268,7 +272,7 @@
     position:absolute;
     top:22px;
     left:2%;
-    height:16px;
+    height:19px;
     width:16px;
     }
     }

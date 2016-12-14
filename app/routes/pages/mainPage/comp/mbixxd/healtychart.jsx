@@ -119,7 +119,7 @@ let Component = React.createClass({
             opposite: true
         }],
             series: [{
-                name: '实际健康度',
+                name: '健康度',
                 type: 'column',
                 data: areaRecordProfit,
                 color:'#4CDB9D',

@@ -150,9 +150,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
          changedate:()=>{
 
-              // time=setInterval(function(){
-            //     console.log('刷新')
-
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                 function setData(rdata){
                     dispatch(actions.setVars('zhzb', rdata));
@@ -179,7 +176,7 @@ const mapDispatchToProps = (dispatch) => {
                         }
                 },2000)
                                                    
-              // },500)
+            
         },
         init: () => {
             var obj = {

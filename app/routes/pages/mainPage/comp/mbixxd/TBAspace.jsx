@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import TBAspacechart from './TBAspacechart.jsx';
-import icono from './wind_logo.png';
+import icono from './img/TBA.png';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;

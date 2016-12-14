@@ -14,7 +14,6 @@ import Gisdxt from './fcright/gisdxt.jsx';
 import Syzjs from './fcright/syzjs.jsx';
 import Choosefan from '../../xym/allinfo/Choosefan.jsx';
 import Choosepv from '../../xym/allinfo/Choosepv.jsx';
-import Turning from '../../xym/turning.jsx';
 var actions = require('redux/actions');
 
 
@@ -24,7 +23,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ flag=true, changeFlag,numpage,hiden=true}=this.props;
+       let{ flag=true, changeFlag,numpage,hiden=true,faninfobool = false}=this.props;
         return (
             <div className={styles.bodyBox}>
                 
@@ -34,7 +33,7 @@ let Component = React.createClass({
                         <Navleft></Navleft>
                       </div>
                     <div className={`${styles.conright} ${flag===true? styles.animat3 : styles.animat2}`}>
-                        { numpage==='fanmatrix' && <Fanmatrix></Fanmatrix>}
+                        { numpage==='fanmatrix' && <Fanmatrix faninfobool={faninfobool}></Fanmatrix>}
                         { numpage==='pvmatrix' && <Pvmatrix></Pvmatrix>}
                         { numpage==='sjlb' && <Sjlb></Sjlb>}
                         { numpage==='sjlb1' && <Sjlb1></Sjlb1>}
@@ -44,9 +43,8 @@ let Component = React.createClass({
                         { numpage==='cgt' && <Cgt></Cgt>}
                         { numpage==='gisdxt' && <Gisdxt></Gisdxt>}
                         { numpage==='syzjs' && <Syzjs></Syzjs>}
-                        { numpage==='choosefan' && <Choosefan></Choosefan>}
+                        { numpage==='choosefan' && <Choosefan faninfobool={faninfobool}></Choosefan>}
                         { numpage==='choosepv' && <Choosepv></Choosepv>}
-                        { numpage==='turning' && <Turning></Turning>}
 
                     </div>
                 </div>

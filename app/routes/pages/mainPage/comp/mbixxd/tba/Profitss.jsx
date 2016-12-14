@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
-import icono from '../wind_logo.png';
+import icono from '../img/PBA.png';
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
