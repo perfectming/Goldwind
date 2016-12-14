@@ -60,7 +60,6 @@ const mapDispatchToProps = (dispatch) => {
 
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
                     function setDatas(rdata){
-                        console.log(rdata)
                         dispatch(actions.setVars('fModel', rdata));
                         TY.getRtData("DevicesMatrix", 8888800, setfData)
                         function setfData(rdata){
