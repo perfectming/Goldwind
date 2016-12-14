@@ -25,17 +25,21 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let{actbt=0,changpage,wind,windP,gogogo,areaNamee,back,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+        let{actbt=0,changpage,wind,windP,gogogo,areaNamee,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaNameN,areaRecordCostN,areaRecordProfitN}=this.props;
           return (
            <div className={styles.box}>
               <div className={styles.boxcover} id='boxcover'></div>
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{text[actbt]+'月份各风机电量'}</p>
+                <p>{text[actbt]+'月份各风机发电量'}</p>
                 <div className={styles.xx} onClick={()=>close()}>x</div>
                 </div>
-        <Windce areaNameX={areaName}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined? areaRecordCost:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} width={1750} height={500}></Windce>
+                
+  <Windce areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={pointWidth} width={12000} height={440}></Windce>
+
+                
+        
              </div>
             <ul className={styles.monthbox}>
                     {
@@ -50,11 +54,11 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <Windce areaNameX={areaNamee==null?areaName:areaNamee}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined? areaRecordCost:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} height={700}></Windce>
+                                <Windce areaNameX={areaNamee==null?areaName:areaNamee}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined?areaRecordProfit:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} height={750}></Windce>
                             </div>
                         </div>
                          <div className={styles.tik}>
-                        <p className={styles.Ff}>{text[actbt]+'月份各风机电量'}</p>
+                        <p className={styles.Ff}>{text[actbt]+'月份各风机发电量'}</p>
                     </div>
                     </div>          
                 <div className={styles.imgq}>
@@ -81,6 +85,9 @@ const mapStateToProps = (state) => {
         actbt:state.vars.actbt,
          wind:state.vars.wind,
          windP:state.vars.windP,
+         areaNameN:state.vars.areaNameN,
+         areaRecordCostN:state.vars.areaRecordCostN,
+         areaRecordProfitN:state.vars.areaRecordProfitN,
          areaNamee:state.vars.areaNamee,
            befor_pagee : state.vars.befor_pagee,
         befor_page2 : state.vars.befor_page2,
@@ -96,9 +103,92 @@ const mapDispatchToProps = (dispatch) => {
         }
         ,
         changpage :(value,key)=>{
-            dispatch(actions.setVars('actbt',key ));
-            dispatch(actions.setVars('wind',value.plan));
-            dispatch(actions.setVars('windP',value.actrul));
+            
+            var arr1=[];
+            var arr2=[];
+            var arr3=[];
+            var areaids=[];
+            var windids=[];
+            var monthh=key+1;
+            //获取所有的区域
+        //    $.ajax({
+        //     type:'post',
+        //     url:'http://10.9.99.235:8080/wbi/BaseData/getGroup',  
+        //     async:false,
+          
+        //     dataType:'json',
+        //     timeout:'3000',
+        //     success:function(data){
+        //        // console.log(data)
+        //        for(var i in data.data){
+        //               areaids.push(i);
+        //        }
+        //        // console.log(areaids)
+        //     // 获取x轴的值内蒙达茂天润风电场
+            
+        //     },
+        //     error:function(){
+        //         alert(2)
+        //     },
+        //   });
+        //   //获取所有的风场
+        //   $.ajax({
+        //     type:'post',
+        //     url:'http://10.9.99.235:8080/wbi/BaseData/getWfsByGroupid',  
+        //     async:false,
+        //    data:{
+        //     'groupid':areaids[key],
+        //    },
+        //     dataType:'json',
+        //     timeout:'3000',
+        //     success:function(data){
+        //        // console.log(data);
+        //        for(var i in data.data){
+        //               windids.push(i);
+        //        }
+        //        console.log(windids)
+
+        //     // 获取x轴的值内蒙达茂天润风电场
+            
+        //     },
+        //     error:function(){
+        //         alert(2)
+        //     },
+        //   });
+        // //获取对应风场下面的数据
+        //  $.ajax({
+        //     type:'post',
+        //     url:'http://10.9.99.235:8080/wbi/ELEC/getWtAreaElec',  
+        //     async:false,
+        //    data:{
+        //     'year':2016,
+        //     'month':monthh,
+        //     'wfid':windids[1]
+        //    },
+        //     dataType:'json',
+        //     timeout:'3000',
+        //     success:function(data){
+               
+        //     // 获取x轴的值内蒙达茂天润风电场
+        //     var dataa=data.data;
+        //     for(var i=0;i<15;i++){
+        //         var xWild=data.data[i].wtname;
+        //         arr1.push(xWild);
+        //         var yPowerPlan=data.data[i].powerplan;
+        //         arr2.push(yPowerPlan);
+        //         var yPowerAct=data.data[i].poweract;
+        //         arr3.push(yPowerAct);
+        //     }
+            
+        //     },
+        //     error:function(){
+        //         alert(2)
+        //     },
+        //   });
+        //   dispatch(actions.setVars('actbt',key ));
+        //   dispatch(actions.setVars('areaNamee',arr1));
+        //     dispatch(actions.setVars('wind',arr3));
+        //     dispatch(actions.setVars('windP',arr2));
         },
         gogogo:(windPT,key)=>{
             (function(){
@@ -106,7 +196,7 @@ const mapDispatchToProps = (dispatch) => {
                     return b.areaRecordCost - a.areaRecordCost;
                 })
 
-                 console.log($('.red'));
+                 
                 for(var i=0;i<12;i++){
                     x0[i]=windPT[i].name;
                     x1[i]=windPT[i].areaRecordCost;
@@ -131,21 +221,42 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('windP',x3))
 
         },
-        more:()=>{
+        more:(key)=>{
              $("#sss").show();
              $('#boxcover').show();
-             $.ajax({
-              type:'post',
-              url:'http://10.9.100.4:8080/soam/user/getPower',
-              async:'true',
-              datatype:'jsonp',
-              success:function(){
-                alert(1);
-              },
-              error:function(e){
-                      console.log(e);  
-              },
-             })
+             var arr4=[],arr5=[],arr6=[];
+             var monthh=key+1;
+           //   $.ajax({
+           //  type:'post',
+           //  url:'http://10.9.99.235:8080/wbi/ELEC/getWtAreaElec',  
+           //  async:false,
+           // data:{
+           //  'year':2016,
+           //  'month':2,
+           //  'wfid':150210
+           // },
+            // dataType:'json',
+            // timeout:'3000',
+            // success:function(data){
+               
+            // 获取x轴的值内蒙达茂天润风电场
+          //   var dataa=data.data;
+          //   for(var i in dataa){
+          //       var xWild=data.data[i].wtname;
+          //       arr4.push(xWild);
+          //       var yPowerPlan=data.data[i].powerplan;
+          //       arr5.push(yPowerPlan);
+          //       var yPowerAct=data.data[i].poweract;
+          //       arr6.push(yPowerAct);
+          //   }
+          //   dispatch(actions.setVars('areaNameN',arr4));
+          //   dispatch(actions.setVars('areaRecordCostN',arr5));
+          //   dispatch(actions.setVars('areaRecordProfitN',arr6));
+          //   },
+          //   error:function(){
+          //       alert(2)
+          //   },
+          // });
         },
         close:()=>{
             $("#sss").hide();

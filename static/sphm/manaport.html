@@ -180,6 +180,10 @@
                     url: window.ApiDomian + '/report/list.json?reportType=3&reportBegin=' + GetYear() + "-01-01" + "&reportEnd=" + GetYear() + "-" + GetMonth() + "-" + getLastDay(GetYear(), GetMonth()),
                     cache: false,
                     dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     success: function (json) {
                         for (var o in json.pagination.list) {
                             $(".tab_conn:eq(0) ul").append('<li><h2>' + json.pagination.list[o].reportTypeDesc + '<span>月</span></h2><div class="btn"><a target="_blank" href="' + window.ApiDomian + '/report/preview.json?fileName=' + json.pagination.list[o].reportPath + '">预览</a><a target="_blank" href="' + window.ApiDomian + '/report/download.json?fileName=' + json.pagination.list[o].reportPath + '" class="ml15">导出</a></div></li>');
@@ -195,6 +199,10 @@
                     url: window.ApiDomian + '/report/list.json?reportType=2',
                     cache: false,
                     dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     success: function (json) {
                         for (var o in json.pagination.list) {
                             $(".tab_conn:eq(1) ul").append('<li><h2>' + json.pagination.list[o].reportTypeDesc + '<span>年</span></h2><div class="btn"><a target="_blank" href="' + window.ApiDomian + '/report/preview.json?fileName=' + json.pagination.list[o].reportPath + '">预览</a><a target="_blank" href="' + window.ApiDomian + '/report/download.json?fileName=' + json.pagination.list[o].reportPath + '" class="ml15">导出</a></div></li>');
@@ -218,6 +226,10 @@
                 url: window.JFApiDomian + '/alarmInfo_getWfName.do',
                 cache: false,
                 dataType: 'jsonp',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 complete: function () {
                     layer.close(lay);
                 },
@@ -240,6 +252,10 @@
                 url: window.JFApiDomian + '/alarmInfo_getWtIDOrName.do?wfID=' + $(source).val()+"&userId="+userId,
                 cache: false,
                 dataType: 'jsonp',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 complete: function () {
                     layer.close(lay);
                 },
@@ -265,6 +281,10 @@
                 url: window.ApiDomian + '/report/list.json?page=' + (pageIndex) + '&size=17' + GetFilter(),
                 cache: false,
                 dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
                 complete:function(){
                     layer.close(pageLayer);
                 },
@@ -276,7 +296,7 @@
                         for (var o in jsonList) {
                             var html = '<tr><td>' + jsonList[o].addTime + '</td><td>' + jsonList[o].userID + '</td><td>' + jsonList[o].reportName + '</td>'
                                     + '<td>巴盟</td><td>' + jsonList[o].wfName + '</td><td>' + jsonList[o].reportBeginTime + '至' + jsonList[o].reportEndTime
-                                    + '</td><td title="' + jsonList[o].reportRemark + '">' + sb_substr(jsonList[o].reportRemark, 0, 20) + '</td>'
+                                    + '</td><td title="' + jsonList[o].reportRemark + '">' + (jsonList[o].reportRemark == null ? "&nbsp;" : sb_substr(jsonList[o].reportRemark, 0, 20)) + '</td>'
                                     +'<td';
                             switch (jsonList[o].reportGrade) {
                                 case 0:
@@ -381,6 +401,10 @@
                     data: json,
                     contentType: "application/json; charset=utf-8",
                     dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
                     complete: function () {
                         layer.closeAll();
                     },

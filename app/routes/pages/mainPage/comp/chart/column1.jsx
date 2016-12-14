@@ -53,7 +53,7 @@ let Component = React.createClass({
             }
         }
         var i=0;
-        var one,two,three;
+        var one,two,three,foure;
          for(let na in mod.ens){
 
             if(na==key[0][0]){
@@ -65,9 +65,12 @@ let Component = React.createClass({
              if(na==key[2][0]){
             three=mod.ens[na].name
             }
+             if(na==key[3][0]){
+            foure=mod.ens[na].name
+            }
 
          }
-         allname1.push(one,two,three)
+         allname1.push(one,two,three,foure)
         
            
 
@@ -148,6 +151,11 @@ let Component = React.createClass({
             },
             tooltip: {
                 shared:true,
+                style:{
+                    color: '#000',
+                    fontSize: '12px',
+                    fontFamily:"微软雅黑"
+                }
 
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
                 //pointFormat: "<b>{point.percentage:.0f}%</b>"
@@ -185,12 +193,18 @@ let Component = React.createClass({
                 type: 'column',
                 color:"#33c5cd",
                 name: "站场发电完成率",
+                tooltip: {
+                valueSuffix: '%'
+            },
                 data: arr,
             }, {
                 type: 'line',
                 color:"#0f0",
                 name: "集团发电完成率",
                 data: line,
+                tooltip: {
+                valueSuffix: '%'
+                },
                 marker: {
                         enabled: false
                        

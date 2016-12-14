@@ -15,17 +15,15 @@ let Component = React.createClass({
         let ssg1 = tabaleData.ModelData;
         let ssg2=model.Model.ens;
         for(let x in ssg1){
-            arr1.push(ssg1[x].Capacity/1);
+            (!x[6]&&x[5])&&arr1.push(ssg1[x].Capacity/1000);
         }
-        arr1.splice(-2,2);
         for(let x in ssg1){
-            arr2.push((ssg1[x].Transformer_P/1).toFixed(0)/1);
+            (!x[6]&&x[5])&&arr2.push((ssg1[x].Transformer_P/1000).toFixed(0)/1);
         }
-        arr2.splice(-2,2);
         for(let x in ssg2){
-            arr3.push(ssg2[x].name);
+            (!x[6]&&x[5])&&arr3.push(ssg2[x].name);
         }
-        arr3.pop();}
+        }
         let configPie = {
             chart: {
                 type: 'column',
@@ -44,6 +42,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
+                valueSuffix:'MW',
                 style:{
                     color: '#333',
                     fontSize: '13px',

@@ -51,7 +51,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-               
+               valueSuffix:'kWh'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -92,11 +92,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                  title: {
-                text:'(kWh)',
+                text:'kWh',
                     align:'high',
                     rotation:'0',
                     y: -10,
-                    x: 45,
+                    x: 40,
                     style:{
                         color:'#fff',
                         fontSize:'14px',
@@ -127,7 +127,7 @@ let Component = React.createClass({
                color:'#70c080',
                 pointWidth: 20,
                 
-               
+               pointPlacement:0.08,
                 borderRadius: 3
             },
             ]

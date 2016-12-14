@@ -52,6 +52,9 @@ let Component = React.createClass({
                     borderRadius:5,
                 }
             },
+            tooltip: {
+	            valueSuffix: unit,
+	        },
             xAxis: {
                 lineWidth: 1,
                 tickWidth: 0,

@@ -5,7 +5,7 @@ import jian from '../../../../img/comp/jian_icon.png';
 import add from '../../../../img/comp/add_icon.png';
 import Column from './colum.jsx';
 let type = require('./ywbb_date');
-let btype = type.comps.from;
+let btype = type.comps.elect_table;
 var $ =require('jquery');
 var actions = require('redux/actions');
 
@@ -73,12 +73,6 @@ let Component = React.createClass({
                      <div className={styles.btnBox}>
                         <button id='searchall'>查询</button>
                     </div>
-                    <div className={styles.btnBox}>
-                        <button>设置参数</button>
-                    </div>
-                    <div className={styles.btnBox}>
-                        <button>导出Excel</button>
-                    </div>
                 </div>
                 <div className={styles.leftlist} id='leftlist'>
                     {
@@ -122,7 +116,7 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.righttable}>
                     <div className={styles.tablebox} id='tablebox'>
-                        <div className={styles.tabtit} id='tablist'>
+                        <div className={styles.tabtit} id='tablist' style={{width:'100%'}}>
                         {
                             select_list !== undefined && select_list.param.map((value,key)=>{
                                 if(key==0){
@@ -131,7 +125,7 @@ let Component = React.createClass({
                                         ) 
                                     }else if(key==1){
                                         return(
-                                        <span key={key} style={{width:'301px'}}>{value}</span>
+                                        <span key={key} style={{width:'401px'}}>{value}</span>
                                         ) 
                                     }else{
                                         return(
@@ -141,9 +135,9 @@ let Component = React.createClass({
                             })
                         }
                         </div>
-                        <div  className={styles.tabline} id='tabline'></div>
+                        <div  className={styles.tabline} id='tabline' style={{width:'100%'}}></div>
                     </div>
-                    <div className={styles.columnbox} id='colum'>
+                    <div className={styles.columnbox}>
                      { chtnum !==undefined && <Column cnum={chtnum} cname={chtname} ctit={chtit} ></Column> }
                     </div>
                 </div>
@@ -194,43 +188,28 @@ const mapDispatchToProps = (dispatch) => {
                 $('#tablist span').css('background','#464c58');
                 if($('#startTime').val() == '' || $('#endTime').val() == ''){
                     alert('请选择开始或者结束时间');
-                }else if(allnum.length==0){
-                    alert('请选择要查询的字段')
                 }else{
                 allnum.map(function(value,key){
-                    $('#tabline').append('<div></div>');
+                    $('#tabline').append('<div style="width:100%"></div>');
+                   
                     value.map(function(valueC,keyC){
                         $('#tabline>div').eq(key).append('<span>'+valueC+'</span>')
                         $('#tabline>div').eq(key).find('span').eq(0).width(80);
-                        $('#tabline>div').eq(key).find('span').eq(1).width(300);
-
+                        $('#tabline>div').eq(key).find('span').eq(1).width(400);
                     })
                     if(key%2==0){
                         $('#tabline>div').eq(key).css('background','#30343f')
                     }else{
                         $('#tabline>div').eq(key).css('background','#272b34')
                     }
-                    
-                     //默认显示第一条数据
-                $('#tablist span').eq(2).css('background','#333');
-                 //初始化默认显示第一层数据
-                         console.log(allnum)
-                        chartnum.push(value[2]);
-                        chartname.push(value[1]); 
-                        dispatch(actions.setVars('chtnum',chartnum));
-                        dispatch(actions.setVars('chtname',chartname));
-                        dispatch(actions.setVars('chtit','平均风速(m/s)')); 
-                //显示highchart图标 
-                $('#colum').css('display','block');
+                
                      
                 })
-               
             }
 
             })
         },
         init: () => {
-           
             //初始化日期
             var date = new Date();
             var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
@@ -238,12 +217,6 @@ const mapDispatchToProps = (dispatch) => {
             //获取今天与明天的日期
             $('#startTime').val(dateString);
             $('#endTime').val(dateString1)
-           
-
-
-
-
-
             //初始化选中数组
             allnum=[];
             //初始化highchart数据与表格数据
@@ -270,7 +243,6 @@ const mapDispatchToProps = (dispatch) => {
                  dispatch(actions.setVars('chtname',''));
                  dispatch(actions.setVars('tabarr',''));
                  dispatch(actions.setVars('chtit',''));
-            //将数据绑定在下拉菜单中
             dispatch(actions.setVars('select_list', value[$('#selectop').val()]));
         },
         sent_info:(value,even)=>{
@@ -379,7 +351,7 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('tabarr', allnum));
         },
         clickitem:(kk,even)=>{
-            //判断数据表里是否有数据
+
             if($('#tabline').has('div').length){
                 //点击初始化数据
             dispatch(actions.setVars('chtnum',''));
@@ -389,9 +361,11 @@ const mapDispatchToProps = (dispatch) => {
             chartnum=[];
             chartname=[];
             allnum.map((valueC,keyC)=>{
-               //获取某一列的数据
+               
                  chartnum.push(valueC[kk]);
-                 chartname.push(valueC[1]); 
+                 chartname.push(valueC[1]);
+                  // console.log(chartnum);
+                  // console.log(chartname) 
                  dispatch(actions.setVars('chtnum',chartnum));
                  dispatch(actions.setVars('chtname',chartname));
                  dispatch(actions.setVars('chtit',$('#'+even.id).text()));  

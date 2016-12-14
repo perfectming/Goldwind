@@ -131,7 +131,10 @@ let Component = React.createClass({
                     type: 'line',
                     data: fanCost,
                     color:'blue',
-                    yAxis:1
+                    yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
                 },
             ]
         };

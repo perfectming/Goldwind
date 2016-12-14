@@ -23,9 +23,11 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {w0='1月',wins}=this.props;
+        let {w0='1月',wins,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
         return (
             <div className={styles.box}>
+            <div className={styles.padding}>
+             <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
@@ -82,6 +84,9 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('w1',w0 ));
             console.log(wins[0]);
             // dispatch(actions.setVars('wins1',wins[b-1]));
+        },
+        backtop:(befor_pagee,befor_page2)=>{
+            dispatch(actions.setVars('showPage',befor_pagee));
         },
     };
 };

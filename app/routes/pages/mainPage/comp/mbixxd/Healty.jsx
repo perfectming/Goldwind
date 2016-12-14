@@ -31,7 +31,7 @@ let Component = React.createClass({
                 <p>{text[actbt]}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
-          <Healtychart machineE={windP==null?machineE:windP} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} width={1750} height={500}></Healtychart>
+          <Healtychart machineE={windP==null?machineE:windP} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} width={1750} height={450}></Healtychart>
              </div>
                  <ul className={styles.monthbox}>
                     {
@@ -41,25 +41,30 @@ let Component = React.createClass({
                     }
                     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
                 </ul>
+ <div className={styles.paddingtop}>
+
+
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
-                               <Healtychart machineE={windP==null?machineE:windP} areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} height={700}></Healtychart>
+                               <Healtychart machineE={windP==null?machineE:windP}         areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} height={750}></Healtychart>
                         </div>
                          <div className={styles.tik}>
-                        <p>{text[actbt]}</p>
-                    </div>
+                             <p>{text[actbt]}</p>
+                         </div>
                     </div>
                     <div className={styles.imgq}>
                         <img src={icono}/>
                     </div>
-                    <div className={styles.buttons}>
+                    <div className={styles.buttonsh}>
                       <button   onClick={()=>gogogo(healthy)} > 前10</button>
                       <button onClick={()=>back(windPT)}>后10</button>
                       <button  onClick={()=>more()}>更多</button>
                    </div>
                 </div>
-            </div>
+ </div>
+                </div>
+          
 
 
         );

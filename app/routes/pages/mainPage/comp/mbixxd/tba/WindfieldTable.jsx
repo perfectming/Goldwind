@@ -10,11 +10,12 @@ let Component = React.createClass({
     },
     render() {
 
-      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA}=this.props;
+      let {PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA}=this.props;
+        
         let configPie = {
             chart: {
-                height:340,
-                width:880,
+                height:370,
+                width:1750,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -53,7 +54,8 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+              
+                 valueSuffix:'kWh'
                
             },
             credits: {
@@ -103,11 +105,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'(kWh)',
+                        text:'kWh',
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 45,
+                        x: 35,
                         style:{
                             color:'#fff',
                             fontSize:'14px'
@@ -179,9 +181,12 @@ let Component = React.createClass({
                 {
                     name: 'PBA',
                     type: 'line',
-                    data: [10,20,30,40,50,60,70,80,90,99],
+                    data: PBAGroupFirstPba,
                     color:'blue',
-                     yAxis:1
+                     yAxis:1,
+                      tooltip: {
+               valueSuffix:'kWh'
+            },
 
                 },]
         };

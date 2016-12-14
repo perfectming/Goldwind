@@ -103,7 +103,7 @@ let Component = React.createClass({
             },
             plotOptions: {
                 column: {
-                    pointWidth:25,
+                    maxPointWidth:25,
                     stacking: 'normal',//柱状图堆叠
                     borderWidth: 0
                 }
@@ -113,15 +113,24 @@ let Component = React.createClass({
             series: [{
                 name:'故障损失',
                 data: czgzss,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
             },{
                 name:'维护损失',
                 data: czwhss,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
             },{
                 name:'限电损失',
                 data: czxdss,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
             }]
         };
         return (

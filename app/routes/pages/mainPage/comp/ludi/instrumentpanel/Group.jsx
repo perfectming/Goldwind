@@ -4,8 +4,7 @@ import styles from './Groupstyle.scss';
 import Yearelectric from './Yearelectric.jsx';
 import Pie2 from '../../mxx/Pie2';
 
-var $ = require('jquery');
-var ipUrl='10.68.100.32:8080';
+let ipUrl='10.68.100.32:8080';
 
 let profit,amounts,rate,yearPro,month2,cost,incomes,shouldElec,actrulElec,sortArr,yearELec,yearPlanELec,monthElec,monthPlanElec,dayelec,dayPlanElec,arrPlan=[],month1=[],arrAct=[],runTime,downTime,tba;
 
@@ -21,7 +20,7 @@ let Component = React.createClass({
   
 	
     render() {
-    	let{flag=true,flagPba=true,flagTime=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+    	let{flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         return (
            <div className={styles.box}>
            		<div className={styles.left}>
@@ -56,7 +55,7 @@ let Component = React.createClass({
            						<a className={styles.time} onClick={()=>changepagePBAT()}></a>
            					</div>
            					<div className={styles.sectionBox}>
-           						<span className={styles.numBox}><p style={{color:'#e9c75c'}}>{((actrulElec/shouldElec)*100).toFixed(1)}%</p>PBA</span>
+           						<span className={styles.numBox}><p style={{color:'#e9c75c'}}>{shouldElec==0? 0:((actrulElec/shouldElec)*100).toFixed(1)}%</p>PBA</span>
            						<Pie2 color={actrulElec/shouldElec>1? ['#1fe005','#fbd500']:actrulElec/shouldElec>0.8?['#fbd500','#39565e']:actrulElec/shouldElec?['#ff0000','#39565e']:['#d06960','#39565e']} num={[actrulElec,shouldElec-actrulElec]}></Pie2>	
            					</div>
            				</div>
@@ -78,21 +77,21 @@ let Component = React.createClass({
            					<div className={styles.electricHeader}><a></a>发电量</div>
            					<div className={styles.electricFirst}>
            						<a></a><span>年累计发电量</span>
-           						<div className={styles.electricTotal}>{yearELec}kWh</div>
+           						<div className={styles.electricTotal}>{(yearELec/10000).toFixed(1)}万kWh</div>
            						<div className={styles.electricPercent}>
            							<div className={yearELec/yearPlanELec>1? styles.green:yearELec/yearPlanELec>.8? styles.yellow:yearELec/yearPlanELec>.6? styles.red:styles.redS} style={{width:((yearELec/yearPlanELec*100))+"%"}}>{(yearELec/yearPlanELec*100).toFixed(1)}%</div>
            						</div>
            					</div>
            					<div className={styles.electricSecond}>
            						<a></a><span>月累计发电量</span>
-           						<div className={styles.electricTotal}>{monthElec}kWh</div>
+           						<div className={styles.electricTotal}>{(monthElec/10000).toFixed(1)}万kWh</div>
            						<div className={styles.electricPercent}>
            							<div className={monthElec/monthPlanElec>1? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:(monthElec/monthPlanElec*100)+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
            						</div>
            					</div>
            					<div className={styles.electricThird}>
            						<a></a><span>日累计发电量</span>
-           						<div className={styles.electricTotal}>{dayelec}kWh</div>
+           						<div className={styles.electricTotal}>{(dayelec/10000).toFixed(1)}万kWh</div>
            						<div className={styles.electricPercent}>
            							<div className={dayelec/dayPlanElec>1? styles.green:dayelec/dayPlanElec>.8? styles.yellow:dayelec/dayPlanElec>.6? styles.red:styles.redS} style={{width:(dayelec/dayPlanElec*100)+"%"}}>{(dayelec/dayPlanElec*100).toFixed(1)}%</div>
            						</div>
@@ -106,7 +105,7 @@ let Component = React.createClass({
 	           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageEleT()}></a></div>
            							</div>
 	           				</div>
-           					<Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+           					<Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'万kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
            				</div>
            				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
            					<div className={styles.header}>
@@ -116,7 +115,7 @@ let Component = React.createClass({
 	           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
            							</div>
 	           				</div>
-           					<div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"元"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
+           					<div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"万元"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
            				</div>
            			</div>
            		</div>
@@ -129,8 +128,8 @@ let Component = React.createClass({
                 			<tr>
 	                			<th>排名</th>
 	           					<th>区域名</th>
-	           					<th onClick={()=>changepageSort1(flag,flagPba,sortArr)} className={flag==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba==true? styles.arrow:styles.bottom}></span></th>
-	           					<th onClick={()=>changepageSort(flag,flagTime,sortArr)} className={flag==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime==true? styles.arrow:styles.bottom}></span></th>
+	           					<th onClick={()=>changepageSort1(flag1,flagPba1,sortArr)} className={flag1==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba1==true? styles.arrow:styles.bottom}></span></th>
+	           					<th onClick={()=>changepageSort(flag1,flagTime1,sortArr)} className={flag1==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime1==true? styles.arrow:styles.bottom}></span></th>
                 			</tr>
                 			{
                 				sortArr.map((value,key)=>{
@@ -150,36 +149,10 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return{
     	sortArr : state.vars.sortArr,
-    	flag : state.vars.flag,
-    	flagPba : state.vars.flagPba,
-    	flagTime : state.vars.flagTime,
-    	
-    	profit:state.vars.profit,
-        rate:state.vars.rate,
-        amounts:state.vars.amounts,
-        
-        yearELec:state.vars.yearELec,
-        yearPlanELec:state.vars.yearPlanELec,
-        monthElec:state.vars.monthElec,
-        monthPlanElec:state.vars.monthPlanElec,
-        dayelec:state.vars.dayelec,
-        dayPlanElec:state.vars.dayPlanElec,
-        arrPlan:state.vars.arrPlan,
-        month1:state.vars.month1,
-        arrAct:state.vars.arrAct,
-        
-        actrulElec:state.vars.actrulElec,
-        shouldElec:state.vars.shouldElec,
-        sortArr:state.vars.sortArr,
-        
-        incomes:state.vars.incomes,
-        cost:state.vars.cost,
-        month2:state.vars.month2,
-        
-        runTime:state.vars.runTime,
-        downTime:state.vars.downTime,
-        tba:state.vars.tba,
-    }
+    	flag1 : state.vars.flag1,
+    	flagPba1 : state.vars.flagPba1,
+    	flagTime1 : state.vars.flagTime1,
+	}
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -202,9 +175,7 @@ const mapDispatchToProps = (dispatch) => {
 			　　　　	}
 			　　	},
 			});
-			dispatch(actions.setVars('profit', profit));
-			dispatch(actions.setVars('amounts', amounts));
-			dispatch(actions.setVars('rate', rate));
+			
 			$.ajax({
 	        	url:'http://'+ipUrl+'/wbi/yield/getAllRate',//年收益表
 			    type: 'post',
@@ -214,10 +185,10 @@ const mapDispatchToProps = (dispatch) => {
 			    success:function (data) {
 				    yearPro=data.data;
 				    month2=[],cost=[],incomes=[];
-				    for(var i=0;i<yearPro.length;i++){
-				        month2.push(yearPro[i].month);
-				        cost.push(yearPro[i].costs);
-				        incomes.push(yearPro[i].earning);
+				    for(var i in yearPro){
+				        month2.push(yearPro[i].month+"月");
+				        cost.push(yearPro[i].costs/10000);
+				        incomes.push(yearPro[i].earning/10000);
 				    }
 			    },
 			    complete : function(XMLHttpRequest,status){ 
@@ -226,9 +197,6 @@ const mapDispatchToProps = (dispatch) => {
 				　　　}
 				},
 			});
-			dispatch(actions.setVars('month2', month2));
-			dispatch(actions.setVars('cost', cost));
-			dispatch(actions.setVars('incomes', incomes));
 			
 			$.ajax({
         		url:'http://'+ipUrl+'/wbi/PBA/getPBA',//PBA表格
@@ -238,8 +206,6 @@ const mapDispatchToProps = (dispatch) => {
 		        data:'type=0',
 		        timeout : 60000, 
 		        success:function (data) {
-		        	console.log(data);
-		        	console.log('PBA');
 		        	shouldElec=data.data.scale[0].powertheory;
 		        	actrulElec=data.data.scale[0].poweract;
 		        	sortArr=data.data.Areatabulation;
@@ -249,10 +215,7 @@ const mapDispatchToProps = (dispatch) => {
 				　　　　　 console.log('超时');
 				　　　}
 				},
-			});	
-			dispatch(actions.setVars('shouldElec', shouldElec));
-			dispatch(actions.setVars('actrulElec', actrulElec));
-			dispatch(actions.setVars('sortArr', sortArr));
+			});
 			
 			$.ajax({
         		url:'http://'+ipUrl+'/wbi/ELEC/getKongElec',//发电量4数据
@@ -261,8 +224,6 @@ const mapDispatchToProps = (dispatch) => {
 		        dataType: 'json',
 		        timeout : 60000, 
 		        success:function (data) {
-		        	console.log(data);
-		        	console.log('ELEc');
 		        	yearELec = data.data.yearELec;
 		        	yearPlanELec=data.data.yearplanElec;
 		        	monthElec = data.data.monthElec;
@@ -271,10 +232,33 @@ const mapDispatchToProps = (dispatch) => {
 		        	dayPlanElec=data.data.dayelecPlanElec;
 		        	arrPlan=[],month1=[],arrAct=[];
 		        	for(var i=0;i<data.data.wtKongMonthsElec.length;i++){
-		        		arrPlan.push(data.data.wtKongMonthsElec[i].powerplan);
-		        		month1.push(data.data.wtKongMonthsElec[i].month);
-		        		arrAct.push(data.data.wtKongMonthsElec[i].poweract);
+		        		month1.push(data.data.wtKongMonthsElec[i].month+"月");
+		        		arrAct.push(data.data.wtKongMonthsElec[i].poweract/10000);
 		        	} 
+		        	for(var i in data.data.wtKongMonthsPlanElec){
+		        		arrPlan.push(data.data.wtKongMonthsPlanElec[i]/10000);
+		        	}
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+				　　　if(status=='timeout'){
+				　　　　　 console.log('超时');
+				　　　}
+				},
+			});
+			
+			$.ajax({
+        		url:'http://'+ipUrl+'/wbi/TBA/getLastMonthTBA',//TBA饼图
+		        type: 'post',
+		        async:false,
+		        dataType: 'json',
+		        timeout : 60000, 
+		        success:function (data) {
+		        	console.log(data);
+		        	console.log('TBA');
+//		        	runTime=data.data[0].runtimes;
+//		        	downTime=data.data[0].downtimes;
+//		        	tba=data.data[0].tba;
+		        	
 		        },
 		        complete : function(XMLHttpRequest,status){ 
 				　　　if(status=='timeout'){
@@ -282,54 +266,21 @@ const mapDispatchToProps = (dispatch) => {
 				　　　}
 				},
 			});	
-			dispatch(actions.setVars('yearELec', yearELec));	
-			dispatch(actions.setVars('yearPlanELec', yearPlanELec));
-			dispatch(actions.setVars('monthElec', monthElec));
-			dispatch(actions.setVars('monthPlanElec', monthPlanElec));
-			dispatch(actions.setVars('dayelec', dayelec));	
-			dispatch(actions.setVars('dayPlanElec', dayPlanElec));
-			dispatch(actions.setVars('arrPlan', arrPlan));
-			dispatch(actions.setVars('month1', month1));
-			dispatch(actions.setVars('arrAct', arrAct));
-			
-//			$.ajax({
-//      		url:'http://'+ipUrl+'/wbi/TBA/getLastMonthTBA',//TBA饼图
-//		        type: 'post',
-//		        async:false,
-//		        dataType: 'json',
-//		        timeout : 60000, 
-//		        success:function (data) {
-//		        	console.log(data);
-//		        	console.log('TBA');
-//		        	runTime=data.data[0].runtimes;
-//		        	downTime=data.data[0].downtimes;
-//		        	tba=data.data[0].tba;
-//		        	
-//		        },
-//		        complete : function(XMLHttpRequest,status){ 
-//				　　　if(status=='timeout'){
-//				　　　　　 console.log('超时');
-//				　　　}
-//				},
-//			});	
-			dispatch(actions.setVars('runTime', runTime));
-			dispatch(actions.setVars('downTime', downTime));
-			dispatch(actions.setVars('tba', tba));
     	},
         init: () => {
         	dispatch(actions.setVars('ipUrl', ipUrl));
         },
         
-        changepageSort:(flag,flagTime,sortArr)=>{
-        	flagTime==false? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.downtime-a.downtime})));
-        	dispatch(actions.setVars('flag',false ));
-        	dispatch(actions.setVars('flagTime',!flagTime ));
+        changepageSort:(flag1,flagTime1,sortArr)=>{
+        	flagTime1==false? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.downtime-a.downtime})));
+        	dispatch(actions.setVars('flag1',false ));
+        	dispatch(actions.setVars('flagTime1',!flagTime1 ));
         	
         },
-        changepageSort1:(flag,flagPba,sortArr)=>{
-        	flagPba==true? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
-        	dispatch(actions.setVars('flag',true ));
-        	dispatch(actions.setVars('flagPba',!flagPba ));
+        changepageSort1:(flag1,flagPba1,sortArr)=>{
+        	flagPba1==true? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
+        	dispatch(actions.setVars('flag1',true ));
+        	dispatch(actions.setVars('flagPba1',!flagPba1 ));
         },
         changepageProfitS:()=>{
         	dispatch(actions.setVars('showPage', 'cs'));

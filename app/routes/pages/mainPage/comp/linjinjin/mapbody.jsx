@@ -54,12 +54,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
          changedate:()=>{
-             time=setInterval(function(){
+             
             //     console.log('刷新')
 
 
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
                     function setDatas(rdata){
+                        console.log(rdata)
                         dispatch(actions.setVars('fModel', rdata));
                         TY.getRtData("DevicesMatrix", 8888800, setfData)
                         function setfData(rdata){
@@ -70,14 +71,23 @@ const mapDispatchToProps = (dispatch) => {
                                 TY.getRtData("WTLeftOverview", 8888800, setlData)
                                 function setlData(rdata){
                                 dispatch(actions.setVars('leftd', rdata));
-                                    setTimeout(function(){
-                                         dispatch(actions.setVars('boolmapbody', true));
-                                     },100)
+                                        setTimeout(function(){
+                                       dispatch(actions.setVars('boolmapbody', true));  
+                                   },1000)
                                 }
                             }
                         }
                     }
-                                                   
+            time=setInterval(function(){  
+                         TY.getRtData("DevicesMatrix", 8888800, setfData)
+                        function setfData(rdata){
+                            dispatch(actions.setVars('fData', rdata));
+                             TY.getRtData("WTLeftOverview", 8888800, setlData)
+                                function setlData(rdata){
+                                    dispatch(actions.setVars('leftd', rdata));
+                                }
+
+                        }                  
              },2000)
         },
         init: () => {

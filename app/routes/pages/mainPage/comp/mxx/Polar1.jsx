@@ -103,7 +103,7 @@ let Component = React.createClass({
             },
             plotOptions: {
                 column: {
-                    pointWidth:25,
+                    maxPointWidth:25,
                     stacking: 'normal',//柱状图堆叠属性
                     borderWidth: 0
                 }
@@ -113,7 +113,10 @@ let Component = React.createClass({
             series: [{
                 name:'年等效利用小时数',
                 data: czndxly,
-                borderRadius: 5
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: 'h'
+                }
             }]
         };
         return (
