@@ -20,7 +20,7 @@ let pack=['pack_WROT','pack_WNAC','pack_WGEN','pack_WTPS','pack_WYAW','pack_WTCS
 let arr=[bg1,bg2,bg3,bg4,bg5,bg6,bg7,bg8,bg9];
 let Component = React.createClass({
     componentWillMount() {
-        let {vid, act1} = this.props;
+        let {vid, act1=0} = this.props;
         console.log(vid);
         this.props.changeDate(vid,act1);
     },
