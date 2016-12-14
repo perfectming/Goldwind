@@ -29,7 +29,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {buttonAction, inputOnChange, onFocus} = this.props;
+        let {buttonAction, onFocus} = this.props;
         let comp = data.list;
         return (	
             <div className={styles.inquireBox}>
@@ -68,9 +68,6 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        inputOnChange:(value,id)=>{
-           
-        }
     };
 };
 

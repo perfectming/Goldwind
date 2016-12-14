@@ -119,7 +119,7 @@ let Component = React.createClass({
 	           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
            							</div>
 	           					</div>
-           						<Yearelectric month={areaMonth} plan={areaCost} actrul={areaProfit} unit={'万元'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
+           						<Yearelectric month={areaMonth} plan={areaProfit} actrul={areaCost} unit={'万元'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
            					</div>
            				</div>
            			</div>
@@ -137,7 +137,7 @@ let Component = React.createClass({
 	           					<th onClick={()=>changepageSort(flag,flagTime,areaArr)} className={flag==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime==true? styles.arrow:styles.bottom}></span></th>
                 			</tr>
                 			{
-                				areaArr.map((value,key)=>{
+                				areaArr.slice(0,15).map((value,key)=>{
 		                    		return(<tr key={key}><th>{key+1}</th><th>{value.wfname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{value.downtime}小时</th></tr>)
 		                    	})
                 			}
@@ -216,7 +216,6 @@ const mapDispatchToProps = (dispatch) => {
 		        data:{'groupid':areaId[0]},
 		        dataType: 'json',//here
 		        success:function (data) {
-		        	console.log(data);
 		        	yearElec=data.data.areasyearElec;
 		        	monthElec=data.data.areaMonthsElec;
 		        	dayElec=data.data.dayelec;
@@ -257,23 +256,23 @@ const mapDispatchToProps = (dispatch) => {
 			　　},
 		   });
 		    
-//		    $.ajax({
-//      		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA-YES
-//		        type: 'post',
-//		        async:false,
-//		        data:{'groupid':areaId[0]},
-//		        dataType: 'json',//here
-//		        success:function (data) {
-//		        	runTime=data.data[0].runtimes;
-//		        	downTime=data.data[0].downtimes;
-//		        	TBA=data.data[0].tba;
-//		        },
-//		        complete : function(XMLHttpRequest,status){ 
-//			　　　　if(status=='timeout'){
-//			　　　　　 alert('超时');
-//			　　　　}
-//			　　},
-//		    });
+		    $.ajax({
+        		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA-YES
+		        type: 'post',
+		        async:false,
+		        data:{'groupid':areaId[0]},
+		        dataType: 'json',//here
+		        success:function (data) {
+		        	runTime=data.data[0].runtimes;
+		        	downTime=data.data[0].downtimes;
+		        	TBA=data.data[0].tba;
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		    });
     	},
         init: () => {
             var obj = {

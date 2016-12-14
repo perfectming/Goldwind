@@ -6,7 +6,7 @@ import Reg_tbats from './Reg_tbats.jsx';
 import Hly_r from './Hly_r.jsx';
 import Hly_ds from './Hly_ds.jsx';
 var actions = require('redux/actions');
-
+let ip="10.68.100.32";
 
 let data = require('./Healthy-data');
 let month=data.data.line_month;
@@ -27,21 +27,15 @@ let Component = React.createClass({
 
 
     render() {
-        let {buttonAction, inputOnChange, onFocus} = this.props;
+        let {befor_pages = 'area', returnit} = this.props;
         return (
 
 
 
 
             <div className = {styles.box}>
-
-
-
-
-
-
-
-                <div className={styles.tbox}>
+                <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
+                <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Reg_tbat   barRoPowerValues={barRoPowerValues1}  barRoPowerValue={barRoPowerValue1} barLoPowerValue={barLoPowerValue1}  barLoTime={barLoTime1} text={"每月TBA"}></Reg_tbat>
                         <div className={styles.logo}>
@@ -74,11 +68,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test:''
             }
-        }
-        ,
+        },
+        returnit: (befor_pages) => {
+            dispatch(actions.setVars('showPage', befor_pages));
+        },
     };
 };
 

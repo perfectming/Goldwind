@@ -8,7 +8,7 @@ var actions = require('redux/actions');
 
 let ipUrl='192.168.31.148:8080';
 let actbt=0,wfName=[],wfId=[],areaId=[],wfTheory,wfAct,wtArr=[],wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct; 
-let month=[],monthAct=[],monthPlan=[],month2,income,cost;
+let month=[],monthAct=[],monthPlan=[],month2,income,cost,runTime,downTime,TBA;
 
 let Component = React.createClass({
 	componentWillMount() {
@@ -61,12 +61,12 @@ let Component = React.createClass({
            				</div>
            				<div className={`${styles.sectionSmall} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
-           						<span>可用<br/>100h <br/>统计<br/>200h</span>
+           						<span>可用<br/>{runTime}h <br/>统计<br/>{downTime}h</span>
            					</div>
            					<div className={styles.sectionfour}>
            						<div className={styles.pie}>
-           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{50}%</p>TBA</span>
-           						<Pie2 color={['#d06960','#39565e']} num={[15,15]}></Pie2>
+           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{TBA}%</p>TBA</span>
+           						<Pie2  color={TBA>1? ['#1fe005','#fbd500']:TBA>0.8?['#fbd500','#39565e']:TBA>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[runTime,downTime]}></Pie2>
            						</div>
            						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>
            						<a className={styles.time} onClick={()=>changepageTBAT()}></a>
@@ -135,7 +135,7 @@ let Component = React.createClass({
 	           					<th onClick={()=>changepageSort(flag2,flagTime2,wtArr)} className={flag2==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime2==true? styles.arrow:styles.bottom}></span></th>
                 			</tr>
                 			{
-                				wtArr.map((value,key)=>{
+                				wtArr.slice(0,15).map((value,key)=>{
 		                    		return(<tr key={key}><th>{key+1}</th><th>{value.wtname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{0}小时</th></tr>)
 		                    	})
                 			}
@@ -244,7 +244,7 @@ const mapDispatchToProps = (dispatch) => {
 				　　},
 			});
 			$.ajax({
-	        		url: 'http://'+ipUrl+'/wbi/ELEC/getWfieldElec',//根据风场ID获取发电量
+	        		url: 'http://'+ipUrl+'/wbi/ELEC/getWfieldElec',//根据风场ID获取电量
 			        type: 'post',
 			        async:false,
 			        data:{'wfid':wfId[0]},
@@ -273,7 +273,7 @@ const mapDispatchToProps = (dispatch) => {
 			});
 			
 			$.ajax({
-	        		url: 'http://'+ipUrl+'/wbi/yield/getWfAllRate',//根据风场ID获取发电量
+	        		url: 'http://'+ipUrl+'/wbi/yield/getWfAllRate',//根据风场ID获取收益
 			        type: 'post',
 			        async:false,
 			        data:{'wfid':wfId[0]},
@@ -292,6 +292,23 @@ const mapDispatchToProps = (dispatch) => {
 				　　　　}
 				　　},
 			});
+			$.ajax({
+        		url: 'http://'+ipUrl+'/wbi/TBA/getWfLastMonthTBA',//TBA-YES
+		        type: 'post',
+		        async:false,
+		        data:{'wfid':wfId[0]},
+		        dataType: 'json',//here
+		        success:function (data) {
+		        	runTime=data.data[0].runtimes;
+		        	downTime=data.data[0].downtimes;
+		        	TBA=data.data[0].tba;
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		    });
     	},
         init: () => {
             var obj = {
@@ -305,17 +322,13 @@ const mapDispatchToProps = (dispatch) => {
         	
         },
         changepageSort1:(flag2,flagPba2,wtArr)=>{
-//      	flagPba2==true? dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
+        	flagPba2==true? dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
         	dispatch(actions.setVars('flag2',true ));
         	dispatch(actions.setVars('flagPba2',!flagPba2 ));
         },
         changepageW :(value,key)=>{
             dispatch(actions.setVars('actbt',key ));
-
-            dispatch(actions.setVars('wind',value.plan ));
-           
-
-            $.ajax({
+           	$.ajax({
 	        		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyWfPBA',//根据风场ID获取PBA和风机
 			        type: 'post',
 			        async:false,
@@ -382,6 +395,23 @@ const mapDispatchToProps = (dispatch) => {
 				　　　　}
 				　　},
 			});
+			$.ajax({
+        		url: 'http://'+ipUrl+'/wbi/TBA/getWfLastMonthTBA',//TBA-YES
+		        type: 'post',
+		        async:false,
+		        data:{'wfid':wfId[key]},
+		        dataType: 'json',//here
+		        success:function (data) {
+		        	runTime=data.data[0].runtimes;
+		        	downTime=data.data[0].downtimes;
+		        	TBA=data.data[0].tba;
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		    });
 
         },
         changepageHealthyT:()=>{

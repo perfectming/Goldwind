@@ -78,7 +78,7 @@ let Component = React.createClass({
 				<div className={styles.content}>
 					<div className={styles.floorOne}>
 						<div className={`${styles.pie} ${styles.boxShadow}`}>
-							<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
+							<ChartPie text={'集团1区域3风场1 机型可靠性分析'} lose={data.lose}></ChartPie>
 						</div>
 						<div className={`${styles.column} ${styles.boxShadow}`}>
 							<OneColumn name={data.data[3].name} title={data.data[3].title} month={data.data[3].month} plan={data.data[3].plan} unit={data.data[3].unit}></OneColumn>
@@ -86,7 +86,7 @@ let Component = React.createClass({
 					</div>
 					<div className={styles.floorTwo}>
 						<div className={`${styles.pie} ${styles.boxShadow}`}>
-							<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
+							<ChartPie text={'集团1区域3风场2 机型可靠性分析'} lose={data.lose}></ChartPie>
 						</div>
 						<div className={`${styles.column} ${styles.boxShadow}`}>
 							<OneColumn name={data.data[3].name} title={data.data[3].title} month={data.data[3].month} plan={data.data[3].plan} unit={data.data[3].unit}></OneColumn>

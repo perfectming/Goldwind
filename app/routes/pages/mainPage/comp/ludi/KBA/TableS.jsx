@@ -3,14 +3,12 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./TimeSelect-data.js');
-
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-    	let {X1,changedata2,X2}=this.props;
+    	let {areaName,X1=areaName[0],changedata2,X2,wfName,wfId,wfElec,wfLose,wfPBA}=this.props;
         let configPie = {
             chart: {
                 height:380,
@@ -22,7 +20,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: X1,
+                text: '集团'+X1+'PBA',
                 align:'left',
                  x : "0",
                 style:{
@@ -47,7 +45,7 @@ let Component = React.createClass({
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+//              pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -73,16 +71,16 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:data.data[1].wind,
+                categories:wfName,
             },
             yAxis: {
                 title:{
-                	text:'kW',
+                	text:'万kWh',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-15,
+	                x:-10,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',
@@ -100,7 +98,7 @@ let Component = React.createClass({
             series: [{
             	name: '实际发电量',
             	type: 'column',
-                data: data.data[1].actrul,
+                data: wfElec,
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
@@ -110,7 +108,7 @@ let Component = React.createClass({
             },{
                 name: '损失发电量',
                 type: 'column',
-                data: data.data[1].lose,
+                data: wfLose,
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
@@ -120,7 +118,7 @@ let Component = React.createClass({
             },{
             	name: 'PBA',
             	type: 'spline',
-                data: data.data[1].PBA,
+                data: wfPBA,
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
@@ -139,16 +137,12 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
     	X1 : state.vars.x1,
-    	X2 : state.vars.x2,
+    	areaName : state.vars.areaName,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: () => {
-        	dispatch(actions.setVars('x1',X1 ));
-        	
-        },
         changedata2 :(X2)=>{
             dispatch(actions.setVars('x2',X2 ));
         },
