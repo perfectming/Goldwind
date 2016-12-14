@@ -269,6 +269,9 @@ function getjfLocalTime(nS) {
 }
 
 
-function GetAllUrl(url){
-	return url+"&userId="+userId;
+function GetAllUrl(url) {
+    if(url.indexOf('?') > -1)
+        return url + "&userId=" + userId;
+    else
+        return url + "?userId=" + userId;
 }
