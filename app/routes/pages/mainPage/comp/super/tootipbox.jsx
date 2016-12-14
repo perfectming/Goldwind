@@ -88,7 +88,7 @@ var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
                                                     obj_pvd[value].map((valueC,key)=>{
                                                         return(
 
-                                                            <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname}</span>
+                                                            <span key={key} onClick = {()=> Topvinfo(valueC,value)}>{valueC.Wtname}</span>
 
                                                             )
                                                     })
