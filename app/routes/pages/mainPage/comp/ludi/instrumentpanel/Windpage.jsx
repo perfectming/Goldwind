@@ -7,7 +7,7 @@ import Pie2 from '../../mxx/Pie2';
 var actions = require('redux/actions');
 
 let ipUrl='10.68.100.32:8080';
-let sortArr,wfName=[],wfId=[],areaId=[],wfTheory,wfAct,wtArr=[],wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct; 
+let actbt=0,wfName=[],wfId=[],areaId=[],wfTheory,wfAct,wtArr=[],wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct; 
 let month=[],monthAct=[],monthPlan=[],month2,income,cost;
 
 let Component = React.createClass({
@@ -21,7 +21,7 @@ let Component = React.createClass({
    
 
     render() {
-        let{flagTime=true,flagPba=true,flag=true,changepageSort1,changepageProT,changepageProS,changepageSort,actbt=0,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{actbt,flagTime2=true,flagPba2=true,flag2=true,changepageSort1,changepageProT,changepageProS,changepageSort,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         return (
            <div className={styles.box}>
            		<ul className={styles.monthbox}>
@@ -131,8 +131,8 @@ let Component = React.createClass({
                 			<tr>
 	                			<th>排名</th>
 	           					<th>风机名</th>
-	           					<th onClick={()=>changepageSort1(flag,flagPba,sortArr)} className={flag==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba==true? styles.arrow:styles.bottom}></span></th>
-	           					<th onClick={()=>changepageSort(flag,flagTime,sortArr)} className={flag==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime==true? styles.arrow:styles.bottom}></span></th>
+	           					<th onClick={()=>changepageSort1(flag2,flagPba2,wtArr)} className={flag2==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba2==true? styles.arrow:styles.bottom}></span></th>
+	           					<th onClick={()=>changepageSort(flag2,flagTime2,wtArr)} className={flag2==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime2==true? styles.arrow:styles.bottom}></span></th>
                 			</tr>
                 			{
                 				wtArr.map((value,key)=>{
@@ -152,13 +152,10 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
     	actbt : state.vars.actbt,
-    	wind : state.vars.wind,
-    	big1 : state.vars.big1,
-    	small1 : state.vars.small1,
-    	sortArr : state.vars.sortArr,
-    	flag : state.vars.flag,
-    	flagPba : state.vars.flagPba,
-    	flagTime : state.vars.flagTime,
+    	wtArr : state.vars.wtArr,
+    	flag2 : state.vars.flag2,
+    	flagPba2 : state.vars.flagPba2,
+    	flagTime2 : state.vars.flagTime2,
     	clickAreaId:state.vars.clickAreaId,
     	AreaId:state.vars.AreaId,
     }
@@ -167,6 +164,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
     	ajax: (clickAreaId) => {
+    		dispatch(actions.setVars('actbt',0 ));
     		if(clickAreaId==undefined){
     			$.ajax({
 	        		url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//默认获取1区域ID-YES
@@ -300,16 +298,16 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        changepageSort:(flag,flagTime,sortArr)=>{
-//      	flagTime==false? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.downtime-a.downtime})));
-        	dispatch(actions.setVars('flag',false ));
-        	dispatch(actions.setVars('flagTime',!flagTime ));
+        changepageSort:(flag2,flagTime2,wtArr)=>{
+//      	flagTime2==false? dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return b.downtime-a.downtime})));
+        	dispatch(actions.setVars('flag2',false ));
+        	dispatch(actions.setVars('flagTime2',!flagTime2 ));
         	
         },
-        changepageSort1:(flag,flagPba,sortArr)=>{
-//      	flagPba==true? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
-        	dispatch(actions.setVars('flag',true ));
-        	dispatch(actions.setVars('flagPba',!flagPba ));
+        changepageSort1:(flag2,flagPba2,wtArr)=>{
+//      	flagPba2==true? dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
+        	dispatch(actions.setVars('flag2',true ));
+        	dispatch(actions.setVars('flagPba2',!flagPba2 ));
         },
         changepageW :(value,key)=>{
             dispatch(actions.setVars('actbt',key ));
@@ -330,6 +328,7 @@ const mapDispatchToProps = (dispatch) => {
 				　　　　}
 				　　},
 			});
+
 			$.ajax({
 	        		url: 'http://'+ipUrl+'/wbi/ELEC/getWfieldElec',//根据风场ID获取发电量
 			        type: 'post',

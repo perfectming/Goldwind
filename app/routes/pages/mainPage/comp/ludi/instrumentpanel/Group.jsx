@@ -20,7 +20,7 @@ let Component = React.createClass({
   
 	
     render() {
-    	let{flag=true,flagPba=true,flagTime=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+    	let{flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         return (
            <div className={styles.box}>
            		<div className={styles.left}>
@@ -128,8 +128,8 @@ let Component = React.createClass({
                 			<tr>
 	                			<th>排名</th>
 	           					<th>区域名</th>
-	           					<th onClick={()=>changepageSort1(flag,flagPba,sortArr)} className={flag==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba==true? styles.arrow:styles.bottom}></span></th>
-	           					<th onClick={()=>changepageSort(flag,flagTime,sortArr)} className={flag==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime==true? styles.arrow:styles.bottom}></span></th>
+	           					<th onClick={()=>changepageSort1(flag1,flagPba1,sortArr)} className={flag1==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba1==true? styles.arrow:styles.bottom}></span></th>
+	           					<th onClick={()=>changepageSort(flag1,flagTime1,sortArr)} className={flag1==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime1==true? styles.arrow:styles.bottom}></span></th>
                 			</tr>
                 			{
                 				sortArr.map((value,key)=>{
@@ -149,9 +149,9 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return{
     	sortArr : state.vars.sortArr,
-    	flag : state.vars.flag,
-    	flagPba : state.vars.flagPba,
-    	flagTime : state.vars.flagTime,
+    	flag1 : state.vars.flag1,
+    	flagPba1 : state.vars.flagPba1,
+    	flagTime1 : state.vars.flagTime1,
 	}
 };
 
@@ -272,16 +272,16 @@ const mapDispatchToProps = (dispatch) => {
         	dispatch(actions.setVars('ipUrl', ipUrl));
         },
         
-        changepageSort:(flag,flagTime,sortArr)=>{
-        	flagTime==false? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.downtime-a.downtime})));
-        	dispatch(actions.setVars('flag',false ));
-        	dispatch(actions.setVars('flagTime',!flagTime ));
+        changepageSort:(flag1,flagTime1,sortArr)=>{
+        	flagTime1==false? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.downtime-a.downtime})));
+        	dispatch(actions.setVars('flag1',false ));
+        	dispatch(actions.setVars('flagTime1',!flagTime1 ));
         	
         },
-        changepageSort1:(flag,flagPba,sortArr)=>{
-        	flagPba==true? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
-        	dispatch(actions.setVars('flag',true ));
-        	dispatch(actions.setVars('flagPba',!flagPba ));
+        changepageSort1:(flag1,flagPba1,sortArr)=>{
+        	flagPba1==true? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
+        	dispatch(actions.setVars('flag1',true ));
+        	dispatch(actions.setVars('flagPba1',!flagPba1 ));
         },
         changepageProfitS:()=>{
         	dispatch(actions.setVars('showPage', 'cs'));
