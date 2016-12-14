@@ -4,7 +4,7 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Profit-data');
-
+var url="10.9.99.239";
 let Component = React.createClass({
     componentWillMount() {
     },

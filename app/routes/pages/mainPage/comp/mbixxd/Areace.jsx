@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Windce from './Windce.jsx';
-import icono from './wind_logo.png';
+import icono from './img/ele.png';
 import Month from './Month';
 var $=require('jquery');
 var actions = require('redux/actions');

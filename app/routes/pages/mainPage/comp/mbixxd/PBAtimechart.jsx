@@ -13,7 +13,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {monthT,profit,cost,w0,winsss,changedata3,machine,fanProfitQ,fanCost,}=this.props;
+        let {monthT,profit,cost,w0,winsss,changedata3,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
         let configPie = {
             chart: {
                 height:395,
@@ -76,7 +76,54 @@ let Component = React.createClass({
                            w0=e.point.category;
                         var  a=w0.toString().split("");
                         var b=a[0];
-                        changedata3(w0,winss,b);
+                         // 第二个图的数据
+                      var PBATimeSecondDay=[];
+                      var PBATimeSecondPoweract=[];
+                      var PBATimeSecondFaultloss=[];
+                      var PBATimeSecondMaintainloss=[];
+                      var PBATimeSecondLimitloss=[];
+                      var PBATimeSecondNodevreasonloss=[];
+                      var PBATimeSecondPbaP=[];
+                        $.ajax({
+                type:'post',
+                url:'http://10.68.100.32:8080/wbi/PBA/getWfieldDayPBA',
+                async:false,
+                data:{
+                    'wfid':150801,
+                    'month':w0,
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                  console.log(w0)
+                 console.log(data)
+
+                     var PBATimeSecondPba=data.data;
+                      for ( var i in PBATimeSecondPba){
+                          var day=PBATimeSecondPba[i].day;
+                          PBATimeSecondDay.push(day);
+                          var poweract=PBATimeSecondPba[i].poweract;
+                          PBATimeSecondPoweract.push(poweract);
+                          var faultloss=PBATimeSecondPba[i].faultloss;
+                          PBATimeSecondFaultloss.push(faultloss);
+                          var maintainloss=PBATimeSecondPba[i].maintainloss;
+                          PBATimeSecondMaintainloss.push(maintainloss);
+                          var limitloss=PBATimeSecondPba[i].limitloss;
+                          PBATimeSecondLimitloss.push(limitloss);
+                          var nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
+                          PBATimeSecondNodevreasonloss.push(nodevreasonloss);
+                          var pba=Number(PBATimeSecondPba[i].pba.toFixed(2));
+                          PBATimeSecondPbaP.push(pba);
+                      }
+                },
+                error:function(){
+                    alert(2)
+                },
+
+            });
+
+
+                    changedata3(w0,winss,b,PBATimeSecondDay,PBATimeSecondPoweract,PBATimeSecondFaultloss,PBATimeSecondMaintainloss,PBATimeSecondLimitloss,PBATimeSecondNodevreasonloss,PBATimeSecondPbaP);
                         }
                     }
                 }
@@ -165,7 +212,7 @@ let Component = React.createClass({
                 {
                     name: '维护损失',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCostA,
                     stack:'waste',
                      pointWidth: 30,
                     color:'#ffffff',
@@ -174,7 +221,7 @@ let Component = React.createClass({
                 {
                     name: '限功率损失',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCostB,
                     stack:'waste',
                     color:'#e9c75c',
                      pointWidth: 30,
@@ -183,7 +230,7 @@ let Component = React.createClass({
                 {
                     name: '非设备原因损失',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCostC,
                     stack:'waste',
                      pointWidth: 30,
                     color:'#d06960',
@@ -213,8 +260,8 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-          w0 : state.vars.w1,
-        winsss: state.vars.wins1,
+          
+        w0: state.vars.windpbaspace,
     }
 };
 
@@ -222,9 +269,16 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-         changedata3 :(w0,winss,b)=>{
-            dispatch(actions.setVars('w1',w0 ));
+         changedata3 :(w0,winss,b,PBATimeSecondDay,PBATimeSecondPoweract,PBATimeSecondFaultloss,PBATimeSecondMaintainloss,PBATimeSecondLimitloss,PBATimeSecondNodevreasonloss,PBATimeSecondPbaP)=>{
+            dispatch(actions.setVars('windpbaspace',w0 ));
             dispatch(actions.setVars('wins1',winss[b-1]));
+            dispatch(actions.setVars('PBATimeSecondDay1',PBATimeSecondDay));
+            dispatch(actions.setVars('PBATimeSecondPoweract1',PBATimeSecondPoweract ));
+            dispatch(actions.setVars('PBATimeSecondMaintainloss1',PBATimeSecondMaintainloss ));
+            dispatch(actions.setVars('PBATimeSecondLimitloss1',PBATimeSecondLimitloss));
+            dispatch(actions.setVars('PBATimeSecondFaultloss1',PBATimeSecondFaultloss ));
+            dispatch(actions.setVars('PBATimeSecondNodevreasonloss1',PBATimeSecondNodevreasonloss ));
+            dispatch(actions.setVars('PBATimeSecondPba12',PBATimeSecondPbaP ));
            
         },
     };

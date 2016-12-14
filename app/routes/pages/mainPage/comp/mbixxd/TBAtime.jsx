@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Areacestylee.scss';
 import TBAtimechart from './TBAtimechart.jsx';
 import TBAtimechartt from './TBAtimechartt.jsx';
-import icono from './wind_logo.png';
+import icono from './img/TBA.png';;
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
@@ -17,6 +17,9 @@ let cost=data.windCost;
 let areaPlanDay=data.areaPlanDay;
 let areaPlanDayT=data.areaPlanDayT;
 let Component = React.createClass({
+    componentWillMount() {
+        this.props.ajax();
+    },
     componentDidMount() {
         this.props.init();
     },
@@ -73,6 +76,30 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+         ajax: () => {
+           console.log(1);
+               $.ajax({
+                type:'post',
+                url:'http://10.9.99.239:8080/wbi/TBA/getMonthsTBAByWf',
+                async:false,
+                data:{
+                    'wfid':'150828',
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                
+                 console.log(data)
+
+                     
+                },
+                error:function(){
+                    alert(2)
+                },
+
+            });
+        }
+        ,
         init: () => {
             var obj = {
                 test:''
