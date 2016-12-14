@@ -185,7 +185,7 @@ const mapDispatchToProps = (dispatch) => {
 			    success:function (data) {
 				    yearPro=data.data;
 				    month2=[],cost=[],incomes=[];
-				    for(var i=0;i<yearPro.length;i++){
+				    for(var i in yearPro){
 				        month2.push(yearPro[i].month+"月");
 				        cost.push(yearPro[i].costs/10000);
 				        incomes.push(yearPro[i].earning/10000);
@@ -223,7 +223,7 @@ const mapDispatchToProps = (dispatch) => {
 		        async:false,
 		        dataType: 'json',
 		        timeout : 60000, 
-		        success:function (data) {				
+		        success:function (data) {
 		        	yearELec = data.data.yearELec;
 		        	yearPlanELec=data.data.yearplanElec;
 		        	monthElec = data.data.monthElec;
@@ -232,12 +232,11 @@ const mapDispatchToProps = (dispatch) => {
 		        	dayPlanElec=data.data.dayelecPlanElec;
 		        	arrPlan=[],month1=[],arrAct=[];
 		        	for(var i=0;i<data.data.wtKongMonthsElec.length;i++){
-		        		arrPlan.push(data.data.wtKongMonthsElec[i].monthpowerplan/10000);
 		        		month1.push(data.data.wtKongMonthsElec[i].month+"月");
-		        		arrAct.push(data.data.wtKongMonthsElec[i].monthpoweract/10000);
+		        		arrAct.push(data.data.wtKongMonthsElec[i].poweract/10000);
 		        	} 
-		        	for(var i in data.data){
-		        		
+		        	for(var i in data.data.wtKongMonthsPlanElec){
+		        		arrPlan.push(data.data.wtKongMonthsPlanElec[i]/10000);
 		        	}
 		        },
 		        complete : function(XMLHttpRequest,status){ 
