@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {changedata1,w0='一区域',mon='一月份',windplan=win,w10,barRotime,barLdpowerValue,barLoPowerValues,barLoPowerValue,text,height} = this.props;
+        let {ip="10.68.100.32",hhdata4,actbt=10,changedata1,w0='一区域',wc1,mon='一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
 
 
 
@@ -47,6 +47,7 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 y:20,
+                x:-75,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -88,16 +89,20 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                             w10=e.point.category;
-                            changedata1(w10,e);
+                            wc1=e.point.index;
+                            changedata1(w10,e,wc1,actbt,hhdata4);
 
                         }
                     }
                 },
                 column: {
                     stacking: 'normal',
-
+                    //pointWidth: 30,
+                    maxPointWidth: 40,
                     borderWidth: 0,
-
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
                 }
             },
             xAxis: {
@@ -114,10 +119,13 @@ let Component = React.createClass({
                 categories:barRotime,
             },
             yAxis: [{
-                // lineWidth: 1,
-                // lineColor: "red",
-                //tickWidth: 4,
-                gridLineDashStyle: 'Solid',
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
                     text:'(h)',
@@ -131,109 +139,86 @@ let Component = React.createClass({
                     },
                 },
 
-                labels: {
-                    y: 10, //x轴刻度往下移动20px
+                title: {
+                    text: 'kWh',
+                    align: 'high',
+                    rotation: '0',
+                    y: -20,
+                    x: 45,
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        fontSize: '14px',
+                        color: '#fff'
                     }
-                },
-            },{
-                title:'TBA%',
-                max:100,
-                oppsite:true,
+                }
+            }, {
                 labels: {
-                    y: 10, //x轴刻度往下移动20px
+                    format: '',
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize: '14px'
                     }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+                title: {
+                    text: 'PBA%',
+                    align: 'high',
+                    rotation: '0',
+                    y: -15,
+                    x: -40,
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+
                 },
+                opposite: true
             }],
+
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                color:"#33BAC0",
-                data: barLoPowerValues,
+                color: "#33BAC0",
+                data: power2,
                 borderRadius: 4,
-                events: {
-                    click: function(e) {
-                        w10=e.point.category;
-                        changedata1(w10,e);
-
-                    }
-                }
+            }, {
+                name: '故障损失',
+                color: '#5298d3',
+                type: 'column',
+                data: wrong20,
+                stack: 'time',
 
             },
                 {
-                    name: '故障损失',
-                    color:'#5298d3',
-                    type: 'column',
-                    data: barLoPowerValue,
-                    borderRadius: 2,
-                    stack:'time',
-                    events: {
-                        click: function(e) {
-                            w10=e.point.category;
-                            changedata1(w10,e);
-
-                        }
-                    }
-                },
-                {
                     name: '维护损失',
-                    color:'#ffffff',
+                    color: '#ffffff',
                     type: 'column',
-                    data: barLoPowerValue,
-                    stack:'time',
-                    events: {
-                        click: function(e) {
-                            w10=e.point.category;
-                            changedata1(w10,e);
-
-                        }
-                    }
+                    data: wrong21,
+                    stack: 'time'
                 },
                 {
                     name: '限功率损失',
-                    color:'#e9c75c',
+                    color: '#e9c75c',
                     type: 'column',
-                    data: barLoPowerValue,
-                    stack:'time',
-                    events: {
-                        click: function(e) {
-                            w10=e.point.category;
-                            changedata1(w10,e);
-
-                        }
-                    }
+                    data: wrong22,
+                    stack: 'time'
                 },
+
                 {
                     name: '非设备原因损失',
-                    color:'#d06960',
                     type: 'column',
-                    data: barLoPowerValue,
-                    stack:'time',
-                    events: {
-                        click: function(e) {
-                            w10=e.point.category;
-                            changedata1(w10,e);
-
-                        }
-                    }
+                    data: wrong23,
+                    stack: 'time',
+                    borderRadius: 2,
                 },
+
+
                 {
                     name: 'PBA',
                     type: 'line',
-                    color:'#0000ff',
-                    data: barLdpowerValue,
-                    events: {
-                        click: function(e) {
-                            w10=e.point.category;
-                            changedata1(w10,e);
-
-                        }
-                    }
+                    color: '#0000ff',
+                    data: pba2,
+                    yAxis: 1,
                 },
 
             ]
@@ -256,6 +241,9 @@ const mapStateToProps = (state) => {
         w10 : state.vars.w11,
         mon : state.vars.mon,
         windplan : state.vars.windplan,
+        hhdata4 : state.vars.hhdata4,
+        actbt : state.vars.actbt,
+
     }
 };
 
@@ -264,7 +252,51 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('w1',w0 ));
         },
-        changedata1 :(w10,e)=> {
+        changedata1 :(w10,e,wc1,actbt,hhdata4)=> {
+            let wfid =hhdata4.data[1][wc1].wfid;
+            $.ajax({
+                type:'post',
+                url:'http://10.68.100.32:8080/wbi/PBA/getCompanySpacesWfieldFans',
+                async:false,
+                data:{
+                    "month":actbt+1,
+                    "groupid":201612121721151,
+                    "wfid":wfid,
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                    let barLotime21q = [];    //各区域   一区域二区域
+                    let power21q=[];       //实际发电量
+                    let wrong201q=[];       //故障损失
+                    let wrong211q=[];       //维护损失
+                    let wrong221q=[];       //限功率损失
+                    let wrong231q=[];       //非设备原因损失
+                    let pba21q=[];
+                    for (var i=0;i<10;i++) {
+                        barLotime21q.push(data.data[i].wtname);    //区域的横坐标
+                        power21q.push(data.data[i].poweract);   //实际发电量
+                        wrong201q.push(data.data[i].faultloss);   //故障损失
+                        wrong211q.push(data.data[i].maintainloss);   //维护损失
+                        wrong221q.push(data.data[i].limitloss);   //限功率损失
+                        wrong231q.push(data.data[i].nodevreasonloss);   //非设备原因损失
+                        pba21q.push(data.data[i].pba);   //非设备原因损失
+                    }
+                    dispatch(actions.setVars('barLotime1', barLotime21q));
+                    dispatch(actions.setVars('power1', power21q));
+                    dispatch(actions.setVars('wrong10', wrong201q));
+                    dispatch(actions.setVars('wrong11', wrong211q));
+                    dispatch(actions.setVars('wrong12', wrong221q));
+                    dispatch(actions.setVars('wrong13', wrong231q));
+                    dispatch(actions.setVars('pba1', pba21q));
+                },
+                error:function(){
+
+                },
+            })
+
+
+
             dispatch(actions.setVars('w11', w10,e));
 
         },
