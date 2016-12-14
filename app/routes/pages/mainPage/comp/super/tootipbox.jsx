@@ -11,7 +11,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {border=true,changeborder,changeborder1,retlegend,closebox,Tofaninfo,Topvinfo,changtext,zhzb,bbs,fData} = this.props;
+        let {border=true,changeborder,changeborder1,retlegend,closebox,Tofaninfo,changtext,zhzb,bbs,fData} = this.props;
 let mod=zhzb.Model;
 let mat=zhzb.Model;
 let model_data = bbs.ModelData;
@@ -119,7 +119,7 @@ var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
                                         return(   
                                             obj_pvd[value].map((valueC,key)=>{
                                                 return(
-                                                    <span key={key} onClick = {()=> Topvinfo(valueC,value)}>{valueC.Wtname}</span>
+                                                    <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname}</span>
                                                 )
                                             })
 
@@ -206,14 +206,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('value', value));
             dispatch(actions.setVars('valueid', valuepage));
             dispatch(actions.setVars('fan_page', 'faninfo'));
-            dispatch(actions.setVars('showPage', 'fan_matrix'));
-            dispatch(actions.setVars('legend', false));
-            dispatch(actions.setVars('headerItemActive', 1));
-        },
-         Topvinfo: (value,valuepage)=> {
-            dispatch(actions.setVars('value', value));
-            dispatch(actions.setVars('valueid', valuepage));
-            dispatch(actions.setVars('fan_page', 'pvinfo'));
             dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('legend', false));
             dispatch(actions.setVars('headerItemActive', 1));
