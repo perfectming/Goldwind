@@ -45,11 +45,12 @@ let Component = React.createClass({
     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
 
                 </ul>
+                <div className={styles.paddingtop}>
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <PBAspacechart fanProfitQ={wind==null?fanProfitQ:wind} machine={machine} fanCost={fanCost} fanCostA={fanCostA} fanCostB={fanCostB} fanCostC={fanCostC} PBA={PBA} height={700}></PBAspacechart>
+                                <PBAspacechart fanProfitQ={wind==null?fanProfitQ:wind} machine={machine} fanCost={fanCost} fanCostA={fanCostA} fanCostB={fanCostB} fanCostC={fanCostC} PBA={PBA} height={750}></PBAspacechart>
                             </div>
                         </div>
                          <div className={styles.tik}>
@@ -65,7 +66,7 @@ let Component = React.createClass({
                       <button  onClick={()=>more()}>更多</button>
                    </div>
                 </div>
-                
+                </div>
             </div>
 
 
