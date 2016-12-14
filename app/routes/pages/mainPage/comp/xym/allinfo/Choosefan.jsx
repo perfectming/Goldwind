@@ -316,9 +316,11 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         Tofaninfo: (value,valuepage)=> {
+            console.log(1)
             dispatch(actions.setVars('value', value));
             dispatch(actions.setVars('valueid', valuepage));
-            dispatch(actions.setVars('fan_page', 'turning'));
+            dispatch(actions.setVars('showPage', 'turning'));
+            dispatch(actions.setVars('pagename', 'fan_matrix')); 
             dispatch(actions.setVars('numtype', 'faninfo'));
         }
     };
