@@ -4,7 +4,7 @@ import styles from './Hindex.scss';
 import Hly_genday from './Hly_genday.jsx';
 
 var actions = require('redux/actions');
-
+let ip="10.68.100.32";
 
 ;
 
@@ -55,7 +55,7 @@ let Component = React.createClass({
                                       barLpdpowerValue={powerplan}
                                       barLdpowerValue={day0}
                                       text={text0[actbt]+'月每日集团发电量'}></Hly_genday>
-                        <div className={styles.logomini}>
+                        <div className={styles.logomini5}>
 
                         </div>
                     </div>
@@ -89,7 +89,7 @@ const mapDispatchToProps = (dispatch) => {
             }
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceTimeElec',
+                url:'http://'+ip+':8080/wbi/ELEC/getSpaceTimeElec',
                 async:false,
                 data:'month=11',
                 dataType:'json',
@@ -116,6 +116,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         init: () => {
+            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
@@ -127,7 +128,7 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceTimeElec',
+                url:'http://'+ip+':8080/wbi/ELEC/getSpaceTimeElec',
                 async:false,
                 data:{"month":key+1},
                 dataType:'json',

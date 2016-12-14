@@ -7,7 +7,7 @@ import Hly_genp from './Hly_genp.jsx';
 
 var actions = require('redux/actions');
 var $ = require('jquery');
-
+let ip="10.68.100.32";
 
 let Component = React.createClass({
     componentWillMount(ip) {
@@ -62,11 +62,11 @@ let Component = React.createClass({
 
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`} id="boxhidden">
                     <div className={styles.hidden_top}>
-                        <div className={styles.logo2}></div>
+                        <div className={styles.logo5}></div>
                         <div className={styles.logo3}>
                             {mon + w0 + w10 + "各风机发电量"}
                         </div>
-                        <span onClick={() => hideit()}>×</span>
+                        <span onClick={() => hideit(hhdata)}>×</span>
                     </div>
                     <div className={styles.hidden_bottom}>
                     <Hly_genp height={450}  widths={4500}
@@ -101,7 +101,7 @@ let Component = React.createClass({
                                  power1={barlopowers1}
                                  power2={barlopowerp1}
                                  pengpeng = {hhdata}></Hly_gen>
-                        <div className={styles.logo}>
+                        <div className={styles.logo5}>
 
                         </div>
                     </div>
@@ -117,7 +117,7 @@ let Component = React.createClass({
                                   power1={barlopowers2}
                                   power2={barlopowerp2}
                                   text={mon + w0 + "各风场发电量" }></Hly_gens>
-                        <div className={styles.logomini}>
+                        <div className={styles.logomini5}>
 
                         </div>
                     </div>
@@ -127,9 +127,9 @@ let Component = React.createClass({
 
                         </div>
                         <div className={styles.rbox3}>
-                            <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
-                            <button className={styles.button} onClick={() => back(sort0)}>后10</button>
-                            <button className={styles.button} onClick={() => more()}>更多</button>
+                            <button className={styles.button} onClick={() => gogogo(hhdata)}>前10</button>
+                            <button className={styles.button} onClick={() => back(hhdata)}>后10</button>
+                            <button className={styles.button} onClick={() => more(hhdata)}>更多</button>
                         </div>
 
 
@@ -139,7 +139,7 @@ let Component = React.createClass({
                                       power1={barlopowers3}
                                       power2={barlopowerp3}
                                       text={mon + w0 + w10 + "各风机发电量"}></Hly_genp>
-                            <div className={styles.logomini}>
+                            <div className={styles.logomini5}>
 
                             </div>
                         </div>
@@ -181,10 +181,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ip) => {
+        ajax: () => {
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceElec',
+                url:'http://'+ip+':8080/wbi/ELEC/getSpaceElec',
                 async:false,
                 data:'month=11',
                 dataType:'json',
@@ -201,6 +201,7 @@ const mapDispatchToProps = (dispatch) => {
                         barlopowerp1.push(data.data[2][i].poweract);   //实际发电量
                     }
                     let w0=data.data[2][0].groupname;
+                    let w10=data.data[1][0].wfname;
                     let barlotimes2 = [];
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
@@ -212,10 +213,10 @@ const mapDispatchToProps = (dispatch) => {
                     let barlotimes3 = [];
                     let barlopowers3 = [];
                     let barlopowerp3 = [];
-                    for (var i in data.data[2]) {
-                        barlotimes3.push(data.data[2][i].wtname);    //区域的横坐标
-                        barlopowers3.push(data.data[2][i].powerplan);   //计划发电量
-                        barlopowerp3.push(data.data[2][i].poweract);   //实际发电量
+                    for (var i=0;i<=10;i++) {
+                        barlotimes3.push(data.data[0][i].wtname);    //区域的横坐标
+                        barlopowers3.push(data.data[0][i].powerplan);   //计划发电量
+                        barlopowerp3.push(data.data[0][i].poweract);   //实际发电量
                     }
 
                     dispatch(actions.setVars('barlotimes1', barlotimes1));
@@ -232,6 +233,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
                     dispatch(actions.setVars('w1', w0));
+                    dispatch(actions.setVars('w11', w10));
 
 
 
@@ -245,6 +247,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         init: () => {
+            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
@@ -257,12 +260,15 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceElec',
+                url:'http://'+ip+':8080/wbi/ELEC/getSpaceElec',
                 async:false,
                 data:{"month":key+1},
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+                    dispatch(actions.setVars('hhdata',  data));
+
+
                     let barlotimes1 = [];
                     let barlopowers1 = [];
                     let barlopowerp1 = [];
@@ -283,10 +289,10 @@ const mapDispatchToProps = (dispatch) => {
                     let barlotimes3 = [];
                     let barlopowers3 = [];
                     let barlopowerp3 = [];
-                    for (var i in data.data[2]) {
-                        barlotimes3.push(data.data[2][i].wtname);    //区域的横坐标
-                        barlopowers3.push(data.data[2][i].powerplan);   //计划发电量
-                        barlopowerp3.push(data.data[2][i].poweract);   //实际发电量
+                    for (var i=0;i<=10;i++) {
+                        barlotimes3.push(data.data[0][i].wtname);    //区域的横坐标
+                        barlopowers3.push(data.data[0][i].powerplan);   //计划发电量
+                        barlopowerp3.push(data.data[0][i].poweract);   //实际发电量
                     }
 
                     dispatch(actions.setVars('barlotimes1', barlotimes1));
@@ -307,26 +313,92 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (x4,x5,x45,i) => {
-            console.log(x4);
-            dispatch(actions.setVars('arr', x4[i].wtname));
-            dispatch(actions.setVars('arr2', x5[i].poweract))
-            dispatch(actions.setVars('arr3', x45[i].powerplan))
+        gogogo: (hhdata) => {
+
+
+            let barLotime3c = [];    //各区域   一区域二区域
+            let power3c=[];       //计划发电量
+            let wrong30c=[];       //实际发电量
+
+            let x=hhdata.data[0];
+            let y=x.length-11;
+            let z=x.length;
+            for (var i=y;i<z;i++) {
+
+                barLotime3c[i]=hhdata.data[0][i].wtname;    //区域的横坐标
+                power3c[i]=hhdata.data[0][i].powerplan;  //实际发电量
+                wrong30c[i]=hhdata.data[0][i].poweract;   //故障损失
+
+            }
+            console.log(barLotime3c)
+            dispatch(actions.setVars('barlotimes3', barLotime3c))
+            dispatch(actions.setVars('barlopowers3', power3c))
+            dispatch(actions.setVars('barlopowerp3', wrong30c))
+
 
 
         },
-        back: (x6,x7,x67,i) => {
+        back: (hhdata) => {
+            let barLotime3c = [];    //各区域   一区域二区域
+            let power3c=[];       //计划发电量
+            let wrong30c=[];       //实际发电量
 
 
-            dispatch(actions.setVars('arr', x6[i].wtname))
-            dispatch(actions.setVars('arr2', x7[i].poweract))
-            dispatch(actions.setVars('arr3', x67[i].powerplan))
+            for (var i=0;i<=10;i++) {
+
+                barLotime3c[i]=hhdata.data[0][i].wtname;    //区域的横坐标
+                power3c[i]=hhdata.data[0][i].powerplan;  //实际发电量
+                wrong30c[i]=hhdata.data[0][i].poweract;   //故障损失
+
+            }
+            console.log(barLotime3c)
+            dispatch(actions.setVars('barlotimes3', barLotime3c))
+            dispatch(actions.setVars('barlopowers3', power3c))
+            dispatch(actions.setVars('barlopowerp3', wrong30c))
         },
-        more: () => {
+        more: (hhdata) => {
+            let barLotime3c = [];    //各区域   一区域二区域
+            let power3c=[];       //计划发电量
+            let wrong30c=[];       //实际发电量
+
+
+            for (var i in hhdata.data[0]) {
+
+                barLotime3c.push(hhdata.data[0][i].wtname)   //区域的横坐标
+                power3c.push(hhdata.data[0][i].powerplan) //实际发电量
+                wrong30c.push(hhdata.data[0][i].poweract);   //故障损失
+
+            }
+            console.log(barLotime3c)
+            dispatch(actions.setVars('barlotimes3', barLotime3c))
+            dispatch(actions.setVars('barlopowers3', power3c))
+            dispatch(actions.setVars('barlopowerp3', wrong30c))
+
+
+
             $("#boxhidden").show();
             $("#light").show();
         },
-        hideit: () => {
+        hideit: (hhdata) => {
+            let barLotime3c = [];    //各区域   一区域二区域
+            let power3c=[];       //计划发电量
+            let wrong30c=[];       //实际发电量
+
+
+            for (var i=0;i<=10;i++) {
+
+                barLotime3c[i]=hhdata.data[0][i].wtname;    //区域的横坐标
+                power3c[i]=hhdata.data[0][i].powerplan;  //实际发电量
+                wrong30c[i]=hhdata.data[0][i].poweract;   //故障损失
+
+            }
+            console.log(barLotime3c)
+            dispatch(actions.setVars('barlotimes3', barLotime3c))
+            dispatch(actions.setVars('barlopowers3', power3c))
+            dispatch(actions.setVars('barlopowerp3', wrong30c))
+
+
+
             $("#boxhidden").hide();
             $("#light").hide();
         },

@@ -10,7 +10,7 @@ import Hly_rs from './Hly_rs.jsx';
 import Hly_d from './Hly_d.jsx';
 var actions = require('redux/actions');
 var $ = require('jquery');
-
+let ip="10.68.100.32";
 
 
 let Component = React.createClass({
@@ -23,7 +23,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {ip="10.68.100.32",hhdata3,hhdata1,pba3=[],wrong32=[],wrong33=[],wrong31=[],wrong30=[],power3=[],barLotime3=[],hhdata, w0 = "一区域", w10 = "风场1", mon = "一月份", win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more,power2=[], wrong20=[], wrong21=[], wrong22=[], wrong23=[], pba2=[],barLotime2=[],power1=[], wrong10=[], wrong11=[], wrong12=[], wrong13=[], pba1=[],barLotime1=[]} = this.props;
+        let {hhdata3,hhdata1,pba3=[],wrong32=[],wrong33=[],wrong31=[],wrong30=[],power3=[],barLotime3=[],hhdata, w0 = "一区域", w10 = "风场1", mon = "一月份", win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more,power2=[], wrong20=[], wrong21=[], wrong22=[], wrong23=[], pba2=[],barLotime2=[],power1=[], wrong10=[], wrong11=[], wrong12=[], wrong13=[], pba1=[],barLotime1=[]} = this.props;
 
 
 
@@ -100,7 +100,7 @@ let Component = React.createClass({
                                actbt={actbt}
                                hhdata2={hhdata}
                         ></Hly_a>
-                        <div className={styles.logo}>
+                        <div className={styles.logo2}>
 
                         </div>
                     </div>
@@ -133,7 +133,7 @@ let Component = React.createClass({
                                  hhdata2={hhdata}
                                  hhdata1={hhdata1}
                         ></Hly_pba>
-                        <div className={styles.logomini}>
+                        <div className={styles.logomini2}>
 
                         </div>
                     </div>
@@ -160,7 +160,7 @@ let Component = React.createClass({
                                       wrong33={wrong33==null? wrong331:wrong33}
                                       pba3={pba3==null? pba31:pba3}
                             ></Hly_pbas>
-                            <div className={styles.logomini}>
+                            <div className={styles.logomini2}>
 
                             </div>
                         </div>
@@ -215,15 +215,21 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: () => {
+
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/PBA/getCompanySpacePBA',
+                url:'http://'+ip+':8080/wbi/PBA/getCompanySpacePBA',
                 async:false,
                 data:'month=11',
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
+
+
+                    let w0=data.data[2][0].groupname;
+                    let w10=data.data[1][0].wfname;
+                    dispatch(actions.setVars('w1', w0));
+                    dispatch(actions.setVars('w11', w10));
                     dispatch(actions.setVars('hhdata',  data));
                     let barLotime1 = [];    //各区域   一区域二区域
                     let power1=[];       //实际发电量
@@ -307,6 +313,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         init: () => {
+            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
@@ -321,7 +328,7 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/PBA/getCompanySpacePBA',
+                url:'http://'+ip+':8080/wbi/PBA/getCompanySpacePBA',
                 async:false,
                 data:{"month":key+1},
                 dataType:'json',
@@ -409,11 +416,8 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         gogogo: (barLotime3,power3,wrong30,wrong31,wrong32,wrong33,pba3) => {
-            // console.log(barLotime3)
-            // console.log(1,barLotime3.length);
-            // console.log(2,barLotime3.splice(-5));
-            // let arrs = barLotime3.splice(-5);
-            // console.log(3,arrs.reverse());
+
+
             let barLotime3c = [];    //各区域   一区域二区域
             let power3c=[];       //实际发电量
             let wrong30c=[];       //故障损失
@@ -494,7 +498,7 @@ const mapDispatchToProps = (dispatch) => {
                 wrong33.push(hhdata3.data[i].nodevreasonloss);   //非设备原因损失
                 pba3.push(hhdata3.data[i].pba);   //非设备原因损失
             }
-            console.log(pba3)
+
             dispatch(actions.setVars('barLotime3a', barLotime3));
             dispatch(actions.setVars('power3a', power3));
             dispatch(actions.setVars('wrong30a', wrong30));

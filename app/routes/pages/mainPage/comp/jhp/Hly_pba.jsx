@@ -271,7 +271,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-                    console.log(data)
+
                     dispatch(actions.setVars('hhdata3', data));
                     var barLotime3=[];
                     var power3=[];

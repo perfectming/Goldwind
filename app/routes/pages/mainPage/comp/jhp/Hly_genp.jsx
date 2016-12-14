@@ -126,9 +126,11 @@ let Component = React.createClass({
                 name: '计划发电量',
                 type: 'column',
                 color:'#5B9BD5',
+                data: power1,
+                color:'#33BAC0',
                 data: power1
-            }
-                ,{
+            },
+                {
                     name:'实际发电量',
                     color:'#70c080',
                     type:'column',

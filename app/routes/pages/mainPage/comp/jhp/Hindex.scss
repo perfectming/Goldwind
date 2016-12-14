@@ -40,11 +40,48 @@
       margin-left: 40px;
       padding: 4px 6px;
 
+      .logo1 {
+        background: url("./images/HEA.png") no-repeat;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
       .logo2 {
+        background: url("./images/PBA.png") no-repeat;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo3 {
+        background: url("./images/TBA.png") no-repeat;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo4 {
+        background: url("./images/MON.png") no-repeat;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo5 {
         background: url("./images/wind_logo.png") no-repeat;
-        background-size: 16px 16px;
-        width: 16px;
-        height: 16px;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
         float: left;
         margin-top: 16px;
       }
@@ -72,14 +109,54 @@
     .logofa {
       position: relative;
 
-      .logo {
+      .logo1 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("./images/HEA.png") no-repeat;
+        background-size: 17px 21px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo2 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("./images/PBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo3 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("./images/TBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo4 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("./images/MON.png") no-repeat;
+        background-size: 17px 21px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo5 {
         position: absolute;
         left: 63px;
         top: 9px;
         background: url("./images/wind_logo.png") no-repeat;
-        background-size: 16px 16px;
-        width: 16px;
-        height: 16px;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
         z-index: 1;
       }
 
@@ -97,14 +174,54 @@
     .logofa {
       position: relative;
 
-      .logo {
+      .logo1 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("./images/HEA.png") no-repeat;
+        background-size: 17px 21px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo2 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("./images/PBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo3 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("./images/TBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo4 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("./images/MON.png") no-repeat;
+        background-size: 17px 21px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo5 {
         position: absolute;
         left: 63px;
         top: 9px;
         background: url("./images/wind_logo.png") no-repeat;
-        background-size: 16px 16px;
-        width: 16px;
-        height: 16px;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
         z-index: 1;
       }
 
@@ -324,10 +441,50 @@
   position: absolute;
   left: 59px;
   top: 8px;
+  background: url("./images/HEA.png") no-repeat;
+  background-size: 17px 21px;
+  width: 17px;
+  height: 21px;
+  z-index: 2;
+}
+.logomini2 {
+  position: absolute;
+  left: 59px;
+  top: 8px;
+  background: url("./images/PBA.png") no-repeat;
+  background-size: 17px 19px;
+  width: 17px;
+  height: 21px;
+  z-index: 2;
+}
+.logomini3 {
+  position: absolute;
+  left: 59px;
+  top: 8px;
+  background: url("./images/TBA.png") no-repeat;
+  background-size: 17px 19px;
+  width: 17px;
+  height: 21px;
+  z-index: 2;
+}
+.logomini4 {
+   position: absolute;
+   left: 59px;
+   top: 8px;
+   background: url("./images/MON.png") no-repeat;
+   background-size: 17px 21px;
+   width: 17px;
+   height: 21px;
+   z-index: 2;
+ }
+.logomini5 {
+  position: absolute;
+  left: 59px;
+  top: 8px;
   background: url("./images/wind_logo.png") no-repeat;
-  background-size: 16px 16px;
-  width: 16px;
-  height: 16px;
+  background-size: 17px 17px;
+  width: 17px;
+  height: 17px;
   z-index: 2;
 }
 

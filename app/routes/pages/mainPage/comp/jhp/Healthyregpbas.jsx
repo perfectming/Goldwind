@@ -5,7 +5,7 @@ import Hly_tsa from './Hly_tsa.jsx';
 
 import Hly_ds from './Hly_ds.jsx';
 var actions = require('redux/actions');
-
+let ip="10.68.100.32";
 
 let data = require('./Healthy-data');
 let month=data.data.line_month;
@@ -37,7 +37,7 @@ let Component = React.createClass({
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_tsa text={"区域每月TBA"}  names={'TBA'} barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1} barRoPowerValue={barRoPowerValue1} barRoPowerValues={barRoPowerValues1}></Hly_tsa>
-                        <div className={styles.logo}>
+                        <div className={styles.logo3}>
 
                         </div>
                     </div>
@@ -49,7 +49,7 @@ let Component = React.createClass({
                 <div className={`${styles.fbox} `}>
                     <div className={` ${styles.logofa} ${styles.box_shadow}`}>
                         <Hly_ds text={"集团"+text222[4]+"月每日TBA"} names={'TBA'} barLdpowerValue={barLdpowerValue2} barLpdpowerValue={barLpdpowerValue2} barlinepdats={barlinepdats2} barlinepdat={barlinepdat2}></Hly_ds>
-                        <div className={styles.logomini}>
+                        <div className={styles.logomini3}>
 
                         </div>
                     </div>
@@ -67,6 +67,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test:''
             }

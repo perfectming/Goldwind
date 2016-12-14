@@ -11,7 +11,7 @@ let Component = React.createClass({
 
     render() {
 
-        let {height,barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
+        let {height,barlinepdats,text,name0,runtime,downtime,tba0} = this.props;
 
 
 
@@ -95,7 +95,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barLdpowerValue,
+                categories:name0,
             },
             yAxis: [{
                 labels: {
@@ -145,13 +145,13 @@ let Component = React.createClass({
             series: [{
                 name: '实际运行时间',
                 type: 'column',
-                data: barLpdpowerValue,
+                data: runtime,
                 borderRadius: 2,
             },{
                 name: '停机时间',
                 type: 'column',
                 color:'#cccccc',
-                data: barlinepdat,
+                data: downtime,
                 borderRadius: 2,
             }
                 ,
@@ -159,7 +159,7 @@ let Component = React.createClass({
                     name: 'TBA',
                     type: 'line',
                     color:'#0000ff',
-                    data: barlinepdats,
+                    data: tba0,
                     yAxis:1,
                 }
 

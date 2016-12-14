@@ -6,7 +6,7 @@ import Reg_tbats from './Reg_tbats.jsx';
 import Hly_r from './Hly_r.jsx';
 import Hly_ds from './Hly_ds.jsx';
 var actions = require('redux/actions');
-
+let ip="10.68.100.32";
 
 let data = require('./Healthy-data');
 let month=data.data.line_month;
@@ -68,6 +68,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test:''
             }

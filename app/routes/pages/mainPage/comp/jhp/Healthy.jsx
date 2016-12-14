@@ -5,7 +5,7 @@ import Hly_t from './Hly_t.jsx';
 import Hly_r from './Hly_r.jsx';
 import Hly_d from './Hly_d.jsx';
 var actions = require('redux/actions');
-
+let ip="10.68.100.32";
 
 let data = require('./Healthy-data');
 let month = data.data.line_month;
@@ -39,9 +39,11 @@ let Component = React.createClass({
                 <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_t barLoTime={barLoTime1} barLoPowerValue={barLoPowerValue1}  text={"集团每月健康度"} ></Hly_t>
+                        <Hly_t barLoTime={barLoTime1}
+                               barLoPowerValue={barLoPowerValue1}
+                               text={"集团每月健康度"} ></Hly_t>
 
-                        <div className={styles.logo}>
+                        <div className={styles.logo1}>
 
                         </div>
                      </div>
@@ -71,6 +73,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test:''
             }

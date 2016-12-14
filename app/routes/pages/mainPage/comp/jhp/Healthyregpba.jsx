@@ -6,7 +6,7 @@ import Hly_pbatwo from './Hly_pbatwo.jsx';
 
 var actions = require('redux/actions');
 var $ = require("jquery");
-
+let ip="10.68.100.32";
 
 
 
@@ -89,7 +89,7 @@ let Component = React.createClass({
                                     wrong23={wrong23}
                                     pba2={pba2}
                         ></Hly_pbaone>
-                        <div className={styles.logo}>
+                        <div className={styles.logo2}>
 
                         </div>
                     </div>
@@ -120,7 +120,7 @@ let Component = React.createClass({
                                     wrong13={wrong13}
                                     pba1={pba1}
                         ></Hly_pbatwo>
-                        <div className={styles.logomini}>
+                        <div className={styles.logomini2}>
 
                         </div>
                     </div>
@@ -163,7 +163,7 @@ const mapDispatchToProps = (dispatch) => {
         ajax: () => {
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/PBA/getAreaWFieldPBA',
+                url:'http://'+ip+':8080/wbi/PBA/getAreaWFieldPBA',
                 async:false,
                 data:{
                     "month":11,
@@ -233,6 +233,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         init: () => {
+            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
@@ -246,7 +247,7 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/PBA/getCompanySpacePBA',
+                url:'http://10.9.99.239:8080/wbi/PBA/getCompanySpacePBA',
                 async:false,
                 data:{
                     "month":key+1,

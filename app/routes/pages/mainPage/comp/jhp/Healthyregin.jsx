@@ -6,7 +6,7 @@ import Hly_rone from './Hly_rone.jsx';
 import Hly_rtwo from './Hly_rtwo.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
-
+let ip="10.68.100.32";
 
 let data = require('./Healthy-data');
 let month = data.data.line_month;
@@ -62,7 +62,7 @@ let Component = React.createClass({
 
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
                     <div className={styles.hidden_top}>
-                        <div className={styles.logo2}></div>
+                        <div className={styles.logo1}></div>
                         <div className={styles.logo3}>{"风场各风机健康度"}</div>
                         <span onClick={()=>hideit()}>×</span>
                     </div>
@@ -91,7 +91,7 @@ let Component = React.createClass({
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_rone  height={400} barRotime={barLoTime1} barLoPowerValue={wind==undefined? barLoPowerValue1:wind} text={text0[actbt]+"月各风场健康度"}></Hly_rone>
 
-                        <div className={styles.logo}>
+                        <div className={styles.logo1}>
 
                         </div>
                     </div>
@@ -134,6 +134,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('ip', ip));
+
             var obj = {
                 test: ''
             }
