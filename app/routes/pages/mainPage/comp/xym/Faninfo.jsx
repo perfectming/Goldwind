@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Faninfo.scss';
+import Login from '../../../../../components/common/Loading.jsx';
 import Header from '../linjinjin/header';
 import Title from '../super/Title.jsx';
 import Pwschart from './allinfo/Pwschart.jsx';
@@ -9,14 +10,14 @@ var actions = require('redux/actions');
 var $ = require('jquery');
 
 
-			function setData(rdata, time) {
-                //var date = new Date();
-                //date.setTime(time);
-                // $(".info").text(time + ":" + JSON.stringify(rdata));
-                // console.log(TY);
-                // console.log(JSON.stringify(rdata));
-                //$(".info").text(JSON.stringify(rdata));
-            }
+			// function setData(rdata, time) {
+   //              //var date = new Date();
+   //              //date.setTime(time);
+   //              // $(".info").text(time + ":" + JSON.stringify(rdata));
+   //              // console.log(TY);
+   //              // console.log(JSON.stringify(rdata));
+   //              //$(".info").text(JSON.stringify(rdata));
+   //          }
 
           
                 //获取模型，适用于综合指标界面的初始化
@@ -25,17 +26,24 @@ var $ = require('jquery');
 
 // console.log(WNACTemp);
 // console.log(fmvalue);
+let times;
 let Component = React.createClass({
-	componentDidMount() {
-		
-	},
-
+	componentWillMount() {
+		let {value} = this.props;
+        this.props.toinfopage(value,times);
+    },
+   componentWillUnmount() {
+       clearInterval(times)
+    },
+    componentDidMount() {
+        this.props.init();
+    },
 	render() {
 
-		let {value,fanid,infofmodel,infofdata,tobujian} = this.props;
+		let {value,fanid,infofmodel,infofdata,tobujian,faninfobool = false} = this.props;
 		
+	if(faninfobool){
 		let val = value.Wtid;
-		// console.log(123,infofmodel);
 		let sp = infofmodel.Model.ens[val].sp;
 		let PPVplace = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].place;
 		let PPVcoeff = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].coeff;
@@ -57,28 +65,28 @@ let Component = React.createClass({
 		// console.log(1,infofmodel);
 		// console.log(2,infofdata);
 
-let fmvalue = infofdata.ModelData[val];
-	// console.log(value.Wtid);
-	// console.log(fmvalue["WROT.Spd.Ra.F32"]);
-// let qwer = "WTGS.PPV.Ra.F32.A";
-let Value = [];
-// let  fdv = fmvalue["DevStatusQuery"];
-// if(fdv.Value == undefined){
-// 	fdv[Value] = Value
-// }
-// console.log(3,fmvalue);
-let WTURTemp = Math.ceil(fmvalue["WTUR.Temp.Ra.F32"]);
-let WNACTemp = Math.ceil(fmvalue["WNAC.Temp.Ra.F32"]);
-let WGENTemp = Math.ceil(fmvalue["WGEN.Temp.Ra.F32.1"]);
+		let fmvalue = infofdata.ModelData[val];
+			// console.log(value.Wtid);
+			// console.log(fmvalue["WROT.Spd.Ra.F32"]);
+		// let qwer = "WTGS.PPV.Ra.F32.A";
+		let Value = [];
+		// let  fdv = fmvalue["DevStatusQuery"];
+		// if(fdv.Value == undefined){
+		// 	fdv[Value] = Value
+		// }
+		// console.log(3,fmvalue);
+		let WTURTemp = Math.ceil(fmvalue["WTUR.Temp.Ra.F32"]);
+		let WNACTemp = Math.ceil(fmvalue["WNAC.Temp.Ra.F32"]);
+		let WGENTemp = Math.ceil(fmvalue["WGEN.Temp.Ra.F32.1"]);
 
-// console.log(WGENTemp);
-let WTGShz = Math.ceil(fmvalue["WTGS.HZ.Ra.F32"]);
+		// console.log(WGENTemp);
+		let WTGShz = Math.ceil(fmvalue["WTGS.HZ.Ra.F32"]);
 
 
-let WTSpd = Number(fmvalue["WTUR.WSpd.Ra.F32"]);
-let WTPwr = Math.ceil(fmvalue["WTUR.PwrAt.Ra.F32"]);
-let WROTSpd = Math.ceil(fmvalue["WROT.Spd.Ra.F32"]);
-let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
+		let WTSpd = Number(fmvalue["WTUR.WSpd.Ra.F32"]);
+		let WTPwr = Math.ceil(fmvalue["WTUR.PwrAt.Ra.F32"]);
+		let WROTSpd = Math.ceil(fmvalue["WROT.Spd.Ra.F32"]);
+		let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
 		
 			setTimeout(function(){
 				if(WTGShz <=44){
@@ -153,15 +161,15 @@ let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
 	        		WGENTemp = 150;
 	        	}
 				$("#WTURTemp").animate({ 
-	        		height:(WTURTemp+30)*3.2,
+	        		height:(WTURTemp+32)*3.2,
 	        		duration: "slow",
 	        	}, 1000 )		
 				$("#WNACTemp").animate({ 
-	        		height:WNACTemp+50,
+	        		height:WNACTemp+100,
 	        		duration: "slow",
 	        	}, 1000 )
 	        	$("#WGENTemp").animate({ 
-	        		height:WGENTemp+50,
+	        		height:WGENTemp+100,
 	        		duration: "slow",
 	        	}, 1000 )
 
@@ -207,7 +215,7 @@ let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
 					break;
 			}
 		// console.log(code);
-		this.props.init(value,fanid,infofmodel,infofdata);
+		// this.props.init(value,fanid,infofmodel,infofdata);
 		return (
 			<div className={styles.bodyBox}>
 				<div className={styles.fanidbox}>
@@ -459,6 +467,11 @@ let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
 				</div>
 			</div>
 		)
+	}else{
+        return (
+            <Login></Login>
+        )
+    }	
 	}
 });
 
@@ -471,15 +484,36 @@ const mapStateToProps = (state) => {
         fanid : state.vars.valueid,
         infofmodel : state.vars.infofmodel,
         infofdata : state.vars.infofdata,
+        faninfobool : state.vars.faninfobool,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: (value,fanid,infofmodel,infofdata) => {
-        let s;
+    	toinfopage: (value,faninfobool) => {
+                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
+                    function setData3(rdata){
+                        dispatch(actions.setVars('infofmodel', rdata));
+                        // console.log(0,rdata); 
+                        TY.getRtData("WTDetail", value.Wtid, setData4)  
+                        function setData4(rdata){
+                             
+                            // console.log(1,rdata);
+                            TY.getRtData("WTDetail", value.Wtid, setData5)
+                            function setData5(rdata){
+                                // console.log(11,rdata);
+                                dispatch(actions.setVars('infofdata', rdata));
+                                setTimeout(function(){
+                                    dispatch(actions.setVars('faninfobool', true));
+                                },100)
+                            } 
+      
+                        }
+                    }
+                     // }, 3000)
+
         	// console.log(value)
-		 s = setTimeout(function(){
+		 times = setInterval(function(){
                    // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
                     	// function setData3(rdata){
                          	// dispatch(actions.setVars('infofmodel', rdata));
@@ -495,7 +529,10 @@ const mapDispatchToProps = (dispatch) => {
                     // }
          
            }, 3000)
-		 s = null;
+
+        },      
+        init: () => {
+
 //   $.ajax({
 //    type: 'post',    
 //    url:'http://54.223.200.134/System/data.aspx?mdid=Model&ScId=2015032011&EnId=654208001&EnKey=Screen&PkId=&ModelKey=6C5002D3-1566-414a-8834-5077940C78E1&dhs=UISys&AspxAutoDetectCookieSupport=1',    
@@ -533,7 +570,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         tobujian:(val)=>{
-        	dispatch(actions.setVars('fan_page', 'fanobj'));
+        	dispatch(actions.setVars('fan_page', 'fanpart'));
         	dispatch(actions.setVars('Wtid', val));
         }
         

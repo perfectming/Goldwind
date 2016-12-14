@@ -412,7 +412,23 @@
 	    })
 
 	    $(".search .tab input").click(function () {
+	        if ($(this).hasClass("disabled"))
+	            return;
 	        $(this).addClass("active").siblings().removeClass("active");
+	        if ($(this).parent().attr("id") == "cl_status") {
+	            $("#sh_status input").removeClass("disabled").removeClass("active");
+
+	            if ($(this).val() == "未处理") {
+	                //禁用
+	                $("#sh_status input:eq(1)").removeClass("disabled").siblings().addClass("disabled");
+	            } else if ($(this).val() == "处理中") {
+	                //禁用
+	                $("#sh_status input:lt(2)").addClass("disabled");
+	                $("#sh_status input:gt(3)").addClass("disabled");
+	            } else if ($(this).val() == "处理完成") {
+	                $("#sh_status input:lt(4)").addClass("disabled");
+	            }
+	        }
 	    })
 
 	    $(".search .right_btn button:eq(0)").click(function () {
@@ -811,10 +827,8 @@
 	            layer.close(index);
 	        },
 	        success: function (json) {
-	            for (var o in json.data.itemList) {
-	                for (var t in json.data.itemList[o].items) {
-	                    $("#yhd").append('<option value="' + json.data.itemList[o].items[t].ruleID + '">' + json.data.itemList[o].items[t].partName + '</option>');
-	                }
+	            for (var o in json.listData) {
+	                $("#yhd").append('<option value="' + json.listData[o].ruleID + '">' + json.listData[o].alarmName_CN + '</option>');
 	            }
 	        },
 	        error: function () {

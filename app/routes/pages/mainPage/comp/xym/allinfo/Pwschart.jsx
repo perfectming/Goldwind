@@ -56,7 +56,19 @@ let Component = React.createClass({
             //颜色
             colors: [ '#1E664A', '#4CDB9D']
             ,
-            
+            tooltip: {
+                shared: false,
+                crosshairs: [true,true],
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            radius: 4,
+                            lineColor: '#666666',
+                            lineWidth: 1
+                        }
+                    }
+                }
+            },
             
 
             xAxis: {
@@ -109,7 +121,7 @@ let Component = React.createClass({
                     color: '#fff'
                 }
             },
-            opposite: true
+            // opposite: true
         }],
         plotOptions: {
             spline: {

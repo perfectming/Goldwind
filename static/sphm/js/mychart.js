@@ -731,7 +731,7 @@ function yjjstj() {
     var yjjstjlay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: GetAllUrl(window.JFApiDomian + '/main_getAlarmInfo.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay()+' 23:59:59'),
+        url: GetAllUrl(window.JFApiDomian + '/main_getAlarmInfo.action'),
         cache: false,
         dataType: 'jsonp',
         xhrFields: {
@@ -781,7 +781,7 @@ function yjcltj(page, chart, index) {
     var yjclay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: GetAllUrl(window.JFApiDomian + page + '?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay()+' 23:59:59'),
+        url: GetAllUrl(window.JFApiDomian + page),
         cache: false,
         dataType: 'jsonp',
         xhrFields: {
@@ -830,7 +830,7 @@ function rwzxtj() {
     var rwzxtjlay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: GetAllUrl(window.JFApiDomian + '/main_getExecuteInfo.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + ' 23:59:59'),
+        url: GetAllUrl(window.JFApiDomian + '/main_getExecuteInfo.action'),
         cache: false,
         dataType: 'jsonp',
         xhrFields: {
@@ -959,7 +959,7 @@ function fc_wjl() {
     var dataShadow = [];
     for (var o in json_yjgk.listData) {
         xAxisData.push(json_yjgk.listData[o].dicsName);
-        seriesData.push(json_yjgk.listData[o].rate*100);
+        seriesData.push(json_yjgk.listData[o].rate * 100);
         dataShadow.push(100);
         $("#dialog_2 .scroll").append('<p class="font14 font_fff mt15">' + json_yjgk.listData[o].dicsName + '（' + json_yjgk.listData[o].rate * 100 + '%）</p><div class="pgrop"><div style="width:' + json_yjgk.listData[o].rate * 100 + '%;"></div></div>');
     }
@@ -979,7 +979,7 @@ function fc_wjl() {
                 type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             },
             formatter: function (params, ticket, callback) {
-                return params[0].name + "<br />预警个数：" + getwjlInfo(params[0].dataIndex, 1,1) + "<br />完结个数：" + getwjlInfo(params[0].dataIndex, 2,1) + "<br />完结率：" + params[0].value + '%';
+                return params[0].name + "<br />预警个数：" + getwjlInfo(params[0].dataIndex, 1,1) + "<br />完结个数：" + getwjlInfo(params[0].dataIndex, 2,1) + "<br />完结率：" + params[1].value + '%';
             }
         },
         grid: {
@@ -1158,7 +1158,7 @@ function sel_wjl_zl() {
                         type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                     },
                     formatter: function (params, ticket, callback) {
-                        return params[0].name + "<br />预警个数：" + getwjlInfo(params[0].name, 1, 2) + "<br />完结个数：" + getwjlInfo(params[0].name, 2, 2) + "<br />完结率：" + params[0].value + '%';
+                        return params[0].name + "<br />预警个数：" + getwjlInfo(params[0].name, 1, 2) + "<br />完结个数：" + getwjlInfo(params[0].name, 2, 2) + "<br />完结率：" + parseFloat(params[0].value).toFixed(2) + '%';
                     }
                 },
                 grid: {
@@ -1276,7 +1276,7 @@ function sel_wjl(index) {
                         type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                     },
                     formatter: function (params, ticket, callback) {
-                        return params[0].name + "<br />预警个数：" + getwjlInfo(params[0].name, 1, 3) + "<br />完结个数：" + getwjlInfo(params[0].name, 2, 3) + "<br />完结率：" + params[0].value + '%';
+                        return params[0].name + "<br />预警个数：" + getwjlInfo(params[0].name, 1, 3) + "<br />完结个数：" + getwjlInfo(params[0].name, 2, 3) + "<br />完结率：" + parseFloat(params[0].value).toFixed(2) + '%';
                     }
                 },
                 grid: {
@@ -1412,7 +1412,7 @@ function fc_zql() {
                 type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             },
             formatter: function (params, ticket, callback) {
-                return params[0].name + "<br />已结项：" + fc_zql_tooltip(params[0].dataIndex, 1) + "<br />准确率：" + params[0].value + '%';
+                return params[0].name + "<br />已结项：" + fc_zql_tooltip(params[0].dataIndex, 1) + "<br />准确率：" + params[1].value + '%';
             }
         },
         grid: {
