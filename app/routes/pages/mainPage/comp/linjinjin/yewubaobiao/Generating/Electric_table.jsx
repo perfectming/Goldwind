@@ -73,12 +73,6 @@ let Component = React.createClass({
                      <div className={styles.btnBox}>
                         <button id='searchall'>查询</button>
                     </div>
-                    <div className={styles.btnBox}>
-                        <button>设置参数</button>
-                    </div>
-                    <div className={styles.btnBox}>
-                        <button>导出Excel</button>
-                    </div>
                 </div>
                 <div className={styles.leftlist} id='leftlist'>
                     {

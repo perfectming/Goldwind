@@ -79,7 +79,6 @@ module.exports = {
                         ],
                     }]
             },
-           
             {
                 type: 'date',
                 content: '这是一个时间选择框',
@@ -87,24 +86,11 @@ module.exports = {
                 width: 140,
                 height:30,
             },
-            
             {
                 type: 'button',
                 content: '这是一个button',
                 id: 'button',
                 title: '查询',
-            },
-            {
-                type: 'button',
-                content: '这是一个button',
-                id: 'button',
-                title: '设置参数',
-            },
-            {
-                type: 'button',
-                content: '这是一个button',
-                id: 'button',
-                title: '导出Excel',
             },
             
         ],

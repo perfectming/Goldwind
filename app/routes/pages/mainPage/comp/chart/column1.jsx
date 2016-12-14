@@ -53,7 +53,7 @@ let Component = React.createClass({
             }
         }
         var i=0;
-        var one,two,three;
+        var one,two,three,foure;
          for(let na in mod.ens){
 
             if(na==key[0][0]){
@@ -65,9 +65,12 @@ let Component = React.createClass({
              if(na==key[2][0]){
             three=mod.ens[na].name
             }
+             if(na==key[3][0]){
+            foure=mod.ens[na].name
+            }
 
          }
-         allname1.push(one,two,three)
+         allname1.push(one,two,three,foure)
         
            
 
