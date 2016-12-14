@@ -264,7 +264,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('modata', rdata));
                     dispatch(actions.setVars('boole', true));
                 }
-            },1000)
+            },2000)
         },
         init: () => {
             dispatch(actions.setVars('navhide', false));

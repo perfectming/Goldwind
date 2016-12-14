@@ -146,6 +146,48 @@ let Component = React.createClass({
                             </div>          
                         </div>  
                         )
+                    }else if(choosefans1 == "PVOFL" && value.WTStateCode== "DisComForPlc"){
+                        return (
+                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
+                            <div className={styles.slistitemR}>
+                                <span className={styles.slistitemT}>
+                                        <p className={styles.slistitemTT}>{value.Wtname}</p>
+                                        <p className={styles.slistitemTB}>{x}</p>
+                                </span>
+                                <span className={styles.slistitemB}>
+                                    <span className={styles.slistitemBL}>
+                                        <p>辐照度:</p>
+                                        <p><span className={styles.slistitemBLL}>{value.PVTSI_Aver == undefined ? '--' : (Math.ceil(value.PVTSI_Aver)).toFixed(2)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                    </span>
+                                    <span className={styles.slistitemBR}>
+                                        <p>功率:</p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(value.ActPwr)).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
+                                    </span>
+                                </span>
+                            </div>          
+                        </div>  
+                        )
+                    }else if(choosefans1 == "PVOFL" && value.WTStateCode== "Unknown"){
+                        return (
+                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
+                            <div className={styles.slistitemR}>
+                                <span className={styles.slistitemT}>
+                                        <p className={styles.slistitemTT}>{value.Wtname}</p>
+                                        <p className={styles.slistitemTB}>{x}</p>
+                                </span>
+                                <span className={styles.slistitemB}>
+                                    <span className={styles.slistitemBL}>
+                                        <p>辐照度:</p>
+                                        <p><span className={styles.slistitemBLL}>{value.PVTSI_Aver == undefined ? '--' : (Math.ceil(value.PVTSI_Aver)).toFixed(2)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                    </span>
+                                    <span className={styles.slistitemBR}>
+                                        <p>功率:</p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(value.ActPwr)).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
+                                    </span>
+                                </span>
+                            </div>          
+                        </div>  
+                        )
                     }
                     
                         
