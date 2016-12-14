@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
+        let {PBAGroupPba,PBAGroupNodevreasonloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupFaultloss,areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
         let configPie = {
             chart: {
                 height:400,
@@ -48,7 +48,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-               
+               valueSuffix:'kWh'
             },
             credits: {
                 enabled: false
@@ -64,10 +64,66 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                        w0=e.point.category;
+                       var  w0=e.point.category;
+                        var PBAGroupIndex=e.point.index;
                         var  a=w0.toString().split("");
                         var b=a[0];
-                        changedata1(w0,b);
+
+                    var PBAGroupFirstDay=[];
+                    var PBAGroupFirstPoweract=[];
+                    var PBAGroupFirstFaultloss=[];
+                    var PBAGroupFirstMaintainloss=[];
+                    var PBAGroupFirstLimitloss=[];
+                    var PBAGroupFirstNodevreasonloss=[];
+                    var PBAGroupFirstPba=[];
+                    // 点击上面下面变
+
+                        $.ajax({
+                     type:'post',
+                     url:'http://10.68.100.32:8080/wbi/PBA/getCompanyDayTimePBA',
+                     async:false,
+                     dataType:'json',
+                     data:{
+                      'month':PBAGroupIndex+1,
+                     },
+                     timeout:'3000',
+                     success:function(data){
+                     
+                    
+                       
+                          var PBAGroupFirstMonth=data.data;
+  
+                        for ( var i in PBAGroupFirstMonth){
+
+                          var day=PBAGroupFirstMonth[i].day;
+                          PBAGroupFirstDay.push(day);
+
+                          var poweract=PBAGroupFirstMonth[i].poweract;
+                          PBAGroupFirstPoweract.push(poweract);
+
+                          var faultloss=PBAGroupFirstMonth[i].faultloss;
+                          PBAGroupFirstFaultloss.push(faultloss);
+
+                          var maintainloss=PBAGroupFirstMonth[i].maintainloss;
+                          PBAGroupFirstMaintainloss.push(maintainloss);
+
+                          var limitloss=PBAGroupFirstMonth[i].limitloss;
+                          PBAGroupFirstLimitloss.push(limitloss);
+
+                          var nodevreasonloss=PBAGroupFirstMonth[i].nodevreasonloss;
+                          PBAGroupFirstNodevreasonloss.push(nodevreasonloss);
+
+                          var pba=Number(PBAGroupFirstMonth[i].pba.toFixed(2));
+                          PBAGroupFirstPba.push(pba);
+                        }
+                      
+              },
+              error:function(){
+                 
+          
+             },
+           });
+                        changedata1(w0,b,PBAGroupFirstDay,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba);
                         }
                     }
                 }
@@ -96,11 +152,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'(kWh)',
+                        text:'kWh',
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 50,
+                        x: 45,
                         style:{
                             fontSize:'14px',
                             color:'#fff'
@@ -139,7 +195,7 @@ let Component = React.createClass({
             {
                 name: '故障损失',
                 type: 'column',
-                data: areaRecordCosts,
+                data: PBAGroupFaultloss,
                 stack:'first',
                 borderRadius: 2,
                 pointPlacement:-0.1,
@@ -148,7 +204,7 @@ let Component = React.createClass({
             {
                 name: '维护损失',
                 type: 'column',
-                data: areaRecordCosts,
+                data: PBAGroupMaintainloss,
                 stack:'first',
                 pointPlacement:-0.1,
                 color:'#ffffff'
@@ -156,7 +212,7 @@ let Component = React.createClass({
             {
                 name: '限功率损失',
                 type: 'column',
-                data: areaRecordCosts,
+                data: PBAGroupLimitloss,
                 stack:'first',
                 pointPlacement:-0.1,
                 color:'#e9c75c',
@@ -164,7 +220,7 @@ let Component = React.createClass({
             {
                 name: '非设备原因损失',
                 type: 'column',
-                data: areaRecordCosts,
+                data: PBAGroupNodevreasonloss,
                 stack:'first',
                 borderRadius: 2,
                 pointPlacement:-0.1,
@@ -173,10 +229,13 @@ let Component = React.createClass({
                 {
                     name: 'PBA',
                     type: 'line',
-                    data: areaRecordCosts,
+                    data: PBAGroupPba,
                     stack:'first',
                     color:'blue',
                     yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
                 },
 
             ]
@@ -190,7 +249,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-          w0 : state.vars.w1,
+          w0 : state.vars.PBAGroupPbaName,
         wins: state.vars.wins1,
     }
 };
@@ -199,8 +258,15 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-         changedata1 :(w0,b)=>{
-            dispatch(actions.setVars('w1',w0)); 
+         changedata1 :(w0,b,PBAGroupFirstDay,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba)=>{
+            dispatch(actions.setVars('PBAGroupPbaName',w0)); 
+            dispatch(actions.setVars('PBAGroupFirstDay1',PBAGroupFirstDay ));
+            dispatch(actions.setVars('PBAGroupFirstPoweract1',PBAGroupFirstPoweract ));
+            dispatch(actions.setVars('PBAGroupFirstMaintainloss1',PBAGroupFirstMaintainloss ));
+            dispatch(actions.setVars('PBAGroupFirstLimitloss1',PBAGroupFirstLimitloss));
+            dispatch(actions.setVars('PBAGroupFirstFaultloss1',PBAGroupFirstFaultloss ));
+            dispatch(actions.setVars('PBAGroupFirstNodevreasonloss1',PBAGroupFirstNodevreasonloss ));
+            dispatch(actions.setVars('PBAGroupFirstPba1',PBAGroupFirstPba ));
            
         },
     };

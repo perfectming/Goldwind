@@ -7,8 +7,8 @@ import Pie2 from '../../mxx/Pie2';
 var actions = require('redux/actions');
 let ipUrl='10.68.100.32:8080';
 
-let clickAreaId,areaName=[],areaId=[],areaCost=[],areaProfit=[],areaMonth=[],runTime,downTime,TBA,sortArr;
-let elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month=[],elecPlan=[],elecAct=[];
+let clickAreaId,areaName=[],areaId=[],areaCost=[],areaProfit=[],areaMonth=[],runTime,downTime,TBA,areaArr;
+let actb=0,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month=[],elecPlan=[],elecAct=[];
 
 
 let Component = React.createClass({
@@ -21,7 +21,7 @@ let Component = React.createClass({
    
 
     render() {
-        let{actb=0,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{actb,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
             
 		return (
            <div className={styles.box}>
@@ -133,11 +133,11 @@ let Component = React.createClass({
                 			<tr>
 	                			<th>排名</th>
 	           					<th>风场名</th>
-	           					<th onClick={()=>changepageSort1(flag,flagPba,sortArr)} className={flag==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba==true? styles.arrow:styles.bottom}></span></th>
-	           					<th onClick={()=>changepageSort(flag,flagTime,sortArr)} className={flag==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime==true? styles.arrow:styles.bottom}></span></th>
+	           					<th onClick={()=>changepageSort1(flag,flagPba,areaArr)} className={flag==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba==true? styles.arrow:styles.bottom}></span></th>
+	           					<th onClick={()=>changepageSort(flag,flagTime,areaArr)} className={flag==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime==true? styles.arrow:styles.bottom}></span></th>
                 			</tr>
                 			{
-                				sortArr.map((value,key)=>{
+                				areaArr.map((value,key)=>{
 		                    		return(<tr key={key}><th>{key+1}</th><th>{value.wfname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{value.downtime}小时</th></tr>)
 		                    	})
                 			}
@@ -158,7 +158,7 @@ const mapStateToProps = (state) => {
     	flag : state.vars.flag,
     	flagPba : state.vars.flagPba,
     	flagTime : state.vars.flagTime,
-    	sortArr : state.vars.sortArr,
+    	areaArr : state.vars.areaArr,
     	clickAreaId:state.vars.clickAreaId,
     }
 };
@@ -166,6 +166,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
     	ajax: () => {
+    		dispatch(actions.setVars('actb',0 ));
     		$.ajax({
         		url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//获得各区域ID和名字-YES
 		        type: 'post',
@@ -225,10 +226,10 @@ const mapDispatchToProps = (dispatch) => {
 		        	month=[],elecPlan=[],elecAct=[];
 		        	for(var i in data.data.twAreaMonthElec){
 		        		elecAct.push(data.data.twAreaMonthElec[i].poweract/10000);
-		        		month.push(data.data.twAreaMonthElec[i].month+"月");
 		        	}
 		        	for(var i in data.data.twAreaMonthPlanElec){
 		        		elecPlan.push(data.data.twAreaMonthPlanElec[i]/10000);
+		        		month.push(i+"月");
 		        	}
 		        },
 		        complete : function(XMLHttpRequest,status){ 
@@ -247,7 +248,7 @@ const mapDispatchToProps = (dispatch) => {
 		        success:function (data) {
 		        	elecActPBA=data.data.scale[0].poweract;
 		        	elecPlanPBA=data.data.scale[0].powertheory;
-		        	sortArr=data.data.everyAreaPba;
+		        	areaArr=data.data.everyAreaPba;
 		        },
 		        complete : function(XMLHttpRequest,status){ 
 			　　　　if(status=='timeout'){
@@ -279,14 +280,14 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             } 
         },
-        changepageSort:(flag,flagTime,sortArr)=>{
-        	flagTime==false? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.downtime-a.downtime})));
+        changepageSort:(flag,flagTime,areaArr)=>{
+        	flagTime==false? dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return b.downtime-a.downtime})));
         	dispatch(actions.setVars('flag',false ));
         	dispatch(actions.setVars('flagTime',!flagTime ));
         	
         },
-        changepageSort1:(flag,flagPba,sortArr)=>{
-        	flagPba==true? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
+        changepageSort1:(flag,flagPba,areaArr)=>{
+        	flagPba==true? dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
         	dispatch(actions.setVars('flag',true ));
         	dispatch(actions.setVars('flagPba',!flagPba ));
         },
@@ -352,7 +353,7 @@ const mapDispatchToProps = (dispatch) => {
 		        success:function (data) {
 		        	elecActPBA=data.data.scale[0].poweract;
 		        	elecPlanPBA=data.data.scale[0].powertheory;
-		        	sortArr=data.data.everyAreaPba;
+		        	areaArr=data.data.everyAreaPba;
 		        },
 		        complete : function(XMLHttpRequest,status){ 
 			　　　　if(status=='timeout'){

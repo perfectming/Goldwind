@@ -84,7 +84,7 @@ let Component = React.createClass({
                                                 return (
                                                     <div className={styles.tableContentItem}
                                                            style={{width:(100/header.length)+'%'}}
-                                                           key={keyC}>{data[value][valueC]*10%1==0?data[value][valueC]:(data[value][valueC]/1).toFixed(2)}</div>
+                                                           key={keyC}>{data[value][valueC]*10%1000==0?data[value][valueC]/1000:(data[value][valueC]/1000).toFixed(2)}</div>
                                                 )}
                                             })
                                         }
@@ -117,7 +117,7 @@ let Component = React.createClass({
                                         return (
                                             <div className={styles.tableContentItem}
                                                  style={{width:(100/header.length)+'%'}}
-                                                 key={keyC}>{data[value][valueC]*10%1==0?data[value][valueC]:(data[value][valueC]/1).toFixed(2)}</div>
+                                                 key={keyC}>{data[value][valueC]*10%1000==0?data[value][valueC]/1000:(data[value][valueC]/1000).toFixed(2)}</div>
                                         )}
                                 })
                             }

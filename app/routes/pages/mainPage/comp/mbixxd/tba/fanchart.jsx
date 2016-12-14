@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
     render() {
 
-      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
+      let {PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -52,10 +52,10 @@ let Component = React.createClass({
 
                 }
             },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-               
+             tooltip: {
+               valueSuffix:'kWh'
             },
+            
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -105,11 +105,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'(kWh)',
+                        text:'kWh',
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 45,
+                        x: 35,
                         style:{
                             color:'#fff',
                             fontSize:'14px'
@@ -178,9 +178,12 @@ let Component = React.createClass({
                 {
                     name: 'PBA',
                     type: 'line',
-                    data: [20,40,50,20,20,60,60,80,70,50,34,99],
+                    data: PBAGroupFirstPba,
                     color:'blue',
-                    yAxis:1
+                    yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
 
                 },]
         };
@@ -203,7 +206,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         changedata10 :(wq,b)=>{
             dispatch(actions.setVars('wr',wq)); 
-            console.log(wq)
+            
            
         },
     };

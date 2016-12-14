@@ -45,11 +45,12 @@ let Component = React.createClass({
           <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
 
                 </ul>
+                <div className={styles.paddingtop}>
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                                <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP} height={700}></TBAspacechart>
+                                <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP} height={750}></TBAspacechart>
                             </div>
                         </div>
                     </div>
@@ -65,6 +66,7 @@ let Component = React.createClass({
                       <button onClick={()=>back(wind)}>后10</button>
                       <button  onClick={()=>more()}>更多</button>
                    </div>
+                </div>
                 </div>
             </div>
 
