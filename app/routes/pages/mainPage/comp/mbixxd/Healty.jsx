@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Healtychart from './Healtychart.jsx';
-import icono from './wind_logo.png';
+import icono from './img/健康度1.png';
 var $=require('jquery');
 var actions = require('redux/actions');
 let data=require('./Profit-data');

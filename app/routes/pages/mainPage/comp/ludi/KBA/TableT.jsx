@@ -3,14 +3,13 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./TimeSelect-data.js');
-
 let Component = React.createClass({
     componentWillMount() {
+    	
     },
 
     render() {
-    	let {X2}=this.props;
+    	let {areaName,wfName,X1=areaName[0],X2=wfName[0],wtName,wtElec,wtPBA,wtLose}=this.props;
         let configPie = {
             chart: {
                 height:380,
@@ -22,7 +21,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: X2,
+                text: '集团'+X1+X2+'PBA',
                 align:'left',
                  x : "0",
                 style:{
@@ -33,6 +32,8 @@ let Component = React.createClass({
             },
             //图例说明
             legend: {
+            	y:30,
+            	margin:0,
                 align:"right",
                 verticalAlign: "top",
                 itemStyle: {
@@ -47,7 +48,7 @@ let Component = React.createClass({
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+//              pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -73,18 +74,18 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:data.data[1].fangroup,
+                categories:wtName,
             },
             yAxis: {
                 title:{
-                	text:'kW',
+                	text:'万kWh',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-15,
+	                x:-5,
 	                style:{
-	                	fontSize:'14px',
+	                	fontSize:'	14px',
 	                	color:'white',
 	                }
                 },
@@ -100,15 +101,15 @@ let Component = React.createClass({
             series: [{
             	name: '实际发电量',
             	type: 'column',
-                data: data.data[1].actrul,
+                data: wtElec,
             },{
                 name: '损失发电量',
                 type: 'column',
-                data: data.data[1].lose,
+                data: wtLose,
             },{
             	name: 'PBA',
             	type: 'spline',
-                data: data.data[1].PBA,
+                data: wtPBA,
             }]
         };
         return (
@@ -121,14 +122,16 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
     	X2 : state.vars.x2,
+    	X1 : state.vars.x1,
+    	areaName : state.vars.areaName,
+    	wfName : state.vars.wfName,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: () => {
-        	dispatch(actions.setVars('x2',X2 ));
-        },
+        
+        
     };
 };
 

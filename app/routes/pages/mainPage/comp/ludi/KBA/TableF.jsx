@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./TimeSelect-data.js');
 
 let Component = React.createClass({
-    componentWillMount() {
+    componentDidMount() {
+    	
     },
 
     render() {
-    	let {X1,changedata1}=this.props
+    	let {X1,changedata1,areaName,areaElec,areaFault,areaMaintain,areaLimit,areaDevice,areaPBA}=this.props
         let configPie = {
             chart: {
                 height:380,
@@ -47,7 +47,7 @@ let Component = React.createClass({
             },
             tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+                 
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -74,16 +74,16 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:data.data[0].area,
+                categories:areaName,
             },
             yAxis: {
                 title:{
-                	text:'kW',
+                	text:'万kWh',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-13,
+	                x:-10,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',
@@ -102,7 +102,7 @@ let Component = React.createClass({
             	name: '应发电量',
             	type: 'column',
                 stack:"male",
-                data: data.data[0].should,
+                data: areaElec,
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
@@ -114,7 +114,7 @@ let Component = React.createClass({
                 name: '故障损失',
                 type: 'column',
                 stack:"female",
-                data: data.data[0].g,
+                data: areaFault,
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
@@ -125,7 +125,7 @@ let Component = React.createClass({
             	name: '维护损失',
             	type: 'column',
                 stack:"female",
-                data: data.data[0].w,
+                data: areaMaintain,
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
@@ -136,7 +136,7 @@ let Component = React.createClass({
             	name: '限功率损失',
             	type: 'column',
                 stack:"female",
-                data: data.data[0].x,
+                data: areaLimit,
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
@@ -147,7 +147,7 @@ let Component = React.createClass({
             	name: '非设备原因损失',
             	type: 'column',
                 stack:"female",
-                data: data.data[0].q,
+                data: areaDevice,
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
@@ -157,7 +157,7 @@ let Component = React.createClass({
             },{
             	name: 'PBA',
             	type: 'spline',
-                data: data.data[0].l,
+                data: areaPBA,
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
@@ -175,14 +175,12 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-    	X1 : state.vars.x1,
+    	
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: () => {
-        },
         changedata1 :(X1)=>{
               dispatch(actions.setVars('x1',X1 ));
         },

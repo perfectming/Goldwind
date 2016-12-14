@@ -318,7 +318,7 @@ let Component = React.createClass({
                                                         </div>
                                                     </div>
                                                 )
-                                            }else if(chooses2 == "PVOFL" && (code == "Offline" || code == "DisComForPre" || code == "DisComForPlc")){
+                                            }else if(chooses2 == "PVOFL" && (code == "Offline" || code == "DisComForPre" || code == "DisComForPlc" || code == "DisComForPlc")){
                                                 return (                                                
                                                     <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Topvinfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
@@ -449,7 +449,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('valueid', value));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('befor_page','fan' ));
-                
+            dispatch(actions.setVars('faninfobool', false)); 
             dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('fan_page', 'faninfo'));     
         },

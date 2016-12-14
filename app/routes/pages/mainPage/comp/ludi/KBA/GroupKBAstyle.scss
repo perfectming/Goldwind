@@ -12,7 +12,7 @@
                     position: absolute;
                     z-index: 5;
                     top: 5px;
-                    left: 40px;
+                    left: 65px;
                     a{
                         display: inline-block;
                         height: 25px;
@@ -34,7 +34,7 @@
                     position: absolute;
                     z-index: 5;
                     top: 5px;
-                    left: 40px;
+                    left: 65px;
                     a{
                         display: inline-block;
                         height: 25px;
@@ -55,13 +55,70 @@
                     position: absolute;
                     z-index: 5;
                     top: 5px;
-                    left: 40px;
+                    left: 65px;
                     a{
                         display: inline-block;
                         height: 25px;
                         width: 25px;
                         border-radius: 12.5px;
                         background: url(../../../img/comp/nianEle.png)no-repeat;
+                    }
+                }
+                .top{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:#20FEFE;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 174px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    &:hover{
+                        box-shadow: 0 0 15px #20FEFE;
+                    }
+                }
+                .bottom{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:#20FEFE;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 94px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    &:hover{
+                        box-shadow: 0 0 15px #20FEFE;
+                    }
+                }
+                .more{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:#20FEFE;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 12px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    &:hover{
+                        box-shadow: 0 0 15px #20FEFE;
                     }
                 }
             }
