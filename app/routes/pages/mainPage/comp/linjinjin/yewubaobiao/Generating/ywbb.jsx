@@ -189,6 +189,14 @@ const mapDispatchToProps = (dispatch) => {
             })
             //查询按钮功能
             $('#searchall').on('click',function(){
+                 //初始化对应数组
+                    chartnum=[];
+                    chartname=[];
+                //初始化highchart数据与表格数据
+                dispatch(actions.setVars('chtnum',''));
+                 dispatch(actions.setVars('chtname',''));
+                 dispatch(actions.setVars('tabarr',''));
+                 dispatch(actions.setVars('chtit',''));
                 $('#tabline').empty();
                 //初始化按钮颜色
                 $('#tablist span').css('background','#464c58');
@@ -213,18 +221,18 @@ const mapDispatchToProps = (dispatch) => {
                     
                      //默认显示第一条数据
                 $('#tablist span').eq(2).css('background','#333');
-                 //初始化默认显示第一层数据
-                         console.log(allnum)
-                        chartnum.push(value[2]);
-                        chartname.push(value[1]); 
-                        dispatch(actions.setVars('chtnum',chartnum));
-                        dispatch(actions.setVars('chtname',chartname));
-                        dispatch(actions.setVars('chtit','平均风速(m/s)')); 
+                 //初始化默认收集第一层数据
+                chartnum.push(value[2]);
+                chartname.push(value[1]); 
+                        
                 //显示highchart图标 
                 $('#colum').css('display','block');
                      
                 })
-               
+                         //初始化默认显示第一层数据
+                        dispatch(actions.setVars('chtnum',chartnum));
+                        dispatch(actions.setVars('chtname',chartname));
+                        dispatch(actions.setVars('chtit','平均风速(m/s)')); 
             }
 
             })
@@ -397,11 +405,12 @@ const mapDispatchToProps = (dispatch) => {
                  dispatch(actions.setVars('chtit',$('#'+even.id).text()));  
                 
             })
+            $('#'+even.id).css('background','#333').siblings('span').css('background','#464c58')
             }else{
                  alert('没有查询到数据！')
             }
             
-            $('#'+even.id).css('background','#333').siblings('span').css('background','#464c58')
+            
 
         }
     
