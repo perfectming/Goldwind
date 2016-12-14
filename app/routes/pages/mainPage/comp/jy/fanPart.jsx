@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './fan.scss';
+import styles from './fanPart.scss';
 import Login from '../../../../../components/common/Loading.jsx';
 import bg1 from '../../img/icon/1.png';
 import bg2 from '../../img/icon/2.png';
@@ -19,7 +19,10 @@ var $ = require('jquery');
 let pack=['pack_WROT','pack_WNAC','pack_WGEN','pack_WTPS','pack_WYAW','pack_WTCS','pack_WCNV','pack_WTRF','pack_WTGS'];
 let arr=[bg1,bg2,bg3,bg4,bg5,bg6,bg7,bg8,bg9];
 let Component = React.createClass({
-    componentWillUnmount() {
+    componentWillMount() {
+        let {vid, act1} = this.props;
+        console.log(vid);
+        this.props.changeDate(vid,act1);
     },
     componentDidMount() {
         this.props.init();
@@ -27,7 +30,6 @@ let Component = React.createClass({
 
     render() {
         let {vid,  changetab, act1=0, boolFan = false, bujianModel, bujianData} = this.props;
-        this.props.changeDate(vid,act1);
         if (boolFan) {
             var forIn=[];
             var forOut=[];
@@ -47,7 +49,7 @@ let Component = React.createClass({
                             pack.map((value, key)=> {
                                 return (
                                     <span className={ act1 == key ? styles.active : styles.actspan } key={key}
-                                          onClick={()=>changetab(key)}>{bujianModel.Model.pks[value].name}</span>
+                                          onClick={()=>changetab(key,vid)}>{bujianModel.Model.pks[value].name}</span>
                                 )
                             })
                         }
@@ -119,9 +121,6 @@ const mapDispatchToProps = (dispatch) => {
         changeDate:(vid,act1)=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, "WTDetail", setData, "Screen", 0);
             function setData(rdata) {
-                // dispatch(actions.setVars('bool', true));
-                // dispatch(actions.setVars('modata', rdata));
-                // dispatch(actions.setVars('fan_page', 'fanobj'));
                 if (rdata.Model){
                 var sk = rdata.Model.ens[vid].sk;
                 TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, sk, setDatas, "Screen", 0);
@@ -145,10 +144,32 @@ const mapDispatchToProps = (dispatch) => {
         },
         init: () => {
         },
-        changetab:(act)=>{
-            dispatch(actions.setVars('val', act));
-            arr[act] &&
-            $('#fanJy').css('background-image','url('+arr[act]+')');
+        changetab:(act1,vid)=>{
+            dispatch(actions.setVars('val', act1));
+            arr[act1] &&
+            $('#fanJy').css('background-image','url('+arr[act1]+')');
+            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, "WTDetail", setData, "Screen", 0);
+            function setData(rdata) {
+                if (rdata.Model){
+                    var sk = rdata.Model.ens[vid].sk;
+                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, sk, setDatas, "Screen", 0);
+                    function setDatas(rdata) {
+                        var key;
+                        for (let x in rdata.Model.prs) {
+                            key = x;
+                        }
+                        var pkscs = rdata.Model.prs[key].pkscs;
+                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, pkscs[pack[act1]].scid, setDataDo, "Screen", 0);
+                        function setDataDo(rdata) {
+                            dispatch(actions.setVars('bujianModel', rdata));
+                            TY.getRtData(pkscs[pack[act1]].scid, vid, setDatafin);
+                            function setDatafin(rdata) {
+                                dispatch(actions.setVars('bujianData', rdata));
+                                dispatch(actions.setVars('boolFan', true));
+                            }
+                        }
+                    }}
+            }
         }
 
     };
