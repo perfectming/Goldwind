@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
-import icono from '../wind_logo.png';
+import icono from '../img/TBA.png';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 var $=require('jquery');
@@ -95,7 +95,7 @@ var tbaDayTba3=[];
                      dataType:'json',
                      timeout:'3000',
                      success:function(data){
-                
+                    // console.log(data);
                         TBAtimedata=data.data; 
                         for(var i in TBAtimedata){
                           var tbamonth=TBAtimedata[i].month;
@@ -135,7 +135,7 @@ var tbaDayTba3=[];
                      },
                      timeout:'3000',
                      success:function(data){
-                        
+                            // console.log(data);
                          TBAdaydata=data.data; 
                          for(var i in TBAdaydata){
                            var tbaDay=TBAdaydata[i].day;

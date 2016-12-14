@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaPlanDay,areaPlan,areaPlanDayT,fanCost}=this.props;
+        let {areaPlanDay,areaPlan,areaPlanDayT,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
         let configPie = {
             chart: {
                 height:395,
@@ -157,7 +157,7 @@ let Component = React.createClass({
                 {
                     name: '维护损失',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCostA,
                     stack:'waste',
                      pointWidth: 15,
                     color:'#ffffff',
@@ -166,7 +166,7 @@ let Component = React.createClass({
                 {
                     name: '限功率损失',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCostB,
                     stack:'waste',
                     color:'#e9c75c',
                      pointWidth: 15,
@@ -175,7 +175,7 @@ let Component = React.createClass({
                 {
                     name: '非设备原因损失',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCostC,
                     stack:'waste',
                      pointWidth: 15,
                     color:'#d06960',

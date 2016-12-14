@@ -6,6 +6,13 @@ import Pie2 from '../../mxx/Pie2';
 
 let ipUrl='10.68.100.32:8080';
 
+
+
+var actions = require('redux/actions');
+var $ =require("jQuery");
+// let data=Instrumentdata;
+// let sort1=data.sort2;
+
 let profit,amounts,rate,yearPro,month2,cost,incomes,shouldElec,actrulElec,sortArr,yearELec,yearPlanELec,monthElec,monthPlanElec,dayelec,dayPlanElec,arrPlan=[],month1=[],arrAct=[],runTime,downTime,tba;
 
 var actions = require('redux/actions');

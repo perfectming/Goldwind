@@ -11,6 +11,7 @@ let Component = React.createClass({
     render() {
 
  let {machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC,PBA,height,width}=this.props;
+       
         let configPie = {
             chart: {
                 height:height,
@@ -162,7 +163,7 @@ let Component = React.createClass({
                 {
                     name: '维护损失',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCostA,
                     stack:'waste',
                      pointWidth: 30,
                     color:'#ffffff',
@@ -171,7 +172,7 @@ let Component = React.createClass({
                 {
                     name: '限功率损失',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCostB,
                     stack:'waste',
                     color:'#e9c75c',
                      pointWidth: 30,
@@ -180,7 +181,7 @@ let Component = React.createClass({
                 {
                     name: '非设备原因损失',
                     type: 'column',
-                    data: fanCost,
+                    data: fanCostC,
                     stack:'waste',
                      pointWidth: 30,
                     color:'#d06960',
@@ -207,7 +208,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        machine:state.vars.PBASpaceWtname1
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

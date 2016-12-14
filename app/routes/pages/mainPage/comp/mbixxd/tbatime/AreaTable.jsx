@@ -85,7 +85,7 @@ let Component = React.createClass({
                      },
                      timeout:'3000',
                      success:function(data){
-                     
+                     console.log(data);
                         var  TBAdaydata=data.data; 
                           for(var i in TBAdaydata){
                             var tbaDay=TBAdaydata[i].day;
