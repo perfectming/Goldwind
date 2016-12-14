@@ -10,10 +10,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let{windFiled,windCost,windProfit,w0='1月份'}=this.props;
+        let{windFiled,windCost,windProfit,w0='1月份',TBA}=this.props;
         let configPie = {
             chart: {
-                height:410,
+                height:430,
                  backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -49,7 +49,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                
+                  valueSuffix:'h'
             },
             credits: {
                 enabled: false
@@ -94,11 +94,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'(小时)',
+                        text:'h',
                         align:'high',
                         rotation:'0',
-                        y: -17,
-                        x: 50,
+                        y: -15,
+                        x: 40,
                         style:{
                             fontSize:'14px',
                             color:'#fff'
@@ -140,10 +140,13 @@ let Component = React.createClass({
                 },{
                     name:'TBA',
                     type:'line',
-                    data:[80,30,3,36,70,70,70,70,80,80,80,80],
+                    data:TBA,
                     yAxis:1,
                     
-                    color:'blue'
+                    color:'blue',
+                     tooltip: {
+               valueSuffix:''
+            },
                 }
 
 
@@ -160,7 +163,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-         w0 : state.vars.w1,
+         w0 : state.vars.qwe,
     }
 };
 

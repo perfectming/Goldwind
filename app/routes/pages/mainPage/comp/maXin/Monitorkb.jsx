@@ -173,15 +173,15 @@ let Component = React.createClass({
                     <div className={`${styles.ssdlqkfx} ${styles.box_shadow}`}>
                         <Title title={['故障设备概览']}></Title>
                         <div className={styles.ssdlqkfxmain}>
-                            <span className={styles.tsstyle1}>3<span className={styles.tsstyled1}>台</span></span>
-                            <span className={styles.tsstyle2}>12<span className={styles.tsstyled2}>台</span></span>
-                            <span className={styles.tsstyle3}>13<span className={styles.tsstyled3}>台</span></span>
-                            <span className={styles.tsstyle4}>19<span className={styles.tsstyled4}>台</span></span>
+                            <span className={styles.tsstyle1}>--<span className={styles.tsstyled1}>台</span></span>
+                            <span className={styles.tsstyle2}>--<span className={styles.tsstyled2}>台</span></span>
+                            <span className={styles.tsstyle3}>--<span className={styles.tsstyled3}>台</span></span>
+                            <span className={styles.tsstyle4}>--<span className={styles.tsstyled4}>台</span></span>
                             <span className={styles.timestyle}>
-                                <span className={styles.timestylee}>0.2<span className={styles.danweicc}>h</span></span>
-                                <span className={styles.timestylee}>12<span className={styles.danweicc}>h</span></span>
-                                <span className={styles.timestylee}>36<span className={styles.danweicc}>h</span></span>
-                                <span className={styles.timestylee}>72<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>--<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>--<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>--<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>--<span className={styles.danweicc}>h</span></span>
                             </span>
                         </div>
                     </div>
@@ -197,14 +197,14 @@ let Component = React.createClass({
                             <div className={styles.righttext}>节能减排</div>
                         </div>
                         <div className={`${styles.navitem} ${styles.bore1}`}>
-                            <div className={styles.leftimg} style={{width:'100%',textAlign:'center'}}>区域内场站数量:12个</div>
+                            <div className={styles.leftimg} style={{width:'100%',textAlign:'center'}}>区域内场站数量:--个</div>
                         </div>
                         <div className={styles.navitem}>
                             <div className={styles.leftimg}><img src={nlcojp}/></div>
-                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{Number((mobd[8888800].YearCO2Emissions)*mod.YearCO2Emissions.coeff).toFixed(mod.YearCO2Emissions.place)}</b>{mod.YearCO2Emissions.unit}</h2></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>--</b>{mod.YearCO2Emissions.unit}</h2></div>
                         </div>
                         <div className={`${styles.navitem} ${styles.bore1}`}>
-                            <div className={styles.leftimg} style={{width:'100%'}}>纳入CDM场站数量:8个</div>
+                            <div className={styles.leftimg} style={{width:'100%'}}>纳入CDM场站数量:--个</div>
                         </div>
 
                         <div className={styles.navitem}>
@@ -212,12 +212,12 @@ let Component = React.createClass({
                             <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{Number((mobd[8888800].YearCO2Emissions)*mod.YearCO2Emissions.coeff).toFixed(mod.YearCO2Emissions.place)}</b>{mod.YearCO2Emissions.unit}</h2></div>
                         </div>
                         <div className={`${styles.navitem} ${styles.bore1}`}>
-                            <div className={styles.leftimg} style={{width:'100%'}}>未纳入CDM场站数量:4个</div>
+                            <div className={styles.leftimg} style={{width:'100%'}}>未纳入CDM场站数量:--个</div>
                         </div>
 
                         <div className={styles.navitem}>
                             <div className={styles.leftimg}><img src={nlcojp}/></div>
-                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>0</b>t</h2></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>--</b>t</h2></div>
                         </div>
 
                     </div>
@@ -264,7 +264,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('modata', rdata));
                     dispatch(actions.setVars('boole', true));
                 }
-            },1000)
+            },2000)
         },
         init: () => {
             dispatch(actions.setVars('navhide', false));
