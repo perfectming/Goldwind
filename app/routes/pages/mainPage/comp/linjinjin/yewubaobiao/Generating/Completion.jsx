@@ -5,7 +5,7 @@ import jian from '../../../../img/comp/jian_icon.png';
 import add from '../../../../img/comp/add_icon.png';
 import Column from './colum.jsx';
 let type = require('./ywbb_date');
-let btype = type.comps.elect_table;
+let btype = type.comps.completion;
 var $ =require('jquery');
 var actions = require('redux/actions');
 
@@ -38,6 +38,7 @@ let Component = React.createClass({
                             if (value.type === 'date') {
                                 return (
                                     <div className={styles.dateBox} key={key}>
+                                        <span>日期维度</span><input id='timelength'  placeholder={value.content} type={value.type} style={{width:value.width}}/>
                                         <span>发生时间</span><input id="startTime"  placeholder={value.content} type={value.type} style={{width:value.width}}/>
                                         <span>结束时间</span><input id="endTime"  placeholder={value.content} type={value.type} style={{width:value.width}}/>
                                     </div>
@@ -199,6 +200,8 @@ const mapDispatchToProps = (dispatch) => {
                     alert('请选择开始或者结束时间');
                 }else if(allnum.length==0){
                     alert('请选择要查询的字段')
+                }else if($('#timelength').val() == ''){
+                    alert('请选择日期维度')
                 }else{
                 allnum.map(function(value,key){
                     $('#tabline').append('<div style="width:100%"></div>');
@@ -207,6 +210,7 @@ const mapDispatchToProps = (dispatch) => {
                         $('#tabline>div').eq(key).append('<span>'+valueC+'</span>')
                         $('#tabline>div').eq(key).find('span').eq(0).width(80);
                         $('#tabline>div').eq(key).find('span').eq(1).width(400);
+                        $('#tabline>div').eq(key).find('span').eq(4).text(valueC+'%')
                     })
                     if(key%2==0){
                         $('#tabline>div').eq(key).css('background','#30343f')

@@ -14,7 +14,7 @@ module.exports = {
                 },
                 {
                     tabname:'完成率统计用例规划',
-                    rpage:''
+                    rpage:'Completion'
                 }
                
 
