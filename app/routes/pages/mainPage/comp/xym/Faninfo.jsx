@@ -570,7 +570,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         tobujian:(val)=>{
-        	dispatch(actions.setVars('fan_page', 'fanobj'));
+        	dispatch(actions.setVars('fan_page', 'fanpart'));
         	dispatch(actions.setVars('Wtid', val));
         }
         
