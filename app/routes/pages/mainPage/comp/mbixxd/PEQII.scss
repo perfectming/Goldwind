@@ -1,5 +1,14 @@
 .powerBox{
   //padding-right:40px;
+  select option{
+  
+  font-size:12px;
+  }
+  .cx{
+  height:30px;
+  width:30px;
+  
+  }
   .buttonss{
   text-align:center;
   height:60px;
@@ -111,6 +120,21 @@
             height: 40px;
             line-height:40px;
             border: none;
+             background:#30343f;
+            img{
+              height:20px;
+              width:20px;
+            }
+          }
+          .tableContentItemm{
+          
+            float: left;
+           text-align:center;
+            display:inline-block;
+            height: 40px;
+            line-height:40px;
+            border: none;
+            background:#30343f;
             img{
               height:20px;
               width:20px;
@@ -135,7 +159,8 @@
           color:#fff;
           overflow: hidden;
           background: #272b34;
-          &:hover{
+          background: #30343f;
+                    &:hover{
             background:rgba(183,195,224,.5);
           }
           .tableContentItem {
@@ -145,6 +170,19 @@
             line-height: 40px;
             height: 40px;
             border: none;
+            img{
+              height:20px;
+              width:20px;
+            }
+          }
+          .tableContentItemm{
+            float: left;
+            overflow: hidden;
+            text-align:center;
+            height: 40px;
+            line-height:40px;
+            border:none;
+            background: #272b34;
             img{
               height:20px;
               width:20px;

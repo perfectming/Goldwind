@@ -8,21 +8,31 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
+let areaName=data.areaName;
+let areaRecordCost=data.areaRecordCost;
+let areaPlan=data.areaPlan;
+let montht=data.monthT;
+let profit=data.windProfit;
+let cost=data.windCost;
+let areaPlanDay=data.areaPlanDay;
+let areaPlanDayT=data.areaPlanDayT;
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
 
     render() {
+        let {w0='1月',winss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
         return (
             <div className={`${styles.box} ${styles.shadow}`}>
-           
+             <div className={styles.padding}>
+             <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windceebox}>
                             <div>
                             <p className={styles.titlee}>风场TBA</p>>
-                                <TBAtimechart></TBAtimechart>
+                                <TBAtimechart montht={montht} profit={profit} cost={cost}></TBAtimechart>
                             </div>
                         </div>
                     </div>
@@ -35,8 +45,8 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                             <p className={styles.titlee}>11月每日TBA</p>>
-                                <TBAtimechartt></TBAtimechartt>
+                             <p className={styles.titlee}>{w0+'每日TBA'}</p>>
+                                <TBAtimechartt areaPlan={areaPlan} areaPlanDay={winss==null?areaPlanDay:winss} areaPlanDayT={areaPlanDayT}></TBAtimechartt>
                             </div>
                         </div>
                     </div>
@@ -54,7 +64,11 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+        winss: state.vars.wins1,
+        
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -65,6 +79,9 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        backtop:(befor_pagee,befor_page2)=>{
+            dispatch(actions.setVars('showPage',befor_pagee));
+        },
     };
 };
 

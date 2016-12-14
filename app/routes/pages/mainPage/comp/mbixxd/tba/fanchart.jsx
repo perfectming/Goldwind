@@ -10,17 +10,16 @@ let Component = React.createClass({
     },
     render() {
 
-      let {machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width}=this.props;
+      let {PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
         let configPie = {
             chart: {
                 height:height,
                 width:width,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                paddingLeft:100,
+                paddingLeft:0,
                
             },
             title: {
@@ -53,10 +52,10 @@ let Component = React.createClass({
 
                 }
             },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-               
+             tooltip: {
+               valueSuffix:'kWh'
             },
+            
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -74,7 +73,10 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                           wq=e.point.category;
+                        var  a=wq.toString().split("");
+                        var b=a[0];
+                        changedata10(wq,b);
                         }
                     }
                 }
@@ -103,11 +105,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'(KWH)',
+                        text:'kWh',
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 45,
+                        x: 35,
                         style:{
                             color:'#fff',
                             fontSize:'14px'
@@ -124,7 +126,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: 'TBA%',
+                text: 'PBA%',
                 align:'high',
                 rotation:'0',
                  y: -17,
@@ -142,38 +144,46 @@ let Component = React.createClass({
                 type: 'column',
                 data: fanProfit,
                 borderRadius: 4,
+                color:'#33BAC0',
             },
             {
-                name: '四',
+                name: '故障损失',
                 type: 'column',
                 data: fanCost,
                 stack:'waste',
                 borderRadius: 2,
+                color:'#5298d3',
             },
                 {
-                    name: '大',
+                    name: '维护损失',
                     type: 'column',
                     data: fanCost1,
                     stack:'waste',
+                     color:'#ffffff'
                 },
                 {
-                    name: '类',
+                    name: '限功率损失',
                     type: 'column',
                     data: fanCost2,
                     stack:'waste',
+                     color:'#e9c75c',
                 },
                 {
-                    name: '损失发电量',
+                    name: '非设备原因损失',
                     type: 'column',
                     data: fanCost3,
                     stack:'waste',
+                    color:'#d06960'
                 },
                 {
-                    name: 'TBA',
+                    name: 'PBA',
                     type: 'line',
-                    data: [20,40,50,20,20,60,60,80,70,50,34,99],
+                    data: PBAGroupFirstPba,
                     color:'blue',
-                    yAxis:1
+                    yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
 
                 },]
         };
@@ -185,12 +195,19 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+          wq : state.vars.wr,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+        changedata10 :(wq,b)=>{
+            dispatch(actions.setVars('wr',wq)); 
+            
+           
         },
     };
 };

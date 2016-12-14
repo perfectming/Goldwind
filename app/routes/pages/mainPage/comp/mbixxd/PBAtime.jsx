@@ -8,20 +8,31 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
+let monthT=data.monthT;
+let profit=data.windProfit;
+let cost=data.windCost;
+let fanCost=data.fanCost;
+let fanCostA=data.fanCostA;
+let areaPlan=data.areaPlan;
+let areaPlanDay=data.areaPlanDay;
+let areaPlanDayT=data.areaPlanDayT;
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
 
     render() {
+        let{w0='1月',winsss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
         return (
             <div className={styles.box}>
+             <div className={styles.padding}>
+             <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
                             <p className={styles.titleee}>每月PBA</p>
-                                <PBAtimechart></PBAtimechart>
+                                <PBAtimechart monthT={monthT} profit={profit} cost={cost} fanCost={fanCost}></PBAtimechart>
                             </div>
                            
                         </div>
@@ -36,8 +47,8 @@ let Component = React.createClass({
                         <div className={styles.windcebox}>
                            
                             <div>
-                             <p className={styles.titleee}>11月每日PBA</p>
-                                <PBAtimechartt></PBAtimechartt>
+                             <p className={styles.titleee}>{w0+'每日PBA'}</p>
+                                <PBAtimechartt areaPlan={areaPlan} areaPlanDay={winsss==null?areaPlanDay:winsss} areaPlanDayT={areaPlanDayT} fanCost={fanCostA}></PBAtimechartt>
                             </div>
                         </div>
                     </div>
@@ -56,7 +67,10 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+         w0 : state.vars.w1,
+        winsss: state.vars.wins1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -67,6 +81,9 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        backtop:(befor_pagee,befor_page2)=>{
+            dispatch(actions.setVars('showPage',befor_pagee));
+        },
     };
 };
 

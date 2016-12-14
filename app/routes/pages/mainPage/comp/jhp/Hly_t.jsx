@@ -22,11 +22,19 @@ let Component = React.createClass({
             chart: {
                 height:400,
 
+
                 backgroundColor: "rgba(44, 61, 71, 0.4)",
+
+
+                plotBackgroundColor: "rgba(46, 46, 65, 0)",
+
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
+
+
+
                 borderRadius:10
             },
 
@@ -67,7 +75,6 @@ let Component = React.createClass({
             colors: ['#4CDB9D', '#1E664A', '#000','#134833', '#082B1F']
             ,
             plotOptions: {
-
                 pie: {
                     allowPointSelect: false,
                     cursor: 'pointer',
@@ -122,7 +129,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
             title: {
-                text:'100%',
+                text:'(100%)',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -186,6 +193,8 @@ const mapDispatchToProps = (dispatch) => {
         changedata1 :(w0,win)=>{
             dispatch(actions.setVars('w1',w0 ));
             dispatch(actions.setVars('win1',win ));
+            console.log(win);
+
 
         },
 

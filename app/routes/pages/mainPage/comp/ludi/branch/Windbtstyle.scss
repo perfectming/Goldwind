@@ -43,7 +43,7 @@
                 position: relative;
                 width: 32%;
                 height: 100%;
-                background-color: #282f37;
+                background-color: rgba(44, 61, 71, 0.4);
                 padding-top: 10px;
                 .sectionbar{
                     text-align: center;
@@ -84,7 +84,7 @@
                 width: 33%;
                 height: 100%;
                 margin-right: 1%;
-                background-color: #282f37;
+                background-color: rgba(44, 61, 71, 0.4);
                 padding-top: 10px;
                 .sectionbar{
                     text-align: center;
@@ -152,7 +152,7 @@
                 position: relative;
                 height: 100%;
                 width: 33%;
-                background-color: #282b34;
+                background-color: rgba(44, 61, 71, 0.4);
                 .electricHeader{
                     height: 35px;
                     width: 100%;
@@ -244,7 +244,6 @@
                 top: 0;
                 height: 315px;
                 width: 66%;
-                background-color: #282f37;
             }.yearprofit{
                 .header{
                     height: 35px;
@@ -256,14 +255,13 @@
                 top: 325px;
                 height: 315px;
                 width: 66%;
-                background-color: #282f37;
             }
         }
     }.right{
         position: relative;
         width: 27%;
         height: 850px;
-        background-color: #282f37;
+        background-color: rgba(44, 61, 71, 0.4);
         float: right;
         h3{
             margin: 0;
@@ -278,16 +276,16 @@
             width: 100%;
             tr{
                 display: inline-block;
-                height: 45px;
+                height: 30px;
                 width: 100%;
                 margin-top: 20px;
-                background-color: #2c333b;
+                background-color: rgba(41, 61, 71, 0.2);
                 th{
                     display: inline-block;
                     text-align: center;
                     width: 25%;
-                    height: 45px;
-                    line-height: 45px;
+                    height: 30px;
+                    line-height: 30px;
                 }.click{
                    color: #20FEFF; 
                 }.click:hover{

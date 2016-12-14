@@ -4,32 +4,6 @@ import Corner from '../super/Corner.jsx';
 import styles from './Pvmatrix.scss';
 var actions = require('redux/actions');
 // import dataBase from '../../../../../config/ModelData';
-let obj = require('../../../../../../config/MatrixData');
-let model = require('../../../../../../config/Model');
-let modeldata = require('../../../../../../config/ModelData');
-var model_data = modeldata.ModelData;
-var model_ens = model.Model.ens;
-var arr1 = [];
-var arr2 = [];
-var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-    for(var x in obj_wfd){
-        arr1.push(x)
-        // for(var y in obj_wfd[x]){
-        //     arr2.push(obj_wfd[x][y])
-        // }
-    }
-    for(var m in obj_pvd){
-        arr2.push(m)
-        // for(var n in obj_wfd[m]){
-        //     arr2.push(obj_wfd[m][n])
-        // }
-    }
-    // console.log(arr1);
-    // console.log(arr2);
-// arr1.map((valueZ, keyZ)=> {
-//     // console.log(valueZ)
-// })  
 
 
 
@@ -39,7 +13,24 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage1=652303,Topvinfo}=this.props;
+         let{valuepage1,Topvinfo,zhzb,fModel,fData}=this.props;
+        // let model_ens = zhzb.Model.ens;
+        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let arr1 = [];
+        let arr2 = [];
+        for(var x in obj_wfd){
+            arr1.push(x);
+            // for(var y in obj_wfd[x]){
+            //     arr2.push(obj_wfd[x][y])
+            // }
+        }
+        for(var m in obj_pvd){
+            arr2.push(m);
+            // for(var n in obj_wfd[m]){
+            //     arr2.push(obj_wfd[m][n])
+            // }
+        }
         return (
             <div className={styles.slistbodyBox}>
                 {
@@ -84,7 +75,7 @@ let Component = React.createClass({
                         }
                  
                         return (
-                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
+                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, valuepage1)}>
                             <div className={styles.slistitemR}>
                                 <span className={styles.slistitemT}>
                                         <p className={styles.slistitemTT}>{value.Wtname}</p>
@@ -93,11 +84,11 @@ let Component = React.createClass({
                                 <span className={styles.slistitemB}>
                                     <span className={styles.slistitemBL}>
                                         <p>辐照度:</p>
-                                        <p><span className={styles.slistitemBLL}>{Math.floor((model_data[valuepage1].PVTSI_Aver))}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                        <p><span className={styles.slistitemBLL}>{value.PVTSI_Aver == undefined ? '--' : Math.ceil(value.PVTSI_Aver)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
                                     </span>
                                     <span className={styles.slistitemBR}>
                                         <p>功率:</p>
-                                        <p><span className={styles.slistitemBLL}>{(Number(model_data[valuepage1].TActPower)/100).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(value.ActPwr)).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
                                     </span>
                                 </span>
                             </div>          
@@ -117,6 +108,9 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         valuepage1 : state.vars.valuepage1,
+        zhzb : state.vars.zhzb,
+        fModel : state.vars.fModel,
+        fData : state.vars.fData,
     }
 };
 
@@ -127,9 +121,16 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        Topvinfo: (value)=> {
+        Topvinfo: (value,valuepage1)=> {
+            console.log(value,valuepage1)
             dispatch(actions.setVars('value', value));
-            dispatch(actions.setVars('fan_page', 'pvinfo'));
+            dispatch(actions.setVars('valueid', valuepage1));
+            dispatch(actions.setVars('showPage', 'turning'));
+            dispatch(actions.setVars('pagename', 'fan_matrix')); 
+            dispatch(actions.setVars('numtype', 'pvinfo')); 
+            
+            
+            // dispatch(actions.setVars('fan_page', 'pvinfo'));
         }
     };
 };

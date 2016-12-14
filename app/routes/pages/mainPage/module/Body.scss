@@ -1,6 +1,6 @@
 .bodyBox {
   display:inline-table;
-  width: 1820px;
+  width: 1810px;
   overflow-x: hidden;
   border-top: 1px solid #3BA9AE;
   border-left: 1px solid #3BA9AE;
@@ -28,11 +28,11 @@
 }
 .bodyBox1 {
   display:inline-table;
-  width: 1922px;
+  width: 100%;
   overflow-x: hidden;
   border-top: 1px solid #3BA9AE;
   border-left: 1px solid #3BA9AE;
-  min-height: 1010px;
+  height: 1010px;
   position:relative;
   padding-left: 30px;
   .clearbox{
@@ -67,7 +67,7 @@ width: 1870px;
 }
 .animate1{
 padding-left:30px;
-width: 1820px;
+width: 1810px;
   animation:myfirst1 1s;
 -moz-animation:myfirst1 1s; 
 -webkit-animation:myfirst1 1s; 
@@ -75,25 +75,25 @@ width: 1820px;
 }
 @keyframes myfirst
 {
-0%   {padding-left:30px;width: 1820px;}
+0%   {padding-left:30px;width: 1810px;}
 100% {padding-left:55px;width: 1870px;}
 }
 
 @-moz-keyframes myfirst /* Firefox */
 {
-0%   {padding-left:30px;width: 1820px;}
+0%   {padding-left:30px;width: 1810px;}
 100% {padding-left:55px;width: 1870px;}
 }
 
 @-webkit-keyframes myfirst /* Safari and Chrome */
 {
-0%   {padding-left:30px;width: 1820px;}
+0%   {padding-left:30px;width: 1810px;}
 100% {padding-left:55px;width: 1870px;}
 }
 
 @-o-keyframes myfirst /* Opera */
 {
-0%   {padding-left:30px;width: 1820px;}
+0%   {padding-left:30px;width: 1810px;}
 100% {padding-left:55px;width: 1870px;}
 }
 

@@ -170,6 +170,7 @@ let Component = React.createClass({
                 },
                 {
                     name: '限功率损失',
+
                     color: '#e9c75c',
                     type: 'column',
                     data: wrong32,

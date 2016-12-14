@@ -14,8 +14,7 @@ let Component = React.createClass({
             chart: {
                 height:height,
                 width:width,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -52,7 +51,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                
+                 valueSuffix:'h'
             },
             credits: {
                 enabled: false
@@ -72,7 +71,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                          
                         }
                     }
                 }
@@ -105,11 +104,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'(KWH)',
+                text:'h',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 45,
+                x: 35,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -140,48 +139,53 @@ let Component = React.createClass({
             opposite: true
         }],
             series: [{
-                name: '实际发电量收益',
+                name: '实际运行时间',
                 type: 'column',
                 data: fanProfitQ,
-                color:'#64DC83',
+                color:'#33BAC0',
                 shadow:true,
                 pointWidth: 30,
                 borderWidth: 0, 
-                borderRadius: 7
+                borderRadius: 7,
+
             },
                 {
-                    name: '四',
+                    name: '故障损失',
                     type: 'column',
-                    color:'#FC794E',
+                    color:'#5298d3',
                     data: fanCost,
                     stack:'waste',
                     pointWidth: 30,
-                    borderRadius: 3
+                    borderRadius: 3,
+                    pointPlacement:-0.07
                 },
                 {
-                    name: '大',
+                    name: '维护损失',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
                      pointWidth: 30,
-                    color:'#FD9C31',
+                    color:'#ffffff',
+                    pointPlacement:-0.07,
                 },
                 {
-                    name: '类',
+                    name: '限功率损失',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
-                    color:'#FFD924',
+                    color:'#e9c75c',
                      pointWidth: 30,
+                     pointPlacement:-0.07,
                 },
                 {
-                    name: '损失发电量',
+                    name: '非设备原因损失',
                     type: 'column',
                     data: fanCost,
                     stack:'waste',
                      pointWidth: 30,
-                    color:'#AACE4A',
-                     borderRadius: 3
+                    color:'#d06960',
+                     borderRadius: 3,
+                     pointPlacement:-0.07,
                 },
                 {
                     name: 'TBA',
@@ -189,7 +193,10 @@ let Component = React.createClass({
                     data: fanCost,
                     color:'blue',
                     opposite:true,
-                    yAxis:1
+                    yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
                 
                 },
                 ]

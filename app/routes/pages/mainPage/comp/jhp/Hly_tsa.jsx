@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {names,barLoTime,barLoPowerValue,barRoPowerValue,barRoPowerValues,text,changedata1,w0,win} = this.props;
+        let {barLoTime,barLoPowerValue,barRoPowerValue,barRoPowerValues,text} = this.props;
 
 
         let configPie = {
@@ -76,21 +76,10 @@ let Component = React.createClass({
                 }
             },
             plotOptions: {
-                series: {
-                    cursor: 'pointer',
-                    events: {
-                        click: function(e) {
-                            w0=e.point.category;
-                            changedata1(w0,win);
-
-                        }
-                    }
-                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30,
-
+                    pointWidth: 30
                 }
             },
             xAxis: {
@@ -117,6 +106,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
+
                     text: 'h',
                     align: 'high',
                     rotation: '0',
@@ -155,32 +145,19 @@ let Component = React.createClass({
                 name: '实际运行时间',
                 type: 'column',
                 data: barRoPowerValue,
-                borderRadius: 7,
-                events: {
-                    click: function(e) {
-                        w0=e.point.category;
-                        changedata1(w0,win);
+                borderRadius: 4,
 
-                    }
-                }
             }
                 ,{
                     name: '停机时间',
                     type: 'column',
                     color:'#cccccc',
                     data: barRoPowerValues,
-                    borderRadius: 7,
-                    events: {
-                        click: function(e) {
-                            w0=e.point.category;
-                            changedata1(w0,win);
-
-                        }
-                    }
+                    borderRadius: 4,
                 }
                 ,
                 {
-                    name: names,
+                    name: 'TBA',
                     type: 'line',
                     color:'#0000ff',
                     data: barLoPowerValue,
@@ -199,21 +176,13 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {
-        w0 : state.vars.w1,
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1 :(w0,win)=>{
-            dispatch(actions.setVars('w1',w0 ));
-            dispatch(actions.setVars('win1',win ));
-
-        },
-
     };
 };
 

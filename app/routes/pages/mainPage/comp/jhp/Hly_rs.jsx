@@ -108,7 +108,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'kW',
+                    text:'(100%)',
                     align:'high',
                     rotation:'0',
                     y: -10,

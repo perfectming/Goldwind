@@ -1,6 +1,7 @@
 .box{
     overflow:hidden;
-    padding-bottom:10px;
+    padding:10px;
+    padding-right:40px;
     position:relative;
     .boxcover{
     position:fixed;
@@ -14,14 +15,22 @@
     .more:hover{
      box-shadow:0 0 15px #fff;
     }
+    .scroll{
+    width:100%;
+    position:relative;
+    overflow-x:scroll;
+    
+    }
     .more{
     background:#21242a;
     position:absolute;
     z-index:1600;
-    width:98%;
+    width:95%;
     top:50%;
-    left:49%;
-    overflow:hidden;
+    left:48%;
+    padding-top:60px;
+    
+      
     transform:translate(-50%,-50%);
     box-sizing:border-box;
     display:none;
@@ -29,10 +38,12 @@
     width:100%;
     height:60px;
     background:#21242a;
-    position:relative;
+    position:absolute;
+    top:0;
+    left:0;
     z-index:2000;
-    height:60px;
-    div{
+    .gg{
+ 
     display:inline-block;
     font-size:16px;
     float:right;
@@ -45,6 +56,7 @@
     position:absolute;
     top:18px;
     left:7%;
+   
     font-size:16px;
     color:#fff;
     }
@@ -65,55 +77,51 @@
      }
     .monthbox{
     width: 98%;
-    height: 80px;
+    height: 50px;
     list-style: none;
-    background-color: #21242b;
     padding:0;
-    padding-left:10px;
+    padding-left:0px;
     position:relative;
-    background: linear-gradient(to bottom,#242a32 ,#1f2025);
+    border-bottom: 1px solid #31F3FB;
+    
     li{
-     float:left;
-     font-size:16px;
-     font-family: '微软雅黑';
-     color:white;
-     height:35px;
-     line-height:33px;
-     text-align:center;
-     width:100px;
-     border-radius:17px;
-     margin:25px 10px;
-     font-weight:700;
-     cursor:pointer;
-      &:hover{
-                background:#20FEFF;
-     color:black;
-    box-shadow:0px 0px 10px  #20FEFF;
+      height: 40px;
+            width: 100px;
+            border: 1px solid #31F3FB;
+            line-height: 38px;
+            float: left;
+            font-family: "微软雅黑";
+            text-align: center;
+            margin-right: 10px;
+            border-radius:5px;
+            cursor:pointer;
+              &:hover{
+                color: #31F3FB;
+                box-shadow:0 0 10px #fff;
             }
      }
-     li:last-child{
-     color: #20FEFF;
-       position:absolute;
-       top:-5px;
-       right:412px;
+     
+     li:nth-last-child(2){
+     
+     }
+      .back{
+     float:left;
+       align-items:center;
+       color: #20FEFF;
        border:1px solid #20FEFF;
        width:100px;
        height:40px;
        line-height:40px;
-       margin-bottom:25px;
+       position:relative;
+       top:0px;
        border-radius:45px;
-       background:radial-gradient(#1c444a, #1c3f46);
        box-shadow:0px 0px 10px  #20FEFF;
+       text-align:center;
      }
-     li:nth-last-child(2){
      
-     }
-      li:last-child:hover{
-      background:#156e74;
-      }
       .red{
-    background:#20FEFF;
-    color:black;
+    
+      color: #31F3FB;
   }
   .green{
     color:white;
@@ -165,10 +173,9 @@
             width:98%;
             margin-left:2px;
             height:410px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             padding-top:20px;
-            background-color:#282F37;
-
+            background: rgba(44, 61, 71,0.4),
            }
        .shadow:hover{
         box-shadow:0 0 15px #fff;
@@ -176,21 +183,24 @@
     .windbox{
        float: left;
        width: 48%;
-       height: 390px;
-       margin-left:12px;
+       height: 420px;
+       margin-right:15px;
         padding-top:20px;
-         background-color:#282F37;
+        background: rgba(44, 61, 71, 0.4);
+    
+
 
     }
      .bigbox{
        float:right;
-    height:390px;
-    width:48%;
-    margin-right:50px;
+    height:420px;
+    overflow:hidden;
+    width:49.3%;
+   margin-right:30px;
     border:1px solid #282F37;
     position:relative;
-    background-color: #282F37;
-    margin-right:33px;
+     background: rgba(44, 61, 71,0.4);
+    
     .coverbox{
       margin-top:50px;
 
@@ -199,7 +209,7 @@
       color:#fff;
       position:absolute;
       font-size:16px;
-      top:25px;
+      top:5px;
       left:100px;
       font-weight:700;
     }
@@ -207,8 +217,8 @@
       width:50px;
       height:30px;
       position:absolute;
-      top:20px;
-      left:32px;
+      top:1px;
+      left:35px;
       text-align:center;
       line-height:30px;
       img{
@@ -239,6 +249,8 @@
         left:100px;
         font-weight:700;
         z-index:100;
+    
+      
 
   }
    .titleeee{
@@ -258,10 +270,15 @@
 
   }
   .buttons{
+  
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
     width:271px;
     position:absolute;
     top:0px;
     right:0px;
+    margin-right:20px;
   }
   .buttons{
     height:60px;
@@ -275,15 +292,14 @@
       border-radius:15px;
       font-family:'微软雅黑';
       margin-left:12px;
-      background-color:white;
-      color: #20FEFF;
+      background-color:transparent;
+     color:white;
       border:1px solid #20FEFF;
-      background:radial-gradient(#1c444a, #1c3f46);
+    
     }
     button:hover{
-      background:#20FEFF;
-      color:black;
-      box-shadow:0px 0px 10px  #20FEFF;
+       color: #31F3FB;
+          box-shadow:0px 0px 10px  #20FEFF;
     }
   }    .fanbox{
         float: right;
@@ -307,7 +323,7 @@
       border-radius:15px;
       font-family:'微软雅黑';
       margin-left:12px;
-      background-color:white;
+     
       }
     }
     .morebox{
@@ -315,7 +331,7 @@
      width:60%;
      border:1px solid #282F37;
      position:absolute;
-     background-color: pink;
+   
      top:50%;
      left:50%;
      transform:translate(-50%,-50%);

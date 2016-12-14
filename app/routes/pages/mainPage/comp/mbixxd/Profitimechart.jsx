@@ -21,8 +21,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:500,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -79,7 +78,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                           
                         }
                     }
                 }
@@ -132,7 +131,10 @@ let Component = React.createClass({
                     type: 'line',
                     data: fanCost,
                     color:'blue',
-                    yAxis:1
+                    yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
                 },
             ]
         };

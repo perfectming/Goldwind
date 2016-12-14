@@ -4,22 +4,17 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Profit-data');
-
+let winss=data.areaPlanDayY;
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaPlan=data.areaPlan;
-        let montht=data.monthT;
-        let profit=data.windProfit;
-        let cost=data.windCost;
+       
+        let{w0,winss,areaName,montht,profit,cost,changedata2}=this.props;
         let configPie = {
             chart: {
-                height:390,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:380,
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -43,6 +38,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -57,7 +53,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-            
+             valueSuffix:'h'
             },
             credits: {
                 enabled: false
@@ -76,7 +72,10 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                       w0=e.point.category;
+                        var  a=w0.toString().split("");
+                        var b=a[0];
+                        changedata2(w0,winss,b);
                         }
                     }
                 }
@@ -95,40 +94,60 @@ let Component = React.createClass({
                 },
                 categories:montht,
             },
-            yAxis: {
-                 gridLineDashStyle: 'Solid',
+            yAxis: [
+            {
+                labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            },
+             gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'100%',
-                    align:'high',
-                    rotation:'0',
-                    y: -20,
-                    x: 40,
-                    style:{
-                        fontSize:'14px',
-                        color:'white',
-                    }
+                text:'h',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x: 35,
+                style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                }
+            }
+        }, {
+             labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+            title: {
+                text: 'TBA%',
+                 align:'high',
+                rotation:'0',
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+
             },
-
-
-        labels: {
-                    title:'100%',
-                    y: 10, //x轴刻度往下移动20px
-                    style: {
-                       color:'white',
-                        fontSize:'14px'  //字体
-                    }
-                },
-            },
-
+            opposite: true
+        }],
             series: [{
                 name: '实际运行时间',
                 type: 'column',
                 data: profit,
-                color:'#64DC83',
+                color:'#33BAC0',
                 shadow:true,
-                pointWidth: 25,
+                pointWidth: 30,
                 borderWidth: 0,
                 pointPlacement: 0,
             },
@@ -137,9 +156,9 @@ let Component = React.createClass({
                     type: 'column',
                     data:cost,
                     color:'#ccc',
-                    pointWidth: 25,
+                    pointWidth: 30,
                     shadow:'true',
-                    pointPlacement: -0.1,
+                    pointPlacement: -0.07,
                 },
                 {
                     name: 'TBA',
@@ -148,6 +167,10 @@ let Component = React.createClass({
                     color:'blue',
                     pointWidth: 15,
                     shadow:'true',
+                    yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
                    
                 },
             ]
@@ -160,12 +183,20 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+          w0 : state.vars.w1,
+        winss: state.vars.wins1,
+         windplan1 : state.vars.windplan1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+         changedata2 :(w0,wins,b)=>{
+           dispatch(actions.setVars('w1',w0 ));
+        dispatch(actions.setVars('wins1',winss[b-1]));
         },
     };
 };

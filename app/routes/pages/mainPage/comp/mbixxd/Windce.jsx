@@ -9,13 +9,13 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaNameX,areaRecordCostT,areaRecordProfitO,colorO,colorT,pointWidth,width,height}=this.props
+        let {areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
+         
         let configPie = {
             chart: {
                 height:height,
                 width:width,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -55,7 +55,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+                valueSuffix:'kWh'
             },
             credits: {
                 enabled: false
@@ -73,7 +73,8 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                            w0=e.point.category;
+                            changedata1(w0,win);
                         }
                     }
                 }
@@ -97,13 +98,14 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                  title: {
-                text:'',
+                text:'kWh',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
                     style:{
-                        color:'#fff'
+                        color:'#fff',
+                        fontSize:'14px',
                     }
             },
                   labels: {
@@ -120,7 +122,7 @@ let Component = React.createClass({
                 name: '计划发电量',
                 type: 'column',
                 data: areaRecordProfitO,
-                color:colorO,
+                color:'#33BAC0',
                 borderRadius: 7,
              
             },
@@ -128,8 +130,9 @@ let Component = React.createClass({
             	name: '实际发电量',
                 type: 'column',
                 data: areaRecordCostT,
-                color:colorT,
+                color:'#70c080',
                 borderRadius: 7,
+                pointPlacement:-0.07,
               
             }]
         };
@@ -141,7 +144,11 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        w0 : state.vars.w1,
+        win : state.vars.win1,
+        windplan1 : state.vars.windplan1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -149,6 +156,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
         },
     };
+    
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

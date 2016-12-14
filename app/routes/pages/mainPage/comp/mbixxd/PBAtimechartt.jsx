@@ -9,17 +9,11 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaPlan=data.areaPlan;
-        let areaPlanDay=data.areaPlanDay;
-        let areaPlanDayT=data.areaPlanDayT;
-
+        let {areaPlanDay,areaPlan,areaPlanDayT,fanCost}=this.props;
         let configPie = {
             chart: {
-                height:390,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:395,
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -42,6 +36,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -56,7 +51,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-               
+                valueSuffix:'kWh'
             },
             credits: {
                 enabled: false
@@ -70,12 +65,13 @@ let Component = React.createClass({
                     borderWidth: 1,
                     pointWidth: 50,
                     borderRadius: 4,
+                    stacking:'nomal',
 
                 }, series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                            
                         }
                     }
                 }
@@ -105,18 +101,18 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'100%',
+                text:'kWh',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 45,
+                x: 40,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
                 }
             }
         }, {
-            labels: {
+             labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -126,15 +122,14 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: '',
+                text: 'PBA%',
                  align:'high',
                 rotation:'0',
-                y: -20,
-                x: 40,
+                y: -15,
+                x: -40,
                 style:{
-                    fontSize:'14px',
-
-                    color:'#fff'
+                    color: '#fff',
+                    fontSize:'14px'
                 }
 
             },
@@ -145,21 +140,56 @@ let Component = React.createClass({
                 name: '实际发电量',
                 type: 'column',
                 data: areaPlanDay,
-                color:'#64DC83',
+                color:'#33BAC0',
                 pointWidth: 15,
             },
-            {
-            	name: '理论发电量',
-                type: 'column',
-                data:areaPlanDayT,
-                color:'#ccc',
-                pointWidth: 15,
-            },{
+             {
+                    name: '故障损失',
+                    type: 'column',
+                    color:'#FC794E',
+                    data: fanCost,
+                    stack:'waste',
+                     pointWidth: 15,
+                     borderRadius: 3,
+                     color:'#5298d3',
+                     pointPlacement:-0.07,
+                },
+                {
+                    name: '维护损失',
+                    type: 'column',
+                    data: fanCost,
+                    stack:'waste',
+                     pointWidth: 15,
+                    color:'#ffffff',
+                    pointPlacement:-0.07,
+                },
+                {
+                    name: '限功率损失',
+                    type: 'column',
+                    data: fanCost,
+                    stack:'waste',
+                    color:'#e9c75c',
+                     pointWidth: 15,
+                     pointPlacement:-0.07,
+                },
+                {
+                    name: '非设备原因损失',
+                    type: 'column',
+                    data: fanCost,
+                    stack:'waste',
+                     pointWidth: 15,
+                    color:'#d06960',
+                    pointPlacement:-0.07,
+                },
+           {
                     name: 'PBA',
                     type: 'line',
                     data:areaPlanDayT,
                     color:'blue',
-                    opposite:true,
+                    yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
                    
                 }
 

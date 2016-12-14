@@ -11,23 +11,22 @@ let Component = React.createClass({
 
     render() {
 
-        let {names,w0='一月份',barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
+        let {height,barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
 
 
 
         let configPie = {
             chart: {
-                height:450,
+                height:height,
                 backgroundColor: "rgba(44, 61, 71, 0.4)",
-                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                // plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-
                 borderRadius:10
             },
             title: {
-                text: w0+"每日PBA",
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
@@ -82,8 +81,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth:20,
-                    borderRadius: 4,
+                    pointWidth:20
                 }
             },
             xAxis: {
@@ -148,17 +146,17 @@ let Component = React.createClass({
                 name: '实际运行时间',
                 type: 'column',
                 data: barLpdpowerValue,
-                borderRadius: 4,
+                borderRadius: 2,
             },{
                 name: '停机时间',
                 type: 'column',
                 color:'#cccccc',
                 data: barlinepdat,
-                borderRadius: 4,
+                borderRadius: 2,
             }
                 ,
                 {
-                    name: names,
+                    name: 'TBA',
                     type: 'line',
                     color:'#0000ff',
                     data: barlinepdats,
@@ -175,15 +173,12 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {
-        w0 : state.vars.w1,
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            dispatch(actions.setVars('w1',w0 ));
         },
     };
 };

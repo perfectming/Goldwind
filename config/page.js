@@ -79,14 +79,8 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/yw_active.png'),
                 page:[
                     {
-                        name:'业务报表1',
+                        name:'发电量报表',
                         page:'ywbb',
-                    },{
-                        name:'故障报表',
-                        page:'fault',
-                    },{
-                        name:'业务报表3',
-                        page:'',
                     }]
             },{
                 name:'数据管理',
@@ -96,12 +90,6 @@ module.exports = {
                     {
                         name:'计划电量录入',
                         page:'PEQI',
-                    },{
-                        name:'数据整理2',
-                        page:'',
-                    },{
-                        name:'数据整理3',
-                        page:'',
                     }]
             }],
         },{
@@ -110,6 +98,8 @@ module.exports = {
             iconActive: require('../app/routes/pages/mainPage/img/comp/jkgl_active.png'),
             subPage: [{
                 name:'健康总览',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/jkzl.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/jkzl_active.png'),
                 page:[
                      {
                         name:'总览',
@@ -117,6 +107,8 @@ module.exports = {
                     }]
             },{
                 name:'预警处理',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/yjcl.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/yjcl_active.png'),
                 page:[
                     {
                         name:'预警处理',
@@ -137,43 +129,43 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/zcgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/zcgl_active.png'),
             subPage: [{
-                name:'资产管理-1',
+                name:'',
                 page:[
                     {
-                        name:'资产管理1-1',
-                        page:'input_cost',
-                    },{
-                        name:'资产管理1-2',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理1-3',
+                        name:'',
+                        page:'',
+                    },{
+                        name:'',
                         page:'',
                     }]
             },{
-                name:'资产管理-2',
+                name:'',
                 page:[
                         
                         {
-                        name:'资产管理2-1',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理2-2',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理2-3',
+                        name:'',
                         page:'',
                     }]
             },{
-                name:'资产管理-3',
+                name:'',
                 page:[
                     {
-                        name:'资产管理3-1',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理3-2',
+                        name:'',
                         page:'',
                     },{
-                        name:'资产管理3-3',
+                        name:'',
                         page:'',
                     }]
             }],
@@ -209,7 +201,7 @@ module.exports = {
                         page:'loseElectric',
                     },{
                         name:'可靠性分析',
-                        page:'topTen',
+                        page:'reliability',
                     },{
                         name:'设备损失分析',
                         page:'deviceLose',
@@ -265,14 +257,11 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/sjtb1.png'),
                 page:[
                      {
-                        name:'业务分析3-1',
-                        page:'',
+                        name:'阶段上网电量',
+                        page:'peqii',
                     },{
-                        name:'业务分析3-2',
-                        page:'',
-                    },{
-                        name:'业务分析3-3',
-                        page:'',
+                        name:'成本录入',
+                        page:'input_cost',
                     }]
             }],
         },{
@@ -280,42 +269,24 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/zhfx.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/zhfx_active.png'),
             subPage: [{
-                name:'综合查询-1',
+                name:'',
                 page:[
                      {
-                        name:'综合查询1-1',
-                        page:'',
-                    },{
-                        name:'综合查询1-2',
-                        page:'',
-                    },{
-                        name:'综合查询1-3',
+                        name:'',
                         page:'',
                     }]
             },{
-                name:'综合查询-2',
+                name:'',
                 page:[
                     {
-                        name:'综合查询2-1',
-                        page:'',
-                    },{
-                        name:'综合查询2-2',
-                        page:'',
-                    },{
-                        name:'综合查询2-3',
+                        name:'',
                         page:'',
                     }]
             },{
-                name:'综合查询-3',
+                name:'',
                 page:[
                      {
-                        name:'综合查询3-1',
-                        page:'',
-                    },{
-                        name:'综合查询3-2',
-                        page:'',
-                    },{
-                        name:'综合查询3-3',
+                        name:'',
                         page:'',
                     }]
             }],

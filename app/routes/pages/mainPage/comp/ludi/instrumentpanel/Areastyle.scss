@@ -60,44 +60,28 @@
                 height: 100%;
                 background-color:rgba(44, 61, 71, 0.4);
                 padding-top: 10px;
+                padding-left: 30px;
                 border:1px solid #3e4c67;
                 .sectionbar{
                     text-align: center;
-                    width: 40%;
+                    width: 30%;
                     height: 100%;
-                    padding-top: 30px;
+                    padding-top: 40px;
                     float: left;
-                    .space{
-                        cursor: pointer;
-                        display: inline-block;
-                        height: 25px;
-                        width: 25px;
-                        background: url(../../../img/comp/space.gif); 
-                        &:hover{
-                            background: url(../../../img/comp/spaceA.gif);
-                        }
-                    }
-                    .time{
-                        margin-left: 20px;
-                        cursor: pointer;
-                        display: inline-block;
-                        height: 25px;
-                        width: 25px;
-                        background: url(../../../img/comp/time1.png);
-                        &:hover{
-                            background: url(../../../img/comp/timeA.gif);
-                        }
-                    }
                 }
                 .sectionfour{
-                    width: 60%;
+                    width: 55%;
                     height: 100%;
                     float: left;
                     position: relative;
+                    .pie{
+                        height: 65%;
+                        width: 70%
+                    }
                     .numBox{
                         position:absolute;
                         top:43%;
-                        left:41%;
+                        left:24%;
                         width:110px;
                         text-align: center;
                         height:40px;
@@ -113,24 +97,10 @@
                             font-size: 26px;
                         }
                     }
-                }
-            }
-            .section{
-                position: relative;
-                float: left;
-                width: 33%;
-                height: 100%;
-                background-color: rgba(44, 61, 71, 0.4);
-                margin-right: 1%;
-                padding-top: 10px;
-                border:1px solid #3e4c67;
-                .sectionbar{
-                    text-align: center;
-                    width: 40%;
-                    height: 100%;
-                    padding-top: 30px;
-                    float: left;
                     .space{
+                        position: absolute;
+                        left: 85%;
+                        top: 25%;
                         cursor: pointer;
                         display: inline-block;
                         height: 25px;
@@ -141,7 +111,9 @@
                         }
                     }
                     .time{
-                        margin-left: 20px;
+                        position: absolute;
+                        left: 85%;
+                        top: 50%;
                         cursor: pointer;
                         display: inline-block;
                         height: 25px;
@@ -151,15 +123,63 @@
                             background: url(../../../img/comp/timeA.gif);
                         }
                     }
+                }
+            }
+            .section{
+                position: relative;
+                float: left;
+                width: 33%;
+                height: 100%;
+                background-color: rgba(44, 61, 71, 0.4);
+                margin-right: 1%;
+                padding-top: 10px;
+                padding-left: 30px;
+                border:1px solid #3e4c67;
+                .sectionbar{
+                    text-align: center;
+                    width: 30%;
+                    height: 100%;
+                    padding-top: 40px;
+                    float: left;
                 }.sectiontwo{
-                    width: 60%;
+                    width: 53%;
                     height: 100%;
                     float: left;
                     position: relative;
+                    .pie{
+                        height: 65%;
+                        width: 70%
+                    }
+                    .space{
+                        position: absolute;
+                        left: 85%;
+                        top: 25%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../img/comp/space.gif); 
+                        &:hover{
+                            background: url(../../../img/comp/spaceA.gif);
+                        }
+                    }
+                    .time{
+                        position: absolute;
+                        left: 85%;
+                        top: 50%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../img/comp/time1.png);
+                        &:hover{
+                            background: url(../../../img/comp/timeA.gif);
+                        }
+                    }
                     .numBox{
                         position:absolute;
                         top:43%;
-                        left:41%;
+                        left:24%;
                         width:110px;
                         text-align: center;
                         height:40px;
@@ -176,14 +196,48 @@
                         }
                     }
                 }.sectionthree{
-                    width: 60%;
+                    width: 53%;
                     height: 100%;
                     float: left;
                     position: relative;
+                    .pie{
+                        height: 65%;
+                        width: 70%
+                    }
+                    .pie{
+                        height: 65%;
+                        width: 70%
+                    }
+                    .space{
+                        position: absolute;
+                        left: 85%;
+                        top: 25%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../img/comp/space.gif); 
+                        &:hover{
+                            background: url(../../../img/comp/spaceA.gif);
+                        }
+                    }
+                    .time{
+                        position: absolute;
+                        left: 85%;
+                        top: 50%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../img/comp/time1.png);
+                        &:hover{
+                            background: url(../../../img/comp/timeA.gif);
+                        }
+                    }
                     .numBox{
                         position:absolute;
                         top:43%;
-                        left:41%;
+                        left:24%;
                         width:110px;
                         text-align: center;
                         height:40px;
@@ -247,18 +301,42 @@
                     }.electricPercent{
                         width: 90%;
                         height: 25px;
-                        background-color: #33BAC0;
+                        background-color: #39565e;
                         border-radius: 12px;
                         overflow: hidden;
-                        div{
+                        .green{
                             color: black;
                             padding-left: 10px;
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
                             background-color: #00ff33;
-                            }
                         }
+                        .yellow{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #fbd500;
+                        }
+                        .red{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #ff0000;
+                        }
+                        .redS{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #d06960;
+                        }
+                    }
                 }.electricSecond{
                     z-index: 3;
                     height: 202px;
@@ -283,13 +361,38 @@
                         background-color: #39565e;
                         border-radius: 12px;
                         overflow: hidden;
-                        div{
+                        .green{
                             color: black;
                             padding-left: 10px;
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
-                            background-color: #f33;
+                            background-color: #00ff33;
+                        }
+                        .yellow{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #fbd500;
+                        }
+                        .red{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #ff0000
+;
+                        }
+                        .redS{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #d06960;
                         }
                     }
                     
@@ -316,13 +419,38 @@
                         background-color: #39565e;
                         border-radius: 12px;
                         overflow: hidden;
-                        div{
+                        .green{
                             color: black;
                             padding-left: 10px;
                             line-height: 25px;
                             height: 25px;
                             border-radius: 12px;
-                            background-color: #f33;
+                            background-color: #00ff33;
+                        }
+                        .yellow{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #fbd500;
+                        }
+                        .red{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #ff0000
+;
+                        }
+                        .redS{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #d06960;
                         }
                     }
                 }
@@ -437,7 +565,7 @@
         }
     }.right{
         position: relative;
-        width: 27.5%;
+        width: 27%;
         height: 850px;
         background-color: rgba(44, 61, 71, 0.4);
         float: right;
@@ -463,9 +591,10 @@
         table{
             font-size: 16px;
             width: 100%;
+            user-select:none;
+            overflow: hidden;
             tr{
                 display: inline-block;
-                height: 30px;
                 width: 100%;
                 margin-top: 20px;
                 background-color: rgba(41, 61, 71, 0.2);
@@ -476,34 +605,110 @@
                     display: inline-block;
                     text-align: center;
                     width: 25%;
-                    height: 30px;
                     line-height: 30px;
                     &:first-child{
                         width: 20%;
                     }
-                }.click1{
-                   color: #20FEFF; 
-                   .bottom{
-                      color: #20FEFF; 
-                   }
-                   .top{
-                      color: #E6E7E8; 
-                   }
-                }.click1:hover{
-                    cursor: pointer;
-                    background-color: #39454e;
-                }.click{
-                   color: #20FEFF; 
-                   .bottom{
-                      color: #20FEFF; 
-                   }
-                   .top{
-                      color: #E6E7E8; 
-                   }
-                }.click:hover{
-                    cursor: pointer;
-                    background-color: #39454e;
                 }
+                .clickPba1{
+                    color: #20FEFF;
+                    .arrow{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortT.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickPba1:hover{
+                    cursor: pointer;
+                    border: 2px solid #20FEFF;
+                }
+                .clickPba4{
+                    .arrow{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickPba4:hover{
+                    cursor: pointer;
+                    border: 2px solid #20FEFF;
+                }
+                .clickTime1{
+                    .arrow{
+                    display: inline-block;
+                    position: relative;
+                    top: 3px;
+                    height: 20px;
+                    width: 20px;
+                    background: url(../../../img/comp/sortAB.gif) no-repeat;
+                    background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickTime1:hover{
+                    cursor: pointer;
+                    border: 2px solid #20FEFF;
+                }
+                .clickTime4{
+                    color: #20FEFF;
+                    .arrow{
+                    display: inline-block;
+                    position: relative;
+                    top: 3px;
+                    height: 20px;
+                    width: 20px;
+                    background: url(../../../img/comp/sortT.gif) no-repeat;
+                    background-size: 20px 20px;  
+                    }
+                    .bottom{
+                        display: inline-block;
+                        position: relative;
+                        top: 3px;
+                        height: 20px;
+                        width: 20px;
+                        background: url(../../../img/comp/sortB.gif) no-repeat;
+                        background-size: 20px 20px;  
+                    }
+                }
+                .clickTime4:hover{
+                    cursor: pointer;
+                    border: 2px solid #20FEFF;
+                }
+                
             } 
         }
         

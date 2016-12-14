@@ -3,44 +3,16 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('../../../../../../config/chart-data');
-let dataBase=require('../../../../../../config/ModelData');
-let dataName=require('../../../../../../config/Model');
-let date=dataBase.ModelData;
-let datename=dataName.Model.ens;
-let arr=[];
-let arrname=[];
-let allnum=0;
-let num=[];
-(function(){
-    for(let i in date){
 
-    arr.push(date[i].DayEgyAt/1);
-    }
-    arr.pop(); 
-    for(let x=0;x<arr.length;x++){
-        allnum+=arr[x]
-    }  
-   
-}());
-(function(){
-    for(let i in datename){
-         arrname.push(datename[i].name);
-     }    
-    
-    play();
-}())
- function play(){
-    for(let i=0;i<arr.length;i++){
-        num.push([arrname[i],arr[i]])
-    }
- }
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
 
     render() {
+
+            let {arn,nu}=this.props;
+            
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -54,13 +26,14 @@ let Component = React.createClass({
                 text: ''
             },
            
-                categories:arrname,
+                categories:arn,
             
             tooltip: {
                 enabled: true,
+                 //pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
                  style:{
                     color: '#000',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     fontFamily:"微软雅黑"
                 }
             },
@@ -75,7 +48,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     borderWidth: 0,
                     size: '50%',
-                    innerSize: '40%',
+                    innerSize: '60%',
                     dataLabels: {
                         enabled: true,
                         format: '{point.name}',
@@ -92,8 +65,11 @@ let Component = React.createClass({
             },
             series: [{
                 type: 'pie',
-                name: "发电量占比",
-                data: num,
+                name: "日发电量",
+                data: nu,
+                tooltip: {
+                valueSuffix: 'kWh'
+            },
                 style: {     fontSize:"20px",  } 
             }]
         };
@@ -105,14 +81,20 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            dispatch(actions.setVars('allnumber', allnum));
+
         },
+        getall:(allnum)=>{
+            dispatch(actions.setVars('allnum',allnum ));
+        }
+ 
     };
 };
 

@@ -16,7 +16,7 @@ let Component = React.createClass({
                       
                         return (
                             <div key={key}>
-                                <span className={itemActive === key ? styles.tabItemAct : styles.tabItem}
+                                <span className={itemActive == key ? styles.tabItemAct : styles.tabItem}
                                      onClick={()=>changeTabItem(key,value.page)}>
                                      {value.name}
                                 </span>

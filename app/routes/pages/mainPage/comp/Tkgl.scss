@@ -1,5 +1,13 @@
 .tkglBox{
   position: relative;
+  .mw{
+    position: absolute;
+    color: #aaa;
+    left: 5px;
+    width:8%;
+    top:40px;
+    font-size: 12px;
+  }
   .agc{
     cursor: pointer;
     color: #fff;
@@ -119,6 +127,14 @@
           float: left;
         }
       }
+    }
+    .close{
+      border-radius: 8px;
+      margin-top: 5px;
+      line-height: 14px;
+      width: 100px;
+      height: 30px;
+      background: #000;
     }
   }
 }

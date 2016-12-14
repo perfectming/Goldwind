@@ -177,7 +177,6 @@ let Component = React.createClass({
                 },
                 {
                     name: '非设备原因损失',
-                    color: '#d06960',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'

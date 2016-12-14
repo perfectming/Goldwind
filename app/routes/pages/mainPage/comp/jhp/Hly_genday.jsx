@@ -136,7 +136,6 @@ let Component = React.createClass({
                     color:'#70c080',
 
 
-
                 },
 
             ]

@@ -149,6 +149,7 @@ let Component = React.createClass({
 
             series: [{
                 name: '实际发电量',
+                color:"#33BAC0",
                 type: 'column',
                 color: "#33BAC0",
                 data: power1,
@@ -162,6 +163,7 @@ let Component = React.createClass({
 
             },
                 {
+
                     name: '维护损失',
                     color: '#ffffff',
                     type: 'column',

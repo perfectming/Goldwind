@@ -17,7 +17,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:0
+                borderRadius:10
             },
             title: {
                 text: title,
@@ -49,7 +49,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 30,
+                    pointWidth: 25,
                     borderRadius:8
                 }
             },
@@ -72,8 +72,8 @@ let Component = React.createClass({
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
-	                y: -15,
-	                x:-10,
+	                y: -10,
+	                x:-15,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',

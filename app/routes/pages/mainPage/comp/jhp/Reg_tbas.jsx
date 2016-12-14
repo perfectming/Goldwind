@@ -112,6 +112,19 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
+                    text:'(kWh)',
+                    align:'high',
+                    rotation:'0',
+                    y: -10,
+                    x: 40,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    },
+                },
+
+
+                title: {
                     text: 'kWh',
                     align: 'high',
                     rotation: '0',
@@ -178,7 +191,6 @@ let Component = React.createClass({
                 },
                 {
                     name: '非设备原因损失',
-                    color: '#d06960',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'

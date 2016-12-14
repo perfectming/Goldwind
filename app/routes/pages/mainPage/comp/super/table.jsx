@@ -7,63 +7,65 @@ import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
 import _ from 'lodash';
 import $ from 'jquery';
-
 let tabaleData = require('../../../../../../config/super_table');
-let dataBase=require('../../../../../../config/ModelData');
-let matrixdata = require('../../../../../../config/MatrixData');
-let place=require('../../../../../../config/Model');
 let header=require('./tabledate');
 let headername=header.header;
-let date=dataBase.ModelData;
-let placename=place.Model.ens;
-let arrname=[];
-let point=[];
 let fcnum=[];
-let number=[];
-let obj = matrixdata;
-let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-(function(){
-    let o=0;
-    for(let name in placename){ 
-      if(placename[name].wft=='Wf')  {  
-               point.push(placename[name].name)
-             }
-           
-            }
-  for(let key in date){
-    let arr=[];
-    let num=[];
-  if(date[key].WTCount!='0' && date[key].InverterCount=='0'){
-     fcnum.push(key);
-    for(let i=0;i<headername.length;i++){
-         if(i==0){
-             arr.push(point[o]);
-            o++;
-        }
-        if(i==4){
-            arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1));
-             }
-             arr.push(date[key][headername[i]]);
-            }
-             for(let number in obj_wfd){
-            num.push(number);
-        }
-            arrname.push(arr);
-            number.push(num);
-         }
-       }
-     
-}());
-
-
 
 let Component = React.createClass({
     componentDidMount() {
         this.props.init(tabaleData);
     },
     render() {
-        let {table, changeTableItem,changepage} = this.props;
+        let {table, changeTableItem,changepage,zhzb,bbs} = this.props;
+        let date=bbs.ModelData;
+        let placename=zhzb.Model.ens;
+        let arrname=[];
+        let point=[];
+
+(function(){
+        let o=0;
+    for(let name in placename){ 
+      if(placename[name].wft=='Wf')  {  
+            point.push(placename[name].name)
+        }
+           
+    }
+  for(let key in date){
+    
+    let arr=[];
+  if(date[key].WTCount!='0' && date[key].InverterCount=='0'){
+    fcnum.push(key)
+    for(let i=0;i<headername.length;i++){
+         if(i==0){
+             arr.push(point[o]);
+            o++;
+        }
+
+
+        if(i==4){
+            arr.push(((date[key].TActPower/date[key].Capacity)*100).toFixed(1));
+             }
+             arr.push(date[key][headername[i]]);
+            }
+            
+            arrname.push(arr);
+         }
+       }
+
+}());
+
+
+
+
+
+
+
+
+
+
+
+
         return (
             <div>
                 
@@ -81,13 +83,28 @@ let Component = React.createClass({
                     <div className={styles.tableContentBox}>
                         {
                             arrname.map((value, key)=> {
-                                
+                            
                                 return (
 
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key} onClick={()=>changepage(key)}>
                                         {
                                             value.map((valueC, keyC)=> {
-
+                                                 if(keyC==3){
+                                                    if(valueC=='null'){
+                                                        return(
+                                                                <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%"}}
+                                                           key={keyC}>--</div>
+                                                            )
+                                                    }
+                                                 }
+                                                 if(keyC==4){
+                                                    if(valueC==''){
+                                                        return(
+                                                                <div className={styles.tableContentItem}style={{width:(tabaleData.data.width[keyC])+"%"}}
+                                                           key={keyC}>--</div>
+                                                            )
+                                                    }
+                                                 }
                                                  if(keyC==5){
                                                         if(valueC<60){
                                                              return (
@@ -154,6 +171,8 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
+        zhzb: state.vars.zhzb,
+        bbs: state.vars.bbs,
     }
 };
 
@@ -173,9 +192,10 @@ const mapDispatchToProps = (dispatch) => {
            dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('actbt',key ));
           dispatch(actions.setVars('actbt1','' ));
-          dispatch(actions.setVars('valuepage', fcnum[key]));
+           dispatch(actions.setVars('valuepage', fcnum[key]));
           dispatch(actions.setVars('befor_page','super' ));
-          dispatch(actions.setVars('fc_info', number[0][key]));
+           dispatch(actions.setVars('fc_info', fcnum[key]));
+          dispatch(actions.setVars('Changnav', 0));
 
         }
     };

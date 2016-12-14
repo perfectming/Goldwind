@@ -10,21 +10,18 @@ let Component = React.createClass({
     },
 
     render() {
-        let windFiled=data.windFiled;
-        let windCost=data.windCost;
-        let windProfit=data.windProfit;
+        let{windFiled,windCost,windProfit,w0='1月份',TBA}=this.props;
         let configPie = {
             chart: {
-                height:405,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:430,
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
             },
             title: {
-                text: '11月份每日TBA',
+                text:w0+'每日TBA',
                 align:'left',
                  x : "0",
                 style:{
@@ -38,7 +35,8 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
-                x:-40,
+                x:-75,
+                y:10,
                 
                 itemHoverStyle:{
                     color:'#31f3fb',
@@ -51,7 +49,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                
+                  valueSuffix:'h'
             },
             credits: {
                 enabled: false
@@ -67,7 +65,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                           
                         }
                     }
                 }
@@ -85,8 +83,8 @@ let Component = React.createClass({
                 },
                 categories:windFiled,
             },
-            yAxis:  [{
-                labels: {
+            yAxis:
+                [{labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -96,11 +94,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'100%',
+                        text:'h',
                         align:'high',
                         rotation:'0',
-                        y: -13,
-                        x: 47,
+                        y: -15,
+                        x: 40,
                         style:{
                             fontSize:'14px',
                             color:'#fff'
@@ -108,7 +106,7 @@ let Component = React.createClass({
                     }
                 }, {
                     labels: {
-                format: '',
+               
                 style: {
                     color: '#fff',
                     fontSize:'14px'
@@ -117,16 +115,20 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-
-                text: '',
+                text: 'TBA%',
                 align:'high',
                 rotation:'0',
-                
+               y:-15,
+               x:-40,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
             },
-            opposite: true,
+            opposite: true
         }],
             series: [{
-                name: '实际发电量',
+                name: '实际运行时间',
                 type: 'column',
                 data: windProfit
             },
@@ -138,9 +140,13 @@ let Component = React.createClass({
                 },{
                     name:'TBA',
                     type:'line',
-                    data:[80,30,3,36,70,70,70,70,80,80,80,80],
+                    data:TBA,
+                    yAxis:1,
                     
-                    color:'blue'
+                    color:'blue',
+                     tooltip: {
+               valueSuffix:''
+            },
                 }
 
 
@@ -156,7 +162,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+         w0 : state.vars.qwe,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

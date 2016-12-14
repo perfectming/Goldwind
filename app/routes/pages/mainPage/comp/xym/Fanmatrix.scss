@@ -75,14 +75,32 @@
     .online{
       border-left: 2px solid #1fe005; //运行
     }
+    .limitPow{
+       border-left: 2px solid rgb(221, 220, 220);
+    }
     .offline{
-      border: 2px solid #666; // 待机
+      border: 2px solid rgb(50, 141, 239); // 待机#f1a820
     }
     .discomfor{
       // border: 2px solid #f1a820; //离线
     }
-    
+    .repair{
+      border: 2px solid rgb(251, 213, 0);
+    }
     .default{
-      border: 2px solid #c7b88c; //检修
+      // border: 2px solid #c7b88c; //检修
     } 
+    // .online{
+    //   border-left: 2px solid #1fe005; //运行
+    // }
+    // .offline{
+    //   border: 2px solid #f1a820; // 待机
+    // }
+    // .discomfor{
+    //   // border: 2px solid #f1a820; //离线
+    // }
+    
+    // .default{
+    //   border: 2px solid #c7b88c; //检修
+    // } 
 }

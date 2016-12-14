@@ -3,24 +3,24 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let data = require('./Profit-data');
+var $=require('jquery');
 
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaNamee,areaRecordCostss,areaRecordProfitt,text}=this.props;
+        let {w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
         let configPie = {
             chart: {
-                height:405,
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                height:430,
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
             },
             title: {
-                text: '风场TBA',
+                text: '集团每月TBA',
                 align:'left',
                  x : "0",
                 style:{
@@ -31,6 +31,8 @@ let Component = React.createClass({
                 }
             },
             legend: {
+                x:-75,
+                y:10,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -47,7 +49,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-            
+              valueSuffix:'h'
             },
             credits: {
                 enabled: false
@@ -57,14 +59,54 @@ let Component = React.createClass({
                 column: {
                     pointPadding:0,
                     borderWidth: 0,
-                    pointWidth:30,
+                    pointWidth:25,
                     borderRadius: 7,
                     stacking: 'normal',
                 }, series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            alert('X轴的值：'+e.point.category);
+                          var   tbaTime=e.point.category;
+                            var TBAindex=e.point.index;
+                           
+                        var  a=tbaTime.toString().split("");
+                        var b=a[0];
+                        var tbaDays=[];
+                         var tbaDayRunTimes=[];
+                        var tbaDayDownTimes=[];
+                         var tbaDayTba=[];
+                        $.ajax({
+                     type:'post',
+                     url:'http://10.68.100.32:8080/wbi/TBA/getDaysTBAByMonth',
+                     async:false,
+                     dataType:'json',
+                     data:{
+                      'month':TBAindex+2,
+                     },
+                     timeout:'3000',
+                     success:function(data){
+                     
+                        var  TBAdaydata=data.data; 
+                          for(var i in TBAdaydata){
+                            var tbaDay=TBAdaydata[i].day;
+                            tbaDays.push(tbaDay);
+                            var tbaDayruntimes=TBAdaydata[i].runtimes;
+                            tbaDayRunTimes.push(tbaDayruntimes);
+                            var daydowntimes=TBAdaydata[i].downtimes;
+                            tbaDayDownTimes.push(daydowntimes);
+                            var tba=TBAdaydata[i].tba;
+                            tbaDayTba.push(tba);
+
+
+                           } 
+                         
+            },
+            error:function(e){
+               
+            
+            },
+          });
+                        changedataDay(tbaTime,b,tbaDays,tbaDayRunTimes,tbaDayDownTimes,tbaDayTba);
                         }
                     }
                 }
@@ -82,8 +124,8 @@ let Component = React.createClass({
                 },
                 categories:areaNamee,
             },
-            yAxis:  [{
-                labels: {
+            yAxis:
+                [{labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -93,19 +135,19 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'100%',
+                        text:'h',
                         align:'high',
                         rotation:'0',
-                        y: -10,
-                        x: 47,
+                        y: -15,
+                        x: 40,
                         style:{
-                            color:'#fff',
-                            fontSize:'14px'
+                            fontSize:'14px',
+                            color:'#fff'
                         }
                     }
                 }, {
                     labels: {
-                format: '',
+               
                 style: {
                     color: '#fff',
                     fontSize:'14px'
@@ -114,35 +156,44 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: '',
+                text: 'TBA%',
                 align:'high',
                 rotation:'0',
-                 y: -17,
-                x: 150,
+               y:-15,
+               x:-40,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
             },
             opposite: true
         }],
             series: [{
-                name: '停机时间',
+                name: '实际运行时间',
                 type: 'column',
                 data: areaRecordProfitt,
                
             },
             {
-            	name: '实际运行时间',
+            	name: '停机时间',
                 type: 'column',
                 data: areaRecordCostss,
                 stack:'first',
                 color:'#ccc',
+                pointPlacement:-0.1,
                 
             },
 
                 {
                     name: 'TBA',
                     type: 'line',
-                    data: areaRecordCostss,
+                    data: TBA,
                     stack:'first',
                     color:'blue',
+                    yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
                 },
 
             ]
@@ -155,12 +206,23 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+         tbaTime : state.vars.tbaTime1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+        changedataDay:(tbaTime,b,tbaDays,tbaDayRunTimes,tbaDayDownTimes,tbaDayTba)=>{
+            dispatch(actions.setVars('tbaTime1',tbaTime ));
+            dispatch(actions.setVars('tbaDays31',tbaDays ));
+            dispatch(actions.setVars('tbaDayRunTimes31',tbaDayRunTimes ));
+            dispatch(actions.setVars('tbaDayDownTimes31',tbaDayDownTimes ));
+            dispatch(actions.setVars('tbaDayTba31',tbaDayTba ));
+
+          
         },
     };
 };

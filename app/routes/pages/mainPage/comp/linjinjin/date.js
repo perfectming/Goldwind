@@ -18,27 +18,27 @@ module.exports = {
         "当月上网电量",
         "当年上网电量",
         "当年上网电量完成率",
-        "顺时风速",
-        "顺时功率",
+        "瞬时风速",
+        "瞬时功率",
         "当年累计等效利用小时",
         "当月时间可利用率",
         
     ],
       wt_unit:[
          "台",
-        "mw",
+        "MW",
         "万kWh",
         "万kWh",
         "万kWh",
         "%",
         "m/s",
-        "kw",
+        "MW",
         "h",
         "%",
         
     ],
     wt_status:[
-         "ONL",
+         "RunCount_SOAM",
         "FaultCount",
         "RepairCount",
         "OfflineCount",
@@ -184,6 +184,24 @@ module.exports = {
     }
 
 ],
+ pie1:[
+        {
+
+        color:'#0f0',
+        title:'正常',
+    },
+    {
+
+
+        color:'#f00',
+        title:'故障',
+    },{
+  
+        color:'#929396',
+        title:'离线',
+    }
+
+],
 
     
     cft:[
@@ -256,15 +274,27 @@ module.exports = {
    jscnum:{
 
      month:{
-         high:270,
+        tooltip: {
+                shared: true,
+                style:{
+                    color: '#333',
+                    fontSize: '12px',
+                    fontFamily:'微软雅黑'
+                },
+                 //pointFormat: '{series.name}: <b>{point.y}</b>',
+                // pointFormat: "<b>{point.percentage:.0f}%</b>"
+            },
+         high:300,
          pointWidth: 15,
          categories:['1月份','2月份','3月份','4月份','5月份','6月份','7月份','8月份','9月份','10月份','11月份','12月份'],
           yAxis: [{
                labels: {
                 offset: 0,
+                format: '{value:.,0f}',
                 x:-5,
                 style: {
                     color: '#fff'
+
                 }
             },
             max: 45000,
@@ -272,7 +302,7 @@ module.exports = {
             title: {
                 align: 'high',
                 offset: 0,
-                text: '(MW)',
+                text: '(万kWh)',
                 rotation: 0,
                 y: -10,
                 style: {
@@ -285,7 +315,7 @@ module.exports = {
             title: {
                 align: 'high',
                 offset: 0,
-                text: '(m/s)',
+                text: '(%)',
                 rotation: 0,
                 y: -10,
                 style: {
@@ -313,6 +343,9 @@ module.exports = {
             type: 'column',
          
             data:  [35000,50000,43000,45000,42000,35000,46000,48000,48000,46000,50000,47000],
+              tooltip: {
+                valueSuffix: '万kWh'
+            }
             
         }, { //第一个Y轴的数据
             name: '月计划发电量',
@@ -320,6 +353,9 @@ module.exports = {
             type: 'column',
              
             data: [30000,36000,38000,35000,32000,29000,26000,38000,38000,36000,40000,37000],
+             tooltip: {
+                valueSuffix: '万kWh'
+            }
             
         },
         { //第一个Y轴的数据
@@ -328,17 +364,31 @@ module.exports = {
             type: 'line',
             yAxis: 1,//坐标轴序号
             data:[26,29,27,28,26,24,28,26,26,25,24,29],
+             tooltip: {
+                valueSuffix: '%'
+            }
             
         }]  
      },
 
      money:{
-         high:270,
+        tooltip: {
+                shared: true,
+                style:{
+                    color: '#333',
+                    fontSize: '12px',
+                    fontFamily:'微软雅黑'
+                },
+                 //pointFormat: '{series.name}: <b>{point.y}</b>',
+                // pointFormat: "<b>{point.percentage:.0f}%</b>"
+            },
+         high:300,
          pointWidth: 15,
          categories:['1月份','2月份','3月份','4月份','5月份','6月份','7月份','8月份','9月份','10月份','11月份','12月份'],
           yAxis: [{
                labels: {
                 offset: 0,
+                format: '{value:.,0f}',
                 x:-5,
                 style: {
                     color: '#fff'
@@ -349,7 +399,7 @@ module.exports = {
             title: {
                 align: 'high',
                 offset: 0,
-                text: '(MW)',
+                text: '(万元)',
                 rotation: 0,
                 y: -10,
                 style: {
@@ -390,6 +440,9 @@ module.exports = {
             type: 'column',
          
             data:  [35000,50000,43000,45000,42000,35000,46000,48000,48000,46000,50000,47000],
+             tooltip: {
+                valueSuffix: '万元'
+            }
             
         }, { //第一个Y轴的数据
             name: '收入',
@@ -397,6 +450,9 @@ module.exports = {
             type: 'column',
              
             data: [30000,36000,38000,35000,32000,29000,26000,38000,38000,36000,40000,37000],
+            tooltip: {
+                valueSuffix: '万元',
+            }
             
         },
         { //第一个Y轴的数据
@@ -405,16 +461,30 @@ module.exports = {
             type: 'line',
             yAxis: 1,//坐标轴序号
             data:[26,29,27,28,26,24,28,26,26,25,24,29],
+            tooltip: {
+                valueSuffix: '%'
+            }
             
         }]  
      },
 
      hour:{
-         high:235,
+        tooltip: {
+                shared: true,
+                style:{
+                    color: '#333',
+                    fontSize: '12px',
+                    fontFamily:'微软雅黑'
+                },
+                // pointFormat: '{series.name}: <b>{point.y}</b>',
+                // pointFormat: "<b>{point.percentage:.0f}%</b>"
+            },
+         high:265,
          pointWidth: 30,
          categories:['华冉','大连胡','阜新穆雷','穆雷照壁山','奇台比六合','小草湖'],
           yAxis: [{
                labels: {
+                format: '{value:.,0f}',
                 offset: 0,
                 x:-5,
                 style: {
@@ -425,7 +495,7 @@ module.exports = {
             title: {
                 align: 'high',
                 offset: 0,
-                text: '(MW)',
+                text: '(h)',
                 rotation: 0,
                 y: -10,
                 style: {
@@ -440,19 +510,32 @@ module.exports = {
             name: '场站等效利用小时数',
             color: '#70C080',
             type: 'column',
-         
+            tooltip: {
+                valueSuffix: 'h'
+            },
             data:  [20437,21805,24247,25271,27383,29653],
             
         }],
      },
 
       mtbf:{
-         high:235,
+        tooltip: {
+                shared: true,
+                style:{
+                    color: '#333',
+                    fontSize: '12px',
+                    fontFamily:'微软雅黑'
+                },
+                // pointFormat: '{series.name}: <b>{point.y}</b>',
+                // pointFormat: "<b>{point.percentage:.0f}%</b>"
+            },
+         high:265,
          pointWidth: 30,
          categories:['华冉','大连胡','阜新穆雷','穆雷照壁山','奇台比六合','小草湖'],
           yAxis: [{
                labels: {
                 offset: 0,
+                format: '{value:.,0f}',
                 x:-5,
                 style: {
                     color: '#fff'
@@ -462,7 +545,7 @@ module.exports = {
             title: {
                 align: 'high',
                 offset: 0,
-                text: '(MW)',
+                text: '(h)',
                 rotation: 0,
                 y: -10,
                 style: {
@@ -477,7 +560,9 @@ module.exports = {
             name: '场站MTBF',
             color: '#70C080',
             type: 'column',
-         
+            tooltip: {
+                valueSuffix: 'h'
+            },
             data:  [20437,21805,24247,25271,27383,29653],
             
         }],
@@ -493,6 +578,16 @@ module.exports = {
                 style: {
                     color: '#fff'
                 }
+            },
+             tooltip: {
+                shared: true,
+                style:{
+                    color: '#333',
+                    fontSize: '12px',
+                    fontFamily:'微软雅黑'
+                },
+                pointFormat: '{series.name}: <b>{point.percentage:.0f}%</b>',
+                // pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             gridLineWidth: 0,
             title: {
@@ -513,8 +608,10 @@ module.exports = {
             name: '故障类型占比',
             
             type: 'pie',
-         
-            data: [['故障',1],['检修',2],['限电',1],['其他',6]]
+            tooltip: {
+                valueSuffix: '%'
+            },
+            data: [['故障',10],['维护',20],['限功率',10],['非设备原因',60]]
             
         }],
      },
