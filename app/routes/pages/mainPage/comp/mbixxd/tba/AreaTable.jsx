@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let data = require('./Profit-data');
+let input_url="10.68.100.32";
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -80,7 +81,7 @@ let Component = React.createClass({
 
                         $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/PBA/getCompanyDayTimePBA',
+                     url:'http://'+input_url+':8080/wbi/PBA/getCompanyDayTimePBA',
                      async:false,
                      dataType:'json',
                      data:{
@@ -88,8 +89,8 @@ let Component = React.createClass({
                      },
                      timeout:'3000',
                      success:function(data){
-                     
-                    
+                     console.log(data);
+                    console.log(PBAGroupIndex+1);
                        
                           var PBAGroupFirstMonth=data.data;
   
@@ -116,7 +117,7 @@ let Component = React.createClass({
                           var pba=Number(PBAGroupFirstMonth[i].pba.toFixed(2));
                           PBAGroupFirstPba.push(pba);
                         }
-                      
+                        console.log(PBAGroupFirstDay);
               },
               error:function(){
                  
@@ -173,7 +174,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: 'PBA%',
+                text: '100%',
                 align:'high',
                 rotation:'0',
                y:-15,
@@ -260,7 +261,7 @@ const mapDispatchToProps = (dispatch) => {
         },
          changedata1 :(w0,b,PBAGroupFirstDay,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba)=>{
             dispatch(actions.setVars('PBAGroupPbaName',w0)); 
-            dispatch(actions.setVars('PBAGroupFirstDay1',PBAGroupFirstDay ));
+            dispatch(actions.setVars('PBAGroupFirstDayy1',PBAGroupFirstDay ));
             dispatch(actions.setVars('PBAGroupFirstPoweract1',PBAGroupFirstPoweract ));
             dispatch(actions.setVars('PBAGroupFirstMaintainloss1',PBAGroupFirstMaintainloss ));
             dispatch(actions.setVars('PBAGroupFirstLimitloss1',PBAGroupFirstLimitloss));

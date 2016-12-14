@@ -136,7 +136,7 @@ let Component = React.createClass({
         }],
             //几条数据
             series: [{
-                name: '实际运行时间',
+                name: '运行时间',
                 type: 'column',
                 data: areaPlanDay,
                 color:'#33BAC0',

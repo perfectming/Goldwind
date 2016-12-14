@@ -4,7 +4,7 @@ import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
 import icono from '../img/收益率1.png';
-var url="10.9.99.239";
+let input_url="10.68.100.32";
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
@@ -115,7 +115,7 @@ const mapStateToProps = (state) => {
          machinee:state.vars.machinee,
          areaRecordCostRR:state.vars.areaRecordCostRR,
          w11: state.vars.w1,
-         w111: state.vars.w12,
+         w111: state.vars.w123,
           sqy: state.vars.wins1,
           windN:state.vars.windN,
           keyyy:state.vars.keyy,
@@ -135,10 +135,6 @@ const mapStateToProps = (state) => {
           areaWindCostMore:state.vars.areaWindCostMore,
           areaWindEarningMore:state.vars.areaWindEarningMore,
           areaWindRateMore:state.vars.areaWindRateMore,
-
-
-        
-
 
     }
 };
@@ -167,17 +163,17 @@ const mapDispatchToProps = (dispatch) => {
            // 第一个图
          $.ajax({
             type:'post',
-            url:'http://10.68.100.32:8080/wbi/yield/getAllGroupYield',  
+            url:'http://'+input_url+':8080/wbi/yield/getAllGroupYield',  
             async:false,
            data:{
              
-            'startdate':year+"-"+"9"+"-"+'1',
-            'enddate':year+"-"+"9"+"-"+"30",
+            'startdate':year+"-"+"11"+"-"+'1',
+            'enddate':year+"-"+"11"+"-"+"30",
            },
             dataType:'json',
             timeout:'3000',
             success:function(data){
-            
+           
                 var dataA=data.data;
                 for (var i in dataA){
                   var earnings=dataA[i].earning;
@@ -201,7 +197,7 @@ const mapDispatchToProps = (dispatch) => {
             },
           });
 
-             dispatch(actions.setVars('actbt',8 ));
+             dispatch(actions.setVars('actbt',10 ));
             dispatch(actions.setVars('windN',arr2));
             dispatch(actions.setVars('wind',arr3));
             dispatch(actions.setVars('windP',arr1));
@@ -209,7 +205,7 @@ const mapDispatchToProps = (dispatch) => {
             // 开始时第二张图跟着变
               $.ajax({
                      type:'post',
-                        url:'http://10.68.100.32:8080/wbi/yield/getYieldByGroupid',
+                        url:'http://'+input_url+':8080/wbi/yield/getYieldByGroupid',
                      async:false,
                     data:{
                       
@@ -269,7 +265,7 @@ const mapDispatchToProps = (dispatch) => {
              // 开始时第三张图跟着变
              $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/yield/getYieldByWfid',
+                     url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
                      async:false,
                     data:{
                       
@@ -361,7 +357,7 @@ const mapDispatchToProps = (dispatch) => {
             
          $.ajax({
             type:'post',
-            url:'http://10.68.100.32:8080/wbi/yield/getAllGroupYield',  
+            url:'http://'+input_url+':8080/wbi/yield/getAllGroupYield',  
             async:false,
            data:{
              
@@ -410,7 +406,7 @@ const mapDispatchToProps = (dispatch) => {
           // 点击月份第二张图跟着变
            $.ajax({
                      type:'post',
-                        url:'http://10.68.100.32:8080/wbi/yield/getYieldByGroupid',
+                        url:'http://'+input_url+':8080/wbi/yield/getYieldByGroupid',
                      async:false,
                     data:{
                       
@@ -425,7 +421,7 @@ const mapDispatchToProps = (dispatch) => {
                      success:function(data){
                        
                
- // console.log(data);
+
                      
 
                          var dataA=data.data;
@@ -466,7 +462,7 @@ const mapDispatchToProps = (dispatch) => {
               {
                  $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/yield/getYieldByWfid',
+                     url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
                      async:false,
                     data:{
                       
@@ -519,6 +515,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('areaWindCostsss',areaWindCosts1));
              dispatch(actions.setVars('areaWindEarningsss',areaWindEarnings1));
              dispatch(actions.setVars('areaWindRatesss',areaWindRates1));
+             dispatch(actions.setVars('w123',areaWindNames[0]));
           
 
 
@@ -535,7 +532,7 @@ const mapDispatchToProps = (dispatch) => {
                          var areaWindids=[];
           $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/yield/getYieldByWfid',
+                     url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
                      async:false,
                     data:{
                    'startdate':year+"-"+(actbt+1)+"-"+'1',
@@ -603,7 +600,7 @@ const mapDispatchToProps = (dispatch) => {
                          var areaWindids=[];
           $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/yield/getYieldByWfid',
+                     url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
                      async:false,
                     data:{
                    'startdate':year+"-"+(actbt+1)+"-"+'1',
@@ -665,7 +662,7 @@ const mapDispatchToProps = (dispatch) => {
                          var areaWindids=[];
           $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/yield/getYieldByWfid',
+                     url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
                      async:false,
                     data:{
                    'startdate':year+"-"+(actbt+1)+"-"+'1',
