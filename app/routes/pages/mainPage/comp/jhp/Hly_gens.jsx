@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",mon="一月份",w10,height,changedata1,power2,power1,name0,hhdata,actbt=10,wc1=0,wc2,} = this.props;
+        let {w0="一区域",mon="一月份",w10,height,changedata1,power2,power1,text,name0,hhdata,actbt=10,wc1=0,wc2,} = this.props;
 
 
         let configPie = {
@@ -28,7 +28,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: mon+w0+"各风场发电量",
+                text: text,
                 align:'left',
                 x : "0",
                 style:{

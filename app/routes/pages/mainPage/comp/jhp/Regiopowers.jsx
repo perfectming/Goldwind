@@ -54,7 +54,7 @@ let Component = React.createClass({
                         <Hly_genday   barLpdpowerValues={poweract}
                                       barLpdpowerValue={powerplan}
                                       barLdpowerValue={day0}
-                                      text={text0[actbt]+'月每日集团发电量'}></Hly_genday>
+                                      text={text0[actbt]+'月巴盟区域每日发电量'}></Hly_genday>
                         <div className={styles.logomini}>
 
                         </div>
@@ -91,7 +91,10 @@ const mapDispatchToProps = (dispatch) => {
                 type:'post',
                 url:'http://'+ip+':8080/wbi/ELEC/getSpaceTimeElec',
                 async:false,
-                data:'month=11',
+                data:{
+                    "month": actbt + 1,
+                    "groupid":  '201612121721151',
+                },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){

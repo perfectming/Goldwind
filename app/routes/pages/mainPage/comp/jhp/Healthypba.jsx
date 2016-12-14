@@ -10,7 +10,7 @@ import Hly_rs from './Hly_rs.jsx';
 import Hly_d from './Hly_d.jsx';
 var actions = require('redux/actions');
 var $ = require('jquery');
-let ip="10.68.100.32";
+let ip = "10.68.100.32";
 
 
 let Component = React.createClass({
@@ -23,17 +23,13 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata3,hhdata1,pba3=[],wrong32=[],wrong33=[],wrong31=[],wrong30=[],power3=[],barLotime3=[],hhdata, w0 = "一区域", w10 = "风场1", mon = "一月份", win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more,power2=[], wrong20=[], wrong21=[], wrong22=[], wrong23=[], pba2=[],barLotime2=[],power1=[], wrong10=[], wrong11=[], wrong12=[], wrong13=[], pba1=[],barLotime1=[]} = this.props;
-
+        let {hhdata3, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon = "十一月份", win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
 
 
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button = data.data.button;
         let text0 = data.data.line_date;
-
-
-
 
 
         return (
@@ -48,10 +44,11 @@ let Component = React.createClass({
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`} id="boxhidden">
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
-                        <div className={styles.logo3}>
+                        <div className={styles.logo30}>
                             {mon + w0 + w10 + "各风机健康度"}
                         </div>
-                        <span onClick={() => hideit(barLotime3,power3,wrong30,wrong31,wrong32,wrong33,pba3)}>×</span>
+                        <span
+                            onClick={() => hideit(bt0,barLotime3, power3, wrong30, wrong31, wrong32, wrong33, pba3)}>×</span>
                     </div>
 
                     <div className={styles.hidden_bottom}>
@@ -89,7 +86,7 @@ let Component = React.createClass({
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_a text={text0[actbt] + "月份集团各区域PBA"}
+                        <Hly_a text={mon + "集团各区域PBA"}
                                barLotime={barLotime1}
                                power1={power1}
                                wrong10={wrong10}
@@ -121,14 +118,14 @@ let Component = React.createClass({
                         {/*pba2={pba2}*/}
 
                         {/*></Hly_pba>*/}
-                        <Hly_pba text={mon+w0 + "各风场PBA"}
-                                 barLotime2={barLotime2==null? barLotime21:barLotime2}
-                                 power2={power2==null? power21:power2}
-                                 wrong20={wrong20==null? wrong201:wrong20}
-                                 wrong21={wrong21==null? wrong211:wrong21}
-                                 wrong22={wrong22==null? wrong221:wrong22}
-                                 wrong23={wrong23==null? wrong231:wrong23}
-                                 pba2={pba2==null? pba21:pba2}
+                        <Hly_pba text={mon + w0 + "各风场PBA"}
+                                 barLotime2={barLotime2 == null ? barLotime21 : barLotime2}
+                                 power2={power2 == null ? power21 : power2}
+                                 wrong20={wrong20 == null ? wrong201 : wrong20}
+                                 wrong21={wrong21 == null ? wrong211 : wrong21}
+                                 wrong22={wrong22 == null ? wrong221 : wrong22}
+                                 wrong23={wrong23 == null ? wrong231 : wrong23}
+                                 pba2={pba2 == null ? pba21 : pba2}
                                  actbt={actbt}
                                  hhdata2={hhdata}
                                  hhdata1={hhdata1}
@@ -144,21 +141,27 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.rbox3}>
 
-                            <button className={styles.button} onClick={() => gogogo(barLotime3,power3,wrong30,wrong31,wrong32,wrong33,pba3)}>前10</button>
-                            <button className={styles.button} onClick={() => back(barLotime3,power3,wrong30,wrong31,wrong32,wrong33,pba3)}>后10</button>
-                            <button className={styles.button} onClick={() => more(hhdata3)}>更多</button>
+                            <button className={bt0===0? styles.button : styles.button22}
+                                    onClick={() => gogogo(bt0,w0, win, wc1,wc2, actbt, hhdata)}>
+                                前10
+                            </button>
+                            <button className={bt0===1? styles.button : styles.button22}
+                                    onClick={() => back(bt0,w0, win, wc1,wc2, actbt, hhdata)}>
+                                后10
+                            </button>
+                            <button className={bt0===2? styles.button : styles.button22} onClick={() => more(hhdata3,bt0)}>更多</button>
                         </div>
 
 
                         <div className={styles.rbox4}>
-                            <Hly_pbas text={mon+w0+w10+"各风机PBA"}
-                                      barLotime3={barLotime3==null? barLotime31:barLotime3}
-                                      power3={power3==null? power31:power3}
-                                      wrong30={ wrong30==null? wrong301:wrong30}
-                                      wrong31={ wrong31==null? wrong311:wrong31}
-                                      wrong32={wrong32==null? wrong321:wrong32}
-                                      wrong33={wrong33==null? wrong331:wrong33}
-                                      pba3={pba3==null? pba31:pba3}
+                            <Hly_pbas text={mon + w0 + w10 + "各风机PBA"}
+                                      barLotime3={barLotime3 == null ? barLotime31 : barLotime3}
+                                      power3={power3 == null ? power31 : power3}
+                                      wrong30={ wrong30 == null ? wrong301 : wrong30}
+                                      wrong31={ wrong31 == null ? wrong311 : wrong31}
+                                      wrong32={wrong32 == null ? wrong321 : wrong32}
+                                      wrong33={wrong33 == null ? wrong331 : wrong33}
+                                      pba3={pba3 == null ? pba31 : pba3}
                             ></Hly_pbas>
                             <div className={styles.logomini2}>
 
@@ -198,7 +201,10 @@ const mapStateToProps = (state) => {
         wrong32: state.vars.wrong32a,
         wrong33: state.vars.wrong33a,
         pba3: state.vars.pba3a,
-
+        w0: state.vars.w1,
+        wc1: state.vars.wc1,
+        wc2: state.vars.wc2,
+        w10: state.vars.w11,
         barLotime1: state.vars.barLotime1a,
         power1: state.vars.power1a,
         wrong10: state.vars.wrong10a,
@@ -206,7 +212,7 @@ const mapStateToProps = (state) => {
         wrong12: state.vars.wrong12a,
         wrong13: state.vars.wrong13a,
         pba1: state.vars.pba1a,
-
+        bt0: state.vars.bt0,
 
 
     }
@@ -217,27 +223,27 @@ const mapDispatchToProps = (dispatch) => {
         ajax: () => {
 
             $.ajax({
-                type:'post',
-                url:'http://'+ip+':8080/wbi/PBA/getCompanySpacePBA',
-                async:false,
-                data:'month=11',
-                dataType:'json',
-                timeout:'3000',
-                success:function(data){
+                type: 'post',
+                url: 'http://' + ip + ':8080/wbi/PBA/getCompanySpacePBA',
+                async: false,
+                data: 'month=11',
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
 
 
-                    let w0=data.data[2][0].groupname;
-                    let w10=data.data[1][0].wfname;
+                    let w0 = data.data[2][0].groupname;
+                    let w10 = data.data[1][0].wfname;
                     dispatch(actions.setVars('w1', w0));
                     dispatch(actions.setVars('w11', w10));
-                    dispatch(actions.setVars('hhdata',  data));
+                    dispatch(actions.setVars('hhdata', data));
                     let barLotime1 = [];    //各区域   一区域二区域
-                    let power1=[];       //实际发电量
-                    let wrong10=[];       //故障损失
-                    let wrong11=[];       //维护损失
-                    let wrong12=[];       //限功率损失
-                    let wrong13=[];       //非设备原因损失
-                    let pba1=[];
+                    let power1 = [];       //实际发电量
+                    let wrong10 = [];       //故障损失
+                    let wrong11 = [];       //维护损失
+                    let wrong12 = [];       //限功率损失
+                    let wrong13 = [];       //非设备原因损失
+                    let pba1 = [];
 
                     for (var i in data.data[2]) {
                         barLotime1.push(data.data[2][i].groupname);    //区域的横坐标
@@ -249,12 +255,12 @@ const mapDispatchToProps = (dispatch) => {
                         pba1.push(data.data[2][i].pba);   //非设备原因损失
                     }
                     let barLotime2 = [];    //各区域   一区域二区域
-                    let power2=[];       //实际发电量
-                    let wrong20=[];       //故障损失
-                    let wrong21=[];       //维护损失
-                    let wrong22=[];       //限功率损失
-                    let wrong23=[];       //非设备原因损失
-                    let pba2=[];
+                    let power2 = [];       //实际发电量
+                    let wrong20 = [];       //故障损失
+                    let wrong21 = [];       //维护损失
+                    let wrong22 = [];       //限功率损失
+                    let wrong23 = [];       //非设备原因损失
+                    let pba2 = [];
                     for (var i in data.data[1]) {
                         barLotime2.push(data.data[1][i].wfname);    //区域的横坐标
                         power2.push(data.data[1][i].poweract);   //实际发电量
@@ -265,13 +271,13 @@ const mapDispatchToProps = (dispatch) => {
                         pba2.push(data.data[1][i].pba);   //非设备原因损失
                     }
                     let barLotime3 = [];    //各区域   一区域二区域
-                    let power3=[];       //实际发电量
-                    let wrong30=[];       //故障损失
-                    let wrong31=[];       //维护损失
-                    let wrong32=[];       //限功率损失
-                    let wrong33=[];       //非设备原因损失
-                    let pba3=[];
-                    for (var i=0;i<=10;i++) {
+                    let power3 = [];       //实际发电量
+                    let wrong30 = [];       //故障损失
+                    let wrong31 = [];       //维护损失
+                    let wrong32 = [];       //限功率损失
+                    let wrong33 = [];       //非设备原因损失
+                    let pba3 = [];
+                    for (var i = 0; i <= 10; i++) {
                         barLotime3.push(data.data[0][i].wtname);    //区域的横坐标
                         power3.push(data.data[0][i].poweract);   //实际发电量
                         wrong30.push(data.data[0][i].faultloss);   //故障损失
@@ -305,7 +311,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('pba1a', pba1))
 
                 },
-                error:function(){
+                error: function () {
 
                 },
             })
@@ -327,21 +333,21 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('windss', value.actruls));
 
             $.ajax({
-                type:'post',
-                url:'http://'+ip+':8080/wbi/PBA/getCompanySpacePBA',
-                async:false,
-                data:{"month":key+1},
-                dataType:'json',
-                timeout:'3000',
-                success:function(data){
-                    dispatch(actions.setVars('hhdata',  data));
+                type: 'post',
+                url: 'http://' + ip + ':8080/wbi/PBA/getCompanySpacePBA',
+                async: false,
+                data: {"month": key + 1},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+                    dispatch(actions.setVars('hhdata', data));
                     let barLotime1 = [];    //各区域   一区域二区域
-                    let power1=[];       //实际发电量
-                    let wrong10=[];       //故障损失
-                    let wrong11=[];       //维护损失
-                    let wrong12=[];       //限功率损失
-                    let wrong13=[];       //非设备原因损失
-                    let pba1=[];
+                    let power1 = [];       //实际发电量
+                    let wrong10 = [];       //故障损失
+                    let wrong11 = [];       //维护损失
+                    let wrong12 = [];       //限功率损失
+                    let wrong13 = [];       //非设备原因损失
+                    let pba1 = [];
 
                     for (var i in data.data[2]) {
                         barLotime1.push(data.data[2][i].groupname);    //区域的横坐标
@@ -353,12 +359,12 @@ const mapDispatchToProps = (dispatch) => {
                         pba1.push(data.data[2][i].pba);   //非设备原因损失
                     }
                     let barLotime2 = [];    //各区域   一区域二区域
-                    let power2=[];       //实际发电量
-                    let wrong20=[];       //故障损失
-                    let wrong21=[];       //维护损失
-                    let wrong22=[];       //限功率损失
-                    let wrong23=[];       //非设备原因损失
-                    let pba2=[];
+                    let power2 = [];       //实际发电量
+                    let wrong20 = [];       //故障损失
+                    let wrong21 = [];       //维护损失
+                    let wrong22 = [];       //限功率损失
+                    let wrong23 = [];       //非设备原因损失
+                    let pba2 = [];
                     for (var i in data.data[1]) {
                         barLotime2.push(data.data[1][i].wfname);    //区域的横坐标
                         power2.push(data.data[1][i].poweract);   //实际发电量
@@ -369,13 +375,13 @@ const mapDispatchToProps = (dispatch) => {
                         pba2.push(data.data[1][i].pba);   //非设备原因损失
                     }
                     let barLotime3 = [];    //各区域   一区域二区域
-                    let power3=[];       //实际发电量
-                    let wrong30=[];       //故障损失
-                    let wrong31=[];       //维护损失
-                    let wrong32=[];       //限功率损失
-                    let wrong33=[];       //非设备原因损失
-                    let pba3=[];
-                    for (var i=0;i<=10;i++) {
+                    let power3 = [];       //实际发电量
+                    let wrong30 = [];       //故障损失
+                    let wrong31 = [];       //维护损失
+                    let wrong32 = [];       //限功率损失
+                    let wrong33 = [];       //非设备原因损失
+                    let pba3 = [];
+                    for (var i = 0; i <= 10; i++) {
                         barLotime3.push(data.data[0][i].wtname);    //区域的横坐标
                         power3.push(data.data[0][i].poweract);   //实际发电量
                         wrong30.push(data.data[0][i].faultloss);   //故障损失
@@ -409,84 +415,127 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('pba1a', pba1))
 
                 },
-                error:function(){
+                error: function () {
 
                 },
             })
 
         },
-        gogogo: (barLotime3,power3,wrong30,wrong31,wrong32,wrong33,pba3) => {
+        gogogo: (bt0,w0, win, wc1,wc2, actbt, hhdata) => {
+            dispatch(actions.setVars('bt0', 0));
+            let grid = hhdata.data[2][0].groupid;
+
+            $.ajax({
+                type: 'post',
+                url: 'http://192.168.31.148:8080/wbi/PBA/getPageSize',
+                async: false,
+                data: {
+                    "month": actbt + 1,
+                    "groupid":  '201612121721151',
+                    "wfid": '150828',
+                    "type":"0",
+                    "year":"2016"
+                },
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    let barLotime3c = [];    //各区域   一区域二区域
+                    let power3c = [];       //实际发电量
+                    let wrong30c = [];       //故障损失
+                    let wrong31c = [];       //维护损失
+                    let wrong32c = [];       //限功率损失
+                    let wrong33c = [];       //非设备原因损失
+                    let pba3c = [];
+
+                    for (var i in data.data) {
+                        barLotime3c.push(data.data[i].wtname);    //区域的横坐标
+                        power3c.push(data.data[i].poweract);   //实际发电量
+                        wrong30c.push(data.data[i].faultloss);   //故障损失
+                        wrong31c.push(data.data[i].maintainloss);   //维护损失
+                        wrong32c.push(data.data[i].limitloss);   //限功率损失
+                        wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
+                        pba3c.push(data.data[i].pba);   //非设备原因损失
+                    }
+
+                    dispatch(actions.setVars('barLotime3a', barLotime3c))
+                    dispatch(actions.setVars('power3a', power3c))
+                    dispatch(actions.setVars('wrong30a', wrong30c))
+                    dispatch(actions.setVars('wrong31a', wrong31c))
+                    dispatch(actions.setVars('wrong32a', wrong32c))
+                    dispatch(actions.setVars('wrong33a', wrong33c))
+                    dispatch(actions.setVars('pba3a', pba3c))
+
+                },
+                error: function () {
+
+                },
+            });
 
 
-            let barLotime3c = [];    //各区域   一区域二区域
-            let power3c=[];       //实际发电量
-            let wrong30c=[];       //故障损失
-            let wrong31c=[];       //维护损失
-            let wrong32c=[];       //限功率损失
-            let wrong33c=[];       //非设备原因损失
-            let pba3c=[];
-
-            for (var i=(barLotime3.length-11);i<barLotime3.length;i++) {
-
-                barLotime3c[i]=barLotime3[i];    //区域的横坐标
-                power3c[i]=power3[i];   //实际发电量
-                wrong30c[i]=wrong30[i];   //故障损失
-                wrong31c[i]=wrong31[i];   //维护损失
-                wrong32c[i]=wrong32[i];   //限功率损失
-                wrong33c[i]=wrong33[i];   //非设备原因损失
-                pba3c[i]=pba3[i];   //非设备原因损失
-
-            }
-
-            dispatch(actions.setVars('barLotime3a', barLotime3c))
-            dispatch(actions.setVars('power3a', power3c))
-            dispatch(actions.setVars('wrong30a', wrong30c))
-            dispatch(actions.setVars('wrong31a', wrong31c))
-            dispatch(actions.setVars('wrong32a', wrong32c))
-            dispatch(actions.setVars('wrong33a', wrong33c))
-            dispatch(actions.setVars('pba3a', pba3c))
-
-
-        },
-        back: (barLotime3,power3,wrong30,wrong31,wrong32,wrong33,pba3) => {
-
-            let barLotime3c = [];    //各区域   一区域二区域
-            let power3c=[];       //实际发电量
-            let wrong30c=[];       //故障损失
-            let wrong31c=[];       //维护损失
-            let wrong32c=[];       //限功率损失
-            let wrong33c=[];       //非设备原因损失
-            let pba3c=[];
-
-            for (var i=0;i<=10;i++) {
-
-                barLotime3c[i]=barLotime3[i];    //区域的横坐标
-                power3c[i]=power3[i];   //实际发电量
-                wrong30c[i]=wrong30[i];   //故障损失
-                wrong31c[i]=wrong31[i];   //维护损失
-                wrong32c[i]=wrong32[i];   //限功率损失
-                wrong33c[i]=wrong33[i];   //非设备原因损失
-                pba3c[i]=pba3[i];    //非设备原因损失
-
-            }
-
-            dispatch(actions.setVars('barLotime3a', barLotime3c))
-            dispatch(actions.setVars('power3a', power3c))
-            dispatch(actions.setVars('wrong30a', wrong30c))
-            dispatch(actions.setVars('wrong31a', wrong31c))
-            dispatch(actions.setVars('wrong32a', wrong32c))
-            dispatch(actions.setVars('wrong33a', wrong33c))
-            dispatch(actions.setVars('pba3a', pba3c))
 
         },
-        more: (hhdata3) => {
-            var barLotime3=[];
-            var power3=[];
-            var wrong30=[];
-            var wrong31=[];
-            var wrong32=[];
-            var wrong33=[];
-            var pba3=[];
+        back: (bt0,w0, win, wc1,wc2, actbt, hhdata) => {
+
+            dispatch(actions.setVars('bt0', 1));
+
+            $.ajax({
+                type: 'post',
+                url: 'http://192.168.31.148:8080/wbi/PBA/getPageSize',
+                async: false,
+                data: {
+                    "month": actbt + 1,
+                    "groupid":  '201612121721151',
+                    "wfid": '150828',
+                    "type":"1",
+                    "year":"2016"
+                },
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    let barLotime3c = [];    //各区域   一区域二区域
+                    let power3c = [];       //实际发电量
+                    let wrong30c = [];       //故障损失
+                    let wrong31c = [];       //维护损失
+                    let wrong32c = [];       //限功率损失
+                    let wrong33c = [];       //非设备原因损失
+                    let pba3c = [];
+
+                    for (var i in data.data) {
+                        barLotime3c.push(data.data[i].wtname);    //区域的横坐标
+                        power3c.push(data.data[i].poweract);   //实际发电量
+                        wrong30c.push(data.data[i].faultloss);   //故障损失
+                        wrong31c.push(data.data[i].maintainloss);   //维护损失
+                        wrong32c.push(data.data[i].limitloss);   //限功率损失
+                        wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
+                        pba3c.push(data.data[i].pba);   //非设备原因损失
+                    }
+
+                    dispatch(actions.setVars('barLotime3a', barLotime3c))
+                    dispatch(actions.setVars('power3a', power3c))
+                    dispatch(actions.setVars('wrong30a', wrong30c))
+                    dispatch(actions.setVars('wrong31a', wrong31c))
+                    dispatch(actions.setVars('wrong32a', wrong32c))
+                    dispatch(actions.setVars('wrong33a', wrong33c))
+                    dispatch(actions.setVars('pba3a', pba3c))
+
+                },
+                error: function () {
+
+                },
+            });
+
+        },
+        more: (hhdata3,bt0) => {
+            dispatch(actions.setVars('bt0', 2));
+            var barLotime3 = [];
+            var power3 = [];
+            var wrong30 = [];
+            var wrong31 = [];
+            var wrong32 = [];
+            var wrong33 = [];
+            var pba3 = [];
 
             for (var i in hhdata3.data) {
 
@@ -509,24 +558,26 @@ const mapDispatchToProps = (dispatch) => {
             $("#light").show();
             $("#boxhidden").show();
         },
-        hideit: (barLotime3,power3,wrong30,wrong31,wrong32,wrong33,pba3) => {
+        hideit: (bt0,barLotime3, power3, wrong30, wrong31, wrong32, wrong33, pba3) => {
+            dispatch(actions.setVars('bt0', 0));
+
             let barLotime3c = [];    //各区域   一区域二区域
-            let power3c=[];       //实际发电量
-            let wrong30c=[];       //故障损失
-            let wrong31c=[];       //维护损失
-            let wrong32c=[];       //限功率损失
-            let wrong33c=[];       //非设备原因损失
-            let pba3c=[];
+            let power3c = [];       //实际发电量
+            let wrong30c = [];       //故障损失
+            let wrong31c = [];       //维护损失
+            let wrong32c = [];       //限功率损失
+            let wrong33c = [];       //非设备原因损失
+            let pba3c = [];
 
-            for (var i=0;i<=10;i++) {
+            for (var i = 0; i <= 10; i++) {
 
-                barLotime3c[i]=barLotime3[i];    //区域的横坐标
-                power3c[i]=power3[i];   //实际发电量
-                wrong30c[i]=wrong30[i];   //故障损失
-                wrong31c[i]=wrong31[i];   //维护损失
-                wrong32c[i]=wrong32[i];   //限功率损失
-                wrong33c[i]=wrong33[i];   //非设备原因损失
-                pba3c[i]=pba3[i];    //非设备原因损失
+                barLotime3c[i] = barLotime3[i];    //区域的横坐标
+                power3c[i] = power3[i];   //实际发电量
+                wrong30c[i] = wrong30[i];   //故障损失
+                wrong31c[i] = wrong31[i];   //维护损失
+                wrong32c[i] = wrong32[i];   //限功率损失
+                wrong33c[i] = wrong33[i];   //非设备原因损失
+                pba3c[i] = pba3[i];    //非设备原因损失
 
             }
 
