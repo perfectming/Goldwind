@@ -311,6 +311,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         changepageW :(value,key)=>{
             dispatch(actions.setVars('actbt',key ));
+
+            dispatch(actions.setVars('wind',value.plan ));
+           
+
             $.ajax({
 	        		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyWfPBA',//根据风场ID获取PBA和风机
 			        type: 'post',
@@ -378,6 +382,7 @@ const mapDispatchToProps = (dispatch) => {
 				　　　　}
 				　　},
 			});
+
         },
         changepageHealthyT:()=>{
         	dispatch(actions.setVars('showPage', 'healthytime'));

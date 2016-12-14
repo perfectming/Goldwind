@@ -3,15 +3,16 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let data = require('./Profit-data');
+var $=require('jquery');
 
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {w0,changedata1,areaNamee,areaRecordCostss,areaRecordProfitt,text}=this.props;
+        let {w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
         let configPie = {
             chart: {
-                height:410,
+                height:430,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -48,7 +49,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-            
+              valueSuffix:'h'
             },
             credits: {
                 enabled: false
@@ -65,10 +66,47 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            w0=e.point.category;
-                        var  a=w0.toString().split("");
+                          var   tbaTime=e.point.category;
+                            var TBAindex=e.point.index;
+                           
+                        var  a=tbaTime.toString().split("");
                         var b=a[0];
-                        changedata1(w0,b);
+                        var tbaDays=[];
+                         var tbaDayRunTimes=[];
+                        var tbaDayDownTimes=[];
+                         var tbaDayTba=[];
+                        $.ajax({
+                     type:'post',
+                     url:'http://10.68.100.32:8080/wbi/TBA/getDaysTBAByMonth',
+                     async:false,
+                     dataType:'json',
+                     data:{
+                      'month':TBAindex+2,
+                     },
+                     timeout:'3000',
+                     success:function(data){
+                     
+                        var  TBAdaydata=data.data; 
+                          for(var i in TBAdaydata){
+                            var tbaDay=TBAdaydata[i].day;
+                            tbaDays.push(tbaDay);
+                            var tbaDayruntimes=TBAdaydata[i].runtimes;
+                            tbaDayRunTimes.push(tbaDayruntimes);
+                            var daydowntimes=TBAdaydata[i].downtimes;
+                            tbaDayDownTimes.push(daydowntimes);
+                            var tba=TBAdaydata[i].tba;
+                            tbaDayTba.push(tba);
+
+
+                           } 
+                         
+            },
+            error:function(e){
+               
+            
+            },
+          });
+                        changedataDay(tbaTime,b,tbaDays,tbaDayRunTimes,tbaDayDownTimes,tbaDayTba);
                         }
                     }
                 }
@@ -97,11 +135,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'(小时)',
+                        text:'h',
                         align:'high',
                         rotation:'0',
-                        y: -17,
-                        x: 50,
+                        y: -15,
+                        x: 40,
                         style:{
                             fontSize:'14px',
                             color:'#fff'
@@ -149,10 +187,13 @@ let Component = React.createClass({
                 {
                     name: 'TBA',
                     type: 'line',
-                    data: areaRecordCostss,
+                    data: TBA,
                     stack:'first',
                     color:'blue',
                     yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
                 },
 
             ]
@@ -166,7 +207,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-         w0 : state.vars.w1,
+         tbaTime : state.vars.tbaTime1,
     }
 };
 
@@ -174,8 +215,13 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1 :(w0,win,b)=>{
-            dispatch(actions.setVars('w1',w0 ));
+        changedataDay:(tbaTime,b,tbaDays,tbaDayRunTimes,tbaDayDownTimes,tbaDayTba)=>{
+            dispatch(actions.setVars('tbaTime1',tbaTime ));
+            dispatch(actions.setVars('tbaDays31',tbaDays ));
+            dispatch(actions.setVars('tbaDayRunTimes31',tbaDayRunTimes ));
+            dispatch(actions.setVars('tbaDayDownTimes31',tbaDayDownTimes ));
+            dispatch(actions.setVars('tbaDayTba31',tbaDayTba ));
+
           
         },
     };

@@ -118,7 +118,7 @@ let Component = React.createClass({
             },
             plotOptions: {
                 column: {
-                    pointWidth:25,
+                    maxPointWidth:25,
                     grouping: false,
                     shadow: false,
                     borderWidth: 0

@@ -8,11 +8,11 @@ let Component = React.createClass({
     },
     render() {
        
-     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement}=this.props
+     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement,width}=this.props
         let configPie = {
             chart: {
                 height:height,
-                width:850,
+                width:width,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -50,7 +50,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-               
+               valueSuffix:'元'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -100,11 +100,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'100%',
+                text:'元',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 45,
+                x: 40,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -121,7 +121,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: 'TBA%',
+                text: '100%',
                  align:'high',
                 rotation:'0',
                 y: -15,
@@ -137,7 +137,7 @@ let Component = React.createClass({
 
             //几条数据
             series: [{
-                name: '实际收益',
+                name: '收益',
                 type: 'column',
                 data: areaRecordProfitR,
                 pointWidth:15,
@@ -146,7 +146,7 @@ let Component = React.createClass({
 
             },
             {
-                name: '收入成本',
+                name: '成本',
                 type: 'column',
                 data: areaRecordCostR,
                 pointWidth:15,
@@ -154,11 +154,14 @@ let Component = React.createClass({
                 pointPlacement:pointPlacement,
             },
             {
-                    name:"TBA",
+                    name:"收益率",
                     type:'line',
                     color:'blue',
                     data:TBAA,
                     yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
              }]
         };
         return (

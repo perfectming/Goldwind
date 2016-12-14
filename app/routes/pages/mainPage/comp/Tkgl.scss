@@ -1,5 +1,13 @@
 .tkglBox{
   position: relative;
+  .mw{
+    position: absolute;
+    color: #aaa;
+    left: 5px;
+    width:8%;
+    top:40px;
+    font-size: 12px;
+  }
   .agc{
     cursor: pointer;
     color: #fff;
