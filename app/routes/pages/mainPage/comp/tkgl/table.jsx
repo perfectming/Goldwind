@@ -33,7 +33,6 @@ let Component = React.createClass({
                     arr2.push(i);
                 }
             }
-            console.log(data,mode);
         return (
             <div>
                 <div className={styles.actionBox}>
