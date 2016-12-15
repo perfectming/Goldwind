@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var $=require('jquery');
 var ReactHighcharts = require('react-highcharts');
-var url="10.9.99.239";
+var input_url="10.68.100.32";
 let data = require('./Profit-data');
 let sqy =data.areaRecordCostQY;
 let Component = React.createClass({
@@ -91,10 +91,9 @@ let Component = React.createClass({
                         // 点击第一张图第二张变
                          $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/yield/getYieldByGroupid',
+                     url:'http://'+input_url+':8080/wbi/yield/getYieldByGroupid',
                      async:false,
                     data:{
-                      
                    'startdate':year+"-"+(keyy)+"-"+'1',
                  'enddate':year+"-"+(keyy)+"-"+daycount,
                 'groupid':arr5[index],
@@ -106,10 +105,8 @@ let Component = React.createClass({
                       
                      
 
-                          console.log(year+"-"+(keyy)+"-"+daycount);
-                           console.log(year+"-"+(keyy)+"-"+'1');
 
-                console.log(arr5[index]);
+
                          var dataA=data.data;
                          for (var i in dataA)
                          {
@@ -125,10 +122,7 @@ let Component = React.createClass({
                              areaWindNames.push(areaWindName)
 
                          }
-                     console.log('下面是areaWindids')
-                     console.log(areaWindids);
-                     console.log('面试是阿容')
-                     console.log(arr5)
+
 
 
                        
@@ -140,15 +134,14 @@ let Component = React.createClass({
             },
             error:function(){
                
-                console.log(year+"-"+(keyy+1)+"-"+daycount);
-                console.log(arr5[index]);
+
                 
             },
           });
                          // 点击第一张图第三张图变
       $.ajax({
                       type:'post',
-                      url:'http://10.68.100.32/wbi/yield/getYieldByWfid',
+                      url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
                       async:false,
                      data:{
                    
@@ -189,10 +182,7 @@ let Component = React.createClass({
             
             },
             error:function(){
-                alert(666666);
-                console.log(year+"-"+(keyy)+"-"+'1');
-                console.log(year+"-"+(keyy)+"-"+daycount);
-                console.log(areaWindids[0])
+              
 
 
             
@@ -329,6 +319,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('areaWindCostsss',areaWindCosts1));
              dispatch(actions.setVars('areaWindEarningsss',areaWindEarnings1));
              dispatch(actions.setVars('areaWindRatesss',areaWindRates1));
+              dispatch(actions.setVars('w123',areaWindNames[0]));
             
 
           

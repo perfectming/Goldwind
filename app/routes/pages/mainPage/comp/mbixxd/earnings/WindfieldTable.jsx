@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
+var input_url="10.68.100.32";
 let data = require('./Profit-data');
-var url="10.9.99.239";
+var input_url="192.168.31.148";
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -86,7 +86,7 @@ let Component = React.createClass({
                          var areaWindNames=[];
                         $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/yield/getYieldByWfid',
+                     url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
                      async:false,
                     data:{
                       
@@ -99,7 +99,7 @@ let Component = React.createClass({
                      dataType:'json',
                      timeout:'3000',
                      success:function(data){
-                        console.log(data);
+                       
                        
                          var dataA=data.data;
                          for (var i in dataA)
@@ -116,8 +116,6 @@ let Component = React.createClass({
                              areaWindNames.push(areaWindName) 
 
                          }
-                       console.log(areaWindNames)
- 
 
                        
                       
@@ -127,7 +125,7 @@ let Component = React.createClass({
             
             },
             error:function(){
-                alert(2);
+          
             
             },
           });

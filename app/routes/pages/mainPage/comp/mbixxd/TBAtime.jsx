@@ -76,30 +76,55 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-         ajax: () => {
+        
+        ajax: () => {
            console.log(1);
-               $.ajax({
-                type:'post',
-                url:'http://10.9.99.239:8080/wbi/TBA/getMonthsTBAByWf',
-                async:false,
-                data:{
-                    'wfid':'150828',
-                },
-                dataType:'json',
-                timeout:'3000',
-                success:function(data){
-                
-                 console.log(data)
+           ajax: () => {
+           console.log(1);
+            var arr1=[];
+            var arr2=[];
+            var arr3=[];
+          
+           $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/ELEC/getWtAreaElec',  
+             async:false,
+            data:{
+             'year':2016,
+             'month':11,
+             'wfid':150828
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+             console.log(data);
+             // 获取x轴的值内蒙达茂天润风电场
+             var dataa=data.data;
+             for(var i=0;i<10;i++){
+                 var xWild=data.data[i].wtname;
+                 arr1.push(xWild);
+                 var yPowerPlan=data.data[i].powerplan;
+                 arr2.push(yPowerPlan);
+                 var yPowerAct=data.data[i].poweract;
+                 arr3.push(yPowerAct);
+             }
+            
+             },
+             error:function(){
+                 
+             },
+           });
+           dispatch(actions.setVars('actbt',10 ));
+           dispatch(actions.setVars('areaNamee',arr1));
+             dispatch(actions.setVars('wind',arr3));
+             dispatch(actions.setVars('windP',arr2));
 
-                     
-                },
-                error:function(){
-                    alert(2)
-                },
-
-            });
+          
         }
         ,
+        }
+        ,
+
         init: () => {
             var obj = {
                 test:''
