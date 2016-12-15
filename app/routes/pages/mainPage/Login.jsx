@@ -33,7 +33,7 @@ let Component = React.createClass({
 });
 const mapStateToProps = (state) => {
   return {
-    userInfo: state.vars.userInfoLogin,
+    userInfo: state.vars.userInfo,
 
   }
 };
@@ -41,15 +41,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     init: ()=> {
-      dispatch(actions.setVars('userInfoLogin', true));
+      dispatch(actions.setVars('userInfo', true));
       $.cookie('token','123123');
        // browserHistory.push('/app/all/page/main')  ;
     },
     login:(value)=>{
       !value?
       alert('请输入账号'):
-       browserHistory.push('/app/all/page/main');
-      dispatch(actions.setVars('userInfoLogin', value));
+       browserHistory.push('/app/all/page/main')  ;
+      dispatch(actions.setVars('userInfo', value));
       // login();
       try { Base.returnPlay(); } catch (e) { };
       try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }
