@@ -56,7 +56,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area', returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,} = this.props;
+        let {befor_pages='area',w0, wc1,wc2,bt0=0,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
         return (
 
 
@@ -71,7 +71,7 @@ let Component = React.createClass({
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
                         <div className={styles.logo3}>{"各风机健康度"}</div>
-                        <span onClick={()=>hideit(hhdata)}>×</span>
+                        <span onClick={()=>hideit(hhdata,bt0)}>×</span>
                     </div>
                     <div className={styles.hidden_bottom}>
                     <Hly_gentwo    widths={4500}  height={450}
@@ -120,10 +120,9 @@ let Component = React.createClass({
 
                         </div>
                         <div className={styles.rbox33}>
-
-                            <button className={styles.button} onClick={() => gogogo(hhdata)}>前10</button>
-                            <button className={styles.button} onClick={() => back(hhdata)}>后10</button>
-                            <button className={styles.button} onClick={() => more(hhdata)}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo( bt0,actbt, hhdata)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, actbt, hhdata)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(hhdata)}>更多</button>
                         </div>
                         <Hly_gentwo    height={390}
                                        name0={barlotimes2}
@@ -155,6 +154,10 @@ const mapStateToProps = (state) => {
         barlotimes2: state.vars.barlotimes2,
         barlopowers2: state.vars.barlopowers2,
         barlopowerp2: state.vars.barlopowerp2,
+        bt0: state.vars.bt0,
+        wc1: state.vars.wc1,
+        w0: state.vars.w0,
+        wc2: state.vars.wc2,
     }
 };
 
@@ -203,8 +206,8 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-                    dispatch(actions.setVars('w1', w0));
-                    dispatch(actions.setVars('w11', w10));
+                    dispatch(actions.setVars('w1', w10));
+
 
 
 
@@ -228,6 +231,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor:(value,key)=>{
+
             dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind',value.plan ));
@@ -247,7 +251,7 @@ const mapDispatchToProps = (dispatch) => {
                     let barlopowers1 = [];
                     let barlopowerp1 = [];
                     for (var i in data.data[1]) {
-                        barlotimes1.push(data.data[1][i].groupname);    //区域的横坐标
+                        barlotimes1.push(data.data[1][i].wfname);    //区域的横坐标
                         barlopowers1.push(data.data[1][i].powerplan);   //计划发电量
                         barlopowerp1.push(data.data[1][i].poweract);   //实际发电量
                     }
@@ -256,7 +260,7 @@ const mapDispatchToProps = (dispatch) => {
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
                     for (var i=0;i<=10;i++) {
-                        barlotimes2.push(data.data[0][i].wfname);    //区域的横坐标
+                        barlotimes2.push(data.data[0][i].wtname);    //区域的横坐标
                         barlopowers2.push(data.data[0][i].powerplan);   //计划发电量
                         barlopowerp2.push(data.data[0][i].poweract);   //实际发电量
                     }
@@ -278,45 +282,93 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (hhdata) => {
-            let barLotime3c = [];    //各区域   一区域二区域
-            let power3c=[];       //计划发电量
-            let wrong30c=[];       //实际发电量
+        gogogo: (bt0, actbt, hhdata) => {
+            dispatch(actions.setVars('bt0', 0));
 
-            let x=hhdata.data[0];
-            let y=x.length-11;
-            let z=x.length;
-            for (var i=y;i<z;i++) {
+            console.log(bt0)
+            console.log(actbt)
 
-                barLotime3c[i]=hhdata.data[0][i].wtname;    //区域的横坐标
-                power3c[i]=hhdata.data[0][i].powerplan;  //实际发电量
-                wrong30c[i]=hhdata.data[0][i].poweract;   //故障损失
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ip + ':8080/wbi/ELEC/getPageSize',
+                async: false,
+                data: {
+                    "month": actbt + 1,
+                    "groupid":  '201612121721151',
+                    "wfid": '150828',
+                    "type":"0",
+                    "year":"2016"
+                },
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+                    console.log(data)
+                    let barLotime3c = [];    //各区域   一区域二区域
+                    let power3c=[];       //计划发电量
+                    let wrong30c=[];       //实际发电量
 
-            }
+                    for (var i in data.data) {
+                        barLotime3c.push(data.data[i].wtname);    //区域的横坐标
+                        power3c.push(data.data[i].powerplan);   //实际发电量
+                        wrong30c.push(data.data[i].poweract);   //故障损失
 
-            dispatch(actions.setVars('barlotimes2', barLotime3c))
-            dispatch(actions.setVars('barlopowers2', power3c))
-            dispatch(actions.setVars('barlopowerp2', wrong30c))
+                    }
+
+                    dispatch(actions.setVars('barlotimes2', barLotime3c))
+                    dispatch(actions.setVars('barlopowers2', power3c))
+                    dispatch(actions.setVars('barlopowerp2', wrong30c))
+
+
+                },
+                error: function () {
+
+                },
+            });
+
+
+
+
 
 
         },
-        back: (hhdata) => {
-            let barLotime3c = [];    //各区域   一区域二区域
-            let power3c=[];       //计划发电量
-            let wrong30c=[];       //实际发电量
+        back: (bt0, actbt, hhdata) => {
+            dispatch(actions.setVars('bt0', 1));
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ip + ':8080/wbi/ELEC/getPageSize',
+                async: false,
+                data: {
+                    "month": actbt + 1,
+                    "groupid":  '201612121721151',
+                    "wfid": '150828',
+                    "type":"1",
+                    "year":"2016"
+                },
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    let barLotime3c = [];    //各区域   一区域二区域
+                    let power3c=[];       //计划发电量
+                    let wrong30c=[];       //实际发电量
+
+                    for (var i in data.data) {
+                        barLotime3c.push(data.data[i].wtname);    //区域的横坐标
+                        power3c.push(data.data[i].powerplan);   //实际发电量
+                        wrong30c.push(data.data[i].poweract);   //故障损失
+
+                    }
+
+                    dispatch(actions.setVars('barlotimes2', barLotime3c))
+                    dispatch(actions.setVars('barlopowers2', power3c))
+                    dispatch(actions.setVars('barlopowerp2', wrong30c))
 
 
-            for (var i=0;i<=10;i++) {
+                },
+                error: function () {
 
-                barLotime3c[i]=hhdata.data[0][i].wtname;    //区域的横坐标
-                power3c[i]=hhdata.data[0][i].powerplan;  //实际发电量
-                wrong30c[i]=hhdata.data[0][i].poweract;   //故障损失
-
-            }
-
-            dispatch(actions.setVars('barlotimes2', barLotime3c))
-            dispatch(actions.setVars('barlopowers2', power3c))
-            dispatch(actions.setVars('barlopowerp2', wrong30c))
+                },
+            });
         },
         more: (hhdata) => {
             let barLotime3c = [];    //各区域   一区域二区域

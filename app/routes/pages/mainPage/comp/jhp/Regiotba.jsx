@@ -166,8 +166,8 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ip+':8080/wbi/PBA/getAreaWFieldPBA',
                 async:false,
                 data:{
-                    "month":11,
-                    "groupid":201612121721151,
+                    "month":'11',
+                    "groupid":'201612121721151',
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -251,7 +251,7 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     "month":key+1,
-                    "groupid":201612121721151,
+                    "groupid":'201612121721151',
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -433,7 +433,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         returnit:(befor_pages)=>{
             dispatch(actions.setVars('showPage',befor_pages));
-
         },
     };
 };

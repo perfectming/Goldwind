@@ -85,7 +85,7 @@
         float: left;
         margin-top: 16px;
       }
-      .logo3 {
+      .logo30 {
         float: left;
         margin-left: 20px;
       }
@@ -310,6 +310,7 @@
     left: 70%;
     top: 21px;
   }
+
   .rbox33 {
 
     width: 500px;
@@ -331,12 +332,24 @@
     background: none;
     color: #20FEFF;
     border: 1px solid #20FEFF;
-
-  }
-  .button:hover {
-
     box-shadow: 0px 0px 10px #20FEFF;
+
   }
+  .button22 {
+    width: 70px;
+    height: 30px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 15px;
+    font-family: '微软雅黑';
+    margin-left: 12px;
+    background: none;
+    color: #FFFFFF;
+    border: 1px solid #20FEFF;
+
+  }
+
   .fbox {
     width: 98%;
     height: 600px;

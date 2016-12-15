@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {ip="10.68.100.32",hhdata1,hhdata2,changedata1,w0='一区域',wc1=0,wc2=0,mon='一月份',actbt,windplan=win,w10,text,height,power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
+        let {ip="10.68.100.32",hhdata,hhdata2,changedata1,w0='一区域',wc1=0,wc2=0,mon='一月份',actbt=10,windplan=win,w10,text,height,power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
 
 
 
@@ -30,7 +30,7 @@ let Component = React.createClass({
             },
 
             title: {
-                text: mon+w0+"各风场PBA",
+                text: text,
 
                 align:'left',
                 x : "0",
@@ -84,9 +84,9 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function (e,) {
-                            w0 = e.point.category;
+                            w10 = e.point.category;
                             wc2 = e.point.index;
-                            changedata1(w10, win, wc1,wc2, actbt,hhdata1, hhdata2,);
+                            changedata1(w10, win, wc1,wc2, actbt,hhdata,);
 
                         }
                     }
@@ -157,7 +157,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text: 'PBA%',
+                    text: '100%',
                     align: 'high',
                     rotation: '0',
                     y: -15,
@@ -237,13 +237,13 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        w0 : state.vars.w1,
+
         w10 : state.vars.w11,
         wc1 : state.vars.wc10,
         mon : state.vars.mon,
         windplan : state.vars.windplan,
-        hhdata1 : state.vars.hhdata1,
-
+        hhdata : state.vars.hhdata,
+        actbt: state.vars.actbt,
 
 
     }
@@ -252,12 +252,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            dispatch(actions.setVars('w1',w0 ));
+
         },
-        changedata1 :(w10, win,wc1, wc2, actbt,hhdata1, hhdata2,)=> {
+        changedata1 :(w10, win,wc1, wc2, actbt,hhdata,)=> {
             dispatch(actions.setVars('w11', w10,));
-            let grid = hhdata2.data[2][wc1].groupid;
-            let wfid =hhdata1.data[0][wc2].wfid;
+            let wfid =hhdata.data[1][wc2].wfid;
 
             $.ajax({
                 type: 'post',
@@ -265,8 +264,8 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "month": actbt + 1,
-                    "groupid": grid,
-                    "wfid": wfid,
+                    "groupid":  '201612121721151',
+                    "wfid": wfid==undefined? '150828':wfid,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -299,6 +298,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wrong32a', wrong32));
                     dispatch(actions.setVars('wrong33a', wrong33));
                     dispatch(actions.setVars('pba3a', pba3));
+
+
 
 
 

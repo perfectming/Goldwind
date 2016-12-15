@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0,wc1,mon="一月份",w10,name0,powerplan1,poweract2,height,changedata1,windplan=win,hhdata,actbt=10} = this.props;
+        let {w0,wc1,mon="十一月份",w10,name0,powerplan1,poweract2,height,changedata1,windplan=win,hhdata,actbt=10} = this.props;
 
 
         let configPie = {
@@ -80,7 +80,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            w10=e.point.category;
+                            w0=e.point.category;
                             wc1=e.point.index;
                             changedata1(w0,win,wc1,hhdata,actbt);
 

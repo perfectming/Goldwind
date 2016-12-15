@@ -7,7 +7,7 @@ import Login from '../../../../../../components/common/Loading.jsx';
 
 var actions = require('redux/actions');
 
-let ipUrl='10.68.100.32:8080';
+let ipUrl='192.168.31.148:8080';
 let actbt=0,wfName=[],wfId=[],areaId=[],wfTheory,wfAct,wtArr=[],wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct; 
 let month=[],monthAct=[],monthPlan=[],month2,income,cost,runTime,downTime,TBA;
 
