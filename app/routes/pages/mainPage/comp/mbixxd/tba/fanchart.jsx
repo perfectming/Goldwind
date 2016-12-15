@@ -11,8 +11,7 @@ let Component = React.createClass({
     render() {
 
       let {PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
-      {console.log(123)}
-      {console.log(machine)}
+    
         let configPie = {
             chart: {
                 height:height,
