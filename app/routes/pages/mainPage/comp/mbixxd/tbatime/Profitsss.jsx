@@ -7,8 +7,8 @@ import icono from '../img/TBA.png';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 var $=require('jquery');
-let month=data.month;
 let button=data.button;
+let input_url="10.68.100.32";
 
 
 // let tbaMonths2=tbaMonths;
@@ -29,7 +29,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{tbaMonths,tbaRunTimes,tbaDownTimes,tbaTba,befor_pagee='windpage',backtop,befor_pagee2,tbaDays3,tbaDayRunTimes3,tbaDayDownTimes3,tbaDayTba3}=this.props;
+       let{tbaMonths,tbaRunTimes,tbaDownTimes,tbaTba,befor_pagee='group',backtop,befor_pagee2,tbaDays3,tbaDayRunTimes3,tbaDayDownTimes3,tbaDayTba3}=this.props;
 
           return (
 
@@ -90,12 +90,12 @@ var tbaDayTba3=[];
 // 获取所有的月份
  $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/TBA/getMonthsTBA',
+                     url:'http://'+input_url+':8080/wbi/TBA/getMonthsTBA',
                      async:false,
                      dataType:'json',
                      timeout:'3000',
                      success:function(data){
-                    // console.log(data);
+                
                         TBAtimedata=data.data; 
                         for(var i in TBAtimedata){
                           var tbamonth=TBAtimedata[i].month;
@@ -112,7 +112,7 @@ var tbaDayTba3=[];
                      
              },
              error:function(){
-                
+             
           
              },
            });
@@ -127,15 +127,15 @@ var tbaDayTba3=[];
 // // // 获取默认的月份：1
  $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/TBA/getDaysTBAByMonth',
+                     url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByMonth',
                      async:false,
                      dataType:'json',
                      data:{
-                      'month':2,
+                      'month':11,
                      },
                      timeout:'3000',
                      success:function(data){
-                            // console.log(data);
+                             
                          TBAdaydata=data.data; 
                          for(var i in TBAdaydata){
                            var tbaDay=TBAdaydata[i].day;
@@ -161,6 +161,8 @@ var tbaDayTba3=[];
         dispatch(actions.setVars('tbaDayRunTimes31',tbaDayRunTimes3 ));
           dispatch(actions.setVars('tbaDayDownTimes31',tbaDayDownTimes3 ));
           dispatch(actions.setVars('tbaDayTba31',tbaDayTba3 ));
+          dispatch(actions.setVars('qwe',11));
+       
 
         }
         ,

@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0,mon="一月份",w10,barRotime,text,barlopowers,barlopowerp,height,changedata1,windplan=win} = this.props;
+        let {w0,wc1,mon="十一月份",w10,name0,powerplan1,poweract2,height,changedata1,windplan=win,hhdata,actbt=10} = this.props;
 
 
         let configPie = {
@@ -53,8 +53,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.yf}%</b>"
+                valueSuffix:'kWh'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -81,8 +80,9 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            w10=e.point.category;
-                            changedata1(w10,e);
+                            w0=e.point.category;
+                            wc1=e.point.index;
+                            changedata1(w0,win,wc1,hhdata,actbt);
 
                         }
                     }
@@ -105,7 +105,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotime,
+                categories:name0,
 
             },
             yAxis: {
@@ -137,27 +137,15 @@ let Component = React.createClass({
                 name: '计划发电量',
                 type: 'column',
                 color:'#33BAC0',
-                data: barlopowers,
-                events: {
-                    click: function(e) {
-                        w10=e.point.category;
-                        changedata1(w10,e);
+                data: powerplan1,
 
-                    }
-                }
             }
                 ,{
                     name:'实际发电量',
                     color:'#70c080',
                     type:'column',
-                    data: barlopowerp,
-                    events: {
-                        click: function(e) {
-                            w10=e.point.category;
-                            changedata1(w10,e);
+                    data: poweract2,
 
-                        }
-                    }
                 }
 
             ]
@@ -173,7 +161,10 @@ const mapStateToProps = (state) => {
     return {
         w0 : state.vars.w1,
         w10 : state.vars.w11,
+        wc1 : state.vars.wc1,
         mon : state.vars.mon,
+        actbt : state.vars.actbt,
+        hhdata : state.vars.hhdata,
         windplan : state.vars.windplan,
     }
 };
@@ -183,8 +174,49 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('w1',w0 ));
         },
-        changedata1 :(w10,e)=> {
-            dispatch(actions.setVars('w11', w10,e));
+        changedata1 :(w0,win,wc1,hhdata,actbt)=>{
+            let wfid=hhdata.data[1][wc1].wfid;
+            console.log(actbt)
+            $.ajax({
+                type:'post',
+                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceByGroupidElec',
+                async:false,
+                data:{
+                    "months":actbt+1,
+                    "groupid":201612121721151,
+                    "wfid":wfid,
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                    console.log(data)
+
+
+                    let barlotimes2 = [];
+                    let barlopowers2 = [];
+                    let barlopowerp2 = [];
+                    for (var i=0;i<=10;i++) {
+                        barlotimes2.push(data.data[0][i].wtname);    //区域的横坐标
+                        barlopowers2.push(data.data[0][i].powerplan);   //计划发电量
+                        barlopowerp2.push(data.data[0][i].poweract);   //实际发电量
+                    }
+                    dispatch(actions.setVars('barlotimes2', barlotimes2));
+                    dispatch(actions.setVars('barlopowers2', barlopowers2));
+                    dispatch(actions.setVars('barlopowerp2', barlopowerp2));
+
+
+
+                },
+                error:function(){
+
+                },
+            });
+
+            dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('win1',win ));
+
+
+
 
         },
     };

@@ -51,9 +51,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
-
+                valueSuffix:'kWh'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -104,7 +102,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'(kWh)',
+                    text:'kWh',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -130,17 +128,12 @@ let Component = React.createClass({
                 color:'#33BAC0',
 
 
-
-
             },
                 {
                     name: '实际发电量',
                     type: 'column',
                     data: barLpdpowerValues,
                     color:'#70c080',
-                    pointPlacement:1,
-
-
 
 
                 },

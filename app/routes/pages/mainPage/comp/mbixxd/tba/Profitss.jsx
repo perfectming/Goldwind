@@ -7,14 +7,15 @@ import icono from '../img/PBA.png';
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
+let input_url="10.68.100.32";
 let month=data.month;
 let button=data.button;
 let areaName=data.areaName;
 let areaRecordCosts=data.areaRecordCosts;
 let areaRecordProfit=data.areaRecordProfit;
 let text0=data.text[0];
-let machine=data.machine;
-let machineee=data.machineee;
+
+
 let fanProfit=data.fanProfit;
 let fanCost=data.fanCost;
 let fanCost1=data.fanCost1;
@@ -39,7 +40,7 @@ let Component = React.createClass({
     },
 
     render() {
-      let{PBAGroupMonthF="11",PBAGroupFirstDay,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,wq='风场1',more,changpage,wind,windP,close,actbt=0,backtop,befor_pagee='group',befor_pagee2,w0,ww,}=this.props;
+      let{PBAGroupMonthF="11",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,wq='风场1',more,changpage,wind,windP,close,actbt=0,backtop,befor_pagee='group',befor_pagee2,w0,ww,}=this.props;
        
 
           return (
@@ -51,7 +52,7 @@ let Component = React.createClass({
                 <p>11月份1区域1风场各风机PBA</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
-                <Fanchart machine={PBAGroupMonth} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} height={500} width={1760}></Fanchart>
+                <Fanchart machine={PBAGroupFirstDayy} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} height={500} width={1760}></Fanchart>
                  </div>
               <div className={styles.paddingtop}><div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
 
@@ -60,7 +61,7 @@ let Component = React.createClass({
                    <div className={`${styles.areabox} ${styles.shadow}`}>
                        <div>
                            <AreaTable PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth} areaRecordProfit={PBAGroupPoweract} PBAGroupMaintainloss={PBAGroupMaintainloss} PBAGroupLimitloss={PBAGroupLimitloss} PBAGroupNodevreasonloss={PBAGroupNodevreasonloss} PBAGroupPba={PBAGroupPba}text0={text0} text1={text1}></AreaTable>
-                           <p className={styles.titww}>{PBAGroupMonthF+'月份集团各区域PBA'}</p>
+                           <p className={styles.titww}>集团每月PBA</p>
                        </div>
                    </div>
                </div>
@@ -69,7 +70,7 @@ let Component = React.createClass({
                    <div className={styles.coverbox}>
                        <div className={styles.windcebox}>
                            <div>
-                               <Fanchart machine={PBAGroupFirstDay} fanProfit={PBAGroupFirstPoweract} fanCost={PBAGroupFirstFaultloss} fanCost1={PBAGroupMaintainloss}fanCost2={PBAGroupFirstLimitloss}fanCost3={PBAGroupFirstNodevreasonloss} height={380} width={1730} PBAGroupFirstPba={PBAGroupFirstPba}></Fanchart>
+                               <Fanchart machine={PBAGroupFirstDayy} fanProfit={PBAGroupFirstPoweract} fanCost={PBAGroupFirstFaultloss} fanCost1={PBAGroupMaintainloss}fanCost2={PBAGroupFirstLimitloss}fanCost3={PBAGroupFirstNodevreasonloss} height={380} width={1730} PBAGroupFirstPba={PBAGroupFirstPba}></Fanchart>
                            </div>
                        </div>
                        <div className={styles.tik}>
@@ -108,7 +109,7 @@ const mapStateToProps = (state) => {
           PBAGroupNodevreasonloss: state.vars.PBAGroupNodevreasonloss1,
           PBAGroupPba: state.vars.PBAGroupPba1,
         // 获取默认的月份上个月
-          PBAGroupFirstDay: state.vars.PBAGroupFirstDay1,
+          PBAGroupFirstDayy: state.vars.PBAGroupFirstDayy1,
           PBAGroupFirstPoweract: state.vars.PBAGroupFirstPoweract1,
           PBAGroupFirstFaultloss: state.vars.PBAGroupFirstFaultloss1,
           PBAGroupFirstMaintainloss: state.vars.PBAGroupFirstMaintainloss1,
@@ -139,7 +140,7 @@ const mapDispatchToProps = (dispatch) => {
         // 获取12个月的PBA
           $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi//PBA/getCompanyTimePBA',
+                     url:'http://'+input_url+':8080/wbi//PBA/getCompanyTimePBA',
                      async:false,
                      dataType:'json',
                      timeout:'3000',
@@ -186,7 +187,8 @@ const mapDispatchToProps = (dispatch) => {
                       
               },
               error:function(){
-                  alert(4);
+                 
+                
           
              },
            });
@@ -198,7 +200,7 @@ const mapDispatchToProps = (dispatch) => {
            dispatch(actions.setVars('PBAGroupNodevreasonloss1',PBAGroupNodevreasonloss ));
            dispatch(actions.setVars('PBAGroupPba1',PBAGroupPba ));
            // 获取上个月的PBAFirst
-           dispatch(actions.setVars('PBAGroupFirstDay1',PBAGroupFirstDay ));
+           dispatch(actions.setVars('PBAGroupFirstDayy1',PBAGroupFirstDay ));
            dispatch(actions.setVars('PBAGroupFirstPoweract1',PBAGroupFirstPoweract ));
            dispatch(actions.setVars('PBAGroupFirstMaintainloss1',PBAGroupFirstMaintainloss ));
            dispatch(actions.setVars('PBAGroupFirstLimitloss1',PBAGroupFirstLimitloss));

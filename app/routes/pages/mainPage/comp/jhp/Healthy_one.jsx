@@ -5,7 +5,7 @@ import Hly_t from './Hly_t.jsx';
 import Hly_r from './Hly_r.jsx';
 import Hly_rs from './Hly_rs.jsx';
 var $ = require('jquery');
-
+let ip="10.68.100.32";
 
 var actions = require('redux/actions');
 let data = require('./Healthy-data');
@@ -100,7 +100,7 @@ let Component = React.createClass({
                         <Hly_t x={x0} barLoTime={barLoTime1}
                                barLoPowerValue={wind == undefined ? barLoPowerValue1 : wind}
                                text={mon+ "集团各区域健康度"}></Hly_t>
-                        <div className={styles.logo}>
+                        <div className={styles.logo1}>
 
                         </div>
                     </div>
@@ -162,6 +162,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
