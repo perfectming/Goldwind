@@ -41,7 +41,7 @@ const mapStateToProps = (state) => {
     return {
         itemHeaderActive: state.vars.headerItemActive,
         itemTreeAct: state.vars.treeItemActive,
-        userInfo: state.vars.userInfo,
+        userInfo: state.vars.userInfoLogin,
         flag: state.vars.putpage,
     }
 };

@@ -12,13 +12,13 @@
     overflow: hidden;
     font-size: 20px;
     padding: 0.1%;
-    color: rgb(14,101,111);
+    color: #fff;
     .int{
       display: block;
       width: 370px;
       height: 40px;
       border:1px solid rgb(14,101,111);
-      background:rgba(26,65,106,.5);
+      background:rgba(20,50,86,.3);
       outline: 1px solid rgb(14,101,111);
       vertical-align: top;
       &:focus{
