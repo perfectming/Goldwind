@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{windFiled,windCost,windProfit,w0='1月份',TBA}=this.props;
+        let{windFiled,windCost,windProfit,w0,TBA}=this.props;
         let configPie = {
             chart: {
                 height:430,
@@ -21,7 +21,7 @@ let Component = React.createClass({
                 paddingLeft:100,
             },
             title: {
-                text:w0+'每日TBA',
+                text:w0+'月每日TBA',
                 align:'left',
                  x : "0",
                 style:{
@@ -115,7 +115,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: 'TBA%',
+                text: '100%',
                 align:'high',
                 rotation:'0',
                y:-15,
@@ -128,7 +128,7 @@ let Component = React.createClass({
             opposite: true
         }],
             series: [{
-                name: '实际运行时间',
+                name: '运行时间',
                 type: 'column',
                 data: windProfit
             },

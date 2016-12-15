@@ -8,12 +8,16 @@ var $=require('jquery');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
+let input_url="10.68.100.32";
 let x0=[];
 let x1=[];
 let x2=[];
 let x3=[];
 let windPT=data.windFJJ;
 let Component = React.createClass({
+    componentWillMount() {
+        this.props.ajax();
+    },
     componentDidMount() {
         this.props.init();
     },
@@ -62,11 +66,7 @@ let Component = React.createClass({
                 <div className={styles.imgq}>
                     <img src={icono}/>
                 </div>
-              <div className={`${styles.buttons} ${styles.buttonss}`}>
-                      <button onClick={()=>gogogo(windPT)} > 前10</button>
-                      <button onClick={()=>back(windPT)}>后10</button>
-                      <button  onClick={()=>more()}>更多</button>
-                   </div>
+          
                 </div>  
                 </div> 
            </div>
@@ -90,6 +90,46 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        ajax: () => {
+            var arr1=[];
+            var arr2=[];
+            var arr3=[];
+            $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/ELEC/getWtTimeAreaElec',  
+             async:false,
+            data:{
+             'month':11,
+             'wfid':'150828',
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+              
+             // 获取x轴的值内蒙达茂天润风电场
+             var dataa=data.data;
+             for(var i=0;i<dataa.length;i++){
+                 var xDay=data.data[i].day;
+                 arr1.push(xDay);
+                 var yPowerPlan=data.data[i].powerplan;
+                 arr2.push(yPowerPlan);
+                 var yPowerAct=data.data[i].poweract;
+                 arr3.push(yPowerAct);
+             }
+
+            
+             dispatch(actions.setVars('areaNameN',arr1));
+             dispatch(actions.setVars('areaRecordCostN',arr3));
+             dispatch(actions.setVars('areaRecordProfitN',arr2));
+            dispatch(actions.setVars('actbtt',10));
+             },
+             error:function(){
+               
+             },
+           });
+            
+        }
+        ,
         init: () => {
             var obj = {
                 test:''
@@ -98,43 +138,43 @@ const mapDispatchToProps = (dispatch) => {
         ,
          changpage :(value,key)=>{
             dispatch(actions.setVars('actbtt',key ));
-            dispatch(actions.setVars('wind',value.plan));
-            dispatch(actions.setVars('windP',value.actrul));
-            var arr1=[];
-            var arr2=[];
-            var arr3=[];
+        
+            var arr1w=[];
+            var arr2w=[];
+            var arr3w=[];
             var monthh=key+1;  
-         // $.ajax({
-         //    type:'post',
-         //    url:'http://10.9.101.99:8080/gwbi/ELEC/getWtTimeAreaElec',  
-         //    async:false,
-         //   data:{
-         //    'year':2016,
-         //    'month':2,
-         //    'wfid':150210
-         //   },
-         //    dataType:'json',
-         //    timeout:'3000',
-         //    success:function(data){
-         //       console.log(data);
-         //    // 获取x轴的值内蒙达茂天润风电场
-         //    var dataa=data.data;
-         //    for(var i=0;i<15;i++){
-         //        var xDay=data.data[i].wtname;
-         //        arr1.push(xWild);
-         //        var yPowerPlan=data.data[i].powerplan;
-         //        arr2.push(yPowerPlan);
-         //        var yPowerAct=data.data[i].poweract;
-         //        arr3.push(yPowerAct);
-         //    }
-          //   dispatch(actions.setVars('areaNameN',arr1));
-          //   dispatch(actions.setVars('areaRecordCostN',arr3));
-          //   dispatch(actions.setVars('areaRecordProfitN',arr2));
-          //   },
-          //   error:function(){
-          //       alert(2)
-          //   },
-          // });
+          $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/ELEC/getWtTimeAreaElec',  
+             async:false,
+            data:{
+             'year':2016,
+             'month':monthh,
+             'wfid':'150828',
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+              
+             // 获取x轴的值内蒙达茂天润风电场
+             var dataa=data.data;
+             for(var i=0;i<data.data.length;i++){
+                 var xDay=data.data[i].day;
+                 arr1w.push(xDay);
+                 var yPowerPlan=data.data[i].powerplan;
+                 arr2w.push(yPowerPlan);
+                 var yPowerAct=data.data[i].poweract;
+                 arr3w.push(yPowerAct);
+             }
+             
+             },
+             error:function(){
+              
+             },
+           });
+          dispatch(actions.setVars('areaNameN',arr1w));
+             dispatch(actions.setVars('windP',arr2w));
+             dispatch(actions.setVars('wind',arr3w));
 
         },
          gogogo:(wind)=>{

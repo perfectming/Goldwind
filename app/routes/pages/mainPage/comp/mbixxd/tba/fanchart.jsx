@@ -11,6 +11,7 @@ let Component = React.createClass({
     render() {
 
       let {PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
+    
         let configPie = {
             chart: {
                 height:height,
@@ -126,7 +127,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: 'PBA%',
+                text: '100%',
                 align:'high',
                 rotation:'0',
                  y: -17,
