@@ -23,9 +23,21 @@ let Component = React.createClass({
             alert('请选择开始或者结束时间');
             return false;
         }
-        alert(sTime+'到'+eTime)
-        // 在这个下边获取这个时间段的数据就行了
-        // 然后去更新图表
+        let {groupid}=this.props;
+        $.ajax({
+	        		url:'http://'+ipUrl+'/wbi/KPI/getCompanyKPI',//默认获取1区域ID-YES
+			        type: 'post',
+			        async:false,
+			        dataType: 'json',
+			        data:{'startTime':sTime,'endTime':eTime,'groupid':groupid},
+			        timeout : 60000, 
+			        success:function (data) {
+			        	console.log(data);
+			        },
+			        complete : function(XMLHttpRequest,status){ 
+					　　　
+					},
+				});
     },
 
     render() {
@@ -58,7 +70,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+    	X1 : state.vars.x1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
