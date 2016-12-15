@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",w10="风场1",mon="一月份",widths,barRotime,barlopowers,barlopowerp,text,height} = this.props;
+        let {w0="一区域",w10="风场1",mon="一月份",widths,barRotime,barlopowers,barlopowerp,text,height,power2,power1,name0} = this.props;
 
 
         let configPie = {
@@ -53,8 +53,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.yf}%</b>"
+                valueSuffix:'kWh'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -95,7 +94,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotime,
+                categories:name0,
 
             },
             yAxis: {
@@ -126,14 +125,16 @@ let Component = React.createClass({
             series: [{
                 name: '计划发电量',
                 type: 'column',
+                color:'#5B9BD5',
+                data: power1,
                 color:'#33BAC0',
-                data: barlopowers
-            }
-                ,{
+                data: power1
+            },
+                {
                     name:'实际发电量',
                     color:'#70c080',
                     type:'column',
-                    data: barlopowerp
+                    data: power2
                 }
 
             ]

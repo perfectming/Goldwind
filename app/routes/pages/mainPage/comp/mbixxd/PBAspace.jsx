@@ -6,7 +6,7 @@ import icono from './img/PBA.png';
 var $ = require('jquery');
 var actions = require('redux/actions');
 let data=require('./Profit-data');
-
+let input_url="10.68.100.32";
 let button=data.button;
 let fanCost=data.fanCost;
 let fanCostA=data.fanCostA;
@@ -17,7 +17,7 @@ let height=700;
 let moree;
  var date=new Date;
 var month=date.getMonth(); 
-  console.log(month)
+  
   var key=month;
 let Component = React.createClass({
      componentWillMount() {
@@ -28,8 +28,9 @@ let Component = React.createClass({
     },
 
     render() {
-        let{PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt=0,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
-     
+        let{PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt=0,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+
+
         return (
             <div className={styles.box} >
             <div className={styles.boxcover} id='boxcover'></div>
@@ -40,7 +41,13 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x</div>
                 </div>
                  <div className={styles.scroll}>
-                  <PBAspacechart fanProfitQ={PBASpaceMorePoweract} machine={PBASpaceMoreWtname} fanCost={PBASpaceMoreFaultloss} fanCostA={PBASpaceMoreMaintainloss} fanCostB={PBASpaceMoreLimitloss} fanCostC={PBASpaceMoreNodevreasonloss} PBA={PBASpaceMorePba} height={450} width={17350}></PBAspacechart>
+                  <PBAspacechart fanProfitQ={PBASpaceMorePoweract}
+                   machine={PBASpaceMoreWtname2} 
+                   fanCost={PBASpaceMoreFaultloss} 
+                   fanCostA={PBASpaceMoreMaintainloss} 
+                   fanCostB={PBASpaceMoreLimitloss} 
+                   fanCostC={PBASpaceMoreNodevreasonloss} 
+                   PBA={PBASpaceMorePba} height={450} width={17350}></PBAspacechart>
                  </div>
              </div>
                
@@ -50,6 +57,7 @@ let Component = React.createClass({
                             return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
                         })
                     }
+     }
     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
 
                 </ul>
@@ -101,7 +109,7 @@ const mapStateToProps = (state) => {
         PBASpaceFirstNodevreasonloss: state.vars.PBASpaceFirstNodevreasonloss1,
         PBASpaceFirstPba: state.vars.PBASpaceFirstPba12,
         //弹出的更多赋值
-        PBASpaceMoreWtname: state.vars.PBASpaceWtname11,
+        PBASpaceMoreWtname2: state.vars.PBASpaceWtname11,
         PBASpaceMorePoweract: state.vars.PBASpaceFirstPoweract11,
         PBASpaceMoreFaultloss: state.vars.PBASpaceFirstFaultloss11,
         PBASpaceMoreMaintainloss: state.vars.PBASpaceFirstMaintainloss11,
@@ -125,12 +133,12 @@ const mapDispatchToProps = (dispatch) => {
          var PBASpaceFirstMaintainloss=[];
          var PBASpaceFirstLimitloss=[];
          var PBASpaceFirstNodevreasonloss=[];
-         var PBASpaceFirstPba=[];
+         var PBASpaceFirstPbaP=[];
          
             // 获取上面的区域
            $.ajax({
              type:'post',
-             url:'http://10.9.99.239:8080/wbi/BaseData/getGroup',  
+             url:'http://'+input_url+':8080/wbi/BaseData/getGroup',  
              async:false,
           
              dataType:'json',
@@ -145,13 +153,13 @@ const mapDispatchToProps = (dispatch) => {
             
              },
              error:function(){
-                 alert(2)
+            
              },
            });
            //获取所有的风场
             $.ajax({
               type:'post',
-              url:'http://10.9.99.239:8080/wbi/BaseData/getWfsByGroupid',  
+              url:'http://'+input_url+':8080/wbi/BaseData/getWfsByGroupid',  
               async:false,
               data:{
                'groupid':areaIds[0],
@@ -159,8 +167,7 @@ const mapDispatchToProps = (dispatch) => {
               dataType:'json',
               timeout:'3000',
               success:function(data){
-               console.log(data)
-               console.log('上面的是所有的风场')
+             
                  for(var i in data.data){
                         windIds.push(i);
                  }
@@ -170,13 +177,13 @@ const mapDispatchToProps = (dispatch) => {
             
               },
               error:function(){
-                  alert(2)
+                  
               },
             });
             // 根据风场找PBA空间
             $.ajax({
               type:'post',
-              url:'http://10.9.99.239:8080/wbi/PBA/getWFliedArea',  
+              url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
               async:false,
               data:{
                'wfid':150801,
@@ -200,20 +207,16 @@ const mapDispatchToProps = (dispatch) => {
                      PBASpaceFirstLimitloss.push(limitloss);
                      var nodevreasonloss=PBASpaceFirstPba[i].nodevreasonloss;
                      PBASpaceFirstNodevreasonloss.push(nodevreasonloss);
-                     var pba=Number(PBASpaceFirstPba[i].pba.toFixed(2));
-                     PBASpaceFirstPba.push(pba);
+                     var pba=PBASpaceFirstPba[i].pba
+                     PBASpaceFirstPbaP.push(pba);
                 }
+           
          
-                 // for(var i in data.data){
-                 //        windIds.push(i);
-                 // }
-                 // console.log(windIds)
-
-              // 获取x轴的值内蒙达茂天润风电场
+               
             
               },
               error:function(){
-                  alert(2)
+               
               },
             });
             // 将初始化月份赋值
@@ -223,7 +226,7 @@ const mapDispatchToProps = (dispatch) => {
            dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceFirstLimitloss));
            dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFirstFaultloss ));
            dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceFirstNodevreasonloss ));
-           dispatch(actions.setVars('PBASpaceFirstPba12',PBASpaceFirstPba ));
+           dispatch(actions.setVars('PBASpaceFirstPba12',PBASpaceFirstPbaP ));
            dispatch(actions.setVars('actbt',month-1 ));
         }
         ,
@@ -245,7 +248,7 @@ const mapDispatchToProps = (dispatch) => {
              var PBASpacePbaPBA=[];
              $.ajax({
               type:'post',
-              url:'http://10.9.99.239:8080/wbi/PBA/getWFliedArea',  
+              url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
               async:false,
               data:{
                'wfid':150801,
@@ -254,8 +257,7 @@ const mapDispatchToProps = (dispatch) => {
               dataType:'json',
               timeout:'3000',
               success:function(data){
-                console.log(key);
-                  console.log(data);
+            
                 var PBASpacePba=data.data;
                  for  ( var  i=0;i<10;i++){
                       var wtname=PBASpacePba[i].wtname;
@@ -274,13 +276,11 @@ const mapDispatchToProps = (dispatch) => {
 
                       PBASpacePbaPBA.push(pba);
                  }
-                 console.log(7)
-             
-             console.log(PBASpacePoweract);
+               
             
               },
               error:function(){
-                  alert(2)
+               
               },
             });
             // 将变化月份赋值
@@ -306,7 +306,7 @@ const mapDispatchToProps = (dispatch) => {
              var PBASpacePbaPBA=[];
              $.ajax({
               type:'post',
-              url:'http://10.9.99.239:8080/wbi/PBA/getWFliedArea',  
+              url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
               async:false,
               data:{
                'wfid':150801,
@@ -315,8 +315,7 @@ const mapDispatchToProps = (dispatch) => {
               dataType:'json',
               timeout:'3000',
               success:function(data){
-                console.log(key);
-                  console.log(data);
+             
                 var PBASpacePba=data.data;
                  for  ( var  i=0;i<10;i++){
                       var wtname=PBASpacePba[i].wtname;
@@ -337,11 +336,11 @@ const mapDispatchToProps = (dispatch) => {
                  }
                
              
-             console.log(PBASpaceWtname);
+          
             
               },
               error:function(){
-                  alert(2)
+                
               },
             });
             // 将变化月份赋值
@@ -367,7 +366,7 @@ const mapDispatchToProps = (dispatch) => {
              var PBASpacePbaPBA=[];
              $.ajax({
               type:'post',
-              url:'http://10.9.99.239:8080/wbi/PBA/getWFliedArea',  
+              url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
               async:false,
               data:{
                'wfid':150801,
@@ -376,11 +375,10 @@ const mapDispatchToProps = (dispatch) => {
               dataType:'json',
               timeout:'3000',
               success:function(data){
-                console.log(key);
+            
 
                 var PBASpacePba=data.data;
-                  console.log(PBASpacePba);
-                  console.log(PBASpacePba.length);
+                
                   var length=PBASpacePba.length-10;
 
                  for  ( var i = length;i>length-10;i--){
@@ -402,12 +400,12 @@ const mapDispatchToProps = (dispatch) => {
                  }
                
 
-             console.log(PBASpaceWtname);
+            
             
             
               },
               error:function(){
-                  alert(2)
+                  
               },
             });
             // 将变化月份赋值
@@ -434,7 +432,7 @@ const mapDispatchToProps = (dispatch) => {
              var PBASpacePbaPBA=[];
              $.ajax({
               type:'post',
-              url:'http://10.9.99.239:8080/wbi/PBA/getWFliedArea',  
+              url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
               async:false,
               data:{
                'wfid':150801,
@@ -443,8 +441,7 @@ const mapDispatchToProps = (dispatch) => {
               dataType:'json',
               timeout:'3000',
               success:function(data){
-                console.log(key);
-                  console.log(data);
+                
                 var PBASpacePba=data.data;
                  for  ( var i in PBASpacePba){
                       var wtname=PBASpacePba[i].wtname;
@@ -463,18 +460,21 @@ const mapDispatchToProps = (dispatch) => {
 
                       PBASpacePbaPBA.push(pba);
                  }
-               
-             var PBASpaceWtnamee=PBASpaceWtname.reverse();
-             console.log(PBASpaceWtname);
+             
+             
+           
+
             
             
               },
               error:function(){
-                  alert(2)
+                  
               },
             });
             // 将变化月份赋值
        dispatch(actions.setVars('PBASpaceWtname11',PBASpaceWtname));
+       
+      // dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
        dispatch(actions.setVars('PBASpaceFirstPoweract11',PBASpacePoweract ));
        dispatch(actions.setVars('PBASpaceFirstMaintainloss11',PBASpaceMaintainloss ));
        dispatch(actions.setVars('PBASpaceFirstLimitloss11',PBASpaceLimitloss));

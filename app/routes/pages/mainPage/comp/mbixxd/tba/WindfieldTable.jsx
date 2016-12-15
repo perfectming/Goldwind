@@ -11,7 +11,7 @@ let Component = React.createClass({
     render() {
 
       let {PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA}=this.props;
-        
+     
         let configPie = {
             chart: {
                 height:370,

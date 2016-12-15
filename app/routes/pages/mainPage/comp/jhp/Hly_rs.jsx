@@ -83,6 +83,9 @@ let Component = React.createClass({
                     borderWidth: 0,
                     pointWidth:20,
                     borderRadius: 4,
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
                 }
             },
             xAxis: {

@@ -52,8 +52,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.yf}%</b>"
+                valueSuffix:'kWh'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -118,7 +117,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text:'(100%)',
+                    text:'kWh',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -129,7 +128,7 @@ let Component = React.createClass({
                     }
                 },
                 labels: {
-                    title:'kW',
+                    title:'kWh',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
