@@ -26,8 +26,10 @@ let Component = React.createClass({
             let moddata=jydata.ModelData;
             let arr1=[];
             let arr2=[];
-
-
+            let arr1agc=[moddata["150801702"].AGCState,moddata["150828702"].AGCState];
+            let arr1avc=[moddata["150801703"].AVCState,moddata["150828703"].AVCState];
+            let arr2agc=[moddata["150801704"].AGCState,moddata["150812801"].AGCState];
+            let arr2avc=["",moddata["150812801"].AVCState];
             (function(){
                 for(let i in modens){
                     if ( modens[i].wft=='Wf'){
@@ -49,9 +51,9 @@ let Component = React.createClass({
                                         <div className={styles.lasttt}>装机容量 : {[(moddata[value].Capacity*0.001).toFixed(2)]} <span className={styles.lastttt}>MW</span></div>
                                         <div className={styles.lasttt}>计划功率 : {[(moddata[value].PlanActPower*0.001).toFixed(0)]} <span className={styles.lastttt}>MW</span></div>
                                         <div className={styles.lasttt}>负荷 : {[(moddata[value].Transformer_P*0.001).toFixed(2)]} <span className={styles.lastttt}>MW</span></div>
-                                        <div className={styles.lasttt}>AVC/AGC :
-                                            <div className={moddata[value].AVC=='#669999'?styles.succ:(moddata[value].AVC=='#FF0000'?styles.defa:styles.cutD)}></div>
-                                            <div className={moddata[value].AGC=='#669999'?styles.succ:(moddata[value].AGC=='#FF0000'?styles.defa:styles.cutD)}></div>
+                                        <div className={styles.lasttt}>AGC/AVC :
+                                            <div className={arr1agc[key]=='#669999'?styles.succ:(arr1agc[key]=='#FF0000'?styles.defa:styles.cutD)}></div>
+                                            <div className={arr1avc[key]=='#669999'?styles.succ:(arr1avc[key]=='#FF0000'?styles.defa:styles.cutD)}></div>
                                         </div>
                                     </div>
                                     <div className={styles.mainn}>
@@ -72,9 +74,9 @@ let Component = React.createClass({
                                         <div className={styles.lasttt}>装机容量 : {[(moddata[value].Capacity*0.001).toFixed(2)]} <span className={styles.lastttt}>MW</span></div>
                                         <div className={styles.lasttt}>计划功率 : {[(moddata[value].PlanActPower*0.001).toFixed(0)]} <span className={styles.lastttt}>MW</span></div>
                                         <div className={styles.lasttt}>负荷 : {[(moddata[value].Transformer_P*0.001).toFixed(2)]} <span className={styles.lastttt}>MW</span></div>
-                                        <div className={styles.lasttt}>AVC/AGC :
-                                            <div className={moddata[value].AVC=='#669999'?styles.succ:(moddata[value].AVC=='#FF0000'?styles.defa:styles.cutD)}></div>
-                                            <div className={moddata[value].AGC=='#669999'?styles.succ:(moddata[value].AGC=='#FF0000'?styles.defa:styles.cutD)}></div>
+                                        <div className={styles.lasttt}>AGC/AVC :
+                                            <div className={arr2agc[key]=='#669999'?styles.succ:(arr2agc[key]=='#FF0000'?styles.defa:styles.cutD)}></div>
+                                            <div className={arr2avc[key]=='#669999'?styles.succ:(arr2avc[key]=='#FF0000'?styles.defa:styles.cutD)}></div>
                                         </div>
                                     </div>
                                     <div className={styles.mainn}>
