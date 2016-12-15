@@ -98,7 +98,7 @@ let Component = React.createClass({
                                                     return (
                                                         <div className={styles.tableContentItem}
                                                              style={{width:contentSize[keyC]+'%'}}
-                                                             key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#FF0000'?styles.succ:(data[value+'801'][valueC]=='#669999'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                             key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#669999'?styles.succ:(data[value+'801'][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
                                                     )
                                                 }else if(keyC==3){
                                                     return (
@@ -110,13 +110,13 @@ let Component = React.createClass({
                                                     return (
                                                         <div className={styles.tableContentItem}
                                                              style={{width:contentSize[keyC]+'%'}}
-                                                             key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#FF0000'?styles.succ:(data[value+'801'][valueC]=='#669999'?styles.defa:styles.cutD)):(data['150801704'][valueC]=='#FF0000'?styles.succ:(data['150801704'][valueC]=='#669999'?styles.defa:styles.cutD))}></div></div>
+                                                             key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#669999'?styles.succ:(data[value+'801'][valueC]=='#FF0000'?styles.defa:styles.cutD)):(data['150801704'][valueC]=='#669999'?styles.succ:(data['150801704'][valueC]=='#FF0000'?styles.defa:styles.cutD))}></div></div>
                                                     )
                                                 }else if(keyC==4){
                                                 return (
                                                     <div className={styles.tableContentItem}
                                                            style={{width:contentSize[keyC]+'%'}}
-                                                           key={keyC}>{value=='150811'?(data['150801301'][valueC]*10%1000==0?data['150801301'][valueC]/1000:(data['150801301'][valueC]/1000).toFixed(2)):(data['150812901'][valueC]*10%1000==0?data['150812901'][valueC]/1000:(data['150812901'][valueC]/1000).toFixed(2))}</div>
+                                                           key={keyC}>{value=='150811'?(data['150801704'][valueC]*10%1000==0?data['150801704'][valueC]/1000:(data['150801704'][valueC]/1000).toFixed(2)):(data['150812801'][valueC]*10%1000==0?data['150812801'][valueC]/1000:(data['150812801'][valueC]/1000).toFixed(2))}</div>
                                                 )}else{
                                                     return (
                                                         <div className={styles.tableContentItem}
@@ -141,19 +141,19 @@ let Component = React.createClass({
                                             return (
                                                 <div className={styles.tableContentItem}
                                                      style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#FF0000'?styles.succ:(data[value+'801'][valueC]=='#669999'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                     key={keyC}><div className={data[value+'703'][valueC]=='#FF0000'?styles.succ:(data[value+'703'][valueC]=='#669999'?styles.defa:styles.cutD)}></div></div>
                                             )
                                         }else if(keyC==1||keyC==2){
                                             return (
                                                 <div className={styles.tableContentItem}
                                                      style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#FF0000'?styles.succ:(data[value+'801'][valueC]=='#669999'?styles.defa:styles.cutD)):(data['150801704'][valueC]=='#FF0000'?styles.succ:(data['150801704'][valueC]=='#669999'?styles.defa:styles.cutD))}></div></div>
+                                                     key={keyC}><div className={data[value+'702'][valueC]=='#FF0000'?styles.succ:(data[value+'702'][valueC]=='#669999'?styles.defa:styles.cutD)}></div></div>
                                             )
                                         }else if(keyC==4){
                                             return (
                                                 <div className={styles.tableContentItem}
                                                      style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}>{value=='150811'?(data['150801301'][valueC]*10%1000==0?data['150801301'][valueC]/1000:(data['150801301'][valueC]/1000).toFixed(2)):(data['150812901'][valueC]*10%1000==0?data['150812901'][valueC]/1000:(data['150812901'][valueC]/1000).toFixed(2))}</div>
+                                                     key={keyC}>{data[value+'702'][valueC]*10%1000==0?data[value+'702'][valueC]/1000:(data[value+'702'][valueC]/1000).toFixed(2)}</div>
                                             )}else{
                                             return (
                                                 <div className={styles.tableContentItem}
