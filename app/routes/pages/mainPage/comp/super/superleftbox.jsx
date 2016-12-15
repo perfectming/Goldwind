@@ -58,11 +58,11 @@ let Component = React.createClass({
                          <Title title={['风场指标',]}></Title>
                          <div className={styles.wind}>
                             <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.WFCount.name}</a><a className={styles.anum}><b>{data2[8888801].WFCount}</b>个</a></span>
-                            <span className={styles.num2} onClick = {()=> chooseALL()}><a className={styles.anum1}>{mod1.dis.WTCount.name}</a><a className={styles.anum}><b>{data2[8888800].WTCount}</b>台</a></span>
+                            <span className={styles.num2} id='allwi' style={{cursor:'pointer'}} onClick = {()=> chooseALL()}><a className={styles.anum1}>{mod1.dis.WTCount.name}</a><a className={styles.anum}><b>{data2[8888800].WTCount}</b>台</a></span>
                             <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{Number(data2[8888800].WindSpeed_DevAverValue).toFixed(2)=='NaN' ? '--' : Number(data2[8888800].WindSpeed_DevAverValue).toFixed(2)}</b>{mod1.dis.WindSpeed_DevAverValue.unit}</a></span>
                           
                          </div>
-                          <div className={styles.wind}>
+                          <div className={styles.wind} id='wind'>
                              <div className={styles.box} style={{color:mod.dis.ONL.color}} onClick = {()=> chooseONL()}>
                                 <span className={styles.block}><img src={icon0}/></span>
                                 <span className={styles.contect}>{mod.dis.ONL.name}</span>
@@ -107,11 +107,11 @@ let Component = React.createClass({
                         <Title title={['光伏指标']}></Title>
                          <div className={styles.wind}>
                             <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVCount.name}</a><a className={styles.anum}><b>{data2[8888802].PVCount}</b>个</a></span>
-                            <span className={styles.num2} onClick = {()=> choosePVALL()}><a className={styles.anum1}>{mod1.dis.InverterCount.name}</a><a className={styles.anum}><b>{data2[8888802].InverterCount}</b>台</a></span>
+                            <span className={styles.num2} id='allpv' style={{cursor:'pointer'}} onClick = {()=> choosePVALL()}><a className={styles.anum1}>{mod1.dis.InverterCount.name}</a><a className={styles.anum}><b>{data2[8888802].InverterCount}</b>台</a></span>
                             <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{data2[8888802].PVTSI_Aver ==='null' ? '--':Number(data2[8888802].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></span>
                           
                          </div>
-                        <div className={styles.spedc}>
+                        <div className={styles.spedc} id='specd'>
 
 
                             <div className={`${styles.box} ${styles.box1}`} style={{color:mod.dis.PVONL.color}} onClick ={()=> choosePVONL()}>
@@ -180,6 +180,19 @@ const mapDispatchToProps = (dispatch) => {
     return {
 
         init: () => {
+            $('#wind>div').on('click',function(){
+                $(this).css('font-size','16px').siblings().css('font-size','14px')
+            })
+             $('#specd>div').on('click',function(){
+                $(this).css('font-size','16px').siblings().css('font-size','14px')
+            })
+              $('#allpv').on('click',function(){
+                $('#specd>div').css('font-size','14px')
+            })
+             $('#allwi').on('click',function(){
+                $('#wind>div').css('font-size','14px')
+            })
+             
             var obj = {
                 test:''
             }

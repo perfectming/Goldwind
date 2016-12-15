@@ -6,9 +6,9 @@ import Pie2 from '../../mxx/Pie2';
 
 var actions = require('redux/actions');
 
-let ipUrl='10.68.100.32:8080';
+let ipUrl='192.168.31.148:8080';
 let actbt=0,wfName=[],wfId=[],areaId=[],wfTheory,wfAct,wtArr=[],wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct; 
-let month=[],monthAct=[],monthPlan=[],month2,income,cost;
+let month=[],monthAct=[],monthPlan=[],month2,income,cost,runTime,downTime,TBA;
 
 let Component = React.createClass({
 	componentWillMount() {
@@ -61,12 +61,12 @@ let Component = React.createClass({
            				</div>
            				<div className={`${styles.sectionSmall} ${styles.boxShadow}`}>
            					<div className={styles.sectionbar}>
-           						<span>可用<br/>100h <br/>统计<br/>200h</span>
+           						<span>可用<br/>{runTime}h <br/>统计<br/>{downTime}h</span>
            					</div>
            					<div className={styles.sectionfour}>
            						<div className={styles.pie}>
-           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{50}%</p>TBA</span>
-           						<Pie2 color={['#d06960','#39565e']} num={[15,15]}></Pie2>
+           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{TBA}%</p>TBA</span>
+           						<Pie2  color={TBA>1? ['#1fe005','#fbd500']:TBA>0.8?['#fbd500','#39565e']:TBA>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[runTime,downTime]}></Pie2>
            						</div>
            						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>
            						<a className={styles.time} onClick={()=>changepageTBAT()}></a>
@@ -292,24 +292,23 @@ const mapDispatchToProps = (dispatch) => {
 				　　　　}
 				　　},
 			});
-//			$.ajax({
-//      		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA-YES
-//		        type: 'post',
-//		        async:false,
-//		        data:{'wfid':wfId[0]},
-//		        dataType: 'json',//here
-//		        success:function (data) {
-//		        	console.log(data);
-//		        	runTime=data.data[0].runtimes;
-//		        	downTime=data.data[0].downtimes;
-//		        	TBA=data.data[0].tba;
-//		        },
-//		        complete : function(XMLHttpRequest,status){ 
-//			　　　　if(status=='timeout'){
-//			　　　　　 alert('超时');
-//			　　　　}
-//			　　},
-//		    });
+			$.ajax({
+        		url: 'http://'+ipUrl+'/wbi/TBA/getWfLastMonthTBA',//TBA-YES
+		        type: 'post',
+		        async:false,
+		        data:{'wfid':wfId[0]},
+		        dataType: 'json',//here
+		        success:function (data) {
+		        	runTime=data.data[0].runtimes;
+		        	downTime=data.data[0].downtimes;
+		        	TBA=data.data[0].tba;
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		    });
     	},
         init: () => {
             var obj = {
@@ -396,6 +395,23 @@ const mapDispatchToProps = (dispatch) => {
 				　　　　}
 				　　},
 			});
+			$.ajax({
+        		url: 'http://'+ipUrl+'/wbi/TBA/getWfLastMonthTBA',//TBA-YES
+		        type: 'post',
+		        async:false,
+		        data:{'wfid':wfId[key]},
+		        dataType: 'json',//here
+		        success:function (data) {
+		        	runTime=data.data[0].runtimes;
+		        	downTime=data.data[0].downtimes;
+		        	TBA=data.data[0].tba;
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		    });
 
         },
         changepageHealthyT:()=>{

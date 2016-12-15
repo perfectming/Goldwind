@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
+let input_url="10.68.100.32";
 let data = require('./Profit-data');
 let winss=data.areaPlanDayY;
 let fanCost=data.fanCost;
@@ -86,7 +86,7 @@ let Component = React.createClass({
                       var PBATimeSecondPbaP=[];
                         $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/PBA/getWfieldDayPBA',
+                url:'http://'+input_url+':8080/wbi/PBA/getWfieldDayPBA',
                 async:false,
                 data:{
                     'wfid':150801,
@@ -95,8 +95,7 @@ let Component = React.createClass({
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                  console.log(w0)
-                 console.log(data)
+                 
 
                      var PBATimeSecondPba=data.data;
                       for ( var i in PBATimeSecondPba){
@@ -117,7 +116,7 @@ let Component = React.createClass({
                       }
                 },
                 error:function(){
-                    alert(2)
+                   
                 },
 
             });
@@ -174,7 +173,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: 'PBA%',
+                text: '100%',
                  align:'high',
                 rotation:'0',
                 y: -15,

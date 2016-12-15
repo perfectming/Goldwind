@@ -8,7 +8,7 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let monthT=data.monthT;
 var date=new Date;
-let input_url='10.9.99.239:8080';
+let input_url="10.68.100.32";
 var month=date.getMonth();
 let profit=data.windProfit;
 let cost=data.windCost;
@@ -98,7 +98,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: () => {
-        console.log(month);
+       
           // 第一个图的数据
             var PBATimeFirstMonth=[];
             var PBATimeFirstPoweract=[];
@@ -117,7 +117,7 @@ const mapDispatchToProps = (dispatch) => {
             var PBATimeSecondPbaP=[];
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32/wbi/PBA/getWfieldMonthPBA',
+                url:'http://'+input_url+':8080/wbi/PBA/getWfieldMonthPBA',
                 async:false,
                 data:{
                     'wfid':150801,
@@ -126,7 +126,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                 console.log(data)
+                
                      var PBATimeFirstPba=data.data;
                      for ( var i in PBATimeFirstPba){
                          var month=PBATimeFirstPba[i].month;
@@ -144,17 +144,11 @@ const mapDispatchToProps = (dispatch) => {
                          var pba=Number(PBATimeFirstPba[i].pba.toFixed(2));
                          PBATimeFirstPbaP.push(pba);
                      }
-                     console.log(PBATimeFirstMonth)
-                    console.log(PBATimeFirstPoweract)
-                    console.log(PBATimeFirstFaultloss)
-                    console.log(PBATimeFirstMaintainloss)
-                    console.log(PBATimeFirstLimitloss)
-                    console.log(PBATimeFirstNodevreasonloss)
-                    console.log(PBATimeFirstPbaP)
+                  
 
                 },
                 error:function(){
-                    alert(222)
+                   
                 },
             });
             // 给12月赋值
@@ -169,7 +163,7 @@ const mapDispatchToProps = (dispatch) => {
            // 给第二个图赋初值
              $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/PBA/getWfieldDayPBA',
+                url:'http://'+input_url+':8080/wbi/PBA/getWfieldDayPBA',
                 async:false,
                 data:{
                     'wfid':150801,
@@ -178,7 +172,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                 console.log(data)
+              
                      var PBATimeSecondPba=data.data;
                      for ( var i in PBATimeSecondPba){
                          var day=PBATimeSecondPba[i].day;
@@ -198,9 +192,7 @@ const mapDispatchToProps = (dispatch) => {
                      }
                 },
                 error:function(){
-                    alert(234)
-                    console.log(month)
-                    console.log('http://10.68.100.32:8080/wbi/PBA/getWfieldDayPBA')
+                   
                 },
 
             });
@@ -211,7 +203,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBATimeSecondFaultloss1',PBATimeSecondFaultloss ));
             dispatch(actions.setVars('PBATimeSecondNodevreasonloss1',PBATimeSecondNodevreasonloss ));
             dispatch(actions.setVars('PBATimeSecondPba12',PBATimeSecondPbaP ));
-             dispatch(actions.setVars('w0',month));
+             dispatch(actions.setVars('windpbaspace',11));
 
         }
         ,

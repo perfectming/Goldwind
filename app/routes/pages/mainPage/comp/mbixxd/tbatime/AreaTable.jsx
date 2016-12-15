@@ -4,7 +4,7 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let data = require('./Profit-data');
 var $=require('jquery');
-
+let input_url="10.68.100.32";
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -77,15 +77,15 @@ let Component = React.createClass({
                          var tbaDayTba=[];
                         $.ajax({
                      type:'post',
-                     url:'http://10.68.100.32:8080/wbi/TBA/getDaysTBAByMonth',
+                     url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByMonth',
                      async:false,
                      dataType:'json',
                      data:{
-                      'month':TBAindex+2,
+                      'month':TBAindex+1,
                      },
                      timeout:'3000',
                      success:function(data){
-                     console.log(data);
+                    
                         var  TBAdaydata=data.data; 
                           for(var i in TBAdaydata){
                             var tbaDay=TBAdaydata[i].day;
@@ -156,7 +156,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: 'TBA%',
+                text: '100%',
                 align:'high',
                 rotation:'0',
                y:-15,
@@ -169,7 +169,7 @@ let Component = React.createClass({
             opposite: true
         }],
             series: [{
-                name: '实际运行时间',
+                name: '运行时间',
                 type: 'column',
                 data: areaRecordProfitt,
                
@@ -216,7 +216,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
         },
         changedataDay:(tbaTime,b,tbaDays,tbaDayRunTimes,tbaDayDownTimes,tbaDayTba)=>{
-            dispatch(actions.setVars('tbaTime1',tbaTime ));
+            dispatch(actions.setVars('qwe',tbaTime ));
             dispatch(actions.setVars('tbaDays31',tbaDays ));
             dispatch(actions.setVars('tbaDayRunTimes31',tbaDayRunTimes ));
             dispatch(actions.setVars('tbaDayDownTimes31',tbaDayDownTimes ));

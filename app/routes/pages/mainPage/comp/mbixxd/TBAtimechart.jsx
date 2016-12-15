@@ -142,7 +142,7 @@ let Component = React.createClass({
             opposite: true
         }],
             series: [{
-                name: '实际运行时间',
+                name: '运行时间',
                 type: 'column',
                 data: profit,
                 color:'#33BAC0',
