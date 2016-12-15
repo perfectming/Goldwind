@@ -77,10 +77,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         
-        ajax: () => {
-           console.log(1);
+       
+          
            ajax: () => {
-           console.log(1);
+           
             var arr1=[];
             var arr2=[];
             var arr3=[];
@@ -120,7 +120,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('windP',arr2));
 
           
-        }
+        
         
         }
         ,
