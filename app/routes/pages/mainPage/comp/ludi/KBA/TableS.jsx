@@ -73,7 +73,7 @@ let Component = React.createClass({
                 },
                 categories:wfName,
             },
-            yAxis: {
+            yAxis: [{
                 title:{
                 	text:'万kWh',
                 	align: 'high',
@@ -94,11 +94,36 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-            },
+            },{
+            	title:{
+                	text:'%',
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -10,
+	                x:-10,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+               },
+               labels: {
+                	format:'{value}%',
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
+                    }
+                },
+               opposite: true
+            }],
             series: [{
             	name: '实际发电量',
             	type: 'column',
                 data: wfElec,
+                tooltip: {
+	                valueSuffix: '万kWh'
+	            },
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
@@ -109,6 +134,9 @@ let Component = React.createClass({
                 name: '损失发电量',
                 type: 'column',
                 data: wfLose,
+                tooltip: {
+	                valueSuffix: '万kWh'
+	            },
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
@@ -119,6 +147,9 @@ let Component = React.createClass({
             	name: 'PBA',
             	type: 'spline',
                 data: wfPBA,
+                tooltip: {
+	                valueSuffix: '%'
+	            },
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
