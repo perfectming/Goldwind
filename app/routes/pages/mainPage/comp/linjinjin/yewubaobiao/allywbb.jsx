@@ -4,6 +4,7 @@ import styles from './allywbb.scss';
 import Generating1 from './Generating/ywbb.jsx';
 import Electric_table from './Generating/Electric_table.jsx';
 import Completion from './Generating/Completion.jsx';
+import Lose_detail from './lose_electtict/lose_detail.jsx';
 var $ =require('jquery');
 var actions = require('redux/actions');
 let paged = require('./pagedate');
@@ -17,7 +18,7 @@ let Component = React.createClass({
    
 
     render() {
-         let {changenavItem,navitem=0,num=0,item=0,changeItem,showbb='ywbb'} = this.props;
+         let {changenavItem,navitem=0,num=0,item=0,changeItem,showbb} = this.props;
         return (
             <div className={styles.bodybox} >
                 <div className={styles.navbox}>
@@ -45,6 +46,7 @@ let Component = React.createClass({
                { showbb==='ywbb' && <Generating1></Generating1>}
                { showbb==='Electric_table' && <Electric_table></Electric_table>}
                { showbb==='Completion' && <Completion></Completion>}
+               { showbb==='lose_detail' && <Lose_detail></Lose_detail>}
             </div>
         );
     }
@@ -64,7 +66,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            
+            dispatch(actions.setVars('showbb', 'ywbb'));
+            dispatch(actions.setVars('item', 0));
+            dispatch(actions.setVars('navitem', 0));
+            dispatch(actions.setVars('num', 0));
         },
         changenavItem:(key,page)=>{
          dispatch(actions.setVars('navitem', key));
