@@ -84,6 +84,7 @@ let Component = React.createClass({
                 }
             },
             legend: {
+                itemHoverStyle:{color:'#2ff4fb'},
                 align:"right",
                 verticalAlign: "top",
                 y:-10,

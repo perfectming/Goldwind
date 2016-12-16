@@ -8,7 +8,7 @@ var {getState} = require('../../../../../redux/store');
 import save from '../../img/comp/save.png';
 import refresh from '../../img/comp/refresh.png';
 
-let nam=['Capacity','AGCState','zd','AGCActPower','TActPower','AVCState','zd','jh','fh'];
+let nam=['Capacity','AGCState','zd','AGCActPower','TActPower','AVCState','zd','AVCGoalValue','Transformer_Q'];
 let header=['场站名称','装机容量MW','AGC系统','AVC系统'];
 let headerSize=[14,14,36,36];
 let contentSize=[14,9,9,9,9,9,9,9,9];
@@ -33,6 +33,7 @@ let Component = React.createClass({
                     arr2.push(i);
                 }
             }
+            console.log(data,mode);
         return (
             <div>
                 <div className={styles.actionBox}>
@@ -99,7 +100,13 @@ let Component = React.createClass({
                                                              style={{width:contentSize[keyC]+'%'}}
                                                              key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#669999'?styles.succ:(data[value+'801'][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
                                                     )
-                                                }else if(keyC==3){
+                                                }else if(keyC==7||keyC==8){
+                                                    return (
+                                                        <div className={styles.tableContentItem}
+                                                             style={{width:contentSize[keyC]+'%'}}
+                                                             key={keyC}>{value=='150811'?'--':data['150812801'][valueC]}</div>
+                                                    )
+                                                } else if(keyC==3){
                                                     return (
                                                         <div className={styles.tableContentItem}
                                                              style={{width:contentSize[keyC]+'%'}}
@@ -140,13 +147,31 @@ let Component = React.createClass({
                                             return (
                                                 <div className={styles.tableContentItem}
                                                      style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}><div className={data[value+'703'][valueC]=='#FF0000'?styles.succ:(data[value+'703'][valueC]=='#669999'?styles.defa:styles.cutD)}></div></div>
+                                                     key={keyC}><div className={data[value+'703'][valueC]=='#669999'?styles.succ:(data[value+'703'][valueC]=='#FF0000'?styles.defa:styles.cutD)}></div></div>
+                                            )
+                                        }else if(keyC==3){
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:contentSize[keyC]+'%'}}
+                                                     key={keyC}>{data[value+'702'][valueC]}</div>
+                                            )
+                                        }else if(keyC==7){
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:contentSize[keyC]+'%'}}
+                                                     key={keyC}>{data[value+'703'][valueC]}</div>
+                                            )
+                                        }else if(keyC==8){
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:contentSize[keyC]+'%'}}
+                                                     key={keyC}>{value=='150801'?data[value+'703']['Transformer_Q_BMCJGF']:data[value+'703'][valueC]}</div>
                                             )
                                         }else if(keyC==1||keyC==2){
                                             return (
                                                 <div className={styles.tableContentItem}
                                                      style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}><div className={data[value+'702'][valueC]=='#FF0000'?styles.succ:(data[value+'702'][valueC]=='#669999'?styles.defa:styles.cutD)}></div></div>
+                                                     key={keyC}><div className={data[value+'702'][valueC]=='#669999'?styles.succ:(data[value+'702'][valueC]=='#FF0000'?styles.defa:styles.cutD)}></div></div>
                                             )
                                         }else if(keyC==4){
                                             return (
