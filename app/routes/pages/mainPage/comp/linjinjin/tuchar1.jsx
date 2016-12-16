@@ -18,7 +18,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                marginTop:10,
+                marginTop:0,
             },
             title: {
                 text:'',
@@ -44,8 +44,8 @@ let Component = React.createClass({
                     color: '#333',
                     fontSize: '14px',
                     fontFamily:'微软雅黑'
-                }
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br>数值：<b>{point.y}</b><h6 style="font-size:12px">万kWh</h6>'
                 // pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
@@ -70,7 +70,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '{point.name}',
+                        format: '{point.name}:<b>{point.percentage:.1f}%</b>',
                            style: {
                                     color: "#d1d2d3",
                                     fontSize: '14px',

@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
+        let {text,areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
          
         let configPie = {
             chart: {
@@ -22,14 +22,15 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                 top:'-20px',
+                y:20,
                 vertical:'top',
                  x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                     fontWeight:700,
                 }
@@ -37,6 +38,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
+                y:50,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{

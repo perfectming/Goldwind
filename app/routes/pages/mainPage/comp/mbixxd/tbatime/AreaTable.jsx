@@ -66,15 +66,15 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                          var   tbaTime=e.point.category;
-                            var TBAindex=e.point.index;
+                          let   tbaTime=e.point.category;
+                            let TBAindex=e.point.index;
                            
-                        var  a=tbaTime.toString().split("");
-                        var b=a[0];
-                        var tbaDays=[];
-                         var tbaDayRunTimes=[];
-                        var tbaDayDownTimes=[];
-                         var tbaDayTba=[];
+                        let  a=tbaTime.toString().split("");
+                        let b=a[0];
+                        let tbaDays=[];
+                         let tbaDayRunTimes=[];
+                        let tbaDayDownTimes=[];
+                         let tbaDayTba=[];
                         $.ajax({
                      type:'post',
                      url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByMonth',
@@ -86,15 +86,15 @@ let Component = React.createClass({
                      timeout:'3000',
                      success:function(data){
                     
-                        var  TBAdaydata=data.data; 
-                          for(var i in TBAdaydata){
-                            var tbaDay=TBAdaydata[i].day;
+                        let  TBAdaydata=data.data; 
+                          for(let i in TBAdaydata){
+                            let tbaDay=TBAdaydata[i].day;
                             tbaDays.push(tbaDay);
-                            var tbaDayruntimes=TBAdaydata[i].runtimes;
+                            let tbaDayruntimes=TBAdaydata[i].runtimes;
                             tbaDayRunTimes.push(tbaDayruntimes);
-                            var daydowntimes=TBAdaydata[i].downtimes;
+                            let daydowntimes=TBAdaydata[i].downtimes;
                             tbaDayDownTimes.push(daydowntimes);
-                            var tba=TBAdaydata[i].tba;
+                            let tba=TBAdaydata[i].tba;
                             tbaDayTba.push(tba);
 
 
@@ -207,7 +207,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-         tbaTime : state.vars.tbaTime1,
+         tbaTime : state.Vars.tbaTime1,
     }
 };
 

@@ -20,7 +20,8 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                height:300
+                height:300,
+                marginLeft:40,
             },
             title: {
                 text: ''
@@ -50,11 +51,12 @@ let Component = React.createClass({
                     size: '50%',
                     innerSize: '60%',
                     dataLabels: {
+                        x:10,
                         enabled: true,
-                        format: '{point.name}',
+                        format: '{point.name}:<b>{point.percentage:.1f}%</b>',
                            style: {
                                     color: "#d1d2d3",
-                                    fontSize: '14px',
+                                    fontSize: '13px',
                                     fontFamily:"微软雅黑"
 
                                 },

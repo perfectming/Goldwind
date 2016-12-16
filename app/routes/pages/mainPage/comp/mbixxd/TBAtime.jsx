@@ -6,16 +6,7 @@ import TBAtimechartt from './TBAtimechartt.jsx';
 import icono from './img/TBA.png';;
 var actions = require('redux/actions');
 let data=require('./Profit-data');
-let month=data.month;
-let button=data.button;
-let areaName=data.areaName;
-let areaRecordCost=data.areaRecordCost;
-let areaPlan=data.areaPlan;
-let montht=data.monthT;
-let profit=data.windProfit;
-let cost=data.windCost;
-let areaPlanDay=data.areaPlanDay;
-let areaPlanDayT=data.areaPlanDayT;
+let input_url="10.68.100.32";
 let Component = React.createClass({
     componentWillMount() {
         this.props.ajax();
@@ -25,34 +16,23 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0='1月',winss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
+        let {changedata2,TBA,TBAAA,montht,profit,cost,areaPlan,areaPlanDay,areaPlanDayT,w0='1月',winss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
         return (
             <div className={`${styles.box} ${styles.shadow}`}>
              <div className={styles.padding}>
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windceebox}>
-                            <div>
-                            <p className={styles.titlee}>风场TBA</p>>
-                                <TBAtimechart montht={montht} profit={profit} cost={cost}></TBAtimechart>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.imgqq}>
+ 
+                       <div className={styles.imgqq}>
                         <img  className={styles.img}src={icono}/>
-                    </div>
-                    
+                       </div>
+                          <TBAtimechart montht={montht} profit={profit} cost={cost} TBA={TBA} height={420}></TBAtimechart>
+   
                 </div>
-                 <div className={styles.bigbox}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
-                            <div>
-                             <p className={styles.titlee}>{w0+'每日TBA'}</p>>
-                                <TBAtimechartt areaPlan={areaPlan} areaPlanDay={winss==null?areaPlanDay:winss} areaPlanDayT={areaPlanDayT}></TBAtimechartt>
-                            </div>
-                        </div>
-                    </div>
+                   <div className={styles.bigbox}>
+           
+                                <TBAtimechartt areaPlan={areaPlan} areaPlanDay={areaPlanDay} areaPlanDayT={areaPlanDayT} TBA={TBAAA}height={420}></TBAtimechartt>
+
                      <div className={styles.imgqq}>
                         <img  className={styles.img}src={icono}/>
                     </div>
@@ -68,60 +48,118 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        w0 : state.vars.w1,
+       
         winss: state.vars.wins1,
-        
+        // 初始化
+        montht:state.vars.wTBAMonth1,
+        profit:state.vars.wTBARun1,
+        cost:state.vars.wTBADown1,
+        TBA:state.vars.wTBAT1,
+        //每天的
+        areaPlan:state.vars.wTBADaD1,
+        areaPlanDay:state.vars.wTBARunD1,
+        areaPlanDayT:state.vars.wTBADownD1,
+        TBAAA:state.vars.wTBATD1, 
+        monthTDDD:state.vars.monthTDD,
+       
+
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        
-       
-          
            ajax: () => {
-           
-            var arr1=[];
-            var arr2=[];
-            var arr3=[];
-          
+            let date=new Date;
+            let monthT=date.getMonth();
+            // 12个月的TBA
+            let wTBAMonth=[];
+            let wTBARun=[];
+            let wTBADown=[];
+            let wTBAT=[];
+            //下面每天的数据TBA
+            let wTBADaD=[];
+            let wTBARunD=[];
+            let wTBADownD=[];
+            let wTBATD=[];
+
            $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/ELEC/getWtAreaElec',  
+             url:'http://'+input_url+':8080/wbi/TBA/getMonthsTBAByWf',  
              async:false,
             data:{
-             'year':2016,
-             'month':11,
-             'wfid':150828
+             'wfid':150828,
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-             console.log(data);
-             // 获取x轴的值内蒙达茂天润风电场
-             var dataa=data.data;
-             for(var i=0;i<10;i++){
-                 var xWild=data.data[i].wtname;
-                 arr1.push(xWild);
-                 var yPowerPlan=data.data[i].powerplan;
-                 arr2.push(yPowerPlan);
-                 var yPowerAct=data.data[i].poweract;
-                 arr3.push(yPowerAct);
+             let wTBATime=data.data;
+             for (let i in wTBATime){
+             let month=wTBATime[i].month;
+             wTBAMonth.push(month);
+             let downtimes=wTBATime[i].downtimes;
+             wTBADown.push(downtimes);
+
+                let runtimes=wTBATime[i].runtimes;
+                wTBARun.push(runtimes);
+
+                let tba=wTBATime[i].tba;
+                wTBAT.push(tba);
+
+
+
+             }
+            
+             },
+             error:function(){
+                
+             },
+           });   
+           // 给12个月赋初值
+           dispatch(actions.setVars('wTBAMonth1',wTBAMonth)) 
+           dispatch(actions.setVars('wTBARun1',wTBARun)) 
+           dispatch(actions.setVars('wTBADown1',wTBADown)) 
+           dispatch(actions.setVars('wTBAT1',wTBAT)) ;
+           //默认上个月
+           $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByWf',  
+             async:false,
+            data:{
+             'wfid':150828,
+             'month':monthT,
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+           
+             let wTBATime=data.data;
+             for (let i in wTBATime){
+                let day=wTBATime[i].day;
+                 wTBADaD.push(day);
+
+                 let downtimes=wTBATime[i].downtimes;
+                 wTBADownD.push(downtimes);
+
+                let runtimes=wTBATime[i].runtimes;
+                wTBARunD.push(runtimes);
+
+                let tba=wTBATime[i].tba;
+                wTBATD.push(tba);
              }
             
              },
              error:function(){
                  
              },
-           });
-           dispatch(actions.setVars('actbt',10 ));
-           dispatch(actions.setVars('areaNamee',arr1));
-             dispatch(actions.setVars('wind',arr3));
-             dispatch(actions.setVars('windP',arr2));
+           });   
+           // 给每天赋值
+           dispatch(actions.setVars('wTBADaD1',wTBADaD)) 
+           dispatch(actions.setVars('wTBARunD1',wTBARunD)) 
+           dispatch(actions.setVars('wTBADownD1',wTBADownD)) 
+           dispatch(actions.setVars('wTBATD1',wTBATD)) ;
+           dispatch(actions.setVars('monthTD',monthT)) ;
+           dispatch(actions.setVars('monthTDD',monthT)) ;
 
-          
-        
-        
         }
         ,
 
