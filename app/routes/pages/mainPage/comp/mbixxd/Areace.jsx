@@ -56,16 +56,14 @@ let Component = React.createClass({
        
                 </ul>
                <div className={`${styles.bigbox} ${styles.shadow}`}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
-                            <div>
-                                <Windce areaNameX={areaNamee==null?areaName:areaNamee}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined?areaRecordProfit:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} height={750}></Windce>
-                            </div>
-                        </div>
-                         <div className={styles.tik}>
-                        <p className={styles.Ff}>{text[actbt]+'月份各风机发电量'}</p>
-                    </div>
-                    </div>          
+                   
+                   
+                          
+                                <Windce areaNameX={areaNamee==null?areaName:areaNamee}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined?areaRecordProfit:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} height={800} text={text[actbt]+'月份各风机发电量'}></Windce>
+                          
+                       
+                       
+                             
                 <div className={styles.imgq}>
                     <img src={icono}/>
                 </div>

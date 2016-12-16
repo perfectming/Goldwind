@@ -569,7 +569,7 @@ module.exports = {
      },
 
       elect:{
-         high:220,
+         high:230,
          pointWidth: 30,
           yAxis: [{
                labels: {
@@ -605,13 +605,12 @@ module.exports = {
         }], 
 
              series: [{ //第二个Y轴的数据
-            name: '故障类型占比',
-            
+            name: '类型占比',
             type: 'pie',
-            tooltip: {
-                valueSuffix: '%'
-            },
-            data: [['故障',10],['维护',20],['限功率',10],['非设备原因',60]]
+            // tooltip: {
+            //     valueSuffix: '%'
+            // },
+            data: [['故障',12441],['维护',45451],['限功率',21221],['非设备原因',66581]]
             
         }],
      },

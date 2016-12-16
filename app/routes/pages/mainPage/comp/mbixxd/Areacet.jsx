@@ -52,17 +52,15 @@ let Component = React.createClass({
                 </ul>
             <div className={styles.paddingtop}>
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
-                             <div>
-                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP} height={750}></Windcet>
-                            </div>
-                        </div>
-                            <div className={styles.tik}>
-                                <p className={styles.Ff}>{text[actbt]}</p>
-                             </div>
+                    
+                       
                            
-                    </div>
+                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP} height={800} text={text[actbt]}></Windcet>
+                          
+                       
+                           
+                           
+                    
                 <div className={styles.imgq}>
                     <img src={icono}/>
                 </div>
