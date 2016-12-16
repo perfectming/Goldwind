@@ -85,6 +85,7 @@
     border-bottom: 1px solid #31F3FB;
     
     li{
+      word-spacing: 15px;
       height: 40px;
             width: 100px;
             border: 1px solid #31F3FB;
@@ -165,6 +166,7 @@
   }
    .covers{
      position:relative;
+   
 
    }
 
@@ -173,9 +175,8 @@
             width:98%;
             margin-left:2px;
             height:410px;
-            margin-bottom: 15px;
-            padding-top:20px;
-            background: rgba(44, 61, 71,0.4),
+            background: rgba(44, 61, 71,0.4);
+            margin-bottom:15px;
            }
        .shadow:hover{
         box-shadow:0 0 15px #fff;
@@ -185,7 +186,8 @@
        width: 48%;
        height: 420px;
        margin-right:15px;
-        padding-top:20px;
+       position:relative;
+      
         background: rgba(44, 61, 71, 0.4);
     
 

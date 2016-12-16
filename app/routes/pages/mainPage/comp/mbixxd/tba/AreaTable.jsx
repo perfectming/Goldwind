@@ -65,18 +65,18 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                       var  w0=e.point.category;
-                        var PBAGroupIndex=e.point.index;
-                        var  a=w0.toString().split("");
-                        var b=a[0];
+                       let  w0=e.point.category;
+                        let PBAGroupIndex=e.point.index;
+                        let  a=w0.toString().split("");
+                        let b=a[0];
 
-                    var PBAGroupFirstDay=[];
-                    var PBAGroupFirstPoweract=[];
-                    var PBAGroupFirstFaultloss=[];
-                    var PBAGroupFirstMaintainloss=[];
-                    var PBAGroupFirstLimitloss=[];
-                    var PBAGroupFirstNodevreasonloss=[];
-                    var PBAGroupFirstPba=[];
+                    let PBAGroupFirstDay=[];
+                    let PBAGroupFirstPoweract=[];
+                    let PBAGroupFirstFaultloss=[];
+                    let PBAGroupFirstMaintainloss=[];
+                    let PBAGroupFirstLimitloss=[];
+                    let PBAGroupFirstNodevreasonloss=[];
+                    let PBAGroupFirstPba=[];
                     // 点击上面下面变
 
                         $.ajax({
@@ -89,35 +89,34 @@ let Component = React.createClass({
                      },
                      timeout:'3000',
                      success:function(data){
-                     console.log(data);
-                    console.log(PBAGroupIndex+1);
+                   
                        
-                          var PBAGroupFirstMonth=data.data;
+                          let PBAGroupFirstMonth=data.data;
   
-                        for ( var i in PBAGroupFirstMonth){
+                        for ( let i in PBAGroupFirstMonth){
 
-                          var day=PBAGroupFirstMonth[i].day;
+                          let day=PBAGroupFirstMonth[i].day;
                           PBAGroupFirstDay.push(day);
 
-                          var poweract=PBAGroupFirstMonth[i].poweract;
+                          let poweract=PBAGroupFirstMonth[i].poweract;
                           PBAGroupFirstPoweract.push(poweract);
 
-                          var faultloss=PBAGroupFirstMonth[i].faultloss;
+                          let faultloss=PBAGroupFirstMonth[i].faultloss;
                           PBAGroupFirstFaultloss.push(faultloss);
 
-                          var maintainloss=PBAGroupFirstMonth[i].maintainloss;
+                          let maintainloss=PBAGroupFirstMonth[i].maintainloss;
                           PBAGroupFirstMaintainloss.push(maintainloss);
 
-                          var limitloss=PBAGroupFirstMonth[i].limitloss;
+                          let limitloss=PBAGroupFirstMonth[i].limitloss;
                           PBAGroupFirstLimitloss.push(limitloss);
 
-                          var nodevreasonloss=PBAGroupFirstMonth[i].nodevreasonloss;
+                          let nodevreasonloss=PBAGroupFirstMonth[i].nodevreasonloss;
                           PBAGroupFirstNodevreasonloss.push(nodevreasonloss);
 
-                          var pba=Number(PBAGroupFirstMonth[i].pba.toFixed(2));
+                          let pba=Number(PBAGroupFirstMonth[i].pba.toFixed(2));
                           PBAGroupFirstPba.push(pba);
                         }
-                        console.log(PBAGroupFirstDay);
+                       
               },
               error:function(){
                  

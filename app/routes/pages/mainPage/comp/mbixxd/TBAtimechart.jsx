@@ -2,18 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
-let data = require('./Profit-data');
-let winss=data.areaPlanDayY;
+let input_url="10.68.100.32";
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
        
-        let{w0,winss,areaName,montht,profit,cost,changedata2}=this.props;
+        let{w0,areaName,montht,profit,cost,height,TBA}=this.props;
         let configPie = {
             chart: {
-                height:380,
+                height:height,
                  backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -22,14 +20,14 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '',
+                text: '风场TBA',
                 align:'left',
                 vertical:'top',
                 offset:200,
                 x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                     fontWeight:700,
                     top:'20px',
@@ -39,6 +37,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 x:-75,
+                y:30,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -73,17 +72,55 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                        w0=e.point.category;
-                        var  a=w0.toString().split("");
-                        var b=a[0];
-                        changedata2(w0,winss,b);
+                        let  a=w0.toString().split("");
+                        let b=a[0];
+                      
+                        let wTBADaD=[];
+                        let wTBARunD=[];
+                        let wTBADownD=[];
+                        let wTBATD=[];
+                        $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByWf',  
+             async:false,
+            data:{
+             'wfid':150828,
+             'month':w0,
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+         
+           
+             let wTBATime=data.data;
+             for (let i in wTBATime){
+                let day=wTBATime[i].day;
+                 wTBADaD.push(day);
+
+                 let downtimes=wTBATime[i].downtimes;
+                 wTBADownD.push(downtimes);
+
+                let runtimes=wTBATime[i].runtimes;
+                wTBARunD.push(runtimes);
+
+                let tba=wTBATime[i].tba;
+                wTBATD.push(tba);
+             }
+            
+             },
+             error:function(){
+                 
+             },
+           });   
+                        changedata2qw :(w0,wTBADaD,wTBARunD,wTBADownD,wTBATD)
+           // 给每天赋值
+           
                         }
                     }
                 }
             },
-
             xAxis: {
                 lineWidth: 1,
-
                 tickWidth: 0,
                 labels: {
                     y: 20,
@@ -128,7 +165,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: 'TBA%',
+                text: '100%',
                  align:'high',
                 rotation:'0',
                 y: -15,
@@ -163,7 +200,7 @@ let Component = React.createClass({
                 {
                     name: 'TBA',
                     type: 'line',
-                    data:cost,
+                    data:TBA,
                     color:'blue',
                     pointWidth: 15,
                     shadow:'true',
@@ -187,6 +224,7 @@ const mapStateToProps = (state) => {
           w0 : state.vars.w1,
         winss: state.vars.wins1,
          windplan1 : state.vars.windplan1,
+
     }
 };
 
@@ -194,9 +232,13 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-         changedata2 :(w0,wins,b)=>{
-           dispatch(actions.setVars('w1',w0 ));
-        dispatch(actions.setVars('wins1',winss[b-1]));
+         changedata2qw :(w0,b,wTBADaD,wTBARunD,wTBADownD,wTBATD)=>{
+            dispatch(actions.setVars('wTBADaD11',wTBADaD));
+           dispatch(actions.setVars('wTBARunD11',wTBARunD)) ;
+           dispatch(actions.setVars('wTBADownD11',wTBADownD)) ;
+           dispatch(actions.setVars('wTBATD11',wTBATD)) ;
+           dispatch(actions.setVars('monthTD1',w0)) ;
+           
         },
     };
 };

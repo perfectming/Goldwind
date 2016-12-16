@@ -7,9 +7,9 @@ import icono from './img/PBA.png';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let monthT=data.monthT;
-var date=new Date;
+let datee=new Date;
 let input_url="10.68.100.32";
-var month=date.getMonth();
+let month=datee.getMonth();
 let profit=data.windProfit;
 let cost=data.windCost;
 let fanCost=data.fanCost;
@@ -100,21 +100,21 @@ const mapDispatchToProps = (dispatch) => {
         ajax: () => {
        
           // 第一个图的数据
-            var PBATimeFirstMonth=[];
-            var PBATimeFirstPoweract=[];
-            var PBATimeFirstFaultloss=[];
-            var PBATimeFirstMaintainloss=[];
-            var PBATimeFirstLimitloss=[];
-            var PBATimeFirstNodevreasonloss=[];
-            var PBATimeFirstPbaP=[];
+            let PBATimeFirstMonth=[];
+            let PBATimeFirstPoweract=[];
+            let PBATimeFirstFaultloss=[];
+            let PBATimeFirstMaintainloss=[];
+            let PBATimeFirstLimitloss=[];
+            let PBATimeFirstNodevreasonloss=[];
+            let PBATimeFirstPbaP=[];
             // 第二个图的数据
-            var PBATimeSecondDay=[];
-            var PBATimeSecondPoweract=[];
-            var PBATimeSecondFaultloss=[];
-            var PBATimeSecondMaintainloss=[];
-            var PBATimeSecondLimitloss=[];
-            var PBATimeSecondNodevreasonloss=[];
-            var PBATimeSecondPbaP=[];
+            let PBATimeSecondDay=[];
+            let PBATimeSecondPoweract=[];
+            let PBATimeSecondFaultloss=[];
+            let PBATimeSecondMaintainloss=[];
+            let PBATimeSecondLimitloss=[];
+            let PBATimeSecondNodevreasonloss=[];
+            let PBATimeSecondPbaP=[];
             $.ajax({
                 type:'post',
                 url:'http://'+input_url+':8080/wbi/PBA/getWfieldMonthPBA',
@@ -127,21 +127,21 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:'3000',
                 success:function(data){
                 
-                     var PBATimeFirstPba=data.data;
-                     for ( var i in PBATimeFirstPba){
-                         var month=PBATimeFirstPba[i].month;
+                     let PBATimeFirstPba=data.data;
+                     for ( let i in PBATimeFirstPba){
+                         let month=PBATimeFirstPba[i].month;
                          PBATimeFirstMonth.push(month);
-                         var poweract=PBATimeFirstPba[i].poweract;
+                         let poweract=PBATimeFirstPba[i].poweract;
                          PBATimeFirstPoweract.push(poweract);
-                         var faultloss=PBATimeFirstPba[i].faultloss;
+                         let faultloss=PBATimeFirstPba[i].faultloss;
                          PBATimeFirstFaultloss.push(faultloss);
-                         var maintainloss=PBATimeFirstPba[i].maintainloss;
+                         let maintainloss=PBATimeFirstPba[i].maintainloss;
                          PBATimeFirstMaintainloss.push(maintainloss);
-                         var limitloss=PBATimeFirstPba[i].limitloss;
+                         let limitloss=PBATimeFirstPba[i].limitloss;
                          PBATimeFirstLimitloss.push(limitloss);
-                         var nodevreasonloss=PBATimeFirstPba[i].nodevreasonloss;
+                         let nodevreasonloss=PBATimeFirstPba[i].nodevreasonloss;
                          PBATimeFirstNodevreasonloss.push(nodevreasonloss);
-                         var pba=Number(PBATimeFirstPba[i].pba.toFixed(2));
+                         let pba=Number(PBATimeFirstPba[i].pba.toFixed(2));
                          PBATimeFirstPbaP.push(pba);
                      }
                   
@@ -173,21 +173,21 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:'3000',
                 success:function(data){
               
-                     var PBATimeSecondPba=data.data;
-                     for ( var i in PBATimeSecondPba){
-                         var day=PBATimeSecondPba[i].day;
+                     let PBATimeSecondPba=data.data;
+                     for ( let i in PBATimeSecondPba){
+                         let day=PBATimeSecondPba[i].day;
                          PBATimeSecondDay.push(day);
-                         var poweract=PBATimeSecondPba[i].poweract;
+                         let poweract=PBATimeSecondPba[i].poweract;
                          PBATimeSecondPoweract.push(poweract);
-                         var faultloss=PBATimeSecondPba[i].faultloss;
+                         let faultloss=PBATimeSecondPba[i].faultloss;
                          PBATimeSecondFaultloss.push(faultloss);
-                         var maintainloss=PBATimeSecondPba[i].maintainloss;
+                         let maintainloss=PBATimeSecondPba[i].maintainloss;
                          PBATimeSecondMaintainloss.push(maintainloss);
-                         var limitloss=PBATimeSecondPba[i].limitloss;
+                         let limitloss=PBATimeSecondPba[i].limitloss;
                          PBATimeSecondLimitloss.push(limitloss);
-                         var nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
+                         let nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
                          PBATimeSecondNodevreasonloss.push(nodevreasonloss);
-                         var pba=Number(PBATimeSecondPba[i].pba.toFixed(2));
+                         let pba=Number(PBATimeSecondPba[i].pba.toFixed(2));
                          PBATimeSecondPbaP.push(pba);
                      }
                 },

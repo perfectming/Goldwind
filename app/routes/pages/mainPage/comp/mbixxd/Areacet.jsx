@@ -91,9 +91,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: () => {
-            var arr1=[];
-            var arr2=[];
-            var arr3=[];
+            let arr1=[];
+            let arr2=[];
+            let arr3=[];
             $.ajax({
              type:'post',
              url:'http://'+input_url+':8080/wbi/ELEC/getWtTimeAreaElec',  
@@ -107,13 +107,13 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
               
              // 获取x轴的值内蒙达茂天润风电场
-             var dataa=data.data;
-             for(var i=0;i<dataa.length;i++){
-                 var xDay=data.data[i].day;
+             let dataa=data.data;
+             for(let i=0;i<dataa.length;i++){
+                 let xDay=data.data[i].day;
                  arr1.push(xDay);
-                 var yPowerPlan=data.data[i].powerplan;
+                 let yPowerPlan=data.data[i].powerplan;
                  arr2.push(yPowerPlan);
-                 var yPowerAct=data.data[i].poweract;
+                 let yPowerAct=data.data[i].poweract;
                  arr3.push(yPowerAct);
              }
 

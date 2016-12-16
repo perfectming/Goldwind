@@ -74,16 +74,16 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                            w0=e.point.category;
-                        var  a=w0.toString().split("");
-                        var b=a[0];
+                        let  a=w0.toString().split("");
+                        let b=a[0];
                          // 第二个图的数据
-                      var PBATimeSecondDay=[];
-                      var PBATimeSecondPoweract=[];
-                      var PBATimeSecondFaultloss=[];
-                      var PBATimeSecondMaintainloss=[];
-                      var PBATimeSecondLimitloss=[];
-                      var PBATimeSecondNodevreasonloss=[];
-                      var PBATimeSecondPbaP=[];
+                      let PBATimeSecondDay=[];
+                      let PBATimeSecondPoweract=[];
+                      let PBATimeSecondFaultloss=[];
+                      let PBATimeSecondMaintainloss=[];
+                      let PBATimeSecondLimitloss=[];
+                      let PBATimeSecondNodevreasonloss=[];
+                      let PBATimeSecondPbaP=[];
                         $.ajax({
                 type:'post',
                 url:'http://'+input_url+':8080/wbi/PBA/getWfieldDayPBA',
@@ -97,21 +97,21 @@ let Component = React.createClass({
                 success:function(data){
                  
 
-                     var PBATimeSecondPba=data.data;
-                      for ( var i in PBATimeSecondPba){
-                          var day=PBATimeSecondPba[i].day;
+                     let PBATimeSecondPba=data.data;
+                      for ( let i in PBATimeSecondPba){
+                          let day=PBATimeSecondPba[i].day;
                           PBATimeSecondDay.push(day);
-                          var poweract=PBATimeSecondPba[i].poweract;
+                          let poweract=PBATimeSecondPba[i].poweract;
                           PBATimeSecondPoweract.push(poweract);
-                          var faultloss=PBATimeSecondPba[i].faultloss;
+                          let faultloss=PBATimeSecondPba[i].faultloss;
                           PBATimeSecondFaultloss.push(faultloss);
-                          var maintainloss=PBATimeSecondPba[i].maintainloss;
+                          let maintainloss=PBATimeSecondPba[i].maintainloss;
                           PBATimeSecondMaintainloss.push(maintainloss);
-                          var limitloss=PBATimeSecondPba[i].limitloss;
+                          let limitloss=PBATimeSecondPba[i].limitloss;
                           PBATimeSecondLimitloss.push(limitloss);
-                          var nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
+                          let nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
                           PBATimeSecondNodevreasonloss.push(nodevreasonloss);
-                          var pba=Number(PBATimeSecondPba[i].pba.toFixed(2));
+                          let pba=Number(PBATimeSecondPba[i].pba.toFixed(2));
                           PBATimeSecondPbaP.push(pba);
                       }
                 },

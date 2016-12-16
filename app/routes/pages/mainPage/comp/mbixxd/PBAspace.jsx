@@ -15,10 +15,10 @@ let fanCostC=data.fanCostC;
 let PBA=data.PBA;
 let height=700;
 let moree;
- var date=new Date;
-var month=date.getMonth(); 
+ let datee=new Date;
+let month=datee.getMonth(); 
   
-  var key=month;
+  let key=month;
 let Component = React.createClass({
      componentWillMount() {
         this.props.ajax();
@@ -124,16 +124,16 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
          ajax: () => {
-            var areaIds=[];
-            var windIds=[];
+            let areaIds=[];
+            let windIds=[];
         // 初始化上个月的数据
-         var PBASpaceFirstWtname=[];
-         var PBASpaceFirstPoweract=[];
-         var PBASpaceFirstFaultloss=[];
-         var PBASpaceFirstMaintainloss=[];
-         var PBASpaceFirstLimitloss=[];
-         var PBASpaceFirstNodevreasonloss=[];
-         var PBASpaceFirstPbaP=[];
+         let PBASpaceFirstWtname=[];
+         let PBASpaceFirstPoweract=[];
+         let PBASpaceFirstFaultloss=[];
+         let PBASpaceFirstMaintainloss=[];
+         let PBASpaceFirstLimitloss=[];
+         let PBASpaceFirstNodevreasonloss=[];
+         let PBASpaceFirstPbaP=[];
          
             // 获取上面的区域
            $.ajax({
@@ -145,7 +145,7 @@ const mapDispatchToProps = (dispatch) => {
              timeout:'3000',
              success:function(data){
                
-                for(var i in data.data){
+                for(let i in data.data){
                        areaIds.push(i);
                 }
                
@@ -168,7 +168,7 @@ const mapDispatchToProps = (dispatch) => {
               timeout:'3000',
               success:function(data){
              
-                 for(var i in data.data){
+                 for(let i in data.data){
                         windIds.push(i);
                  }
                 
@@ -193,21 +193,21 @@ const mapDispatchToProps = (dispatch) => {
               timeout:'3000',
               success:function(data){
            
-               var PBASpaceFirstPba=data.data;
-                for ( var  i=0;i<10;i++){
-                     var wtname=PBASpaceFirstPba[i].wtname;
+               let PBASpaceFirstPba=data.data;
+                for ( let  i=0;i<10;i++){
+                     let wtname=PBASpaceFirstPba[i].wtname;
                      PBASpaceFirstWtname.push(wtname);
-                     var poweract=PBASpaceFirstPba[i].poweract;
+                     let poweract=PBASpaceFirstPba[i].poweract;
                      PBASpaceFirstPoweract.push(poweract);
-                     var faultloss=PBASpaceFirstPba[i].faultloss;
+                     let faultloss=PBASpaceFirstPba[i].faultloss;
                      PBASpaceFirstFaultloss.push(faultloss);
-                     var maintainloss=PBASpaceFirstPba[i].maintainloss;
+                     let maintainloss=PBASpaceFirstPba[i].maintainloss;
                      PBASpaceFirstMaintainloss.push(maintainloss);
-                     var limitloss=PBASpaceFirstPba[i].limitloss;
+                     let limitloss=PBASpaceFirstPba[i].limitloss;
                      PBASpaceFirstLimitloss.push(limitloss);
-                     var nodevreasonloss=PBASpaceFirstPba[i].nodevreasonloss;
+                     let nodevreasonloss=PBASpaceFirstPba[i].nodevreasonloss;
                      PBASpaceFirstNodevreasonloss.push(nodevreasonloss);
-                     var pba=PBASpaceFirstPba[i].pba
+                     let pba=PBASpaceFirstPba[i].pba
                      PBASpaceFirstPbaP.push(pba);
                 }
            
@@ -238,14 +238,14 @@ const mapDispatchToProps = (dispatch) => {
         ,
          changpage :(value,key)=>{
              //切换月份传值
-             var PBASpaceWtname=[];
-             var PBASpacePoweract=[];
-             var PBASpaceFaultloss=[];
-             var PBASpaceMaintainloss=[];
-             var PBASpaceLimitloss=[];
-             var PBASpaceNodevreasonloss=[];
-             var PBASpacePba=[];
-             var PBASpacePbaPBA=[];
+             let PBASpaceWtname=[];
+             let PBASpacePoweract=[];
+             let PBASpaceFaultloss=[];
+             let PBASpaceMaintainloss=[];
+             let PBASpaceLimitloss=[];
+             let PBASpaceNodevreasonloss=[];
+             let PBASpacePba=[];
+             let PBASpacePbaPBA=[];
              $.ajax({
               type:'post',
               url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
@@ -258,21 +258,21 @@ const mapDispatchToProps = (dispatch) => {
               timeout:'3000',
               success:function(data){
             
-                var PBASpacePba=data.data;
-                 for  ( var  i=0;i<10;i++){
-                      var wtname=PBASpacePba[i].wtname;
+                let PBASpacePba=data.data;
+                 for  ( let  i=0;i<10;i++){
+                      let wtname=PBASpacePba[i].wtname;
                       PBASpaceWtname.push(wtname);
-                      var poweract=PBASpacePba[i].poweract;
+                      let poweract=PBASpacePba[i].poweract;
                       PBASpacePoweract.push(poweract);
-                      var faultloss=PBASpacePba[i].faultloss;
+                      let faultloss=PBASpacePba[i].faultloss;
                       PBASpaceFaultloss.push(faultloss);
-                      var maintainloss=PBASpacePba[i].maintainloss;
+                      let maintainloss=PBASpacePba[i].maintainloss;
                       PBASpaceMaintainloss.push(maintainloss);
-                      var limitloss=PBASpacePba[i].limitloss;
+                      let limitloss=PBASpacePba[i].limitloss;
                       PBASpaceLimitloss.push(limitloss);
-                      var nodevreasonloss=PBASpacePba[i].nodevreasonloss;
+                      let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                       PBASpaceNodevreasonloss.push(nodevreasonloss);
-                      var pba=Number(PBASpacePba[i].pba.toFixed(2));
+                      let pba=Number(PBASpacePba[i].pba.toFixed(2));
 
                       PBASpacePbaPBA.push(pba);
                  }
@@ -296,14 +296,14 @@ const mapDispatchToProps = (dispatch) => {
         },
          gogogo:(actbt)=>{
            
-            var PBASpaceWtname=[];
-             var PBASpacePoweract=[];
-             var PBASpaceFaultloss=[];
-             var PBASpaceMaintainloss=[];
-             var PBASpaceLimitloss=[];
-             var PBASpaceNodevreasonloss=[];
-             var PBASpacePba=[];
-             var PBASpacePbaPBA=[];
+            let PBASpaceWtname=[];
+             let PBASpacePoweract=[];
+             let PBASpaceFaultloss=[];
+             let PBASpaceMaintainloss=[];
+             let PBASpaceLimitloss=[];
+             let PBASpaceNodevreasonloss=[];
+             let PBASpacePba=[];
+             let PBASpacePbaPBA=[];
              $.ajax({
               type:'post',
               url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
@@ -316,21 +316,21 @@ const mapDispatchToProps = (dispatch) => {
               timeout:'3000',
               success:function(data){
              
-                var PBASpacePba=data.data;
-                 for  ( var  i=0;i<10;i++){
-                      var wtname=PBASpacePba[i].wtname;
+                let PBASpacePba=data.data;
+                 for  ( let  i=0;i<10;i++){
+                      let wtname=PBASpacePba[i].wtname;
                       PBASpaceWtname.push(wtname);
-                      var poweract=PBASpacePba[i].poweract;
+                      let poweract=PBASpacePba[i].poweract;
                       PBASpacePoweract.push(poweract);
-                      var faultloss=PBASpacePba[i].faultloss;
+                      let faultloss=PBASpacePba[i].faultloss;
                       PBASpaceFaultloss.push(faultloss);
-                      var maintainloss=PBASpacePba[i].maintainloss;
+                      let maintainloss=PBASpacePba[i].maintainloss;
                       PBASpaceMaintainloss.push(maintainloss);
-                      var limitloss=PBASpacePba[i].limitloss;
+                      let limitloss=PBASpacePba[i].limitloss;
                       PBASpaceLimitloss.push(limitloss);
-                      var nodevreasonloss=PBASpacePba[i].nodevreasonloss;
+                      let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                       PBASpaceNodevreasonloss.push(nodevreasonloss);
-                      var pba=Number(PBASpacePba[i].pba.toFixed(2));
+                      let pba=Number(PBASpacePba[i].pba.toFixed(2));
 
                       PBASpacePbaPBA.push(pba);
                  }
@@ -356,14 +356,14 @@ const mapDispatchToProps = (dispatch) => {
         },
         back:(actbt)=>{
            
-            var PBASpaceWtname=[];
-             var PBASpacePoweract=[];
-             var PBASpaceFaultloss=[];
-             var PBASpaceMaintainloss=[];
-             var PBASpaceLimitloss=[];
-             var PBASpaceNodevreasonloss=[];
+            let PBASpaceWtname=[];
+             let PBASpacePoweract=[];
+             let PBASpaceFaultloss=[];
+             let PBASpaceMaintainloss=[];
+             let PBASpaceLimitloss=[];
+             let PBASpaceNodevreasonloss=[];
 
-             var PBASpacePbaPBA=[];
+             let PBASpacePbaPBA=[];
              $.ajax({
               type:'post',
               url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
@@ -377,24 +377,24 @@ const mapDispatchToProps = (dispatch) => {
               success:function(data){
             
 
-                var PBASpacePba=data.data;
+                let PBASpacePba=data.data;
                 
-                  var length=PBASpacePba.length-10;
+                  let length=PBASpacePba.length-10;
 
-                 for  ( var i = length;i>length-10;i--){
-                      var wtname=PBASpacePba[i].wtname;
+                 for  ( let i = length;i>length-10;i--){
+                      let wtname=PBASpacePba[i].wtname;
                       PBASpaceWtname.push(wtname);
-                      var poweract=PBASpacePba[i].poweract;
+                      let poweract=PBASpacePba[i].poweract;
                       PBASpacePoweract.push(poweract);
-                      var faultloss=PBASpacePba[i].faultloss;
+                      let faultloss=PBASpacePba[i].faultloss;
                       PBASpaceFaultloss.push(faultloss);
-                      var maintainloss=PBASpacePba[i].maintainloss;
+                      let maintainloss=PBASpacePba[i].maintainloss;
                       PBASpaceMaintainloss.push(maintainloss);
-                      var limitloss=PBASpacePba[i].limitloss;
+                      let limitloss=PBASpacePba[i].limitloss;
                       PBASpaceLimitloss.push(limitloss);
-                      var nodevreasonloss=PBASpacePba[i].nodevreasonloss;
+                      let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                       PBASpaceNodevreasonloss.push(nodevreasonloss);
-                      var pba=Number(PBASpacePba[i].pba.toFixed(2));
+                      let pba=Number(PBASpacePba[i].pba.toFixed(2));
 
                       PBASpacePbaPBA.push(pba);
                  }
@@ -422,14 +422,14 @@ const mapDispatchToProps = (dispatch) => {
         more:(actbt)=>{
              $("#sss").show();
              $('#boxcover').show();
-              var PBASpaceWtname=[];
-             var PBASpacePoweract=[];
-             var PBASpaceFaultloss=[];
-             var PBASpaceMaintainloss=[];
-             var PBASpaceLimitloss=[];
-             var PBASpaceNodevreasonloss=[];
-             var PBASpacePba=[];
-             var PBASpacePbaPBA=[];
+              let PBASpaceWtname=[];
+             let PBASpacePoweract=[];
+             let PBASpaceFaultloss=[];
+             let PBASpaceMaintainloss=[];
+             let PBASpaceLimitloss=[];
+             let PBASpaceNodevreasonloss=[];
+             let PBASpacePba=[];
+             let PBASpacePbaPBA=[];
              $.ajax({
               type:'post',
               url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
@@ -442,21 +442,21 @@ const mapDispatchToProps = (dispatch) => {
               timeout:'3000',
               success:function(data){
                 
-                var PBASpacePba=data.data;
-                 for  ( var i in PBASpacePba){
-                      var wtname=PBASpacePba[i].wtname;
+                let PBASpacePba=data.data;
+                 for  ( let i in PBASpacePba){
+                      let wtname=PBASpacePba[i].wtname;
                       PBASpaceWtname.push(wtname);
-                      var poweract=PBASpacePba[i].poweract;
+                      let poweract=PBASpacePba[i].poweract;
                       PBASpacePoweract.push(poweract);
-                      var faultloss=PBASpacePba[i].faultloss;
+                      let faultloss=PBASpacePba[i].faultloss;
                       PBASpaceFaultloss.push(faultloss);
-                      var maintainloss=PBASpacePba[i].maintainloss;
+                      let maintainloss=PBASpacePba[i].maintainloss;
                       PBASpaceMaintainloss.push(maintainloss);
-                      var limitloss=PBASpacePba[i].limitloss;
+                      let limitloss=PBASpacePba[i].limitloss;
                       PBASpaceLimitloss.push(limitloss);
-                      var nodevreasonloss=PBASpacePba[i].nodevreasonloss;
+                      let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                       PBASpaceNodevreasonloss.push(nodevreasonloss);
-                      var pba=Number(PBASpacePba[i].pba.toFixed(2));
+                      let pba=Number(PBASpacePba[i].pba.toFixed(2));
 
                       PBASpacePbaPBA.push(pba);
                  }
