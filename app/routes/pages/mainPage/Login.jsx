@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch) => {
       alert('请输入账号'):
        browserHistory.push('/app/all/page/main')  ;
       dispatch(actions.setVars('userInfo', value));
-      login();
+      // login();
       try { Base.returnPlay(); } catch (e) { };
       try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }
       //
@@ -62,32 +62,32 @@ const mapDispatchToProps = (dispatch) => {
 
       var st = null, et = null, th = null, re = null;
 
-      function login() {
-        $.ajax({
-          url: "http://54.223.200.134/System/mlogin.aspx",
-          async: false,
-          data: 'loginType=4&P_username=bmjk&P_password=1',
-          type: "post",
-          dataType: "text",
-          complete: function () {
-
-          },
-          success: function (data, state) {
-            if (TY.Zip == true) {
-              eval("data=" + utf8to16(zip_inflate(base64decode(data))));
-            }
-            else {
-              eval("data=" + data);
-            }
-            if (data.f === false)
-              alert(data);
-          },
-          error: function (a, b, c) {
-            // alert(a + ":" + b + ":" + c);
-
-          }
-        });
-      }
+   // function login() {
+      //   $.ajax({
+      //     url: "http://54.223.200.134/System/mlogin.aspx",
+      //     async: false,
+      //     data: 'loginType=4&P_username=bmjk&P_password=1',
+      //     type: "post",
+      //     dataType: "text",
+      //     complete: function () {
+      //
+      //     },
+      //     success: function (data, state) {
+      //       if (TY.Zip == true) {
+      //         eval("data=" + utf8to16(zip_inflate(base64decode(data))));
+      //       }
+      //       else {
+      //         eval("data=" + data);
+      //       }
+      //       if (data.f === false)
+      //         alert(data);
+      //     },
+      //     error: function (a, b, c) {
+      //       // alert(a + ":" + b + ":" + c);
+      //
+      //     }
+      //   });
+      // }
     }
   }
 };

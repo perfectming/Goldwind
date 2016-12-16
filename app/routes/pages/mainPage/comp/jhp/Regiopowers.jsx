@@ -131,7 +131,7 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceTimeElec',
+                url:'http://' + ip + ':8080/wbi/ELEC/getSpaceTimeElec',
                 async:false,
                 data:{"month":key+1},
                 dataType:'json',

@@ -433,7 +433,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         returnit:(befor_pages)=>{
             dispatch(actions.setVars('showPage',befor_pages));
-
         },
     };
 };
