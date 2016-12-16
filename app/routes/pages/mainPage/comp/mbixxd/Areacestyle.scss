@@ -31,6 +31,7 @@
      }
      
     .bigbox{
+
     height:100%;
     width:100%;
     margin:0 auto;
@@ -38,6 +39,7 @@
     border:1px solid #282F37;
     position:relative;
     overflow:hidden;
+    
      background: rgba(44, 61, 71,0.4);
       .lkua{
       border:3px solid #5B9BD5;
@@ -57,11 +59,7 @@
       top:68px;
       z-index:100;
       }
-      .coverbox{
-        margin-top:50px;
-       
-        position:relative;
-      }
+     
       .Ff{
       margin-left:20px;
       }

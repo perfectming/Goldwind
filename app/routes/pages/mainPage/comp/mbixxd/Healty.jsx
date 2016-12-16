@@ -45,14 +45,12 @@ let Component = React.createClass({
 
 
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
-                               <Healtychart machineE={windP==null?machineE:windP}         areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} height={750}></Healtychart>
-                        </div>
-                         <div className={styles.tik}>
-                             <p>{text[actbt]}</p>
-                         </div>
-                    </div>
+                  
+                      
+                               <Healtychart machineE={windP==null?machineE:windP}         areaRecordProfit={wind==undefined? areaRecordProfit[0]:wind} height={800} text={text[actbt]}></Healtychart>
+                       
+                        
+                 
                     <div className={styles.imgq}>
                         <img src={icono}/>
                     </div>

@@ -63,16 +63,14 @@ let Component = React.createClass({
                 </ul>
                 <div className={styles.paddingtop}>
                 <div className={styles.bigbox}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
-                            <div>
-                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={750} width={1735}></PBAspacechart>
-                            </div>
-                        </div>
-                         <div className={styles.tik}>
-                        <p>{ [actbt+1]+'月份各风机PBA'}</p>
-                    </div>
-                    </div>
+                
+                    
+                         
+                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={[actbt+1]+'月份各风机PBA'}></PBAspacechart>
+                        
+                    
+                       
+                  
                     <div className={styles.imgq}>
                         <img src={icono}/>
                     </div>
