@@ -82,7 +82,7 @@ const mapDispatchToProps = (dispatch) => {
         ,
         changedata1 :(w0,win,b)=>{
             dispatch(actions.setVars('w1',w0 ));
-            console.log(wins[0]);
+         
             // dispatch(actions.setVars('wins1',wins[b-1]));
         },
         backtop:(befor_pagee,befor_page2)=>{

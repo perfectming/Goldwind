@@ -61,7 +61,7 @@ let Component = React.createClass({
             xAxis: {
                 lineWidth: 0,
                 lineColor: "red",
-                tickWidth: 0,
+                //tickWidth: 0,
                 tickWidth: 1, //刻度的宽
                 tickLength: 310, //刻度线的长度
                 tickmarkPlacement: 'on',// 刻度在中间

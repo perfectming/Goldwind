@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Profitimechart from './Profitimechart.jsx';
-import icono from './wind_logo.png';
+import icono from './img/收益率1.png';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
@@ -13,36 +13,33 @@ let Component = React.createClass({
     },
 
     render() {
+        let {actbt,changpage,backtop,befor_pagee='group',befor_page2}=this.props;
         return (
             <div className={styles.box}>
-                <ul className={styles.monthbox}>
+                 <ul className={styles.monthbox}>
                     {
-                        month.map((value,key)=>{
-                            return(<li key={key}>{value}</li>)
+                        data.wind.map((value,key)=>{
+                            return(<li className={actbt===key? styles.red : styles.green} key={key} onClick={()=>changpage(value,key)} >{value.name}</li>)
                         })
                     }
+              <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
+
                 </ul>
                 <div className={styles.bigbox}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
+                   
+                       <div className={styles.imgq}>
+                        <img src={icono}/>
+                       </div>
                             <div>
                                 <Profitimechart ></Profitimechart>
                             </div>
-                        </div>
-                        <div className={styles.tik}>
-                            <p>11月份各风机PBA</p>
-                        </div>
-                    </div>
-                    <div className={styles.imgq}>
-                        <img src={icono}/>
-                    </div>
-                    <div className={styles.buttons}>
-                        {
-                            button.map((value,key)=>{
-                                return(<button key={key}>{value}</button>)
-                            })
-                        }
-                    </div>
+                       <div className={styles.buttons}>
+                      <button onClick={()=>gogogo(areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)} > 前10</button>
+                      <button onClick={()=>back(areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)}>后10</button>
+                      <button  onClick={()=>more(areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)}>更多</button>
+                   </div>
+                   
+                    
                 </div>
             </div>
 
@@ -54,7 +51,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        actbt:state.vars.actbtm
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -65,6 +64,13 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        changpage :(value,key)=>{
+             dispatch(actions.setVars('actbtm',key ));
+            
+        },
+        backtop:(befor_pagee,befor_page2)=>{
+            dispatch(actions.setVars('showPage',befor_pagee))
+        }
     };
 };
 

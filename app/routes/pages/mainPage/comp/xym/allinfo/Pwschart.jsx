@@ -121,7 +121,7 @@ let Component = React.createClass({
                     color: '#fff'
                 }
             },
-            // opposite: true
+            opposite: true
         }],
         plotOptions: {
             spline: {

@@ -290,7 +290,7 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type: 'post',
-                url: 'http://192.168.31.148:8080/wbi/ELEC/getPageSize',
+                url: 'http://' + ip + ':8080/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
@@ -335,7 +335,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
                 type: 'post',
-                url: 'http://192.168.31.148:8080/wbi/ELEC/getPageSize',
+                url: 'http://' + ip + ':8080/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,

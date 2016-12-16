@@ -77,16 +77,16 @@ const mapDispatchToProps = (dispatch) => {
     return {
       ajax: () => {
           //获取十二个月的TBA
-var TBAtimedata;
-var TBAdaydata;
-var tbaMonths=[];
-var tbaRunTimes=[];
-var tbaDownTimes=[];
-var tbaTba=[];
-var tbaDays3=[];
-var tbaDayRunTimes3=[];
-var tbaDayDownTimes3=[];
-var tbaDayTba3=[];
+let TBAtimedata;
+let TBAdaydata;
+let tbaMonths=[];
+let tbaRunTimes=[];
+let tbaDownTimes=[];
+let tbaTba=[];
+let tbaDays3=[];
+let tbaDayRunTimes3=[];
+let tbaDayDownTimes3=[];
+let tbaDayTba3=[];
 // 获取所有的月份
  $.ajax({
                      type:'post',
@@ -97,14 +97,14 @@ var tbaDayTba3=[];
                      success:function(data){
                 
                         TBAtimedata=data.data; 
-                        for(var i in TBAtimedata){
-                          var tbamonth=TBAtimedata[i].month;
+                        for(let i in TBAtimedata){
+                          let tbamonth=TBAtimedata[i].month;
                           tbaMonths.push(tbamonth);
-                          var tbaruntimes=TBAtimedata[i].runtimes;
+                          let tbaruntimes=TBAtimedata[i].runtimes;
                           tbaRunTimes.push(tbaruntimes);
-                          var downtimes=TBAtimedata[i].downtimes;
+                          let downtimes=TBAtimedata[i].downtimes;
                           tbaDownTimes.push(downtimes);
-                          var tba=TBAtimedata[i].tba;
+                          let tba=TBAtimedata[i].tba;
                           tbaTba.push(tba);
 
                           } 

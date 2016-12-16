@@ -72,6 +72,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
             dispatch(actions.setVars('ip', ip));
+            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test:''
             }
