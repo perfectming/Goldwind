@@ -26,7 +26,8 @@ let Component = React.createClass({
             },
             xAxis:{
                  categories:datename,
-                 
+                 max:datename.length-1,
+                 min:datename.length-30,
                  labels: {
                         style: {
                             color: '#fff',//颜色
@@ -36,9 +37,18 @@ let Component = React.createClass({
                 }
             },
              yAxis:{
+                gridLineWidth: 0,//刻度线宽度
+                lineWidth: 1, //Y轴线宽度
                 title:{
                     enabled:false
-                }
+                },
+                labels: {
+                      
+                        style: {
+                            color: '#fff',//颜色
+                            fontSize:'12px'  //字体
+                        }
+                    },
                  
             },
             legend:{

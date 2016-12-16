@@ -24,11 +24,11 @@ module.exports = {
         },
         {
             name: '损失电量报表',
-            page: '',
+            page: 'lose_detail',
             rightpagge:[
             	  {
                     tabname:'损失电量明细用例规划',
-                    rpage:''
+                    rpage:'lose_detail'
                 },
                  {
                     tabname:'损失电量分类统计用例规划',
