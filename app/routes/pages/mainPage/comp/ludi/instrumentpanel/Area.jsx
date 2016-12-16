@@ -6,7 +6,6 @@ import Pie2 from '../../mxx/Pie2';
 import Login from '../../../../../../components/common/Loading.jsx';
 
 var actions = require('redux/actions');
-let ipUrl='10.68.100.32:8080';
 
 let clickAreaId,areaName=[],areaId=[],areaCost=[],areaProfit=[],areaMonth=[],runTime,downTime,TBA,areaArr;
 let actb=0,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month=[],elecPlan=[],elecAct=[];
@@ -14,7 +13,8 @@ let actb=0,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearEle
 
 let Component = React.createClass({
 	componentWillMount() {
-        this.props.ajax();
+		let {ipUrl}=this.props;
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -108,7 +108,7 @@ let Component = React.createClass({
 		           						<div className={styles.space} onClick={()=>changepageEleS()}></div>&nbsp;
 		           						<div className={styles.time} onClick={()=>changepageEleT()}></div>
 	           						</div>
-	           						<Yearelectric month={month} plan={elecPlan} actrul={elecAct} unit={'万kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+	           						<Yearelectric month={month} plan={elecPlan} actrul={elecAct} unit={'kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
@@ -120,7 +120,7 @@ let Component = React.createClass({
 		           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
 	           							</div>
 		           					</div>
-	           						<Yearelectric month={areaMonth} plan={areaProfit} actrul={areaCost} unit={'万元'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
+	           						<Yearelectric month={areaMonth} plan={areaProfit} actrul={areaCost} unit={'元'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           			</div>
@@ -169,12 +169,13 @@ const mapStateToProps = (state) => {
     	areaArr : state.vars.areaArr,
     	clickAreaId:state.vars.clickAreaId,
     	areaBool:state.vars.areaBool,
+    	ipUrl : state.vars.ipUrl,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    	ajax: () => {
+    	ajax: (ipUrl) => {
     		dispatch(actions.setVars('actb',0 ));
     		$.ajax({
         		url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//获得各区域ID和名字-YES
@@ -202,8 +203,8 @@ const mapDispatchToProps = (dispatch) => {
 				        	areaMonth=[],areaProfit=[],areaCost=[];
 				        	for(var i in data.data){
 				        		areaMonth.push(data.data[i].month+"月");
-				        		areaProfit.push(data.data[i].incomes/10000);
-				        		areaCost.push(data.data[i].costs/10000);
+				        		areaProfit.push(data.data[i].incomes);
+				        		areaCost.push(data.data[i].costs);
 				        	}
 				        },
 				        complete : function(XMLHttpRequest,status){ 
@@ -222,10 +223,10 @@ const mapDispatchToProps = (dispatch) => {
 						        	dayPlanElec=data.data.dayPlanElec;
 						        	month=[],elecPlan=[],elecAct=[];
 						        	for(var i in data.data.twAreaMonthElec){
-						        		elecAct.push(data.data.twAreaMonthElec[i].poweract/10000);
+						        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
 						        	}
 						        	for(var i in data.data.twAreaMonthPlanElec){
-						        		elecPlan.push(data.data.twAreaMonthPlanElec[i]/10000);
+						        		elecPlan.push(data.data.twAreaMonthPlanElec[i]);
 						        		month.push(i+"月");
 						        	}
 						        },
@@ -322,11 +323,11 @@ const mapDispatchToProps = (dispatch) => {
 		        	dayPlanElec=data.data.dayPlanElec;
 		        	month=[],elecPlan=[],elecAct=[];
 		        	for(var i in data.data.twAreaMonthElec){
-		        		elecAct.push(data.data.twAreaMonthElec[i].poweract/10000);
+		        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
 		        		month.push(data.data.twAreaMonthElec[i].month+"月");
 		        	}
 		        	for(var i in data.data.twAreaMonthPlanElec){
-		        		elecPlan.push(data.data.twAreaMonthPlanElec[i]/10000);
+		        		elecPlan.push(data.data.twAreaMonthPlanElec[i]);
 		        	}
 		        },
 		        complete : function(XMLHttpRequest,status){ 

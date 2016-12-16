@@ -85,28 +85,27 @@ const mapDispatchToProps = (dispatch) => {
 		        	for(var i in data.data[2]){
 		        		areaId.push(data.data[2][i].groupid);
 		        		areaName.push(data.data[2][i].groupname);
-		        		areaPBA.push(data.data[2][i].pba/10000);
-		        		areaFault.push(data.data[2][i].faultloss/10000);
-		        		areaLimit.push(data.data[2][i].limitloss/10000);
-		        		areaMaintain.push(data.data[2][i].maintainloss/10000);
-		        		areaDevice.push(data.data[2][i].nodevreasonloss/10000);
-		        		areaElec.push(data.data[2][i].poweract/10000);
+		        		areaPBA.push(data.data[2][i].pba);
+		        		areaFault.push(data.data[2][i].faultloss);
+		        		areaLimit.push(data.data[2][i].limitloss);
+		        		areaMaintain.push(data.data[2][i].maintainloss);
+		        		areaDevice.push(data.data[2][i].nodevreasonloss);
+		        		areaElec.push(data.data[2][i].poweract);
 		        	}
-		        	console.log(areaId);
 		        	for(var i in data.data[1]){
 		        		wfName.push(data.data[1][i].wfname);
 		        		wfId.push(data.data[1][i].wfid);
-		        		wfElec.push(data.data[1][i].poweract/10000);
-		        		wfLose.push(data.data[1][i].totalloss/10000);
-		        		wfPBA.push(data.data[1][i].pba/10000)
+		        		wfElec.push(data.data[1][i].poweract);
+		        		wfLose.push(data.data[1][i].totalloss);
+		        		wfPBA.push(data.data[1][i].pba)
 		        	}
 		        	dispatch(actions.setVars('areaId', areaId));
 		        	wtData=data.data[0];
 		        	wtData.sort(function(a,b){return b.pba-a.pba});
 		        	for(var i=0;i<10;i++){
 		        		wtName.push(wtData.slice(0,10)[i].wtname);
-		        		wtElec.push(wtData.slice(0,10)[i].poweract/10000);
-		        		wtLose.push(wtData.slice(0,10)[i].totalloss/10000);
+		        		wtElec.push(wtData.slice(0,10)[i].poweract);
+		        		wtLose.push(wtData.slice(0,10)[i].totalloss);
 		        		wtPBA.push(wtData.slice(0,10)[i].pba);
 		        	};
 		        	dispatch(actions.setVars('wtName', wtName));

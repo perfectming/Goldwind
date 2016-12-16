@@ -41,7 +41,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {buttonAction, onFocus} = this.props;
+        let {buttonAction, onFocus,changeValue}= this.props;
         let comp = data.list;
         return (	
             <div className={styles.inquireBox}>
@@ -50,7 +50,7 @@ let Component = React.createClass({
                         if (value.type === 'date') {
                             return (
                                     <div className={styles.dateBox} key={key}>
-                                        <span>发生时间</span><input ref="startTime" placeholder={value.content} type={value.type} style={{width:value.width}}/>
+                                        <span>发生时间</span><input ref="startTime" value="2016-11-01" onChange={()=>changeValue()} placeholder={value.content} type={value.type} style={{width:value.width}}/>
                                         <span>结束时间</span><input ref="endTime" placeholder={value.content} type={value.type} style={{width:value.width}}/>
                                     </div>
                                 )
@@ -78,10 +78,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            var obj = {
-                test:''
-            }
+        	
         },
+        
     };
 };
 

@@ -74,19 +74,18 @@ let Component = React.createClass({
             },
             yAxis: [{
                 title:{
-                	text:'万kWh',
+                	text:'kWh',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-10,
+	                x:-15,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',
 	                }
                 },
                 labels: {
-                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -108,7 +107,6 @@ let Component = React.createClass({
 	                }
                },
                labels: {
-                	format:'{value}%',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -123,7 +121,7 @@ let Component = React.createClass({
                 stack:"male",
                 data: areaElec,
                 tooltip: {
-	                valueSuffix: '万kWh'
+	                valueSuffix: 'kWh'
 	            },
                 events: {
                     click: function(e) {
@@ -137,7 +135,7 @@ let Component = React.createClass({
                 stack:"female",
                 data: areaFault,
                 tooltip: {
-	                valueSuffix: '万kWh'
+	                valueSuffix: 'kWh'
 	            },
                 events: {
                     click: function(e) {
@@ -151,7 +149,7 @@ let Component = React.createClass({
                 stack:"female",
                 data: areaMaintain,
                 tooltip: {
-	                valueSuffix: '万kWh'
+	                valueSuffix: 'kWh'
 	            },
                 events: {
                     click: function(e) {
@@ -166,7 +164,7 @@ let Component = React.createClass({
                 stack:"female",
                 data: areaLimit,
                 tooltip: {
-	                valueSuffix: '万kWh'
+	                valueSuffix: 'kWh'
 	            },
                 events: {
                     click: function(e) {
@@ -180,7 +178,7 @@ let Component = React.createClass({
                 stack:"female",
                 data: areaDevice,
                 tooltip: {
-	                valueSuffix: '万kWh'
+	                valueSuffix: 'kWh'
 	            },
                 events: {
                     click: function(e) {
