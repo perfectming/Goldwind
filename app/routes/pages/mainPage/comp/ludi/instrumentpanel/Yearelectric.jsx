@@ -83,7 +83,6 @@ let Component = React.createClass({
                 },
                 gridLineWidth:0,
                 labels: {
-                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色

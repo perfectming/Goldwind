@@ -2,11 +2,10 @@ module.exports={
 	list:[
 		{
 			type: 'date',
-                content: '这是一个时间选择框',
-                id: 'date',
-                width: 120,
-                height:30,
-			
+            content: '这是一个时间选择框',
+            id: 'date',
+            width: 150,
+            height:30,
 		},{
 			type: 'button',
             content: '这是一个button',

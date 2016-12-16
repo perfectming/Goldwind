@@ -66,6 +66,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            //初始化页面
             dispatch(actions.setVars('showbb', 'ywbb'));
             dispatch(actions.setVars('item', 0));
             dispatch(actions.setVars('navitem', 0));

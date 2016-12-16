@@ -71,12 +71,13 @@
 					height: auto;
 					margin-left: 17px;
 					font-size: 16px;
-					text-align: center;
+					text-align: left;
 					line-height: 35px;
 					div:nth-child(1){
 						width: 85px;
 						height: 35px;
 						border-radius: 30px;
+						text-align: center;
 					}
 					div:nth-child(2),div:nth-child(3){
 						width: 80px;

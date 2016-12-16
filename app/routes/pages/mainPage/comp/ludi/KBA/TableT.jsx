@@ -74,19 +74,18 @@ let Component = React.createClass({
             },
             yAxis: [{
                 title:{
-                	text:'万kWh',
+                	text:'kWh',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-5,
+	                x:-15,
 	                style:{
 	                	fontSize:'	14px',
 	                	color:'white',
 	                }
                 },
                 labels: {
-                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -107,7 +106,6 @@ let Component = React.createClass({
 	                }
                },
                labels: {
-                	format:'{value}%',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -121,14 +119,14 @@ let Component = React.createClass({
             	type: 'column',
                 data: wtElec,
                 tooltip: {
-	                valueSuffix: '万kWh'
+	                valueSuffix: 'kWh'
 	            },
             },{
                 name: '损失发电量',
                 type: 'column',
                 data: wtLose,
                 tooltip: {
-	                valueSuffix: '万kWh'
+	                valueSuffix: 'kWh'
 	            },
             },{
             	name: 'PBA',

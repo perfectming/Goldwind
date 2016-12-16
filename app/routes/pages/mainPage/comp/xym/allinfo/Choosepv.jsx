@@ -218,6 +218,8 @@ const mapDispatchToProps = (dispatch) => {
         Topvinfo: (value)=> {
             dispatch(actions.setVars('value', value));
             dispatch(actions.setVars('fan_page', 'pvinfo'));
+            dispatch(actions.setVars('befor_page2', 'allpage'));
+            dispatch(actions.setVars('npage', 'choosepv'));
         }
     };
 };
