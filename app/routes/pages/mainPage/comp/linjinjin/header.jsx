@@ -112,10 +112,17 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         backtop:(befor_page,befor_page2)=>{
+          alert(befor_page2);
+            if(befor_page2==undefined){
             dispatch(actions.setVars('showPage',befor_page));
             dispatch(actions.setVars('navhide', true));
+          }else{
+            dispatch(actions.setVars('fan_page', befor_page2 ));
+            dispatch(actions.setVars('befor_page2',undefined));
+          }
+            
             dispatch(actions.setVars('numpage', 'fanmatrix'));
-            console.log(befor_page2)
+            
         }
    
     };
