@@ -42,24 +42,24 @@ const mapDispatchToProps = (dispatch) => {
             //     console.log(dataObj)
             // });
 
-        // $.ajax({
-        //     url: "http://54.223.200.134/Monitor/xml.aspx",
-        //     data: 'crossDomain=true&zip=true&functionname=GetWFInfoByMon&devtype=WindTurbine',
-        //     type: 'post',
-        //     async: false,
-        //     dataType: 'text',//here
-        //     complete: function () {
+        $.ajax({
+            url: "http://54.223.200.134/Monitor/xml.aspx",
+            data: 'crossDomain=true&zip=true&functionname=GetWFInfoByMon&devtype=WindTurbine',
+            type: 'post',
+            async: true,
+            dataType: 'text',//here
+            complete: function () {
 
-        //     },
-        //     success:function (data) {
+            },
+            success:function (data) {
 
-        //         var dataObj=eval("data={" + data + "}");
-        //         console.log(dataObj)
-        //     },
-        //     error:function(){
-        //         console.log('获取数据失败')
-        //     }
-        // });
+                var dataObj=eval("data={" + data + "}");
+                console.log(dataObj)
+            },
+            error:function(){
+                console.log('获取数据失败')
+            }
+        });
 
         }
      
