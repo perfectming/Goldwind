@@ -322,6 +322,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('fan_page', 'faninfo')); 
             dispatch(actions.setVars('faninfobool', false));
             dispatch(actions.setVars('befor_page2', 'allpage'));
+            dispatch(actions.setVars('npage', 'choosefan'));
         }
     };
 };
