@@ -52,22 +52,6 @@ let Component = React.createClass({
             colors: ['#32c5cd', '#37545c', '#000','#134833', '#082B1F']
             ,
             plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
-                
-                bar:{
-                    animation: true
-                }
-            },
-            plotOptions: {
                 column: {
                     pointPadding: 0,
                     borderWidth: 0,//柱状的边

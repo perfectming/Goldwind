@@ -2,7 +2,7 @@
 ////单例获取数据
 var TY = {};
 ///是否跨域
-TY.crossDomain = false;
+TY.crossDomain = true;
 TY.dataUrl = "http://54.223.200.134/System/data.aspx";
 TY.TT = { startTime: 0, checkTime: 0, timeOutlength: 1000 * 5 };//
 TY.Zip = false;

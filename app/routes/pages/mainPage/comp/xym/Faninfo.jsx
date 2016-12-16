@@ -170,7 +170,7 @@ let Component = React.createClass({
 	        		duration: "slow",
 	        	}, 1000 )
 	        	$("#WGENTemp").animate({ 
-	        		height:WGENTemp+100,
+	        		height:WGENTemp*0.7+100,
 	        		duration: "slow",
 	        	}, 1000 )
 
@@ -528,7 +528,7 @@ const mapDispatchToProps = (dispatch) => {
                         	  
                      			function setData4(rdata){
 	                            dispatch(actions.setVars('infofdata', rdata));
-	                            console.log(1,rdata);
+	                            // console.log(1,rdata);
                            
                             
                         }
@@ -575,6 +575,7 @@ const mapDispatchToProps = (dispatch) => {
         tobujian:(val)=>{
         	dispatch(actions.setVars('fan_page', 'fanpart'));
         	dispatch(actions.setVars('Wtid', val));
+        	dispatch(actions.setVars('befor_page3', 'faninfo'));
         }
         
     };

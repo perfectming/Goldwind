@@ -56,13 +56,13 @@ const mapDispatchToProps = (dispatch) => {
       //
       TY.dataUrl = "http://54.223.200.134/System/data.aspx";
       TY.crossDomain = true;
-      TY.Zip = true;
+      TY.Zip =false;
       TY.TT.timeOutlength = 1000*60*1;
 
 
       var st = null, et = null, th = null, re = null;
 
-      // function login() {
+   // function login() {
       //   $.ajax({
       //     url: "http://54.223.200.134/System/mlogin.aspx",
       //     async: false,

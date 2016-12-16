@@ -56,16 +56,14 @@ let Component = React.createClass({
        
                 </ul>
                <div className={`${styles.bigbox} ${styles.shadow}`}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
-                            <div>
-                                <Windce areaNameX={areaNamee==null?areaName:areaNamee}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined?areaRecordProfit:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} height={750}></Windce>
-                            </div>
-                        </div>
-                         <div className={styles.tik}>
-                        <p className={styles.Ff}>{text[actbt]+'月份各风机发电量'}</p>
-                    </div>
-                    </div>          
+                   
+                   
+                          
+                                <Windce areaNameX={areaNamee==null?areaName:areaNamee}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined?areaRecordProfit:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} height={800} text={text[actbt]+'月份各风机发电量'}></Windce>
+                          
+                       
+                       
+                             
                 <div className={styles.imgq}>
                     <img src={icono}/>
                 </div>
@@ -104,9 +102,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
        ajax: () => {
          
-            var arr1=[];
-            var arr2=[];
-            var arr3=[];
+            let arr1=[];
+            let arr2=[];
+            let arr3=[];
           
            $.ajax({
              type:'post',
@@ -122,13 +120,13 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
             
              // 获取x轴的值内蒙达茂天润风电场
-             var dataa=data.data;
-             for(var i=0;i<10;i++){
-                 var xWild=data.data[i].wtname;
+             let dataa=data.data;
+             for(let i=0;i<10;i++){
+                 let xWild=data.data[i].wtname;
                  arr1.push(xWild);
-                 var yPowerPlan=data.data[i].powerplan;
+                 let yPowerPlan=data.data[i].powerplan;
                  arr2.push(yPowerPlan);
-                 var yPowerAct=data.data[i].poweract;
+                 let yPowerAct=data.data[i].poweract;
                  arr3.push(yPowerAct);
              }
             
