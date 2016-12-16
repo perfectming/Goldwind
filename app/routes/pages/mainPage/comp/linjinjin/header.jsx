@@ -115,8 +115,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         backtop:(befor_page,befor_page2,befor_page3,npage)=>{
           //判断返回原来页面的顺序
-          alert(befor_page3);
-          alert(befor_page2)
           if(befor_page3==undefined){
             if(befor_page2==undefined){
             dispatch(actions.setVars('showPage',befor_page));
