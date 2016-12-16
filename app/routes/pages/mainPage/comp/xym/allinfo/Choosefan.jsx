@@ -127,7 +127,7 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.WindSpeed).toFixed(2)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
@@ -149,7 +149,7 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.WindSpeed).toFixed(2)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
@@ -171,7 +171,7 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.WindSpeed).toFixed(2)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
@@ -193,7 +193,7 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.WindSpeed).toFixed(2)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
@@ -215,7 +215,7 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.WindSpeed).toFixed(2)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
@@ -237,7 +237,7 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.WindSpeed).toFixed(2)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
@@ -259,7 +259,7 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.WindSpeed).toFixed(2)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
@@ -281,7 +281,7 @@ let Component = React.createClass({
                                 <span className={styles.listitemB}>
                                     <span className={styles.listitemBL}>
                                         <p>风速:</p>
-                                        <p><span className={styles.listitemBLL}>{Math.ceil(value.WindSpeed)}</span><span className={styles.listitemBLR}>m/s</span></p>
+                                        <p><span className={styles.listitemBLL}>{Number(value.WindSpeed).toFixed(2)}</span><span className={styles.listitemBLR}>m/s</span></p>
                                     </span>
                                     <span className={styles.listitemBR}>
                                         <p>功率:</p>
