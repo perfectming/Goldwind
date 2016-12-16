@@ -528,7 +528,7 @@ const mapDispatchToProps = (dispatch) => {
                         	  
                      			function setData4(rdata){
 	                            dispatch(actions.setVars('infofdata', rdata));
-	                            console.log(1,rdata);
+	                            // console.log(1,rdata);
                            
                             
                         }

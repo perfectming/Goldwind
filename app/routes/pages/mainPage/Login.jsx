@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => {
 
       var st = null, et = null, th = null, re = null;
 
-      // function login() {
+   // function login() {
       //   $.ajax({
       //     url: "http://54.223.200.134/System/mlogin.aspx",
       //     async: false,

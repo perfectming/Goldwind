@@ -2,10 +2,10 @@
 ////单例获取数据
 var TY = {};
 ///是否跨域
-TY.crossDomain = false;
+TY.crossDomain = true;
 TY.dataUrl = "http://54.223.200.134/System/data.aspx";
 TY.TT = { startTime: 0, checkTime: 0, timeOutlength: 1000 * 5 };//
-TY.Zip = false;
+TY.Zip = true;
 //sdata:发送的数据,asyn:异步方法,flag:是否强制发送而不监测活动线程,lock:是否锁定
 TY.sendData = function (sdata, asyn, flag,lock)
 {
