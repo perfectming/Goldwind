@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
     render() {
 
- let {machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC,PBA,height,width}=this.props;
+ let {text,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC,PBA,height,width}=this.props;
      
         let configPie = {
             chart: {
@@ -24,14 +24,15 @@ let Component = React.createClass({
 
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
                 x : "0",
+                y:20,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"15px",
                     fontFamily:"微软雅黑",
                     fontWeight:700,
                 }
@@ -40,6 +41,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 x:-75,
+                y:70,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{

@@ -56,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
       //
       TY.dataUrl = "http://54.223.200.134/System/data.aspx";
       TY.crossDomain = true;
-      TY.Zip = true;
+      TY.Zip =false;
       TY.TT.timeOutlength = 1000*60*1;
 
 

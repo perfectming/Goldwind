@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaRecordProfit,machineE,width,height}=this.props;
+        let {areaRecordProfit,machineE,width,height,text}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -22,19 +22,23 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                 top:'-20px',
+
                 vertical:'top',
                 x : "0",
+                 x : 90,
+                y :20,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                     fontWeight:700,
                 }
             },
             legend: {
+                y:40,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
