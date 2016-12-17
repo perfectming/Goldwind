@@ -75,8 +75,8 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                            wq=e.point.category;
-                        var  a=wq.toString().split("");
-                        var b=a[0];
+                        let  a=wq.toString().split("");
+                        let b=a[0];
                         changedata10(wq,b);
                         }
                     }

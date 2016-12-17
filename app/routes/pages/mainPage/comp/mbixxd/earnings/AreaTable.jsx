@@ -10,13 +10,12 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,}=this.props;
+        let {areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height}=this.props;
        
         
         let configPie = {
             chart: {
-                height:370,
-
+                height:height,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -25,12 +24,14 @@ let Component = React.createClass({
                
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                  x : "0",
+                x : 90,
+                y :10,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                      fontWeight:700,
                 }
@@ -40,6 +41,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                x:-75,
+               y:25,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -72,22 +74,22 @@ let Component = React.createClass({
                         click: function(e) {
                             
                              w11=e.point.category;
-                         var     index=e.point.index;
-                            var w111=windFiedN;
+                         let     index=e.point.index;
+                            let w111=windFiedN;
                             // console.log(e.point.index+"qwe");
-                        var  a=w11.toString().split("");
-                        var b=a[0];
+                        let  a=w11.toString().split("");
+                        let b=a[0];
                         // console.log(arr5[index]);
-                        var areaWindCosts=[];
-                         var areaWindEarnings=[];
-                         var areaWindRates=[];
-                         var areaWindids=[];
-                         var areaWindNames=[];
-                         var areaWindCosts1=[];
-                         var areaWindEarnings1=[];
-                         var areaWindRates1=[];
-                         var areaWindids1=[];
-                         var areaWindNames1=[];
+                        let areaWindCosts=[];
+                         let areaWindEarnings=[];
+                         let areaWindRates=[];
+                         let areaWindids=[];
+                         let areaWindNames=[];
+                         let areaWindCosts1=[];
+                         let areaWindEarnings1=[];
+                         let areaWindRates1=[];
+                         let areaWindids1=[];
+                         let areaWindNames1=[];
                         // 点击第一张图第二张变
                          $.ajax({
                      type:'post',

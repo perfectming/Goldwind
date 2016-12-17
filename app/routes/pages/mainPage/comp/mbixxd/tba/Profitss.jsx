@@ -123,20 +123,20 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
        ajax: () => {
-        var PBAGroupMonth=[];
-        var PBAGroupFirstDay=[];
-        var PBAGroupPoweract=[];
-        var PBAGroupFaultloss=[];
-        var PBAGroupMaintainloss=[];
-        var PBAGroupLimitloss=[];
-        var PBAGroupNodevreasonloss=[];
-        var PBAGroupPba=[];
-        var PBAGroupFirstPoweract=[];
-        var PBAGroupFirstFaultloss=[];
-        var PBAGroupFirstMaintainloss=[];
-        var PBAGroupFirstLimitloss=[];
-        var PBAGroupFirstNodevreasonloss=[];
-        var PBAGroupFirstPba=[];
+        let PBAGroupMonth=[];
+        let PBAGroupFirstDay=[];
+        let PBAGroupPoweract=[];
+        let PBAGroupFaultloss=[];
+        let PBAGroupMaintainloss=[];
+        let PBAGroupLimitloss=[];
+        let PBAGroupNodevreasonloss=[];
+        let PBAGroupPba=[];
+        let PBAGroupFirstPoweract=[];
+        let PBAGroupFirstFaultloss=[];
+        let PBAGroupFirstMaintainloss=[];
+        let PBAGroupFirstLimitloss=[];
+        let PBAGroupFirstNodevreasonloss=[];
+        let PBAGroupFirstPba=[];
         // 获取12个月的PBA
           $.ajax({
                      type:'post',
@@ -146,41 +146,41 @@ const mapDispatchToProps = (dispatch) => {
                      timeout:'3000',
                      success:function(data){
                      
-                        var PBAGroupSpace=data.data[0];
+                        let PBAGroupSpace=data.data[0];
                        
-                        for ( var i in PBAGroupSpace){
-                          var month=PBAGroupSpace[i].month;
+                        for ( let i in PBAGroupSpace){
+                          let month=PBAGroupSpace[i].month;
                           PBAGroupMonth.push(month);
-                          var poweract=PBAGroupSpace[i].poweract;
+                          let poweract=PBAGroupSpace[i].poweract;
                           PBAGroupPoweract.push(poweract);
-                          var faultloss=PBAGroupSpace[i].faultloss;
+                          let faultloss=PBAGroupSpace[i].faultloss;
                           PBAGroupFaultloss.push(faultloss);
-                          var maintainloss=PBAGroupSpace[i].maintainloss;
+                          let maintainloss=PBAGroupSpace[i].maintainloss;
                           PBAGroupMaintainloss.push(maintainloss);
-                          var limitloss=PBAGroupSpace[i].limitloss;
+                          let limitloss=PBAGroupSpace[i].limitloss;
                           PBAGroupLimitloss.push(limitloss);
-                          var nodevreasonloss=PBAGroupSpace[i].nodevreasonloss;
+                          let nodevreasonloss=PBAGroupSpace[i].nodevreasonloss;
                           PBAGroupNodevreasonloss.push(nodevreasonloss);
-                          var pba=Number(PBAGroupSpace[i].pba.toFixed(2));
+                          let pba=Number(PBAGroupSpace[i].pba.toFixed(2));
                           PBAGroupPba.push(pba);
                         }
                         // 默认的月份
-                        var PBAGroupFirstMonth=data.data[1];
+                        let PBAGroupFirstMonth=data.data[1];
   
-                        for ( var i in PBAGroupFirstMonth){
-                          var day=PBAGroupFirstMonth[i].day;
+                        for ( let i in PBAGroupFirstMonth){
+                          let day=PBAGroupFirstMonth[i].day;
                           PBAGroupFirstDay.push(day);
-                          var poweract=PBAGroupFirstMonth[i].poweract;
+                          let poweract=PBAGroupFirstMonth[i].poweract;
                           PBAGroupFirstPoweract.push(poweract);
-                          var faultloss=PBAGroupFirstMonth[i].faultloss;
+                          let faultloss=PBAGroupFirstMonth[i].faultloss;
                           PBAGroupFirstFaultloss.push(faultloss);
-                          var maintainloss=PBAGroupFirstMonth[i].maintainloss;
+                          let maintainloss=PBAGroupFirstMonth[i].maintainloss;
                           PBAGroupFirstMaintainloss.push(maintainloss);
-                          var limitloss=PBAGroupFirstMonth[i].limitloss;
+                          let limitloss=PBAGroupFirstMonth[i].limitloss;
                           PBAGroupFirstLimitloss.push(limitloss);
-                          var nodevreasonloss=PBAGroupFirstMonth[i].nodevreasonloss;
+                          let nodevreasonloss=PBAGroupFirstMonth[i].nodevreasonloss;
                           PBAGroupFirstNodevreasonloss.push(nodevreasonloss);
-                          var pba=Number(PBAGroupFirstMonth[i].pba.toFixed(2));
+                          let pba=Number(PBAGroupFirstMonth[i].pba.toFixed(2));
                           PBAGroupFirstPba.push(pba);
                         }
                

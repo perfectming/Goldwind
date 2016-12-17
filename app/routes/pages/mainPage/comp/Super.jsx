@@ -106,17 +106,14 @@ let Component = React.createClass({
                             <Line1 date={date01} datename={datename01} height={150} name={'当前风速'} unit={mod.dis.CurDayWindSpeedCurve.unit}></Line1>
                             <Title title={[mod.dis.CurDayWindSpeedCurve.name+'('+mod.dis.CurDayWindSpeedCurve.unit+')']}></Title>
                         </div>
-
+                        <div style={{"clear":"both"}}></div>
+                    </div>
+                    <div className={styles.chart_bar}>
                          <div className={`${styles.linebox} ${styles.linebox1} ${styles.box_shadow}`}>
                             <Line1 date={date02} datename={datename02} height={150} name={'当前辐照度'} unit={['(W/㎡)']}></Line1>
                             <Title title={[mod.dis.CurDayPVTSICurve.name+'(W/㎡)']}></Title>
-
                         </div>
                         <div style={{"clear":"both"}}></div>
-                        
-                   
-                        
-                       
                     </div>
                     <div className={styles.box_shadow}>
                         <div className={styles.table}>
@@ -168,13 +165,13 @@ const mapDispatchToProps = (dispatch) => {
                 }
 
 
-                time=setInterval(function(){
+                 time=setInterval(function(){
                     TY.getRtData("DataOverview", 8888800, setData1)
                         function setData1(rdata){
                             dispatch(actions.setVars('bbs', rdata));
    
                         }
-                },2000)
+                 },20000)
                                                    
             
         },

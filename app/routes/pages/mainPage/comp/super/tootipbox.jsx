@@ -209,6 +209,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('legend', false));
             dispatch(actions.setVars('headerItemActive', 1));
+             dispatch(actions.setVars('befor_page', 'super'));
         },
          Topvinfo: (value,valuepage)=> {
             dispatch(actions.setVars('value', value));
@@ -217,6 +218,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('legend', false));
             dispatch(actions.setVars('headerItemActive', 1));
+            dispatch(actions.setVars('befor_page', 'super'));
         },
        
        

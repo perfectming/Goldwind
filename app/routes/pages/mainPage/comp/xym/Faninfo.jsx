@@ -28,15 +28,16 @@ var $ = require('jquery');
 // console.log(fmvalue);
 let times;
 let Component = React.createClass({
-	componentWillMount() {
+	componentWillMount() {     // 页面加载前执行的方法
 		let {value} = this.props;
-        this.props.toinfopage(value,times);
+        this.props.toinfopage(value);
     },
    componentWillUnmount() {
-       clearInterval(times)
+       clearInterval(times)  // 页面离开前执行的方法
     },
     componentDidMount() {
-        this.props.init();
+    	let {value} = this.props;
+        this.props.init(value);	// 页面加载时执行的方法
     },
 	render() {
 
@@ -118,8 +119,8 @@ let Component = React.createClass({
 	        	}, 2000);
 	        	if(WTPwr>=180){
 	        		WTPwr = 180;
-	        	}else{
-
+	        	}else if(WTPwr <= 0){
+	        		WTPwr = 0;
 	        	}
 	        	$("#pwratpoint").animate({ textIndent: 0 }, { 
 					step: function(now,fx) {
@@ -169,7 +170,7 @@ let Component = React.createClass({
 	        		duration: "slow",
 	        	}, 1000 )
 	        	$("#WGENTemp").animate({ 
-	        		height:WGENTemp+100,
+	        		height:WGENTemp*0.7+100,
 	        		duration: "slow",
 	        	}, 1000 )
 
@@ -286,7 +287,7 @@ let Component = React.createClass({
 
 								</div>
 							</div>
-							<div className={styles.pwratbox}><span>{Math.ceil(fmvalue["WROT.Spd.Ra.F32"])}</span><span>rpm</span></div>
+							<div className={styles.pwratbox}><span>{fmvalue["WROT.Spd.Ra.F32"] == undefined ? '--' : (Number(fmvalue["WROT.Spd.Ra.F32"]).toFixed(2))}</span><span>rpm</span></div>
 						</div>
 						<div className={`${styles.wsbox4} ${styles.dialbox}`}>
 							<div className={styles.boxtitle}><p>发电机转速</p></div>
@@ -513,7 +514,13 @@ const mapDispatchToProps = (dispatch) => {
                      // }, 3000)
 
         	// console.log(value)
-		 times = setInterval(function(){
+
+
+        },
+        
+
+        init: (value) => {
+        	times = setInterval(function(){
                    // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
                     	// function setData3(rdata){
                          	// dispatch(actions.setVars('infofmodel', rdata));
@@ -528,11 +535,7 @@ const mapDispatchToProps = (dispatch) => {
                         TY.getRtData("WTDetail", value.Wtid, setData4)
                     // }
          
-           }, 3000)
-
-        },      
-        init: () => {
-
+           }, 3000)  
 //   $.ajax({
 //    type: 'post',    
 //    url:'http://54.223.200.134/System/data.aspx?mdid=Model&ScId=2015032011&EnId=654208001&EnKey=Screen&PkId=&ModelKey=6C5002D3-1566-414a-8834-5077940C78E1&dhs=UISys&AspxAutoDetectCookieSupport=1',    
@@ -572,6 +575,7 @@ const mapDispatchToProps = (dispatch) => {
         tobujian:(val)=>{
         	dispatch(actions.setVars('fan_page', 'fanpart'));
         	dispatch(actions.setVars('Wtid', val));
+        	dispatch(actions.setVars('befor_page3', 'faninfo'));
         }
         
     };
