@@ -41,7 +41,7 @@ let Component = React.createClass({
                 plotShadow: false,
                 height:270,
                 marginTop: 60,
-                marginBottom:45,
+                marginBottom:50,
                 marginLeft:55,
             },
             title: {
