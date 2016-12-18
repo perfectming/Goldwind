@@ -4,7 +4,7 @@ import styles from './Xilinstyle.scss';
 import Instrumentdata from './Instrument-data';
 import Instrumentdata1 from '../instrumentpanel/Instrument-data';
 import Yearelectric from '../instrumentpanel/Yearelectric.jsx';
-import Pie2 from '../../mxx/Pie2';
+import Pie2 from '../../wfm/mxx/Pie2';
 
 var actions = require('redux/actions');
 

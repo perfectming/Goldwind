@@ -7,10 +7,10 @@ import Column from '../mxx/Column.jsx';
 import Column1 from '../mxx/Column1.jsx';
 import Column2 from '../mxx/Column2.jsx';
 import Polar from '../mxx/Polar1.jsx';
-import Login from '../../../../../components/common/Loading.jsx';
+import Login from '../../../../../../components/common/Loading.jsx';
 import Pie2 from '../mxx/Pie2.jsx';
-import jnjp from '../../img/comp/jienengjp.png';
-import nlcojp from '../../img/comp/nianleicojp.png';
+import jnjp from '../../../img/comp/jienengjp.png';
+import nlcojp from '../../../img/comp/nianleicojp.png';
 let time;
 
 var $ = require('jquery');
