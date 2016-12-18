@@ -5,9 +5,9 @@ import {connect} from 'react-redux';
 import styles from './Choosefan.scss';
 var actions = require('redux/actions');
 // import dataBase from '../../../../../config/ModelData';
-let matrixdata = require('../../../../../../../config/MatrixData');
-let model = require('../../../../../../../config/Model');
-let modeldata = require('../../../../../../../config/ModelData');
+let matrixdata = require('../../../../../../../../config/MatrixData');
+let model = require('../../../../../../../../config/Model');
+let modeldata = require('../../../../../../../../config/ModelData');
 
        
 

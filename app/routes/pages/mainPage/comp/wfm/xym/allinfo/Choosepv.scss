@@ -10,7 +10,7 @@
       width: 255px;
       height: 112px;
       background: #292F34;
-      background-image:url(../../img/comp/smatrix.png);
+      background-image:url(../../../../img/comp/smatrix.png);
       background-size: 100% 100%;
       background-repeat: no-repeat;
       cursor: pointer;
@@ -64,7 +64,7 @@
       }
     }
     .fault{
-      background-image: url(../../img/comp/faultbg.png),url(../../img/comp/smatrix.png);
+      background-image: url(../../../../img/comp/faultbg.png),url(../../../../img/comp/smatrix.png);
       background-size: 100% 100%;
       background-repeat: no-repeat; //故障
       .slistitemT{
@@ -78,7 +78,7 @@
       border: 2px solid #666; // 待机
     }
     .discomfor{
-      // border: 2px solid #f1a820; //离线
+      border: 2px solid #f1a820; //离线
     }
     
     // .default{

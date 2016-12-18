@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 var $ = require('jquery');
-let data = require('../../../../../../../config/WTDetailData.js');
+let data = require('../../../../../../../../config/WTDetailData.js');
 
 let Component = React.createClass({
     componentWillMount() {

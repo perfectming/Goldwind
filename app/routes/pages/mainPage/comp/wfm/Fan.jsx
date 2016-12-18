@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Fan.scss';
 
-import Login from '../../../../components/common/Loading.jsx';
+import Login from '../../../../../components/common/Loading.jsx';
 import Superleftbox from './super/superleftbox.jsx';    // 左侧组件
 import Unfilterfan from './xym/Unfilterfan.jsx';    //右侧组件
 

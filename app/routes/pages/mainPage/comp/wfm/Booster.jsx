@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Booster.scss';
 var actions = require('redux/actions');
-import Login from '../../../../components/common/Loading.jsx';
+import Login from '../../../../../components/common/Loading.jsx';
 let time;
 var $ = require('jquery');
 

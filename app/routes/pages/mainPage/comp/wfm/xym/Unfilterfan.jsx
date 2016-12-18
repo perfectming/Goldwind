@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Login from '../../../../../components/common/Loading.jsx';
+import Login from '../../../../../../components/common/Loading.jsx';
 import styles from './Unfilterfan.scss';
 // import Login from '../../../../components/common/Loading.jsx';
 // import dataBase from '../../../../../config/ModelData';
