@@ -92,7 +92,7 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ip+':8080/wbi/ELEC/getSpaceTimeElec',
                 async:false,
                 data:{
-                    "month": actbt + 1,
+                    "month": 11,
                     "groupid":  '201612121721151',
                 },
                 dataType:'json',

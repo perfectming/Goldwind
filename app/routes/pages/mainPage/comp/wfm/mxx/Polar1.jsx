@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('../../../../../../config/RegulationData');
-let mod = require('../../../../../../config/Model');
+let data = require('../../../../../../../config/RegulationData');
+let mod = require('../../../../../../../config/Model');
 let arr1 = [];
 let arr2=[];
 let arr3=[];
@@ -30,7 +30,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{czname,unit,czgzss,czwhss,czxdss}=this.props;
+        let{czname,czndxly}=this.props;
         let configPie = {
             chart: {
                 type: 'column',
@@ -65,14 +65,14 @@ let Component = React.createClass({
             },
             yAxis: {
                 title: {
-                    text:  '('+unit+')',
+                    text:  '(h)',
                     style: {
                         color: '#ffffff'
                     },
                     align: 'high',
                     rotation: 1,
                     y: -5,
-                    x: 86
+                    x: 70
                 },
                 labels: {
                     style: {
@@ -104,32 +104,18 @@ let Component = React.createClass({
             plotOptions: {
                 column: {
                     maxPointWidth:25,
-                    stacking: 'normal',//柱状图堆叠
+                    stacking: 'normal',//柱状图堆叠属性
                     borderWidth: 0
                 }
             },
-            colors: ['#37545C','#32C5CD','#D06960']
+            colors: ['#32C5CD','#37545C','#D06960']
             ,
             series: [{
-                name:'故障损失',
-                data: czgzss,
+                name:'年等效利用小时数',
+                data: czndxly,
                 borderRadius: 5,
                 tooltip: {
-                    valueSuffix: unit
-                }
-            },{
-                name:'维护损失',
-                data: czwhss,
-                borderRadius: 5,
-                tooltip: {
-                    valueSuffix: unit
-                }
-            },{
-                name:'限电损失',
-                data: czxdss,
-                borderRadius: 5,
-                tooltip: {
-                    valueSuffix: unit
+                    valueSuffix: 'h'
                 }
             }]
         };

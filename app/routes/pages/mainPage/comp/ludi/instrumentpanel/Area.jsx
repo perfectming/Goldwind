@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areastyle.scss';
 import Yearelectric from './Yearelectric.jsx';
-import Pie2 from '../../mxx/Pie2';
+import Pie2 from '../../wfm/mxx/Pie2';
 import Login from '../../../../../../components/common/Loading.jsx';
 
 var actions = require('redux/actions');

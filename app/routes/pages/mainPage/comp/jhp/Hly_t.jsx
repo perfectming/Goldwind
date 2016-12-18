@@ -87,9 +87,7 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 series: {
                     cursor: 'pointer',
                     events: {
@@ -109,6 +107,7 @@ let Component = React.createClass({
                     },
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
 

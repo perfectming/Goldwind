@@ -1,3 +1,4 @@
+@import "../../../skinVariables";
 .bodyBox{
   .box_shadow:hover{
     box-shadow:0 0 20px #fff;
@@ -18,7 +19,7 @@
       height:177px;
       margin-left: 20px;
       overflow: hidden;
-      background: url(../../img/comp/zhzbgb.png) no-repeat;
+      background: url(../../../img/comp/zhzbgb.png) no-repeat;
       background-size: 96% 93%;
       background-position:top left;
       .zhzbtopbox {
@@ -51,7 +52,15 @@
       overflow: hidden;
       .daynum{
         font-size: 20px;
-        color:#1fe005;
+          @if $styleType==bright {
+          color:#2ff4fb;
+        }
+          @else if $styleType==dark {
+            color:#1fe005;
+          }@else if $styleType==aaaaaa {
+            color:#555555;
+          }
+
       }
       .danweicc{
         font-size: 10px;
@@ -251,7 +260,7 @@
       margin-left: 50px;
       position: relative;
       overflow: hidden;
-      background: url(../../img/comp/gzsbglbg.png) no-repeat;
+      background: url(../../../img/comp/gzsbglbg.png) no-repeat;
       background-size: 100% 100%;
       .tsstyle1{
         margin-left: 75px;

@@ -74,9 +74,7 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
@@ -84,6 +82,7 @@ let Component = React.createClass({
                     borderRadius: 4,
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
                 //lineColor: "red",

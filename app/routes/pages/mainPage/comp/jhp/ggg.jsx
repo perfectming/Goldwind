@@ -131,7 +131,8 @@ const mapDispatchToProps = (dispatch) => {
                         wfid1.push(data.data[0].wfid);   //维护损失
 
                     }
-
+                    console.log(runtime1)
+                    console.log(downtime1)
                     dispatch(actions.setVars('name1', name1));
                     dispatch(actions.setVars('runtime1', runtime1));
                     dispatch(actions.setVars('downtime1', downtime1));
