@@ -8,19 +8,19 @@ let Component = React.createClass({
     },
 
     render() {
-        let{njhfdl,nsjfdl,unit}=this.props;
+        let{njhfdl,nsjfdl,nfdlwcl,unit}=this.props;
         let configPie = {
             chart: {
-                type: 'column',
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 height:270,
-                marginTop: 50,
-                marginBottom:40,
+                marginTop: 60,
+                marginBottom:50,
                 marginLeft:55,
+                marginRight:55
             },
             title: {
                 text: '',
@@ -41,7 +41,7 @@ let Component = React.createClass({
                 tickLength: 0,
                 categories: ['十二月','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月']
             },
-            yAxis: {
+            yAxis: [{
                 title: {
                     text: '('+unit+')',
                     style: {
@@ -61,7 +61,27 @@ let Component = React.createClass({
                     }
                 },
                 gridLineWidth: 0
-            },
+            },{
+                title: {
+                    text:  '(%)',
+                    style: {
+                        color: '#ffffff'
+                    },
+                    align: 'high',
+                    rotation: 1,
+                    y:-5,
+                    x:-56
+                },
+                labels: {
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'12px'  //字体
+                    }
+                },
+                lineWidth: 1,
+                opposite: true,
+                gridLineWidth: 0,
+            }],
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -85,12 +105,16 @@ let Component = React.createClass({
                     grouping: false,
                     shadow: false,
                     borderWidth: 0
+                },
+                series:{
+                    animation:false
                 }
             },
-            colors: ['#37545C','#32C5CD'    ]
+            colors: ['#37545C','#32C5CD','#1fe005','#D06960']
             ,
             series: [{
                 name:'计划发电量',
+                type: 'column',
                 data: njhfdl,
                 borderRadius: 5,
                 tooltip: {
@@ -98,12 +122,21 @@ let Component = React.createClass({
                 }
             },{
                 name:'实际发电量',
+                type: 'column',
                 data: nsjfdl,
                 borderRadius: 5,
                 tooltip: {
                     valueSuffix: unit
                 }
 
+            },{
+                name:'场站完成率',
+                type: 'line',
+                data: nfdlwcl,
+                yAxis: 1,
+                tooltip: {
+                    valueSuffix: '%'
+                }
             }]
         };
         return (

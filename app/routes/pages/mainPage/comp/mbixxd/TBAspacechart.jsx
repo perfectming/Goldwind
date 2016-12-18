@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {fanCost,machine,fanProfitQ,width,height}=this.props;
+        let {text,fanCost,machine,fanProfitQ,width,height}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -21,14 +21,15 @@ let Component = React.createClass({
                 paddingLeft:100,
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
                 x : "0",
+                y:20,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                     fontWeight:700,
                 }
@@ -37,6 +38,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 x:-75,
+                y:70,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -125,7 +127,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: 'TBA%',
+                text: '100%',
                  align:'high',
                 rotation:'0',
                 y: -15,

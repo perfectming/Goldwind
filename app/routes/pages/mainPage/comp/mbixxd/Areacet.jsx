@@ -52,17 +52,15 @@ let Component = React.createClass({
                 </ul>
             <div className={styles.paddingtop}>
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
-                             <div>
-                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP} height={750}></Windcet>
-                            </div>
-                        </div>
-                            <div className={styles.tik}>
-                                <p className={styles.Ff}>{text[actbt]}</p>
-                             </div>
+                    
+                       
                            
-                    </div>
+                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP} height={800} text={text[actbt]}></Windcet>
+                          
+                       
+                           
+                           
+                    
                 <div className={styles.imgq}>
                     <img src={icono}/>
                 </div>
@@ -91,9 +89,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: () => {
-            var arr1=[];
-            var arr2=[];
-            var arr3=[];
+            let arr1=[];
+            let arr2=[];
+            let arr3=[];
             $.ajax({
              type:'post',
              url:'http://'+input_url+':8080/wbi/ELEC/getWtTimeAreaElec',  
@@ -107,13 +105,13 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
               
              // 获取x轴的值内蒙达茂天润风电场
-             var dataa=data.data;
-             for(var i=0;i<dataa.length;i++){
-                 var xDay=data.data[i].day;
+             let dataa=data.data;
+             for(let i=0;i<dataa.length;i++){
+                 let xDay=data.data[i].day;
                  arr1.push(xDay);
-                 var yPowerPlan=data.data[i].powerplan;
+                 let yPowerPlan=data.data[i].powerplan;
                  arr2.push(yPowerPlan);
-                 var yPowerAct=data.data[i].poweract;
+                 let yPowerAct=data.data[i].poweract;
                  arr3.push(yPowerAct);
              }
 

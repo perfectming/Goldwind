@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ changpage, fcpage,actbt=0,backtop,changpage1,actbt1,befor_page='super',befor_page2,zhz,bs}=this.props;
+       let{ changpage, fcpage,actbt=0,backtop,changpage1,actbt1,befor_page,befor_page2,zhz,bs,befor_page3,npage='fanmatrix'}=this.props;
           let model_data = bs.ModelData;
           var model_ens = zhz.Model.ens;
           let arr1 = [];
@@ -44,7 +44,7 @@ let Component = React.createClass({
         return (
          
                 <div className={styles.bodynav}>
-                <img src={back} onClick={()=>backtop(befor_page,befor_page2)}/>
+                <img src={back} onClick={()=>backtop(befor_page,befor_page2,befor_page3,npage)}/>
                  {
                     arr1.map((value,key)=>{
                         return(
@@ -75,6 +75,8 @@ const mapStateToProps = (state) => {
         actbt1 : state.vars.actbt1,
         befor_page : state.vars.befor_page,
         befor_page2 : state.vars.befor_page2,
+        befor_page3 : state.vars.befor_page3,
+        npage : state.vars.npage,
         
 
     }
@@ -111,11 +113,23 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('fc_info', value));
 
         },
-        backtop:(befor_page,befor_page2)=>{
+        backtop:(befor_page,befor_page2,befor_page3,npage)=>{
+          //判断返回原来页面的顺序
+          if(befor_page3==undefined){
+            if(befor_page2==undefined){
             dispatch(actions.setVars('showPage',befor_page));
             dispatch(actions.setVars('navhide', true));
-            dispatch(actions.setVars('numpage', 'fanmatrix'));
-            console.log(befor_page2)
+          }else{
+            dispatch(actions.setVars('fan_page', befor_page2 ));
+            dispatch(actions.setVars('befor_page2',undefined));
+          }
+        }else{
+            dispatch(actions.setVars('fan_page', befor_page3 ));
+            dispatch(actions.setVars('befor_page3',undefined));
+        }
+            
+            dispatch(actions.setVars('numpage', npage));
+            
         }
    
     };

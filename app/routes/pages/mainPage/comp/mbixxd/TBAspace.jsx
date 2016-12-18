@@ -47,16 +47,14 @@ let Component = React.createClass({
                 </ul>
                 <div className={styles.paddingtop}>
                 <div className={styles.bigbox}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
+                  
+                      
                             <div>
-                                <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP} height={750}></TBAspacechart>
+                                <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP} height={800} text={text[actbt]+'月份各风机TBA'}></TBAspacechart>
                             </div>
-                        </div>
-                    </div>
-                    <div className={styles.tik}>
-                        <p>{text[actbt]+'月份各风机TBA'}</p>
-                    </div>
+                       
+               
+                  
                     <div className={styles.imgq}>
                         <img src={icono}/>
                     </div>

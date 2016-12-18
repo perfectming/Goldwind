@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {X1,changedata1,areaName,areaElec,areaFault,areaMaintain,areaLimit,areaDevice,areaPBA}=this.props
+    	let {X1,changedata1,areaId,areaName,areaElec,areaFault,areaMaintain,areaLimit,areaDevice,areaPBA}=this.props;
         let configPie = {
             chart: {
                 height:380,
@@ -45,10 +45,6 @@ let Component = React.createClass({
                 color: '#31f3fb'
             	}
             },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                 
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -76,9 +72,30 @@ let Component = React.createClass({
                 },
                 categories:areaName,
             },
-            yAxis: {
+            yAxis: [{
                 title:{
-                	text:'万kWh',
+                	text:'kWh',
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -10,
+	                x:-15,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+                },
+                labels: {
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
+                    }
+                },
+                
+            },{
+            	title:{
+                	text:'%',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
@@ -88,26 +105,28 @@ let Component = React.createClass({
 	                	fontSize:'14px',
 	                	color:'white',
 	                }
-                },
-                labels: {
-                	format:'{value}',
+               },
+               labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
                         fontSize:'14px'  //字体
                     }
                 },
-            },
+               opposite: true
+            }],
             series: [{
             	name: '应发电量',
             	type: 'column',
                 stack:"male",
                 data: areaElec,
+                tooltip: {
+	                valueSuffix: 'kWh'
+	            },
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
                     	changedata1(X1);
-                    	
                     }
                 }
             },{
@@ -115,6 +134,9 @@ let Component = React.createClass({
                 type: 'column',
                 stack:"female",
                 data: areaFault,
+                tooltip: {
+	                valueSuffix: 'kWh'
+	            },
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
@@ -126,9 +148,13 @@ let Component = React.createClass({
             	type: 'column',
                 stack:"female",
                 data: areaMaintain,
+                tooltip: {
+	                valueSuffix: 'kWh'
+	            },
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
+//                  	x2=e.point.index;		
                     	changedata1(X1);
                     }
                 }
@@ -137,6 +163,9 @@ let Component = React.createClass({
             	type: 'column',
                 stack:"female",
                 data: areaLimit,
+                tooltip: {
+	                valueSuffix: 'kWh'
+	            },
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
@@ -148,6 +177,9 @@ let Component = React.createClass({
             	type: 'column',
                 stack:"female",
                 data: areaDevice,
+                tooltip: {
+	                valueSuffix: 'kWh'
+	            },
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
@@ -158,6 +190,9 @@ let Component = React.createClass({
             	name: 'PBA',
             	type: 'spline',
                 data: areaPBA,
+                tooltip: {
+	                valueSuffix: '%'
+	            },
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
@@ -175,7 +210,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-    	
+    	AreaId : state.vars.AreaId,
     }
 };
 

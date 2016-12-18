@@ -3,15 +3,11 @@ import {connect} from 'react-redux';
 import styles from './Groupstyle.scss';
 import Yearelectric from './Yearelectric.jsx';
 import Pie2 from '../../mxx/Pie2';
+import Login from '../../../../../../components/common/Loading.jsx';
 
-let ipUrl='10.68.100.32:8080';
-
-
-
+var ipUrl='10.68.100.32:8080';
 var actions = require('redux/actions');
 var $ =require("jQuery");
-// let data=Instrumentdata;
-// let sort1=data.sort2;
 
 let profit,amounts,rate,yearPro,month2,cost,incomes,shouldElec,actrulElec,sortArr,yearELec,yearPlanELec,monthElec,monthPlanElec,dayelec,dayPlanElec,arrPlan=[],month1=[],arrAct=[],runTime,downTime,tba;
 
@@ -27,8 +23,10 @@ let Component = React.createClass({
 
 
     render() {
-        let{flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
-        return (
+        let{bool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+  		
+  		if(bool){
+  		return (
             <div className={styles.box}>
                 <div className={styles.left}>
                     <div className={`${styles.firstfloor} ${styles.boxShadow}`}>
@@ -68,7 +66,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.section}>
                             <div className={styles.border}></div>
-                            <div className={styles.text1}>可用{downTime}h·统计{runTime}h</div>
+                            <div className={styles.text1}>停机时间{downTime}h·运行时间{runTime}h</div>
                             <div className={styles.alink}>
                                 <a className={styles.space} onClick={()=>changepageTBAS()}></a><br/><br/>
                                 <a className={styles.time} onClick={()=>changepageTBAT()}></a>
@@ -112,7 +110,7 @@ let Component = React.createClass({
                                     <div className={styles.links}><a className={styles.time} onClick={()=>changepageEleT()}></a></div>
                                 </div>
                             </div>
-                            <Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'万kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+                            <Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
                         </div>
                         <div className={`${styles.yearprofit} ${styles.boxShadow}`}>
                             <div className={styles.header}>
@@ -122,7 +120,7 @@ let Component = React.createClass({
                                     <div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
                                 </div>
                             </div>
-                            <div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"万元"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
+                            <div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"元"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
                         </div>
                     </div>
                 </div>
@@ -140,7 +138,7 @@ let Component = React.createClass({
                         </tr>
                         {
                             sortArr.slice(0,15).map((value,key)=>{
-                                return(<tr key={key}><th>{key+1}</th><th>{value.groupname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{value.downtime}小时</th></tr>)
+                                return(<tr key={key}><th>{key+1}</th><th>{value.groupname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{value.downtime}分钟</th></tr>)
                             })
                         }
                         </tbody>
@@ -148,6 +146,12 @@ let Component = React.createClass({
                 </div>
             </div>
         );
+      }else{
+      	return(
+      		<Login></Login>
+      	)
+      	
+      }
     }
 });
 
@@ -159,6 +163,8 @@ const mapStateToProps = (state) => {
         flag1 : state.vars.flag1,
         flagPba1 : state.vars.flagPba1,
         flagTime1 : state.vars.flagTime1,
+        bool : state.vars.bool,
+        ipUrl : state.vars.ipUrl,
     }
 };
 
@@ -168,107 +174,86 @@ const mapDispatchToProps = (dispatch) => {
             $.ajax({
                 url:'http://'+ipUrl+'/wbi/yield/getMaxYie',//收益率饼图
                 type: 'post',
-                async:false,
+                async:true,
                 dataType: 'json',
-                timeout : 3000,
                 success:function (data) {
                     profit = (data.data.incomes/10000).toFixed(1)/1;
                     amounts =(data.data.amounts/10000).toFixed(1)/1;
                     rate = data.data.rate;
+                    
                 },
                 complete : function(XMLHttpRequest,status){
-                    if(status=='timeout'){
-                        console.log('超时');
-                    }
-                },
-            });
-
-            $.ajax({
-                url:'http://'+ipUrl+'/wbi/yield/getAllRate',//年收益表
-                type: 'post',
-                async:false,
-                dataType: 'json',
-                timeout : 3000,
-                success:function (data) {
-                    yearPro=data.data;
-                    month2=[],cost=[],incomes=[];
-                    for(var i in yearPro){
-                        month2.push(yearPro[i].month+"月");
-                        cost.push(yearPro[i].costs/10000);
-                        incomes.push(yearPro[i].earning/10000);
-                    }
-                },
-                complete : function(XMLHttpRequest,status){
-                    if(status=='timeout'){
-                        console.log('超时');
-                    }
-                },
-            });
-
-            $.ajax({
-                url:'http://'+ipUrl+'/wbi/PBA/getPBA',//PBA表格
-                type: 'post',
-                async:false,
-                dataType: 'json',
-                data:'type=0',
-                timeout : 60000,
-                success:function (data) {
-                    shouldElec=data.data.scale[0].powertheory;
-                    actrulElec=data.data.scale[0].poweract;
-                    sortArr=data.data.Areatabulation;
-                },
-                complete : function(XMLHttpRequest,status){
-                    if(status=='timeout'){
-                        console.log('超时');
-                    }
-                },
-            });
-
-            $.ajax({
-                url:'http://'+ipUrl+'/wbi/ELEC/getKongElec',//发电量4数据
-                type: 'post',
-                async:false,
-                dataType: 'json',
-                timeout : 60000,
-                success:function (data) {
-                    yearELec = data.data.yearELec;
-                    yearPlanELec=data.data.yearplanElec;
-                    monthElec = data.data.monthElec;
-                    monthPlanElec=data.data.monthplanElec;
-                    dayelec = data.data.dayelec;
-                    dayPlanElec=data.data.dayelecPlanElec;
-                    arrPlan=[],month1=[],arrAct=[];
-                    for(var i=0;i<data.data.wtKongMonthsElec.length;i++){
-                        month1.push(data.data.wtKongMonthsElec[i].month+"月");
-                        arrAct.push(data.data.wtKongMonthsElec[i].poweract/10000);
-                    }
-                    for(var i in data.data.wtKongMonthsPlanElec){
-                        arrPlan.push(data.data.wtKongMonthsPlanElec[i]/10000);
-                    }
-                },
-                complete : function(XMLHttpRequest,status){
-                    if(status=='timeout'){
-                        console.log('超时');
-                    }
-                },
-            });
-
-            $.ajax({
-                url:'http://'+ipUrl+'/wbi/TBA/getLastMonthTBA',//TBA饼图
-                type: 'post',
-                async:false,
-                dataType: 'json',
-                timeout : 60000,
-                success:function (data) {
-                    runTime=data.data[0].runtimes;
-                    downTime=data.data[0].downtimes;
-                    tba=data.data[0].tba;
-
-                },
-                complete : function(XMLHttpRequest,status){
-                    if(status=='timeout'){
-                        console.log('超时');
-                    }
+                    $.ajax({
+		                url:'http://'+ipUrl+'/wbi/yield/getAllRate',//年收益表
+		                type: 'post',
+		                async:true,
+		                dataType: 'json',
+		                success:function (data) {
+		                    yearPro=data.data;
+		                    month2=[],cost=[],incomes=[];
+		                    for(var i in yearPro){
+		                        month2.push(yearPro[i].month+"月");
+		                        cost.push(yearPro[i].costs);
+		                        incomes.push(yearPro[i].earning);
+		                    }
+		                },
+		                complete : function(XMLHttpRequest,status){
+		                    $.ajax({
+				                url:'http://'+ipUrl+'/wbi/PBA/getPBA',//PBA表格
+				                type: 'post',
+				                async:true,
+				                dataType: 'json',
+				                data:'type=0',
+				                success:function (data) {
+				                    shouldElec=data.data.scale[0].powertheory;
+				                    actrulElec=data.data.scale[0].poweract;
+				                    sortArr=data.data.Areatabulation;
+				                },
+				                complete : function(XMLHttpRequest,status){
+				                    $.ajax({
+						                url:'http://'+ipUrl+'/wbi/ELEC/getKongElec',//发电量4数据
+						                type: 'post',
+						                async:true,
+						                dataType: 'json',
+						                success:function (data) {
+						                    yearELec = data.data.yearELec;
+						                    yearPlanELec=data.data.yearplanElec;
+						                    monthElec = data.data.monthElec;
+						                    monthPlanElec=data.data.monthplanElec;
+						                    dayelec = data.data.dayelec;
+						                    dayPlanElec=data.data.dayelecPlanElec;
+						                    arrPlan=[],month1=[],arrAct=[];
+						                    for(var i=0;i<data.data.wtKongMonthsElec.length;i++){
+						                        month1.push(data.data.wtKongMonthsElec[i].month+"月");
+						                        arrAct.push(data.data.wtKongMonthsElec[i].poweract);
+						                    }
+						                    for(var i in data.data.wtKongMonthsPlanElec){
+						                        arrPlan.push(data.data.wtKongMonthsPlanElec[i]);
+						                    }
+						                },
+						                complete : function(XMLHttpRequest,status){
+						                    $.ajax({
+								                url:'http://'+ipUrl+'/wbi/TBA/getLastMonthTBA',//TBA饼图
+								                type: 'post',
+								                async:true,
+								                dataType: 'json',
+								                timeout : 60000,
+								                success:function (data) {
+								                    runTime=data.data[0].runtimes;
+								                    downTime=data.data[0].downtimes;
+								                    tba=data.data[0].tba;
+								
+								                },
+								                complete : function(XMLHttpRequest,status){
+								                    dispatch(actions.setVars('bool', true));
+								                },
+								            });
+						                },
+						            });
+				                },
+				            });
+		                },
+		            });
                 },
             });
         },

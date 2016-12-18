@@ -96,7 +96,7 @@ let Component = React.createClass({
                 rotation: 0,
                 y: -10,
                 style: {
-                    color: '#fff',
+                    color: '#00F7FE',
                     top:0,
                     right:0,
                 }
@@ -109,7 +109,7 @@ let Component = React.createClass({
                 rotation: 0,
                 y: -10,
                 style: {
-                    color: '#fff',
+                    color: '#00F7FE',
                     top:0,
                     right:0,
                 }
@@ -121,7 +121,7 @@ let Component = React.createClass({
                     color: '#fff'
                 }
             },
-            // opposite: true
+            opposite: true
         }],
         plotOptions: {
             spline: {

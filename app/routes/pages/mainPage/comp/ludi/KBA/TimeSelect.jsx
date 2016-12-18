@@ -23,13 +23,25 @@ let Component = React.createClass({
             alert('请选择开始或者结束时间');
             return false;
         }
-        alert(sTime+'到'+eTime)
-        // 在这个下边获取这个时间段的数据就行了
-        // 然后去更新图表
+        let {groupid}=this.props;
+        $.ajax({
+	        		url:'http://'+ipUrl+'/wbi/KPI/getCompanyKPI',//默认获取1区域ID-YES
+			        type: 'post',
+			        async:false,
+			        dataType: 'json',
+			        data:{'startTime':sTime,'endTime':eTime,'groupid':groupid},
+			        timeout : 60000, 
+			        success:function (data) {
+			        	console.log(data);
+			        },
+			        complete : function(XMLHttpRequest,status){ 
+					　　　
+					},
+				});
     },
 
     render() {
-        let {buttonAction, onFocus} = this.props;
+        let {buttonAction, onFocus,changeValue}= this.props;
         let comp = data.list;
         return (	
             <div className={styles.inquireBox}>
@@ -38,7 +50,7 @@ let Component = React.createClass({
                         if (value.type === 'date') {
                             return (
                                     <div className={styles.dateBox} key={key}>
-                                        <span>发生时间</span><input ref="startTime" placeholder={value.content} type={value.type} style={{width:value.width}}/>
+                                        <span>发生时间</span><input ref="startTime" value="2016-11-01" onChange={()=>changeValue()} placeholder={value.content} type={value.type} style={{width:value.width}}/>
                                         <span>结束时间</span><input ref="endTime" placeholder={value.content} type={value.type} style={{width:value.width}}/>
                                     </div>
                                 )
@@ -58,16 +70,17 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+    	X1 : state.vars.x1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            var obj = {
-                test:''
-            }
+        	
         },
+        
     };
 };
 

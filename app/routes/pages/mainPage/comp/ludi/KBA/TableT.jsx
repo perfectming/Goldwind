@@ -46,10 +46,6 @@ let Component = React.createClass({
                 color: '#31f3fb'
             	}
             },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-//              pointFormat: "<b>{point.percentage:.0f}%</b>"
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -76,40 +72,69 @@ let Component = React.createClass({
                 },
                 categories:wtName,
             },
-            yAxis: {
+            yAxis: [{
                 title:{
-                	text:'万kWh',
+                	text:'kWh',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-5,
+	                x:-15,
 	                style:{
 	                	fontSize:'	14px',
 	                	color:'white',
 	                }
                 },
                 labels: {
-                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
                         fontSize:'14px'  //字体
                     }
                 },
-            },
+            },,{
+            	title:{
+                	text:'%',
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -10,
+	                x:-10,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+               },
+               labels: {
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
+                    }
+                },
+               opposite: true
+            }],
             series: [{
             	name: '实际发电量',
             	type: 'column',
                 data: wtElec,
+                tooltip: {
+	                valueSuffix: 'kWh'
+	            },
             },{
                 name: '损失发电量',
                 type: 'column',
                 data: wtLose,
+                tooltip: {
+	                valueSuffix: 'kWh'
+	            },
             },{
             	name: 'PBA',
             	type: 'spline',
                 data: wtPBA,
+                tooltip: {
+	                valueSuffix: '%'
+	            },
             }]
         };
         return (

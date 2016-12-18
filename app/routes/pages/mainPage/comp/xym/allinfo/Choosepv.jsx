@@ -83,7 +83,7 @@ let Component = React.createClass({
                                 x = "维护";
                                 break;
                         }
-                    if(choosefans1 == "PVONL" && (value.WTStateCode== "Online" || value.WTStateCode== "LimitPow")){
+                    if(choosefans1 == "PVONL" && (code== "Online" || code== "LimitPow")){
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -104,7 +104,7 @@ let Component = React.createClass({
                             </div>          
                         </div>  
                         )
-                    }else if(choosefans1 == "PVFLT" && value.WTStateCode== "Fault"){
+                    }else if(choosefans1 == "PVFLT" && code== "Fault"){
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -125,7 +125,28 @@ let Component = React.createClass({
                             </div>          
                         </div>  
                         )
-                    }else if(choosefans1 == "PVOFL" && value.WTStateCode== "DisComForPre"){
+                    }else if(choosefans1 == "PVOFL" && (code== "DisComForPre" || code== "Offline")){
+                        return (
+                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.offline : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
+                            <div className={styles.slistitemR}>
+                                <span className={styles.slistitemT}>
+                                        <p className={styles.slistitemTT}>{value.Wtname}</p>
+                                        <p className={styles.slistitemTB}>{x}</p>
+                                </span>
+                                <span className={styles.slistitemB}>
+                                    <span className={styles.slistitemBL}>
+                                        <p>辐照度:</p>
+                                        <p><span className={styles.slistitemBLL}>{value.PVTSI_Aver == undefined ? '--' : (Math.ceil(value.PVTSI_Aver)).toFixed(2)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
+                                    </span>
+                                    <span className={styles.slistitemBR}>
+                                        <p>功率:</p>
+                                        <p><span className={styles.slistitemBLL}>{(Number(value.ActPwr)).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
+                                    </span>
+                                </span>
+                            </div>          
+                        </div>  
+                        )
+                    }else if(choosefans1 == "PVOFL" && code== "DisComForPlc"){
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -146,28 +167,7 @@ let Component = React.createClass({
                             </div>          
                         </div>  
                         )
-                    }else if(choosefans1 == "PVOFL" && value.WTStateCode== "DisComForPlc"){
-                        return (
-                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
-                            <div className={styles.slistitemR}>
-                                <span className={styles.slistitemT}>
-                                        <p className={styles.slistitemTT}>{value.Wtname}</p>
-                                        <p className={styles.slistitemTB}>{x}</p>
-                                </span>
-                                <span className={styles.slistitemB}>
-                                    <span className={styles.slistitemBL}>
-                                        <p>辐照度:</p>
-                                        <p><span className={styles.slistitemBLL}>{value.PVTSI_Aver == undefined ? '--' : (Math.ceil(value.PVTSI_Aver)).toFixed(2)}</span><span className={styles.slistitemBLR}>W/㎡</span></p>
-                                    </span>
-                                    <span className={styles.slistitemBR}>
-                                        <p>功率:</p>
-                                        <p><span className={styles.slistitemBLL}>{(Number(value.ActPwr)).toFixed(2)}</span><span className={styles.slistitemBLR}>KW</span></p>
-                                    </span>
-                                </span>
-                            </div>          
-                        </div>  
-                        )
-                    }else if(choosefans1 == "PVOFL" && value.WTStateCode== "Unknown"){
+                    }else if(choosefans1 == "PVOFL" && code== "Unknown"){
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -218,6 +218,8 @@ const mapDispatchToProps = (dispatch) => {
         Topvinfo: (value)=> {
             dispatch(actions.setVars('value', value));
             dispatch(actions.setVars('fan_page', 'pvinfo'));
+            dispatch(actions.setVars('befor_page2', 'allpage'));
+            dispatch(actions.setVars('npage', 'choosepv'));
         }
     };
 };

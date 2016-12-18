@@ -26,17 +26,18 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                
             },
             title: {
-                text: '',
+                text: '11月份每天收益率',
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : "0",
+                x : 100,
+                y :20,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                     fontWeight:700,
                 }
@@ -45,6 +46,8 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 align:"right",
+                x:-75,
+                y: 40,
                 verticalAlign: "top",
                 itemHoverStyle:{
                     color:'#31f3fb',
@@ -59,7 +62,7 @@ let Component = React.createClass({
             },
             tooltip: {
 
-               
+               valueSuffix:'元'
             },
             credits: {
                 enabled: false
@@ -72,7 +75,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 10,
                     stacking:'nomal',
-                    pointWidth: 50,
+                    pointWidth: 25,
+                    borderRadius:10
 
                 }, series: {
                     cursor: 'pointer',
@@ -97,19 +101,56 @@ let Component = React.createClass({
                 },
                 categories:machine,
             },
-            yAxis: [{
-                title: {
-                    text: ''
+           yAxis: [{
+            labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
                 }
-            }, {
-                title: {
-                    text: ''
-                },
-                opposite: true
-            }],
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+            title: {
+                text:'元',
+                align:'high',
+                rotation:'0',
+                y: -20,
+                x:45,
+                style:{
+                    fontSize:'14px',
+                    color:'#fff'
+                }
+            }
+        }, {
+             labels: {
+                format: '',
+                style: {
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+                
+               
+
+            title: {
+                text: '100%',
+                 align:'high',
+                rotation:'0',
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
+
+            },
+            opposite: true
+        }],
             //几条数据
             series: [{
-                name: '实际发电量收益',
+                name: '收入',
                 type: 'column',
                 data: fanProfitQ,
                 color:'#64DC83',
@@ -118,7 +159,7 @@ let Component = React.createClass({
                 borderWidth: 0,
             },
                 {
-                    name: '四',
+                    name: '成本',
                     type: 'column',
                     color:'#FC794E',
                     data: fanCost,
@@ -127,7 +168,7 @@ let Component = React.createClass({
                 },
                 
                 {
-                    name: 'TBA',
+                    name: '收益率',
                     type: 'line',
                     data: fanCost,
                     color:'blue',

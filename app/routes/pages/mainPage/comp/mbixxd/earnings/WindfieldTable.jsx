@@ -2,18 +2,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-var input_url="10.68.100.32";
+let input_url="10.68.100.32";
 let data = require('./Profit-data');
-var input_url="192.168.31.148";
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let {windFiled,windCost,windProfit,w111,changedata1,TBA,year,monthh,daycount,keyy,areaWindids}=this.props;
+        let {height,windFiled,windCost,windProfit,w111,changedata1,TBA,year,monthh,daycount,keyy,areaWindids,text}=this.props;
         let configPie = {
             chart: {
-                height:400,
+                height:height,
                 width:860,
              backgroundColor: "rgba(44, 61, 71,0)",
             
@@ -23,13 +22,15 @@ let Component = React.createClass({
                 paddingLeft:100,
                
             },
-            title: {
-                text: '',
+            title:{
+                text:text,
                 align:'left',
                  x : "0",
+                 x : 90,
+                y :10,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"15px",
                     fontFamily:"微软雅黑",
                       fontWeight:700,
                 }
@@ -37,6 +38,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 x:-75,
+                y:25,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -56,12 +58,7 @@ let Component = React.createClass({
                 enabled: false //不显示highCharts版权信息
             },
             colors: [ '#33BAC0', '#70c080'],
-            plotOptions: {
-
-                bar:{
-                    animation: true
-                }
-            },
+           
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
@@ -101,18 +98,18 @@ let Component = React.createClass({
                      success:function(data){
                        
                        
-                         var dataA=data.data;
-                         for (var i in dataA)
+                         let dataA=data.data;
+                         for (let i in dataA)
                          {
-                             var areaWindCost=dataA[i].costs;
+                             let areaWindCost=dataA[i].costs;
                              areaWindCosts.push(areaWindCost);
-                             var areaWindEarning=dataA[i].earning;
+                             let areaWindEarning=dataA[i].earning;
                              areaWindEarnings.push(areaWindEarning);
-                             var areaWindRate=dataA[i].rate;
+                             let areaWindRate=dataA[i].rate;
                              areaWindRates.push(areaWindRate);
-                             var areaWindid=dataA[i].wfid;
+                             let areaWindid=dataA[i].wfid;
                              areaWindids.push(areaWindid);
-                             var areaWindName =dataA[i].wtname;
+                             let areaWindName =dataA[i].wtname;
                              areaWindNames.push(areaWindName) 
 
                          }

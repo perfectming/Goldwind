@@ -43,10 +43,6 @@ let Component = React.createClass({
                 color: '#31f3fb'
             	}
             },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-//              pointFormat: "<b>{point.percentage:.0f}%</b>"
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -73,9 +69,29 @@ let Component = React.createClass({
                 },
                 categories:wfName,
             },
-            yAxis: {
+            yAxis: [{
                 title:{
-                	text:'万kWh',
+                	text:'kWh',
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -10,
+	                x:-15,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+                },
+                labels: {
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
+                    }
+                },
+            },{
+            	title:{
+                	text:'%',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
@@ -85,20 +101,23 @@ let Component = React.createClass({
 	                	fontSize:'14px',
 	                	color:'white',
 	                }
-                },
-                labels: {
-                	format:'{value}',
+               },
+               labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
                         fontSize:'14px'  //字体
                     }
                 },
-            },
+               opposite: true
+            }],
             series: [{
             	name: '实际发电量',
             	type: 'column',
                 data: wfElec,
+                tooltip: {
+	                valueSuffix: 'kWh'
+	            },
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
@@ -109,6 +128,9 @@ let Component = React.createClass({
                 name: '损失发电量',
                 type: 'column',
                 data: wfLose,
+                tooltip: {
+	                valueSuffix: 'kWh'
+	            },
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
@@ -119,6 +141,9 @@ let Component = React.createClass({
             	name: 'PBA',
             	type: 'spline',
                 data: wfPBA,
+                tooltip: {
+	                valueSuffix: '%'
+	            },
                 events: {
                     click: function(e) {
                     	X2=e.point.category;

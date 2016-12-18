@@ -180,7 +180,8 @@ const mapDispatchToProps = (dispatch) => {
 
             dispatch(actions.setVars('showPage', 'fan_matrix'));
             dispatch(actions.setVars('fan_page', 'faninfo')); 
-            dispatch(actions.setVars('faninfobool', false)); 
+            dispatch(actions.setVars('faninfobool', false));
+            dispatch(actions.setVars('befor_page2', 'allpage')); 
         }
     };
 };
