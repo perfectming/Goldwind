@@ -5,15 +5,14 @@ import Chart from '../comp/Chart.jsx';
 import From from '../comp/From.jsx';
 import Table from '../comp/Table.jsx';
 import Test from '../comp/Test.jsx';
-import Power from '../comp/power/Power.jsx';
 import Tab from './Tab.jsx';
 import Tree from './Tree.jsx';
 import Header from './Header.jsx';
 
-import u865 from '../../img/comp/gz_icon.png';
-import u867 from '../../img/comp/tx_icon.png';
-import u869 from '../../img/comp/xx_icon.png';
-import u871 from '../../img/comp/ss_icon.png';
+import u865 from '../img/comp/gz_icon.png';
+import u867 from '../img/comp/tx_icon.png';
+import u869 from '../img/comp/xx_icon.png';
+import u871 from '../img/comp/ss_icon.png';
 
 import Baotou from '../comp/ludi/branch/Baotou.jsx';
 import Windbtpage from '../comp/ludi/branch/Windbtpage.jsx';
@@ -58,6 +57,7 @@ import AS from '../comp/wfm/jy/AS.jsx';
 import Alarm from '../comp/wfm/yAll/Alarm.jsx';
 import Fault from '../comp/wfm/yAll/Fault.jsx';
 import Tkgl from '../comp/wfm/tkgl.jsx';
+import Power from '../comp/wfm/power/Power.jsx';
 
 import Super from '../comp/wfm/Super.jsx';//林津津
 import Cockpit from '../comp/wfm/linjinjin/Cockpit.jsx';

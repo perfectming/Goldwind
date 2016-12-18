@@ -54,27 +54,27 @@ module.exports = {
     mapitem:[
         {
             name:'图例',
-            url:require('../../img/comp/zz.png'),
+            url:require('../../../img/comp/zz.png'),
         },
         {
             name:'风电场',
-            url:require('../../img/comp/fc_icon.png'),
+            url:require('../../../img/comp/fc_icon.png'),
         },
         {
             name:'光伏场',
-            url:require('../../img/comp/gfc_icon.png'),
+            url:require('../../../img/comp/gfc_icon.png'),
         },
         {
             name:'变电站',
-            url:require('../../img/comp/fdc_icon.png'),
+            url:require('../../../img/comp/fdc_icon.png'),
         },
         {
             name:'流向',
-            url:require('../../img/comp/lx_icon.png'),
+            url:require('../../../img/comp/lx_icon.png'),
         },
         {
             name:'信息',
-            url:require('../../img/comp/info_icon.png'),
+            url:require('../../../img/comp/info_icon.png'),
         },
     ],
    

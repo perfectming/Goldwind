@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './distribution.scss';
-import map1 from '../../../../img/comp/DistributionMap.jpg' ;
-import leftIcon from '../../../../img/icon/direct_icon.png' ;
-import rightIcon from '../../../../img/icon/direct_icon1.png' ;
+import map1 from '../../../img/comp/DistributionMap.jpg' ;
+import leftIcon from '../../../img/icon/direct_icon.png' ;
+import rightIcon from '../../../img/icon/direct_icon1.png' ;
 import Superleftbox from '../super/superleftbox.jsx';
 let Item = require('./date');
 
