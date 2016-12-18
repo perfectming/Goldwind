@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {text,name0,runtime,downtime,tba0,changedata1,hhdata,w10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
+        let {text,name3,runtime3,downtime3,tba3,changedata1,hhdata,w0,W10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
 
 
         let configPie = {
@@ -77,9 +77,9 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function (e,) {
-                            w10 = e.point.category;
+                            w0 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl);
+                            changedata1(w0, wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl);
 
                         }
                     }
@@ -102,7 +102,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:name0,
+                categories:name3,
             },
 
             yAxis: [{
@@ -154,7 +154,7 @@ let Component = React.createClass({
             series: [{
                 name: '实际运行时间',
                 type: 'column',
-                data: runtime,
+                data: runtime3,
                 borderRadius: 4,
 
             }
@@ -162,7 +162,7 @@ let Component = React.createClass({
                     name: '停机时间',
                     type: 'column',
                     color:'#cccccc',
-                    data: downtime,
+                    data: downtime3,
                     borderRadius: 4,
                 }
                 ,
@@ -170,9 +170,8 @@ let Component = React.createClass({
                     name: 'TBA',
                     type: 'line',
                     color:'#0000ff',
-                    data: tba0,
+                    data: tba3,
                     yAxis:1,
-
                 }
 
 
@@ -187,14 +186,12 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        hhdata:state.vars.hhdata,
-        actbt:state.vars.actbt,
         hhdata1:state.vars.hhdata1,
         hhdata2:state.vars.hhdata2,
         hhdata3:state.vars.hhdata3,
+        actbt:state.vars.actbt,
         w0: state.vars.w1,
-        wc1: state.vars.wc1,
-        w10: state.vars.w11,
+        w10: state.vars.w10,
         ipUrl: state.vars.ipUrl,
     }
 };
@@ -203,43 +200,83 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1: (w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl) => {
+        changedata1: (w0,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl) => {
 
-            dispatch(actions.setVars('w11', w10));
 
-            let wfid = hhdata2.data[wc1].wfid;
+
 
 
 
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/TBA/getWfAllWtByM',
+                url:'http://'+ipUrl+'/wbi/TBA/getGroupAllWfByM',
                 async:false,
                 data:{
                     "groupid":'201612121721151',
                     "month":actbt+1,
-                    "wfid":wfid,
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    dispatch(actions.setVars('hhdata3',  data));
-                    dispatch(actions.setVars('w11',  w10));
+                    dispatch(actions.setVars('hhdata',  data));
                     console.log(data)
                     //各区域   一区域二区域
-                    let runtime2 = [];       //实际发电量
-                    let downtime2 = [];       //故障损失
-                    let tba2 = [];       //维护损失
-                    let name2 = [];
-
-                    for (var i =0;i<=10;i++) {
+                    let runtime1=[];       //实际发电量
+                    let downtime1=[];       //故障损失
+                    let tba1=[];       //维护损失
+                    let name1=[];
+                    let wfid1=[];
+                    for (var i in data.data) {
                         //区域的横坐标
+                        name1.push(data.data[i].wfname)
+                        runtime1.push(data.data[i].runtimes);   //实际发电量
+                        downtime1.push(data.data[i].downtimes);   //故障损失
+                        tba1.push(data.data[i].tba);   //维护损失
+                        wfid1.push(data.data[0].wfid);   //维护损失
 
+                    }
+
+                    dispatch(actions.setVars('name1', name1));
+                    dispatch(actions.setVars('runtime1', runtime1));
+                    dispatch(actions.setVars('downtime1', downtime1));
+                    dispatch(actions.setVars('tba1', tba1));
+
+
+                },
+                error:function(){
+
+                },
+            })
+            let wfid = hhdata2.data[wc1].wfid;
+            $.ajax({
+                type:'post',
+                url:'http://'+ipUrl+'/wbi/TBA/getWfAllWtByM',
+                async:false,
+                data:{
+                    "groupid":  '201612121721151',
+                    "month":actbt+1,
+                    "wfid":'150801',
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                    dispatch(actions.setVars('hhdata3', data));
+                    //各区域   一区域二区域
+
+
+                    let runtime2=[];       //实际发电量
+                    let downtime2=[];       //故障损失
+                    let tba2=[];       //维护损失
+                    let name2=[];
+                    for (var i=0;i<=10;i++) {
+                        //区域的横坐标
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
                         tba2.push(data.data[i].tba);   //维护损失
+
                     }
+
                     dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));
@@ -251,7 +288,6 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
             })
-
         },
     };
 };

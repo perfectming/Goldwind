@@ -1,4 +1,4 @@
-﻿var _fontSize = 14;
+var _fontSize = 14;
 var barGapJson = [{ gap: '-82%', cate: '90%' }, { gap: '-80%', cate: '79%' }, { gap: '-80%', cate: '79%' }, { gap: '-82%', cate: '60%' }, { gap: '-100%', cate: '40%' }];
 function BarOption(title, xAxisData, seriesTitle, seriesData, triggerOn) {
     if (triggerOn == "click") {

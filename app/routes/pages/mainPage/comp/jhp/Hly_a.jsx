@@ -25,7 +25,6 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-
                 borderRadius: 10
             },
             title: {
@@ -76,9 +75,7 @@ let Component = React.createClass({
                 },
                 bar: {
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 series: {
                     cursor: 'pointer',
                     events: {
@@ -99,6 +96,7 @@ let Component = React.createClass({
                     },
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
                 //lineColor: "red",
@@ -243,7 +241,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "month": actbt + 1,
-                    "groupid": grid,
+                    "groupid":  '201612121721151',
                     "wfid": '',
                 },
                 dataType: 'json',
@@ -289,7 +287,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-                    dispatch(actions.setVars('hhdata1', data));
+                    dispatch(actions.setVars('hhdata', data));
 
 
 

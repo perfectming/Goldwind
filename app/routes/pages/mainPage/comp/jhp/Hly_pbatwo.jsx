@@ -76,9 +76,7 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 column: {
                     stacking: 'normal',
                     maxPointWidth: 100,
@@ -88,6 +86,7 @@ let Component = React.createClass({
                     },
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
                 //lineColor: "red",

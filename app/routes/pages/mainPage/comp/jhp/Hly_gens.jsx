@@ -74,9 +74,7 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 series: {
                     cursor: 'pointer',
                     events: {
@@ -91,10 +89,11 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    maxPointWidth: 40,
+                    maxPointWidth: 30,
                     borderRadius: 4,
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
                 //lineColor: "red",
@@ -177,15 +176,16 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         changedata1 :(w0,w10,win,wc1,wc2,hhdata,actbt)=> {
-            let grid=hhdata.data[2][wc1].groupid;
+           // let grid=hhdata.data[2][wc1].groupid;
             let wfid=hhdata.data[1][wc2].wfid;
+
             $.ajax({
                 type:'post',
                 url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceByGroupidElec',
                 async:false,
                 data:{
                     "months":actbt+1,
-                    "groupid":grid,
+                    "groupid":'201612121721151',
                     "wfid":wfid,
                 },
                 dataType:'json',
@@ -206,6 +206,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('barlotimes3', barlotimes3));
                     dispatch(actions.setVars('barlopowers3', barlopowers3));
                     dispatch(actions.setVars('barlopowerp3', barlopowerp3));
+
+                    dispatch(actions.setVars('wfid', wfid));
 
 
 

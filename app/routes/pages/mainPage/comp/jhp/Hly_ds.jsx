@@ -11,13 +11,11 @@ let Component = React.createClass({
 
     render() {
 
-        let {height,barlinepdats,text,name0,runtime,downtime,tba0} = this.props;
-
-
-
+        let {height,text,name2,runtime2,downtime2,tba2,widths} = this.props;
         let configPie = {
             chart: {
                 height:height,
+                width:widths,
                 backgroundColor: "rgba(44, 61, 71, 0.4)",
                 // plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -39,7 +37,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
-                y:20,
+                y:40,
                 x:-75,
                 itemHoverStyle:{
                     color:'#31f3fb',
@@ -75,15 +73,14 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth:20
+                    //pointWidth:20
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
                 //lineColor: "red",
@@ -95,7 +92,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:name0,
+                categories:name2,
             },
             yAxis: [{
                 labels: {
@@ -129,7 +126,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text: 'TBA%',
+                    text: '100%',
                     align: 'high',
                     rotation: '0',
                     y: -15,
@@ -145,21 +142,20 @@ let Component = React.createClass({
             series: [{
                 name: '实际运行时间',
                 type: 'column',
-                data: runtime,
+                data: runtime2,
                 borderRadius: 2,
             },{
                 name: '停机时间',
                 type: 'column',
                 color:'#cccccc',
-                data: downtime,
+                data: downtime2,
                 borderRadius: 2,
-            }
-                ,
+            },
                 {
                     name: 'TBA',
                     type: 'line',
                     color:'#0000ff',
-                    data: tba0,
+                    data: tba2,
                     yAxis:1,
                 }
 

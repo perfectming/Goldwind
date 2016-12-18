@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {barLoTime,barLoPowerValue,barRoPowerValue,barRoPowerValues,text} = this.props;
+        let {name0,runtime,downtime,tba0,text,w0, win, wc1, actbt,changedata1} = this.props;
 
 
         let configPie = {
@@ -22,7 +22,6 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-
                 borderRadius:10
             },
             title: {
@@ -41,6 +40,7 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 y:20,
+                x:-75,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -73,9 +73,18 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function (e,) {
+                            w0 = e.point.category;
+                            wc1 = e.point.index;
+                            changedata1(w0, win, wc1, actbt,);
+
+                        }
+                    }
+                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
@@ -85,6 +94,7 @@ let Component = React.createClass({
                     },
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
                 //lineColor: "red",
@@ -96,38 +106,57 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barLoTime,
+                categories:name0,
             },
-            yAxis: {
-                // lineWidth: 1,
-                // lineColor: "red",
-                //tickWidth: 4,
-                gridLineDashStyle: 'Solid',
-                gridLineColor: '#6d6a6c',
-                title: {
-                    text:'(h)',
-                    align:'high',
-                    rotation:'0',
-                    y: -10,
-                    x: 40,
-                    style:{
-                        color:'#fff',
-                        fontSize:'14px'
-                    },
-                },
-                max:100,
+            yAxis: [{
                 labels: {
-                    y: 10, //x轴刻度往下移动20px
+                    format: '',
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize: '14px'
                     }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+                title: {
+                    text: 'h',
+                    align: 'high',
+                    rotation: '0',
+                    y: -20,
+                    x: 45,
+                    style: {
+                        fontSize: '14px',
+                        color: '#fff'
+                    }
+                }
+            }, {
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+                title: {
+                    text: '100%',
+                    align: 'high',
+                    rotation: '0',
+                    y: -15,
+                    x: -40,
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+
                 },
-            },
+                opposite: true
+            }],
             series: [{
                 name: '实际运行时间',
                 type: 'column',
-                data: barRoPowerValue,
+                data: runtime,
                 borderRadius: 4,
 
                 }
@@ -135,7 +164,7 @@ let Component = React.createClass({
                     name: '停机时间',
                     type: 'column',
                     color:'#cccccc',
-                    data: barRoPowerValues,
+                    data: downtime,
                     borderRadius: 4,
                 }
                 ,
@@ -143,7 +172,7 @@ let Component = React.createClass({
                     name: 'TBA',
                     type: 'line',
                     color:'#0000ff',
-                    data: barLoPowerValue
+                    data: tba0,
                 }
 
 
@@ -157,13 +186,18 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
+        changedata1:(w0, win, wc1, actbt,)=>{
+
+    }
     };
 };
 

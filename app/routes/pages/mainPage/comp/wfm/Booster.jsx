@@ -100,7 +100,7 @@ let Component = React.createClass({
 });
 
 
-const mapStateToProps = (state) => {
+const mapStateToprops = (state) => {
     return {
         jyname: state.vars.jyname,
         jydata: state.vars.jydata,
@@ -108,7 +108,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToprops = (dispatch) => {
     return {
         changedate:()=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", momo, "Screen", 0);
@@ -166,4 +166,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToprops, mapDispatchToprops)(Component);

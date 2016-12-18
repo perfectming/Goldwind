@@ -29,7 +29,7 @@ let Component = React.createClass({
    
 
     render() {
-         let {buttonAction, inputOnChange, onFocus,befor_pages = 'group', returnit} = this.props;
+         let {ipUrl, onFocus,befor_pages = 'group', returnit} = this.props;
         return (
 
 
@@ -67,7 +67,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        ipUrl:state.vars.ipUrl,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
