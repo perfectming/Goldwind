@@ -7,8 +7,8 @@ import Table from '../comp/Table.jsx';
 import Super from '../comp/Super.jsx';
 import Test from '../comp/Test.jsx';
 import Distribution from '../comp/linjinjin/distribution.jsx';
-import Tkgl from '../comp/wfm/jy/controlAll.jsx';
-import Power from '../comp/wfm/power/Power.jsx';
+import Tkgl from '../comp/Tkgl.jsx';
+import Power from '../comp/power/Power.jsx';
 import Tab from './Tab.jsx';
 import Booster from '../comp/Booster.jsx';
 import Tree from './Tree.jsx';
@@ -16,14 +16,14 @@ import Header from './Header.jsx';
 import Fan from '../comp/Fan.jsx';
 import Cockpit from '../comp/linjinjin/Cockpit.jsx';
 import Fan_matrix from '../comp/linjinjin/Fan_matrix.jsx';
-import Alarm from '../comp/wfm/yAll/Alarm.jsx';
-import PEQI from '../comp/wfm/jy/PEQI.jsx';
-import AS from '../comp/wfm/jy/AS.jsx';
+import Alarm from '../comp/yAll/Alarm.jsx';
+import PEQI from '../comp/jy/PEQI.jsx';
+import AS from '../comp/jy/AS.jsx';
 import Ms from '../comp/xym/Ms.jsx';
 import Amm from '../comp/xym/Amm.jsx';
 import Monitorkb from '../comp/maXin/Monitorkb.jsx';
 import Ywbb from '../comp/linjinjin/yewubaobiao/allywbb.jsx';
-import Fault from '../comp/wfm/yAll/Fault.jsx';
+import Fault from '../comp/yAll/Fault.jsx';
 import u865 from '../img/comp/gz_icon.png';
 import u867 from '../img/comp/tx_icon.png';
 import u869 from '../img/comp/xx_icon.png';
@@ -64,7 +64,7 @@ import Areace from '../comp/mbixxd/Areace.jsx';
 import Areacet from '../comp/mbixxd/Areacet.jsx';
 import TBAtime from '../comp/mbixxd/TBAtime.jsx';
 import TBAspace from '../comp/mbixxd/TBAspace.jsx';
-import Healty from '../comp/mbixxd/Healty.jsx'; 
+import Healty from '../comp/mbixxd/Healty.jsx';
 import Healthytime from '../comp/mbixxd/Healthytime.jsx';
 import PBAtime from '../comp/mbixxd/PBAtime.jsx';
 import PBAspace from '../comp/mbixxd/PBAspace.jsx';
@@ -105,7 +105,7 @@ let Component = React.createClass({
                     <img src={u865}/>
                     <img src={u867}/>
                     <img src={u869}/>
-                   {legend===true && <Legend></Legend>}
+                    {legend===true && <Legend></Legend>}
                 </div>
                 <Tab tabOpt={tabOpt} tab={tab}/>
                 {showPage === 'chart' && <Chart></Chart>}
@@ -126,8 +126,8 @@ let Component = React.createClass({
                 {showPage === 'amm' && <Amm></Amm>}
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
-                {showPage === 'ywbb' && <Ywbb></Ywbb>} 
-                {showPage === 'fault' && <Fault></Fault>} 
+                {showPage === 'ywbb' && <Ywbb></Ywbb>}
+                {showPage === 'fault' && <Fault></Fault>}
 
                 {showPage === 'baotou' && <Baotou></Baotou>}
                 {showPage === 'windbtpage' && <Windbtpage></Windbtpage>}
@@ -146,9 +146,9 @@ let Component = React.createClass({
                 {showPage === 'deviceLose' && <DeviceLose></DeviceLose>}
                 {showPage === 'topTen' && <TopTen></TopTen>}
 
-				
-		
-			
+
+
+
 
                 {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
                 {showPage === 'healthy' && <Healthy></Healthy>}
@@ -177,13 +177,13 @@ let Component = React.createClass({
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
 
-                
+
                 {showPage === 'reliability' && <Reliability></Reliability>}
-               
 
 
-              
-               
+
+
+
 
                 {showPage === 'health_main' && <Health_main></Health_main>}
                 {showPage === 'history_list' && <History_list></History_list>}
@@ -217,14 +217,14 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('bodypage', false));
 
-            
+
         },
         changelegend:(legend)=>{
             legend=true;
             dispatch(actions.setVars('legend', legend));
         },
-       
-       
+
+
     };
 };
 
