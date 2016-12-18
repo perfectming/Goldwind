@@ -4,30 +4,16 @@ import styles from './Body.scss';
 import Chart from '../comp/Chart.jsx';
 import From from '../comp/From.jsx';
 import Table from '../comp/Table.jsx';
-import Super from '../comp/Super.jsx';
 import Test from '../comp/Test.jsx';
-import Distribution from '../comp/linjinjin/distribution.jsx';
-import Tkgl from '../comp/Tkgl.jsx';
 import Power from '../comp/power/Power.jsx';
 import Tab from './Tab.jsx';
-import Booster from '../comp/Booster.jsx';
 import Tree from './Tree.jsx';
 import Header from './Header.jsx';
-import Fan from '../comp/Fan.jsx';
-import Cockpit from '../comp/linjinjin/Cockpit.jsx';
-import Fan_matrix from '../comp/linjinjin/Fan_matrix.jsx';
-import Alarm from '../comp/yAll/Alarm.jsx';
-import PEQI from '../comp/jy/PEQI.jsx';
-import AS from '../comp/jy/AS.jsx';
-import Ms from '../comp/xym/Ms.jsx';
-import Amm from '../comp/xym/Amm.jsx';
-import Monitorkb from '../comp/maXin/Monitorkb.jsx';
-import Ywbb from '../comp/linjinjin/yewubaobiao/allywbb.jsx';
-import Fault from '../comp/yAll/Fault.jsx';
-import u865 from '../img/comp/gz_icon.png';
-import u867 from '../img/comp/tx_icon.png';
-import u869 from '../img/comp/xx_icon.png';
-import u871 from '../img/comp/ss_icon.png';
+
+import u865 from '../../img/comp/gz_icon.png';
+import u867 from '../../img/comp/tx_icon.png';
+import u869 from '../../img/comp/xx_icon.png';
+import u871 from '../../img/comp/ss_icon.png';
 
 import Baotou from '../comp/ludi/branch/Baotou.jsx';
 import Windbtpage from '../comp/ludi/branch/Windbtpage.jsx';
@@ -44,51 +30,74 @@ import ServiceLose from '../comp/ludi/KBA/ServiceLose.jsx';
 import PerformLose from '../comp/ludi/KBA/PerformLose.jsx';
 import MaintainLose from '../comp/ludi/KBA/MaintainLose.jsx';
 import LimitLose from '../comp/ludi/KBA/LimitLose.jsx';
-
-import Healthy_one from '../comp/jhp/Healthy_one.jsx';
-import Healthy from '../comp/jhp/Healthy.jsx';
-import Healthypba from '../comp/jhp/Healthypba.jsx';
-import Healthypbas from '../comp/jhp/Healthypbas.jsx';
-import Healthyregin from '../comp/jhp/Healthyregin.jsx';
-import Healthyregins from '../comp/jhp/Healthyregins.jsx';
-import Healthyregpba from '../comp/jhp/Healthyregpba.jsx';
-import Healthyregpbas from '../comp/jhp/Healthyregpbas.jsx';
-import Healthygen from '../comp/jhp/Healthygen.jsx';
-import Healthygens from '../comp/jhp/Healthygens.jsx';
-import Regiopower from '../comp/jhp/Regiopower.jsx';
-import Regiopowers from '../comp/jhp/Regiopowers.jsx';
-import Regiotba from '../comp/jhp/Regiotba.jsx';
-import Regiotbas from '../comp/jhp/Regiotbas.jsx';
-
-import Areace from '../comp/mbixxd/Areace.jsx';
-import Areacet from '../comp/mbixxd/Areacet.jsx';
-import TBAtime from '../comp/mbixxd/TBAtime.jsx';
-import TBAspace from '../comp/mbixxd/TBAspace.jsx';
-import Healty from '../comp/mbixxd/Healty.jsx';
-import Healthytime from '../comp/mbixxd/Healthytime.jsx';
-import PBAtime from '../comp/mbixxd/PBAtime.jsx';
-import PBAspace from '../comp/mbixxd/PBAspace.jsx';
-import Profits from '../comp/mbixxd/earnings/Profits.jsx';
-import Profitss from '../comp/mbixxd/tba/Profitss.jsx';
-import Profitsss from '../comp/mbixxd/tbatime/Profitsss.jsx';
-
-
-
-import Legend from '../comp/super/tootipbox.jsx';
 import Reliability from '../comp/ludi/KBA/Reliability.jsx';
-import PEQII from '../comp/mbixxd/PEQII.jsx';
+
+
 import Health_main from '../comp/healthManagement/Health_main.jsx';
 import History_list from '../comp/healthManagement/history.jsx';
 import Manaport from '../comp/healthManagement/manaport.jsx';
 import Subscribe from '../comp/healthManagement/subscribe.jsx';
 import Yujing from '../comp/healthManagement/yujing.jsx';
-import Input_cost from '../comp/jhp/Input_cost.jsx';
-import CS from '../comp/linjinjin/cs.jsx';
 
 
 
 
 
+
+
+import Booster from '../comp/wfm/Booster.jsx';//马鑫
+import Monitorkb from '../comp/wfm/maXin/Monitorkb.jsx';
+
+import Fan from '../comp/wfm/Fan.jsx';//徐远明
+import Ms from '../comp/wfm/xym/Ms.jsx';
+import Amm from '../comp/wfm/xym/Amm.jsx';
+
+
+import PEQI from '../comp/wfm/jy/PEQI.jsx';//姜园
+import AS from '../comp/wfm/jy/AS.jsx';
+import Alarm from '../comp/wfm/yAll/Alarm.jsx';
+import Fault from '../comp/wfm/yAll/Fault.jsx';
+import Tkgl from '../comp/wfm/tkgl.jsx';
+
+import Super from '../comp/wfm/Super.jsx';//林津津
+import Cockpit from '../comp/wfm/linjinjin/Cockpit.jsx';
+import Ywbb from '../comp/wfm/linjinjin/yewubaobiao/allywbb.jsx';
+import Fan_matrix from '../comp/wfm/linjinjin/Fan_matrix.jsx';
+import Distribution from '../comp/wfm/linjinjin/distribution.jsx';
+import Legend from '../comp/wfm/super/tootipbox.jsx';
+import CS from '../comp/wfm/linjinjin/cs.jsx';
+
+
+import Healthy_one from '../comp/wbi/jhp/Healthy_one.jsx';//姜海鹏
+import Healthy from '../comp/wbi/jhp/Healthy.jsx';
+import Healthypba from '../comp/wbi/jhp/Healthypba.jsx';
+import Healthypbas from '../comp/wbi/jhp/Healthypbas.jsx';
+import Healthyregin from '../comp/wbi/jhp/Healthyregin.jsx';
+import Healthyregins from '../comp/wbi/jhp/Healthyregins.jsx';
+import Healthyregpba from '../comp/wbi/jhp/Healthyregpba.jsx';
+import Healthyregpbas from '../comp/wbi/jhp/Healthyregpbas.jsx';
+import Healthygen from '../comp/wbi/jhp/Healthygen.jsx';
+import Healthygens from '../comp/wbi/jhp/Healthygens.jsx';
+import Regiopower from '../comp/wbi/jhp/Regiopower.jsx';
+import Regiopowers from '../comp/wbi/jhp/Regiopowers.jsx';
+import Regiotba from '../comp/wbi/jhp/Regiotba.jsx';
+import Regiotbas from '../comp/wbi/jhp/Regiotbas.jsx';
+import Input_cost from '../comp/wbi/jhp/Input_cost.jsx';
+
+
+
+import Areace from '../comp/wbi/mbixxd/Areace.jsx';//薛旭东
+import Areacet from '../comp/wbi/mbixxd/Areacet.jsx';
+import TBAtime from '../comp/wbi/mbixxd/TBAtime.jsx';
+import TBAspace from '../comp/wbi/mbixxd/TBAspace.jsx';
+import Healty from '../comp/wbi/mbixxd/Healty.jsx'; 
+import Healthytime from '../comp/wbi/mbixxd/Healthytime.jsx';
+import PBAtime from '../comp/wbi/mbixxd/PBAtime.jsx';
+import PBAspace from '../comp/wbi/mbixxd/PBAspace.jsx';
+import Profits from '../comp/wbi/mbixxd/earnings/Profits.jsx';
+import Profitss from '../comp/wbi/mbixxd/tba/Profitss.jsx';
+import Profitsss from '../comp/wbi/mbixxd/tbatime/Profitsss.jsx';
+import PEQII from '../comp/wbi/mbixxd/PEQII.jsx';
 
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
