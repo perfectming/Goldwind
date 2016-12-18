@@ -5,43 +5,37 @@ var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Profit-data');
 
+let wins=data.areaPlanDayY;
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
 
- let {text,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC,PBA,height,width}=this.props;
-     
+        let {w0,wins,monthT,areaRecordProfitT,text,changedata1}=this.props;
         let configPie = {
             chart: {
-                height:height,
-                width:width,
+                height:390,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-
+                 
             },
             title: {
-                text: text,
+                text: '',
                 align:'left',
                 top:'-20px',
                 vertical:'top',
                 x : "0",
-                y:20,
                 style:{
                     color:"#fff",
-                    fontSize:"15px",
+                    fontSize:"25px",
                     fontFamily:"微软雅黑",
                     fontWeight:700,
                 }
             },
-            // 插入图片
-            //图例说明
             legend: {
-                x:-75,
-                y:70,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -55,28 +49,28 @@ let Component = React.createClass({
 
                 }
             },
-            
             tooltip: {
-                valueSuffix:'kWh'
+                
             },
             credits: {
                 enabled: false
             },
-            //柱子颜色
-            colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31', '#EB6B34','#2623FF'],
-
-            // 柱子宽 柱子间隔 柱子边框；
+            colors: [ '#1E664A', '#4CDB9D']
+            ,
             plotOptions: {
                 column: {
-                    pointPadding: 10,
-                   stacking:'nomal',
-                    pointWidth: 50,
-
+                    pointPadding: 0.2,
+                    borderWidth: 0,
+                    pointWidth: 30,
+                    borderRadius: 7,
                 }, series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                        
+                        w0=e.point.category;
+                        let  a=w0.toString().split("");
+                        let b=a[0];
+                        changedata1(w0,win,b);
                         }
                     }
                 }
@@ -84,7 +78,6 @@ let Component = React.createClass({
 
             xAxis: {
                 lineWidth: 1,
-
                 tickWidth: 0,
                 labels: {
                     y: 20,
@@ -93,10 +86,10 @@ let Component = React.createClass({
                         fontSize:'14px'
                     }
                 },
-                categories:machine,
+                categories:monthT,
             },
-           yAxis: [{
-            labels: {
+            yAxis: [{
+                labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -106,7 +99,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'kWh',
+                text:'100%',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -117,7 +110,7 @@ let Component = React.createClass({
                 }
             }
         }, {
-             labels: {
+            labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -127,80 +120,23 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: '100%',
+                text: '',
                  align:'high',
                 rotation:'0',
-                y: -15,
-                x: -40,
-                style:{
-                    color: '#fff',
-                    fontSize:'14px'
-                }
+                y: -20,
+                x: 40,
 
             },
             opposite: true
         }],
-            //几条数据
+
             series: [{
-                name: '实际发电量',
+                name: '健康度',
                 type: 'column',
-                data: fanProfitQ,
-                color:'#33BAC0',
-                shadow:true,
-                pointWidth: 30,
-                borderWidth: 0,
-                borderRadius: 7,
+                data: areaRecordProfitT,
+                color:'#4CDB9D',
             },
-                {
-                    name: '故障损失',
-                    type: 'column',
-                    color:'#FC794E',
-                    data: fanCost,
-                    stack:'waste',
-                     pointWidth: 30,
-                     borderRadius: 3,
-                     color:'#5298d3',
-                     pointPlacement:-0.07,
-                },
-                {
-                    name: '维护损失',
-                    type: 'column',
-                    data: fanCostA,
-                    stack:'waste',
-                     pointWidth: 30,
-                    color:'#ffffff',
-                    pointPlacement:-0.07,
-                },
-                {
-                    name: '限功率损失',
-                    type: 'column',
-                    data: fanCostB,
-                    stack:'waste',
-                    color:'#e9c75c',
-                     pointWidth: 30,
-                     pointPlacement:-0.07,
-                },
-                {
-                    name: '非设备原因损失',
-                    type: 'column',
-                    data: fanCostC,
-                    stack:'waste',
-                     pointWidth: 30,
-                    color:'#d06960',
-                    pointPlacement:-0.07,
-                },
-                {
-                    name: 'PBA',
-                    type: 'line',
-                    data: PBA,
-                    color:'blue',
-                    yAxis:1,
-                     tooltip: {
-               valueSuffix:''
-            },
-                    
-                },
-                ]
+            ]
         };
         return (
             <ReactHighcharts config={configPie}/>
@@ -211,13 +147,22 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        machine:state.vars.PBASpaceWtname1
+    
+        wins: state.vars.wins1,
+         windplan1 : state.vars.windplan1,
+
+        
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+        changedata1 :(w0,win,b)=>{
+            dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('wins1',wins[b-1]));
+           
         },
     };
 };

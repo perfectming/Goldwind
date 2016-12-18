@@ -3,6 +3,7 @@
     padding:10px;
     padding-right:40px;
     position:relative;
+
     .boxcover{
     position:fixed;
     height:100%;
@@ -174,7 +175,7 @@
       position:relative;
             width:98%;
             margin-left:2px;
-            height:410px;
+            height:415px;
             background: rgba(44, 61, 71,0.4);
             margin-bottom:15px;
            }
@@ -184,7 +185,7 @@
     .windbox{
        float: left;
        width: 48%;
-       height: 420px;
+       height: 430px;
        margin-right:15px;
        position:relative;
       
@@ -195,7 +196,7 @@
     }
      .bigbox{
        float:right;
-    height:420px;
+    height:430px;
     overflow:hidden;
     width:49.3%;
    margin-right:30px;
@@ -298,6 +299,12 @@
      color:white;
       border:1px solid #20FEFF;
     
+    }
+    .btn0{
+     color: #31F3FB;
+     }
+    .btn1{
+    color:#fff;
     }
     button:hover{
        color: #31F3FB;

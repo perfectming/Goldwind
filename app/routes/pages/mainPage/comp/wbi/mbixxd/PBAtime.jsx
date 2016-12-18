@@ -8,7 +8,7 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let monthT=data.monthT;
 let datee=new Date;
-let input_url="10.68.100.32";
+let input_url="10.9.99.103";
 let month=datee.getMonth();
 let profit=data.windProfit;
 let cost=data.windCost;
@@ -117,7 +117,7 @@ const mapDispatchToProps = (dispatch) => {
             let PBATimeSecondPbaP=[];
             $.ajax({
                 type:'post',
-                url:'http://'+input_url+':8080/wbi/PBA/getWfieldMonthPBA',
+                url:'http://'+input_url+':9080/wbi/PBA/getWfieldMonthPBA',
                 async:false,
                 data:{
                     'wfid':150801,
@@ -126,7 +126,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                
+                console.log(9080)
                      let PBATimeFirstPba=data.data;
                      for ( let i in PBATimeFirstPba){
                          let month=PBATimeFirstPba[i].month;
@@ -163,7 +163,7 @@ const mapDispatchToProps = (dispatch) => {
            // 给第二个图赋初值
              $.ajax({
                 type:'post',
-                url:'http://'+input_url+':8080/wbi/PBA/getWfieldDayPBA',
+                url:'http://'+input_url+':9080/wbi/PBA/getWfieldDayPBA',
                 async:false,
                 data:{
                     'wfid':150801,

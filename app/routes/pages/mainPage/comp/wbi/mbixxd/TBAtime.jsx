@@ -16,9 +16,11 @@ let Component = React.createClass({
     },
 
     render() {
-        let {changedata2,TBA,TBAAA,montht,profit,cost,areaPlan,areaPlanDay,areaPlanDayT,w0='1月',winss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
+        let {changedata2,TBA,TBAAA,montht,profit,cost,areaPlan,areaPlanDay,areaPlanDayT,w0,winss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
+        
         return (
             <div className={`${styles.box} ${styles.shadow}`}>
+          
              <div className={styles.padding}>
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
@@ -30,8 +32,8 @@ let Component = React.createClass({
    
                 </div>
                    <div className={styles.bigbox}>
-           
-                                <TBAtimechartt areaPlan={areaPlan} areaPlanDay={areaPlanDay} areaPlanDayT={areaPlanDayT} TBA={TBAAA}height={420}></TBAtimechartt>
+               
+                                <TBAtimechartt areaPlan={areaPlan} areaPlanDay={areaPlanDay} areaPlanDayT={areaPlanDayT} TBA={TBAAA}height={420} text={w0+'月每日TBA'}></TBAtimechartt>
 
                      <div className={styles.imgqq}>
                         <img  className={styles.img}src={icono}/>
@@ -50,17 +52,19 @@ const mapStateToProps = (state) => {
     return {
        
         winss: state.vars.wins1,
-        // 初始化
+    
         montht:state.vars.wTBAMonth1,
         profit:state.vars.wTBARun1,
         cost:state.vars.wTBADown1,
         TBA:state.vars.wTBAT1,
-        //每天的
+       
         areaPlan:state.vars.wTBADaD1,
         areaPlanDay:state.vars.wTBARunD1,
         areaPlanDayT:state.vars.wTBADownD1,
         TBAAA:state.vars.wTBATD1, 
-        monthTDDD:state.vars.monthTDD,
+        
+        w0:state.vars.monthTD1,
+
        
 
     }

@@ -6,6 +6,7 @@
   .scroll{
     overflow-x: scroll;
   }
+
     .paddingtop{
     margin-top:0px;
    
@@ -39,7 +40,6 @@
     border:1px solid #282F37;
     position:relative;
     overflow:hidden;
-    
      background: rgba(44, 61, 71,0.4);
       .lkua{
       border:3px solid #5B9BD5;
@@ -128,6 +128,21 @@
        box-shadow:0px 0px 10px  #20FEFF;
        text-align:center;
     }
+    .back1{
+      float:right;
+       align-items:center;
+       color: #20FEFF;
+       border:1px solid #20FEFF;
+       width:100px;
+       height:40px;
+       line-height:40px;
+       position:relative;
+       top:px;
+       border-radius:45px;
+    
+       box-shadow:0px 0px 10px  #20FEFF;
+       text-align:center;
+    }
    
  
       .red{
@@ -149,6 +164,12 @@
     position:absolute;
     top:0px;
     right:78px;
+    .btn0{
+     color: #31F3FB;
+     }
+    .btn1{
+    color:#fff;
+    }
 
     }
     .buttonsh{
@@ -156,7 +177,12 @@
     position:absolute;
     top:0px;
     right:0px;
-
+     .btn0{
+     color: #31F3FB;
+     }
+    .btn1{
+    color:#fff;
+    }
     }
      .buttonss{
     width:254px;
@@ -168,6 +194,7 @@
     .buttons{
     height:60px;
     line-height:60px;
+
       button{
       width:70px;
       height:30px;
@@ -182,6 +209,12 @@
       border:1px solid #20FEFF;
       background:transparent;
          border-radius:15px;
+         .btn0{
+     color: #31F3FB;
+     }
+    .btn1{
+    color:#fff;
+    }
       }
 
       button:hover{

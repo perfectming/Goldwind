@@ -2,43 +2,46 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let input_url="10.68.100.32";
+
 let data = require('./Profit-data');
-let winss=data.areaPlanDayY;
-let fanCost=data.fanCost;
-let fanCostA=data.fanCostA;
-let fanCostB=data.fanCostB;
-let fanCostC=data.fanCostC;
+
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {monthT,profit,cost,w0,winsss,changedata3,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
+
+ let {ty,text,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC,PBA,height,width}=this.props;
+     
         let configPie = {
             chart: {
-                height:395,
+                height:height,
+                width:width,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
+
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
                 x : "0",
+                y:20,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"15px",
                     fontFamily:"微软雅黑",
                     fontWeight:700,
                 }
             },
-
+            // 插入图片
+            //图例说明
             legend: {
                 x:-75,
+                y:ty,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -52,6 +55,7 @@ let Component = React.createClass({
 
                 }
             },
+            
             tooltip: {
                 valueSuffix:'kWh'
             },
@@ -59,70 +63,20 @@ let Component = React.createClass({
                 enabled: false
             },
             //柱子颜色
-            colors: [ '#1E664A', '#4CDB9D']
-            ,
-            plotOptions: {
+            colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31', '#EB6B34','#2623FF'],
 
+            // 柱子宽 柱子间隔 柱子边框；
+            plotOptions: {
                 column: {
                     pointPadding: 10,
+                   stacking:'nomal',
                     pointWidth: 50,
-                    borderRadius: 3,
-                    stacking:'nomal',
 
                 }, series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                           w0=e.point.category;
-                        let  a=w0.toString().split("");
-                        let b=a[0];
-                         // 第二个图的数据
-                      let PBATimeSecondDay=[];
-                      let PBATimeSecondPoweract=[];
-                      let PBATimeSecondFaultloss=[];
-                      let PBATimeSecondMaintainloss=[];
-                      let PBATimeSecondLimitloss=[];
-                      let PBATimeSecondNodevreasonloss=[];
-                      let PBATimeSecondPbaP=[];
-                        $.ajax({
-                type:'post',
-                url:'http://'+input_url+':8080/wbi/PBA/getWfieldDayPBA',
-                async:false,
-                data:{
-                    'wfid':150801,
-                    'month':w0,
-                },
-                dataType:'json',
-                timeout:'3000',
-                success:function(data){
-                 
-
-                     let PBATimeSecondPba=data.data;
-                      for ( let i in PBATimeSecondPba){
-                          let day=PBATimeSecondPba[i].day;
-                          PBATimeSecondDay.push(day);
-                          let poweract=PBATimeSecondPba[i].poweract;
-                          PBATimeSecondPoweract.push(poweract);
-                          let faultloss=PBATimeSecondPba[i].faultloss;
-                          PBATimeSecondFaultloss.push(faultloss);
-                          let maintainloss=PBATimeSecondPba[i].maintainloss;
-                          PBATimeSecondMaintainloss.push(maintainloss);
-                          let limitloss=PBATimeSecondPba[i].limitloss;
-                          PBATimeSecondLimitloss.push(limitloss);
-                          let nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
-                          PBATimeSecondNodevreasonloss.push(nodevreasonloss);
-                          let pba=Number(PBATimeSecondPba[i].pba.toFixed(2));
-                          PBATimeSecondPbaP.push(pba);
-                      }
-                },
-                error:function(){
-                   
-                },
-
-            });
-
-
-                    changedata3(w0,winss,b,PBATimeSecondDay,PBATimeSecondPoweract,PBATimeSecondFaultloss,PBATimeSecondMaintainloss,PBATimeSecondLimitloss,PBATimeSecondNodevreasonloss,PBATimeSecondPbaP);
+                        
                         }
                     }
                 }
@@ -139,9 +93,9 @@ let Component = React.createClass({
                         fontSize:'14px'
                     }
                 },
-                categories:monthT,
+                categories:machine,
             },
-            yAxis: [{
+           yAxis: [{
             labels: {
                 format: '',
                 style: {
@@ -186,16 +140,16 @@ let Component = React.createClass({
             },
             opposite: true
         }],
-
+            //几条数据
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: profit,
+                data: fanProfitQ,
                 color:'#33BAC0',
                 shadow:true,
                 pointWidth: 30,
                 borderWidth: 0,
-                pointPlacement: 0,
+                borderRadius: 7,
             },
                 {
                     name: '故障损失',
@@ -238,17 +192,15 @@ let Component = React.createClass({
                 {
                     name: 'PBA',
                     type: 'line',
-                    data:cost,
+                    data: PBA,
                     color:'blue',
-                    pointWidth: 15,
-                    shadow:'true',
                     yAxis:1,
                      tooltip: {
                valueSuffix:''
             },
-                  
+                    
                 },
-            ]
+                ]
         };
         return (
             <ReactHighcharts config={configPie}/>
@@ -259,26 +211,13 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-          
-        w0: state.vars.windpbaspace,
+        machine:state.vars.PBASpaceWtname1
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-        },
-         changedata3 :(w0,winss,b,PBATimeSecondDay,PBATimeSecondPoweract,PBATimeSecondFaultloss,PBATimeSecondMaintainloss,PBATimeSecondLimitloss,PBATimeSecondNodevreasonloss,PBATimeSecondPbaP)=>{
-            dispatch(actions.setVars('windpbaspace',w0 ));
-            dispatch(actions.setVars('wins1',winss[b-1]));
-            dispatch(actions.setVars('PBATimeSecondDay1',PBATimeSecondDay));
-            dispatch(actions.setVars('PBATimeSecondPoweract1',PBATimeSecondPoweract ));
-            dispatch(actions.setVars('PBATimeSecondMaintainloss1',PBATimeSecondMaintainloss ));
-            dispatch(actions.setVars('PBATimeSecondLimitloss1',PBATimeSecondLimitloss));
-            dispatch(actions.setVars('PBATimeSecondFaultloss1',PBATimeSecondFaultloss ));
-            dispatch(actions.setVars('PBATimeSecondNodevreasonloss1',PBATimeSecondNodevreasonloss ));
-            dispatch(actions.setVars('PBATimeSecondPba12',PBATimeSecondPbaP ));
-           
         },
     };
 };

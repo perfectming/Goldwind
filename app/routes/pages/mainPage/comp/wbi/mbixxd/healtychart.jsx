@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaRecordProfit,machineE,width,height,text}=this.props;
+        let {ty,areaRecordProfit,machineE,width,height,text}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -38,7 +38,8 @@ let Component = React.createClass({
                 }
             },
             legend: {
-                y:40,
+                y:ty,
+                x:-15,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -63,7 +64,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30,
+                    pointWidth: 25,
                     borderRadius: 7,
                 }, series: {
                     cursor: 'pointer',
