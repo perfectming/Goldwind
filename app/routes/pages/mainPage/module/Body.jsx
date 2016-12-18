@@ -4,10 +4,7 @@ import styles from './Body.scss';
 import Chart from '../comp/Chart.jsx';
 import From from '../comp/From.jsx';
 import Table from '../comp/Table.jsx';
-
 import Test from '../comp/Test.jsx';
-
-import Tkgl from '../comp/Tkgl.jsx';
 import Power from '../comp/power/Power.jsx';
 import Tab from './Tab.jsx';
 import Tree from './Tree.jsx';
@@ -117,7 +114,7 @@ let Component = React.createClass({
                     <img src={u865}/>
                     <img src={u867}/>
                     <img src={u869}/>
-                   {legend===true && <Legend></Legend>}
+                    {legend===true && <Legend></Legend>}
                 </div>
                 <Tab tabOpt={tabOpt} tab={tab}/>
                 {showPage === 'chart' && <Chart></Chart>}
@@ -138,8 +135,8 @@ let Component = React.createClass({
                 {showPage === 'amm' && <Amm></Amm>}
                 {showPage === 'monitorkb' && <Monitorkb></Monitorkb>}
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
-                {showPage === 'ywbb' && <Ywbb></Ywbb>} 
-                {showPage === 'fault' && <Fault></Fault>} 
+                {showPage === 'ywbb' && <Ywbb></Ywbb>}
+                {showPage === 'fault' && <Fault></Fault>}
 
                 {showPage === 'baotou' && <Baotou></Baotou>}
                 {showPage === 'windbtpage' && <Windbtpage></Windbtpage>}
@@ -158,9 +155,9 @@ let Component = React.createClass({
                 {showPage === 'deviceLose' && <DeviceLose></DeviceLose>}
                 {showPage === 'topTen' && <TopTen></TopTen>}
 
-				
-		
-			
+
+
+
 
                 {showPage === 'healthy_one' && <Healthy_one></Healthy_one>}
                 {showPage === 'healthy' && <Healthy></Healthy>}
@@ -189,13 +186,13 @@ let Component = React.createClass({
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
 
-                
+
                 {showPage === 'reliability' && <Reliability></Reliability>}
-               
 
 
-              
-               
+
+
+
 
                 {showPage === 'health_main' && <Health_main></Health_main>}
                 {showPage === 'history_list' && <History_list></History_list>}
@@ -229,14 +226,14 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('bodypage', false));
 
-            
+
         },
         changelegend:(legend)=>{
             legend=true;
             dispatch(actions.setVars('legend', legend));
         },
-       
-       
+
+
     };
 };
 

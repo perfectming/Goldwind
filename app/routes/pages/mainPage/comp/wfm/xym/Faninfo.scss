@@ -1,0 +1,663 @@
+.bodyBox{
+	.infofL{
+		float: left;
+		margin-right: 15px;
+		margin-top: 15px;
+		position: relative;
+		}
+	.dialbox{
+		float: left;
+		margin-left: 28px;
+		padding-top: 50px;
+		.pwratbox{
+			width: 100px;
+			height: 50px;
+			margin: 0 auto;
+			padding-top: 20px;
+			text-align: center;
+			line-height: 30px;
+			span:nth-child(1){
+				font-size: 18px;
+				color: #00F7FE;
+			}
+			span:nth-child(2){
+				color: #fff;
+			}
+		}
+		.boxtitle{
+			p{
+				width: 200px;
+				height: 50px;
+				color:#fff;
+				font-size: 16px;
+				margin: 0;
+				line-height: 50px;
+				text-align: center;
+			}
+		}
+	}
+	.fanidbox{
+		color:#999;
+		font-size: 14px;
+		height: 20px;
+		line-height: 20px;
+		div{
+			float: left;
+			margin-right: 15px;
+		}
+	}
+	.fanidbox:after{
+     content:".";        
+     display:block;        
+     height:0;        
+     clear:both;        
+     visibility:hidden;        
+	}
+	.infoBox{
+		width: 1350px;
+		
+		margin-right: 0;
+		margin-top: 0;
+		.infoBox1{
+			color:#999;
+			width: 370px;
+			height: 290px;
+			background:#292F36;
+			.hzBoxt{
+				padding-top: 50px;
+				.hzBoxtall{
+					float: left;
+					width:106px;
+					height: auto;
+					margin-left: 17px;
+					font-size: 16px;
+					text-align: left;
+					line-height: 35px;
+					div:nth-child(1){
+						width: 85px;
+						height: 35px;
+						border-radius: 30px;
+						text-align: center;
+					}
+					div:nth-child(2),div:nth-child(3){
+						width: 80px;
+					}
+					div:nth-child(3){
+						margin-top: -10px;
+					}
+					.hzunit{
+						color:#fff;
+						font-size: 12px;
+					}
+				}
+				.hzBoxtA{
+					color:#E67726;
+					div:nth-child(1){
+						background: #F8D673;
+					}
+
+				}
+				.hzBoxtB{
+					color:#00E287;
+					div:nth-child(1){
+						
+						background: #CBEDD3;
+					}
+				}
+				.hzBoxtC{
+					color:#FF4B3A;
+					div:nth-child(1){
+						
+						background: #FC9B90;
+					}
+				}
+			}
+			.hzBoxt:after{
+     			content:".";        
+     			display:block;        
+			     height:0;        
+			     clear:both;        
+			     visibility:hidden;        
+			}
+			.hzBoxb{
+				width: 100%;
+				height: 140px;
+				
+				div{
+					float: left;
+					margin-left: 20px;
+				}
+				.Boxbdial{
+					width: 205px;
+					height: 130px;
+					color:#fff;
+					position: relative;
+					background: url(../../../img/comp/dialhz.png) no-repeat;
+					.hzBoxbdial{
+						width: 68px;
+						height: 13px;
+						position: absolute;
+						left:20px;
+						bottom: 18px;
+						background: url(../../../img/comp/dial_001.png);
+						transition: transform 2s easein;
+						transform: rotate(30deg);
+						transform-origin: 90% 50%;
+					}
+					p{
+						position: absolute;
+						left: 10px;
+						top: 105px;
+						font-size: 16px;
+					}
+					.hz{
+						position: absolute;
+						left: 105px;
+						top: 105px;
+						span:nth-child(1){
+							font-size: 18px;
+							color:#00F7FE;
+						}
+					}
+				}
+				.hzfactor{
+					width: 105px;
+					height:108px;
+					margin-top: 10px;
+					div{
+						width: 80px;
+						margin-top: 10px;
+					}
+					div:nth-child(1){
+						height: 35px;
+						color: #000;
+						font-size: 16px;
+						text-align: center;
+						line-height: 35px;
+						background: #7AF3F5;
+						border-radius: 30px;
+					}
+					div:nth-child(2){
+						text-align: center;
+						font-size: 24px;
+						color:#00F7FE;
+					}
+				}
+			}
+		}
+		.infoBox2{
+			color:#999;
+			width: 945px;
+			height: 290px;
+			background:#292F36;
+			.wsbox1{
+				.wsdialbox{
+					width:198px;
+					height:112px; 
+					background: url(../../../img/comp/dial_01.png) no-repeat;
+					position: relative;
+					.wsipbox{
+						background: url(../../../img/comp/dial_001.png);
+						width: 68px;
+						height: 13px;
+						position: absolute;
+						bottom:7px;
+						left: 38px;
+						#wspoint{
+						text-indent: 10px;
+
+						}
+					}
+				}
+			}
+			.wsbox2{
+				.wsdialbox{
+					width:198px;
+					height:112px; 
+					background: url(../../../img/comp/dial_011.png) no-repeat;
+					position: relative;
+					.cardnum{
+						color:#000;
+						position: absolute;
+						left: 80px;
+						top: 70px;
+					}
+					.wsipbox{
+						background: url(../../../img/comp/dial_001.png);
+						width: 70px;
+						height: 13px;
+						position: absolute;
+						bottom:7px;
+						left: 38px;
+					}
+				}
+			}
+			.wsbox3{
+				.wsdialbox{
+					width:200px;
+					height:112px; 
+					background: url(../../../img/comp/dial_021.png) no-repeat;
+					position: relative;
+					.wsipbox{
+						background: url(../../../img/comp/dial_001.png);
+						width: 70px;
+						height: 13px;
+						position: absolute;
+						bottom:6px;
+						left: 38px;
+					}
+				}
+			}
+			.wsbox4{				
+				.wsdialbox{
+					width:200px;
+					height:112px; 
+					background: url(../../../img/comp/dial_02.png) no-repeat;
+					position: relative;
+					
+					.wsipbox{
+						background: url(../../../img/comp/dial_001.png);
+						width: 70px;
+						height: 13px;
+						position: absolute;
+						bottom:6px;
+						left: 38px;
+					}
+				}
+			}
+		}
+		.infoBox3{
+			font-size: 12px;
+			color:#fff;
+			width: 370px;
+			height: 350px;
+			background:#292F36;
+			.nomal{
+						background: #62DE88;
+					}
+			.high{
+						background: #F62B1D;
+					}
+			.fanTemp{
+				text-align: center;
+				width: 80px;
+				height: 100%;
+				float: left;
+				margin-left: 10px;
+				padding-top: 50px;
+				div:nth-child(1)>span:nth-child(1){
+					font-size: 18px;
+					color:#00F7FE;
+				}
+				div:nth-child(3){
+					font-size: 18px;
+					margin: 10px 5px 0 0;
+				}
+				.WTURTempbox{
+					width: 58px;height: 230px;
+					margin: 0 auto;
+					position: relative;
+					background: url(../../../img/comp/thermometer_1.png) 0 0 no-repeat;
+					div:nth-child(1){
+						width: 13px;height: 0px;
+						background: #62DE88;
+						border-radius: 4px;
+						position: absolute;left: 20px;bottom: 25px;
+					}
+					div:nth-child(2){
+						width: 25px;height: 25px;
+						border-radius: 50%;
+						background: #62DE88;
+						position: absolute;left: 14px;bottom: 3px;
+					}
+				}
+				.WNACTempbox{
+					width: 65px;height: 230px;
+					margin: 0 auto;
+					position: relative;
+					background: url(../../../img/comp/thermometer.png) no-repeat;
+					
+					div:nth-child(1){
+						width: 13px;height: 65px;
+					
+						border-radius: 4px;
+						position: absolute;left: 21px;bottom: 25px;
+					}
+					div:nth-child(2){
+						width: 25px;height: 25px;
+						border-radius: 50%;
+					
+						position: absolute;left: 15px;bottom: 4px;
+					}
+				}
+				.WGENTempbox{
+					width: 65px;height: 230px;
+					margin: 0 auto;
+					position: relative;
+					background: url(../../../img/comp/thermometer.png) no-repeat;
+					
+					div:nth-child(1){
+						width: 13px;height: 20px;
+						
+						border-radius: 4px;
+						position: absolute;left: 21px;bottom: 25px;
+					}
+					div:nth-child(2){
+						width: 25px;height: 25px;
+						border-radius: 50%;
+					
+						position: absolute;left: 15px;bottom: 4px;
+					}
+				}
+			}
+		}
+		.infoBox4{
+			
+			color:#999;
+			width: 470px;
+			height: 350px;
+			background:#292F36;
+			.box4Cahrt{
+
+				width: 100%;
+				height: 280px;
+				padding-top: 40px;
+				.box4Cahrt1{
+
+				}
+				
+			}
+		}
+		.infoBox5{
+			color:#999;
+			width: 460px;
+			height: 350px;
+			background:#292F36;
+			.box5Cahrt{
+
+				width: 100%;
+				height: 280px;
+				padding-top: 40px;
+			}
+		}
+		.infoBox6{
+			overflow: hidden;
+			color:#999;
+			width: 370px;
+			height: 220px;
+			background:#292F36;
+			white-space:nowrap;
+			span{
+					display: inline-block;
+					text-align: center;
+					line-height: 38px;
+					color:#fff;
+				}
+			.titlebox{
+					width: 350px;
+					height: 40px;
+					font-size: 16px;
+					margin-left: 5px;
+					position: relative;z-index: 100000;
+					white-space:nowrap;
+					span:nth-child(1){
+					width: 150px;
+					text-align: left;
+					padding-left: 10px;
+					}
+					span{
+						width: 100px;
+					}
+				}
+			.statusquery{
+				width: 370px;
+				height: 180px;
+				overflow-y:auto;
+				.bgbox{
+					background: #30343D;
+				}
+				.statusquerybox{
+					width: 100%;
+					height: 35px;
+					span:nth-child(1){
+						width: 155px;
+						padding-left: 10px;
+					}
+					span{
+						width: 100px;
+					}
+					&:hover{
+        				background:rgba(183,195,224,.5);
+      				}	
+				}
+			}
+			.statusquery::-webkit-scrollbar {
+			        width:14px;
+			        height:12px;
+			        border:0px solid #fff;
+			}
+			.statusquery::-webkit-scrollbar-button{
+			        background-color:#272b34;
+			        display:none;
+			}
+			.statusquery::-webkit-scrollbar-track{
+			        background:#131619;
+
+			}
+			.statusquery::-webkit-scrollbar-thumb{
+			        background:#464c58;
+			        border-radius:10px;
+			}
+			.statusquery::-webkit-scrollbar-corner{
+			        background:#131619;
+			}
+			.statusquery::-webkit-scrollbar-resizer{
+			        background:#f00;
+			}	
+		}
+		.infoBox7{
+			color:#999;
+			width: 945px;
+			height: 220px;
+			background:#292F36;
+			white-space:nowrap;
+			span{
+					display: inline-block;
+					text-align: center;
+					line-height: 38px;
+					color:#fff;
+				}
+			.titlebox{
+					width: 100%;
+					height: 40px;
+					font-size: 16px;
+					margin-left: 5px;
+					position: relative;z-index: 100000;
+					white-space:nowrap;
+					span{
+						text-align: left;
+						display: inline-block;
+					}
+					span:nth-child(1){
+					padding-left: 10px;
+					}
+					span:nth-child(2){
+						margin-left: 90px;
+						width: 400px;
+					}
+					span:nth-child(3){
+						margin-left: 10px;
+						width: 70px;
+					}
+					span:nth-child(4){
+						margin-left: 20px;
+						width: 100px;
+					}
+					span:nth-child(5){
+						margin-left: 30px;
+						width: 100px;
+					}
+				}
+			.statusquery{
+				width: 100%;
+				height: 180px;
+				overflow-y:auto;
+				.bgbox{
+					background: #30343D;
+				}
+				.statusquerybox{
+					width: 100%;
+					height: 35px;
+					span{
+						text-align: left;
+						display: inline-block;
+						overflow: hidden;
+					}
+					span:nth-child(1){
+						width: 155px;
+						padding-left: 15px;
+					}
+					span:nth-child(2){
+						margin-left: 50px;
+						width: 407px;
+
+					}
+					span:nth-child(3){
+						margin-left: 10px;
+						width: 70px;
+					}
+					span:nth-child(4){
+						margin-left: 20px;
+						width: 100px;
+					}
+					span:nth-child(5){
+						margin-left: 30px;
+						width: 100px;
+					}
+					&:hover{
+        				background:rgba(183,195,224,.5);
+      				}
+				}
+					 
+			}
+			.statusquery::-webkit-scrollbar {
+			        width:14px;
+			        height:12px;
+			        border:0px solid #fff;
+			}
+			.statusquery::-webkit-scrollbar-button{
+			        background-color:#272b34;
+			        display:none;
+			}
+			.statusquery::-webkit-scrollbar-track{
+			        background:#131619;
+
+			}
+			.statusquery::-webkit-scrollbar-thumb{
+			        background:#464c58;
+			        border-radius:10px;
+			}
+			.statusquery::-webkit-scrollbar-corner{
+			        background:#131619;
+			}
+			.statusquery::-webkit-scrollbar-resizer{
+			        background:#f00;
+			}	
+		}
+	}
+	.fanrightbox{
+		width: 400px;
+		height: 890px;
+		background:#292F36;
+		white-space:nowrap;
+		.fanaction{
+			width: 400px;
+			height: 430px;
+			position: relative;
+			background: url(../../../img/comp/faninfo.png) no-repeat;
+			.parts{
+				width: 400px;
+				height: 380px;
+				cursor: pointer;
+			}
+			.actionbox{
+				position: absolute;
+				left: 0;bottom: 20px;
+				padding-left: 8px;
+				div{
+					float: left;
+					width: 71px;
+					height: 26px;
+					text-align: center;
+					font-size: 16px;
+					line-height: 26px;
+					border-radius: 13px;
+					cursor: pointer;
+					margin-left: 20px;
+					background: #5EB7BB;
+				}
+				div:hover{
+        			box-shadow:0px 0px 8px 2px #fff;
+        		}
+
+			}
+			
+		}
+		.action1box{
+			width: 400px;
+			$height: 460px;
+			font-size: 14px;
+			color: #fff;
+			line-height: $height/17;
+			div:nth-child(2n-1){
+				background: #30343D;
+			}
+			.fandatabox{
+				width: 100%;
+				height: $height/16;
+				position: relative;
+				span:nth-child(1){
+					display: inline-block;
+					padding-left: 20px;
+					padding-right: 50px;
+					text-align: left;
+				}
+				.numbox{
+					position: absolute;right:20px;top: 0;
+					display: inline-block;
+					width: 200px;
+					
+					white-space:nowrap;
+					text-align: right;
+					span{
+						display: inline-block;
+					}
+					span:nth-child(1){
+						padding-right: 5px;
+						text-align: right;
+						color: #00F7FE;
+						font-size: 16px;
+					}
+					span:nth-child(2){
+						padding-right: 20px;
+						text-align: left;
+						width: 40px;
+						font-size: 12px;
+					}
+				}
+			}
+				
+		}
+	}
+
+
+}
+.bodyBox:after{
+     content:".";        
+     display:block;        
+     height:0;        
+     clear:both;        
+     visibility:hidden;        
+	}
+
+
