@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('../../../../../../config/RegulationData');
-let mod = require('../../../../../../config/Model');
+let data = require('../../../../../../../config/RegulationData');
+let mod = require('../../../../../../../config/Model');
 let arr1 = [];
 let arr2=[];
 let arr3=[];
@@ -30,10 +30,9 @@ let Component = React.createClass({
     },
 
     render() {
-        let{czname,czndxly}=this.props;
+        let{unit,czname,sjfdl,jhfdl,czwcl,gswcl}=this.props;
         let configPie = {
             chart: {
-                type: 'column',
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -41,16 +40,15 @@ let Component = React.createClass({
                 plotShadow: false,
                 height:270,
                 marginTop: 60,
-                marginBottom:50,
+                marginBottom:45,
                 marginLeft:55,
+                marginRight:55,
             },
             title: {
-                text: '',
-                style:{
-                    color:"#fff",
-                    fontSize:"24px",
-                    fontFamily:"Microsoft YaHei"
-                }
+                text: ''
+            },
+            credits: {
+                enabled: false //不显示highCharts版权信息
             },
             xAxis: {
                 labels: {
@@ -63,16 +61,16 @@ let Component = React.createClass({
                 tickLength: 0,
                 categories: czname
             },
-            yAxis: {
+            yAxis: [{
                 title: {
-                    text:  '(h)',
+                    text:  '('+unit+')',
                     style: {
                         color: '#ffffff'
                     },
                     align: 'high',
                     rotation: 1,
                     y: -5,
-                    x: 70
+                    x: 86
                 },
                 labels: {
                     style: {
@@ -82,7 +80,27 @@ let Component = React.createClass({
                 },
                 lineWidth: 1,
                 gridLineWidth: 0
-            },
+            },{
+                title: {
+                    text:  '(%)',
+                    style: {
+                        color: '#ffffff'
+                    },
+                    align: 'high',
+                    rotation: 1,
+                    y:-5,
+                    x:-50
+                },
+                labels: {
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'12px'  //字体
+                    }
+                },
+                lineWidth: 1,
+                opposite: true,
+                gridLineWidth: 0,
+            }],
             legend: {
                 itemHoverStyle:{color:'#2ff4fb'},
                 align:"right",
@@ -95,27 +113,53 @@ let Component = React.createClass({
                 },
                 y:-18,
             },
-            credits: {
-                enabled: false //不显示highCharts版权信息
-            },
             tooltip: {
-                shared: true,
+                shared: true
             },
             plotOptions: {
                 column: {
                     maxPointWidth:25,
-                    stacking: 'normal',//柱状图堆叠属性
+                    grouping: false,
+                    shadow: false,
                     borderWidth: 0
+                },
+                series:{
+                    animation:false
                 }
             },
-            colors: ['#32C5CD','#37545C','#D06960']
+            colors: ['#37545C','#32C5CD','#1fe005','#D06960']
             ,
             series: [{
-                name:'年等效利用小时数',
-                data: czndxly,
+                name:'计划发电量',
+                type: 'column',
+                data: jhfdl,
                 borderRadius: 5,
                 tooltip: {
-                    valueSuffix: 'h'
+                    valueSuffix: unit
+                }
+            },{
+                name:'实际发电量',
+                type: 'column',
+                data: sjfdl,
+                borderRadius: 5,
+                tooltip: {
+                    valueSuffix: unit
+                }
+            },{
+                name:'场站完成率',
+                type: 'line',
+                data: czwcl,
+                yAxis: 1,
+                tooltip: {
+                    valueSuffix: '%'
+                }
+            },{
+                name:'集团完成率',
+                type: 'line',
+                data: gswcl,
+                yAxis: 1,
+                tooltip: {
+                    valueSuffix: '%'
                 }
             }]
         };
