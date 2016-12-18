@@ -85,7 +85,7 @@
     .infoBox{
       overflow: hidden;
       color:#999;
-      background:#202030;
+      background:rgba(20,20,30,.5);
       white-space:nowrap;
       span{
         display: inline-block;
@@ -118,7 +118,7 @@
     overflow-y: auto;
     overflow-x:hidden;
     height:650px;
-    background:#292F36;
+    background:rgba(20,20,30,.5);
     white-space:nowrap;
     .action1box{
       width: 400px;
@@ -128,6 +128,9 @@
       line-height: $height/17;
       div:nth-child(2n-1){
         background: #30343D;
+      }
+      div:nth-child(2n){
+        background: #292F36;
       }
       .fandatabox{
         width: 100%;

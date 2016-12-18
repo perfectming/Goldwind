@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './box.scss';
-import jian from '../../img/comp/jian_down.png';
-import add from '../../img/comp/add_down.png';
-import close from '../../img/comp/close_down.png';
+import jian from '../../../img/comp/jian_down.png';
+import add from '../../../img/comp/add_down.png';
+import close from '../../../img/comp/close_down.png';
 let $ =require('jquery');
 var actions = require('redux/actions');
 let matrixdata = require('../xym/data');
