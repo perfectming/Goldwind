@@ -82,7 +82,7 @@ let Component = React.createClass({
                 rotation: 0,
                 x: 30,
                     style: {
-                        color: '#fff', //#4572A7
+                        color: '#00F7FE', //#4572A7
                         top:0,
                         right:0,
                     }
@@ -111,7 +111,7 @@ let Component = React.createClass({
                 rotation: 0,
                 y: -10,
                 style: {
-                    color: '#fff',
+                    color: '#00F7FE',
                     top:0,
                     right:0,
                 }

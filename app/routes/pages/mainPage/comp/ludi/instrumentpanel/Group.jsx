@@ -110,7 +110,7 @@ let Component = React.createClass({
                                     <div className={styles.links}><a className={styles.time} onClick={()=>changepageEleT()}></a></div>
                                 </div>
                             </div>
-                            <Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'万kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+                            <Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
                         </div>
                         <div className={`${styles.yearprofit} ${styles.boxShadow}`}>
                             <div className={styles.header}>
@@ -120,7 +120,7 @@ let Component = React.createClass({
                                     <div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
                                 </div>
                             </div>
-                            <div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"万元"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
+                            <div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"元"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
                         </div>
                     </div>
                 </div>
@@ -193,8 +193,8 @@ const mapDispatchToProps = (dispatch) => {
 		                    month2=[],cost=[],incomes=[];
 		                    for(var i in yearPro){
 		                        month2.push(yearPro[i].month+"月");
-		                        cost.push(yearPro[i].costs/10000);
-		                        incomes.push(yearPro[i].earning/10000);
+		                        cost.push(yearPro[i].costs);
+		                        incomes.push(yearPro[i].earning);
 		                    }
 		                },
 		                complete : function(XMLHttpRequest,status){
@@ -225,10 +225,10 @@ const mapDispatchToProps = (dispatch) => {
 						                    arrPlan=[],month1=[],arrAct=[];
 						                    for(var i=0;i<data.data.wtKongMonthsElec.length;i++){
 						                        month1.push(data.data.wtKongMonthsElec[i].month+"月");
-						                        arrAct.push(data.data.wtKongMonthsElec[i].poweract/10000);
+						                        arrAct.push(data.data.wtKongMonthsElec[i].poweract);
 						                    }
 						                    for(var i in data.data.wtKongMonthsPlanElec){
-						                        arrPlan.push(data.data.wtKongMonthsPlanElec[i]/10000);
+						                        arrPlan.push(data.data.wtKongMonthsPlanElec[i]);
 						                    }
 						                },
 						                complete : function(XMLHttpRequest,status){

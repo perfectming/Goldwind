@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -41,7 +41,7 @@
                 <dl class="clearfix">
                     <dt><span class="red">*</span>邮箱</dt>
                     <dd>
-                        <input name="email" id="email" type="text" maxlength="30" class="txt" datatype="Email" msg="邮箱为空或格式不正确" />
+                        <input name="email" id="email" type="text" maxlength="100" class="txt" datatype="Email" msg="邮箱为空或格式不正确" />
                     </dd>
                 </dl>
                 <dl class="clearfix">
@@ -158,6 +158,7 @@
 
         function showDetail(key) {
             clearForm();
+            $("input[type='checkbox']").prop("checked", false);
             for (var i = 0; i < jsonList.length; i++) {
                 if (key == jsonList[i].subscribeID) {
                     $("#code").val(jsonList[i].userID);
@@ -169,12 +170,14 @@
                     $("#wx").val(jsonList[i].userWeiXin);
 
                     for (var o in jsonList[i].subscribeTemps) {
-                        if (jsonList[i].subscribeTemps[o].type != 5)
-                            $("input[name='cms'][value='" + jsonList[i].subscribeTemps[o].type + "']").attr("checked", true);
+                        if (jsonList[i].subscribeTemps[o].type != 5) {
+                            $("input[name='cms'][value='" + jsonList[i].subscribeTemps[o].type + "']").prop("checked", true);
+                        }
+                            
                     }
 
                     for (var o in jsonList[i].wfwts) {
-                        $("input[name='fc'][value='" + jsonList[i].wfwts[o].wfID + "']").attr("checked", true);
+                        $("input[name='fc'][value='" + jsonList[i].wfwts[o].wfID + "']").prop("checked", true);
                     }
                     break;
                 }
@@ -203,7 +206,7 @@
                 //新建
                 isUpdate = false;
                 $("#subscribeList option").remove();
-                $("input[type='checkbox']").attr("checked", true);
+                $("input[type='checkbox']").prop("checked", true);
             })
 
             $("#save").click(function () {
@@ -303,11 +306,12 @@
                     withCredentials: true
                 },
                 crossDomain: true,
-                complete: function () {
-                    layer.close(infoLayer);
-                },
                 success: function (json) {
+                    layer.close(infoLayer);
                     if (json.state == 1) {
+                        //冻结所有控件
+                        $("input").prop("disabled",true)
+
                         layer.msg('数据提交成功', { time: 1000 }, function () {
                             location.reload();
                         });
@@ -316,6 +320,7 @@
                         alert('提交失败，请稍后尝试！');
                 },
                 error: function () {
+                    layer.close(infoLayer);
                     alert('提交失败，请稍后尝试！');
                 }
             });

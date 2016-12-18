@@ -1,19 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
-import Block from './super/block.jsx';
-import Title from './super/Title.jsx';
-import Column from './chart/Column.jsx';
-import Pie from './chart/Pie.jsx';
-import Line from './chart/Line.jsx';
 import styles from './Fan.scss';
+
 import Login from '../../../../components/common/Loading.jsx';
-import Superleftbox from './super/superleftbox.jsx';
-import Unfilterfan from './xym/Unfilterfan.jsx';
+import Superleftbox from './super/superleftbox.jsx';    // 左侧组件
+import Unfilterfan from './xym/Unfilterfan.jsx';    //右侧组件
+
 import Filterfan from './xym/Filterfan.jsx';
 import Filterpv from './xym/Filterpv.jsx';
 // import dataBase from '../../../../../config/ModelData';
-import matrix from '../../../../../config/MatrixModel';
+// import matrix from '../../../../../config/MatrixModel';
 var actions = require('redux/actions');
 var { Router, Route, browserHistory} = require('react-router');
 // let fanData = require('../../../../../config/fan-data');
@@ -74,17 +70,17 @@ var { Router, Route, browserHistory} = require('react-router');
 let time;
 let Component = React.createClass({
     componentWillMount() {
-        this.props.changedate();
+        this.props.getfanpvdata(); // 获取该页面数据
     },
      componentWillUnmount() {
-       clearInterval(time)
+       clearInterval(time)  // 离开页面清除定时器
     },
     componentDidMount() {
         this.props.init();
     },
     
     render() {
-        let {zhzb,fModel,fData,fanbool=false,choosepage = 'unfilterfan'}=this.props;
+        let {zhzb,fModel,fData,fanbool=false}=this.props;
         // console.log(fModel);
         // console.log(fData);
         // console.log(zhzb);
@@ -116,9 +112,8 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.listrightBox}>
                     <div className={styles.listbodyBox1}>
-                        {choosepage == 'unfilterfan' && <Unfilterfan></Unfilterfan>}  
-                        {choosepage == 'filterfan' && <Filterfan></Filterfan>}
-                        {choosepage == 'filterpv' && <Filterpv></Filterpv>}
+                        <Unfilterfan></Unfilterfan> 
+                        
                     
                 
                     </div>
@@ -141,13 +136,13 @@ const mapStateToProps = (state) => {
             fModel: state.vars.fModel,
             fData: state.vars.fData,    
             fanbool: state.vars.fanbool,   
-            choosepage: state.vars.choosepage,   
+            // choosepage: state.vars.choosepage,   
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changedate: () => {
+        getfanpvdata: () => {
             // time = setInterval(function(){
                 TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                 function setData(rdata){

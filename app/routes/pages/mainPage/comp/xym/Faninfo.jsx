@@ -19,7 +19,7 @@ var $ = require('jquery');
    //              //$(".info").text(JSON.stringify(rdata));
    //          }
 
-          
+
                 //获取模型，适用于综合指标界面的初始化
                     //          此参数固定          “”文档中指定的
                 // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", "652113028", "WTDetail", setData, "Screen", 0);
@@ -42,7 +42,7 @@ let Component = React.createClass({
 	render() {
 
 		let {value,fanid,infofmodel,infofdata,tobujian,faninfobool = false} = this.props;
-		
+
 	if(faninfobool){
 		let val = value.Wtid;
 		let sp = infofmodel.Model.ens[val].sp;
@@ -88,7 +88,7 @@ let Component = React.createClass({
 		let WTPwr = Math.ceil(fmvalue["WTUR.PwrAt.Ra.F32"]);
 		let WROTSpd = Math.ceil(fmvalue["WROT.Spd.Ra.F32"]);
 		let WGENSpd = Math.ceil(fmvalue["WGEN.Spd.Ra.F32"]);
-		
+
 			setTimeout(function(){
 				if(WTGShz <=44){
         		WTGShz = 20;
@@ -98,23 +98,23 @@ let Component = React.createClass({
 	        		WTGShz = 20+(WTGShz-44)*6.5;
 	        	}
 
-	        	$("#hzpoint").animate({ textIndent: 0 }, { 
+	        	$("#hzpoint").animate({ textIndent: 0 }, {
 	        		duration: 1000,
 					step: function(now,fx) {
-	 				$(this).css('transform-origin','90% 50%'); 
-					$(this).css('transform','rotate('+WTGShz+'deg)'); 
+	 				$(this).css('transform-origin','90% 50%');
+					$(this).css('transform','rotate('+WTGShz+'deg)');
 					},
 	        	}, 1000 )
-	        	
+
 
 	        	if(WTSpd>=30){
 	        		WTSpd = 30;
 	        	}
-	        	$("#wspoint").animate({ textIndent: 0 }, { 
+	        	$("#wspoint").animate({ textIndent: 0 }, {
 					step: function(now,fx) {
-	 				$(this).css('transform-origin','90% 50%'); 
-					$(this).css('transform','rotate('+WTSpd*6+'deg)'); 
-					}, 
+	 				$(this).css('transform-origin','90% 50%');
+					$(this).css('transform','rotate('+WTSpd*6+'deg)');
+					},
 					duration:'slow'
 	        	}, 2000);
 	        	if(WTPwr>=180){
@@ -122,32 +122,32 @@ let Component = React.createClass({
 	        	}else if(WTPwr <= 0){
 	        		WTPwr = 0;
 	        	}
-	        	$("#pwratpoint").animate({ textIndent: 0 }, { 
+	        	$("#pwratpoint").animate({ textIndent: 0 }, {
 					step: function(now,fx) {
-	 				$(this).css('transform-origin','90% 50%'); 
-					$(this).css('transform','rotate('+WTPwr+'deg)'); 
-					}, 
+	 				$(this).css('transform-origin','90% 50%');
+					$(this).css('transform','rotate('+WTPwr+'deg)');
+					},
 	        	},1000)
 	        	if(WROTSpd>=180){
 	        		WROTSpd = 180;
 	        	}
-	        	$("#rspdpoint").animate({ textIndent: 0 }, { 
+	        	$("#rspdpoint").animate({ textIndent: 0 }, {
 					step: function(now,fx) {
-	 				$(this).css('transform-origin','90% 50%'); 
-					$(this).css('transform','rotate('+WROTSpd+'deg)'); 
-					}, 
+	 				$(this).css('transform-origin','90% 50%');
+					$(this).css('transform','rotate('+WROTSpd+'deg)');
+					},
 	        	},1000)
 	        	if(WGENSpd>=30){
 	        		WGENSpd = 30;
 	        	}
-	        	$("#gspdpoint").animate({ textIndent: 0 }, { 
+	        	$("#gspdpoint").animate({ textIndent: 0 }, {
 					step: function(now,fx) {
-	 				$(this).css('transform-origin','90% 50%'); 
-					$(this).css('transform','rotate('+WGENSpd*6+'deg)'); 
-					}, 
+	 				$(this).css('transform-origin','90% 50%');
+					$(this).css('transform','rotate('+WGENSpd*6+'deg)');
+					},
 	        	},1000)
 
-	        	// $("#WGENtemp").animate({ 
+	        	// $("#WGENtemp").animate({
 	        	// 	height:WNACTemp+50,
 	        	// 	duration: "slow",
 	        	// }, 1000 )
@@ -161,21 +161,21 @@ let Component = React.createClass({
 	        	if(WGENTemp>=150){
 	        		WGENTemp = 150;
 	        	}
-				$("#WTURTemp").animate({ 
+				$("#WTURTemp").animate({
 	        		height:(WTURTemp+32)*3.2,
 	        		duration: "slow",
-	        	}, 1000 )		
-				$("#WNACTemp").animate({ 
+	        	}, 1000 )
+				$("#WNACTemp").animate({
 	        		height:WNACTemp+100,
 	        		duration: "slow",
 	        	}, 1000 )
-	        	$("#WGENTemp").animate({ 
+	        	$("#WGENTemp").animate({
 	        		height:WGENTemp*0.7+100,
 	        		duration: "slow",
 	        	}, 1000 )
 
 	        }, )
-			
+
 
 		let x;
 		let code = value.WTStateCode;
@@ -244,7 +244,7 @@ let Component = React.createClass({
 								<div><span>{(Number(fmvalue["WTGS.PPV.Ra.F32.C"])*PPVcoeff).toFixed(PPVplace)}</span><span className={styles.hzunit}>{PPVunit}</span></div>
 								<div><span>{(Number(fmvalue["WTGS.AC.Ra.F32.C"])*PPVcoeff).toFixed(PPVplace)}</span><span className={styles.hzunit}>{ACunit}</span></div>
 							</div>
-							
+
 						</div>
 						<div className={`${styles.hzBoxb} ${styles.infofL111111}`}>
 							<div className={`${styles.Boxbdial} ${styles.infofL111111}`}>
@@ -255,9 +255,9 @@ let Component = React.createClass({
 							<div className={`${styles.hzfactor} ${styles.infofL111111}`}>
 								<div>功率因数</div>
 								<div>{(Number(fmvalue["WTGS.PF.Ra.F32"])*Hzcoeff).toFixed(Hzplace)}</div>
-								
+
 							</div>
-						</div>	
+						</div>
 					</div>
 					<div className={`${styles.infoBox2} ${styles.infofL}`}>
 						<Title></Title>
@@ -275,7 +275,7 @@ let Component = React.createClass({
 							<div className={styles.wsdialbox}>
 								<div className={styles.cardnum}>x100</div>
 								<div id="pwratpoint" className={styles.wsipbox}>
-								
+
 								</div>
 							</div>
 							<div className={styles.pwratbox}><span>{Number(fmvalue["WTUR.PwrAt.Ra.F32"]).toFixed(2)}</span><span>kW</span></div>
@@ -292,14 +292,14 @@ let Component = React.createClass({
 						<div className={`${styles.wsbox4} ${styles.dialbox}`}>
 							<div className={styles.boxtitle}><p>发电机转速</p></div>
 							<div className={styles.wsdialbox}>
-								
+
 								<div id="gspdpoint" className={styles.wsipbox}>
 
 								</div>
 							</div>
 							<div className={styles.pwratbox}><span>{Number(fmvalue["WGEN.Spd.Ra.F32"]).toFixed(2)}</span><span>rpm</span></div>
 						</div>
-						
+
 					</div>
 					<div className={`${styles.infoBox3} ${styles.infofL}`}>
 						<Title title={['风机温度']}></Title>
@@ -351,11 +351,11 @@ let Component = React.createClass({
 					</div>
 					<div className={`${styles.infoBox6} ${styles.infofL}`}>
 						<Title></Title>
-						
+
 						<div className={styles.titlebox}><span>风机描述</span><span>风机状态</span><span>状态时长(分钟)</span></div>
 						<div className={styles.statusquery}>
 							{
-								
+
 								// fdv.map((value, key)=>{
 								// 	return (
 								// 			<div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
@@ -463,7 +463,7 @@ let Component = React.createClass({
 						<div className={styles.fandatabox}>
 							<span>3号变桨逆变器温度</span>
 							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(2)}</span><span>℃</span></span>
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>
@@ -472,7 +472,7 @@ let Component = React.createClass({
         return (
             <Login></Login>
         )
-    }	
+    }
 	}
 });
 
@@ -495,10 +495,10 @@ const mapDispatchToProps = (dispatch) => {
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
                     function setData3(rdata){
                         dispatch(actions.setVars('infofmodel', rdata));
-                        // console.log(0,rdata); 
-                        TY.getRtData("WTDetail", value.Wtid, setData4)  
+                        // console.log(0,rdata);
+                        TY.getRtData("WTDetail", value.Wtid, setData4)
                         function setData4(rdata){
-                             
+
                             // console.log(1,rdata);
                             TY.getRtData("WTDetail", value.Wtid, setData5)
                             function setData5(rdata){
@@ -507,8 +507,8 @@ const mapDispatchToProps = (dispatch) => {
                                 setTimeout(function(){
                                     dispatch(actions.setVars('faninfobool', true));
                                 },100)
-                            } 
-      
+                            }
+
                         }
                     }
                      // }, 3000)
@@ -517,37 +517,37 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        
+
 
         init: (value) => {
         	times = setInterval(function(){
                    // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
                     	// function setData3(rdata){
                          	// dispatch(actions.setVars('infofmodel', rdata));
-                        	// console.log(0,rdata); 
-                        	  
+                        	// console.log(0,rdata);
+
                      			function setData4(rdata){
 	                            dispatch(actions.setVars('infofdata', rdata));
 	                            // console.log(1,rdata);
-                           
-                            
+
+
                         }
                         TY.getRtData("WTDetail", value.Wtid, setData4)
                     // }
-         
-           }, 3000)  
+
+           }, 3000)
 //   $.ajax({
 //    type: 'post',    
 //    url:'http://54.223.200.134/System/data.aspx?mdid=Model&ScId=2015032011&EnId=654208001&EnKey=Screen&PkId=&ModelKey=6C5002D3-1566-414a-8834-5077940C78E1&dhs=UISys&AspxAutoDetectCookieSupport=1',    
 //    data:{name:'xuyuanming'},    
 //    dataType:"json",
-    
+
 //    timeout:3000,    
-   
+
 //    success:function(data){    
 //        console.log(data.data);    
 //    },    
-   
+
 // });
 				// function jsonp(data){console.log(data)};
 // 				$.jsonp({  
@@ -577,7 +577,7 @@ const mapDispatchToProps = (dispatch) => {
         	dispatch(actions.setVars('Wtid', val));
         	dispatch(actions.setVars('befor_page3', 'faninfo'));
         }
-        
+
     };
 };
 

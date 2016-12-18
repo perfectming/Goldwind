@@ -28,7 +28,9 @@ let Component = React.createClass({
             categories:arrname1,
 
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br>数值：<b>{point.y}</b><h6 style="font-size:12px">{unit}</h6>'
+
+                // pointFormat: '{point.name}:<b>{point.percentage:.1f}%</b>',
                 // pointFormat: "<b>{point.percentage:.0f}%</b>"
             },
             credits: {
@@ -45,7 +47,7 @@ let Component = React.createClass({
                     innerSize: '40%',
                     dataLabels: {
                         enabled: true,
-                        format: '{point.name}',
+                        format: '{point.name}:<b>{point.percentage:.1f}%</b>',
                         style: {
                             color: "#d1d2d3",
                             fontSize: '14px',

@@ -13,8 +13,8 @@ let month=[],monthAct=[],monthPlan=[],month2,income,cost,runTime,downTime,TBA;
 
 let Component = React.createClass({
 	componentWillMount() {
-		let {clickAreaId}=this.props;
-        this.props.ajax(clickAreaId);
+		let {clickAreaId,ipUrl}=this.props;
+        this.props.ajax(clickAreaId,ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -107,7 +107,7 @@ let Component = React.createClass({
 	           							<div className={styles.space} onClick={()=>changepageEleS()}></div>
 	           							<div className={styles.time} onClick={()=>changepageEleT()}></div>
 	           						</div>
-	           						<Yearelectric month={month} plan={monthPlan} actrul={monthAct} unit={'万kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+	           						<Yearelectric month={month} plan={monthPlan} actrul={monthAct} unit={'kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
@@ -119,7 +119,7 @@ let Component = React.createClass({
 		           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
 	           							</div>
 		           					</div>
-	           						<Yearelectric month={month2} plan={income} actrul={cost} unit={'万元'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
+	           						<Yearelectric month={month2} plan={income} actrul={cost} unit={'元'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           			</div>
@@ -167,12 +167,13 @@ const mapStateToProps = (state) => {
     	clickAreaId : state.vars.clickAreaId,
     	AreaId : state.vars.AreaId,
     	windBool : state.vars.windBool,
+    	ipUrl : state.vars.ipUrl,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    	ajax: (clickAreaId) => {
+    	ajax: (clickAreaId,ipUrl) => {
     		dispatch(actions.setVars('actbt',0 ));
     		if(clickAreaId==undefined){
     			$.ajax({
@@ -261,10 +262,10 @@ const mapDispatchToProps = (dispatch) => {
 					        	month=[],monthAct=[],monthPlan=[];
 					        	for(var i in data.data.wfieldsMonthsElec){
 									month.push(data.data.wfieldsMonthsElec[i].month+"月");
-									monthAct.push(data.data.wfieldsMonthsElec[i].poweract/10000);
+									monthAct.push(data.data.wfieldsMonthsElec[i].poweract);
 								};
 								for(var i in data.data.wfieldsMonthsPlanElec){
-									monthPlan.push(data.data.wfieldsMonthsPlanElec[i]/10000);
+									monthPlan.push(data.data.wfieldsMonthsPlanElec[i]);
 								}
 					        },
 					        complete : function(XMLHttpRequest,status){ 
@@ -278,8 +279,8 @@ const mapDispatchToProps = (dispatch) => {
 							        	month2=[],cost=[],income=[];
 							        	for(var i in data.data){
 							        		month2.push(data.data[i].month+"月");
-							        		cost.push(data.data[i].costs/10000);
-							        		income.push(data.data[i].incomes/10000);
+							        		cost.push(data.data[i].costs);
+							        		income.push(data.data[i].incomes);
 							        	}
 							        },
 							        complete : function(XMLHttpRequest,status){ 
@@ -361,10 +362,10 @@ const mapDispatchToProps = (dispatch) => {
 			        	month=[],monthAct=[],monthPlan=[];
 			        	for(var i in data.data.wfieldsMonthsElec){
 							month.push(data.data.wfieldsMonthsElec[i].month+"月");
-							monthAct.push(data.data.wfieldsMonthsElec[i].poweract/10000);
+							monthAct.push(data.data.wfieldsMonthsElec[i].poweract);
 						};
 						for(var i in data.data.wfieldsMonthsPlanElec){
-							monthPlan.push(data.data.wfieldsMonthsPlanElec[i]/10000);
+							monthPlan.push(data.data.wfieldsMonthsPlanElec[i]);
 						}
 			        },
 			        complete : function(XMLHttpRequest,status){ 
@@ -384,8 +385,8 @@ const mapDispatchToProps = (dispatch) => {
 			        	month2=[],cost=[],income=[];
 			        	for(var i in data.data){
 			        		month2.push(data.data[i].month+"月");
-			        		cost.push(data.data[i].costs/10000);
-			        		income.push(data.data[i].incomes/10000);
+			        		cost.push(data.data[i].costs);
+			        		income.push(data.data[i].incomes);
 			        	}
 			        },
 			        complete : function(XMLHttpRequest,status){ 

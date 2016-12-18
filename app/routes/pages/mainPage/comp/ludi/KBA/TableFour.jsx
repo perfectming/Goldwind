@@ -46,8 +46,7 @@ let Component = React.createClass({
             	}
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                pointFormat: "<b>{point.percentage:.0f}%</b>"
+                
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -67,9 +66,7 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 column: {
                 	stacking:"normal",
                     pointPadding: 0.1,
