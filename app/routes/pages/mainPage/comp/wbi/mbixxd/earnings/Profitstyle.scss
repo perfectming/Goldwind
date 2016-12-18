@@ -1,0 +1,386 @@
+.box{
+    overflow:hidden;
+    padding:10px;
+    padding-right:40px;
+    position:relative;
+
+    .boxcover{
+    position:fixed;
+    height:100%;
+    width:100%;
+    z-index:1200;
+    background:black;
+    display:none;
+    opacity:0.6;
+    }
+    .more:hover{
+     box-shadow:0 0 15px #fff;
+    }
+    .scroll{
+    width:100%;
+    position:relative;
+    overflow-x:scroll;
+    
+    }
+    .more{
+    background:#21242a;
+    position:absolute;
+    z-index:1600;
+    width:95%;
+    top:50%;
+    left:48%;
+    padding-top:60px;
+    
+      
+    transform:translate(-50%,-50%);
+    box-sizing:border-box;
+    display:none;
+    .moretitle{
+    width:100%;
+    height:60px;
+    background:#15181B;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:2000;
+    .gg{
+ 
+    display:inline-block;
+    font-size:16px;
+    float:right;
+    line-height:60px;
+    cursor:pointer;
+    margin-right:50px;
+       color:#fff;
+    }
+    p{
+    position:absolute;
+    top:18px;
+    left:7%;
+   
+    font-size:16px;
+    color:#fff;
+    }
+    img{
+    position:absolute;
+    top:22px;
+    left:5%;
+    height:16px;
+    width:16px;
+    }
+    }
+    }
+     .shadow:hover{
+      box-shadow:0 0 15px #fff;
+     }
+     .bigbox:hover{
+     box-shadow:0 0 15px #fff;
+     }
+    .monthbox{
+    width: 98%;
+    height: 50px;
+    list-style: none;
+    padding:0;
+    padding-left:0px;
+    position:relative;
+    border-bottom: 1px solid #31F3FB;
+    
+    li{
+      word-spacing: 15px;
+      height: 40px;
+            width: 100px;
+            border: 1px solid #31F3FB;
+            line-height: 38px;
+            float: left;
+            font-family: "微软雅黑";
+            text-align: center;
+            margin-right: 10px;
+            border-radius:5px;
+            cursor:pointer;
+              &:hover{
+                color: #31F3FB;
+                box-shadow:0 0 10px #fff;
+            }
+     }
+     
+     li:nth-last-child(2){
+     
+     }
+      .back{
+     float:left;
+       align-items:center;
+       color: #20FEFF;
+       border:1px solid #20FEFF;
+       width:100px;
+       height:40px;
+       line-height:40px;
+       position:relative;
+       top:0px;
+       border-radius:45px;
+       box-shadow:0px 0px 10px  #20FEFF;
+       text-align:center;
+     }
+     
+      .red{
+    
+      color: #31F3FB;
+  }
+  .green{
+    color:white;
+  }
+    }
+  .bgc{
+    position:absolute;
+    height:40px;
+    width:40px;
+    top:6px;
+    left:46px;
+    z-index:5;
+    img{
+    height:40px;
+    width:40px
+  }
+  }
+  .bgccc{
+    position:absolute;
+    height:16px;
+    width:16px;
+    top:3px;
+    left:57px;
+    z-index:5;
+    img{
+    height:16px;
+    width:16px
+  }
+  }
+  .bgcccc{
+    position:absolute;
+    height:40px;
+    width:40px;
+    top:9px;
+    left:55px;
+    z-index:5;
+    img{
+    height:30px;
+    width:40px
+  }
+  }
+   .covers{
+     position:relative;
+   
+
+   }
+
+    .areabox{
+      position:relative;
+            width:98%;
+            margin-left:2px;
+            height:415px;
+            background: rgba(44, 61, 71,0.4);
+            margin-bottom:15px;
+           }
+       .shadow:hover{
+        box-shadow:0 0 15px #fff;
+      }
+    .windbox{
+       float: left;
+       width: 48%;
+       height: 430px;
+       margin-right:15px;
+       position:relative;
+      
+        background: rgba(44, 61, 71, 0.4);
+    
+
+
+    }
+     .bigbox{
+       float:right;
+    height:430px;
+    overflow:hidden;
+    width:49.3%;
+   margin-right:30px;
+    border:1px solid #282F37;
+    position:relative;
+     background: rgba(44, 61, 71,0.4);
+    
+    .coverbox{
+      margin-top:50px;
+
+    }
+    .tik{
+      color:#fff;
+      position:absolute;
+      font-size:16px;
+      top:5px;
+      left:100px;
+      font-weight:700;
+    }
+    .imgq{
+      width:50px;
+      height:30px;
+      position:absolute;
+      top:1px;
+      left:35px;
+      text-align:center;
+      line-height:30px;
+      img{
+        height:16px;
+        width:16px;
+      }
+    }
+    .imgqa{
+      width:50px;
+      height:30px;
+      position:absolute;
+      top:25px;
+      left:40px;
+      text-align:center;
+      line-height:30px;
+      img{
+        height:16px;
+        width:16px;
+      }
+    }
+  }
+
+  .tiw{
+  color:#fff;
+      position:absolute;
+        font-size:16px;
+        top:4px;
+        left:100px;
+        font-weight:700;
+        z-index:100;
+    
+      
+
+  }
+   .titleeee{
+    color:#fff;
+      position:absolute;
+        font-size:16px;
+        top:4px;
+        left:100px;
+        font-weight:700;
+        z-index:100;
+   }
+  .windecbox{
+    margin-top:50px;
+    width:45%;
+    height:300px;
+    margin-bottom: 12px;
+
+  }
+  .buttons{
+  
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+    width:271px;
+    position:absolute;
+    top:0px;
+    right:0px;
+    margin-right:20px;
+  }
+  .buttons{
+    height:60px;
+    line-height:60px;
+    button{
+      width:70px;
+      height:30px;
+      line-height:20px;
+      text-align:center;
+      font-size:16px;
+      border-radius:15px;
+      font-family:'微软雅黑';
+      margin-left:12px;
+      background-color:transparent;
+     color:white;
+      border:1px solid #20FEFF;
+    
+    }
+    .btn0{
+     color: #31F3FB;
+     }
+    .btn1{
+    color:#fff;
+    }
+    button:hover{
+       color: #31F3FB;
+          box-shadow:0px 0px 10px  #20FEFF;
+    }
+  }    .fanbox{
+        float: right;
+        width: 49%;
+        height: 400px;
+        }
+    .buttons{
+    height:46px;
+    width:35%;
+    float:right;
+    }
+    .buttons{
+    height:60px;
+    line-height:60px;
+      button{
+      width:70px;
+      height:30px;
+      line-height:20px;
+      text-align:center;
+      font-size:16px;
+      border-radius:15px;
+      font-family:'微软雅黑';
+      margin-left:12px;
+     
+      }
+    }
+    .morebox{
+     height:450px;
+     width:60%;
+     border:1px solid #282F37;
+     position:absolute;
+   
+     top:50%;
+     left:50%;
+     transform:translate(-50%,-50%);
+     display:none;
+     .imgq{
+     position:absolute;
+     top:9px;
+     left:7px;
+     img{
+     height:16px;
+     width:16px;
+     }
+     .tit{
+       position:absolute;
+       top:10%;
+       left:50px;
+       color:white;
+       font-weight:700;
+       width:300px;
+       font-size:16px;
+     }
+     }
+     .close{
+     position:absolute;
+     top:10px;
+     right:10px;
+     height:30px;
+     width:30px;
+     border:1px solid pink;
+     line-height:24px;
+     font-size:16px;
+     text-align:center;
+     cursor:pointer;
+     }
+     .windcebox{
+        margin-top:50px;
+     }
+
+
+    }
+
+   
+}
