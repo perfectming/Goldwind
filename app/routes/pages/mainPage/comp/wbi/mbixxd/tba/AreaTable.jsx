@@ -90,12 +90,12 @@ let Component = React.createClass({
                      timeout:'3000',
                      success:function(data){
                    
-                       
+                      
                           let PBAGroupFirstMonth=data.data;
   
                         for ( let i in PBAGroupFirstMonth){
 
-                          let day=PBAGroupFirstMonth[i].day;
+                          let day=PBAGroupFirstMonth[i].day+'日';
                           PBAGroupFirstDay.push(day);
 
                           let poweract=PBAGroupFirstMonth[i].poweract;
@@ -116,6 +116,7 @@ let Component = React.createClass({
                           let pba=Number(PBAGroupFirstMonth[i].pba.toFixed(2));
                           PBAGroupFirstPba.push(pba);
                         }
+                     
                        
               },
               error:function(){
@@ -152,7 +153,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'kWh',
+                        text:'(kWh)',
                         align:'high',
                         rotation:'0',
                         y: -17,
@@ -233,8 +234,8 @@ let Component = React.createClass({
                     stack:'first',
                     color:'blue',
                     yAxis:1,
-                     tooltip: {
-               valueSuffix:''
+                    tooltip: {
+               valueSuffix:'%'
             },
                 },
 
@@ -266,7 +267,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBAGroupFirstLimitloss1',PBAGroupFirstLimitloss));
             dispatch(actions.setVars('PBAGroupFirstFaultloss1',PBAGroupFirstFaultloss ));
             dispatch(actions.setVars('PBAGroupFirstNodevreasonloss1',PBAGroupFirstNodevreasonloss ));
-            dispatch(actions.setVars('PBAGroupFirstPba1',PBAGroupFirstPba ));
+            dispatch(actions.setVars('PBAGroupFirstPba12',PBAGroupFirstPba ));
+        
            
         },
     };

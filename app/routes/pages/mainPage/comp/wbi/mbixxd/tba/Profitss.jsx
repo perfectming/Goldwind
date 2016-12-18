@@ -42,7 +42,6 @@ let Component = React.createClass({
     render() {
       let{PBAGroupMonthF="11",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,wq='风场1',more,changpage,wind,windP,close,actbt=0,backtop,befor_pagee='group',befor_pagee2,w0,ww,}=this.props;
        
-
           return (
            <div className={styles.box}>
            <div className={styles.boxcover} id='boxcover'></div>
@@ -74,7 +73,7 @@ let Component = React.createClass({
                            </div>
                        </div>
                        <div className={styles.tik}>
-                           <p>{PBAGroupMonthF+'月份每日PBA'}</p>
+                           <p>{PBAGroupMonthF+'每日PBA'}</p>
                        </div>
                    </div>
                    <div className={styles.imgq}>
@@ -149,7 +148,7 @@ const mapDispatchToProps = (dispatch) => {
                         let PBAGroupSpace=data.data[0];
                        
                         for ( let i in PBAGroupSpace){
-                          let month=PBAGroupSpace[i].month;
+                          let month=PBAGroupSpace[i].month+'月';
                           PBAGroupMonth.push(month);
                           let poweract=PBAGroupSpace[i].poweract;
                           PBAGroupPoweract.push(poweract);
@@ -164,11 +163,12 @@ const mapDispatchToProps = (dispatch) => {
                           let pba=Number(PBAGroupSpace[i].pba.toFixed(2));
                           PBAGroupPba.push(pba);
                         }
+
                         // 默认的月份
                         let PBAGroupFirstMonth=data.data[1];
   
                         for ( let i in PBAGroupFirstMonth){
-                          let day=PBAGroupFirstMonth[i].day;
+                          let day=PBAGroupFirstMonth[i].day+'日';
                           PBAGroupFirstDay.push(day);
                           let poweract=PBAGroupFirstMonth[i].poweract;
                           PBAGroupFirstPoweract.push(poweract);

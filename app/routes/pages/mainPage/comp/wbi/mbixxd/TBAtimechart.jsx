@@ -2,13 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let input_url="10.68.100.32";
+let input_url="10.9.101.15";
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
        
-        let{w0,areaName,montht,profit,cost,height,TBA}=this.props;
+        let{w0,areaName,montht,profit,cost,height,TBA,changedata2qw}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -91,7 +91,7 @@ let Component = React.createClass({
              timeout:'3000',
              success:function(data){
          
-           
+            
              let wTBATime=data.data;
              for (let i in wTBATime){
                 let day=wTBATime[i].day;
@@ -106,13 +106,14 @@ let Component = React.createClass({
                 let tba=wTBATime[i].tba;
                 wTBATD.push(tba);
              }
-            
+           
              },
              error:function(){
                  
              },
            });   
-                        changedata2qw :(w0,wTBADaD,wTBARunD,wTBADownD,wTBATD)
+                    
+                        changedata2qw(w0,wTBADaD,wTBARunD,wTBADownD,wTBATD)
            // 给每天赋值
            
                         }
@@ -221,9 +222,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-          w0 : state.vars.w1,
-        winss: state.vars.wins1,
-         windplan1 : state.vars.windplan1,
+        
 
     }
 };
@@ -232,11 +231,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-         changedata2qw :(w0,b,wTBADaD,wTBARunD,wTBADownD,wTBATD)=>{
-            dispatch(actions.setVars('wTBADaD11',wTBADaD));
-           dispatch(actions.setVars('wTBARunD11',wTBARunD)) ;
-           dispatch(actions.setVars('wTBADownD11',wTBADownD)) ;
-           dispatch(actions.setVars('wTBATD11',wTBATD)) ;
+         changedata2qw:(w0,wTBADaD,wTBARunD,wTBADownD,wTBATD)=>{
+
+            dispatch(actions.setVars('wTBADaD1',wTBADaD));
+           dispatch(actions.setVars('wTBARunD1',wTBARunD)) ;
+           dispatch(actions.setVars('wTBADownD1',wTBADownD)) ;
+           dispatch(actions.setVars('wTBATD1',wTBATD)) ;
            dispatch(actions.setVars('monthTD1',w0)) ;
            
         },

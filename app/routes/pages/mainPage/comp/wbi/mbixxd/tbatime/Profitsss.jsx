@@ -98,7 +98,7 @@ let tbaDayTba3=[];
                 
                         TBAtimedata=data.data; 
                         for(let i in TBAtimedata){
-                          let tbamonth=TBAtimedata[i].month;
+                          let tbamonth=TBAtimedata[i].month+'月';
                           tbaMonths.push(tbamonth);
                           let tbaruntimes=TBAtimedata[i].runtimes;
                           tbaRunTimes.push(tbaruntimes);
@@ -138,7 +138,7 @@ let tbaDayTba3=[];
                              
                          TBAdaydata=data.data; 
                          for(var i in TBAdaydata){
-                           var tbaDay=TBAdaydata[i].day;
+                           var tbaDay=TBAdaydata[i].day+'日';
                            tbaDays3.push(tbaDay);
                            var tbaDayruntimes=TBAdaydata[i].runtimes;
                            tbaDayRunTimes3.push(tbaDayruntimes);

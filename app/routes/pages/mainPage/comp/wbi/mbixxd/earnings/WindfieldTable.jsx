@@ -10,7 +10,9 @@ let Component = React.createClass({
 
     render() {
         let {height,windFiled,windCost,windProfit,w111,changedata1,TBA,year,monthh,daycount,keyy,areaWindids,text}=this.props;
+     
         let configPie = {
+
             chart: {
                 height:height,
                 width:860,
@@ -38,7 +40,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 x:-75,
-                y:25,
+                y:35,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -63,24 +65,24 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 15,
+                   maxPointWidth: 30,
                     borderRadius: 4,
                 },
                 series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                              var w111=e.point.category;
+                              let w111=e.point.category;
                                
-                               var index=e.point.index;
-                        var  a=w111.toString().split("");
+                               let index=e.point.index;
+                        let  a=w111.toString().split("");
                         
-                        var b=a[0];
-                         var areaWindCosts=[];
-                         var areaWindEarnings=[];
-                         var areaWindRates=[];
+                        let b=a[0];
+                         let areaWindCosts=[];
+                         let areaWindEarnings=[];
+                         let areaWindRates=[];
                          
-                         var areaWindNames=[];
+                         let areaWindNames=[];
                         $.ajax({
                      type:'post',
                      url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
@@ -96,8 +98,7 @@ let Component = React.createClass({
                      dataType:'json',
                      timeout:'3000',
                      success:function(data){
-                       
-                       
+          
                          let dataA=data.data;
                          for (let i in dataA)
                          {
@@ -105,7 +106,7 @@ let Component = React.createClass({
                              areaWindCosts.push(areaWindCost);
                              let areaWindEarning=dataA[i].earning;
                              areaWindEarnings.push(areaWindEarning);
-                             let areaWindRate=dataA[i].rate;
+                             let areaWindRate=Number(dataA[i].rate.toFixed(1));
                              areaWindRates.push(areaWindRate);
                              let areaWindid=dataA[i].wfid;
                              areaWindids.push(areaWindid);
@@ -158,11 +159,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'元',
+                text:'（元）',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 45,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -235,7 +236,6 @@ const mapDispatchToProps = (dispatch) => {
         },
           changedata1 :(w111,b,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,index)=>{
             dispatch(actions.setVars('w123',w111)); 
-            
              dispatch(actions.setVars('areaWindNamesss',areaWindNames));
              dispatch(actions.setVars('areaWindCostsss',areaWindCosts));
              dispatch(actions.setVars('areaWindEarningsss',areaWindEarnings));

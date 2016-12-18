@@ -2,6 +2,12 @@
     overflow:hidden;
     padding:10px;
     padding-right:40px;
+     .btn0{
+     color: #31F3FB;
+     }
+    .btn1{
+    color:#fff;
+    }s
   
     .bigbox:hover{
     box-shadow:0 0 15px #fff;
@@ -28,7 +34,29 @@
       cursor:pointer;
        text-align:center;
     }
+     .back1{
+   float:left;
+    
+       align-items:center;
+       color: #20FEFF;
+       color:#fff;
+       border:1px solid #20FEFF;
+       width:100px;
+       height:40px;
+       line-height:40px;
+       position:relative;
+       top:-8px;
+       right:0;
+       border-radius:45px;
+
+      cursor:pointer;
+       text-align:center;
+    }
     .back:hover{
+     box-shadow:0px 0px 10px  #20FEFF;
+     color:#20FEFF
+    }
+    .back1:hover{
      box-shadow:0px 0px 10px  #20FEFF;
      color:#20FEFF
     }

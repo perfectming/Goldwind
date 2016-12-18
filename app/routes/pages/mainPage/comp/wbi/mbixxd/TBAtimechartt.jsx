@@ -2,40 +2,40 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
 let data = require('./Profit-data');
-let win=data.areaRecordProfitT;
-let wins=data.areaPlanDayY;
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-
-        let {w0,wins,monthT,areaRecordProfitT=win,text,changedata1}=this.props;
+        
+       let {areaPlan,areaPlanDay,areaPlanDayT,height,w0,TBA,text}=this.props;
         let configPie = {
             chart: {
-                height:390,
-                backgroundColor: "rgba(44, 61, 71,0)",
+                height:height,
+                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                 
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : "0",
+                 x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                     fontWeight:700,
                 }
             },
+            // 插入图片
+            //图例说明
             legend: {
+                x:-75,
+                y:30,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -50,27 +50,27 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                
+                valueSuffix:'h'
             },
             credits: {
                 enabled: false
             },
+            //柱子颜色
             colors: [ '#1E664A', '#4CDB9D']
             ,
+            // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0,
-                    pointWidth: 30,
-                    borderRadius: 7,
+                    pointPadding: 10,
+                    borderWidth: 1,
+                    pointWidth: 50,
+                    borderRadius: 4
+
                 }, series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                        w0=e.point.category;
-                        let  a=w0.toString().split("");
-                        let b=a[0];
-                        changedata1(w0,win,b);
+                           
                         }
                     }
                 }
@@ -86,31 +86,33 @@ let Component = React.createClass({
                         fontSize:'14px'
                     }
                 },
-                categories:monthT,
+                categories:areaPlan,
             },
-            yAxis: [{
+            yAxis: [
+            {
                 labels: {
                 format: '',
                 style: {
                     color: '#fff',
                     fontSize:'14px'
                 }
-            }, gridLineDashStyle: 'Solid',
+            },
+             gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'100%',
+                text:'h',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 35,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
                 }
             }
         }, {
-            labels: {
+             labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -120,22 +122,45 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: '',
+                text: '100%',
                  align:'high',
                 rotation:'0',
-                y: -20,
-                x: 40,
+                y: -15,
+                x: -40,
+                style:{
+                    color: '#fff',
+                    fontSize:'14px'
+                }
 
             },
             opposite: true
         }],
-
+            //几条数据
             series: [{
-                name: '健康度',
+                name: '运行时间',
                 type: 'column',
-                data: areaRecordProfitT,
-                color:'#4CDB9D',
+                data: areaPlanDay,
+                color:'#33BAC0',
+                pointWidth: 15,
             },
+            {
+            	name: '停机时间',
+                type: 'column',
+                data:areaPlanDayT,
+                color:'#ccc',
+                pointWidth: 15,
+            },{
+                    name: 'TBA',
+                    type: 'line',
+                    data:TBA,
+                    color:'blue',
+                    opposite:true,
+                    yAxis:1,
+                     tooltip: {
+               valueSuffix:''
+            },
+                }
+
             ]
         };
         return (
@@ -147,22 +172,14 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-         w0 : state.vars.w1,
-        wins: state.vars.wins1,
-         windplan1 : state.vars.windplan1,
-
-        
+          w0 : state.vars.monthTD,
     }
+   
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-        },
-        changedata1 :(w0,win,b)=>{
-            dispatch(actions.setVars('w1',w0 ));
-            dispatch(actions.setVars('wins1',wins[b-1]));
-           
         },
     };
 };

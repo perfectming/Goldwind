@@ -9,15 +9,13 @@ let input_url="10.68.100.32";
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
-let button=data.button;
-let actbt=0;
 let text=data.text;
 let datee=new Date;
 let year=datee.getFullYear();
- let dayy = new Date(year,11,0); 
+
+let dayy = new Date(year,11,0); 
 //获取天数：
-              let daycount = dayy.getDate();
-                
+    let daycount = dayy.getDate();
  let windFiedN=[];
  let arr5=[];
 let Component = React.createClass({
@@ -29,13 +27,12 @@ let Component = React.createClass({
     },
 
     render() {
-       let{index2,keyy,actbt=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban,backtop,befor_pagee='group',befor_page2,w11='1区域',w111='风机1',sqy,pointPlacement,windN,keyyy,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNamessT,areaWindCostssT,areaWindEarningssT,areaWindRatessT,areaWindidssT,areaWindCostMore,areaWindEarningMore,areaWindNameMore,areaWindRateMore}=this.props;
-   let day = new Date(year,keyyy,0); 
-//获取天数：
-              let daycount = day.getDate();
-             
+       let{index2,keyy,actbt=0,btn=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban,backtop,befor_pagee='group',befor_page2,w11='1区域',w111='风机1',sqy,pointPlacement,windN,keyyy,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNamessT,areaWindCostssT,areaWindEarningssT,areaWindRatessT,areaWindidssT,areaWindCostMore,areaWindEarningMore,areaWindNameMore,areaWindRateMore}=this.props;
+   
+            
             
           return (
+
            <div className={styles.box}>
             <div className={styles.boxcover} id='boxcover'></div>
              <div className={styles.more} id="sss">
@@ -46,7 +43,7 @@ let Component = React.createClass({
                 <div onClick={()=>close()} className={styles.gg}>x</div>
                 </div>
                 <div className={styles.scroll}>
-                <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={17200} pointPlacement={-0.2}></Fanchart>
+                <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={17200} pointPlacement={-0.17} ly={20}></Fanchart>
                 </div>
                  </div>
                <ul className={styles.monthbox}>
@@ -61,7 +58,8 @@ let Component = React.createClass({
                   
                    <div className={`${styles.areabox} ${styles.shadow}`}>
                           <div className={styles.bgccc}> <img src={icono}/></div>
-                           <AreaTable text={actbt+1+'月集团各区域收益'} areaName={wind} areaRecordCost={windN} areaRecordProfit={windP} TBA={windPT} windFiedN={windFiedN} arr5={arr5} year={year} keyy={keyyy} daycount={daycount} height={410}></AreaTable>
+                           <AreaTable text={actbt+1+'月集团各区域收益'} areaName={wind} areaRecordCost={windN} areaRecordProfit={windP} TBA={windPT} windFiedN={windFiedN} arr5={arr5} year={year} keyy={keyyy} daycount={daycount} height={410} width={1700} ></AreaTable>
+                          
                     </div>
                 
 
@@ -69,32 +67,25 @@ let Component = React.createClass({
                   
                    <div className={`${styles.windbox} ${styles.shadow}`}>
                          <div className={styles.bgccc}> <img src={icono}/></div>
-                       
-                      
                            <WindfieldTable  text={[actbt+1]+'月'+w11+'各风电场年收益'} windFiled={areaWindNames} windCost={areaWindCosts} windProfit={areaWindEarnings} TBA={areaWindRates} year={year} keyy={keyyy} daycount={daycount} areaWindids={areaWindids} height={410}></WindfieldTable>
                       
                    </div>
-             
-
-
                <div className={`${styles.bigbox} ${styles.shadow}`}>
-                   <div className={styles.coverbox}>
-                       <div className={styles.windcebox}>
-                           <div>
-                               <Fanchart areaRecordCostR={areaWindCostssT} areaRecordProfitR={areaWindEarningssT} machine={areaWindNamessT } height={370} TBAA={areaWindRatessT} pointPlacement={-0.06} width={850}></Fanchart>
-                           </div>
-                       </div>
-                       <div className={styles.tik}>
-                           <p>{[actbt+1]+'月'+w11+w111+'各风机收益'}</p>
-                       </div>
-                   </div>
+                 
+                       
+                           
+                               <Fanchart areaRecordCostR={areaWindCostssT} areaRecordProfitR={areaWindEarningssT} machine={areaWindNamessT } height={440} TBAA={areaWindRatessT} pointPlacement={-0.06} width={850} text={(actbt+1)+'月'+w11+w111+'各风机收益'} ly={40}></Fanchart>
+                          
+                       
+                      
+                   
                    <div className={styles.imgq}>
                        <img src={icono}/>
                    </div>
                    <div className={styles.buttons}>
-                      <button onClick={()=>gogogo(areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)} > 前10</button>
-                      <button onClick={()=>back(areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)}>后10</button>
-                      <button  onClick={()=>more(areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)}>更多</button>
+                      <button className={btn===0? styles.btn0 : styles.btn1} onClick={()=>gogogo(btn,areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)}  > 前10</button>
+                      <button className={btn===1? styles.btn0 : styles.btn1} onClick={()=>back(btn,areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount) }>后10</button>
+                      <button className={btn===2? styles.btn0 : styles.btn1} onClick={()=>more(btn,areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount) }>更多</button>
                    </div>
                </div>
                <p className={styles.clear}></p>
@@ -136,13 +127,13 @@ const mapStateToProps = (state) => {
           areaWindCostMore:state.vars.areaWindCostMore,
           areaWindEarningMore:state.vars.areaWindEarningMore,
           areaWindRateMore:state.vars.areaWindRateMore,
+          btn:state.vars.btnn,
 
     }
 };
 const mapDispatchToProps = (dispatch) => {
     return {
       ajax:()=>{
-      
         let arr1=[];
             let arr2=[];
             let arr3=[];
@@ -159,17 +150,20 @@ const mapDispatchToProps = (dispatch) => {
             let areaWindNames1=[];
 
 
-                        
-            
-           // 第一个图
+            let datee=new Date;
+            let monthF=datee.getMonth();  
+                       
+            let day = new Date(year,monthF,0); 
+            let  daycountT = day.getDate();
+             
          $.ajax({
             type:'post',
             url:'http://'+input_url+':8080/wbi/yield/getAllGroupYield',  
             async:false,
            data:{
              
-            'startdate':year+"-"+"11"+"-"+'1',
-            'enddate':year+"-"+"11"+"-"+"30",
+            'startdate':year+"-"+monthF+"-"+'1',
+            'enddate':year+"-"+monthF+"-"+daycountT,
            },
             dataType:'json',
             timeout:'3000',
@@ -183,22 +177,17 @@ const mapDispatchToProps = (dispatch) => {
                     arr2.push(costs);
               let groupname=dataA[i].groupname;
               arr3.push(groupname);
-              let rate=Number(dataA[i].rate.toFixed(2));
-            
+              let rate=Number(dataA[i].rate.toFixed(1));
               arr4.push(rate);
               let groupid=dataA[i].groupid;
               arr5.push(Number(groupid))
                 }
-             
-     
-
             },
             error:function(){
-               
+             
             },
           });
-
-             dispatch(actions.setVars('actbt',10 ));
+            dispatch(actions.setVars('actbt',monthF-1));
             dispatch(actions.setVars('windN',arr2));
             dispatch(actions.setVars('wind',arr3));
             dispatch(actions.setVars('windP',arr1));
@@ -210,17 +199,13 @@ const mapDispatchToProps = (dispatch) => {
                      async:false,
                     data:{
                       
-                   'startdate':year+"-"+"9"+"-"+'1',
-                 'enddate':year+"-"+"9"+"-"+"30",
+                  'startdate':year+"-"+monthF+"-"+'1',
+            'enddate':year+"-"+monthF+"-"+daycountT,
                 'groupid':arr5[0],
-             
-  
                     },
                      dataType:'json',
                      timeout:'3000',
                      success:function(data){
-                     
-                       
                          let dataA=data.data;
                          for (let i in dataA)
                          {
@@ -228,7 +213,7 @@ const mapDispatchToProps = (dispatch) => {
                              areaWindCosts.push(areaWindCost);
                              let areaWindEarning=dataA[i].earning;
                              areaWindEarnings.push(areaWindEarning);
-                             let areaWindRate=Number(dataA[i].rate.toFixed(2));
+                             let areaWindRate=Number(dataA[i].rate.toFixed(1));
                              areaWindRates.push(areaWindRate);
                              let areaWindid=dataA[i].wfid;
                              areaWindids.push(areaWindid);
@@ -260,8 +245,9 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('areaWindidsss',areaWindids));
               dispatch(actions.setVars('areaWindidssT',areaWindids));
               dispatch(actions.setVars('index2',0));
-              dispatch(actions.setVars('keyy',9));
-               dispatch(actions.setVars('daycount',30));
+              dispatch(actions.setVars('keyy',monthF));
+               dispatch(actions.setVars('daycount',daycountT));
+               dispatch(actions.setVars('w123',areaWindNames[0]));
 
              // 开始时第三张图跟着变
              $.ajax({
@@ -270,8 +256,8 @@ const mapDispatchToProps = (dispatch) => {
                      async:false,
                     data:{
                       
-                   'startdate':year+"-"+"9"+"-"+'1',
-                 'enddate':year+"-"+"9"+"-"+'30',
+                  'startdate':year+"-"+monthF+"-"+'1',
+            'enddate':year+"-"+monthF+"-"+daycountT,
                 'wfid':areaWindids[0],
                 'methods':'desc',
   
@@ -289,7 +275,7 @@ const mapDispatchToProps = (dispatch) => {
                               areaWindCosts1.push(areaWindCost);
                               let areaWindEarning=dataA[i].earning;
                               areaWindEarnings1.push(areaWindEarning);
-                              let areaWindRate=dataA[i].rate;
+                              let areaWindRate=Number(dataA[i].rate.toFixed(1));
                               areaWindRates1.push(areaWindRate);
                               let areaWindid=dataA[i].wfid;
                               areaWindids1.push(areaWindid);
@@ -348,6 +334,7 @@ const mapDispatchToProps = (dispatch) => {
             let areaWindRates1=[];
             let areaWindids1=[];
             let areaWindNames1=[];
+           
             
             year=datee.getFullYear();
             let day = new Date(year,monthh,0); 
@@ -377,7 +364,7 @@ const mapDispatchToProps = (dispatch) => {
                    arr2.push(costs);
              let groupname=dataA[i].groupname;
              arr3.push(groupname);
-             let rate=Number(dataA[i].rate.toFixed(2));
+             let rate=Number(dataA[i].rate.toFixed(1));
             
              arr4.push(rate);
              let groupid=dataA[i].groupid;
@@ -432,7 +419,7 @@ const mapDispatchToProps = (dispatch) => {
                              areaWindCosts.push(areaWindCost);
                              let areaWindEarning=dataA[i].earning;
                              areaWindEarnings.push(areaWindEarning);
-                             let areaWindRate=Number(dataA[i].rate.toFixed(2));
+                             let areaWindRate=Number(dataA[i].rate.toFixed(1));
                              areaWindRates.push(areaWindRate);
                              let areaWindid=dataA[i].wfid;
                              areaWindids.push(areaWindid);
@@ -485,7 +472,7 @@ const mapDispatchToProps = (dispatch) => {
                               areaWindCosts1.push(areaWindCost);
                               let areaWindEarning=dataA[i].earning;
                               areaWindEarnings1.push(areaWindEarning);
-                              let areaWindRate=dataA[i].rate;
+                              let areaWindRate=Number(dataA[i].rate.toFixed(1));
                               areaWindRates1.push(areaWindRate);
                          
                               
@@ -524,9 +511,13 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         //这是前十；
-        gogogo:(areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)=>{
+        gogogo:(btn,areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)=>{
                   
-                        
+            let areaWindCosts12=[];
+            let areaWindEarnings12=[];
+            let areaWindRates12=[];
+            let areaWindids12=[];
+            let areaWindNames12=[];       
 
           $.ajax({
                      type:'post',
@@ -536,35 +527,28 @@ const mapDispatchToProps = (dispatch) => {
                    'startdate':year+"-"+(actbt+1)+"-"+'1',
                  'enddate':year+"-"+(actbt+1)+"-"+daycount,
                 'wfid':areaWindidssT[index2],
-                'methods':'desc',
-  
+                'methods':'desc',   
                     },
                      dataType:'json',
                      timeout:'3000',
                      success:function(data){
 
 
-
-                         let dataA=data.data;
-                         for (let i in dataA)
+          
+                         let dataAB=data.data;
+                         for (let i in dataAB)
                          {
-                             let areaWindCost=dataA[i].costs;
-                             areaWindCosts.push(areaWindCost);
-                             let areaWindEarning=dataA[i].earning;
-                             areaWindEarnings.push(areaWindEarning);
-                             let areaWindRate=dataA[i].rate;
-                             areaWindRates.push(areaWindRate);
-                             let areaWindid=dataA[i].wfid;
-                             areaWindids.push(areaWindid);
-                             let areaWindName =dataA[i].wtname;
-                             areaWindNames.push(areaWindName) 
+                             let areaWindCost=dataAB[i].costs;
+                             areaWindCosts12.push(areaWindCost);
+                             let areaWindEarning=dataAB[i].earning;
+                             areaWindEarnings12.push(areaWindEarning);
+                             let areaWindRate=dataAB[i].rate;
+                             areaWindRates12.push(areaWindRate);
+                             let areaWindName =dataAB[i].wtname;
+                             areaWindNames12.push(areaWindName) 
 
                          }
-
  
-
-                       
-                      
                      // 获取x轴的值内蒙达茂天润风电场
                     
                     
@@ -572,24 +556,31 @@ const mapDispatchToProps = (dispatch) => {
             },
             error:function(){
          
-            
+      
             },
           });
                  
             
-             dispatch(actions.setVars('areaWindNamesss',areaWindNames));
-             dispatch(actions.setVars('areaWindCostsss',areaWindCosts));
-             dispatch(actions.setVars('areaWindEarningsss',areaWindEarnings));
-             dispatch(actions.setVars('areaWindRatesss',areaWindRates));
+             dispatch(actions.setVars('areaWindNamesss',areaWindNames12));
+             dispatch(actions.setVars('areaWindCostsss',areaWindCosts12));
+             dispatch(actions.setVars('areaWindEarningsss',areaWindEarnings12));
+             dispatch(actions.setVars('areaWindRatesss',areaWindRates12));
+              dispatch(actions.setVars('btnn',0));
             
 
 
             
               },
               // 这是更多
-              more:(areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)=>{
+              more:(btn,areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)=>{
                 $("#sss").show();
              $('#boxcover').show();
+                areaWindCosts=[];
+             areaWindEarnings=[];
+             areaWindRates=[];
+             
+             areaWindNames=[];       
+
         
           $.ajax({
                      type:'post',
@@ -605,7 +596,7 @@ const mapDispatchToProps = (dispatch) => {
                      dataType:'json',
                      timeout:'3000',
                      success:function(data){
-                      
+                      console.log(data);
                    
                          let dataA=data.data;
                          for (let i in dataA)
@@ -616,8 +607,7 @@ const mapDispatchToProps = (dispatch) => {
                              areaWindEarnings.push(areaWindEarning);
                              let areaWindRate=dataA[i].rate;
                              areaWindRates.push(areaWindRate);
-                             let areaWindid=dataA[i].wfid;
-                             areaWindids.push(areaWindid);
+                            
                              let areaWindName =dataA[i].wtname;
                              areaWindNames.push(areaWindName) 
 
@@ -643,11 +633,17 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('areaWindCostMore',areaWindCosts));
              dispatch(actions.setVars('areaWindEarningMore',areaWindEarnings));
              dispatch(actions.setVars('areaWindRateMore',areaWindRates));
+              dispatch(actions.setVars('btnn',2));
             
             
               },
-               back:(areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)=>{
-         
+               back:(btn,areaWindidssT,index2,actbt,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,daycount)=>{
+               
+            areaWindCosts=[];
+            areaWindEarnings=[];
+            areaWindRates=[];
+            areaWindNames=[];
+
           $.ajax({
                      type:'post',
                      url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
@@ -661,9 +657,6 @@ const mapDispatchToProps = (dispatch) => {
                      dataType:'json',
                      timeout:'3000',
                      success:function(data){
-                      
-                        
-                    
                          let dataA=data.data;
                          for (let i in dataA)
                          {
@@ -673,8 +666,7 @@ const mapDispatchToProps = (dispatch) => {
                              areaWindEarnings.push(areaWindEarning);
                              let areaWindRate=dataA[i].rate;
                              areaWindRates.push(areaWindRate);
-                             let areaWindid=dataA[i].wfid;
-                             areaWindids.push(areaWindid);
+                             
                              let areaWindName =dataA[i].wtname;
                              areaWindNames.push(areaWindName) 
 
@@ -702,6 +694,8 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('areaWindCostsss',areaWindCosts));
              dispatch(actions.setVars('areaWindEarningsss',areaWindEarnings));
              dispatch(actions.setVars('areaWindRatesss',areaWindRates));
+             dispatch(actions.setVars('btnn',1));
+
          
             
               },

@@ -10,17 +10,17 @@ let Component = React.createClass({
     },
     render() {
 
-      let {PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
-    
+      let {PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA}=this.props;
+     
         let configPie = {
             chart: {
-                height:height,
-                width:width,
+                height:370,
+                width:1750,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                paddingLeft:0,
+                paddingLeft:100,
                
             },
             title: {
@@ -39,7 +39,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
-                 x:-75,
+                x:-75,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -53,10 +53,11 @@ let Component = React.createClass({
 
                 }
             },
-             tooltip: {
-               valueSuffix:'kWh'
+            tooltip: {
+              
+                 valueSuffix:'kWh'
+               
             },
-            
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -74,10 +75,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                           wq=e.point.category;
-                        let  a=wq.toString().split("");
-                        let b=a[0];
-                        changedata10(wq,b);
+                           
                         }
                     }
                 }
@@ -95,8 +93,9 @@ let Component = React.createClass({
                 },
                 categories:machine,
             },
-             yAxis:
-                [{labels: {
+            yAxis:
+                [{
+                    labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -106,16 +105,17 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                     title:{
-                        text:'kWh',
+                        text:'(kWh)',
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 45,
+                        x: 50,
                         style:{
-                            color:'#fff',
+                            color:'red',
                             fontSize:'14px'
                         }
-                    }
+                    },
+                    
                 }, {
                     labels: {
                 format: '',
@@ -127,24 +127,26 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text: '100%',
+                
+                text: 'PBA%',
                 align:'high',
                 rotation:'0',
                  y: -17,
                 x: -40,
                 style:{
-                    color:'#fff',
-                    fontSize:'14px'
+                    fontSize:'14px',
+                    color:'#fff'
                 }
             },
-            opposite: true
+            opposite: true,
+
         }],
             //几条数据
             series: [{
                 name: '实际发电量',
                 type: 'column',
                 data: fanProfit,
-                borderRadius: 4,
+                borderRadius: 3,
                 color:'#33BAC0',
             },
             {
@@ -152,7 +154,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: fanCost,
                 stack:'waste',
-                borderRadius: 2,
+                borderRadius: 3,
                 color:'#5298d3',
             },
                 {
@@ -167,7 +169,7 @@ let Component = React.createClass({
                     type: 'column',
                     data: fanCost2,
                     stack:'waste',
-                     color:'#e9c75c',
+                    color:'#e9c75c',
                 },
                 {
                     name: '非设备原因损失',
@@ -181,9 +183,9 @@ let Component = React.createClass({
                     type: 'line',
                     data: PBAGroupFirstPba,
                     color:'blue',
-                    yAxis:1,
-                     tooltip: {
-               valueSuffix:''
+                     yAxis:1,
+                      tooltip: {
+               valueSuffix:'kWh'
             },
 
                 },]
@@ -196,19 +198,12 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {
-          wq : state.vars.wr,
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-        },
-        changedata10 :(wq,b)=>{
-            dispatch(actions.setVars('wr',wq)); 
-            
-           
         },
     };
 };

@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
     render() {
        
-     let{areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement,width}=this.props
+     let{ly,text,areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement,width}=this.props
         let configPie = {
             chart: {
                 height:height,
@@ -20,14 +20,14 @@ let Component = React.createClass({
                 paddingLeft:100,
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
                 x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                     fontWeight:700,
                 }
@@ -36,6 +36,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 x:-75,
+                y:ly,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -60,9 +61,9 @@ let Component = React.createClass({
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 0.1,
+                    // pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 15,
+                   maxPointWidth: 20,
                     borderRadius: 4,
                 },
                 series: {
@@ -100,7 +101,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'元',
+                text:'（元）',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -140,7 +141,7 @@ let Component = React.createClass({
                 name: '收益',
                 type: 'column',
                 data: areaRecordProfitR,
-                pointWidth:15,
+                
                 borderRadius: 4,
                 pointPlacement:0,
 
@@ -149,7 +150,7 @@ let Component = React.createClass({
                 name: '成本',
                 type: 'column',
                 data: areaRecordCostR,
-                pointWidth:15,
+             
                 borderRadius: 4,
                 pointPlacement:pointPlacement,
             },

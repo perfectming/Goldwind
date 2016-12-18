@@ -10,12 +10,13 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height}=this.props;
+        let {width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height}=this.props;
        
         
         let configPie = {
             chart: {
                 height:height,
+                width:width,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -66,7 +67,7 @@ let Component = React.createClass({
             
             plotOptions: {
                 column: {
-                    pointWidth: 30
+                    maxPointWidth: 40,
                 },
                 series: {
                     cursor: 'pointer',
@@ -116,7 +117,7 @@ let Component = React.createClass({
                              areaWindCosts.push(areaWindCost);
                              var areaWindEarning=dataA[i].earning;
                              areaWindEarnings.push(areaWindEarning);
-                             var areaWindRate=Number(dataA[i].rate.toFixed(2));
+                             var areaWindRate=Number(dataA[i].rate.toFixed(1));
                              areaWindRates.push(areaWindRate);
                              var areaWindid=dataA[i].wfid;
                              areaWindids.push(areaWindid);
@@ -165,7 +166,7 @@ let Component = React.createClass({
                               areaWindCosts1.push(areaWindCost);
                               var areaWindEarning=dataA[i].earning;
                               areaWindEarnings1.push(areaWindEarning);
-                              var areaWindRate=dataA[i].rate;
+                              var areaWindRate=Number(dataA[i].rate.toFixed(1));
                               areaWindRates1.push(areaWindRate);
                               var areaWindid=dataA[i].wtid;
                               areaWindids1.push(areaWindid);
@@ -219,8 +220,9 @@ let Component = React.createClass({
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
+
             title: {
-                text:'元',
+                text:'（元）',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -237,14 +239,14 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            }, gridLineDashStyle: 'Solid',
-                gridLineColor: '#6d6a6c',
+            },
+             gridLineDashStyle: 'Solid',
+            gridLineColor: '#6d6a6c',
+            tickInterval: 20,
                 
-               
-
             title: {
                 text: '100%',
-                 align:'high',
+                align:'high',
                 rotation:'0',
                 y: -15,
                 x: -40,
@@ -254,6 +256,7 @@ let Component = React.createClass({
                 }
 
             },
+            
             opposite: true
         }],
 
@@ -263,8 +266,8 @@ let Component = React.createClass({
                 data: areaRecordProfit,
                 borderRadius: 7,
                 color:'#33BAC0',
-                
                 borderWidth:0,
+                maxPointWidth: 40,
             },
             {
             	name: '成本',
@@ -280,6 +283,7 @@ let Component = React.createClass({
                     color:'blue',
                     data:TBA,
                     yAxis:1,
+                    tickInterval: 1,
                      tooltip: {
                valueSuffix:''
             },
