@@ -52,6 +52,7 @@ let Component = React.createClass({
             let kbnsjfdl=mobd[8888800].Last12MonthsEgyAtStat.Value;
             let kbnjhfdl1=[];
             let kbnsjfdl1=[];
+            let kbnfdwcl=[];
             let czjhfdl=[];
             let czsjfdl=[];
             let czwcl1=[];
@@ -68,6 +69,9 @@ let Component = React.createClass({
                 }
                 for(let i in kbnsjfdl){
                     kbnsjfdl1.push(Number((kbnsjfdl[i]*mod.Last12MonthsEgyAtStat.coeff).toFixed(mod.Last12MonthsEgyAtStat.place)));
+                }
+                for(let i=0;i<kbnjhfdl1.length;i++){
+                    kbnfdwcl.push(Number((kbnsjfdl1[i]/kbnjhfdl1[i]*100).toFixed(2)))
                 }
             }());
             (function(){
@@ -154,7 +158,7 @@ let Component = React.createClass({
                     <div className={`${styles.nfdlwcqk} ${styles.box_shadow}`}>
                         <Title title={['年发电量完成情况']}></Title>
                         <div className={styles.nfdlwcqkmain}>
-                            <Column njhfdl={kbnjhfdl1} nsjfdl={kbnsjfdl1} unit={mod.Last12MonthsPlanEgyAtStat.unit}></Column>
+                            <Column njhfdl={kbnjhfdl1} nsjfdl={kbnsjfdl1} nfdlwcl={kbnfdwcl} unit={mod.Last12MonthsPlanEgyAtStat.unit}></Column>
                         </div>
                     </div>
                     <div className={`${styles.czydfdqk} ${styles.box_shadow}`}>
@@ -178,10 +182,10 @@ let Component = React.createClass({
                             <span className={styles.tsstyle3}>--<span className={styles.tsstyled3}>台</span></span>
                             <span className={styles.tsstyle4}>--<span className={styles.tsstyled4}>台</span></span>
                             <span className={styles.timestyle}>
-                                <span className={styles.timestylee}>--<span className={styles.danweicc}>h</span></span>
-                                <span className={styles.timestylee}>--<span className={styles.danweicc}>h</span></span>
-                                <span className={styles.timestylee}>--<span className={styles.danweicc}>h</span></span>
-                                <span className={styles.timestylee}>--<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>2<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>12<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>24<span className={styles.danweicc}>h</span></span>
+                                <span className={styles.timestylee}>72<span className={styles.danweicc}>h</span></span>
                             </span>
                         </div>
                     </div>

@@ -26,19 +26,20 @@
 			<div class="right_btn">
 				<button type="button">查询</button>
 				<button class="export" type="button">数据导出</button>
+                <a><span></span></a>
 			</div>
 			<div class="box">
 				<div class="wrap">
-					<label>工作编号</label>
+					<label>工单编号</label>
 					<input type="text" name="workcode" class="txt" id="workcode" />
 					<label class="ml15">执行单编号</label>
 					<input type="text" name="zxdcode" class="txt" id="zxdcode" />
 					<label class="ml15">处理状态</label>
 					<span class="tab" id="cl_status">
 						<input type="button" class="active" value="全部" />
-						<input type="button" value="未处理" />
-						<input type="button" value="处理中" />
-						<input type="button" value="处理完成" />
+						<input type="button" key="0" value="未处理" />
+						<input type="button" key="2,3" value="处理中" />
+						<input type="button" key="4,1" value="处理完成" />
 					</span>
 					<label class="ml15">审核状态</label>
 					<span class="tab" id="sh_status">
@@ -311,13 +312,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="d_zql clearfix">
-                    <label>预警准确率</label>
-                    <p><span></span></p>
+                <div class="hide">
+                    <div class="d_zql clearfix">
+                        <label>预警准确率</label>
+                        <p><span></span></p>
+                    </div>
+                    <h1 style="text-align:center;margin:15px 20px 0;">结项备注</h1>
+                    <div style="margin:0px 20px;"><textarea class="remark" readonly="readonly"></textarea></div>
                 </div>
-                <h1 style="text-align:center;margin:15px 20px 0;">结项备注</h1>
-                <div style="margin:0px 20px;"><textarea class="remark" readonly="readonly"></textarea></div>
-
                 <div class="btn">
                     <button type="button" class="cancle" for="jx_detail">关闭</button>
                     <button type="button" class="ml15 submitBtn">结项</button>
@@ -404,7 +406,7 @@
 	                break;
 	        }
 	    }
-
+        
 	    LoginJFPage(function () {
 	        initYhd();
 	        bindWF();
@@ -438,7 +440,76 @@
 	    })
 
 	    $(".search .right_btn button:eq(1)").click(function () {
-	       //导出
+	        //导出
+	        var filter = '';
+	        //工作编号
+	        if ($.trim($('#workcode').val()) != '')
+	            filter += '&alarmID=' + $.trim($('#workcode').val());
+	        if ($.trim($('#zxdcode').val()) != '')
+	            filter += '&customAlarmID=' + $.trim($('#zxdcode').val());
+	        //审核状态
+	        if ($("#sh_status .active").attr('key') != undefined) {
+	            filter += '&wfState=' + $("#sh_status .active").attr('key');
+	        }else if ($("#cl_status .active").attr('key') != undefined){
+				filter += '&wfState=' + $("#cl_status .active").attr('key');
+			}
+
+	        //预警时间
+	        if ($('#begindate').val() != '') {
+	            filter += '&beginTime=' + $('#begindate').val();
+	        }
+	        if ($('#enddate').val() != '') {
+	            filter += '&endTime=' + $('#enddate').val();
+	        }
+	        if ($('#begindate').val() == '' && $('#enddate').val() == '') {
+	            var begindate = '', enddate = '';
+	            switch ($("#yj_time .active").val()) {
+	                case '今天':
+	                    begindate = enddate = getDay();
+	                    break;
+	                case '昨天':
+	                    begindate = enddate = GetDateStr(-1);
+	                    break;
+	                case '近一周':
+	                    begindate = GetDateStr(-6);
+	                    enddate = getDay();
+	                    break;
+	                case '本月':
+	                    begindate = GetYear() + "-" + GetMonth() + "-01";
+	                    enddate = GetYear() + "-" + GetMonth() + "-" + getLastDay(GetYear(), GetMonth());
+	                    break;
+	                case '本年':
+	                    begindate = GetYear() + "-01-01";
+	                    enddate = GetYear() + "-12-" + getLastDay(GetYear(), 12);
+	                    break;
+	            }
+	            if (begindate != '' && enddate != '')
+	                filter += '&beginTime=' + begindate + ' 00:00:00&endTime=' + enddate + ' 23:59:59';
+	        }
+	        if ($("#level .active").attr('key') != undefined) {
+	            filter += '&alarmGrade_CN=' + $("#level .active").val();
+	        }
+	        //预警来源
+	        if ($("#yj_source").val() != '') {
+	            filter += '&dataType=' + $("#yj_source").val();
+	        }
+	        //隐患点
+	        if ($("#yhd").val() != '') {
+	            filter += '&ruleID=' + $("#yhd").val();
+	        }
+	        //风场
+	        if ($("#wfName").val() != '') {
+	            filter += '&wfID=' + $("#wfName").val();
+	        }
+	        if ($("#wtName").val() != '') {
+	            filter += '&wtID=' + $("#wtName").val();
+	        }
+	        //准确度
+	        if ($("#zqd .active").attr('key') != undefined) {
+	            filter += '&isRight=' + $("#zqd .active").attr('key');
+	        }
+	        $(".right_btn a").attr("href", window.JFApiDomian + '/alarmInfo_exportAlarmData.do?1=1' + filter);
+	        $(".right_btn a > span").trigger("click");
 	    })
 
 	    $("#jx_detail_form .d_zql a").click(function () {
@@ -489,8 +560,6 @@
 	var currRow;
 	function bindRowClick() {
 	    $(".grid tr").on("dblclick", function (event) {
-	        var _id = $(this).find("input[type='checkbox']").val();
-	        $(this).find("input[type='checkbox']").get(0).checked = true;
 	        currRow = $(this);
 	        var Index = $(this).index();
 
@@ -913,7 +982,7 @@
 	                for (var o in jsonList) {
 	                    messageType = jsonList[o].messageType;
 
-	                    html = '<tr><td><input type="checkbox" value="' + jsonList[o].customAlarmID + '" class="chk" name="chk" /></td>'
+	                    html = '<tr>'
 	                    html += '<td>' + getjfLocalTime(jsonList[o].beginTime.time) + '</td><td>' + jsonList[o].proName + '</td><td>' + jsonList[o].wfName + '</td><td>' + jsonList[o].wtName + '</td>'
 	                    html += '<td>' + jsonList[o].alarmName_CN + '</td><td>' + jsonList[o].alarmGrade_CN + '</td><td title="' + (messageType == 1 ? jsonList[o].plan_CN : "") + '">' + (messageType == 1 ? sb_substr(jsonList[o].plan_CN, 0, 30) : "") + '</td>'
 	                    html += '<td>';
@@ -975,7 +1044,6 @@
 	                        liNums: 7,
 	                        activeClass: 'activP',
 	                        callBack: function (page) {
-	                            pageLayer = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
 	                            loadPage(page)
 	                        }
 	                    });
@@ -999,7 +1067,9 @@
         //审核状态
         if ($("#sh_status .active").attr('key') != undefined) {
             filter += '&wfState=' + $("#sh_status .active").attr('key');
-        } 
+        }else if ($("#cl_status .active").attr('key') != undefined){
+			filter += '&wfState=' + $("#cl_status .active").attr('key');
+		}
         
         //预警时间
         if ($('#begindate').val() != '') {
@@ -1250,6 +1320,10 @@
 	                $("#jx_detail .d_zql span").append("<a class='active'></a>");
 	        }
 	        $("#jx_detail textarea").val(currPageJson.pagination.list[index].remark);
+	        $("#jx_detail .hide").show();
+	    }
+	    else {
+	        $("#jx_detail .hide").hide();
 	    }
 
 

@@ -1,10 +1,9 @@
 var _fontSize = 14;
-var barGapJson = [{ gap: '-82%', cate: '90%' }, { gap: '-80%', cate: '79%' }];
+var barGapJson = [{ gap: '-82%', cate: '90%' }, { gap: '-80%', cate: '79%' }, { gap: '-80%', cate: '79%' }, { gap: '-82%', cate: '60%' }, { gap: '-100%', cate: '40%' }];
 function BarOption(title, xAxisData, seriesTitle, seriesData, triggerOn) {
     if (triggerOn == "click") {
         var yMax = 100;
         var dataShadow = [];
-        
         for (var i = 0; i < seriesData.length; i++) {
             dataShadow.push(yMax);
         }
@@ -82,8 +81,8 @@ function BarOption(title, xAxisData, seriesTitle, seriesData, triggerOn) {
                 itemStyle: {
                     normal: { color: 'rgba(0,0,0,0.1)' }
                 },
-                barGap: (seriesData.length == 1 ? barGapJson[0].gap : barGapJson[1].gap),
-                barCategoryGap: (seriesData.length == 1 ? barGapJson[0].cate : barGapJson[1].cate),
+                barGap: (seriesData.length <= barGapJson.length ? barGapJson[seriesData.length-1].gap : barGapJson[4].gap),
+                barCategoryGap: (seriesData.length <= barGapJson.length ? barGapJson[seriesData.length-1].cate : barGapJson[4].cate),
                 data: dataShadow,
                 animation: false
             },
@@ -1036,8 +1035,8 @@ function fc_wjl() {
                 itemStyle: {
                     normal: { color: 'rgba(0,0,0,0.1)' }
                 },
-                barGap: (seriesData.length == 1 ? barGapJson[0].gap : barGapJson[1].gap),
-                barCategoryGap: (seriesData.length == 1 ? barGapJson[0].cate : barGapJson[1].cate),
+                barGap: (seriesData.length <= barGapJson.length ? barGapJson[seriesData.length-1].gap : barGapJson[4].gap),
+                barCategoryGap: (seriesData.length <= barGapJson.length ? barGapJson[seriesData.length-1].cate : barGapJson[4].cate),
                 data: dataShadow,
                 animation: false
             },
@@ -1468,8 +1467,8 @@ function fc_zql() {
                 itemStyle: {
                     normal: { color: 'rgba(0,0,0,0.1)' }
                 },
-                barGap: (seriesData.length == 1 ? barGapJson[0].gap : barGapJson[1].gap),
-                barCategoryGap: (seriesData.length == 1 ? barGapJson[0].cate : barGapJson[1].cate),
+                barGap: (seriesData.length <= barGapJson.length ? barGapJson[seriesData.length-1].gap : barGapJson[4].gap),
+                barCategoryGap: (seriesData.length <= barGapJson.length ? barGapJson[seriesData.length-1].cate : barGapJson[4].cate),
                 data: dataShadow,
                 animation: false
             },

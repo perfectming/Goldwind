@@ -1,6 +1,6 @@
 window.ApiDomian = 'http://211.90.87.226:8080/sphm';
 window.JFApiDomian = 'http://211.90.87.226:8180/alarmClientInterface';
-var userId = '1';
+var userId = '10';
 function getLastDay(year, month) {
     var new_year = year;    //取当前的年份  
     var new_month = month++;//取下一个月的第一天，方便计算（最后一天不固定）  
