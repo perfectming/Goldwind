@@ -4,11 +4,11 @@ import styles from './Power.scss';
 import Bar_l from './Bar_l.jsx';
 import Bar_r from './Bar_r.jsx';
 import Line_l from './Line_l.jsx';
-import Line_r from './Line_r.jsx';
+import Line_r from './line_r.jsx';
 import Title from './PowerTitle.jsx';
 
 var actions = require('redux/actions');
-let comps = require('../../../../../../config/comp');
+let comps = require('../../../../../../../config/comp');
 
 let Component = React.createClass({
     componentDidMount() {

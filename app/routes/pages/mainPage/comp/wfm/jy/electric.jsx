@@ -4,10 +4,10 @@ var actions = require('redux/actions');
 
 import styles from './electric.scss';
 var {getState} = require('../../../../../redux/store');
-import del from '../../img/icon/tabDel.png';
-import save from '../../img/comp/save.png';
-import refresh from '../../img/comp/refresh.png';
-import tabAdd from '../../img/icon/tabAdd.png';
+import del from '../../../img/icon/tabDel.png';
+import save from '../../../img/comp/save.png';
+import refresh from '../../../img/comp/refresh.png';
+import tabAdd from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 
 let tabaleData = require('./data');

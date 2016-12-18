@@ -3,10 +3,9 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 
 import styles from './table.scss';
-var {getState} = require('../../../../../redux/store');
 
-import save from '../../img/comp/save.png';
-import refresh from '../../img/comp/refresh.png';
+import save from '../../../img/comp/save.png';
+import refresh from '../../../img/comp/refresh.png';
 
 let nam=['Capacity','AGCState','zd','AGCActPower','TActPower','AVCState','zd','AVCGoalValue','Transformer_Q'];
 let header=['场站名称','装机容量MW','AGC系统','AVC系统'];
