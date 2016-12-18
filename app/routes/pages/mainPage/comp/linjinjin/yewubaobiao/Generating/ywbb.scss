@@ -3,16 +3,30 @@
    overflow:hidden;
    .search_tit{
     width:100%;
-    hieght:46px;
+    height:46px;
     line-height:46px;
     background: #464c58;
     margin-bottom:20px;
-    overflow:hidden;
     .seleBox{
+            hieght:46px;
             float:left;
-            color:#fff;
             span{margin:0 10px 0 15px; color:#fff;}
-            select{width:150px;color:#333;}
+            .select{
+                width:200px;height:28px; background:#fff; border:1px solid #ccc; display:inline-block; margin-top:10px;  line-height:25px; padding-left:10px; position:relative;
+                span{ color:#333; margin:0 0 0 8px;}
+                .topimg{float:right; width:21px; cursor:pointer;}
+                    .selectye{ 
+                        display:none;
+                        width:200px;border:1px solid #ccc;padding-bottom:20px; position:absolute;top:25px;left:0px;background:#fff;margin-left:-1px;
+                        .item{ 
+                            width:100%;height:30px;line-height:30px;padding-left:10px;font-size:16px;cursor:pointer;
+                            span{
+                                &:hover{color:#00f;font-weight:bold;}
+                                }
+                            img{float:left;margin: 5px 5px 0 0;}
+                        }
+                    }
+                }
         }
         .inputBox{
             float:left;
