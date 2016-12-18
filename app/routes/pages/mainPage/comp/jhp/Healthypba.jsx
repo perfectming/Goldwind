@@ -11,6 +11,12 @@ import Hly_d from './Hly_d.jsx';
 var actions = require('redux/actions');
 var $ = require('jquery');
 let ip = "10.68.100.32";
+var date=new Date
+var year=date.getFullYear();
+var month11=date.getMonth();
+var day = new Date(year,11,0);
+//获取天数：
+var daycount = day.getDate();
 
 
 let Component = React.createClass({
@@ -23,7 +29,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata3, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon = "十一月份", win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
+        let {hhdata3, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
 
 
         let data = require('./Healthy-data');
@@ -237,6 +243,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('w1', w0));
                     dispatch(actions.setVars('w11', w10));
                     dispatch(actions.setVars('hhdata', data));
+                    dispatch(actions.setVars('mon', '11月'));
                     let barLotime1 = [];    //各区域   一区域二区域
                     let power1 = [];       //实际发电量
                     let wrong10 = [];       //故障损失

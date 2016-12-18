@@ -76,9 +76,7 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 series: {
                     cursor: 'pointer',
                     events: {
@@ -98,6 +96,7 @@ let Component = React.createClass({
                     borderRadius: 5,
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
                 //lineColor: "red",
@@ -186,7 +185,7 @@ const mapDispatchToProps = (dispatch) => {
 
             let grid;
 
-                 grid=hhdata.data[2][wc1].groupid;
+           // grid=hhdata.data[2][wc1].groupid;
 
 
 
@@ -198,7 +197,7 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     "months":actbt+1,
-                    "groupid":grid,
+                    "groupid": '201612121721151',
                     "wfid":'',
                 },
                 dataType:'json',
@@ -229,6 +228,10 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('barlotimes3', barlotimes3));
                     dispatch(actions.setVars('barlopowers3', barlopowers3));
                     dispatch(actions.setVars('barlopowerp3', barlopowerp3));
+
+
+                    dispatch(actions.setVars('hhdata', data));
+
 
 
 

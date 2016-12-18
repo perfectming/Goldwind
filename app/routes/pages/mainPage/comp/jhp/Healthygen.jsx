@@ -7,11 +7,12 @@ import Hly_genp from './Hly_genp.jsx';
 
 var actions = require('redux/actions');
 var $ = require('jquery');
-let ip="10.68.100.32";
+
 
 let Component = React.createClass({
-    componentWillMount(ip) {
-        this.props.ajax(ip);
+    componentWillMount() {
+        let {ipUrl}=this.props
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -19,37 +20,14 @@ let Component = React.createClass({
 
 
     render() {
-        let {ip="10.68.100.32",barlotimes1,bt0=0,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,barlotimes3,barlopowers3,barlopowerp3,hhdata,hhdata1, w0 = "", w10 = "风场1", mon = "十一月份", befor_pages = 'group', returnit, hideit, arr, arr2,arr3, gogogo, back, more, actbt = 10, changecolor,wc1,wc2} = this.props;
+        let {wfid,ipUrl,barlotimes1,bt0=0,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,barlotimes3,barlopowers3,barlopowerp3,hhdata,hhdata1, w0 , w10 , mon , befor_pages = 'group', returnit, hideit, arr, arr2,arr3, gogogo, back, more, actbt = 10, changecolor,wc1,wc2} = this.props;
 
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button = data.data.button;
 
-
-
-        // let sort0 = hhdata.data[0];
-        // let x4 = [];
-        // let x5 = [];
-        // let x45=[];
-        // let x6 = [];
-        // let x7 = [];
-        // let x67 = [];
-        //
-        //
-        // (function () {
-        //     // console.log(sort0)
-        //     for (var i = 0; i < 12; i++) {
-        //         x4[i] = sort0[i].wtname;
-        //         x5[i] = sort0[i].poweract;
-        //         x45[i] = sort0[i].powerplan;
-        //     }
-        //     for (var i = 0; i < sort0.length; i++) {
-        //         x6[i] = sort0[i].wtname;
-        //         x7[i] = sort0[i].poweract;
-        //         x67[i] =sort0[i].powerplan;
-        //     }
-        //
-        // })();
+        // console.log(year)
+        // console.log(month2)
 
 
         return (
@@ -66,7 +44,7 @@ let Component = React.createClass({
                         <div className={styles.logo30}>
                             {mon + w0 + w10 + "各风机发电量"}
                         </div>
-                        <span onClick={() => hideit(hhdata)}>×</span>
+                        <span onClick={() => hideit(hhdata,bt0)}>×</span>
                     </div>
                     <div className={styles.hidden_bottom}>
                     <Hly_genp height={450}  widths={4500}
@@ -84,7 +62,7 @@ let Component = React.createClass({
                         data.data.yearelectric[0].wind.map((value, key) => {
                             return (
                                 <div className={actbt === key ? styles.inmonth : styles.inmonth2} key={key}
-                                     onClick={() => changecolor(value, key)}>
+                                     onClick={() => changecolor(value, key,ipUrl)}>
                                     {value.name}
                                 </div>
                             )
@@ -127,9 +105,9 @@ let Component = React.createClass({
 
                         </div>
                         <div className={styles.rbox3}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(hhdata)}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(hhdata,wfid)}>更多</button>
                         </div>
 
 
@@ -177,22 +155,32 @@ const mapStateToProps = (state) => {
         barlopowers3: state.vars.barlopowers3,
         barlopowerp3: state.vars.barlopowerp3,
         bt0: state.vars.bt0,
+        ipUrl:state.vars.ipUrl,
+        wfid:state.vars.wfid,
 
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: () => {
+        ajax: (ipUrl) => {
+            let date=new Date();
+            let year=date.getFullYear()
+            let month2=date.getMonth();
+            console.log(month2)
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/ELEC/getSpaceElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getSpaceElec',
                 async:false,
-                data:'month=11',
+                data:{
+                    "month":month2,
+                },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
                     dispatch(actions.setVars('hhdata',  data));
+                    dispatch(actions.setVars('actbt',  10));
+                    dispatch(actions.setVars('mon',  month2+"月"));
 
                     let barlotimes1 = [];
                     let barlopowers1 = [];
@@ -220,7 +208,7 @@ const mapDispatchToProps = (dispatch) => {
                         barlopowers3.push(data.data[0][i].powerplan);   //计划发电量
                         barlopowerp3.push(data.data[0][i].poweract);   //实际发电量
                     }
-
+                    console.log(data)
                     dispatch(actions.setVars('barlotimes1', barlotimes1));
                     dispatch(actions.setVars('barlopowers1', barlopowers1));
                     dispatch(actions.setVars('barlopowerp1', barlopowerp1));
@@ -249,12 +237,12 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         init: () => {
-            dispatch(actions.setVars('ip', ip));
+            // dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
         },
-        changecolor: (value, key) => {
+        changecolor: (value, key,ipUrl) => {
             dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind', value.plan));
@@ -262,7 +250,7 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/ELEC/getSpaceElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getSpaceElec',
                 async:false,
                 data:{"month":key+1},
                 dataType:'json',
@@ -315,16 +303,16 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0,w0,  wc1,wc2, actbt, hhdata) => {
+        gogogo: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ip + ':8080/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": '150828',
+                    "wfid": wfid==undefined? '150828':wfid,
                     "type":"0",
                     "year":"2016"
                 },
@@ -377,16 +365,16 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0,w0,  wc1,wc2, actbt, hhdata) => {
+        back: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ip + ':8080/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": '150828',
+                    "wfid": wfid==undefined? '150828':wfid,
                     "type":"1",
                     "year":"2016"
                 },
@@ -440,7 +428,8 @@ const mapDispatchToProps = (dispatch) => {
             $("#boxhidden").show();
             $("#light").show();
         },
-        hideit: (hhdata) => {
+        hideit: (hhdata,bt0) => {
+            dispatch(actions.setVars('bt0', 0));
             let barLotime3c = [];    //各区域   一区域二区域
             let power3c=[];       //计划发电量
             let wrong30c=[];       //实际发电量
@@ -457,6 +446,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('barlotimes3', barLotime3c))
             dispatch(actions.setVars('barlopowers3', power3c))
             dispatch(actions.setVars('barlopowerp3', wrong30c))
+            dispatch(actions.setVars('bt0', 0))
 
 
 

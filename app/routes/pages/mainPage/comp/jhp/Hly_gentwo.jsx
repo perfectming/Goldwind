@@ -73,9 +73,7 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,

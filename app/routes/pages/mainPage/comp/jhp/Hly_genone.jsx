@@ -73,9 +73,7 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 series: {
                     cursor: 'pointer',
                     events: {

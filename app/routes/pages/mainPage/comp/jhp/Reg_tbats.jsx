@@ -11,7 +11,7 @@ let Component = React.createClass({
 
     render() {
 
-        let {height,barLdpowerValue,barLpdpowerValue,barlinepdats,barlinepdat,text} = this.props;
+        let {height,name2,runtime2,downtime2,tba2,text} = this.props;
 
 
 
@@ -39,7 +39,8 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
-                y:20,
+                y:40,
+                x:-75,
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -51,8 +52,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
+
 
             },
             credits: {
@@ -73,9 +73,7 @@ let Component = React.createClass({
                 },
                 bar:{
                     animation: true
-                }
-            },
-            plotOptions: {
+                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
@@ -85,6 +83,7 @@ let Component = React.createClass({
                     },
                 }
             },
+
             xAxis: {
                 lineWidth: 1,
                 //lineColor: "red",
@@ -96,44 +95,63 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barLdpowerValue,
+                categories:name2,
             },
-            yAxis: {
-                // lineWidth: 1,
-                // lineColor: "red",
-                //tickWidth: 4,
-                gridLineDashStyle: 'Solid',
-                gridLineColor: '#6d6a6c',
-                title: {
-                    text:'(h)',
-                    align:'high',
-                    rotation:'0',
-                    y: -10,
-                    x: 40,
-                    style:{
-                        color:'#fff',
-                        fontSize:'14px'
-                    },
-                },
-                max:100,
+            yAxis: [{
                 labels: {
-                    y: 10, //x轴刻度往下移动20px
+                    format: '',
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        color: '#fff',
+                        fontSize: '14px'
                     }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+                title: {
+                    text: 'h',
+                    align: 'high',
+                    rotation: '0',
+                    y: -20,
+                    x: 45,
+                    style: {
+                        fontSize: '14px',
+                        color: '#fff'
+                    }
+                }
+            }, {
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+
+                title: {
+                    text: '100%',
+                    align: 'high',
+                    rotation: '0',
+                    y: -15,
+                    x: -40,
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+
                 },
-            },
+                opposite: true
+            }],
             series: [{
                 name: '实际运行时间',
                 type: 'column',
-                data: barLpdpowerValue,
+                data: runtime2,
                 borderRadius: 2,
             },{
                 name: '停机时间',
                 type: 'column',
                 color:'#cccccc',
-                data: barlinepdat,
+                data: downtime2,
                 borderRadius: 2,
             }
                 ,
@@ -141,7 +159,7 @@ let Component = React.createClass({
                     name: 'TBA',
                     type: 'line',
                     color:'#0000ff',
-                    data: barlinepdats
+                    data: tba2,
                 }
 
             ]
