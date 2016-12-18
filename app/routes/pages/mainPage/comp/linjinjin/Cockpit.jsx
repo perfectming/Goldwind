@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Cockpit.scss';
 import Title from '../super/Title.jsx';
-import Polar from '../mxx/Polar1';
+import Polar from '../wfm/mxx/Polar1';
 import Pie2 from './Pie2.jsx';
 import Tuchart from './Tuchart.jsx';
 import Tuchart1 from './tuchar1.jsx';

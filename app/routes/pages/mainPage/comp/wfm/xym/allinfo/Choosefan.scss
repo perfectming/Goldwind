@@ -1,0 +1,94 @@
+.listbodyBox{
+  float: left;
+  
+    .listBox{
+      font-size: 20px;
+      color:#fff;
+      float: left;
+      margin-left: 12px;
+      margin-bottom: 10px;
+      width: 255px;
+      height: 112px;
+      background: #292F34;
+      background-image:url(../../../../img/comp/fmatrix.png);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      
+      // border-left: 2px solid #00E438;
+      .listitemL{
+        float: left;
+        
+      }
+      .listitemR{
+        float: left;
+        margin-left: 90px;
+        .listitemT{
+          display: block;
+          margin: 12px 0;
+          .listitemTT{
+            font-size: 18px;
+            line-height: 16px;
+          }
+          .listitemTB{
+            font-size: 14px;
+            line-height: 14px;
+          }
+        }
+        .listitemB{
+          padding-top: 10px;
+          font-size: 14px;
+           p{
+              margin:0;
+            }
+          .listitemBLL{
+              color:#00F7FE;
+              line-height: 25px;
+          }
+          .listitemBLR{
+              line-height: 20px;
+              font-size: 12px;
+              padding:2px 0 0 2px;
+          }
+          span{
+            float: left;
+          }
+          .listitemBL{
+            width: 70px;
+            p{
+              margin:0;
+            }
+          }
+        }
+      }
+      div{
+        float: left;
+      }
+    } 
+    .fault{
+      background-image: url(../../../../img/comp/faultbg.png),url(../../../../img/comp/fmatrix.png);
+      background-size: 100% 100%;
+      background-repeat: no-repeat; //故障
+      .listitemT{
+        color: red;
+      }
+    }
+    .online{
+      border-left: 2px solid #1fe005; //运行
+    }
+    .limitPow{
+       border-left: 2px solid rgb(221, 220, 220);
+    }
+    .offline{
+      border: 2px solid rgb(50, 141, 239); // 待机#f1a820
+    }
+    .discomfor{
+      // border: 2px solid #f1a820; //离线
+    }
+    .repair{
+      border: 2px solid rgb(251, 213, 0);
+    }
+    .default{
+      border: 2px solid #c7b88c; //检修
+    } 
+}

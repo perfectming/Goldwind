@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -20,6 +20,7 @@
     <div class="container manaport">
         <div class="pos"><i>|</i><span class="active">预警信息月报</span><i>|</i><span>预警信息年报</span><i>|</i><span>CMS监测报告</span><i>|</i></div>
         <div class="tab_conn m_y_port">
+            <span style="margin-left:35px;">月报年份：<select></select></span>
             <ul class="clearfix"></ul>
         </div>
         <div class="tab_conn m_y_port hide">
@@ -171,28 +172,36 @@
         laydate(d_start);
         laydate(d_end);
 
+        function loadMonthPort(year) {
+            var lay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
+            $(".tab_conn:eq(0) ul").html('');
+            $.ajax({
+                type: "post",
+                url: window.ApiDomian + '/report/list.json?reportType=3&reportBegin=' + year + "-01-01" + "&reportEnd=" + year + "-12-31",
+                cache: false,
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (json) {
+                    for (var o in json.pagination.list) {
+                        $(".tab_conn:eq(0) ul").append('<li><h2>' + json.pagination.list[o].reportTypeDesc + '<span>月</span></h2><div class="btn"><a target="_blank" href="' + window.ApiDomian + '/report/preview.json?fileName=' + json.pagination.list[o].reportPath + '">预览</a><a target="_blank" href="' + window.ApiDomian + '/report/download.json?fileName=' + json.pagination.list[o].reportPath + '" class="ml15">导出</a></div></li>');
+                    }
+                    layer.close(lay);
+                },
+                error: function () {
+                    layer.close(lay);
+                    alert('载入数据失败！');
+                }
+            });
+        }
+
         function init() {
             loadPage(0);
             LoginPage(function () {
-                //读取月报
-                $.ajax({
-                    type: "post",
-                    url: window.ApiDomian + '/report/list.json?reportType=3&reportBegin=' + GetYear() + "-01-01" + "&reportEnd=" + GetYear() + "-" + GetMonth() + "-" + getLastDay(GetYear(), GetMonth()),
-                    cache: false,
-                    dataType: 'json',
-                    xhrFields: {
-                        withCredentials: true
-                    },
-                    crossDomain: true,
-                    success: function (json) {
-                        for (var o in json.pagination.list) {
-                            $(".tab_conn:eq(0) ul").append('<li><h2>' + json.pagination.list[o].reportTypeDesc + '<span>月</span></h2><div class="btn"><a target="_blank" href="' + window.ApiDomian + '/report/preview.json?fileName=' + json.pagination.list[o].reportPath + '">预览</a><a target="_blank" href="' + window.ApiDomian + '/report/download.json?fileName=' + json.pagination.list[o].reportPath + '" class="ml15">导出</a></div></li>');
-                        }
-                    },
-                    error: function () {
-                        alert('载入数据失败！');
-                    }
-                });
+                loadMonthPort(GetYear());
+
                 //读取年报
                 $.ajax({
                     type: "post",
@@ -206,6 +215,7 @@
                     success: function (json) {
                         for (var o in json.pagination.list) {
                             $(".tab_conn:eq(1) ul").append('<li><h2>' + json.pagination.list[o].reportTypeDesc + '<span>年</span></h2><div class="btn"><a target="_blank" href="' + window.ApiDomian + '/report/preview.json?fileName=' + json.pagination.list[o].reportPath + '">预览</a><a target="_blank" href="' + window.ApiDomian + '/report/download.json?fileName=' + json.pagination.list[o].reportPath + '" class="ml15">导出</a></div></li>');
+                            $(".m_y_port select").append('<option value="' + json.pagination.list[o].reportTypeDesc + '">' + json.pagination.list[o].reportTypeDesc + '年</option>');                            
                         }
                     },
                     error: function () {
@@ -349,7 +359,6 @@
         }
 
         $(function () {
-            pageLayer = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
             LoginPage(function () {
                 init();
             })
@@ -358,6 +367,10 @@
                 pageLayer = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
                 $("#page").html('');
                 loadPage(0);
+            })
+
+            $(".m_y_port select").change(function () {
+                loadMonthPort($(this).val());
             })
 
             $(".manaport .pos span").click(function () {
