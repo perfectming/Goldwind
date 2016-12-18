@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 
 import styles from './Amm.scss';
-var {getState} = require('../../../../../redux/store');
 
-import save from '../../img/comp/save.png';
-import refresh from '../../img/comp/refresh.png';
-import del from '../../img/icon/tabDel.png';
-import add from '../../img/icon/tabAdd.png';
+
+import save from '../../../img/comp/save.png';
+import refresh from '../../../img/comp/refresh.png';
+import del from '../../../img/icon/tabDel.png';
+import add from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 import Ambox from '../jy/boxAm.jsx';
 let tabaleData = require('./data');
