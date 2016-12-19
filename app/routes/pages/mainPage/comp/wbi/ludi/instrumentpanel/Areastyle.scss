@@ -3,54 +3,241 @@
     overflow:hidden;
     color: #E6E7E8;
     font-size: 16px;
-    padding:10px 40px 10px 10px;
+    padding: 0 40px 10px 10px;
+    height: 930px;
+    .monthbox{
+        width: 100%;
+        height: 60px;
+        list-style: none;
+        color: #E6E7E8;
+        padding-top: 10px;
+        padding-left: 0;
+        border-bottom: 1px solid #31F3FB;
+        .bg{
+            height: 40px;
+            width: 100px;
+            border: 1px solid #31F3FB;
+            line-height: 38px;
+            float: left;
+            font-family: "微软雅黑";
+            text-align: center;
+            margin-right: 10px;
+            border-radius:5px;
+            cursor: pointer;
+            &:hover{
+                color: #31F3FB;
+                box-shadow:0 0 10px #fff;
+            }
+        }
+        .bg1{
+            height: 40px;
+            width: 100px;
+            border: 1px solid #31F3FB;
+            line-height: 38px;
+            float: left;
+            font-family: "微软雅黑";
+            text-align: center;
+            margin-right: 10px;
+            border-radius:5px;
+            cursor: pointer;
+            color: #31F3FB;
+            box-shadow:0 0 10px #fff;
+        }
+        
+    }
     .left{
-        width: 75%;
+        display: inline-block;
+        width: 72%;
         float: left;
         .firstfloor{
-            background-color: rgba(44, 61, 71, 0.4);
-            height: 250px;
-            width: 99%;
-            border:1px solid #3e4c67;
-            .section{
+            position: relative;
+            height: 200px;
+            width: 100%;
+            .sectionSmall{
                 position: relative;
                 float: left;
-                width: 25%;
+                width: 32%;
                 height: 100%;
-                .alink{
-                    position: absolute;
-                    left: 80%;
-                    top: 45%;
-                    z-index: 9;
+                background-color:rgba(44, 61, 71, 0.4);
+                padding-top: 10px;
+                padding-left: 30px;
+                border:1px solid #3e4c67;
+                .sectionbar{
+                    text-align: center;
+                    width: 30%;
+                    height: 100%;
+                    padding-top: 40px;
+                    float: left;
+                }
+                .sectionfour{
+                    width: 55%;
+                    height: 100%;
+                    float: left;
+                    position: relative;
+                    .pie{
+                        height: 65%;
+                        width: 70%
+                    }
+                    .numBox{
+                        position:absolute;
+                        top:43%;
+                        left:24%;
+                        width:110px;
+                        text-align: center;
+                        height:40px;
+                        line-height:18px;
+                        font-size: 16px;
+                        z-index:11;
+                        margin-left:-30px;
+                        margin-top:-15px;
+                        display:inline-block;
+                        padding:0 5px;
+                        color: #ffffff;
+                        p{
+                            font-size: 26px;
+                        }
+                    }
                     .space{
+                        position: absolute;
+                        left: 85%;
+                        top: 25%;
                         cursor: pointer;
                         display: inline-block;
                         height: 25px;
                         width: 25px;
-                        background: url(../../../img/comp/space.gif); 
+                        background: url(../../../../img/comp/space.gif); 
                         &:hover{
-                            background: url(../../../img/comp/spaceA.gif);
+                            background: url(../../../../img/comp/spaceA.gif);
                         }
                     }
                     .time{
+                        position: absolute;
+                        left: 85%;
+                        top: 50%;
                         cursor: pointer;
                         display: inline-block;
                         height: 25px;
                         width: 25px;
-                        background: url(../../../img/comp/time1.png);
+                        background: url(../../../../img/comp/time1.png);
                         &:hover{
-                            background: url(../../../img/comp/timeA.gif);
+                            background: url(../../../../img/comp/timeA.gif);
                         }
                     }
                 }
-                .sectionBox{
+            }
+            .section{
+                position: relative;
+                float: left;
+                width: 33%;
+                height: 100%;
+                background-color: rgba(44, 61, 71, 0.4);
+                margin-right: 1%;
+                padding-top: 10px;
+                padding-left: 30px;
+                border:1px solid #3e4c67;
+                .sectionbar{
+                    text-align: center;
+                    width: 30%;
+                    height: 100%;
+                    padding-top: 40px;
+                    float: left;
+                }.sectiontwo{
+                    width: 53%;
+                    height: 100%;
+                    float: left;
                     position: relative;
-                    width: 44%;
-                    margin-left: 28%;
+                    .pie{
+                        height: 65%;
+                        width: 70%
+                    }
+                    .space{
+                        position: absolute;
+                        left: 85%;
+                        top: 25%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../../img/comp/space.gif); 
+                        &:hover{
+                            background: url(../../../../img/comp/spaceA.gif);
+                        }
+                    }
+                    .time{
+                        position: absolute;
+                        left: 85%;
+                        top: 50%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../../img/comp/time1.png);
+                        &:hover{
+                            background: url(../../../../img/comp/timeA.gif);
+                        }
+                    }
                     .numBox{
                         position:absolute;
-                        top:48%;
-                        left:34%;
+                        top:43%;
+                        left:24%;
+                        width:110px;
+                        text-align: center;
+                        height:40px;
+                        line-height:18px;
+                        font-size: 16px;
+                        z-index:11;
+                        margin-left:-30px;
+                        margin-top:-15px;
+                        display:inline-block;
+                        padding:0 5px;
+                        color: #ffffff;
+                        p{
+                            font-size: 26px;
+                        }
+                    }
+                }.sectionthree{
+                    width: 53%;
+                    height: 100%;
+                    float: left;
+                    position: relative;
+                    .pie{
+                        height: 65%;
+                        width: 70%
+                    }
+                    .pie{
+                        height: 65%;
+                        width: 70%
+                    }
+                    .space{
+                        position: absolute;
+                        left: 85%;
+                        top: 25%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../../img/comp/space.gif); 
+                        &:hover{
+                            background: url(../../../../img/comp/spaceA.gif);
+                        }
+                    }
+                    .time{
+                        position: absolute;
+                        left: 85%;
+                        top: 50%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../../img/comp/time1.png);
+                        &:hover{
+                            background: url(../../../../img/comp/timeA.gif);
+                        }
+                    }
+                    .numBox{
+                        position:absolute;
+                        top:43%;
+                        left:24%;
                         width:110px;
                         text-align: center;
                         height:40px;
@@ -67,66 +254,165 @@
                         }
                     }
                 }
-                .border{
-                    position: absolute;
-                    left: 0;
-                    top: 10%;
-                    height: 80%;
-                    border-right: 2px solid #191c26;
-                }
-                .text1{
-                    margin-top: 20px;
-                    line-height: 40px;
-                    height: 40px;
-                    width: 100%;
-                    text-align: center;
-                }
-            } 
+            }
         }.secondfloor{
             position: relative;
-            top: 15px;
-            height: 650px;
-            width: 99%;
+            top: 10px;
+            height: 640px;
+            width: 100%;
             .electric{
                 position: absolute;
-                height: 98.5%;
-                width: 24.5%;
+                height: 100%;
+                width: 33%;
                 border:1px solid #3e4c67;
                 background-color: rgba(44, 61, 71, 0.4);
                 .electricHeader{
-                    position: relative;
+                    padding-left: 20px;
                     height: 30px;
-                    line-height: 30px;
                     width: 100%;
                     background:  #464C58;
-                    padding-left: 15px;
+                    line-height: 30px;
                     a{
                         position: relative;
                         top: 4px;
                         display: inline-block;
                         height: 20px;
                         width: 20px;
-                        background: url(../../../img/comp/nianEle.png);
+                        background: url(../../../../img/comp/nianEle.png);
                         background-size: 20px 20px; 
                     }
                 }.electricFirst{
-                    position: relative;
                     z-index: 3;
                     height: 201px;
                     padding-left: 20px;
-                    padding-top: 50px;
+                    padding-top: 40px;
                     a{
                         display: inline-block;
                         height: 20px;
                         width: 20px;
                         position: relative;
                         top: 4px;
-                        background: url(../../../img/comp/nianC.png);
+                        background: url(../../../../img/comp/nianC.png);
                         background-size: 20px 20px;
                     }
                     .electricTotal{
                         margin: 10px 0;
-                        color: #f23333; 
+                        color:#f23333; 
+                    }.electricPercent{
+                        width: 90%;
+                        height: 25px;
+                        background-color: #39565e;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        .green{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #00ff33;
+                        }
+                        .yellow{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #fbd500;
+                        }
+                        .red{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #ff0000;
+                        }
+                        .redS{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #d06960;
+                        }
+                    }
+                }.electricSecond{
+                    z-index: 3;
+                    height: 202px;
+                    padding-left: 20px;
+                    padding-top: 40px;
+                    a{
+                        display: inline-block;
+                        height: 20px;
+                        width: 20px;
+                        position: relative;
+                        top: 4px;
+                        background: url(../../../../img/comp/yueC.png);
+                        background-size: 20px 20px;
+                    }
+                    .electricTotal{
+                        margin: 10px 0;
+                        color: #ffff41; 
+                    }
+                    .electricPercent{
+                        width: 90%;
+                        height: 25px;
+                        background-color: #39565e;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        .green{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #00ff33;
+                        }
+                        .yellow{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #fbd500;
+                        }
+                        .red{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #ff0000
+;
+                        }
+                        .redS{
+                            color: black;
+                            padding-left: 10px;
+                            line-height: 25px;
+                            height: 25px;
+                            border-radius: 12px;
+                            background-color: #d06960;
+                        }
+                    }
+                    
+                }.electricThird{
+                    z-index: 3;
+                    height:202px;
+                    padding-left: 20px;
+                    padding-top: 40px;
+                    a{
+                        display: inline-block;
+                        height: 20px;
+                        width: 20px;
+                        position: relative;
+                        top: 4px;
+                        background: url(../../../../img/comp/riC.png);
+                        background-size: 20px 20px;
+                    }
+                    .electricTotal{
+                        margin: 10px 0;
+                        color: #00ff33;
                     }.electricPercent{
                         width: 90%;
                         height: 25px;
@@ -165,131 +451,65 @@
                             height: 25px;
                             border-radius: 12px;
                             background-color: #d06960;
-                        }   
-                    }
-                }.electricSecond{
-                    position: relative;
-                    z-index: 3;
-                    height: 202px;
-                    padding-left: 20px;
-                    padding-top: 50px;
-                    a{
-                        display: inline-block;
-                        height: 20px;
-                        width: 20px;
-                        position: relative;
-                        top: 4px;
-                        background: url(../../../img/comp/yueC.png);
-                        background-size: 20px 20px;
-                    }
-                    .electricTotal{
-                        margin: 10px 0;
-                        color: #ffff41; 
-                    }
-                    .electricPercent{
-                        width: 90%;
-                        height: 25px;
-                        background-color: #39565e;
-                        border-radius: 12px;
-                        overflow: hidden;
-                        .green{
-                            color: black;
-                            padding-left: 10px;
-                            line-height: 25px;
-                            height: 25px;
-                            border-radius: 12px;
-                            background-color:#00ff33;
-                        }
-                        .yellow{
-                            color: black;
-                            padding-left: 10px;
-                            line-height: 25px;
-                            height: 25px;
-                            border-radius: 12px;
-                            background-color: #fbd500;
-                        }
-                        .red{
-                            color: black;
-                            padding-left: 10px;
-                            line-height: 25px;
-                            height: 25px;
-                            border-radius: 12px;
-                            background-color: #ff0000;
-;
-                        }
-                        .redS{
-                            color: black;
-                            padding-left: 10px;
-                            line-height: 25px;
-                            height: 25px;
-                            border-radius: 12px;
-                            background-color: #d06960;
-                        }
-                    }
-                    
-                }.electricThird{
-                    position: relative;
-                    z-index: 3;
-                    height: 202px;
-                    padding-left: 20px;
-                    padding-top: 50px;
-                    a{
-                        display: inline-block;
-                        height: 20px;
-                        width: 20px;
-                        position: relative;
-                        top: 4px;
-                        background: url(../../../img/comp/riC.png);
-                        background-size: 20px 20px;
-                    }
-                    .electricTotal{
-                        margin: 10px 0;
-                        color: #00ff33;
-                    }.electricPercent{
-                        width: 90%;
-                        height: 25px;
-                        background-color: #39565e;
-                        border-radius: 12px;
-                        overflow: hidden;
-                        .green{
-                            color: black;
-                            padding-left: 10px;
-                            line-height: 25px;
-                            height: 25px;
-                            border-radius: 12px;
-                            background-color: #00ff33;
-                        }
-                        .yellow{
-                            color: black;
-                            padding-left: 10px;
-                            line-height: 25px;
-                            height: 25px;
-                            border-radius: 12px;
-                            background-color: #fbd500;
-                        }
-                        .red{
-                            color: black;
-                            padding-left: 10px;
-                            line-height: 25px;
-                            height: 25px;
-                            border-radius: 12px;
-                            background-color: #ff0000;
-
-                        }
-                        .redS{
-                            color: black;
-                            padding-left: 10px;
-                            line-height: 25px;
-                            height: 25px;
-                            border-radius: 12px;
-                            background-color: #d06960;
                         }
                     }
                 }
             }.yearelectric{
+                .header{
+                    height: 30px;
+                    line-height: 30px;
+                    background-color: #464C58;
+                    padding-left: 20px;
+                    position: relative;
+                   .logo{
+                        float: left; 
+                        a{
+                        display: inline-block;
+                        height: 20px;
+                        width: 20px;
+                        position: relative;
+                        top: 4px;
+                        background: url(../../../../img/comp/nianC.png);
+                        background-size: 20px 20px;
+                        }
+                    }
+                    .space{
+                        position: relative;
+                        top: 2px;
+                        float: left;
+                        margin-left: 75%;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../../img/comp/space.gif); 
+                        &:hover{
+                            background: url(../../../../img/comp/spaceA.gif);
+                        }
+                    }
+                    .time{
+                        position: relative;
+                        top: 2px;
+                        margin-left: 16px;
+                        cursor: pointer;
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        background: url(../../../../img/comp/time1.png);
+                        &:hover{
+                            background: url(../../../../img/comp/timeA.gif);
+                        }
+                    }
+                }
                 position: absolute;
-                left: 25.5%;
-                width: 74.5%;
+                left: 34%;
+                width: 66%;
+                border:1px solid #3e4c67;
+            }.yearprofit{
+                position: absolute;
+                left: 34%;
+                top: 325px;
+                width: 66%;
                 border:1px solid #3e4c67;
                 .header{
                     height: 30px;
@@ -305,7 +525,7 @@
                         width: 20px;
                         position: relative;
                         top: 4px;
-                        background: url(../../../img/comp/nianC.png);
+                        background: url(../../../../img/comp/profit.png);
                         background-size: 20px 20px;
                     }
                     }
@@ -323,9 +543,9 @@
                                 display: inline-block;
                                 height: 25px;
                                 width: 25px;
-                                background: url(../../../img/comp/space.gif);
+                                background: url(../../../../img/comp/space.gif);
                                 &:hover{
-                                    background: url(../../../img/comp/spaceA.gif);
+                                    background: url(../../../../img/comp/spaceA.gif);
                                 }
                             }
                             .time{
@@ -333,65 +553,9 @@
                                 display: inline-block;
                                 height: 25px;
                                 width: 25px;
-                                background: url(../../../img/comp/time1.png);
+                                background: url(../../../../img/comp/time1.png);
                                 &:hover{
-                                    background: url(../../../img/comp/timeA.gif);
-                                }
-                            }
-                        }
-                    } 
-                }
-            }.yearprofit{
-                position: absolute;
-                left: 25.5%;
-                top: 327px;
-                width: 74.5%;
-                border:1px solid #3e4c67;
-                .header{
-                    height: 30px;
-                    line-height: 25px;
-                    padding-left: 20px;
-                    background-color: #464C58;
-                    position: relative;
-                   .logo{
-                        float: left; 
-                        a{
-                        display: inline-block;
-                        height: 20px;
-                        width: 20px;
-                        position: relative;
-                        top: 4px;
-                        background: url(../../../img/comp/profit.png);
-                        background-size: 20px 20px;
-                    }
-                    }
-                    .linkBox{
-                        float: left;
-                        margin-left: 77%;
-                        position: relative;
-                        .links{
-                            float: left;
-                            margin-left: 20px;
-                            position: relative;
-                            top: 2px;
-                            .space{
-                                cursor: pointer; 
-                                display: inline-block;
-                                height: 25px;
-                                width: 25px;
-                                background: url(../../../img/comp/space.gif);
-                                &:hover{
-                                    background: url(../../../img/comp/spaceA.gif);
-                                }
-                            }
-                            .time{
-                                cursor: pointer;
-                                display: inline-block;
-                                height: 25px;
-                                width: 25px;
-                                background: url(../../../img/comp/time1.png);
-                                &:hover{
-                                    background: url(../../../img/comp/timeA.gif);
+                                    background: url(../../../../img/comp/timeA.gif);
                                 }
                             }
                         }
@@ -400,17 +564,17 @@
             }
         }
     }.right{
-        width: 25%;
-        height: 905px;
+        position: relative;
+        width: 27%;
+        height: 850px;
         background-color: rgba(44, 61, 71, 0.4);
-        float: left;
+        float: right;
         border:1px solid #3e4c67;
         h3{
-            position: relative;
             margin: 0;
-            font-size: 16px;
-            height: 30px;
+            height:30px;
             line-height: 30px;
+            font-size: 16px;
             font-weight: 900;
             padding-left: 20px;
             background-color: #464C58;
@@ -420,16 +584,16 @@
                 display: inline-block;
                 height: 20px;
                 width: 20px;
-                background: url(../../../img/comp/rank.png) no-repeat;
+                background: url(../../../../img/comp/rank.png) no-repeat;
                 background-size: 20px 20px;
             }
         }
         table{
+            font-size: 16px;
             width: 100%;
             user-select:none;
             overflow: hidden;
             tr{
-                position: relative;
                 display: inline-block;
                 width: 100%;
                 margin-top: 20px;
@@ -454,7 +618,7 @@
                         top: 3px;
                         height: 20px;
                         width: 20px;
-                        background: url(../../../img/comp/sortB.gif) no-repeat;
+                        background: url(../../../../img/comp/sortB.gif) no-repeat;
                         background-size: 20px 20px;  
                     }
                     .bottom{
@@ -463,7 +627,7 @@
                         top: 3px;
                         height: 20px;
                         width: 20px;
-                        background: url(../../../img/comp/sortT.gif) no-repeat;
+                        background: url(../../../../img/comp/sortT.gif) no-repeat;
                         background-size: 20px 20px;  
                     }
                 }
@@ -478,7 +642,7 @@
                         top: 3px;
                         height: 20px;
                         width: 20px;
-                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background: url(../../../../img/comp/sortAB.gif) no-repeat;
                         background-size: 20px 20px;  
                     }
                     .bottom{
@@ -487,7 +651,7 @@
                         top: 3px;
                         height: 20px;
                         width: 20px;
-                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background: url(../../../../img/comp/sortAB.gif) no-repeat;
                         background-size: 20px 20px;  
                     }
                 }
@@ -502,7 +666,7 @@
                     top: 3px;
                     height: 20px;
                     width: 20px;
-                    background: url(../../../img/comp/sortAB.gif) no-repeat;
+                    background: url(../../../../img/comp/sortAB.gif) no-repeat;
                     background-size: 20px 20px;  
                     }
                     .bottom{
@@ -511,7 +675,7 @@
                         top: 3px;
                         height: 20px;
                         width: 20px;
-                        background: url(../../../img/comp/sortAB.gif) no-repeat;
+                        background: url(../../../../img/comp/sortAB.gif) no-repeat;
                         background-size: 20px 20px;  
                     }
                 }
@@ -527,7 +691,7 @@
                     top: 3px;
                     height: 20px;
                     width: 20px;
-                    background: url(../../../img/comp/sortT.gif) no-repeat;
+                    background: url(../../../../img/comp/sortT.gif) no-repeat;
                     background-size: 20px 20px;  
                     }
                     .bottom{
@@ -536,7 +700,7 @@
                         top: 3px;
                         height: 20px;
                         width: 20px;
-                        background: url(../../../img/comp/sortB.gif) no-repeat;
+                        background: url(../../../../img/comp/sortB.gif) no-repeat;
                         background-size: 20px 20px;  
                     }
                 }
@@ -544,11 +708,11 @@
                     cursor: pointer;
                     border: 2px solid #20FEFF;
                 }
+                
             } 
         }
         
     }
-   .boxShadow:hover{
-       box-shadow:0 0 15px #fff;
-   }  
+    .boxShadow:hover{
+       box-shadow:0 0 15px #fff;}
 }

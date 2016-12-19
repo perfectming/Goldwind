@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Windstyle.scss';
 import Yearelectric from './Yearelectric.jsx';
-import Pie2 from '../../wfm/mxx/Pie2';
-import Login from '../../../../../../components/common/Loading.jsx';
+import Pie2 from '../../../wfm/mxx/Pie2';
+import Login from '../../../../../../../components/common/Loading.jsx';
 var $ =require("jQuery");
 var actions = require('redux/actions');
 
