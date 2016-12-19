@@ -16,7 +16,6 @@ import Manaport from '../comp/healthManagement/manaport.jsx';
 import Subscribe from '../comp/healthManagement/subscribe.jsx';
 import Yujing from '../comp/healthManagement/yujing.jsx';
 
-
 import Booster from '../comp/wfm/Booster.jsx';//马鑫
 import Monitorkb from '../comp/wfm/maXin/Monitorkb.jsx';
 
@@ -87,6 +86,7 @@ import PerformLose from '../comp/wbi/ludi/KBA/PerformLose.jsx';
 import MaintainLose from '../comp/wbi/ludi/KBA/MaintainLose.jsx';
 import LimitLose from '../comp/wbi/ludi/KBA/LimitLose.jsx';
 import Reliability from '../comp/wbi/ludi/KBA/Reliability.jsx';
+
 
 
 var actions = require('redux/actions');
