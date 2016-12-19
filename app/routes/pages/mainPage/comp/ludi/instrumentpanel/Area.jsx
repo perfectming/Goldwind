@@ -4,10 +4,10 @@ import styles from './Areastyle.scss';
 import Yearelectric from './Yearelectric.jsx';
 import Pie2 from '../../mxx/Pie2';
 import Login from '../../../../../../components/common/Loading.jsx';
-
+var $ =require("jQuery");
 var actions = require('redux/actions');
 
-let clickAreaId,areaName=[],areaId=[],areaCost=[],areaProfit=[],areaMonth=[],runTime,downTime,TBA,areaArr;
+let healthy,clickAreaId,areaName=[],areaId=[],areaCost=[],areaProfit=[],areaMonth=[],runTime,downTime,TBA,areaArr;
 let actb=0,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month=[],elecPlan=[],elecAct=[];
 
 
@@ -22,14 +22,14 @@ let Component = React.createClass({
    
 
     render() {
-        let{areaBool=false,actb,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{ipUrl,areaBool=false,actb,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(areaBool){
         	return (
 	            <div className={styles.box}>
 	           		<ul className={styles.monthbox}>
 	                    {
 	                    	areaName.map((value,key)=>{
-	                    		return(<li key={key} className={actb===key? styles.bg1 : styles.bg} onClick={()=>changepage(value,key,areaId,areaMonth,areaProfit,areaCost,clickAreaId)}>{value}</li>)
+	                    		return(<li key={key} className={actb===key? styles.bg1 : styles.bg} onClick={()=>changepage(ipUrl,value,key,areaId,areaMonth,areaProfit,areaCost,clickAreaId)}>{value}</li>)
 	                    	})
 	                    }
 	                </ul>
@@ -38,12 +38,12 @@ let Component = React.createClass({
 	           			<div className={styles.firstfloor}>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>当前60分<br/><br/>总分100分</span><br/><br/>
+	           						<span>当前{healthy}分<br/><br/>总分100分</span><br/><br/>
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{((61/100)*100).toFixed(1)}%</p>健康度</span>
-	           						<Pie2 color={(.6)>1? ['#1fe005','#fbd500']:(.6)>0.8?['#fbd500','#39565e']:(.61)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[6,4]}></Pie2>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthy}%</p>健康度</span>
+	           						<Pie2 color={(healthy/100)>1? ['#1fe005','#fbd500']:(healthy/100)>0.8?['#fbd500','#39565e']:(healthy/100)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[healthy,100-healthy]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
@@ -194,7 +194,7 @@ const mapDispatchToProps = (dispatch) => {
 		        },
 		        complete : function(XMLHttpRequest,status){ 
 				　　　$.ajax({
-		        		url: 'http://'+ipUrl+'/wbi/yield/getGroupAllRate',//初始年收益表-YES
+		        		url: 'http://'+ipUrl+'/wbi/yield/getGroupAllRate',//收益柱图
 				        type: 'post',
 				        async:true,
 				        data:{'groupid':areaId[0]},
@@ -209,7 +209,7 @@ const mapDispatchToProps = (dispatch) => {
 				        },
 				        complete : function(XMLHttpRequest,status){ 
 					　　　　  $.ajax({
-				        		url: 'http://'+ipUrl+'/wbi/ELEC/getAreaElec',//初始电量--YES
+				        		url: 'http://'+ipUrl+'/wbi/ELEC/getAreaElec',//电量进度条和柱图
 						        type: 'post',
 						        async:true,
 						        data:{'groupid':areaId[0]},
@@ -232,7 +232,7 @@ const mapDispatchToProps = (dispatch) => {
 						        },
 						        complete : function(XMLHttpRequest,status){ 
 							　　　　	$.ajax({
-						        		url: 'http://'+ipUrl+'/wbi/PBA/getAreaPBA',//PBA
+						        		url: 'http://'+ipUrl+'/wbi/PBA/getAreaPBA',//PBA饼图和风场列表
 								        type: 'post',
 								        async:true,
 								        data:{'groupid':areaId[0],'type':1},
@@ -244,7 +244,7 @@ const mapDispatchToProps = (dispatch) => {
 								        },
 								        complete : function(XMLHttpRequest,status){ 
 									　　　　	$.ajax({
-								        		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA-YES
+								        		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA饼图
 										        type: 'post',
 										        async:true,
 										        data:{'groupid':areaId[0]},
@@ -254,9 +254,22 @@ const mapDispatchToProps = (dispatch) => {
 										        	downTime=data.data[0].downtimes;
 										        	TBA=data.data[0].tba;
 										        },
-										        complete : function(XMLHttpRequest,status){ 
-											　　　　  dispatch(actions.setVars('areaBool',true ));
-											　　},
+										        complete : function(XMLHttpRequest,status){
+										        	$.ajax({
+										                url:'http://'+ipUrl+'/wbi/Health/getCompanyHealth',//健康度饼图
+										                type: 'post',
+										                data: {'type':1,'groupid':areaId[0],'wfid':''},
+										                async:true,
+										                dataType: 'json',
+										                timeout : 60000,
+										                success:function (data) {
+															healthy=data.data.health;
+										                },
+										                complete : function(XMLHttpRequest,status){
+										                    dispatch(actions.setVars('areaBool',true ));
+										                },
+										            });
+											　　　},
 										    });
 									　　  },
 								   });
@@ -284,11 +297,11 @@ const mapDispatchToProps = (dispatch) => {
         	dispatch(actions.setVars('flag',true ));
         	dispatch(actions.setVars('flagPba',!flagPba ));
         },
-        changepage :(value,key,areaId,areaMonth,areaProfit,areaCost,clickAreaId)=>{
+        changepage :(ipUrl,value,key,areaId,areaMonth,areaProfit,areaCost,clickAreaId)=>{
         	$.ajax({
-        		url: 'http://'+ipUrl+'/wbi/yield/getGroupAllRate',//收益表
+        		url: 'http://'+ipUrl+'/wbi/yield/getGroupAllRate',//收益柱图
 		        type: 'post',
-		        async:false,
+		        async:true,
 		        data:{'groupid':areaId[key]},
 		        dataType: 'json',//here
 		        success:function (data) {
@@ -301,79 +314,77 @@ const mapDispatchToProps = (dispatch) => {
 		        	}
 		        },
 		        complete : function(XMLHttpRequest,status){ 
-			　　　　if(status=='timeout'){
-			　　　　　 alert('超时');
-			　　　　}
-			　　},
+			　　　　	$.ajax({
+						url:'http://'+ipUrl+'/wbi/Health/getCompanyHealth',//健康度饼图
+						type: 'post',
+						data: {'type':1,'groupid':areaId[key],'wfid':''},
+						async:true,
+						dataType: 'json',
+						timeout : 60000,
+						success:function (data) {
+							healthy=data.data.health;
+						},
+						complete : function(XMLHttpRequest,status){
+							$.ajax({
+				        		url: 'http://'+ipUrl+'/wbi/ELEC/getAreaElec',//电量进度条和柱图
+						        type: 'post',
+						        async:true,
+						        data:{'groupid':areaId[key]},
+						        dataType: 'json',//here
+						        success:function (data) {
+						        	yearElec=data.data.areasyearElec;
+						        	monthElec=data.data.areaMonthsElec;
+						        	dayElec=data.data.dayelec;
+						        	yearPlanElec=data.data.areasyearPlanElec;
+						        	monthPlanElec=data.data.areasMonthsPlanElec;
+						        	dayPlanElec=data.data.dayPlanElec;
+						        	month=[],elecPlan=[],elecAct=[];
+						        	for(var i in data.data.twAreaMonthElec){
+						        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
+						        		month.push(data.data.twAreaMonthElec[i].month+"月");
+						        	}
+						        	for(var i in data.data.twAreaMonthPlanElec){
+						        		elecPlan.push(data.data.twAreaMonthPlanElec[i]);
+						        	}
+						        },
+						        complete : function(XMLHttpRequest,status){ 
+							　　　　	$.ajax({
+						        		url: 'http://'+ipUrl+'/wbi/PBA/getAreaPBA',//PBA饼图和风场列表
+								        type: 'post',
+								        async:true,
+								        data:{'groupid':areaId[key],'type':1},
+								        dataType: 'json',//here
+								        success:function (data) {
+								        	elecActPBA=data.data.scale[0].poweract;
+								        	elecPlanPBA=data.data.scale[0].powertheory;
+								        	areaArr=data.data.everyAreaPba;
+								        },
+								        complete : function(XMLHttpRequest,status){ 
+									　　　　	$.ajax({
+								        		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA饼图
+										        type: 'post',
+										        async:true,
+										        data:{'groupid':areaId[key]},
+										        dataType: 'json',//here
+										        success:function (data) {
+										        	runTime=data.data[0].runtimes;
+										        	downTime=data.data[0].downtimes;
+										        	TBA=data.data[0].tba;
+										        },
+										        complete : function(XMLHttpRequest,status){ 
+											　　　　
+											　　   },
+										    });
+									　　  },
+								    });
+							　　 },
+						    });
+						},
+					});
+			　　 },
 		    });
 		    dispatch(actions.setVars('clickAreaId', clickAreaId));
-		    
-		    $.ajax({
-        		url: 'http://'+ipUrl+'/wbi/ELEC/getAreaElec',//查询ID电量--YES
-		        type: 'post',
-		        async:false,
-		        data:{'groupid':areaId[key]},
-		        dataType: 'json',//here
-		        success:function (data) {
-		        	yearElec=data.data.areasyearElec;
-		        	monthElec=data.data.areaMonthsElec;
-		        	dayElec=data.data.dayelec;
-		        	yearPlanElec=data.data.areasyearPlanElec;
-		        	monthPlanElec=data.data.areasMonthsPlanElec;
-		        	dayPlanElec=data.data.dayPlanElec;
-		        	month=[],elecPlan=[],elecAct=[];
-		        	for(var i in data.data.twAreaMonthElec){
-		        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
-		        		month.push(data.data.twAreaMonthElec[i].month+"月");
-		        	}
-		        	for(var i in data.data.twAreaMonthPlanElec){
-		        		elecPlan.push(data.data.twAreaMonthPlanElec[i]);
-		        	}
-		        },
-		        complete : function(XMLHttpRequest,status){ 
-			　　　　if(status=='timeout'){
-			　　　　　 alert('超时');
-			　　　　}
-			　　},
-		    });
-		    
-		    $.ajax({
-        		url: 'http://'+ipUrl+'/wbi/PBA/getAreaPBA',//查询ID-PBA
-		        type: 'post',
-		        async:false,
-		        data:{'groupid':areaId[key],'type':1},
-		        dataType: 'json',//here
-		        success:function (data) {
-		        	elecActPBA=data.data.scale[0].poweract;
-		        	elecPlanPBA=data.data.scale[0].powertheory;
-		        	areaArr=data.data.everyAreaPba;
-		        },
-		        complete : function(XMLHttpRequest,status){ 
-			　　　　if(status=='timeout'){
-			　　　　　 alert('超时');
-			　　　　}
-			　　},
-		    });
-		    
-		    $.ajax({
-        		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA-YES
-		        type: 'post',
-		        async:false,
-		        data:{'groupid':areaId[key]},
-		        dataType: 'json',//here
-		        success:function (data) {
-		        	runTime=data.data[0].runtimes;
-		        	downTime=data.data[0].downtimes;
-		        	TBA=data.data[0].tba;
-		        },
-		        complete : function(XMLHttpRequest,status){ 
-			　　　　if(status=='timeout'){
-			　　　　　 alert('超时');
-			　　　　}
-			　　},
-		    });
-        	
-            dispatch(actions.setVars('actb',key ));
+		    dispatch(actions.setVars('actb',key ));
         },
         changepageHealthyT:()=>{
         	dispatch(actions.setVars('showPage', 'healthyregins'));
