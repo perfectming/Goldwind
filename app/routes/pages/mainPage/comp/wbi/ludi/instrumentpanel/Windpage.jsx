@@ -2,13 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Windstyle.scss';
 import Yearelectric from './Yearelectric.jsx';
-import Pie2 from '../../wfm/mxx/Pie2';
-import Login from '../../../../../../components/common/Loading.jsx';
-
+import Pie2 from '../../../wfm/mxx/Pie2';
+import Login from '../../../../../../../components/common/Loading.jsx';
+var $ =require("jQuery");
 var actions = require('redux/actions');
 
-let ipUrl='10.68.100.32:8080';
-let actbt=0,wfName=[],wfId=[],areaId=[],wfTheory,wfAct,wtArr=[],wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct; 
+let healthy,actbt=0,wfName=[],wfId=[],areaId=[],wfTheory,wfAct,wtArr=[],wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct; 
 let month=[],monthAct=[],monthPlan=[],month2,income,cost,runTime,downTime,TBA;
 
 let Component = React.createClass({
@@ -22,14 +21,14 @@ let Component = React.createClass({
    
 
     render() {
-        let{windBool=false,actbt,flagTime2=true,flagPba2=true,flag2=true,changepageSort1,changepageProT,changepageProS,changepageSort,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{ipUrl,windBool=false,actbt,flagTime2=true,flagPba2=true,flag2=true,changepageSort1,changepageProT,changepageProS,changepageSort,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(windBool){
         	return (
 	            <div className={styles.box}>
 	           		<ul className={styles.monthbox}>
 	                    {
 	                    	wfName.map((value,key)=>{
-	                    		return(<li key={key} className={actbt===key? styles.bg1 : styles.bg} onClick={()=>changepageW(value,key)}>{value}</li>)
+	                    		return(<li key={key} className={actbt===key? styles.bg1 : styles.bg} onClick={()=>changepageW(value,key,ipUrl)}>{value}</li>)
 	                    	})
 	                    }
 	                </ul>
@@ -37,12 +36,12 @@ let Component = React.createClass({
 	           			<div className={styles.firstfloor}>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>当前<br/>65分<br/>总分<br/>100分</span>
+	           						<span>当前<br/>{healthy}分<br/>总分<br/>100分</span>
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{65}%</p>健康度</span>
-	           						<Pie2 color={(.7)>1? ['#1fe005','#fbd500']:(.7)>0.8?['#fbd500','#39565e']:(.7)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[65,35]}></Pie2>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthy}%</p>健康度</span>
+	           						<Pie2 color={(healthy/100)>1? ['#1fe005','#fbd500']:(healthy/100)>0.8?['#fbd500','#39565e']:(healthy/100)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[healthy,100]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
@@ -212,8 +211,7 @@ const mapDispatchToProps = (dispatch) => {
 				　　　　}
 				　　},
 			    });
-			    
-    		}else{
+			}else{
     			$.ajax({
 	        		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyAreaPBA',//点击区域获取风场名和ID
 			        type: 'post',
@@ -235,7 +233,7 @@ const mapDispatchToProps = (dispatch) => {
 			    });
     		}
     		$.ajax({
-	        		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyWfPBA',//根据风场ID获取PBA和风机
+	        		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyWfPBA',//PBA饼图和风机列表
 			        type: 'post',
 			        async:true,
 			        data:{'wfid':wfId[0]},
@@ -247,7 +245,7 @@ const mapDispatchToProps = (dispatch) => {
 			        },
 			        complete : function(XMLHttpRequest,status){ 
 				　　　　  $.ajax({
-			        		url: 'http://'+ipUrl+'/wbi/ELEC/getWfieldElec',//根据风场ID获取电量
+			        		url: 'http://'+ipUrl+'/wbi/ELEC/getWfieldElec',//电量进度条和柱图
 					        type: 'post',
 					        async:true,
 					        data:{'wfid':wfId[0]},
@@ -270,7 +268,7 @@ const mapDispatchToProps = (dispatch) => {
 					        },
 					        complete : function(XMLHttpRequest,status){ 
 						　　　　	$.ajax({
-					        		url: 'http://'+ipUrl+'/wbi/yield/getWfAllRate',//根据风场ID获取收益
+					        		url: 'http://'+ipUrl+'/wbi/yield/getWfAllRate',//收益柱图
 							        type: 'post',
 							        async:true,
 							        data:{'wfid':wfId[0]},
@@ -285,7 +283,7 @@ const mapDispatchToProps = (dispatch) => {
 							        },
 							        complete : function(XMLHttpRequest,status){ 
 								　　　　	$.ajax({
-							        		url: 'http://'+ipUrl+'/wbi/TBA/getWfLastMonthTBA',//TBA-YES
+							        		url: 'http://'+ipUrl+'/wbi/TBA/getWfLastMonthTBA',//TBA饼图
 									        type: 'post',
 									        async:true,
 									        data:{'wfid':wfId[0]},
@@ -296,7 +294,20 @@ const mapDispatchToProps = (dispatch) => {
 									        	TBA=data.data[0].tba;
 									        },
 									        complete : function(XMLHttpRequest,status){ 
-										　　　　	dispatch(actions.setVars('windBool',true ));
+										　　　　	$.ajax({
+										                url:'http://'+ipUrl+'/wbi/Health/getCompanyHealth',//健康度饼图
+										                type: 'post',
+										                data: {'type':2,'groupid':'','wfid':wfId[0]},
+										                async:true,
+										                dataType: 'json',
+										                timeout : 60000,
+										                success:function (data) {
+															healthy=data.data.health;
+										                },
+										                complete : function(XMLHttpRequest,status){
+										                    dispatch(actions.setVars('windBool',true ));
+										                },
+										        });
 										　　},
 									    });
 								　　 },
@@ -316,7 +327,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changepageSort:(flag2,flagTime2,wtArr)=>{
-//      	flagTime2==false? dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return b.downtime-a.downtime})));
+        	flagTime2==false? dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return b.downtime-a.downtime})));
         	dispatch(actions.setVars('flag2',false ));
         	dispatch(actions.setVars('flagTime2',!flagTime2 ));
         	
@@ -326,12 +337,12 @@ const mapDispatchToProps = (dispatch) => {
         	dispatch(actions.setVars('flag2',true ));
         	dispatch(actions.setVars('flagPba2',!flagPba2 ));
         },
-        changepageW :(value,key)=>{
+        changepageW :(value,key,ipUrl)=>{
             dispatch(actions.setVars('actbt',key ));
            	$.ajax({
-	        		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyWfPBA',//根据风场ID获取PBA和风机
+	        		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyWfPBA',//PBA饼图和风机列表
 			        type: 'post',
-			        async:false,
+			        async:true,
 			        data:{'wfid':wfId[key]},
 			        dataType: 'json',//here
 			        success:function (data) {
@@ -340,79 +351,79 @@ const mapDispatchToProps = (dispatch) => {
 			        	wfTheory=data.data.scale[0].powertheory;
 			        },
 			        complete : function(XMLHttpRequest,status){ 
-				　　　　if(status=='timeout'){
-				　　　　　 alert('超时');
-				　　　　}
-				　　},
+				　　　　	$.ajax({
+							url:'http://'+ipUrl+'/wbi/Health/getCompanyHealth',//健康度饼图
+							type: 'post',
+							data: {'type':2,'groupid':'','wfid':wfId[key]},
+							async:true,
+							dataType: 'json',
+							timeout : 60000,
+							success:function (data) {
+								healthy=data.data.health;
+							},
+							complete : function(XMLHttpRequest,status){
+								$.ajax({
+					        		url: 'http://'+ipUrl+'/wbi/ELEC/getWfieldElec',//发电量进度条和柱图
+							        type: 'post',
+							        async:true,
+							        data:{'wfid':wfId[key]},
+							        dataType: 'json',//here
+							        success:function (data) {
+							        	wfYearPlan=data.data.yearPlanElec;
+							        	wfYearAct=data.data.yearElec;
+							        	wfMonthPlan=data.data.monthPlanElec;
+							        	wfMonthAct=data.data.monthElec;
+							        	wfDayPlan=data.data.dayPlanElec;
+							        	wfDayAct=data.data.dayelec;
+							        	month=[],monthAct=[],monthPlan=[];
+							        	for(var i in data.data.wfieldsMonthsElec){
+											month.push(data.data.wfieldsMonthsElec[i].month+"月");
+											monthAct.push(data.data.wfieldsMonthsElec[i].poweract);
+										};
+										for(var i in data.data.wfieldsMonthsPlanElec){
+											monthPlan.push(data.data.wfieldsMonthsPlanElec[i]);
+										}
+							        },
+							        complete : function(XMLHttpRequest,status){ 
+								　　　　	$.ajax({
+							        		url: 'http://'+ipUrl+'/wbi/yield/getWfAllRate',//收益柱图
+									        type: 'post',
+									        async:true,
+									        data:{'wfid':wfId[key]},
+									        dataType: 'json',//here
+									        success:function (data) {
+									        	month2=[],cost=[],income=[];
+									        	for(var i in data.data){
+									        		month2.push(data.data[i].month+"月");
+									        		cost.push(data.data[i].costs);
+									        		income.push(data.data[i].incomes);
+									        	}
+									        },
+									        complete : function(XMLHttpRequest,status){ 
+										　　　　	$.ajax({
+									        		url: 'http://'+ipUrl+'/wbi/TBA/getWfLastMonthTBA',//TBA饼图
+											        type: 'post',
+											        async:false,
+											        data:{'wfid':wfId[key]},
+											        dataType: 'json',//here
+											        success:function (data) {
+											        	runTime=data.data[0].runtimes;
+											        	downTime=data.data[0].downtimes;
+											        	TBA=data.data[0].tba;
+											        },
+											        complete : function(XMLHttpRequest,status){ 
+												　　　　	
+												　　	},
+											    });
+										　	},
+										});
+								　　  },
+								});
+							},
+						});
+				　　  },
 			});
-
-			$.ajax({
-	        		url: 'http://'+ipUrl+'/wbi/ELEC/getWfieldElec',//根据风场ID获取发电量
-			        type: 'post',
-			        async:false,
-			        data:{'wfid':wfId[key]},
-			        dataType: 'json',//here
-			        success:function (data) {
-			        	wfYearPlan=data.data.yearPlanElec;
-			        	wfYearAct=data.data.yearElec;
-			        	wfMonthPlan=data.data.monthPlanElec;
-			        	wfMonthAct=data.data.monthElec;
-			        	wfDayPlan=data.data.dayPlanElec;
-			        	wfDayAct=data.data.dayelec;
-			        	month=[],monthAct=[],monthPlan=[];
-			        	for(var i in data.data.wfieldsMonthsElec){
-							month.push(data.data.wfieldsMonthsElec[i].month+"月");
-							monthAct.push(data.data.wfieldsMonthsElec[i].poweract);
-						};
-						for(var i in data.data.wfieldsMonthsPlanElec){
-							monthPlan.push(data.data.wfieldsMonthsPlanElec[i]);
-						}
-			        },
-			        complete : function(XMLHttpRequest,status){ 
-				　　　　if(status=='timeout'){
-				　　　　　 alert('超时');
-				　　　　}
-				　　},
-			});
-			
-			$.ajax({
-	        		url: 'http://'+ipUrl+'/wbi/yield/getWfAllRate',//根据风场ID获取收益
-			        type: 'post',
-			        async:false,
-			        data:{'wfid':wfId[key]},
-			        dataType: 'json',//here
-			        success:function (data) {
-			        	month2=[],cost=[],income=[];
-			        	for(var i in data.data){
-			        		month2.push(data.data[i].month+"月");
-			        		cost.push(data.data[i].costs);
-			        		income.push(data.data[i].incomes);
-			        	}
-			        },
-			        complete : function(XMLHttpRequest,status){ 
-				　　　　if(status=='timeout'){
-				　　　　　 alert('超时');
-				　　　　}
-				　　},
-			});
-			$.ajax({
-        		url: 'http://'+ipUrl+'/wbi/TBA/getWfLastMonthTBA',//TBA-YES
-		        type: 'post',
-		        async:false,
-		        data:{'wfid':wfId[key]},
-		        dataType: 'json',//here
-		        success:function (data) {
-		        	runTime=data.data[0].runtimes;
-		        	downTime=data.data[0].downtimes;
-		        	TBA=data.data[0].tba;
-		        },
-		        complete : function(XMLHttpRequest,status){ 
-			　　　　if(status=='timeout'){
-			　　　　　 alert('超时');
-			　　　　}
-			　　},
-		    });
-
+		
         },
         changepageHealthyT:()=>{
         	dispatch(actions.setVars('showPage', 'healthytime'));
