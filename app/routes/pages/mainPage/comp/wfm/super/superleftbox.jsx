@@ -20,10 +20,6 @@ let Component = React.createClass({
     },
 
     render() {
-         let data=dataBase.ModelData;
-        let mod=model.Model;
-        let  mat=matrix.Model;
-        let matD=matData.ModelData;
         let {all,zhzb,bbs,chooseONL,chooseALL,chooseFault,chooseRepair,chooseOffline,chooseWFStandby,chooseWFLIM,choosePVALL,choosePVONL,choosePVFLT,choosePVOFL}=this.props;
         let mod1=zhzb.Model;
         let data2=bbs.ModelData;
@@ -59,36 +55,36 @@ let Component = React.createClass({
                           
                          </div>
                           <div className={styles.wind} id='wind'>
-                             <div className={styles.box} style={{color:mod.dis.ONL.color}} onClick = {()=> chooseONL()}>
+                             <div className={styles.box} style={{color:'#0f0'}} onClick = {()=> chooseONL()}>
                                 <span className={styles.block}><img src={icon0}/></span>
-                                <span className={styles.contect}>{mod.dis.ONL.name}</span>
+                                <span className={styles.contect}>并网</span>
                                 <span className={styles.numx}>{data2[8888801].RunCount_SOAM}</span>
                              </div>
 
-                             <div className={styles.box} style={{color:mod.dis.FaultCount.color}} onClick ={()=> chooseFault()}>
+                             <div className={styles.box} style={{color:'#f00'}} onClick ={()=> chooseFault()}>
                                 <span className={styles.block}><img src={icon1}/></span>
                                 <span className={styles.contect}>{mod1.dis.FaultCount.name}</span>
                                 <span className={styles.numx}>{data2[8888801].FaultCount}</span>
                              </div>
 
-                             <div className={styles.box} style={{color:mod.dis.RepairCount.color}} onClick ={()=> chooseRepair()}>
+                             <div className={styles.box} style={{color:'#ff0'}} onClick ={()=> chooseRepair()}>
                                 <span className={styles.block}><img src={icon2}/></span>
                                 <span className={styles.contect}>{mod1.dis.RepairCount.name}</span>
                                 <span className={styles.numx}>{data2[8888801].RepairCount}</span>
                              </div>
-                               <div className={styles.box} style={{color:mod.dis.OfflineCount.color}} onClick ={()=> chooseOffline()}>
+                               <div className={styles.box} style={{color:'#aaa'}} onClick ={()=> chooseOffline()}>
                                 <span className={styles.block}><img src={icon3}/></span>
                                 <span className={styles.contect}>{mod1.dis.OfflineCount.name}</span>
                                 <span className={styles.numx}>{data2[8888801].OfflineCount}</span>
                              </div>
 
-                             <div className={styles.box} style={{color:mod.dis.WFStandbyCount.color}} onClick ={()=> chooseWFStandby()}>
+                             <div className={styles.box} style={{color:mod1.dis.WFStandbyCount.color}} onClick ={()=> chooseWFStandby()}>
                                 <span className={styles.block}><img src={icon4}/></span>
                                 <span className={styles.contect}>{mod1.dis.WFStandbyCount.name}</span>
                                 <span className={styles.numx}>{data2[8888801].WFStandbyCount}</span>
                              </div>
 
-                             <div className={styles.box} style={{color:mod.dis.WFLIMCount.color}} onClick ={()=> chooseWFLIM()}>
+                             <div className={styles.box} style={{color:'#fff'}} onClick ={()=> chooseWFLIM()}>
                                 <span className={styles.block}><img src={icon5}/></span>
                                 <span className={styles.contect}>{mod1.dis.WFLIMCount.name}</span>
                                 <span className={styles.numx}>{data2[8888801].WFLIMCount}</span>
@@ -110,19 +106,19 @@ let Component = React.createClass({
                         <div className={styles.spedc} id='specd'>
 
 
-                            <div className={`${styles.box} ${styles.box1}`} style={{color:mod.dis.PVONL.color}} onClick ={()=> choosePVONL()}>
+                            <div className={`${styles.box} ${styles.box1}`} style={{color:mod1.dis.PVONL.color}} onClick ={()=> choosePVONL()}>
                                 <span className={styles.block}><img src={icon0}/></span>
                                 <span className={styles.contect} >{mod1.dis.PVONL.name}</span>
                                 <span className={styles.num} >{data2[8888802].PVONL}</span>
                              </div>
 
-                             <div className={`${styles.box} ${styles.box1}`} style={{color:mod.dis.PVFLT.color}} onClick ={()=> choosePVFLT()}>
+                             <div className={`${styles.box} ${styles.box1}`} style={{color:mod1.dis.PVFLT.color}} onClick ={()=> choosePVFLT()}>
                                 <span className={styles.block}><img src={icon1}/></span>
                                 <span className={styles.contect} >{mod1.dis.PVFLT.name}</span>
                                 <span className={styles.num} >{data2[8888802].PVFLT}</span>
                              </div>
 
-                             <div className={`${styles.box} ${styles.box1}`} style={{color:mod.dis.PVOFL.color}} onClick ={()=> choosePVOFL()}>
+                             <div className={`${styles.box} ${styles.box1}`} style={{color:'#aaa'}} onClick ={()=> choosePVOFL()}>
                                 <span className={styles.block}><img src={icon3}/></span>
                                 <span className={styles.contect} >{mod1.dis.PVOFL.name}</span>
                                 <span className={styles.num} >{data2[8888802].PVOFL}</span>

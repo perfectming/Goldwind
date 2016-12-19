@@ -15,10 +15,6 @@ let Component = React.createClass({
     },
 
     render() {
-        let data=dataBase.ModelData;
-        let mod=model.Model;
-        let  mat=matrix.Model;
-        let matD=matData.ModelData;
         let {clickNumber, showFlag, changeFlag, flag,play,map,map1} = this.props;
         return (
             <div className={styles.bodyBox}>

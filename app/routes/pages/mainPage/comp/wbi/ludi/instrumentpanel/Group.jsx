@@ -2,14 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Groupstyle.scss';
 import Yearelectric from './Yearelectric.jsx';
-import Pie2 from '../../wfm/mxx/Pie2';
-import Login from '../../../../../../components/common/Loading.jsx';
+import Pie2 from '../../../wfm/mxx/Pie2';
+import Login from '../../../../../../../components/common/Loading.jsx';
 
 var ipUrl='10.68.100.32:8080';
 var actions = require('redux/actions');
 var $ =require("jQuery");
 
-let profit,amounts,rate,yearPro,month2,cost,incomes,shouldElec,actrulElec,sortArr,yearELec,yearPlanELec,monthElec,monthPlanElec,dayelec,dayPlanElec,arrPlan=[],month1=[],arrAct=[],runTime,downTime,tba;
+let healthy,profit,amounts,rate,yearPro,month2,cost,incomes,shouldElec,actrulElec,sortArr,yearELec,yearPlanELec,monthElec,monthPlanElec,dayelec,dayPlanElec,arrPlan=[],month1=[],arrAct=[],runTime,downTime,tba;
 
 var actions = require('redux/actions');
 
@@ -42,14 +42,14 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.section}>
                             <div className={styles.border}></div>
-                            <div className={styles.text1}>当前30分·总分100分</div>
+                            <div className={styles.text1}>当前{healthy}分·总分100分</div>
                             <div className={styles.alink}>
                                 <a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/><br/>
                                 <a className={styles.time} onClick={()=>changepageHealthyT()}></a>
                             </div>
                             <div className={styles.sectionBox}>
-                                <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{82}%</p>健康度</span>
-                                <Pie2 color={.81>1? ['#1fe005','#fbd500']:.81>0.8?['#fbd500','#39565e']:.81>0.6?['#ff0000','#39565e']:['#d06960','#39565e']} num={[53,13]}></Pie2>
+                                <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{healthy}%</p>健康度</span>
+                                <Pie2 color={healthy/100>1? ['#1fe005','#fbd500']:healthy/100>0.8?['#fbd500','#39565e']:healthy/100>0.6?['#ff0000','#39565e']:['#d06960','#39565e']} num={[healthy,100-healthy]}></Pie2>
                             </div>
                         </div>
                         <div className={styles.section}>
@@ -237,15 +237,26 @@ const mapDispatchToProps = (dispatch) => {
 								                type: 'post',
 								                async:true,
 								                dataType: 'json',
-								                timeout : 60000,
 								                success:function (data) {
 								                    runTime=data.data[0].runtimes;
 								                    downTime=data.data[0].downtimes;
 								                    tba=data.data[0].tba;
-								
-								                },
+												},
 								                complete : function(XMLHttpRequest,status){
-								                    dispatch(actions.setVars('bool', true));
+								                    $.ajax({
+										                url:'http://'+ipUrl+'/wbi/Health/getCompanyHealth',//TBA饼图
+										                type: 'post',
+										                data: 'type=0&groupid=&wfid=',
+										                async:true,
+										                dataType: 'json',
+										                timeout : 60000,
+										                success:function (data) {
+										                    healthy=data.data.health;
+														},
+										                complete : function(XMLHttpRequest,status){
+										                    dispatch(actions.setVars('bool', true));
+										                },
+										            });
 								                },
 								            });
 						                },

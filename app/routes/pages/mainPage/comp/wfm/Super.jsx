@@ -32,8 +32,6 @@ let Component = React.createClass({
        if(boolsuper){
         let data=bbs.ModelData;
         let mod=zhzb.Model;
-        let  mat=matrix.Model;
-        let matD=matData.ModelData;
         let datename00=bbs.ModelData[8888800].CurDayPowerCurve.Time;
         let date00=bbs.ModelData[8888800].CurDayPowerCurve.Value;
         let datename01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Time;
