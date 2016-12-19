@@ -12,36 +12,11 @@ let Component = React.createClass({
         this.props.init();
     },
     
-    buttonAction (){
-        // 获取select 选择的内容
-        //开始时间
-        var sTime = this.refs.startTime.value;
-        //结束时间时间
-        var eTime = this.refs.endTime.value;
-
-        if(sTime == '' || eTime == ''){
-            alert('请选择开始或者结束时间');
-            return false;
-        }
-        let {groupid,ipUrl}=this.props;
-        $.ajax({
-	        		url:'http://'+ipUrl+'/wbi/KPI/getCompanyKPI',//默认获取1区域ID-YES
-			        type: 'post',
-			        async:false,
-			        dataType: 'json',
-			        data:{'startTime':sTime,'endTime':eTime,'groupid':groupid},
-			        timeout : 60000, 
-			        success:function (data) {
-			        	console.log(data);
-			        },
-			        complete : function(XMLHttpRequest,status){ 
-					　　　
-					},
-				});
-    },
+    
 
     render() {
-        let {buttonAction, onFocus,changeValueS,changeValueE}= this.props;
+        let {buttonAction, onFocus,changeValueS,changeValueE,startTime,endTime}= this.props;
+        let {areaId,ipUrl,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,wtName,wtElec,wtPBA,wtLose}=this.props;
         let comp = data.list;
         return (	
             <div className={styles.inquireBox}>
@@ -57,7 +32,7 @@ let Component = React.createClass({
                         }else if (value.type === 'button') {
                             return (
                                     <div className={styles.btnBox} key={key}>
-                                        <button onClick={this.buttonAction}>{value.title}</button>
+                                        <button onClick={()=>buttonAction(areaId,ipUrl,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,wtName,wtElec,wtPBA,wtLose)}>{value.title}</button>
                                     </div>
                                 )
                             }
@@ -73,6 +48,7 @@ const mapStateToProps = (state) => {
     return {
     	X1 : state.vars.x1,
     	ipUrl : state.vars.ipUrl,
+    	areaId : state.vars.areaId,    	
     }
 };
 
@@ -106,13 +82,90 @@ const mapDispatchToProps = (dispatch) => {
         	var endString=yearString+'-'+monthString+'-'+dayString;
         	$('#startTime').val(startString);
             $('#endTime').val(endString);
+            dispatch(actions.setVars('startTime', $('#startTime').val()));
+            dispatch(actions.setVars('endTime', $('#endTime').val()));
+            
         },
         changeValueS : (e) => {
         	
         },
         changeValueE : (e) => {
         	
+        },
+        buttonAction : (areaId,ipUrl,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,wtName,wtElec,wtPBA,wtLose) => {
+        // 获取select 选择的内容
+        //开始时间
+        var sTime = $('#startTime').val();
+        //结束时间时间
+        var eTime = $('#endTime').val();
+		if(sTime == '' || eTime == ''){
+            alert('请选择开始或者结束时间');
+            return false;
         }
+        dispatch(actions.setVars('startTime', $('#startTime').val()));
+        dispatch(actions.setVars('endTime', $('#endTime').val()));
+        $.ajax({
+        		url: 'http://'+ipUrl+'/wbi/KPI/getCompanyKPI',//查询ID电量--YES
+		        type: 'post',
+		        async:false,
+		        data:{startTime:sTime,endTime:eTime},
+		        dataType: 'json',//here
+		        success:function (data) {
+		        	areaId=[],areaName=[],areaPBA=[],areaFault=[],areaLimit=[],areaMaintain=[],areaDevice=[],areaElec=[];
+		        	wfName=[],wfId=[],wfElec=[],wfLose=[],wfPBA=[],wtElec=[],wtLose=[],wtPBA=[],wtName=[];
+		        	for(var i in data.data[2]){
+		        		areaId.push(data.data[2][i].groupid);
+		        		areaName.push(data.data[2][i].groupname);
+		        		areaPBA.push(data.data[2][i].pba*100);
+		        		areaFault.push(data.data[2][i].faultloss);
+		        		areaLimit.push(data.data[2][i].limitloss);
+		        		areaMaintain.push(data.data[2][i].maintainloss);
+		        		areaDevice.push(data.data[2][i].nodevreasonloss);
+		        		areaElec.push(data.data[2][i].poweract);
+		        	};
+		        	
+		        	for(var i in data.data[1]){
+		        		wfName.push(data.data[1][i].wfname);
+		        		wfId.push(data.data[1][i].wfid);
+		        		wfElec.push(data.data[1][i].poweract);
+		        		wfLose.push(data.data[1][i].totalloss);
+		        		wfPBA.push(data.data[1][i].pba*100)
+		        	}
+		        	wtData=data.data[0];
+		        	wtData.sort(function(a,b){return b.pba-a.pba});
+		        	for(var i=0;i<10;i++){
+		        		wtName.push(wtData.slice(0,10)[i].wtname);
+		        		wtElec.push(wtData.slice(0,10)[i].poweract);
+		        		wtLose.push(wtData.slice(0,10)[i].totalloss);
+		        		wtPBA.push(wtData.slice(0,10)[i].pba*100);
+		        	};
+		        	
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		  	});
+		  	dispatch(actions.setVars('areaId', areaId));
+			dispatch(actions.setVars('areaName', areaName));
+		    dispatch(actions.setVars('areaPBA', areaPBA));
+		    dispatch(actions.setVars('areaFault', areaFault));
+		    dispatch(actions.setVars('areaLimit', areaLimit));
+		    dispatch(actions.setVars('areaMaintain', areaMaintain));
+		    dispatch(actions.setVars('areaDevice', areaDevice));
+		    dispatch(actions.setVars('areaElec', areaElec));
+		    dispatch(actions.setVars('wfName', wfName));
+		    dispatch(actions.setVars('wfId', wfId));
+		    dispatch(actions.setVars('wfElec', wfElec));
+		    dispatch(actions.setVars('wfLose', wfLose));
+		    dispatch(actions.setVars('wfPBA', wfPBA));
+		    dispatch(actions.setVars('wtName', wtName));
+			dispatch(actions.setVars('wtElec', wtElec));
+			dispatch(actions.setVars('wtLose', wtLose));
+			dispatch(actions.setVars('wtPBA', wtPBA));
+			dispatch(actions.setVars('wtData',wtData ));
+    	},
     };
 };
 
