@@ -16,8 +16,8 @@ let PBA=data.PBA;
 let height=700;
 let moree;
  let datee=new Date;
-let month=datee.getMonth(); 
-  
+let month=datee.getMonth();
+
   let key=month;
 let Component = React.createClass({
      componentWillMount() {
@@ -76,10 +76,10 @@ let Component = React.createClass({
                         <img src={icono}/>
                     </div>
                     <div className={styles.buttons}>
-                      <button className={btn===0? styles.btn0 : styles.btn1}onClick={()=>gogogo(actbt,xxdwfId)} > 前10</button>
-                      <button className={btn===1? styles.btn0 : styles.btn1}onClick={()=>back(actbt,xxdwfId)}>后10</button>
-                      <button className={btn===2? styles.btn0 : styles.btn1} onClick={()=>more(actbt,xxdwfId)}>更多</button>
-                   </div>
+                        <button className={btn===0? styles.btn0 : styles.btn1}onClick={()=>gogogo(actbt,xxdwfId)} > 前10</button>
+                        <button className={btn===1? styles.btn0 : styles.btn1}onClick={()=>back(actbt,xxdwfId)}>后10</button>
+                        <button className={btn===2? styles.btn0 : styles.btn1} onClick={()=>more(actbt,xxdwfId)}>更多</button>
+                    </div>
                 </div>
                 </div>
             </div>
@@ -96,8 +96,8 @@ const mapStateToProps = (state) => {
         actbt:state.vars.actbt,
         wind:state.vars.wind,
         windP:state.vars.windP,
-         moree:state.vars.moree,
-           befor_pagee : state.vars.befor_pagee,
+        moree:state.vars.moree,
+        befor_pagee : state.vars.befor_pagee,
         befor_page2 : state.vars.befor_page2,
         // 将上个月的数据赋值
         PBASpaceFirstWtname: state.vars.PBASpaceWtname1,
@@ -126,111 +126,111 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-         ajax: (xxdwfId,xxdwfNa) => {
+        ajax: (xxdwfId,xxdwfNa) => {
             let areaIds=[];
             let windIds=[];
-        // 初始化上个月的数据
-         let PBASpaceFirstWtname=[];
-         let PBASpaceFirstPoweract=[];
-         let PBASpaceFirstFaultloss=[];
-         let PBASpaceFirstMaintainloss=[];
-         let PBASpaceFirstLimitloss=[];
-         let PBASpaceFirstNodevreasonloss=[];
-         let PBASpaceFirstPbaP=[];
+            // 初始化上个月的数据
+            let PBASpaceFirstWtname=[];
+            let PBASpaceFirstPoweract=[];
+            let PBASpaceFirstFaultloss=[];
+            let PBASpaceFirstMaintainloss=[];
+            let PBASpaceFirstLimitloss=[];
+            let PBASpaceFirstNodevreasonloss=[];
+            let PBASpaceFirstPbaP=[];
          
             // 获取上面的区域
-           $.ajax({
-             type:'post',
-             url:'http://'+input_url+':8080/wbi/BaseData/getGroup',  
-             async:false,
-          
-             dataType:'json',
-             timeout:'3000',
-             success:function(data){
-               
-                for(let i in data.data){
-                       areaIds.push(i);
-                }
-               
-             // 获取x轴的值内蒙达茂天润风电场
-            
-             },
-             error:function(){
-            
-             },
-           });
-           //获取所有的风场
             $.ajax({
-              type:'post',
-              url:'http://'+input_url+':8080/wbi/BaseData/getWfsByGroupid',  
-              async:false,
-              data:{
-               'groupid':areaIds[0],
-              },
-              dataType:'json',
-              timeout:'3000',
-              success:function(data){
+                type:'post',
+                url:'http://'+input_url+':8080/wbi/BaseData/getGroup',
+                async:false,
+          
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+               
+                    for(let i in data.data){
+                        areaIds.push(i);
+                    }
+               
+                    // 获取x轴的值内蒙达茂天润风电场
+            
+                },
+                error:function(){
+            
+                },
+            });
+            //获取所有的风场
+            $.ajax({
+                type:'post',
+                url:'http://'+input_url+':8080/wbi/BaseData/getWfsByGroupid',
+                async:false,
+                data:{
+                    'groupid':areaIds[0],
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
              
-                 for(let i in data.data){
+                    for(let i in data.data){
                         windIds.push(i);
-                 }
+                    }
                 
 
-              // 获取x轴的值内蒙达茂天润风电场
+                    // 获取x轴的值内蒙达茂天润风电场
             
-              },
-              error:function(){
+                },
+                error:function(){
                   
-              },
+                },
             });
             // 根据风场找PBA空间
             $.ajax({
-              type:'post',
-              url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
-              async:false,
-              data:{
-               'wfid':xxdwfId,
-               'month':month,
-              },
-              dataType:'json',
-              timeout:'3000',
-              success:function(data){
+                type:'post',
+                url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',
+                async:false,
+                data:{
+                    'wfid':xxdwfId,
+                    'month':month,
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
            
-               let PBASpaceFirstPba=data.data;
-                for ( let  i=0;i<10;i++){
-                     let wtname=PBASpaceFirstPba[i].wtname;
-                     PBASpaceFirstWtname.push(wtname);
-                     let poweract=PBASpaceFirstPba[i].poweract;
-                     PBASpaceFirstPoweract.push(poweract);
-                     let faultloss=PBASpaceFirstPba[i].faultloss;
-                     PBASpaceFirstFaultloss.push(faultloss);
-                     let maintainloss=PBASpaceFirstPba[i].maintainloss;
-                     PBASpaceFirstMaintainloss.push(maintainloss);
-                     let limitloss=PBASpaceFirstPba[i].limitloss;
-                     PBASpaceFirstLimitloss.push(limitloss);
-                     let nodevreasonloss=PBASpaceFirstPba[i].nodevreasonloss;
-                     PBASpaceFirstNodevreasonloss.push(nodevreasonloss);
-                     let pba=PBASpaceFirstPba[i].pba
-                     PBASpaceFirstPbaP.push(pba);
-                }
+                    let PBASpaceFirstPba=data.data;
+                    for ( let  i=0;i<10;i++){
+                        let wtname=PBASpaceFirstPba[i].wtname;
+                        PBASpaceFirstWtname.push(wtname);
+                        let poweract=PBASpaceFirstPba[i].poweract;
+                        PBASpaceFirstPoweract.push(poweract);
+                        let faultloss=PBASpaceFirstPba[i].faultloss;
+                        PBASpaceFirstFaultloss.push(faultloss);
+                        let maintainloss=PBASpaceFirstPba[i].maintainloss;
+                        PBASpaceFirstMaintainloss.push(maintainloss);
+                        let limitloss=PBASpaceFirstPba[i].limitloss;
+                        PBASpaceFirstLimitloss.push(limitloss);
+                        let nodevreasonloss=PBASpaceFirstPba[i].nodevreasonloss;
+                        PBASpaceFirstNodevreasonloss.push(nodevreasonloss);
+                        let pba=PBASpaceFirstPba[i].pba
+                        PBASpaceFirstPbaP.push(pba);
+                    }
            
          
                
             
-              },
-              error:function(){
+                },
+                error:function(){
                
-              },
+                },
             });
             // 将初始化月份赋值
-           dispatch(actions.setVars('PBASpaceWtname1',PBASpaceFirstWtname));
-           dispatch(actions.setVars('PBASpaceFirstPoweract1',PBASpaceFirstPoweract ));
-           dispatch(actions.setVars('PBASpaceFirstMaintainloss1',PBASpaceFirstMaintainloss ));
-           dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceFirstLimitloss));
-           dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFirstFaultloss ));
-           dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceFirstNodevreasonloss ));
-           dispatch(actions.setVars('PBASpaceFirstPba12',PBASpaceFirstPbaP ));
-           dispatch(actions.setVars('actbt',month-1 ));
+            dispatch(actions.setVars('PBASpaceWtname1',PBASpaceFirstWtname));
+            dispatch(actions.setVars('PBASpaceFirstPoweract1',PBASpaceFirstPoweract ));
+            dispatch(actions.setVars('PBASpaceFirstMaintainloss1',PBASpaceFirstMaintainloss ));
+            dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceFirstLimitloss));
+            dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFirstFaultloss ));
+            dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceFirstNodevreasonloss ));
+            dispatch(actions.setVars('PBASpaceFirstPba12',PBASpaceFirstPbaP ));
+            dispatch(actions.setVars('actbt',month-1 ));
         }
         ,
         init: () => {
@@ -239,262 +239,262 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
-         changpage :(value,key,xxdwfId)=>{
-             //切换月份传值
-             let PBASpaceWtname=[];
-             let PBASpacePoweract=[];
-             let PBASpaceFaultloss=[];
-             let PBASpaceMaintainloss=[];
-             let PBASpaceLimitloss=[];
-             let PBASpaceNodevreasonloss=[];
-             let PBASpacePba=[];
-             let PBASpacePbaPBA=[];
-             $.ajax({
-              type:'post',
-              url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
-              async:false,
-              data:{
-               'wfid':xxdwfId,
-               'month':key+1,
-              },
-              dataType:'json',
-              timeout:'3000',
-              success:function(data){
+        changpage :(value,key,xxdwfId)=>{
+            //切换月份传值
+            let PBASpaceWtname=[];
+            let PBASpacePoweract=[];
+            let PBASpaceFaultloss=[];
+            let PBASpaceMaintainloss=[];
+            let PBASpaceLimitloss=[];
+            let PBASpaceNodevreasonloss=[];
+            let PBASpacePba=[];
+            let PBASpacePbaPBA=[];
+            $.ajax({
+                type:'post',
+                url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',
+                async:false,
+                data:{
+                    'wfid':xxdwfId,
+                    'month':key+1,
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
             
-                let PBASpacePba=data.data;
-                 for  ( let  i=0;i<10;i++){
-                      let wtname=PBASpacePba[i].wtname;
-                      PBASpaceWtname.push(wtname);
-                      let poweract=PBASpacePba[i].poweract;
-                      PBASpacePoweract.push(poweract);
-                      let faultloss=PBASpacePba[i].faultloss;
-                      PBASpaceFaultloss.push(faultloss);
-                      let maintainloss=PBASpacePba[i].maintainloss;
-                      PBASpaceMaintainloss.push(maintainloss);
-                      let limitloss=PBASpacePba[i].limitloss;
-                      PBASpaceLimitloss.push(limitloss);
-                      let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
-                      PBASpaceNodevreasonloss.push(nodevreasonloss);
-                      let pba=Number(PBASpacePba[i].pba.toFixed(2));
+                    let PBASpacePba=data.data;
+                    for  ( let  i=0;i<10;i++){
+                        let wtname=PBASpacePba[i].wtname;
+                        PBASpaceWtname.push(wtname);
+                        let poweract=PBASpacePba[i].poweract;
+                        PBASpacePoweract.push(poweract);
+                        let faultloss=PBASpacePba[i].faultloss;
+                        PBASpaceFaultloss.push(faultloss);
+                        let maintainloss=PBASpacePba[i].maintainloss;
+                        PBASpaceMaintainloss.push(maintainloss);
+                        let limitloss=PBASpacePba[i].limitloss;
+                        PBASpaceLimitloss.push(limitloss);
+                        let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
+                        PBASpaceNodevreasonloss.push(nodevreasonloss);
+                        let pba=Number(PBASpacePba[i].pba.toFixed(2));
 
-                      PBASpacePbaPBA.push(pba);
-                 }
+                        PBASpacePbaPBA.push(pba);
+                    }
                
             
-              },
-              error:function(){
+                },
+                error:function(){
                
-              },
+                },
             });
             // 将变化月份赋值
-       dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
-       dispatch(actions.setVars('PBASpaceFirstPoweract1',PBASpacePoweract ));
-       dispatch(actions.setVars('PBASpaceFirstMaintainloss1',PBASpaceMaintainloss ));
-       dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceLimitloss));
-       dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFaultloss ));
-       dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
-       dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
-      dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
+            dispatch(actions.setVars('PBASpaceFirstPoweract1',PBASpacePoweract ));
+            dispatch(actions.setVars('PBASpaceFirstMaintainloss1',PBASpaceMaintainloss ));
+            dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceLimitloss));
+            dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFaultloss ));
+            dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
+            dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
+            dispatch(actions.setVars('actbt',key ));
           
         },
-         gogogo:(actbt,xxdwfId)=>{
+        gogogo:(actbt,xxdwfId)=>{
            
             let PBASpaceWtname=[];
-             let PBASpacePoweract=[];
-             let PBASpaceFaultloss=[];
-             let PBASpaceMaintainloss=[];
-             let PBASpaceLimitloss=[];
-             let PBASpaceNodevreasonloss=[];
-             let PBASpacePba=[];
-             let PBASpacePbaPBA=[];
-             $.ajax({
-              type:'post',
-              url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
-              async:false,
-              data:{
-               'wfid':xxdwfId,
-               'month':actbt+1,
-              },
-              dataType:'json',
-              timeout:'3000',
-              success:function(data){
+            let PBASpacePoweract=[];
+            let PBASpaceFaultloss=[];
+            let PBASpaceMaintainloss=[];
+            let PBASpaceLimitloss=[];
+            let PBASpaceNodevreasonloss=[];
+            let PBASpacePba=[];
+            let PBASpacePbaPBA=[];
+            $.ajax({
+                type:'post',
+                url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',
+                async:false,
+                data:{
+                    'wfid':xxdwfId,
+                    'month':actbt+1,
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
              
-                let PBASpacePba=data.data;
-                 for  ( let  i=0;i<10;i++){
-                      let wtname=PBASpacePba[i].wtname;
-                      PBASpaceWtname.push(wtname);
-                      let poweract=PBASpacePba[i].poweract;
-                      PBASpacePoweract.push(poweract);
-                      let faultloss=PBASpacePba[i].faultloss;
-                      PBASpaceFaultloss.push(faultloss);
-                      let maintainloss=PBASpacePba[i].maintainloss;
-                      PBASpaceMaintainloss.push(maintainloss);
-                      let limitloss=PBASpacePba[i].limitloss;
-                      PBASpaceLimitloss.push(limitloss);
-                      let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
-                      PBASpaceNodevreasonloss.push(nodevreasonloss);
-                      let pba=Number(PBASpacePba[i].pba.toFixed(2));
+                    let PBASpacePba=data.data;
+                    for  ( let  i=0;i<10;i++){
+                        let wtname=PBASpacePba[i].wtname;
+                        PBASpaceWtname.push(wtname);
+                        let poweract=PBASpacePba[i].poweract;
+                        PBASpacePoweract.push(poweract);
+                        let faultloss=PBASpacePba[i].faultloss;
+                        PBASpaceFaultloss.push(faultloss);
+                        let maintainloss=PBASpacePba[i].maintainloss;
+                        PBASpaceMaintainloss.push(maintainloss);
+                        let limitloss=PBASpacePba[i].limitloss;
+                        PBASpaceLimitloss.push(limitloss);
+                        let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
+                        PBASpaceNodevreasonloss.push(nodevreasonloss);
+                        let pba=Number(PBASpacePba[i].pba.toFixed(2));
 
-                      PBASpacePbaPBA.push(pba);
-                 }
+                        PBASpacePbaPBA.push(pba);
+                    }
                
              
           
             
-              },
-              error:function(){
+                },
+                error:function(){
                 
-              },
+                },
             });
             // 将变化月份赋值
-       dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
-       dispatch(actions.setVars('PBASpaceFirstPoweract1',PBASpacePoweract ));
-       dispatch(actions.setVars('PBASpaceFirstMaintainloss1',PBASpaceMaintainloss ));
-       dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceLimitloss));
-       dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFaultloss ));
-       dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
-       dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
-       dispatch(actions.setVars('btnn',0));
+            dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
+            dispatch(actions.setVars('PBASpaceFirstPoweract1',PBASpacePoweract ));
+            dispatch(actions.setVars('PBASpaceFirstMaintainloss1',PBASpaceMaintainloss ));
+            dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceLimitloss));
+            dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFaultloss ));
+            dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
+            dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
+            dispatch(actions.setVars('btnn',0));
          
-             // $('.box').css('opacity',".5")
+            // $('.box').css('opacity',".5")
         },
         back:(actbt,xxdwfId)=>{
            
             let PBASpaceWtname=[];
-             let PBASpacePoweract=[];
-             let PBASpaceFaultloss=[];
-             let PBASpaceMaintainloss=[];
-             let PBASpaceLimitloss=[];
-             let PBASpaceNodevreasonloss=[];
+            let PBASpacePoweract=[];
+            let PBASpaceFaultloss=[];
+            let PBASpaceMaintainloss=[];
+            let PBASpaceLimitloss=[];
+            let PBASpaceNodevreasonloss=[];
 
-             let PBASpacePbaPBA=[];
-             $.ajax({
-              type:'post',
-              url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
-              async:false,
-              data:{
-               'wfid':xxdwfId,
-               'month':actbt+1,
-              },
-              dataType:'json',
-              timeout:'3000',
-              success:function(data){
+            let PBASpacePbaPBA=[];
+            $.ajax({
+                type:'post',
+                url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',
+                async:false,
+                data:{
+                    'wfid':xxdwfId,
+                    'month':actbt+1,
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
             
 
-                let PBASpacePba=data.data;
+                    let PBASpacePba=data.data;
                 
-                  let length=PBASpacePba.length-10;
+                    let length=PBASpacePba.length-10;
 
-                 for  ( let i = length;i>length-10;i--){
-                      let wtname=PBASpacePba[i].wtname;
-                      PBASpaceWtname.push(wtname);
-                      let poweract=PBASpacePba[i].poweract;
-                      PBASpacePoweract.push(poweract);
-                      let faultloss=PBASpacePba[i].faultloss;
-                      PBASpaceFaultloss.push(faultloss);
-                      let maintainloss=PBASpacePba[i].maintainloss;
-                      PBASpaceMaintainloss.push(maintainloss);
-                      let limitloss=PBASpacePba[i].limitloss;
-                      PBASpaceLimitloss.push(limitloss);
-                      let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
-                      PBASpaceNodevreasonloss.push(nodevreasonloss);
-                      let pba=Number(PBASpacePba[i].pba.toFixed(2));
+                    for  ( let i = length;i>length-10;i--){
+                        let wtname=PBASpacePba[i].wtname;
+                        PBASpaceWtname.push(wtname);
+                        let poweract=PBASpacePba[i].poweract;
+                        PBASpacePoweract.push(poweract);
+                        let faultloss=PBASpacePba[i].faultloss;
+                        PBASpaceFaultloss.push(faultloss);
+                        let maintainloss=PBASpacePba[i].maintainloss;
+                        PBASpaceMaintainloss.push(maintainloss);
+                        let limitloss=PBASpacePba[i].limitloss;
+                        PBASpaceLimitloss.push(limitloss);
+                        let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
+                        PBASpaceNodevreasonloss.push(nodevreasonloss);
+                        let pba=Number(PBASpacePba[i].pba.toFixed(2));
 
-                      PBASpacePbaPBA.push(pba);
-                 }
+                        PBASpacePbaPBA.push(pba);
+                    }
                
 
             
             
             
-              },
-              error:function(){
+                },
+                error:function(){
                   
-              },
+                },
             });
             // 将变化月份赋值
-       dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
-       dispatch(actions.setVars('PBASpaceFirstPoweract1',PBASpacePoweract ));
-       dispatch(actions.setVars('PBASpaceFirstMaintainloss1',PBASpaceMaintainloss ));
-       dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceLimitloss));
-       dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFaultloss ));
-       dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
-       dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
-       dispatch(actions.setVars('btnn',1));
+            dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
+            dispatch(actions.setVars('PBASpaceFirstPoweract1',PBASpacePoweract ));
+            dispatch(actions.setVars('PBASpaceFirstMaintainloss1',PBASpaceMaintainloss ));
+            dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceLimitloss));
+            dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFaultloss ));
+            dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
+            dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
+            dispatch(actions.setVars('btnn',1));
          
-             // $('.box').css('opacity',".5")
+            // $('.box').css('opacity',".5")
         },
         more:(actbt,xxdwfId)=>{
-             $("#sss").show();
-             $('#boxcover').show();
-              let PBASpaceWtname=[];
-             let PBASpacePoweract=[];
-             let PBASpaceFaultloss=[];
-             let PBASpaceMaintainloss=[];
-             let PBASpaceLimitloss=[];
-             let PBASpaceNodevreasonloss=[];
-             let PBASpacePba=[];
-             let PBASpacePbaPBA=[];
-             $.ajax({
-              type:'post',
-              url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',  
-              async:false,
-              data:{
-               'wfid':xxdwfId,
-               'month':actbt+1,
-              },
-              dataType:'json',
-              timeout:'3000',
-              success:function(data){
+            $("#sss").show();
+            $('#boxcover').show();
+            let PBASpaceWtname=[];
+            let PBASpacePoweract=[];
+            let PBASpaceFaultloss=[];
+            let PBASpaceMaintainloss=[];
+            let PBASpaceLimitloss=[];
+            let PBASpaceNodevreasonloss=[];
+            let PBASpacePba=[];
+            let PBASpacePbaPBA=[];
+            $.ajax({
+                type:'post',
+                url:'http://'+input_url+':8080/wbi/PBA/getWFliedArea',
+                async:false,
+                data:{
+                    'wfid':xxdwfId,
+                    'month':actbt+1,
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
                 
-                let PBASpacePba=data.data;
-                 for  ( let i in PBASpacePba){
-                      let wtname=PBASpacePba[i].wtname;
-                      PBASpaceWtname.push(wtname);
-                      let poweract=PBASpacePba[i].poweract;
-                      PBASpacePoweract.push(poweract);
-                      let faultloss=PBASpacePba[i].faultloss;
-                      PBASpaceFaultloss.push(faultloss);
-                      let maintainloss=PBASpacePba[i].maintainloss;
-                      PBASpaceMaintainloss.push(maintainloss);
-                      let limitloss=PBASpacePba[i].limitloss;
-                      PBASpaceLimitloss.push(limitloss);
-                      let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
-                      PBASpaceNodevreasonloss.push(nodevreasonloss);
-                      let pba=Number(PBASpacePba[i].pba.toFixed(2));
+                    let PBASpacePba=data.data;
+                    for  ( let i in PBASpacePba){
+                        let wtname=PBASpacePba[i].wtname;
+                        PBASpaceWtname.push(wtname);
+                        let poweract=PBASpacePba[i].poweract;
+                        PBASpacePoweract.push(poweract);
+                        let faultloss=PBASpacePba[i].faultloss;
+                        PBASpaceFaultloss.push(faultloss);
+                        let maintainloss=PBASpacePba[i].maintainloss;
+                        PBASpaceMaintainloss.push(maintainloss);
+                        let limitloss=PBASpacePba[i].limitloss;
+                        PBASpaceLimitloss.push(limitloss);
+                        let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
+                        PBASpaceNodevreasonloss.push(nodevreasonloss);
+                        let pba=Number(PBASpacePba[i].pba.toFixed(2));
 
-                      PBASpacePbaPBA.push(pba);
-                 }
+                        PBASpacePbaPBA.push(pba);
+                    }
              
              
            
       
             
             
-              },
-              error:function(){
+                },
+                error:function(){
                   
-              },
+                },
             });
             // 将变化月份赋值
-       dispatch(actions.setVars('PBASpaceWtname11',PBASpaceWtname));
+            dispatch(actions.setVars('PBASpaceWtname11',PBASpaceWtname));
        
-      // dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
-       dispatch(actions.setVars('PBASpaceFirstPoweract11',PBASpacePoweract ));
-       dispatch(actions.setVars('PBASpaceFirstMaintainloss11',PBASpaceMaintainloss ));
-       dispatch(actions.setVars('PBASpaceFirstLimitloss11',PBASpaceLimitloss));
-       dispatch(actions.setVars('PBASpaceFirstFaultloss11',PBASpaceFaultloss ));
-       dispatch(actions.setVars('PBASpaceFirstNodevreasonloss11',PBASpaceNodevreasonloss ));
-       dispatch(actions.setVars('PBASpaceFirstPba121',PBASpacePbaPBA ));
-       dispatch(actions.setVars('btnn',2));
+            // dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
+            dispatch(actions.setVars('PBASpaceFirstPoweract11',PBASpacePoweract ));
+            dispatch(actions.setVars('PBASpaceFirstMaintainloss11',PBASpaceMaintainloss ));
+            dispatch(actions.setVars('PBASpaceFirstLimitloss11',PBASpaceLimitloss));
+            dispatch(actions.setVars('PBASpaceFirstFaultloss11',PBASpaceFaultloss ));
+            dispatch(actions.setVars('PBASpaceFirstNodevreasonloss11',PBASpaceNodevreasonloss ));
+            dispatch(actions.setVars('PBASpaceFirstPba121',PBASpacePbaPBA ));
+            dispatch(actions.setVars('btnn',2));
          
-             // $('.box').css('opacity',".5")
+            // $('.box').css('opacity',".5")
         },
         close:()=>{
             $("#sss").hide();
-              $('#boxcover').hide();
+            $('#boxcover').hide();
         },
-          backtop:(befor_pagee,befor_page2)=>{
+        backtop:(befor_pagee,befor_page2)=>{
             dispatch(actions.setVars('showPage',befor_pagee));
         },
     };

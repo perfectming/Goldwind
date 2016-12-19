@@ -16,13 +16,13 @@ let Component = React.createClass({
         let {actbt,changpage,backtop,befor_pagee='group',befor_page2}=this.props;
         return (
             <div className={styles.box}>
-                 <ul className={styles.monthbox}>
+                <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
                             return(<li className={actbt===key? styles.red : styles.green} key={key} onClick={()=>changpage(value,key)} >{value.name}</li>)
                         })
                     }
-              <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
+                    <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
 
                 </ul>
                 <div className={styles.bigbox}>
