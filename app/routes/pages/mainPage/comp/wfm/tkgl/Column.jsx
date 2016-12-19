@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
+var {getState} = require('redux/store');
 var ReactHighcharts = require('react-highcharts');
 
 let Component = React.createClass({
