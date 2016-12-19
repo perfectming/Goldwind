@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+var {getState} = require('redux/store');
 import del from '../../../img/icon/tabDel.png';
 import add from '../../../img/icon/tabAdd.png';
 var actions = require('redux/actions');

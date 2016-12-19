@@ -7,7 +7,7 @@ import Login from '../../../../../../../components/common/Loading.jsx';
 var $ =require("jQuery");
 var actions = require('redux/actions');
 
-let healthy,clickAreaId,areaName=[],areaId=[],areaCost=[],areaProfit=[],areaMonth=[],runTime,downTime,TBA,areaArr;
+let healthyArea,clickAreaId,areaName=[],areaId=[],areaCost=[],areaProfit=[],areaMonth=[],runTime,downTime,TBA,areaArr;
 let actb=0,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month=[],elecPlan=[],elecAct=[];
 
 
@@ -22,7 +22,7 @@ let Component = React.createClass({
    
 
     render() {
-        let{ipUrl,areaBool=false,actb,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{healthyArea,clickAreaId,areaName,areaId,areaCost,areaProfit,areaMonth,runTime,downTime,TBA,areaArr,actb,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month,elecPlan,elecAct,ipUrl,areaBool=false,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(areaBool){
         	return (
 	            <div className={styles.box}>
@@ -38,12 +38,12 @@ let Component = React.createClass({
 	           			<div className={styles.firstfloor}>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>当前{healthy}分<br/><br/>总分100分</span><br/><br/>
+	           						<span>当前{healthyArea}分<br/><br/>总分100分</span><br/><br/>
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthy}%</p>健康度</span>
-	           						<Pie2 color={(healthy/100)>1? ['#1fe005','#fbd500']:(healthy/100)>0.8?['#fbd500','#39565e']:(healthy/100)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[healthy,100-healthy]}></Pie2>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthyArea}%</p>健康度</span>
+	           						<Pie2 color={(healthyArea/100)>1? ['#1fe005','#fbd500']:(healthyArea/100)>0.8?['#fbd500','#39565e']:(healthyArea/100)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[healthyArea,100-healthyArea]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
@@ -170,6 +170,27 @@ const mapStateToProps = (state) => {
     	clickAreaId:state.vars.clickAreaId,
     	areaBool:state.vars.areaBool,
     	ipUrl : state.vars.ipUrl,
+    	
+    	areaName : state.vars.areaName,
+    	areaId : state.vars.areaId,
+    	areaMonth : state.vars.areaMonth,
+    	areaProfit : state.vars.areaProfit,
+    	areaCost : state.vars.areaCost,
+    	yearElec : state.vars.yearElec,
+    	monthElec : state.vars.monthElec,
+    	dayElec : state.vars.dayElec,
+    	yearPlanElec : state.vars.yearPlanElec,
+    	monthPlanElec : state.vars.monthPlanElec,
+    	dayPlanElec : state.vars.dayPlanElec,
+    	month : state.vars.month,
+    	elecPlan : state.vars.elecPlan,
+    	elecAct : state.vars.elecAct,
+    	elecActPBA : state.vars.elecActPBA,
+    	elecPlanPBA : state.vars.elecPlanPBA,
+    	runTime : state.vars.runTime,
+    	downTime : state.vars.downTime,
+    	TBA : state.vars.TBA,
+    	healthyArea : state.vars.healthyArea,
     }
 };
 
@@ -190,7 +211,9 @@ const mapDispatchToProps = (dispatch) => {
 		        	for(var i in data.data){
 		        		areaName.push(data.data[i]);
 		        		areaId.push(i);
-		        	}
+		        	};
+		        	dispatch(actions.setVars('areaName',areaName ));
+		        	dispatch(actions.setVars('areaId',areaId ));
 		        },
 		        complete : function(XMLHttpRequest,status){ 
 				　　　$.ajax({
@@ -205,7 +228,10 @@ const mapDispatchToProps = (dispatch) => {
 				        		areaMonth.push(data.data[i].month+"月");
 				        		areaProfit.push(data.data[i].incomes);
 				        		areaCost.push(data.data[i].costs);
-				        	}
+				        	};
+				        	dispatch(actions.setVars('areaMonth',areaMonth ));
+				        	dispatch(actions.setVars('areaProfit',areaProfit ));
+				        	dispatch(actions.setVars('areaCost',areaCost ));
 				        },
 				        complete : function(XMLHttpRequest,status){ 
 					　　　　  $.ajax({
@@ -224,11 +250,20 @@ const mapDispatchToProps = (dispatch) => {
 						        	month=[],elecPlan=[],elecAct=[];
 						        	for(var i in data.data.twAreaMonthElec){
 						        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
-						        	}
+						        	};
 						        	for(var i in data.data.twAreaMonthPlanElec){
 						        		elecPlan.push(data.data.twAreaMonthPlanElec[i]);
 						        		month.push(i+"月");
-						        	}
+						        	};
+						        	dispatch(actions.setVars('yearElec',yearElec ));
+						        	dispatch(actions.setVars('monthElec',monthElec ));
+						        	dispatch(actions.setVars('dayElec',dayElec ));
+						        	dispatch(actions.setVars('yearPlanElec',yearPlanElec ));
+						        	dispatch(actions.setVars('monthPlanElec',monthPlanElec ));
+						        	dispatch(actions.setVars('dayPlanElec',dayPlanElec ));
+						        	dispatch(actions.setVars('month',month ));
+						        	dispatch(actions.setVars('elecPlan',elecPlan ));
+						        	dispatch(actions.setVars('elecAct',elecAct ));
 						        },
 						        complete : function(XMLHttpRequest,status){ 
 							　　　　	$.ajax({
@@ -241,6 +276,9 @@ const mapDispatchToProps = (dispatch) => {
 								        	elecActPBA=data.data.scale[0].poweract;
 								        	elecPlanPBA=data.data.scale[0].powertheory;
 								        	areaArr=data.data.everyAreaPba;
+								        	dispatch(actions.setVars('elecActPBA',elecActPBA ));
+								        	dispatch(actions.setVars('elecPlanPBA',elecPlanPBA ));
+								        	dispatch(actions.setVars('areaArr',areaArr ));
 								        },
 								        complete : function(XMLHttpRequest,status){ 
 									　　　　	$.ajax({
@@ -253,6 +291,9 @@ const mapDispatchToProps = (dispatch) => {
 										        	runTime=data.data[0].runtimes;
 										        	downTime=data.data[0].downtimes;
 										        	TBA=data.data[0].tba;
+										        	dispatch(actions.setVars('runTime',runTime ));
+										        	dispatch(actions.setVars('downTime',downTime ));
+										        	dispatch(actions.setVars('TBA',TBA ));
 										        },
 										        complete : function(XMLHttpRequest,status){
 										        	$.ajax({
@@ -263,7 +304,8 @@ const mapDispatchToProps = (dispatch) => {
 										                dataType: 'json',
 										                timeout : 60000,
 										                success:function (data) {
-															healthy=data.data.health;
+															healthyArea=data.data.health;
+															dispatch(actions.setVars('healthyArea',healthyArea ));
 										                },
 										                complete : function(XMLHttpRequest,status){
 										                    dispatch(actions.setVars('areaBool',true ));
@@ -322,7 +364,7 @@ const mapDispatchToProps = (dispatch) => {
 						dataType: 'json',
 						timeout : 60000,
 						success:function (data) {
-							healthy=data.data.health;
+							healthyArea=data.data.health;
 						},
 						complete : function(XMLHttpRequest,status){
 							$.ajax({
