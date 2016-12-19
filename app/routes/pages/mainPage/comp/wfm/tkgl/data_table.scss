@@ -1,0 +1,86 @@
+.actionBox{
+  img{
+    width: 40px;
+    display: inline-block;
+    margin: 20px;
+    cursor: pointer;
+  }
+}
+.tableBox {
+  overflow: hidden;
+  .tableHeaderBox {
+    overflow: hidden;
+    background: #464c58;
+    .tableHeaderItem {
+      float: left;
+      height:30px;
+      line-height:30px;
+      overflow: hidden;
+      color:#fff;
+      text-align: center;
+    }
+  }
+  .tableContentBox {
+    margin-bottom: 40px;
+    .tableContentLine {
+       color:#fff;
+       background: #30343f;
+      overflow: hidden;
+      &:hover{
+        border:1px solid #2ff4fb;
+      }
+      .tableContentItem {
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        height: 30px;
+        line-height:30px;
+        border: none;
+      }
+      input{
+        background: #272b34;
+        border:6px solid #fff;
+        &:hover{
+          box-shadow:0px 0px 8px 2px #fff;
+        }
+      }
+      .tableLineNum {
+        width: 45px;
+        padding: 10px 0 10px;
+        text-align: center;
+        background-color: #E4E5E6;
+        float: left;
+      }
+    }
+     .tableContentLine1 {
+       color:#fff;
+      overflow: hidden;
+      background: #272b34;
+       &:hover{
+         border:1px solid #2ff4fb;
+       }
+      .tableContentItem {
+        float: left;
+        padding: 10px 0 10px;
+        overflow: hidden;
+        text-align: center;
+        height: 40px;
+        border: none;
+      }
+       input{
+         background: #272b34;
+         border:6px solid #fff;
+         &:hover{
+           box-shadow:0px 0px 8px 2px #fff;
+         }
+       }
+      .tableLineNum {
+        width: 45px;
+        padding: 10px 0 10px;
+        text-align: center;
+        background-color: #E4E5E6;
+        float: left;
+      }
+    }
+  }
+}

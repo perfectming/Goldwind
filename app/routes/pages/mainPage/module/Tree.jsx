@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Tree.scss';
-import Controler_fc from '../comp/super/controler_fc.jsx';
+import Controler_fc from '../../comp/super/controler_fc.jsx';
 
 var actions = require('redux/actions');
 var $ =require('jquery');

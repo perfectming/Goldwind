@@ -1,0 +1,309 @@
+.box{
+     box-sizing:border-box;
+    overflow:hidden;
+    padding:10px;
+    padding-right:40px;
+  .scroll{
+    overflow-x: scroll;
+  }
+
+    .paddingtop{
+    margin-top:0px;
+   
+    }
+    .boxcover{
+    position:fixed;
+    height:100%;
+    width:100%;
+    z-index:1000;
+    background:black;
+    display:none;
+    opacity:0.6;
+    overflow:hidden;
+    }
+    .long{
+   
+    }
+     .shadow:hover{
+      box-shadow:0 0 15px #fff;
+     }
+     .bigbox:hover{
+     box-shadow:0 0 15px #fff;
+     }
+     
+    .bigbox{
+
+    height:100%;
+    width:100%;
+    margin:0 auto;
+    margin-top:40px;
+    border:1px solid #282F37;
+    position:relative;
+    overflow:hidden;
+     background: rgba(44, 61, 71,0.4);
+      .lkua{
+      border:3px solid #5B9BD5;
+      height:14px;
+      width:14px;
+      position:absolute;
+      right:204px;
+      top:68px;
+      z-index:100;
+      }
+      .rkua{
+      border:3px solid #ED7D31;
+      height:14px;
+      width:14px;
+      position:absolute;
+      right:92px;
+      top:68px;
+      z-index:100;
+      }
+     
+      .Ff{
+      margin-left:20px;
+      }
+      .tik{
+      color:#fff;
+      position:absolute;
+        font-size:16px;
+        top:25px;
+        left:108px;
+        font-weight:700;
+      }
+      .imgq{
+        width:16px;
+        height:30px;
+        position:absolute;
+        top:8px;
+        left:50px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:16px;
+          width:16px;
+        }
+      }
+    }
+    .monthbox{
+    margin-bottom:10px;
+    width: 100%;
+    height: 50px;
+    list-style: none;
+    background-color: transparent;
+    padding:0;
+    padding-left:0px;
+    position:relative;
+    
+    border-bottom: 1px solid #31F3FB;
+   
+    li{
+      height: 40px;
+            width: 100px;
+            border: 1px solid #31F3FB;
+            line-height: 38px;
+            float: left;
+            font-family: "微软雅黑";
+            text-align: center;
+            margin-right: 10px;
+            border-radius:5px;
+            cursor:pointer;
+              &:hover{
+                color: #31F3FB;
+                box-shadow:0 0 10px #fff;
+            }
+     }
+      .back{
+      float:left;
+       align-items:center;
+       color: #20FEFF;
+       border:1px solid #20FEFF;
+       width:100px;
+       height:40px;
+       line-height:40px;
+       position:relative;
+       top:px;
+       border-radius:45px;
+    
+       box-shadow:0px 0px 10px  #20FEFF;
+       text-align:center;
+    }
+    .back1{
+      float:right;
+       align-items:center;
+       color: #20FEFF;
+       border:1px solid #20FEFF;
+       width:100px;
+       height:40px;
+       line-height:40px;
+       position:relative;
+       top:px;
+       border-radius:45px;
+    
+       box-shadow:0px 0px 10px  #20FEFF;
+       text-align:center;
+    }
+   
+ 
+      .red{
+       
+        color: #31F3FB;
+      }
+      .green{
+        color:white;
+      }
+    }
+    .windecbox{
+            margin-top:50px;
+            width:100%;
+            height:300px;
+            margin-bottom: 12px;
+           }
+    .buttons{
+    width:254px;
+    position:absolute;
+    top:0px;
+    right:78px;
+    .btn0{
+     color: #31F3FB;
+     }
+    .btn1{
+    color:#fff;
+    }
+
+    }
+    .buttonsh{
+    width:254px;
+    position:absolute;
+    top:0px;
+    right:0px;
+     .btn0{
+     color: #31F3FB;
+     }
+    .btn1{
+    color:#fff;
+    }
+    }
+     .buttonss{
+    width:254px;
+    position:absolute;
+    top:0px;
+    right:0px;
+
+    }
+    .buttons{
+    height:60px;
+    line-height:60px;
+
+      button{
+      width:70px;
+      height:30px;
+      line-height:20px;
+      text-align:center;
+      font-size:16px;
+      font-family:'微软雅黑';
+      margin-left:12px;
+      background-color:white;
+      color: #20FEFF;
+      color:#fff;
+      border:1px solid #20FEFF;
+      background:transparent;
+         border-radius:15px;
+         .btn0{
+     color: #31F3FB;
+     }
+    .btn1{
+    color:#fff;
+    }
+      }
+
+      button:hover{
+               
+             color: #31F3FB;
+          box-shadow:0px 0px 10px  #20FEFF;
+      }
+     
+    }
+    .buttonsh{
+    height:60px;
+    line-height:60px;
+      button{
+      width:70px;
+      height:30px;
+      line-height:20px;
+      text-align:center;
+      font-size:16px;
+      font-family:'微软雅黑';
+      margin-left:12px;
+      background-color:white;
+      color: #20FEFF;
+      color:#fff;
+      border:1px solid #20FEFF;
+      background:transparent;
+         border-radius:15px;
+      }
+
+      button:hover{
+               
+             color: #31F3FB;
+          box-shadow:0px 0px 10px  #20FEFF;
+      }
+     
+    }
+    .more:hover{
+     box-shadow:0 0 15px #fff;
+    }
+    .more{
+    padding-top:0px;
+    background:#21242a;
+    position:absolute;
+    z-index:1200;
+    width:95.5%;
+    margin-left:0px;
+    top:50%;
+    left:50%;
+    height:540px;
+
+    transform:translate(-50%,-50%);
+    box-sizing:border-box;
+    display:none;
+    .moretitle{
+    width:100%;
+    height:60px;
+    background:#15181B;
+    position:relative;
+    top:0;
+    left:0;
+    ;
+
+   
+    z-index:2000;
+    height:60px;
+
+    div{
+    display:inline-block;
+    font-size:16px;
+    float:right;
+    line-height:60px;
+    cursor:pointer;
+    margin-right:50px;
+       color:#fff;
+    }
+    p{
+    position:absolute;
+    top:18px;
+    left:5%;
+    font-size:16px;
+    color:#fff;
+    }
+    img{
+    position:absolute;
+    top:22px;
+    left:2%;
+    height:19px;
+    width:16px;
+    }
+    }
+    }
+
+}

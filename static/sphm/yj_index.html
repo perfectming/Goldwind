@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -398,13 +398,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="d_zql clearfix">
-                    <label>预警准确率</label>
-                    <p><span></span></p>
+                <div class="hide">
+                    <div class="d_zql clearfix">
+                        <label>预警准确率</label>
+                        <p><span></span></p>
+                    </div>
+                    <h1 style="text-align:center;margin:15px 20px 0;">结项备注</h1>
+                    <div style="margin:0px 20px;"><textarea class="remark" readonly="readonly"></textarea></div>
                 </div>
-                <h1 style="text-align:center;margin:15px 20px 0;">结项备注</h1>
-                <div style="margin:0px 20px;"><textarea class="remark" readonly="readonly"></textarea></div>
-
                 <div class="btn">
                     <button type="button" class="cancle" for="jx_detail">关闭</button>
                     <button type="button" class="ml15 submitBtn">结项</button>
@@ -697,6 +698,11 @@
 	                    if (json.state == 1) {
 	                        //清空表单
 	                        $("#add_form").get(0).reset();
+
+	                        //重新生成图表
+	                        chart_1();
+	                        chart_2();
+
 	                        loadPage(parseInt($("#page a.activP").text()));
 	                    }
 	                });
@@ -1380,6 +1386,11 @@
                     $("#dialog_1").hide();
                     if (json.state == 1) {
                         $("#ht_form").get(0).reset();
+
+                        //重新生成图表
+                        chart_1();
+                        chart_2();
+
                         loadPage(parseInt($("#page a.activP").text()));
                     }
                 });
@@ -1417,6 +1428,11 @@
                     if (json.state == 1) {
                         //清空表单
                         $("#pg_form").get(0).reset();
+
+                        //重新生成图表
+                        chart_1();
+                        chart_2();
+
                         loadPage(parseInt($("#page a.activP").text()));
                     } else {
                         //重新生成
@@ -1429,7 +1445,6 @@
             }
         });
     }
-
 
     //图标
     function chart_1() {
@@ -1652,6 +1667,10 @@
                     $("#jx_detail .d_zql span").append("<a class='active'></a>");
             }
             $("#jx_detail textarea").val(currPageJson.pagination.list[index].remark);
+            $("#jx_detail .hide").show();
+        }
+        else {
+            $("#jx_detail .hide").hide();
         }
 
         //显示相关信息
