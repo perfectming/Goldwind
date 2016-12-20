@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",mon="一月份",w10,height,changedata1,power2,power1,text,name0,hhdata,actbt=10,wc1=0,wc2,} = this.props;
+        let {w0="一区域",mon="一月份",ipUrl,w10,height,changedata1,power2,power1,text,name0,hhdata,actbt=10,wc1=0,wc2,} = this.props;
 
 
         let configPie = {
@@ -81,7 +81,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc2=e.point.index;
-                            changedata1(w0,w10,win,wc1,wc2,hhdata,actbt);
+                            changedata1(w0,w10,win,wc1,wc2,hhdata,actbt,ipUrl);
 
                         }
                     }
@@ -167,6 +167,7 @@ const mapStateToProps = (state) => {
         windplan : state.vars.windplan,
         hhdata : state.vars.hhdata,
         actbt:state.vars.actbt,
+        ipUrl:state.vars.ipUrl,
     }
 };
 
@@ -175,13 +176,13 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(w0,w10,win,wc1,wc2,hhdata,actbt)=> {
+        changedata1 :(w0,w10,win,wc1,wc2,hhdata,actbt,ipUrl)=> {
            // let grid=hhdata.data[2][wc1].groupid;
             let wfid=hhdata.data[1][wc2].wfid;
 
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceByGroupidElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getSpaceByGroupidElec',
                 async:false,
                 data:{
                     "months":actbt+1,
@@ -192,7 +193,7 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:'3000',
                 success:function(data){
 
-
+                    dispatch(actions.setVars('hhdata', data));
                     let barlotimes3 = [];
                     let barlopowers3 = [];
                     let barlopowerp3 = [];
@@ -222,6 +223,7 @@ const mapDispatchToProps = (dispatch) => {
             });
 
             dispatch(actions.setVars('w11', w10,));
+            dispatch(actions.setVars('bt0', 0));
 
         },
     };

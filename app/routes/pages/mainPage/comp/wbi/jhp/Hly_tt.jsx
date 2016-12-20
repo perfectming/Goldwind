@@ -36,7 +36,7 @@ let Component = React.createClass({
             title: {
                 text: text,
                 align:'left',
-                 x : "0",
+                x : "0",
                 style:{
                     color:"#fff",
                     fontSize:"16px",
@@ -118,25 +118,25 @@ let Component = React.createClass({
                 categories:barLoTime,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
+                // lineWidth: 1,
+                // lineColor: "red",
                 //tickWidth: 4,
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-            title: {
-                text:'(100%)',
+                title: {
+                    text:'(100%)',
                     align:'high',
                     rotation:'0',
                     y: -10,
                     x: 40,
-                style:{
-                    color:'#fff',
-                    fontSize:'14px'
-                }
-            },
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px'
+                    }
+                },
 
 
-        labels: {
+                labels: {
                     title:'100%',
                     y: 10, //x轴刻度往下移动20px
                     style: {
@@ -183,15 +183,14 @@ const mapDispatchToProps = (dispatch) => {
         },
         changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl)=>{
             dispatch(actions.setVars('w1',w0 ));
-
+            console.log(wc1)
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/Health/getAreaHealth',
+                url:'http://'+ipUrl+'/wbi/Health/getCompanyMonthHealth',
                 async:false,
                 data:{
-                    "month":actbt+1,
-                    "groupid":'201612121721151',
-
+                    "month":wc1+1,
+                    "year":'',
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -200,31 +199,20 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('hhdata',  data));
 
 
+                    let WTHeal=data.data.dayHealth;
+                    let WTN=[];
+                    let WTHealName=[];
+                    WTHeal.map(function(value,key){
+                        for(let n in value){
 
-                    let barlopowers2 = [];
-                    let barlopowerp2 = [];
+                            WTN.push(value[n]);
+                            WTHealName.push(n+"日")
+                        }
 
-                    for (var i in data.data[1]) {
-                        barlopowers2.push(data.data[1][i].wfHealth);    //区域的横坐标
-                        barlopowerp2.push(data.data[1][i].wfname);    //区域的横坐标
+                    })
 
-                    }
-                    let barlopowers3 = [];
-                    let barlopowerp3 = [];
-
-                    for (var i =0;i<10;i++) {
-                        barlopowers3.push(data.data[0][i].fanHealth);    //区域的横坐标
-                        barlopowerp3.push(data.data[0][i].wtname);    //区域的横坐标
-
-                    }
-
-                    dispatch(actions.setVars('healthy2', barlopowers2));
-                    dispatch(actions.setVars('namex2', barlopowerp2));
-                    dispatch(actions.setVars('healthy3', barlopowers3));
-                    dispatch(actions.setVars('namex3', barlopowerp3));
-
-
-
+                    dispatch(actions.setVars('healthy3', WTN));
+                    dispatch(actions.setVars('monthx2', WTHealName));
 
                 },
                 error:function(){

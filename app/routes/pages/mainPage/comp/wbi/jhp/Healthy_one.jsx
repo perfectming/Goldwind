@@ -30,7 +30,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {w0,w10,mon,ipUrl,win,windplan=win,befor_pages='group',namex3,healthy3,namex2,healthy2,namex1,healthy1, returnit,hideit,wind, buttonAction, actbt = 0,  value0, inputOnChange, onFocus, changecolor, gogogo, back, more, arr,arr2} = this.props;
+        let {w0,w10,mon,ipUrl,win,windplan=win,bt0=0,hhdata,befor_pages='group',namex3,healthy3,namex2,healthy2,wfid,namex1,healthy1, returnit,hideit,wind, buttonAction, actbt = 0,  value0, inputOnChange, onFocus, changecolor, gogogo, back, more, arr,arr2} = this.props;
 
 
         return (
@@ -63,7 +63,7 @@ let Component = React.createClass({
                         data.data.yearelectric[0].wind.map((value, key) => {
                             return (
                                 <div className={actbt === key ? styles.inmonth : styles.inmonth2} key={key}
-                                     onClick={() => changecolor(value, key)}>
+                                     onClick={() => changecolor(value, key,ipUrl)}>
                                     {value.name}
                                 </div>
                             )
@@ -101,10 +101,9 @@ let Component = React.createClass({
 
                         </div>
                         <div className={styles.rbox3}>
-
-                            <button className={styles.button} onClick={() => gogogo(sort0)}>前10</button>
-                            <button className={styles.button} onClick={() => back(sort0)}>后10</button>
-                            <button className={styles.button} onClick={() => more()}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0, actbt, hhdata,ipUrl,wfid)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, actbt, hhdata,ipUrl,wfid)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(hhdata,)}>更多</button>
                         </div>
                         <div className={styles.rbox4}>
                             <Hly_rs height={400}
@@ -144,8 +143,10 @@ const mapStateToProps = (state) => {
         namex1:state.vars.namex1,
         healthy2:state.vars.healthy2,
         namex2:state.vars.namex2,
-        healthy3:state.vars.healthy3,
         namex3:state.vars.namex3,
+        healthy3:state.vars.healthy3,
+        hhdata:state.vars.hhdata,
+
 
 
     }
@@ -157,11 +158,11 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test: ''
             }
-
+            dispatch(actions.setVars('bt0', 0));
             let date=new Date();
             let year=date.getFullYear()
             let month2=date.getMonth();
-            console.log(month2)
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getCompanyAreaHealth',
@@ -172,7 +173,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
+
                     dispatch(actions.setVars('hhdata',  data));
                     dispatch(actions.setVars('actbt',  10));
                     dispatch(actions.setVars('mon',  month2+"月"));
@@ -188,25 +189,29 @@ const mapDispatchToProps = (dispatch) => {
                     let barlopowerp2 = [];
 
                     for (var i in data.data[1]) {
-                        barlopowers2.push(data.data[1][i].groupname);    //区域的横坐标
-                        barlopowerp2.push(data.data[1][i].areaHealth);    //区域的横坐标
+                        barlopowers2.push(data.data[1][i].wfHealth);    //区域的横坐标
+                        barlopowerp2.push(data.data[1][i].wfname);    //区域的横坐标
 
                     }
                     let barlopowers3 = [];
                     let barlopowerp3 = [];
 
-                    for (var i in data.data[0]) {
-                        barlopowers3.push(data.data[0][i].groupname);    //区域的横坐标
-                        barlopowerp3.push(data.data[0][i].areaHealth);    //区域的横坐标
+                    for (var i =0;i<10;i++) {
+                        barlopowers3.push(data.data[0][i].fanHealth);    //区域的横坐标
+                        barlopowerp3.push(data.data[0][i].wtname);    //区域的横坐标
 
                     }
-
                     dispatch(actions.setVars('healthy1', barlopowers1));
                     dispatch(actions.setVars('namex1', barlopowerp1));
                     dispatch(actions.setVars('healthy2', barlopowers2));
                     dispatch(actions.setVars('namex2', barlopowerp2));
                     dispatch(actions.setVars('healthy3', barlopowers3));
                     dispatch(actions.setVars('namex3', barlopowerp3));
+
+                    let w0=data.data[2][0].groupname;
+                    let w10=data.data[1][0].wfname;
+                    dispatch(actions.setVars('w1', w0));
+                    dispatch(actions.setVars('w11', w10));
 
 
 
@@ -228,48 +233,169 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        changecolor: (value, key) => {
+        changecolor: (value, key,ipUrl) => {
             dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('windplan', value.plan));
             dispatch(actions.setVars('windplan1', value.plan));
+
+            $.ajax({
+                type:'post',
+                url:'http://'+ipUrl+'/wbi/Health/getCompanyAreaHealth',
+                async:false,
+                data:{
+                    "month":key+1,
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+
+                    dispatch(actions.setVars('hhdata',  data));
+
+                    let barlopowers1 = [];
+                    let barlopowerp1 = [];
+                    for (var i in data.data[2]) {
+                        barlopowerp1.push(data.data[2][i].groupname);    //区域的横坐标
+                        barlopowers1.push(data.data[2][i].areaHealth);   //计划发电量
+
+                    }
+
+                    let barlopowers2 = [];
+                    let barlopowerp2 = [];
+
+                    for (var i in data.data[1]) {
+                        barlopowers2.push(data.data[1][i].wfHealth);    //区域的横坐标
+                        barlopowerp2.push(data.data[1][i].wfname);    //区域的横坐标
+
+                    }
+                    let barlopowers3 = [];
+                    let barlopowerp3 = [];
+
+                    for (var i =0;i<10;i++) {
+                        barlopowers3.push(data.data[0][i].fanHealth);    //区域的横坐标
+                        barlopowerp3.push(data.data[0][i].wtname);    //区域的横坐标
+
+                    }
+
+                    dispatch(actions.setVars('healthy1', barlopowers1));
+                    dispatch(actions.setVars('namex1', barlopowerp1));
+                    dispatch(actions.setVars('healthy2', barlopowers2));
+                    dispatch(actions.setVars('namex2', barlopowerp2));
+                    dispatch(actions.setVars('healthy3', barlopowers3));
+                    dispatch(actions.setVars('namex3', barlopowerp3));
+
+
+
+
+                },
+                error:function(){
+
+                },
+            })
         },
-        gogogo: (sort0) => {
-            (function () {
-                sort0.sort(function (a,b) {
-                    return b.time - a.time;
-                })
-                for(var i=0;i<12;i++){
-                    x0[i]=sort0[i].name;
-                    x1[i]=sort0[i].time;
-                }
+        gogogo: (bt0, actbt, hhdata,ipUrl,wfid) => {
+            dispatch(actions.setVars('bt0', 0));
+            $.ajax({
+                type:'post',
+                url:'http://'+ipUrl+'/wbi/Health/getByWfidFanHealth',
+                async:false,
+                data:{
+                    "month": actbt + 1,
+                    "groupid":  '201612121721151',
+                    "wfid": wfid==undefined? '150828':wfid,
+                    "type":"0",
+                    "year":"2016"
 
-            })();
-            dispatch(actions.setVars('arr', x1))
-            dispatch(actions.setVars('arr2', x0))
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                    console.log(data)
+
+                    let barlopowers3 = [];
+                    let barlopowerp3 = [];
+
+                    for (var i =0;i<10;i++) {
+                        barlopowers3.push(data.data[i].fanHealth);    //区域的横坐标
+                        barlopowerp3.push(data.data[i].wtname);    //区域的横坐标
+                    }
+
+                    dispatch(actions.setVars('healthy3', barlopowers3));
+                    dispatch(actions.setVars('namex3', barlopowerp3));
+
+                },
+                error:function(){
+
+                },
+            })
 
 
         },
-        back: (sort0) => {
-            (function () {
-                sort0.sort(function (a,b) {
-                    return  a.time - b.time;
-                })
-                for(var i=0;i<12;i++){
-                    x2[i]=sort0[i].name;
-                    x3[i]=sort0[i].time;
-                }
+        back: (bt0, actbt, hhdata,ipUrl,wfid) => {
+            dispatch(actions.setVars('bt0', 1));
+            $.ajax({
+                type:'post',
+                url:'http://'+ipUrl+'/wbi/Health/getByWfidFanHealth',
+                async:false,
+                data:{
+                    "month": actbt + 1,
+                    "groupid":  '201612121721151',
+                    "wfid": wfid==undefined? '150828':wfid,
+                    "type":"1",
+                    "year":"2016"
 
-            })();
-            dispatch(actions.setVars('arr', x3))
-            dispatch(actions.setVars('arr2', x2))
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                    console.log(data)
+
+                    let barlopowers3 = [];
+                    let barlopowerp3 = [];
+
+                    for (var i =0;i<10;i++) {
+                        barlopowers3.push(data.data[i].fanHealth);    //区域的横坐标
+                        barlopowerp3.push(data.data[i].wtname);    //区域的横坐标
+                    }
+
+                    dispatch(actions.setVars('healthy3', barlopowers3));
+                    dispatch(actions.setVars('namex3', barlopowerp3));
+
+                },
+                error:function(){
+
+                },
+            })
         },
-        more: () => {
+        more: (hhdata) => {
+            console.log(hhdata)
+            let barlopowers3 = [];
+            let barlopowerp3 = [];
+
+            for (var i in hhdata.data[0]) {
+                barlopowers3.push(hhdata.data[0][i].fanHealth);    //区域的横坐标
+                barlopowerp3.push(hhdata.data[0][i].wtname);    //区域的横坐标
+
+            }
+
+
             $("#boxhidden").show();
             $("#light").show();
         },
-        hideit: () =>{
-            $("#boxhidden").hide();
+        hideit: (healthy3,namex3) =>{
+            let barLotime3c = [];    //各区域   一区域二区域
+            let power3c=[];
+            for (var i=0;i<=10;i++) {
+
+                barLotime3c[i] = healthy3[i];    //区域的横坐标
+                power3c[i] = namex3[i];
+            }
+            dispatch(actions.setVars('healthy3', barLotime3c))
+            dispatch(actions.setVars('namex3', power3c))
+
+
+
+                $("#boxhidden").hide();
             $("#light").hide();
         },
         returnit:(befor_pages)=>{

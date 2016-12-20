@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",w10="风场1",mon="一月份",barRotimes,powerValue,windplan=win,height,widths} = this.props;
+        let {w0,height,widths,namex3,healthy3,text} = this.props;
 
 
         let configPie = {
@@ -28,7 +28,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: mon+w10+"各风机健康度",
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
@@ -96,7 +96,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotimes,
+                categories:namex3,
             },
             yAxis: {
                 // lineWidth: 1,
@@ -126,7 +126,7 @@ let Component = React.createClass({
             series: [{
                 name: '实际健康度',
                 type: 'column',
-                data: powerValue,
+                data: healthy3,
                 borderRadius: 4,
 
             }
