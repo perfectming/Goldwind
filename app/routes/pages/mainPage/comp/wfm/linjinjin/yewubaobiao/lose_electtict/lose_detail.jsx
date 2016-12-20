@@ -9,10 +9,55 @@ let Component = React.createClass({
    
 
     render() {
-         let {} = this.props;
+      let one=[];
+      let two=[];
+      let three=[];
+      let alltree=[];
+      let alltree1=[];
+         let {asd,aaa} = this.props;
+          for(let arg2 in aaa){
+                if(aaa[arg2].id &&aaa[arg2].id!=''){
+                    if(aaa[arg2].type=='wf'){
+                      one.push(aaa[arg2])
+                     }else if(aaa[arg2].type=='wl'){
+                      two.push(aaa[arg2])
+                     }else if(aaa[arg2].type=='wt'){
+                        three.push(aaa[arg2])
+                     }
+                }
+          }
+
+          //二级菜单
+        for(let i=0; i<one.length;i++){
+          let two1=[];
+          two.map((value,key)=>{
+            if(value.parentid==one[i].id){
+              two1.push(value)
+            }
+
+          })
+          alltree.push(two1)
+        }
+
+          //三级菜单
+        for(let i=0; i<two.length;i++){
+          let two4=[];
+          three.map((value,key)=>{
+            if(value.parentid==two[i].id){
+              two4.push(value)
+            }
+
+          })
+          alltree1.push(two4)
+        }
+
+          console.log(one)
+          console.log(alltree)
+          console.log(alltree1)
         return (
-            <div>
-            ghjgthghjghjghjghjghj
+            <div style={{color:'#fff'}}>
+            45454545
+              
             </div>
         );
     }
@@ -22,6 +67,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         asd:state.objs.asd,
+        aaa:state.objs.aaa,
     }
 };
 
@@ -37,13 +83,13 @@ const mapDispatchToProps = (dispatch) => {
           //获取设备类型信息
         $.ajax({    
                url:'http://54.223.200.134/Monitor/xml.aspx',    
-               data:'functionname=GetDevTypeTree&crossDomain=true&zip=false&menuid=1DD28544-7805-4D86-8E39-09404726214A&sysid=1',    
+               data:'functionname=getDevtree&crossDomain=true&zip=false',    
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
                timeout:3000,       
-               success:function(json,textStatus){    
-                   console.log(json)   
+               success:function(json,textStatus){     
+                    dispatch(actions.appendObjs('aaa',json)); 
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
                    console.log('获取数据失败！');    

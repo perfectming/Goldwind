@@ -51,7 +51,6 @@ let Component = React.createClass({
                     size: '50%',
                     innerSize: '60%',
                     dataLabels: {
-                        x:10,
                         enabled: true,
                         format: '{point.name}:<b>{point.percentage:.1f}%</b>',
                            style: {

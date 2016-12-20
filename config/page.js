@@ -33,12 +33,12 @@ module.exports = {
                         page:'',
                     }]
             },{
-                name:'运营监视',
+                name:'运行监视',
                 iconNormal: require('../app/routes/pages/mainPage/img/comp/yy.png'),
                 iconActive: require('../app/routes/pages/mainPage/img/comp/yy_active.png'),
                 page:[
                     {
-                        name:'数据预览',
+                        name:'运行概览',
                         page:'super',
                     },{
                         name:'地理分布',
