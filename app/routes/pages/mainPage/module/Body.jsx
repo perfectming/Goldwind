@@ -68,6 +68,8 @@ import Profits from '../comp/wbi/mbixxd/earnings/Profits.jsx';
 import Profitss from '../comp/wbi/mbixxd/tba/Profitss.jsx';
 import Profitsss from '../comp/wbi/mbixxd/tbatime/Profitsss.jsx';
 import PEQII from '../comp/wbi/mbixxd/PEQII.jsx';
+import Profitime from '../comp/wbi/mbixxd/Profitime.jsx';
+import WFSprofit from '../comp/wbi/mbixxd/WFSprofit.jsx';
 
 
 import Baotou from '../comp/wbi/ludi/branch/Baotou.jsx';//路迪
@@ -171,6 +173,8 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
+                {showPage === 'profitime' && <Profitime></Profitime>}
+                {showPage === 'wfsprofit' && <WFSprofit></WFSprofit>}
 
 
                 {showPage === 'reliability' && <Reliability></Reliability>}
