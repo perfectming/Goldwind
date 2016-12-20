@@ -20,11 +20,11 @@ let Component = React.createClass({
         }
         for(let x in ssg1){
             if(x=='150801'){
-                arr2.push((ssg1['150801301'].Transformer_P_BMCJGF/1000).toFixed(0)/1);
+                arr2.push((ssg1['150801301'].Transformer_P_BMCJGF/1).toFixed(0)/1);
             }else if(x=='150811'){
-                arr2.push(((ssg1['150801301'].Transformer_P_BMCJGF-ssg1['150801301'].Transformer_P)/1000).toFixed(0)/1);
+                arr2.push((ssg1['150801301'].Transformer_P/1-ssg1['150801301'].Transformer_P_BMCJGF/1).toFixed(0)/1);
             }else {
-                (!x[6] && x[5]) && arr2.push((ssg1[x+'901'].Transformer_P / 1000).toFixed(0) / 1);
+                (!x[6] && x[5]) && arr2.push((ssg1[x+'901'].Transformer_P / 1).toFixed(0) / 1);
             }
         }console.log(arr2);
         for(let x in ssg2){
