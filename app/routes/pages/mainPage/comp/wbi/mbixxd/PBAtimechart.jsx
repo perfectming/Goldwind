@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let input_url="10.9.99.103";
+let input_url="10.68.100.32";
+var $=require('jquery');
 let data = require('./Profit-data');
 let winss=data.areaPlanDayY;
 let fanCost=data.fanCost;
@@ -13,10 +14,11 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {monthT,profit,cost,w0,winsss,changedata3,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
+        let {width,xxdwfId,xxdfc,monthT,profit,cost,w0,winsss,changedata3,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
         let configPie = {
             chart: {
                 height:395,
+              
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -39,6 +41,7 @@ let Component = React.createClass({
 
             legend: {
                 x:-75,
+                y:20,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -73,9 +76,10 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                           w0=e.point.category;
-                        let  a=w0.toString().split("");
-                        let b=a[0];
+                         let  w0=e.point.category;
+                    
+                        let b= parseInt(w0);
+                       
                          // 第二个图的数据
                       let PBATimeSecondDay=[];
                       let PBATimeSecondPoweract=[];
@@ -86,11 +90,11 @@ let Component = React.createClass({
                       let PBATimeSecondPbaP=[];
                         $.ajax({
                 type:'post',
-                url:'http://'+input_url+':9080/wbi/PBA/getWfieldDayPBA',
+                url:'http://'+input_url+':8080/wbi/PBA/getWfieldDayPBA',
                 async:false,
                 data:{
-                    'wfid':150801,
-                    'month':w0,
+                    'wfid':xxdwfId,
+                    'month':b,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -99,7 +103,7 @@ let Component = React.createClass({
 
                      let PBATimeSecondPba=data.data;
                       for ( let i in PBATimeSecondPba){
-                          let day=PBATimeSecondPba[i].day;
+                          let day=PBATimeSecondPba[i].day+'日';
                           PBATimeSecondDay.push(day);
                           let poweract=PBATimeSecondPba[i].poweract;
                           PBATimeSecondPoweract.push(poweract);
@@ -111,9 +115,11 @@ let Component = React.createClass({
                           PBATimeSecondLimitloss.push(limitloss);
                           let nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
                           PBATimeSecondNodevreasonloss.push(nodevreasonloss);
-                          let pba=Number(PBATimeSecondPba[i].pba.toFixed(2));
-                          PBATimeSecondPbaP.push(pba);
+                          let pba=PBATimeSecondPba[i].pba*100;
+                          PBATimeSecondPbaP.push(Number(pba.toFixed(1)));
                       }
+                    
+
                 },
                 error:function(){
                    
@@ -151,12 +157,13 @@ let Component = React.createClass({
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
+
             title: {
-                text:'kWh',
+                text:'（kWh）',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 50,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -171,6 +178,7 @@ let Component = React.createClass({
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+                 tickInterval: 30,
 
             title: {
                 text: '100%',
@@ -244,7 +252,7 @@ let Component = React.createClass({
                     shadow:'true',
                     yAxis:1,
                      tooltip: {
-               valueSuffix:''
+               valueSuffix:'%'
             },
                   
                 },

@@ -5,7 +5,7 @@ import Yearelectric from './Yearelectric.jsx';
 import Pie2 from '../../../wfm/mxx/Pie2';
 import Login from '../../../../../../../components/common/Loading.jsx';
 
-var ipUrl='10.9.100.38:8080';
+var ipUrl='10.68.100.32:8080';
 var actions = require('redux/actions');
 var $ =require("jQuery");
 

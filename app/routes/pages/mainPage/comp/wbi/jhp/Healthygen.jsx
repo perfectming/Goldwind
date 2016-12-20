@@ -190,8 +190,7 @@ const mapDispatchToProps = (dispatch) => {
                         barlopowers1.push(data.data[2][i].powerplan);   //计划发电量
                         barlopowerp1.push(data.data[2][i].poweract);   //实际发电量
                     }
-                    let w0=data.data[2][0].groupname;
-                    let w10=data.data[1][0].wfname;
+
                     let barlotimes2 = [];
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
@@ -221,7 +220,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('barlopowers3', barlopowers3));
                     dispatch(actions.setVars('barlopowerp3', barlopowerp3));
 
-
+                    let w0=data.data[2][0].groupname;
+                    let w10=data.data[1][0].wfname;
                     dispatch(actions.setVars('w1', w0));
                     dispatch(actions.setVars('w11', w10));
 
@@ -247,6 +247,10 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind', value.plan));
             dispatch(actions.setVars('winds', value.actrul));
+            dispatch(actions.setVars('bt0', 0));
+
+
+
 
             $.ajax({
                 type:'post',
@@ -267,7 +271,7 @@ const mapDispatchToProps = (dispatch) => {
                         barlopowers1.push(data.data[2][i].powerplan);   //计划发电量
                         barlopowerp1.push(data.data[2][i].poweract);   //实际发电量
                     }
-                    let w0=data.data[2][0].groupname;
+
                     let barlotimes2 = [];
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
@@ -296,6 +300,11 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('barlotimes3', barlotimes3));
                     dispatch(actions.setVars('barlopowers3', barlopowers3));
                     dispatch(actions.setVars('barlopowerp3', barlopowerp3));
+
+                    let w0=data.data[2][0].groupname;
+                    let w10=data.data[1][0].wfname;
+                    dispatch(actions.setVars('w1', w0));
+                    dispatch(actions.setVars('w11', w10));
                 },
                 error:function(){
 
@@ -343,24 +352,6 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
 
-            // let barLotime3c = [];    //各区域   一区域二区域
-            // let power3c=[];       //计划发电量
-            // let wrong30c=[];       //实际发电量
-            //
-            // let x=hhdata.data[0];
-            // let y=x.length-11;
-            // let z=x.length;
-            // for (var i=y;i<z;i++) {
-            //
-            //     barLotime3c[i]=hhdata.data[0][i].wtname;    //区域的横坐标
-            //     power3c[i]=hhdata.data[0][i].powerplan;  //实际发电量
-            //     wrong30c[i]=hhdata.data[0][i].poweract;   //故障损失
-            //
-            // }
-            // console.log(barLotime3c)
-            // dispatch(actions.setVars('barlotimes3', barLotime3c))
-            // dispatch(actions.setVars('barlopowers3', power3c))
-            // dispatch(actions.setVars('barlopowerp3', wrong30c))
 
 
 

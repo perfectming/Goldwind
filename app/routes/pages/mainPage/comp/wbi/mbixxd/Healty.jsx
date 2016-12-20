@@ -8,7 +8,7 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
-let input_url="10.68.100.32";
+let input_url="10.9.100.38";
 let x0=[];
 let x1=[];
 let x2=[];
@@ -39,7 +39,7 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-          <Healtychart machineE={windPP} areaRecordProfit={windd} width={3500} height={450} ty={20}></Healtychart>
+          <Healtychart machineE={windPP} areaRecordProfit={windd} width={18000} height={450} ty={20}></Healtychart>
                 </div>
              </div>
                  <ul className={styles.monthbox}>
@@ -49,7 +49,7 @@ let Component = React.createClass({
                         })
                     }
 
-                    <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>{xxdwfNa}</li>
+                    <li className={styles.back1} onClick={()=>backtop(befor_pagee,befor_page2)}>{xxdwfNa}</li>
                     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
                 </ul>
  <div className={styles.paddingtop}>
@@ -139,6 +139,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('WSHealH1',WSHealH ));
             dispatch(actions.setVars('WSHealName1',WSHealName ));
              dispatch(actions.setVars('actbt',month-1));
+             dispatch(actions.setVars('btnn',0));
             
              },
              error:function(){

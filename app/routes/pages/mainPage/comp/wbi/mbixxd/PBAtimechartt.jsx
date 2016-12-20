@@ -9,10 +9,11 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaPlanDay,areaPlan,areaPlanDayT,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
+        let {width,areaPlanDay,areaPlan,areaPlanDayT,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
         let configPie = {
             chart: {
                 height:395,
+            
                  backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -37,6 +38,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 x:-75,
+                y:20,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -101,11 +103,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'kWh',
+                text:'（kWh）',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 50,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -120,6 +122,8 @@ let Component = React.createClass({
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+                 minRange:100,
+                 
 
             title: {
                 text: '100%',
@@ -188,7 +192,7 @@ let Component = React.createClass({
                     color:'blue',
                     yAxis:1,
                      tooltip: {
-               valueSuffix:''
+               valueSuffix:'%'
             },
                    
                 }

@@ -82,8 +82,9 @@
                 padding-left:20px;
                 background-color: #0d293f;
                 img{margin-right:10px; margin-top:-5px;}
-                span{
+                b{
                 cursor:pointer;
+                font-weight:normal;
                  }
                 }
             .placename{
@@ -98,8 +99,9 @@
                 line-height:35px; 
                 margin:0px;
                 img{margin-right:10px;}
-                span{
+                b{
                 cursor:pointer;
+                font-weight:normal;
                  }
                 font-size:16px;
                 display:inline-block;
@@ -122,9 +124,10 @@
                         line-height:35px; 
                         margin:0px;
                         img{margin-right:10px;}
-                        span{
+                        b{
                             cursor:pointer;
-                            }
+                            font-weight:normal;
+                        }
                         font-size:16px;
                         display:inline-block;
                         color:#fff;

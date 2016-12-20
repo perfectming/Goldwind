@@ -11,7 +11,7 @@ let Component = React.createClass({
     render() {
 
  let {ty,text,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC,PBA,height,width}=this.props;
-     
+
         let configPie = {
             chart: {
                 height:height,
@@ -106,11 +106,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'kWh',
+                text:'（kWh）',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: 50,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -125,6 +125,7 @@ let Component = React.createClass({
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+                minRange:100,
 
             title: {
                 text: '100%',
@@ -196,7 +197,7 @@ let Component = React.createClass({
                     color:'blue',
                     yAxis:1,
                      tooltip: {
-               valueSuffix:''
+               valueSuffix:'%'
             },
                     
                 },
@@ -211,7 +212,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        machine:state.vars.PBASpaceWtname1
+        
     }
 };
 

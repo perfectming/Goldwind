@@ -16,7 +16,6 @@ let Component = React.createClass({
         let {ip="10.68.100.32",hhdata4,actbt=10,changedata1,w0='一区域',wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
 
 
-
         let configPie = {
             chart: {
                 height:height,

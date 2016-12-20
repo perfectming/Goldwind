@@ -52,11 +52,14 @@ let str=d.getDate();
         if(i==5){
            array.push(((date[key].YearPostGridEgyAt/date[key].YearPlanTotEgyAt)*100).toFixed(1)+'%') //当年上网电量完成率
         }
+         
          if(i==7){
            array.push((date[key].YearEgyAt/date[key].Capacity).toFixed(1)+'h') //年累计利用小时
            array.push((((date[key].MonthEgyAt/date[key].Capacity)/str*24)*100).toFixed(2)+'%') //当月时间可利用率
         }
+      
         array.push(date[key][title[i]]) //获取每一个key值得对应字段数组
+        
     }
     array2.push(array) //获取全部风场的对应字段数据
     } 
@@ -112,7 +115,7 @@ let str=d.getDate();
                                          <div className={styles.leftnum}>
                                              <a>{arrayJy.indexOf(fc_info)==-1?'W㎡':uint[key]}</a>
 
-                                             <span className={styles.tabnum}>{arrayJy.indexOf(fc_info)!==-1 ? (date[fc_info][title[key]]=='null'? '--' : date[fc_info][title[key]] ) : ( (date[fc_info]["PVTSI_Aver"]/1).toFixed(2)=='NaN'? '--' :(date[fc_info]["PVTSI_Aver"]/1).toFixed(2))}</span>
+                                             <span className={styles.tabnum}>{arrayJy.indexOf(fc_info)!==-1 ? (date[fc_info][title[key]]=='null'? '--' : Number(date[fc_info][title[key]]).toFixed(2) ) : ( (date[fc_info]["PVTSI_Aver"]/1).toFixed(2)=='NaN'? '--' :(date[fc_info]["PVTSI_Aver"]/1).toFixed(2))}</span>
                                          </div>
                                      </div>
                                  )
@@ -146,7 +149,7 @@ let str=d.getDate();
                                         <div className={styles.leftname}>{wtname[key]}</div>
                                         <div className={styles.leftnum}>
                                             <a>{uint[key]}</a>
-                                            <span className={styles.tabnum}>{(((date[fc_info].MonthEgyAt/date[fc_info].Capacity)/str*24)*100).toFixed(2)}</span>
+                                            <span className={styles.tabnum}>--</span>
                                         </div>
                                     </div>
                                 )

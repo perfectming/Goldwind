@@ -108,7 +108,7 @@ let Component = React.createClass({
                         <div className={styles.rbox33}>
                             <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>前10</button>
                             <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(hhdata)}>更多</button>
+                            <button className={styles.button22} onClick={() => more(hhdata4)}>更多</button>
                         </div>
 
                         <Hly_pbatwo height={390} text={mon+w0+"各风机PBA"}
@@ -172,7 +172,7 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
-
+            dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('actbt',  10));
             dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
@@ -333,7 +333,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
@@ -353,7 +353,9 @@ const mapDispatchToProps = (dispatch) => {
                     let wrong32c = [];       //限功率损失
                     let wrong33c = [];       //非设备原因损失
                     let pba3c = [];      //故障损失
-
+                    console.log('a')
+                    console.log(data)
+                    console.log("b")
 
                     for (var i in data.data) {
                         barLotime3c.push(data.data[i].wtname);    //区域的横坐标
@@ -364,6 +366,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
                         pba3c.push(data.data[i].pba);   //非设备原因损失
                     }
+
 
                     dispatch(actions.setVars('barLotime1', barLotime3c))
                     dispatch(actions.setVars('power1', power3c))
@@ -389,7 +392,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
@@ -437,6 +440,8 @@ const mapDispatchToProps = (dispatch) => {
             });
         },
         more: (hhdata4) => {
+
+
             var barLotime3=[];
             var power3=[];
             var wrong30=[];
@@ -462,7 +467,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('wrong11', wrong31));
             dispatch(actions.setVars('wrong12', wrong32));
             dispatch(actions.setVars('wrong13', wrong33));
-            dispatch(actions.setVars('pba14', pba3));
+            dispatch(actions.setVars('pba1', pba3));
             $("#light").show();
             $("#boxhidden").show();;
         },
