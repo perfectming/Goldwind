@@ -230,7 +230,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-			        	};
+			        	
 			        	dispatch(actions.setVars('wfName',wfName ));
 			        	dispatch(actions.setVars('wfId',wfId ));
 
