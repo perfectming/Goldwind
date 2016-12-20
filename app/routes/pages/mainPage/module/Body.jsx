@@ -56,7 +56,7 @@ import Regiotbas from '../comp/wbi/jhp/Regiotbas.jsx';
 import Input_cost from '../comp/wbi/jhp/Input_cost.jsx';
 
 
-import Areace from '../comp/wbi/mbixxd/Areace.jsx';//薛旭东
+import Areace from '../comp/wbi/mbixxd/Areace.jsx';//薛旭东44
 import Areacet from '../comp/wbi/mbixxd/Areacet.jsx';
 import TBAtime from '../comp/wbi/mbixxd/TBAtime.jsx';
 import TBAspace from '../comp/wbi/mbixxd/TBAspace.jsx';

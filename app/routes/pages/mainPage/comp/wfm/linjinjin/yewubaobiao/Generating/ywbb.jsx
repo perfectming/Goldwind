@@ -22,38 +22,94 @@ let Component = React.createClass({
         //初始化jquery方法
         setTimeout(function(){
             playjq();
-        },100)
+        },1000)
     },
-   showTree (b){
-    let{playjq,showtree,firstname,devtype}=this.props;
-     for(let arg1 in devtype.list){
-        if(devtype.list[arg1].id==b){
-            firstname=devtype.list[arg1]
+   showTree (devurl){
+    let{playjq,showtree,select_list,firstname,devtype}=this.props;
+    let one=[];
+    let two=[];
+    let three=[];  
+    let alltree=[];
+    let alltree1=[];
+            //点击切换下来选择项
+            for(let id in devtype.list){
+              if(devtype.list[id].id==devurl){
+                firstname=devtype.list[id];
+              }
+
+            }
+              //获取设备类型对应的左侧树形二级和三级数据
+              for(let arg2 in select_list){
+                if(select_list[arg2].id &&select_list[arg2].id!=''){
+                    if(select_list[arg2].type=='wf'){
+                      one.push(select_list[arg2])
+                     }else if(select_list[arg2].type=='wl'){
+                      two.push(select_list[arg2])
+                     }else if(select_list[arg2].type=='wt' && select_list[arg2].args.devtype==devurl){
+                        three.push(select_list[arg2])
+                    }
+                }
+              }
+             //二级菜单
+          for(let i=0; i<one.length;i++){
+            let two1=[];
+            two.map((value,key)=>{
+            if(value.parentid==one[i].id){
+              two1.push(value)
+            }
+          })
+          alltree.push(two1)
         }
-    }
-    showtree(firstname);
-   
+          //三级菜单
+        alltree.map(function(value,key){
+          for(let i=0; i<value.length;i++){
+            let two4=[];
+            three.map((valueC,keyC)=>{
+              if(valueC.parentid==value[i].id){
+              two4.push(valueC)
+              }
+            })
+            alltree1.push(two4)
+          }
+        })
+        
+            console.log(devtype)
+            console.log(one)
+            console.log(two)
+            console.log(three)
+
+
+
+    showtree(devurl,alltree,alltree1,firstname);
     //初始化jquery方法
         setTimeout(function(){
             playjq();
-        },100)
+        },1000)
    },
 
     render() {
-         let {devtype,boolywbb=false,showtree,playjq,firstname} = this.props;
-           
+         let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,select_list1,secondtree,threetree} = this.props;
+           let treetype=[];
+           let lefttree=[];
+
             if(boolywbb){
-                let treetype=[];
+                //获取设备类型数组
             for(let arg in devtype.list){
                 if(devtype.list[arg].args.name){
                     treetype.push(devtype.list[arg])
                 }
             }
+              //获取设备类型对应的左侧树形一级数据
+            for(let arg2 in select_list1){
+                if(select_list1[arg2].id &&　select_list1[arg2].id!=''){
+                    lefttree.push(select_list1[arg2])
+                }
+            }
+
+            //初始化显示设备类型
             if(firstname==undefined){
             firstname=devtype.list._WindTurbine;
             }
-            console.log(devtype)
-
 
         return (
             <div className={styles.faultBox}>
@@ -79,7 +135,48 @@ let Component = React.createClass({
                 </div>
 
 
-                <div className={styles.leftlist}></div>
+                <div className={styles.leftlist} id='leftlist'>
+                  {
+                     select_list !== undefined && lefttree.map((valueC,keyC)=>{
+                        return(
+                          <div key={keyC} className={styles.place} >
+                            <a className={styles.ca}>
+                              <img src={add} />
+                              <b><img src={'http://'+url+'/'+valueC.img}/>{valueC.text}</b>
+                              <input type='checkbox' onClick={(e)=>sent_info(valueC.args.wfid,e.target)} />
+                            </a>
+                            {
+                                secondtree[keyC].map((valueD,keyD)=>{
+                                    return(
+                                        <div className={styles.placename} key={keyD}>
+                                            <a className={styles.da}>
+                                              <img src={add} />
+                                              <b><img src={'http://'+url+'/'+valueD.img}/>{valueD.text}</b>
+                                              <input type='checkbox' onClick={(e)=>sent_info(valueD,e.target)} />
+                                            </a>
+
+                                            {
+                                                threetree[keyD].map((valueE,keyE)=>{
+                                                    return(
+                                                        <div className={styles.placeline} key={keyE}>
+                                                            <a className={styles.ea}>
+                                                               <b><img src={'http://'+url+'/'+valueE.img}/>{valueE.text}</b>
+                                                              <input type='checkbox' onClick={(e)=>sent_info(valueE,e.target)}/>
+                                                            </a>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+
+                                        </div>
+                                    )
+                                })
+                              }
+                          </div>
+                          )
+                     })
+                  }
+                </div>
                 <div className={styles.righttable}></div>
 
             </div>
@@ -97,7 +194,11 @@ const mapStateToProps = (state) => {
     return {
         devtype:state.objs.devtype,
         boolywbb:state.vars.boolywbb,
-        firstname:state.vars.firstname,
+        firstname:state.objs.firstname,
+        select_list:state.objs.select_list,
+        select_list1:state.objs.select_list1,
+        secondtree:state.objs.secondtree,
+        threetree:state.objs.threetree,
     }
 };
 
@@ -114,12 +215,35 @@ const mapDispatchToProps = (dispatch) => {
                timeout:3000,       
                success:function(json,textStatus){    
                    dispatch(actions.appendObjs('devtype',json));
-                   dispatch(actions.setVars('boolywbb', true));  
+                   gettreedata(); 
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
                    console.log('获取数据失败！');    
                }    
             });
+
+
+        function gettreedata(){
+           $.ajax({    
+               url:'http://'+url+'/Monitor/xml.aspx',    
+               data:'functionname=getDevtree&crossDomain=true&zip=false',    
+               dataType:"jsonp",    
+               jsonp:"callback",    
+               jsonpCallback:"testCall",    
+               timeout:3000,       
+               success:function(json,textStatus){    
+                dispatch(actions.appendObjs('select_list',json));
+                dispatch(actions.setVars('boolywbb', true));
+               },    
+               error:function(XMLHttpRequest,textStatus,errorThrown){    
+                   console.log('获取数据失败！');    
+               }    
+            });
+        }
+
+
+
+
 
         },
         
@@ -141,28 +265,51 @@ const mapDispatchToProps = (dispatch) => {
             $('#showitem').html($(this).html());
             $('#selectye').hide();
         })
-        },
-        showtree:(firstname)=>{
-            dispatch(actions.setVars('boolywbb', false));
 
+
+
+         //复选框状态跟随
+            $("#leftlist input").change(function(){
+                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
+            })
+            //下拉点击事件
+            $("#leftlist b").on('click',function(){
+                $(this).parent().siblings().toggle();
+                if($(this).siblings('img').attr('src') == add){
+                    $(this).siblings('img').attr('src', jian);
+                }else{
+                    $(this).siblings('img').attr('src', add);
+                }
+            })
+
+
+
+
+
+        },
+        showtree:(devurl,alltree,alltree1,firstname)=>{
+            dispatch(actions.setVars('boolywbb', false));
+            dispatch(actions.appendObjs('secondtree',alltree));
+            dispatch(actions.appendObjs('threetree',alltree1));
+            dispatch(actions.appendObjs('firstname',firstname));
             //获取对应设备的数据
         $.ajax({    
                url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=GetWFInfoByMon&devtype=WindTurbine&crossDomain=true&zip=false',    
+               data:'functionname=GetWFInfoByMon&devtype='+devurl+'&crossDomain=true&zip=false',    
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
                timeout:3000,       
-               success:function(json,textStatus){    
-                console.log(json)
+               success:function(json,textStatus){  
+                dispatch(actions.appendObjs('select_list1',json));
+                
                 dispatch(actions.setVars('boolywbb', true));
-                dispatch(actions.setVars('firstname', firstname));
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
                    console.log('获取数据失败！');    
                }    
             });
-
+      
 
 
         },
