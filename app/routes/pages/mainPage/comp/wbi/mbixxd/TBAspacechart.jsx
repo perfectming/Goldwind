@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {text,fanCost,machine,fanProfitQ,width,height}=this.props;
+        let {ty,TBA,text,fanCost,machine,fanProfitQ,width,height}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -38,7 +38,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 x:-75,
-                y:70,
+                y:ty,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -105,8 +105,9 @@ let Component = React.createClass({
              gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
+
             title: {
-                text:'h',
+                text:'（h）',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -125,6 +126,8 @@ let Component = React.createClass({
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+                minRange:100,
+                max:100,
 
             title: {
                 text: '100%',
@@ -141,7 +144,7 @@ let Component = React.createClass({
             opposite: true
         }],
             series: [{
-                name: '实际运行时间',
+                name: '运行时间',
                 type: 'column',
                 data: fanProfitQ,
                 color:'#33BAC0',
@@ -152,52 +155,24 @@ let Component = React.createClass({
 
             },
                 {
-                    name: '故障损失',
+                    name: '停机时间',
                     type: 'column',
                     color:'#5298d3',
                     data: fanCost,
                     stack:'waste',
                     pointWidth: 30,
                     borderRadius: 3,
-                    pointPlacement:-0.07
-                },
-                {
-                    name: '维护损失',
-                    type: 'column',
-                    data: fanCost,
-                    stack:'waste',
-                     pointWidth: 30,
-                    color:'#ffffff',
-                    pointPlacement:-0.07,
-                },
-                {
-                    name: '限功率损失',
-                    type: 'column',
-                    data: fanCost,
-                    stack:'waste',
-                    color:'#e9c75c',
-                     pointWidth: 30,
-                     pointPlacement:-0.07,
-                },
-                {
-                    name: '非设备原因损失',
-                    type: 'column',
-                    data: fanCost,
-                    stack:'waste',
-                     pointWidth: 30,
-                    color:'#d06960',
-                     borderRadius: 3,
-                     pointPlacement:-0.07,
+                    color:'#FFFFFF',
                 },
                 {
                     name: 'TBA',
                     type: 'line',
-                    data: fanCost,
+                    data: TBA,
                     color:'blue',
                     opposite:true,
                     yAxis:1,
                      tooltip: {
-               valueSuffix:''
+               valueSuffix:'%'
             },
                 
                 },

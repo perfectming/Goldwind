@@ -27,10 +27,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{index2,keyy,actbt=0,btn=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban,backtop,befor_pagee='group',befor_page2,w11='1区域',w111='风机1',sqy,pointPlacement,windN,keyyy,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNamessT,areaWindCostssT,areaWindEarningssT,areaWindRatessT,areaWindidssT,areaWindCostMore,areaWindEarningMore,areaWindNameMore,areaWindRateMore}=this.props;
-   
-            
-            
+        let{index2,keyy,actbt=0,btn=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban,backtop,befor_pagee='group',befor_page2,w11='1区域',w111='风机1',sqy,pointPlacement,windN,keyyy,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNamessT,areaWindCostssT,areaWindEarningssT,areaWindRatessT,areaWindidssT,areaWindCostMore,areaWindEarningMore,areaWindNameMore,areaWindRateMore}=this.props;   
         return (
 
             <div className={styles.box}>
@@ -43,7 +40,7 @@ let Component = React.createClass({
                         <div onClick={()=>close()} className={styles.gg}>x</div>
                     </div>
                     <div className={styles.scroll}>
-                        <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={17200} pointPlacement={-0.17} ly={20}></Fanchart>
+                        <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={17200} pointPlacement={-0.17} ly={10}></Fanchart>
                     </div>
                 </div>
                 <ul className={styles.monthbox}>
@@ -177,8 +174,8 @@ const mapDispatchToProps = (dispatch) => {
                         arr2.push(costs);
                         let groupname=dataA[i].groupname;
                         arr3.push(groupname);
-                        let rate=Number(dataA[i].rate.toFixed(1));
-                        arr4.push(rate);
+                        let rate=dataA[i].rate*100;
+                        arr4.push(Number(rate.toFixed(1)));
                         let groupid=dataA[i].groupid;
                         arr5.push(Number(groupid))
                     }
@@ -192,6 +189,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('wind',arr3));
             dispatch(actions.setVars('windP',arr1));
             dispatch(actions.setVars('windPT',arr4));
+            dispatch(actions.setVars('btnn',0));
             // 开始时第二张图跟着变
             $.ajax({
                 type:'post',
@@ -213,8 +211,8 @@ const mapDispatchToProps = (dispatch) => {
                         areaWindCosts.push(areaWindCost);
                         let areaWindEarning=dataA[i].earning;
                         areaWindEarnings.push(areaWindEarning);
-                        let areaWindRate=Number(dataA[i].rate.toFixed(1));
-                        areaWindRates.push(areaWindRate);
+                        let areaWindRate=dataA[i].rate*100;
+                        areaWindRates.push(Number(areaWindRate.toFixed(1)));
                         let areaWindid=dataA[i].wfid;
                         areaWindids.push(areaWindid);
                         let areaWindName =dataA[i].wfname;
@@ -244,6 +242,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('keyy',monthF));
             dispatch(actions.setVars('daycount',daycountT));
             dispatch(actions.setVars('w123',areaWindNames[0]));
+             dispatch(actions.setVars('btnn',0));
 
             // 开始时第三张图跟着变
             $.ajax({
@@ -268,8 +267,8 @@ const mapDispatchToProps = (dispatch) => {
                         areaWindCosts1.push(areaWindCost);
                         let areaWindEarning=dataA[i].earning;
                         areaWindEarnings1.push(areaWindEarning);
-                        let areaWindRate=Number(dataA[i].rate.toFixed(1));
-                        areaWindRates1.push(areaWindRate);
+                        let areaWindRate=dataA[i].rate*100;
+                        areaWindRates1.push(Number(areaWindRate.toFixed(1)));
                         let areaWindid=dataA[i].wfid;
                         areaWindids1.push(areaWindid);
                         let areaWindName =dataA[i].wtname;
@@ -357,9 +356,9 @@ const mapDispatchToProps = (dispatch) => {
                         arr2.push(costs);
                         let groupname=dataA[i].groupname;
                         arr3.push(groupname);
-                        let rate=Number(dataA[i].rate.toFixed(1));
+                        let rate=dataA[i].rate*100;
             
-                        arr4.push(rate);
+                        arr4.push(Number(rate.toFixed(1)));
                         let groupid=dataA[i].groupid;
                         arr5.push(Number(groupid));
                     }
@@ -384,6 +383,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('windP',arr1));
             dispatch(actions.setVars('windPT',arr4));
             dispatch(actions.setVars('keyy',monthh));
+            dispatch(actions.setVars('btnn',0));
             // 点击月份第二张图跟着变
             $.ajax({
                 type:'post',
@@ -412,8 +412,8 @@ const mapDispatchToProps = (dispatch) => {
                         areaWindCosts.push(areaWindCost);
                         let areaWindEarning=dataA[i].earning;
                         areaWindEarnings.push(areaWindEarning);
-                        let areaWindRate=Number(dataA[i].rate.toFixed(1));
-                        areaWindRates.push(areaWindRate);
+                        let areaWindRate=dataA[i].rate*100;
+                        areaWindRates.push(Number(areaWindRate.toFixed(1)));
                         let areaWindid=dataA[i].wfid;
                         areaWindids.push(areaWindid);
                         let areaWindName =dataA[i].wfname;
@@ -465,8 +465,8 @@ const mapDispatchToProps = (dispatch) => {
                             areaWindCosts1.push(areaWindCost);
                             let areaWindEarning=dataA[i].earning;
                             areaWindEarnings1.push(areaWindEarning);
-                            let areaWindRate=Number(dataA[i].rate.toFixed(1));
-                            areaWindRates1.push(areaWindRate);
+                            let areaWindRate=dataA[i].rate*100;
+                            areaWindRates1.push(Number(areaWindRate.toFixed(1)));
                          
                               
                             let areaWindName =dataA[i].wtname;
@@ -532,8 +532,8 @@ const mapDispatchToProps = (dispatch) => {
                         areaWindCosts12.push(areaWindCost);
                         let areaWindEarning=dataAB[i].earning;
                         areaWindEarnings12.push(areaWindEarning);
-                        let areaWindRate=dataAB[i].rate;
-                        areaWindRates12.push(areaWindRate);
+                        let areaWindRate=dataAB[i].rate*100;
+                        areaWindRates12.push(Number(areaWindRate.toFixed(1)));
                         let areaWindName =dataAB[i].wtname;
                         areaWindNames12.push(areaWindName)
 
@@ -595,8 +595,8 @@ const mapDispatchToProps = (dispatch) => {
                         areaWindCosts.push(areaWindCost);
                         let areaWindEarning=dataA[i].earning;
                         areaWindEarnings.push(areaWindEarning);
-                        let areaWindRate=dataA[i].rate;
-                        areaWindRates.push(areaWindRate);
+                        let areaWindRate=dataA[i].rate*100;
+                        areaWindRates.push(Number(areaWindRate.toFixed(1)));
                             
                         let areaWindName =dataA[i].wtname;
                         areaWindNames.push(areaWindName)
@@ -654,8 +654,8 @@ const mapDispatchToProps = (dispatch) => {
                         areaWindCosts.push(areaWindCost);
                         let areaWindEarning=dataA[i].earning;
                         areaWindEarnings.push(areaWindEarning);
-                        let areaWindRate=dataA[i].rate;
-                        areaWindRates.push(areaWindRate);
+                        let areaWindRate=dataA[i].rate*100;
+                        areaWindRates.push(Number(areaWindRate.toFixed(1)));
                              
                         let areaWindName =dataA[i].wtname;
                         areaWindNames.push(areaWindName)

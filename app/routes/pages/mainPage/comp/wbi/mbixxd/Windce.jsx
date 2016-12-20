@@ -9,8 +9,8 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {text,areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
-         
+        let {areaPlan,ly,text,areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
+          {console.log(areaPlan)}
         let configPie = {
             chart: {
                 height:height,
@@ -38,7 +38,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
-                y:50,
+                y:ly,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -100,7 +100,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                  title: {
-                text:'kWh',
+                text:'(kWh)',
                     align:'high',
                     rotation:'0',
                     y: -10,

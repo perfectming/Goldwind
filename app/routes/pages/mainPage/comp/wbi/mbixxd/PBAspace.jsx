@@ -17,7 +17,6 @@ let height=700;
 let moree;
  let datee=new Date;
 let month=datee.getMonth();
-
   let key=month;
 let Component = React.createClass({
      componentWillMount() {
@@ -30,7 +29,6 @@ let Component = React.createClass({
 
     render() {
         let{xxdwfId,xxdwfNa,btn=0,PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt=0,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
-
         return (
             <div className={styles.box} >
             <div className={styles.boxcover} id='boxcover'></div>
@@ -108,7 +106,7 @@ const mapStateToProps = (state) => {
         PBASpaceFirstNodevreasonloss: state.vars.PBASpaceFirstNodevreasonloss1,
         PBASpaceFirstPba: state.vars.PBASpaceFirstPba12,
         //弹出的更多赋值
-        PBASpaceMoreWtname2: state.vars.PBASpaceWtname11,
+        PBASpaceMoreWtname2: state.vars.PBASpaceWtname111,
         PBASpaceMorePoweract: state.vars.PBASpaceFirstPoweract11,
         PBASpaceMoreFaultloss: state.vars.PBASpaceFirstFaultloss11,
         PBASpaceMoreMaintainloss: state.vars.PBASpaceFirstMaintainloss11,
@@ -210,8 +208,8 @@ const mapDispatchToProps = (dispatch) => {
                         PBASpaceFirstLimitloss.push(limitloss);
                         let nodevreasonloss=PBASpaceFirstPba[i].nodevreasonloss;
                         PBASpaceFirstNodevreasonloss.push(nodevreasonloss);
-                        let pba=PBASpaceFirstPba[i].pba
-                        PBASpaceFirstPbaP.push(pba);
+                        let pba=PBASpaceFirstPba[i].pba*100
+                        PBASpaceFirstPbaP.push(Number(pba.toFixed(1)));
                     }
            
          
@@ -231,6 +229,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceFirstNodevreasonloss ));
             dispatch(actions.setVars('PBASpaceFirstPba12',PBASpaceFirstPbaP ));
             dispatch(actions.setVars('actbt',month-1 ));
+            dispatch(actions.setVars('btnn',0));
         }
         ,
         init: () => {
@@ -260,7 +259,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-            
+           
                     let PBASpacePba=data.data;
                     for  ( let  i=0;i<10;i++){
                         let wtname=PBASpacePba[i].wtname;
@@ -275,12 +274,11 @@ const mapDispatchToProps = (dispatch) => {
                         PBASpaceLimitloss.push(limitloss);
                         let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
-                        let pba=Number(PBASpacePba[i].pba.toFixed(2));
-
-                        PBASpacePbaPBA.push(pba);
+                        let pba=PBASpacePba[i].pba*100;
+                        PBASpacePbaPBA.push(Number(pba.toFixed(1)));
                     }
                
-            
+
                 },
                 error:function(){
                
@@ -295,6 +293,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
             dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
             dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('btnn',0));
           
         },
         gogogo:(actbt,xxdwfId)=>{
@@ -333,9 +332,9 @@ const mapDispatchToProps = (dispatch) => {
                         PBASpaceLimitloss.push(limitloss);
                         let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
-                        let pba=Number(PBASpacePba[i].pba.toFixed(2));
+                        let pba=PBASpacePba[i].pba*100;
 
-                        PBASpacePbaPBA.push(pba);
+                        PBASpacePbaPBA.push(Number(pba.toFixed(1)));
                     }
                
              
@@ -398,9 +397,9 @@ const mapDispatchToProps = (dispatch) => {
                         PBASpaceLimitloss.push(limitloss);
                         let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
-                        let pba=Number(PBASpacePba[i].pba.toFixed(2));
+                        let pba=PBASpacePba[i].pba*100;
 
-                        PBASpacePbaPBA.push(pba);
+                        PBASpacePbaPBA.push(Number(pba.toFixed(1)));
                     }
                
 
@@ -461,11 +460,11 @@ const mapDispatchToProps = (dispatch) => {
                         PBASpaceLimitloss.push(limitloss);
                         let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
-                        let pba=Number(PBASpacePba[i].pba.toFixed(2));
+                        let pba=PBASpacePba[i].pba*100;
 
-                        PBASpacePbaPBA.push(pba);
+                        PBASpacePbaPBA.push(Number(pba.toFixed(1)));
                     }
-             
+        
              
            
       
@@ -477,7 +476,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
             // 将变化月份赋值
-            dispatch(actions.setVars('PBASpaceWtname11',PBASpaceWtname));
+            dispatch(actions.setVars('PBASpaceWtname111',PBASpaceWtname));
        
             // dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
             dispatch(actions.setVars('PBASpaceFirstPoweract11',PBASpacePoweract ));
@@ -487,6 +486,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBASpaceFirstNodevreasonloss11',PBASpaceNodevreasonloss ));
             dispatch(actions.setVars('PBASpaceFirstPba121',PBASpacePbaPBA ));
             dispatch(actions.setVars('btnn',2));
+
          
             // $('.box').css('opacity',".5")
         },

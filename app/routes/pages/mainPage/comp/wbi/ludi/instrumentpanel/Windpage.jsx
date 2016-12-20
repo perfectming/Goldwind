@@ -204,6 +204,8 @@ const mapDispatchToProps = (dispatch) => {
 			        		wfName.push(data.data.everyAreaPba[i].wfname);
 			        		wfId.push(data.data.everyAreaPba[i].wfid);
 			        	}
+
+
 			        },
 			        complete : function(XMLHttpRequest,status){ 
 				　　　　if(status=='timeout'){

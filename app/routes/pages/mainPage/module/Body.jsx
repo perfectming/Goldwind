@@ -70,6 +70,7 @@ import Profitsss from '../comp/wbi/mbixxd/tbatime/Profitsss.jsx';
 import PEQII from '../comp/wbi/mbixxd/PEQII.jsx';
 
 
+
 import Baotou from '../comp/wbi/ludi/branch/Baotou.jsx';//路迪
 import Windbtpage from '../comp/wbi/ludi/branch/Windbtpage.jsx';
 import Xilin from '../comp/wbi/ludi/branch/Xilin.jsx';
@@ -171,6 +172,7 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
+                
 
 
                 {showPage === 'reliability' && <Reliability></Reliability>}
