@@ -232,7 +232,7 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
-
+            dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('actbt',  10));
             dispatch(actions.setVars('mon',  month2+"月"));
 
@@ -346,7 +346,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('wind', value.plan));
             dispatch(actions.setVars('winds', value.actrul));
             dispatch(actions.setVars('windss', value.actruls));
-
+            dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
                 url: 'http://' + ip + ':8080/wbi/PBA/getCompanySpacePBA',
@@ -438,7 +438,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         gogogo: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
             dispatch(actions.setVars('bt0', 0));
-            let grid = hhdata.data[2][0].groupid;
+          //  let grid = hhdata.data[2][0].groupid;
 
             $.ajax({
                 type: 'post',

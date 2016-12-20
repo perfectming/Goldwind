@@ -7,7 +7,7 @@ import icono from '../img/PBA.png';
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
-let input_url="10.68.100.32";
+let input_url="10.9.100.38";
 let month=data.month;
 let button=data.button;
 let areaName=data.areaName;
@@ -40,7 +40,7 @@ let Component = React.createClass({
     },
 
     render() {
-      let{PBAGroupMonthF="11",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,wq='风场1',more,changpage,wind,windP,close,actbt=0,backtop,befor_pagee='group',befor_pagee2,w0,ww,}=this.props;
+      let{PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,wq='风场1',more,changpage,wind,windP,close,actbt=0,backtop,befor_pagee='group',befor_pagee2,w0,ww,}=this.props;
        
           return (
            <div className={styles.box}>
@@ -160,8 +160,8 @@ const mapDispatchToProps = (dispatch) => {
                           PBAGroupLimitloss.push(limitloss);
                           let nodevreasonloss=PBAGroupSpace[i].nodevreasonloss;
                           PBAGroupNodevreasonloss.push(nodevreasonloss);
-                          let pba=Number(PBAGroupSpace[i].pba.toFixed(2));
-                          PBAGroupPba.push(pba);
+                          let pba=PBAGroupSpace[i].pba*100;
+                          PBAGroupPba.push(Number(pba.toFixed(1)));
                         }
 
                         // 默认的月份
@@ -180,8 +180,8 @@ const mapDispatchToProps = (dispatch) => {
                           PBAGroupFirstLimitloss.push(limitloss);
                           let nodevreasonloss=PBAGroupFirstMonth[i].nodevreasonloss;
                           PBAGroupFirstNodevreasonloss.push(nodevreasonloss);
-                          let pba=Number(PBAGroupFirstMonth[i].pba.toFixed(2));
-                          PBAGroupFirstPba.push(pba);
+                          let pba=PBAGroupFirstMonth[i].pba*100;
+                          PBAGroupFirstPba.push(Number(pba.toFixed(1)));
                         }
                
                       

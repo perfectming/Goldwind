@@ -124,7 +124,7 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-
+                min:0,
                 title: {
                     text: '100%',
                     align: 'high',

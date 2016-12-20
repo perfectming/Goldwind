@@ -23,7 +23,7 @@ let Component = React.createClass({
             
             title: {
                 text: text+'<br>PBA',
-                align:'left',
+                align:'center',
                 style:{
                     color:"#fff",
                     fontSize:"16px",

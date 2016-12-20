@@ -117,8 +117,8 @@ let Component = React.createClass({
                              areaWindCosts.push(areaWindCost);
                              var areaWindEarning=dataA[i].earning;
                              areaWindEarnings.push(areaWindEarning);
-                             var areaWindRate=Number(dataA[i].rate.toFixed(1));
-                             areaWindRates.push(areaWindRate);
+                             var areaWindRate=dataA[i].rate*100;
+                             areaWindRates.push(Number(areaWindRate.toFixed(1)));
                              var areaWindid=dataA[i].wfid;
                              areaWindids.push(areaWindid);
                              var areaWindName =dataA[i].wfname;
@@ -166,8 +166,8 @@ let Component = React.createClass({
                               areaWindCosts1.push(areaWindCost);
                               var areaWindEarning=dataA[i].earning;
                               areaWindEarnings1.push(areaWindEarning);
-                              var areaWindRate=Number(dataA[i].rate.toFixed(1));
-                              areaWindRates1.push(areaWindRate);
+                              var areaWindRate=dataA[i].rate*100;
+                              areaWindRates1.push(Number(areaWindRate.toFixed(1)));
                               var areaWindid=dataA[i].wtid;
                               areaWindids1.push(areaWindid);
                               var areaWindName =dataA[i].wtname;
@@ -243,6 +243,7 @@ let Component = React.createClass({
              gridLineDashStyle: 'Solid',
             gridLineColor: '#6d6a6c',
             tickInterval: 20,
+            minRange: 20,
                 
             title: {
                 text: '100%',
@@ -285,7 +286,7 @@ let Component = React.createClass({
                     yAxis:1,
                     tickInterval: 1,
                      tooltip: {
-               valueSuffix:''
+               valueSuffix:'%'
             },
                 }
                 ]

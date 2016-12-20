@@ -65,7 +65,7 @@ let Component = React.createClass({
                                 x = "正常发电";
                                 break;
                             case "Alarm":
-                                x = "告警";
+                                x = "正常发电";
                                 break;
                             case "Fault":
                                 x = "故障停机";
@@ -82,10 +82,10 @@ let Component = React.createClass({
                             default:
                                 x = "维护";
                                 break;
-                        }
-                    if(choosefans1 == "PVONL" && (code== "Online" || code== "LimitPow")){
+                        }  
+                    if(choosefans1 == "PVONL" && (code == "Online" || code == "LimitPow" || code == "Alarm")){
                         return (
-                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
+                        <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
                                 <span className={styles.slistitemT}>
                                         <p className={styles.slistitemTT}>{value.Wtname}</p>

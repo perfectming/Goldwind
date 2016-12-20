@@ -72,6 +72,7 @@ import Profitime from '../comp/wbi/mbixxd/Profitime.jsx';
 import WFSprofit from '../comp/wbi/mbixxd/WFSprofit.jsx';
 
 
+
 import Baotou from '../comp/wbi/ludi/branch/Baotou.jsx';//路迪
 import Windbtpage from '../comp/wbi/ludi/branch/Windbtpage.jsx';
 import Xilin from '../comp/wbi/ludi/branch/Xilin.jsx';
@@ -173,8 +174,11 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
+
                 {showPage === 'profitime' && <Profitime></Profitime>}
                 {showPage === 'wfsprofit' && <WFSprofit></WFSprofit>}
+
+
 
 
                 {showPage === 'reliability' && <Reliability></Reliability>}

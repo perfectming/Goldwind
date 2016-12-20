@@ -9,31 +9,33 @@ let data=require('./Profit-data');
 let input_url="10.68.100.32";
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+       let{xxdwfId,xxdwfNa}=this.props;
+        this.props.ajax(xxdwfId,xxdwfNa);
     },
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-        let {changedata2,TBA,TBAAA,montht,profit,cost,areaPlan,areaPlanDay,areaPlanDayT,w0,winss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
+        let {xxdwfNa,xxdwfId,changedata2,TBA,TBAAA,montht,profit,cost,areaPlan,areaPlanDay,areaPlanDayT,w0,winss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
         
         return (
             <div className={`${styles.box} ${styles.shadow}`}>
           
              <div className={styles.padding}>
+              <div className={styles.back1} onClick={()=>backtop(befor_pagee,befor_pagee2)}>{xxdwfNa}</div>
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
  
                        <div className={styles.imgqq}>
                         <img  className={styles.img}src={icono}/>
                        </div>
-                          <TBAtimechart montht={montht} profit={profit} cost={cost} TBA={TBA} height={420}></TBAtimechart>
+                          <TBAtimechart montht={montht} profit={profit} cost={cost} TBA={TBA} height={420} xxdwfId={xxdwfId}></TBAtimechart>
    
                 </div>
                    <div className={styles.bigbox}>
                
-                                <TBAtimechartt areaPlan={areaPlan} areaPlanDay={areaPlanDay} areaPlanDayT={areaPlanDayT} TBA={TBAAA}height={420} text={w0+'月每日TBA'}></TBAtimechartt>
+                                <TBAtimechartt areaPlan={areaPlan} areaPlanDay={areaPlanDay} areaPlanDayT={areaPlanDayT} TBA={TBAAA}height={420} text={w0+'每日TBA'}></TBAtimechartt>
 
                      <div className={styles.imgqq}>
                         <img  className={styles.img}src={icono}/>
@@ -64,6 +66,8 @@ const mapStateToProps = (state) => {
         TBAAA:state.vars.wTBATD1, 
         
         w0:state.vars.monthTD1,
+         xxdwfId:state.vars.xxdwfId1,
+        xxdwfNa:state.vars.xxdwfNa1,
 
        
 
@@ -72,7 +76,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-           ajax: () => {
+           ajax: (xxdwfId,xxdwfNa) => {
             let date=new Date;
             let monthT=date.getMonth();
             // 12个月的TBA
@@ -86,19 +90,20 @@ const mapDispatchToProps = (dispatch) => {
             let wTBADownD=[];
             let wTBATD=[];
 
+
            $.ajax({
              type:'post',
              url:'http://'+input_url+':8080/wbi/TBA/getMonthsTBAByWf',  
              async:false,
             data:{
-             'wfid':150828,
+             'wfid':xxdwfId,
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
              let wTBATime=data.data;
              for (let i in wTBATime){
-             let month=wTBATime[i].month;
+             let month=wTBATime[i].month+'月';
              wTBAMonth.push(month);
              let downtimes=wTBATime[i].downtimes;
              wTBADown.push(downtimes);
@@ -106,8 +111,8 @@ const mapDispatchToProps = (dispatch) => {
                 let runtimes=wTBATime[i].runtimes;
                 wTBARun.push(runtimes);
 
-                let tba=wTBATime[i].tba;
-                wTBAT.push(tba);
+                let tba=wTBATime[i].tba*100;
+                wTBAT.push(Number(tba.toFixed(1)));
 
 
 
@@ -129,7 +134,7 @@ const mapDispatchToProps = (dispatch) => {
              url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByWf',  
              async:false,
             data:{
-             'wfid':150828,
+             'wfid':xxdwfId,
              'month':monthT,
             },
              dataType:'json',
@@ -138,7 +143,7 @@ const mapDispatchToProps = (dispatch) => {
            
              let wTBATime=data.data;
              for (let i in wTBATime){
-                let day=wTBATime[i].day;
+                let day=wTBATime[i].day+'日';
                  wTBADaD.push(day);
 
                  let downtimes=wTBATime[i].downtimes;
@@ -147,8 +152,8 @@ const mapDispatchToProps = (dispatch) => {
                 let runtimes=wTBATime[i].runtimes;
                 wTBARunD.push(runtimes);
 
-                let tba=wTBATime[i].tba;
-                wTBATD.push(tba);
+                let tba=wTBATime[i].tba*100;
+                wTBATD.push(Number(tba.toFixed(1)));
              }
             
              },
@@ -161,8 +166,9 @@ const mapDispatchToProps = (dispatch) => {
            dispatch(actions.setVars('wTBARunD1',wTBARunD)) 
            dispatch(actions.setVars('wTBADownD1',wTBADownD)) 
            dispatch(actions.setVars('wTBATD1',wTBATD)) ;
-           dispatch(actions.setVars('monthTD',monthT)) ;
+           dispatch(actions.setVars('monthTD1',monthT+'月')) ;
            dispatch(actions.setVars('monthTDD',monthT)) ;
+          
 
         }
         ,
