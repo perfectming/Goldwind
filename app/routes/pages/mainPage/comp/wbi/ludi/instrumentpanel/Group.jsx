@@ -5,7 +5,7 @@ import Yearelectric from './Yearelectric.jsx';
 import Pie2 from '../../../wfm/mxx/Pie2';
 import Login from '../../../../../../../components/common/Loading.jsx';
 
-var ipUrl='10.68.100.32:8080';
+var ipUrl='10.9.100.38:8080';
 var actions = require('redux/actions');
 var $ =require("jQuery");
 
@@ -23,9 +23,8 @@ let Component = React.createClass({
 
 
     render() {
-        let{bool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
-  		
-  		if(bool){
+        let{groupbool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+  		if(groupbool){
   		return (
             <div className={styles.box}>
                 <div className={styles.left}>
@@ -163,7 +162,7 @@ const mapStateToProps = (state) => {
         flag1 : state.vars.flag1,
         flagPba1 : state.vars.flagPba1,
         flagTime1 : state.vars.flagTime1,
-        bool : state.vars.bool,
+        groupbool : state.vars.groupbool,
         ipUrl : state.vars.ipUrl,
     }
 };
@@ -254,7 +253,7 @@ const mapDispatchToProps = (dispatch) => {
 										                    healthy=data.data.health;
 														},
 										                complete : function(XMLHttpRequest,status){
-										                    dispatch(actions.setVars('bool', true));
+										                	dispatch(actions.setVars('groupbool', true));
 										                },
 										            });
 								                },

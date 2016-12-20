@@ -88,7 +88,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth:20,
+                    maxPointWidth:20,
                     borderRadius: 4,
                 }
             },
@@ -188,7 +188,7 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:'3000',
                 success:function(data){
                     console.log(data)
-
+                    dispatch(actions.setVars('hhdata', data));
 
                     let barlotimes2 = [];
                     let barlopowers2 = [];

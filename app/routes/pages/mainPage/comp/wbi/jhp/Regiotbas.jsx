@@ -12,7 +12,8 @@ let ip="10.68.100.32";
 
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+        let {ipUrl}=this.props
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -20,7 +21,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages = 'area', returnit,name0,runtime,downtime,tba0,name2,runtime2,downtime2,tba2,actbt,hhdata,w0,mon} = this.props;
+        let {befor_pages = 'area', returnit,name0,ipUrl,runtime,downtime,tba0,name2,runtime2,downtime2,tba2,actbt,hhdata,w0,mon} = this.props;
         let data = require('./Healthy-data');
         let month=data.data.line_month;
         let text0=data.data.line_date;
@@ -55,7 +56,7 @@ let Component = React.createClass({
                                    runtime2={runtime2}
                                    downtime2={downtime2}
                                    tba2={tba2}
-                                   text={text0[5]+"月每日TBA"}></Reg_tbats>
+                                   text={mon+"每日TBA"}></Reg_tbats>
                         <div className={styles.logomini3}>
 
                         </div>
@@ -81,19 +82,27 @@ const mapStateToProps = (state) => {
         w0:state.vars.w1,
         actbt:state.vars.actbt,
         hhdata: state.vars.hhdata,
+        ipUrl: state.vars.ipUrl,
+        wfid:state.vars.wfid,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: () => {
-            dispatch(actions.setVars('ip', ip));
+        ajax: (ipUrl) => {
+            let date = new Date();
+            let year = date.getFullYear()
+            let month2 = date.getMonth();
+            dispatch(actions.setVars('bt0',  0));
+            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('mon',  month2+"月"));
+
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/TBA/getMonthsTBA',
+                url:'http://'+ipUrl+'/wbi/TBA/getMonthsTBAByG',
                 async:false,
                 data:{
-
+                    "groupid":  '201612121721151',
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -128,15 +137,15 @@ const mapDispatchToProps = (dispatch) => {
             })
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/TBA/getDaysTBAByMonth',
+                url:'http://'+ip+':8080/wbi/TBA/getDaysTBAByG',
                 async:false,
                 data:{
-                    "month":'11',
+                    "month":month2,
+                    "groupid":  '201612121721151',
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
                     //各区域   一区域二区域
 
 

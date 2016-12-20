@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {name0,runtime,downtime,tba0,text,w0, win, wc1, actbt,changedata1} = this.props;
+        let {name0,runtime,downtime,tba0,text,w0, win, wc1, actbt,changedata1,ipUrl,wfid,hhdata} = this.props;
 
 
         let configPie = {
@@ -80,7 +80,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w0 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w0, win, wc1, actbt,);
+                            changedata1(w0, win, wc1, actbt,ipUrl,hhdata);
 
                         }
                     }
@@ -187,7 +187,13 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-
+        hhdata: state.vars.hhdata,
+        ipUrl: state.vars.ipUrl,
+        wfid:state.vars.wfid,
+        mon: state.vars.mon,
+        w0:state.vars.w1,
+        wc1:state.vars.wc1,
+        win:state.vars.win,
     }
 };
 
@@ -195,7 +201,45 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1:(w0, win, wc1, actbt,)=>{
+        changedata1:(w0, win, wc1, actbt,ipUrl,hhdata)=>{
+
+            let monthx=hhdata.data[wc1].month
+            $.ajax({
+                type:'post',
+                url:'http://'+ipUrl+'/wbi/TBA/getDaysTBAByG',
+                async:false,
+                data:{
+                    "month":monthx,
+                    "groupid":  '201612121721151',
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                    console.log(data)
+                    //各区域   一区域二区域
+
+
+                    let runtime2=[];       //实际发电量
+                    let downtime2=[];       //故障损失
+                    let tba2=[];       //维护损失
+                    let name2=[];
+                    for (var i in data.data) {
+                        //区域的横坐标
+                        name2.push(data.data[i].day)
+                        runtime2.push(data.data[i].runtimes);   //实际发电量
+                        downtime2.push(data.data[i].downtimes);   //故障损失
+                        tba2.push(data.data[i].tba);   //维护损失
+                    }
+                    dispatch(actions.setVars('runtime2', runtime2));
+                    dispatch(actions.setVars('downtime2', downtime2));
+                    dispatch(actions.setVars('tba2', tba2));
+                    dispatch(actions.setVars('name2', name2));
+                    dispatch(actions.setVars('mon', wc1+1+"月"));
+                },
+                error:function(){
+
+                },
+            })
 
     }
     };

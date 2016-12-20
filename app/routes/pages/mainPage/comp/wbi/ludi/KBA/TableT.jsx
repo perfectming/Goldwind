@@ -12,6 +12,7 @@ let Component = React.createClass({
     	let {areaName,wfName,X1=areaName[0],X2=wfName[0],wtName,wtElec,wtPBA,wtLose}=this.props;
         let configPie = {
             chart: {
+            	zoomType: 'xy',
                 height:380,
                 backgroundColor: 'rgba(44, 61, 71, 0.4)',
                 plotBorderWidth: 0,
@@ -33,6 +34,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
             	y:30,
+            	x:-50,
             	margin:0,
                 align:"right",
                 verticalAlign: "top",
@@ -94,7 +96,7 @@ let Component = React.createClass({
                 },
             },,{
             	title:{
-                	text:'%',
+                	text:'100%',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
@@ -106,6 +108,7 @@ let Component = React.createClass({
 	                }
                },
                labels: {
+               	format: '',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -132,8 +135,9 @@ let Component = React.createClass({
             	name: 'PBA',
             	type: 'spline',
                 data: wtPBA,
+                yAxis: 2,
                 tooltip: {
-	                valueSuffix: '%'
+	                valueSuffix: '%',
 	            },
             }]
         };
