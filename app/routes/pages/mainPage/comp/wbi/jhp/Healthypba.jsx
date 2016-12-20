@@ -21,7 +21,8 @@ var daycount = day.getDate();
 
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+        let {ipUrl}=this.props
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -29,7 +30,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata3, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
+        let {hhdata3,ipUrl,wfid, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
 
 
         let data = require('./Healthy-data');
@@ -51,7 +52,7 @@ let Component = React.createClass({
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
                         <div className={styles.logo30}>
-                            {mon + w0 + w10 + "各风机健康度"}
+                            {mon + w0 + w10 + "各风机PBA"}
                         </div>
                         <span
                             onClick={() => hideit(bt0,barLotime3, power3, wrong30, wrong31, wrong32, wrong33, pba3)}>×</span>
@@ -148,11 +149,11 @@ let Component = React.createClass({
                         <div className={styles.rbox3}>
 
                             <button className={bt0===0? styles.button : styles.button22}
-                                    onClick={() => gogogo(bt0,w0, win, wc1,wc2, actbt, hhdata)}>
+                                    onClick={() => gogogo(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid)}>
                                 前10
                             </button>
                             <button className={bt0===1? styles.button : styles.button22}
-                                    onClick={() => back(bt0,w0, win, wc1,wc2, actbt, hhdata)}>
+                                    onClick={() => back(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid)}>
                                 后10
                             </button>
                             <button className={bt0===2? styles.button : styles.button22} onClick={() => more(hhdata3,bt0)}>更多</button>
@@ -219,18 +220,25 @@ const mapStateToProps = (state) => {
         wrong13: state.vars.wrong13a,
         pba1: state.vars.pba1a,
         bt0: state.vars.bt0,
-
+        ipUrl: state.vars.ipUrl,
+        wfid:state.vars.wfid,
 
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: () => {
+        ajax: (ipUrl) => {
+            let date = new Date();
+            let year = date.getFullYear()
+            let month2 = date.getMonth();
+            dispatch(actions.setVars('bt0', 0));
+            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('mon',  month2+"月"));
 
             $.ajax({
                 type: 'post',
-                url: 'http://' + ip + ':8080/wbi/PBA/getCompanySpacePBA',
+                url: 'http://' + ipUrl + '/wbi/PBA/getCompanySpacePBA',
                 async: false,
                 data: 'month=11',
                 dataType: 'json',
@@ -243,7 +251,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('w1', w0));
                     dispatch(actions.setVars('w11', w10));
                     dispatch(actions.setVars('hhdata', data));
-                    dispatch(actions.setVars('mon', '11月'));
+
                     let barLotime1 = [];    //各区域   一区域二区域
                     let power1 = [];       //实际发电量
                     let wrong10 = [];       //故障损失
@@ -338,7 +346,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('wind', value.plan));
             dispatch(actions.setVars('winds', value.actrul));
             dispatch(actions.setVars('windss', value.actruls));
-
+            dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
                 url: 'http://' + ip + ':8080/wbi/PBA/getCompanySpacePBA',
@@ -428,18 +436,18 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0,w0, win, wc1,wc2, actbt, hhdata) => {
+        gogogo: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
             dispatch(actions.setVars('bt0', 0));
-            let grid = hhdata.data[2][0].groupid;
+          //  let grid = hhdata.data[2][0].groupid;
 
             $.ajax({
                 type: 'post',
-                url: 'http://' + ip + ':8080/wbi/PBA/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": '150828',
+                    "wfid": wfid == undefined ? '150828' : wfid,
                     "type":"0",
                     "year":"2016"
                 },
@@ -482,18 +490,18 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0,w0, win, wc1,wc2, actbt, hhdata) => {
+        back: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
 
             dispatch(actions.setVars('bt0', 1));
 
             $.ajax({
                 type: 'post',
-                url: 'http://' + ip + ':8080/wbi/PBA/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": '150828',
+                    "wfid": wfid == undefined ? '150828' : wfid,
                     "type":"1",
                     "year":"2016"
                 },

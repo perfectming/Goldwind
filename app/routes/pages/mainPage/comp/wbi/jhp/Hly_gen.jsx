@@ -13,7 +13,7 @@ let Component = React.createClass({
 
     render() {
 
-        let {ip="10.68.100.32",actbt=10,w0,changedata1,windplan1 = win,text,hhdata,wc1,wc2,power2,power1,name0} = this.props;
+        let {ipUrl,actbt=10,w0,changedata1,windplan1 = win,text,hhdata,wc1,wc2,power2,power1,name0} = this.props;
 
 
 
@@ -83,7 +83,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w0=e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w0,win,wc1,hhdata,actbt);
+                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl);
 
                         }
                     }
@@ -172,6 +172,7 @@ const mapStateToProps = (state) => {
         windplan1 : state.vars.windplan1,
         hhdata : state.vars.hhdata,
         actbt:state.vars.actbt,
+        ipUrl:state.vars.ipUrl,
 
     }
 };
@@ -181,19 +182,18 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(w0,win,wc1,hhdata,actbt)=>{
+        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl)=>{
 
-            let grid;
+
 
            // grid=hhdata.data[2][wc1].groupid;
 
 
 
-            console.log(grid)
-            console.log(actbt)
+
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceByGroupidElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getSpaceByGroupidElec',
                 async:false,
                 data:{
                     "months":actbt+1,
@@ -203,7 +203,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
+                    console.log(data);
 
                     let barlotimes2 = [];
                     let barlopowers2 = [];
@@ -247,7 +247,7 @@ const mapDispatchToProps = (dispatch) => {
 
             dispatch(actions.setVars('w1',w0 ));
             dispatch(actions.setVars('win1',win ));
-
+            dispatch(actions.setVars('bt0', 0));
         },
     };
 };

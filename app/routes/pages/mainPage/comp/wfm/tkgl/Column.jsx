@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
+var {getState} = require('redux/store');
 var ReactHighcharts = require('react-highcharts');
 
 let Component = React.createClass({
@@ -18,8 +19,14 @@ let Component = React.createClass({
             (!x[6]&&x[5])&&arr1.push(ssg1[x].Capacity/1000);
         }
         for(let x in ssg1){
-            (!x[6]&&x[5])&&arr2.push((ssg1[x].Transformer_P/1000).toFixed(0)/1);
-        }
+            if(x=='150801'){
+                arr2.push((ssg1['150801301'].Transformer_P_BMCJGF/1).toFixed(0)/1);
+            }else if(x=='150811'){
+                arr2.push((ssg1['150801301'].Transformer_P/1-ssg1['150801301'].Transformer_P_BMCJGF/1).toFixed(0)/1);
+            }else {
+                (!x[6] && x[5]) && arr2.push((ssg1[x+'901'].Transformer_P / 1).toFixed(0) / 1);
+            }
+        }console.log(arr2);
         for(let x in ssg2){
             (!x[6]&&x[5])&&arr3.push(ssg2[x].name);
         }

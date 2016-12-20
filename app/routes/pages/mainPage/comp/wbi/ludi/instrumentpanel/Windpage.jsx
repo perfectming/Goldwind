@@ -21,7 +21,7 @@ let Component = React.createClass({
    
 
     render() {
-        let{ipUrl,windBool=false,actbt,flagTime2=true,flagPba2=true,flag2=true,changepageSort1,changepageProT,changepageProS,changepageSort,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let {healthy,wfName,wfId,areaId,wfTheory,wfAct,wtArr,wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct,month,monthAct,monthPlan,month2,income,cost,runTime,downTime,TBA,ipUrl,windBool=false,actbt,flagTime2=true,flagPba2=true,flag2=true,changepageSort1,changepageProT,changepageProS,changepageSort,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(windBool){
         	return (
 	            <div className={styles.box}>
@@ -167,6 +167,27 @@ const mapStateToProps = (state) => {
     	AreaId : state.vars.AreaId,
     	windBool : state.vars.windBool,
     	ipUrl : state.vars.ipUrl,
+    	
+    	wfName : state.vars.wfName,
+    	wfId : state.vars.wfId,
+    	wfAct : state.vars.wfAct,
+    	wfTheory : state.vars.wfTheory,
+    	wfYearPlan : state.vars.wfYearPlan,
+    	wfYearAct : state.vars.wfYearAct,
+    	wfMonthPlan : state.vars.wfMonthPlan,
+    	wfMonthAct : state.vars.wfMonthAct,
+    	wfDayPlan : state.vars.wfDayPlan,
+    	wfDayAct : state.vars.wfDayAct,
+    	month : state.vars.month,
+    	monthAct : state.vars.monthAct,
+    	monthPlan : state.vars.monthPlan,
+    	month2 : state.vars.month2,
+    	cost : state.vars.cost,
+    	income : state.vars.income,
+    	healthy : state.vars.healthy,
+    	runTime : state.vars.runTime,
+    	downTime : state.vars.downTime,
+    	TBA : state.vars.TBA,
     }
 };
 
@@ -186,7 +207,8 @@ const mapDispatchToProps = (dispatch) => {
 			        	areaId=[];
 			        	for(var i in data.data){
 			        		areaId.push(i);
-			        	}
+			        	};
+			        	dispatch(actions.setVars('areaId',areaId ));
 			        },
 			        complete : function(XMLHttpRequest,status){ 
 					　　　
@@ -203,8 +225,14 @@ const mapDispatchToProps = (dispatch) => {
 			        	for(var i in data.data.everyAreaPba){
 			        		wfName.push(data.data.everyAreaPba[i].wfname);
 			        		wfId.push(data.data.everyAreaPba[i].wfid);
+
 			        	}
 
+
+
+			        	};
+			        	dispatch(actions.setVars('wfName',wfName ));
+			        	dispatch(actions.setVars('wfId',wfId ));
 
 			        },
 			        complete : function(XMLHttpRequest,status){ 
@@ -225,7 +253,9 @@ const mapDispatchToProps = (dispatch) => {
 			        	for(var i in data.data.everyAreaPba){
 			        		wfName.push(data.data.everyAreaPba[i].wfname);
 			        		wfId.push(data.data.everyAreaPba[i].wfid);
-			        	}
+			        	};
+			        	dispatch(actions.setVars('wfName',wfName ));
+			        	dispatch(actions.setVars('wfId',wfId ));
 			        },
 			        complete : function(XMLHttpRequest,status){ 
 				　　　　if(status=='timeout'){
@@ -244,6 +274,9 @@ const mapDispatchToProps = (dispatch) => {
 			        	wtArr=data.data.everyAreaPba;
 			        	wfAct=data.data.scale[0].poweract;
 			        	wfTheory=data.data.scale[0].powertheory;
+			        	dispatch(actions.setVars('wtArr',wtArr ));
+			        	dispatch(actions.setVars('wfAct',wfAct ));
+			        	dispatch(actions.setVars('wfTheory',wfTheory ));
 			        },
 			        complete : function(XMLHttpRequest,status){ 
 				　　　　  $.ajax({
@@ -266,7 +299,16 @@ const mapDispatchToProps = (dispatch) => {
 								};
 								for(var i in data.data.wfieldsMonthsPlanElec){
 									monthPlan.push(data.data.wfieldsMonthsPlanElec[i]);
-								}
+								};
+								dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
+								dispatch(actions.setVars('wfYearAct',wfYearAct ));
+								dispatch(actions.setVars('wfMonthPlan',wfMonthPlan ));
+								dispatch(actions.setVars('wfMonthAct',wfMonthAct ));
+								dispatch(actions.setVars('wfDayPlan',wfDayPlan ));
+								dispatch(actions.setVars('wfDayAct',wfDayAct ));
+								dispatch(actions.setVars('month',month ));
+								dispatch(actions.setVars('monthAct',monthAct ));
+								dispatch(actions.setVars('monthPlan',monthPlan ));
 					        },
 					        complete : function(XMLHttpRequest,status){ 
 						　　　　	$.ajax({
@@ -281,7 +323,10 @@ const mapDispatchToProps = (dispatch) => {
 							        		month2.push(data.data[i].month+"月");
 							        		cost.push(data.data[i].costs);
 							        		income.push(data.data[i].incomes);
-							        	}
+							        	};
+							        	dispatch(actions.setVars('month2',month2 ));
+							        	dispatch(actions.setVars('cost',cost ));
+							        	dispatch(actions.setVars('income',income ));
 							        },
 							        complete : function(XMLHttpRequest,status){ 
 								　　　　	$.ajax({
@@ -294,6 +339,9 @@ const mapDispatchToProps = (dispatch) => {
 									        	runTime=data.data[0].runtimes;
 									        	downTime=data.data[0].downtimes;
 									        	TBA=data.data[0].tba;
+									        	dispatch(actions.setVars('runTime',runTime ));
+									        	dispatch(actions.setVars('downTime',downTime ));
+									        	dispatch(actions.setVars('TBA',TBA ));
 									        },
 									        complete : function(XMLHttpRequest,status){ 
 										　　　　	$.ajax({
@@ -305,16 +353,17 @@ const mapDispatchToProps = (dispatch) => {
 										                timeout : 60000,
 										                success:function (data) {
 															healthy=data.data.health;
+															dispatch(actions.setVars('healthy',healthy ));
 										                },
 										                complete : function(XMLHttpRequest,status){
 										                    dispatch(actions.setVars('windBool',true ));
 										                },
 										        });
-										　　},
+										　　  },
 									    });
-								　　 },
+								　　  },
 								});
-						　　},
+						　　 },
 						});
 				　　  },
 			});
@@ -351,6 +400,9 @@ const mapDispatchToProps = (dispatch) => {
 			        	wtArr=data.data.everyAreaPba;
 			        	wfAct=data.data.scale[0].poweract;
 			        	wfTheory=data.data.scale[0].powertheory;
+			        	dispatch(actions.setVars('wtArr',wtArr ));
+			        	dispatch(actions.setVars('wfAct',wfAct ));
+			        	dispatch(actions.setVars('wfTheory',wfTheory ));
 			        },
 			        complete : function(XMLHttpRequest,status){ 
 				　　　　	$.ajax({
@@ -362,6 +414,7 @@ const mapDispatchToProps = (dispatch) => {
 							timeout : 60000,
 							success:function (data) {
 								healthy=data.data.health;
+								dispatch(actions.setVars('healthy',healthy ));
 							},
 							complete : function(XMLHttpRequest,status){
 								$.ajax({
@@ -384,7 +437,16 @@ const mapDispatchToProps = (dispatch) => {
 										};
 										for(var i in data.data.wfieldsMonthsPlanElec){
 											monthPlan.push(data.data.wfieldsMonthsPlanElec[i]);
-										}
+										};
+										dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
+										dispatch(actions.setVars('wfYearAct',wfYearAct ));
+										dispatch(actions.setVars('wfMonthPlan',wfMonthPlan ));
+										dispatch(actions.setVars('wfMonthAct',wfMonthAct ));
+										dispatch(actions.setVars('wfDayPlan',wfDayPlan ));
+										dispatch(actions.setVars('wfDayAct',wfDayAct ));
+										dispatch(actions.setVars('month',month ));
+										dispatch(actions.setVars('monthAct',monthAct ));
+										dispatch(actions.setVars('monthPlan',monthPlan ));
 							        },
 							        complete : function(XMLHttpRequest,status){ 
 								　　　　	$.ajax({
@@ -399,7 +461,10 @@ const mapDispatchToProps = (dispatch) => {
 									        		month2.push(data.data[i].month+"月");
 									        		cost.push(data.data[i].costs);
 									        		income.push(data.data[i].incomes);
-									        	}
+									        	};
+									        	dispatch(actions.setVars('month2',month2 ));
+									        	dispatch(actions.setVars('cost',cost ));
+									        	dispatch(actions.setVars('income',income ));
 									        },
 									        complete : function(XMLHttpRequest,status){ 
 										　　　　	$.ajax({
@@ -412,6 +477,9 @@ const mapDispatchToProps = (dispatch) => {
 											        	runTime=data.data[0].runtimes;
 											        	downTime=data.data[0].downtimes;
 											        	TBA=data.data[0].tba;
+											        	dispatch(actions.setVars('runTime',runTime ));
+											        	dispatch(actions.setVars('downTime',downTime ));
+											        	dispatch(actions.setVars('TBA',TBA ));
 											        },
 											        complete : function(XMLHttpRequest,status){ 
 												　　　　	

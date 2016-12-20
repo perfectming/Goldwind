@@ -13,7 +13,8 @@ let ip="10.68.100.32";
 
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+        let {ipUrl}=this.props
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -21,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {ip="10.68.100.32",befor_pages='area',wc1,wc2,bt0=0,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {ip="10.68.100.32",ipUrl,befor_pages='area',wc1,wfid,bt0=0,wc2,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
@@ -67,7 +68,7 @@ let Component = React.createClass({
                     {
                         data.data.yearelectric[0].wind.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key)}>
+                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl)}>
                                     {value.name}
                                 </div>
                             )
@@ -105,9 +106,9 @@ let Component = React.createClass({
 
                         </div>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(hhdata)}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(hhdata4)}>更多</button>
                         </div>
 
                         <Hly_pbatwo height={390} text={mon+w0+"各风机PBA"}
@@ -159,19 +160,27 @@ const mapStateToProps = (state) => {
         wc2: state.vars.wc2,
         hhdata: state.vars.hhdata,
         bt0: state.vars.bt0,
+        ipUrl: state.vars.ipUrl,
+        wfid: state.vars.wfid,
 
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: () => {
+        ajax: (ipUrl) => {
+            let date = new Date();
+            let year = date.getFullYear()
+            let month2 = date.getMonth();
+            dispatch(actions.setVars('bt0', 0));
+            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/PBA/getAreaWFieldPBA',
+                url:'http://'+ipUrl+'/wbi/PBA/getAreaWFieldPBA',
                 async:false,
                 data:{
-                    "month":'11',
+                    "month":month2,
                     "groupid":'201612121721151',
                 },
                 dataType:'json',
@@ -248,7 +257,7 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor:(value,key)=>{
+        changecolor:(value,key,ipUrl)=>{
             dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind',value.plan ));
@@ -257,7 +266,7 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/PBA/getAreaWFieldPBA',
+                url:'http://'+ipUrl+'/wbi/PBA/getAreaWFieldPBA',
                 async:false,
                 data:{
                     "month":key+1,
@@ -320,16 +329,16 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        gogogo: (bt0,w0,  wc1,wc2, actbt, hhdata) => {
+        gogogo: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ip + ':8080/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": '150828',
+                    "wfid": wfid == undefined ? '150828' : wfid,
                     "type":"0",
                     "year":"2016"
                 },
@@ -344,7 +353,9 @@ const mapDispatchToProps = (dispatch) => {
                     let wrong32c = [];       //限功率损失
                     let wrong33c = [];       //非设备原因损失
                     let pba3c = [];      //故障损失
-
+                    console.log('a')
+                    console.log(data)
+                    console.log("b")
 
                     for (var i in data.data) {
                         barLotime3c.push(data.data[i].wtname);    //区域的横坐标
@@ -355,6 +366,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
                         pba3c.push(data.data[i].pba);   //非设备原因损失
                     }
+
 
                     dispatch(actions.setVars('barLotime1', barLotime3c))
                     dispatch(actions.setVars('power1', power3c))
@@ -376,16 +388,16 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0,w0,  wc1,wc2, actbt, hhdata) => {
+        back: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ip + ':8080/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": '150828',
+                    "wfid": wfid == undefined ? '150828' : wfid,
                     "type":"1",
                     "year":"2016"
                 },
@@ -428,6 +440,8 @@ const mapDispatchToProps = (dispatch) => {
             });
         },
         more: (hhdata4) => {
+
+
             var barLotime3=[];
             var power3=[];
             var wrong30=[];
@@ -453,7 +467,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('wrong11', wrong31));
             dispatch(actions.setVars('wrong12', wrong32));
             dispatch(actions.setVars('wrong13', wrong33));
-            dispatch(actions.setVars('pba14', pba3));
+            dispatch(actions.setVars('pba1', pba3));
             $("#light").show();
             $("#boxhidden").show();;
         },

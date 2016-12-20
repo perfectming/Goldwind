@@ -12,7 +12,7 @@ let Component = React.createClass({
     render() {
         let {text,name3,runtime3,downtime3,tba3,changedata1,hhdata,w0,W10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
 
-
+        console.log(tba3)
         let configPie = {
             chart: {
                 height:400,
@@ -136,7 +136,7 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-
+                min:0,
                 title: {
                     text: '100%',
                     align: 'high',
@@ -231,7 +231,7 @@ const mapDispatchToProps = (dispatch) => {
                         name1.push(data.data[i].wfname)
                         runtime1.push(data.data[i].runtimes);   //实际发电量
                         downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(data.data[i].tba);   //维护损失
+                        tba1.push(data.data[i].tb*100);   //维护损失
                         wfid1.push(data.data[0].wfid);   //维护损失
 
                     }
@@ -273,7 +273,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba);   //维护损失
+                        tba2.push(data.data[i].tba*100);   //维护损失
 
                     }
 

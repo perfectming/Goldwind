@@ -16,7 +16,6 @@ let Component = React.createClass({
         let {ip="10.68.100.32",hhdata4,actbt=10,changedata1,w0='一区域',wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
 
 
-
         let configPie = {
             chart: {
                 height:height,
@@ -126,17 +125,6 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-                title: {
-                    text:'(h)',
-                    align:'high',
-                    rotation:'0',
-                    y: -10,
-                    x: 40,
-                    style:{
-                        color:'#fff',
-                        fontSize:'14px'
-                    },
-                },
 
                 title: {
                     text: 'kWh',
@@ -259,7 +247,7 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     "month":actbt+1,
-                    "groupid":201612121721151,
+                    "groupid":'201612121721151',
                     "wfid":wfid,
                 },
                 dataType:'json',
@@ -288,6 +276,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wrong12', wrong221q));
                     dispatch(actions.setVars('wrong13', wrong231q));
                     dispatch(actions.setVars('pba1', pba21q));
+                    dispatch(actions.setVars('wfid', wfid));
                 },
                 error:function(){
 

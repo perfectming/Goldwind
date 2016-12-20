@@ -5,6 +5,7 @@ import Generating1 from './Generating/ywbb.jsx';
 import Electric_table from './Generating/Electric_table.jsx';
 import Completion from './Generating/Completion.jsx';
 import Lose_detail from './lose_electtict/lose_detail.jsx';
+import Alert from './Booster/alert.jsx';
 var $ =require('jquery');
 var actions = require('redux/actions');
 let paged = require('./pagedate');
@@ -47,6 +48,7 @@ let Component = React.createClass({
                { showbb==='Electric_table' && <Electric_table></Electric_table>}
                { showbb==='Completion' && <Completion></Completion>}
                { showbb==='lose_detail' && <Lose_detail></Lose_detail>}
+               { showbb==='alert' && <Alert></Alert>}
             </div>
         );
     }

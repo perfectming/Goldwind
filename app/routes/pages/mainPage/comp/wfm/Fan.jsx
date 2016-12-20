@@ -157,7 +157,7 @@ const mapDispatchToProps = (dispatch) => {
                                 dispatch(actions.setVars('fData', rdata));
                                 setTimeout(function(){
                                     dispatch(actions.setVars('fanbool', true));
-                                },500)
+                                },200)
                                 
                             }
                         }

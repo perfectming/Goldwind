@@ -17,24 +17,19 @@ let Component = React.createClass({
     render() {
 
 
-        let {w0,changedata1,x,windplan1 = win,barLoTime,text,}=this.props;
+        let {w0,changedata1,x,windplan1 = win,barLoTime,text,barLoPowerValue,wc1,hhdata,actbt,ipUrl}=this.props;
         let configPie = {
             chart: {
                 height:400,
 
 
                 backgroundColor: "rgba(44, 61, 71, 0.4)",
-
-
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
 
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-
-
-
                 borderRadius:10
             },
 
@@ -93,7 +88,8 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                             w0=e.point.category;
-                            changedata1(w0,win);
+                            wc1=e.point.index;
+                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl);
 
                         }
                     }
@@ -152,19 +148,9 @@ let Component = React.createClass({
             series: [{
                 name: '实际健康度',
                 type: 'column',
-                data: windplan1,
+                data: barLoPowerValue,
                 borderRadius: 7,
             }
-            // ,{
-            //     name: '实际健康度',
-            //     type: 'column',
-            //     data: barRoPowerValue
-            // },{
-            //     name: '停机时间',
-            //     type: 'spline',
-            //     color:'#fff',
-            //     data: barRoPowerValue
-            // }
 
 
             ]
@@ -182,6 +168,12 @@ const mapStateToProps = (state) => {
         w0 : state.vars.w1,
         win : state.vars.win1,
         windplan1 : state.vars.windplan1,
+        wc1 : state.vars.wc1,
+        hhddata : state.vars.hhdata,
+        actbt : state.vars.actbt,
+        ipUrl : state.vars.ipUrl,
+
+
     }
 };
 
@@ -189,10 +181,56 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1 :(w0,win)=>{
+        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl)=>{
             dispatch(actions.setVars('w1',w0 ));
-            dispatch(actions.setVars('win1',win ));
-            console.log(win);
+
+            $.ajax({
+                type:'post',
+                url:'http://'+ipUrl+'/wbi/Health/getAreaHealth',
+                async:false,
+                data:{
+                    "month":actbt+1,
+                    "groupid":'201612121721151',
+
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                    console.log(data)
+                    dispatch(actions.setVars('hhdata',  data));
+
+
+
+                    let barlopowers2 = [];
+                    let barlopowerp2 = [];
+
+                    for (var i in data.data[1]) {
+                        barlopowers2.push(data.data[1][i].wfHealth);    //区域的横坐标
+                        barlopowerp2.push(data.data[1][i].wfname);    //区域的横坐标
+
+                    }
+                    let barlopowers3 = [];
+                    let barlopowerp3 = [];
+
+                    for (var i =0;i<10;i++) {
+                        barlopowers3.push(data.data[0][i].fanHealth);    //区域的横坐标
+                        barlopowerp3.push(data.data[0][i].wtname);    //区域的横坐标
+
+                    }
+
+                    dispatch(actions.setVars('healthy2', barlopowers2));
+                    dispatch(actions.setVars('namex2', barlopowerp2));
+                    dispatch(actions.setVars('healthy3', barlopowers3));
+                    dispatch(actions.setVars('namex3', barlopowerp3));
+
+
+
+
+                },
+                error:function(){
+
+                },
+            })
 
 
         },
