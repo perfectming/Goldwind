@@ -397,7 +397,9 @@ const mapDispatchToProps = (dispatch) => {
 			        	dispatch(actions.setVars('wtArr',wtArr ));
 			        	dispatch(actions.setVars('wfAct',wfAct ));
 			        	dispatch(actions.setVars('wfTheory',wfTheory ));
-			        },
+			        	dispatch(actions.setVars('xxdwfNa1', wfName[key]));
+			        	dispatch(actions.setVars('xxdwfId1', wfId[key]));
+					},
 			        complete : function(XMLHttpRequest,status){ 
 				　　　　	$.ajax({
 							url:'http://'+ipUrl+'/wbi/Health/getCompanyHealth',//健康度饼图
