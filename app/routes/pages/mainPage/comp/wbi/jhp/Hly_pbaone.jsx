@@ -126,17 +126,6 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-                title: {
-                    text:'(h)',
-                    align:'high',
-                    rotation:'0',
-                    y: -10,
-                    x: 40,
-                    style:{
-                        color:'#fff',
-                        fontSize:'14px'
-                    },
-                },
 
                 title: {
                     text: 'kWh',
@@ -259,7 +248,7 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     "month":actbt+1,
-                    "groupid":201612121721151,
+                    "groupid":'201612121721151',
                     "wfid":wfid,
                 },
                 dataType:'json',
@@ -288,6 +277,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wrong12', wrong221q));
                     dispatch(actions.setVars('wrong13', wrong231q));
                     dispatch(actions.setVars('pba1', pba21q));
+                    dispatch(actions.setVars('wfid', wfid));
                 },
                 error:function(){
 

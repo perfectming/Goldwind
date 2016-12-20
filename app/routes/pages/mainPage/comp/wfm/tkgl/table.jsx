@@ -34,6 +34,7 @@ let Component = React.createClass({
                 }
             }
             console.log(data,mode);
+            if (data[150801]){
         return (
             <div>
                 <div className={styles.actionBox}>
@@ -194,6 +195,7 @@ let Component = React.createClass({
                 </div>
             </div>
         );}else {return(<div></div>)}
+    }else {return(<div></div>)}
     }
 });
 

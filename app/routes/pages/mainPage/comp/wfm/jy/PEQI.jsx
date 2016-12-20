@@ -224,7 +224,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: (page) => {
-            $.ajax({
+            /*$.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
                 data:'pageSize='+pageSize+'&&nowPage='+page,
@@ -247,7 +247,7 @@ const mapDispatchToProps = (dispatch) => {
                 error:function(){
                     console.log('获取数据失败')
                 }
-            });
+            });*/
         },
         saveTableItem:(line)=>{
             let tableV = _.clone(getState().objs.tableContent);

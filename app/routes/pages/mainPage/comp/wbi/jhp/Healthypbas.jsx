@@ -20,7 +20,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wfid, ipUrl, barlotimes1, bt0 = 0, hhdata,hhdata2,hhdata3, w0 = "巴盟", w10 , mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2, runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, name3, runtime3, downtime3, tba3} = this.props;
+        let {wfid, ipUrl, bt0 = 0, hhdata,hhdata2,hhdata3, w0 = "巴盟", w10 , mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2, runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, name3, runtime3, downtime3, tba3} = this.props;
 
         let data = require('./Healthy-data');
         let month = data.data.line_month;
@@ -34,7 +34,6 @@ let Component = React.createClass({
 
             <div className={styles.box}>
                 <div className={styles.light} id="light"></div>
-
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`} id="boxhidden">
                     <div className={styles.hidden_top}>
                         <div className={styles.logo3}></div>
@@ -80,7 +79,7 @@ let Component = React.createClass({
                                  runtime3={runtime3}
                                  downtime3={downtime3}
                                  tba3={tba3 * 100}></Hly_tsb>
-                        <div className={styles.logo5}>
+                        <div className={styles.logo3}>
 
                         </div>
                     </div>
@@ -98,7 +97,7 @@ let Component = React.createClass({
                                  runtime={runtime}
                                  downtime={downtime}
                                  tba0={tba0 * 100}></Hly_tsa>
-                        <div className={styles.logomini5}>
+                        <div className={styles.logomini3}>
 
                         </div>
                     </div>
@@ -109,10 +108,10 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.rbox3}>
                             <button className={bt0 === 0 ? styles.button : styles.button22}
-                                    onClick={() => gogogo(bt0, w0, wc1, wc2, actbt, name2,runtime2,downtime2,tba2)}>前10
+                                    onClick={() => gogogo(bt0, ipUrl, wfid,actbt)}>前10
                             </button>
                             <button className={bt0 === 1 ? styles.button : styles.button22}
-                                    onClick={() => back(bt0, w0, wc1, wc2, actbt, name2,runtime2,downtime2,tba2)}>后10
+                                    onClick={() => back(bt0, ipUrl, wfid,actbt)}>后10
                             </button>
                             <button className={styles.button22} onClick={() => more(hhdata3, wfid)}>更多</button>
                         </div>
@@ -125,7 +124,7 @@ let Component = React.createClass({
                                     runtime2={runtime2}
                                     downtime2={downtime2}
                                     tba2={tba2 * 100}></Hly_ds>
-                            <div className={styles.logomini5}>
+                            <div className={styles.logomini3}>
 
                             </div>
                         </div>
@@ -204,7 +203,7 @@ const mapDispatchToProps = (dispatch) => {
                         tba3.push(data.data[i].tba);   //维护损失
 
                     }
-                    console.log(tba3)
+
                     dispatch(actions.setVars('name3', name3));
                     dispatch(actions.setVars('runtime3', runtime3));
                     dispatch(actions.setVars('downtime3', downtime3));
@@ -431,38 +430,40 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0, w0, wc1, wc2, actbt, name2,runtime2,downtime2,tba2) => {
+        gogogo: (bt0, ipUrl, wfid,actbt) => {
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/TBA/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
                     "groupid": '201612121721151',
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "0",
-                    "year": "2016"
+                    "year": '2016',
                 },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
+                    let name2 = [];
+                    let runtime2 = [];       //实际发电量
+                    let downtime2 = [];       //故障损失
+                    let tba2 = [];       //维护损失
 
-                    let barLotime3c = [];    //各区域   一区域二区域
-                    let power3c = [];       //实际发电量
-                    let wrong30c = [];       //故障损失
 
-
-                    for (var i in data.data) {
-                        barLotime3c.push(data.data[i].wtname);    //区域的横坐标
-                        power3c.push(data.data[i].powerplan);   //实际发电量
-                        wrong30c.push(data.data[i].poweract);   //故障损失
+                    for (let i =0;i<10;i++) {
+                        //区域的横坐标
+                        name2.push(data.data[i].wtname);
+                        runtime2.push(data.data[i].runtimes);   //实际发电量
+                        downtime2.push(data.data[i].downtimes);   //故障损失
+                        tba2.push(data.data[i].tba);   //维护损失
 
                     }
-
-                    dispatch(actions.setVars('barlotimes3', barLotime3c))
-                    dispatch(actions.setVars('barlopowers3', power3c))
-                    dispatch(actions.setVars('barlopowerp3', wrong30c))
+                    dispatch(actions.setVars('name2', name2));
+                    dispatch(actions.setVars('runtime2', runtime2));
+                    dispatch(actions.setVars('downtime2', downtime2));
+                    dispatch(actions.setVars('tba2', tba2));
 
 
                 },
@@ -473,38 +474,42 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid) => {
+        back: (bt0, ipUrl, wfid,actbt) => {
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/TBA/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
                     "groupid": '201612121721151',
-                    "wfid": wfid,
+                    "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "1",
-                    "year": "2016"
+                    "year": '2016',
                 },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
 
-                    let barLotime3c = [];    //各区域   一区域二区域
-                    let power3c = [];       //实际发电量
-                    let wrong30c = [];       //故障损失
+                    let runtime2 = [];       //实际发电量
+                    let downtime2 = [];       //故障损失
+                    let tba2 = [];       //维护损失
+                    let name2 = [];      //故障损失
 
 
-                    for (var i in data.data) {
-                        barLotime3c.push(data.data[i].wtname);    //区域的横坐标
-                        power3c.push(data.data[i].powerplan);   //实际发电量
-                        wrong30c.push(data.data[i].poweract);   //故障损失
+                    for (var i =0;i<10;i++) {
+                        //区域的横坐标
 
+                        name2.push(data.data[i].wtname)
+                        runtime2.push(data.data[i].runtimes);   //实际发电量
+                        downtime2.push(data.data[i].downtimes);   //故障损失
+                        tba2.push(data.data[i].tba);   //维护损失
                     }
 
-                    dispatch(actions.setVars('barlotimes3', barLotime3c))
-                    dispatch(actions.setVars('barlopowers3', power3c))
-                    dispatch(actions.setVars('barlopowerp3', wrong30c))
+                    dispatch(actions.setVars('name2', name2));
+                    dispatch(actions.setVars('runtime2', runtime2));
+                    dispatch(actions.setVars('downtime2', downtime2));
+                    dispatch(actions.setVars('tba2', tba2));
 
 
                 },
@@ -543,7 +548,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-            console.log(hhdata3)
+
             let runtime2=[];       //实际发电量
             let downtime2=[];       //故障损失
             let tba2=[];       //维护损失
