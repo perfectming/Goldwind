@@ -150,7 +150,6 @@ let Component = React.createClass({
                 name: '实际发电量',
                 color:"#33BAC0",
                 type: 'column',
-                color: "#33BAC0",
                 data: power1,
                 borderRadius: 4,
             }, {

@@ -6,7 +6,7 @@ import del from '../../../img/icon/tabDel.png';
 import add from '../../../img/icon/tabAdd.png';
 var {getState} = require('../../../../../../redux/store');
 import _ from 'lodash';
-import mod from '../../../../../../../config/Model'
+import mod from '../../../../../../../config/Model';
 var actions = require('redux/actions');
 let comps = require('./data');
 let ssg2=mod.Model.ens;
@@ -224,7 +224,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: (page) => {
-            $.ajax({
+            /*$.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
                 data:'pageSize='+pageSize+'&&nowPage='+page,
@@ -247,7 +247,7 @@ const mapDispatchToProps = (dispatch) => {
                 error:function(){
                     console.log('获取数据失败')
                 }
-            });
+            });*/
         },
         saveTableItem:(line)=>{
             let tableV = _.clone(getState().objs.tableContent);

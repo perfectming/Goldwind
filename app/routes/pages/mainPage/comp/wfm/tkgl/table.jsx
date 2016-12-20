@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 
 import styles from './table.scss';
+var {getState} = require('redux/store');
 
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';
@@ -33,6 +34,7 @@ let Component = React.createClass({
                 }
             }
             console.log(data,mode);
+            if (data[150801]){
         return (
             <div>
                 <div className={styles.actionBox}>
@@ -193,6 +195,7 @@ let Component = React.createClass({
                 </div>
             </div>
         );}else {return(<div></div>)}
+    }else {return(<div></div>)}
     }
 });
 

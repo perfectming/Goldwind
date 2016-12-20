@@ -17,7 +17,7 @@ let Component = React.createClass({
     render() {
 
 
-        let {w0,changedata1,x,windplan1 = win,barLoTime,text,}=this.props;
+        let {w0,changedata1,x,windplan1 = win,barLoTime,text,barLoPowerValue}=this.props;
         let configPie = {
             chart: {
                 height:400,
@@ -152,7 +152,7 @@ let Component = React.createClass({
             series: [{
                 name: '实际健康度',
                 type: 'column',
-                data: windplan1,
+                data: barLoPowerValue,
                 borderRadius: 7,
             }
             // ,{
@@ -191,7 +191,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         changedata1 :(w0,win)=>{
             dispatch(actions.setVars('w1',w0 ));
-            dispatch(actions.setVars('win1',win ));
+
             console.log(win);
 
 

@@ -48,7 +48,8 @@ let x7=[];
 
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+        let {ipUrl}=this.props
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -56,7 +57,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area',w0, wc1,wc2,bt0=0,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
+        let {befor_pages='area',w0, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
         return (
 
 
@@ -69,12 +70,12 @@ let Component = React.createClass({
 
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
                     <div className={styles.hidden_top}>
-                        <div className={styles.logo2}></div>
-                        <div className={styles.logo3}>{"各风机健康度"}</div>
+                        <div className={styles.logo5}></div>
+                        <div className={styles.logo30}>{"各风机健康度"}</div>
                         <span onClick={()=>hideit(hhdata,bt0)}>×</span>
                     </div>
                     <div className={styles.hidden_bottom}>
-                    <Hly_gentwo    widths={4500}  height={450}
+                    <Hly_gentwo    widths={5000}  height={450}
                                    name0={barlotimes2}
                                    powerplan1={barlopowers2}
                                    poweract2={barlopowerp2}
@@ -88,7 +89,7 @@ let Component = React.createClass({
                     {
                         data.data.yearelectric[0].wind.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key)}>
+                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl)}>
                                     {value.name}
                                 </div>
                             )
@@ -120,8 +121,8 @@ let Component = React.createClass({
 
                         </div>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo( bt0,actbt, hhdata)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, actbt, hhdata)}>后10</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo( bt0,actbt, hhdata,ipUrl, wfid,)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, actbt, hhdata,ipUrl, wfid,)}>后10</button>
                             <button className={styles.button22} onClick={() => more(hhdata)}>更多</button>
                         </div>
                         <Hly_gentwo    height={390}
@@ -158,15 +159,23 @@ const mapStateToProps = (state) => {
         wc1: state.vars.wc1,
         w0: state.vars.w0,
         wc2: state.vars.wc2,
+        ipUrl: state.vars.ipUrl,
+        wfid:state.vars.wfid,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: () => {
+        ajax: (ipUrl) => {
+            let date = new Date();
+            let year = date.getFullYear()
+            let month2 = date.getMonth();
+            dispatch(actions.setVars('bt0',  0));
+            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/ELEC/getSpaceElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getSpaceElec',
                 async:false,
                 data:'month=11',
                 dataType:'json',
@@ -230,7 +239,7 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor:(value,key)=>{
+        changecolor:(value,key,ipUrl)=>{
 
             dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
@@ -238,7 +247,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('winds',value.actrul ));
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/ELEC/getSpaceElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getSpaceElec',
                 async:false,
                 data:{"month":key+1},
                 dataType:'json',
@@ -282,7 +291,7 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0, actbt, hhdata) => {
+        gogogo: (bt0, actbt, hhdata, ipUrl, wfid) => {
             dispatch(actions.setVars('bt0', 0));
 
             console.log(bt0)
@@ -290,12 +299,12 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type: 'post',
-                url: 'http://' + ip + ':8080/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": '150828',
+                    "wfid":wfid == undefined ? '150828' : wfid,
                     "type":"0",
                     "year":"2016"
                 },
@@ -331,16 +340,16 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, actbt, hhdata) => {
+        back: (bt0, actbt, hhdata, ipUrl, wfid) => {
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ip + ':8080/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": '150828',
+                    "wfid":wfid == undefined ? '150828' : wfid,
                     "type":"1",
                     "year":"2016"
                 },
@@ -370,7 +379,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (hhdata) => {
+        more: (hhdata, ipUrl, wfid) => {
             let barLotime3c = [];    //各区域   一区域二区域
             let power3c=[];       //计划发电量
             let wrong30c=[];       //实际发电量

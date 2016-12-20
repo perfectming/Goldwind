@@ -16,6 +16,8 @@
     overflow: hidden;
     background: #464c58;
     .tableHeaderItem {
+      border-left: 1px solid #000;
+      border-top: 1px solid #000;
       float: left;
       height:72px;
       line-height:72px;
@@ -24,6 +26,8 @@
       text-align: center;
     }
     .tableHeaderAGCItem {
+      border-left: 1px solid #000;
+      border-top: 1px solid #000;
       height:36px;
       line-height:36px;
       overflow: hidden;
@@ -31,6 +35,8 @@
       text-align: center;
     }
     .tableAGCItem{
+      border-left: 1px solid #000;
+      border-top: 1px solid #000;
       float: left;
       height:36px;
       line-height:36px;

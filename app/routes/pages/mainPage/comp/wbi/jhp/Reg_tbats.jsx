@@ -172,7 +172,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
