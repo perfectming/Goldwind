@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {areaName,X1=areaName[0],changedata2,X2,wfName,wfId,wfElec,wfLose,wfPBA}=this.props;
+    	let {wtData,sTime,eTime,WfId,wtName,wtElec,wtLose,wtPBA,ipUrl,areaName,X1=areaName[0],changedata2,X2,wfName,wfId,wfElec,wfLose,wfPBA}=this.props;
         let configPie = {
             chart: {
                 height:380,
@@ -31,6 +31,7 @@ let Component = React.createClass({
             },
             //图例说明
             legend: {
+            	x:-50,
                 align:"right",
                 verticalAlign: "top",
                 itemStyle: {
@@ -83,6 +84,7 @@ let Component = React.createClass({
 	                }
                 },
                 labels: {
+                	format: '',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -90,8 +92,9 @@ let Component = React.createClass({
                     }
                 },
             },{
+            	min:0,
             	title:{
-                	text:'%',
+                	text:'100%',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
@@ -99,17 +102,18 @@ let Component = React.createClass({
 	                x:-10,
 	                style:{
 	                	fontSize:'14px',
-	                	color:'white',
+	                	color:'#fff',
 	                }
                },
-               labels: {
+               	labels: {
+               	 	format: '',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
                         fontSize:'14px'  //字体
                     }
                 },
-               opposite: true
+               opposite: true,
             }],
             series: [{
             	name: '实际发电量',
@@ -121,7 +125,9 @@ let Component = React.createClass({
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
-                    	changedata2(X2);
+                    	WfId=wfId[e.point.index];
+                    	changedata2(wtData,X2,sTime,eTime,WfId,wtName,wtElec,wtLose,wtPBA,ipUrl);
+                    	
                     }
                 }
             },{
@@ -134,20 +140,23 @@ let Component = React.createClass({
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
-                    	changedata2(X2);
+                    	WfId=wfId[e.point.index];
+                    	changedata2(wtData,X2,sTime,eTime,WfId,wtName,wtElec,wtLose,wtPBA,ipUrl);
                     }
                 }
             },{
             	name: 'PBA',
             	type: 'spline',
                 data: wfPBA,
+                yAxis: 1,
                 tooltip: {
 	                valueSuffix: '%'
 	            },
                 events: {
                     click: function(e) {
                     	X2=e.point.category;
-                    	changedata2(X2);
+                    	WfId=wfId[e.point.index];
+                    	changedata2(wtData,X2,sTime,eTime,WfId,wtName,wtElec,wtLose,wtPBA,ipUrl);
                     }
                 }
             }]
@@ -163,13 +172,51 @@ const mapStateToProps = (state) => {
     return {
     	X1 : state.vars.x1,
     	areaName : state.vars.areaName,
+    	sTime : state.vars.startTime,
+    	eTime : state.vars.endTime,
+    	ipUrl : state.vars.ipUrl,
+    	
+    	wtName : state.vars.wtName,
+    	wtElec : state.vars.wtElec,
+    	wtLose : state.vars.wtLose,
+    	wtPBA : state.vars.wtPBA,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changedata2 :(X2)=>{
+        changedata2 :(wtData,X2,sTime,eTime,WfId,wtName,wtElec,wtLose,wtPBA,ipUrl)=>{
             dispatch(actions.setVars('x2',X2 ));
+            $.ajax({
+        		url: 'http://'+ipUrl+'/wbi/KPI/getCompanyKPISpacesWfieldFans',//查询ID电量--YES
+		        type: 'post',
+		        async:false,
+		        data:{startTime:sTime,endTime:eTime,wfid:WfId},
+		        dataType: 'json',//here
+		        success:function (data) {
+		        	console.log(data);
+		        	wtElec=[],wtLose=[],wtPBA=[],wtName=[];
+		        	wtData=data.data;
+		        	wtData.sort(function(a,b){return b.pba-a.pba});
+		        	for(var i=0;i<10;i++){
+		        		wtName.push(wtData.slice(0,10)[i].wtname);
+		        		wtElec.push(wtData.slice(0,10)[i].poweract);
+		        		wtLose.push(wtData.slice(0,10)[i].totalloss);
+		        		wtPBA.push(wtData.slice(0,10)[i].pba*100);
+		        	};
+		        	
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+			　　　　if(status=='timeout'){
+			　　　　　 alert('超时');
+			　　　　}
+			　　},
+		  	});
+		  	dispatch(actions.setVars('wtName', wtName));
+			dispatch(actions.setVars('wtElec', wtElec));
+			dispatch(actions.setVars('wtLose', wtLose));
+			dispatch(actions.setVars('wtPBA', wtPBA));
+			dispatch(actions.setVars('wtData', wtData));
         },
     };
 };

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 
 import styles from './table.scss';
+var {getState} = require('redux/store');
 
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';

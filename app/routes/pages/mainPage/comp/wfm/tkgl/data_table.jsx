@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+var {getState} = require('redux/store');
 var actions = require('redux/actions');
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';

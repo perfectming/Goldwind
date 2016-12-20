@@ -9,8 +9,10 @@ let ip="10.68.100.32";
 ;
 
 let Component = React.createClass({
+
     componentWillMount() {
-        this.props.ajax();
+        let {ipUrl}=this.props
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -19,7 +21,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='group', returnit,actbt=10,changecolor,day0,poweract,powerplan} = this.props;
+        let {befor_pages='group', returnit,actbt=10,changecolor,day0,poweract,powerplan,mon,ipUrl} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button = data.data.button;
@@ -54,7 +56,7 @@ let Component = React.createClass({
                         <Hly_genday   barLpdpowerValues={poweract}
                                       barLpdpowerValue={powerplan}
                                       barLdpowerValue={day0}
-                                      text={text0[actbt]+'月每日集团发电量'}></Hly_genday>
+                                      text={mon+"每日集团发电量"}></Hly_genday>
                         <div className={styles.logomini5}>
 
                         </div>
@@ -77,19 +79,27 @@ const mapStateToProps = (state) => {
         day0:state.vars.day1,
         powerplan:state.vars.powerplan1,
         poweract:state.vars.poweract1,
+        mon:state.vars.mon,
+        ipUrl: state.vars.ipUrl,
 
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: () => {
+        ajax: (ipUrl) => {
             var obj = {
                 test: ''
             }
+            let date = new Date();
+            let year = date.getFullYear()
+            let month2 = date.getMonth();
+
+            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/ELEC/getSpaceTimeElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getSpaceTimeElec',
                 async:false,
                 data:'month=11',
                 dataType:'json',
@@ -123,6 +133,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         changecolor :(value,key)=>{
             dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('wind',value.plan ));
             dispatch(actions.setVars('winds',value.actrul ));
 
