@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Faninfo.scss';
 import Login from '../../../../../../components/common/Loading.jsx';
-import Header from '../linjinjin/header';
 import Title from '../super/Title.jsx';
 import Pwschart from './allinfo/Pwschart.jsx';
 import Pwschart2 from './allinfo/Pwschart2.jsx';
@@ -42,7 +41,7 @@ let Component = React.createClass({
 	render() {
 
 		let {value,fanid,infofmodel,infofdata,tobujian,faninfobool = false} = this.props;
-
+		// console.log(value)
 	if(faninfobool){
 		let val = value.Wtid;
 		let sp = infofmodel.Model.ens[val].sp;
@@ -320,14 +319,7 @@ let Component = React.createClass({
 							<div>机舱</div>
 						</div>
 
-						<div className={`${styles.WTURTemp} ${styles.fanTemp}`}>
-							<div><span>0</span><span>℃</span></div>
-							<div className={styles.WTURTempbox}>
-									<div></div>
-									<div></div>
-							</div>
-							<div>齿轮箱</div>
-						</div>
+						
 						<div className={`${styles.WGENTemp} ${styles.fanTemp}`}>
 							<div><span>{Math.ceil(fmvalue["WGEN.Temp.Ra.F32.1"])}</span><span>℃</span></div>
 							<div className={styles.WGENTempbox}>
