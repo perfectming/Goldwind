@@ -56,6 +56,8 @@ let Component = React.createClass({
 	            valueSuffix: unit,
 	        },
             xAxis: {
+            	gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
                 lineWidth: 1,
                 tickWidth: 0,
                 labels: {
@@ -68,8 +70,7 @@ let Component = React.createClass({
                 categories:month,
             },
             yAxis: {
-            	lineWidth: 1,
-                title:{
+            	title:{
                 	text:unit,
                 	align: 'high',
 	                offset: 0,
@@ -81,7 +82,6 @@ let Component = React.createClass({
 	                	color:'white',
 	                }
                 },
-                gridLineWidth:0,
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {

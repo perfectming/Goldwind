@@ -225,7 +225,7 @@ const mapDispatchToProps = (dispatch) => {
                 success:function(data){
                     dispatch(actions.setVars('hhdata3',  data));
                     dispatch(actions.setVars('w11',  w10));
-                    console.log(data)
+                    dispatch(actions.setVars('wfid',  wfid));
                     //各区域   一区域二区域
                     let runtime2 = [];       //实际发电量
                     let downtime2 = [];       //故障损失
@@ -235,7 +235,7 @@ const mapDispatchToProps = (dispatch) => {
                     for (var i =0;i<=10;i++) {
                         //区域的横坐标
 
-                        name2.push(data.data[i].wtname)
+                        name2.push(data.data[i].wtname);
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
                         tba2.push(data.data[i].tba);   //维护损失

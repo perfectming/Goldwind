@@ -12,7 +12,7 @@ let Component = React.createClass({
     render() {
         let {text,name3,runtime3,downtime3,tba3,changedata1,hhdata,w0,W10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
 
-
+        console.log(tba3)
         let configPie = {
             chart: {
                 height:400,
