@@ -101,7 +101,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'h',
+                text:'(h)',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -120,6 +120,8 @@ let Component = React.createClass({
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+                minRange:100,
+                max:100,
 
             title: {
                 text: '100%',
@@ -157,7 +159,7 @@ let Component = React.createClass({
                     opposite:true,
                     yAxis:1,
                      tooltip: {
-               valueSuffix:''
+               valueSuffix:'%'
             },
                 }
 

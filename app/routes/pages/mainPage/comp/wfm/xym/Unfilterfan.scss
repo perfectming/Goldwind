@@ -15,7 +15,7 @@
       padding:5px 0;
       border-radius:6px;
       background-color:#31F3FB;
-      color:#69747B;
+      color:#343434;
       font-size:16px;
       font-weight: bold;  
       position:absolute;
@@ -36,16 +36,18 @@
         padding:5px 20px;
         background-color:#1D2835;
         div{
+          color:#111;
+          font-weight: 600;
           font-size:14px;
           cursor:pointer;
           display:inline-table;
           float:left;
           width:58px;
-          height:25px;
+          // height:25px; 
           border-radius:3px;
-          line-height:25px;
+          line-height:20px;
           text-align:center;
-          padding:0 2px;
+          padding:2px 2px;
           margin: 2px;
           position:relative;
           .listoptinfo{
@@ -88,19 +90,19 @@
           // background-color:#f1a820
         }
         .online{
-        background-color:#049304;/*绿色*/ //运行
+        background-color:#0f0;/*绿色*/ //运行049304
         }
         .Alarm{
         background-color:#990000;/**/ //告警
         }
         .limitPow{
-          background-color:#328DEF;    //限功率
+          background-color:#ffffff;    //限功率328DEF
         }
         .offline{
-         background-color: #bfbfbf; // 待机
+         background-color: #328def; // 待机bfbfbf
         }
         .discomfor{
-          background-color: #e1dc92 //离线#f1a820
+          background-color: #aaaaaa //离线#f1a820  #e1dc92
         }
         .discomforpre{
           background-color: #f1a820;
@@ -109,13 +111,13 @@
           background-color: red;
         }
         .repair{
-          background-color: rgb(251, 213, 0);
+          background-color: #ff0;// 检修#c7b88c
         }
         .default{
           border: 2px solid #c7b88c; //检修
         } 
         .fault{
-          background-color:#ff0000;
+          background-color:#f00; //#ff0000
         }
       }
     }

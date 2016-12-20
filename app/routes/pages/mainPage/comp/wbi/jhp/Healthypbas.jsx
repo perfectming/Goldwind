@@ -50,7 +50,7 @@ let Component = React.createClass({
                                 name2={name2}
                                 runtime2={runtime2}
                                 downtime2={downtime2}
-                                tba2={tba2 * 100}></Hly_ds>
+                                tba2={tba2}></Hly_ds>
                     </div>
 
                 </div>
@@ -78,7 +78,7 @@ let Component = React.createClass({
                                  name3={name3}
                                  runtime3={runtime3}
                                  downtime3={downtime3}
-                                 tba3={tba3 * 100}></Hly_tsb>
+                                 tba3={tba3}></Hly_tsb>
                         <div className={styles.logo3}>
 
                         </div>
@@ -96,7 +96,7 @@ let Component = React.createClass({
                                  name0={name0}
                                  runtime={runtime}
                                  downtime={downtime}
-                                 tba0={tba0 * 100}></Hly_tsa>
+                                 tba0={tba0}></Hly_tsa>
                         <div className={styles.logomini3}>
 
                         </div>
@@ -123,7 +123,7 @@ let Component = React.createClass({
                                     name2={name2}
                                     runtime2={runtime2}
                                     downtime2={downtime2}
-                                    tba2={tba2 * 100}></Hly_ds>
+                                    tba2={tba2}></Hly_ds>
                             <div className={styles.logomini3}>
 
                             </div>
@@ -200,7 +200,7 @@ const mapDispatchToProps = (dispatch) => {
                         name3.push(data.data[i].groupname)
                         runtime3.push(data.data[i].runtimes);   //实际发电量
                         downtime3.push(data.data[i].downtimes);   //故障损失
-                        tba3.push(data.data[i].tba);   //维护损失
+                        tba3.push(data.data[i].tba*100);   //维护损失
 
                     }
 
@@ -239,7 +239,7 @@ const mapDispatchToProps = (dispatch) => {
                         name1.push(data.data[i].wfname)
                         runtime1.push(data.data[i].runtimes);   //实际发电量
                         downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(data.data[i].tba);   //维护损失
+                        tba1.push(data.data[i].tba*100);   //维护损失
                         wfid1.push(data.data[0].wfid);   //维护损失
 
                     }
@@ -282,8 +282,11 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba);   //维护损失
+                        tba2.push(data.data[i].tba*100);   //维护损失
                     }
+                    console.log("1")
+                    console.log(tba2)
+                    console.log("2")
                     dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));
@@ -332,7 +335,7 @@ const mapDispatchToProps = (dispatch) => {
                         name3.push(data.data[i].groupname)
                         runtime3.push(data.data[i].runtimes);   //实际发电量
                         downtime3.push(data.data[i].downtimes);   //故障损失
-                        tba3.push(data.data[i].tba);   //维护损失
+                        tba3.push(data.data[i].tba*100);   //维护损失
 
                     }
 
@@ -371,7 +374,7 @@ const mapDispatchToProps = (dispatch) => {
                         name1.push(data.data[i].wfname)
                         runtime1.push(data.data[i].runtimes);   //实际发电量
                         downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(data.data[i].tba);   //维护损失
+                        tba1.push(data.data[i].tba*100);   //维护损失
                         wfid1.push(data.data[0].wfid);   //维护损失
 
                     }
@@ -414,7 +417,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba);   //维护损失
+                        tba2.push(data.data[i].tba*100);   //维护损失
                     }
 
                     dispatch(actions.setVars('name2', name2));
@@ -457,7 +460,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname);
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba);   //维护损失
+                        tba2.push(data.data[i].tba*100);   //维护损失
 
                     }
                     dispatch(actions.setVars('name2', name2));

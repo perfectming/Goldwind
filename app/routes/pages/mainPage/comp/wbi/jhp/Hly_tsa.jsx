@@ -105,7 +105,11 @@ let Component = React.createClass({
                 categories:name0,
             },
 
-            yAxis: [{
+            yAxis:
+
+                [
+
+                {
                 labels: {
                     format: '',
                     style: {
@@ -128,24 +132,29 @@ let Component = React.createClass({
                     }
                 }
             }, {
+
                 labels: {
                     format: '',
+
                     style: {
                         color: '#fff',
-                        fontSize: '14px'
+                        fontSize: '14px',
+
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-
+                    min:0,
                 title: {
                     text: '100%',
                     align: 'high',
                     rotation: '0',
                     y: -15,
                     x: -40,
+
                     style: {
                         color: '#fff',
-                        fontSize: '14px'
+                        fontSize: '14px',
+
                     }
 
                 },
@@ -238,7 +247,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname);
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba);   //维护损失
+                        tba2.push(data.data[i].tba*100);   //维护损失
                     }
                     dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));

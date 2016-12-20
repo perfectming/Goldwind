@@ -104,8 +104,8 @@ let tbaDayTba3=[];
                           tbaRunTimes.push(tbaruntimes);
                           let downtimes=TBAtimedata[i].downtimes;
                           tbaDownTimes.push(downtimes);
-                          let tba=TBAtimedata[i].tba;
-                          tbaTba.push(tba);
+                          let tba=TBAtimedata[i].tba*100;
+                          tbaTba.push(Number(tba.toFixed(1)));
 
                           } 
                         
@@ -144,8 +144,8 @@ let tbaDayTba3=[];
                            tbaDayRunTimes3.push(tbaDayruntimes);
                            var daydowntimes=TBAdaydata[i].downtimes;
                            tbaDayDownTimes3.push(daydowntimes);
-                           var tba=TBAdaydata[i].tba;
-                           tbaDayTba3.push(tba);
+                           var tba=TBAdaydata[i].tba*100;
+                           tbaDayTba3.push(Number(tba.toFixed(1)));
 
 
                            } 
@@ -161,7 +161,7 @@ let tbaDayTba3=[];
         dispatch(actions.setVars('tbaDayRunTimes31',tbaDayRunTimes3 ));
           dispatch(actions.setVars('tbaDayDownTimes31',tbaDayDownTimes3 ));
           dispatch(actions.setVars('tbaDayTba31',tbaDayTba3 ));
-          dispatch(actions.setVars('qwe',11));
+          dispatch(actions.setVars('qwe','11月'));
        
 
         }

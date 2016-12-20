@@ -225,9 +225,15 @@ const mapDispatchToProps = (dispatch) => {
 			        	for(var i in data.data.everyAreaPba){
 			        		wfName.push(data.data.everyAreaPba[i].wfname);
 			        		wfId.push(data.data.everyAreaPba[i].wfid);
+
+			        	}
+
+
+
 			        	};
 			        	dispatch(actions.setVars('wfName',wfName ));
 			        	dispatch(actions.setVars('wfId',wfId ));
+
 			        },
 			        complete : function(XMLHttpRequest,status){ 
 				　　　　if(status=='timeout'){

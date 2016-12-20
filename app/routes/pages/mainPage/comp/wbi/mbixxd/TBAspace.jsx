@@ -5,6 +5,7 @@ import TBAspacechart from './TBAspacechart.jsx';
 import icono from './img/TBA.png';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
+let input_url="10.9.100.38";
 let month=data.month;
 let button=data.button;
 let machine=data.machine;
@@ -17,12 +18,16 @@ let windFF=data.windFF;
  let fanCost=data.fanCost;
  let fanProfitQ=data.fanProfitQ;
 let Component = React.createClass({
+  componentWillMount() {
+        let{xxdwfId,xxdwfNa}=this.props;
+        this.props.ajax(xxdwfId,xxdwfNa);
+    },
     componentDidMount() {
         this.props.init();
     },
     render() {
        
-        let{actbt=0,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+        let{wTBATM,wTBADownM,wTBARunM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
         return (
            
             <div className={styles.box}>
@@ -33,16 +38,18 @@ let Component = React.createClass({
                 <p>{text[actbt]+'月份各风机TBA'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
-            <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP} width={1750} height={500}></TBAspacechart>
+                <div className={styles.scroll}>
+            <TBAspacechart fanCost={wTBADownM} machine={wTBANaM} fanProfitQ={wTBARunM} TBA={wTBATM} height={500} width={24000} ty={0}></TBAspacechart></div>
 
              </div>
                 <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId)} key={key}>{value.name}</li>)
                         })
                     }
-          <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
+                    <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
+                <li className={styles.back1} onClick={()=>backtop(befor_pagee,befor_page2)}>{xxdwfNa}</li>
 
                 </ul>
                 <div className={styles.paddingtop}>
@@ -50,7 +57,7 @@ let Component = React.createClass({
                   
                       
                             <div>
-                                <TBAspacechart fanCost={fanCost} machine={machinee==null?machine:machinee} fanProfitQ={windP==null?fanProfitQ:windP} height={800} text={text[actbt]+'月份各风机TBA'}></TBAspacechart>
+                                <TBAspacechart fanCost={wTBADown} machine={wTBANa} fanProfitQ={wTBARun} TBA={wTBAT} height={800} text={text[actbt]+'各风机TBA'} ty={50}></TBAspacechart>
                             </div>
                        
                
@@ -60,9 +67,9 @@ let Component = React.createClass({
                     </div>
 
                     <div className={styles.buttons}>
-                      <button onClick={()=>gogogo(windFF)} > 前10</button>
-                      <button onClick={()=>back(wind)}>后10</button>
-                      <button  onClick={()=>more()}>更多</button>
+                      <button onClick={()=>gogogo(xxdwfId,actbt,btn)} className={btn===0? styles.btn0 : styles.btn1} > 前10</button>
+                      <button onClick={()=>back(xxdwfId,actbt,btn)} className={btn===1? styles.btn0 : styles.btn1}>后10</button>
+                      <button  onClick={()=>more(xxdwfId,actbt,btn)} className={btn===2? styles.btn0 : styles.btn1}>更多</button>
                    </div>
                 </div>
                 </div>
@@ -83,54 +90,273 @@ const mapStateToProps = (state) => {
          machinee:state.vars.machinee,
            befor_pagee : state.vars.befor_pagee,
         befor_page2 : state.vars.befor_page2,
+         xxdwfId:state.vars.xxdwfId1,
+        xxdwfNa:state.vars.xxdwfNa1,
+        wTBANa:state.vars.wTBANa1q,
+        wTBARun:state.vars.wTBARun1q,
+        wTBADown:state.vars.wTBADown1q,
+        wTBAT:state.vars.wTBAT1q,
+        // 更多
+         wTBANaM:state.vars.wTBANa1qM,
+        wTBARunM:state.vars.wTBARun1qM,
+        wTBADownM:state.vars.wTBADown1qM,
+        wTBATM:state.vars.wTBAT1qM,
+        btn:state.vars.btnn,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+       ajax: (xxdwfId,xxdwfNa) => {
+        let date=new Date();
+        let month=date.getMonth();
+          let wTBANa=[];
+          let wTBADown=[];
+          let wTBARun=[];
+          let wTBAT=[];
+            $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/TBA/getWfAllWtByM',  
+             async:false,
+            data:{
+             'wfid':xxdwfId,
+             'month':month,
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+            
+
+             let WTSpace=data.data
+             for (let i=0;i<10;i++)
+             {
+
+              let wtname=WTSpace[i].wtname;
+             wTBANa.push(wtname);
+             let downtimes=WTSpace[i].downtimes;
+             wTBADown.push(downtimes);
+
+                let runtimes=WTSpace[i].runtimes;
+                wTBARun.push(runtimes);
+
+                let tba=WTSpace[i].tba*100;
+                wTBAT.push(Number(tba.toFixed(1)));
+             }
+   
+
+             },
+             error:function(){
+               
+             },
+           });   
+            dispatch(actions.setVars('wTBANa1q',wTBANa)) ;
+           dispatch(actions.setVars('wTBARun1q',wTBARun)) ;
+           dispatch(actions.setVars('wTBADown1q',wTBADown)); 
+           dispatch(actions.setVars('wTBAT1q',wTBAT)) ;
+           dispatch(actions.setVars('actbt',month-1)) ;
+           dispatch(actions.setVars('btnn',0)) ;
+
+        }
+        ,
         init: () => {
             var obj = {
                 test:''
             }
         }
         ,
-         changpage :(value,key)=>{
-            dispatch(actions.setVars('actbt',key ));
-            dispatch(actions.setVars('wind',value.plan));
-            dispatch(actions.setVars('windP',value.actrul));
+         changpage :(value,key,xxdwfId)=>{
+          let wTBANa=[];
+          let wTBADown=[];
+          let wTBARun=[];
+          let wTBAT=[];
+            $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/TBA/getWfAllWtByM',  
+             async:false,
+            data:{
+             'wfid':xxdwfId,
+             'month':key+1,
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+            
+          
+             let WTSpace=data.data
+             for (let i=0;i<10;i++)
+             {
+
+              let wtname=WTSpace[i].wtname;
+             wTBANa.push(wtname);
+             let downtimes=WTSpace[i].downtimes;
+             wTBADown.push(downtimes);
+
+                let runtimes=WTSpace[i].runtimes;
+                wTBARun.push(runtimes);
+
+                let tba=WTSpace[i].tba*100;
+                wTBAT.push(Number(tba.toFixed(1)));
+             }
+ 
+
+
+             },
+             error:function(){
+             
+             },
+           });   
+            dispatch(actions.setVars('wTBANa1q',wTBANa)) ;
+           dispatch(actions.setVars('wTBARun1q',wTBARun)) ;
+           dispatch(actions.setVars('wTBADown1q',wTBADown)); 
+           dispatch(actions.setVars('wTBAT1q',wTBAT)) ;
+           dispatch(actions.setVars('actbt',key)) ;
+           dispatch(actions.setVars('btnn',0));
+
+            // dispatch(actions.setVars('actbt',key ));
+            // dispatch(actions.setVars('wind',value.plan));
+            // dispatch(actions.setVars('windP',value.actrul));
         },
-         gogogo:(wind)=>{
-            (function(){
-                windFF.sort(function(a,b){
-                    return b.plan - a.plan;
-                })
-                for(var i=0;i<12;i++){
-                    x0[i]=windFF[i].name;
-                    x1[i]=windFF[i].plan;
-                }
-            })()
-              dispatch(actions.setVars('machinee', x0));
-              dispatch(actions.setVars('windP',x1))
+         gogogo:(xxdwfId,actbt,btn)=>{
+           let wTBANa=[];
+          let wTBADown=[];
+          let wTBARun=[];
+          let wTBAT=[];
+           $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/TBA/getPageSize',  
+             async:false,
+            data:{
+              'type':0,
+             'wfid':xxdwfId,
+             'month':actbt+1,
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+           
+          
+             let WTSpace=data.data
+             for (let i=0;i<10;i++)
+             {
+
+               let wtname=WTSpace[i].wtname;
+              wTBANa.push(wtname);
+              let downtimes=WTSpace[i].downtimes;
+              wTBADown.push(downtimes);
+
+                 let runtimes=WTSpace[i].runtimes;
+                 wTBARun.push(runtimes);
+
+                let tba=WTSpace[i].tba*100;
+                wTBAT.push(Number(tba.toFixed(1)));
+             }
+ 
+             },
+             error:function(){
+            
+             },
+           });   
+            dispatch(actions.setVars('wTBANa1q',wTBANa)) ;
+           dispatch(actions.setVars('wTBARun1q',wTBARun)) ;
+           dispatch(actions.setVars('wTBADown1q',wTBADown)); 
+           dispatch(actions.setVars('wTBAT1q',wTBAT)) ;
+           dispatch(actions.setVars('btnn',0)) ;
+         
+           
+        },
+       back:(xxdwfId,actbt,btn)=>{
+           let wTBANa=[];
+          let wTBADown=[];
+          let wTBARun=[];
+          let wTBAT=[];
+           $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/TBA/getPageSize',  
+             async:false,
+            data:{
+              'type':1,
+             'wfid':xxdwfId,
+             'month':actbt+1,
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+           
+             let WTSpace=data.data
+             for (let i=0;i<10;i++)
+             {
+
+               let wtname=WTSpace[i].wtname;
+              wTBANa.push(wtname);
+              let downtimes=WTSpace[i].downtimes;
+              wTBADown.push(downtimes);
+
+                 let runtimes=WTSpace[i].runtimes;
+                 wTBARun.push(runtimes);
+
+                let tba=WTSpace[i].tba*100;
+                wTBAT.push(Number(tba.toFixed(1)));
+             }
+             },
+             error:function(){
+             
+
+             },
+           });   
+            dispatch(actions.setVars('wTBANa1q',wTBANa)) ;
+           dispatch(actions.setVars('wTBARun1q',wTBARun)) ;
+           dispatch(actions.setVars('wTBADown1q',wTBADown)); 
+           dispatch(actions.setVars('wTBAT1q',wTBAT)) ;
+           dispatch(actions.setVars('btnn',1)) ;
 
         },
-       back:(wind)=>{
-            (function(){
-                windFF.sort(function(a,b){
-                    return a.plan - b.plan;
-                })
-                for(var i=0;i<12;i++){
-                    x2[i]=windFF[i].name;
-                    x3[i]=windFF[i].plan;
-                }
-            })()
-              dispatch(actions.setVars('machinee', x2));
-              dispatch(actions.setVars('windP',x3))
-
-        },
-         more:()=>{
+         more:(xxdwfId,actbt,btn)=>{
              $("#sss").show();
              $('#boxcover').show();
-             // $('.box').css('opacity',".5")
+              let wTBANaM=[];
+          let wTBADownM=[];
+          let wTBARunM=[];
+          let wTBATM=[];
+           $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/TBA/getWfAllWtByM',  
+             async:false,
+            data:{
+             'wfid':xxdwfId,
+             'month':actbt+1,
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+     
+             let WTSpace=data.data
+             for (let i in WTSpace)
+             {
+
+              let wtname=WTSpace[i].wtname;
+             wTBANaM.push(wtname);
+             let downtimes=WTSpace[i].downtimes;
+             wTBADownM.push(downtimes);
+
+                let runtimes=WTSpace[i].runtimes;
+                wTBARunM.push(runtimes);
+
+                let tba=WTSpace[i].tba*100;
+                wTBATM.push(Number(tba.toFixed(1)));
+             }
+   
+
+             },
+             error:function(){
+               
+             },
+           });   
+            dispatch(actions.setVars('wTBANa1qM',wTBANaM)) ;
+           dispatch(actions.setVars('wTBARun1qM',wTBARunM)) ;
+           dispatch(actions.setVars('wTBADown1qM',wTBADownM)); 
+           dispatch(actions.setVars('wTBAT1qM',wTBATM)) ;
+           dispatch(actions.setVars('btnn',2)) ;
+         
         },
         close:()=>{
             $("#sss").hide();

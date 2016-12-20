@@ -56,7 +56,7 @@ import Regiotbas from '../comp/wbi/jhp/Regiotbas.jsx';
 import Input_cost from '../comp/wbi/jhp/Input_cost.jsx';
 
 
-import Areace from '../comp/wbi/mbixxd/Areace.jsx';//薛旭东
+import Areace from '../comp/wbi/mbixxd/Areace.jsx';//薛旭东44
 import Areacet from '../comp/wbi/mbixxd/Areacet.jsx';
 import TBAtime from '../comp/wbi/mbixxd/TBAtime.jsx';
 import TBAspace from '../comp/wbi/mbixxd/TBAspace.jsx';
@@ -68,6 +68,7 @@ import Profits from '../comp/wbi/mbixxd/earnings/Profits.jsx';
 import Profitss from '../comp/wbi/mbixxd/tba/Profitss.jsx';
 import Profitsss from '../comp/wbi/mbixxd/tbatime/Profitsss.jsx';
 import PEQII from '../comp/wbi/mbixxd/PEQII.jsx';
+
 
 
 import Baotou from '../comp/wbi/ludi/branch/Baotou.jsx';//路迪
@@ -171,6 +172,7 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
+                
 
 
                 {showPage === 'reliability' && <Reliability></Reliability>}
