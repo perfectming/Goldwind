@@ -24,6 +24,7 @@ let Component = React.createClass({
 		// console.log(1111,infopmodel);
 		let x;
 		let code = value.WTStateCode;
+		// console.log(value)
 		switch(code)
 			{
 				case "DisComForPre":

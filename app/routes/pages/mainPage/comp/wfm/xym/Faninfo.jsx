@@ -90,17 +90,17 @@ let Component = React.createClass({
 
 			setTimeout(function(){
 				if(WTGShz <=44){
-        		WTGShz = 20;
-	        	}else if(WTGShz >= 67){
-	        		WTGShz = 160;
+        		WTGShz = 0;
+	        	}else if(WTGShz >= 61){
+	        		WTGShz = 180;
 	        	}else{
-	        		WTGShz = 20+(WTGShz-44)*6.5;
+	        		WTGShz = WTGShz*3;
 	        	}
 
 	        	$("#hzpoint").animate({ textIndent: 0 }, {
 	        		duration: 1000,
 					step: function(now,fx) {
-	 				$(this).css('transform-origin','90% 50%');
+	 				$(this).css('transform-origin','93% 50%');
 					$(this).css('transform','rotate('+WTGShz+'deg)');
 					},
 	        	}, 1000 )
@@ -111,20 +111,20 @@ let Component = React.createClass({
 	        	}
 	        	$("#wspoint").animate({ textIndent: 0 }, {
 					step: function(now,fx) {
-	 				$(this).css('transform-origin','90% 50%');
+	 				$(this).css('transform-origin','93% 50%');
 					$(this).css('transform','rotate('+WTSpd*6+'deg)');
 					},
 					duration:'slow'
 	        	}, 2000);
-	        	if(WTPwr>=180){
+	        	if(WTPwr>=1800){
 	        		WTPwr = 180;
 	        	}else if(WTPwr <= 0){
 	        		WTPwr = 0;
 	        	}
 	        	$("#pwratpoint").animate({ textIndent: 0 }, {
 					step: function(now,fx) {
-	 				$(this).css('transform-origin','90% 50%');
-					$(this).css('transform','rotate('+WTPwr+'deg)');
+	 				$(this).css('transform-origin','93% 50%');
+					$(this).css('transform','rotate('+WTPwr/10+'deg)');
 					},
 	        	},1000)
 	        	if(WROTSpd>=180){
@@ -132,7 +132,7 @@ let Component = React.createClass({
 	        	}
 	        	$("#rspdpoint").animate({ textIndent: 0 }, {
 					step: function(now,fx) {
-	 				$(this).css('transform-origin','90% 50%');
+	 				$(this).css('transform-origin','93% 50%');
 					$(this).css('transform','rotate('+WROTSpd+'deg)');
 					},
 	        	},1000)
@@ -141,7 +141,7 @@ let Component = React.createClass({
 	        	}
 	        	$("#gspdpoint").animate({ textIndent: 0 }, {
 					step: function(now,fx) {
-	 				$(this).css('transform-origin','90% 50%');
+	 				$(this).css('transform-origin','93% 50%');
 					$(this).css('transform','rotate('+WGENSpd*6+'deg)');
 					},
 	        	},1000)
