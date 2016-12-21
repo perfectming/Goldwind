@@ -56,39 +56,39 @@ import Regiotbas from '../comp/wbi/jhp/Regiotbas.jsx';
 import Input_cost from '../comp/wbi/jhp/Input_cost.jsx';
 
 
-// import Areace from '../comp/wbi/mbixxd/Areace.jsx';//薛旭东44
-// import Areacet from '../comp/wbi/mbixxd/Areacet.jsx';
-// import TBAtime from '../comp/wbi/mbixxd/TBAtime.jsx';
-// import TBAspace from '../comp/wbi/mbixxd/TBAspace.jsx';
-// import Healty from '../comp/wbi/mbixxd/Healty.jsx';
-// import Healthytime from '../comp/wbi/mbixxd/Healthytime.jsx';
-// import PBAtime from '../comp/wbi/mbixxd/PBAtime.jsx';
-// import PBAspace from '../comp/wbi/mbixxd/PBAspace.jsx';
-// import Profits from '../comp/wbi/mbixxd/earnings/Profits.jsx';
-// import Profitss from '../comp/wbi/mbixxd/tba/Profitss.jsx';
-// import Profitsss from '../comp/wbi/mbixxd/tbatime/Profitsss.jsx';
-// import PEQII from '../comp/wbi/mbixxd/PEQII.jsx';
-// import Profitime from '../comp/wbi/mbixxd/Profitime.jsx';
-// import WFSprofit from '../comp/wbi/mbixxd/WFSprofit.jsx';
+import Areace from '../comp/wbi/mbixxd/Areace.jsx';//薛旭东44
+import Areacet from '../comp/wbi/mbixxd/Areacet.jsx';
+import TBAtime from '../comp/wbi/mbixxd/TBAtime.jsx';
+import TBAspace from '../comp/wbi/mbixxd/TBAspace.jsx';
+import Healty from '../comp/wbi/mbixxd/Healty.jsx';
+import Healthytime from '../comp/wbi/mbixxd/Healthytime.jsx';
+import PBAtime from '../comp/wbi/mbixxd/PBAtime.jsx';
+import PBAspace from '../comp/wbi/mbixxd/PBAspace.jsx';
+import Profits from '../comp/wbi/mbixxd/earnings/Profits.jsx';
+import Profitss from '../comp/wbi/mbixxd/tba/Profitss.jsx';
+import Profitsss from '../comp/wbi/mbixxd/tbatime/Profitsss.jsx';
+import PEQII from '../comp/wbi/mbixxd/PEQII.jsx';
+import Profitime from '../comp/wbi/mbixxd/Profitime.jsx';
+import WFSprofit from '../comp/wbi/mbixxd/WFSprofit.jsx';
 
 
 
-// import Baotou from '../comp/wbi/ludi/branch/Baotou.jsx';//路迪
-// import Windbtpage from '../comp/wbi/ludi/branch/Windbtpage.jsx';
-// import Xilin from '../comp/wbi/ludi/branch/Xilin.jsx';
-// import Areaa from '../comp/wbi/ludi/instrumentpanel/Area.jsx';
-// import Group from '../comp/wbi/ludi/instrumentpanel/Group.jsx';
-// import Windpage from '../comp/wbi/ludi/instrumentpanel/Windpage.jsx';
-// import GroupKBA from '../comp/wbi/ludi/KBA/GroupKBA.jsx';
-// import AreaKBA from '../comp/wbi/ludi/KBA/AreaKBA.jsx';
-// import LoseElectric from '../comp/wbi/ludi/KBA/LoseElectric.jsx';
-// import DeviceLose from '../comp/wbi/ludi/KBA/DeviceLose.jsx';
-// import TopTen from '../comp/wbi/ludi/KBA/TopTen.jsx';
-// import ServiceLose from '../comp/wbi/ludi/KBA/ServiceLose.jsx';
-// import PerformLose from '../comp/wbi/ludi/KBA/PerformLose.jsx';
-// import MaintainLose from '../comp/wbi/ludi/KBA/MaintainLose.jsx';
-// import LimitLose from '../comp/wbi/ludi/KBA/LimitLose.jsx';
-// import Reliability from '../comp/wbi/ludi/KBA/Reliability.jsx';
+import Baotou from '../comp/wbi/ludi/branch/Baotou.jsx';//路迪
+import Windbtpage from '../comp/wbi/ludi/branch/Windbtpage.jsx';
+import Xilin from '../comp/wbi/ludi/branch/Xilin.jsx';
+import Areaa from '../comp/wbi/ludi/instrumentpanel/Area.jsx';
+import Group from '../comp/wbi/ludi/instrumentpanel/Group.jsx';
+import Windpage from '../comp/wbi/ludi/instrumentpanel/Windpage.jsx';
+import GroupKBA from '../comp/wbi/ludi/KBA/GroupKBA.jsx';
+import AreaKBA from '../comp/wbi/ludi/KBA/AreaKBA.jsx';
+import LoseElectric from '../comp/wbi/ludi/KBA/LoseElectric.jsx';
+import DeviceLose from '../comp/wbi/ludi/KBA/DeviceLose.jsx';
+import TopTen from '../comp/wbi/ludi/KBA/TopTen.jsx';
+import ServiceLose from '../comp/wbi/ludi/KBA/ServiceLose.jsx';
+import PerformLose from '../comp/wbi/ludi/KBA/PerformLose.jsx';
+import MaintainLose from '../comp/wbi/ludi/KBA/MaintainLose.jsx';
+import LimitLose from '../comp/wbi/ludi/KBA/LimitLose.jsx';
+import Reliability from '../comp/wbi/ludi/KBA/Reliability.jsx';
 
 
 
