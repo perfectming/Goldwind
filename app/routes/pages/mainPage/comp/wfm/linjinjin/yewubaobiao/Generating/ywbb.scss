@@ -34,7 +34,11 @@
         }
         .dateBox{
             float:left;
-            input{height:25px;}
+            input{height:25px;width:140px;
+            background-image: url(../../../../../img/comp/drop2.gif);
+            background-repeat:no-repeat;
+            background-position:right center;
+            }
             span{margin:0 10px 0 15px; color:#fff;}
         }
         .btnBox{
@@ -45,10 +49,7 @@
             button{
             height:25px;
             line-height:20px;
-                &:hover{
-                    background:#485b7b;
-                    color:#fff;
-                }
+            img{margin-right:5px;}
             }
             
         }
