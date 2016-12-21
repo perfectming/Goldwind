@@ -4,33 +4,39 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Healthy-data');
+let text0 = data.data.line_date;
+let winds = data.data.yearelectric[0].wind;
+let win  = winds[0].plan;
 
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let {text,name3,runtime3,downtime3,tba3,changedata1,hhdata,w0,W10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
+        let {ip="10.68.100.32",hhdata4,actbt=10,text,changedata1,w0='一区域',wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
+
 
         let configPie = {
             chart: {
-                height:400,
+                height:height,
                 backgroundColor: "rgba(44, 61, 71, 0.4)",
                 //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                paddingLeft:100,
-                borderRadius:10,
+                borderRadius:10
             },
+
             title: {
                 text: text,
+
                 align:'left',
                 x : "0",
                 style:{
 
                     color:"#fff",
                     fontSize:"16px",
+                    fontWight:'600',
                     fontFamily:"微软雅黑"
                 }
             },
@@ -50,11 +56,15 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
+            tooltip: {
+                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
 
+            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#4CDB9D', '#1E664A', '#000','#134833', '#082B1F']
+            colors: ['#4CDB9D', ' #A2D04D', '#FFD927' , '#FF9424', '#FF6124', '#000fff','#134833', '#082B1F']
             ,
             plotOptions: {
                 pie: {
@@ -73,20 +83,21 @@ let Component = React.createClass({
                 series: {
                     cursor: 'pointer',
                     events: {
-                        click: function (e,) {
-                            w0 = e.point.category;
-                            wc1 = e.point.index;
-                            changedata1(w0, wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl);
+                        click: function(e) {
+                            w10=e.point.category;
+                            wc1=e.point.index;
+                            changedata1(w10,e,wc1,actbt,hhdata4);
 
                         }
                     }
                 },
                 column: {
-                    pointPadding: 0.2,
+                    stacking: 'normal',
+                    //pointWidth: 30,
+                    maxPointWidth: 30,
                     borderWidth: 0,
-                    pointWidth: 30,
                     tooltip: {
-                        valueSuffix:'h'
+                        valueSuffix:'kWh'
                     },
                 },
                 line:{
@@ -107,9 +118,8 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:name3,
+                categories:barRotime,
             },
-
             yAxis: [{
                 labels: {
                     format: '',
@@ -121,8 +131,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-
-                    text: 'h',
+                    text: 'kWh',
                     align: 'high',
                     rotation: '0',
                     y: -20,
@@ -156,143 +165,133 @@ let Component = React.createClass({
                 },
                 opposite: true
             }],
+
             series: [{
-                name: '实际运行时间',
+                name: '实际发电量',
                 type: 'column',
-                data: runtime3,
+                color: "#33BAC0",
+                data: power2,
                 borderRadius: 4,
+            }, {
+                name: '故障损失',
+                color: '#5298d3',
+                type: 'column',
+                data: wrong20,
+                stack: 'time',
 
-            }
-                ,{
-                    name: '停机时间',
-                    type: 'column',
-                    color:'#cccccc',
-                    data: downtime3,
-                    borderRadius: 4,
-                }
-                ,
+            },
                 {
-                    name: 'TBA',
-                    type: 'line',
-                    color:'#0000ff',
-                    data: tba3,
-                    yAxis:1,
-                }
+                    name: '维护损失',
+                    color: '#ffffff',
+                    type: 'column',
+                    data: wrong21,
+                    stack: 'time'
+                },
+                {
+                    name: '限功率损失',
+                    color: '#e9c75c',
+                    type: 'column',
+                    data: wrong22,
+                    stack: 'time'
+                },
 
+                {
+                    name: '非设备原因损失',
+                    type: 'column',
+                    data: wrong23,
+                    stack: 'time',
+                    borderRadius: 2,
+                },
+
+
+                {
+                    name: 'PBA',
+                    type: 'line',
+                    color: '#0000ff',
+                    data: pba2,
+                    yAxis: 1,
+                },
 
             ]
         };
         return (
             <ReactHighcharts config={configPie}/>
         );
+
+
+
+
+
     }
 });
 
 
 const mapStateToProps = (state) => {
     return {
-        hhdata1:state.vars.hhdata1,
-        hhdata2:state.vars.hhdata2,
-        hhdata3:state.vars.hhdata3,
-        actbt:state.vars.actbt,
-        w0: state.vars.w1,
-        w10: state.vars.w10,
-        ipUrl: state.vars.ipUrl,
+        w0 : state.vars.w1,
+        w10 : state.vars.w11,
+        mon : state.vars.mon,
+        windplan : state.vars.windplan,
+        hhdata4 : state.vars.hhdata4,
+        actbt : state.vars.actbt,
+
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('w1',w0 ));
         },
-        changedata1: (w0,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl) => {
-
-
+        changedata1 :(w10,e,wc1,actbt,hhdata4)=> {
             dispatch(actions.setVars('bt0', 0));
-
-
-
+            let wfid =hhdata4.data[1][wc1].wfid;
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/TBA/getGroupAllWfByM',
+                url:'http://10.68.100.32:8080/wbi/PBA/getCompanyDayTimePBA',
                 async:false,
                 data:{
-                    "groupid":'201612121721151',
-                    "month":actbt+1,
+                    "month":wc1+1,
+
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    dispatch(actions.setVars('hhdata',  data));
-
-                    //各区域   一区域二区域
-                    let runtime1=[];       //实际发电量
-                    let downtime1=[];       //故障损失
-                    let tba1=[];       //维护损失
-                    let name1=[];
-                    let wfid1=[];
+                    console.log(data)
+                    let barLotime21q = [];    //各区域   一区域二区域
+                    let power21q=[];       //实际发电量
+                    let wrong201q=[];       //故障损失
+                    let wrong211q=[];       //维护损失
+                    let wrong221q=[];       //限功率损失
+                    let wrong231q=[];       //非设备原因损失
+                    let pba21q=[];
                     for (var i in data.data) {
-                        //区域的横坐标
-                        name1.push(data.data[i].wfname)
-                        runtime1.push(data.data[i].runtimes);   //实际发电量
-                        downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(data.data[i].tba.toFixed(3)*100);  //维护损失
-                        wfid1.push(data.data[0].wfid);   //维护损失
-
+                        barLotime21q.push(data.data[i].day+"日");    //区域的横坐标
+                        power21q.push(data.data[i].poweract);   //实际发电量
+                        wrong201q.push(data.data[i].faultloss);   //故障损失
+                        wrong211q.push(data.data[i].maintainloss);   //维护损失
+                        wrong221q.push(data.data[i].limitloss);   //限功率损失
+                        wrong231q.push(data.data[i].nodevreasonloss);   //非设备原因损失
+                        pba21q.push(data.data[i].pba.toFixed(3)*100);    //非设备原因损失
                     }
-
-                    dispatch(actions.setVars('name1', name1));
-                    dispatch(actions.setVars('runtime1', runtime1));
-                    dispatch(actions.setVars('downtime1', downtime1));
-                    dispatch(actions.setVars('tba1', tba1));
-
-
+                    dispatch(actions.setVars('barLotime1', barLotime21q));
+                    dispatch(actions.setVars('power1', power21q));
+                    dispatch(actions.setVars('wrong10', wrong201q));
+                    dispatch(actions.setVars('wrong11', wrong211q));
+                    dispatch(actions.setVars('wrong12', wrong221q));
+                    dispatch(actions.setVars('wrong13', wrong231q));
+                    dispatch(actions.setVars('pba1', pba21q));
+                    dispatch(actions.setVars('mon', w10));
                 },
                 error:function(){
 
                 },
             })
-            let wfid = hhdata2.data[wc1].wfid;
-            $.ajax({
-                type:'post',
-                url:'http://'+ipUrl+'/wbi/TBA/getWfAllWtByM',
-                async:false,
-                data:{
-                    "groupid":  '201612121721151',
-                    "month":actbt+1,
-                    "wfid":'150801',
-                },
-                dataType:'json',
-                timeout:'3000',
-                success:function(data){
-                    dispatch(actions.setVars('hhdata3', data));
-                    //各区域   一区域二区域
 
 
-                    let runtime2=[];       //实际发电量
-                    let downtime2=[];       //故障损失
-                    let tba2=[];       //维护损失
-                    let name2=[];
-                    for (var i=0;i<=10;i++) {
-                        //区域的横坐标
-                        name2.push(data.data[i].wtname)
-                        runtime2.push(data.data[i].runtimes);   //实际发电量
-                        downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba.toFixed(3)*100);  //维护损失
 
-                    }
+            dispatch(actions.setVars('w11', w10,e));
 
-                    dispatch(actions.setVars('name2', name2));
-                    dispatch(actions.setVars('runtime2', runtime2));
-                    dispatch(actions.setVars('downtime2', downtime2));
-                    dispatch(actions.setVars('tba2', tba2));
-
-
-                },
-                error:function(){
-
-                },
-            })
         },
     };
 };
