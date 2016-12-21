@@ -88,11 +88,16 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 40,
+                    maxPointWidth: 35,
                     tooltip: {
                         valueSuffix:'kWh'
                     },
-                }
+                },
+                line:{
+                    tooltip: {
+                        valueSuffix:'%'
+                    },
+                },
             },
 
             xAxis: {
@@ -138,7 +143,7 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-
+                min:0,
                 title: {
                     text: '100%',
                     align: 'high',
@@ -173,6 +178,7 @@ let Component = React.createClass({
                     type: 'line',
                     color:'#0000ff',
                     data: tba0,
+                    yAxis:1,
                 }
 
 
@@ -225,10 +231,10 @@ const mapDispatchToProps = (dispatch) => {
                     let name2=[];
                     for (var i in data.data) {
                         //区域的横坐标
-                        name2.push(data.data[i].day)
+                        name2.push(data.data[i].day+"日");
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba);   //维护损失
+                        tba2.push(data.data[i].tba.toFixed(3)*100);      //维护损失
                     }
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));

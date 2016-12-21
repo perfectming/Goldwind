@@ -49,6 +49,7 @@ let Component = React.createClass({
                 <div className={styles.clear}>
 
                 </div>
+
                 <div className={`${styles.fbox} `}>
                     <div className={` ${styles.logofa} ${styles.box_shadow}`}>
                         <Reg_tbats height={450}
@@ -73,11 +74,11 @@ const mapStateToProps = (state) => {
         name0: state.vars.name1,
         runtime: state.vars.runtime1,
         downtime: state.vars.downtime1,
-        pba0: state.vars.pba1,
+        tba0: state.vars.tba1,
         name2: state.vars.name2,
         runtime2: state.vars.runtime2,
         downtime2: state.vars.downtime2,
-        pba2: state.vars.pba2,
+        tba2: state.vars.tba2,
         mon: state.vars.mon,
         w0:state.vars.w1,
         actbt:state.vars.actbt,
@@ -117,10 +118,10 @@ const mapDispatchToProps = (dispatch) => {
                     let wfid1=[];
                     for (var i in data.data) {
                         //区域的横坐标
-                        name1.push(data.data[i].month)
+                        name1.push(data.data[i].month+"月")
                         runtime1.push(data.data[i].runtimes);   //实际发电量
                         downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(data.data[i].tba);   //维护损失
+                        tba1.push(data.data[i].tba.toFixed(3)*100);     //维护损失
                         wfid1.push(data.data[0].wfid);   //维护损失
 
                     }
@@ -155,10 +156,10 @@ const mapDispatchToProps = (dispatch) => {
                     let name2=[];
                     for (var i in data.data) {
                         //区域的横坐标
-                        name2.push(data.data[i].day)
+                        name2.push(data.data[i].day+"日");
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba);   //维护损失
+                        tba2.push(data.data[i].tba.toFixed(3)*100);     //维护损失
                     }
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));

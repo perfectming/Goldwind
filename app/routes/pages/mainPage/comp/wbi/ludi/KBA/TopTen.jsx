@@ -22,7 +22,7 @@ let Component = React.createClass({
 				<div className={styles.content}>
 					<div className={styles.floorOne}>
 						<div className={`${styles.pie} ${styles.boxShadow}`}>
-							<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
+							<ChartPie text={data.data[0].text[1]} lose={[['机型1',5],['机型2',5],['机型3',5],['机型4',5]]}></ChartPie>
 						</div>
 						<div className={`${styles.column} ${styles.boxShadow}`}>
 							<OneColumn name={data.data[3].name} title={data.data[3].title} month={data.data[3].month} plan={data.data[3].plan} unit={data.data[3].unit}></OneColumn>
@@ -30,7 +30,7 @@ let Component = React.createClass({
 					</div>
 					<div className={styles.floorTwo}>
 						<div className={`${styles.pie} ${styles.boxShadow}`}>
-							<ChartPie text={data.data[0].text[1]} lose={data.lose}></ChartPie>
+							<ChartPie text={data.data[0].text[1]} lose={[['机型1',5],['机型2',3],['机型3',4],['机型4',6]]}></ChartPie>
 						</div>
 						<div className={`${styles.column} ${styles.boxShadow}`}>
 							<OneColumn name={data.data[3].name} title={data.data[3].title} month={data.data[3].month} plan={data.data[3].plan} unit={data.data[3].unit}></OneColumn>

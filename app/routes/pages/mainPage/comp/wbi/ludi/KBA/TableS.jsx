@@ -22,14 +22,13 @@ let Component = React.createClass({
             title: {
                 text: '集团'+X1+'PBA',
                 align:'left',
-                 x : "0",
+                x : "0",
                 style:{
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
             },
-            //图例说明
             legend: {
             	x:-50,
                 align:"right",
@@ -41,14 +40,13 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 },
                 itemHoverStyle: {
-                color: '#31f3fb'
+                	color: '#31f3fb'
             	}
             },
             credits: {
-                enabled: false //不显示highCharts版权信息
+                enabled: false, //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#70c080','#5298d3','#5b9bd5']
-            ,
+            colors: [ '#33BAC0', '#70c080','#5298d3','#5b9bd5'],
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
@@ -59,7 +57,6 @@ let Component = React.createClass({
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -104,7 +101,7 @@ let Component = React.createClass({
 	                	fontSize:'14px',
 	                	color:'#fff',
 	                }
-               },
+               	},
                	labels: {
                	 	format: '',
                     y: 10, //x轴刻度往下移动20px
@@ -187,6 +184,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         changedata2 :(wtData,X2,sTime,eTime,WfId,wtName,wtElec,wtLose,wtPBA,ipUrl)=>{
             dispatch(actions.setVars('x2',X2 ));
+            dispatch(actions.setVars('choice', 1));
             $.ajax({
         		url: 'http://'+ipUrl+'/wbi/KPI/getCompanyKPISpacesWfieldFans',//查询ID电量--YES
 		        type: 'post',
@@ -194,7 +192,6 @@ const mapDispatchToProps = (dispatch) => {
 		        data:{startTime:sTime,endTime:eTime,wfid:WfId},
 		        dataType: 'json',//here
 		        success:function (data) {
-		        	console.log(data);
 		        	wtElec=[],wtLose=[],wtPBA=[],wtName=[];
 		        	wtData=data.data;
 		        	wtData.sort(function(a,b){return b.pba-a.pba});

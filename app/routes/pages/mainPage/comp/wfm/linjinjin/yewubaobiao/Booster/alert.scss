@@ -174,23 +174,27 @@
         .tablebox{
             height:360px;
             overflow:auto;
-            tr{ 
-                height:40px;
-                border:1px solid #fff;
-                border-top:0;
-                td{
-                padding:0px;
-                margin:0px;
-                height:40px;
-                 border-left:1px solid #fff;
-                 min-width:150px;
-                 color:#fff;
-                 text-align:center;
+            .rtable{
+                tr{ 
+                    height:40px;
+                    border:1px solid #fff;
+                    border-top:0;
+                        td{
+                            padding:0px;
+                            margin:0px;
+                            height:40px;
+                            border-left:1px solid #fff;
+                            min-width:150px;
+                            color:#fff;
+                            text-align:center;
+                        }
+                       
                 }
-            }
-            .oneline{
-            border-top:1px solid #fff;
-                height:40px;
+                .oneline{
+                    border-top:1px solid #fff;
+                    height:40px;
+                    background: #464c58;
+                }
             }
             
         }

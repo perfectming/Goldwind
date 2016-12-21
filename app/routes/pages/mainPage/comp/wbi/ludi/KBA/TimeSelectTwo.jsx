@@ -29,7 +29,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {buttonAction, inputOnChange, onFocus,changeValueS,changeValueE} = this.props;
+        let {checked=1,buttonAction, inputOnChange, onFocus,changeValueS,changeValueE,checkBoxPro,checkBoxElec} = this.props;
         let comp = data.list;
         return (	
             <div className={styles.inquireBox}>
@@ -62,17 +62,17 @@ let Component = React.createClass({
 	                                        <button onClick={this.buttonAction}>{value.title}</button>
 	                                    </div>
 	                                    <div className={styles.bBox}>
-	                                        <button onClick={this.buttonAction}>{"重置"}</button>
+	                                        <button onClick={this.buttonReset}>{"重置"}</button>
 	                                    </div>
                                     </div>
                                 )
                         }else if (value.type === 'radio') {
                             return (
                                     <div className={styles.radioBox} key={key}>
-	                                    <span>指标项选择</span>
-	                                    <input type={value.type} name={value.type}/>
+	                                    <span>指标项选择 :</span>
+	                                    <input type={value.type} id="loseElectric" checked={checked==1? true:false} onChange={()=>checkBoxElec()} name={value.type}/>
 	                                    <span>损失电量</span>
-	                                    <input type={value.type} name={value.type}/>
+	                                    <input type={value.type} id="loseProfit" checked={checked==0? true:false} onChange={()=>checkBoxPro()} name={value.type}/>
 	                                    <span>损失收入</span>
                                     </div>
                                 )
@@ -86,7 +86,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+    	checked : state.vars.checked,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -125,6 +127,12 @@ const mapDispatchToProps = (dispatch) => {
 	    },
 	    changeValueE : (e) => {
 	        	
+	    },
+	    checkBoxElec : () =>{
+	    	dispatch(actions.setVars('checked', 1));
+	    },
+	    checkBoxPro : () =>{
+	    	dispatch(actions.setVars('checked', 0));
 	    }
     }
         

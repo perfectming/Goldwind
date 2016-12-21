@@ -8,18 +8,18 @@ import TableT from './TableT.jsx';
 
 
 let areaId=[],areaName=[],areaPBA=[],areaFault=[],areaLimit=[],areaDevice=[],areaMaintain=[],areaElec=[];
-let wfName=[],wfId=[],wfElec=[],wfLose=[],wfPBA=[],wtData,wtElec=[],wtLose=[],wtPBA=[],wtName=[];
+let wfName=[],wfId=[],wfElec=[],wfLose=[],wfPBA=[],wtData,wtElec=[],wtLose=[],wtPBA=[],wtName=[],wtElecMore=[],wtLoseMore=[],wtPBAMore=[],wtNameMore=[];;
 
 var actions = require('redux/actions');
 
 let Component = React.createClass({
 	componentWillMount() {
 		let {ipUrl}=this.props;
-        this.props.init(ipUrl);
+        this.props.ajax(ipUrl);
     },
     
 	render() {
-		let {areaId,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,hide,topTen,bottomTen,more,choice=1,wtName,wtElec,wtPBA,wtLose}=this.props;
+		let {X2,X1,areaId,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,hide,topTen,bottomTen,more,choice=1,wtName,wtElec,wtPBA,wtLose,wtNameMore,wtElecMore,wtPBAMore,wtLoseMore}=this.props;
 		return(
 			<div className={styles.gbaBox}>
 					<TimeSelect></TimeSelect>
@@ -42,11 +42,12 @@ let Component = React.createClass({
 					</div>
 					<div className={choice==3? styles.show:styles.hide}>
 						<div className={styles.header}>
+							<h3>风场PBA</h3>
 							<span onClick={()=>hide(wtData,choice,wtName,wtElec,wtLose,wtPBA)}>×</span>
 						</div>
 						<div className={styles.chart}>
 							<div>
-							<TableT wtName={wtName} wtElec={wtElec} wtPBA={wtPBA} wtLose={wtLose} ></TableT>
+							<TableT wtName={wtNameMore} wtElec={wtElecMore} wtPBA={wtPBAMore} wtLose={wtLoseMore}></TableT>
 							</div>
 						</div>
 					</div>
@@ -67,8 +68,13 @@ const mapStateToProps = (state) => {
     	wtElec : state.vars.wtElec,
     	wtLose : state.vars.wtLose,
     	wtPBA : state.vars.wtPBA,
+    	wtNameMore : state.vars.wtNameMore,
+    	wtElecMore : state.vars.wtElecMore,
+    	wtLoseMore : state.vars.wtLoseMore,
+    	wtPBAMore : state.vars.wtPBAMore,
     	areaId: state.vars.areaId,
     	X1 : state.vars.x1,
+    	X2 : state.vars.x2,
     	
     	areaId : state.vars.areaId,
     	areaName : state.vars.areaName,
@@ -83,17 +89,14 @@ const mapStateToProps = (state) => {
     	wfElec : state.vars.wfElec,
     	wfLose : state.vars.wfLose,
     	wfPBA : state.vars.wfPBA,
-    	X1 : state.vars.x1,
-    	X1 : state.vars.x1,
-    	
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    	init: (ipUrl) => {
+    	ajax: (ipUrl) => {
             	$.ajax({
-        		url: 'http://'+ipUrl+'/wbi/KPI/getCompanyKPI',//查询ID电量--YES
+        		url: 'http://'+ipUrl+'/wbi/KPI/getCompanyKPI',
 		        type: 'post',
 		        async:false,
 		        data:{},
@@ -186,25 +189,24 @@ const mapDispatchToProps = (dispatch) => {
         },
         more:(wtData,choice,wtName,wtElec,wtLose,wtPBA)=>{
         	dispatch(actions.setVars('choice', 3));
-        	wtElec=[],wtLose=[],wtPBA=[],wtName=[];
+        	wtElecMore=[],wtLoseMore=[],wtPBAMore=[],wtNameMore=[];
         	wtData.sort(function(a,b){return b.pba-a.pba});
 		        	for(var i in wtData){
-		        		wtName.push(wtData[i].wtname);
-		        		wtElec.push(wtData[i].poweract);
-		        		wtLose.push(wtData[i].totalloss);
-		        		wtPBA.push(wtData[i].pba*100);
+		        		wtNameMore.push(wtData[i].wtname);
+		        		wtElecMore.push(wtData[i].poweract);
+		        		wtLoseMore.push(wtData[i].totalloss);
+		        		wtPBAMore.push(wtData[i].pba*100);
 		        	};
-		    dispatch(actions.setVars('wtName', wtName));
-		    dispatch(actions.setVars('wtElec', wtElec));
-		    dispatch(actions.setVars('wtLose', wtLose));
-		    dispatch(actions.setVars('wtPBA', wtPBA));
+		    dispatch(actions.setVars('wtNameMore', wtNameMore));
+		    dispatch(actions.setVars('wtElecMore', wtElecMore));
+		    dispatch(actions.setVars('wtLoseMore', wtLoseMore));
+		    dispatch(actions.setVars('wtPBAMore', wtPBAMore));
         },
         hide:(wtData,choice,wtName,wtElec,wtLose,wtPBA)=>{
         	dispatch(actions.setVars('choice', 1));
     		wtElec=[],wtLose=[],wtPBA=[],wtName=[];
         	wtData.sort(function(a,b){return b.pba-a.pba});
-        	
-		        	for(var i=0;i<10;i++){
+        			for(var i=0;i<10;i++){
 		        		wtName.push(wtData.slice(0,10)[i].wtname);
 		        		wtElec.push(wtData.slice(0,10)[i].poweract);
 		        		wtLose.push(wtData.slice(0,10)[i].totalloss);

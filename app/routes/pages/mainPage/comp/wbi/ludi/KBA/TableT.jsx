@@ -31,39 +31,36 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
-            //图例说明
             legend: {
             	y:30,
-            	x:-50,
+            	x:300,
             	margin:0,
-                align:"right",
+                align:"left",
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
                     fontSize:"14px",
                     fontWeight:"normal",
-                    fontFamily:"微软雅黑"
+                    fontFamily:"微软雅黑",
                 },
                 itemHoverStyle: {
-                color: '#31f3fb'
+                	color: '#31f3fb',
             	}
             },
             credits: {
-                enabled: false //不显示highCharts版权信息
+                enabled: false, //不显示highCharts版权信息
             },
-            colors: ['#33BAC0', '#70c080','#5298d3','#a1c0e5', '#ffd689','#5b9bd5']
-            ,
+            colors: ['#33BAC0', '#70c080','#5298d3','#a1c0e5', '#ffd689','#5b9bd5'],
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
                     pointWidth: 15,
-                    borderRadius:5
+                    borderRadius:4
                 }
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -94,7 +91,8 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-            },,{
+            },{
+            	min:0,
             	title:{
                 	text:'100%',
                 	align: 'high',
@@ -115,7 +113,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-               opposite: true
+               	opposite: true
             }],
             series: [{
             	name: '实际发电量',
@@ -123,22 +121,22 @@ let Component = React.createClass({
                 data: wtElec,
                 tooltip: {
 	                valueSuffix: 'kWh'
-	            },
+	            }
             },{
                 name: '损失发电量',
                 type: 'column',
                 data: wtLose,
                 tooltip: {
 	                valueSuffix: 'kWh'
-	            },
+	            }
             },{
             	name: 'PBA',
             	type: 'spline',
                 data: wtPBA,
-                yAxis: 2,
+                yAxis: 1,
                 tooltip: {
 	                valueSuffix: '%',
-	            },
+	            }
             }]
         };
         return (

@@ -160,6 +160,7 @@ const mapStateToProps = (state) => {
         w10: state.vars.w11,
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
+        bt0:state.vars.bt0,
 
     }
 };
@@ -170,6 +171,7 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test: ''
             }
+            dispatch(actions.setVars('bt0', 0));
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
@@ -200,7 +202,7 @@ const mapDispatchToProps = (dispatch) => {
                         name3.push(data.data[i].groupname)
                         runtime3.push(data.data[i].runtimes);   //实际发电量
                         downtime3.push(data.data[i].downtimes);   //故障损失
-                        tba3.push(data.data[i].tba*100);   //维护损失
+                        tba3.push(data.data[i].tba.toFixed(3)*100);      //维护损失
 
                     }
 
@@ -228,6 +230,8 @@ const mapDispatchToProps = (dispatch) => {
                 success: function (data) {
                     dispatch(actions.setVars('hhdata2', data));
                     dispatch(actions.setVars('w11', data.data[0].wfname));
+
+                    console.log(data)
                     //各区域   一区域二区域
                     let runtime1 = [];       //实际发电量
                     let downtime1 = [];       //故障损失
@@ -239,7 +243,7 @@ const mapDispatchToProps = (dispatch) => {
                         name1.push(data.data[i].wfname)
                         runtime1.push(data.data[i].runtimes);   //实际发电量
                         downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(data.data[i].tba*100);   //维护损失
+                        tba1.push(data.data[i].tba.toFixed(3)*100);     //维护损失
                         wfid1.push(data.data[0].wfid);   //维护损失
 
                     }
@@ -282,11 +286,9 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba*100);   //维护损失
+                        tba2.push(data.data[i].tba.toFixed(3)*100);    //维护损失
                     }
-                    console.log("1")
-                    console.log(tba2)
-                    console.log("2")
+
                     dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));
@@ -306,6 +308,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor: (value, key, ipUrl) => {
+            dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind', value.plan));
@@ -335,7 +338,7 @@ const mapDispatchToProps = (dispatch) => {
                         name3.push(data.data[i].groupname)
                         runtime3.push(data.data[i].runtimes);   //实际发电量
                         downtime3.push(data.data[i].downtimes);   //故障损失
-                        tba3.push(data.data[i].tba*100);   //维护损失
+                        tba3.push(data.data[i].tba.toFixed(3)*100);  //维护损失
 
                     }
 
@@ -362,7 +365,7 @@ const mapDispatchToProps = (dispatch) => {
                 timeout: '3000',
                 success: function (data) {
                     dispatch(actions.setVars('hhdata2', data));
-
+                    dispatch(actions.setVars('w11', data.data[0].wfname));
                     //各区域   一区域二区域
                     let runtime1 = [];       //实际发电量
                     let downtime1 = [];       //故障损失
@@ -374,7 +377,7 @@ const mapDispatchToProps = (dispatch) => {
                         name1.push(data.data[i].wfname)
                         runtime1.push(data.data[i].runtimes);   //实际发电量
                         downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(data.data[i].tba*100);   //维护损失
+                        tba1.push(data.data[i].tba.toFixed(3)*100);   //维护损失
                         wfid1.push(data.data[0].wfid);   //维护损失
 
                     }
@@ -397,7 +400,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     "groupid": '201612121721151',
                     "month": key+1,
-                    "wfid": '150828',
+                    "wfid": '150801',
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -417,7 +420,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba*100);   //维护损失
+                        tba2.push(data.data[i].tba.toFixed(3)*100);   //维护损失
                     }
 
                     dispatch(actions.setVars('name2', name2));
@@ -460,7 +463,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname);
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba*100);   //维护损失
+                        tba2.push(data.data[i].tba.toFixed(3)*100);   //维护损失
 
                     }
                     dispatch(actions.setVars('name2', name2));
@@ -478,7 +481,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         back: (bt0, ipUrl, wfid,actbt) => {
-            dispatch(actions.setVars('bt0', 1));
+
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/TBA/getPageSize',
@@ -506,14 +509,14 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba);   //维护损失
+                        tba2.push(data.data[i].tba.toFixed(3)*100);  //维护损失
                     }
 
                     dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));
                     dispatch(actions.setVars('tba2', tba2));
-
+                    dispatch(actions.setVars('bt0', 1));
 
                 },
                 error: function () {
@@ -533,7 +536,7 @@ const mapDispatchToProps = (dispatch) => {
                 barLotime3c.push(hhdata3.data[i].wtname)   //区域的横坐标
                 power3c.push(hhdata3.data[i].runtimes) //实际发电量
                 wrong30c.push(hhdata3.data[i].downtimes);   //故障损失
-                wrong31c.push(hhdata3.data[i].tba);   //故障损失
+                wrong31c.push(hhdata3.data[i].tba.toFixed(3)*100);  //故障损失
 
             }
 
@@ -561,7 +564,7 @@ const mapDispatchToProps = (dispatch) => {
                 name2.push(hhdata3.data[i].wtname)
                 runtime2.push(hhdata3.data[i].runtimes);   //实际发电量
                 downtime2.push(hhdata3.data[i].downtimes);   //故障损失
-                tba2.push(hhdata3.data[i].tba);   //维护损失
+                tba2.push(hhdata3.data[i].tba.toFixed(3)*100);    //维护损失
 
             }
 

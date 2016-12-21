@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Windstyle.scss';
 import Yearelectric from './Yearelectric.jsx';
-import Pie2 from '../../../wfm/mxx/Pie2';
+import Pie2 from './Pie2';
 import Login from '../../../../../../../components/common/Loading.jsx';
 var $ =require("jQuery");
 var actions = require('redux/actions');
@@ -225,6 +225,7 @@ const mapDispatchToProps = (dispatch) => {
 			        	for(var i in data.data.everyAreaPba){
 			        		wfName.push(data.data.everyAreaPba[i].wfname);
 			        		wfId.push(data.data.everyAreaPba[i].wfid);
+<<<<<<< HEAD
 
 
 
@@ -232,6 +233,10 @@ const mapDispatchToProps = (dispatch) => {
 
 			        	};
 			        	dispatch(actions.setVars('wfName',wfName ));
+=======
+						}
+						dispatch(actions.setVars('wfName',wfName ));
+>>>>>>> 232d180d01ee7910f9c03470c4cf6a3281d48906
 			        	dispatch(actions.setVars('wfId',wfId ));
 			       
 
@@ -405,7 +410,9 @@ const mapDispatchToProps = (dispatch) => {
 			        	dispatch(actions.setVars('wtArr',wtArr ));
 			        	dispatch(actions.setVars('wfAct',wfAct ));
 			        	dispatch(actions.setVars('wfTheory',wfTheory ));
-			        },
+			        	dispatch(actions.setVars('xxdwfNa1', wfName[key]));
+			        	dispatch(actions.setVars('xxdwfId1', wfId[key]));
+					},
 			        complete : function(XMLHttpRequest,status){ 
 				　　　　	$.ajax({
 							url:'http://'+ipUrl+'/wbi/Health/getCompanyHealth',//健康度饼图
