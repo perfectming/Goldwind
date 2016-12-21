@@ -177,10 +177,10 @@ let Component = React.createClass({
                     <div className={`${styles.ssdlqkfx} ${styles.box_shadow}`}>
                         <Title title={['故障设备概览']}></Title>
                         <div className={styles.ssdlqkfxmain}>
-                            <span className={styles.tsstyle1}>--<span className={styles.tsstyled1}>台</span></span>
-                            <span className={styles.tsstyle2}>--<span className={styles.tsstyled2}>台</span></span>
-                            <span className={styles.tsstyle3}>--<span className={styles.tsstyled3}>台</span></span>
-                            <span className={styles.tsstyle4}>--<span className={styles.tsstyled4}>台</span></span>
+                            <span className={styles.tsstyle1}>5<span className={styles.tsstyled1}>台</span></span>
+                            <span className={styles.tsstyle2}>7<span className={styles.tsstyled2}>台</span></span>
+                            <span className={styles.tsstyle3}>10<span className={styles.tsstyled3}>台</span></span>
+                            <span className={styles.tsstyle4}>13<span className={styles.tsstyled4}>台</span></span>
                             <span className={styles.timestyle}>
                                 <span className={styles.timestylee}>2<span className={styles.danweicc}>h</span></span>
                                 <span className={styles.timestylee}>12<span className={styles.danweicc}>h</span></span>
@@ -258,7 +258,7 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('modata', rdata));
                         setTimeout(function () {
                             dispatch(actions.setVars('boole', true));
-                        },100)
+                        },1000)
                     }
                 }
             }
@@ -266,7 +266,6 @@ const mapDispatchToProps = (dispatch) => {
                 TY.getRtData("MonitorBoard", 8888800, ppo);
                 function ppo(rdata){
                     dispatch(actions.setVars('modata', rdata));
-                    dispatch(actions.setVars('boole', true));
                 }
             },2000)
         },

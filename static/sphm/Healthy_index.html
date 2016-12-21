@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -19,7 +19,7 @@
     <div class="container" style="height:918px;margin-top:30px;">
         <div class="pl_r30">
             <div class="column_4 zl_t">
-                <div><img src="images/ico.png" /><p>健康度</p><i style="color: rgb(112, 192, 128);">0°H</i></div>
+                <div><img src="images/ico.png" /><p>健康度</p><i style="color: rgb(112, 192, 128);">0%</i></div>
                 <div><img src="images/ico1.png" /><p>工单完结率</p><i style="color: rgb(208, 105, 96);">0%</i></div>
                 <div><img src="images/ico3.png" /><p>预警准确率</p><i style="color: rgb(208, 105, 96);">0%</i></div>
                 <div><img src="images/ico4.png" /><p>MTBF</p><i style="color: rgb(233, 199, 92);">0</i></div>
@@ -365,7 +365,7 @@
 
                 $.ajax({
                     type: "post",
-                    url: GetAllUrl(window.JFApiDomian + '/main_getWfAlarmInfoByWtType.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate + ' 23:59:59&areaId=201409110342501'),
+                    url: GetAllUrl(window.JFApiDomian + '/main_getWfAlarmInfoByWtType.action?beginTime=' + nowDate + ' 00:00:00&endTime=' + nowDate + ' 23:59:59&areaId='+areaId),
                     cache: false,
                     dataType: 'jsonp',
                     xhrFields: {
@@ -373,7 +373,6 @@
                     },
                     crossDomain: true,
                     success: function (json) {
-                        json_yjgk = json;
                         var xAxisData = new Array();
                         var seriesData = new Array();
                         for (var o in json.listData) {

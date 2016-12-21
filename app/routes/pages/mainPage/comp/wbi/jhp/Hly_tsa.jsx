@@ -51,9 +51,7 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
-            tooltip: {
-                valueSuffix:'h'
-            },
+
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -87,8 +85,16 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30
-                }
+                    pointWidth: 30,
+                    tooltip: {
+                        valueSuffix:'h'
+                    },
+                },
+                line:{
+                    tooltip: {
+                        valueSuffix:'%'
+                    },
+                },
             },
 
             xAxis: {
@@ -218,7 +224,7 @@ const mapDispatchToProps = (dispatch) => {
 
             let wfid = hhdata2.data[wc1].wfid;
 
-
+            dispatch(actions.setVars('bt0', 0));
 
             $.ajax({
                 type:'post',
@@ -247,7 +253,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname);
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba*100);   //维护损失
+                        tba2.push(data.data[i].tba.toFixed(3)*100); //维护损失
                     }
                     dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));

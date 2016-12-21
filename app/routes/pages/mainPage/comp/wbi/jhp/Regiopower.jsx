@@ -22,28 +22,6 @@ let barRotime3 = data.data.bar_rotimes;
 let barlopowers3 = data.data.bar_loPowers;
 let barlopowerp3 = data.data.bar_loPowerp;
 
-let sort0=data.data.sort1;
-let x0=[];
-let x1=[];
-let x2=[];
-let x3=[];
-let x4=[];
-let x5=[];
-let x6=[];
-let x7=[];
-(function () {
-
-    for(var i=0;i<12;i++){
-        x4[i]=sort0[i].name;
-        x5[i]=sort0[i].time;
-    }
-    for(var i=0;i<sort0.length;i++){
-        x6[i]=sort0[i].name;
-        x7[i]=sort0[i].time;
-    }
-
-
-})();
 
 
 let Component = React.createClass({
@@ -57,7 +35,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area',w0, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
+        let {befor_pages='area',w0,w10, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
         return (
 
 
@@ -71,7 +49,7 @@ let Component = React.createClass({
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
                     <div className={styles.hidden_top}>
                         <div className={styles.logo5}></div>
-                        <div className={styles.logo30}>{"各风机健康度"}</div>
+                        <div className={styles.logo30}>{mon+w10+"各风机PBA"}</div>
                         <span onClick={()=>hideit(hhdata,bt0)}>×</span>
                     </div>
                     <div className={styles.hidden_bottom}>
@@ -105,8 +83,8 @@ let Component = React.createClass({
                                     name0={barlotimes1}
                                     powerplan1={barlopowers1}
                                     poweract2={barlopowerp1}
-                                    text={text0[3]+"月"+text0[1]+"区域发电量"}></Hly_genone>
-                        <div className={styles.logo}>
+                                    text={mon+"各风场发电量"}></Hly_genone>
+                        <div className={styles.logo5}>
 
                         </div>
                     </div>
@@ -129,8 +107,8 @@ let Component = React.createClass({
                                        name0={barlotimes2}
                                        powerplan1={barlopowers2}
                                        poweract2={barlopowerp2}
-                                       text={text0[3]+"月"+text0[3]+"区域各风机发电量"}></Hly_gentwo>
-                        <div className={styles.logomini}>
+                                       text={mon+w10+"各风机PBA"}></Hly_gentwo>
+                        <div className={styles.logomini5}>
 
                         </div>
                     </div>
@@ -143,6 +121,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+
         actbt:state.vars.actbt,
         wind:state.vars.wind,
         winds:state.vars.winds,
@@ -158,9 +137,11 @@ const mapStateToProps = (state) => {
         bt0: state.vars.bt0,
         wc1: state.vars.wc1,
         w0: state.vars.w0,
+        w10: state.vars.w11,
         wc2: state.vars.wc2,
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
+        mon:state.vars.mon,
     }
 };
 
@@ -192,13 +173,13 @@ const mapDispatchToProps = (dispatch) => {
                         barlopowers1.push(data.data[1][i].powerplan);   //计划发电量
                         barlopowerp1.push(data.data[1][i].poweract);   //实际发电量
                     }
-                    let w0=data.data[2][0].groupname;
+
                     let w10=data.data[1][0].wfname;
 
                     let barlotimes2 = [];
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
-                    for (var i=0;i<=10;i++) {
+                    for (var i=0;i<10;i++) {
                         barlotimes2.push(data.data[0][i].wtname);    //区域的横坐标
                         barlopowers2.push(data.data[0][i].powerplan);   //计划发电量
                         barlopowerp2.push(data.data[0][i].poweract);   //实际发电量
@@ -215,7 +196,8 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-                    dispatch(actions.setVars('w1', w10));
+
+                    dispatch(actions.setVars('w11',w10 ));
 
 
 
@@ -240,7 +222,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor:(value,key,ipUrl)=>{
-
+            dispatch(actions.setVars('bt0',  0));
             dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind',value.plan ));
@@ -264,11 +246,11 @@ const mapDispatchToProps = (dispatch) => {
                         barlopowers1.push(data.data[1][i].powerplan);   //计划发电量
                         barlopowerp1.push(data.data[1][i].poweract);   //实际发电量
                     }
-                    let w0=data.data[2][0].groupname;
+
                     let barlotimes2 = [];
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
-                    for (var i=0;i<=10;i++) {
+                    for (var i=0;i<10;i++) {
                         barlotimes2.push(data.data[0][i].wtname);    //区域的横坐标
                         barlopowers2.push(data.data[0][i].powerplan);   //计划发电量
                         barlopowerp2.push(data.data[0][i].poweract);   //实际发电量

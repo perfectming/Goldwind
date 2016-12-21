@@ -91,12 +91,17 @@ let Component = React.createClass({
                 },
                 column: {
                     stacking: 'normal',
-                    maxPointWidth: 40,
+                    maxPointWidth: 30,
                     borderWidth: 0,
                     tooltip: {
                         valueSuffix:'kWh'
                     },
-                }
+                },
+                line:{
+                    tooltip: {
+                        valueSuffix:'%'
+                    },
+                },
             },
 
             xAxis: {
@@ -121,7 +126,7 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-
+                min:0,
                 title: {
                     text: 'kWh',
                     align: 'high',
@@ -142,7 +147,7 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-
+                min:0,
                 title: {
                     text: '100%',
                     align: 'high',
@@ -243,8 +248,13 @@ const mapDispatchToProps = (dispatch) => {
         },
         changedata1 :(w10, win,wc1, wc2, actbt,hhdata,)=> {
             dispatch(actions.setVars('w11', w10,));
-            let wfid =hhdata.data[1][wc2].wfid;
+            dispatch(actions.setVars('bt0', 0));
 
+
+
+            let wfid =hhdata.data[1][wc2].wfid;
+            console.log(wfid)
+            dispatch(actions.setVars('wfid', wfid));
             $.ajax({
                 type: 'post',
                 url: 'http://10.68.100.32:8080/wbi/PBA/getCompanySpacesWfieldFans',
@@ -252,13 +262,12 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": wfid==undefined? '150828':wfid,
+                    "wfid": wfid==undefined? '150801':wfid,
                 },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
 
-                    dispatch(actions.setVars('hhdata3', data));
                     var barLotime3=[];
                     var power3=[];
                     var wrong30=[];
@@ -275,9 +284,9 @@ const mapDispatchToProps = (dispatch) => {
                         wrong31.push(data.data[i].maintainloss);   //维护损失
                         wrong32.push(data.data[i].limitloss);   //限功率损失
                         wrong33.push(data.data[i].nodevreasonloss);   //非设备原因损失
-                        pba3.push(data.data[i].pba);   //非设备原因损失
+                        pba3.push(data.data[i].pba.toFixed(3)*100);   //非设备原因损失
                     }
-                    console.log(pba3)
+
                     dispatch(actions.setVars('barLotime3a', barLotime3));
                     dispatch(actions.setVars('power3a', power3));
                     dispatch(actions.setVars('wrong30a', wrong30));
@@ -285,6 +294,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wrong32a', wrong32));
                     dispatch(actions.setVars('wrong33a', wrong33));
                     dispatch(actions.setVars('pba3a', pba3));
+
 
 
 

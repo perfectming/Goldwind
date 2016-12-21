@@ -22,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {ip="10.68.100.32",ipUrl,befor_pages='area',wc1,wfid,bt0=0,wc2,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {ip="10.68.100.32",ipUrl,befor_pages='area',wc1,wfid,bt0=0,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
@@ -48,7 +48,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                     <Hly_pbatwo height={450}
-                                widths={4500}
+                                widths={6500}
                                 text={''}
                                 barRotimes={barLotime1}
                                 power1={power1}
@@ -81,7 +81,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
 
-                        <Hly_pbaone height={400} text={text0[3]+'区域'+'各风场PBA'}
+                        <Hly_pbaone height={400} text={mon+'各风场PBA'}
                                     barRotime={barLotime2}
                                     power2={power2}
                                     wrong20={wrong20}
@@ -108,7 +108,7 @@ let Component = React.createClass({
                         <div className={styles.rbox33}>
                             <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>前10</button>
                             <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(hhdata4)}>更多</button>
+                            <button className={styles.button22} onClick={() => more(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>更多</button>
                         </div>
 
                         <Hly_pbatwo height={390} text={mon+w0+"各风机PBA"}
@@ -207,7 +207,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong211.push(data.data[1][i].maintainloss);   //维护损失
                         wrong221.push(data.data[1][i].limitloss);   //限功率损失
                         wrong231.push(data.data[1][i].nodevreasonloss);   //非设备原因损失
-                        pba21.push(data.data[1][i].pba);   //非设备原因损失
+                        pba21.push(data.data[1][i].pba.toFixed(3)*100);   //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime21', barLotime21));
                     dispatch(actions.setVars('power21', power21));
@@ -231,7 +231,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong211q.push(data.data[0][i].maintainloss);   //维护损失
                         wrong221q.push(data.data[0][i].limitloss);   //限功率损失
                         wrong231q.push(data.data[0][i].nodevreasonloss);   //非设备原因损失
-                        pba21q.push(data.data[0][i].pba);   //非设备原因损失
+                        pba21q.push(data.data[0][i].pba.toFixed(3)*100);    //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime1', barLotime21q));
                     dispatch(actions.setVars('power1', power21q));
@@ -258,6 +258,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor:(value,key,ipUrl)=>{
+            dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('wind',value.plan ));
@@ -290,7 +291,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong211.push(data.data[1][i].maintainloss);   //维护损失
                         wrong221.push(data.data[1][i].limitloss);   //限功率损失
                         wrong231.push(data.data[1][i].nodevreasonloss);   //非设备原因损失
-                        pba21.push(data.data[1][i].pba);   //非设备原因损失
+                        pba21.push(data.data[1][i].pba.toFixed(3)*100);    //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime21', barLotime21));
                     dispatch(actions.setVars('power21', power21));
@@ -314,7 +315,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong211q.push(data.data[0][i].maintainloss);   //维护损失
                         wrong221q.push(data.data[0][i].limitloss);   //限功率损失
                         wrong231q.push(data.data[0][i].nodevreasonloss);   //非设备原因损失
-                        pba21q.push(data.data[0][i].pba);   //非设备原因损失
+                        pba21q.push(data.data[0][i].pba.toFixed(3)*100);    //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime1', barLotime21q));
                     dispatch(actions.setVars('power1', power21q));
@@ -338,7 +339,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": wfid == undefined ? '150828' : wfid,
+                    "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"0",
                     "year":"2016"
                 },
@@ -353,9 +354,7 @@ const mapDispatchToProps = (dispatch) => {
                     let wrong32c = [];       //限功率损失
                     let wrong33c = [];       //非设备原因损失
                     let pba3c = [];      //故障损失
-                    console.log('a')
-                    console.log(data)
-                    console.log("b")
+
 
                     for (var i in data.data) {
                         barLotime3c.push(data.data[i].wtname);    //区域的横坐标
@@ -364,7 +363,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong31c.push(data.data[i].maintainloss);   //维护损失
                         wrong32c.push(data.data[i].limitloss);   //限功率损失
                         wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
-                        pba3c.push(data.data[i].pba);   //非设备原因损失
+                        pba3c.push(data.data[i].pba.toFixed(3)*100);   //非设备原因损失
                     }
 
 
@@ -397,7 +396,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": wfid == undefined ? '150828' : wfid,
+                    "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"1",
                     "year":"2016"
                 },
@@ -421,7 +420,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong31c.push(data.data[i].maintainloss);   //维护损失
                         wrong32c.push(data.data[i].limitloss);   //限功率损失
                         wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
-                        pba3c.push(data.data[i].pba);   //非设备原因损失
+                        pba3c.push(data.data[i].pba.toFixed(3)*100);    //非设备原因损失
                     }
 
                     dispatch(actions.setVars('barLotime1', barLotime3c))
@@ -439,39 +438,62 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (hhdata4) => {
+        more: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
+
+            dispatch(actions.setVars('bt0', 2));
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
+                async: false,
+                data: {
+                    "month": actbt + 1,
+                    "groupid":  '201612121721151',
+                    "wfid": wfid == undefined ? '150801' : wfid,
+                    "type":"2",
+                    "year":"2016"
+                },
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    let barLotime3c = [];    //各区域   一区域二区域
+                    let power3c = [];       //实际发电量
+                    let wrong30c = [];       //故障损失
+                    let wrong31c = [];       //维护损失
+                    let wrong32c = [];       //限功率损失
+                    let wrong33c = [];       //非设备原因损失
+                    let pba3c = [];      //故障损失
 
 
-            var barLotime3=[];
-            var power3=[];
-            var wrong30=[];
-            var wrong31=[];
-            var wrong32=[];
-            var wrong33=[];
-            var pba3=[];
+                    for (var i in data.data) {
+                        barLotime3c.push(data.data[i].wtname);    //区域的横坐标
+                        power3c.push(data.data[i].poweract);   //实际发电量
+                        wrong30c.push(data.data[i].faultloss);   //故障损失
+                        wrong31c.push(data.data[i].maintainloss);   //维护损失
+                        wrong32c.push(data.data[i].limitloss);   //限功率损失
+                        wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
+                        pba3c.push(data.data[i].pba.toFixed(3)*100);   //非设备原因损失
+                    }
 
-            for (var i in hhdata4.data[0]) {
+                    dispatch(actions.setVars('barLotime1', barLotime3c))
+                    dispatch(actions.setVars('power1', power3c))
+                    dispatch(actions.setVars('wrong10', wrong30c))
+                    dispatch(actions.setVars('wrong11', wrong31c))
+                    dispatch(actions.setVars('wrong12', wrong32c))
+                    dispatch(actions.setVars('wrong13', wrong33c))
+                    dispatch(actions.setVars('pba1', pba3c))
 
-                barLotime3.push(hhdata4.data[0][i].wtname);    //区域的横坐标
-                power3.push(hhdata4.data[0][i].poweract);   //实际发电量
-                wrong30.push(hhdata4.data[0][i].faultloss);   //故障损失
-                wrong31.push(hhdata4.data[0][i].maintainloss);   //维护损失
-                wrong32.push(hhdata4.data[0][i].limitloss);   //限功率损失
-                wrong33.push(hhdata4.data[0][i].nodevreasonloss);   //非设备原因损失
-                pba3.push(hhdata4.data[0][i].pba);   //非设备原因损失
-            }
 
-            dispatch(actions.setVars('barLotime1', barLotime3));
-            dispatch(actions.setVars('power1', power3));
-            dispatch(actions.setVars('wrong10', wrong30));
-            dispatch(actions.setVars('wrong11', wrong31));
-            dispatch(actions.setVars('wrong12', wrong32));
-            dispatch(actions.setVars('wrong13', wrong33));
-            dispatch(actions.setVars('pba1', pba3));
+                },
+                error: function () {
+
+                },
+            });
             $("#light").show();
             $("#boxhidden").show();;
         },
         hideit: (power1, wrong10, wrong11, wrong12, wrong13, pba1,barLotime1) =>{
+            dispatch(actions.setVars('bt0', 0));
             let barLotime3c = [];    //各区域   一区域二区域
             let power3c=[];       //实际发电量
             let wrong30c=[];       //故障损失
