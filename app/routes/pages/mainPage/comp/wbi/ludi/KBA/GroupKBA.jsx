@@ -15,7 +15,7 @@ var actions = require('redux/actions');
 let Component = React.createClass({
 	componentWillMount() {
 		let {ipUrl}=this.props;
-        this.props.init(ipUrl);
+        this.props.ajax(ipUrl);
     },
     
 	render() {
@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    	init: (ipUrl) => {
+    	ajax: (ipUrl) => {
             	$.ajax({
         		url: 'http://'+ipUrl+'/wbi/KPI/getCompanyKPI',
 		        type: 'post',
@@ -206,8 +206,7 @@ const mapDispatchToProps = (dispatch) => {
         	dispatch(actions.setVars('choice', 1));
     		wtElec=[],wtLose=[],wtPBA=[],wtName=[];
         	wtData.sort(function(a,b){return b.pba-a.pba});
-        	
-		        	for(var i=0;i<10;i++){
+        			for(var i=0;i<10;i++){
 		        		wtName.push(wtData.slice(0,10)[i].wtname);
 		        		wtElec.push(wtData.slice(0,10)[i].poweract);
 		        		wtLose.push(wtData.slice(0,10)[i].totalloss);
