@@ -160,7 +160,7 @@ let Component = React.createClass({
                                                 }
                                             if(chooses == "all"){      
                                                 return (
-                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.offline : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                             <div className={styles.listoptinfo}>
                                                                 <span>{valueA.Wtname}</span>
                                                                     <p>{'风速:'+Number(valueA.WindSpeed)+'m/s'}</p>
@@ -170,7 +170,7 @@ let Component = React.createClass({
                                                 )
                                             }else if(chooses == "RunCount_SOAM" && (code == "Online" || code == "Alarm")){
                                                 return (
-                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                             <div className={styles.listoptinfo}>
                                                                 <span>{valueA.Wtname}</span>
                                                                     <p>{'风速:'+Number(valueA.WindSpeed).toFixed(2)+'m/s'}</p>
@@ -180,7 +180,7 @@ let Component = React.createClass({
                                                 )
                                             }else if(chooses == "Fault" && code == "Fault"){
                                                 return (
-                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                             <div className={styles.listoptinfo}>
                                                                 <span>{valueA.Wtname}</span>
                                                                     <p>{'风速:'+Number(valueA.WindSpeed).toFixed(2)+'m/s'}</p>
@@ -190,7 +190,7 @@ let Component = React.createClass({
                                                 )
                                             }else if(chooses == "Repair" && valueA.WTStateColor == "#c7b88c"){
                                                 return (
-                                                        <div className={`${styles.listoptbtn_2} ${styles.repair} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                        <div className={`${styles.listoptbtn_2} ${styles.repair} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                             <div className={styles.listoptinfo}>
                                                                 <span>{valueA.Wtname}</span>
                                                                     <p>{'风速:'+Number(valueA.WindSpeed).toFixed(2)+'m/s'}</p>
@@ -200,7 +200,7 @@ let Component = React.createClass({
                                                 )
                                             }else if(chooses == "Offline1" && (code == "DisComForPre" || code == "DisComForPlc" || code == "Unknown")){
                                                 return (
-                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                             <div className={styles.listoptinfo}>
                                                                 <span>{valueA.Wtname}</span>
                                                                     <p>{'风速:'+Number(valueA.WindSpeed).toFixed(2)+'m/s'}</p>
@@ -210,7 +210,7 @@ let Component = React.createClass({
                                                 )
                                             }else if(chooses == "WFStandby" && (code == "Offline" || code == "ProtoectStop" || code == "LimitPowStop")){
                                                 return (
-                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.dispre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.dispre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.offline : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                             <div className={styles.listoptinfo}>
                                                                 <span>{valueA.Wtname}</span>
                                                                     <p>{'风速:'+Number(valueA.WindSpeed).toFixed(2)+'m/s'}</p>
@@ -220,7 +220,7 @@ let Component = React.createClass({
                                                 )
                                             }else if(chooses == "WFLIM" && code == "LimitPow"){
                                                 return (
-                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.dispre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.dispre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                             <div className={styles.listoptinfo}>
                                                                 <span>{valueA.Wtname}</span>
                                                                     <p>{'风速:'+Number(valueA.WindSpeed).toFixed(2)+'m/s'}</p>
@@ -290,7 +290,7 @@ let Component = React.createClass({
                                                 }
                                             if(chooses2 == "PVall"){      
                                                 return (                                                
-                                                    <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Topvinfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                    <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Topvinfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'辐照度:'+(valueA.PVTSI_Aver == undefined ? '--' : Math.ceil(valueA.PVTSI_Aver))+'W/㎡'}</p>
@@ -300,7 +300,7 @@ let Component = React.createClass({
                                                 )
                                             }else if(chooses2 == "PVONL" && (code == "Online" || code == "Alarm" || code == "LimitPow")){
                                                 return (
-                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                        <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                             <div className={styles.listoptinfo}>
                                                                 <span>{valueA.Wtname}</span>
                                                                     <p>{'风速:'+Number(valueA.WindSpeed).toFixed(2)+'m/s'}</p>
@@ -310,7 +310,7 @@ let Component = React.createClass({
                                                 )
                                             }else if(chooses2 == "PVFLT" && code == "Fault"){
                                                 return (                                                
-                                                    <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Topvinfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                    <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Topvinfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'辐照度:'+(valueA.PVTSI_Aver == undefined ? '--' : Math.ceil(valueA.PVTSI_Aver))+'W/㎡'}</p>
@@ -320,7 +320,7 @@ let Component = React.createClass({
                                                 )
                                             }else if(chooses2 == "PVOFL" && (code == "Offline" || code == "DisComForPre" || code == "DisComForPlc" || code == "DisComForPlc")){
                                                 return (                                                
-                                                    <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomforpre : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.Alarm : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Topvinfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
+                                                    <div className={`${styles.listoptbtn_3} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`}  key={keyA} onClick = {()=> Topvinfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                         <div className={styles.listoptinfo}>
                                                             <span>{valueA.Wtname}</span>
                                                                 <p>{'辐照度:'+(valueA.PVTSI_Aver == undefined ? '--' : Math.ceil(valueA.PVTSI_Aver))+'W/㎡'}</p>
@@ -456,7 +456,7 @@ const mapDispatchToProps = (dispatch) => {
         Topvinfo1: (value,valueA,key)=> {
             // console.log(value,valueA,key)
             // dispatch(actions.setVars('valuepage1', value));
-            dispatch(actions.setVars('value', valueA.Wtid));
+            dispatch(actions.setVars('value', valueA));
             dispatch(actions.setVars('valueid', value));
             dispatch(actions.setVars('actbt1',key ));
             dispatch(actions.setVars('actbt',''));

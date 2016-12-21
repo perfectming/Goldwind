@@ -333,7 +333,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,
@@ -389,7 +389,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
                 type: 'post',
-                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
+                url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
                     "month": actbt + 1,

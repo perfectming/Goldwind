@@ -18,6 +18,16 @@
                 background-color: #464c58;
                 font-size: 16px;
                 padding: 4px 6px;
+                h3{
+                    position: absolute;
+                    display: inline-block;
+                    height: 60px;
+                    width: 200px;
+                    line-height: 60px;
+                    top: -20px;
+                    left: 20px;
+                    font-size: 16px;
+                }
                 span{
                     display: inline-block;
                     position: absolute;
@@ -129,7 +139,7 @@
                     font-size: 14px;
                     font-family: '微软雅黑';
                     position: absolute;
-                    color:#20FEFE;
+                    color:white;
                     border: 1px solid #20FEFE;
                     top: 5px;
                     right: 174px;
@@ -165,7 +175,7 @@
                     font-size: 14px;
                     font-family: '微软雅黑';
                     position: absolute;
-                    color:#20FEFE;
+                    color:white;
                     border: 1px solid #20FEFE;
                     top: 5px;
                     right: 94px;
@@ -201,7 +211,7 @@
                     font-size: 14px;
                     font-family: '微软雅黑';
                     position: absolute;
-                    color:#20FEFE;
+                    color:white;
                     border: 1px solid #20FEFE;
                     top: 5px;
                     right: 12px;

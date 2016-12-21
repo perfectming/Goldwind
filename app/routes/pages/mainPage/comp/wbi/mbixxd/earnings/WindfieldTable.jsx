@@ -106,8 +106,8 @@ let Component = React.createClass({
                              areaWindCosts.push(areaWindCost);
                              let areaWindEarning=dataA[i].earning;
                              areaWindEarnings.push(areaWindEarning);
-                             let areaWindRate=Number(dataA[i].rate.toFixed(1));
-                             areaWindRates.push(areaWindRate);
+                             let areaWindRate=dataA[i].rate*100;
+                             areaWindRates.push(Number(areaWindRate.toFixed(1)));
                              let areaWindid=dataA[i].wfid;
                              areaWindids.push(areaWindid);
                              let areaWindName =dataA[i].wtname;
@@ -158,6 +158,7 @@ let Component = React.createClass({
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
+
             title: {
                 text:'（元）',
                 align:'high',
@@ -178,6 +179,9 @@ let Component = React.createClass({
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+               minRange: 100,
+               tickInterval:25,
+               
 
             title: {
                 text: '100%',
@@ -213,7 +217,7 @@ let Component = React.createClass({
                     data:TBA,
                     yAxis:1,
                      tooltip: {
-               valueSuffix:''
+               valueSuffix:'%'
             },
                 }]
         };

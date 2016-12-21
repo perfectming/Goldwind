@@ -161,11 +161,11 @@ module.exports = {
         },
          {
             name: '告警报表',
-            page: '',
+            page: 'alert',
             rightpagge:[
                   {
                     tabname:'升压站告警查询',
-                    rpage:''
+                    rpage:'alert'
                 },
                  {
                     tabname:'AGC/ AVC告警查询',

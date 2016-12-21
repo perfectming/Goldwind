@@ -10,6 +10,7 @@ let Component = React.createClass({
     },
     render() {
         let{text,areaPlan,areaPlanDay, areaPlanDayT,width,height}=this.props;
+       {console.log(areaPlanDayT)}
         let configPie = {
             chart: {
                 height:height,
@@ -94,7 +95,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                  title: {
-                text:'kWh',
+                text:'(kWh)',
                     align:'high',
                     rotation:'0',
                     y: -10,

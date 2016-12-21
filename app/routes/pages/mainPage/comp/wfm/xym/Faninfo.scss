@@ -128,20 +128,20 @@
 					margin-left: 20px;
 				}
 				.Boxbdial{
-					width: 205px;
-					height: 130px;
+					width: 195px;
+					height: 110px;
 					color:#fff;
 					position: relative;
 					background: url(../../../img/comp/dialhz.png) no-repeat;
 					.hzBoxbdial{
-						width: 68px;
-						height: 13px;
+						width: 120px;
+						height: 16px;
 						position: absolute;
-						left:20px;
-						bottom: 18px;
-						background: url(../../../img/comp/dial_001.png);
+						left:-34px;
+						bottom: 10px;
+						background: url(../../../img/comp/dial_001.png) no-repeat;
 						transition: transform 2s easein;
-						transform: rotate(30deg);
+						transform: rotate(0deg);
 						transform-origin: 90% 50%;
 					}
 					p{
@@ -192,17 +192,17 @@
 			background:#292F36;
 			.wsbox1{
 				.wsdialbox{
-					width:198px;
-					height:112px; 
+					width:204px;
+					height:100px; 
 					background: url(../../../img/comp/dial_01.png) no-repeat;
 					position: relative;
 					.wsipbox{
 						background: url(../../../img/comp/dial_001.png);
-						width: 68px;
-						height: 13px;
+						width: 120px;
+						height: 16px;
 						position: absolute;
-						bottom:7px;
-						left: 38px;
+						bottom:-2px;
+						left: -7px;
 						#wspoint{
 						text-indent: 10px;
 
@@ -212,56 +212,56 @@
 			}
 			.wsbox2{
 				.wsdialbox{
-					width:198px;
-					height:112px; 
-					background: url(../../../img/comp/dial_011.png) no-repeat;
+					width:204px;
+					height:100px;
+					background: url(../../../img/comp/dial_02.png) no-repeat;
 					position: relative;
 					.cardnum{
-						color:#000;
+						color:#999;
 						position: absolute;
-						left: 80px;
+						left: 85px;
 						top: 70px;
 					}
 					.wsipbox{
 						background: url(../../../img/comp/dial_001.png);
-						width: 70px;
-						height: 13px;
+						width: 120px;
+						height: 16px;
 						position: absolute;
-						bottom:7px;
-						left: 38px;
+						bottom:-2px;
+						left: -7px;
 					}
 				}
 			}
 			.wsbox3{
 				.wsdialbox{
-					width:200px;
-					height:112px; 
-					background: url(../../../img/comp/dial_021.png) no-repeat;
+					width:204px;
+					height:100px; 
+					background: url(../../../img/comp/dial_03.png) no-repeat;
 					position: relative;
 					.wsipbox{
 						background: url(../../../img/comp/dial_001.png);
-						width: 70px;
-						height: 13px;
+						width: 120px;
+						height: 16px;
 						position: absolute;
-						bottom:6px;
-						left: 38px;
+						bottom:-2px;
+						left: -7px;
 					}
 				}
 			}
 			.wsbox4{				
 				.wsdialbox{
-					width:200px;
-					height:112px; 
-					background: url(../../../img/comp/dial_02.png) no-repeat;
+					width:204px;
+					height:100px; 
+					background: url(../../../img/comp/dial_04.png) no-repeat;
 					position: relative;
 					
 					.wsipbox{
 						background: url(../../../img/comp/dial_001.png);
-						width: 70px;
-						height: 13px;
+						width: 120px;
+						height: 16px;
 						position: absolute;
-						bottom:6px;
-						left: 38px;
+						bottom:-2px;
+						left: -7px;
 					}
 				}
 			}
@@ -283,7 +283,7 @@
 				width: 80px;
 				height: 100%;
 				float: left;
-				margin-left: 10px;
+				margin-left: 30px;
 				padding-top: 50px;
 				div:nth-child(1)>span:nth-child(1){
 					font-size: 18px;
