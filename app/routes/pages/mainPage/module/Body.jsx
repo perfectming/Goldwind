@@ -60,7 +60,7 @@ import Areace from '../comp/wbi/mbixxd/Areace.jsx';//薛旭东44
 import Areacet from '../comp/wbi/mbixxd/Areacet.jsx';
 import TBAtime from '../comp/wbi/mbixxd/TBAtime.jsx';
 import TBAspace from '../comp/wbi/mbixxd/TBAspace.jsx';
-import Healty from '../comp/wbi/mbixxd/Healty.jsx'; 
+import Healty from '../comp/wbi/mbixxd/Healty.jsx';
 import Healthytime from '../comp/wbi/mbixxd/Healthytime.jsx';
 import PBAtime from '../comp/wbi/mbixxd/PBAtime.jsx';
 import PBAspace from '../comp/wbi/mbixxd/PBAspace.jsx';
