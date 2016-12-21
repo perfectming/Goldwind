@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
-let input_url="10.9.100.38";
+let data = require('./Profit-dataq');
+let input_url="10.9.99.65";
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -79,48 +79,56 @@ let Component = React.createClass({
            
             let day = new Date(year,month,0); 
             let  daycount = day.getDate();
-                           let GEIn=[];
+             // 获取每天的收益
+        let GEIn=[];
         let GEAm=[];
         let GERa=[];
     let    GENa=[];
-         for (let i=1;i<daycount+1;i++)
-          {
+     
+          
            $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getMaxYieByDate',  
+             url:'http://'+input_url+':8080/wbi/yield/getMaxYieBayDay',  
              async:false,
              data:{
-              'startdate':year+'-'+month+'-'+i,
-              'enddate':year+'-'+month+'-'+i,
+              'month':month,
              },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-            let GE=data.data;
-         let incomes=GE.incomes
-         GEIn.push(incomes);
+                console.log(data)
+           let GE=data.data;
+           for( let i in GE){
+          let incomes=GE[i].incomes
+          GEIn.push(incomes);
 
-         let amounts=GE.amounts
-         GEAm.push(amounts);
+          let amounts=GE[i].amounts
+          GEAm.push(amounts);
 
-         let rate=GE.rate
-         GERa.push(rate);
+          let rate=GE[i].rate*100
+      GERa.push(Number(rate.toFixed(1)));
 
-
-         GENa.push(i+"日");
+    let day=GE[i].day;
+          GENa.push(day+'日');}
             
              
              },
              error:function(){
                 
-             }
-           });
+              }
+          })
+       
+        // dispatch(actions.setVars('GENa1',GENa));
+        // dispatch(actions.setVars('GEIn1',GEIn));
+        // dispatch(actions.setVars('GEAm1',GEAm));
+        // dispatch(actions.setVars('GERa1',GERa));
+                     changedata3(month,GENa,GEIn,GEAm,GERa);
        }
- changedata3(month,GENa,GEIn,GEAm,GERa);
+ 
       
 
                         }
-                    }
+                    
                 }
             },
 

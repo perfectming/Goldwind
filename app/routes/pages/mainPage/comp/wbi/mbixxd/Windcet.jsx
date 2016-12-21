@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
+let data = require('./Profit-dataq');
 
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
         let{text,areaPlan,areaPlanDay, areaPlanDayT,width,height}=this.props;
-       {console.log(areaPlanDayT)}
+     
         let configPie = {
             chart: {
                 height:height,

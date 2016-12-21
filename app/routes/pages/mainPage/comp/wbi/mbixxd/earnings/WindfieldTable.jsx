@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let input_url="10.68.100.32";
-let data = require('./Profit-data');
+let data = require('./Profit-data1');
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -27,7 +27,7 @@ let Component = React.createClass({
             title:{
                 text:text,
                 align:'left',
-                 x : "0",
+               
                  x : 90,
                 y :10,
                 style:{
@@ -59,15 +59,10 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#70c080'],
+           
            
             plotOptions: {
-                column: {
-                    pointPadding: 0.1,
-                    borderWidth: 0,
-                   maxPointWidth: 30,
-                    borderRadius: 4,
-                },
+              
                 series: {
                     cursor: 'pointer',
                     events: {
@@ -177,8 +172,7 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            }, gridLineDashStyle: 'Solid',
-                gridLineColor: '#6d6a6c',
+            }, 
                minRange: 100,
                tickInterval:25,
                
@@ -203,12 +197,22 @@ let Component = React.createClass({
                 type: 'column',
                 data: windProfit,
                 pointPlacement:0,
+                pointPadding: 0.1,
+                    borderWidth: 0,
+                   maxPointWidth: 30,
+                    borderRadius: 4,
+                    color:'#33BAC0',
             },
             {
             	name: '成本',
                 type: 'column',
                 data: windCost,
                 pointPlacement: -0.06,
+                pointPadding: 0.1,
+                    borderWidth: 0,
+                   maxPointWidth: 30,
+                    borderRadius: 4,
+                     colors:'#70c080',
             },
                 {
                     name:'收益率',
@@ -216,6 +220,10 @@ let Component = React.createClass({
                     color:'blue',
                     data:TBA,
                     yAxis:1,
+                    pointPadding: 0.1,
+                    borderWidth: 0,
+                   maxPointWidth: 30,
+                    borderRadius: 4,
                      tooltip: {
                valueSuffix:'%'
             },
@@ -246,6 +254,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('areaWindRatesss',areaWindRates));
              dispatch(actions.setVars('areaWindidsss',areaWindids));
              dispatch(actions.setVars('index2',index));
+               dispatch(actions.setVars('btnn',0));
 
           
         },

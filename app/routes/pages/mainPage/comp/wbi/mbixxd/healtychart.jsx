@@ -3,10 +3,11 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
+
 
 let Component = React.createClass({
     componentWillMount() {
+        
     },
     render() {
         let {ty,areaRecordProfit,machineE,width,height,text}=this.props;
@@ -27,7 +28,7 @@ let Component = React.createClass({
                 top:'-20px',
 
                 vertical:'top',
-                x : "0",
+          
                  x : 90,
                 y :20,
                 style:{
@@ -99,7 +100,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'100',
+                text:'(100°H)',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -128,6 +129,9 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordProfit,
                 color:'#4CDB9D',
+                 tooltip: {
+               valueSuffix:'°H'
+            },
             },
                 ]
         };
@@ -139,7 +143,10 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+          xxdwfId:state.vars.xxdwfId1,
+        xxdwfNa:state.vars.xxdwfNa1,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

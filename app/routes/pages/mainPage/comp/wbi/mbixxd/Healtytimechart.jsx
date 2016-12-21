@@ -3,15 +3,16 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
 
-let wins=data.areaPlanDayY;
+ 
 let Component = React.createClass({
     componentWillMount() {
+  
+     
     },
     render() {
 
-        let {w0,wins,monthT,areaRecordProfitT,text,changedata1}=this.props;
+        let {input_url,xxdwfId,xxdwfNa,w0,wins,monthT,areaRecordProfitT,text,changedata1}=this.props;
         let configPie = {
             chart: {
                 height:390,
@@ -67,10 +68,57 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                        w0=e.point.category;
+                        let  w0=e.point.category;
+                        let  month=e.point.index+1; 
                         let  a=w0.toString().split("");
                         let b=a[0];
-                        changedata1(w0,win,b);
+                         let WTHealH=[];
+       let WTHealName=["1日","2日","3日","4日","5日","6日","7日","8日","9日","10日","11日","12日","13日","14日",];
+       let WTN=[0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+     
+       let date = new Date();
+     
+       let year=date.getFullYear();
+      
+       
+              $.ajax({
+              type:'post',
+              url:'http://'+input_url+'/wbi/Health/getWfieldTimHealth',  
+              async:false,
+             data:{
+                'year':year,
+                'month':month,
+              'wfid':xxdwfId,
+             },
+              dataType:'json',
+              timeout:'3000',
+              success:function(data){
+           
+            
+               let WTHeal=data.data.dayHealth;
+               let WTHeall=data.data.monthHealth;
+
+
+         for (let i in WTHeal){
+            WTHealName.push(i.slice(6,8)+'日');
+            WTN.push(WTHeal[i])
+
+         }
+       
+    
+                         
+             
+   
+              
+             
+            
+              },
+              error:function(){
+                
+              },
+            });
+               changedata1(w0,WTHealName,WTN);
+                        
                         }
                     }
                 }
@@ -99,7 +147,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'100',
+                text:'(100°H)',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -135,6 +183,9 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordProfitT,
                 color:'#4CDB9D',
+                  tooltip: {
+               valueSuffix:'°H'
+            },
             },
             ]
         };
@@ -150,6 +201,8 @@ const mapStateToProps = (state) => {
     
         wins: state.vars.wins1,
          windplan1 : state.vars.windplan1,
+           xxdwfId:state.vars.xxdwfId1,
+        xxdwfNa:state.vars.xxdwfNa1,
 
         
     }
@@ -159,9 +212,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1 :(w0,win,b)=>{
-            dispatch(actions.setVars('w1',w0 ));
-            dispatch(actions.setVars('wins1',wins[b-1]));
+        changedata1 :(w0,WTHealName,WTN)=>{
+         
+            dispatch(actions.setVars('wfH',w0 ));
+             dispatch(actions.setVars('WTHealName12',WTHealName));
+             dispatch(actions.setVars('WTN12',WTN ));
+              
            
         },
     };

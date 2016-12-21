@@ -5,40 +5,40 @@ import PBAtimechart from './PBAtimechart.jsx';
 import PBAtimechartt from './PBAtimechartt.jsx';
 import icono from './img/PBA.png';
 var actions = require('redux/actions');
-let data=require('./Profit-data');
-let monthT=data.monthT;
+ let data=require('./Profit-dataq');
+
 let datee=new Date;
-let input_url="10.68.100.32";
+
 let month=datee.getMonth();
-let profit=data.windProfit;
-let cost=data.windCost;
-let fanCost=data.fanCost;
-let fanCostA=data.fanCostA;
-let areaPlan=data.areaPlan;
-let areaPlanDay=data.areaPlanDay;
-let areaPlanDayT=data.areaPlanDayT;
+// let profit=data.windProfit;
+// let cost=data.windCost;
+// let fanCost=data.fanCost;
+// let fanCostA=data.fanCostA;
+// let areaPlan=data.areaPlan;
+// let areaPlanDay=data.areaPlanDay;
+// let areaPlanDayT=data.areaPlanDayT;
 let Component = React.createClass({
     componentWillMount() {
-        let{xxdwfId,xxdwfNa}=this.props;
-        this.props.ajax(xxdwfId,xxdwfNa);
+        let{xxdwfId,xxdwfNa,ipUrl}=this.props;
+        this.props.ajax(xxdwfId,xxdwfNa,ipUrl);
     },
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-        let{xxdwfId,xxdwfNa,PBATimeSecondPba,PBATimeSecondNodevreasonloss,PBATimeSecondLimitloss,PBATimeSecondMaintainloss,PBATimeSecondFaultloss,PBATimeSecondPoweract,PBATimeSecondDay,PBATimeFirstPba,PBATimeFirstNodevreasonloss,PBATimeFirstLimitloss,PBATimeFirstMaintainloss,PBATimeFirstFaultloss,PBATimeFirstPoweract,PBATimeFirstMonth,w0,winsss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
+        let{ipUrl,xxdwfId,xxdwfNa,PBATimeSecondPba,PBATimeSecondNodevreasonloss,PBATimeSecondLimitloss,PBATimeSecondMaintainloss,PBATimeSecondFaultloss,PBATimeSecondPoweract,PBATimeSecondDay,PBATimeFirstPba,PBATimeFirstNodevreasonloss,PBATimeFirstLimitloss,PBATimeFirstMaintainloss,PBATimeFirstFaultloss,PBATimeFirstPoweract,PBATimeFirstMonth,w0,winsss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
         return (
             <div className={styles.box}>
              <div className={styles.padding}>
-             <div className={styles.back1} onClick={()=>backtop(befor_pagee,befor_pagee2)}>{xxdwfNa}</div>
+            
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                            <p className={styles.titleee}>每月PBA</p>
-                                <PBAtimechart monthT={PBATimeFirstMonth} profit={PBATimeFirstPoweract} cost={PBATimeFirstPba} fanCost={PBATimeFirstFaultloss} fanCostA={PBATimeFirstMaintainloss} fanCostB={PBATimeFirstLimitloss} fanCostC={PBATimeFirstNodevreasonloss} xxdwfId={xxdwfId} ></PBAtimechart>
+                            <p className={styles.titleee}>{xxdwfNa+'每月PBA'}</p>
+                                <PBAtimechart monthT={PBATimeFirstMonth} profit={PBATimeFirstPoweract} cost={PBATimeFirstPba} fanCost={PBATimeFirstFaultloss} fanCostA={PBATimeFirstMaintainloss} fanCostB={PBATimeFirstLimitloss} fanCostC={PBATimeFirstNodevreasonloss} xxdwfId={xxdwfId} input_url={ipUrl}></PBAtimechart>
                             </div>
                            
                         </div>
@@ -53,7 +53,7 @@ let Component = React.createClass({
                         <div className={styles.windcebox}>
                            
                             <div>
-                             <p className={styles.titleee}>{w0+'每日PBA'}</p>
+                             <p className={styles.titleee}>{xxdwfNa+w0+'每日PBA'}</p>
                                 <PBAtimechartt areaPlan={PBATimeSecondDay} areaPlanDay={PBATimeSecondPoweract} areaPlanDayT={PBATimeSecondPba} fanCost={PBATimeSecondFaultloss} fanCostB={PBATimeSecondLimitloss} fanCostC={PBATimeSecondNodevreasonloss} fanCostA={PBATimeSecondMaintainloss} xxdwfId={xxdwfId} ></PBAtimechartt>
                             </div>
                         </div>
@@ -94,6 +94,7 @@ const mapStateToProps = (state) => {
         PBATimeSecondPba: state.vars.PBATimeSecondPba12,
         xxdwfId:state.vars.xxdwfId1,
         xxdwfNa:state.vars.xxdwfNa1,
+        ipUrl:state.vars.ipUrl,
 
 
     }
@@ -101,7 +102,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (xxdwfId,xxdwfNa) => {
+        ajax: (xxdwfId,xxdwfNa,input_url) => {
 
            let date=new Date();
            let month=date.getMonth();
@@ -123,7 +124,7 @@ const mapDispatchToProps = (dispatch) => {
             let PBATimeSecondPbaP=[];
             $.ajax({
                 type:'post',
-                url:'http://'+input_url+':8080/wbi/PBA/getWfieldMonthPBA',
+                url:'http://'+input_url+'/wbi/PBA/getWfieldMonthPBA',
                 async:false,
                 data:{
                     'wfid':xxdwfId,
@@ -169,7 +170,7 @@ const mapDispatchToProps = (dispatch) => {
            // 给第二个图赋初值
              $.ajax({
                 type:'post',
-                url:'http://'+input_url+':8080/wbi/PBA/getWfieldDayPBA',
+                url:'http://'+input_url+'/wbi/PBA/getWfieldDayPBA',
                 async:false,
                 data:{
                     'wfid':xxdwfId,

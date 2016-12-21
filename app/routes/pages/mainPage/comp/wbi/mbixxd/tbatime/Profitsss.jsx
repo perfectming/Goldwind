@@ -5,7 +5,7 @@ import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
 import icono from '../img/TBA.png';
 var actions = require('redux/actions');
-let data=require('./Profit-data');
+let data=require('./Profit-data3');
 var $=require('jquery');
 let button=data.button;
 let input_url="10.68.100.32";
@@ -87,6 +87,8 @@ let tbaDays3=[];
 let tbaDayRunTimes3=[];
 let tbaDayDownTimes3=[];
 let tbaDayTba3=[];
+let date = new Date();
+let month =date.getMonth();
 // 获取所有的月份
  $.ajax({
                      type:'post',
@@ -124,14 +126,15 @@ let tbaDayTba3=[];
 
 
 
-// // // 获取默认的月份：1
+// // // 获取默认的月份：11
+
  $.ajax({
                      type:'post',
                      url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByMonth',
                      async:false,
                      dataType:'json',
                      data:{
-                      'month':11,
+                      'month':month,
                      },
                      timeout:'3000',
                      success:function(data){
@@ -161,7 +164,7 @@ let tbaDayTba3=[];
         dispatch(actions.setVars('tbaDayRunTimes31',tbaDayRunTimes3 ));
           dispatch(actions.setVars('tbaDayDownTimes31',tbaDayDownTimes3 ));
           dispatch(actions.setVars('tbaDayTba31',tbaDayTba3 ));
-          dispatch(actions.setVars('qwe','11月'));
+          dispatch(actions.setVars('qwe',month+'月'));
        
 
         }

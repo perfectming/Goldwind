@@ -8,7 +8,7 @@ var $=require('jquery');
 let input_url="10.68.100.32";
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
-let data=require('./Profit-data');
+let data=require('./Profit-data1');
 let text=data.text;
 let datee=new Date;
 let year=datee.getFullYear();
@@ -20,6 +20,7 @@ let windFiedN=[];
 let arr5=[];
 let Component = React.createClass({
     componentWillMount() {
+        
         this.props.ajax();
     },
     componentDidMount() {
@@ -586,7 +587,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data);
+                 
                    
                     let dataA=data.data;
                     for (let i in dataA)

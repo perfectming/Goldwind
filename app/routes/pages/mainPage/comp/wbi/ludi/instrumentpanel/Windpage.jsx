@@ -226,13 +226,15 @@ const mapDispatchToProps = (dispatch) => {
 			        		wfName.push(data.data.everyAreaPba[i].wfname);
 			        		wfId.push(data.data.everyAreaPba[i].wfid);
 
-			        	}
+
 
 
 
 			        	};
 			        	dispatch(actions.setVars('wfName',wfName ));
 			        	dispatch(actions.setVars('wfId',wfId ));
+			       
+
 
 			        },
 			        complete : function(XMLHttpRequest,status){ 
@@ -447,6 +449,8 @@ const mapDispatchToProps = (dispatch) => {
 										dispatch(actions.setVars('month',month ));
 										dispatch(actions.setVars('monthAct',monthAct ));
 										dispatch(actions.setVars('monthPlan',monthPlan ));
+								
+
 							        },
 							        complete : function(XMLHttpRequest,status){ 
 								　　　　	$.ajax({

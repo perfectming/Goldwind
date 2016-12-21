@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let data = require('./Profit-data');
-let input_url="10.9.100.38";
+let data = require('./Profit-data2');
+let input_url="10.9.99.65";
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -24,7 +24,7 @@ let Component = React.createClass({
             title: {
                 text:'',
                 align:'left',
-                 x : "0",
+                
                 style:{
                     color:"#fff",
                     fontSize:"25px",

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let data = require('./Profit-data');
+let data = require('./Profit-dataq');
 let Component = React.createClass({
     componentWillMount() {
     },

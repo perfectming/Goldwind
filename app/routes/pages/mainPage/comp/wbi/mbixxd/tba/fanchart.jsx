@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
+let data = require('./Profit-data2');
 
 let Component = React.createClass({
     componentWillMount() {
@@ -28,7 +28,7 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : "0",
+               
                 style:{
                     color:"#fff",
                     fontSize:"25px",

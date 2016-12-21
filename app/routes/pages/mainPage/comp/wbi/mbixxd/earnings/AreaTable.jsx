@@ -4,7 +4,7 @@ var actions = require('redux/actions');
 var $=require('jquery');
 var ReactHighcharts = require('react-highcharts');
 var input_url="10.68.100.32";
-let data = require('./Profit-data');
+let data = require('./Profit-data1');
 let sqy =data.areaRecordCostQY;
 let Component = React.createClass({
     componentWillMount() {
@@ -327,6 +327,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('areaWindEarningsss',areaWindEarnings1));
              dispatch(actions.setVars('areaWindRatesss',areaWindRates1));
               dispatch(actions.setVars('w123',areaWindNames[0]));
+              dispatch(actions.setVars('btnn',0));
             
 
           
