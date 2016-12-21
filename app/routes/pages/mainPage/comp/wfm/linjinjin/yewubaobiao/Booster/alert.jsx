@@ -4,15 +4,6 @@ import styles from './alert.scss';
 var $ =require('jquery');
 var actions = require('redux/actions');
 
-
-
-
-
-
-
-
-
-
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -29,7 +20,8 @@ let Component = React.createClass({
                 </div>
                  <div className={styles.righttable}>
                     <div className={styles.tablebox}>
-                      <table id="tb_1" cellSpacing="0" cellPadding="2" className={styles.tablebox}>   
+
+                      <table id="tb_1" cellSpacing="0" cellPadding="2" className={styles.rtable}>   
                         <tbody>   
                           <tr className={styles.oneline}>   
                             <td>用户编号</td>   

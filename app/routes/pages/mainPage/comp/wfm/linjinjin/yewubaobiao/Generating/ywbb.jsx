@@ -22,7 +22,7 @@ let Component = React.createClass({
         //初始化jquery方法
         setTimeout(function(){
             playjq();
-        },1000)
+        },500)
     },
    showTree (devurl){
     let{playjq,showtree,select_list,firstname,devtype}=this.props;
@@ -131,7 +131,23 @@ let Component = React.createClass({
                             </div>
                         </div> 
                     </div>
-                    
+                    <div className={styles.seleBox}>
+                      <div className={styles.dateBox}>
+                        <span>发生时间</span><input id="startTime"   type='date'/>
+                        <span>结束时间</span><input id="endTime"   type='date'/>
+                      </div>
+                    </div>
+
+                    <div className={styles.btnBox}>
+                        <button id='searchall'><img src={'http://'+url+'/images/button/search.gif'}/>查询</button>
+                    </div>
+                    <div className={styles.btnBox}>
+                        <button><img src={'http://'+url+'/images/button/set.gif'}/>设置参数</button>
+                    </div>
+                    <div className={styles.btnBox}>
+                        <button><img src={'http://'+url+'/images/button/outbox.gif'}/>导出Excel</button>
+                    </div>
+
                 </div>
 
 
@@ -143,7 +159,7 @@ let Component = React.createClass({
                             <a className={styles.ca}>
                               <img src={add} />
                               <b><img src={'http://'+url+'/'+valueC.img}/>{valueC.text}</b>
-                              <input type='checkbox' onClick={(e)=>sent_info(valueC.args.wfid,e.target)} />
+                              <input type='checkbox' />
                             </a>
                             {
                                 secondtree[keyC].map((valueD,keyD)=>{
@@ -152,16 +168,16 @@ let Component = React.createClass({
                                             <a className={styles.da}>
                                               <img src={add} />
                                               <b><img src={'http://'+url+'/'+valueD.img}/>{valueD.text}</b>
-                                              <input type='checkbox' onClick={(e)=>sent_info(valueD,e.target)} />
+                                              <input type='checkbox' />
                                             </a>
 
                                             {
                                                 threetree[keyD].map((valueE,keyE)=>{
                                                     return(
                                                         <div className={styles.placeline} key={keyE}>
-                                                            <a className={styles.ea}>
-                                                               <b><img src={'http://'+url+'/'+valueE.img}/>{valueE.text}</b>
-                                                              <input type='checkbox' onClick={(e)=>sent_info(valueE,e.target)}/>
+                                                            <a className={styles.ea} >
+                                                               <b style={{cursor:'auto'}}><img src={'http://'+url+'/'+valueE.img}/>{valueE.text}</b>
+                                                              <input type='checkbox'/>
                                                             </a>
                                                         </div>
                                                     )
@@ -248,10 +264,19 @@ const mapDispatchToProps = (dispatch) => {
         },
         
         init: () => {
-       
+    
 
         },
         playjq:()=>{
+
+
+          //初始化日期
+            var date = new Date();
+            var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+            var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1);
+            //获取今天与明天的日期
+            $('#startTime').val(dateString);
+            $('#endTime').val(dateString1)
             //显示下拉菜单
         $('#slide').on('click',function(){
             $('#selectye').show();
@@ -282,12 +307,21 @@ const mapDispatchToProps = (dispatch) => {
                 }
             })
 
+              //查询按钮功能
+            $('#searchall').on('click',function(){
+              
+            })
 
 
 
 
         },
         showtree:(devurl,alltree,alltree1,firstname)=>{
+
+
+
+
+
             dispatch(actions.setVars('boolywbb', false));
             dispatch(actions.appendObjs('secondtree',alltree));
             dispatch(actions.appendObjs('threetree',alltree1));
