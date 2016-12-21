@@ -77,18 +77,18 @@ let Component = React.createClass({
 				<div className={styles.content}>
 					<div className={styles.floorOne}>
 						<div className={`${styles.pie} ${styles.boxShadow}`}>
-							<ChartPie text={'集团1区域3风场1 机型可靠性分析'} lose={data.lose}></ChartPie>
+							<ChartPie text={'集团1区域3风场1 机型可靠性分析'} lose={[['机型1',5],['机型2',3],['机型3',4],['机型4',6]]}></ChartPie>
 						</div>
 						<div className={`${styles.column} ${styles.boxShadow}`}>
-							<OneColumn name={data.data[3].name} title={data.data[3].title} month={data.data[3].month} plan={data.data[3].plan} unit={data.data[3].unit}></OneColumn>
+							<OneColumn name={'可靠性指标分析'} title={'可靠性指标分析'} month={['MTBF','MTBI','MTBR','MTTI','MTTR','FTAF']} plan={[4,6,7,8,4,5]} unit={data.data[3].unit}></OneColumn>
 						</div>
 					</div>
 					<div className={styles.floorTwo}>
 						<div className={`${styles.pie} ${styles.boxShadow}`}>
-							<ChartPie text={'集团1区域3风场2 机型可靠性分析'} lose={data.lose}></ChartPie>
+							<ChartPie text={'集团1区域3风场2 机型可靠性分析'} lose={[['机型1',5],['机型2',3],['机型3',4],['机型4',6]]}></ChartPie>
 						</div>
 						<div className={`${styles.column} ${styles.boxShadow}`}>
-							<OneColumn name={data.data[3].name} title={data.data[3].title} month={data.data[3].month} plan={data.data[3].plan} unit={data.data[3].unit}></OneColumn>
+							<OneColumn name={'可靠性指标分析'} title={'可靠性指标分析'} month={['MTBF','MTBI','MTBR','MTTI','MTTR','FTAF']} plan={[14,6,7,8,14,5]} unit={data.data[3].unit}></OneColumn>
 						</div>
 					</div>
 				</div>

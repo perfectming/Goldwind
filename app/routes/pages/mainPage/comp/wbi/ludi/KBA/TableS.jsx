@@ -194,7 +194,6 @@ const mapDispatchToProps = (dispatch) => {
 		        data:{startTime:sTime,endTime:eTime,wfid:WfId},
 		        dataType: 'json',//here
 		        success:function (data) {
-		        	console.log(data);
 		        	wtElec=[],wtLose=[],wtPBA=[],wtName=[];
 		        	wtData=data.data;
 		        	wtData.sort(function(a,b){return b.pba-a.pba});

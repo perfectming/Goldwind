@@ -60,7 +60,7 @@ import Areace from '../comp/wbi/mbixxd/Areace.jsx';//薛旭东44
 import Areacet from '../comp/wbi/mbixxd/Areacet.jsx';
 import TBAtime from '../comp/wbi/mbixxd/TBAtime.jsx';
 import TBAspace from '../comp/wbi/mbixxd/TBAspace.jsx';
-import Healty from '../comp/wbi/mbixxd/Healty.jsx'; 
+import Healty from '../comp/wbi/mbixxd/Healty.jsx';
 import Healthytime from '../comp/wbi/mbixxd/Healthytime.jsx';
 import PBAtime from '../comp/wbi/mbixxd/PBAtime.jsx';
 import PBAspace from '../comp/wbi/mbixxd/PBAspace.jsx';
@@ -68,6 +68,9 @@ import Profits from '../comp/wbi/mbixxd/earnings/Profits.jsx';
 import Profitss from '../comp/wbi/mbixxd/tba/Profitss.jsx';
 import Profitsss from '../comp/wbi/mbixxd/tbatime/Profitsss.jsx';
 import PEQII from '../comp/wbi/mbixxd/PEQII.jsx';
+import Profitime from '../comp/wbi/mbixxd/Profitime.jsx';
+import WFSprofit from '../comp/wbi/mbixxd/WFSprofit.jsx';
+
 
 
 import Baotou from '../comp/wbi/ludi/branch/Baotou.jsx';//路迪
@@ -171,6 +174,11 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
+
+                {showPage === 'profitime' && <Profitime></Profitime>}
+                {showPage === 'wfsprofit' && <WFSprofit></WFSprofit>}
+
+
 
 
                 {showPage === 'reliability' && <Reliability></Reliability>}

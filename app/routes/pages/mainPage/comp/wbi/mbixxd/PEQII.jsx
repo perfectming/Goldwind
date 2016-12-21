@@ -10,13 +10,13 @@ import _ from 'lodash';
 import mod from '../../../../../../../config/Model';
 var $ = require("jquery");
 var actions = require('redux/actions');
+var {getState} = require('redux/store');
 let comps = require('./data');
 let ssg2=mod.Model.ens;
 let arr3=[];
 let years=[];
 let thDate=new Date();
 let thYear=thDate.getFullYear();
- 
 for(let i=0;i<=30;i++){
     years.push(thYear-15+i)
 }

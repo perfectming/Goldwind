@@ -7,7 +7,7 @@ import Healtytimecharttt from './Healtytimecharttt.jsx';
 import icono from './img/健康度1.png';
 var actions = require('redux/actions');
 let data=require('./Profit-data');
-let input_url="10.9.96.196";
+let input_url="10.68.100.32";
 let month=data.month;
 let button=data.button;
 let areaRecordProfitT=data.areaRecordProfitT;
@@ -29,7 +29,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {xxdwfNa,WTN,WTHealName,w0='1月',wins,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
+        let {areaName,areaRecordCost,xxdwfNa,WTN,WTHealName,w0='1月',wins,befor_pagee='windpage',backtop,befor_pagee2,areaPlan,areaPlanDay}=this.props;
         return (
 
             <div className={styles.box}>
@@ -55,8 +55,8 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                              <p className={styles.titleee}>{w0+'月每日健康度'}</p>
-                                <Healtytimecharttt areaName={areaName} areaRecordCost={areaRecordCost} areaPlan={areaPlan} areaPlanDay={wins==null?areaPlanDay:wins}></Healtytimecharttt>
+                              <p className={styles.titleee}>{w0+'每日健康度'}</p>
+                                <Healtytimecharttt   areaPlan={areaPlan} areaPlanDay={areaPlanDay}></Healtytimecharttt>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ const mapDispatchToProps = (dispatch) => {
               dataType:'json',
               timeout:'3000',
               success:function(data){
-             
+             console.log(data)
                           let WTHeal=data.data.monthHealth;
                WTHeal.map(function(value,key){
                     for(let n in value){
@@ -120,7 +120,8 @@ const mapDispatchToProps = (dispatch) => {
                     }
 
                })
-               let WHDayH=data.data.
+            
+               let WHDayH=data.data
    
               dispatch(actions.setVars('WTHealName1',WTHealName));
               dispatch(actions.setVars('WTN1',WTN ));

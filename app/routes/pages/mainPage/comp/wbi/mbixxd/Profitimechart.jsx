@@ -4,23 +4,15 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Profit-data');
-
+let input_url="10.9.100.38";
 let Component = React.createClass({
     componentWillMount() {
     },
-    render() {
-        let areaName=data.areaName;
-        let areaRecordCost=data.areaRecordCost;
-        let areaPlan=data.areaPlan;
-        let areaPlanDay=data.areaPlanDay;
-        let areaPlanDayT=data.areaPlanDayT;
-        let fanCost=data.fanCost;
-        let machine=data.machine;
-        let fanProfitQ=data.fanProfitQ;
-
+    render() { 
+      let{changedata3,height,GeR,GeM,GeE,GeC,text}=this.props;
         let configPie = {
             chart: {
-                height:500,
+                height:height,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -29,7 +21,7 @@ let Component = React.createClass({
                 
             },
             title: {
-                text: '11月份每天收益率',
+                text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
@@ -61,7 +53,6 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-
                valueSuffix:'元'
             },
             credits: {
@@ -82,7 +73,52 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                           
+                            let month=e.point.index+1;
+                            let date =new Date();
+            let year =date.getFullYear();
+           
+            let day = new Date(year,month,0); 
+            let  daycount = day.getDate();
+                           let GEIn=[];
+        let GEAm=[];
+        let GERa=[];
+    let    GENa=[];
+         for (let i=1;i<daycount+1;i++)
+          {
+           $.ajax({
+             type:'post',
+             url:'http://'+input_url+':8080/wbi/yield/getMaxYieByDate',  
+             async:false,
+             data:{
+              'startdate':year+'-'+month+'-'+i,
+              'enddate':year+'-'+month+'-'+i,
+             },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+            let GE=data.data;
+         let incomes=GE.incomes
+         GEIn.push(incomes);
+
+         let amounts=GE.amounts
+         GEAm.push(amounts);
+
+         let rate=GE.rate
+         GERa.push(rate);
+
+
+         GENa.push(i+"日");
+            
+             
+             },
+             error:function(){
+                
+             }
+           });
+       }
+ changedata3(month,GENa,GEIn,GEAm,GERa);
+      
+
                         }
                     }
                 }
@@ -99,7 +135,7 @@ let Component = React.createClass({
                         fontSize:'14px'
                     }
                 },
-                categories:machine,
+                categories:GeM,
             },
            yAxis: [{
             labels: {
@@ -112,7 +148,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'元',
+                text:'(元)',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -152,7 +188,7 @@ let Component = React.createClass({
             series: [{
                 name: '收入',
                 type: 'column',
-                data: fanProfitQ,
+                data: GeE,
                 color:'#64DC83',
                 shadow:true,
                 pointWidth: 30,
@@ -162,7 +198,7 @@ let Component = React.createClass({
                     name: '成本',
                     type: 'column',
                     color:'#FC794E',
-                    data: fanCost,
+                    data: GeC,
                     stack:'waste',
                     pointWidth: 30,
                 },
@@ -170,11 +206,11 @@ let Component = React.createClass({
                 {
                     name: '收益率',
                     type: 'line',
-                    data: fanCost,
+                    data: GeR,
                     color:'blue',
                     yAxis:1,
                      tooltip: {
-               valueSuffix:''
+               valueSuffix:'%'
             },
                 },
             ]
@@ -194,6 +230,13 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
+         changedata3:(month,GENa,GEIn,GEAm,GERa)=>{
+             dispatch(actions.setVars('GENa1',GENa));
+       dispatch(actions.setVars('GEIn1',GEIn));
+       dispatch(actions.setVars('GEAm1',GEAm));
+       dispatch(actions.setVars('GERa1',GERa));
+       dispatch(actions.setVars('w0GE',month+'月' ))
+         }
     };
 };
 

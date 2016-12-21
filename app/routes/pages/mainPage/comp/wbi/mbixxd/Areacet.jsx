@@ -8,7 +8,7 @@ var $=require('jquery');
 let data=require('./Profit-data');
 let month=data.month;
 let button=data.button;
-let input_url="10.68.100.32";
+let input_url="10.9.100.38";
 let x0=[];
 let x1=[];
 let x2=[];
@@ -16,18 +16,19 @@ let x3=[];
 let windPT=data.windFJJ;
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+         let{xxdwfId,xxdwfNa}=this.props;
+        this.props.ajax(xxdwfId,xxdwfNa);
     },
     componentDidMount() {
         this.props.init();
     },
     render() {
-        let areaPlan=data.areaPlan;
+       
         let areaPlanDay=data.areaPlanDay;
         let areaPlanDayT=data.areaPlanDayT;
         let text=data.textT;
 
-        let{actbt=0,changpage,wind,windP,gogogo,back,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+        let{xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaPlan}=this.props;
           return (
            <div className={styles.box}>
              <div className={styles.boxcover} id='boxcover'></div>
@@ -38,7 +39,7 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x
                 </div>
                 </div>
-                <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP} width={1750} height={500}></Windcet>
+                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} width={1750} height={500}></Windcet>
 
                 </div>
                  <ul className={styles.monthbox}>
@@ -48,6 +49,7 @@ let Component = React.createClass({
                         })
                     }
               <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
+              <li className={styles.back1} onClick={()=>backtop(befor_pagee,befor_page2)}>{xxdwfNa}</li>
 
                 </ul>
             <div className={styles.paddingtop}>
@@ -55,7 +57,7 @@ let Component = React.createClass({
                     
                        
                            
-                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind==undefined? areaPlanDay:wind} areaPlanDayT={windP==undefined? areaPlanDayT:windP} height={800} text={text[actbt]}></Windcet>
+                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} height={800} text={text[actbt]}></Windcet>
                           
                        
                            
@@ -79,16 +81,21 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         actbt:state.vars.actbtt,
-         wind:state.vars.wind,
-         windP:state.vars.windP,
+         wind:state.vars.areaRecordCostNP,
+         windP:state.vars.areaRecordProfitNP,
            befor_pagee : state.vars.befor_pagee,
         befor_page2 : state.vars.befor_page2,
+         xxdwfId:state.vars.xxdwfId1,
+        xxdwfNa:state.vars.xxdwfNa1,
+         btn:state.vars.btnn,
+         areaPlan:state.vars.areaNameNP,
+
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: () => {
+        ajax: (xxdwfId,xxdwfNa) => {
             let arr1=[];
             let arr2=[];
             let arr3=[];
@@ -107,18 +114,18 @@ const mapDispatchToProps = (dispatch) => {
              // 获取x轴的值内蒙达茂天润风电场
              let dataa=data.data;
              for(let i=0;i<dataa.length;i++){
-                 let xDay=data.data[i].day;
+                 let xDay=data.data[i].day+'日';
                  arr1.push(xDay);
                  let yPowerPlan=data.data[i].powerplan;
                  arr2.push(yPowerPlan);
                  let yPowerAct=data.data[i].poweract;
                  arr3.push(yPowerAct);
              }
-
+   
             
-             dispatch(actions.setVars('areaNameN',arr1));
-             dispatch(actions.setVars('areaRecordCostN',arr3));
-             dispatch(actions.setVars('areaRecordProfitN',arr2));
+             dispatch(actions.setVars('areaNameNP',arr1));
+             dispatch(actions.setVars('areaRecordCostNP',arr2));
+             dispatch(actions.setVars('areaRecordProfitNP',arr3));
             dispatch(actions.setVars('actbtt',10));
              },
              error:function(){
@@ -153,26 +160,26 @@ const mapDispatchToProps = (dispatch) => {
              dataType:'json',
              timeout:'3000',
              success:function(data){
-              
+              console.log(data)
              // 获取x轴的值内蒙达茂天润风电场
-             var dataa=data.data;
+            
              for(var i=0;i<data.data.length;i++){
-                 var xDay=data.data[i].day;
+                 var xDay=data.data[i].day+'日';
                  arr1w.push(xDay);
                  var yPowerPlan=data.data[i].powerplan;
                  arr2w.push(yPowerPlan);
                  var yPowerAct=data.data[i].poweract;
                  arr3w.push(yPowerAct);
              }
-             
+           
              },
              error:function(){
               
              },
            });
-          dispatch(actions.setVars('areaNameN',arr1w));
-             dispatch(actions.setVars('windP',arr2w));
-             dispatch(actions.setVars('wind',arr3w));
+          dispatch(actions.setVars('areaNameNP',arr1w));
+             dispatch(actions.setVars('areaRecordCostNP',arr2w));
+             dispatch(actions.setVars('areaRecordProfitNP',arr3w));
 
         },
          gogogo:(wind)=>{

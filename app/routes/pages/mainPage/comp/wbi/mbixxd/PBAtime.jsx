@@ -8,7 +8,7 @@ var actions = require('redux/actions');
 let data=require('./Profit-data');
 let monthT=data.monthT;
 let datee=new Date;
-let input_url="10.9.99.103";
+let input_url="10.68.100.32";
 let month=datee.getMonth();
 let profit=data.windProfit;
 let cost=data.windCost;
@@ -19,24 +19,26 @@ let areaPlanDay=data.areaPlanDay;
 let areaPlanDayT=data.areaPlanDayT;
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+        let{xxdwfId,xxdwfNa}=this.props;
+        this.props.ajax(xxdwfId,xxdwfNa);
     },
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-        let{PBATimeSecondPba,PBATimeSecondNodevreasonloss,PBATimeSecondLimitloss,PBATimeSecondMaintainloss,PBATimeSecondFaultloss,PBATimeSecondPoweract,PBATimeSecondDay,PBATimeFirstPba,PBATimeFirstNodevreasonloss,PBATimeFirstLimitloss,PBATimeFirstMaintainloss,PBATimeFirstFaultloss,PBATimeFirstPoweract,PBATimeFirstMonth,w0,winsss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
+        let{xxdwfId,xxdwfNa,PBATimeSecondPba,PBATimeSecondNodevreasonloss,PBATimeSecondLimitloss,PBATimeSecondMaintainloss,PBATimeSecondFaultloss,PBATimeSecondPoweract,PBATimeSecondDay,PBATimeFirstPba,PBATimeFirstNodevreasonloss,PBATimeFirstLimitloss,PBATimeFirstMaintainloss,PBATimeFirstFaultloss,PBATimeFirstPoweract,PBATimeFirstMonth,w0,winsss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
         return (
             <div className={styles.box}>
              <div className={styles.padding}>
+             <div className={styles.back1} onClick={()=>backtop(befor_pagee,befor_pagee2)}>{xxdwfNa}</div>
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
                             <p className={styles.titleee}>每月PBA</p>
-                                <PBAtimechart monthT={PBATimeFirstMonth} profit={PBATimeFirstPoweract} cost={PBATimeFirstPba} fanCost={PBATimeFirstFaultloss} fanCostA={PBATimeFirstMaintainloss} fanCostB={PBATimeFirstLimitloss} fanCostC={PBATimeFirstNodevreasonloss} ></PBAtimechart>
+                                <PBAtimechart monthT={PBATimeFirstMonth} profit={PBATimeFirstPoweract} cost={PBATimeFirstPba} fanCost={PBATimeFirstFaultloss} fanCostA={PBATimeFirstMaintainloss} fanCostB={PBATimeFirstLimitloss} fanCostC={PBATimeFirstNodevreasonloss} xxdwfId={xxdwfId} ></PBAtimechart>
                             </div>
                            
                         </div>
@@ -51,8 +53,8 @@ let Component = React.createClass({
                         <div className={styles.windcebox}>
                            
                             <div>
-                             <p className={styles.titleee}>{w0+'月每日PBA'}</p>
-                                <PBAtimechartt areaPlan={PBATimeSecondDay} areaPlanDay={PBATimeSecondPoweract} areaPlanDayT={PBATimeSecondPba} fanCost={PBATimeSecondFaultloss} fanCostB={PBATimeSecondLimitloss} fanCostC={PBATimeSecondNodevreasonloss} fanCostA={PBATimeSecondMaintainloss}></PBAtimechartt>
+                             <p className={styles.titleee}>{w0+'每日PBA'}</p>
+                                <PBAtimechartt areaPlan={PBATimeSecondDay} areaPlanDay={PBATimeSecondPoweract} areaPlanDayT={PBATimeSecondPba} fanCost={PBATimeSecondFaultloss} fanCostB={PBATimeSecondLimitloss} fanCostC={PBATimeSecondNodevreasonloss} fanCostA={PBATimeSecondMaintainloss} xxdwfId={xxdwfId} ></PBAtimechartt>
                             </div>
                         </div>
                     </div>
@@ -90,6 +92,8 @@ const mapStateToProps = (state) => {
         PBATimeSecondLimitloss: state.vars.PBATimeSecondLimitloss1,
         PBATimeSecondNodevreasonloss: state.vars.PBATimeSecondNodevreasonloss1,
         PBATimeSecondPba: state.vars.PBATimeSecondPba12,
+        xxdwfId:state.vars.xxdwfId1,
+        xxdwfNa:state.vars.xxdwfNa1,
 
 
     }
@@ -97,8 +101,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: () => {
-       
+        ajax: (xxdwfId,xxdwfNa) => {
+
+           let date=new Date();
+           let month=date.getMonth();
           // 第一个图的数据
             let PBATimeFirstMonth=[];
             let PBATimeFirstPoweract=[];
@@ -117,19 +123,19 @@ const mapDispatchToProps = (dispatch) => {
             let PBATimeSecondPbaP=[];
             $.ajax({
                 type:'post',
-                url:'http://'+input_url+':9080/wbi/PBA/getWfieldMonthPBA',
+                url:'http://'+input_url+':8080/wbi/PBA/getWfieldMonthPBA',
                 async:false,
                 data:{
-                    'wfid':150801,
+                    'wfid':xxdwfId,
                    
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                console.log(9080)
+               
                      let PBATimeFirstPba=data.data;
                      for ( let i in PBATimeFirstPba){
-                         let month=PBATimeFirstPba[i].month;
+                         let month=PBATimeFirstPba[i].month+'月';
                          PBATimeFirstMonth.push(month);
                          let poweract=PBATimeFirstPba[i].poweract;
                          PBATimeFirstPoweract.push(poweract);
@@ -141,8 +147,8 @@ const mapDispatchToProps = (dispatch) => {
                          PBATimeFirstLimitloss.push(limitloss);
                          let nodevreasonloss=PBATimeFirstPba[i].nodevreasonloss;
                          PBATimeFirstNodevreasonloss.push(nodevreasonloss);
-                         let pba=Number(PBATimeFirstPba[i].pba.toFixed(2));
-                         PBATimeFirstPbaP.push(pba);
+                         let pba=PBATimeFirstPba[i].pba*100;
+                         PBATimeFirstPbaP.push(Number(pba.toFixed(1)));
                      }
                   
 
@@ -163,10 +169,10 @@ const mapDispatchToProps = (dispatch) => {
            // 给第二个图赋初值
              $.ajax({
                 type:'post',
-                url:'http://'+input_url+':9080/wbi/PBA/getWfieldDayPBA',
+                url:'http://'+input_url+':8080/wbi/PBA/getWfieldDayPBA',
                 async:false,
                 data:{
-                    'wfid':150801,
+                    'wfid':xxdwfId,
                     'month':month,
                 },
                 dataType:'json',
@@ -175,7 +181,7 @@ const mapDispatchToProps = (dispatch) => {
               
                      let PBATimeSecondPba=data.data;
                      for ( let i in PBATimeSecondPba){
-                         let day=PBATimeSecondPba[i].day;
+                         let day=PBATimeSecondPba[i].day+'日';
                          PBATimeSecondDay.push(day);
                          let poweract=PBATimeSecondPba[i].poweract;
                          PBATimeSecondPoweract.push(poweract);
@@ -187,8 +193,8 @@ const mapDispatchToProps = (dispatch) => {
                          PBATimeSecondLimitloss.push(limitloss);
                          let nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
                          PBATimeSecondNodevreasonloss.push(nodevreasonloss);
-                         let pba=Number(PBATimeSecondPba[i].pba.toFixed(2));
-                         PBATimeSecondPbaP.push(pba);
+                         let pba=PBATimeSecondPba[i].pba*100;
+                         PBATimeSecondPbaP.push(Number(pba.toFixed(1)));
                      }
                 },
                 error:function(){
@@ -203,7 +209,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBATimeSecondFaultloss1',PBATimeSecondFaultloss ));
             dispatch(actions.setVars('PBATimeSecondNodevreasonloss1',PBATimeSecondNodevreasonloss ));
             dispatch(actions.setVars('PBATimeSecondPba12',PBATimeSecondPbaP ));
-             dispatch(actions.setVars('windpbaspace',11));
+             dispatch(actions.setVars('windpbaspace',month+'月'));
 
         }
         ,

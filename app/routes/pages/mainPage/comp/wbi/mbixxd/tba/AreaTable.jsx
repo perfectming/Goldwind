@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let data = require('./Profit-data');
-let input_url="10.68.100.32";
+let input_url="10.9.100.38";
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -113,8 +113,8 @@ let Component = React.createClass({
                           let nodevreasonloss=PBAGroupFirstMonth[i].nodevreasonloss;
                           PBAGroupFirstNodevreasonloss.push(nodevreasonloss);
 
-                          let pba=Number(PBAGroupFirstMonth[i].pba.toFixed(2));
-                          PBAGroupFirstPba.push(pba);
+                          let pba=PBAGroupFirstMonth[i].pba*100;
+                          PBAGroupFirstPba.push(Number(pba.toFixed(1)));
                         }
                      
                        
@@ -172,6 +172,8 @@ let Component = React.createClass({
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+                 minRange: 100,
+                   tickInterval: 30,
 
             title: {
                 text: '100%',

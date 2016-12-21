@@ -6,6 +6,7 @@ import icon1 from '../../../img/comp/icon1.png';
 import icon2 from '../../../img/comp/icon2.png';
 import icon3 from '../../../img/comp/icon3.png';
 import icon4 from '../../../img/comp/icon4.png';
+import icon5 from '../../../img/comp/icon5.png';
 let arr=['Wtid','wtne','dayElec','ActPwr','WindSpeed','WTStateCode'];
 var actions = require('redux/actions');
 let database = require('./data');
@@ -24,9 +25,10 @@ let Component = React.createClass({
         var offL=0;
         var stand=0;
         var haul=0;
+        var elec=0;
         for (let i=0;i<obj_wfd[valuepage].length;i++){
             switch (obj_wfd[valuepage][i].WTStateCode){
-                case "Online":case "LimitPow":case "Alarm":
+                case "Online":case "Alarm":
                     run++;
                 break;
                 case "Fault":
@@ -36,7 +38,10 @@ let Component = React.createClass({
                     offL++;
                 break;
                 case "Offline":case "ProtoectStop":case "LimitPowStop":
-                stand++;
+                    stand++;
+                break;
+                case "LimitPow":
+                    elec++;
                 break;
                 default:
                     haul++;
@@ -67,7 +72,7 @@ let Component = React.createClass({
                                                     arr.map((valueC, keyC)=> {
                                                         if(keyC==5){
                                                             switch (value[valueC]){
-                                                                case "Online":case "LimitPow":case "Alarm":
+                                                                case "Online":case "Alarm":
                                                                     return (
                                                                         <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
                                                                              key={keyC}><div className={css.icon0}></div></div>
@@ -89,6 +94,12 @@ let Component = React.createClass({
                                                                     return (
                                                                         <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
                                                                              key={keyC}><div className={css.icon3}></div></div>
+                                                                    );
+                                                                    break;
+                                                                case "LimitPow":
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon5}></div></div>
                                                                     );
                                                                     break;
                                                                 default:
@@ -135,7 +146,7 @@ let Component = React.createClass({
                                                     arr.map((valueC, keyC)=> {
                                                         if(keyC==5){
                                                             switch (value[valueC]){
-                                                                case "Online":case "LimitPow":case "Alarm":
+                                                                case "Online":case "Alarm":
                                                                 return (
                                                                     <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
                                                                          key={keyC}><div className={css.icon0}></div></div>
@@ -159,6 +170,12 @@ let Component = React.createClass({
                                                                          key={keyC}><div className={css.icon3}></div></div>
                                                                 );
                                                                 break;
+                                                                case "LimitPow":
+                                                                    return (
+                                                                        <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
+                                                                             key={keyC}><div className={css.icon5}></div></div>
+                                                                    );
+                                                                    break;
                                                                 default:
                                                                     return (
                                                                         <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
@@ -187,6 +204,7 @@ let Component = React.createClass({
                     <span className={css.offL}><img src={icon3}/>离线 &nbsp; {offL}</span>
                     <span className={css.stand}><img src={icon4}/>待机 &nbsp; {stand}</span>
                     <span className={css.haul}><img src={icon2}/>检修 &nbsp; {haul}</span>
+                    <span className={css.elec}><img src={icon5}/>限电 &nbsp; {elec}</span>
                     <a className={css.btnP} onClick={()=>next(page,obj_wfd[valuepage].length)}>下一页</a>
                     <span className={css.txt}>{page}/{Math.ceil(obj_wfd[valuepage].length/38)}</span>
                     <a className={css.btnP} onClick={()=>previous(page)}>上一页</a>

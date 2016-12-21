@@ -121,7 +121,7 @@ const mapDispatchToprops = (dispatch) => {
                         dispatch(actions.setVars('jydata', rdata));
                         setTimeout(function () {
                             dispatch(actions.setVars('boolebooster', true));
-                        },100)
+                        },1000)
                     }
                 }
             }
@@ -129,7 +129,6 @@ const mapDispatchToprops = (dispatch) => {
                 TY.getRtData("RegulationOverview", 8888800, ppo);
                 function ppo(rdata){
                     dispatch(actions.setVars('jydata', rdata));
-                    dispatch(actions.setVars('boolebooster', true));
                 }
             },2000)
         },

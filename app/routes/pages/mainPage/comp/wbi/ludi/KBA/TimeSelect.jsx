@@ -15,7 +15,7 @@ let Component = React.createClass({
     
 
     render() {
-        let {buttonAction, onFocus,changeValueS,changeValueE,startTime,endTime}= this.props;
+        let {buttonAction, onFocus,changeValueS,changeValueE}= this.props;
         let {areaId,ipUrl,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,wtName,wtElec,wtPBA,wtLose}=this.props;
         let comp = data.list;
         return (	
@@ -82,9 +82,8 @@ const mapDispatchToProps = (dispatch) => {
         	var endString=yearString+'-'+monthString+'-'+dayString;
         	$('#startTime').val(startString);
             $('#endTime').val(endString);
-            dispatch(actions.setVars('startTime', $('#startTime').val()));
-            dispatch(actions.setVars('endTime', $('#endTime').val()));
-            
+            dispatch(actions.setVars('startTime', startString));
+            dispatch(actions.setVars('endTime', endString));
         },
         changeValueS : (e) => {
         	
@@ -101,9 +100,9 @@ const mapDispatchToProps = (dispatch) => {
 		if(sTime == '' || eTime == ''){
             alert('请选择开始或者结束时间');
             return false;
-        }
-        dispatch(actions.setVars('startTime', $('#startTime').val()));
-        dispatch(actions.setVars('endTime', $('#endTime').val()));
+        };
+        dispatch(actions.setVars('startTime', sTime));
+        dispatch(actions.setVars('endTime', eTime));
         $.ajax({
         		url: 'http://'+ipUrl+'/wbi/KPI/getCompanyKPI',//查询ID电量--YES
 		        type: 'post',

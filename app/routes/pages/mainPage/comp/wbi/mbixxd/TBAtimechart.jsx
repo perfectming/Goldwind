@@ -2,13 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let input_url="10.9.101.15";
+let input_url="10.9.100.38";
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
        
-        let{w0,areaName,montht,profit,cost,height,TBA,changedata2qw}=this.props;
+        let{xxdwfId,w0,areaName,montht,profit,cost,height,TBA,changedata2qw}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -72,8 +72,8 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                        w0=e.point.category;
-                        let  a=w0.toString().split("");
-                        let b=a[0];
+                      
+                        let b= parseInt(w0);
                       
                         let wTBADaD=[];
                         let wTBARunD=[];
@@ -84,8 +84,8 @@ let Component = React.createClass({
              url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByWf',  
              async:false,
             data:{
-             'wfid':150828,
-             'month':w0,
+             'wfid':xxdwfId,
+             'month':b,
             },
              dataType:'json',
              timeout:'3000',
@@ -94,7 +94,7 @@ let Component = React.createClass({
             
              let wTBATime=data.data;
              for (let i in wTBATime){
-                let day=wTBATime[i].day;
+                let day=wTBATime[i].day+'日';
                  wTBADaD.push(day);
 
                  let downtimes=wTBATime[i].downtimes;
@@ -103,8 +103,8 @@ let Component = React.createClass({
                 let runtimes=wTBATime[i].runtimes;
                 wTBARunD.push(runtimes);
 
-                let tba=wTBATime[i].tba;
-                wTBATD.push(tba);
+                let tba=wTBATime[i].tba*100;
+                wTBATD.push(Number(tba.toFixed(1)));
              }
            
              },
@@ -145,7 +145,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'h',
+                text:'(h)',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -207,7 +207,7 @@ let Component = React.createClass({
                     shadow:'true',
                     yAxis:1,
                      tooltip: {
-               valueSuffix:''
+               valueSuffix:'%'
             },
                    
                 },

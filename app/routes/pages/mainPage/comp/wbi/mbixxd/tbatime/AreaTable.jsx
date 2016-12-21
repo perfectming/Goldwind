@@ -94,8 +94,8 @@ let Component = React.createClass({
                             tbaDayRunTimes.push(tbaDayruntimes);
                             let daydowntimes=TBAdaydata[i].downtimes;
                             tbaDayDownTimes.push(daydowntimes);
-                            let tba=TBAdaydata[i].tba;
-                            tbaDayTba.push(tba);
+                            let tba=TBAdaydata[i].tba*100;
+                            tbaDayTba.push(Number(tba.toFixed(1)));
 
 
                            } 
@@ -154,6 +154,7 @@ let Component = React.createClass({
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+                
 
             title: {
                 text: '100%',
@@ -192,7 +193,7 @@ let Component = React.createClass({
                     color:'blue',
                     yAxis:1,
                      tooltip: {
-               valueSuffix:''
+               valueSuffix:'%'
             },
                 },
 
