@@ -195,8 +195,6 @@ let Component = React.createClass({
                     <span className={css.run}><img src={icon0}/>运行 &nbsp; {run}</span>
                     <span className={css.fau}><img src={icon1}/>故障 &nbsp; {fau}</span>
                     <span className={css.offL}><img src={icon3}/>离线 &nbsp; {offL}</span>
-                    <span className={css.stand}><img src={icon4}/>待机 &nbsp; {stand}</span>
-                    <span className={css.haul}><img src={icon2}/>检修 &nbsp; {haul}</span>
                     <a className={css.btnP} onClick={()=>next(page,obj_pvd[valuepage1].length)}>下一页</a>
                     <span className={css.txt}>{page}/{Math.ceil(obj_pvd[valuepage1].length/38)}</span>
                     <a className={css.btnP} onClick={()=>previous(page)}>上一页</a>
