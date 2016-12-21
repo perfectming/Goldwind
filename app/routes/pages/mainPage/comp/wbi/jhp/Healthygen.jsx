@@ -47,7 +47,7 @@ let Component = React.createClass({
                         <span onClick={() => hideit(hhdata,bt0)}>×</span>
                     </div>
                     <div className={styles.hidden_bottom}>
-                    <Hly_genp height={450}  widths={4500}
+                    <Hly_genp height={450}  widths={6500}
                               name0={barlotimes3}
                               power1={barlopowers3}
                               power2={barlopowerp3}
@@ -107,7 +107,7 @@ let Component = React.createClass({
                         <div className={styles.rbox3}>
                             <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>前10</button>
                             <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(hhdata,wfid)}>更多</button>
+                            <button className={styles.button22} onClick={() => more(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>更多</button>
                         </div>
 
 
@@ -164,10 +164,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: (ipUrl) => {
+            dispatch(actions.setVars('bt0', 0));
             let date=new Date();
             let year=date.getFullYear()
             let month2=date.getMonth();
-            console.log(month2)
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/ELEC/getSpaceElec',
@@ -202,7 +203,7 @@ const mapDispatchToProps = (dispatch) => {
                     let barlotimes3 = [];
                     let barlopowers3 = [];
                     let barlopowerp3 = [];
-                    for (var i=0;i<=10;i++) {
+                    for (var i=0;i<10;i++) {
                         barlotimes3.push(data.data[0][i].wtname);    //区域的横坐标
                         barlopowers3.push(data.data[0][i].powerplan);   //计划发电量
                         barlopowerp3.push(data.data[0][i].poweract);   //实际发电量
@@ -283,7 +284,7 @@ const mapDispatchToProps = (dispatch) => {
                     let barlotimes3 = [];
                     let barlopowers3 = [];
                     let barlopowerp3 = [];
-                    for (var i=0;i<=10;i++) {
+                    for (var i=0;i<10;i++) {
                         barlotimes3.push(data.data[0][i].wtname);    //区域的横坐标
                         barlopowers3.push(data.data[0][i].powerplan);   //计划发电量
                         barlopowerp3.push(data.data[0][i].poweract);   //实际发电量
@@ -396,23 +397,62 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (hhdata) => {
-            let barLotime3c = [];    //各区域   一区域二区域
-            let power3c=[];       //计划发电量
-            let wrong30c=[];       //实际发电量
+        more: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
+            dispatch(actions.setVars('bt0', 2));
+            // let barLotime3c = [];    //各区域   一区域二区域
+            // let power3c=[];       //计划发电量
+            // let wrong30c=[];       //实际发电量
+            //
+            //
+            // for (var i in hhdata.data[0]) {
+            //
+            //     barLotime3c.push(hhdata.data[0][i].wtname)   //区域的横坐标
+            //     power3c.push(hhdata.data[0][i].powerplan) //实际发电量
+            //     wrong30c.push(hhdata.data[0][i].poweract);   //故障损失
+            //
+            // }
+            //
+            // dispatch(actions.setVars('barlotimes3', barLotime3c))
+            // dispatch(actions.setVars('barlopowers3', power3c))
+            // dispatch(actions.setVars('barlopowerp3', wrong30c))
+
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
+                async: false,
+                data: {
+                    "month": actbt + 1,
+                    "groupid":  '201612121721151',
+                    "wfid": wfid==undefined? '150828':wfid,
+                    "type":"2",
+                    "year":"2016"
+                },
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    let barLotime3c = [];    //各区域   一区域二区域
+                    let power3c = [];       //实际发电量
+                    let wrong30c = [];       //故障损失
 
 
-            for (var i in hhdata.data[0]) {
+                    for (var i in data.data) {
+                        barLotime3c.push(data.data[i].wtname);    //区域的横坐标
+                        power3c.push(data.data[i].powerplan);   //实际发电量
+                        wrong30c.push(data.data[i].poweract);   //故障损失
 
-                barLotime3c.push(hhdata.data[0][i].wtname)   //区域的横坐标
-                power3c.push(hhdata.data[0][i].powerplan) //实际发电量
-                wrong30c.push(hhdata.data[0][i].poweract);   //故障损失
+                    }
 
-            }
+                    dispatch(actions.setVars('barlotimes3', barLotime3c))
+                    dispatch(actions.setVars('barlopowers3', power3c))
+                    dispatch(actions.setVars('barlopowerp3', wrong30c))
 
-            dispatch(actions.setVars('barlotimes3', barLotime3c))
-            dispatch(actions.setVars('barlopowers3', power3c))
-            dispatch(actions.setVars('barlopowerp3', wrong30c))
+
+                },
+                error: function () {
+
+                },
+            });
 
 
 
@@ -426,7 +466,7 @@ const mapDispatchToProps = (dispatch) => {
             let wrong30c=[];       //实际发电量
 
 
-            for (var i=0;i<=10;i++) {
+            for (var i=0;i<10;i++) {
 
                 barLotime3c[i]=hhdata.data[0][i].wtname;    //区域的横坐标
                 power3c[i]=hhdata.data[0][i].powerplan;  //实际发电量

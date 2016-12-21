@@ -77,11 +77,16 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth:20,
+                    maxPointWidth:20,
                     tooltip: {
                         valueSuffix:'kWh'
                     },
-                }
+                },
+                line:{
+                    tooltip: {
+                        valueSuffix:'%'
+                    },
+                },
             },
 
             xAxis: {
@@ -127,7 +132,7 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-
+                min:0,
                 title: {
                     text: '100%',
                     align: 'high',
@@ -160,6 +165,7 @@ let Component = React.createClass({
                     type: 'line',
                     color:'#0000ff',
                     data: tba2,
+                    yAxis:1,
                 }
 
             ]

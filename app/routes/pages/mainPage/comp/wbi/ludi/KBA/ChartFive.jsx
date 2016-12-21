@@ -44,9 +44,6 @@ let Component = React.createClass({
                 color: '#31f3fb'
             	}
             },
-            tooltip: {
-                
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -75,12 +72,12 @@ let Component = React.createClass({
             },
             yAxis: {
                 title:{
-                	text:'kW',
+                	text:'kWh',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-15,
+	                x:-10,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',

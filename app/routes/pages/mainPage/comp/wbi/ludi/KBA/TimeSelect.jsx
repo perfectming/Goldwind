@@ -65,6 +65,9 @@ const mapDispatchToProps = (dispatch) => {
         		monthString=12;
         		yearString=yearString-1;
         	}else{
+        		if(monthString<11){
+        			monthString="0"+(monthString-1);
+        		}
         		monthString=monthString-1;
         	};
         	//判断获取上月最后一天日期
@@ -92,15 +95,23 @@ const mapDispatchToProps = (dispatch) => {
         	
         },
         buttonAction : (areaId,ipUrl,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,wtName,wtElec,wtPBA,wtLose) => {
-        // 获取select 选择的内容
+        // 获取select 选择的时间内容
         //开始时间
         var sTime = $('#startTime').val();
         //结束时间时间
         var eTime = $('#endTime').val();
+        var oDate1 = new Date(sTime);
+        var oDate2 = new Date(eTime);
+        var date = new Date();
+        
 		if(sTime == '' || eTime == ''){
             alert('请选择开始或者结束时间');
             return false;
+        }else if(oDate1.getTime()>oDate2.getTime()){
+        	alert('请选择正确的开始和者结束时间');
+            return false;
         };
+        dispatch(actions.setVars('choice', 1));
         dispatch(actions.setVars('startTime', sTime));
         dispatch(actions.setVars('endTime', eTime));
         $.ajax({
@@ -164,6 +175,8 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(actions.setVars('wtLose', wtLose));
 			dispatch(actions.setVars('wtPBA', wtPBA));
 			dispatch(actions.setVars('wtData',wtData ));
+			dispatch(actions.setVars('x1', areaName[0]));
+			dispatch(actions.setVars('x2',wfName[0]));
     	},
     };
 };

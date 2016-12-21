@@ -4,7 +4,7 @@ module.exports={
 			type: 'date',
             content: '这是一个时间选择框',
             id: 'date',
-            width: 120,
+            width: 140,
             height:30,
 		},{
 			type: 'button',
@@ -21,8 +21,9 @@ module.exports={
                 id: 'input',
                 valueName:'选择KPI',
                 select: [
+                	'集团',
                     '区域1',
-                    '-风场1',
+                    '--------风场1',
                     '-风场2',
                     '区域2',
                 ]

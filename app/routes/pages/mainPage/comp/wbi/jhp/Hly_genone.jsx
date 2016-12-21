@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0,wc1,mon="十一月份",w10,name0,powerplan1,poweract2,height,changedata1,windplan=win,hhdata,actbt=10} = this.props;
+        let {w0,wc1,mon="十一月份",w10,name0,powerplan1,text,poweract2,height,changedata1,windplan=win,hhdata,actbt=10} = this.props;
 
 
         let configPie = {
@@ -28,7 +28,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: mon+"各风场发电量",
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
@@ -78,9 +78,9 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            w0=e.point.category;
+                            w10=e.point.category;
                             wc1=e.point.index;
-                            changedata1(w0,win,wc1,hhdata,actbt);
+                            changedata1(w10,win,wc1,hhdata,actbt);
 
                         }
                     }
@@ -88,7 +88,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    maxPointWidth:20,
+                    maxPointWidth:30,
                     borderRadius: 4,
                 }
             },
@@ -170,9 +170,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            dispatch(actions.setVars('w1',w0 ));
+
         },
-        changedata1 :(w0,win,wc1,hhdata,actbt)=>{
+        changedata1 :(w10,win,wc1,hhdata,actbt)=>{
+            dispatch(actions.setVars('bt0',  0));
             let wfid=hhdata.data[1][wc1].wfid;
             console.log(actbt)
             $.ajax({
@@ -210,7 +211,8 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
 
-            dispatch(actions.setVars('w1',w0 ));
+            dispatch(actions.setVars('w11',w10 ));
+
             dispatch(actions.setVars('win1',win ));
 
 

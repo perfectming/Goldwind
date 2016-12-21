@@ -20,7 +20,6 @@ let Component = React.createClass({
                 paddingLeft:100,
                 borderRadius:10
             },
-            
             title: {
                 text: text+'<br>PBA',
                 align:'center',
@@ -30,7 +29,6 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
-            //图例说明
             legend: {
                 align:"center",
                 verticalAlign: "bottom",
@@ -43,9 +41,6 @@ let Component = React.createClass({
                 itemHoverStyle: {
                 color: '#31f3fb'
             	}
-            },
-            tooltip: {
-                
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -63,7 +58,6 @@ let Component = React.createClass({
 	        },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 0, //x轴刻度往下移动20px
@@ -72,12 +66,8 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
                 labels: {
                 	format:'{value}',
                     y: 10, //x轴刻度往下移动20px

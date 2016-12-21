@@ -45,14 +45,10 @@ let Component = React.createClass({
                 color: '#31f3fb'
             	}
             },
-            tooltip: {
-                
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#c5e0b4', '#c9c9c9','#f5b297','#a1c0e5', '#ffd689','#5b9bd5']
-            ,
+            colors: [ '#c5e0b4', '#c9c9c9','#f5b297','#a1c0e5', '#ffd689','#5b9bd5'],
             plotOptions: {
                 pie: {
                     allowPointSelect: false,
@@ -76,7 +72,6 @@ let Component = React.createClass({
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -88,9 +83,6 @@ let Component = React.createClass({
                 categories:Xname,
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
                 labels: {
                 	format:'{value}',
                     y: 10, //x轴刻度往下移动20px

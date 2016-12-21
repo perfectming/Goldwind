@@ -44,8 +44,8 @@ let Component = React.createClass({
 
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
                     <div className={styles.hidden_top}>
-                        <div className={styles.logo2}></div>
-                        <div className={styles.logo3}>{mon+w0+w10+"各风机健康度"}</div>
+                        <div className={styles.logo1}></div>
+                        <div className={styles.logo30}>{mon+w0+w10+"各风机健康度"}</div>
                         <span onClick={()=>hideit()}>×</span>
                     </div>
                     <Hly_rs height={500}

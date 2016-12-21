@@ -109,7 +109,7 @@ const mapDispatchToProps = (dispatch) => {
                     let poweract=[];
                     let powerplan=[];
                     for(var i in data.data){
-                        day0.push(data.data[i].day);
+                        day0.push(data.data[i].day+"日");
                         poweract.push(data.data[i].poweract);
                         powerplan.push(data.data[i].powerplan);
 
@@ -149,7 +149,7 @@ const mapDispatchToProps = (dispatch) => {
                     let poweract=[];
                     let powerplan=[];
                     for(var i in data.data){
-                        day0.push(data.data[i].day);
+                        day0.push(data.data[i].day+"日");
                         poweract.push(data.data[i].poweract);
                         powerplan.push(data.data[i].powerplan);
 

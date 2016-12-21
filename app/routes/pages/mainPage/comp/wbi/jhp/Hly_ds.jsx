@@ -49,12 +49,7 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
-            tooltip: {
 
-                    valueSuffix:'h'
-
-
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -78,7 +73,15 @@ let Component = React.createClass({
                     pointPadding: 0.2,
                     borderWidth: 0,
                     //pointWidth:20
-                }
+                    tooltip: {
+                        valueSuffix:'h'
+                    },
+                },
+                line:{
+                    tooltip: {
+                        valueSuffix:'%'
+                    },
+                },
             },
 
             xAxis: {

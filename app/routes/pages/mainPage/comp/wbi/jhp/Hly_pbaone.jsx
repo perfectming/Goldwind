@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {ip="10.68.100.32",hhdata4,actbt=10,changedata1,w0='一区域',wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
+        let {ip="10.68.100.32",hhdata4,actbt=10,text,changedata1,w0='一区域',wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
 
 
         let configPie = {
@@ -24,12 +24,11 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-
                 borderRadius:10
             },
 
             title: {
-                text: mon+"各风场PBA",
+                text: text,
 
                 align:'left',
                 x : "0",
@@ -95,12 +94,17 @@ let Component = React.createClass({
                 column: {
                     stacking: 'normal',
                     //pointWidth: 30,
-                    maxPointWidth: 40,
+                    maxPointWidth: 30,
                     borderWidth: 0,
                     tooltip: {
                         valueSuffix:'kWh'
                     },
-                }
+                },
+                line:{
+                    tooltip: {
+                        valueSuffix:'%'
+                    },
+                },
             },
 
             xAxis: {
@@ -146,7 +150,7 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-
+                min:0,
                 title: {
                     text: '100%',
                     align: 'high',
@@ -240,6 +244,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('w1',w0 ));
         },
         changedata1 :(w10,e,wc1,actbt,hhdata4)=> {
+            dispatch(actions.setVars('bt0', 0));
             let wfid =hhdata4.data[1][wc1].wfid;
             $.ajax({
                 type:'post',
@@ -267,7 +272,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong211q.push(data.data[i].maintainloss);   //维护损失
                         wrong221q.push(data.data[i].limitloss);   //限功率损失
                         wrong231q.push(data.data[i].nodevreasonloss);   //非设备原因损失
-                        pba21q.push(data.data[i].pba);   //非设备原因损失
+                        pba21q.push(data.data[i].pba.toFixed(3)*100);    //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime1', barLotime21q));
                     dispatch(actions.setVars('power1', power21q));
