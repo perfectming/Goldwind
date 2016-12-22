@@ -1,0 +1,131 @@
+.bodybox{
+  width:100%;
+  height:100%;
+  background-image: url('../../../../img/comp/cgt.png');
+  background-size:100% 100%;
+  padding-top:10px;
+  position: relative;
+  .infotitle{
+    width:250px;
+    height:200px;
+    margin:50px 0 0 8%;
+    background: #24282f;
+    box-shadow:10px 10px 10px #000;
+    position:absolute;
+    .item{
+      width:100%;
+      height:100px;
+      overflow:hidden;
+      .itemimg{
+        width:100px;
+        height:100px;
+        float:left;
+        background-image:url('../../../../img/comp/wd.png');
+      }
+      .itemimg1{
+        width:100px;
+        height:100px;
+        float:left;
+        background:url('../../../../img/comp/fs.png') 36px 29px no-repeat;
+      }
+      .itemimg2{
+        width:100px;
+        height:100px;
+        float:left;
+        background-image:url('../../../../img/comp/sd.png');
+      }
+      .itembox{
+        width:150px;
+        height:100px;
+        float:right;
+        color:#fff;
+        p{
+          margin-bottom:0px;
+          b{
+            font-size:26px;
+            color: #f97332;
+            margin:0 10px 0 15px;
+          }
+          a{
+            color: #fff;
+          }
+        }
+        .itemp{
+
+          line-height:20px;
+          padding-left:15px;
+          margin-top:25px;
+          font-size:16px;
+        }
+
+      }
+    }
+
+  }
+  .infotitle1 {
+    overflow: hidden;
+    margin: 350px 0 0 800px;
+    background: #24282f;
+    box-shadow: 10px 10px 10px #000;
+    position: absolute;
+    .infobox {
+      width: 150px;
+      height: 30px;
+      line-height: 30px;
+      margin: 10px 20px;
+      font-size: 16px;
+      text-align: left;
+      .boxname {
+        color: #fff;
+      }
+      a {
+        color: #fff;
+
+        b {
+          margin: 0 10px 0 20px;
+          color: #2cccd4;
+        }
+        .unit {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .com1{
+    margin: 550px 0 0 800px;
+    position: absolute;
+  }
+  .infotitle2 {
+    overflow: hidden;
+    margin: 350px 0 0 1050px;
+    background: #24282f;
+    box-shadow: 10px 10px 10px #000;
+    position: absolute;
+    .infobox {
+      width: 150px;
+      height: 30px;
+      line-height: 30px;
+      margin: 10px 20px;
+      font-size: 16px;
+      text-align: left;
+      .boxname {
+        color: #fff;
+      }
+      a {
+        color: #fff;
+
+        b {
+          margin: 0 10px 0 20px;
+          color: #2cccd4;
+        }
+        .unit {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .com2{
+    margin: 550px 0 0 1050px;
+    position: absolute;
+  }
+}

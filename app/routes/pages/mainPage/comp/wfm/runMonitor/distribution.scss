@@ -1,0 +1,285 @@
+.bodyBox {
+  overflow: hidden;
+  .changeBox{
+    img{
+      display: inline-block;
+      position: absolute;
+      margin-left:5px;
+      cursor:pointer;
+    }
+  }
+  .leftBox {
+    width: 400px;
+    float: left;
+    padding-bottom: 20px;
+    position: relative;
+  }
+  .rightBox {
+    display: inline-block;
+    margin-left: 30px;
+    width: 1230px;
+    height: 915px;
+    position: relative;
+    .bigimg{
+     width:1100px;
+     margin:auto;
+     position:relative;
+     height:815px;
+     background-image:url('../../../img/comp/big_map.png');
+     background-size:100% 100%;
+     .place1{
+      width:258px;
+      height:265px;
+      position:absolute;
+      right:62px;
+      bottom:277px;
+      cursor:pointer;
+      &:hover{
+        opacity:0.4;
+        background-image:url('../../../img/comp/placetm.png');
+        background-size:100% 100%;
+        }
+     }
+    }
+    .animat4{
+     width:1100px;
+     height:815px;
+     background-image:url('../../../img/comp/small_map.png');
+     .place1{
+        &:hover{
+         opacity:0;
+        }
+      }
+     animation:small 1s;
+    -moz-animation:small 1s; /* Firefox */
+    -webkit-animation:small 1s; /* Safari and Chrome */
+    -o-animation:small 1s; /* Opera */
+  }
+  .animat5{
+     width:1100px;
+     height:815px;
+    background-image:url('../../../img/comp/big_map.png');
+     animation:big 1s;
+    -moz-animation:big 1s; /* Firefox */
+    -webkit-animation:big 1s; /* Safari and Chrome */
+    -o-animation:big 1s; /* Opera */
+   
+  }
+    .mapitem{
+      width:90%;
+      height:55px;
+      position:absolute;
+      bottom:0px;
+      left:50px;
+      border-radius:10px;
+      background: rgba(39,43,52,1);
+      box-shadow:10px 10px 10px #000;
+      .item_btn{
+       width:16.66%;
+       height:55px;
+       cursor:pointer;
+       float:left;
+       img{margin-top:-20px; margin-left:10px;}
+       span{
+        color:#fff;
+        font-size:20px;
+        padding-top:10px;
+       }
+      }
+    }
+
+  }
+  .rightBoxChange{
+    display: inline-block;
+    margin-left: 30px;
+    width: 1700px;
+    height: 1000px;
+    position: relative;
+  }
+  .animat{
+    margin-left:-478px;
+    animation:myfirst 1s;
+    -moz-animation:myfirst 1s; /* Firefox */
+    -webkit-animation:myfirst 1s; /* Safari and Chrome */
+    -o-animation:myfirst 1s; /* Opera */
+  }
+  .animat1{
+    margin-left:0px;
+    animation:myfirst1 1s;
+    -moz-animation:myfirst1 1s; /* Firefox */
+    -webkit-animation:myfirst1 1s; /* Safari and Chrome */
+    -o-animation:myfirst1 1s; /* Opera */
+  }
+  .animat2{
+    width:1700px;
+    animation:myfirst2 1s;
+    -moz-animation:myfirst2 1s; /* Firefox */
+    -webkit-animation:myfirst2 1s; /* Safari and Chrome */
+    -o-animation:myfirst2 1s; /* Opera */
+  }
+  .animat3{
+    width:1230px;
+    animation:myfirst3 1s;
+    -moz-animation:myfirst3 1s; /* Firefox */
+    -webkit-animation:myfirst3 1s; /* Safari and Chrome */
+    -o-animation:myfirst3 1s; /* Opera */
+  }
+}
+
+@keyframes myfirst
+{
+  from {margin-left:0;}
+  to {margin-left:-478px;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+  from {margin-left:0;}
+  to {margin-left:-478px;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+  from {margin-left:0;}
+  to {margin-left:-478px;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+  from {margin-left:0;}
+  to {margin-left:-478px;}
+}
+
+
+@keyframes myfirst1
+{
+  from {margin-left:-478px;}
+  to {margin-left:0;}
+}
+
+@-moz-keyframes myfirst1 /* Firefox */
+{
+  from {margin-left:-478px;}
+  to {margin-left:0;}
+}
+
+@-webkit-keyframes myfirst1 /* Safari and Chrome */
+{
+  from {margin-left:-478px;}
+  to {margin-left:0;}
+}
+
+@-o-keyframes myfirst1 /* Opera */
+{
+  from {margin-left:-478px;}
+  to {margin-left:0;}
+}
+
+
+
+
+
+@keyframes myfirst2
+{
+  from {width:1230px;}
+  to {width:1700px;}
+}
+
+@-moz-keyframes myfirst2 /* Firefox */
+{
+  from {width:1230px;}
+  to {width:1700px;}
+}
+
+@-webkit-keyframes myfirst2 /* Safari and Chrome */
+{
+  from {width:1230px;}
+  to {width:1700px;}
+}
+
+@-o-keyframes myfirst2 /* Opera */
+{
+  from {width:1230px;}
+  to {width:1700px;}
+}
+
+
+
+@keyframes myfirst3
+{
+  from {width:1700px;}
+  to {width:1230px;}
+}
+
+@-moz-keyframes myfirst3 /* Firefox */
+{
+  from {width:1700px;}
+  to {width:1230px;}
+}
+
+@-webkit-keyframes myfirst3 /* Safari and Chrome */
+{
+  from {width:1700px;}
+  to {width:1230px;}
+}
+
+@-o-keyframes myfirst3 /* Opera */
+{
+  from {width:1700px;}
+  to {width:1230px;}
+}
+
+
+
+
+
+
+  @keyframes small
+{
+0%   { background-image:url('../../../img/comp/big_map.png');}
+100% {background-image:url('../../../img/comp/small_map.png');}
+}
+
+@-moz-keyframes small /* Firefox */
+{
+0%   { background-image:url('../../../img/comp/big_map.png');}
+100% {background-image:url('../../../img/comp/small_map.png');}
+}
+
+@-webkit-keyframes small /* Safari and Chrome */
+{
+0%   { background-image:url('../../../img/comp/big_map.png');}
+100% {background-image:url('../../../img/comp/small_map.png');}
+}
+
+@-o-keyframes small /* Opera */
+{
+0%   { background-image:url('../../../img/comp/big_map.png');}
+100% {background-image:url('../../../img/comp/small_map.png');}
+}
+
+
+
+ @keyframes big
+{
+0%   { background-image:url('../../../img/comp/small_map.png');}
+100% {background-image:url('../../../img/comp/big_map.png');}
+}
+
+@-moz-keyframes big /* Firefox */
+{
+0%   { background-image:url('../../../img/comp/small_map.png');}
+100% {background-image:url('../../../img/comp/big_map.png');}
+}
+
+@-webkit-keyframes big /* Safari and Chrome */
+{
+0%   { background-image:url('../../../img/comp/small_map.png');}
+100% {background-image:url('../../../img/comp/big_map.png');}
+}
+
+@-o-keyframes big /* Opera */
+{
+0%   { background-image:url('../../../img/comp/small_map.png');}
+100% {background-image:url('../../../img/comp/big_map.png');}
+}
