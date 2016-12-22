@@ -57,6 +57,11 @@ let Component = React.createClass({
 		let EgyAtplace = infofmodel.Model.dis["DayEgyAt"].place;
 		let EgyAtcoeff = infofmodel.Model.dis["DayEgyAt"].coeff;
 		let EgyAtunit = infofmodel.Model.dis["DayEgyAt"].unit;
+
+		let xdata = infofdata.ModelData[val]["DevCurDayPowerCurve"]["Time"];
+        let pwdata = infofdata.ModelData[val]["DevCurDayPowerCurve"]["Value"];
+        let spdata = infofdata.ModelData[val]["CurDayWindSpeedCurve_Device"]["Value"];
+        console.log(infofdata.ModelData[val]["CurDayWindSpeedCurve_Device"])
 		// if(infofmodel.Model == undefined){
 		// 	alert('数据获取失败，请重新登录');
 		// }else if(infofdata.ModelData == undefined){
@@ -332,7 +337,7 @@ let Component = React.createClass({
 					<div className={`${styles.infoBox4} ${styles.infofL}`}>
 						<Title title={['当日功率与风速实时曲线']}></Title>
 						<div className={`${styles.box4Cahrt} ${styles.infofL000}`}>
-							<Pwschart className={styles.box4Cahrt1} data = {infofdata} value = {val}></Pwschart>
+							<Pwschart className={styles.box4Cahrt1} xdata = {xdata} pwdata = {pwdata} spdata = {spdata}></Pwschart>
 						</div>
 					</div>
 					<div className={`${styles.infoBox5} ${styles.infofL}`}>
@@ -498,7 +503,7 @@ const mapDispatchToProps = (dispatch) => {
                                 dispatch(actions.setVars('infofdata', rdata));
                                 setTimeout(function(){
                                     dispatch(actions.setVars('faninfobool', true));
-                                },100)
+                                },500)
                             }
 
                         }
@@ -520,8 +525,8 @@ const mapDispatchToProps = (dispatch) => {
 
                      			function setData4(rdata){
 	                            dispatch(actions.setVars('infofdata', rdata));
-	                            // console.log(1,rdata);
-
+	                            console.log(1,rdata);
+	                            
 
                         }
                         TY.getRtData("WTDetail", value.Wtid, setData4)
