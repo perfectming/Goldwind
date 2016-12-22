@@ -1,5 +1,5 @@
-﻿var _fontSize = 14;
-var barGapJson = [{ gap: '-82%', cate: '90%' }, { gap: '-80%', cate: '79%' }, { gap: '-80%', cate: '68%' }, { gap: '-82%', cate: '60%' }, { gap: '-100%', cate: '40%' }];
+var _fontSize = 14;
+var barGapJson = [{ gap: '-82%', cate: '90%' }, { gap: '-80%', cate: '79%' }, { gap: '-80%', cate: '79%' }, { gap: '-82%', cate: '60%' }, { gap: '-100%', cate: '40%' }];
 function BarOption(title, xAxisData, seriesTitle, seriesData, triggerOn) {
     if (triggerOn == "click") {
         var yMax = 100;
@@ -89,7 +89,7 @@ function BarOption(title, xAxisData, seriesTitle, seriesData, triggerOn) {
                 {
                     name: seriesTitle,
                     type: 'bar',
-                    barMaxWidth:seriesData.length > 4 ? "auto" : 50,
+                    barMaxWidth:50,
                     data: seriesData,
                     itemStyle: {
                         normal: {
@@ -503,13 +503,13 @@ function jkzl_index() {
                 yAxisData.push(json.data.totalHeath.wfHealthList[o].wfName);
                 seriesData.push(json.data.totalHeath.wfHealthList[o].totalHealth);
             }
-            $(".zl_t i:eq(0)").text(json.data.totalHeath.regionHealth + '%')
+            $(".zl_t i:eq(0)").text(json.data.totalHeath.regionHealth + '°H')
             yAxisData.reverse();
             seriesData.reverse();
             //chart_1
             option = {
                 title: {
-                    text: '健康指数%',
+                    text: '健康指数°H',
                     top: '3%',
                     left:'5%',
                     textStyle: {
@@ -568,7 +568,7 @@ function jkzl_index() {
                 },
                 series: [
                     {
-                        name: '健康指数%',
+                        name: '健康指数°H',
                         type: 'bar',
                         barMaxWidth: 20,
                         data: seriesData,
@@ -595,7 +595,7 @@ function yjgk_index() {
 
     $.ajax({
         type: "post",
-        url: GetAllUrl(window.JFApiDomian + '/main_getWfAlarmInfoByWtType.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId="+areaId),
+        url: GetAllUrl(window.JFApiDomian + '/main_getWfAlarmInfoByWtType.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501"),
         cache: false,
         dataType: 'jsonp',
         xhrFields: {
@@ -610,7 +610,7 @@ function yjgk_index() {
             for (var o in json.listData) {
                 xAxisData.push(json.listData[o].dicsName);
                 seriesData1.push(json.listData[o].areaAlarmCount);
-                seriesData2.push(json.listData[o].rate*100);
+                seriesData2.push(json.listData[o].rate);
             }
             //不同风场预警概况
             option = {
@@ -618,10 +618,7 @@ function yjgk_index() {
                     trigger: 'axis',
                     axisPointer: {            // 坐标轴指示器，坐标轴触发有效
                         type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                    },
-					formatter: function (params, ticket, callback) {
-						return params[0].name + "<br />-预警个数：" + params[0].value + "<br />-完结率：" + params[1].value +'%';
-					}
+                    }
                 },
                 legend: {
                     data: ['数量', '百分比'],
@@ -656,7 +653,7 @@ function yjgk_index() {
                         type: 'value',
                         name: '数量',
                         min: 0,
-                        max: GetChartMaxValue(seriesData1),
+                        max: 100,
                         axisLine: {
                             lineStyle: {
                                 color: '#747484'
@@ -672,7 +669,7 @@ function yjgk_index() {
                         type: 'value',
                         name: '百分比',
                         min: 0,
-                        max: 100,
+                        max: 1,
                         axisLine: {
                             lineStyle: {
                                 color: '#747484'
@@ -887,10 +884,10 @@ function jkzl() {
         yAxisData.push(json_jkzl.data.totalHeath.wfHealthList[o].wfName);
         seriesData.push(json_jkzl.data.totalHeath.wfHealthList[o].totalHealth);
         
-        $("#dialog_1 .scroll").append('<p class="font14 font_fff mt15">' + json_jkzl.data.totalHeath.wfHealthList[o].wfName + '（' + json_jkzl.data.totalHeath.wfHealthList[o].totalHealth + '%）</p><div class="pgrop"><div style="width:' + json_jkzl.data.totalHeath.wfHealthList[o].totalHealth + '%;"></div></div>');
+        $("#dialog_1 .scroll").append('<p class="font14 font_fff mt15">' + json_jkzl.data.totalHeath.wfHealthList[o].wfName + '（' + json_jkzl.data.totalHeath.wfHealthList[o].totalHealth + '°H）</p><div class="pgrop"><div style="width:' + json_jkzl.data.totalHeath.wfHealthList[o].totalHealth + '%;"></div></div>');
     }
 
-    option = BarOption('健康度%', yAxisData, '健康度%', seriesData, "click");
+    option = BarOption('健康度°H', yAxisData, '健康度°H', seriesData, "click");
 
     var myChart = echarts.init(document.getElementById('dialog_1_chart_1'));
     myChart.setOption(option);
@@ -915,11 +912,11 @@ function sel_jkd_zl() {
     var name = '';
     for (var o in healthArr) {
         name = healthArr[o].split(':')[0];
-        yAxisData.push(name.substr(1, name.length - 2).substr(4)+'月');
+        yAxisData.push(name.substr(1, name.length - 2));
         seriesData.push(healthArr[o].split(':')[1]);
     }
 
-    option = LineOption('', yAxisData, '健康度%', 0, 100, '健康度%', seriesData);
+    option = LineOption('', yAxisData, '健康度°H', 0, 100, '健康度°H', seriesData);
 
     var myChart = echarts.init(document.getElementById('dialog_1_chart_2'));
     myChart.setOption(option);
@@ -937,14 +934,14 @@ function sel_jkd(name) {
             var name = '';
             for (var o in healthArr) {
                 name = healthArr[o].split(':')[0];
-                yAxisData.push(name.substr(1, name.length - 2).substr(4)+'月');
+                yAxisData.push(name.substr(1, name.length - 2));
                 seriesData.push(healthArr[o].split(':')[1]);
             }
             break;
         }
     }
 
-    option = LineOption('', yAxisData, '健康度%', 0, 100, '健康度%', seriesData);
+    option = LineOption('', yAxisData, '健康度°H', 0, 100, '健康度°H', seriesData);
 
     var myChart = echarts.init(document.getElementById('dialog_1_chart_2'));
     myChart.setOption(option);
@@ -1046,7 +1043,7 @@ function fc_wjl() {
             {
                 name: '完结率%',
                 type: 'bar',
-                barMaxWidth:seriesData.length > 4 ? "auto" : 50,
+                barMaxWidth: 50,
                 data: seriesData,
                 itemStyle: {
                     normal: {
@@ -1083,11 +1080,9 @@ function getwjlInfo(index, key,source) {
     } else if (source == 2) {
         if (json_wjl_zl_line == undefined)
             return;
-
-		
         for (var o in json_wjl_zl_line.listData) {
 
-            if(json_wjl_zl_line.listData[o].dt.substr(5) == index.substr(0,index.length-1)){
+            if(json_wjl_zl_line.listData[o].dt == index){
                 if (key == 1)
                     return json_wjl_zl_line.listData[o].areaAlarmCount == undefined ? 0 : json_wjl_zl_line.listData[o].areaAlarmCount;
                 else
@@ -1102,7 +1097,7 @@ function getwjlInfo(index, key,source) {
             return;
 
         for(var o in json_wjl_line.listData){
-            if(json_wjl_line.listData[o].dt.substr(5) == index.substr(0,index.length-1)){
+            if(json_wjl_line.listData[o].dt == index){
                 if (key == 1)
                     return json_wjl_line.listData[o].areaAlarmCount == undefined ? 0 : json_wjl_line.listData[o].areaAlarmCount;
                 else
@@ -1122,7 +1117,7 @@ function sel_wjl_zl() {
     var lay_wjl_zl = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: GetAllUrl(window.JFApiDomian + '/main_getAlarmInfoByTime.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId="+areaId),
+        url: GetAllUrl(window.JFApiDomian + '/main_getAlarmInfoByTime.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501"),
         cache: false,
         dataType: 'jsonp',
         xhrFields: {
@@ -1143,14 +1138,14 @@ function sel_wjl_zl() {
                 flag = false;
                 for (var o in json.listData) {
                     if (json.listData[o].dt == now.getFullYear() + '-' + month) {
-                        xAxisDate.push(month+'月');
+                        xAxisDate.push(json.listData[o].dt);
                         seriesDate.push(json.listData[o].rate * 100);
                         flag = true;
                         break;
                     }
                 }
                 if (flag == false) {
-                    xAxisDate.push(month+'月');
+                    xAxisDate.push(now.getFullYear() + '-' + month);
                     seriesDate.push(0);
                 }
             }
@@ -1240,7 +1235,7 @@ function sel_wjl(index) {
     var lay_wjl = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: GetAllUrl(window.JFApiDomian + '/main_getAlarmInfoByTime.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId="+areaId+"&wfid=" + json_yjgk.listData[index].dicsID),
+        url: GetAllUrl(window.JFApiDomian + '/main_getAlarmInfoByTime.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501&wfId=" + json_yjgk.listData[index].dicsID),
         cache: false,
         dataType: 'jsonp',
         xhrFields: {
@@ -1261,14 +1256,14 @@ function sel_wjl(index) {
                 flag = false;
                 for (var o in json.listData) {
                     if (json.listData[o].dt == now.getFullYear() + '-' + month) {
-                        xAxisDate.push(month+'月');
+                        xAxisDate.push(json.listData[o].dt);
                         seriesDate.push(json.listData[o].rate * 100);
                         flag = true;
                         break;
                     }
                 }
                 if (flag == false) {
-                    xAxisDate.push(month+'月');
+                    xAxisDate.push(now.getFullYear() + '-' + month);
                     seriesDate.push(0);
                 }
             }
@@ -1480,7 +1475,7 @@ function fc_zql() {
             {
                 name: '准确率',
                 type: 'bar',
-               barMaxWidth:seriesData.length > 4 ? "auto" : 50,
+                barMaxWidth:50,
                 data: seriesData,
                 itemStyle: {
                     normal: {
@@ -1507,33 +1502,15 @@ function fc_zql() {
 function fc_zql_tooltip(index, source, nameIndex) {
     if (json_zql == undefined)
         return;
-	
-	var data = 0;
     if (source == 1) {
         //柱状图
         return json_zql.data.precison.wfMonthPre[index].total;
     } else if (source == 2) {
         //总览曲线图
-		for (var o in json_zql.data.precison.monthPrecision) {
-			if(index.substr(0,2) == json_zql.data.precison.monthPrecision[o].ym.substr(4)){
-				
-				data = json_zql.data.precison.monthPrecision[o].total;
-				break;
-			}
-		}
-
-		return data;
+        return json_zql.data.precison.monthPrecision[index].total;
     } else if (source == 3) {
-       
-		for (var o in json_zql.data.precison.wfMonthPre[nameIndex].monthPre) {
-			if(index.substr(0,2) == json_zql.data.precison.wfMonthPre[nameIndex].monthPre[o].ym.substr(4)){
-				
-				data = json_zql.data.precison.wfMonthPre[nameIndex].monthPre[o].total;
-				break;
-			}
-		}
-
-		return data;
+        //总览曲线图
+        return json_zql.data.precison.wfMonthPre[nameIndex].monthPre[index].total;
     }
 }
 
@@ -1543,26 +1520,9 @@ function sel_zql_zl() {
     if (json_zql == undefined)
         return;
 
-	var flag;
-	var month;
-		
-	for (var i = 1; i <= (now.getMonth() + 1) ; i++) {
-		flag = false;
-		for (var o in json_zql.data.precison.monthPrecision) {
-			month = i < 10 ? '0' + i : i;
-
-			if(month == json_zql.data.precison.monthPrecision[o].ym.substr(4)){
-				xAxisData.push(month+'月');
-				seriesData.push(json_zql.data.precison.monthPrecision[o].precision);
-				flag = true;
-				break;
-			}
-		}
-
-        if(flag == false){
-			xAxisData.push(month+'月');
-			seriesData.push(0);
-		}
+    for (var o in json_zql.data.precison.monthPrecision) {
+        xAxisData.push(json_zql.data.precison.monthPrecision[o].ym);
+        seriesData.push(json_zql.data.precison.monthPrecision[o].precision);
     }
 
     option = {
@@ -1572,7 +1532,7 @@ function sel_zql_zl() {
                 type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             },
             formatter: function (params, ticket, callback) {
-                return params[0].name + "<br />已结项：" + fc_zql_tooltip(params[0].name, 2) + "<br />准确率：" + params[0].value + '%';
+                return params[0].name + "<br />已结项：" + fc_zql_tooltip(params[0].dataIndex, 2) + "<br />准确率：" + params[0].value + '%';
             }
         },
         grid: {
@@ -1646,27 +1606,10 @@ function sel_zql(index) {
     if (json_zql == undefined)
         return;
 
-	var flag;
-	var month;
-	for (var i = 1; i <= (now.getMonth() + 1) ; i++) {
-		flag = false;
-		month = i < 10 ? '0' + i : i;
-		for (var o in json_zql.data.precison.wfMonthPre[index].monthPre) {
-
-			if(json_zql.data.precison.wfMonthPre[index].monthPre[o].ym.substr(4) == month){
-
-				xAxisData.push(month+'月');
-				seriesData.push(json_zql.data.precison.wfMonthPre[index].monthPre[o].precision);
-				flag = true;
-				break;
-
-			}
-		}
-		if(flag == false){
-			xAxisData.push(month+'月');
-			seriesData.push(0);
-		}
-	}
+    for (var o in json_zql.data.precison.wfMonthPre[index].monthPre) {
+        xAxisData.push(json_zql.data.precison.wfMonthPre[index].monthPre[o].ym);
+        seriesData.push(json_zql.data.precison.wfMonthPre[index].monthPre[o].precision);
+    }
 
     option = {
         tooltip: {
@@ -1675,7 +1618,7 @@ function sel_zql(index) {
                 type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
             },
             formatter: function (params, ticket, callback) {
-                return params[0].name + "<br />已结项：" + fc_zql_tooltip(params[0].name, 3,index) + "<br />准确率：" + params[0].value + '%';
+                return params[0].name + "<br />已结项：" + fc_zql_tooltip(params[0].dataIndex, 3,index) + "<br />准确率：" + params[0].value + '%';
             }
         },
         grid: {
@@ -1921,7 +1864,7 @@ function gdwjl_top() {
     var gdwjllay = layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 9999999999 });
     $.ajax({
         type: "post",
-        url: GetAllUrl(window.JFApiDomian + '/main_getEndRate.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId="+areaId),
+        url: GetAllUrl(window.JFApiDomian + '/main_getEndRate.action?beginTime=' + now.getFullYear() + '-01-01 00:00:00&endTime=' + getDay() + " 23:59:59&areaId=201409110342501"),
         cache: false,
         dataType: 'jsonp',
         xhrFields: {

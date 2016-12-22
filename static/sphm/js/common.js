@@ -1,13 +1,6 @@
 window.ApiDomian = 'http://211.90.87.226:8080/sphm';
 window.JFApiDomian = 'http://211.90.87.226:8180/alarmClientInterface';
-
-
-// window.ApiDomian = 'http://10.68.4.9:8080/alarmClientInterface';
-// window.JFApiDomian = 'http://10.68.4.9:8080/alarmClientInterface';
-
-
 var userId = '10';
-var areaId = '201612121721151';
 function getLastDay(year, month) {
     var new_year = year;    //取当前的年份  
     var new_month = month++;//取下一个月的第一天，方便计算（最后一天不固定）  
@@ -57,49 +50,6 @@ function bindRowBgColor() {
         $(this).addClass("active");
     })
     $(".grid tr").on('mouseout', function (event) {
-        if ($(this).find("input[type='checkbox']").length > 0) {
-            if ($(this).find("input[type='checkbox']").get(0).checked == false)
-                $(this).removeClass("active");
-        }
-        else if ($(this).find("input[type='radio']").length > 0) {
-            if ($(this).find("input[type='radio']").get(0).checked == false)
-                $(this).removeClass("active");
-        }
-        else
-            $(this).removeClass("active");
-    })
-}
-
-
-function bindRowBgColorByTarget(target) {
-    $("#"+target+".grid input[type='checkbox'],.grid input[type='radio']").on('click', function (event) {
-        if ($(this).get(0).checked == true) {
-            $(this).parent().parent().addClass("active");
-        } else {
-            $(this).parent().parent().removeClass("active");
-        }
-        event.stopPropagation();
-    })
-    $("#"+target+".grid tr").on('click', function (event) {
-        if ($(this).find("input[type='checkbox']").length > 0){
-            if ($(this).find("input[type='checkbox']").get(0).checked == false) {
-                $(this).addClass("active");
-                $(this).find("input[type='checkbox']").get(0).checked = true;
-            } else {
-                $(this).removeClass("active");
-                $(this).find("input[type='checkbox']").get(0).checked = false;
-            }
-        }
-        if ($(this).find("input[type='radio']").length > 0) {
-            $(this).find("input[type='radio']").get(0).checked = true;
-            $(this).addClass("active").siblings().removeClass("active");
-        }
-    })
-
-    $("#"+target+".grid tr").on('mouseover', function (event) {
-        $(this).addClass("active");
-    })
-    $("#"+target+".grid tr").on('mouseout', function (event) {
         if ($(this).find("input[type='checkbox']").length > 0) {
             if ($(this).find("input[type='checkbox']").get(0).checked == false)
                 $(this).removeClass("active");
@@ -324,33 +274,4 @@ function GetAllUrl(url) {
         return url + "&userId=" + userId;
     else
         return url + "?userId=" + userId;
-}
-
-function GetChartMaxValue(seriesData){
-	var data = 0;
-
-	for(var i = 0; i < seriesData.length;i++){
-		if(seriesData[i].areaAlarmCount > data)
-			data= seriesData[i].areaAlarmCount;
-	}
-
-
-	if(data <= 100)
-		return 100;
-
-	data = data+'';
-	var str = '';
-	for(var i = 0; i < data.length;i++){
-		if(i == data.length-2){
-			if( i == 0)
-				str += data[i]+'.';
-			else
-				str += '.'+data[i];
-		}
-		else
-			str += data[i];
-	}
-
-	var back = Math.ceil(parseFloat(str));
-	return parseInt(back+'00')
 }

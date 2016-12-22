@@ -29,7 +29,7 @@ Validator = {
     Custom: "this.Exec(value, getAttribute('regexp'))",
     Group: "this.MustChecked(getAttribute('name'), getAttribute('min'), getAttribute('max'))",
     ErrorItem: [document.forms[0]],
-    ErrorMessage: ["\u4ee5\u4e0b\u539f\u56e0\u5bfc\u81f4\u63d0\u4ea4\u5931\u8d25\uff1a"],
+    ErrorMessage: ["\u4ee5\u4e0b\u539f\u56e0\u5bfc\u81f4\u63d0\u4ea4\u5931\u8d25\uff1a\t\t\t\t"],
     Validate: function(theForm, mode) {
         
         var obj = theForm || event.srcElement;

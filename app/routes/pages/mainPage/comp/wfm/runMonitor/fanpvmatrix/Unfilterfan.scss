@@ -1,0 +1,123 @@
+
+    .listheaderBox:last-child{
+      padding-bottom:25px;
+      }
+    .listheaderBox{
+      width:100%;
+      height:auto;
+      margin: 0 auto;
+      border-top: 10px solid #2EA6AF;
+      background-color:#1D2835;
+      position:relative;
+
+      .listbtn{
+      width:130px;
+      padding:5px 0;
+      border-radius:6px;
+      background-color:#31F3FB;
+      color:#343434;
+      font-size:16px;
+      font-weight: bold;  
+      position:absolute;
+      top:38%;left:15px;
+      box-shadow:1px 1px 3px #292929
+    }
+    .listbtnitem{
+      float:left;
+    }
+    .listopt:nth-child(3){
+      margin: 10px 0px 60px 170px;
+      }
+      .listopt{
+        width:1230px;
+        min-height:100px;
+        display:inline-block;
+        margin: 10px 0px 10px 140px;
+        padding:5px 20px;
+        background-color:#1D2835;
+        div{
+          color:#111;
+          font-weight: 600;
+          font-size:14px;
+          cursor:pointer;
+          display:inline-table;
+          float:left;
+          width:58px;
+          // height:25px; 
+          border-radius:3px;
+          line-height:20px;
+          text-align:center;
+          padding:2px 2px;
+          margin: 2px;
+          position:relative;
+          .listoptinfo{
+            width:150px;height:110px;background-color: #FFFFFF;display:none;
+            position:absolute;right:62px;top: -10px;
+            font-size:20px;
+            text-align:left;
+            color:#578D1E;
+            span{
+              
+              line-height:40px;
+              display:inline-block;
+              
+              width:100%;
+              height:40px;
+              border-bottom:1px solid #999;
+            }
+            p{
+              margin:0 auto;
+              display:block;
+              line-height:35px;
+              font-size:16px;
+            }
+          }
+          
+        }
+        div:hover{
+          box-shadow:0px 0px 8px 2px #fff;
+          cursor:pointer;
+          .listoptinfo{
+            display:block;
+            z-index:1000;
+          }
+        }
+        .listoptbtn_2{
+          // box-shadow:1px 1px 3px #87CB2D;
+        }
+        .listoptbtn_3{
+          // box-shadow:1px 1px 3px #87CB2D;
+          // background-color:#f1a820
+        }
+        .online{
+        background-color:#0f0;/*绿色*/ //运行049304
+        }
+        .Alarm{
+        background-color:#990000;/**/ //告警
+        }
+        .limitPow{
+          background-color:#ffffff;    //限功率328DEF
+        }
+        .offline{
+         background-color: #328def; // 待机bfbfbf
+        }
+        .discomfor{
+          background-color: #aaaaaa //离线#f1a820  #e1dc92
+        }
+        .discomforpre{
+          background-color: #f1a820;
+        }
+        .dispre{
+          background-color: red;
+        }
+        .repair{
+          background-color: #ff0;// 检修#c7b88c
+        }
+        .default{
+          border: 2px solid #c7b88c; //检修
+        } 
+        .fault{
+          background-color:#f00; //#ff0000
+        }
+      }
+    }

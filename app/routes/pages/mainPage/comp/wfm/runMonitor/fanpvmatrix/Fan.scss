@@ -1,0 +1,32 @@
+.bodyBox{
+  .box_shadow:hover{
+       box-shadow:0 0 15px #fff;
+      }
+  .listrightBox{
+    width:1348px;
+    height:920px;
+    overflow:hidden;
+    float:left;
+    margin-left: 15px;
+  .listbodyBox1 {
+    overflow-y:scroll;
+  
+    padding-right:10px;
+    -padding-left:10px;
+    -width:1200;
+    height:100%;
+    display:inline-block;
+    background-color: #1D2835;
+    
+    
+    }
+  }
+    .leftBox{
+      width: 400px;
+      float:left;
+      padding-bottom:20px;
+      
+
+    }
+    
+}
