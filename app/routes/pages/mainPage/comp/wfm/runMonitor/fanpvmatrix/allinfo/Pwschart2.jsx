@@ -12,8 +12,8 @@ let Component = React.createClass({
         let {data,value} = this.props;
         // console.log(data);
         // let xdata = data.ModelData[value]["DevCurDayPowerCurve"]["Time"];
-        let pwdata = (data.ModelData[value]["DevCurDayPowerCurve"]["Value"]).sort(function(a,b){return a-b});
-        let spdata = (data.ModelData[value]["CurDayWindSpeedCurve_Device"]["Value"]).sort(function(a,b){return a-b});
+        let wpwdata = data.ModelData[value]["DevCurDayPowerCurve"]["Value"];
+        let wspdata = data.ModelData[value]["CurDayWindSpeedCurve_Device"]["Value"];
             // console.log(pwdata)
         let configpie = {
             chart: {
@@ -94,7 +94,7 @@ let Component = React.createClass({
                     color: '#fff'
                 }
                 },
-                categories: spdata,
+                categories: '',
             },
             yAxis:[{ //第一个Y轴，序号为0
             labels: {
@@ -142,7 +142,7 @@ let Component = React.createClass({
             color: '#29D0CF',
             type: 'spline',
          
-            data: pwdata,
+            data: '',
         
 
 
