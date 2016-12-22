@@ -17,20 +17,20 @@ let Component = React.createClass({
         let num=0;
         return (
             <div>
-                
+                <div className={styles.tableHeaderBox}>
+                    {
+                        tabaleData.data.header.map((value, key)=> {
+                            return (
+                                <div className={styles.tableHeaderItem}
+                                     style={{width:tabaleData.data.length[key]}} key={key}>
+                                    {value}
+                                </div>
+                            )
+                        })
+                    }
+                </div>
                 <div className={styles.tableBox}>
-                    <div className={styles.tableHeaderBox}>
-                        {
-                            tabaleData.data.header.map((value, key)=> {
-                                return (
-                                    <div className={styles.tableHeaderItem}
-                                         style={{width:tabaleData.data.length[key]}} key={key}>
-                                         {value}
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+
                     <div className={styles.tableContentBox} id="alarmTable">
                         {
                             tabaleData.data.content.map((value, key)=> {
