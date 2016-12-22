@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>智能运营SOAM平台2.0</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">  
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script src="layer/layer.js" type="text/javascript"></script>
+    <script src="js/full-validator.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container subscribe clearfix">
+        <form class="form" id="form">
+
+            <div class="left mana yj_form">
+                <h1>订阅人管理</h1>
+                <dl class="clearfix">
+                    <dt>当前选择</dt>
+                    <dd>
+                        <select id="subscribeList" name="subscribeList" onchange="switchSubscribe(this)"></select>
+                        <a href="javascript:;" id="add" class="a_btn">新建订阅人</a>
+                        <a href="javascript:;" id="del" class="a_btn">删除</a>
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><span class="red">*</span>姓名</dt>
+                    <dd>
+                        <input name="name" id="name" type="text" maxlength="5" class="txt" datatype="Require" msg="请输入姓名" />
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><span class="red">*</span>手机号</dt>
+                    <dd>
+                        <input name="mobile" id="mobile" type="text" maxlength="11" class="txt" datatype="Mobile" msg="手机号为空或格式不正确" />
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><span class="red">*</span>邮箱</dt>
+                    <dd>
+                        <input name="email" id="email" type="text" maxlength="100" class="txt" datatype="Email" msg="邮箱为空或格式不正确" />
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><span class="red">*</span>微信</dt>
+                    <dd>
+                        <input name="wx" id="wx" type="text" maxlength="30" class="txt" datatype="Require" msg="请输入微信" />
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt><span class="red">*</span>工号</dt>
+                    <dd>
+                        <input name="code" id="code" type="text" maxlength="30" class="txt" datatype="Require" msg="请输入工号" />
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>备注</dt>
+                    <dd><textarea name="remark" id="remark"></textarea></dd>
+                </dl>
+                <dl class="clearfix" style="margin-top:0px;">
+                    <dt>接收方式</dt>
+                    <dd><label><input type="checkbox" class="chk" id="isemail" /> 邮箱</label></dd>
+                </dl>
+                <button type="button" id="save">保存</button>
+            </div>
+
+            <div class="left push">
+                <div class="pp">
+                    <h1>报告推送</h1>
+                    <div class="box">
+                        <div class="wrap">
+                            <p>CMS监测报告 <span><input type="checkbox" id="iscms" value="1" name="cms" class="chk" /></span></p>
+                        </div>
+                        <div class="wrap">
+                            <p>金风预警信息报告 <span><label>月报 <input type="checkbox" name="cms" value="4" id="ismonth" class="chk" /></label><label>年报 <input type="checkbox" value="3" name="cms" id="isyear" class="chk" /></label></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pp mt15">
+                    <h1>各风场预警消息推送</h1>
+                    <div class="box">
+                        <div class="wrap" style="height:460px;overflow:auto;">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        var isUpdate = true;
+        var jsonList;
+        
+        function init() {
+            LoginJFPage(function () {
+                layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
+                $.ajax({
+                    type: "post",
+                    url: window.JFApiDomian + '/alarmInfo_getWfName.do',
+                    cache: false,
+                    dataType: 'jsonp',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
+                    success: function (json) {
+                        for (var o in json.listData) {
+                            $(".pp:eq(1) .wrap").append('<p>' + json.listData[o].wfName + '<span><input type="checkbox" value="' + json.listData[o].wfid + '" name="fc" class="chk" /></span></p>');
+                        }
+                        $("input[type='checkbox']").on("change", function () {
+                            save();
+                        })
+                        initSub();
+                    },
+                    error: function () {
+                        alert('载入数据失败！');
+                    }
+                });
+            })
+        }
+
+        function initSub() {
+            LoginPage(function () {
+                //载入数据
+                $.ajax({
+                    type: "post",
+                    url: window.ApiDomian + '/subscribe/list.json?page=0&size=9999999',
+                    cache: false,
+                    dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
+                    success: function (json) {
+                        if (json.state == 1) {
+                            jsonList = json.pagination.list;
+                            for (var i = 0; i < json.pagination.list.length; i++) {
+                                $("#subscribeList").append('<option value="' + json.pagination.list[i].subscribeID + '">' + json.pagination.list[i].userName + '</option>');
+                                if (i == 0)
+                                    showDetail(json.pagination.list[i].subscribeID);
+                            }
+
+                            if (json.pagination.list.length == 0) {
+                                isUpdate = false;
+                                layer.closeAll();
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert('载入数据失败！');
+                    }
+                });
+            })
+        }
+
+        function showDetail(key) {
+            clearForm();
+            $("input[type='checkbox']").prop("checked", false);
+            for (var i = 0; i < jsonList.length; i++) {
+                if (key == jsonList[i].subscribeID) {
+                    $("#code").val(jsonList[i].userID);
+                    $("#name").val(jsonList[i].userName);
+                    $("#email").val(jsonList[i].userEmail);
+                    $("#isemail").get(0).checked = jsonList[i].use;
+                    $("#remark").val(jsonList[i].remark);
+                    $("#mobile").val(jsonList[i].userPhone);
+                    $("#wx").val(jsonList[i].userWeiXin);
+
+                    for (var o in jsonList[i].subscribeTemps) {
+                        if (jsonList[i].subscribeTemps[o].type != 5) {
+                            $("input[name='cms'][value='" + jsonList[i].subscribeTemps[o].type + "']").prop("checked", true);
+                        }
+                            
+                    }
+
+                    for (var o in jsonList[i].wfwts) {
+                        $("input[name='fc'][value='" + jsonList[i].wfwts[o].wfID + "']").prop("checked", true);
+                    }
+                    break;
+                }
+            }
+
+            //获取风场数据
+
+            layer.closeAll();
+        }
+
+        function switchSubscribe(o) {
+            layer.msg('数据载入中...', { icon: 16, shade: 0.01, time: 999999 });
+            showDetail($(o).val());
+        }
+
+        function clearForm() {
+            $("input[type='text'],textarea").val('');
+        }
+        
+        $(function () {
+            init();
+
+            $("#add").click(function () {
+                //清空form表单
+                clearForm();
+                //新建
+                isUpdate = false;
+                $("#subscribeList option").remove();
+                $("input[type='checkbox']").prop("checked", true);
+            })
+
+            $("#save").click(function () {
+                save();
+            })
+            $("#del").click(function () {
+                var _id = $("#subscribeList").val();
+                if (_id == null)
+                    return;
+                var delLayer = layer.msg('数据提交中...', { icon: 16, shade: 0.01, time: 999999 });
+                //删除
+                $.ajax({
+                    type: "post",
+                    url: window.ApiDomian + "/subscribe/delete.json?id=" + _id,
+                    cache: false,
+                    dataType: 'json',
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    crossDomain: true,
+                    complete: function () {
+                        layer.close(delLayer);
+                    },
+                    success: function (json) {
+                        if (json.state == 1) {
+                            layer.msg('删除订阅人成功', {time:1000}, function () {
+                                location.reload();
+                            });
+                        } else {
+                            alert('删除订阅人失败，请稍后尝试！');
+                        }
+                    },
+                    error: function () {
+                        alert('删除订阅人失败，请稍后尝试！');
+                    }
+                });
+            })
+        })
+
+        function save() {
+            if (!Validator.Validate(document.getElementById('form'))) return false;
+
+            var json = '';
+            if (isUpdate == true)
+                json += ',"subscribeID": "' + $("#subscribeList").val() + '"';
+            json += ',"userID": "' + $("#code").val() + '"';
+            json += ',"userName": "' + $("#name").val() + '"';
+            json += ',"userEmail": "' + $("#email").val() + '"';
+
+            if ($("#isemail").get(0).checked == true)
+                json += ',"use": 1';
+            else
+                json += ',"use": 0';
+            json += ',"remark": "' + $("#remark").val() + '"';
+            json += ',"userPhone": "' + $("#mobile").val() + '"';
+            json += ',"userWeiXin": "' + $("#wx").val() + '"';
+
+            if ($("input[name='cms']:checked").length > 0) {
+                json += ',"subscribeTemps": [';
+
+                $("input[name='cms']:checked").each(function () {
+                    json += '{"type":' + $(this).val() + ',"email":1,"sms":1,"wechat":1},';
+                })
+
+                //判断是否预警报告
+                if ($("input[name='fc']:checked").length > 0) {
+                    json += '{"type":5,"email":1,"sms":1,"wechat":1},';
+                }
+
+                json = json.substr(0, json.length - 1);
+
+                json += ']';
+            }
+
+            if ($("input[name='fc']:checked").length > 0) {
+                json += ',"wfwts":[';
+                $("input[name='fc']:checked").each(function () {
+                    json += '{"wfID":' + $(this).val() + '},';
+                })
+
+                json = json.substr(0, json.length - 1);
+                json += ']';
+            }
+            json = '{' + json.substr(1) + '}';
+
+            var infoLayer = layer.msg('数据提交中...', { icon: 16, shade: 0.01, time: 999999 });
+
+            //提交
+            $.ajax({
+                type: "post",
+                url: window.ApiDomian + (isUpdate == true ? '/subscribe/edit.json' : '/subscribe/add.json'),
+                data: json,
+                contentType: "application/json; charset=utf-8",
+                cache: false,
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (json) {
+                    layer.close(infoLayer);
+                    if (json.state == 1) {
+                        //冻结所有控件
+                        $("input").prop("disabled",true)
+
+                        layer.msg('数据提交成功', { time: 1000 }, function () {
+                            location.reload();
+                        });
+                    }
+                    else
+                        alert('提交失败，请稍后尝试！');
+                },
+                error: function () {
+                    layer.close(infoLayer);
+                    alert('提交失败，请稍后尝试！');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
