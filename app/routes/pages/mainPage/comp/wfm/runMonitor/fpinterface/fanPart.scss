@@ -1,0 +1,175 @@
+.bodyBox{
+  background: url("../../../../img/icon/1.png") -10px 0px no-repeat;
+  overflow: hidden;
+  .infofL{
+    float: left;
+    margin-right: 15px;
+    margin-top: 15px;
+    position: relative;
+  }
+  .dialbox{
+    float: left;
+    margin-left: 28px;
+    padding-top: 50px;
+    .pwratbox{
+      width: 100px;
+      height: 50px;
+      margin: 0 auto;
+      padding-top: 20px;
+      text-align: center;
+      line-height: 30px;
+      span:nth-child(1){
+        font-size: 18px;
+        color: #00F7FE;
+      }
+      span:nth-child(2){
+        color: #fff;
+      }
+    }
+    .boxtitle{
+      p{
+        width: 200px;
+        height: 50px;
+        color:#fff;
+        font-size: 16px;
+        margin: 0;
+        line-height: 50px;
+        text-align: center;
+      }
+    }
+  }
+  .fanidbox{
+    color:#999;
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    .actspan{
+      width:100px;
+      height:40px;
+      line-height:40px;
+      cursor:pointer;
+      border-radius:5px;
+      color:#fff;
+      font-size:16px;
+      border:1px solid #2ff4fb;
+      margin:10px 13px 0 0;
+      float:left;
+      text-align:center;
+      &:hover{
+        box-shadow:0px 0px 8px #fff;
+        color:#2ff4fb;
+      }
+    }
+    .active{
+      box-shadow:0px 0px 8px #fff;
+      color:#2ff4fb;
+      width:100px;
+      height:40px;
+      line-height:40px;
+      cursor:pointer;
+      border-radius:5px;
+      font-size:16px;
+      border:1px solid #2ff4fb;
+      margin:10px 13px 0 0;
+      float:left;
+      text-align:center;
+    }
+  }
+  .fanidbox:after{
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+  }
+    .infoBox{
+      overflow: hidden;
+      color:#999;
+      background:rgba(20,20,30,.5);
+      white-space:nowrap;
+      span{
+        display: inline-block;
+        text-align: center;
+        line-height: 38px;
+        color:#fff;
+      }
+      .statusquery{
+        width: 1700px;
+        overflow: hidden;
+        .bgbox{
+          background: #30343D;
+        }
+        .nomalbox{
+          background: #292F36;
+        }
+        .statusquerybox{
+          float: left;
+          width: 16.6666%;
+          height: 35px;
+          span{
+            padding-left: 30px;
+          }
+        }
+      }
+    }
+  .fanrightbox{
+    margin-top: 10px;
+    margin-left: 263px;
+    overflow-y: auto;
+    overflow-x:hidden;
+    height:650px;
+    background:rgba(20,20,30,.5);
+    white-space:nowrap;
+    .action1box{
+      width: 400px;
+      $height: 600px;
+      font-size: 14px;
+      color: #fff;
+      line-height: $height/17;
+      div:nth-child(2n-1){
+        background: #30343D;
+      }
+      div:nth-child(2n){
+        background: #292F36;
+      }
+      .fandatabox{
+        width: 100%;
+        height: $height/16;
+        position: relative;
+        span:nth-child(1){
+          display: inline-block;
+          padding-left: 20px;
+          padding-right: 50px;
+          text-align: left;
+        }
+        .numbox{
+          position: absolute;right:20px;top: 0;
+          display: inline-block;
+          width: 200px;
+
+          white-space:nowrap;
+          text-align: right;
+          span{
+            display: inline-block;
+          }
+          span:nth-child(1){
+            padding-right: 5px;
+            text-align: right;
+            color: #00F7FE;
+            font-size: 16px;
+          }
+          span:nth-child(2){
+            padding-right: 20px;
+            text-align: left;
+            width: 40px;
+            font-size: 12px;
+          }
+        }
+      }
+
+    }
+  }
+
+}
+
+
