@@ -1,0 +1,29 @@
+.navTab {
+  width: 100%;
+  height: 63px;
+  line-height: 63px;
+  font-size: 18px;
+  color: #e6e7e8;
+  overflow:hidden;
+  .tabItemAct {
+    //min-width: 120px;
+    //display: inline-block;
+    color: #2ff4fb;
+    cursor: pointer;
+    float:left;
+  }
+  .tabItem {
+    //min-width: 120px;
+    display: inline-block;
+    color: #e6e7e8;
+    cursor: pointer;
+    float:left;
+  }
+  .tabItemIcon{
+    float:left;
+    font-size:20px;
+    color:#fff;
+    padding:0 12px;
+  }
+}
+.navTab1 {display:none}
