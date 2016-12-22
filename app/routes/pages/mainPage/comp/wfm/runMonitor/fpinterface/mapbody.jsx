@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch) => {
                                 dispatch(actions.setVars('leftd', rdata));
                                         setTimeout(function(){
                                        dispatch(actions.setVars('boolmapbody', true));  
-                                   },1000)
+                                        },1500)
                                 }
                             }
                         }
@@ -86,7 +86,7 @@ const mapDispatchToProps = (dispatch) => {
                                 }
 
                         }                  
-             },2000)
+             },1500)
         },
         init: () => {
         },

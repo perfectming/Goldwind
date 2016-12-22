@@ -34,7 +34,11 @@
         }
         .dateBox{
             float:left;
-            input{height:25px;}
+            input{height:25px;width:140px;
+            background-image: url(../../../img/comp/drop2.gif);
+            background-repeat:no-repeat;
+            background-position:right center;
+            }
             span{margin:0 10px 0 15px; color:#fff;}
         }
         .btnBox{
@@ -45,10 +49,8 @@
             button{
             height:25px;
             line-height:20px;
-                &:hover{
-                    background:#485b7b;
-                    color:#fff;
-                }
+            img{margin-right:5px;}
+            &:hover{background:#ccc}
             }
             
         }
@@ -170,33 +172,50 @@
         float:left;
         margin-left:15px;
         height:780px;
+        position:relative;
         background: rgba(70,76,88,0.5);
         .tablebox{
             width:100%;
             height:360px;
-             overflow:auto;
-            .tabtit{
-                width:1500px;
-                height:40px;
-                background: #464c58;
-                span{display:inline-block;width:150px;height:40px;line-height:40px;color:#fff;text-align:center;border-right:1px solid #fff;}
+            position:relative;
+            overflow-x:auto;
+            overflow-y:hidden;
+             .tabtit{
+                position:absolute;
+                top:0px;
+                left:0px;
+                height:35px;
+                white-space:nowrap;
+                span{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border-right:1px solid #fff;background: #464c58;min-width:160px;}
                 span:last-child{border-right:none;}
             }
-            .tabline{
-                    width:100%;
-                    display:inline-block;
-                    div{
-                        width:1500px;
-                        height:40px;
-                        border-bottom:1px solid #fff;
-                        span{display:inline-block;width:150px;height:40px;line-height:40px;color:#fff;text-align:center;border-right:1px solid #fff;}
-                        span:last-child{border-right:none;}
-
-                    }
+            .tabody{
+                width:2282px;
+                overflow-y:auto;
+                height:325px;
+                margin-top:35px;
+                .tabline{
+                background: #30343f;
+                
+                height:35px;
+                white-space:nowrap;
+                td{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border:1px solid #fff;min-width:160px;}
+                span:last-child{border-right:none;}
+                }
+                 .tabline1{
+                background: #272b34;
+                height:35px;
+                white-space:nowrap;
+                td{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border:1px solid #fff;min-width:160px;}
+                span:last-child{border-right:none;}
+                }
             }
             
         }
         .columnbox{
+        position:absolute;
+        bottom:0px;
+        left:0px;
          width:100%;
          height:400px;
          margin-top:20px;

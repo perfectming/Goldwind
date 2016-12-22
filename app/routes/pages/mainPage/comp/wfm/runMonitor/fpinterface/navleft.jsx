@@ -31,7 +31,7 @@ var d = new Date();
 let str=d.getDate();
 (function(){
  
-    // console.log(datem)
+     // console.log(date)
 
      // for(let abs in datem){ 
      //    console.log(datem.abs)
@@ -149,7 +149,7 @@ let str=d.getDate();
                                         <div className={styles.leftname}>{wtname[key]}</div>
                                         <div className={styles.leftnum}>
                                             <a>{uint[key]}</a>
-                                            <span className={styles.tabnum}>--</span>
+                                            <span className={styles.tabnum}>{((1-(date[fc_info].WFMonthFaultTime/date[fc_info].WFMonthOutOkTime))*100).toFixed(2)=='NaN' ? '--' : ((1-(date[fc_info].WFMonthFaultTime/date[fc_info].WFMonthOutOkTime))*100).toFixed(2)}</span>
                                         </div>
                                     </div>
                                 )
