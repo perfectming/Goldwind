@@ -1,0 +1,127 @@
+.bodyBox {
+  display:inline-table;
+  width: 1810px;
+  overflow-x: hidden;
+  border-top: 1px solid #3BA9AE;
+  border-left: 1px solid #3BA9AE;
+  min-height: 1010px;
+  position:relative;
+  padding-left: 30px;
+  .clearbox{
+  	clear:both
+  }
+  .fiexd{
+    width:169px;
+    height:50px;
+    position:absolute;
+    top:8px;
+    right:23px;
+    padding-top:10px;
+    z-index:999;
+    img{
+    margin-right:10px;
+    cursor:pointer;
+    }
+   
+  }
+  .ifshow{display:none;}
+}
+.bodyBox1 {
+  display:inline-table;
+  width: 100%;
+  overflow-x: hidden;
+  border-top: 1px solid #3BA9AE;
+  border-left: 1px solid #3BA9AE;
+  height: 1010px;
+  position:relative;
+  padding-left: 30px;
+  .clearbox{
+    clear:both
+  }
+  .fiexd{
+    width:169px;
+    height:50px;
+    position:absolute;
+    top:8px;
+    right:27px;
+    padding-top:10px;
+    display:none;
+    z-index:999;
+    img{
+    margin-right:10px;
+    cursor:pointer;
+    }
+  }
+  .ifshow{display:none;}
+
+}
+
+
+.animate{
+padding-left:55px;
+width: 1870px;
+  animation:myfirst 1s;
+-moz-animation:myfirst 1s; 
+-webkit-animation:myfirst 1s; 
+-o-animation:myfirst 1s; 
+}
+.animate1{
+padding-left:30px;
+width: 1810px;
+  animation:myfirst1 1s;
+-moz-animation:myfirst1 1s; 
+-webkit-animation:myfirst1 1s; 
+-o-animation:myfirst1 1s; 
+}
+@keyframes myfirst
+{
+0%   {padding-left:30px;width: 1810px;}
+100% {padding-left:55px;width: 1870px;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+0%   {padding-left:30px;width: 1810px;}
+100% {padding-left:55px;width: 1870px;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+0%   {padding-left:30px;width: 1810px;}
+100% {padding-left:55px;width: 1870px;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+0%   {padding-left:30px;width: 1810px;}
+100% {padding-left:55px;width: 1870px;}
+}
+
+
+
+
+
+
+@keyframes myfirst1
+{
+0%   {padding-left:55px;}
+100% {padding-left:30px;}
+}
+
+@-moz-keyframes myfirst1 /* Firefox */
+{
+0%   {padding-left:55px;}
+100% {padding-left:30px;}
+}
+
+@-webkit-keyframes myfirst1 /* Safari and Chrome */
+{
+0%   {padding-left:55px;}
+100% {padding-left:30px;}
+}
+
+@-o-keyframes myfirst1 /* Opera */
+{
+0%   {padding-left:55px;}
+100% {padding-left:30px;}
+}

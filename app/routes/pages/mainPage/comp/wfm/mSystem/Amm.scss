@@ -1,0 +1,154 @@
+
+.bodyBox{
+  .roleputBox{
+  width:100%;
+  height:100%;
+  border:1px solid #3B888F;
+
+    .inquireBox{
+      width:100%;
+      height:80px;
+      border-top: 1px solid #676971;
+      border-bottom: 1px solid #676971;
+      margin-bottom:40px;
+      padding: 10px;
+      overflow:hidden;
+      color: #fff;
+      input,select,button,option{
+        background: #181a25;
+      }
+      span{
+        color:#fff;
+        margin-right:10px;
+        margin-left:20px;
+        line-height:60px;
+      }
+      .seleBox{
+        float:left;
+      }
+      .inputBox{
+        float:left;
+      }
+      .dateBox{
+        float:left;
+      }
+      .btnBox{
+        float:left;
+        margin-top:16px;
+        margin-left:20px;
+        font-size:16px;
+        button{
+          &:hover{
+            background:#485b7b;
+            color:#fff;
+          }
+        }
+
+      }
+    }
+
+}
+.actionBox {
+  width: 100%;
+  text-align: left;
+  margin: 30px 0 30px 30px;
+  overflow: hidden;
+  img {
+    width: 30px;
+    margin-left: 50px;
+  }
+}
+
+  .tableBox {
+
+    overflow: hidden;
+    .tableHeaderBox {
+      overflow: hidden;
+      background: #464c58;
+      .tableHeaderItem {
+        float: left;
+        height:40px;
+        line-height:40px;
+        overflow: hidden;
+        color:#fff;
+        text-align: center;
+      }
+    }
+    .tableContentBox {
+      font-size: 14px;
+      .tableContentLine {
+        color:#fff;
+        background: #30343f;
+        overflow: hidden;
+        &:hover{
+          border:1px solid #2ff4fb;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 40px;
+          line-height:40px;
+          border: none;
+          img{
+            height:20px;
+            width:20px;
+          }
+        }
+        input{
+          background: #30343f;
+          border:6px solid transparent;
+          &:hover{
+            background:#485b7b;
+          }
+        }
+        .tableLineNum {
+          width: 65px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+      .tableContentLine1 {
+        color:#fff;
+        overflow: hidden;
+        background: #272b34;
+        &:hover{
+          border:1px solid #2ff4fb;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          line-height:40px;
+          text-align: center;
+          height: 40px;
+          border: none;
+          img{
+            height:20px;
+            width:20px;
+          }
+        }
+        input{
+          background: #272b34;
+          border:6px solid transparent;
+          &:hover{
+            background:#485b7b;
+          }
+        }
+        .tableLineNum {
+          width: 65px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+    }
+  }
+
+
+}
+
+
+
