@@ -31,7 +31,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let{ipUrl,btn=0,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,areaNamee,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaNameN,areaRecordCostN,areaRecordProfitN}=this.props;
+        let{width,ipUrl,btn=0,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,areaNamee,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaNameN,areaRecordCostN,areaRecordProfitN}=this.props;
        
           return (
            <div className={styles.box}>
@@ -43,7 +43,7 @@ let Component = React.createClass({
                 <div className={styles.xx} onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-  <Windce areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={pointWidth} width={12000} height={483} ly={10}></Windce>
+  <Windce areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={20} width={width} height={483} ly={10} pointPlacement={0}></Windce>
                 </div>
 
                 
@@ -63,7 +63,7 @@ let Component = React.createClass({
                    
                    
                           
-                                <Windce areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} height={800} text={xxdwfNa+text[actbt]+'月各风机发电量'} ly={40}></Windce>
+                                <Windce areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={800} text={xxdwfNa+text[actbt]+'月各风机发电量'} ly={40} pointPlacement={-0.07}></Windce>
                           
                        
                        
@@ -104,6 +104,7 @@ const mapStateToProps = (state) => {
          btn:state.vars.btnn,
         // 传过来的ip
         ipUrl:state.vars.ipUrl,
+        width:state.vars.width1,
     }
 };
 
@@ -114,20 +115,23 @@ const mapDispatchToProps = (dispatch) => {
             let arr1=[];
             let arr2=[];
             let arr3=[];
+            let date =new Date();
+            let year =date.getFullYear();
+            let month= date.getMonth();
           
            $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/ELEC/getWtAreaElec',  
              async:false,
             data:{
-             'year':2016,
-             'month':11,
-             'wfid':150828
+             'year':year,
+             'month':month,
+             'wfid':xxdwfId
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-            
+           
              // 获取x轴的值内蒙达茂天润风电场
              let dataa=data.data;
              for(let i=0;i<10;i++){
@@ -144,7 +148,7 @@ const mapDispatchToProps = (dispatch) => {
                 
              },
            });
-           dispatch(actions.setVars('actbt',10 ));
+           dispatch(actions.setVars('actbt',month-1 ));
            dispatch(actions.setVars('areaNamee',arr1));
              dispatch(actions.setVars('wind',arr3));
              dispatch(actions.setVars('windP',arr2));
@@ -270,7 +274,7 @@ const mapDispatchToProps = (dispatch) => {
              timeout:'3000',
              success:function(data){
            
-           
+          
              // 获取x轴的值内蒙达茂天润风电场
              var dataa=data.data;
              for(var i=0;i<10;i++){
@@ -341,10 +345,13 @@ const mapDispatchToProps = (dispatch) => {
              $("#sss").show();
              $('#boxcover').show();
               let date=new Date();
+
        let year= date.getFullYear();
              let arr4=[];
             let arr5=[];
             let arr6=[];
+            let width=0;
+
            $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/ELEC/getPageSize',  
@@ -370,10 +377,14 @@ const mapDispatchToProps = (dispatch) => {
                  arr5.push(yPowerPlan);
                  var yPowerAct=data.data[i].poweract;
                  arr6.push(yPowerAct);
+
+
              }
          
 
- 
+            let length=arr4.length;
+              width =length*60;
+           
 
              },
              error:function(){
@@ -384,6 +395,7 @@ const mapDispatchToProps = (dispatch) => {
                dispatch(actions.setVars('areaRecordCostNb',arr6));
                dispatch(actions.setVars('areaRecordProfitNb',arr5));
                 dispatch(actions.setVars('btnn',2));
+                dispatch(actions.setVars('width1',width));
         },
         close:()=>{
             $("#sss").hide();

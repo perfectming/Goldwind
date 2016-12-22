@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let data = require('./Profit-data2');
-let input_url="10.9.99.65";
+
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
 
-        let {PBAGroupPba,PBAGroupNodevreasonloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupFaultloss,areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
+        let {input_url,PBAGroupPba,PBAGroupNodevreasonloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupFaultloss,areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
         let configPie = {
             chart: {
                 height:400,
@@ -81,7 +81,7 @@ let Component = React.createClass({
 
                         $.ajax({
                      type:'post',
-                     url:'http://'+input_url+':8080/wbi/PBA/getCompanyDayTimePBA',
+                     url:'http://'+input_url+'/wbi/PBA/getCompanyDayTimePBA',
                      async:false,
                      dataType:'json',
                      data:{

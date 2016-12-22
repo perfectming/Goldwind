@@ -7,7 +7,6 @@ import icono from '../img/PBA.png';
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data2');
-let input_url="10.9.99.65";
 let month=data.month;
 let button=data.button;
 let areaName=data.areaName;
@@ -33,14 +32,16 @@ let areaNamee=data.areaNamee;
 let text2=data.text[2];
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+      let{ipUrl}=this.props;
+        this.props.ajax(ipUrl);
+      
     },
      componentDidMount() {
         this.props.init();
     },
 
     render() {
-      let{PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,wq='风场1',more,changpage,wind,windP,close,actbt=0,backtop,befor_pagee='group',befor_pagee2,w0,ww,}=this.props;
+      let{ipUrl,PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,wq='风场1',more,changpage,wind,windP,close,actbt=0,backtop,befor_pagee='group',befor_pagee2,w0,ww,}=this.props;
        
           return (
            <div className={styles.box}>
@@ -48,7 +49,7 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>11月份1区域1风场各风机PBA</p>
+            
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <Fanchart machine={PBAGroupFirstDayy} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} height={500} width={1760}></Fanchart>
@@ -59,7 +60,7 @@ let Component = React.createClass({
                    <div className={styles.bgc}> <img src={icono}/></div>
                    <div className={`${styles.areabox} ${styles.shadow}`}>
                        <div>
-                           <AreaTable PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth} areaRecordProfit={PBAGroupPoweract} PBAGroupMaintainloss={PBAGroupMaintainloss} PBAGroupLimitloss={PBAGroupLimitloss} PBAGroupNodevreasonloss={PBAGroupNodevreasonloss} PBAGroupPba={PBAGroupPba}text0={text0} text1={text1}></AreaTable>
+                           <AreaTable PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth} areaRecordProfit={PBAGroupPoweract} PBAGroupMaintainloss={PBAGroupMaintainloss} PBAGroupLimitloss={PBAGroupLimitloss} PBAGroupNodevreasonloss={PBAGroupNodevreasonloss} PBAGroupPba={PBAGroupPba}text0={text0} text1={text1} input_url={ipUrl}></AreaTable>
                            <p className={styles.titww}>集团每月PBA</p>
                        </div>
                    </div>
@@ -115,13 +116,15 @@ const mapStateToProps = (state) => {
           PBAGroupFirstLimitloss: state.vars.PBAGroupFirstLimitloss1,
           PBAGroupFirstNodevreasonloss: state.vars.PBAGroupFirstNodevreasonloss1,
           PBAGroupFirstPba: state.vars.PBAGroupFirstPba12,
+          //ipUrl
+          ipUrl:state.vars.ipUrl,
 
 
     }
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-       ajax: () => {
+       ajax: (input_url) => {
         let PBAGroupMonth=[];
         let PBAGroupFirstDay=[];
         let PBAGroupPoweract=[];
@@ -139,7 +142,7 @@ const mapDispatchToProps = (dispatch) => {
         // 获取12个月的PBA
           $.ajax({
                      type:'post',
-                     url:'http://'+input_url+':8080/wbi//PBA/getCompanyTimePBA',
+                     url:'http://'+input_url+'/wbi//PBA/getCompanyTimePBA',
                      async:false,
                      dataType:'json',
                      timeout:'3000',

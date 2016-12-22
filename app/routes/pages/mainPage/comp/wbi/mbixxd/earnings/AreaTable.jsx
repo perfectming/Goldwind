@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var $=require('jquery');
 var ReactHighcharts = require('react-highcharts');
-var input_url="10.68.100.32";
+
 let data = require('./Profit-data1');
 let sqy =data.areaRecordCostQY;
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height}=this.props;
+        let {input_url,width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height}=this.props;
        
         
         let configPie = {
@@ -94,7 +94,7 @@ let Component = React.createClass({
                         // 点击第一张图第二张变
                          $.ajax({
                      type:'post',
-                     url:'http://'+input_url+':8080/wbi/yield/getYieldByGroupid',
+                     url:'http://'+input_url+'/wbi/yield/getYieldByGroupid',
                      async:false,
                     data:{
                    'startdate':year+"-"+(keyy)+"-"+'1',
@@ -144,7 +144,7 @@ let Component = React.createClass({
                          // 点击第一张图第三张图变
       $.ajax({
                       type:'post',
-                      url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
+                      url:'http://'+input_url+'/wbi/yield/getYieldByWfid',
                       async:false,
                      data:{
                    

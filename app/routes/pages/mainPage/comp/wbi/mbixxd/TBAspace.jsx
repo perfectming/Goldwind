@@ -24,7 +24,7 @@ let Component = React.createClass({
     },
     render() {
        
-        let{ipUrl,wTBATM,wTBADownM,wTBARunM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+        let{width,ipUrl,wTBATM,wTBADownM,wTBARunM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
         return (
            
             <div className={styles.box}>
@@ -36,7 +36,7 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-            <TBAspacechart fanCost={wTBADownM} machine={wTBANaM} fanProfitQ={wTBARunM} TBA={wTBATM} height={500} width={24000} ty={0}></TBAspacechart></div>
+            <TBAspacechart fanCost={wTBADownM} machine={wTBANaM} fanProfitQ={wTBARunM} TBA={wTBATM} height={500} width={width} ty={0} pointWidth={20} borderRadius={4} pointPlacement={0.07}></TBAspacechart></div>
 
              </div>
                 <ul className={styles.monthbox}>
@@ -54,7 +54,7 @@ let Component = React.createClass({
                   
                       
                             <div>
-                                <TBAspacechart fanCost={wTBADown} machine={wTBANa} fanProfitQ={wTBARun} TBA={wTBAT} height={800} text={xxdwfNa+[actbt+1]+'月各风机TBA'} ty={50}></TBAspacechart>
+                                <TBAspacechart fanCost={wTBADown} machine={wTBANa} fanProfitQ={wTBARun} TBA={wTBAT} height={800} text={xxdwfNa+[actbt+1]+'月各风机TBA'} ty={50} pointWidth={30} borderRadius={4} pointPlacement={-0.07}></TBAspacechart>
                             </div>
                        
                
@@ -99,7 +99,8 @@ const mapStateToProps = (state) => {
         wTBADownM:state.vars.wTBADown1qM,
         wTBATM:state.vars.wTBAT1qM,
         btn:state.vars.btnn,
-        ipUrl:state.vars.ipUrl
+        ipUrl:state.vars.ipUrl,
+        width:state.vars.width1,
     }
 };
 
@@ -315,6 +316,7 @@ const mapDispatchToProps = (dispatch) => {
           let wTBADownM=[];
           let wTBARunM=[];
           let wTBATM=[];
+          let width=0;
            $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/TBA/getWfAllWtByM',  
@@ -343,7 +345,8 @@ const mapDispatchToProps = (dispatch) => {
                 wTBATM.push(Number(tba.toFixed(1)));
              }
    
-
+      let length=wTBANaM.length;
+      width=length*60;
              },
              error:function(){
                
@@ -354,6 +357,7 @@ const mapDispatchToProps = (dispatch) => {
            dispatch(actions.setVars('wTBADown1qM',wTBADownM)); 
            dispatch(actions.setVars('wTBAT1qM',wTBATM)) ;
            dispatch(actions.setVars('btnn',2)) ;
+           dispatch(actions.setVars('width1',width)) ;
          
         },
         close:()=>{

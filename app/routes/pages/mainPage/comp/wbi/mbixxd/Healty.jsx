@@ -7,7 +7,6 @@ var $=require('jquery');
 var actions = require('redux/actions');
 
  let  data=require('./Profit-dataq');
-let input_url="10.9.99.65";
 let x0=[];
 let x1=[];
 let x2=[];
@@ -26,7 +25,7 @@ let Component = React.createClass({
         let areaRecordProfit=data.areaRecordProfit;
         let machineE=data.machineE;
         let text =data.textHealty;
-      let{ipUrl,xxdwfNa,xxdwfId,WText,back,actbt,btn=0,changpage,wind,gogogo,windP,windPP,windd,actbtt,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+      let{width,ipUrl,xxdwfNa,xxdwfId,WText,back,actbt,btn=0,changpage,wind,gogogo,windP,windPP,windd,actbtt,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
         return (
 
             <div className={styles.box}>
@@ -38,7 +37,7 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-          <Healtychart machineE={windPP} areaRecordProfit={windd} width={18000} height={450} ty={20}></Healtychart>
+          <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={450} ty={20} pointWidth={20} borderRadius={4}></Healtychart>
                 </div>
              </div>
                  <ul className={styles.monthbox}>
@@ -57,7 +56,7 @@ let Component = React.createClass({
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                   
                       
-                               <Healtychart machineE={windP}         areaRecordProfit={wind} height={800} text={xxdwfNa+text[actbt]} ty={40}></Healtychart>
+                               <Healtychart machineE={windP}         areaRecordProfit={wind} height={800} text={xxdwfNa+text[actbt]} ty={40} pointWidth={30} borderRadius={7}></Healtychart>
                        
                         
                  
@@ -96,6 +95,7 @@ const mapStateToProps = (state) => {
         xxdwfId:state.vars.xxdwfId1,
         xxdwfNa:state.vars.xxdwfNa1,
         ipUrl:state.vars.ipUrl,
+        width:state.vars.width1,
 
 
     }
@@ -274,7 +274,7 @@ const mapDispatchToProps = (dispatch) => {
        let year =date.getFullYear();
             let WSHealH=[];
             let WSHealName=[];
-           
+           let width=0;
             let month =date.getMonth();
              $.ajax({
              type:'post',
@@ -296,9 +296,12 @@ const mapDispatchToProps = (dispatch) => {
               let wtname=WSHeal[i].wtname;
               WSHealName.push(wtname);
             }
+            let length=WSHealName.length;
+            width=length*45;
             dispatch(actions.setVars('WSHealH11',WSHealH ));
             dispatch(actions.setVars('WSHealName11',WSHealName ));
              dispatch(actions.setVars('btnn',2));
+            dispatch(actions.setVars('width1',width));
             
              },
              error:function(){

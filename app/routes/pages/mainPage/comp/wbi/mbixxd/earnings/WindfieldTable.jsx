@@ -2,14 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let input_url="10.68.100.32";
 let data = require('./Profit-data1');
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
-        let {height,windFiled,windCost,windProfit,w111,changedata1,TBA,year,monthh,daycount,keyy,areaWindids,text}=this.props;
+        let {input_url,height,windFiled,windCost,windProfit,w111,changedata1,TBA,year,monthh,daycount,keyy,areaWindids,text}=this.props;
      
         let configPie = {
 
@@ -80,7 +79,7 @@ let Component = React.createClass({
                          let areaWindNames=[];
                         $.ajax({
                      type:'post',
-                     url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',
+                     url:'http://'+input_url+'/wbi/yield/getYieldByWfid',
                      async:false,
                     data:{
                       

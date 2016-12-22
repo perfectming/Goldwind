@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaPlan,ly,text,areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
+        let {pointPlacement,areaPlan,ly,text,areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
          
         let configPie = {
             chart: {
@@ -134,7 +134,7 @@ let Component = React.createClass({
                 data: areaRecordCostT,
                 color:'#70c080',
                 borderRadius: 7,
-                pointPlacement:-0.07,
+                pointPlacement:pointPlacement,
               
             }]
         };

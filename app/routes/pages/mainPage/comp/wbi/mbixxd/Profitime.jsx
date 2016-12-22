@@ -8,17 +8,17 @@ var actions = require('redux/actions');
 let data=require('./Profit-dataq');
 let month=data.month;
 let button=data.button;
-let input_url="10.9.99.65";
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+        let{ipUrl}=this.props;
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-        let {w0,GERa,GEAm,GENa,GEIn,GeR,GeM,GeE,GeC,actbt,changpage,backtop,befor_pagee='group',befor_pagee2}=this.props;
+        let {ipUrl,w0,GERa,GEAm,GENa,GEIn,GeR,GeM,GeE,GeC,actbt,changpage,backtop,befor_pagee='group',befor_pagee2}=this.props;
         return (
             <div className={styles.box}>
             <div className={styles.padding}>
@@ -29,7 +29,7 @@ let Component = React.createClass({
                         <img src={icono}/>
                        </div>
                             <div>
-                                <Profitimechart GeR={GeR} GeE={GeE} GeC={GeC} GeM={GeM} text={'集团每月收益'}height={420} ></Profitimechart>
+                                <Profitimechart GeR={GeR} GeE={GeE} GeC={GeC} GeM={GeM} text={'集团每月收益'}height={420} input_url={ipUrl}></Profitimechart>
                             </div>
                 </div>
                  <div className={styles.bigbox}>
@@ -64,12 +64,13 @@ const mapStateToProps = (state) => {
         GEAm:state.vars.GEAm1,
         GERa:state.vars.GERa1,
         w0:state.vars.w0GE,
+        ipUrl:state.vars.ipUrl,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      ajax:()=>{
+      ajax:(input_url)=>{
         // 上面12各月的数据
             let arr1=[];
             let arr2=[];
@@ -83,7 +84,7 @@ const mapDispatchToProps = (dispatch) => {
            
           $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getAllRate',  
+             url:'http://'+input_url+'/wbi/yield/getAllRate',  
              async:false,
              dataType:'json',
              timeout:'3000',
@@ -111,7 +112,7 @@ const mapDispatchToProps = (dispatch) => {
             
              },
              error:function(){
-                
+                console.log(3)
              }
            });
      // 获取每天的收益
@@ -123,7 +124,7 @@ const mapDispatchToProps = (dispatch) => {
           
            $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getMaxYieBayDay',  
+             url:'http://'+input_url+'/wbi/yield/getMaxYieBayDay',  
              async:false,
              data:{
               'month':month,
@@ -149,7 +150,9 @@ const mapDispatchToProps = (dispatch) => {
              
              },
              error:function(){
-                
+                console.log(2);
+                console.log(month);
+                console.log('http://'+input_url+'/wbi/yield/getMaxYieBayDay')
               }
           })
        

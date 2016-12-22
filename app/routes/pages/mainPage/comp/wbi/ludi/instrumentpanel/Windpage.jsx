@@ -227,7 +227,7 @@ const mapDispatchToProps = (dispatch) => {
 			        		wfId.push(data.data.everyAreaPba[i].wfid);
 			        	};
 			        	dispatch(actions.setVars('wfName',wfName ));
-						}
+						
 						dispatch(actions.setVars('wfName',wfName ));
 			        	dispatch(actions.setVars('wfId',wfId ));
 			        },

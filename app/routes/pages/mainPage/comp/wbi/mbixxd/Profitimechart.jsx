@@ -4,12 +4,12 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Profit-dataq');
-let input_url="10.9.99.65";
+
 let Component = React.createClass({
     componentWillMount() {
     },
     render() { 
-      let{changedata3,height,GeR,GeM,GeE,GeC,text}=this.props;
+      let{input_url,changedata3,height,GeR,GeM,GeE,GeC,text}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -67,7 +67,7 @@ let Component = React.createClass({
                     pointPadding: 10,
                     stacking:'nomal',
                     pointWidth: 25,
-                    borderRadius:10
+                    borderRadius:5
 
                 }, series: {
                     cursor: 'pointer',
@@ -88,7 +88,7 @@ let Component = React.createClass({
           
            $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getMaxYieBayDay',  
+             url:'http://'+input_url+'/wbi/yield/getMaxYieBayDay',  
              async:false,
              data:{
               'month':month,
@@ -96,7 +96,7 @@ let Component = React.createClass({
              dataType:'json',
              timeout:'3000',
              success:function(data){
-                console.log(data)
+           
            let GE=data.data;
            for( let i in GE){
           let incomes=GE[i].incomes
@@ -114,7 +114,7 @@ let Component = React.createClass({
              
              },
              error:function(){
-                
+                console.log(1)
               }
           })
        

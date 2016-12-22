@@ -8,7 +8,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {ty,TBA,text,fanCost,machine,fanProfitQ,width,height}=this.props;
+        let {pointPlacement,borderRadius,pointWidth,ty,TBA,text,fanCost,machine,fanProfitQ,width,height}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -148,9 +148,10 @@ let Component = React.createClass({
                 data: fanProfitQ,
                 color:'#33BAC0',
                 shadow:true,
-                pointWidth: 30,
+                pointWidth: pointWidth,
                 borderWidth: 0, 
-                borderRadius: 7,
+                borderRadius:borderRadius,
+                pointPlacement:0
 
             },
                 {
@@ -159,9 +160,10 @@ let Component = React.createClass({
                     color:'#5298d3',
                     data: fanCost,
                     stack:'waste',
-                    pointWidth: 30,
-                    borderRadius: 3,
+                    pointWidth: pointWidth,
+                    borderRadius: borderRadius,
                     color:'#FFFFFF',
+                    pointPlacement:pointPlacement,
                 },
                 {
                     name: 'TBA',

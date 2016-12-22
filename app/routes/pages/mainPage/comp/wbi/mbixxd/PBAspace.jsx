@@ -31,7 +31,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{ipUrl,xxdwfId,xxdwfNa,btn=0,PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt=0,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+        let{width,ipUrl,xxdwfId,xxdwfNa,btn=0,PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt=0,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
         return (
             <div className={styles.box} >
             <div className={styles.boxcover} id='boxcover'></div>
@@ -48,7 +48,7 @@ let Component = React.createClass({
                    fanCostA={PBASpaceMoreMaintainloss} 
                    fanCostB={PBASpaceMoreLimitloss} 
                    fanCostC={PBASpaceMoreNodevreasonloss} 
-                   PBA={PBASpaceMorePba} height={450} width={17350} ty={10}></PBAspacechart>
+                   PBA={PBASpaceMorePba} height={450} width={width} ty={10} pointWidth={20} pointPlacement={0.07} borderRadius={4}></PBAspacechart>
                  </div>
              </div>
                
@@ -68,7 +68,7 @@ let Component = React.createClass({
                 
                     
                          
-                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={xxdwfNa+[actbt+1]+'月各风机PBA'} ty={60}></PBAspacechart>
+                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={xxdwfNa+[actbt+1]+'月各风机PBA'} ty={60} pointWidth={30}  pointPlacement={-0.07} borderRadius={4}></PBAspacechart>
                         
                     
                        
@@ -121,6 +121,7 @@ const mapStateToProps = (state) => {
         xxdwfNa:state.vars.xxdwfNa1,
         btn:state.vars.btnn,
         ipUrl:state.vars.ipUrl,
+        width:state.vars.width1,
 
     
     }
@@ -438,6 +439,7 @@ const mapDispatchToProps = (dispatch) => {
             let PBASpaceNodevreasonloss=[];
             let PBASpacePba=[];
             let PBASpacePbaPBA=[];
+            let width =0;
             $.ajax({
                 type:'post',
                 url:'http://'+input_url+'/wbi/PBA/getWFliedArea',
@@ -469,7 +471,8 @@ const mapDispatchToProps = (dispatch) => {
                         PBASpacePbaPBA.push(Number(pba.toFixed(1)));
                     }
         
-             
+             let length =PBASpaceWtname.length;
+              width=length*60;
            
       
             
@@ -490,6 +493,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBASpaceFirstNodevreasonloss11',PBASpaceNodevreasonloss ));
             dispatch(actions.setVars('PBASpaceFirstPba121',PBASpacePbaPBA ));
             dispatch(actions.setVars('btnn',2));
+            dispatch(actions.setVars('width1',width));
 
          
             // $('.box').css('opacity',".5")
