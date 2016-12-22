@@ -303,7 +303,7 @@ let Component = React.createClass({
                                                         <div className={`${styles.listoptbtn_2} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={keyA} onClick = {()=> Tofaninfo1(value,valueA,key)}><span>{valueA.Wtname}</span>
                                                             <div className={styles.listoptinfo}>
                                                                 <span>{valueA.Wtname}</span>
-                                                                    <p>{'风速:'+Number(valueA.WindSpeed).toFixed(2)+'m/s'}</p>
+                                                                    <p>{'辐照度:'+(valueA.PVTSI_Aver == undefined ? '--' : Math.ceil(valueA.PVTSI_Aver))+'W/㎡'}</p>
                                                                     <p>{'功率:'+Number(valueA.ActPwr).toFixed(2)+'KW'}</p>
                                                             </div>
                                                         </div>

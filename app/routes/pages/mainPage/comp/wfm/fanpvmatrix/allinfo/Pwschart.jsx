@@ -57,7 +57,7 @@ let Component = React.createClass({
             colors: [ '#1E664A', '#4CDB9D']
             ,
             tooltip: {
-                shared: false,
+                shared: true,
                 crosshairs: [true,true],
                 plotOptions: {
                     spline: {
@@ -73,13 +73,15 @@ let Component = React.createClass({
 
             xAxis: {
                 labels: {
-                step:10,
+                // step:1,
                
                 style: {
                     color: '#fff'
                 }
                 },
                 categories: xdata,
+                max:xdata.length-1,
+                min:xdata.length-15,
             },
             yAxis:[{ //第一个Y轴，序号为0
             labels: {
