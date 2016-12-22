@@ -29,7 +29,6 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
-            //图例说明
             legend: {
                 align:"center",
                 verticalAlign: "bottom",
@@ -42,9 +41,6 @@ let Component = React.createClass({
                 itemHoverStyle: {
                 color: '#31f3fb'
             	}
-            },
-            tooltip: {
-                
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -74,9 +70,6 @@ let Component = React.createClass({
                 
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
                 labels: {
                 	format:'{value}',
                     y: 10, //x轴刻度往下移动20px

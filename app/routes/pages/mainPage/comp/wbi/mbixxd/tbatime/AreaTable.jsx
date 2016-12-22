@@ -2,14 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let data = require('./Profit-data');
+let data = require('./Profit-data3');
 var $=require('jquery');
-let input_url="10.68.100.32";
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
+        let { input_url,w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
         let configPie = {
             chart: {
                 height:430,
@@ -77,7 +76,7 @@ let Component = React.createClass({
                          let tbaDayTba=[];
                         $.ajax({
                      type:'post',
-                     url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByMonth',
+                     url:'http://'+input_url+'/wbi/TBA/getDaysTBAByMonth',
                      async:false,
                      dataType:'json',
                      data:{

@@ -6,7 +6,7 @@ import icono from './img/ele.png';
 import Month from './Month';
 var $=require('jquery');
 var actions = require('redux/actions');
-let data=require('./Profit-data')
+let data=require('./Profit-dataq')
 let button=data.button;
 let areaName=data.areaName;
 let areaRecordCost=data.areaRecordCost;
@@ -14,7 +14,7 @@ let areaRecordProfit=data.areaRecordProfit[0];
 let text=data.textF;
 let colorO='#5B9BD5';
 let colorT='#ED7D31';
-let input_url="10.68.100.32";
+// let input_url="10.68.100.32";
 let pointWidth=30;
 let x0=[];
 let x1=[];
@@ -23,15 +23,15 @@ let x3=[];
 let windPT=data.windareace;
 let Component = React.createClass({
    componentWillMount() {
-        let{xxdwfId,xxdwfNa}=this.props;
+        let{xxdwfId,xxdwfNa,ipUrl}=this.props;
 
-        this.props.ajax(xxdwfId,xxdwfNa);
+        this.props.ajax(xxdwfId,xxdwfNa,ipUrl);
     },
     componentDidMount() {
         this.props.init();
     },
     render() {
-        let{btn=0,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,areaNamee,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaNameN,areaRecordCostN,areaRecordProfitN}=this.props;
+        let{width,ipUrl,btn=0,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,areaNamee,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaNameN,areaRecordCostN,areaRecordProfitN}=this.props;
        
           return (
            <div className={styles.box}>
@@ -39,11 +39,11 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{text[actbt]+'月各风机发电量'}</p>
+                <p>{xxdwfNa+text[actbt]+'月各风机发电量'}</p>
                 <div className={styles.xx} onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-  <Windce areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={pointWidth} width={12000} height={483} ly={10}></Windce>
+  <Windce areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={20} width={width} height={483} ly={10} pointPlacement={0}></Windce>
                 </div>
 
                 
@@ -52,10 +52,10 @@ let Component = React.createClass({
             <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,ipUrl)} key={key}>{value.name}</li>)
                         })
                     }
-        <li className={styles.back1} onClick={()=>backtop(befor_pagee,befor_page2)}>{xxdwfNa}</li>
+        
     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
        
                 </ul>
@@ -63,7 +63,7 @@ let Component = React.createClass({
                    
                    
                           
-                                <Windce areaNameX={areaNamee==null?areaName:areaNamee}  areaRecordCostT={wind==undefined? areaRecordCost:wind} areaRecordProfitO={windP==undefined?areaRecordProfit:windP} colorO={colorO} colorT={colorT} pointWidth={pointWidth} height={800} text={text[actbt]+'月各风机发电量'} ly={40}></Windce>
+                                <Windce areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={800} text={xxdwfNa+text[actbt]+'月各风机发电量'} ly={40} pointPlacement={-0.07}></Windce>
                           
                        
                        
@@ -72,9 +72,9 @@ let Component = React.createClass({
                     <img src={icono}/>
                 </div>
                 <div className={`${styles.buttons} ${styles.buttonss}`}>
-                      <button className={btn===0? styles.btn0 : styles.btn1} onClick={()=>gogogo(actbt)} > 前10</button>
-                      <button className={btn===1? styles.btn0 : styles.btn1} onClick={()=>back(actbt)}>后10</button>
-                      <button className={btn===2? styles.btn0 : styles.btn1} onClick={()=>more(actbt)}>更多</button>
+                      <button className={btn===0? styles.btn0 : styles.btn1} onClick={()=>gogogo(actbt,ipUrl,xxdwfId)} > 前10</button>
+                      <button className={btn===1? styles.btn0 : styles.btn1} onClick={()=>back(actbt,ipUrl,xxdwfId)}>后10</button>
+                      <button className={btn===2? styles.btn0 : styles.btn1} onClick={()=>more(actbt,ipUrl,xxdwfId)}>更多</button>
                    </div>
                 </div>   
            </div>
@@ -102,30 +102,36 @@ const mapStateToProps = (state) => {
          xxdwfId:state.vars.xxdwfId1,
         xxdwfNa:state.vars.xxdwfNa1,
          btn:state.vars.btnn,
+        // 传过来的ip
+        ipUrl:state.vars.ipUrl,
+        width:state.vars.width1,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-       ajax: (xxdwfId,xxdwfNa) => {
-         
+       ajax: (xxdwfId,xxdwfNa,input_url) => {
+    
             let arr1=[];
             let arr2=[];
             let arr3=[];
+            let date =new Date();
+            let year =date.getFullYear();
+            let month= date.getMonth();
           
            $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/ELEC/getWtAreaElec',  
+             url:'http://'+input_url+'/wbi/ELEC/getWtAreaElec',  
              async:false,
             data:{
-             'year':2016,
-             'month':11,
-             'wfid':150828
+             'year':year,
+             'month':month,
+             'wfid':xxdwfId
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-            
+           
              // 获取x轴的值内蒙达茂天润风电场
              let dataa=data.data;
              for(let i=0;i<10;i++){
@@ -142,7 +148,7 @@ const mapDispatchToProps = (dispatch) => {
                 
              },
            });
-           dispatch(actions.setVars('actbt',10 ));
+           dispatch(actions.setVars('actbt',month-1 ));
            dispatch(actions.setVars('areaNamee',arr1));
              dispatch(actions.setVars('wind',arr3));
              dispatch(actions.setVars('windP',arr2));
@@ -157,7 +163,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
-        changpage :(value,key)=>{
+        changpage :(value,key,input_url)=>{
             
             var arr1=[];
             var arr2=[];
@@ -165,10 +171,12 @@ const mapDispatchToProps = (dispatch) => {
             var areaids=[];
             var windids=[];
             var monthh=key+1;
+            let date = new Date();
+            let year= date.getFullYear();
             //获取所有的区域
             $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/BaseData/getGroup',  
+             url:'http://'+input_url+'/wbi/BaseData/getGroup',  
              async:false,
              dataType:'json',
              timeout:'3000',
@@ -188,7 +196,7 @@ const mapDispatchToProps = (dispatch) => {
            //获取所有的风场
            $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/BaseData/getWfsByGroupid',  
+             url:'http://'+input_url+'/wbi/BaseData/getWfsByGroupid',  
              async:false,
             data:{
              'groupid':areaids[0],
@@ -212,17 +220,17 @@ const mapDispatchToProps = (dispatch) => {
          //获取对应风场下面的数据
           $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/ELEC/getWtAreaElec',  
+             url:'http://'+input_url+'/wbi/ELEC/getWtAreaElec',  
              async:false,
             data:{
-             'year':2016,
+             'year':year,
              'month':monthh,
              'wfid':windids[1]
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-           console.log(data);
+
              // 获取x轴的值内蒙达茂天润风电场
              var dataa=data.data;
              for(var i=0;i<10;i++){
@@ -233,9 +241,7 @@ const mapDispatchToProps = (dispatch) => {
                  var yPowerAct=data.data[i].poweract;
                  arr3.push(yPowerAct);
              }
-            console.log(arr1);
-            console.log(arr2);
-            console.log(arr3);
+         
              },
              error:function(){
                  
@@ -247,19 +253,20 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('windP',arr2));
              dispatch(actions.setVars('btnn',0));
         },
-        gogogo:(actbt,btn)=>{
-    
+        gogogo:(actbt,input_url,xxdwfId)=>{
+       let date=new Date();
+       let year= date.getFullYear();
         var arr1=[];
             var arr2=[];
             var arr3=[];
            $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/ELEC/getPageSize',  
+             url:'http://'+input_url+'/wbi/ELEC/getPageSize',  
              async:false,
             data:{
-             'year':2016,
+             'year':year,
              'month':actbt+1,
-             'wfid':150828,
+             'wfid':xxdwfId,
              'type':0,
              'groupid':'',
             },
@@ -267,7 +274,7 @@ const mapDispatchToProps = (dispatch) => {
              timeout:'3000',
              success:function(data){
            
-           
+          
              // 获取x轴的值内蒙达茂天润风电场
              var dataa=data.data;
              for(var i=0;i<10;i++){
@@ -291,18 +298,20 @@ const mapDispatchToProps = (dispatch) => {
            
 
         },
-        back:(actbt,btn)=>{
+        back:(actbt,input_url,xxdwfId)=>{
              var arr1=[];
             var arr2=[];
             var arr3=[];
+             let date=new Date();
+       let year= date.getFullYear();
            $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/ELEC/getPageSize',  
+             url:'http://'+input_url+'/wbi/ELEC/getPageSize',  
              async:false,
             data:{
-             'year':2016,
+             'year':year,
              'month':actbt+1,
-             'wfid':150828,
+             'wfid':xxdwfId,
              'type':1,
              'groupid':'',
             },
@@ -332,20 +341,25 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('windP',arr2));
               dispatch(actions.setVars('btnn',1));
         },
-        more:(actbt)=>{
+        more:(actbt,input_url,xxdwfId)=>{
              $("#sss").show();
              $('#boxcover').show();
+              let date=new Date();
+
+       let year= date.getFullYear();
              let arr4=[];
             let arr5=[];
             let arr6=[];
+            let width=0;
+
            $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/ELEC/getPageSize',  
+             url:'http://'+input_url+'/wbi/ELEC/getPageSize',  
              async:false,
             data:{
-             'year':2016,
+             'year':year,
              'month':actbt+1,
-             'wfid':150828,
+             'wfid':xxdwfId,
              'type':2,
              'groupid':'',
             },
@@ -363,10 +377,14 @@ const mapDispatchToProps = (dispatch) => {
                  arr5.push(yPowerPlan);
                  var yPowerAct=data.data[i].poweract;
                  arr6.push(yPowerAct);
+
+
              }
          
 
- 
+            let length=arr4.length;
+              width =length*60;
+           
 
              },
              error:function(){
@@ -377,6 +395,7 @@ const mapDispatchToProps = (dispatch) => {
                dispatch(actions.setVars('areaRecordCostNb',arr6));
                dispatch(actions.setVars('areaRecordProfitNb',arr5));
                 dispatch(actions.setVars('btnn',2));
+                dispatch(actions.setVars('width1',width));
         },
         close:()=>{
             $("#sss").hide();

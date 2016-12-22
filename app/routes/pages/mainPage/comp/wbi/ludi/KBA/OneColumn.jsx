@@ -29,15 +29,11 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
-            //图例说明
             legend: {
             	enabled:false,
             	itemHoverStyle: {
                 color: '#31f3fb'
             	}
-            },
-            tooltip: {
-                
             },
             credits: {
                 enabled: false //不显示highCharts版权信息

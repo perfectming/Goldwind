@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let input_url="10.68.100.32";
+
 var $=require('jquery');
-let data = require('./Profit-data');
+let data = require('./Profit-dataq');
 let winss=data.areaPlanDayY;
 let fanCost=data.fanCost;
 let fanCostA=data.fanCostA;
@@ -14,7 +14,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {width,xxdwfId,xxdfc,monthT,profit,cost,w0,winsss,changedata3,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
+        let {input_url,width,xxdwfId,xxdfc,monthT,profit,cost,w0,winsss,changedata3,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
         let configPie = {
             chart: {
                 height:395,
@@ -90,7 +90,7 @@ let Component = React.createClass({
                       let PBATimeSecondPbaP=[];
                         $.ajax({
                 type:'post',
-                url:'http://'+input_url+':8080/wbi/PBA/getWfieldDayPBA',
+                url:'http://'+input_url+'/wbi/PBA/getWfieldDayPBA',
                 async:false,
                 data:{
                     'wfid':xxdwfId,

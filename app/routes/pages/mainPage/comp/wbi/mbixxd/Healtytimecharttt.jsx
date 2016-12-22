@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
+
 
 let Component = React.createClass({
     componentWillMount() {
@@ -97,7 +97,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'100',
+                text:'(100°H)',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -127,6 +127,9 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaPlanDay,
                 color:'#4CDB9D',
+                  tooltip: {
+               valueSuffix:'°H'
+            },
                 
             },
             ]

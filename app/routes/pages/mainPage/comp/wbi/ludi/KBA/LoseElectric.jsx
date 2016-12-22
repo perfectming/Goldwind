@@ -7,7 +7,7 @@ import ChartFive from './ChartFive.jsx';
 
 var actions = require('redux/actions');
 
-let loseArea = [],loseAreaName=[],loseAreaId=[];
+let loseArea = [],loseAreaName=[],loseAreaId=[],selectName=[],selectId=[];
 
 let Component = React.createClass({
 	componentWillMount() {
@@ -21,7 +21,7 @@ let Component = React.createClass({
     
 	render() {
 		let data=PBAdata,comp=data.list;
-		let {ipUrl,checkedLose=1,buttonAction, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
+		let {selectName,selectId,ipUrl,checkedLose=1,buttonAction, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
 		return(
 				<div className={styles.bodyBox}>
 					<div className={styles.inquireBox}>
@@ -60,17 +60,17 @@ let Component = React.createClass({
 		                                )
 		                        }else if (value.type === 'radio') {
 		                            return (
-		                                    <div className={styles.radioBox} key={key}>
-			                                    <span>指标项选择 :</span>
-			                                    <input type={value.type} id="loseElectric" checked={checkedLose==1? true:false} onChange={()=>checkedBoxElec()} name={value.type}/>
-			                                    <span>损失电量</span>
-			                                    <input type={value.type} id="loseProfit" checked={checkedLose==0? true:false} onChange={()=>checkedBoxPro()} name={value.type}/>
-			                                    <span>损失收入</span>
-		                                    </div>
-		                                )
+		                                <div className={styles.radioBox} key={key}>
+			                                <span>指标项选择 :</span>
+			                                <input type={value.type} id="loseElectric" checked={checkedLose==1? true:false} onChange={()=>checkedBoxElec()} name={value.type}/>
+			                                <span>损失电量</span>
+			                                <input type={value.type} id="loseProfit" checked={checkedLose==0? true:false} onChange={()=>checkedBoxPro()} name={value.type}/>
+			                                <span>损失收入</span>
+		                                </div>
+		                            )
 		                        }
-		                        })
-		                    }
+		                    })
+		                }
 		            </div>
 					<div className={styles.content}>
 						<div className={styles.areaLose}>
@@ -129,6 +129,33 @@ const mapDispatchToProps = (dispatch) => {
 				　　　}
 				},
 			});
+			$.ajax({
+        		url:'http://'+ipUrl+'/wbi/KPI/getGroupidAndwfid',//PBA表
+		        type: 'post',
+		        async:false,
+		        dataType: 'json',
+		        data:'',
+		        timeout : 60000, 
+		        success:function (data) {
+		        	console.log(data)
+		        	selectId=[],selectName=[];
+		        	for(var i in data.data){
+		        		selectId.push(data.data[i].groupid);
+		        		selectName.push(data.data[i].groupname);
+		        		for(var j in data.data[i].wfs){
+		        			selectId.push(data.data[i].wfs[j].wfid);
+		        			selectName.push(data.data[i].wfs[j].wfname);
+		        		}
+		        	}
+		        	console.log(selectId);
+		        	console.log(selectName);
+		        },
+		        complete : function(XMLHttpRequest,status){ 
+				　　　if(status=='timeout'){
+				　　　　　 console.log('超时');
+				　　　}
+				},
+			})
     	},
         init: () => {
         	//初始日期为上月

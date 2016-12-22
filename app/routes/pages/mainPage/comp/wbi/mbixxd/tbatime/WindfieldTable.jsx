@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
+let data = require('./Profit-data3');
 
 let Component = React.createClass({
     componentWillMount() {
@@ -56,11 +56,7 @@ let Component = React.createClass({
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0,
-                    borderWidth: 0,
-                    pointWidth: 15,
-                    borderRadius: 3,
-                    pointPadding:0.1,
+                    
                 }, series: {
                     cursor: 'pointer',
                     events: {
@@ -70,7 +66,7 @@ let Component = React.createClass({
                     }
                 }
             },
-          colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31', '#EB6B34','#2623FF'],  
+          
             xAxis: {
                 lineWidth: 1,
                 tickWidth: 0,

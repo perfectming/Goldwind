@@ -43,14 +43,13 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 },
                 itemHoverStyle: {
-                color: '#31f3fb'
+                	color: '#31f3fb'
             	}
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#5298d3', '#ffffff', '#e9c75c','#d06960','#5298d3']
-            ,
+            colors: [ '#33BAC0', '#5298d3', '#ffffff', '#e9c75c','#d06960','#5298d3'],
             plotOptions: {
                 column: {
                 	stacking:"normal",
@@ -62,7 +61,6 @@ let Component = React.createClass({
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -129,7 +127,7 @@ let Component = React.createClass({
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
+                    	AreaId=areaId[e.point.index];
                     	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
                     }
                 }
@@ -144,7 +142,7 @@ let Component = React.createClass({
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
+                    	AreaId=areaId[e.point.index];
                     	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
                     }
                 }
@@ -159,7 +157,7 @@ let Component = React.createClass({
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
+                    	AreaId=areaId[e.point.index];
                     	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
                     }
                 }
@@ -174,7 +172,7 @@ let Component = React.createClass({
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
+                    	AreaId=areaId[e.point.index];
                     	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
                     }
                 }
@@ -189,7 +187,7 @@ let Component = React.createClass({
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
+                    	AreaId=areaId[e.point.index];
                     	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
                     }
                 }
@@ -204,7 +202,7 @@ let Component = React.createClass({
                 events: {
                     click: function(e) {
                     	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
+                    	AreaId=areaId[e.point.index];
                     	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
                     }
                 }
@@ -271,6 +269,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(actions.setVars('wtLose', wtLose));
 			dispatch(actions.setVars('wtPBA', wtPBA));
 			dispatch(actions.setVars('wtData',wtData ));
+			dispatch(actions.setVars('choice', 1));
         },
     };
 };

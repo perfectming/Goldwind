@@ -10,7 +10,8 @@ let ip="10.68.100.32";
 
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+        let {ipUrl}=this.props
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -19,7 +20,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='group', returnit,actbt=10,changecolor,day0,poweract,powerplan} = this.props;
+        let {befor_pages='area',ipUrl, returnit,actbt=10,changecolor,day0,poweract,powerplan} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button = data.data.button;
@@ -39,7 +40,7 @@ let Component = React.createClass({
                     {
                         data.data.yearelectric[0].wind.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key)}>
+                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl)}>
                                     {value.name}
                                 </div>
                             )
@@ -55,7 +56,7 @@ let Component = React.createClass({
                                       barLpdpowerValue={powerplan}
                                       barLdpowerValue={day0}
                                       text={text0[actbt]+'月巴盟区域每日发电量'}></Hly_genday>
-                        <div className={styles.logomini}>
+                        <div className={styles.logomini5}>
 
                         </div>
                     </div>
@@ -77,19 +78,26 @@ const mapStateToProps = (state) => {
         day0:state.vars.day1,
         powerplan:state.vars.powerplan1,
         poweract:state.vars.poweract1,
+        ipUrl:state.vars.ipUrl,
 
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: () => {
+        ajax: (ipUrl) => {
             var obj = {
                 test: ''
             }
+            let date=new Date();
+            let year=date.getFullYear()
+            let month2=date.getMonth();
+
+            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/ELEC/getSpaceTimeElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getSpaceTimeElec',
                 async:false,
                 data:{
                     "month": 11,
@@ -102,7 +110,7 @@ const mapDispatchToProps = (dispatch) => {
                     let poweract=[];
                     let powerplan=[];
                     for(var i in data.data){
-                        day0.push(data.data[i].day);
+                        day0.push(data.data[i].day+"日");
                         poweract.push(data.data[i].poweract);
                         powerplan.push(data.data[i].powerplan);
 
@@ -124,14 +132,14 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor :(value,key)=>{
+        changecolor :(value,key,ipUrl)=>{
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('wind',value.plan ));
             dispatch(actions.setVars('winds',value.actrul ));
 
             $.ajax({
                 type:'post',
-                url:'http://' + ip + ':8080/wbi/ELEC/getSpaceTimeElec',
+                url:'http://' + ipUrl + '/wbi/ELEC/getSpaceTimeElec',
                 async:false,
                 data:{"month":key+1},
                 dataType:'json',
@@ -141,7 +149,7 @@ const mapDispatchToProps = (dispatch) => {
                     let poweract=[];
                     let powerplan=[];
                     for(var i in data.data){
-                        day0.push(data.data[i].day);
+                        day0.push(data.data[i].day+"日");
                         poweract.push(data.data[i].poweract);
                         powerplan.push(data.data[i].powerplan);
 

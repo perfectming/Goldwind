@@ -26,7 +26,7 @@ let Component = React.createClass({
             }else {
                 (!x[6] && x[5]) && arr2.push((ssg1[x+'901'].Transformer_P / 1).toFixed(0) / 1);
             }
-        }console.log(arr2);
+        }
         for(let x in ssg2){
             (!x[6]&&x[5])&&arr3.push(ssg2[x].name);
         }

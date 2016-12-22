@@ -2,13 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let input_url="10.9.100.38";
+
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
        
-        let{xxdwfId,w0,areaName,montht,profit,cost,height,TBA,changedata2qw}=this.props;
+        let{input_url,xxdwfNa,xxdwfId,w0,areaName,montht,profit,cost,height,TBA,changedata2qw}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -20,7 +20,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '风场TBA',
+                text: xxdwfNa+'风场TBA',
                 align:'left',
                 vertical:'top',
                 offset:200,
@@ -81,7 +81,7 @@ let Component = React.createClass({
                         let wTBATD=[];
                         $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByWf',  
+             url:'http://'+input_url+'/wbi/TBA/getDaysTBAByWf',  
              async:false,
             data:{
              'wfid':xxdwfId,

@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
     render() {
        
-     let{ly,text,areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement,width}=this.props
+     let{pointWidth,ly,text,areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement,width}=this.props
         let configPie = {
             chart: {
                 height:height,
@@ -63,8 +63,9 @@ let Component = React.createClass({
                 column: {
                     // pointPadding: 0.1,
                     borderWidth: 0,
-                   maxPointWidth: 20,
+                 
                     borderRadius: 4,
+                   
                 },
                 series: {
                     cursor: 'pointer',
@@ -145,6 +146,7 @@ let Component = React.createClass({
                 
                 borderRadius: 4,
                 pointPlacement:0,
+                pointWidth:pointWidth,
 
             },
             {
@@ -154,6 +156,7 @@ let Component = React.createClass({
              
                 borderRadius: 4,
                 pointPlacement:pointPlacement,
+                 pointWidth:pointWidth,
             },
             {
                     name:"收益率",
@@ -161,6 +164,7 @@ let Component = React.createClass({
                     color:'blue',
                     data:TBAA,
                     yAxis:1,
+                     pointWidth:pointWidth,
                      tooltip: {
                valueSuffix:'%'
             },
