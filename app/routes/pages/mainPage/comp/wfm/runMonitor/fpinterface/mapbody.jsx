@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './mapbodyy.scss';
 import Fcone from './fcone.jsx';
-import Fctwo from './fctwo.jsx';
 import Nav from './nav.jsx';
 import Login from '../../../../../../../components/common/Loading.jsx';
 let time;
