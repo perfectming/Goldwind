@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 
 import styles from './AS.scss';
+let soam='http://10.9.0.16:9080/soam';
 var {getState} = require('../../../../../../redux/store');
 import del from '../../../img/icon/tabDel.png';
 import save from '../../../img/comp/save.png';
