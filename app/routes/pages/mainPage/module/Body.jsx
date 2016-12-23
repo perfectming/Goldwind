@@ -70,6 +70,7 @@ import Profitsss from '../comp/wbi/mbixxd/tbatime/Profitsss.jsx';
 import PEQII from '../comp/wbi/mbixxd/PEQII.jsx';
 import Profitime from '../comp/wbi/mbixxd/Profitime.jsx';
 import WFSprofit from '../comp/wbi/mbixxd/WFSprofit.jsx';
+import WFTprofit from '../comp/wbi/mbixxd/WFTprofit.jsx';
 
 
 
@@ -178,6 +179,7 @@ let Component = React.createClass({
 
                 {showPage === 'profitime' && <Profitime></Profitime>}
                 {showPage === 'wfsprofit' && <WFSprofit></WFSprofit>}
+                {showPage === 'wftprofit' && <WFTprofit></WFTprofit>}
 
 
 

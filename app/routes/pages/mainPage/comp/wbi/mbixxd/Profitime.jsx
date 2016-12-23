@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Areacestylee.scss';
 import Profitimechart from './Profitimechart.jsx';
 import Profitimechartt from './Profitimechartt.jsx';
-import icono from './img/收益率1.png';
+import icono from './img/profits.png';
 var actions = require('redux/actions');
 let data=require('./Profit-dataq');
 let month=data.month;

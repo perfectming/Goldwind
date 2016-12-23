@@ -63,7 +63,7 @@ let Component = React.createClass({
                    
                    
                           
-                                <WFTprofitchart areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机收益'}  rate={rate}ly={40} pointPlacement={-0.07} borderRadius={7}></WFTprofitchart>
+                                <WFTprofitchart areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={800} text={[actbt+1]+'月'+xxdwfNa+'每日收益'}  rate={rate}ly={40} pointPlacement={-0.07} borderRadius={7}></WFTprofitchart>
                           
                        
                        

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import styles from './Areacestylee.scss';
 import Healtytimechart from './Healtytimechart.jsx';
 import Healtytimecharttt from './Healtytimecharttt.jsx';
-import icono from './img/健康度1.png';
+import icono from './img/healthy1.png';
 
 var $=require('jquery');
 var actions = require('redux/actions');

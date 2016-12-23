@@ -356,13 +356,14 @@ const mapDispatchToProps = (dispatch) => {
            dispatch(actions.setVars('wTBARun1qM',wTBARunM)) ;
            dispatch(actions.setVars('wTBADown1qM',wTBADownM)); 
            dispatch(actions.setVars('wTBAT1qM',wTBATM)) ;
-           dispatch(actions.setVars('btnn',2)) ;
+           
            dispatch(actions.setVars('width1',width)) ;
          
         },
         close:()=>{
             $("#sss").hide();
               $('#boxcover').hide();
+
         },
         backtop:(befor_pagee,befor_page2)=>{
             dispatch(actions.setVars('showPage',befor_pagee));
