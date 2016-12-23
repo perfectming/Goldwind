@@ -203,7 +203,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data);
+
 
                     let barlotimes2 = [];
                     let barlopowers2 = [];

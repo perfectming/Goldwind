@@ -99,7 +99,7 @@ let Component = React.createClass({
                     borderWidth: 0,
                     pointWidth: 25,
                     tooltip: {
-                        valueSuffix:'kWh'
+                        valueSuffix:"°H",
                     },
                 }
             },
@@ -124,7 +124,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'(100%)',
+                    text:'(°H)',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -182,8 +182,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
         },
         changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl)=>{
-            dispatch(actions.setVars('w1',w0 ));
-            console.log(wc1)
+            dispatch(actions.setVars('mon',w0 ));
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getCompanyMonthHealth',
@@ -195,24 +194,25 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
+
                     dispatch(actions.setVars('hhdata',  data));
 
 
                     let WTHeal=data.data.dayHealth;
                     let WTN=[];
                     let WTHealName=[];
-                    WTHeal.map(function(value,key){
-                        for(let n in value){
 
-                            WTN.push(value[n]);
-                            WTHealName.push(n+"日")
+
+
+                        for(let n in WTHeal){
+                            WTN.push(WTHeal[n]);
+                            WTHealName.push(n.slice(6,8)+"日")
                         }
 
-                    })
+
 
                     dispatch(actions.setVars('healthy3', WTN));
-                    dispatch(actions.setVars('monthx2', WTHealName));
+                    dispatch(actions.setVars('monthx3', WTHealName));
 
                 },
                 error:function(){

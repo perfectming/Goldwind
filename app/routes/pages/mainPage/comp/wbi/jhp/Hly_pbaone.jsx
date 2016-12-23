@@ -241,10 +241,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            dispatch(actions.setVars('w1',w0 ));
+
         },
         changedata1 :(w10,e,wc1,actbt,hhdata4)=> {
             dispatch(actions.setVars('bt0', 0));
+            dispatch(actions.setVars('w11', w10));
             let wfid =hhdata4.data[1][wc1].wfid;
             $.ajax({
                 type:'post',
@@ -290,7 +291,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-            dispatch(actions.setVars('w11', w10,e));
+
 
         },
     };

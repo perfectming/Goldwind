@@ -20,14 +20,12 @@ let Component = React.createClass({
 
 
     render() {
-        let {wfid,ipUrl,barlotimes1,bt0=0,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,barlotimes3,barlopowers3,barlopowerp3,hhdata,hhdata1, w0 , w10 , mon , befor_pages = 'group', returnit, hideit, arr, arr2,arr3, gogogo, back, more, actbt = 10, changecolor,wc1,wc2} = this.props;
+        let {wfid,ipUrl,barlotimes1,bt0=0,width0,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,barlotimes3,barlopowers3,barlopowerp3,hhdata,hhdata1, w0 , w10 , mon , befor_pages = 'group', returnit, hideit, arr, arr2,arr3, gogogo, back, more, actbt = 10, changecolor,wc1,wc2} = this.props;
 
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button = data.data.button;
 
-        // console.log(year)
-        // console.log(month2)
 
 
         return (
@@ -47,7 +45,7 @@ let Component = React.createClass({
                         <span onClick={() => hideit(hhdata,bt0)}>×</span>
                     </div>
                     <div className={styles.hidden_bottom}>
-                    <Hly_genp height={450}  widths={6500}
+                    <Hly_genp height={450}  widths={width0}
                               name0={barlotimes3}
                               power1={barlopowers3}
                               power2={barlopowerp3}
@@ -157,6 +155,7 @@ const mapStateToProps = (state) => {
         bt0: state.vars.bt0,
         ipUrl:state.vars.ipUrl,
         wfid:state.vars.wfid,
+        width0:state.vars.width0,
 
     }
 };
@@ -208,7 +207,7 @@ const mapDispatchToProps = (dispatch) => {
                         barlopowers3.push(data.data[0][i].powerplan);   //计划发电量
                         barlopowerp3.push(data.data[0][i].poweract);   //实际发电量
                     }
-                    console.log(data)
+
                     dispatch(actions.setVars('barlotimes1', barlotimes1));
                     dispatch(actions.setVars('barlopowers1', barlopowers1));
                     dispatch(actions.setVars('barlopowerp1', barlopowerp1));
@@ -399,22 +398,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         more: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
             dispatch(actions.setVars('bt0', 2));
-            // let barLotime3c = [];    //各区域   一区域二区域
-            // let power3c=[];       //计划发电量
-            // let wrong30c=[];       //实际发电量
-            //
-            //
-            // for (var i in hhdata.data[0]) {
-            //
-            //     barLotime3c.push(hhdata.data[0][i].wtname)   //区域的横坐标
-            //     power3c.push(hhdata.data[0][i].powerplan) //实际发电量
-            //     wrong30c.push(hhdata.data[0][i].poweract);   //故障损失
-            //
-            // }
-            //
-            // dispatch(actions.setVars('barlotimes3', barLotime3c))
-            // dispatch(actions.setVars('barlopowers3', power3c))
-            // dispatch(actions.setVars('barlopowerp3', wrong30c))
 
             $.ajax({
                 type: 'post',
@@ -423,7 +406,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": wfid==undefined? '150828':wfid,
+                    "wfid": wfid==undefined? '150801':wfid,
                     "type":"2",
                     "year":"2016"
                 },
@@ -442,6 +425,9 @@ const mapDispatchToProps = (dispatch) => {
                         wrong30c.push(data.data[i].poweract);   //故障损失
 
                     }
+                    let width0=barLotime3c.length*60;
+                    dispatch(actions.setVars('width0', width0));
+
 
                     dispatch(actions.setVars('barlotimes3', barLotime3c))
                     dispatch(actions.setVars('barlopowers3', power3c))

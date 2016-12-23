@@ -109,8 +109,6 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:'3000',
                 success:function(data){
                     dispatch(actions.setVars('hhdata',  data));
-                    console.log(data)
-                    //各区域   一区域二区域
                     let runtime1=[];       //实际发电量
                     let downtime1=[];       //故障损失
                     let tba1=[];       //维护损失

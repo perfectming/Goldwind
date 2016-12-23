@@ -22,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {ip="10.68.100.32",ipUrl,befor_pages='area',wc1,wfid,bt0=0,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {ip="10.68.100.32",ipUrl,befor_pages='area',width0,w10,wc1,wfid,bt0=0,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
@@ -42,13 +42,13 @@ let Component = React.createClass({
                     <div className={styles.hidden_top}>
                         <div className={styles.logo2}></div>
                         <div className={styles.logo30}>
-                            {mon+w0+"各风机PBA"}
+                            {mon+w10+"各风机PBA"}
                         </div>
                         <span onClick={()=>hideit(power1, wrong10, wrong11, wrong12, wrong13, pba1,barLotime1)}>×</span>
                     </div>
                     <div className={styles.hidden_bottom}>
                     <Hly_pbatwo height={450}
-                                widths={6500}
+                                widths={width0}
                                 text={''}
                                 barRotimes={barLotime1}
                                 power1={power1}
@@ -111,7 +111,7 @@ let Component = React.createClass({
                             <button className={styles.button22} onClick={() => more(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>更多</button>
                         </div>
 
-                        <Hly_pbatwo height={390} text={mon+w0+"各风机PBA"}
+                        <Hly_pbatwo height={390} text={mon+w10+"各风机PBA"}
                                     barRotimes={barLotime1}
                                     power1={power1}
                                     wrong10={wrong10}
@@ -156,12 +156,14 @@ const mapStateToProps = (state) => {
         hhdata4: state.vars.hhdata4,
         mon: state.vars.mon,
         w0: state.vars.w1,
+        w10: state.vars.w11,
         wc1: state.vars.wc1,
         wc2: state.vars.wc2,
         hhdata: state.vars.hhdata,
         bt0: state.vars.bt0,
         ipUrl: state.vars.ipUrl,
         wfid: state.vars.wfid,
+        width0: state.vars.width0,
 
     }
 };
@@ -189,8 +191,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('hhdata4',  data));
 
 
-                    let w0 = data.data[1][0].wfname;
-                    dispatch(actions.setVars('w1', w0));
+                    let w10 = data.data[1][0].wfname;
+                    dispatch(actions.setVars('w11', w10));
 
 
                     let barLotime21 = [];    //各区域   一区域二区域
@@ -276,6 +278,8 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+                    let w10 = data.data[1][0].wfname;
+                    dispatch(actions.setVars('w11', w10));
                     dispatch(actions.setVars('hhdata4',  data));
                     let barLotime21 = [];    //各区域   一区域二区域
                     let power21=[];       //实际发电量
@@ -474,7 +478,8 @@ const mapDispatchToProps = (dispatch) => {
                         wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
                         pba3c.push(data.data[i].pba.toFixed(3)*100);   //非设备原因损失
                     }
-
+                    let width0=barLotime3c.length*60;
+                    dispatch(actions.setVars('width0', width0));
                     dispatch(actions.setVars('barLotime1', barLotime3c))
                     dispatch(actions.setVars('power1', power3c))
                     dispatch(actions.setVars('wrong10', wrong30c))

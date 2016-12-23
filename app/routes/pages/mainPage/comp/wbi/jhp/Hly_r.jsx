@@ -52,7 +52,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                valueSuffix:'kWh'
+                valueSuffix:'°H'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -116,7 +116,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text:'h',
+                    text:'(°H)',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -127,7 +127,7 @@ let Component = React.createClass({
                     }
                 },
                 labels: {
-                    title:'kWh',
+                    title:'°H',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -173,7 +173,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         changedata1 :(w10,w0,wc1,wc2,hhdata,actbt,ipUrl)=> {
             dispatch(actions.setVars('w11', w10));
-
+            dispatch(actions.setVars('bt0', 0));
             let wfid=hhdata.data[1][wc2].wfid;
             $.ajax({
                 type:'post',
@@ -188,8 +188,10 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
 
+                    console.log("a")
+                    console.log(data)
+                    console.log("b")
                     let barlopowers3 = [];
                     let barlopowerp3 = [];
 

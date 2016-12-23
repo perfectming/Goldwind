@@ -35,7 +35,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area',w0,w10, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
+        let {befor_pages='area',w0,w10,width0, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
         return (
 
 
@@ -53,7 +53,7 @@ let Component = React.createClass({
                         <span onClick={()=>hideit(hhdata,bt0)}>×</span>
                     </div>
                     <div className={styles.hidden_bottom}>
-                    <Hly_gentwo    widths={5000}  height={450}
+                    <Hly_gentwo    widths={width0}  height={450}
                                    name0={barlotimes2}
                                    powerplan1={barlopowers2}
                                    poweract2={barlopowerp2}
@@ -142,6 +142,7 @@ const mapStateToProps = (state) => {
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
         mon:state.vars.mon,
+        width0:state.vars.width0,
     }
 };
 
@@ -236,7 +237,7 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:'3000',
                 success:function(data){
                     dispatch(actions.setVars('hhdata',  data));
-
+                    let w10=data.data[1][0].wfname;
 
                     let barlotimes1 = [];
                     let barlopowers1 = [];
@@ -264,6 +265,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('barlotimes2', barlotimes2));
                     dispatch(actions.setVars('barlopowers2', barlopowers2));
                     dispatch(actions.setVars('barlopowerp2', barlopowerp2));
+                    dispatch(actions.setVars('w11', w10));
 
 
                 },
@@ -276,8 +278,7 @@ const mapDispatchToProps = (dispatch) => {
         gogogo: (bt0, actbt, hhdata, ipUrl, wfid) => {
             dispatch(actions.setVars('bt0', 0));
 
-            console.log(bt0)
-            console.log(actbt)
+
 
             $.ajax({
                 type: 'post',
@@ -293,7 +294,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-                    console.log(data)
+
                     let barLotime3c = [];    //各区域   一区域二区域
                     let power3c=[];       //计划发电量
                     let wrong30c=[];       //实际发电量
@@ -374,6 +375,8 @@ const mapDispatchToProps = (dispatch) => {
                 wrong30c.push(hhdata.data[0][i].poweract);   //故障损失
 
             }
+            let width0=barLotime3c.length*60;
+            dispatch(actions.setVars('width0', width0));
 
             dispatch(actions.setVars('barlotimes2', barLotime3c))
             dispatch(actions.setVars('barlopowers2', power3c))

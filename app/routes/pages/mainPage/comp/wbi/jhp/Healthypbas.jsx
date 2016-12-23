@@ -20,7 +20,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wfid, ipUrl, bt0 = 0, hhdata,hhdata2,hhdata3, w0 = "巴盟", w10 , mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2, runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, name3, runtime3, downtime3, tba3} = this.props;
+        let {wfid, ipUrl, bt0 = 0,width0, hhdata,hhdata2,hhdata3, w0 = "巴盟", w10 , mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2, runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, name3, runtime3, downtime3, tba3} = this.props;
 
         let data = require('./Healthy-data');
         let month = data.data.line_month;
@@ -45,7 +45,7 @@ let Component = React.createClass({
                     <div className={styles.hidden_bottom}>
                         <Hly_ds text={''}
                                 height={450}
-                                widths={4500}
+                                widths={width0}
                                 names={'TBA'}
                                 name2={name2}
                                 runtime2={runtime2}
@@ -161,6 +161,7 @@ const mapStateToProps = (state) => {
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
         bt0:state.vars.bt0,
+        width0:state.vars.width0,
 
     }
 };
@@ -231,7 +232,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('hhdata2', data));
                     dispatch(actions.setVars('w11', data.data[0].wfname));
 
-                    console.log(data)
+
                     //各区域   一区域二区域
                     let runtime1 = [];       //实际发电量
                     let downtime1 = [];       //故障损失
@@ -539,7 +540,8 @@ const mapDispatchToProps = (dispatch) => {
                 wrong31c.push(hhdata3.data[i].tba.toFixed(3)*100);  //故障损失
 
             }
-
+            let width0=barLotime3c.length*60;
+            dispatch(actions.setVars('width0', width0));
             dispatch(actions.setVars('name2', barLotime3c))
             dispatch(actions.setVars('runtime2', power3c))
             dispatch(actions.setVars('downtime2', wrong30c))

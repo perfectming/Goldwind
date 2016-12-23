@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="各",barRotime,height,actbt,text,mon="一月份",windplan=win,w10,changedata1,namex2,healthy2}= this.props;
+        let {w0="各",hhdata,height,actbt,text,mon,wc2,w10,ipUrl,changedata1,namex2,healthy2}= this.props;
 
 
 
@@ -80,7 +80,8 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                             w10=e.point.category;
-                            changedata1(w10,e);
+                            wc2=e.point.index;
+                            changedata1(w10,w0,wc2,hhdata,actbt,ipUrl);
 
                         }
                     }
@@ -92,7 +93,7 @@ let Component = React.createClass({
                     borderWidth: 0,
                     pointWidth:30,
                     tooltip: {
-                        valueSuffix:'kWh'
+                        valueSuffix:'°H'
                     },
                 }
             },
@@ -118,7 +119,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'(100%)',
+                    text:'(°H)',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -162,8 +163,13 @@ const mapStateToProps = (state) => {
     return {
         w0 : state.vars.w1,
         w10 : state.vars.w11,
+        hhdata : state.vars.hhdata,
+        wc2 : state.vars.wc2,
+        ipUrl : state.vars.ipUrl,
         mon : state.vars.mon,
         windplan : state.vars.windplan,
+        actbt : state.vars.actbt,
+
     }
 };
 
@@ -172,8 +178,41 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('w1',w0 ));
         },
-        changedata1 :(w10,e)=> {
-            dispatch(actions.setVars('w11', w10,e));
+        changedata1 :(w10,w0,wc2,hhdata,actbt,ipUrl)=> {
+            dispatch(actions.setVars('w11', w10));
+            dispatch(actions.setVars('bt0', 0));
+            let wfid=hhdata.data[1][wc2].wfid;
+            $.ajax({
+                type:'post',
+                url:'http://'+ipUrl+'/wbi/Health/getByWfidFanHealth',
+                async:false,
+                data:{
+                    "month":actbt+1,
+                    "groupid":'201612121721151',
+                    "wfid": wfid,
+
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+
+                    let barlopowers3 = [];
+                    let barlopowerp3 = [];
+
+                    for (var i =0;i<10;i++) {
+                        barlopowers3.push(data.data[i].fanHealth);    //区域的横坐标
+                        barlopowerp3.push(data.data[i].wtname);    //区域的横坐标
+                    }
+
+                    dispatch(actions.setVars('healthy3', barlopowers3));
+                    dispatch(actions.setVars('namex3', barlopowerp3));
+
+                },
+                error:function(){
+
+                },
+            })
+            dispatch(actions.setVars('wfid', wfid));
 
         },
     };

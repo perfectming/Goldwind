@@ -253,7 +253,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
             let wfid =hhdata.data[1][wc2].wfid;
-            console.log(wfid)
+
             dispatch(actions.setVars('wfid', wfid));
             $.ajax({
                 type: 'post',

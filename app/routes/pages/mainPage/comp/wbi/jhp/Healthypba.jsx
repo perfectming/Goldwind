@@ -30,7 +30,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata3,ipUrl,wfid, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
+        let {hhdata3,ipUrl,wfid,width0, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
 
 
         let data = require('./Healthy-data');
@@ -61,7 +61,7 @@ let Component = React.createClass({
                     <div className={styles.hidden_bottom}>
 
                         <Hly_pbas text={""}
-                                  widths={4500}
+                                  widths={width0}
                                   height={450}
                                   barLotime3={barLotime3}
                                   power3={power3}
@@ -222,6 +222,7 @@ const mapStateToProps = (state) => {
         bt0: state.vars.bt0,
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
+        width0:state.vars.width0,
 
     }
 };
@@ -346,6 +347,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('winds', value.actrul));
             dispatch(actions.setVars('windss', value.actruls));
             dispatch(actions.setVars('bt0', 0));
+
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/PBA/getCompanySpacePBA',
@@ -354,6 +356,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
+                    let w12 = data.data[1][0].wfname;
                     dispatch(actions.setVars('hhdata', data));
                     let barLotime1 = [];    //各区域   一区域二区域
                     let power1 = [];       //实际发电量
@@ -427,6 +430,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wrong12a', wrong12))
                     dispatch(actions.setVars('wrong13a', wrong13))
                     dispatch(actions.setVars('pba1a', pba1))
+                    dispatch(actions.setVars('w11', w12))
+
 
                 },
                 error: function () {
@@ -576,6 +581,8 @@ const mapDispatchToProps = (dispatch) => {
                         wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
                         pba3c.push(data.data[i].pba.toFixed(3)*100);  //非设备原因损失
                     }
+                    let width0=barLotime3c.length*60;
+                    dispatch(actions.setVars('width0', width0));
 
                     dispatch(actions.setVars('barLotime3a', barLotime3c))
                     dispatch(actions.setVars('power3a', power3c))

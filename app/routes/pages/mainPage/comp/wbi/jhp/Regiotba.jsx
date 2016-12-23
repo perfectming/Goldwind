@@ -22,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {ip="10.68.100.32",ipUrl,befor_pages='area',wc1,wfid,wc2,bt0=0,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {ip="10.68.100.32",ipUrl,befor_pages='area',wc1,width0,wfid,wc2,bt0=0,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
@@ -113,6 +113,7 @@ const mapStateToProps = (state) => {
         bt0: state.vars.bt0,
         ipUrl: state.vars.ipUrl,
         wfid: state.vars.wfid,
+        width0: state.vars.width0,
 
     }
 };
@@ -138,7 +139,6 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:'3000',
                 success:function(data){
                     dispatch(actions.setVars('hhdata4',  data));
-                    console.log(data)
 
                     let w0 = data.data[1][0].wfname;
                     dispatch(actions.setVars('w1', w0));
@@ -406,7 +406,8 @@ const mapDispatchToProps = (dispatch) => {
                 wrong33.push(hhdata4.data[0][i].nodevreasonloss);   //非设备原因损失
                 pba3.push(hhdata4.data[0][i].pba);   //非设备原因损失
             }
-
+            let width0=barLotime3.length*60;
+            dispatch(actions.setVars('width0', width0));
             dispatch(actions.setVars('barLotime1', barLotime3));
             dispatch(actions.setVars('power1', power3));
             dispatch(actions.setVars('wrong10', wrong30));
