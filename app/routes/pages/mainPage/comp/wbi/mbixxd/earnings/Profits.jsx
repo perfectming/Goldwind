@@ -40,7 +40,7 @@ let Component = React.createClass({
                         <div onClick={()=>close()} className={styles.gg}>x</div>
                     </div>
                     <div className={styles.scroll}>
-                        <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={width} pointPlacement={0} ly={10} pointWidth={20} lx={-[width-2000]} ></Fanchart>
+                        <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={width} pointPlacement={0} ly={10} pointWidth={20} lx={-75} ></Fanchart>
                     </div>
                 </div>
                 <ul className={styles.monthbox}>
