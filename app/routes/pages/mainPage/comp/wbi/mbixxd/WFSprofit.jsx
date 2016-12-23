@@ -399,7 +399,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('WFSPCo11',WFSPCo)); 
             dispatch(actions.setVars('WFSPRa11',WFSPRa)) ;
            
-             dispatch(actions.setVars('btnn',2)) ;
+             
               dispatch(actions.setVars('width1',width)) ;
          
         },

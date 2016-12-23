@@ -206,12 +206,12 @@ let Component = React.createClass({
             	name: '成本',
                 type: 'column',
                 data: windCost,
-                pointPlacement: -0.06,
-                pointPadding: 0.1,
+           
+               
                     borderWidth: 0,
                    maxPointWidth: 30,
                     borderRadius: 4,
-                     colors:'#70c080',
+                     color:'#70c080',
             },
                 {
                     name:'收益率',

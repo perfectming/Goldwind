@@ -52,7 +52,7 @@ let Component = React.createClass({
             <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,ipUrl)} key={key}>{value.name}</li>)
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,ipUrl,xxdwfId)} key={key}>{value.name}</li>)
                         })
                     }
         
@@ -163,7 +163,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
-        changpage :(value,key,input_url)=>{
+        changpage :(value,key,input_url,xxdwfId)=>{
             
             var arr1=[];
             var arr2=[];
@@ -225,7 +225,7 @@ const mapDispatchToProps = (dispatch) => {
             data:{
              'year':year,
              'month':monthh,
-             'wfid':windids[1]
+             'wfid':xxdwfId,
             },
              dataType:'json',
              timeout:'3000',
@@ -394,7 +394,7 @@ const mapDispatchToProps = (dispatch) => {
                dispatch(actions.setVars('areaNamenb',arr4));
                dispatch(actions.setVars('areaRecordCostNb',arr6));
                dispatch(actions.setVars('areaRecordProfitNb',arr5));
-                dispatch(actions.setVars('btnn',2));
+                
                 dispatch(actions.setVars('width1',width));
         },
         close:()=>{

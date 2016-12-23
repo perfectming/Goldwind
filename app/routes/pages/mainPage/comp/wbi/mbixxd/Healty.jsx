@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Healtychart from './Healtychart.jsx';
-import icono from './img/健康度1.png';
+import icono from './img/healthy1.png';
 var $=require('jquery');
 var actions = require('redux/actions');
 
@@ -113,7 +113,7 @@ const mapDispatchToProps = (dispatch) => {
        let WSHealName=[];
        let date = new Date();
        let month =date.getMonth();
-      
+      let year =date.getFullYear();
              $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/Health/getWfieldHealth',  
@@ -121,7 +121,7 @@ const mapDispatchToProps = (dispatch) => {
             data:{
              'wfid':xxdwfId,
              'month':month,
-             'year':2016
+             'year':year,
             },
              dataType:'json',
              timeout:'3000',
@@ -300,7 +300,7 @@ const mapDispatchToProps = (dispatch) => {
             width=length*45;
             dispatch(actions.setVars('WSHealH11',WSHealH ));
             dispatch(actions.setVars('WSHealName11',WSHealName ));
-             dispatch(actions.setVars('btnn',2));
+             
             dispatch(actions.setVars('width1',width));
             
              },
@@ -312,6 +312,7 @@ const mapDispatchToProps = (dispatch) => {
         close:()=>{
             $("#sss").hide();
               $('#boxcover').hide();
+
         },
          backtop:(befor_pagee,befor_page2)=>{
             dispatch(actions.setVars('showPage',befor_pagee));

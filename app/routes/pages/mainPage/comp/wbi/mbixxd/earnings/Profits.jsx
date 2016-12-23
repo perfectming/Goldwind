@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
-import icono from '../img/收益率1.png';
+import icono from '../img/profits.png';
 var $=require('jquery');
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
@@ -64,7 +64,7 @@ let Component = React.createClass({
                   
                 <div className={`${styles.windbox} ${styles.shadow}`}>
                     <div className={styles.bgccc}> <img src={icono}/></div>
-                    <WindfieldTable  text={[actbt+1]+'月'+w11+'各风电场年收益'} windFiled={areaWindNames} windCost={areaWindCosts} windProfit={areaWindEarnings} TBA={areaWindRates} year={year} keyy={keyyy} daycount={daycount} areaWindids={areaWindids} height={410} input_url={ipUrl}></WindfieldTable>
+                    <WindfieldTable  text={[actbt+1]+'月'+w11+'各风电场收益'} windFiled={areaWindNames} windCost={areaWindCosts} windProfit={areaWindEarnings} TBA={areaWindRates} year={year} keyy={keyyy} daycount={daycount} areaWindids={areaWindids} height={410} input_url={ipUrl}></WindfieldTable>
                       
                 </div>
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
@@ -310,7 +310,7 @@ const mapDispatchToProps = (dispatch) => {
         }
         ,
         try:()=>{
-   alert(1)
+  
         },
         changpage :(value,key,input_url)=>{
             let arr1=[];
@@ -630,7 +630,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('areaWindCostMore',areaWindCosts));
             dispatch(actions.setVars('areaWindEarningMore',areaWindEarnings));
             dispatch(actions.setVars('areaWindRateMore',areaWindRates));
-            dispatch(actions.setVars('btnn',2));
+            
             dispatch(actions.setVars('width1',width));
             
             

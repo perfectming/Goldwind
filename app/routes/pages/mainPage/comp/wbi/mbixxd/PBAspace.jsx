@@ -492,7 +492,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBASpaceFirstFaultloss11',PBASpaceFaultloss ));
             dispatch(actions.setVars('PBASpaceFirstNodevreasonloss11',PBASpaceNodevreasonloss ));
             dispatch(actions.setVars('PBASpaceFirstPba121',PBASpacePbaPBA ));
-            dispatch(actions.setVars('btnn',2));
+           
             dispatch(actions.setVars('width1',width));
 
          
@@ -501,6 +501,7 @@ const mapDispatchToProps = (dispatch) => {
         close:()=>{
             $("#sss").hide();
             $('#boxcover').hide();
+
         },
         backtop:(befor_pagee,befor_page2)=>{
             dispatch(actions.setVars('showPage',befor_pagee));
