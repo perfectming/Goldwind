@@ -14,7 +14,7 @@ let arr3=[];
 let years=[];
 var pageSize=11;
 let page=1;
-let soam='http://10.9.0.14:8081/soam';
+let soam='http://10.9.0.16:9080/soam';
 let thDate=new Date();
 let thYear=thDate.getFullYear();
 for(let i=0;i<=30;i++){
@@ -27,7 +27,7 @@ for(let i=0;i<=30;i++){
 arr3.splice(-2,2);
 let arr1=[
     // 'name',
-    'wfid','rectime','operationtime','operator','planelec'];
+    'name','rectime','operationtime','operator','planelec'];
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
@@ -79,7 +79,7 @@ let Component = React.createClass({
                             <button onClick={this.buttonAction}>查询</button>
                         </div>
                         <div className={styles.btnBox}>
-                            <div>单位：万kWh</div>
+                            <div>单位：kWh</div>
                         </div>
                     </div>
                     <div className={styles.table}>
@@ -223,14 +223,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: (page) => {
-            /*$.ajax({
+        init: () => {
+            dispatch(actions.setVars('page1', 1));
+            $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+page,
+                data:'pageSize='+pageSize+'&&nowPage='+1,
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data)
+                    console.log(data);
                     dispatch(actions.setObjs('tableContent', data));
                 },
                 error:function(){
@@ -242,12 +243,13 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data)
+                    console.log(data);
+                    dispatch(actions.setObjs('wtidAll', data));
                 },
                 error:function(){
                     console.log('获取数据失败')
                 }
-            });*/
+            });
         },
         saveTableItem:(line)=>{
             let tableV = _.clone(getState().objs.tableContent);
@@ -306,7 +308,7 @@ const mapDispatchToProps = (dispatch) => {
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize=9&&nowPage=1',
+                data:'pageSize='+pageSize+'&&nowPage=1',
                 dataType: 'json',//here,
                 success:function (data) {
                     dispatch(actions.setObjs('tableContent', data));
