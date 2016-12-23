@@ -25,13 +25,13 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : 100,
-                y :20,
+                x : 120,
+                y :14,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                  
                 }
             },
             // 插入图片
@@ -197,18 +197,19 @@ let Component = React.createClass({
                 name: '收入',
                 type: 'column',
                 data: GeE,
-                color:'#64DC83',
+                color:'#33BAC0',
                 shadow:true,
-                pointWidth: 30,
+                maXPointWidth: 30,
                 borderWidth: 0,
             },
                 {
                     name: '成本',
                     type: 'column',
-                    color:'#FC794E',
+                    color:'#70c080',
                     data: GeC,
                     stack:'waste',
-                    pointWidth: 30,
+                     maXPointWidth: 30,
+                     borderWidth: 0,
                 },
                 
                 {

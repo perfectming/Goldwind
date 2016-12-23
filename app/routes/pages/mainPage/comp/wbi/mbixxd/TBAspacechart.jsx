@@ -24,13 +24,13 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : "0",
+                x : 120,
                 y:20,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                   
                 }
             },
             // 插入图片
@@ -63,9 +63,9 @@ let Component = React.createClass({
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 10,
+                   
                    stacking:'nomal',
-                    pointWidth: 50,
+                   borderWidth:0,
 
 
                 }, series: {
@@ -148,10 +148,10 @@ let Component = React.createClass({
                 data: fanProfitQ,
                 color:'#33BAC0',
                 shadow:true,
-                pointWidth: pointWidth,
-                borderWidth: 0, 
+                maxPointWidth: pointWidth,
+               
                 borderRadius:borderRadius,
-                pointPlacement:0
+              
 
             },
                 {
@@ -160,10 +160,10 @@ let Component = React.createClass({
                     color:'#5298d3',
                     data: fanCost,
                     stack:'waste',
-                    pointWidth: pointWidth,
+                    maxPointWidth: pointWidth,
                     borderRadius: borderRadius,
                     color:'#FFFFFF',
-                    pointPlacement:pointPlacement,
+                    
                 },
                 {
                     name: 'TBA',

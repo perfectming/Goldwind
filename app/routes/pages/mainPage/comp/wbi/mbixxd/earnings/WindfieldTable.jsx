@@ -27,13 +27,13 @@ let Component = React.createClass({
                 text:text,
                 align:'left',
                
-                 x : 90,
-                y :10,
+                 x : 105,
+                y :11,
                 style:{
                     color:"#fff",
                     fontSize:"15px",
                     fontFamily:"微软雅黑",
-                      fontWeight:700,
+                    
                 }
             },
             //图例说明

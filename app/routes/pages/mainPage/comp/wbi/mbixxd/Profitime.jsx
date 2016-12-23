@@ -25,16 +25,16 @@ let Component = React.createClass({
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
                    
-                       <div className={styles.imgq}>
+                       <div className={styles.imgqwe}>
                         <img src={icono}/>
                        </div>
                             <div>
-                                <Profitimechart GeR={GeR} GeE={GeE} GeC={GeC} GeM={GeM} text={'集团每月收益'}height={420} input_url={ipUrl}></Profitimechart>
+                                <Profitimechart GeR={GeR} GeE={GeC} GeC={GeE} GeM={GeM} text={'集团每月收益'}height={420} input_url={ipUrl}></Profitimechart>
                             </div>
                 </div>
                  <div className={styles.bigbox}>
                    
-                       <div className={styles.imgq}>
+                       <div className={styles.imgqwe}>
                         <img src={icono}/>
                        </div>
                             <div>
@@ -112,7 +112,7 @@ const mapDispatchToProps = (dispatch) => {
             
              },
              error:function(){
-                console.log(3)
+            
              }
            });
      // 获取每天的收益
@@ -132,7 +132,7 @@ const mapDispatchToProps = (dispatch) => {
              dataType:'json',
              timeout:'3000',
              success:function(data){
-               
+                 
            let GE=data.data;
            for( let i in GE){
           let incomes=GE[i].incomes

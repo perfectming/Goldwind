@@ -27,7 +27,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{width,ipUrl,index2,keyy,actbt=0,btn=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban,backtop,befor_pagee='group',befor_page2,w11='1区域',w111='风机1',sqy,pointPlacement,windN,keyyy,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNamessT,areaWindCostssT,areaWindEarningssT,areaWindRatessT,areaWindidssT,areaWindCostMore,areaWindEarningMore,areaWindNameMore,areaWindRateMore}=this.props;   
+        let{trt,width,ipUrl,index2,keyy,actbt=0,btn=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban,backtop,befor_pagee='group',befor_page2,w11='1区域',w111='风机1',sqy,pointPlacement,windN,keyyy,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNamessT,areaWindCostssT,areaWindEarningssT,areaWindRatessT,areaWindidssT,areaWindCostMore,areaWindEarningMore,areaWindNameMore,areaWindRateMore}=this.props;   
         return (
 
             <div className={styles.box}>
@@ -36,11 +36,11 @@ let Component = React.createClass({
                     <div className={styles.moretitle}>
                         <img src={icono}/>
                         <p>{[actbt+1]+'月'+w11+w111+'收益'}</p>
-
+                       
                         <div onClick={()=>close()} className={styles.gg}>x</div>
                     </div>
                     <div className={styles.scroll}>
-                        <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={width} pointPlacement={0} ly={10} pointWidth={20} ></Fanchart>
+                        <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={width} pointPlacement={0} ly={10} pointWidth={20} lx={-[width-2000]} ></Fanchart>
                     </div>
                 </div>
                 <ul className={styles.monthbox}>
@@ -71,7 +71,7 @@ let Component = React.createClass({
                  
                        
                            
-                    <Fanchart pointWidth={15} areaRecordCostR={areaWindCostssT} areaRecordProfitR={areaWindEarningssT} machine={areaWindNamessT } height={440} TBAA={areaWindRatessT} pointPlacement={-0.06} width={850} text={(actbt+1)+'月'+w11+w111+'各风机收益'} ly={40}></Fanchart>
+                    <Fanchart pointWidth={15} areaRecordCostR={areaWindCostssT} areaRecordProfitR={areaWindEarningssT} machine={areaWindNamessT } height={440} TBAA={areaWindRatessT} pointPlacement={-0.06} width={850} text={(actbt+1)+'月'+w11+w111+'各风机收益'} ly={40} lx={-75}></Fanchart>
                           
                        
                       
@@ -309,6 +309,9 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        try:()=>{
+   alert(1)
+        },
         changpage :(value,key,input_url)=>{
             let arr1=[];
             let arr2=[];

@@ -26,7 +26,7 @@ let Component = React.createClass({
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                     fontWeight:700,
+                   
                 }
             },
             legend: {
@@ -56,9 +56,7 @@ let Component = React.createClass({
             colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31','#EB6B34'],
             plotOptions: {
                 column: {
-                    pointPadding:0,
-                    borderWidth: 0,
-                    pointWidth:25,
+                   
                     borderRadius: 7,
                     stacking: 'normal',
                 }, series: {
@@ -172,6 +170,7 @@ let Component = React.createClass({
                 name: '运行时间',
                 type: 'column',
                 data: areaRecordProfitt,
+                maxPointWidth:30,
                
             },
             {
@@ -180,7 +179,8 @@ let Component = React.createClass({
                 data: areaRecordCostss,
                 stack:'first',
                 color:'#ccc',
-                pointPlacement:-0.1,
+                maxPointWidth:30,
+                
                 
             },
 

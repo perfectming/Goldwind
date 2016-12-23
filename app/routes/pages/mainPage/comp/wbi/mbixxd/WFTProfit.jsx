@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
-import Windce from './Windce.jsx';
+import WFTprofitchart from './WFTprofitchart.jsx';
 import icono from './img/wind_logo.png';
 import Month from './Month';
 var $=require('jquery');
@@ -31,7 +31,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let{width,ipUrl,btn=0,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,areaNamee,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaNameN,areaRecordCostN,areaRecordProfitN}=this.props;
+        let{rate,width,ipUrl,btn=0,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,areaNamee,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaNameN,areaRecordCostN,areaRecordProfitN}=this.props;
        
           return (
            <div className={styles.box}>
@@ -43,7 +43,7 @@ let Component = React.createClass({
                 <div className={styles.xx} onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-  <Windce areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={20} width={width} height={483} ly={10} pointPlacement={0.14} borderRadius={4}></Windce>
+  <WFTprofitchart areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={20} width={width} height={483} ly={10} pointPlacement={0} borderRadius={3}></WFTprofitchart>
                 </div>
 
                 
@@ -52,7 +52,7 @@ let Component = React.createClass({
             <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,ipUrl)} key={key}>{value.name}</li>)
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,ipUrl,xxdwfId)} key={key}>{value.name}</li>)
                         })
                     }
         
@@ -63,7 +63,7 @@ let Component = React.createClass({
                    
                    
                           
-                                <Windce areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机发电量'} ly={40} pointPlacement={-0.07} borderRadius={7}></Windce>
+                                <WFTprofitchart areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机收益'}  rate={rate}ly={40} pointPlacement={-0.07} borderRadius={7}></WFTprofitchart>
                           
                        
                        
@@ -71,11 +71,6 @@ let Component = React.createClass({
                 <div className={styles.imgq}>
                     <img src={icono}/>
                 </div>
-                <div className={`${styles.buttons} ${styles.buttonss}`}>
-                      <button className={btn===0? styles.btn0 : styles.btn1} onClick={()=>gogogo(actbt,ipUrl,xxdwfId)} > 前10</button>
-                      <button className={btn===1? styles.btn0 : styles.btn1} onClick={()=>back(actbt,ipUrl,xxdwfId)}>后10</button>
-                      <button className={btn===2? styles.btn0 : styles.btn1} onClick={()=>more(actbt,ipUrl,xxdwfId)}>更多</button>
-                   </div>
                 </div>   
            </div>
            
@@ -105,6 +100,7 @@ const mapStateToProps = (state) => {
         // 传过来的ip
         ipUrl:state.vars.ipUrl,
         width:state.vars.width1,
+        rate:state.vars.arr4,
     }
 };
 
@@ -115,44 +111,50 @@ const mapDispatchToProps = (dispatch) => {
             let arr1=[];
             let arr2=[];
             let arr3=[];
+            let arr4=[];
             let date =new Date();
             let year =date.getFullYear();
             let month= date.getMonth();
           
            $.ajax({
              type:'post',
-             url:'http://'+input_url+'/wbi/ELEC/getWtAreaElec',  
+             url:'http://'+input_url+'/wbi/yield/getWfieldMaxYieBayDay',  
              async:false,
             data:{
              'year':year,
              'month':month,
-             'wfid':xxdwfId
+             'wfid':xxdwfId,
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-           
-             // 获取x轴的值内蒙达茂天润风电场
-             let dataa=data.data;
-             for(let i=0;i<10;i++){
-                 let xWild=data.data[i].wtname;
-                 arr1.push(xWild);
-                 let yPowerPlan=data.data[i].powerplan;
-                 arr2.push(yPowerPlan);
-                 let yPowerAct=data.data[i].poweract;
-                 arr3.push(yPowerAct);
-             }
+             
             
+        
+             let dataa=data.data;
+             for(let i in dataa){
+                 let day=dataa[i].day;
+                 arr1.push(day+'日');
+                 let incomes=dataa[i].incomes;
+                 arr2.push(incomes);
+                 let amounts=dataa[i].amounts;
+                 arr3.push(amounts);
+                 let rate=dataa[i].rate*100;
+                 arr4.push(Number(rate.toFixed(1)));
+
+             }
+         
              },
              error:function(){
-                
+          
              },
            });
-           dispatch(actions.setVars('actbt',month-1 ));
-           dispatch(actions.setVars('areaNamee',arr1));
-             dispatch(actions.setVars('wind',arr3));
-             dispatch(actions.setVars('windP',arr2));
-              dispatch(actions.setVars('btnn',0));
+            dispatch(actions.setVars('actbt',month-1 ));
+            dispatch(actions.setVars('areaNamee',arr1));
+              dispatch(actions.setVars('wind',arr2));
+              dispatch(actions.setVars('windP',arr3));
+              dispatch(actions.setVars('arr4',arr4));
+               
 
           
         }
@@ -163,95 +165,57 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
-        changpage :(value,key,input_url)=>{
+        changpage :(value,key,input_url,xxdwfId)=>{
             
-            var arr1=[];
-            var arr2=[];
-            var arr3=[];
-            var areaids=[];
-            var windids=[];
-            var monthh=key+1;
-            let date = new Date();
-            let year= date.getFullYear();
-            //获取所有的区域
-            $.ajax({
-             type:'post',
-             url:'http://'+input_url+'/wbi/BaseData/getGroup',  
-             async:false,
-             dataType:'json',
-             timeout:'3000',
-             success:function(data){
-              
-                for(var i in data.data){
-                       areaids.push(i);
-                }
-              
-             // 获取x轴的值内蒙达茂天润风电场
-            
-             },
-             error:function(){
-              
-             },
-           });
-           //获取所有的风场
+           let arr1=[];
+            let arr2=[];
+            let arr3=[];
+            let arr4=[];
+            let date =new Date();
+            let year =date.getFullYear();
+            let month= date.getMonth();
+          
            $.ajax({
              type:'post',
-             url:'http://'+input_url+'/wbi/BaseData/getWfsByGroupid',  
-             async:false,
-            data:{
-             'groupid':areaids[0],
-            },
-             dataType:'json',
-             timeout:'3000',
-             success:function(data){
-               
-                for(var i in data.data){
-                       windids.push(i);
-                }
-                
-
-             // 获取x轴的值内蒙达茂天润风电场
-            
-             },
-             error:function(){
-              
-             },
-           });
-         //获取对应风场下面的数据
-          $.ajax({
-             type:'post',
-             url:'http://'+input_url+'/wbi/ELEC/getWtAreaElec',  
+             url:'http://'+input_url+'/wbi/yield/getWfieldMaxYieBayDay',  
              async:false,
             data:{
              'year':year,
-             'month':monthh,
-             'wfid':windids[1]
+             'month':key+1,
+             'wfid':xxdwfId,
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
+                
+            
+        
+             let dataa=data.data;
+             for(let i in dataa){
+                 let day=dataa[i].day;
+                 arr1.push(day+'日');
+                 let incomes=dataa[i].incomes;
+                 arr2.push(incomes);
+                 let amounts=dataa[i].amounts;
+                 arr3.push(amounts);
+                 let rate=dataa[i].rate*100;
+                 arr4.push(Number(rate.toFixed(1)));
 
-             // 获取x轴的值内蒙达茂天润风电场
-             var dataa=data.data;
-             for(var i=0;i<10;i++){
-                 var xWild=data.data[i].wtname;
-                 arr1.push(xWild);
-                 var yPowerPlan=data.data[i].powerplan;
-                 arr2.push(yPowerPlan);
-                 var yPowerAct=data.data[i].poweract;
-                 arr3.push(yPowerAct);
              }
          
              },
              error:function(){
-                 
+          
              },
            });
-           dispatch(actions.setVars('actbt',key ));
-           dispatch(actions.setVars('areaNamee',arr1));
-             dispatch(actions.setVars('wind',arr3));
-             dispatch(actions.setVars('windP',arr2));
-             dispatch(actions.setVars('btnn',0));
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('areaNamee',arr1));
+              dispatch(actions.setVars('wind',arr2));
+              dispatch(actions.setVars('windP',arr3));
+              dispatch(actions.setVars('arr4',arr4));
+
+               
+
         },
         gogogo:(actbt,input_url,xxdwfId)=>{
        let date=new Date();
@@ -275,7 +239,7 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
            
           
-             // 获取x轴的值内蒙达茂天润风电场
+        
              var dataa=data.data;
              for(var i=0;i<10;i++){
                  var xWild=data.data[i].wtname;
@@ -285,7 +249,8 @@ const mapDispatchToProps = (dispatch) => {
                  var yPowerAct=data.data[i].poweract;
                  arr3.push(yPowerAct);
              }
-            
+
+
              },
              error:function(){
               
@@ -320,7 +285,7 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
            
             
-             // 获取x轴的值内蒙达茂天润风电场
+          
              var dataa=data.data;
              for(var i=0;i<10;i++){
                  var xWild=data.data[i].wtname;
@@ -368,7 +333,7 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
            
              
-             // 获取x轴的值内蒙达茂天润风电场
+       
              let dataa=data.data;
              for(var i=0;i<dataa.length;i++){
                  var xWild=data.data[i].wtname;

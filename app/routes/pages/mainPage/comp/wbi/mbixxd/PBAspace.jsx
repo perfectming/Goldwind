@@ -38,7 +38,7 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{ xxdwfNa+[actbt+1]+'月各风机PBA'}</p>
+                <p>{ [actbt+1]+'月'+xxdwfNa+'各风机PBA'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
                  <div className={styles.scroll}>
@@ -68,7 +68,7 @@ let Component = React.createClass({
                 
                     
                          
-                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={xxdwfNa+[actbt+1]+'月各风机PBA'} ty={60} pointWidth={30}  pointPlacement={-0.07} borderRadius={4}></PBAspacechart>
+                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={[actbt+1]+'月'+xxdwfNa+'各风机PBA'} ty={60} pointWidth={30}  pointPlacement={-0.07} borderRadius={7}></PBAspacechart>
                         
                     
                        

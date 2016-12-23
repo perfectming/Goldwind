@@ -30,12 +30,12 @@ let Component = React.createClass({
                        <div className={styles.imgqq}>
                         <img  className={styles.img}src={icono}/>
                        </div>
-                          <TBAtimechart xxdwfNa={xxdwfNa}montht={montht} profit={profit} cost={cost} TBA={TBA} height={420} xxdwfId={xxdwfId} input_url={ipUrl}></TBAtimechart>
+                          <TBAtimechart xxdwfNa={xxdwfNa}montht={montht} profit={profit} cost={cost} TBA={TBA} height={420} xxdwfId={xxdwfId} input_url={ipUrl} pointWidth={30}></TBAtimechart>
    
                 </div>
                    <div className={styles.bigbox}>
                
-                                <TBAtimechartt areaPlan={areaPlan} areaPlanDay={areaPlanDay} areaPlanDayT={areaPlanDayT} TBA={TBAAA}height={420} text={xxdwfNa+w0+'每日TBA'}></TBAtimechartt>
+                                <TBAtimechartt areaPlan={areaPlan} areaPlanDay={areaPlanDay} areaPlanDayT={areaPlanDayT} TBA={TBAAA}height={420} text={w0+xxdwfNa+'每日TBA'}></TBAtimechartt>
 
                      <div className={styles.imgqq}>
                         <img  className={styles.img}src={icono}/>

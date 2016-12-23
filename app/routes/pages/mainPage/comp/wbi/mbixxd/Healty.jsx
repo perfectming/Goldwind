@@ -33,7 +33,7 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{text[actbt]}</p>
+                <p>{[actbt+1]+'月'+xxdwfNa+'各风机健康度'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
@@ -56,15 +56,15 @@ let Component = React.createClass({
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                   
                       
-                               <Healtychart machineE={windP}         areaRecordProfit={wind} height={800} text={xxdwfNa+text[actbt]} ty={40} pointWidth={30} borderRadius={7}></Healtychart>
+                               <Healtychart machineE={windP}         areaRecordProfit={wind} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机健康度'} ty={40} pointWidth={30} borderRadius={7}></Healtychart>
                        
                         
                  
-                    <div className={styles.imgq}>
+                    <div className={styles.imgqvg}>
                         <img src={icono}/>
                     </div>
                     <div className={styles.buttonsh}>
-                      <button  className={btn===0? styles.btn0 : styles.btn1} onClick={()=>gogogo(actbt,btn,ipUrl)}   > 前10</button>
+                      <button  className={btn===0? styles.btn0 : styles.btn1} onClick={()=>gogogo(actbt,btn,ipUrl,xxdwfId)}   > 前10</button>
                       <button onClick={()=>back(xxdwfNa,xxdwfId,actbt,btn,ipUrl)} className={btn===1? styles.btn0 : styles.btn1}>后10</button>
                       <button  onClick={()=>more(xxdwfNa,xxdwfId,actbt,btn,ipUrl)} className={btn===2? styles.btn0 : styles.btn1}>更多</button>
                    </div>
@@ -193,7 +193,7 @@ const mapDispatchToProps = (dispatch) => {
            });
             
         },
-         gogogo:(key,btn,input_url)=>{
+         gogogo:(key,btn,input_url,xxdwfId)=>{
        let date=new Date();
        let year =date.getFullYear()
         let WSHealH=[];

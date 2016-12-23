@@ -28,7 +28,7 @@ let Component = React.createClass({
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                      fontWeight:700,
+                    
                 }
             },
             //图例说明
@@ -56,7 +56,7 @@ let Component = React.createClass({
             },
             plotOptions: {
                 column: {
-                    
+                     borderWidth:0,
                 }, series: {
                     cursor: 'pointer',
                     events: {
@@ -127,13 +127,17 @@ let Component = React.createClass({
             series: [{
                 name: '运行时间',
                 type: 'column',
-                data: windProfit
+                data: windProfit,
+                maxPointWidth:20,
+                borderRadius:4,
             },
                 {
                     name: '停机时间',
                     type: 'column',
                     data: windCost,
-                    color:'#ccc'
+                    color:'#ccc',
+                     maxPointWidth:20,
+                     borderRadius:4,
                 },{
                     name:'TBA',
                     type:'line',

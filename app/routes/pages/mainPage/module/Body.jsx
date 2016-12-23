@@ -30,7 +30,7 @@ import Fault from '../comp/wfm/yAll/Fault.jsx';
 import Tkgl from '../comp/wfm/jy/controlAll.jsx';
 import Power from '../comp/wfm/power/Power.jsx';
 
-import Super from '../comp/wfm/Super.jsx';//林津津
+import Super from '../comp/wfm/Super.jsx';//林津津SB
 import Cockpit from '../comp/wfm/linjinjin/Cockpit.jsx';
 import Ywbb from '../comp/wfm/linjinjin/yewubaobiao/allywbb.jsx';
 import Fan_matrix from '../comp/wfm/linjinjin/Fan_matrix.jsx';
@@ -70,6 +70,7 @@ import Profitsss from '../comp/wbi/mbixxd/tbatime/Profitsss.jsx';
 import PEQII from '../comp/wbi/mbixxd/PEQII.jsx';
 import Profitime from '../comp/wbi/mbixxd/Profitime.jsx';
 import WFSprofit from '../comp/wbi/mbixxd/WFSprofit.jsx';
+
 
 
 

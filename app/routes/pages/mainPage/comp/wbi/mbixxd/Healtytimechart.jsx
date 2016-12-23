@@ -33,7 +33,7 @@ let Component = React.createClass({
                     color:"#fff",
                     fontSize:"25px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                    
                 }
             },
             legend: {
@@ -60,9 +60,9 @@ let Component = React.createClass({
             ,
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
+                    
                     borderWidth: 0,
-                    pointWidth: 30,
+                    maxPointWidth: 30,
                     borderRadius: 7,
                 }, series: {
                     cursor: 'pointer',
@@ -147,7 +147,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'(100°H)',
+                text:'(°H)',
                 align:'high',
                 rotation:'0',
                 y: -20,

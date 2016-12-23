@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Windcet from './Windcet.jsx';
-import icono from './img/ele.png';
+import icono from './img/wind_logo.png';
 var actions = require('redux/actions');
 var $=require('jquery');
 let data=require('./Profit-dataq');
@@ -34,7 +34,7 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{text[actbt]}</p>
+                <p>{[actbt+1]+'月'+xxdwfNa+'每日发电量'}</p>
                 <div onClick={()=>close()}>x
                 </div>
                 </div>
@@ -56,7 +56,7 @@ let Component = React.createClass({
                     
                        
                            
-                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} height={800} text={xxdwfNa+[actbt+1]+'月每日发电量'}></Windcet>
+                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} height={800} text={[actbt+1]+'月'+xxdwfNa+'每日发电量'}></Windcet>
                           
                        
                            

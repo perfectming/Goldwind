@@ -66,9 +66,7 @@ let Component = React.createClass({
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 0.1,
-                    borderWidth: 0,
-                    pointWidth: 15,
+                    borderWidth:0,
                     stacking:'normal',
                 }, series: {
                     cursor: 'pointer',
@@ -147,6 +145,7 @@ let Component = React.createClass({
                 data: fanProfit,
                 borderRadius: 4,
                 color:'#33BAC0',
+                maxPointWidth:20,
             },
             {
                 name: '故障损失',
@@ -155,13 +154,16 @@ let Component = React.createClass({
                 stack:'waste',
                 borderRadius: 2,
                 color:'#5298d3',
+                 maxPointWidth:20,
             },
                 {
                     name: '维护损失',
                     type: 'column',
                     data: fanCost1,
                     stack:'waste',
-                     color:'#ffffff'
+                     color:'#ffffff',
+                      maxPointWidth:20,
+                       borderRadius: 2,
                 },
                 {
                     name: '限功率损失',
@@ -169,13 +171,17 @@ let Component = React.createClass({
                     data: fanCost2,
                     stack:'waste',
                      color:'#e9c75c',
+                      maxPointWidth:20,
+                       borderRadius: 2,
                 },
                 {
                     name: '非设备原因损失',
                     type: 'column',
                     data: fanCost3,
                     stack:'waste',
-                    color:'#d06960'
+                    color:'#d06960',
+                     maxPointWidth:20,
+                      borderRadius: 2,
                 },
                 {
                     name: 'PBA',

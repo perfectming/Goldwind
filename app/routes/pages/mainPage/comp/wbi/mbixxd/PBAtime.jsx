@@ -53,7 +53,7 @@ let Component = React.createClass({
                         <div className={styles.windcebox}>
                            
                             <div>
-                             <p className={styles.titleee}>{xxdwfNa+w0+'每日PBA'}</p>
+                             <p className={styles.titleee}>{w0+xxdwfNa+'每日PBA'}</p>
                                 <PBAtimechartt areaPlan={PBATimeSecondDay} areaPlanDay={PBATimeSecondPoweract} areaPlanDayT={PBATimeSecondPba} fanCost={PBATimeSecondFaultloss} fanCostB={PBATimeSecondLimitloss} fanCostC={PBATimeSecondNodevreasonloss} fanCostA={PBATimeSecondMaintainloss} xxdwfId={xxdwfId} ></PBAtimechartt>
                             </div>
                         </div>

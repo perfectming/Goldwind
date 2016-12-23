@@ -32,7 +32,7 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{actbt+1+'月份各风机TBA'}</p>
+                <p>{[actbt+1]+'月'+xxdwfNa+'各风机TBA'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
@@ -54,7 +54,7 @@ let Component = React.createClass({
                   
                       
                             <div>
-                                <TBAspacechart fanCost={wTBADown} machine={wTBANa} fanProfitQ={wTBARun} TBA={wTBAT} height={800} text={xxdwfNa+[actbt+1]+'月各风机TBA'} ty={50} pointWidth={30} borderRadius={4} pointPlacement={-0.07}></TBAspacechart>
+                                <TBAspacechart fanCost={wTBADown} machine={wTBANa} fanProfitQ={wTBARun} TBA={wTBAT} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机TBA'} ty={50} pointWidth={30} borderRadius={7} pointPlacement={-0.07}></TBAspacechart>
                             </div>
                        
                

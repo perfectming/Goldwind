@@ -44,7 +44,7 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                            <p className={styles.titleee}>{xxdwfNa+'健康度'}</p>
+                            <p className={styles.titleee}>{xxdwfNa+'每月健康度'}</p>
                                <Healtytimechart  monthT={WTHealName} text={text} areaRecordProfitT={WTN} input_url={ipUrl}></Healtytimechart>
                             </div>
                         </div>
@@ -57,7 +57,7 @@ let Component = React.createClass({
                     <div className={styles.coverbox}>
                         <div className={styles.windcebox}>
                             <div>
-                              <p className={styles.titleee}>{xxdwfNa+w0+'每日健康度'}</p>
+                              <p className={styles.titleee}>{w0+xxdwfNa+'每日健康度'}</p>
                                 <Healtytimecharttt   areaPlan={WTHealNamee} areaPlanDay={WTNe}></Healtytimecharttt>
                             </div>
                         </div>
@@ -132,7 +132,7 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('WTHealName1',WTHealName));
               dispatch(actions.setVars('WTN1',WTN ));
               dispatch(actions.setVars('WHmonth',month));
-              dispatch(actions.setVars('wfH',month));
+              dispatch(actions.setVars('wfH',month+'月'));
                dispatch(actions.setVars('WTN12',WTNN ));
          
             

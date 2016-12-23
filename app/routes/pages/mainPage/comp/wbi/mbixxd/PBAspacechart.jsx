@@ -28,13 +28,14 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : "0",
+              
                 y:20,
+                x:130,
                 style:{
                     color:"#fff",
                     fontSize:"15px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                   
                 }
             },
             // 插入图片
@@ -68,8 +69,10 @@ let Component = React.createClass({
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 10,
+                  
                    stacking:'nomal',
+                   borderRadius:2,
+                   borderWidth:0,
                     
 
                 }, series: {
@@ -148,7 +151,7 @@ let Component = React.createClass({
                 data: fanProfitQ,
                 color:'#33BAC0',
                 shadow:true,
-                pointWidth: pointWidth,
+                maxPointWidth: pointWidth,
                 borderWidth: 0,
                 borderRadius: borderRadius,
             },
@@ -158,19 +161,19 @@ let Component = React.createClass({
                     color:'#FC794E',
                     data: fanCost,
                     stack:'waste',
-                    pointWidth: pointWidth,
+                    maxPointWidth: pointWidth,
                     borderRadius: borderRadius,
                      color:'#5298d3',
-                    pointPlacement:pointPlacement,
+                   
                 },
                 {
                     name: '维护损失',
                     type: 'column',
                     data: fanCostA,
                     stack:'waste',
-                    pointWidth: pointWidth,
+                   maxPointWidth: pointWidth,
                     color:'#ffffff',
-                    pointPlacement:pointPlacement,
+                   
                 },
                 {
                     name: '限功率损失',
@@ -178,17 +181,17 @@ let Component = React.createClass({
                     data: fanCostB,
                     stack:'waste',
                     color:'#e9c75c',
-                    pointWidth: pointWidth,
-                    pointPlacement:pointPlacement,
+                    maxPointWidth:pointWidth,
+                    
                 },
                 {
                     name: '非设备原因损失',
                     type: 'column',
                     data: fanCostC,
                     stack:'waste',
-                    pointWidth: pointWidth,
+                    maxPointWidth: pointWidth,
                     color:'#d06960',
-                    pointPlacement:pointPlacement,
+                    
                 },
                 {
                     name: 'PBA',

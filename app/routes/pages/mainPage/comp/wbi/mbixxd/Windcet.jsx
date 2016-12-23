@@ -27,13 +27,13 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                 x : "0",
+                 x : 120,
                  y:20,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                    
                 }
             },
             // 插入图片
@@ -65,8 +65,8 @@ let Component = React.createClass({
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 10,
-                    borderWidth: 1,
+                  
+                    borderWidth: 0,
 
                 }, series: {
                     cursor: 'pointer',
@@ -99,7 +99,7 @@ let Component = React.createClass({
                     align:'high',
                     rotation:'0',
                     y: -10,
-                    x: 40,
+                    x: 45,
                     style:{
                         color:'#fff',
                         fontSize:'14px',
@@ -120,18 +120,16 @@ let Component = React.createClass({
                 data: areaPlanDay,
                 color:'#33BAC0',
                 borderColor:'#5B9BD5',
-               pointWidth: 20,
-                borderRadius: 3
+               maxPointWidth: 20,
+                borderRadius: 4
             },
             {
             	name: '实际发电量',
                 type: 'column',
                 data:areaPlanDayT,
                color:'#70c080',
-                pointWidth: 20,
-                
-               pointPlacement:0.08,
-                borderRadius: 3
+                maxPointWidth: 20,
+                borderRadius: 4
             },
             ]
         };
