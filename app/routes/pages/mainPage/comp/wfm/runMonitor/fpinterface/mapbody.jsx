@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './mapbodyy.scss';
 import Fcone from './fcone.jsx';
-import Fctwo from './fctwo.jsx';
 import Nav from './nav.jsx';
 import Login from '../../../../../../../components/common/Loading.jsx';
 let time;
@@ -72,7 +71,7 @@ const mapDispatchToProps = (dispatch) => {
                                 dispatch(actions.setVars('leftd', rdata));
                                         setTimeout(function(){
                                        dispatch(actions.setVars('boolmapbody', true));  
-                                   },1000)
+                                        },1500)
                                 }
                             }
                         }
@@ -87,7 +86,7 @@ const mapDispatchToProps = (dispatch) => {
                                 }
 
                         }                  
-             },2000)
+             },1500)
         },
         init: () => {
         },

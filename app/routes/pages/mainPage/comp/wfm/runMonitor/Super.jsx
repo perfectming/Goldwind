@@ -29,8 +29,13 @@ let Component = React.createClass({
        if(boolsuper){
         let data=bbs.ModelData;
         let mod=zhzb.Model;
+        let date03=[];
         let datename00=bbs.ModelData[8888800].CurDayPowerCurve.Time;
         let date00=bbs.ModelData[8888800].CurDayPowerCurve.Value;
+          date00.map(function(value,key){
+            date03.push(Number((value/1000).toFixed(2)))
+          })
+          
         let datename01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Time;
         let date01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Value;
         let datename02=bbs.ModelData[8888802].CurDayPVTSICurve.Time;
@@ -84,7 +89,7 @@ let Component = React.createClass({
                             <Title title={['日发电量统计(kWh)']}></Title>
                         </div>
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
-                            <Line1 date={date00} datename={datename00} height={220} name={'当前出力'} unit={mod.dis.CurDayPowerCurve.unit}></Line1>
+                            <Line1 date={date03} datename={datename00} height={220} name={'当前出力'} unit={mod.dis.CurDayPowerCurve.unit}></Line1>
                    
                             <Title title={[mod.dis.CurDayPowerCurve.name+'('+mod.dis.CurDayPowerCurve.unit+')']}></Title>
                             
@@ -140,11 +145,13 @@ const mapDispatchToProps = (dispatch) => {
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                 function setData(rdata){
                     dispatch(actions.setVars('zhzb', rdata));
+                    console.log(rdata)
                     TY.getRtData("DataOverview", 8888800, setData1)
                         function setData1(rdata){
                             TY.getRtData("DataOverview", 8888800, setData1)
                                 function setData1(rdata){
                                     dispatch(actions.setVars('bbs', rdata));
+                                    console.log(rdata)
                                     setTimeout(function(){
                                        dispatch(actions.setVars('boolsuper', true));  
 
@@ -161,7 +168,7 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('bbs', rdata));
    
                         }
-                 },20000)
+                 },2000)
                                                    
             
         },
@@ -175,3 +182,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
+
