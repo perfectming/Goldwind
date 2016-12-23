@@ -2,13 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let input_url="10.9.100.38";
+
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
        
-        let{xxdwfId,w0,areaName,montht,profit,cost,height,TBA,changedata2qw}=this.props;
+        let{pointWidth,input_url,xxdwfNa,xxdwfId,w0,areaName,montht,profit,cost,height,TBA,changedata2qw}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -20,7 +20,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '风场TBA',
+                text: xxdwfNa+'TBA',
                 align:'left',
                 vertical:'top',
                 offset:200,
@@ -29,7 +29,7 @@ let Component = React.createClass({
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                  
                     top:'20px',
                 }
             },
@@ -63,8 +63,7 @@ let Component = React.createClass({
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 10,
-                    pointWidth: 50,
+                  borderWidth:0,
                     borderRadius: 7
 
                 }, series: {
@@ -81,7 +80,7 @@ let Component = React.createClass({
                         let wTBATD=[];
                         $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByWf',  
+             url:'http://'+input_url+'/wbi/TBA/getDaysTBAByWf',  
              async:false,
             data:{
              'wfid':xxdwfId,
@@ -185,18 +184,18 @@ let Component = React.createClass({
                 data: profit,
                 color:'#33BAC0',
                 shadow:true,
-                pointWidth: 30,
-                borderWidth: 0,
-                pointPlacement: 0,
+                maxPointWidth: pointWidth,
+               
+                
             },
                 {
                     name: '停机时间',
                     type: 'column',
                     data:cost,
                     color:'#ccc',
-                    pointWidth: 30,
+                    maxPointWidth: pointWidth,
                     shadow:'true',
-                    pointPlacement: -0.07,
+                    
                 },
                 {
                     name: 'TBA',

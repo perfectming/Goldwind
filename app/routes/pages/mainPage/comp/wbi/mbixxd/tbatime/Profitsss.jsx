@@ -5,31 +5,22 @@ import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
 import icono from '../img/TBA.png';
 var actions = require('redux/actions');
-let data=require('./Profit-data');
+let data=require('./Profit-data3');
 var $=require('jquery');
 let button=data.button;
-let input_url="10.68.100.32";
-
-
-// let tbaMonths2=tbaMonths;
-// let tbaruntimes2=tbaRunTimes;
-// let tbaDownTimes2=tbaDownTimes;
-// let tbaTba2=tbaTba;
  let text=data.text[0];
-// let windFiled=data.windFiled;
-// let windCost=data.windCost;
-// let windProfit=data.windProfit;
 
 let Component = React.createClass({
    componentWillMount() {
-        this.props.ajax();
+    let {ipUrl}=this.props;
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-       let{tbaMonths,tbaRunTimes,tbaDownTimes,tbaTba,befor_pagee='group',backtop,befor_pagee2,tbaDays3,tbaDayRunTimes3,tbaDayDownTimes3,tbaDayTba3}=this.props;
+       let{ipUrl,tbaMonths,tbaRunTimes,tbaDownTimes,tbaTba,befor_pagee='group',backtop,befor_pagee2,tbaDays3,tbaDayRunTimes3,tbaDayDownTimes3,tbaDayTba3}=this.props;
 
           return (
 
@@ -38,7 +29,7 @@ let Component = React.createClass({
                 <div className={`${styles.areabox} ${styles.shadow}`}>
                 <div className={styles.bgcc}><img src={icono}/></div>
                    <div>
-                     <AreaTable text={text} areaNamee={tbaMonths} areaRecordCostss={tbaDownTimes} areaRecordProfitt={tbaRunTimes} TBA={tbaTba}></AreaTable>
+                     <AreaTable text={text} areaNamee={tbaMonths} areaRecordCostss={tbaDownTimes} areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl}></AreaTable>
                    </div>
                 </div>
                <div className={`${styles.windbox} ${styles.shadow}`}>
@@ -69,13 +60,14 @@ const mapStateToProps = (state) => {
         tbaDayRunTimes3:state.vars.tbaDayRunTimes31,
         tbaDayDownTimes3:state.vars.tbaDayDownTimes31,
         tbaDayTba3:state.vars.tbaDayTba31,
+        ipUrl:state.vars.ipUrl,
     
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      ajax: () => {
+      ajax: (input_url) => {
           //获取十二个月的TBA
 let TBAtimedata;
 let TBAdaydata;
@@ -87,10 +79,12 @@ let tbaDays3=[];
 let tbaDayRunTimes3=[];
 let tbaDayDownTimes3=[];
 let tbaDayTba3=[];
+let date = new Date();
+let month =date.getMonth();
 // 获取所有的月份
  $.ajax({
                      type:'post',
-                     url:'http://'+input_url+':8080/wbi/TBA/getMonthsTBA',
+                     url:'http://'+input_url+'/wbi/TBA/getMonthsTBA',
                      async:false,
                      dataType:'json',
                      timeout:'3000',
@@ -124,14 +118,15 @@ let tbaDayTba3=[];
 
 
 
-// // // 获取默认的月份：1
+// // // 获取默认的月份：11
+
  $.ajax({
                      type:'post',
-                     url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByMonth',
+                     url:'http://'+input_url+'/wbi/TBA/getDaysTBAByMonth',
                      async:false,
                      dataType:'json',
                      data:{
-                      'month':11,
+                      'month':month,
                      },
                      timeout:'3000',
                      success:function(data){
@@ -161,7 +156,7 @@ let tbaDayTba3=[];
         dispatch(actions.setVars('tbaDayRunTimes31',tbaDayRunTimes3 ));
           dispatch(actions.setVars('tbaDayDownTimes31',tbaDayDownTimes3 ));
           dispatch(actions.setVars('tbaDayTba31',tbaDayTba3 ));
-          dispatch(actions.setVars('qwe','11月'));
+          dispatch(actions.setVars('qwe',month+'月'));
        
 
         }

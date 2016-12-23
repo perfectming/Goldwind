@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let data = require('./Profit-data');
+let data = require('./Profit-dataq');
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -23,13 +23,14 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                 x : "0",
-                 y:18,
+               
+                 x:120,
+                 y:14,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                  
                 }
             },
             // 插入图片
@@ -62,9 +63,9 @@ let Component = React.createClass({
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 10,
-                    borderWidth: 1,
-                    pointWidth: 50,
+                   
+            
+                borderWidth:0,
                     borderRadius: 4
 
                 }, series: {
@@ -142,14 +143,14 @@ let Component = React.createClass({
                 type: 'column',
                 data: GEIn,
                 color:'#33BAC0',
-                pointWidth: 15,
+                maxPointWidth: 20,
             },
             {
             	name: '成本',
                 type: 'column',
                 data:GEAm,
-                color:'#ccc',
-                pointWidth: 15,
+                color:'#70c080',
+                maxPointWidth: 20,
             },{
                     name: '收益率',
                     type: 'line',

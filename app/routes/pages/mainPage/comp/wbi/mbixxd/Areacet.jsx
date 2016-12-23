@@ -2,13 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Windcet from './Windcet.jsx';
-import icono from './img/ele.png';
+import icono from './img/wind_logo.png';
 var actions = require('redux/actions');
 var $=require('jquery');
-let data=require('./Profit-data');
+let data=require('./Profit-dataq');
 let month=data.month;
 let button=data.button;
-let input_url="10.9.100.38";
 let x0=[];
 let x1=[];
 let x2=[];
@@ -16,8 +15,8 @@ let x3=[];
 let windPT=data.windFJJ;
 let Component = React.createClass({
     componentWillMount() {
-         let{xxdwfId,xxdwfNa}=this.props;
-        this.props.ajax(xxdwfId,xxdwfNa);
+         let{xxdwfId,xxdwfNa,ipUrl}=this.props;
+        this.props.ajax(xxdwfId,xxdwfNa,ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -28,14 +27,14 @@ let Component = React.createClass({
         let areaPlanDayT=data.areaPlanDayT;
         let text=data.textT;
 
-        let{xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaPlan}=this.props;
+        let{ipUrl,xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaPlan}=this.props;
           return (
            <div className={styles.box}>
              <div className={styles.boxcover} id='boxcover'></div>
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{text[actbt]}</p>
+                <p>{[actbt+1]+'月'+xxdwfNa+'每日发电量'}</p>
                 <div onClick={()=>close()}>x
                 </div>
                 </div>
@@ -45,11 +44,11 @@ let Component = React.createClass({
                  <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key)} key={key}>{value.name}</li>)
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId,ipUrl)} key={key}>{value.name}</li>)
                         })
                     }
               <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
-              <li className={styles.back1} onClick={()=>backtop(befor_pagee,befor_page2)}>{xxdwfNa}</li>
+              
 
                 </ul>
             <div className={styles.paddingtop}>
@@ -57,7 +56,7 @@ let Component = React.createClass({
                     
                        
                            
-                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} height={800} text={text[actbt]}></Windcet>
+                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} height={800} text={[actbt+1]+'月'+xxdwfNa+'每日发电量'}></Windcet>
                           
                        
                            
@@ -89,23 +88,26 @@ const mapStateToProps = (state) => {
         xxdwfNa:state.vars.xxdwfNa1,
          btn:state.vars.btnn,
          areaPlan:state.vars.areaNameNP,
+         ipUrl:state.vars.ipUrl,
 
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (xxdwfId,xxdwfNa) => {
+        ajax: (xxdwfId,xxdwfNa,input_url) => {
             let arr1=[];
             let arr2=[];
             let arr3=[];
+            let date=new Date();
+            let month= date.getMonth();
             $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/ELEC/getWtTimeAreaElec',  
+             url:'http://'+input_url+'/wbi/ELEC/getWtTimeAreaElec',  
              async:false,
             data:{
-             'month':11,
-             'wfid':'150828',
+             'month':month,
+             'wfid':xxdwfId,
             },
              dataType:'json',
              timeout:'3000',
@@ -141,26 +143,27 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
-         changpage :(value,key)=>{
+         changpage :(value,key,xxdwfId,input_url)=>{
             dispatch(actions.setVars('actbtt',key ));
-        
+           let date=new Date();
+            let year= date.getFullYear();
             var arr1w=[];
             var arr2w=[];
             var arr3w=[];
             var monthh=key+1;  
           $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/ELEC/getWtTimeAreaElec',  
+             url:'http://'+input_url+'/wbi/ELEC/getWtTimeAreaElec',  
              async:false,
             data:{
-             'year':2016,
+             'year':year,
              'month':monthh,
-             'wfid':'150828',
+             'wfid':xxdwfId,
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-              console.log(data)
+          
              // 获取x轴的值内蒙达茂天润风电场
             
              for(var i=0;i<data.data.length;i++){

@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
     render() {
        
-     let{ly,text,areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement,width}=this.props
+     let{lx,adc=2,pointWidth,ly,text,areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement,width}=this.props
         let configPie = {
             chart: {
                 height:height,
@@ -24,18 +24,18 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : "0",
+                x:103,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                    
                 }
             },
             // 插入图片
             //图例说明
             legend: {
-                x:-75,
+                x:lx,
                 y:ly,
                 align:"right",
                 verticalAlign: "top",
@@ -63,15 +63,24 @@ let Component = React.createClass({
                 column: {
                     // pointPadding: 0.1,
                     borderWidth: 0,
-                   maxPointWidth: 20,
+                 
                     borderRadius: 4,
+                   
                 },
                 series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
                             
-                        }
+                        },
+
+                        legendItemClick: function() {
+                            
+                            console.log(adc)
+                    if(adc==1){
+                        return false;
+                    }
+                }
                     }
                 }
 
@@ -145,6 +154,7 @@ let Component = React.createClass({
                 
                 borderRadius: 4,
                 pointPlacement:0,
+               maxPointWidth:20,
 
             },
             {
@@ -153,7 +163,8 @@ let Component = React.createClass({
                 data: areaRecordCostR,
              
                 borderRadius: 4,
-                pointPlacement:pointPlacement,
+             
+                maxPointWidth:20,
             },
             {
                     name:"收益率",
@@ -161,6 +172,7 @@ let Component = React.createClass({
                     color:'blue',
                     data:TBAA,
                     yAxis:1,
+                    maxPointWidth:20,
                      tooltip: {
                valueSuffix:'%'
             },

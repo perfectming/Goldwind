@@ -6,12 +6,13 @@ import Login from '../../../../../components/common/Loading.jsx';
 import Superleftbox from './super/superleftbox.jsx';    // 左侧组件
 import Unfilterfan from './xym/Unfilterfan.jsx';    //右侧组件
 
-import Filterfan from './xym/Filterfan.jsx';
-import Filterpv from './xym/Filterpv.jsx';
+var actions = require('redux/actions');
+// import Filterfan from './xym/Filterfan.jsx';
+// import Filterpv from './xym/Filterpv.jsx';
 // import dataBase from '../../../../../config/ModelData';
 // import matrix from '../../../../../config/MatrixModel';
-var actions = require('redux/actions');
-var { Router, Route, browserHistory} = require('react-router');
+
+// var { Router, Route, browserHistory} = require('react-router');
 // let fanData = require('../../../../../config/fan-data');
 // let matrixdata = require('../../../../../config/MatrixData');
 // let model = require('../../../../../config/Model'); 
@@ -67,13 +68,13 @@ var { Router, Route, browserHistory} = require('react-router');
 // // })
 
 
-let time;
+let fan_time; // 该页面定时器
 let Component = React.createClass({
     componentWillMount() {
-        this.props.getfanpvdata(); // 获取该页面数据
+        this.props.getfanpvdata(); // 获取该页面数据方法
     },
      componentWillUnmount() {
-       clearInterval(time)  // 离开页面清除定时器
+       clearInterval(fan_time)  // 离开页面清除定时器
     },
     componentDidMount() {
         this.props.init();
@@ -81,26 +82,18 @@ let Component = React.createClass({
     
     render() {
         let {zhzb,fModel,fData,fanbool=false}=this.props;
-        // console.log(fModel);
-        // console.log(fData);
-        // console.log(zhzb);
+        // fModel:风机光伏矩阵模型, fData:风机光伏矩阵数据。fanbool：页面挂载控制
         if(fanbool){
         let model_ens = zhzb.Model.ens;
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
-        let arr1 = [];
-        let arr2 = [];
-        for(var x in obj_wfd){
-            arr1.push(x);
-            // for(var y in obj_wfd[x]){
-            //     arr2.push(obj_wfd[x][y])
-            // }
+        let arr1 = []; // 接收风场集合
+        let arr2 = []; // 接收光伏场集合
+        for(var i in obj_wfd){
+            arr1.push(i);
         }
-        for(var m in obj_pvd){
-            arr2.push(m);
-            // for(var n in obj_wfd[m]){
-            //     arr2.push(obj_wfd[m][n])
-            // }
+        for(var j in obj_pvd){
+            arr2.push(j);
         }
         // console.log(arr1,arr2)
         return (
@@ -152,8 +145,8 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('fModel', rdata));
                         TY.getRtData("DevicesMatrix", 8888800, setfData)
                         function setfData(rdata){
-                            TY.getRtData("DevicesMatrix", 8888800, setfData1)
-                            function setfData1(rdata){
+                            TY.getRtData("DevicesMatrix", 8888800, setfDatas)
+                            function setfDatas(rdata){
                                 dispatch(actions.setVars('fData', rdata));
                                 setTimeout(function(){
                                     dispatch(actions.setVars('fanbool', true));
@@ -164,7 +157,7 @@ const mapDispatchToProps = (dispatch) => {
                     }
                 }
             // },3000)
-            time = setInterval(function(){
+            fan_time = setInterval(function(){
                 // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                 // function setData(rdata){
                 //     dispatch(actions.setVars('zhzb', rdata));
@@ -175,9 +168,9 @@ const mapDispatchToProps = (dispatch) => {
                         function setfData(rdata){
                             dispatch(actions.setVars('fData', rdata));
 
-                            TY.getRtData("DataOverview", 8888800, setfData1)
+                            TY.getRtData("DataOverview", 8888800, setfDatas)
 
-                            function setfData1(rdata){
+                            function setfDatas(rdata){
                                 
                                 // setTimeout(function(){
                                     dispatch(actions.setVars('bbs', rdata));

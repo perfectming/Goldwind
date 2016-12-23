@@ -5,40 +5,40 @@ import Profitimechart from './Profitimechart.jsx';
 import Profitimechartt from './Profitimechartt.jsx';
 import icono from './img/收益率1.png';
 var actions = require('redux/actions');
-let data=require('./Profit-data');
+let data=require('./Profit-dataq');
 let month=data.month;
 let button=data.button;
-let input_url="10.9.100.38";
 let Component = React.createClass({
     componentWillMount() {
-        this.props.ajax();
+        let{ipUrl}=this.props;
+        this.props.ajax(ipUrl);
     },
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-        let {w0,GERa,GEAm,GENa,GEIn,GeR,GeM,GeE,GeC,actbt,changpage,backtop,befor_pagee='group',befor_pagee2}=this.props;
+        let {ipUrl,w0,GERa,GEAm,GENa,GEIn,GeR,GeM,GeE,GeC,actbt,changpage,backtop,befor_pagee='group',befor_pagee2}=this.props;
         return (
             <div className={styles.box}>
             <div className={styles.padding}>
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
                    
-                       <div className={styles.imgq}>
+                       <div className={styles.imgqwe}>
                         <img src={icono}/>
                        </div>
                             <div>
-                                <Profitimechart GeR={GeR} GeE={GeE} GeC={GeC} GeM={GeM} text={'集团每月收益'}height={420} ></Profitimechart>
+                                <Profitimechart GeR={GeR} GeE={GeC} GeC={GeE} GeM={GeM} text={'集团每月收益'}height={420} input_url={ipUrl}></Profitimechart>
                             </div>
                 </div>
                  <div className={styles.bigbox}>
                    
-                       <div className={styles.imgq}>
+                       <div className={styles.imgqwe}>
                         <img src={icono}/>
                        </div>
                             <div>
-                                <Profitimechartt GEIn={GEIn} GERa={GERa} GEAm={GEAm} GENa={GENa}height={420} text={w0+'每天收益'} ></Profitimechartt>
+                                <Profitimechartt GEIn={GEIn} GERa={GERa} GEAm={GEAm} GENa={GENa}height={420} text={w0+'每日收益'} ></Profitimechartt>
                             </div>
                 </div>
 
@@ -64,12 +64,13 @@ const mapStateToProps = (state) => {
         GEAm:state.vars.GEAm1,
         GERa:state.vars.GERa1,
         w0:state.vars.w0GE,
+        ipUrl:state.vars.ipUrl,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      ajax:()=>{
+      ajax:(input_url)=>{
         // 上面12各月的数据
             let arr1=[];
             let arr2=[];
@@ -83,11 +84,12 @@ const mapDispatchToProps = (dispatch) => {
            
           $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getAllRate',  
+             url:'http://'+input_url+'/wbi/yield/getAllRate',  
              async:false,
              dataType:'json',
              timeout:'3000',
              success:function(data){
+               
             let GE=data.data;
           
             
@@ -110,7 +112,7 @@ const mapDispatchToProps = (dispatch) => {
             
              },
              error:function(){
-                
+            
              }
            });
      // 获取每天的收益
@@ -118,43 +120,47 @@ const mapDispatchToProps = (dispatch) => {
         let GEAm=[];
         let GERa=[];
     let    GENa=[];
-         for (let i=1;i<daycount+1;i++)
-          {
+     
+          
            $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getMaxYieByDate',  
+             url:'http://'+input_url+'/wbi/yield/getMaxYieBayDay',  
              async:false,
              data:{
-              'startdate':year+'-'+month+'-'+i,
-              'enddate':year+'-'+month+'-'+i,
+              'month':month,
              },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-            let GE=data.data;
-         let incomes=GE.incomes
-         GEIn.push(incomes);
+                 
+           let GE=data.data;
+           for( let i in GE){
+          let incomes=GE[i].incomes
+          GEIn.push(incomes);
 
-         let amounts=GE.amounts
-         GEAm.push(amounts);
+          let amounts=GE[i].amounts
+          GEAm.push(amounts);
 
-         let rate=GE.rate*100
-         GERa.push(Number(rate.toFixed(1)));
+          let rate=GE[i].rate*100
+      GERa.push(Number(rate.toFixed(1)));
 
-
-         GENa.push(i+"日");
+    let day=GE[i].day;
+          GENa.push(day+'日');}
             
              
              },
              error:function(){
-                
-             }
-           })
-       }
-       dispatch(actions.setVars('GENa1',GENa));
-       dispatch(actions.setVars('GEIn1',GEIn));
-       dispatch(actions.setVars('GEAm1',GEAm));
-       dispatch(actions.setVars('GERa1',GERa));
+                console.log(2);
+                console.log(month);
+                console.log('http://'+input_url+'/wbi/yield/getMaxYieBayDay')
+              }
+          })
+       
+        dispatch(actions.setVars('GENa1',GENa));
+        dispatch(actions.setVars('GEIn1',GEIn));
+        dispatch(actions.setVars('GEAm1',GEAm));
+        dispatch(actions.setVars('GERa1',GERa));
+
 
 
          

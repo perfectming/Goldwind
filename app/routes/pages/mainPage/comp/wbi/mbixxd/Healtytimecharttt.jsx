@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
+
 
 let Component = React.createClass({
     componentWillMount() {
@@ -31,7 +31,7 @@ let Component = React.createClass({
                     color:"#fff",
                     fontSize:"25px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                  
                 }
             },
             legend: {
@@ -60,9 +60,9 @@ let Component = React.createClass({
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
+                   
                     borderWidth: 0,
-                    pointWidth: 20,
+                    maxPointWidth: 20,
                     borderRadius: 7,
                 }, series: {
                     cursor: 'pointer',
@@ -97,7 +97,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'100',
+                text:'(°H)',
                 align:'high',
                 rotation:'0',
                 y: -20,
@@ -127,6 +127,9 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaPlanDay,
                 color:'#4CDB9D',
+                  tooltip: {
+               valueSuffix:'°H'
+            },
                 
             },
             ]

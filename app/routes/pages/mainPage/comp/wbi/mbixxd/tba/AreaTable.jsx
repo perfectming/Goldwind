@@ -2,14 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let data = require('./Profit-data');
-let input_url="10.9.100.38";
+let data = require('./Profit-data2');
+
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
 
-        let {PBAGroupPba,PBAGroupNodevreasonloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupFaultloss,areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
+        let {input_url,PBAGroupPba,PBAGroupNodevreasonloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupFaultloss,areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
         let configPie = {
             chart: {
                 height:400,
@@ -24,7 +24,7 @@ let Component = React.createClass({
             title: {
                 text:'',
                 align:'left',
-                 x : "0",
+                
                 style:{
                     color:"#fff",
                     fontSize:"25px",
@@ -57,9 +57,7 @@ let Component = React.createClass({
             colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31','#EB6B34'],
               plotOptions: {
                 column: {
-                    pointPadding:0,
-                    borderWidth: 0,
-                    pointWidth:25,
+                   borderWidth:0,
                     stacking: 'normal',
                 }, series: {
                     cursor: 'pointer',
@@ -81,7 +79,7 @@ let Component = React.createClass({
 
                         $.ajax({
                      type:'post',
-                     url:'http://'+input_url+':8080/wbi/PBA/getCompanyDayTimePBA',
+                     url:'http://'+input_url+'/wbi/PBA/getCompanyDayTimePBA',
                      async:false,
                      dataType:'json',
                      data:{
@@ -194,6 +192,8 @@ let Component = React.createClass({
                 data: areaRecordProfit,
                 borderRadius: 7,
                 color:'#33BAC0',
+                maxPointWidth:30,
+
             },
             {
                 name: '故障损失',
@@ -201,7 +201,7 @@ let Component = React.createClass({
                 data: PBAGroupFaultloss,
                 stack:'first',
                 borderRadius: 2,
-                pointPlacement:-0.1,
+               maxPointWidth:30,
                 color:'#5298d3',
             },
             {
@@ -209,7 +209,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: PBAGroupMaintainloss,
                 stack:'first',
-                pointPlacement:-0.1,
+               maxPointWidth:30,
                 color:'#ffffff'
             },
             {
@@ -217,7 +217,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: PBAGroupLimitloss,
                 stack:'first',
-                pointPlacement:-0.1,
+                maxPointWidth:30,
                 color:'#e9c75c',
             },
             {
@@ -226,7 +226,7 @@ let Component = React.createClass({
                 data: PBAGroupNodevreasonloss,
                 stack:'first',
                 borderRadius: 2,
-                pointPlacement:-0.1,
+                maxPointWidth:30,
                 color:'#d06960'
             },
                 {

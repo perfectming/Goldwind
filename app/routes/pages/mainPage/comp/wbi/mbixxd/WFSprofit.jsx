@@ -4,8 +4,8 @@ import styles from './Areacestyle.scss';
 import WFSprofitchart from './WFSprofitchart.jsx';
 import icono from './img/TBA.png';
 var actions = require('redux/actions');
-let data=require('./Profit-data');
-let input_url="10.9.100.38";
+let data=require('./Profit-dataq');
+
 let month=data.month;
 let button=data.button;
 let machine=data.machine;
@@ -19,15 +19,15 @@ let windFF=data.windFF;
  let fanProfitQ=data.fanProfitQ;
 let Component = React.createClass({
   componentWillMount() {
-        let{xxdwfId,xxdwfNa}=this.props;
-        this.props.ajax(xxdwfId,xxdwfNa);
+        let{xxdwfId,xxdwfNa,ipUrl}=this.props;
+        this.props.ajax(xxdwfId,xxdwfNa,ipUrl);
     },
     componentDidMount() {
         this.props.init();
     },
     render() {
        
-        let{WFSPRa,WFSPNaM,WFSPCo,WFSPEa,WFSPNa,WFSPRaM,WFSPCoM,WFSPEaM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+        let{width,ipUrl,WFSPRa,WFSPNaM,WFSPCo,WFSPEa,WFSPNa,WFSPRaM,WFSPCoM,WFSPEaM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
         return (
            
             <div className={styles.box}>
@@ -35,21 +35,21 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{text[actbt]+'月各风机收益'}</p>
+                <p>{text[actbt]+xxdwfNa+'各风机收益'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-            <WFSprofitchart fanCost={WFSPCoM} machine={WFSPNaM} fanProfitQ={WFSPEaM} TBA={WFSPRaM} height={500} width={24000}  ty={10}></WFSprofitchart></div>
+            <WFSprofitchart fanCost={WFSPCoM} machine={WFSPNaM} fanProfitQ={WFSPEaM} TBA={WFSPRaM} height={500} width={width}  ty={10} pointWidth={20} borderRadius={4} pointPlacement={0}></WFSprofitchart></div>
 
              </div>
                 <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId)} key={key}>{value.name}</li>)
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId,ipUrl)} key={key}>{value.name}</li>)
                         })
                     }
                     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
-                <li className={styles.back1} onClick={()=>backtop(befor_pagee,befor_page2)}>{xxdwfNa}</li>
+               
 
                 </ul>
                 <div className={styles.paddingtop}>
@@ -57,19 +57,19 @@ let Component = React.createClass({
                   
                       
                             <div>
-                                <WFSprofitchart fanCost={WFSPCo} machine={WFSPNa} fanProfitQ={WFSPEa} TBA={WFSPRa} height={800} text={text[actbt]+'各风机收益'} ty={50}></WFSprofitchart>
+                                <WFSprofitchart fanCost={WFSPCo} machine={WFSPNa} fanProfitQ={WFSPEa} TBA={WFSPRa} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机收益'} ty={50} pointWidth={30} borderRadius={7} pointPlacement={0}></WFSprofitchart>
                             </div>
                        
                
                   
-                    <div className={styles.imgq}>
+                    <div className={styles.imgqnm}>
                         <img src={icono}/>
                     </div>
 
                     <div className={styles.buttons}>
-                      <button onClick={()=>gogogo(xxdwfId,actbt,btn)} className={btn===0? styles.btn0 : styles.btn1} > 前10</button>
-                      <button onClick={()=>back(xxdwfId,actbt,btn)} className={btn===1? styles.btn0 : styles.btn1}>后10</button>
-                      <button  onClick={()=>more(xxdwfId,actbt,btn)} className={btn===2? styles.btn0 : styles.btn1}>更多</button>
+                      <button onClick={()=>gogogo(xxdwfId,actbt,btn,ipUrl)} className={btn===0? styles.btn0 : styles.btn1} > 前10</button>
+                      <button onClick={()=>back(xxdwfId,actbt,btn,ipUrl)} className={btn===1? styles.btn0 : styles.btn1}>后10</button>
+                      <button  onClick={()=>more(xxdwfId,actbt,btn,ipUrl)} className={btn===2? styles.btn0 : styles.btn1}>更多</button>
                    </div>
                 </div>
                 </div>
@@ -99,18 +99,20 @@ const mapStateToProps = (state) => {
         WFSPCo:state.vars.WFSPCo1,
         WFSPRa:state.vars.WFSPRa1,
         btn:state.vars.btnn,
+        ipUrl:state.vars.ipUrl,
       
         WFSPNaM:state.vars.WFSPNa11,
         WFSPEaM:state.vars.WFSPEa11,
         WFSPCoM:state.vars.WFSPCo11,
         WFSPRaM:state.vars.WFSPRa11,
+        width:state.vars.width1,
      
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-       ajax: (xxdwfId,xxdwfNa) => {
+       ajax: (xxdwfId,xxdwfNa,input_url) => {
      
           let WFSPNa=[];
           let WFSPEa=[];
@@ -124,7 +126,7 @@ const mapDispatchToProps = (dispatch) => {
  
             $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',  
+             url:'http://'+input_url+'/wbi/yield/getYieldByWfid',  
              async:false,
             data:{
 
@@ -136,7 +138,7 @@ const mapDispatchToProps = (dispatch) => {
              dataType:'json',
              timeout:'3000',
              success:function(data){
-             	console.log(year+"-"+month+"-"+daycountT);
+           
               let WFSP=data.data;
               for (let i in WFSP)
               {
@@ -155,7 +157,7 @@ const mapDispatchToProps = (dispatch) => {
           
               },
              error:function(){
-               console.log(1)
+             
               },
             });   
             dispatch(actions.setVars('WFSPNa1',WFSPNa)) ;
@@ -173,7 +175,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
-         changpage :(value,key,xxdwfId)=>{
+         changpage :(value,key,xxdwfId,input_url)=>{
           
           let WFSPNa=[];
           let WFSPEa=[];
@@ -187,7 +189,7 @@ const mapDispatchToProps = (dispatch) => {
  
             $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',  
+             url:'http://'+input_url+'/wbi/yield/getYieldByWfid',  
              async:false,
             data:{
 
@@ -199,7 +201,7 @@ const mapDispatchToProps = (dispatch) => {
              dataType:'json',
              timeout:'3000',
              success:function(data){
-             	console.log(year+"-"+(key+1)+"-"+daycountT);
+          
               let WFSP=data.data;
               for (let i in WFSP)
               {
@@ -219,7 +221,7 @@ const mapDispatchToProps = (dispatch) => {
 
               },
              error:function(){
-               console.log(2)
+          
               },
             });   
             dispatch(actions.setVars('WFSPNa1',WFSPNa)) ;
@@ -229,7 +231,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('actbtWFP',key)) ;
              dispatch(actions.setVars('btnn',0)) ;
         },
-         gogogo:(xxdwfId,actbt,btn)=>{
+         gogogo:(xxdwfId,actbt,btn,input_url)=>{
            let WFSPNa=[];
           let WFSPEa=[];
           let WFSPCo=[];
@@ -242,7 +244,7 @@ const mapDispatchToProps = (dispatch) => {
  
             $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',  
+             url:'http://'+input_url+'/wbi/yield/getYieldByWfid',  
              async:false,
             data:{
 
@@ -254,7 +256,7 @@ const mapDispatchToProps = (dispatch) => {
              dataType:'json',
              timeout:'3000',
              success:function(data){
-             	console.log(year+"-"+(actbt+1)+"-"+daycountT);
+           
               let WFSP=data.data;
               for (let i in WFSP)
               {
@@ -274,7 +276,7 @@ const mapDispatchToProps = (dispatch) => {
 
               },
              error:function(){
-               console.log(3)
+          
               },
             });   
             dispatch(actions.setVars('WFSPNa1',WFSPNa)) ;
@@ -285,7 +287,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('btnn',0)) ;
            
         },
-       back:(xxdwfId,actbt,btn)=>{
+       back:(xxdwfId,actbt,btn,input_url)=>{
            let WFSPNa=[];
           let WFSPEa=[];
           let WFSPCo=[];
@@ -298,7 +300,7 @@ const mapDispatchToProps = (dispatch) => {
  
             $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',  
+             url:'http://'+input_url+'/wbi/yield/getYieldByWfid',  
              async:false,
             data:{
              'wfid':xxdwfId,
@@ -309,7 +311,7 @@ const mapDispatchToProps = (dispatch) => {
              dataType:'json',
              timeout:'3000',
              success:function(data){
-             	console.log(year+"-"+(actbt+1)+"-"+daycountT);
+           
               let WFSP=data.data;
               for (let i in WFSP)
               {
@@ -329,7 +331,7 @@ const mapDispatchToProps = (dispatch) => {
 
               },
              error:function(){
-               console.log(4)
+           
               },
             });   
             dispatch(actions.setVars('WFSPNa1',WFSPNa)) ;
@@ -340,13 +342,14 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('btnn',1)) ;
 
         },
-         more:(xxdwfId,actbt,btn)=>{
+         more:(xxdwfId,actbt,btn,input_url)=>{
              $("#sss").show();
              $('#boxcover').show();
             let WFSPNa=[];
           let WFSPEa=[];
           let WFSPCo=[];
           let WFSPRa=[];
+          let width=0;
           let date= new Date();
           let year =date.getFullYear();
           let month=date.getMonth();
@@ -355,7 +358,7 @@ const mapDispatchToProps = (dispatch) => {
  
             $.ajax({
              type:'post',
-             url:'http://'+input_url+':8080/wbi/yield/getYieldByWfid',  
+             url:'http://'+input_url+'/wbi/yield/getYieldByWfid',  
              async:false,
             data:{
 
@@ -367,7 +370,7 @@ const mapDispatchToProps = (dispatch) => {
              dataType:'json',
              timeout:'3000',
              success:function(data){
-             	console.log(year+"-"+(actbt+1)+"-"+daycountT);
+           
               let WFSP=data.data;
               for (let i in WFSP)
               {
@@ -383,11 +386,12 @@ const mapDispatchToProps = (dispatch) => {
               	let rate=WFSP[i].rate*100;
               	WFSPRa.push(Number(rate.toFixed(1)));
               }
-          
+          let length =WFSPNa.length;
+          width=length*60;
 
               },
              error:function(){
-               console.log(5)
+               
               },
             });   
             dispatch(actions.setVars('WFSPNa11',WFSPNa)) ;
@@ -396,6 +400,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('WFSPRa11',WFSPRa)) ;
            
              dispatch(actions.setVars('btnn',2)) ;
+              dispatch(actions.setVars('width1',width)) ;
          
         },
         close:()=>{

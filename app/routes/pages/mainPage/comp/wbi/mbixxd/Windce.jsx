@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
+let data = require('./Profit-dataq');
 
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {areaPlan,ly,text,areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
-          {console.log(areaPlan)}
+        let {borderRadius,pointPlacement,areaPlan,ly,text,areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
+         
         let configPie = {
             chart: {
                 height:height,
@@ -19,7 +19,7 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                borderRadius:10
+                borderRadius:0,
             },
             title: {
                 text: text,
@@ -27,12 +27,12 @@ let Component = React.createClass({
                 top:'-20px',
                 y:20,
                 vertical:'top',
-                 x : "0",
+                x:120,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                    
                 }
             },
             // 插入图片
@@ -68,9 +68,10 @@ let Component = React.createClass({
 
             plotOptions: {
                 column: {
-                    pointPadding: 0.05,
                     borderWidth: 0,
-                    pointWidth: pointWidth,
+
+                   maxPointWidth:pointWidth,
+                    
                 }, series: {
                     cursor: 'pointer',
                     events: {
@@ -125,7 +126,8 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordProfitO,
                 color:'#33BAC0',
-                borderRadius: 7,
+                borderRadius: borderRadius,
+               
              
             },
             {
@@ -133,8 +135,8 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordCostT,
                 color:'#70c080',
-                borderRadius: 7,
-                pointPlacement:-0.07,
+                borderRadius: borderRadius,
+                
               
             }]
         };

@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
+let data = require('./Profit-dataq');
 
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {ty,TBA,text,fanCost,machine,fanProfitQ,width,height}=this.props;
+        let {pointWidth,borderRadius,ty,TBA,text,fanCost,machine,fanProfitQ,width,height}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -25,13 +25,13 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : "0",
-                y:20,
+                x:120,
+                y:14,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                   
                 }
             },
             // 插入图片
@@ -53,7 +53,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                 valueSuffix:'h'
+                 valueSuffix:'元'
             },
             credits: {
                 enabled: false
@@ -64,9 +64,9 @@ let Component = React.createClass({
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                    pointPadding: 10,
+                   
                    stacking:'nomal',
-                    pointWidth: 50,
+               
 
 
                 }, series: {
@@ -106,11 +106,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'（h）',
+                text:'（元）',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 35,
+                x: 45,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -142,24 +142,24 @@ let Component = React.createClass({
             opposite: true
         }],
             series: [{
-                name: '运行时间',
+                name: '收入',
                 type: 'column',
                 data: fanProfitQ,
                 color:'#33BAC0',
                 shadow:true,
-                pointWidth: 30,
+                maxPointWidth: pointWidth,
                 borderWidth: 0, 
-                borderRadius: 7,
+                borderRadius: borderRadius,
 
             },
                 {
-                    name: '停机时间',
+                    name: '成本',
                     type: 'column',
                     color:'#5298d3',
                     data: fanCost,
                     stack:'waste',
-                    pointWidth: 30,
-                    borderRadius: 3,
+                    maxPointWidth: pointWidth,
+                    borderRadius: borderRadius,
                     color:'#FFFFFF',
                 },
                 {

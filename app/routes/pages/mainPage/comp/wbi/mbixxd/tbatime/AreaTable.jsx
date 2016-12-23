@@ -2,14 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let data = require('./Profit-data');
+let data = require('./Profit-data3');
 var $=require('jquery');
-let input_url="10.68.100.32";
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
+        let { input_url,w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
         let configPie = {
             chart: {
                 height:430,
@@ -27,7 +26,7 @@ let Component = React.createClass({
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                     fontWeight:700,
+                   
                 }
             },
             legend: {
@@ -57,9 +56,7 @@ let Component = React.createClass({
             colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31','#EB6B34'],
             plotOptions: {
                 column: {
-                    pointPadding:0,
-                    borderWidth: 0,
-                    pointWidth:25,
+                   
                     borderRadius: 7,
                     stacking: 'normal',
                 }, series: {
@@ -77,7 +74,7 @@ let Component = React.createClass({
                          let tbaDayTba=[];
                         $.ajax({
                      type:'post',
-                     url:'http://'+input_url+':8080/wbi/TBA/getDaysTBAByMonth',
+                     url:'http://'+input_url+'/wbi/TBA/getDaysTBAByMonth',
                      async:false,
                      dataType:'json',
                      data:{
@@ -173,6 +170,7 @@ let Component = React.createClass({
                 name: '运行时间',
                 type: 'column',
                 data: areaRecordProfitt,
+                maxPointWidth:30,
                
             },
             {
@@ -181,7 +179,8 @@ let Component = React.createClass({
                 data: areaRecordCostss,
                 stack:'first',
                 color:'#ccc',
-                pointPlacement:-0.1,
+                maxPointWidth:30,
+                
                 
             },
 

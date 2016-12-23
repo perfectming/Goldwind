@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Groupstyle.scss';
 import Yearelectric from './Yearelectric.jsx';
-import Pie2 from './Pie2';
+import Pie2 from './PieTwo';
 import Login from '../../../../../../../components/common/Loading.jsx';
 
-var ipUrl='10.68.100.32:8080';
+var ipUrl='10.9.99.28:8080';
 var actions = require('redux/actions');
 var $ =require("jQuery");
 

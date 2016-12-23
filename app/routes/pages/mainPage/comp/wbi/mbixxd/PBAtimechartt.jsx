@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data');
+let data = require('./Profit-dataq');
 
 let Component = React.createClass({
     componentWillMount() {
@@ -31,7 +31,7 @@ let Component = React.createClass({
                     color:"#fff",
                     fontSize:"25px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+               
                 }
             },
             // 插入图片
@@ -63,11 +63,9 @@ let Component = React.createClass({
 
             plotOptions: {
                 column: {
-                    pointPadding: 10,
-                    borderWidth: 1,
-                    pointWidth: 50,
-                    borderRadius: 4,
+                    
                     stacking:'nomal',
+                    borderWidth:0,
 
                 }, series: {
                     cursor: 'pointer',
@@ -145,7 +143,8 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaPlanDay,
                 color:'#33BAC0',
-                pointWidth: 15,
+                maxPointWidth: 20,
+                 borderRadius:3,
             },
              {
                     name: '故障损失',
@@ -153,19 +152,21 @@ let Component = React.createClass({
                     color:'#FC794E',
                     data: fanCost,
                     stack:'waste',
-                     pointWidth: 15,
+                     maxPointWidth: 20,
                      borderRadius: 3,
                      color:'#5298d3',
-                     pointPlacement:-0.07,
+
+                     
                 },
                 {
                     name: '维护损失',
                     type: 'column',
                     data: fanCostA,
                     stack:'waste',
-                     pointWidth: 15,
+                    maxPointWidth: 20,
                     color:'#ffffff',
-                    pointPlacement:-0.07,
+                     borderRadius:3,
+                    
                 },
                 {
                     name: '限功率损失',
@@ -173,17 +174,19 @@ let Component = React.createClass({
                     data: fanCostB,
                     stack:'waste',
                     color:'#e9c75c',
-                     pointWidth: 15,
-                     pointPlacement:-0.07,
+                     maxPointWidth: 20,
+                      borderRadius:3,
+                     
                 },
                 {
                     name: '非设备原因损失',
                     type: 'column',
                     data: fanCostC,
                     stack:'waste',
-                     pointWidth: 15,
+                   maxPointWidth: 20,
                     color:'#d06960',
-                    pointPlacement:-0.07,
+                     borderRadius:3,
+                    
                 },
            {
                     name: 'PBA',
