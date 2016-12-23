@@ -74,19 +74,20 @@
       }
     }
     .online{
-      border-left: 2px solid #1fe005; //运行
+      border: 2px solid #1fe005; //运行
     }
     .limitPow{
-       border-left: 2px solid rgb(221, 220, 220);
+       border: 2px solid rgb(221, 220, 220);
     }
     .offline{
-      border-left: 2px solid rgb(50, 141, 239); // 待机#f1a820
+      border: 2px solid rgb(50, 141, 239); // 待机#f1a820
     }
     .discomfor{
-      border-left: 2px solid #f1a820; //离线
+      border: 2px solid #666; //离线
     }
     .repair{
       border: 2px solid rgb(251, 213, 0);
+      background: url(../../../../img/comp/icon2.png) no-repeat 220px 10px,url(../../../../img/comp/fmatrix.png);
     }
     .default{
       // border: 2px solid #c7b88c; //检修
