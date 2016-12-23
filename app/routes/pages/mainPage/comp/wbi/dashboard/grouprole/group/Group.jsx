@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Groupstyle.scss';
 import Yearelectric from '../Yearelectric.jsx';
-import Pie2 from './PieTwo';
+import Pie2 from '../PieTwo';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 
 

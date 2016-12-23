@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let input_url="10.68.100.32";
-let data = require('./Profit-data');
+let data = require('./Profit-data1');
 let Component = React.createClass({
     componentWillMount() {
     },

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Hly_genday from './Hly_genday.jsx';
+import Hly_genday from '../group/groupj/Hly_genday.jsx';
 
 var actions = require('redux/actions');
 let ip="10.68.100.32";
