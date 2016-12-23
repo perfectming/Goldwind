@@ -39,54 +39,54 @@ import Legend from '../comp/wfm/super/tootipbox.jsx';
 import CS from '../comp/wfm/chart/cs.jsx';
 
 
-import Healthy_one from '../comp/wbi/dashboard/grouprole/group/groupj/Healthy_one.jsx';//姜海鹏
-import Healthy from '../comp/wbi/dashboard/grouprole/group/groupj/Healthy.jsx';
-import Healthypba from '../comp/wbi/dashboard/grouprole/group/groupj/Healthypba.jsx';
-import Healthypbas from '../comp/wbi/dashboard/grouprole/group/groupj/Healthypbas.jsx';
-import Healthyregin from '../comp/wbi/dashboard/grouprole/area/Healthyregin.jsx';
-import Healthyregins from '../comp/wbi/dashboard/grouprole/area/Healthyregins.jsx';
-import Healthyregpba from '../comp/wbi/dashboard/grouprole/area/Healthyregpba.jsx';
-import Healthyregpbas from '../comp/wbi/dashboard/grouprole/area/Healthyregpbas.jsx';
-import Healthygen from '../comp/wbi/dashboard/grouprole/group/groupj/Healthygen.jsx';
-import Healthygens from '../comp/wbi/dashboard/grouprole/group/groupj/Healthygens.jsx';
-import Regiopower from '../comp/wbi/dashboard/grouprole/area/Regiopower.jsx';
-import Regiopowers from '../comp/wbi/dashboard/grouprole/area/Regiopowers.jsx';
-import Regiotba from '../comp/wbi/dashboard/grouprole/area/Regiotba.jsx';
-import Regiotbas from '../comp/wbi/dashboard/grouprole/area/Regiotbas.jsx';
-import Input_cost from '../comp/wbi/dashboard/grouprole/area/Input_cost.jsx';
+// import Healthy_one from '../comp/wbi/dashboard/grouprole/group/groupj/Healthy_one.jsx';//姜海鹏
+// import Healthy from '../comp/wbi/dashboard/grouprole/group/groupj/Healthy.jsx';
+// import Healthypba from '../comp/wbi/dashboard/grouprole/group/groupj/Healthypba.jsx';
+// import Healthypbas from '../comp/wbi/dashboard/grouprole/group/groupj/Healthypbas.jsx';
+// import Healthyregin from '../comp/wbi/dashboard/grouprole/area/Healthyregin.jsx';
+// import Healthyregins from '../comp/wbi/dashboard/grouprole/area/Healthyregins.jsx';
+// import Healthyregpba from '../comp/wbi/dashboard/grouprole/area/Healthyregpba.jsx';
+// import Healthyregpbas from '../comp/wbi/dashboard/grouprole/area/Healthyregpbas.jsx';
+// import Healthygen from '../comp/wbi/dashboard/grouprole/group/groupj/Healthygen.jsx';
+// import Healthygens from '../comp/wbi/dashboard/grouprole/group/groupj/Healthygens.jsx';
+// import Regiopower from '../comp/wbi/dashboard/grouprole/area/Regiopower.jsx';
+// import Regiopowers from '../comp/wbi/dashboard/grouprole/area/Regiopowers.jsx';
+// import Regiotba from '../comp/wbi/dashboard/grouprole/area/Regiotba.jsx';
+// import Regiotbas from '../comp/wbi/dashboard/grouprole/area/Regiotbas.jsx';
+// import Input_cost from '../comp/wbi/dashboard/grouprole/area/Input_cost.jsx';
 
 
-import Areace from '../comp/wbi/dashboard/grouprole/windpage/Areace.jsx';//薛旭东44
-import Areacet from '../comp/wbi/dashboard/grouprole/windpage/Areacet.jsx';
-import TBAtime from '../comp/wbi/dashboard/grouprole/windpage/TBAtime.jsx';
-import TBAspace from '../comp/wbi/dashboard/grouprole/windpage/TBAspace.jsx';
-import Healty from '../comp/wbi/dashboard/grouprole/windpage/Healty.jsx';
-import Healthytime from '../comp/wbi/dashboard/grouprole/windpage/Healthytime.jsx';
-import PBAtime from '../comp/wbi/dashboard/grouprole/windpage/PBAtime.jsx';
-import PBAspace from '../comp/wbi/dashboard/grouprole/windpage/PBAspace.jsx';
-import Profits from '../comp/wbi/dashboard/grouprole/group/earnings/Profits.jsx';
-import Profitss from '../comp/wbi/dashboard/grouprole/group/tba/Profitss2.jsx';
-import Profitsss from '../comp/wbi/dashboard/grouprole/group/tbatime/Profitsss3.jsx';
-import PEQII from '../comp/wbi/dashboard/grouprole/windpage/PEQII.jsx';
+// import Areace from '../comp/wbi/dashboard/grouprole/windpage/Areace.jsx';//薛旭东44
+// import Areacet from '../comp/wbi/dashboard/grouprole/windpage/Areacet.jsx';
+// import TBAtime from '../comp/wbi/dashboard/grouprole/windpage/TBAtime.jsx';
+// import TBAspace from '../comp/wbi/dashboard/grouprole/windpage/TBAspace.jsx';
+// import Healty from '../comp/wbi/dashboard/grouprole/windpage/Healty.jsx';
+// import Healthytime from '../comp/wbi/dashboard/grouprole/windpage/Healthytime.jsx';
+// import PBAtime from '../comp/wbi/dashboard/grouprole/windpage/PBAtime.jsx';
+// import PBAspace from '../comp/wbi/dashboard/grouprole/windpage/PBAspace.jsx';
+// import Profits from '../comp/wbi/dashboard/grouprole/group/earnings/Profits.jsx';
+// import Profitss from '../comp/wbi/dashboard/grouprole/group/tba/Profitss2.jsx';
+// import Profitsss from '../comp/wbi/dashboard/grouprole/group/tbatime/Profitsss3.jsx';
+// import PEQII from '../comp/wbi/dashboard/grouprole/windpage/PEQII.jsx';
 
 
 
-import Baotou from '../comp/wbi/dashboard/branch/Baotou.jsx';//路迪
-import Windbtpage from '../comp/wbi/dashboard/branch/Windbtpage.jsx';
-import Xilin from '../comp/wbi/dashboard/branch/Xilin.jsx';
-import Areaa from '../comp/wbi/dashboard/grouprole/area/Area.jsx';
-import Group from '../comp/wbi/dashboard/grouprole/group/Group.jsx';
-import Windpage from '../comp/wbi/dashboard/grouprole/windpage/Windpage.jsx';
-import GroupKBA from '../comp/wbi/KPI/GroupKBA.jsx';
-import AreaKBA from '../comp/wbi/KPI/AreaKBA.jsx';
-import LoseElectric from '../comp/wbi/KPI/LoseElectric.jsx';
-import DeviceLose from '../comp/wbi/KPI/DeviceLose.jsx';
-import TopTen from '../comp/wbi/KPI/TopTen.jsx';
-import ServiceLose from '../comp/wbi/KPI/ServiceLose.jsx';
-import PerformLose from '../comp/wbi/KPI/PerformLose.jsx';
-import MaintainLose from '../comp/wbi/KPI/MaintainLose.jsx';
-import LimitLose from '../comp/wbi/KPI/LimitLose.jsx';
-import Reliability from '../comp/wbi/KPI/Reliability.jsx';
+// import Baotou from '../comp/wbi/dashboard/branch/Baotou.jsx';//路迪
+// import Windbtpage from '../comp/wbi/dashboard/branch/Windbtpage.jsx';
+// import Xilin from '../comp/wbi/dashboard/branch/Xilin.jsx';
+// import Areaa from '../comp/wbi/dashboard/grouprole/area/Area.jsx';
+// import Group from '../comp/wbi/dashboard/grouprole/group/Group.jsx';
+// import Windpage from '../comp/wbi/dashboard/grouprole/windpage/Windpage.jsx';
+// import GroupKBA from '../comp/wbi/KPI/GroupKBA.jsx';
+// import AreaKBA from '../comp/wbi/KPI/AreaKBA.jsx';
+// import LoseElectric from '../comp/wbi/KPI/LoseElectric.jsx';
+// import DeviceLose from '../comp/wbi/KPI/DeviceLose.jsx';
+// import TopTen from '../comp/wbi/KPI/TopTen.jsx';
+// import ServiceLose from '../comp/wbi/KPI/ServiceLose.jsx';
+// import PerformLose from '../comp/wbi/KPI/PerformLose.jsx';
+// import MaintainLose from '../comp/wbi/KPI/MaintainLose.jsx';
+// import LimitLose from '../comp/wbi/KPI/LimitLose.jsx';
+// import Reliability from '../comp/wbi/KPI/Reliability.jsx';
 
 
 var actions = require('redux/actions');

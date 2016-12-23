@@ -1,4 +1,3 @@
-@import "../../../skinVariables";
 .bodyBox{
   .box_shadow:hover{
     box-shadow:0 0 20px #fff;
@@ -51,16 +50,8 @@
       font-size: 16px;
       overflow: hidden;
       .daynum{
-        font-size: 20px;
-          @if $styleType==bright {
-          color:#2ff4fb;
-        }
-          @else if $styleType==dark {
-            color:#1fe005;
-          }@else if $styleType==aaaaaa {
-            color:#555555;
-          }
-
+        font-size: 20px;     
+        color:#2ff4fb;
       }
       .danweicc{
         font-size: 10px;

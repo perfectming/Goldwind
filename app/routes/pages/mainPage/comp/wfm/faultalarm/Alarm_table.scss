@@ -8,24 +8,23 @@
 //     margin-left: 50px;
 //   }
 // }
-
+.tableHeaderBox {
+  overflow: hidden;
+  background: #464c58;
+  .tableHeaderItem {
+    float: left;
+    height:40px;
+    line-height:40px;
+    overflow: hidden;
+    color:#fff;
+    text-align: center;
+  }
+}
 .tableBox {
   overflow-y: scroll;
   overflow-x:hidden;                                                                                                                            
   height:800px;
   display:block;
-  .tableHeaderBox {
-    overflow: hidden;
-    background: #464c58;
-    .tableHeaderItem {
-      float: left;
-      height:40px;
-      line-height:40px;
-      overflow: hidden;
-      color:#fff;
-      text-align: center;
-    }
-  }
   .tableContentBox {
     .tableContentLine {
        color:#fff;

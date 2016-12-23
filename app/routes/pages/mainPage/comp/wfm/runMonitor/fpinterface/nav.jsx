@@ -16,7 +16,6 @@ let Component = React.createClass({
 
        let {title,arr, changetab, act=0,leftd,fc_info='150801'} = this.props;
        let date=leftd.ModelData;
-
        
         return (
           <div className={styles.navbox}>
