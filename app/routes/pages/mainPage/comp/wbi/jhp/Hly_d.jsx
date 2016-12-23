@@ -7,6 +7,8 @@ let data = require('./Healthy-data');
 let text0 = data.data.line_date;
 let winds = data.data.yearelectric[0].wind;
 let win  = winds[0].plan;
+
+
 let Component = React.createClass({
     componentWillMount() {
     },

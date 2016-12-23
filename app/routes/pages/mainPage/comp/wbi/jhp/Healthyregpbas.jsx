@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
 import Hly_tsa from './Hly_tsa.jsx';
-
 import Hly_ds from './Hly_ds.jsx';
 var actions = require('redux/actions');
 let ip="10.9.101.15";
