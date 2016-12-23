@@ -175,7 +175,7 @@ const mapDispatchToProps = (dispatch) => {
         changedata1 :(w10,win,wc1,hhdata,actbt)=>{
             dispatch(actions.setVars('bt0',  0));
             let wfid=hhdata.data[1][wc1].wfid;
-            console.log(actbt)
+
             $.ajax({
                 type:'post',
                 url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceByGroupidElec',
@@ -188,13 +188,12 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
                     dispatch(actions.setVars('hhdata', data));
 
                     let barlotimes2 = [];
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
-                    for (var i=0;i<=10;i++) {
+                    for (var i=0;i<10;i++) {
                         barlotimes2.push(data.data[0][i].wtname);    //区域的横坐标
                         barlopowers2.push(data.data[0][i].powerplan);   //计划发电量
                         barlopowerp2.push(data.data[0][i].poweract);   //实际发电量

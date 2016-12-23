@@ -72,6 +72,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
+                    maxPointWidth: 20,
                     //pointWidth:20
                     tooltip: {
                         valueSuffix:'h'

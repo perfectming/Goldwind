@@ -85,7 +85,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30,
+                    maxPointWidth: 30,
                     tooltip: {
                         valueSuffix:'h'
                     },
@@ -247,7 +247,7 @@ const mapDispatchToProps = (dispatch) => {
                     let tba2 = [];       //维护损失
                     let name2 = [];
 
-                    for (var i =0;i<=10;i++) {
+                    for (var i =0;i<10;i++) {
                         //区域的横坐标
 
                         name2.push(data.data[i].wtname);

@@ -99,7 +99,7 @@ let Component = React.createClass({
                     borderWidth: 0,
                     pointWidth: 25,
                     tooltip: {
-                        valueSuffix:'kWh'
+                        valueSuffix:'°H'
                     },
                 }
             },
@@ -124,7 +124,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
             title: {
-                text:'(100%)',
+                text:'(°H)',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -183,7 +183,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl)=>{
             dispatch(actions.setVars('w1',w0 ));
-
+            dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getAreaHealth',
@@ -196,7 +196,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
+
                     dispatch(actions.setVars('hhdata',  data));
 
 

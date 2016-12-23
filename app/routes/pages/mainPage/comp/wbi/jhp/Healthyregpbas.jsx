@@ -21,7 +21,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata,mon,w0="巴盟",w10,hhdata1,hhdata2,hhdata3,changecolor, befor_pages = 'area',bt0, ipUrl, wfid,actbt=10, returnit,ip="10.68.100.32",runtime,downtime,tba0,name0,name2,runtime2,downtime2,tba2,gogogo,back,more,hideit} = this.props;
+        let {hhdata,mon,w0="巴盟",w10,hhdata1,width0,hhdata2,hhdata3,changecolor, befor_pages = 'area',bt0, ipUrl, wfid,actbt=10, returnit,ip="10.68.100.32",runtime,downtime,tba0,name0,name2,runtime2,downtime2,tba2,gogogo,back,more,hideit} = this.props;
 
         return (
 
@@ -42,7 +42,7 @@ let Component = React.createClass({
                     <div className={styles.hidden_bottom}>
                         <Hly_ds text={''}
                                 height={450}
-                                widths={4500}
+                                widths={width0}
                                 names={'TBA'}
                                 name2={name2}
                                 runtime2={runtime2}
@@ -87,7 +87,7 @@ let Component = React.createClass({
                             <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, ipUrl, wfid,actbt)}>后10</button>
                             <button className={styles.button22} onClick={() => more(hhdata3, wfid)}>更多</button>
                         </div>
-                        <Hly_ds text={mon +w0+w10+ "每日TBA"}
+                        <Hly_ds text={mon +w10+ "每日TBA"}
                                 names={'TBA'}
                                 name2={name2}
                                 runtime2={runtime2}
@@ -124,6 +124,8 @@ const mapStateToProps = (state) => {
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
         bt0: state.vars.bt0,
+        width0: state.vars.width0,
+
     }
 };
 
@@ -153,7 +155,7 @@ const mapDispatchToProps = (dispatch) => {
                 success:function(data){
                     dispatch(actions.setVars('hhdata2',  data));
                     dispatch(actions.setVars('w11', data.data[0].wfname));
-                    console.log(data)
+
                     //各区域   一区域二区域
                     let runtime1=[];       //实际发电量
                     let downtime1=[];       //故障损失
@@ -201,7 +203,7 @@ const mapDispatchToProps = (dispatch) => {
                     let downtime2=[];       //故障损失
                     let tba2=[];       //维护损失
                     let name2=[];
-                    for (var i=0;i<=10;i++) {
+                    for (var i=0;i<10;i++) {
                         //区域的横坐标
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
@@ -261,6 +263,7 @@ const mapDispatchToProps = (dispatch) => {
                         tba1.push(data.data[i].tba.toFixed(3)*100);  //维护损失
 
                     }
+                    dispatch(actions.setVars('w11', data.data[0].wfname));
                     dispatch(actions.setVars('name1', name1));
                     dispatch(actions.setVars('runtime1', runtime1));
                     dispatch(actions.setVars('downtime1', downtime1));
@@ -292,7 +295,7 @@ const mapDispatchToProps = (dispatch) => {
                     let downtime2=[];       //故障损失
                     let tba2=[];       //维护损失
                     let name2=[];
-                    for (var i=0;i<=10;i++) {
+                    for (var i=0;i<10;i++) {
                         //区域的横坐标
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
@@ -414,6 +417,8 @@ const mapDispatchToProps = (dispatch) => {
                 wrong31c.push(hhdata3.data[i].tba.toFixed(3)*100); //故障损失
 
             }
+            let width0=barLotime3c.length*60;
+            dispatch(actions.setVars('width0', width0));
 
             dispatch(actions.setVars('name2', barLotime3c))
             dispatch(actions.setVars('runtime2', power3c))
@@ -434,7 +439,7 @@ const mapDispatchToProps = (dispatch) => {
             let downtime2=[];       //故障损失
             let tba2=[];       //维护损失
             let name2=[];
-            for (var i=0;i<=10;i++) {
+            for (var i=0;i<10;i++) {
                 //区域的横坐标
                 name2.push(hhdata3.data[i].wtname)
                 runtime2.push(hhdata3.data[i].runtimes);   //实际发电量

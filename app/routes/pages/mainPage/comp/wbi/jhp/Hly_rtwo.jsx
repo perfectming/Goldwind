@@ -80,7 +80,7 @@ let Component = React.createClass({
                     borderWidth: 0,
                     pointWidth:20,
                     tooltip: {
-                        valueSuffix:'kWh'
+                        valueSuffix:'°H'
                     },
                 }
             },
@@ -105,7 +105,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'(100%)',
+                    text:'(°H)',
                     align:'high',
                     rotation:'0',
                     y: -10,

@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一月份",barLpdpowerValue,windplan=win,barLdpowerValue,text}=this.props;
+        let {w0="一月份",barLpdpowerValue,windplan=win,barLdpowerValue,text,monthx3,healthy3}=this.props;
 
         let configPie = {
             chart: {
@@ -26,7 +26,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: w0+"每日健康度",
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
@@ -52,7 +52,7 @@ let Component = React.createClass({
             },
             tooltip: {
 
-                    valueSuffix:'%'
+                    valueSuffix:'°H'
 
 
             },
@@ -94,7 +94,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barLdpowerValue,
+                categories:monthx3,
             },
             yAxis: {
                 // lineWidth: 1,
@@ -103,7 +103,7 @@ let Component = React.createClass({
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 title: {
-                    text:'(100%)',
+                    text:'(°H)',
                     align:'high',
                     rotation:'0',
                     y: -10,
@@ -123,9 +123,9 @@ let Component = React.createClass({
                 },
             },
             series: [{
-                name: '集团五月单日健康度',
+                name: '实际健康度',
                 type: 'column',
-                data: windplan,
+                data: healthy3,
             },
 
             ]
