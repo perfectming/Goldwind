@@ -7,11 +7,9 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {data,value} = this.props;
-        // console.log(data);
-        let xdata = data.ModelData[value]["DevCurDayPowerCurve"]["Time"];
-        let pwdata = data.ModelData[value]["DevCurDayPowerCurve"]["Value"];
-        let spdata = data.ModelData[value]["CurDayWindSpeedCurve_Device"]["Value"];
+        let {xdata,pwdata,spdata} = this.props;
+        // console.log(spdata);
+        
         let configpie = {
             chart: {
 
@@ -57,7 +55,7 @@ let Component = React.createClass({
             colors: [ '#1E664A', '#4CDB9D']
             ,
             tooltip: {
-                shared: false,
+                shared: true,
                 crosshairs: [true,true],
                 plotOptions: {
                     spline: {
@@ -72,14 +70,17 @@ let Component = React.createClass({
             
 
             xAxis: {
-                labels: {
-                step:10,
-               
-                style: {
-                    color: '#fff'
-                }
-                },
                 categories: xdata,
+                max:xdata.length-1,
+                min:xdata.length-15,
+                labels: {
+                // step:1,
+               
+                    style: {
+                        color: '#fff'
+                    }
+                },
+                
             },
             yAxis:[{ //第一个Y轴，序号为0
             labels: {
@@ -172,6 +173,8 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        // data : state.vars.data,
+        // value : state.vars.value,
     }
 };
 
