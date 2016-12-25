@@ -8,18 +8,14 @@ let page = require('../../../../config/page');
 let comp = require('../../../../config/comp');
 import css from './Login.scss';
 require('jquery.cookie');
-var codeChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+let codeChars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
   'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 let Component = React.createClass({
   componentDidMount() {
     this.props.init(this.props.userInfo);
   },
   render() {
-    let {login,}=this.props;
-    let code='';
-    for (let i=0;i<4;i++){
-      code+=codeChars[Math.floor(Math.random()*36)]
-    }
+    let {login,code,change}=this.props;
     return (
         <FixedContent mode="fullWidth" width={1920}>
           {
@@ -28,7 +24,7 @@ let Component = React.createClass({
               <input placeholder=" 用户名:" className={css.int} id="username1" type="text" name="username"/><br/>
               <input placeholder=" 密码:" className={css.int} id="password1" type="password" name="password"/><br/>
               <input placeholder=" 验证码:" className={css.ints} id="check" type="text" name="check"/>
-              <input value={code} readOnly="readOnly" id="checked" className={css.pages}/><br/>
+              <input value={code} readOnly="readOnly" id="checked" onClick={()=>{change()}} className={css.pages}/><br/>
               <input className={css.submit} type="submit " value='登      陆' readOnly="true" onClick={()=>login()}/>
             </form>
           </div>
@@ -40,7 +36,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
   return {
     userInfo: state.vars.userInfo,
-
+    code:state.vars.verificationCode
   }
 };
 
@@ -48,20 +44,48 @@ const mapDispatchToProps = (dispatch) => {
   return {
     init: ()=> {
       dispatch(actions.setVars('userInfo', true));
-      $.cookie('token','123123');
+      // $.cookie('token','123123');
+      let codeNew='';
+      for (let i=0;i<4;i++){
+        codeNew+=codeChars[Math.floor(Math.random()*36)]
+      }
+      dispatch(actions.setVars('verificationCode', codeNew));
        // browserHistory.push('/app/all/page/main')  ;
     },
+    change:()=>{
+      let codeNew='';
+      for (let i=0;i<4;i++){
+        codeNew+=codeChars[Math.floor(Math.random()*36)]
+      }
+      dispatch(actions.setVars('verificationCode', codeNew));
+    },
     login:()=>{
-      $('#check')[0].value!==$('#checked')[0].value?
-      alert('验证码输入错误'):
-      browserHistory.push('/app/all/page/main')  ;
-      dispatch(actions.setVars('userInfo', true));
-      try { Base.returnPlay(); } catch (e) { };
-      try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }
-      TY.dataUrl = "http://54.223.200.134/System/data.aspx";
-      TY.crossDomain = true;
-      TY.Zip =false;
-      TY.TT.timeOutlength = 1000*60*1;
+      if ($('#check')[0].value!==$('#checked')[0].value){
+          alert('验证码输入错误');
+      let codeNew='';
+      for (let i=0;i<4;i++){
+        codeNew+=codeChars[Math.floor(Math.random()*36)]
+      }
+      dispatch(actions.setVars('verificationCode', codeNew));}else {
+        browserHistory.push('/app/all/page/main');
+        dispatch(actions.setVars('userInfo', true));
+        try {
+          Base.returnPlay();
+        } catch (e) {
+        }
+        ;
+        try {
+          if (TY == null) {
+          }
+        } catch (e) {
+          alert("配置文件加载失败!");
+          return;
+        }
+        TY.dataUrl = "http://54.223.200.134/System/data.aspx";
+        TY.crossDomain = true;
+        TY.Zip = false;
+        TY.TT.timeOutlength = 1000 * 60 * 1;
+      }
           /*$.ajax({
             url: 'http://10.9.0.16:9080/soam/user/login',
             type: 'post',

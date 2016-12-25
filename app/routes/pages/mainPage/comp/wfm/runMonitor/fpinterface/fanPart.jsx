@@ -16,8 +16,8 @@ import Jerry from '../../../../img/comp/defa.png';
 
 var actions = require('redux/actions');
 var $ = require('jquery');
-let pack=['pack_WROT','pack_WNAC','pack_WGEN','pack_WTPS','pack_WYAW','pack_WTCS','pack_WCNV','pack_WTRF','pack_WTGS'];
-let arr=[bg1,bg2,bg3,bg4,bg5,bg6,bg7,bg8,bg9];
+let pack=['pack_WROT','pack_WNAC','pack_WGEN','pack_WTPS','pack_WYAW','pack_WTCS','pack_WCNV','pack_WTRF','pack_WTGS'];//设置表格每列属性
+let arr=[bg1,bg2,bg3,bg4,bg5,bg6,bg7,bg8,bg9];//整理背景路径
 let Component = React.createClass({
     componentWillMount() {
         let {vid, act1=0} = this.props;
@@ -30,7 +30,7 @@ let Component = React.createClass({
 
     render() {
         let {vid,  changetab, act1=0, boolFan = false, bujianModel, bujianData} = this.props;
-        if (boolFan) {
+        if (boolFan) {//判断执行完数据后打开页面
             var forIn=[];
             var forOut=[];
             for(let key in bujianData.ModelData){
@@ -137,17 +137,17 @@ const mapDispatchToProps = (dispatch) => {
                         function setDatafin(rdata) {
                             dispatch(actions.setVars('bujianData', rdata));
                             dispatch(actions.setVars('boolFan', true));
-                        }
+                        }/*从后台取出数据并赋给bujianData并告知页面加载完成*/
                     }
                 }}
             }
         },
         init: () => {
         },
-        changetab:(act1,vid)=>{
+        changetab:(act1,vid)=>{/*切换到选中部件的数据*/
             dispatch(actions.setVars('val', act1));
             arr[act1] &&
-            $('#fanJy').css('background-image','url('+arr[act1]+')');
+            $('#fanJy').css('background-image','url('+arr[act1]+')');//切换背景图片引用路径
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, "WTDetail", setData, "Screen", 0);
             function setData(rdata) {
                 if (rdata.Model){

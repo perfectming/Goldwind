@@ -2,10 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areastyle.scss';
 import Yearelectric from '../Yearelectric.jsx';
-import Pie2 from '../../../../wfm/chart/Pie2';
+import Pie2 from '../PieTwo';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var $ =require("jQuery");
 var actions = require('redux/actions');
+
 
 let healthyArea,clickAreaId,areaName=[],areaId=[],areaCost=[],areaProfit=[],areaMonth=[],runTime,downTime,TBA,areaArr;
 let actb=0,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month=[],elecPlan=[],elecAct=[];

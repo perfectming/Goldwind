@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 
 import styles from './AS.scss';
+let soam='http://10.9.0.16:9080/soam';
 var {getState} = require('../../../../../../redux/store');
-import del from '../../../img/icon/tabDel.png';
+import del from '../../../img/icon/tabDel.png';//定义图片路径
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';
 import tabAdd from '../../../img/icon/tabAdd.png';
