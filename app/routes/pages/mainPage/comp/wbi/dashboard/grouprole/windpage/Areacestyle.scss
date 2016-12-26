@@ -12,6 +12,25 @@
     margin-top:0px;
    
     }
+    .padding{
+    height:31px;
+   
+    }
+     .back{
+      float:right;
+       align-items:center;
+       color: #20FEFF;
+       border:1px solid #20FEFF;
+       width:100px;
+       height:40px;
+       line-height:40px;
+       position:relative;
+       top:px;
+       border-radius:45px;
+    cursor:pointer;
+       box-shadow:0px 0px 10px  #20FEFF;
+       text-align:center;
+    }
     .boxcover{
     position:fixed;
     height:100%;
@@ -31,13 +50,98 @@
      .bigbox:hover{
      box-shadow:0 0 15px #fff;
      }
-     
+      .biggbox:hover{
+     box-shadow:0 0 15px #fff;
+     }
     .bigbox{
 
     height:100%;
     width:100%;
     margin:0 auto;
     margin-top:40px;
+    border:1px solid #282F37;
+    position:relative;
+    overflow:hidden;
+     background: rgba(44, 61, 71,0.4);
+      .lkua{
+      border:3px solid #5B9BD5;
+      height:14px;
+      width:14px;
+      position:absolute;
+      right:204px;
+      top:68px;
+      z-index:100;
+      }
+      .rkua{
+      border:3px solid #ED7D31;
+      height:14px;
+      width:14px;
+      position:absolute;
+      right:92px;
+      top:68px;
+      z-index:100;
+      }
+     
+      .Ff{
+      margin-left:20px;
+      }
+      .tik{
+      color:#fff;
+      position:absolute;
+        font-size:16px;
+        top:25px;
+        left:108px;
+        font-weight:700;
+      }
+      .imgq{
+        width:16px;
+        height:30px;
+        position:absolute;
+        top:8px;
+        left:89px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:16px;
+          width:16px;
+        }
+
+      }
+      .imgqvg{
+        width:16px;
+        height:30px;
+        position:absolute;
+        top:8px;
+        left:89px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:18px;
+          width:16px;
+        }
+
+      }
+       .imgqnm{
+        width:16px;
+        height:30px;
+        position:absolute;
+        top:3px;
+        left:89px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:16px;
+          width:16px;
+        }
+        
+      }
+    }
+    .biggbox{
+
+    height:100%;
+    width:100%;
+    margin:0 auto;
+    margin-top:15px;
     border:1px solid #282F37;
     position:relative;
     overflow:hidden;
