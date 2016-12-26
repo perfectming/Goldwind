@@ -14,7 +14,7 @@ let arr3=[];
 let years=[];
 var pageSize=11;//设置每页的条目数量
 let page=1;//设置初始页码
-let soam='http://10.9.0.16:9080/soam';//设置接口
+let soam='http://10.9.0.6:9080/soam';//设置接口
 let thDate=new Date();
 let thYear=thDate.getFullYear();//定义变量，路径
 for(let i=0;i<=30;i++){
@@ -62,7 +62,7 @@ let Component = React.createClass({
                                     )
                                 })
                                 }
-                            </select>/*map遍历年度*/
+                            </select>{/*map遍历年度*/}
                         </div>
                         <div className={styles.seleBox}>
                             <span>场站</span>
@@ -73,7 +73,7 @@ let Component = React.createClass({
                                     )
                                 })
                                 }
-                            </select>/*map遍历场站*/
+                            </select>{/*map遍历年度*/}
                         </div>
                         <div className={styles.inputBox}>
                             <button onClick={this.buttonAction}>查询</button>
