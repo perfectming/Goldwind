@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react';//电场数据列表
 import {connect} from 'react-redux';
 import css from  './fanDataList.scss';
 import icon0 from '../../../../img/comp/icon0.png';

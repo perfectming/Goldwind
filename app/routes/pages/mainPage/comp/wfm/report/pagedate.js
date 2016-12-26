@@ -32,7 +32,7 @@ module.exports = {
                 },
                  {
                     tabname:'损失电量分类统计用例规划',
-                    rpage:''
+                    rpage:'loseelectric_statistics'
                 }
 
             ]
@@ -40,11 +40,11 @@ module.exports = {
         },
          {
             name: '可靠性报表',
-            page: '',
+            page: 'PowerCurveStatistics',
             rightpagge:[
                   {
                     tabname:'功率曲线一致性统计用例规划',
-                    rpage:''
+                    rpage:'PowerCurveStatistics'
                 },
                  {
                     tabname:'可利用率统计用例规划',

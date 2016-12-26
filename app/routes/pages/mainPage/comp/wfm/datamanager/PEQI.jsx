@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react';//计划电量录入，含有翻页，增删改查等功能
 import {connect} from 'react-redux';
 import styles from './PEQI.scss';
 import save from '../../../img/comp/save.png';
@@ -12,11 +12,11 @@ let comps = require('./../../../../../../../config/data');
 let ssg2=mod.Model.ens;
 let arr3=[];
 let years=[];
-var pageSize=11;
-let page=1;
-let soam='http://10.9.0.16:9080/soam';
+var pageSize=11;//设置每页的条目数量
+let page=1;//设置初始页码
+let soam='http://10.9.0.16:9080/soam';//设置接口
 let thDate=new Date();
-let thYear=thDate.getFullYear();
+let thYear=thDate.getFullYear();//定义变量，路径
 for(let i=0;i<=30;i++){
     years.push(thYear-15+i)
 }
@@ -24,10 +24,10 @@ for(let i=0;i<=30;i++){
     for(let x in ssg2){
         arr3.push(ssg2[x].name);
     }}());
-arr3.splice(-2,2);
+arr3.splice(-2,2);//清理数据格式
 let arr1=[
     // 'name',
-    'name','rectime','operationtime','operator','planelec'];
+    'name','rectime','operationtime','operator','planelec'];//设置每列的属性
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
@@ -40,16 +40,16 @@ let Component = React.createClass({
         alert(tContent+tContent1);
     },
     render() {
-        let {theOne,lastPage,nextPage,theLast,zhzb,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table, changeTableItem1} = this.props;
+        let {theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table, changeTableItem1} = this.props;
         let newData={};
         let opti=[];
         let num=0;
         let arr=[16,16,16,16,16,10];
         for(let i=0;i<arr1.length;i++){
             newData[arr1[i]]='';
-        };
+        }
         newData['datetype']=1;
-        if (table){
+        if (table){//判断数据是否存在
             return (
                 <div className={styles.powerBox}>
                     <div className={styles.inquireBox}>
@@ -62,7 +62,7 @@ let Component = React.createClass({
                                     )
                                 })
                                 }
-                            </select>
+                            </select>/*map遍历年度*/
                         </div>
                         <div className={styles.seleBox}>
                             <span>场站</span>
@@ -73,7 +73,7 @@ let Component = React.createClass({
                                     )
                                 })
                                 }
-                            </select>
+                            </select>/*map遍历场站*/
                         </div>
                         <div className={styles.inputBox}>
                             <button onClick={this.buttonAction}>查询</button>
@@ -216,7 +216,6 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
-        zhzb: state.vars.zhzb,
         page: state.vars.page1,
     }
 };
