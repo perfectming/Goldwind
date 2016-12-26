@@ -22,7 +22,7 @@ let Component = React.createClass({
         //初始化jquery方法
         setTimeout(function(){
             playjq();
-        },2000)
+        },1000)
     },
    showTree (devurl){
     let{playjq,showtree,select_list,firstname,devtype}=this.props;
@@ -79,7 +79,7 @@ let Component = React.createClass({
     //初始化jquery方法
         setTimeout(function(){
             playjq();
-        },2000)
+        },1000)
    },
 
     render() {
@@ -125,6 +125,11 @@ let Component = React.createClass({
                }
                // console.log(Barr)
                // console.log(Carr)
+
+
+
+
+
            }
 
             if(boolywbb){
@@ -454,7 +459,14 @@ const mapDispatchToProps = (dispatch) => {
                jsonpCallback:"testCall",    
                timeout:3000,       
                success:function(json,textStatus){  
-                console.log(json)
+                let shu=[];
+                for(let i in json){
+                  shu.push(json[i])
+                }
+                if(shu.length==0){
+                  alert('没有符合条件的数据！')
+                }
+                
                 dispatch(actions.appendObjs('tabledata',json));
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
@@ -483,7 +495,6 @@ const mapDispatchToProps = (dispatch) => {
                timeout:3000,       
                success:function(json,textStatus){  
                 dispatch(actions.appendObjs('select_list1',json));
-                
                 dispatch(actions.setVars('boolywbb', true));
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    

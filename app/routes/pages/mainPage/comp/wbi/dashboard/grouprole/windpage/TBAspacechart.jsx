@@ -107,11 +107,11 @@ let Component = React.createClass({
 
 
             title: {
-                text:'（h）',
+                text:'(h)',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 35,
+                x: 30,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -130,7 +130,7 @@ let Component = React.createClass({
                 max:100,
 
             title: {
-                text: '100%',
+                text: '(%)',
                  align:'high',
                 rotation:'0',
                 y: -15,

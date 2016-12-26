@@ -30,6 +30,7 @@ let Component = React.createClass({
         let data=bbs.ModelData;
         let mod=zhzb.Model;
         let date03=[];
+
         let datename00=bbs.ModelData[8888800].CurDayPowerCurve.Time;
         let date00=bbs.ModelData[8888800].CurDayPowerCurve.Value;
           date00.map(function(value,key){
@@ -40,6 +41,18 @@ let Component = React.createClass({
         let date01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Value;
         let datename02=bbs.ModelData[8888802].CurDayPVTSICurve.Time;
         let date02=bbs.ModelData[8888802].CurDayPVTSICurve.Value;
+         if(datename00==undefined || date00==undefined){
+            datename00=[];
+            date00=[];
+        }
+         if(datename01==undefined || date01==undefined){
+            datename01=[];
+            date02=[];
+        }
+        if(datename02==undefined || date02==undefined){
+            datename02=[];
+            date02=[];
+        }
             let datename=zhzb.Model.ens;
             let arr=[];
             let arrname=[];
@@ -89,7 +102,7 @@ let Component = React.createClass({
                             <Title title={['日发电量统计(kWh)']}></Title>
                         </div>
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
-                            <Line1 date={date03} datename={datename00} height={220} name={'当前出力'} unit={mod.dis.CurDayPowerCurve.unit}></Line1>
+                            <Line1 date={date03} datenamel={datename00} height={220} name={'当前出力'} unit={mod.dis.CurDayPowerCurve.unit}></Line1>
                    
                             <Title title={[mod.dis.CurDayPowerCurve.name+'('+mod.dis.CurDayPowerCurve.unit+')']}></Title>
                             
@@ -99,14 +112,14 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.chart_bar}>
                         <div className={`${styles.linebox} ${styles.box_shadow}`}>
-                            <Line1 date={date01} datename={datename01} height={150} name={'当前风速'} unit={mod.dis.CurDayWindSpeedCurve.unit}></Line1>
+                            <Line1 date={date01} datenamel={datename01} height={150} name={'当前风速'} unit={mod.dis.CurDayWindSpeedCurve.unit}></Line1>
                             <Title title={[mod.dis.CurDayWindSpeedCurve.name+'('+mod.dis.CurDayWindSpeedCurve.unit+')']}></Title>
                         </div>
                         <div style={{"clear":"both"}}></div>
                     </div>
                     <div className={styles.chart_bar}>
                          <div className={`${styles.linebox} ${styles.linebox1} ${styles.box_shadow}`}>
-                            <Line1 date={date02} datename={datename02} height={150} name={'当前辐照度'} unit={['(W/㎡)']}></Line1>
+                            <Line1 date={date02} datenamel={datename02} height={150} name={'当前辐照度'} unit={['(W/㎡)']}></Line1>
                             <Title title={[mod.dis.CurDayPVTSICurve.name+'(W/㎡)']}></Title>
                         </div>
                         <div style={{"clear":"both"}}></div>
@@ -143,15 +156,13 @@ const mapDispatchToProps = (dispatch) => {
     return {
          changedate:()=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
-                function setData(rdata){
-                    dispatch(actions.setVars('zhzb', rdata));
-                    console.log(rdata)
+                function setData(zhzb){
+                    dispatch(actions.setVars('zhzb', zhzb));
                     TY.getRtData("DataOverview", 8888800, setData1)
-                        function setData1(rdata){
+                        function setData1(bbs){
                             TY.getRtData("DataOverview", 8888800, setData1)
-                                function setData1(rdata){
-                                    dispatch(actions.setVars('bbs', rdata));
-                                    console.log(rdata)
+                                function setData1(bbs){
+                                    dispatch(actions.setVars('bbs', bbs));
                                     setTimeout(function(){
                                        dispatch(actions.setVars('boolsuper', true));  
 
@@ -164,8 +175,8 @@ const mapDispatchToProps = (dispatch) => {
 
                  time=setInterval(function(){
                     TY.getRtData("DataOverview", 8888800, setData1)
-                        function setData1(rdata){
-                            dispatch(actions.setVars('bbs', rdata));
+                        function setData1(bbs1){
+                            dispatch(actions.setVars('bbs', bbs1));
    
                         }
                  },2000)

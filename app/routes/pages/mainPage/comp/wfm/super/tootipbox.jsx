@@ -18,6 +18,7 @@ let model_data = bbs.ModelData;
 var model_ens = zhzb.Model.ens;
 let arr1 = [];
 let arr2 = [];
+console.log(fData)
 var obj_wfd = fData.ModelData[8888801].WFDevsStatus;
 var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
 

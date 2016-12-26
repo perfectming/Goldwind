@@ -7,6 +7,7 @@ var actions = require('redux/actions');
 let wttitle=require('./date');
 
 let Component = React.createClass({
+
     componentDidMount() {
         this.props.init();
     },
@@ -211,6 +212,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+
         init: () => {
            
         },
