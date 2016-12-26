@@ -6,7 +6,7 @@ import Pie2 from '../PieTwo';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 
 
-var ipUrl='10.68.100.32:8080';
+var ipUrl='10.9.100.75:8080';
 var actions = require('redux/actions');
 var $ =require("jQuery");
 

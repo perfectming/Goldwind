@@ -9,8 +9,8 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {borderRadius,pointPlacement,areaPlan,ly,text,areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
-         
+        let{changedata3,xxdwfId,input_url,text,areaPlan,areaPlanDay, areaPlanDayT,width,height}=this.props;
+     
         let configPie = {
             chart: {
                 height:height,
@@ -19,15 +19,16 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                borderRadius:0,
+                paddingLeft:100,
+                borderRadius:10
             },
             title: {
                 text: text,
                 align:'left',
                 top:'-20px',
-                y:20,
                 vertical:'top',
-                x:120,
+                 x : 120,
+                 y:20,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
@@ -38,15 +39,11 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
-                y:ly,
+                y:40,
                 align:"right",
                 verticalAlign: "top",
-                itemHoverStyle:{
+                 itemHoverStyle:{
                     color:'#31f3fb',
-                },
-                navigation:{
-                   activeColor: "#fff",
-                   inactiveColor: "blue",
                 },
                 itemStyle: {
                     color: "#fff",
@@ -57,27 +54,60 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                valueSuffix:'kWh'
+               valueSuffix:'kWh'
             },
             credits: {
-                enabled: false
+                enabled: false //不显示highCharts版权信息
             },
-
+            //柱子颜色
             colors: [ '#1E664A', '#4CDB9D']
             ,
-
+            // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
+                  
                     borderWidth: 0,
 
-                   maxPointWidth:pointWidth,
-                    
                 }, series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            w0=e.point.category;
-                            changedata1(w0,win);
+                            let b=e.point.index;
+                             let arr1=[];
+            let arr2=[];
+            let arr3=[];
+                              $.ajax({
+             type:'post',
+             url:'http://'+input_url+'/wbi/ELEC/getWtTimeAreaElec',  
+             async:false,
+            data:{
+             'month':b+1,
+             'wfid':xxdwfId,
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+              console.log(b+1)
+              console.log(xxdwfId)
+             // 获取x轴的值内蒙达茂天润风电场
+             let dataa=data.data;
+             for(let i=0;i<dataa.length;i++){
+                 let xDay=data.data[i].day+'日';
+                 arr1.push(xDay);
+                 let yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
+                 arr2.push(yPowerPlan);
+                 let yPowerAct=Number(data.data[i].poweract.toFixed(1));
+                 arr3.push(yPowerAct);
+             }
+   
+            
+          
+             },
+             error:function(){
+               
+             },
+           });
+                                changedata3(b,arr1,arr2,arr3);
                         }
                     }
                 }
@@ -86,15 +116,14 @@ let Component = React.createClass({
             xAxis: {
                 lineWidth: 1,
                 tickWidth: 0,
-                pointPadding:0,
                 labels: {
-                    y: 20,
+                    y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
-                        fontSize:'14px'  //字体
+                        fontSize:'14px',
+                        color:'#fff'  //字体
                     }
                 },
-                categories:areaNameX,
+                categories:areaPlan,
             },
             yAxis:{
                  gridLineDashStyle: 'Solid',
@@ -105,40 +134,39 @@ let Component = React.createClass({
                     align:'high',
                     rotation:'0',
                     y: -10,
-                    x: 47,
+                    x: 50,
                     style:{
                         color:'#fff',
                         fontSize:'14px',
                     }
             },
-                  labels: {
-                    title:'100%',
+                labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color:"white",
+                       color:"#fff",
                         fontSize:'14px'  //字体
                     }
                 },
-
             },
+            //几条数据
             series: [{
                 name: '计划发电量',
                 type: 'column',
-                data: areaRecordProfitO,
+                data: areaPlanDay,
                 color:'#33BAC0',
-                borderRadius: borderRadius,
-               
-             
+                borderColor:'#5B9BD5',
+               maxPointWidth: 20,
+                borderRadius: 4
             },
             {
             	name: '实际发电量',
                 type: 'column',
-                data: areaRecordCostT,
-                color:'#70c080',
-                borderRadius: borderRadius,
-                
-              
-            }]
+                data:areaPlanDayT,
+               color:'#70c080',
+                maxPointWidth: 20,
+                borderRadius: 4
+            },
+            ]
         };
         return (
             <ReactHighcharts config={configPie}/>
@@ -148,19 +176,20 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {
-        w0 : state.vars.w1,
-        win : state.vars.win1,
-        windplan1 : state.vars.windplan1,
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
+        changedata3:(b,arr1,arr2,arr3) =>{
+             dispatch(actions.setVars('areaNameNP',arr1));
+             dispatch(actions.setVars('areaRecordCostNP',arr2));
+             dispatch(actions.setVars('areaRecordProfitNP',arr3));
+            dispatch(actions.setVars('actbtt',b));
+        }
     };
-    
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
