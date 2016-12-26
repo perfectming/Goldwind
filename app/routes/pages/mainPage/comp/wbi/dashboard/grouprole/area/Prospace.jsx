@@ -195,7 +195,7 @@ const mapDispatchToProps = (dispatch) => {
             console.log(year+"-"+month2+"-"+daycountT)
             $.ajax({
                 type:'post',
-                url:'http://10.9.100.75:8080/yield/getYieldByWfid',
+                url:'http://10.9.100.75:8080/wbi/yield/getYieldByWfid',
                 async:false,
                 data:{
                     'wfid':'150828',
@@ -207,7 +207,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                //    console.log(data)
+                   console.log(data)
                     dispatch(actions.setVars('hhdata3',  data));
                     //各区域   一区域二区域
 
