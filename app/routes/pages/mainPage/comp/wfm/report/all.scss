@@ -55,7 +55,6 @@
             
         }
     }
-    .search_tit1{margin-bottom:0px;}
     .leftlist{
         width:400px;
         float:left;
@@ -150,8 +149,9 @@
                         height:35px;
                         line-height:35px; 
                         margin:0px;
-                        span{
+                          b{
                             cursor:pointer;
+                            font-weight:normal;
                             }
                         font-size:16px;
                         display:inline-block;
@@ -168,7 +168,6 @@
             }
         }
     }
-    
     .righttable{
         width:1340px;
         float:left;
@@ -177,77 +176,39 @@
         position:relative;
         background: rgba(70,76,88,0.5);
         .tablebox{
-            border-bottom:1px solid #ddd;
             width:100%;
-            height:370px;
+            height:360px;
             position:relative;
             overflow-x:auto;
             overflow-y:hidden;
              .tabtit{
-                background: #0d293f;
-                width:2280px;
                 position:absolute;
+                background: #464c58;
                 top:0px;
                 left:0px;
                 height:35px;
                 white-space:nowrap;
-                span{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border-right:1px solid #fff;min-width:160px;}
+                span{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border-right:1px solid #fff;width:160px;}
+                span:first-child{width:80px;}
             }
-            .tabody{
-                width:2280px;
-                overflow-y:auto;
-                overflow-x:hidden;
-                height:280px;
-                margin-top:35px;
-                .tabline{
-                background: #30343f;
-                
-                height:35px;
-                white-space:nowrap;
-                td{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border:1px solid #fff;min-width:160px;}
-                span:last-child{border-right:none;}
-                }
-                 .tabline1{
-                background: #272b34;
-                height:35px;
-                white-space:nowrap;
-                td{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border:1px solid #fff;min-width:160px;}
-                span:last-child{border-right:none;}
-                }
-            }
-            .bot{
-                width:2280px;
-                height:35px;
-                position:absolute;
-                bottom:0px;
-                left:0px;
-                background: #0d293f;
-                 span{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border-right:1px solid #fff;min-width:160px;}
-                }
 
-            .tabody1{
-                min-width:1340px;
-                overflow-y:auto;
-                height:325px;
-                margin-top:35px;
                 .tabline{
                 background: #30343f;
-                
+                div{
                 height:35px;
                 white-space:nowrap;
-                td{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border:1px solid #fff;min-width:160px;}
-                span:last-child{border-right:none;}
+                span{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border:1px solid #fff;width:160px;}
+                span:first-child{width:80px;}
+                }
                 }
                  .tabline1{
                 background: #272b34;
                 height:35px;
                 white-space:nowrap;
-                td{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border:1px solid #fff;min-width:160px;}
-                span:last-child{border-right:none;}
+                td{display:inline-block;height:35px;line-height:35px;color:#fff;text-align:center;border:1px solid #fff;width:160px;}
+                span:first-child{width:80px;}
                 }
-            }
-            .tabody2{width:1500px;}
-            .bot1{width:1500px;}
+            
             
         }
         .columnbox{
@@ -257,11 +218,9 @@
          width:100%;
          height:400px;
          margin-top:20px;
-         display:none;
+         display:block;
         }
     }
-    .leftlist1{height:826px;}
-    .righttable1{height:826px;}
    
 }
 

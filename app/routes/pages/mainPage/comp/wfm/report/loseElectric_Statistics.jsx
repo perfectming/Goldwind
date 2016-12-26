@@ -22,31 +22,33 @@ let Component = React.createClass({
         //初始化jquery方法
         setTimeout(function(){
             playjq();
-        },2000)
+        },2500)
     },
-   showTree (devurl){
-    let{playjq,showtree,select_list,firstname,devtype}=this.props;
-    let one=[];
-    let two=[];
-    let three=[];  
-    let alltree=[];
-    let alltree1=[];
-            //点击切换下来选择项
-            for(let id in devtype.list){
-              if(devtype.list[id].id==devurl){
-                firstname=devtype.list[id];
-              }
 
-            }
+    render() {
+         let {devtype2,boolywbb2=false,showtree,playjq,select_list3,select_list31,tabledata2,clickitem,chart2,chart2name,chart2Title} = this.props;
+           let treetype=[];
+           let lefttree=[];
+           let Tarr=[];
+           let Barr=[];
+           let Carr=[];
+           let Darr=[];
+          let one=[];
+          let two=[];
+          let three=[];  
+          let alltree=[];
+          let alltree1=[];
+           if(select_list3!=undefined){
+
               //获取设备类型对应的左侧树形二级和三级数据
-              for(let arg2 in select_list){
-                if(select_list[arg2].id &&select_list[arg2].id!=''){
-                    if(select_list[arg2].type=='wf'){
-                      one.push(select_list[arg2])
-                     }else if(select_list[arg2].type=='wl'){
-                      two.push(select_list[arg2])
-                     }else if(select_list[arg2].type=='wt' && select_list[arg2].args.devtype==devurl){
-                        three.push(select_list[arg2])
+              for(let arg2 in select_list3){
+                if(select_list3[arg2].id &&select_list3[arg2].id!=''){
+                    if(select_list3[arg2].type=='wf'){
+                      one.push(select_list3[arg2])
+                     }else if(select_list3[arg2].type=='wl'){
+                      two.push(select_list3[arg2])
+                     }else if(select_list3[arg2].type=='wt' && select_list3[arg2].args.devtype=='WindTurbine'){
+                        three.push(select_list3[arg2])
                     }
                 }
               }
@@ -60,6 +62,7 @@ let Component = React.createClass({
           })
           alltree.push(two1)
         }
+       
           //三级菜单
         alltree.map(function(value,key){
           for(let i=0; i<value.length;i++){
@@ -72,47 +75,34 @@ let Component = React.createClass({
             alltree1.push(two4)
           }
         })
+     
+           }
 
-
-
-    showtree(devurl,alltree,alltree1,firstname);
-    //初始化jquery方法
-        setTimeout(function(){
-            playjq();
-        },2000)
-   },
-
-    render() {
-         let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,select_list1,secondtree,threetree,tabledata,clickitem,chart,chartname,chartTitle} = this.props;
-           let treetype=[];
-           let lefttree=[];
-           let Tarr=[];
-           let Barr=[];
-           let Carr=[];
-           let Darr=[];
            //表格数据处理
-           if(tabledata!=undefined){
-            console.log(tabledata)
+           if(tabledata2!=undefined){
+
               //获取标题
-              for(let title in tabledata){
-                if(tabledata[title].Unit!=''){
-                Tarr.push(tabledata[title].Caption+'('+tabledata[title].Unit+')')
-                }else{
-                  Tarr.push(tabledata[title].Caption)
+              for(let title in tabledata2){
+                   if(tabledata2[title].Caption!=''){
+                     Tarr.push(tabledata2[title].Caption)
+                   
+                  }
                 }
-              }
-               //获取统计
-              for(let title in tabledata){
-                  if(tabledata[title].OK!='wtid' && tabledata[title].OK!='wtname')
-                  Darr.push(tabledata[title].Count)
+                //获取统计
+              for(let title in tabledata2){
+                  if(tabledata2[title].OK!='wtid' && tabledata2[title].OK!='wtname')
+                  Darr.push(tabledata2[title].Count)
                 
               }
+              
+             
               var len;
               //获取数据
-               for(let val in tabledata){
-
-                Barr.push(tabledata[val].Values.split(','))
-                len=tabledata[val].Values.split(',').length
+               for(let val in tabledata2){
+                if(tabledata2[val].Caption!=''){
+                Barr.push(tabledata2[val].Values.split(','))
+                len=tabledata2[val].Values.split(',').length
+                }
 
               }
                
@@ -127,66 +117,20 @@ let Component = React.createClass({
                // console.log(Carr)
            }
 
-            if(boolywbb){
+            if(boolywbb2){
                 //获取设备类型数组
-            for(let arg in devtype.list){
-                if(devtype.list[arg].args.name){
-                    treetype.push(devtype.list[arg])
+            for(let arg in devtype2.list){
+                if(devtype2.list[arg].args.name){
+                    treetype.push(devtype2.list[arg])
                 }
-            }
-              //获取设备类型对应的左侧树形一级数据
-            for(let arg2 in select_list1){
-                if(select_list1[arg2].id &&　select_list1[arg2].id!=''){
-                    lefttree.push(select_list1[arg2])
-                }
-            }
-
-            //初始化显示设备类型
-            if(firstname==undefined){
-            firstname=devtype.list._WindTurbine;
             }
 
         return (
             <div className={styles.faultBox}>
-                <div className={styles.search_tit}>
-                    <div className={styles.seleBox}>
-                        <span>设备类型:</span>
-                        <div className={styles.select}>
-                            <span id='showitem'><img src={'http://'+url+'/'+firstname.img}/>{firstname.args.name}</span>
-                            <img src={drop} id='slide' className={styles.topimg}/>
-                            <div className={styles.selectye} id='selectye'>
-                            {
-                                    treetype.map((value, key)=> {
-                        
-                                    return (
-                                        <div className={styles.item} key={key} onClick={()=>{this.showTree(value.id)}}><img src={'http://'+url+'/'+value.img}/>{value.args.name}</div>
-                                        )
-                                })
-                            }
-                            </div>
-                        </div> 
-                    </div>
-                    <div className={styles.seleBox}>
-                      <div className={styles.dateBox}>
-                        <span>发生时间</span><input id="startTime"   type='date'/>
-                        <span>结束时间</span><input id="endTime"   type='date'/>
-                      </div>
-                    </div>
-
-                    <div className={styles.btnBox}>
-                        <button id='searchall'><img src={'http://'+url+'/images/button/search.gif'}/>查询</button>
-                    </div>
-                    <div className={styles.btnBox}>
-                        <button><img src={'http://'+url+'/images/button/set.gif'}/>设置参数</button>
-                    </div>
-                    <div className={styles.btnBox}>
-                        <button><img src={'http://'+url+'/images/button/outbox.gif'}/>导出Excel</button>
-                    </div>
-
-                </div>
-                <div className={styles.leftlist} id='leftlist'>
+               
+                <div className={`${styles.leftlist} ${styles.leftlist1}`} id='leftlist'>
                   {
-                     select_list !== undefined && lefttree.map((valueC,keyC)=>{
+                     select_list3 !== undefined && one.map((valueC,keyC)=>{
                         return(
                           <div key={keyC} className={styles.place} >
                             <a className={styles.ca}>
@@ -195,7 +139,7 @@ let Component = React.createClass({
                               <input type='checkbox' value='value'   />
                             </a>
                             {
-                                secondtree[keyC].map((valueD,keyD)=>{
+                                alltree[keyC].map((valueD,keyD)=>{
                                     return(
                                         <div className={styles.placename} key={keyD}>
                                             <a className={styles.da}>
@@ -205,7 +149,7 @@ let Component = React.createClass({
                                             </a>
 
                                             {
-                                                threetree[keyD].map((valueE,keyE)=>{
+                                                alltree1[keyD].map((valueE,keyE)=>{
                                                     return(
                                                         <div className={styles.placeline} key={keyE}>
                                                             <a className={styles.ea} >
@@ -226,12 +170,28 @@ let Component = React.createClass({
                      })
                   }
                 </div>
-                <div className={styles.righttable}>
+                <div className={`${styles.righttable} ${styles.righttable1}`}>
+                   <div className={`${styles.search_tit} ${styles.search_tit1}`}>
+                    <div className={styles.seleBox}>
+                      <div className={styles.dateBox}>
+                        <span>开始时间</span><input id="startTime"   type='date'/>
+                        <span>结束时间</span><input id="endTime"   type='date'/>
+                      </div>
+                    </div>
+
+                    <div className={styles.btnBox}>
+                        <button id='searchall'><img src={'http://'+url+'/images/button/search.gif'}/>查询</button>
+                    </div>
+                    <div className={styles.btnBox}>
+                        <button><img src={'http://'+url+'/images/button/outbox.gif'}/>导出Excel</button>
+                    </div>
+
+                </div>
                   <div className={styles.tablebox} id='tablebox'>
                        
                           <div className={styles.tabtit} id='tabtit' >
                           {
-                            tabledata!=undefined && Tarr.map((value,key)=>{
+                            tabledata2!=undefined && Tarr.map((value,key)=>{
 
                              if(key==0){
                                     return(
@@ -241,6 +201,10 @@ let Component = React.createClass({
                                         return(
                                         <span key={key} style={{width:'200px'}}>{value}</span>
                                         ) 
+                                    }else if(key==2){
+                                        return(
+                                        <span key={key}>{value}</span>
+                                        ) 
                                     }else{
                                         return(
                                         <span key={key} style={{cursor:'pointer'}} id={'e'+key} onClick={(e)=>clickitem(key,e.target)}>{value}</span>
@@ -249,11 +213,11 @@ let Component = React.createClass({
                             })
                           }
                           </div>
-                          <div className={styles.tabody} id='tabody'>
+                          <div className={`${styles.tabody} ${styles.tabody2}`} id='tabody'>
                           <table id='tablist'>
                           <tbody>
                            {
-                            tabledata!=undefined && Carr.map((value,key)=>{
+                            tabledata2!=undefined && Carr.map((value,key)=>{
                               return(
                                   <tr className={key%2==0 ? styles.tabline :styles.tabline1} key ={key}>
                                     {
@@ -266,6 +230,10 @@ let Component = React.createClass({
                                               }else if(keyC==1){
                                                 return(
                                                   <td key={keyC} style={{width:'200px'}}>{valueC}</td>
+                                                ) 
+                                              }else if(keyC==2){
+                                                return(
+                                                  <td key={keyC}>{valueC}</td>
                                                 ) 
                                               }else{
                                                 return(
@@ -282,21 +250,23 @@ let Component = React.createClass({
                           </tbody>
                         </table>
                         </div>
-                        <div className={styles.bot}>
+                        <div className={`${styles.bot} ${styles.bot1}`}>
+
                         <span style={{width:'360px'}}>统计</span>
                         
                            {
-                            tabledata!=undefined && Darr.map((value,key)=>{
+                            tabledata2!=undefined && Darr.map((value,key)=>{
                                   return(
                                       <span key={key}>{value.toFixed(2)}</span>
                                       ) 
                             })
                           }
+                       
                         </div>
                   </div>
 
                   <div className={styles.columnbox} id='colum'>
-                     { chart !==undefined && <Column cnum={chart} cname={chartname} ctit={chartTitle} ></Column> }
+                     { chart2 !==undefined && <Column cnum={chart2} cname={chart2name} ctit={chart2Title} ></Column> }
                   </div>
                 </div>
 
@@ -313,44 +283,41 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        devtype:state.objs.devtype,
-        boolywbb:state.vars.boolywbb,
-        firstname:state.objs.firstname,
-        select_list:state.objs.select_list,
-        select_list1:state.objs.select_list1,
-        secondtree:state.objs.secondtree,
-        threetree:state.objs.threetree,
-        tabledata:state.objs.tabledata,
-        chart:state.vars.chart,
-        chartname:state.vars.chartname,
-        chartTitle:state.vars.chartTitle,
+        devtype2:state.objs.devtype2,
+        boolywbb2:state.vars.boolywbb2,
+        select_list3:state.objs.select_list3,
+        select_list31:state.objs.select_list31,
+        tabledata2:state.objs.tabledata2,
+        chart2:state.vars.chart2,
+        chart2name:state.vars.chart2name,
+        chart2Title:state.vars.chart2Title,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax:()=>{
-          dispatch(actions.setVars('boolywbb', false));
-          dispatch(actions.setObjs('tabledata',undefined));
-            //获取设备类型信息
-        $.ajax({    
+          dispatch(actions.setVars('boolywbb2', false));
+          dispatch(actions.setObjs('tabledata2',undefined));
+            //获取设备信息
+         $.ajax({    
                url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=GetDevTypeTree&crossDomain=true&zip=false&menuid=1DD28544-7805-4D86-8E39-09404726214A&sysid=1',    
+               data:'functionname=GetWFInfoByMon&devtype=WindTurbine&crossDomain=true&zip=false',    
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
                timeout:3000,       
-               success:function(json,textStatus){    
-                   dispatch(actions.appendObjs('devtype',json));
-                   gettreedata(); 
+               success:function(json,textStatus){  
+        
+                dispatch(actions.appendObjs('devtype2',json));
+                gettreedata()
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
                    console.log('获取数据失败！');    
                }    
             });
 
-
-        function gettreedata(){
+          function gettreedata(){
            $.ajax({    
                url:'http://'+url+'/Monitor/xml.aspx',    
                data:'functionname=getDevtree&crossDomain=true&zip=false',    
@@ -359,8 +326,9 @@ const mapDispatchToProps = (dispatch) => {
                jsonpCallback:"testCall",    
                timeout:3000,       
                success:function(json,textStatus){    
-                dispatch(actions.appendObjs('select_list',json));
-                dispatch(actions.setVars('boolywbb', true));
+          
+                dispatch(actions.appendObjs('select_list3',json));
+                dispatch(actions.setVars('boolywbb2', true));
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
                    console.log('获取数据失败！');    
@@ -448,14 +416,14 @@ const mapDispatchToProps = (dispatch) => {
 
                $.ajax({    
                url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=CountDay&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&modelid=1DD28544-7805-4D86-8E39-09404726214A&devtype=WindTurbine&CountColumn=true&crossDomain=true&zip=false',    
+               data:'functionname=GetLostPower&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&proid=null&CountColumn=true&crossDomain=true&zip=false',    
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
                timeout:3000,       
-               success:function(json,textStatus){  
-                console.log(json)
-                dispatch(actions.appendObjs('tabledata',json));
+               success:function(json,textStatus){ 
+                console.log(json) 
+                dispatch(actions.appendObjs('tabledata2',json));
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
                    console.log('获取数据失败！');    
@@ -465,32 +433,6 @@ const mapDispatchToProps = (dispatch) => {
             })
 
 
-
-
-        },
-        showtree:(devurl,alltree,alltree1,firstname)=>{
-            dispatch(actions.setVars('boolywbb', false));
-            dispatch(actions.appendObjs('secondtree',alltree));
-            dispatch(actions.appendObjs('threetree',alltree1));
-            dispatch(actions.appendObjs('firstname',firstname));
-            //获取对应设备的数据
-        $.ajax({    
-               url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=GetWFInfoByMon&devtype='+devurl+'&crossDomain=true&zip=false',    
-               dataType:"jsonp",    
-               jsonp:"callback",    
-               jsonpCallback:"testCall",    
-               timeout:3000,       
-               success:function(json,textStatus){  
-                dispatch(actions.appendObjs('select_list1',json));
-                
-                dispatch(actions.setVars('boolywbb', true));
-               },    
-               error:function(XMLHttpRequest,textStatus,errorThrown){    
-                   console.log('获取数据失败！');    
-               }    
-            });
-      
 
 
         },
@@ -504,9 +446,9 @@ const mapDispatchToProps = (dispatch) => {
             knum.push(Number($(this).children('td').eq(kk).text()))
             Tname.push($(this).children('td').eq(1).text())
           })
-          dispatch(actions.setVars('chart', knum));
-          dispatch(actions.setVars('chartname', Tname));
-          dispatch(actions.setVars('chartTitle', even.innerHTML));
+          dispatch(actions.setVars('chart2', knum));
+          dispatch(actions.setVars('chart2name', Tname));
+          dispatch(actions.setVars('chart2Title', even.innerHTML));
           $('#colum').show();
         },
 
