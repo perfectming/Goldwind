@@ -54,6 +54,7 @@ import Regiopowers from '../comp/wbi/dashboard/grouprole/area/Regiopowers.jsx';
 import Regiotba from '../comp/wbi/dashboard/grouprole/area/Regiotba.jsx';
 import Regiotbas from '../comp/wbi/dashboard/grouprole/area/Regiotbas.jsx';
 import Input_cost from '../comp/wbi/dashboard/grouprole/area/Input_cost.jsx';
+import Prospace from '../comp/wbi/dashboard/grouprole/area/Prospace.jsx';
 
 
 import Areace from '../comp/wbi/dashboard/grouprole/windpage/Areace.jsx';//薛旭东44
@@ -74,22 +75,22 @@ import Profitime from '../comp/wbi/dashboard/grouprole/group/Profitime.jsx';
 
 
 
-// import Baotou from '../comp/wbi/dashboard/branch/Baotou.jsx';//路迪
-// import Windbtpage from '../comp/wbi/dashboard/branch/Windbtpage.jsx';
-// import Xilin from '../comp/wbi/dashboard/branch/Xilin.jsx';
-// import Areaa from '../comp/wbi/dashboard/grouprole/area/Area.jsx';
-// import Group from '../comp/wbi/dashboard/grouprole/group/Group.jsx';
-// import Windpage from '../comp/wbi/dashboard/grouprole/windpage/Windpage.jsx';
-// import GroupKBA from '../comp/wbi/KPI/GroupKBA.jsx';
-// import AreaKBA from '../comp/wbi/KPI/AreaKBA.jsx';
-// import LoseElectric from '../comp/wbi/KPI/LoseElectric.jsx';
-// import DeviceLose from '../comp/wbi/KPI/DeviceLose.jsx';
-// import TopTen from '../comp/wbi/KPI/TopTen.jsx';
-// import ServiceLose from '../comp/wbi/KPI/ServiceLose.jsx';
-// import PerformLose from '../comp/wbi/KPI/PerformLose.jsx';
-// import MaintainLose from '../comp/wbi/KPI/MaintainLose.jsx';
-// import LimitLose from '../comp/wbi/KPI/LimitLose.jsx';
-// import Reliability from '../comp/wbi/KPI/Reliability.jsx';
+import Baotou from '../comp/wbi/dashboard/branch/Baotou.jsx';//路迪
+import Windbtpage from '../comp/wbi/dashboard/branch/Windbtpage.jsx';
+import Xilin from '../comp/wbi/dashboard/branch/Xilin.jsx';
+import Areaa from '../comp/wbi/dashboard/grouprole/area/Area.jsx';
+import Group from '../comp/wbi/dashboard/grouprole/group/Group.jsx';
+import Windpage from '../comp/wbi/dashboard/grouprole/windpage/Windpage.jsx';
+import GroupKBA from '../comp/wbi/KPI/GroupKBA.jsx';
+import AreaKBA from '../comp/wbi/KPI/AreaKBA.jsx';
+import LoseElectric from '../comp/wbi/KPI/LoseElectric.jsx';
+import DeviceLose from '../comp/wbi/KPI/DeviceLose.jsx';
+import TopTen from '../comp/wbi/KPI/TopTen.jsx';
+import ServiceLose from '../comp/wbi/KPI/ServiceLose.jsx';
+import PerformLose from '../comp/wbi/KPI/PerformLose.jsx';
+import MaintainLose from '../comp/wbi/KPI/MaintainLose.jsx';
+import LimitLose from '../comp/wbi/KPI/LimitLose.jsx';
+import Reliability from '../comp/wbi/KPI/Reliability.jsx';
 
 
 var actions = require('redux/actions');
@@ -162,6 +163,7 @@ let Component = React.createClass({
                 {showPage === 'regiopowers' && <Regiopowers></Regiopowers>}
                 {showPage === 'regiotba' && <Regiotba></Regiotba>}
                 {showPage === 'regiotbas' && <Regiotbas></Regiotbas>}
+                {showPage === 'prospace' && <Prospace></Prospace>}
 
                 {showPage === 'areace' && <Areace></Areace>}
                 {showPage === 'areacet' && <Areacet></Areacet>}
