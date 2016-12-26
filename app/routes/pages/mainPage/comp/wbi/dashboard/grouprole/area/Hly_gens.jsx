@@ -53,8 +53,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.yf}%</b>"
+                valueSuffix:'kWh'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -136,7 +135,7 @@ let Component = React.createClass({
             series: [{
                 name: '计划发电量',
                 type: 'column',
-                color:'#5B9BD5',
+                color:'#33BAC0',
                 data: power1,
 
             }
@@ -199,8 +198,8 @@ const mapDispatchToProps = (dispatch) => {
                     let barlopowerp3 = [];
                     for (var i=0;i<10;i++) {
                         barlotimes3.push(data.data[0][i].wtname);    //区域的横坐标
-                        barlopowers3.push(data.data[0][i].powerplan);   //计划发电量
-                        barlopowerp3.push(data.data[0][i].poweract);   //实际发电量
+                        barlopowers3.push(Number((data.data[0][i].powerplan).toFixed(2)));   //计划发电量
+                        barlopowerp3.push(Number((data.data[0][i].poweract).toFixed(2)));     //实际发电量
                     }
 
 

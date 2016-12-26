@@ -8,10 +8,10 @@ var {getState} = require('redux/store');
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';
 
-let nam=['Capacity','AGCState','zd','AGCActPower','TActPower','AVCState','zd','AVCGoalValue','Transformer_Q'];
+let nam=['Capacity','EnergyManager','AVC'];
 let header=['场站名称','装机容量MW','AGC系统','AVC系统'];
 let headerSize=[14,14,36,36];
-let contentSize=[14,9,9,9,9,9,9,9,9];
+let contentSize=[14,36,36];
 let agc=['AGC状态','有功自动状态','有功计划值','上网有功负荷'];
 let avc=['AVC状态','无功自动状态','无功计划值','上网无功负荷'];
 let Component = React.createClass({
@@ -20,7 +20,7 @@ let Component = React.createClass({
     },
     render() {
         let {table,changepage2,changepage3,model,tabaleData} = this.props;
-        if(model&&tabaleData) {
+        if(model[150801]&&tabaleData[150801]) {
             let arr1 = [];
             let arr2 = [];
             let data = tabaleData.ModelData;

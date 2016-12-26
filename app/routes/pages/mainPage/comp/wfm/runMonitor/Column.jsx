@@ -10,23 +10,28 @@ let Component = React.createClass({
     render() {
         let {model,tabaleData} = this.props;
         if (model&&tabaleData){
+        var arr = [];
         var arr1 = [];
         var arr2=[];
         var arr3=[];
         let ssg1 = tabaleData.ModelData;
         let ssg2=model.Model.ens;
+            console.log(ssg1,ssg2);
+        for(let x in ssg2){
+            ssg2[x].det=='TransSubstation' && arr.push(x);
+        }
         for(let x in ssg1){
             (!x[6]&&x[5])&&arr1.push(ssg1[x].Capacity/1000);
         }
-        for(let x in ssg1){
-            if(x=='150801'){
+        for(let x=0;x<arr.length;x++){
+            if(ssg2[arr[x]].cis==='150801'){
                 arr2.push((ssg1['150801301'].Transformer_P_BMCJGF/1).toFixed(0)/1);
-            }else if(x=='150811'){
+            }else if(ssg2[arr[x]].cis==='150811'){
                 arr2.push((ssg1['150801301'].Transformer_P/1-ssg1['150801301'].Transformer_P_BMCJGF/1).toFixed(0)/1);
             }else {
-                (!x[6] && x[5]) && arr2.push((ssg1[x+'901'].Transformer_P / 1).toFixed(0) / 1);
+                arr2.push((ssg1[arr[x]].Transformer_P / 1).toFixed(0) / 1);
             }
-        }console.log(arr2);
+        }
         for(let x in ssg2){
             (!x[6]&&x[5])&&arr3.push(ssg2[x].name);
         }

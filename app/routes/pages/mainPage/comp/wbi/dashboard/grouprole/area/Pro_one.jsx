@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {name0,runtime,downtime,tba0,text,w0, win, wc1, actbt,changedata1,ipUrl,wfid,hhdata} = this.props;
+        let {text,name0,runtime,downtime,tba0,changedata1,hhdata,w10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
 
 
         let configPie = {
@@ -22,7 +22,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                borderRadius:10,
             },
             title: {
                 text: text,
@@ -51,6 +51,7 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
+
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -74,19 +75,18 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function (e,) {
-                            w0 = e.point.category;
+                            w10 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w0, win, wc1, actbt,ipUrl,hhdata);
-
+                            changedata1(w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl);
                         }
                     }
                 },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    maxPointWidth: 35,
+                    maxPointWidth: 30,
                     tooltip: {
-                        valueSuffix:'kWh'
+                        valueSuffix:'元'
                     },
                 },
                 line:{
@@ -109,72 +109,85 @@ let Component = React.createClass({
                 },
                 categories:name0,
             },
-            yAxis: [{
-                labels: {
-                    format: '',
-                    style: {
-                        color: '#fff',
-                        fontSize: '14px'
-                    }
-                }, gridLineDashStyle: 'Solid',
-                gridLineColor: '#6d6a6c',
 
-                title: {
-                    text: 'h',
-                    align: 'high',
-                    rotation: '0',
-                    y: -20,
-                    x: 45,
-                    style: {
-                        fontSize: '14px',
-                        color: '#fff'
-                    }
-                }
-            }, {
-                labels: {
-                    format: '',
-                    style: {
-                        color: '#fff',
-                        fontSize: '14px'
-                    }
-                }, gridLineDashStyle: 'Solid',
-                gridLineColor: '#6d6a6c',
-                min:0,
-                title: {
-                    text: '100%',
-                    align: 'high',
-                    rotation: '0',
-                    y: -15,
-                    x: -40,
-                    style: {
-                        color: '#fff',
-                        fontSize: '14px'
-                    }
+            yAxis:
 
-                },
-                opposite: true
-            }],
+                [
+
+                    {
+                        labels: {
+                            format: '',
+                            style: {
+                                color: '#fff',
+                                fontSize: '14px'
+                            }
+                        }, gridLineDashStyle: 'Solid',
+                        gridLineColor: '#6d6a6c',
+
+                        title: {
+
+                            text: '元',
+                            align: 'high',
+                            rotation: '0',
+                            y: -20,
+                            x: 45,
+                            style: {
+                                fontSize: '14px',
+                                color: '#fff'
+                            }
+                        }
+                    }, {
+
+                    labels: {
+                        format: '',
+
+                        style: {
+                            color: '#fff',
+                            fontSize: '14px',
+
+                        }
+                    }, gridLineDashStyle: 'Solid',
+                    gridLineColor: '#6d6a6c',
+                    min:0,
+                    title: {
+                        text: '100%',
+                        align: 'high',
+                        rotation: '0',
+                        y: -15,
+                        x: -40,
+
+                        style: {
+                            color: '#fff',
+                            fontSize: '14px',
+
+                        }
+
+                    },
+                    opposite: true
+                }],
             series: [{
-                name: '实际运行时间',
+                name: '收益',
+                color:'#33BAC0',
                 type: 'column',
                 data: runtime,
                 borderRadius: 4,
 
-                }
+            }
                 ,{
-                    name: '停机时间',
+                    name: '成本',
                     type: 'column',
-                    color:'#cccccc',
+                    color:'#70c080',
                     data: downtime,
                     borderRadius: 4,
                 }
                 ,
                 {
-                    name: 'TBA',
+                    name: '收益率',
                     type: 'line',
                     color:'#0000ff',
                     data: tba0,
                     yAxis:1,
+
                 }
 
 
@@ -189,13 +202,15 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        hhdata: state.vars.hhdata,
+        hhdata:state.vars.hhdata,
+        actbt:state.vars.actbt,
+        hhdata1:state.vars.hhdata1,
+        hhdata2:state.vars.hhdata2,
+        hhdata3:state.vars.hhdata3,
+        w0: state.vars.w1,
+        wc1: state.vars.wc1,
+        w10: state.vars.w11,
         ipUrl: state.vars.ipUrl,
-        wfid:state.vars.wfid,
-        mon: state.vars.mon,
-        w0:state.vars.w1,
-        wc1:state.vars.wc1,
-        win:state.vars.win,
     }
 };
 
@@ -203,47 +218,63 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1:(w0, win, wc1, actbt,ipUrl,hhdata)=>{
+        changedata1: (w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl) => {
 
-            let monthx=hhdata.data[wc1].month
+            dispatch(actions.setVars('w11', w10));
+            let wfid = hhdata2.data[wc1].wfid;
+            dispatch(actions.setVars('bt0', 0));
+
+            let date = new Date();
+            let year = date.getFullYear()
+            let month2 = date.getMonth();
+            let day = new Date(year, month2, 0);
+            let daycount = day.getDate();
+
+
+
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/TBA/getDaysTBAByG',
+                url:'http://'+ipUrl+'/wbi/yield/getYieldByWfid',
                 async:false,
                 data:{
-                    "month":monthx,
-                    "groupid":  '201612121721151',
+                    'startdate':year+"-"+(actbt+1)+"-"+'1',
+                    'enddate':year+"-"+(actbt+1)+"-"+daycount,
+                    'wfid':wfid,
+                    'methods':'desc',
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+                    dispatch(actions.setVars('hhdata3',  data));
+                    dispatch(actions.setVars('w11',  w10));
+                    dispatch(actions.setVars('wfid',  wfid));
+                    //各区域   一区域二区域
+                    let runtime2 = [];       //实际发电量
+                    let downtime2 = [];       //故障损失
+                    let tba2 = [];       //维护损失
+                    let name2 = [];
 
-
-
-
-                    let runtime2=[];       //实际发电量
-                    let downtime2=[];       //故障损失
-                    let tba2=[];       //维护损失
-                    let name2=[];
-                    for (var i in data.data) {
+                    for (var i =0;i<10;i++) {
                         //区域的横坐标
-                        name2.push(data.data[i].day+"日");
-                        runtime2.push(data.data[i].runtimes);   //实际发电量
-                        downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(Number((data.data[i].tba*100).toFixed(2)));      //维护损失
+
+                        name2.push(data.data[i].wtname);
+                        runtime2.push(data.data[i].earning);   //实际发电量
+                        downtime2.push(data.data[i].costs);   //故障损失
+                        tba2.push(Number((data.data[i].rate * 100).toFixed(2))); //维护损失
                     }
+                    dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));
                     dispatch(actions.setVars('tba2', tba2));
-                    dispatch(actions.setVars('name2', name2));
-                    dispatch(actions.setVars('mon', wc1+1+"月"));
+
+
                 },
                 error:function(){
 
                 },
             })
 
-    }
+        },
     };
 };
 

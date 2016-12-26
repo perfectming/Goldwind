@@ -195,8 +195,8 @@ const mapDispatchToProps = (dispatch) => {
                     let barlopowerp2 = [];
                     for (var i=0;i<10;i++) {
                         barlotimes2.push(data.data[0][i].wtname);    //区域的横坐标
-                        barlopowers2.push(data.data[0][i].powerplan);   //计划发电量
-                        barlopowerp2.push(data.data[0][i].poweract);   //实际发电量
+                        barlopowers2.push(Number((data.data[0][i].powerplan).toFixed(2)));   //计划发电量
+                        barlopowerp2.push(Number((data.data[0][i].poweract).toFixed(2)));  //实际发电量
                     }
                     dispatch(actions.setVars('barlotimes2', barlotimes2));
                     dispatch(actions.setVars('barlopowers2', barlopowers2));

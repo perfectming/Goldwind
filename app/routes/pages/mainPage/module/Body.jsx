@@ -54,6 +54,7 @@ import Regiopowers from '../comp/wbi/dashboard/grouprole/area/Regiopowers.jsx';
 import Regiotba from '../comp/wbi/dashboard/grouprole/area/Regiotba.jsx';
 import Regiotbas from '../comp/wbi/dashboard/grouprole/area/Regiotbas.jsx';
 import Input_cost from '../comp/wbi/dashboard/grouprole/area/Input_cost.jsx';
+import Prospace from '../comp/wbi/dashboard/grouprole/area/Prospace.jsx';
 
 
 import Areace from '../comp/wbi/dashboard/grouprole/windpage/Areace.jsx';//薛旭东44
@@ -162,6 +163,7 @@ let Component = React.createClass({
                 {showPage === 'regiopowers' && <Regiopowers></Regiopowers>}
                 {showPage === 'regiotba' && <Regiotba></Regiotba>}
                 {showPage === 'regiotbas' && <Regiotbas></Regiotbas>}
+                {showPage === 'prospace' && <Prospace></Prospace>}
 
                 {showPage === 'areace' && <Areace></Areace>}
                 {showPage === 'areacet' && <Areacet></Areacet>}
@@ -177,7 +179,7 @@ let Component = React.createClass({
                 {showPage === 'wfsprofit' && <WFSprofit></WFSprofit>}
                 {showPage === 'wftprofit' && <WFTprofit></WFTprofit>}
                 {showPage === 'profitime' && <Profitime></Profitime>}
-                
+
 
 
                 {showPage === 'reliability' && <Reliability></Reliability>}

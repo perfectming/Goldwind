@@ -3,10 +3,11 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 
 import styles from './AS.scss';
-let soam='http://10.9.0.16:9080/soam';
+let soam='http://10.9.100.75:8080/soam';
 var {getState} = require('../../../../../../redux/store');
 import del from '../../../img/icon/tabDel.png';//定义图片路径
 import save from '../../../img/comp/save.png';
+var pageSize=11;
 import refresh from '../../../img/comp/refresh.png';
 import tabAdd from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
@@ -128,6 +129,19 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
+            $.ajax({
+                url: soam+'/Alarm/getAlarm',
+                type: 'post',
+                data:'pageSize='+pageSize+'&&nowPage='+1,
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContent', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
         changeTableItem: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);
