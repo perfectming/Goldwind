@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{date, datename,height,name,unit}=this.props;
+        let{date, datenamel,height,name,unit}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -25,9 +25,9 @@ let Component = React.createClass({
                 text: ''
             },
             xAxis:{
-                 categories:datename,
-                 max:datename.length-1,
-                 min:datename.length-30,
+                 categories:datenamel,
+                 max:datenamel.length-1,
+                 min:datenamel.length-30,
                  labels: {
                         style: {
                             color: '#fff',//颜色

@@ -67,13 +67,20 @@ const mapDispatchToProps = (dispatch) => {
                             }else{
                                 dispatch(actions.setVars('fData', fdata));
                                 TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "WTLeftOverview", setDatas, "Screen", 0);
-                                function setDatas(rdata){
-                                    dispatch(actions.setVars('leftm', rdata));
+                                function setDatas(leftm){
+                                    dispatch(actions.setVars('leftm', leftm));
                                     TY.getRtData("WTLeftOverview", 8888800, setlData)
-                                    function setlData(rdata){
-                                    dispatch(actions.setVars('leftd', rdata));
+                                    function setlData(leftd){
+                                    if(leftd.ModelData['150801'] == undefined){
+                                         TY.getRtData("WTLeftOverview", 8888800, setlData)
+                                     }else{
+                                        console.log(leftd)
+                                        dispatch(actions.setVars('leftd', leftd));
+                                           setTimeout(function(){
+                                            dispatch(actions.setVars('boolmapbody', true)); 
+                                           },2000)
                                            
-                                           dispatch(actions.setVars('boolmapbody', true));  
+                                           } 
                                             
                                     }
                                 }
@@ -92,7 +99,7 @@ const mapDispatchToProps = (dispatch) => {
                                 }
             
                         }
-             },1500)
+             },2000)
         },
         init: () => {
         },
