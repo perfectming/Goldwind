@@ -4,7 +4,7 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./Profit-data3');
-let input_url="10.9.100.38";
+
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -179,11 +179,11 @@ let Component = React.createClass({
                
 
             title: {
-                text: '100%',
+                text: '(%)',
                  align:'high',
                 rotation:'0',
                 y: -15,
-                x: -40,
+                x: -48,
                 style:{
                     color: '#fff',
                     fontSize:'14px'

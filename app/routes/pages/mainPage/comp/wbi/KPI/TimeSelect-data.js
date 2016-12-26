@@ -4,7 +4,7 @@ module.exports={
 			type: 'date',
             content: '这是一个时间选择框',
             id: 'date',
-            width: 120,
+            width: 150,
             height:30,
 		},{
 			type: 'button',

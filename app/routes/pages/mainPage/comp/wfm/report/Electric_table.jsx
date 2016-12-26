@@ -329,7 +329,7 @@ const mapDispatchToProps = (dispatch) => {
               //获取对应设备的数据
         $.ajax({    
                url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=GetWFInfoByMon&devtype1=EnergyMeter&crossDomain=true&zip=false',    
+               data:'functionname=GetWFInfoByMon&devtype=EnergyMeter&crossDomain=true&zip=false',    
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
@@ -432,7 +432,7 @@ const mapDispatchToProps = (dispatch) => {
                jsonp:"callback",    
                jsonpCallback:"testCall",    
                timeout:3000,       
-               success:function(json,textStatus){  
+               success:function(json,textStatus){ 
                 dispatch(actions.appendObjs('tabledata1',json));
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    

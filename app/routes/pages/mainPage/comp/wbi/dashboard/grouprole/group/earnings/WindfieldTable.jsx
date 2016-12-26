@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let input_url="10.68.100.32";
-let data = require('./Profit-data');
+let data = require('./Profit-data1');
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -71,7 +71,12 @@ let Component = React.createClass({
                                
                                let index=e.point.index;
                         let  a=w111.toString().split("");
-                        
+                            let datee=new Date;
+                        let year=datee.getFullYear();
+
+let dayy = new Date(year,keyy,0); 
+//获取天数：
+let daycount = dayy.getDate();
                         let b=a[0];
                          let areaWindCosts=[];
                          let areaWindEarnings=[];
@@ -178,11 +183,11 @@ let Component = React.createClass({
                
 
             title: {
-                text: '100%',
+                text: '（%）',
                  align:'high',
                 rotation:'0',
                 y: -15,
-                x: -40,
+                x: -45,
                 style:{
                     color: '#fff',
                     fontSize:'14px'

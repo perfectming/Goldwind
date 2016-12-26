@@ -51,10 +51,6 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormat: "<b>{point.percentage:.0f}%</b>"
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -234,7 +230,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].day+"日");
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba.toFixed(3)*100);      //维护损失
+                        tba2.push(Number((data.data[i].tba*100).toFixed(2)));      //维护损失
                     }
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Hly_genday from './Hly_genday.jsx';
+import Hly_genday from '../group/groupj/Hly_genday.jsx';
 
 var actions = require('redux/actions');
 let ip="10.68.100.32";
@@ -111,8 +111,8 @@ const mapDispatchToProps = (dispatch) => {
                     let powerplan=[];
                     for(var i in data.data){
                         day0.push(data.data[i].day+"日");
-                        poweract.push(data.data[i].poweract);
-                        powerplan.push(data.data[i].powerplan);
+                        poweract.push(Number((data.data[i].poweract).toFixed(2)));
+                        powerplan.push(Number((data.data[i].powerplan).toFixed(2)));
 
                     }
                     dispatch(actions.setVars('day1',day0 ));
@@ -150,8 +150,8 @@ const mapDispatchToProps = (dispatch) => {
                     let powerplan=[];
                     for(var i in data.data){
                         day0.push(data.data[i].day+"日");
-                        poweract.push(data.data[i].poweract);
-                        powerplan.push(data.data[i].powerplan);
+                        poweract.push(Number((data.data[i].poweract).toFixed(2)));
+                        powerplan.push(Number((data.data[i].powerplan).toFixed(2)));
 
                     }
                     dispatch(actions.setVars('day1',day0 ));

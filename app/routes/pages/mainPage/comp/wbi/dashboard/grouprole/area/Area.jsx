@@ -43,7 +43,7 @@ let Component = React.createClass({
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthyArea}%</p>健康度</span>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthyArea.toFixed(1)}%</p>健康度</span>
 	           						<Pie2 color={(healthyArea/100)>1? ['#1fe005','#fbd500']:(healthyArea/100)>0.8?['#fbd500','#39565e']:(healthyArea/100)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[healthyArea,100-healthyArea]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
@@ -69,7 +69,7 @@ let Component = React.createClass({
 	           					</div>
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{(TBA*100)}%</p>TBA</span>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{(TBA*100).toFixed(1)}%</p>TBA</span>
 	           						<Pie2 color={TBA>1? ['#1fe005','#fbd500']:TBA>0.8?['#fbd500','#39565e']:TBA>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[runTime,downTime]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>
@@ -227,8 +227,8 @@ const mapDispatchToProps = (dispatch) => {
 				        	areaMonth=[],areaProfit=[],areaCost=[];
 				        	for(var i in data.data){
 				        		areaMonth.push(data.data[i].month+"月");
-				        		areaProfit.push(data.data[i].incomes);
-				        		areaCost.push(data.data[i].costs);
+				        		areaProfit.push((data.data[i].incomes).toFixed(1)/1);
+				        		areaCost.push((data.data[i].costs).toFixed(1)/1);
 				        	};
 				        	dispatch(actions.setVars('areaMonth',areaMonth ));
 				        	dispatch(actions.setVars('areaProfit',areaProfit ));
@@ -250,10 +250,10 @@ const mapDispatchToProps = (dispatch) => {
 						        	dayPlanElec=data.data.dayPlanElec;
 						        	month=[],elecPlan=[],elecAct=[];
 						        	for(var i in data.data.twAreaMonthElec){
-						        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
+						        		elecAct.push((data.data.twAreaMonthElec[i].poweract).toFixed(1)/1);
 						        	};
 						        	for(var i in data.data.twAreaMonthPlanElec){
-						        		elecPlan.push(data.data.twAreaMonthPlanElec[i]);
+						        		elecPlan.push((data.data.twAreaMonthPlanElec[i]).toFixed(1)/1);
 						        		month.push(i+"月");
 						        	};
 						        	dispatch(actions.setVars('yearElec',yearElec ));
@@ -352,9 +352,13 @@ const mapDispatchToProps = (dispatch) => {
 		        	areaMonth=[],areaProfit=[],areaCost=[];
 		        	for(var i in data.data){
 		        		areaMonth.push(data.data[i].month+"月");
-		        		areaProfit.push(data.data[i].incomes);
-		        		areaCost.push(data.data[i].costs);
+		        		areaProfit.push((data.data[i].incomes).toFixed(1)/1);
+		        		areaCost.push((data.data[i].costs).toFixed(1)/1);
 		        	}
+		        	dispatch(actions.setVars('clickAreaId',clickAreaId ));
+		        	dispatch(actions.setVars('areaMonth',areaMonth ));
+		        	dispatch(actions.setVars('areaProfit',areaProfit ));
+		        	dispatch(actions.setVars('areaCost',areaCost ));
 		        },
 		        complete : function(XMLHttpRequest,status){ 
 			　　　　	$.ajax({
@@ -366,6 +370,7 @@ const mapDispatchToProps = (dispatch) => {
 						timeout : 60000,
 						success:function (data) {
 							healthyArea=data.data.health;
+							dispatch(actions.setVars('healthyArea',healthyArea ));
 						},
 						complete : function(XMLHttpRequest,status){
 							$.ajax({
@@ -383,12 +388,21 @@ const mapDispatchToProps = (dispatch) => {
 						        	dayPlanElec=data.data.dayPlanElec;
 						        	month=[],elecPlan=[],elecAct=[];
 						        	for(var i in data.data.twAreaMonthElec){
-						        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
+						        		elecAct.push((data.data.twAreaMonthElec[i].poweract).toFixed(1)/1);
 						        		month.push(data.data.twAreaMonthElec[i].month+"月");
 						        	}
 						        	for(var i in data.data.twAreaMonthPlanElec){
-						        		elecPlan.push(data.data.twAreaMonthPlanElec[i]);
+						        		elecPlan.push((data.data.twAreaMonthPlanElec[i]).toFixed(1)/1);
 						        	}
+						        	dispatch(actions.setVars('yearElec',yearElec ));
+						        	dispatch(actions.setVars('monthElec',monthElec ));
+						        	dispatch(actions.setVars('dayElec',dayElec ));
+						        	dispatch(actions.setVars('yearPlanElec',yearPlanElec ));
+						        	dispatch(actions.setVars('monthPlanElec',monthPlanElec ));
+						        	dispatch(actions.setVars('dayPlanElec',dayPlanElec ));
+						        	dispatch(actions.setVars('elecAct',elecAct ));
+						        	dispatch(actions.setVars('month',month ));
+						        	dispatch(actions.setVars('elecPlan',elecPlan));
 						        },
 						        complete : function(XMLHttpRequest,status){ 
 							　　　　	$.ajax({
@@ -401,6 +415,9 @@ const mapDispatchToProps = (dispatch) => {
 								        	elecActPBA=data.data.scale[0].poweract;
 								        	elecPlanPBA=data.data.scale[0].powertheory;
 								        	areaArr=data.data.everyAreaPba;
+								        	dispatch(actions.setVars('elecActPBA',elecActPBA ));
+								        	dispatch(actions.setVars('elecPlanPBA',elecPlanPBA ));
+								        	dispatch(actions.setVars('areaArr',areaArr));
 								        },
 								        complete : function(XMLHttpRequest,status){ 
 									　　　　	$.ajax({
@@ -413,12 +430,15 @@ const mapDispatchToProps = (dispatch) => {
 										        	runTime=data.data[0].runtimes;
 										        	downTime=data.data[0].downtimes;
 										        	TBA=data.data[0].tba;
+										        	dispatch(actions.setVars('runTime',runTime ));
+										        	dispatch(actions.setVars('downTime',downTime ));
+										        	dispatch(actions.setVars('TBA',TBA));
 										        },
 										        complete : function(XMLHttpRequest,status){ 
 											　　　　
-											　　   },
+											　　},
 										    });
-									　　  },
+									　　},
 								    });
 							　　 },
 						    });

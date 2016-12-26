@@ -4,7 +4,7 @@ var actions = require('redux/actions');
 var $=require('jquery');
 var ReactHighcharts = require('react-highcharts');
 var input_url="10.68.100.32";
-let data = require('./Profit-data');
+let data = require('./Profit-data1');
 let sqy =data.areaRecordCostQY;
 let Component = React.createClass({
     componentWillMount() {
@@ -77,10 +77,16 @@ let Component = React.createClass({
                              w11=e.point.category;
                          let     index=e.point.index;
                             let w111=windFiedN;
-                            // console.log(e.point.index+"qwe");
+                            let datee=new Date;
+let year=datee.getFullYear();
+
+let dayy = new Date(year,keyy,0); 
+//获取天数：
+let daycount = dayy.getDate();
+                          
                         let  a=w11.toString().split("");
                         let b=a[0];
-                        // console.log(arr5[index]);
+                    
                         let areaWindCosts=[];
                          let areaWindEarnings=[];
                          let areaWindRates=[];
@@ -105,7 +111,7 @@ let Component = React.createClass({
                      dataType:'json',
                      timeout:'3000',
                      success:function(data){
-                      
+                    
                      
 
 
@@ -157,8 +163,8 @@ let Component = React.createClass({
                       dataType:'json',
                       timeout:'3000',
                       success:function(data){
-              
-                        // console.log('第三张数据')
+             
+               
                           var dataA=data.data;
                           for (var i in dataA)
                           {
@@ -246,11 +252,11 @@ let Component = React.createClass({
             minRange: 20,
                 
             title: {
-                text: '100%',
+                text: '（%）',
                 align:'high',
                 rotation:'0',
                 y: -15,
-                x: -40,
+                x: -45,
                 style:{
                     color: '#fff',
                     fontSize:'14px'

@@ -171,8 +171,8 @@ const mapDispatchToProps = (dispatch) => {
                     let barlopowerp1 = [];
                     for (var i in data.data[1]) {
                         barlotimes1.push(data.data[1][i].wfname);    //区域的横坐标
-                        barlopowers1.push(data.data[1][i].powerplan);   //计划发电量
-                        barlopowerp1.push(data.data[1][i].poweract);   //实际发电量
+                        barlopowers1.push(Number((data.data[1][i].powerplan).toFixed(2)));   //计划发电量
+                        barlopowerp1.push(Number((data.data[1][i].poweract).toFixed(2)));   //实际发电量
                     }
 
                     let w10=data.data[1][0].wfname;
@@ -182,8 +182,8 @@ const mapDispatchToProps = (dispatch) => {
                     let barlopowerp2 = [];
                     for (var i=0;i<10;i++) {
                         barlotimes2.push(data.data[0][i].wtname);    //区域的横坐标
-                        barlopowers2.push(data.data[0][i].powerplan);   //计划发电量
-                        barlopowerp2.push(data.data[0][i].poweract);   //实际发电量
+                        barlopowers2.push(Number((data.data[0][i].powerplan).toFixed(2)));   //计划发电量
+                        barlopowerp2.push(Number((data.data[0][i].poweract).toFixed(2)));   //实际发电量
                     }
 
                     dispatch(actions.setVars('barlotimes1', barlotimes1));
@@ -244,8 +244,8 @@ const mapDispatchToProps = (dispatch) => {
                     let barlopowerp1 = [];
                     for (var i in data.data[1]) {
                         barlotimes1.push(data.data[1][i].wfname);    //区域的横坐标
-                        barlopowers1.push(data.data[1][i].powerplan);   //计划发电量
-                        barlopowerp1.push(data.data[1][i].poweract);   //实际发电量
+                        barlopowers1.push(Number((data.data[1][i].powerplan).toFixed(2)));     //计划发电量
+                        barlopowerp1.push(Number((data.data[1][i].poweract).toFixed(2)));   //实际发电量
                     }
 
                     let barlotimes2 = [];
@@ -253,8 +253,8 @@ const mapDispatchToProps = (dispatch) => {
                     let barlopowerp2 = [];
                     for (var i=0;i<10;i++) {
                         barlotimes2.push(data.data[0][i].wtname);    //区域的横坐标
-                        barlopowers2.push(data.data[0][i].powerplan);   //计划发电量
-                        barlopowerp2.push(data.data[0][i].poweract);   //实际发电量
+                        barlopowers2.push(Number((data.data[0][i].powerplan).toFixed(2)));   //计划发电量
+                        barlopowerp2.push(Number((data.data[0][i].poweract).toFixed(2)));     //实际发电量
                     }
 
 
@@ -301,8 +301,8 @@ const mapDispatchToProps = (dispatch) => {
 
                     for (var i in data.data) {
                         barLotime3c.push(data.data[i].wtname);    //区域的横坐标
-                        power3c.push(data.data[i].powerplan);   //实际发电量
-                        wrong30c.push(data.data[i].poweract);   //故障损失
+                        power3c.push(Number((data.data[i].powerplan).toFixed(2)));     //实际发电量
+                        wrong30c.push(Number((data.data[i].poweract).toFixed(2)));    //故障损失
 
                     }
 
@@ -346,8 +346,8 @@ const mapDispatchToProps = (dispatch) => {
 
                     for (var i in data.data) {
                         barLotime3c.push(data.data[i].wtname);    //区域的横坐标
-                        power3c.push(data.data[i].powerplan);   //实际发电量
-                        wrong30c.push(data.data[i].poweract);   //故障损失
+                        power3c.push(Number((data.data[i].powerplan).toFixed(2)));     //实际发电量
+                        wrong30c.push(Number((data.data[i].poweract).toFixed(2)));   //故障损失
 
                     }
 
@@ -371,8 +371,8 @@ const mapDispatchToProps = (dispatch) => {
             for (var i in hhdata.data[0]) {
 
                 barLotime3c.push(hhdata.data[0][i].wtname)   //区域的横坐标
-                power3c.push(hhdata.data[0][i].powerplan) //实际发电量
-                wrong30c.push(hhdata.data[0][i].poweract);   //故障损失
+                power3c.push(Number((hhdata.data[0][i].powerplan).toFixed(2)));  //实际发电量
+                wrong30c.push(Number((hhdata.data[0][i].poweract).toFixed(2)));     //故障损失
 
             }
             let width0=barLotime3c.length*60;
@@ -392,7 +392,7 @@ const mapDispatchToProps = (dispatch) => {
             let wrong30c=[];       //实际发电量
 
 
-            for (var i=0;i<=10;i++) {
+            for (var i=0;i<10;i++) {
 
                 barLotime3c[i]=hhdata.data[0][i].wtname;    //区域的横坐标
                 power3c[i]=hhdata.data[0][i].powerplan;  //实际发电量

@@ -55,6 +55,16 @@ let Component = React.createClass({
                     borderWidth: 0,
                     pointWidth: 15,
                     borderRadius:5
+                },
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                        X2=e.point.category;
+                        WfId=wfId[e.point.index];
+                        changedata2(wtData,X2,sTime,eTime,WfId,wtName,wtElec,wtLose,wtPBA,ipUrl);
+                        }
+                    }
                 }
             },
             xAxis: {
@@ -122,28 +132,13 @@ let Component = React.createClass({
                 tooltip: {
 	                valueSuffix: 'kWh'
 	            },
-                events: {
-                    click: function(e) {
-                    	X2=e.point.category;
-                    	WfId=wfId[e.point.index];
-                    	changedata2(wtData,X2,sTime,eTime,WfId,wtName,wtElec,wtLose,wtPBA,ipUrl);
-                    	
-                    }
-                }
             },{
                 name: '损失发电量',
                 type: 'column',
                 data: wfLose,
                 tooltip: {
 	                valueSuffix: 'kWh'
-	            },
-                events: {
-                    click: function(e) {
-                    	X2=e.point.category;
-                    	WfId=wfId[e.point.index];
-                    	changedata2(wtData,X2,sTime,eTime,WfId,wtName,wtElec,wtLose,wtPBA,ipUrl);
-                    }
-                }
+	            }
             },{
             	name: 'PBA',
             	type: 'spline',
@@ -152,13 +147,6 @@ let Component = React.createClass({
                 tooltip: {
 	                valueSuffix: '%'
 	            },
-                events: {
-                    click: function(e) {
-                    	X2=e.point.category;
-                    	WfId=wfId[e.point.index];
-                    	changedata2(wtData,X2,sTime,eTime,WfId,wtName,wtElec,wtLose,wtPBA,ipUrl);
-                    }
-                }
             }]
         };
         return (

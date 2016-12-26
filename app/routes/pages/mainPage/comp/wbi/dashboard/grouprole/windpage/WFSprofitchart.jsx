@@ -128,11 +128,11 @@ let Component = React.createClass({
                 minRange:100,
 
             title: {
-                text: '100%',
+                text: '(%)',
                  align:'high',
                 rotation:'0',
                 y: -15,
-                x: -40,
+                x: -48,
                 style:{
                     color: '#fff',
                     fontSize:'14px'
@@ -155,12 +155,12 @@ let Component = React.createClass({
                 {
                     name: '成本',
                     type: 'column',
-                    color:'#5298d3',
+                    color:'#70c080',
                     data: fanCost,
                     stack:'waste',
                     maxPointWidth: pointWidth,
                     borderRadius: borderRadius,
-                    color:'#FFFFFF',
+                   
                 },
                 {
                     name: '收益率',

@@ -23,6 +23,12 @@ let Component = React.createClass({
         let {all,zhzb,bbs,chooseONL,chooseALL,chooseFault,chooseRepair,chooseOffline,chooseWFStandby,chooseWFLIM,choosePVALL,choosePVONL,choosePVFLT,choosePVOFL}=this.props;
         let mod1=zhzb.Model;
         let data2=bbs.ModelData;
+        if(mod1==undefined){
+          mod1=[];
+        }
+        if(data2==undefined){
+          data2=[];
+        }
         return (
 
             <div className={styles.bodyBox}>

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Groupstyle.scss';
 import Yearelectric from '../Yearelectric.jsx';
-import Pie2 from './PieTwo';
+import Pie2 from '../PieTwo';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 
 
@@ -24,7 +24,7 @@ let Component = React.createClass({
 
 
     render() {
-        let{groupbool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageProfitT,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{groupbool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(groupbool){
             return (
                 <div className={styles.box}>
@@ -33,8 +33,7 @@ let Component = React.createClass({
                             <div className={styles.section}>
                                 <div className={styles.text1}>收益:{profit}万元·投资:{amounts}万元</div>
                                 <div className={styles.alink}>
-                                    <a className={styles.space} onClick={()=>changepageProfitS()}></a><br/><br/>
-                                    <a className={styles.time} onClick={()=>changepageProfitT()}></a>
+                                    <a className={styles.space} onClick={()=>changepageProfitS()}></a>
                                 </div>
                                 <div className={styles.sectionBox}>
                                     <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{(rate*100).toFixed(1)}%</p>收益率</span>
@@ -49,7 +48,7 @@ let Component = React.createClass({
                                     <a className={styles.time} onClick={()=>changepageHealthyT()}></a>
                                 </div>
                                 <div className={styles.sectionBox}>
-                                    <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{healthy}%</p>健康度</span>
+                                    <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{healthy.toFixed(1)}%</p>健康度</span>
                                     <Pie2 color={healthy/100>1? ['#1fe005','#fbd500']:healthy/100>0.8?['#fbd500','#39565e']:healthy/100>0.6?['#ff0000','#39565e']:['#d06960','#39565e']} num={[healthy,100-healthy]}></Pie2>
                                 </div>
                             </div>
@@ -194,8 +193,8 @@ const mapDispatchToProps = (dispatch) => {
                             month2=[],cost=[],incomes=[];
                             for(var i in yearPro){
                                 month2.push(yearPro[i].month+"月");
-                                cost.push(yearPro[i].costs);
-                                incomes.push(yearPro[i].earning);
+                                cost.push((yearPro[i].costs).toFixed(1)/1);
+                                incomes.push((yearPro[i].earning).toFixed(1)/1);
                             }
                         },
                         complete : function(XMLHttpRequest,status){
@@ -226,10 +225,10 @@ const mapDispatchToProps = (dispatch) => {
                                             arrPlan=[],month1=[],arrAct=[];
                                             for(var i=0;i<data.data.wtKongMonthsElec.length;i++){
                                                 month1.push(data.data.wtKongMonthsElec[i].month+"月");
-                                                arrAct.push(data.data.wtKongMonthsElec[i].poweract);
+                                                arrAct.push((data.data.wtKongMonthsElec[i].poweract).toFixed(1)/1);
                                             }
                                             for(var i in data.data.wtKongMonthsPlanElec){
-                                                arrPlan.push(data.data.wtKongMonthsPlanElec[i]);
+                                                arrPlan.push((data.data.wtKongMonthsPlanElec[i]).toFixed(1)/1);
                                             }
                                         },
                                         complete : function(XMLHttpRequest,status){
@@ -285,50 +284,37 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('flagPba1',!flagPba1 ));
         },
         changepageProfitS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'profits'));
-        },
-        changepageProfitT:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'profitime'));
+            dispatch(actions.setVars('showPage', 'profits'));
         },
         changepageHealthyT:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthy'));
+            dispatch(actions.setVars('showPage', 'healthy'));
         },
         changepageHealthyS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthy_one'));
+            dispatch(actions.setVars('showPage', 'healthy_one'));
         },
         changepageTBAT:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'profitsss'));
+            dispatch(actions.setVars('showPage', 'profitsss'));
         },
         changepageTBAS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthypbas'));
+            dispatch(actions.setVars('showPage', 'healthypbas'));
         },
         changepagePBAT:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'profitss'));
+            dispatch(actions.setVars('showPage', 'profitss'));
         },
         changepagePBAS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthypba'));
+            dispatch(actions.setVars('showPage', 'healthypba'));
         },
         changepageEleT:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthygens'));
+            dispatch(actions.setVars('showPage', 'healthygens'));
         },
         changepageEleS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthygen'));
+            dispatch(actions.setVars('showPage', 'healthygen'));
         },
         changepageProT:()=>{
-
+            dispatch(actions.setVars('showPage', 'profitime'));
         },
         changepageProS:()=>{
-
+            dispatch(actions.setVars('showPage', 'profits'));
         },
 
     };

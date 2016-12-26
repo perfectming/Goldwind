@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Windce from './Windce.jsx';
-import icono from '../../../../../img/comp/ele.png';
+import icono from '../../../../../img/comp/wind_logo.png';
 import Month from './Month';
 var $=require('jquery');
 var actions = require('redux/actions');
@@ -43,7 +43,7 @@ let Component = React.createClass({
                 <div className={styles.xx} onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-  <Windce areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={20} width={width} height={483} ly={10} pointPlacement={0.14} borderRadius={4}></Windce>
+  <Windce areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={20} width={width} height={483} ly={10} pointPlacement={0} borderRadius={4}></Windce>
                 </div>
 
                 
@@ -52,7 +52,7 @@ let Component = React.createClass({
             <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,ipUrl)} key={key}>{value.name}</li>)
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,ipUrl,xxdwfId)} key={key}>{value.name}</li>)
                         })
                     }
         
@@ -118,7 +118,7 @@ const mapDispatchToProps = (dispatch) => {
             let date =new Date();
             let year =date.getFullYear();
             let month= date.getMonth();
-          
+           // adsas
            $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/ELEC/getWtAreaElec',  
@@ -137,9 +137,9 @@ const mapDispatchToProps = (dispatch) => {
              for(let i=0;i<10;i++){
                  let xWild=data.data[i].wtname;
                  arr1.push(xWild);
-                 let yPowerPlan=data.data[i].powerplan;
+                 let yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
                  arr2.push(yPowerPlan);
-                 let yPowerAct=data.data[i].poweract;
+                 let yPowerAct=Number(data.data[i].poweract.toFixed(1));
                  arr3.push(yPowerAct);
              }
             
@@ -163,60 +163,18 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
-        changpage :(value,key,input_url)=>{
+        changpage :(value,key,input_url,xxdwfId)=>{
             
             var arr1=[];
             var arr2=[];
             var arr3=[];
             var areaids=[];
             var windids=[];
-            var monthh=key+1;
+           
             let date = new Date();
+            let monthh=date.getMonth();
             let year= date.getFullYear();
-            //获取所有的区域
-            $.ajax({
-             type:'post',
-             url:'http://'+input_url+'/wbi/BaseData/getGroup',  
-             async:false,
-             dataType:'json',
-             timeout:'3000',
-             success:function(data){
-              
-                for(var i in data.data){
-                       areaids.push(i);
-                }
-              
-             // 获取x轴的值内蒙达茂天润风电场
-            
-             },
-             error:function(){
-              
-             },
-           });
-           //获取所有的风场
-           $.ajax({
-             type:'post',
-             url:'http://'+input_url+'/wbi/BaseData/getWfsByGroupid',  
-             async:false,
-            data:{
-             'groupid':areaids[0],
-            },
-             dataType:'json',
-             timeout:'3000',
-             success:function(data){
-               
-                for(var i in data.data){
-                       windids.push(i);
-                }
-                
-
-             // 获取x轴的值内蒙达茂天润风电场
-            
-             },
-             error:function(){
-              
-             },
-           });
+           
          //获取对应风场下面的数据
           $.ajax({
              type:'post',
@@ -224,34 +182,36 @@ const mapDispatchToProps = (dispatch) => {
              async:false,
             data:{
              'year':year,
-             'month':monthh,
-             'wfid':windids[1]
+             'month':key+1,
+             'wfid':xxdwfId,
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
 
+
              // 获取x轴的值内蒙达茂天润风电场
-             var dataa=data.data;
+          
              for(var i=0;i<10;i++){
                  var xWild=data.data[i].wtname;
                  arr1.push(xWild);
-                 var yPowerPlan=data.data[i].powerplan;
+                 var yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
                  arr2.push(yPowerPlan);
-                 var yPowerAct=data.data[i].poweract;
+                 var yPowerAct=Number(data.data[i].poweract.toFixed(1));
                  arr3.push(yPowerAct);
              }
-         
+
              },
              error:function(){
                  
              },
            });
-           dispatch(actions.setVars('actbt',key ));
+           dispatch(actions.setVars('actbt',key));
            dispatch(actions.setVars('areaNamee',arr1));
              dispatch(actions.setVars('wind',arr3));
              dispatch(actions.setVars('windP',arr2));
              dispatch(actions.setVars('btnn',0));
+            
         },
         gogogo:(actbt,input_url,xxdwfId)=>{
        let date=new Date();
@@ -280,9 +240,9 @@ const mapDispatchToProps = (dispatch) => {
              for(var i=0;i<10;i++){
                  var xWild=data.data[i].wtname;
                  arr1.push(xWild);
-                 var yPowerPlan=data.data[i].powerplan;
+                 var yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
                  arr2.push(yPowerPlan);
-                 var yPowerAct=data.data[i].poweract;
+                 var yPowerAct=Number(data.data[i].poweract.toFixed(1));
                  arr3.push(yPowerAct);
              }
             
@@ -325,9 +285,9 @@ const mapDispatchToProps = (dispatch) => {
              for(var i=0;i<10;i++){
                  var xWild=data.data[i].wtname;
                  arr1.push(xWild);
-                 var yPowerPlan=data.data[i].powerplan;
+                 var yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
                  arr2.push(yPowerPlan);
-                 var yPowerAct=data.data[i].poweract;
+                 var yPowerAct=Number(data.data[i].poweract.toFixed(1));
                  arr3.push(yPowerAct);
              }
             
@@ -373,14 +333,14 @@ const mapDispatchToProps = (dispatch) => {
              for(var i=0;i<dataa.length;i++){
                  var xWild=data.data[i].wtname;
                  arr4.push(xWild);
-                 var yPowerPlan=data.data[i].powerplan;
+                 var yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
                  arr5.push(yPowerPlan);
-                 var yPowerAct=data.data[i].poweract;
+                 var yPowerAct=Number(data.data[i].poweract.toFixed(1));
                  arr6.push(yPowerAct);
 
 
              }
-         
+
 
             let length=arr4.length;
               width =length*60;
@@ -394,7 +354,7 @@ const mapDispatchToProps = (dispatch) => {
                dispatch(actions.setVars('areaNamenb',arr4));
                dispatch(actions.setVars('areaRecordCostNb',arr6));
                dispatch(actions.setVars('areaRecordProfitNb',arr5));
-                dispatch(actions.setVars('btnn',2));
+             
                 dispatch(actions.setVars('width1',width));
         },
         close:()=>{

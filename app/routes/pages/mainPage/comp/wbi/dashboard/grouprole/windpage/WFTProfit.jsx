@@ -2,8 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import WFTprofitchart from './WFTprofitchart.jsx';
-import icono from './img/wind_logo.png';
-import Month from './Month';
+import icono from '../../../../../img/comp/wind_logo.png';
 var $=require('jquery');
 var actions = require('redux/actions');
 let data=require('./Profit-dataq')
@@ -39,7 +38,7 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{[actbt+1]+'月'+xxdwfNa+'各风机发电量'}</p>
+                <p>{[actbt+1]+'月'+xxdwfNa+'各风机收益'}</p>
                 <div className={styles.xx} onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>

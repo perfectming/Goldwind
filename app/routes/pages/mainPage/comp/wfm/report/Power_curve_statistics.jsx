@@ -116,21 +116,28 @@ let Component = React.createClass({
                     }
                 </div>
                 <div className={styles.righttable}>
+                    <div className={styles.columnbox} id='colum'>
+                     { chtnum !==undefined && <Column cnum={chtnum} cname={chtname} ctit={chtit} ></Column> }
+                    </div>
                     <div className={styles.tablebox} id='tablebox'>
                         <div className={styles.tabtit} id='tablist' style={{width:'100%'}}>
                         {
                             select_list !== undefined && select_list.param.map((value,key)=>{
                                 if(key==0){
                                         return(
-                                        <span key={key} style={{width:'85px'}}>{value}</span>
+                                        <span key={key} style={{width:'83px'}}>{value}</span>
+                                        ) 
+                                    }else if(key==6){
+                                        return(
+                                        <span key={key} style={{width:'292px'}}>{value}</span>
                                         ) 
                                     }else if(key==6 || key==7){
                                         return(
-                                        <span key={key} style={{width:'301px'}}>{value}</span>
+                                        <span key={key} style={{width:'303px'}}>{value}</span>
                                         ) 
                                     }else{
                                         return(
-                                        <span key={key} style={{cursor:'pointer',width:'130px'}} id={'poin'+key} onClick={(e)=>clickitem(key,e.target)}>{value}</span>
+                                        <span key={key} style={{cursor:'pointer',width:'132px'}} id={'poin'+key} onClick={(e)=>clickitem(key,e.target)}>{value}</span>
                                         ) 
                                     }
                             })
@@ -138,9 +145,7 @@ let Component = React.createClass({
                         </div>
                         <div  className={styles.tabline} id='tabline' style={{width:'100%'}}></div>
                     </div>
-                    <div className={styles.columnbox} id='colum'>
-                     { chtnum !==undefined && <Column cnum={chtnum} cname={chtname} ctit={chtit} ></Column> }
-                    </div>
+                    
                 </div>
 
             </div>
@@ -208,10 +213,10 @@ const mapDispatchToProps = (dispatch) => {
                    
                     value.map(function(valueC,keyC){
                         $('#tabline>div').eq(key).append('<span>'+valueC+'</span>');
-                        $('#tabline>div').eq(key).find('span').width(235);
+                        $('#tabline>div').eq(key).find('span').width(130);
                         $('#tabline>div').eq(key).find('span').eq(0).width(80);
-                        $('#tabline>div').eq(key).find('span').eq(1).width(400);
-                        $('#tabline>div').eq(key).find('span').eq(4).text(valueC+'%')
+                        $('#tabline>div').eq(key).find('span').eq(6).width(291);
+                        $('#tabline>div').eq(key).find('span').eq(7).width(301);
                     })
                     if(key%2==0){
                         $('#tabline>div').eq(key).css('background','#30343f')
@@ -219,10 +224,10 @@ const mapDispatchToProps = (dispatch) => {
                         $('#tabline>div').eq(key).css('background','#272b34')
                     }
                    //默认显示第一条数据
-                $('#tablist span').eq(2).css('background','#333');
+                $('#tablist span').eq(1).css('background','#333');
                  //初始化默认收集第一层数据
-                chartnum.push(value[2]);
-                chartname.push(value[1]); 
+                chartnum.push(value[1]);
+                chartname.push(value[7]); 
                         
                 //显示highchart图标 
                 $('#colum').css('display','block');
@@ -231,7 +236,7 @@ const mapDispatchToProps = (dispatch) => {
                     //初始化默认显示第一层数据
                         dispatch(actions.setVars('chtnum',chartnum));
                         dispatch(actions.setVars('chtname',chartname));
-                        dispatch(actions.setVars('chtit','平均风速(m/s)')); 
+                        dispatch(actions.setVars('chtit','18')); 
             }
 
             })

@@ -36,9 +36,6 @@ let Component = React.createClass({
                 color: '#31f3fb'
             	}
             },
-            tooltip: {
-                
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -71,15 +68,14 @@ let Component = React.createClass({
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
-	                y: -10,
-	                x:-15,
+	                y: -15,
+	                x:-18,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',
 	                }
                 },
                 labels: {
-                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色

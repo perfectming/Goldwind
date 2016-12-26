@@ -262,7 +262,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong21.push(data.data[0][i].maintainloss);   //维护损失
                         wrong22.push(data.data[0][i].limitloss);   //限功率损失
                         wrong23.push(data.data[0][i].nodevreasonloss);   //非设备原因损失
-                        pba2.push(data.data[0][i].pba.toFixed(3)*100);   //非设备原因损失
+                        pba2.push(Number((data.data[0][i].pba*100).toFixed(2)));  //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime2a', barLotime2));
                     dispatch(actions.setVars('power2a', power2));
@@ -280,7 +280,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong31.push(data.data[1][i].maintainloss);   //维护损失
                         wrong32.push(data.data[1][i].limitloss);   //限功率损失
                         wrong33.push(data.data[1][i].nodevreasonloss);   //非设备原因损失
-                        pba3.push(data.data[1][i].pba.toFixed(3)*100);   //非设备原因损失
+                        pba3.push(Number((data.data[1][i].pba*100).toFixed(2)))  //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime3a', barLotime3));
                     dispatch(actions.setVars('power3a', power3));
