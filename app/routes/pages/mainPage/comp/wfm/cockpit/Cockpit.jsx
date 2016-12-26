@@ -184,7 +184,6 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
                 dispatch(actions.setVars('putpage', false));
                 dispatch(actions.setVars('bodypage', false));
-                dispatch(actions.setVars('navhide', false));
                 dispatch(actions.setVars('cssif2', false));
             var obj = {
                 test:''
