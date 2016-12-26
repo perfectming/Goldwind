@@ -74,22 +74,22 @@ import Profitime from '../comp/wbi/dashboard/grouprole/group/Profitime.jsx';
 
 
 
-import Baotou from '../comp/wbi/dashboard/branch/Baotou.jsx';//路迪
-import Windbtpage from '../comp/wbi/dashboard/branch/Windbtpage.jsx';
-import Xilin from '../comp/wbi/dashboard/branch/Xilin.jsx';
-import Areaa from '../comp/wbi/dashboard/grouprole/area/Area.jsx';
-import Group from '../comp/wbi/dashboard/grouprole/group/Group.jsx';
-import Windpage from '../comp/wbi/dashboard/grouprole/windpage/Windpage.jsx';
-import GroupKBA from '../comp/wbi/KPI/GroupKBA.jsx';
-import AreaKBA from '../comp/wbi/KPI/AreaKBA.jsx';
-import LoseElectric from '../comp/wbi/KPI/LoseElectric.jsx';
-import DeviceLose from '../comp/wbi/KPI/DeviceLose.jsx';
-import TopTen from '../comp/wbi/KPI/TopTen.jsx';
-import ServiceLose from '../comp/wbi/KPI/ServiceLose.jsx';
-import PerformLose from '../comp/wbi/KPI/PerformLose.jsx';
-import MaintainLose from '../comp/wbi/KPI/MaintainLose.jsx';
-import LimitLose from '../comp/wbi/KPI/LimitLose.jsx';
-import Reliability from '../comp/wbi/KPI/Reliability.jsx';
+// import Baotou from '../comp/wbi/dashboard/branch/Baotou.jsx';//路迪
+// import Windbtpage from '../comp/wbi/dashboard/branch/Windbtpage.jsx';
+// import Xilin from '../comp/wbi/dashboard/branch/Xilin.jsx';
+// import Areaa from '../comp/wbi/dashboard/grouprole/area/Area.jsx';
+// import Group from '../comp/wbi/dashboard/grouprole/group/Group.jsx';
+// import Windpage from '../comp/wbi/dashboard/grouprole/windpage/Windpage.jsx';
+// import GroupKBA from '../comp/wbi/KPI/GroupKBA.jsx';
+// import AreaKBA from '../comp/wbi/KPI/AreaKBA.jsx';
+// import LoseElectric from '../comp/wbi/KPI/LoseElectric.jsx';
+// import DeviceLose from '../comp/wbi/KPI/DeviceLose.jsx';
+// import TopTen from '../comp/wbi/KPI/TopTen.jsx';
+// import ServiceLose from '../comp/wbi/KPI/ServiceLose.jsx';
+// import PerformLose from '../comp/wbi/KPI/PerformLose.jsx';
+// import MaintainLose from '../comp/wbi/KPI/MaintainLose.jsx';
+// import LimitLose from '../comp/wbi/KPI/LimitLose.jsx';
+// import Reliability from '../comp/wbi/KPI/Reliability.jsx';
 
 
 var actions = require('redux/actions');

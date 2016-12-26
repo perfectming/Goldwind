@@ -158,7 +158,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong211.push(data.data[0][i].maintainloss);   //维护损失
                         wrong221.push(data.data[0][i].limitloss);   //限功率损失
                         wrong231.push(data.data[0][i].nodevreasonloss);   //非设备原因损失
-                        pba21.push(data.data[0][i].pba);   //非设备原因损失
+                        pba21.push(Number((data.data[0][i].pba*100).toFixed(2)));    //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime21', barLotime21));
                     dispatch(actions.setVars('power21', power21));
@@ -182,7 +182,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong211q.push(data.data[1][i].maintainloss);   //维护损失
                         wrong221q.push(data.data[1][i].limitloss);   //限功率损失
                         wrong231q.push(data.data[1][i].nodevreasonloss);   //非设备原因损失
-                        pba21q.push(data.data[1][i].pba);   //非设备原因损失
+                        pba21q.push(Number((data.data[1][i].pba*100).toFixed(2)));    //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime1', barLotime21q));
                     dispatch(actions.setVars('power1', power21q));
@@ -241,7 +241,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong211.push(data.data[1][i].maintainloss);   //维护损失
                         wrong221.push(data.data[1][i].limitloss);   //限功率损失
                         wrong231.push(data.data[1][i].nodevreasonloss);   //非设备原因损失
-                        pba21.push(data.data[1][i].pba);   //非设备原因损失
+                        pba21.push(Number((data.data[1][i].pba*100).toFixed(2)));    //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime21', barLotime21));
                     dispatch(actions.setVars('power21', power21));
@@ -265,7 +265,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong211q.push(data.data[0][i].maintainloss);   //维护损失
                         wrong221q.push(data.data[0][i].limitloss);   //限功率损失
                         wrong231q.push(data.data[0][i].nodevreasonloss);   //非设备原因损失
-                        pba21q.push(data.data[0][i].pba);   //非设备原因损失
+                        pba21q.push(Number((data.data[0][i].pba*100).toFixed(2)));    //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime1', barLotime21q));
                     dispatch(actions.setVars('power1', power21q));
@@ -313,7 +313,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong31c.push(data.data[i].maintainloss);   //维护损失
                         wrong32c.push(data.data[i].limitloss);   //限功率损失
                         wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
-                        pba3c.push(data.data[i].pba);   //非设备原因损失
+                        pba3c.push(Number((data.data[i].pba*100).toFixed(2)));  //非设备原因损失
                     }
 
                     dispatch(actions.setVars('barLotime1', barLotime3c))
@@ -369,7 +369,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong31c.push(data.data[i].maintainloss);   //维护损失
                         wrong32c.push(data.data[i].limitloss);   //限功率损失
                         wrong33c.push(data.data[i].nodevreasonloss);   //非设备原因损失
-                        pba3c.push(data.data[i].pba);   //非设备原因损失
+                        pba3c.push(Number((data.data[i].pba*100).toFixed(2)));    //非设备原因损失
                     }
 
                     dispatch(actions.setVars('barLotime1', barLotime3c))
@@ -404,7 +404,7 @@ const mapDispatchToProps = (dispatch) => {
                 wrong31.push(hhdata4.data[0][i].maintainloss);   //维护损失
                 wrong32.push(hhdata4.data[0][i].limitloss);   //限功率损失
                 wrong33.push(hhdata4.data[0][i].nodevreasonloss);   //非设备原因损失
-                pba3.push(hhdata4.data[0][i].pba);   //非设备原因损失
+                pba3.push(Number((hhdata4.data[0][i].pba*100).toFixed(2)));   //非设备原因损失
             }
             let width0=barLotime3.length*60;
             dispatch(actions.setVars('width0', width0));
@@ -427,7 +427,7 @@ const mapDispatchToProps = (dispatch) => {
             let wrong33c=[];       //非设备原因损失
             let pba3c=[];
 
-            for (var i=0;i<=10;i++) {
+            for (var i=0;i<10;i++) {
 
                 barLotime3c[i]=barLotime1[i];    //区域的横坐标
                 power3c[i]=power1[i];   //实际发电量

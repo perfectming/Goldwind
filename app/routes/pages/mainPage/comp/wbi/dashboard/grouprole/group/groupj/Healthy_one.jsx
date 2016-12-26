@@ -417,7 +417,7 @@ const mapDispatchToProps = (dispatch) => {
         hideit: (healthy3,namex3) =>{
             let barLotime3c = [];    //各区域   一区域二区域
             let power3c=[];
-            for (var i=0;i<=10;i++) {
+            for (var i=0;i<10;i++) {
 
                 barLotime3c[i] = healthy3[i];    //区域的横坐标
                 power3c[i] = namex3[i];

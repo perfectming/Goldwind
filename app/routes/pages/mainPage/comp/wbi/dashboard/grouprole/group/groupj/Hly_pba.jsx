@@ -284,7 +284,7 @@ const mapDispatchToProps = (dispatch) => {
                         wrong31.push(data.data[i].maintainloss);   //维护损失
                         wrong32.push(data.data[i].limitloss);   //限功率损失
                         wrong33.push(data.data[i].nodevreasonloss);   //非设备原因损失
-                        pba3.push(data.data[i].pba.toFixed(3)*100);   //非设备原因损失
+                        pba3.push(Number((data.data[i].pba*100).toFixed(2)));   //非设备原因损失
                     }
 
                     dispatch(actions.setVars('barLotime3a', barLotime3));

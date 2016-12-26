@@ -11,7 +11,7 @@ let Component = React.createClass({
 
     render() {
         let {text,name0,runtime,downtime,tba0,changedata1,hhdata,w10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
-
+        console.log(ipUrl)
 
         let configPie = {
             chart: {
@@ -253,7 +253,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname);
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba.toFixed(3)*100); //维护损失
+                        tba2.push(Number((data.data[i].tba*100).toFixed(2))); //维护损失
                     }
                     dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));
