@@ -115,28 +115,28 @@ const mapDispatchToProps = (dispatch) => {
 		        	for(var i in data.data[2]){
 		        		areaId.push(data.data[2][i].groupid);
 		        		areaName.push(data.data[2][i].groupname);
-		        		areaPBA.push(data.data[2][i].pba*100);
-		        		areaFault.push(data.data[2][i].faultloss);
-		        		areaLimit.push(data.data[2][i].limitloss);
-		        		areaMaintain.push(data.data[2][i].maintainloss);
-		        		areaDevice.push(data.data[2][i].nodevreasonloss);
-		        		areaElec.push(data.data[2][i].poweract);
+		        		areaPBA.push((data.data[2][i].pba*100).toFixed(1)/1);
+		        		areaFault.push((data.data[2][i].faultloss).toFixed(1)/1);
+		        		areaLimit.push((data.data[2][i].limitloss).toFixed(1)/1);
+		        		areaMaintain.push((data.data[2][i].maintainloss).toFixed(1)/1);
+		        		areaDevice.push((data.data[2][i].nodevreasonloss).toFixed(1)/1);
+		        		areaElec.push((data.data[2][i].poweract).toFixed(1)/1);
 		        	};
 		        	
 		        	for(var i in data.data[1]){
 		        		wfName.push(data.data[1][i].wfname);
 		        		wfId.push(data.data[1][i].wfid);
-		        		wfElec.push(data.data[1][i].poweract);
-		        		wfLose.push(data.data[1][i].totalloss);
-		        		wfPBA.push(data.data[1][i].pba*100)
+		        		wfElec.push((data.data[1][i].poweract).toFixed(1)/1);
+		        		wfLose.push((data.data[1][i].totalloss).toFixed(1)/1);
+		        		wfPBA.push((data.data[1][i].pba*100).toFixed(1)/1)
 		        	}
 		        	wtData=data.data[0];
 		        	wtData.sort(function(a,b){return b.pba-a.pba});
 		        	for(var i=0;i<10;i++){
 		        		wtName.push(wtData.slice(0,10)[i].wtname);
-		        		wtElec.push(wtData.slice(0,10)[i].poweract);
-		        		wtLose.push(wtData.slice(0,10)[i].totalloss);
-		        		wtPBA.push(wtData.slice(0,10)[i].pba*100);
+		        		wtElec.push((wtData.slice(0,10)[i].poweract).toFixed(1)/1);
+		        		wtLose.push((wtData.slice(0,10)[i].totalloss).toFixed(1)/1);
+		        		wtPBA.push((wtData.slice(0,10)[i].pba*100).toFixed(1)/1);
 		        	};
 		        	
 		        },
@@ -164,6 +164,8 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(actions.setVars('wtLose', wtLose));
 			dispatch(actions.setVars('wtPBA', wtPBA));
 			dispatch(actions.setVars('wtData',wtData ));
+            dispatch(actions.setVars('x1', areaName[0]));
+            dispatch(actions.setVars('x2',wfName[0]));
     	},
     };
 };

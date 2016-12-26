@@ -15,13 +15,12 @@ let Component = React.createClass({
         this.props.init(ipUrl,selectId,selectName);
         setTimeout(function(){
         	init(ipUrl,selectId,selectName)
-        },1000)
+        },800)
     },
     
 	render() {
-		let data=PBAdata;
 		let comp = PBAdata.list;
-		let {columnOneName=[],columnTwoName=[],columnOne=[],columnTwo=[],wtType,topTitleOne,topTitleTwo,topPieOne=[],topPieTwo=[],ipUrl,topBool=false,selectId,selectName,buttonAction,buttonReset,checkedTop=1,checkedBoxTopPro,checkedBoxTopElec,changeValueS,changeValueE}=this.props;
+		let {columnOneTitle='',columnTwoTitle='',columnOneName=[],columnTwoName=[],columnOne=[],columnTwo=[],wtType,topTitleOne,topTitleTwo,topPieOne=[],topPieTwo=[],ipUrl,topBool=false,selectId,selectName,buttonAction,buttonReset,checkedTop=1,checkedBoxTopPro,checkedBoxTopElec,changeValueS,changeValueE}=this.props;
 		if(topBool){
 			return(
 				<div className={styles.bodyBox}>
@@ -39,7 +38,7 @@ let Component = React.createClass({
 	                            return (
 	                                    <div className={styles.btnBox} key={key}>
 		                                    <div className={styles.bBox}>
-		                                        <button onClick={()=>buttonAction(columnOneName,columnTwoName,columnOne,columnTwo,wtType,ipUrl,checkedTop,selectName,selectId,topTitleOne,topTitleTwo,topPieOne,topPieTwo)}>{"查询"}</button>
+		                                        <button onClick={()=>buttonAction(columnTwoTitle,columnTwoTitle,columnOneName,columnTwoName,columnOne,columnTwo,wtType,ipUrl,checkedTop,selectName,selectId,topTitleOne,topTitleTwo,topPieOne,topPieTwo)}>{"查询"}</button>
 		                                    </div>
 		                                    <div className={styles.bBox}>
 		                                        <button onClick={()=>buttonReset()}>{"重置"}</button>
@@ -75,18 +74,18 @@ let Component = React.createClass({
 					<div className={styles.content}>
 						<div className={styles.floorOne}>
 							<div className={`${styles.pie} ${styles.boxShadow}`}>
-								<ChartPie text={topTitleOne} lose={topPieOne}></ChartPie>
+								<ChartPie name={topTitleOne} text={topTitleOne} lose={topPieOne}></ChartPie>
 							</div>
 							<div className={`${styles.column} ${styles.boxShadow}`}>
-								<OneColumn name={''} title={''} month={columnOneName} plan={columnOne} unit={data.data[3].unit}></OneColumn>
+								<OneColumn name={columnOneTitle} title={'Top10故障损失分析'+columnOneTitle} month={columnOneName} plan={columnOne} unit={'h'}></OneColumn>
 							</div>
 						</div>
 						<div className={styles.floorTwo}>
 							<div className={`${styles.pie} ${styles.boxShadow}`}>
-								<ChartPie text={topTitleTwo} lose={topPieTwo}></ChartPie>
+								<ChartPie name={topTitleOne} text={topTitleTwo} lose={topPieTwo}></ChartPie>
 							</div>
 							<div className={`${styles.column} ${styles.boxShadow}`}>
-								<OneColumn name={''} title={''} month={columnTwoName} plan={columnTwo} unit={data.data[3].unit}></OneColumn>
+								<OneColumn name={columnTwoTitle} title={'Top10故障损失分析'+columnTwoTitle} month={columnTwoName} plan={columnTwo} unit={'h'}></OneColumn>
 							</div>
 						</div>
 					</div>
@@ -113,16 +112,32 @@ const mapStateToProps = (state) => {
     	
     	topPieOne : state.vars.topPieOne,
     	topTitleOne: state.vars.topTitleOne,
-    	topPieTwo : state.vars.topPieTwo,
-    	topTitleTwo: state.vars.topTitleTwo,
     	columnOneName: state.vars.columnOneName,
     	columnOne: state.vars.columnOne,
+    	columnOneTitle: state.vars.columnOneTitle,
+
+    	topPieTwo : state.vars.topPieTwo,
+    	topTitleTwo: state.vars.topTitleTwo,
+    	columnTwoName: state.vars.columnTwoName,
+    	columnTwo: state.vars.columnTwo,
+    	columnTwoTitle: state.vars.columnTwoTitle,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: (ipUrl,selectId,selectName) => {
+        	dispatch(actions.setVars('topTitleOne', ));
+			dispatch(actions.setVars('topPieOne', ));
+			dispatch(actions.setVars('topTitleTwo', ));
+			dispatch(actions.setVars('topPieTwo', ));
+	        dispatch(actions.setVars('columnOneName', ));
+			dispatch(actions.setVars('columnOne', ));	
+	        dispatch(actions.setVars('columnTwoName', ));
+			dispatch(actions.setVars('columnTwo', ));
+			dispatch(actions.setVars('columnOneTitle', ));
+			dispatch(actions.setVars('columnTwoTitle', ));
+
           	//初始日期为上月
         	var date = new Date();
         	var yearString=date.getFullYear();
@@ -182,7 +197,7 @@ const mapDispatchToProps = (dispatch) => {
 	    changeValueE : (e) => {
 	        	
 	    },
-	    buttonAction : (columnOneName,columnTwoName,columnOne,columnTwo,wtType,ipUrl,checkedTop,selectName,selectId,topTitleOne,topTitleTwo,topPieOne,topPieTwo) => {
+	    buttonAction : (columnOneTitle,columnTwoTitle,columnOneName,columnTwoName,columnOne,columnTwo,wtType,ipUrl,checkedTop,selectName,selectId,topTitleOne,topTitleTwo,topPieOne,topPieTwo) => {
 	    	var sTime = $('#startTime').val();
 	        //结束时间时间
 	        var eTime = $('#endTime').val();
@@ -205,14 +220,29 @@ const mapDispatchToProps = (dispatch) => {
 					data: {'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
 					timeout : 60000, 
 					success: function (data) {
-						topPieOne=[];
-						topTitleOne=A+'故障损失分析';
-						wtType=data.data[0].wttype;
-						for(var i in data.data){
-							topPieOne.push([data.data[i].wttype,data.data[i].faultloss]);
+						if (topTitleOne==undefined) {
+							topPieOne=[];
+							topTitleOne=A+'故障损失分析';
+							wtType=data.data[0].wttype;
+							for(var i in data.data){
+								topPieOne.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+							}
+						    dispatch(actions.setVars('topTitleOne', topTitleOne));
+						    dispatch(actions.setVars('topPieOne', topPieOne));
+						    dispatch(actions.setVars('columnOneTitle', wtType));
+						}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+							topPieTwo=[];
+							topTitleTwo=A+'故障损失分析';
+							wtType=data.data[0].wttype;
+							for(var i in data.data){
+								topPieTwo.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+							}
+						    dispatch(actions.setVars('topTitleTwo', topTitleTwo));
+						    dispatch(actions.setVars('topPieTwo', topPieTwo));
+						    dispatch(actions.setVars('columnTwoTitle', wtType));
+						}else{
+							alert('请先重置清除数据')
 						}
-					    dispatch(actions.setVars('topTitleOne', topTitleOne));
-					    dispatch(actions.setVars('topPieOne', topPieOne));
 					},
 					complete : function(XMLHttpRequest,status) { 
 						$.ajax({
@@ -223,14 +253,25 @@ const mapDispatchToProps = (dispatch) => {
 							data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
 							timeout : 60000, 
 							success: function (data) {
-								console.log(data);
-								columnOneName=[],columnOne=[];
-								for(var i in data.data){
-									columnOneName.push(data.data[i].blooeydescr);
-									columnOne.push(data.data[i].powerloss);
-								};
-								dispatch(actions.setVars('columnOneName', columnOneName));
-					    		dispatch(actions.setVars('columnOne', columnOne));
+								if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+									columnOneName=[],columnOne=[];
+									for(var i in data.data){
+										columnOneName.push(data.data[i].blooeydescr);
+										columnOne.push((data.data[i].powerloss).toFixed(1)/1);
+									};
+									dispatch(actions.setVars('columnOneName', columnOneName));
+						    		dispatch(actions.setVars('columnOne', columnOne));
+								}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
+									columnTwoName=[],columnTwo=[];
+									for(var i in data.data){
+										columnTwoName.push(data.data[i].blooeydescr);
+										columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
+									};
+									dispatch(actions.setVars('columnTwoName', columnTwoName));
+						    		dispatch(actions.setVars('columnTwo', columnTwo));
+								}else{
+									alert('请先重置清除数据')
+								}
 							},
 							complete : function(XMLHttpRequest,status) { 
 								
@@ -247,14 +288,29 @@ const mapDispatchToProps = (dispatch) => {
 					data: {'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
 					timeout : 60000, 
 					success: function (data) {
-						topPieOne=[];
-					    topTitleOne=A+'故障损失分析';
-					    wtType=data.data[0].wttype;
-						for(var i in data.data){
-							topPieOne.push([data.data[i].wttype,data.data[i].faultloss]);
+						if (topTitleOne==undefined) {
+							topPieOne=[];
+							topTitleOne=A+'故障损失分析';
+							wtType=data.data[0].wttype;
+							for(var i in data.data){
+								topPieOne.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+							}
+						    dispatch(actions.setVars('topTitleOne', topTitleOne));
+						    dispatch(actions.setVars('topPieOne', topPieOne));
+						    dispatch(actions.setVars('columnOneTitle', wtType));
+						}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+							topPieTwo=[];
+							topTitleTwo=A+'故障损失分析';
+							wtType=data.data[0].wttype;
+							for(var i in data.data){
+								topPieTwo.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+							}
+						    dispatch(actions.setVars('topTitleTwo', topTitleTwo));
+						    dispatch(actions.setVars('topPieTwo', topPieTwo));
+						    dispatch(actions.setVars('columnTwoTitle', wtType));
+						}else{
+							alert('请先重置清除数据')
 						}
-					    dispatch(actions.setVars('topTitleOne', topTitleOne));
-					    dispatch(actions.setVars('topPieOne', topPieOne));
 					},
 					complete : function(XMLHttpRequest,status) {},
 				});
@@ -266,15 +322,25 @@ const mapDispatchToProps = (dispatch) => {
 							data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
 							timeout : 60000, 
 							success: function (data) {
-								console.log(data);
-								console.log(data);
-								columnOneName=[],columnOne=[];
-								for(var i in data.data){
-									columnOneName.push(data.data[i].blooeydescr);
-									columnOne.push(data.data[i].powerloss);
-								};
-								dispatch(actions.setVars('columnOneName', columnOneName));
-					    		dispatch(actions.setVars('columnOne', columnOne));
+								if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+									columnOneName=[],columnOne=[];
+									for(var i in data.data){
+										columnOneName.push(data.data[i].blooeydescr);
+										columnOne.push((data.data[i].powerloss).toFixed(1)/1);
+									};
+									dispatch(actions.setVars('columnOneName', columnOneName));
+						    		dispatch(actions.setVars('columnOne', columnOne));
+								}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
+									columnTwoName=[],columnTwo=[];
+									for(var i in data.data){
+										columnTwoName.push(data.data[i].blooeydescr);
+										columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
+									};
+									dispatch(actions.setVars('columnTwoName', columnTwoName));
+						    		dispatch(actions.setVars('columnTwo', columnTwo));
+								}else{
+									alert('请先重置清除数据')
+								}
 							},
 							complete : function(XMLHttpRequest,status) { 
 								
@@ -283,7 +349,16 @@ const mapDispatchToProps = (dispatch) => {
 			}
         },
 	    buttonReset : (e) => {
-	        	
+	    	dispatch(actions.setVars('topTitleOne', ));
+			dispatch(actions.setVars('topPieOne', ));
+			dispatch(actions.setVars('topTitleTwo', ));
+			dispatch(actions.setVars('topPieTwo', ));
+	        dispatch(actions.setVars('columnOneName', ));
+			dispatch(actions.setVars('columnOne', ));	
+	        dispatch(actions.setVars('columnTwoName', ));
+			dispatch(actions.setVars('columnTwo', ));
+			dispatch(actions.setVars('columnOneTitle', ));
+			dispatch(actions.setVars('columnTwoTitle', ));	
 	    },
         checkedBoxTopPro : () => {
         	dispatch(actions.setVars('checkedTop', 2));

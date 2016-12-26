@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{njhfdl,nsjfdl,nfdlwcl,unit}=this.props;
+        let{njhfdl,nsjfdl,nfdlwcl,unit,monthTime}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -39,7 +39,7 @@ let Component = React.createClass({
                     rotation: 0
                 },
                 tickLength: 0,
-                categories: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                categories: monthTime
             },
             yAxis: [{
                 title: {

@@ -16,7 +16,7 @@ let Component = React.createClass({
         this.props.init();
         setTimeout(function(){
         	init()
-        },1000)
+        },800)
     },
 	componentWillMount() {
     	let {ipUrl}=this.props;
@@ -27,7 +27,7 @@ let Component = React.createClass({
     
 	render() {
 		let comp=PBAdata.list;
-		let {loseElecBool=false,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne='',loseAreaNameTwo='',loseAreaNameThree='',loseAreaNameFour='',selectName,selectId,ipUrl,checkedLose=1,buttonAction, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
+		let {storage,loseElecBool=false,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne='',loseAreaNameTwo='',loseAreaNameThree='',loseAreaNameFour='',selectName,selectId,ipUrl,checkedLose=1,buttonAction,buttonReset, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
 		if(loseElecBool){
 			return(
 				<div className={styles.bodyBox}>
@@ -45,10 +45,10 @@ let Component = React.createClass({
 		                            return (
 		                                    <div className={styles.btnBox} key={key}>
 			                                    <div className={styles.bBox}>
-			                                        <button onClick={()=>buttonAction(selectId,selectName,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne,loseAreaNameTwo,loseAreaNameThree,loseAreaNameFour,checkedLose,ipUrl)}>{"查询"}</button>
+			                                        <button onClick={()=>buttonAction(storage,selectId,selectName,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne,loseAreaNameTwo,loseAreaNameThree,loseAreaNameFour,checkedLose,ipUrl)}>{"查询"}</button>
 			                                    </div>
 			                                    <div className={styles.bBox}>
-			                                        <button onClick={()=>buttonReset()}>{"重置"}</button>
+			                                        <button onClick={()=>buttonReset(loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne,loseAreaNameTwo,loseAreaNameThree,loseAreaNameFour)}>{"重置"}</button>
 			                                    </div>
 		                                    </div>
 		                                )
@@ -82,20 +82,20 @@ let Component = React.createClass({
 					<div className={styles.content}>
 						<div className={styles.areaLose}>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
-								<ChartOne text={loseAreaNameOne} lose={loseAreaOne}></ChartOne>
+								<ChartOne name={loseAreaNameOne} text={loseAreaNameOne} lose={loseAreaOne}></ChartOne>
 							</div>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
-								<ChartOne text={loseAreaNameTwo} lose={loseAreaTwo}></ChartOne>
+								<ChartOne name={loseAreaNameOne} text={loseAreaNameTwo} lose={loseAreaTwo}></ChartOne>
 							</div>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
-								<ChartOne text={loseAreaNameThree} lose={loseAreaThree}></ChartOne>
+								<ChartOne name={loseAreaNameOne} text={loseAreaNameThree} lose={loseAreaThree}></ChartOne>
 							</div>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
-								<ChartOne text={loseAreaNameFour} lose={loseAreaFour}></ChartOne>
+								<ChartOne name={loseAreaNameOne} text={loseAreaNameFour} lose={loseAreaFour}></ChartOne>
 							</div>
 						</div>
 						<div className={`${styles.lose} ${styles.boxShadow}`}>
-							<ChartFive title={'损失分析'} unit={''} loseA={loseA} loseB={loseB} loseC={loseC} loseD={loseD} nameOne={loseAreaNameOne} nameTwo={loseAreaNameTwo} nameThree={loseAreaNameThree} nameFour={loseAreaNameFour}></ChartFive>
+							<ChartFive title={'损失分析'} unit={storage==1? "kWh":"元"} loseA={loseA} loseB={loseB} loseC={loseC} loseD={loseD} nameOne={loseAreaNameOne} nameTwo={loseAreaNameTwo} nameThree={loseAreaNameThree} nameFour={loseAreaNameFour}></ChartFive>
 						</div>
 					</div>
 				</div>
@@ -113,6 +113,7 @@ const mapStateToProps = (state) => {
     	loseElecBool : state.vars.loseElecBool,
     	ipUrl : state.vars.ipUrl,
     	checkedLose : state.vars.checkedLose,
+    	storage: state.vars.storage,
     	
     	selectId : state.vars.selectId,
     	selectName : state.vars.selectName,
@@ -135,6 +136,18 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
     	init: () => {
+    		dispatch(actions.setVars('loseA', ));
+	    	dispatch(actions.setVars('loseB', ));
+	    	dispatch(actions.setVars('loseC', ));
+	    	dispatch(actions.setVars('loseD', ));
+	    	dispatch(actions.setVars('loseAreaOne', ));
+	    	dispatch(actions.setVars('loseAreaTwo', ));
+	    	dispatch(actions.setVars('loseAreaThree', ));
+	    	dispatch(actions.setVars('loseAreaFour', ));
+	    	dispatch(actions.setVars('loseAreaNameOne', ));
+	    	dispatch(actions.setVars('loseAreaNameTwo', ));
+	    	dispatch(actions.setVars('loseAreaNameThree', ));
+	    	dispatch(actions.setVars('loseAreaNameFour', ));
         	//初始日期为上月
         	var date = new Date();
         	var yearString=date.getFullYear();
@@ -203,101 +216,217 @@ const mapDispatchToProps = (dispatch) => {
 	    checkedBoxPro : () =>{
 	    	dispatch(actions.setVars('checkedLose', 2));
 	    },
-	    buttonAction : (selectId,selectName,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne,loseAreaNameTwo,loseAreaNameThree,loseAreaNameFour,checkedLose,ipUrl) => {
-	    	var sTime = $('#startTime').val();
-	        //结束时间时间
-	        var eTime = $('#endTime').val();
-			if(sTime == '' || eTime == '') {
-	            alert('请选择开始或者结束时间');
-	            return false;
-	        };
-	        var A=$('select').val();
-			for(var i in selectName){
-				if(selectName[i]==A){
-					selectId=selectId[i];
+	    buttonReset : (loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne,loseAreaNameTwo,loseAreaNameThree,loseAreaNameFour)=>{
+	    	dispatch(actions.setVars('loseA', ));
+	    	dispatch(actions.setVars('loseB', ));
+	    	dispatch(actions.setVars('loseC', ));
+	    	dispatch(actions.setVars('loseD', ));
+	    	dispatch(actions.setVars('loseAreaOne', ));
+	    	dispatch(actions.setVars('loseAreaTwo', ));
+	    	dispatch(actions.setVars('loseAreaThree', ));
+	    	dispatch(actions.setVars('loseAreaFour', ));
+	    	dispatch(actions.setVars('loseAreaNameOne', ));
+	    	dispatch(actions.setVars('loseAreaNameTwo', ));
+	    	dispatch(actions.setVars('loseAreaNameThree', ));
+	    	dispatch(actions.setVars('loseAreaNameFour', ));
+	    },
+	    buttonAction : (storage,selectId,selectName,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne,loseAreaNameTwo,loseAreaNameThree,loseAreaNameFour,checkedLose,ipUrl) => {
+	    	if (loseAreaOne!==undefined) {
+	    		if(checkedLose==storage){
+	    			var sTime = $('#startTime').val();
+			        //结束时间时间
+			        var eTime = $('#endTime').val();
+					if(sTime == '' || eTime == '') {
+			            alert('请选择开始或者结束时间');
+			            return false;
+			        };
+			        var A=$('select').val();
+					for(var i in selectName){
+						if(selectName[i]==A){
+							selectId=selectId[i];
+						}
+					};
+					if(selectId<1000000){
+						$.ajax({
+			    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//Pie表
+					        type: 'post',
+					        async:false,
+					        dataType: 'json',
+					        data:{'flag':checkedLose,'startTime':sTime,'endTime':eTime,'wfid':selectId,}, 
+					        success:function (data) {
+					        	if(loseAreaOne==undefined){
+					        		loseAreaNameOne=data.data[0].wfname;
+					        		loseAreaOne=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+					        		loseA=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+					        	}else if(loseAreaOne!==undefined&&loseAreaTwo==undefined){
+					        		loseAreaNameTwo=data.data[0].wfname;
+					        		loseAreaTwo=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+					        		loseB=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+					        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree==undefined){
+					        		loseAreaNameThree=data.data[0].wfname;
+					        		loseAreaThree=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+					        		loseC=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+					        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree!==undefined&&loseAreaFour==undefined){
+					        		loseAreaNameFour=data.data[0].wfname;
+					        		loseAreaFour=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+					        		loseD=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+					        	}else{
+					        		alert("请先重置清除数据");
+					        	}
+							},
+					        complete : function(XMLHttpRequest,status) { 
+							　　　if(status=='timeout') {
+							　　　　　 console.log('超时');
+							　　　}
+							},
+						});
+					}else{
+						$.ajax({
+			    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//Pie表
+					        type: 'post',
+					        async:false,
+					        dataType: 'json',
+					        data:{'flag':checkedLose,'startTime':sTime,'endTime':eTime,'groupid':selectId,}, 
+					        success:function (data) {
+					        	if(loseAreaOne==undefined){
+					        		loseAreaNameOne=data.data[0].groupname;
+					        		loseAreaOne=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+					        		loseA=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+					        	}else if(loseAreaOne!==undefined&&loseAreaTwo==undefined){
+					        		loseAreaNameTwo=data.data[0].groupname;
+					        		loseAreaTwo=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+					        		loseB=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+					        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree==undefined){
+					        		loseAreaNameThree=data.data[0].groupname;
+					        		loseAreaThree=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+					        		loseC=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+					        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree!==undefined&&loseAreaFour==undefined){
+					        		loseAreaNameFour=data.data[0].groupname;
+					        		loseAreaFour=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+					        		loseD=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+					        	}else{
+					        		alert("请先重置清除数据");
+					        	}
+							},
+					        complete : function(XMLHttpRequest,status) { 
+							　　　if(status=='timeout') {
+							　　　　　 console.log('超时');
+							　　　}
+							},
+						});
+					}
+					dispatch(actions.setVars('loseA', loseA));
+					dispatch(actions.setVars('loseB', loseB));
+					dispatch(actions.setVars('loseC', loseC));
+					dispatch(actions.setVars('loseD', loseD));
+					dispatch(actions.setVars('loseAreaOne', loseAreaOne));
+					dispatch(actions.setVars('loseAreaTwo', loseAreaTwo));
+					dispatch(actions.setVars('loseAreaThree', loseAreaThree));
+					dispatch(actions.setVars('loseAreaFour', loseAreaFour));
+					dispatch(actions.setVars('loseAreaNameOne', loseAreaNameOne));
+					dispatch(actions.setVars('loseAreaNameTwo', loseAreaNameTwo));
+					dispatch(actions.setVars('loseAreaNameThree', loseAreaNameThree));
+					dispatch(actions.setVars('loseAreaNameFour', loseAreaNameFour));
+	    		}else{
+	    			alert("请选择同一个指标项")
+	    		}
+	    	}else{
+	    		dispatch(actions.setVars('storage', checkedLose));
+	    		var sTime = $('#startTime').val();
+		        //结束时间时间
+		        var eTime = $('#endTime').val();
+				if(sTime == '' || eTime == '') {
+		            alert('请选择开始或者结束时间');
+		            return false;
+		        };
+		        var A=$('select').val();
+				for(var i in selectName){
+					if(selectName[i]==A){
+						selectId=selectId[i];
+					}
+				};
+				if(selectId<1000000){
+					$.ajax({
+		    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//Pie表
+				        type: 'post',
+				        async:false,
+				        dataType: 'json',
+				        data:{'flag':checkedLose,'startTime':sTime,'endTime':eTime,'wfid':selectId,}, 
+				        success:function (data) {
+				        	if(loseAreaOne==undefined){
+				        		loseAreaNameOne=data.data[0].wfname;
+				        		loseAreaOne=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+				        		loseA=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+				        	}else if(loseAreaOne!==undefined&&loseAreaTwo==undefined){
+				        		loseAreaNameTwo=data.data[0].wfname;
+				        		loseAreaTwo=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+				        		loseB=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+				        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree==undefined){
+				        		loseAreaNameThree=data.data[0].wfname;
+				        		loseAreaThree=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+				        		loseC=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+				        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree!==undefined&&loseAreaFour==undefined){
+				        		loseAreaNameFour=data.data[0].wfname;
+				        		loseAreaFour=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+				        		loseD=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+				        	}else{
+				        		alert("请先重置清除数据");
+				        	}
+						},
+				        complete : function(XMLHttpRequest,status) { 
+						　　　if(status=='timeout') {
+						　　　　　 console.log('超时');
+						　　　}
+						},
+					});
+				}else{
+					$.ajax({
+		    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//Pie表
+				        type: 'post',
+				        async:false,
+				        dataType: 'json',
+				        data:{'flag':checkedLose,'startTime':sTime,'endTime':eTime,'groupid':selectId,}, 
+				        success:function (data) {
+				        	if(loseAreaOne==undefined){
+				        		loseAreaNameOne=data.data[0].groupname;
+				        		loseAreaOne=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+				        		loseA=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+				        	}else if(loseAreaOne!==undefined&&loseAreaTwo==undefined){
+				        		loseAreaNameTwo=data.data[0].groupname;
+				        		loseAreaTwo=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+				        		loseB=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+				        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree==undefined){
+				        		loseAreaNameThree=data.data[0].groupname;
+				        		loseAreaThree=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+				        		loseC=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+				        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree!==undefined&&loseAreaFour==undefined){
+				        		loseAreaNameFour=data.data[0].groupname;
+				        		loseAreaFour=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
+				        		loseD=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
+				        	}else{
+				        		alert("请先重置清除数据");
+				        	}
+						},
+				        complete : function(XMLHttpRequest,status) { 
+						　　　if(status=='timeout') {
+						　　　　　 console.log('超时');
+						　　　}
+						},
+					});
 				}
-			};
-			if(selectId<1000000){
-				$.ajax({
-	    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//Pie表
-			        type: 'post',
-			        async:false,
-			        dataType: 'json',
-			        data:{'flag':checkedLose,'startTime':sTime,'endTime':eTime,'wfid':selectId,}, 
-			        success:function (data) {
-			        	if(loseAreaOne==undefined){
-			        		loseAreaNameOne=data.data[0].wfname;
-			        		loseAreaOne=[['故障损失',data.data[0].faultloss],['维护损失',data.data[0].maintainloss],['限功率损失',data.data[0].limitloss],['非设备原因损失',data.data[0].nodevreasonloss]];
-			        		loseA=[data.data[0].faultloss,data.data[0].maintainloss,data.data[0].limitloss,data.data[0].nodevreasonloss];
-			        	}else if(loseAreaOne!==undefined&&loseAreaTwo==undefined){
-			        		loseAreaNameTwo=data.data[0].wfname;
-			        		loseAreaTwo=[['故障损失',data.data[0].faultloss],['维护损失',data.data[0].maintainloss],['限功率损失',data.data[0].limitloss],['非设备原因损失',data.data[0].nodevreasonloss]];
-			        		loseB=[data.data[0].faultloss,data.data[0].maintainloss,data.data[0].limitloss,data.data[0].nodevreasonloss];
-			        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree==undefined){
-			        		loseAreaNameThree=data.data[0].wfname;
-			        		loseAreaThree=[['故障损失',data.data[0].faultloss],['维护损失',data.data[0].maintainloss],['限功率损失',data.data[0].limitloss],['非设备原因损失',data.data[0].nodevreasonloss]];
-			        		loseC=[data.data[0].faultloss,data.data[0].maintainloss,data.data[0].limitloss,data.data[0].nodevreasonloss];
-			        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree!==undefined&&loseAreaFour==undefined){
-			        		loseAreaNameFour=data.data[0].wfname;
-			        		loseAreaFour=[['故障损失',data.data[0].faultloss],['维护损失',data.data[0].maintainloss],['限功率损失',data.data[0].limitloss],['非设备原因损失',data.data[0].nodevreasonloss]];
-			        		loseD=[data.data[0].faultloss,data.data[0].maintainloss,data.data[0].limitloss,data.data[0].nodevreasonloss];
-			        	}else{
-			        		alert("请先清除数据");
-			        	}
-					},
-			        complete : function(XMLHttpRequest,status) { 
-					　　　if(status=='timeout') {
-					　　　　　 console.log('超时');
-					　　　}
-					},
-				});
-			}else{
-				$.ajax({
-	    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//Pie表
-			        type: 'post',
-			        async:false,
-			        dataType: 'json',
-			        data:{'flag':checkedLose,'startTime':sTime,'endTime':eTime,'groupid':selectId,}, 
-			        success:function (data) {
-			        	if(loseAreaOne==undefined){
-			        		loseAreaNameOne=data.data[0].groupname;
-			        		loseAreaOne=[['故障损失',data.data[0].faultloss],['维护损失',data.data[0].maintainloss],['限功率损失',data.data[0].limitloss],['非设备原因损失',data.data[0].nodevreasonloss]];
-			        		loseA=[data.data[0].faultloss,data.data[0].maintainloss,data.data[0].limitloss,data.data[0].nodevreasonloss];
-			        	}else if(loseAreaOne!==undefined&&loseAreaTwo==undefined){
-			        		loseAreaNameTwo=data.data[0].groupname;
-			        		loseAreaTwo=[['故障损失',data.data[0].faultloss],['维护损失',data.data[0].maintainloss],['限功率损失',data.data[0].limitloss],['非设备原因损失',data.data[0].nodevreasonloss]];
-			        		loseB=[data.data[0].faultloss,data.data[0].maintainloss,data.data[0].limitloss,data.data[0].nodevreasonloss];
-			        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree==undefined){
-			        		loseAreaNameThree=data.data[0].groupname;
-			        		loseAreaThree=[['故障损失',data.data[0].faultloss],['维护损失',data.data[0].maintainloss],['限功率损失',data.data[0].limitloss],['非设备原因损失',data.data[0].nodevreasonloss]];
-			        		loseC=[data.data[0].faultloss,data.data[0].maintainloss,data.data[0].limitloss,data.data[0].nodevreasonloss];
-			        	}else if(loseAreaOne!==undefined&&loseAreaTwo!==undefined&&loseAreaThree!==undefined&&loseAreaFour==undefined){
-			        		loseAreaNameFour=data.data[0].groupname;
-			        		loseAreaFour=[['故障损失',data.data[0].faultloss],['维护损失',data.data[0].maintainloss],['限功率损失',data.data[0].limitloss],['非设备原因损失',data.data[0].nodevreasonloss]];
-			        		loseD=[data.data[0].faultloss,data.data[0].maintainloss,data.data[0].limitloss,data.data[0].nodevreasonloss];
-			        	}else{
-			        		alert("请先清除数据");
-			        	}
-					},
-			        complete : function(XMLHttpRequest,status) { 
-					　　　if(status=='timeout') {
-					　　　　　 console.log('超时');
-					　　　}
-					},
-				});
-			}
-			dispatch(actions.setVars('loseA', loseA));
-			dispatch(actions.setVars('loseB', loseB));
-			dispatch(actions.setVars('loseC', loseC));
-			dispatch(actions.setVars('loseD', loseD));
-			dispatch(actions.setVars('loseAreaOne', loseAreaOne));
-			dispatch(actions.setVars('loseAreaTwo', loseAreaTwo));
-			dispatch(actions.setVars('loseAreaThree', loseAreaThree));
-			dispatch(actions.setVars('loseAreaFour', loseAreaFour));
-			dispatch(actions.setVars('loseAreaNameOne', loseAreaNameOne));
-			dispatch(actions.setVars('loseAreaNameTwo', loseAreaNameTwo));
-			dispatch(actions.setVars('loseAreaNameThree', loseAreaNameThree));
-			dispatch(actions.setVars('loseAreaNameFour', loseAreaNameFour));
+				dispatch(actions.setVars('loseA', loseA));
+				dispatch(actions.setVars('loseB', loseB));
+				dispatch(actions.setVars('loseC', loseC));
+				dispatch(actions.setVars('loseD', loseD));
+				dispatch(actions.setVars('loseAreaOne', loseAreaOne));
+				dispatch(actions.setVars('loseAreaTwo', loseAreaTwo));
+				dispatch(actions.setVars('loseAreaThree', loseAreaThree));
+				dispatch(actions.setVars('loseAreaFour', loseAreaFour));
+				dispatch(actions.setVars('loseAreaNameOne', loseAreaNameOne));
+				dispatch(actions.setVars('loseAreaNameTwo', loseAreaNameTwo));
+				dispatch(actions.setVars('loseAreaNameThree', loseAreaNameThree));
+				dispatch(actions.setVars('loseAreaNameFour', loseAreaNameFour));
+	    	}
 	    }
     };
 };

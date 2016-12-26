@@ -5,6 +5,7 @@ import save from '../../../img/comp/save.png';
 import del from '../../../img/icon/tabDel.png';
 import add from '../../../img/icon/tabAdd.png';
 var {getState} = require('../../../../../../redux/store');
+var $ = require('jquery');
 import _ from 'lodash';
 import mod from '../../../../../../../config/Model';
 var actions = require('redux/actions');
@@ -14,7 +15,7 @@ let arr3=[];
 let years=[];
 var pageSize=11;//设置每页的条目数量
 let page=1;//设置初始页码
-let soam='http://10.9.0.6:9080/soam';//设置接口
+let soam='http://10.9.100.75:8080/soam';//设置接口
 let thDate=new Date();
 let thYear=thDate.getFullYear();//定义变量，路径
 for(let i=0;i<=30;i++){
@@ -25,22 +26,14 @@ for(let i=0;i<=30;i++){
         arr3.push(ssg2[x].name);
     }}());
 arr3.splice(-2,2);//清理数据格式
-let arr1=[
-    // 'name',
-    'name','rectime','operationtime','operator','planelec'];//设置每列的属性
+let arr1=['wfname','rectime','operationtime','operator','planelec'];//设置每列的属性
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
         this.props.init(page);
     },
-    buttonAction (){
-        // 获取select 选择的内容
-        var tContent = this.refs.textContent5.value;
-        var tContent1 = this.refs.textContent6.value;
-        alert(tContent+tContent1);
-    },
     render() {
-        let {theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table, changeTableItem1} = this.props;
+        let {wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table, changeTableItem1} = this.props;
         let newData={};
         let opti=[];
         let num=0;
@@ -55,7 +48,7 @@ let Component = React.createClass({
                     <div className={styles.inquireBox}>
                         <div className={styles.seleBox}>
                             <span>年度</span>
-                            <select ref='textContent5'>
+                            <select id='textContent5'>
                                 {years.map((value, key)=> {
                                     return (
                                         <option value={value} key={key}>{value}</option>
@@ -66,17 +59,17 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.seleBox}>
                             <span>场站</span>
-                            <select ref='textContent6'>
-                                {arr3.map((value, key)=> {
+                            <select id='textContent6'>
+                                {wtidAll.data.map((value, key)=> {
                                     return (
-                                        <option className={styles.opt} value={value} key={key}>{value}</option>
+                                        <option className={styles.opt} value={value.wfid} key={key}>{value.wfname}</option>
                                     )
                                 })
                                 }
                             </select>{/*map遍历年度*/}
                         </div>
                         <div className={styles.inputBox}>
-                            <button onClick={this.buttonAction}>查询</button>
+                            <button onClick={(e)=>{buttonAction(e.target)}}>查询</button>
                         </div>
                         <div className={styles.btnBox}>
                             <div>单位：kWh</div>
@@ -165,8 +158,12 @@ let Component = React.createClass({
                                                                     <select className={styles.tableContentItem}
                                                                             style={{width:arr[keyC]+"%"}} key={keyC}
                                                                             onChange={(e)=>changeTableItem1(e.target.value,newData,key,keyC)}>
-                                                                        <option value="422803">422803</option>
-                                                                        <option value="422804">422804</option>
+                                                                        {wtidAll.data.map((value, key)=> {
+                                                                            return (
+                                                                                <option className={styles.opt} value={value.wfid} key={key}>{value.wfname}</option>
+                                                                            )
+                                                                        })
+                                                                        }
                                                                     </select>
                                                                 )
                                                             }else if(keyC<3){
@@ -217,6 +214,9 @@ const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
         page: state.vars.page1,
+        wtidAll: state.objs.wtidAll,
+        wfids:state.vars.wfids,
+        years:state.vars.years
     }
 };
 
@@ -227,7 +227,7 @@ const mapDispatchToProps = (dispatch) => {
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+1,
+                data:'pageSize='+pageSize+'&&nowPage='+1+'&&year=&&wfids=',
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data);
@@ -244,6 +244,25 @@ const mapDispatchToProps = (dispatch) => {
                 success:function (data) {
                     console.log(data);
                     dispatch(actions.setObjs('wtidAll', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        buttonAction (sit){
+            // 获取select 选择的内容
+            var tContent = $('#textContent5')[0].value;
+            var tContent1 = $('#textContent6')[0].value;
+            alert(tContent+tContent1);
+            $.ajax({
+                url: soam+'/ELEC/getWfelec',
+                type: 'post',
+                data:'pageSize='+pageSize+'&&nowPage='+1+'&&year='+tContent+'&&wfids='+tContent1,
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContent', data));
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -342,7 +361,7 @@ const mapDispatchToProps = (dispatch) => {
             tableV.data.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
         },
-        lastPage:(page)=>{
+        lastPage:(page,years,wfids)=>{
             page>1 ? page--:page;
             dispatch(actions.setVars('page1', page));
             $.ajax({

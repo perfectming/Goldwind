@@ -180,7 +180,7 @@ const mapDispatchToProps = (dispatch) => {
                     profit = (data.data.incomes/10000).toFixed(1)/1;
                     amounts =(data.data.amounts/10000).toFixed(1)/1;
                     rate = data.data.rate;
-
+                    dispatch(actions.setVars('navhide', true));
                 },
                 complete : function(XMLHttpRequest,status){
                     $.ajax({
@@ -193,8 +193,8 @@ const mapDispatchToProps = (dispatch) => {
                             month2=[],cost=[],incomes=[];
                             for(var i in yearPro){
                                 month2.push(yearPro[i].month+"月");
-                                cost.push(yearPro[i].costs);
-                                incomes.push(yearPro[i].earning);
+                                cost.push((yearPro[i].costs).toFixed(1)/1);
+                                incomes.push((yearPro[i].earning).toFixed(1)/1);
                             }
                         },
                         complete : function(XMLHttpRequest,status){
@@ -225,10 +225,10 @@ const mapDispatchToProps = (dispatch) => {
                                             arrPlan=[],month1=[],arrAct=[];
                                             for(var i=0;i<data.data.wtKongMonthsElec.length;i++){
                                                 month1.push(data.data.wtKongMonthsElec[i].month+"月");
-                                                arrAct.push(data.data.wtKongMonthsElec[i].poweract);
+                                                arrAct.push((data.data.wtKongMonthsElec[i].poweract).toFixed(1)/1);
                                             }
                                             for(var i in data.data.wtKongMonthsPlanElec){
-                                                arrPlan.push(data.data.wtKongMonthsPlanElec[i]);
+                                                arrPlan.push((data.data.wtKongMonthsPlanElec[i]).toFixed(1)/1);
                                             }
                                         },
                                         complete : function(XMLHttpRequest,status){
@@ -284,48 +284,37 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('flagPba1',!flagPba1 ));
         },
         changepageProfitS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'profits'));
+            dispatch(actions.setVars('showPage', 'profits'));
         },
         changepageHealthyT:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthy'));
+            dispatch(actions.setVars('showPage', 'healthy'));
         },
         changepageHealthyS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthy_one'));
+            dispatch(actions.setVars('showPage', 'healthy_one'));
         },
         changepageTBAT:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'profitsss'));
+            dispatch(actions.setVars('showPage', 'profitsss'));
         },
         changepageTBAS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthypbas'));
+            dispatch(actions.setVars('showPage', 'healthypbas'));
         },
         changepagePBAT:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'profitss'));
+            dispatch(actions.setVars('showPage', 'profitss'));
         },
         changepagePBAS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthypba'));
+            dispatch(actions.setVars('showPage', 'healthypba'));
         },
         changepageEleT:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthygens'));
+            dispatch(actions.setVars('showPage', 'healthygens'));
         },
         changepageEleS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'healthygen'));
+            dispatch(actions.setVars('showPage', 'healthygen'));
         },
         changepageProT:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'profitime'));
+            dispatch(actions.setVars('showPage', 'profitime'));
         },
         changepageProS:()=>{
-            dispatch(actions.setVars('showPage', 'cs'));
-            dispatch(actions.setVars('pagename', 'profits'));
+            dispatch(actions.setVars('showPage', 'profits'));
         },
 
     };

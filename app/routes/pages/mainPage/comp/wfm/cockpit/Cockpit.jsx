@@ -159,27 +159,34 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         changedate:()=>{
-          
+
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
-            function setData(rdata){
-                dispatch(actions.setVars('zhzb', rdata));
+            function setData(rdata1){
+                dispatch(actions.setVars('zhzb', rdata1));
                 TY.getRtData("DataOverview", 8888800, setData1)
-                function setData1(rdata){
-                    dispatch(actions.setVars('bbs', rdata));
+                function setData1(rdata2){
+                    dispatch(actions.setVars('bbs', rdata2));
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
-                    function setDatas(rdata){
-                        dispatch(actions.setVars('fModel', rdata));
+                    function setDatas(rdata3){
+                        dispatch(actions.setVars('fModel', rdata3));
                         TY.getRtData("DevicesMatrix", 8888800, setfData)
-                        function setfData(rdata){
-                        dispatch(actions.setVars('fData', rdata));
-                            setTimeout(function () {
-                                dispatch(actions.setVars('bloo', true));
-                            },500)
+                        function setfData(rdata4){
+                            if(rdata4.ModelData[8888801]==undefined){
+
+                                TY.getRtData("DevicesMatrix", 8888800, setfData)
+                            }else{
+
+                                dispatch(actions.setVars('fData', rdata4));
+                                setTimeout(function () {
+                                    dispatch(actions.setVars('bloo', true));
+                                },500)
+                            }
+
                         }
                     }
                 }
             }
-      
+
         },
         init: () => {
                 dispatch(actions.setVars('putpage', false));
