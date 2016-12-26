@@ -227,8 +227,8 @@ const mapDispatchToProps = (dispatch) => {
 				        	areaMonth=[],areaProfit=[],areaCost=[];
 				        	for(var i in data.data){
 				        		areaMonth.push(data.data[i].month+"月");
-				        		areaProfit.push(data.data[i].incomes);
-				        		areaCost.push(data.data[i].costs);
+				        		areaProfit.push((data.data[i].incomes).toFixed(1)/1);
+				        		areaCost.push((data.data[i].costs).toFixed(1)/1);
 				        	};
 				        	dispatch(actions.setVars('areaMonth',areaMonth ));
 				        	dispatch(actions.setVars('areaProfit',areaProfit ));
@@ -250,10 +250,10 @@ const mapDispatchToProps = (dispatch) => {
 						        	dayPlanElec=data.data.dayPlanElec;
 						        	month=[],elecPlan=[],elecAct=[];
 						        	for(var i in data.data.twAreaMonthElec){
-						        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
+						        		elecAct.push((data.data.twAreaMonthElec[i].poweract).toFixed(1)/1);
 						        	};
 						        	for(var i in data.data.twAreaMonthPlanElec){
-						        		elecPlan.push(data.data.twAreaMonthPlanElec[i]);
+						        		elecPlan.push((data.data.twAreaMonthPlanElec[i]).toFixed(1)/1);
 						        		month.push(i+"月");
 						        	};
 						        	dispatch(actions.setVars('yearElec',yearElec ));
@@ -352,8 +352,8 @@ const mapDispatchToProps = (dispatch) => {
 		        	areaMonth=[],areaProfit=[],areaCost=[];
 		        	for(var i in data.data){
 		        		areaMonth.push(data.data[i].month+"月");
-		        		areaProfit.push(data.data[i].incomes);
-		        		areaCost.push(data.data[i].costs);
+		        		areaProfit.push((data.data[i].incomes).toFixed(1)/1);
+		        		areaCost.push((data.data[i].costs).toFixed(1)/1);
 		        	}
 		        	dispatch(actions.setVars('clickAreaId',clickAreaId ));
 		        	dispatch(actions.setVars('areaMonth',areaMonth ));
@@ -388,11 +388,11 @@ const mapDispatchToProps = (dispatch) => {
 						        	dayPlanElec=data.data.dayPlanElec;
 						        	month=[],elecPlan=[],elecAct=[];
 						        	for(var i in data.data.twAreaMonthElec){
-						        		elecAct.push(data.data.twAreaMonthElec[i].poweract);
+						        		elecAct.push((data.data.twAreaMonthElec[i].poweract).toFixed(1)/1);
 						        		month.push(data.data.twAreaMonthElec[i].month+"月");
 						        	}
 						        	for(var i in data.data.twAreaMonthPlanElec){
-						        		elecPlan.push(data.data.twAreaMonthPlanElec[i]);
+						        		elecPlan.push((data.data.twAreaMonthPlanElec[i]).toFixed(1)/1);
 						        	}
 						        	dispatch(actions.setVars('yearElec',yearElec ));
 						        	dispatch(actions.setVars('monthElec',monthElec ));

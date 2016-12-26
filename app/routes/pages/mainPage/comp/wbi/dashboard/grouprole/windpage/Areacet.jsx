@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import Windcet from './Windcet.jsx';
-import icono from '../../../../../img/comp/ele.png';
+import Windcett from './Windcett.jsx';
+import icono from '../../../../../img/comp/wind_logo.png';
 var actions = require('redux/actions');
 var $=require('jquery');
 let data=require('./../group/Profit-data3');
@@ -28,47 +29,46 @@ let Component = React.createClass({
         let areaPlanDayT=data.areaPlanDayT;
         let text=data.textT;
 
-        let{ipUrl,xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaPlan}=this.props;
+        let{wftpowerplan,wftmonth,wftpoweract,ipUrl,xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,more,close,backtop,befor_pagee='windpage',befor_pagee2,areaPlan}=this.props;
           return (
            <div className={styles.box}>
              <div className={styles.boxcover} id='boxcover'></div>
-             <div className={styles.more} id="sss">
-                <div className={styles.moretitle}>
-                <img src={icono}/>
-                <p>{[actbt+1]+'月'+xxdwfNa+'每日发电量'}</p>
-                <div onClick={()=>close()}>x
-                </div>
-                </div>
-                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} width={1750} height={500}></Windcet>
-
-                </div>
-                 <ul className={styles.monthbox}>
-                    {
-                        data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId,ipUrl)} key={key}>{value.name}</li>)
-                        })
-                    }
-              <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
-              
-
-                </ul>
-            <div className={styles.paddingtop}>
-                <div className={`${styles.bigbox} ${styles.shadow}`}>
+              <div className={styles.padding}>
+              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
+                   <div className={styles.paddingtop}>
+                <div className={`${styles.biggbox} ${styles.shadow}`}>
                     
                        
                            
-                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} height={800} text={[actbt+1]+'月'+xxdwfNa+'每日发电量'}></Windcet>
+                                <Windcett areaPlan={wftmonth} xxdwfId={xxdwfId} input_url={ipUrl} areaPlanDay={wftpowerplan} areaPlanDayT={wftpoweract} height={410} text={xxdwfNa+'每月发电量'}></Windcett>
                           
                        
                            
                            
                     
-                <div className={styles.imgq}>
-                    <img src={icono}/>
-                </div>
+                                <div className={styles.imgq}>
+                                    <img src={icono}/>
+                                </div>
           
                 </div>  
-                </div> 
+            </div> 
+            <div className={styles.paddingtop}>
+                <div className={`${styles.biggbox} ${styles.shadow}`}>
+                    
+                       
+                           
+                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} height={410} text={[actbt+1]+'月'+xxdwfNa+'每日发电量'}></Windcet>
+                          
+                       
+                           
+                           
+                    
+                                <div className={styles.imgq}>
+                                    <img src={icono}/>
+                                </div>
+          
+                </div>  
+            </div> 
            </div>
            
         
@@ -90,6 +90,10 @@ const mapStateToProps = (state) => {
          btn:state.vars.btnn,
          areaPlan:state.vars.areaNameNP,
          ipUrl:state.vars.ipUrl,
+         wftmonth:state.vars.wftmonth1,
+         wftpowerplan:state.vars.wftpowerplan1,
+         wftpoweract:state.vars.wftpoweract1,
+         
 
     }
 };
@@ -102,6 +106,42 @@ const mapDispatchToProps = (dispatch) => {
             let arr3=[];
             let date=new Date();
             let month= date.getMonth();
+            let wftmonth=[];
+            let wftpoweract=[];
+            let wftpowerplan=[];
+             // 发电量12个月的
+           $.ajax({
+                            url: 'http://'+input_url+'/wbi/ELEC/getWfieldElec',
+                            type: 'post',
+                            async:true,
+                            data:{'wfid':xxdwfId},
+                            dataType: 'json',//here
+                            success:function (data) {
+                               
+                               
+                                for(let i in data.data.wfieldsMonthsElec)
+                                {
+                                let month=data.data.wfieldsMonthsElec[i].month;
+                                wftmonth.push(month+'月');
+                                let poweract=data.data.wfieldsMonthsElec[i].poweract;
+                                wftpoweract.push(poweract);
+                                
+
+                            }
+                            for( let j in data.data.wfieldsMonthsPlanElec)
+                            {
+                               
+                                wftpowerplan.push(data.data.wfieldsMonthsPlanElec[j]);
+                            }
+                         
+                            dispatch(actions.setVars('wftmonth1',wftmonth));
+                             dispatch(actions.setVars('wftpowerplan1',wftpowerplan));
+                              dispatch(actions.setVars('wftpoweract1',wftpoweract));
+                            },
+                            error:function(){
+
+                            },
+                         });
             $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/ELEC/getWtTimeAreaElec',  
@@ -119,9 +159,9 @@ const mapDispatchToProps = (dispatch) => {
              for(let i=0;i<dataa.length;i++){
                  let xDay=data.data[i].day+'日';
                  arr1.push(xDay);
-                 let yPowerPlan=data.data[i].powerplan;
+                 let yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
                  arr2.push(yPowerPlan);
-                 let yPowerAct=data.data[i].poweract;
+                 let yPowerAct=Number(data.data[i].poweract.toFixed(1));
                  arr3.push(yPowerAct);
              }
    
@@ -129,7 +169,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('areaNameNP',arr1));
              dispatch(actions.setVars('areaRecordCostNP',arr2));
              dispatch(actions.setVars('areaRecordProfitNP',arr3));
-            dispatch(actions.setVars('actbtt',10));
+            dispatch(actions.setVars('actbtt',month-1));
              },
              error:function(){
                

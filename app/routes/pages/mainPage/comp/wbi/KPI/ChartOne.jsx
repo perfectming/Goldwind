@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {text,lose,}=this.props;
+    	let {text,lose,name}=this.props;
         let configPie = {
             chart: {
                 height:360,
@@ -63,7 +63,6 @@ let Component = React.createClass({
 	        },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 0, //x轴刻度往下移动20px
@@ -75,9 +74,6 @@ let Component = React.createClass({
                 
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
                 labels: {
                 	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
@@ -89,7 +85,7 @@ let Component = React.createClass({
             },
             series: [{
             type: 'pie',
-            name: '集团区域1',
+            name: name,
             data: lose,
         }]
         };

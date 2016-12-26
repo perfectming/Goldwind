@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-dataq');
+let data = require('./../group/Profit-data3');
 
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let{areaRecordCostT,areaRecordProfitO,rate,text,areaPlan,areaPlanDay, areaPlanDayT,width,height,areaNameX,areaRecordCost}=this.props;
+        let{changedata3,xxdwfId,input_url,text,areaPlan,areaPlanDay, areaPlanDayT,width,height}=this.props;
      
         let configPie = {
             chart: {
@@ -40,7 +40,6 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 y:40,
-                x:-75,
                 align:"right",
                 verticalAlign: "top",
                  itemHoverStyle:{
@@ -55,7 +54,7 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-               valueSuffix:'元'
+               valueSuffix:'kWh'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -73,7 +72,42 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                            
+                            let b=e.point.index;
+                             let arr1=[];
+            let arr2=[];
+            let arr3=[];
+                              $.ajax({
+             type:'post',
+             url:'http://'+input_url+'/wbi/ELEC/getWtTimeAreaElec',  
+             async:false,
+            data:{
+             'month':b+1,
+             'wfid':xxdwfId,
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+              console.log(b+1)
+              console.log(xxdwfId)
+             // 获取x轴的值内蒙达茂天润风电场
+             let dataa=data.data;
+             for(let i=0;i<dataa.length;i++){
+                 let xDay=data.data[i].day+'日';
+                 arr1.push(xDay);
+                 let yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
+                 arr2.push(yPowerPlan);
+                 let yPowerAct=Number(data.data[i].poweract.toFixed(1));
+                 arr3.push(yPowerAct);
+             }
+   
+            
+          
+             },
+             error:function(){
+               
+             },
+           });
+                                changedata3(b,arr1,arr2,arr3);
                         }
                     }
                 }
@@ -89,88 +123,49 @@ let Component = React.createClass({
                         color:'#fff'  //字体
                     }
                 },
-                categories:areaNameX,
+                categories:areaPlan,
             },
-              yAxis: [{
-            labels: {
-                format: '',
-                style: {
-                    color: '#fff',
-                    fontSize:'14px'
-                }
-            }, gridLineDashStyle: 'Solid',
+            yAxis:{
+                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
-
-            title: {
-                text:'（元）',
-                align:'high',
-                rotation:'0',
-                y: -20,
-                x:45,
-                style:{
-                    fontSize:'14px',
-                    color:'#fff'
-                }
-            }
-        }, {
-             labels: {
-                format: '',
-                style: {
-                    color: '#fff',
-                    fontSize:'14px'
-                }
+                 title: {
+                text:'(kWh)',
+                    align:'high',
+                    rotation:'0',
+                    y: -10,
+                    x: 50,
+                    style:{
+                        color:'#fff',
+                        fontSize:'14px',
+                    }
             },
-             gridLineDashStyle: 'Solid',
-            gridLineColor: '#6d6a6c',
-           tickInterval: 20,
-            minRange: 20,
-                
-            title: {
-                text: '(%)',
-                align:'high',
-                rotation:'0',
-                y: -15,
-                x: -45,
-                style:{
-                    color: '#fff',
-                    fontSize:'14px'
-                }
-
+                labels: {
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                       color:"#fff",
+                        fontSize:'14px'  //字体
+                    }
+                },
             },
-            
-            opposite: true
-        }],
             //几条数据
             series: [{
-                name: '收入',
+                name: '计划发电量',
                 type: 'column',
-                data: areaRecordCostT,
+                data: areaPlanDay,
                 color:'#33BAC0',
                 borderColor:'#5B9BD5',
-              maxPointWidth: 30,
-                borderRadius: 3
+               maxPointWidth: 20,
+                borderRadius: 4
             },
             {
-            	name: '成本',
+            	name: '实际发电量',
                 type: 'column',
-                data:areaRecordProfitO,
+                data:areaPlanDayT,
                color:'#70c080',
-                maxPointWidth: 30,
-               
-                borderRadius: 3
+                maxPointWidth: 20,
+                borderRadius: 4
             },
-            {
-                    name:"收益率",
-                    type:'line',
-                    color:'blue',
-                    data:rate,
-                    yAxis:1,
-                    tickInterval: 1,
-                     tooltip: {
-               valueSuffix:'%'
-            },
-                }
             ]
         };
         return (
@@ -188,6 +183,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
+        changedata3:(b,arr1,arr2,arr3) =>{
+             dispatch(actions.setVars('areaNameNP',arr1));
+             dispatch(actions.setVars('areaRecordCostNP',arr2));
+             dispatch(actions.setVars('areaRecordProfitNP',arr3));
+            dispatch(actions.setVars('actbtt',b));
+        }
     };
 };
 

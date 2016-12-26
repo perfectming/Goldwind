@@ -17,6 +17,49 @@ let Component = React.createClass({
        let {title,arr, changetab, act=0,leftd,fc_info='150801'} = this.props;
        let date=leftd.ModelData;
        
+       if(!date['150801']){
+        return (
+          <div className={styles.navbox}>
+                <div className={styles.navleft}>
+                   {
+                    title.map((value,key)=>{
+                        return(
+                            <span className={ act===key? styles.active : styles.actspan } key={key} onClick={()=>changetab(value.rpage,key)}>{value.tabname}</span>
+                            )
+
+                    })
+
+                   }
+                    <div className={`${styles.numtai} ${styles.nummor}`}><div className={styles.numname}>型号：</div><b>--</b><a>台</a></div>
+                    <div className={styles.numtai}><div className={styles.numname}>总计</div><b>--</b><a>台</a></div>
+                    
+
+                </div>
+                <div className={styles.navright}>
+                    <div className={styles.userinfo}>
+                        <span>
+                            <p>手机</p>
+                            <p className={styles.username}>---</p>
+                        </span>
+                    </div>
+                    <div className={styles.userinfo}>
+                         <span>
+                            <p>电话</p>
+                            <p className={styles.username}>---</p>
+                        </span>
+                    </div>
+                    <div className={`${styles.userinfo} ${styles.usericon}`}>
+                        <span className={styles.usmar}>
+                            <p>场长</p>
+                            <p className={styles.username}>---</p>
+                        </span>
+                    </div>
+                    
+                </div>
+            </div>
+        );
+
+       }else{
         return (
           <div className={styles.navbox}>
                 <div className={styles.navleft}>
@@ -57,6 +100,11 @@ let Component = React.createClass({
                 </div>
             </div>
         );
+
+
+       }
+       
+        
     }
 });
 
