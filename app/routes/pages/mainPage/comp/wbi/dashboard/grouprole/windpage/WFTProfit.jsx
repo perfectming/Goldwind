@@ -2,8 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import WFTprofitchart from './WFTprofitchart.jsx';
-import icono from './img/wind_logo.png';
-import Month from './Month';
+import icono from '../../../../../img/comp/wind_logo.png';
 var $=require('jquery');
 var actions = require('redux/actions');
 let data=require('./Profit-dataq')

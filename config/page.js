@@ -213,10 +213,10 @@ module.exports = {
                 page:[
                      {
                         name:'业务分析3-1',
-                        page:'profitime',
+                        page:'',
                     },{
                         name:'业务分析3-2',
-                        page:'wfsprofit',
+                        page:'',
                     },{
                         name:'业务分析3-3',
                         page:'',

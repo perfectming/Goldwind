@@ -8,7 +8,7 @@ var actions = require('redux/actions');
 let data=require('./Profit-data3');
 let month=data.month;
 let button=data.button;
-let input_url="10.9.100.38";
+
 let Component = React.createClass({
     componentWillMount() {
         let{ipUrl}=this.props;
