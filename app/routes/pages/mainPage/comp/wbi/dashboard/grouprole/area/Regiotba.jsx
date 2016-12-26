@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Hly_pbaone from './Hly_pbaone.jsx';
+import Hly_pbath from './Hly_pbath.jsx';
 import Hly_pbatwo from './Hly_pbatwo.jsx';
 
 var actions = require('redux/actions');
@@ -22,66 +22,26 @@ let Component = React.createClass({
 
 
     render() {
-        let {ip="10.68.100.32",ipUrl,befor_pages='area',wc1,wfid,wc2,bt0=0,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {ip="10.68.100.32",ipUrl,befor_pages='area',wc1,width0,wfid,wc2,bt0=0,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
 
         let text0=data.data.line_date;
 
+
+
+
         return (
 
 
 
 
-            <div className={styles.box}>
-
-                <div className={styles.light} id="light"> </div>
-
-                <div className={`${styles.boxhidden} ${styles.box_shadow}`}   id="boxhidden">
-                    <div className={styles.hidden_top}>
-                        <div className={styles.logo2}></div>
-                        <div className={styles.logo30}>
-                            {mon+w0+"各风机PBA"}
-                        </div>
-                        <span onClick={()=>hideit(power1, wrong10, wrong11, wrong12, wrong13, pba1,barLotime1)}>×</span>
-                    </div>
-                    <div className={styles.hidden_bottom}>
-                        <Hly_pbatwo height={450}
-                                    widths={4500}
-                                    text={''}
-                                    barRotimes={barLotime1}
-                                    power1={power1}
-                                    wrong10={wrong10}
-                                    wrong11={wrong11}
-                                    wrong12={wrong12}
-                                    wrong13={wrong13}
-                                    pba1={pba1}
-                        ></Hly_pbatwo>
-
-                    </div>
-
-                </div>
-
-
-                <div className={styles.onmonth}>
-                    {
-                        data.data.yearelectric[0].wind.map((value, key) => {
-                            return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl)}>
-                                    {value.name}
-                                </div>
-                            )
-                        })
-                    }
-                    <div className={styles.return} onClick={()=>returnit(befor_pages)}>返回</div>
-                </div>
-
-
-                <div className={`${styles.tbox}`}>
+            <div className = {styles.box}>
+                <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
+                <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-
-                        <Hly_pbaone height={400} text={text0[3]+'区域'+'各风场PBA'}
+                        <Hly_pbath height={400} text={'巴盟每月PBA'}
                                     barRotime={barLotime2}
                                     power2={power2}
                                     wrong20={wrong20}
@@ -89,7 +49,7 @@ let Component = React.createClass({
                                     wrong22={wrong22}
                                     wrong23={wrong23}
                                     pba2={pba2}
-                        ></Hly_pbaone>
+                        ></Hly_pbath>
                         <div className={styles.logo2}>
 
                         </div>
@@ -99,19 +59,10 @@ let Component = React.createClass({
                 <div className={styles.clear}>
 
                 </div>
-                <div className={`${styles.fbox}  ${styles.logofa}`}>
-                    <div className={`${styles.box_shadow} ${styles.fbox2}`}>
-                        <div className={styles.rbox31}>
 
-
-                        </div>
-                        <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(hhdata)}>更多</button>
-                        </div>
-
-                        <Hly_pbatwo height={390} text={mon+w0+"各风机PBA"}
+                <div className={`${styles.fbox} `}>
+                    <div className={` ${styles.logofa} ${styles.box_shadow}`}>
+                        <Hly_pbatwo height={450} text={mon+"每日PBA"}
                                     barRotimes={barLotime1}
                                     power1={power1}
                                     wrong10={wrong10}
@@ -162,6 +113,7 @@ const mapStateToProps = (state) => {
         bt0: state.vars.bt0,
         ipUrl: state.vars.ipUrl,
         wfid: state.vars.wfid,
+        width0: state.vars.width0,
 
     }
 };
@@ -177,7 +129,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/PBA/getAreaWFieldPBA',
+                url:'http://'+ipUrl+'/wbi/PBA/getCompanyTimePBA',
                 async:false,
                 data:{
                     "month":month2,
@@ -187,7 +139,6 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:'3000',
                 success:function(data){
                     dispatch(actions.setVars('hhdata4',  data));
-
 
                     let w0 = data.data[1][0].wfname;
                     dispatch(actions.setVars('w1', w0));
@@ -200,14 +151,14 @@ const mapDispatchToProps = (dispatch) => {
                     let wrong221=[];       //限功率损失
                     let wrong231=[];       //非设备原因损失
                     let pba21=[];
-                    for (var i in data.data[1]) {
-                        barLotime21.push(data.data[1][i].wfname);    //区域的横坐标
-                        power21.push(data.data[1][i].poweract);   //实际发电量
-                        wrong201.push(data.data[1][i].faultloss);   //故障损失
-                        wrong211.push(data.data[1][i].maintainloss);   //维护损失
-                        wrong221.push(data.data[1][i].limitloss);   //限功率损失
-                        wrong231.push(data.data[1][i].nodevreasonloss);   //非设备原因损失
-                        pba21.push(data.data[1][i].pba);   //非设备原因损失
+                    for (var i in data.data[0]) {
+                        barLotime21.push(data.data[0][i].month+"月");    //区域的横坐标
+                        power21.push(data.data[0][i].poweract);   //实际发电量
+                        wrong201.push(data.data[0][i].faultloss);   //故障损失
+                        wrong211.push(data.data[0][i].maintainloss);   //维护损失
+                        wrong221.push(data.data[0][i].limitloss);   //限功率损失
+                        wrong231.push(data.data[0][i].nodevreasonloss);   //非设备原因损失
+                        pba21.push(data.data[0][i].pba);   //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime21', barLotime21));
                     dispatch(actions.setVars('power21', power21));
@@ -224,14 +175,14 @@ const mapDispatchToProps = (dispatch) => {
                     let wrong221q=[];       //限功率损失
                     let wrong231q=[];       //非设备原因损失
                     let pba21q=[];
-                    for (var i=0;i<10;i++) {
-                        barLotime21q.push(data.data[0][i].wtname);    //区域的横坐标
-                        power21q.push(data.data[0][i].poweract);   //实际发电量
-                        wrong201q.push(data.data[0][i].faultloss);   //故障损失
-                        wrong211q.push(data.data[0][i].maintainloss);   //维护损失
-                        wrong221q.push(data.data[0][i].limitloss);   //限功率损失
-                        wrong231q.push(data.data[0][i].nodevreasonloss);   //非设备原因损失
-                        pba21q.push(data.data[0][i].pba);   //非设备原因损失
+                    for (var i in data.data[1]) {
+                        barLotime21q.push(data.data[1][i].day+"日");    //区域的横坐标
+                        power21q.push(data.data[1][i].poweract);   //实际发电量
+                        wrong201q.push(data.data[1][i].faultloss);   //故障损失
+                        wrong211q.push(data.data[1][i].maintainloss);   //维护损失
+                        wrong221q.push(data.data[1][i].limitloss);   //限功率损失
+                        wrong231q.push(data.data[1][i].nodevreasonloss);   //非设备原因损失
+                        pba21q.push(data.data[1][i].pba);   //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime1', barLotime21q));
                     dispatch(actions.setVars('power1', power21q));
@@ -455,7 +406,8 @@ const mapDispatchToProps = (dispatch) => {
                 wrong33.push(hhdata4.data[0][i].nodevreasonloss);   //非设备原因损失
                 pba3.push(hhdata4.data[0][i].pba);   //非设备原因损失
             }
-
+            let width0=barLotime3.length*60;
+            dispatch(actions.setVars('width0', width0));
             dispatch(actions.setVars('barLotime1', barLotime3));
             dispatch(actions.setVars('power1', power3));
             dispatch(actions.setVars('wrong10', wrong30));
