@@ -10,10 +10,10 @@ let Component = React.createClass({
     },
     render() {
 
-        let {input_url,PBAGroupPba,PBAGroupNodevreasonloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupFaultloss,areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
+        let {textq,height,input_url,PBAGroupPba,PBAGroupNodevreasonloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupFaultloss,areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
         let configPie = {
             chart: {
-                height:400,
+                height:height,
               backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -23,14 +23,14 @@ let Component = React.createClass({
 
             },
             title: {
-                text:'',
+                text:textq,
                 align:'left',
                 
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
-                     fontWeight:700,
+                     
                 }
             },
             legend: {

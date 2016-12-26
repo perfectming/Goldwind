@@ -68,9 +68,6 @@ import Profits from '../comp/wbi/dashboard/grouprole/group/earnings/Profits.jsx'
 import Profitss from '../comp/wbi/dashboard/grouprole/group/tba/Profitss2.jsx';
 import Profitsss from '../comp/wbi/dashboard/grouprole/group/tbatime/Profitsss3.jsx';
 import PEQII from '../comp/wbi/dashboard/grouprole/windpage/PEQII.jsx';
-import WFSprofit from '../comp/wbi/dashboard/grouprole/windpage/WFSprofit.jsx';
-import WFTprofit from '../comp/wbi/dashboard/grouprole/windpage/WFTprofit.jsx';
-import Profitime from '../comp/wbi/dashboard/grouprole/group/Profitime.jsx';
 
 
 
@@ -174,9 +171,6 @@ let Component = React.createClass({
                 {showPage === 'profits' && <Profits></Profits>}
                 {showPage === 'profitss' && <Profitss></Profitss>}
                 {showPage === 'profitsss' && <Profitsss></Profitsss>}
-                {showPage === 'wfsprofit' && <WFSprofit></WFSprofit>}
-                {showPage === 'wftprofit' && <WFTprofit></WFTprofit>}
-                {showPage === 'profitime' && <Profitime></Profitime>}
                 
 
 

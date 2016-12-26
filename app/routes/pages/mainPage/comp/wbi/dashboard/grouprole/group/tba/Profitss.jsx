@@ -7,29 +7,6 @@ import icono from '../img/PBA.png';
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
 let data=require('./Profit-data2');
-let month=data.month;
-let button=data.button;
-let areaName=data.areaName;
-let areaRecordCosts=data.areaRecordCosts;
-let areaRecordProfit=data.areaRecordProfit;
-let text0=data.text[0];
-
-
-let fanProfit=data.fanProfit;
-let fanCost=data.fanCost;
-let fanCost1=data.fanCost1;
-let fanCost2=data.fanCost2;
-let fanCost3=data.fanCost3;
-let text1=data.text[1];
-let windFiled=data.windFiled;
-let areaRecordProfitt=data.areaRecordProfitt;
-let areaRecordCostss=data.areaRecordCostss;
-let areaRecordCostsS1=data.areaRecordCostsS1;
-let areaRecordCostsS2=data.areaRecordCostsS2;
-let areaRecordCostsS3=data.areaRecordCostsS3;
-let areaRecordCostsS4=data.areaRecordCostsS4;
-let areaNamee=data.areaNamee;
-let text2=data.text[2];
 let Component = React.createClass({
     componentWillMount() {
       let{ipUrl}=this.props;
@@ -60,7 +37,7 @@ let Component = React.createClass({
                    <div className={styles.bgc}> <img src={icono}/></div>
                    <div className={`${styles.areabox} ${styles.shadow}`}>
                        <div>
-                           <AreaTable PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth} areaRecordProfit={PBAGroupPoweract} PBAGroupMaintainloss={PBAGroupMaintainloss} PBAGroupLimitloss={PBAGroupLimitloss} PBAGroupNodevreasonloss={PBAGroupNodevreasonloss} PBAGroupPba={PBAGroupPba}text0={text0} text1={text1} input_url={ipUrl}></AreaTable>
+                           <AreaTable PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth} areaRecordProfit={PBAGroupPoweract} PBAGroupMaintainloss={PBAGroupMaintainloss} PBAGroupLimitloss={PBAGroupLimitloss} PBAGroupNodevreasonloss={PBAGroupNodevreasonloss} PBAGroupPba={PBAGroupPba} textq={'集团每月PBA'}  input_url={ipUrl} height={400}></AreaTable>
                            <p className={styles.titww}>集团每月PBA</p>
                        </div>
                    </div>
