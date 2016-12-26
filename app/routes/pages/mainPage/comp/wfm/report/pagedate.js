@@ -48,7 +48,7 @@ module.exports = {
                 },
                  {
                     tabname:'可利用率统计用例规划',
-                    rpage:''
+                    rpage:'AvailableStatistics'
                 }
 
             ]

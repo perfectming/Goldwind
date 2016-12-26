@@ -7,6 +7,7 @@ import Completion from './Completion.jsx';
 import Lose_detail from './lose_detail.jsx';
 import LoseElectric_Statistics from './loseElectric_Statistics.jsx';
 import PowerCurveStatistics from './Power_curve_statistics.jsx';
+import AvailableStatistics from './Available_statistics.jsx';
 import Alert from './alert.jsx';
 var $ =require('jquery');
 var actions = require('redux/actions');
@@ -52,6 +53,7 @@ let Component = React.createClass({
                { showbb==='lose_detail' && <Lose_detail></Lose_detail>}
                { showbb==='loseelectric_statistics' && <LoseElectric_Statistics></LoseElectric_Statistics>}
                { showbb==='PowerCurveStatistics' && <PowerCurveStatistics></PowerCurveStatistics>}
+               { showbb==='AvailableStatistics' && <AvailableStatistics></AvailableStatistics>}
 
 
 

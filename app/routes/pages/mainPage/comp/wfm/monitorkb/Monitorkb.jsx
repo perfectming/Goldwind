@@ -69,6 +69,7 @@ let Component = React.createClass({
             let czndxly1=[];//各场站年等效利用小时数//
             let IntoCDMjp=0;//纳入CDM场站CO2减排量//
             let NotIntoCDMjp=0;//未纳入CDM场站CO2减排量//
+            let monthTimeHandle=[];//变形后的最近的十二个月的月份数组//
 
             //以下是各个数据的提取、循环、计算的方法//
             (function(){
@@ -82,10 +83,13 @@ let Component = React.createClass({
                     kbnfdwcl.push(Number((kbnsjfdl1[i]/kbnjhfdl1[i]*100).toFixed(2)))
                 }
                 for(let i=0;i<parameter.IntoCDM.length;i++){
-                    IntoCDMjp += mobd[parameter.IntoCDM[i]].YearEgyAt*mod.YearEgyAt.coeff*parameter.Coefficient;
+                    IntoCDMjp += mobd[parameter.IntoCDM[i]].YearEgyAt*mod.YearEgyAt.coeff*parameter.Coefficient*10;
                 }
                 for(let i=0;i<parameter.NotIntoCDM.length;i++){
-                    NotIntoCDMjp += mobd[parameter.NotIntoCDM[i]].YearEgyAt*mod.YearEgyAt.coeff*parameter.Coefficient;
+                    NotIntoCDMjp += mobd[parameter.NotIntoCDM[i]].YearEgyAt*mod.YearEgyAt.coeff*parameter.Coefficient*10;
+                }
+                for(let i=0;i<mobd[8888800].Last12MonthsEgyAtStat.Time.length;i++){
+                    monthTimeHandle.push(Number(mobd[8888800].Last12MonthsEgyAtStat.Time[i].substring(5))+'月')
                 }
             }());
             (function(){
@@ -174,7 +178,7 @@ let Component = React.createClass({
                     <div className={`${styles.nfdlwcqk} ${styles.box_shadow}`}>
                         <Title title={['年发电量完成情况']}></Title>
                         <div className={styles.nfdlwcqkmain}>
-                            <Column njhfdl={kbnjhfdl1} nsjfdl={kbnsjfdl1} nfdlwcl={kbnfdwcl} unit={mod.Last12MonthsPlanEgyAtStat.unit}></Column>
+                            <Column njhfdl={kbnjhfdl1} nsjfdl={kbnsjfdl1} nfdlwcl={kbnfdwcl} unit={mod.Last12MonthsPlanEgyAtStat.unit} monthTime={monthTimeHandle}></Column>
                         </div>
                     </div>
                     <div className={`${styles.czydfdqk} ${styles.box_shadow}`}>

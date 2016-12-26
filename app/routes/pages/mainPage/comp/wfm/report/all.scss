@@ -181,6 +181,7 @@
             position:relative;
             overflow-x:auto;
             overflow-y:hidden;
+
              .tabtit{
                 position:absolute;
                 background: #464c58;
@@ -193,6 +194,7 @@
             }
 
                 .tabline{
+                margin-top:35px;
                 background: #30343f;
                 div{
                 height:35px;
@@ -212,12 +214,10 @@
             
         }
         .columnbox{
-        position:absolute;
-        bottom:0px;
-        left:0px;
+
          width:100%;
          height:400px;
-         margin-top:20px;
+         margin-bottom:20px;
          display:block;
         }
     }

@@ -40,7 +40,7 @@ let Component = React.createClass({
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthy}%</p>健康度</span>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthy.toFixed(1)}%</p>健康度</span>
 	           						<Pie2 color={(healthy/100)>1? ['#1fe005','#fbd500']:(healthy/100)>0.8?['#fbd500','#39565e']:(healthy/100)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[healthy,100]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
@@ -66,7 +66,7 @@ let Component = React.createClass({
 	           					</div>
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{TBA}%</p>TBA</span>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{TBA.toFixed(1)}%</p>TBA</span>
 	           						<Pie2  color={TBA>1? ['#1fe005','#fbd500']:TBA>0.8?['#fbd500','#39565e']:TBA>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[runTime,downTime]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>
@@ -240,7 +240,7 @@ const mapDispatchToProps = (dispatch) => {
 			    });
 			}else{
     			$.ajax({
-	        		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyAreaPBA',//点击区域获取风场名和ID
+	        		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyAreaPBA',//区域页面点击区域获取风场名和ID
 			        type: 'post',
 			        async:false,
 			        data:{'groupid':clickAreaId},
@@ -292,10 +292,10 @@ const mapDispatchToProps = (dispatch) => {
 					        	month=[],monthAct=[],monthPlan=[];
 					        	for(var i in data.data.wfieldsMonthsElec){
 									month.push(data.data.wfieldsMonthsElec[i].month+"月");
-									monthAct.push(data.data.wfieldsMonthsElec[i].poweract);
+									monthAct.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
 								};
 								for(var i in data.data.wfieldsMonthsPlanElec){
-									monthPlan.push(data.data.wfieldsMonthsPlanElec[i]);
+									monthPlan.push((data.data.wfieldsMonthsPlanElec[i]).toFixed(1)/1);
 								};
 								dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
 								dispatch(actions.setVars('wfYearAct',wfYearAct ));
@@ -318,8 +318,8 @@ const mapDispatchToProps = (dispatch) => {
 							        	month2=[],cost=[],income=[];
 							        	for(var i in data.data){
 							        		month2.push(data.data[i].month+"月");
-							        		cost.push(data.data[i].costs);
-							        		income.push(data.data[i].incomes);
+							        		cost.push((data.data[i].costs).toFixed(1)/1);
+							        		income.push((data.data[i].incomes).toFixed(1)/1);
 							        	};
 							        	dispatch(actions.setVars('month2',month2 ));
 							        	dispatch(actions.setVars('cost',cost ));
@@ -432,10 +432,10 @@ const mapDispatchToProps = (dispatch) => {
 							        	month=[],monthAct=[],monthPlan=[];
 							        	for(var i in data.data.wfieldsMonthsElec){
 											month.push(data.data.wfieldsMonthsElec[i].month+"月");
-											monthAct.push(data.data.wfieldsMonthsElec[i].poweract);
+											monthAct.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
 										};
 										for(var i in data.data.wfieldsMonthsPlanElec){
-											monthPlan.push(data.data.wfieldsMonthsPlanElec[i]);
+											monthPlan.push((data.data.wfieldsMonthsPlanElec[i]).toFixed(1)/1);
 										};
 										dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
 										dispatch(actions.setVars('wfYearAct',wfYearAct ));
@@ -461,8 +461,8 @@ const mapDispatchToProps = (dispatch) => {
 									        	month2=[],cost=[],income=[];
 									        	for(var i in data.data){
 									        		month2.push(data.data[i].month+"月");
-									        		cost.push(data.data[i].costs);
-									        		income.push(data.data[i].incomes);
+									        		cost.push((data.data[i].costs).toFixed(1)/1);
+									        		income.push((data.data[i].incomes).toFixed(1)/1);
 									        	};
 									        	dispatch(actions.setVars('month2',month2 ));
 									        	dispatch(actions.setVars('cost',cost ));
