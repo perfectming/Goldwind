@@ -61,11 +61,6 @@ const mapDispatchToProps = (dispatch) => {
                  dispatch(actions.setVars('navhide', false));
                  dispatch(actions.setVars('putpage', true));
                  dispatch(actions.setVars('bodypage', true));
-             }else if(page=='group'){
-                 dispatch(actions.setVars('showPage', page));
-                 dispatch(actions.setVars('navhide', true));
-                 dispatch(actions.setVars('putpage', true));
-                 dispatch(actions.setVars('bodypage', true));
              }else if(page=='health_main'){
                  dispatch(actions.setVars('showPage', 'cs'));
                  dispatch(actions.setVars('pagename', page));
@@ -73,10 +68,10 @@ const mapDispatchToProps = (dispatch) => {
                  dispatch(actions.setVars('putpage', true));
                  dispatch(actions.setVars('bodypage', true));
              }else{
+                dispatch(actions.setVars('navhide', true));
                 dispatch(actions.setVars('showPage', page));
                 dispatch(actions.setVars('putpage', true));
                 dispatch(actions.setVars('bodypage', true));
-                dispatch(actions.setVars('navhide', true));
              }
               if(key==1){
                 dispatch(actions.setVars('ifshow', true));

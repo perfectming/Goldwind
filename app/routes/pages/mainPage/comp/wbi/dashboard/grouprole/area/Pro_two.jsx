@@ -10,18 +10,17 @@ let Component = React.createClass({
     },
 
     render() {
-        let {name0,runtime,downtime,tba0,text,w0, win, wc1, actbt,changedata1,ipUrl,wfid,hhdata} = this.props;
 
-
+        let {height,text,name2,runtime2,downtime2,tba2,widths} = this.props;
         let configPie = {
             chart: {
-                height:400,
+                height:height,
+                width:widths,
                 backgroundColor: "rgba(44, 61, 71, 0.4)",
-                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                // plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                paddingLeft:100,
                 borderRadius:10
             },
             title: {
@@ -29,7 +28,6 @@ let Component = React.createClass({
                 align:'left',
                 x : "0",
                 style:{
-
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑"
@@ -39,7 +37,7 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
-                y:20,
+                y:40,
                 x:-75,
                 itemHoverStyle:{
                     color:'#31f3fb',
@@ -51,6 +49,7 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
+
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -70,23 +69,13 @@ let Component = React.createClass({
                 bar:{
                     animation: true
                 },
-                series: {
-                    cursor: 'pointer',
-                    events: {
-                        click: function (e,) {
-                            w0 = e.point.category;
-                            wc1 = e.point.index;
-                            changedata1(w0, win, wc1, actbt,ipUrl,hhdata);
-
-                        }
-                    }
-                },
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    maxPointWidth: 35,
+                    maxPointWidth: 20,
+                    //pointWidth:20
                     tooltip: {
-                        valueSuffix:'kWh'
+                        valueSuffix:'元'
                     },
                 },
                 line:{
@@ -107,7 +96,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:name0,
+                categories:name2,
             },
             yAxis: [{
                 labels: {
@@ -120,7 +109,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text: 'h',
+                    text: '元',
                     align: 'high',
                     rotation: '0',
                     y: -20,
@@ -155,28 +144,25 @@ let Component = React.createClass({
                 opposite: true
             }],
             series: [{
-                name: '实际运行时间',
+                name: '收益',
+                color:'#33BAC0',
                 type: 'column',
-                data: runtime,
-                borderRadius: 4,
-
-                }
-                ,{
-                    name: '停机时间',
-                    type: 'column',
-                    color:'#cccccc',
-                    data: downtime,
-                    borderRadius: 4,
-                }
-                ,
+                data: runtime2,
+                borderRadius: 2,
+            },{
+                name: '成本',
+                type: 'column',
+                color:'#70c080',
+                data: downtime2,
+                borderRadius: 2,
+            },
                 {
-                    name: 'TBA',
+                    name: '收益率',
                     type: 'line',
                     color:'#0000ff',
-                    data: tba0,
+                    data: tba2,
                     yAxis:1,
                 }
-
 
             ]
         };
@@ -188,62 +174,13 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {
-        hhdata: state.vars.hhdata,
-        ipUrl: state.vars.ipUrl,
-        wfid:state.vars.wfid,
-        mon: state.vars.mon,
-        w0:state.vars.w1,
-        wc1:state.vars.wc1,
-        win:state.vars.win,
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1:(w0, win, wc1, actbt,ipUrl,hhdata)=>{
-
-            let monthx=hhdata.data[wc1].month
-            $.ajax({
-                type:'post',
-                url:'http://'+ipUrl+'/wbi/TBA/getDaysTBAByG',
-                async:false,
-                data:{
-                    "month":monthx,
-                    "groupid":  '201612121721151',
-                },
-                dataType:'json',
-                timeout:'3000',
-                success:function(data){
-
-
-
-
-                    let runtime2=[];       //实际发电量
-                    let downtime2=[];       //故障损失
-                    let tba2=[];       //维护损失
-                    let name2=[];
-                    for (var i in data.data) {
-                        //区域的横坐标
-                        name2.push(data.data[i].day+"日");
-                        runtime2.push(data.data[i].runtimes);   //实际发电量
-                        downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(Number((data.data[i].tba*100).toFixed(2)));      //维护损失
-                    }
-                    dispatch(actions.setVars('runtime2', runtime2));
-                    dispatch(actions.setVars('downtime2', downtime2));
-                    dispatch(actions.setVars('tba2', tba2));
-                    dispatch(actions.setVars('name2', name2));
-                    dispatch(actions.setVars('mon', wc1+1+"月"));
-                },
-                error:function(){
-
-                },
-            })
-
-    }
     };
 };
 

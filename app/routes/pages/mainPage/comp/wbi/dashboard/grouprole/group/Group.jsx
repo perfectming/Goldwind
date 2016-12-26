@@ -180,7 +180,7 @@ const mapDispatchToProps = (dispatch) => {
                     profit = (data.data.incomes/10000).toFixed(1)/1;
                     amounts =(data.data.amounts/10000).toFixed(1)/1;
                     rate = data.data.rate;
-
+                    dispatch(actions.setVars('navhide', true));
                 },
                 complete : function(XMLHttpRequest,status){
                     $.ajax({
