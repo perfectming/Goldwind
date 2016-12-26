@@ -36,8 +36,7 @@ let Component = React.createClass({
                             tabaleData.data.content.map((value, key)=> {
                                 num++;
                                 return (
-                                    <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}
-                                    style={{color:value[2]=='故障'}}>
+                                    <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                         
                                          {
                                             value.map((valueC, keyC)=> {
@@ -45,6 +44,12 @@ let Component = React.createClass({
                                                     return (
                                                         <div className={styles.tableContentItem} style={{width:tabaleData.data.length[keyC]}} key={keyC}>
                                                             {num}
+                                                        </div>
+                                                    )
+                                                }else if(keyC==2){
+                                                    return (
+                                                        <div className={styles.tableContentItem} style={{width:tabaleData.data.length[keyC],color:valueC=='故障'?'#f00':(valueC=='警告'?'#ff0':'#fff')}} key={keyC}>
+                                                            {valueC}
                                                         </div>
                                                     )
                                                 }else if(keyC <= 12&&keyC!=10){

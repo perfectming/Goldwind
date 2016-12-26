@@ -44,6 +44,7 @@ let Component = React.createClass({
 		// console.log(value)
 	if(faninfobool){
 		let val = value.Wtid;
+		console.log(infofmodel)
 		let sp = infofmodel.Model.ens[val].sp;
 		let PPVplace = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].place;
 		let PPVcoeff = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].coeff;
@@ -485,23 +486,35 @@ const mapDispatchToProps = (dispatch) => {
     return {
     	toinfopage: (value,faninfobool) => {
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
-                    function setData3(rdata){
-                        dispatch(actions.setVars('infofmodel', rdata));
-                        // console.log(0,rdata);
-                        TY.getRtData("WTDetail", value.Wtid, setData4)
-                        function setData4(rdata){
+                    function setData3(infofModel){
+                    	console.log(1,infofModel);
+                    	if(!infofModel.Model){
+                    		TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
+                    	}else{
+                    		dispatch(actions.setVars('infofmodel', infofModel));
+	                        console.log(0,infofModel);
+                            // console.log(1,infofModel);
+	                                TY.getRtData("WTDetail", value.Wtid, setData5)
+	                                function setData5(infofData){
+	                                    // console.log(11,infofData);
+	                                    // console.log(value.Wtid)
+	                                    // console.log(infofData.ModelData[value.Wtid]["WTUR.Temp.Ra.F32"])
+	                                    let d = infofData.ModelData[value.Wtid];
+	                                    if(d == undefined || d["DevCurDayPowerCurve"] == undefined || d["CurDayWindSpeedCurve_Device"] == undefined){
+	                                    	console.log(value,setData5)
+	                                    	TY.getRtData("WTDetail", value.Wtid, setData5)
+	                                    }else{
+	                                    	dispatch(actions.setVars('infofdata', infofData));
+		                                        dispatch(actions.setVars('faninfobool', true));
+		                                    
+	                                    }
+	                                    
+	                                }
+                    	}
+                        
 
-                            // console.log(1,rdata);
-                            TY.getRtData("WTDetail", value.Wtid, setData5)
-                            function setData5(rdata){
-                                // console.log(11,rdata);
-                                dispatch(actions.setVars('infofdata', rdata));
-                                setTimeout(function(){
-                                    dispatch(actions.setVars('faninfobool', true));
-                                },100)
-                            }
 
-                        }
+
                     }
                      // }, 3000)
 
@@ -513,21 +526,12 @@ const mapDispatchToProps = (dispatch) => {
 
         init: (value) => {
         	times = setInterval(function(){
-                   // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
-                    	// function setData3(rdata){
-                         	// dispatch(actions.setVars('infofmodel', rdata));
-                        	// console.log(0,rdata);
-
-                     			function setData4(rdata){
-	                            dispatch(actions.setVars('infofdata', rdata));
-	                            // console.log(1,rdata);
-
-
-                        }
-                        TY.getRtData("WTDetail", value.Wtid, setData4)
-                    // }
-
-           }, 3000)
+                function setData4(rdata){
+	            	dispatch(actions.setVars('infofdata', rdata));
+	            	// console.log(1,rdata);
+                }
+                TY.getRtData("WTDetail", value.Wtid, setData4)        
+           	}, 3000) 
 //   $.ajax({
 //    type: 'post',    
 //    url:'http://54.223.200.134/System/data.aspx?mdid=Model&ScId=2015032011&EnId=654208001&EnKey=Screen&PkId=&ModelKey=6C5002D3-1566-414a-8834-5077940C78E1&dhs=UISys&AspxAutoDetectCookieSupport=1',    
