@@ -6,6 +6,7 @@ import icon1 from '../../../../img/comp/icon1.png';
 import icon2 from '../../../../img/comp/icon2.png';
 import icon3 from '../../../../img/comp/icon3.png';
 import icon4 from '../../../../img/comp/icon4.png';
+import icon5 from '../../../../img/comp/icon5.png';
 let arr=['Wtid','wtne','dayElec','ActPwr','WindSpeed','WTStateCode'];//设置表格每列属性
 var actions = require('redux/actions');
 let database = require('./../../../../../../../../config/data');
