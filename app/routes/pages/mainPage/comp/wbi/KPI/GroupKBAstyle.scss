@@ -27,6 +27,18 @@
                     top: -20px;
                     left: 20px;
                     font-size: 16px;
+                    a{
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 12.5px;
+                        background: url(../../../img/comp/rank.png)no-repeat;
+                    }
+                    span{
+                        display: inline-block;
+                        height: 25px;
+                        width: 150px;
+                    }
                 }
                 span{
                     display: inline-block;
@@ -70,7 +82,7 @@
                         height: 25px;
                         width: 25px;
                         border-radius: 12.5px;
-                        background: url(../../../img/comp/nianEle.png)no-repeat;
+                        background: url(../../../img/comp/rank.png)no-repeat;
                     }
                 }
             }
@@ -92,7 +104,7 @@
                         height: 25px;
                         width: 25px;
                         border-radius: 12.5px;
-                        background: url(../../../img/comp/nianEle.png)no-repeat;
+                        background: url(../../../img/comp/rank.png)no-repeat;
                     }
                 }
             }
@@ -113,7 +125,7 @@
                         height: 25px;
                         width: 25px;
                         border-radius: 12.5px;
-                        background: url(../../../img/comp/nianEle.png)no-repeat;
+                        background: url(../../../img/comp/rank.png)no-repeat;
                     }
                 }
                 .topLight{

@@ -14,11 +14,10 @@ let Component = React.createClass({
         this.props.init(ipUrl,selectId,selectName);
         setTimeout(function(){
             init(ipUrl,selectId,selectName)
-        },1000)
+        },800)
     },
     
     render() {
-        let data=PBAdata;
         let {machineTypeTwo=[],machineTypeOne=[],typeTwo=[],typeOne=[],typeNameTwo='可靠性指标分析',typeNameOne='可靠性指标分析',reliabilityNameOne='机型可靠性分析',reliabilityNameTwo='机型可靠性分析',reliabilityOne=[],reliabilityTwo=[],wtType,ipUrl,reliabilityBool=false,selectId,selectName,buttonAction,buttonReset,inputOnChange, onFocus,changeValueS,changeValueE} = this.props;
         let comp = PBAdata.list;
         if(reliabilityBool){
@@ -38,7 +37,7 @@ let Component = React.createClass({
                                 return (
                                         <div className={styles.btnBox} key={key}>
                                             <div className={styles.bBox}>
-                                                <button onClick={()=>buttonAction(ipUrl,selectId,selectName,wtType,typeTwo=[],typeOne=[],typeNameTwo='可靠性指标分析',typeNameOne='可靠性指标分析',reliabilityNameOne='机型可靠性分析',reliabilityNameTwo='机型可靠性分析',reliabilityOne=[],reliabilityTwo=[],machineTypeTwo=[],machineTypeOne=[])}>{"查询"}</button>
+                                                <button onClick={()=>buttonAction(ipUrl,selectId,selectName,wtType,typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne='机型可靠性分析',reliabilityNameTwo='机型可靠性分析',reliabilityOne=[],reliabilityTwo=[],machineTypeTwo=[],machineTypeOne=[])}>{"查询"}</button>
                                             </div>
                                             <div className={styles.bBox}>
                                                 <button onClick={()=>buttonReset()}>{"重置"}</button>
@@ -65,7 +64,7 @@ let Component = React.createClass({
                     <div className={styles.content}>
                         <div className={styles.floorOne}>
                             <div className={`${styles.pie} ${styles.boxShadow}`}>
-                                <ChartPie text={reliabilityNameOne} lose={reliabilityOne}></ChartPie>
+                                <ChartPie name={reliabilityNameOne} text={reliabilityNameOne} lose={reliabilityOne}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
                                 <OneColumn name={typeNameOne} title={typeNameOne} month={machineTypeOne} plan={typeOne} unit={"h"}></OneColumn>
@@ -73,10 +72,10 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.floorTwo}>
                             <div className={`${styles.pie} ${styles.boxShadow}`}>
-                                <ChartPie text={reliabilityNameTwo} lose={reliabilityTwo}></ChartPie>
+                                <ChartPie name={reliabilityNameOne} text={reliabilityNameTwo} lose={reliabilityTwo}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
-                                <OneColumn name={typeNameTwo} title={typeNameTwo} month={['MTBF','MTBI','MTBR','MTTI','MTTR','FTAF']} plan={typeTwo} unit={"h"}></OneColumn>
+                                <OneColumn name={typeNameTwo} title={typeNameTwo} month={machineTypeTwo} plan={typeTwo} unit={"h"}></OneColumn>
                             </div>
                         </div>
                     </div>
@@ -104,12 +103,29 @@ const mapStateToProps = (state) => {
         machineTypeOne : state.vars.machineTypeOne,
         typeNameOne : state.vars.typeNameOne,
         typeOne : state.vars.typeOne,
+
+        reliabilityNameTwo : state.vars.reliabilityNameTwo,
+        reliabilityTwo : state.vars.reliabilityTwo,
+        machineTypeTwo : state.vars.machineTypeTwo,
+        typeNameTwo : state.vars.typeNameTwo,
+        typeTwo : state.vars.typeTwo,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: (ipUrl,selectId,selectName) => {
+            dispatch(actions.setVars('reliabilityNameOne', ));
+            dispatch(actions.setVars('reliabilityOne', ));
+            dispatch(actions.setVars('typeNameOne', '可靠性指标分析'));
+            dispatch(actions.setVars('typeOne', ));
+            dispatch(actions.setVars('machineTypeOne', ));
+
+            dispatch(actions.setVars('reliabilityNameTwo', ));
+            dispatch(actions.setVars('reliabilityTwo', ));
+            dispatch(actions.setVars('typeNameTwo', '可靠性指标分析'));
+            dispatch(actions.setVars('typeTwo', ));
+            dispatch(actions.setVars('machineTypeTwo', ));
             //初始日期为上月
             var date = new Date();
             var yearString=date.getFullYear();
@@ -169,7 +185,20 @@ const mapDispatchToProps = (dispatch) => {
         changeValueE:(e)=>{
             
         },
-        buttonAction:(ipUrl,selectId,selectName,wtType,typeTwo=[],typeOne=[],typeNameTwo='可靠性指标分析',typeNameOne='可靠性指标分析',reliabilityNameOne='机型可靠性分析',reliabilityNameTwo='机型可靠性分析',reliabilityOne=[],reliabilityTwo=[],machineTypeTwo=[],machineTypeOne=[])=>{
+        buttonReset:()=>{
+            dispatch(actions.setVars('reliabilityNameOne', ));
+            dispatch(actions.setVars('reliabilityOne', ));
+            dispatch(actions.setVars('typeNameOne', '可靠性指标分析'));
+            dispatch(actions.setVars('typeOne', ));
+            dispatch(actions.setVars('machineTypeOne', ));
+
+            dispatch(actions.setVars('reliabilityNameTwo', ));
+            dispatch(actions.setVars('reliabilityTwo', ));
+            dispatch(actions.setVars('typeNameTwo', '可靠性指标分析'));
+            dispatch(actions.setVars('typeTwo', ));
+            dispatch(actions.setVars('machineTypeTwo', ));
+        },
+        buttonAction:(ipUrl,selectId,selectName,wtType,typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne='机型可靠性分析',reliabilityNameTwo='机型可靠性分析',reliabilityOne=[],reliabilityTwo=[],machineTypeTwo=[],machineTypeOne=[])=>{
             var sTime = $('#startTime').val();
             //结束时间时间
             var eTime = $('#endTime').val();
@@ -195,24 +224,23 @@ const mapDispatchToProps = (dispatch) => {
                             reliabilityOne=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
-                                reliabilityOne.push([data.data[i].wttype,data.data[i].totalloss]);
+                                reliabilityOne.push([data.data[i].wttype,(data.data[i].totalloss).toFixed(1)/1]);
                             };
                             reliabilityNameOne=A+'机型可靠性分析';
+                            dispatch(actions.setVars('reliabilityNameOne', reliabilityNameOne));
+                            dispatch(actions.setVars('reliabilityOne', reliabilityOne));
                         }else if(typeNameOne!=='可靠性指标分析'&&typeNameTwo=='可靠性指标分析'){
                             reliabilityTwo=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
-                                reliabilityTwo.push([data.data[i].wttype,data.data[i].totalloss]);
+                                reliabilityTwo.push([data.data[i].wttype,(data.data[i].totalloss).toFixed(1)/1]);
                             };
                             reliabilityNameTwo=A+'机型可靠性分析';
+                            dispatch(actions.setVars('reliabilityNameTwo', reliabilityNameTwo));
+                            dispatch(actions.setVars('reliabilityTwo', reliabilityTwo));
                         }else{
-                            alert('请先清除数据');
+                            alert('请先重置清除数据');
                         }
-                        
-                        dispatch(actions.setVars('reliabilityNameOne', reliabilityNameOne));
-                        dispatch(actions.setVars('reliabilityOne', reliabilityOne));
-                        dispatch(actions.setVars('reliabilityNameTwo', reliabilityNameTwo));
-                        dispatch(actions.setVars('reliabilityTwo', reliabilityTwo));
                     },
                     complete : function(XMLHttpRequest,status) {
                         $.ajax({
@@ -226,23 +254,23 @@ const mapDispatchToProps = (dispatch) => {
                                     typeOne=[],machineTypeOne=[];
                                     typeNameOne=wtType+'可靠性指标分析';
                                     for(var i in data.data){
-                                        typeOne.push(data.data[i]);
+                                        typeOne.push((data.data[i]).toFixed(1)/1);
                                         machineTypeOne.push(i);
                                     }
+                                    dispatch(actions.setVars('typeNameOne', typeNameOne));
+                                    dispatch(actions.setVars('typeOne', typeOne));
+                                    dispatch(actions.setVars('machineTypeOne', machineTypeOne));
                                 }else if(typeNameOne!=='可靠性指标分析'&&typeNameTwo=='可靠性指标分析'){
                                     typeTwo=[],machineTypeTwo=[];
                                     typeNameTwo=wtType+'可靠性指标分析';
                                     for(var i in data.data){
-                                        typeTwo.push(data.data[i]);
+                                        typeTwo.push((data.data[i]).toFixed(1)/1);
                                         machineTypeTwo.push(i);
                                     }
+                                    dispatch(actions.setVars('typeNameTwo', typeNameTwo));
+                                    dispatch(actions.setVars('typeTwo', typeTwo));
+                                    dispatch(actions.setVars('machineTypeTwo', machineTypeTwo));
                                 }
-                                dispatch(actions.setVars('typeNameOne', typeNameOne));
-                                dispatch(actions.setVars('typeOne', typeOne));
-                                dispatch(actions.setVars('machineTypeOne', machineTypeOne));
-                                dispatch(actions.setVars('typeNameTwo', typeNameTwo));
-                                dispatch(actions.setVars('typeTwo', typeTwo));
-                                dispatch(actions.setVars('machineTypeTwo', machineTypeTwo));
                             },
                             complete : function(XMLHttpRequest,status) {},
                         });
@@ -256,34 +284,34 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',
                     data: {'startTime':sTime,'endTime':eTime,'groupid':selectId}, 
                     success: function (data) {
-                        console.log(data)
                         if(typeNameOne=='可靠性指标分析'){
                             reliabilityOne=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
-                                reliabilityOne.push([data.data[i].wttype,data.data[i].totalloss]);
+                                reliabilityOne.push([data.data[i].wttype,(data.data[i].totalloss).toFixed(1)/1]);
                             };
                             reliabilityNameOne=A+'机型可靠性分析';
+                            dispatch(actions.setVars('reliabilityNameOne', reliabilityNameOne));
+                            dispatch(actions.setVars('reliabilityOne', reliabilityOne));
                         }else if(typeNameOne!=='可靠性指标分析'&&typeNameTwo=='可靠性指标分析'){
                             reliabilityTwo=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
-                                reliabilityTwo.push([data.data[i].wttype,data.data[i].totalloss]);
+                                reliabilityTwo.push([data.data[i].wttype,(data.data[i].totalloss).toFixed(1)/1]);
                             };
                             reliabilityNameTwo=A+'机型可靠性分析';
+                            dispatch(actions.setVars('reliabilityNameOne', reliabilityNameOne));
+                            dispatch(actions.setVars('reliabilityOne', reliabilityOne));
                         }else{
-                            alert('请先清除数据');
+                            alert('请先重置清除数据');
                         }
                         
-                        dispatch(actions.setVars('reliabilityNameOne', reliabilityNameOne));
-                        dispatch(actions.setVars('reliabilityOne', reliabilityOne));
                         dispatch(actions.setVars('reliabilityNameTwo', reliabilityNameTwo));
                         dispatch(actions.setVars('reliabilityTwo', reliabilityTwo));
                     },
                     complete : function(XMLHttpRequest,status) {
-                        console.log(wtType)
                         $.ajax({
-                            url:'http://'+ipUrl+'/wbi/KPI/getReliableNormAnalyse',//下拉框内容
+                            url:'http://'+ipUrl+'/wbi/KPI/getReliableNormAnalyse',
                             type: 'post',
                             async: false,
                             dataType: 'json',
@@ -293,23 +321,23 @@ const mapDispatchToProps = (dispatch) => {
                                     typeOne=[],machineTypeOne=[];
                                     typeNameOne=wtType+'可靠性指标分析';
                                     for(var i in data.data){
-                                        typeOne.push(data.data[i]);
+                                        typeOne.push((data.data[i]).toFixed(1)/1);
                                         machineTypeOne.push(i);
                                     }
+                                    dispatch(actions.setVars('typeNameOne', typeNameOne));
+                                    dispatch(actions.setVars('typeOne', typeOne));
+                                    dispatch(actions.setVars('machineTypeOne', machineTypeOne));
                                 }else if(typeNameOne!=='可靠性指标分析'&&typeNameTwo=='可靠性指标分析'){
                                     typeTwo=[],machineTypeTwo=[];
                                     typeNameTwo=wtType+'可靠性指标分析';
                                     for(var i in data.data){
-                                        typeTwo.push(data.data[i]);
+                                        typeTwo.push((data.data[i]).toFixed(1)/1);
                                         machineTypeTwo.push(i);
                                     }
+                                    dispatch(actions.setVars('typeNameTwo', typeNameTwo));
+                                    dispatch(actions.setVars('typeTwo', typeTwo));
+                                    dispatch(actions.setVars('machineTypeTwo', machineTypeTwo));
                                 }
-                                dispatch(actions.setVars('typeNameOne', typeNameOne));
-                                dispatch(actions.setVars('typeOne', typeOne));
-                                dispatch(actions.setVars('machineTypeOne', machineTypeOne));
-                                dispatch(actions.setVars('typeNameTwo', typeNameTwo));
-                                dispatch(actions.setVars('typeTwo', typeTwo));
-                                dispatch(actions.setVars('machineTypeTwo', machineTypeTwo));
                             },
                             complete : function(XMLHttpRequest,status) {},
                         });

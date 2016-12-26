@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./TimeSelect-data.js');
 
 let Component = React.createClass({
     componentWillMount() {
     },
 
     render() {
+        let {title,unit,nameOne,nameTwo,nameThree,nameFour,loseD,loseC,loseB,loseA}=this.props;
         let configPie = {
             chart: {
                 height:380,
@@ -21,7 +21,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: '损失收入电量',
+                text: title,
                 align:'left',
                  x : "0",
                 style:{
@@ -43,9 +43,6 @@ let Component = React.createClass({
                 itemHoverStyle: {
                 color: '#31f3fb'
             	}
-            },
-            tooltip: {
-                
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -71,23 +68,22 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:data.data[2].name,
+                categories:["故障损失","维护损失","限功率损失","非设备原因损失"],
             },
             yAxis: {
                 title:{
-                	text:'kW',
+                	text:unit,
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-15,
+	                x:-18,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',
 	                }
                 },
                 labels: {
-                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -96,21 +92,21 @@ let Component = React.createClass({
                 },
             },
             series: [{
-                name: '集团区域1',
+                name: nameOne,
                 type: 'column',
-                data: data.data[2].loseA,
+                data: loseA,
             },{
-            	name: '集团区域2',
+            	name: nameTwo,
                 type: 'column',
-                data: data.data[2].loseB,
+                data: loseB,
             },{
-                name: '集团区域13',
+                name: nameThree,
                 type: 'column',
-                data: data.data[2].loseC,
+                data: loseC,
             },{
-            	name: '集团区域4',
+            	name: nameFour,
                 type: 'column',
-                data: data.data[2].loseD,
+                data: loseD,
             }]
         };
         return (
