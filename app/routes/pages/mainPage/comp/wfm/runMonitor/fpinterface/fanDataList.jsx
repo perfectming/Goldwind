@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react';//风机数据列表
 import {connect} from 'react-redux';
 import css from  './fanDataList.scss';
 import icon0 from '../../../../img/comp/icon0.png';
@@ -6,7 +6,8 @@ import icon1 from '../../../../img/comp/icon1.png';
 import icon2 from '../../../../img/comp/icon2.png';
 import icon3 from '../../../../img/comp/icon3.png';
 import icon4 from '../../../../img/comp/icon4.png';
-let arr=['Wtid','wtne','dayElec','ActPwr','WindSpeed','WTStateCode'];
+import icon5 from '../../../../img/comp/icon5.png';
+let arr=['Wtid','wtne','dayElec','ActPwr','WindSpeed','WTStateCode'];//设置表格每列属性
 var actions = require('redux/actions');
 let database = require('./../../../../../../../../config/data');
 import _ from 'lodash';
@@ -46,7 +47,7 @@ let Component = React.createClass({
                     haul++;
                     break;
             }
-        }
+        }//筛选不同状态风机数量
         return (
             <div className={css.toBox}>
                 <div className={css.leftBox}>
@@ -107,7 +108,7 @@ let Component = React.createClass({
                                                                              key={keyC}><div className={css.icon4}></div></div>
                                                                     );
                                                                     break;
-                                                            }
+                                                            }//设置不同状态风机样式
                                                         }else{
                                                             return (
                                                                 <div className={css.tableContentItem} style={{width:(100/data.header.length)+"%"}}
@@ -232,11 +233,11 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        previous:(page)=>{
+        previous:(page)=>{/*上一页方法*/
             page>1 ? page--:page;
             dispatch(actions.setVars('page1', page));
         },
-        next:(page,i)=>{
+        next:(page,i)=>{/*下一页方法*/
             (page<(i/38)) ? page++:page;
             dispatch(actions.setVars('page1', page));
 
