@@ -24,9 +24,11 @@ let Component = React.createClass({
         let{trt,width,ipUrl,index2,keyy,actbt=0,btn=0,changpage,wind,windP,windPT,gogogo,back,areaRecordCostRR,machinee,height,more,close,ban,backtop,befor_pagee='group',befor_page2,w11='1区域',w111='风机1',sqy,pointPlacement,windN,keyyy,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNamessT,areaWindCostssT,areaWindEarningssT,areaWindRatessT,areaWindidssT,areaWindCostMore,areaWindEarningMore,areaWindNameMore,areaWindRateMore}=this.props;   
         return (
             <div className={styles.box}>
-                 // 遮罩层
+                 {// 遮罩层 
+                 }
                 <div className={styles.boxcover} id='boxcover'></div>
-                // 更多弹出的表格
+                {// 更多弹出的表格
+                }
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
                         <img src={icono}/>
@@ -37,7 +39,8 @@ let Component = React.createClass({
                         <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={width} pointPlacement={0} ly={0} pointWidth={20} lx={-[width-2000]} ></Fanchart>
                     </div>
                 </div>
-                // 导航的月份
+                {//导航的月份
+                }
                 <ul className={styles.monthbox}>
                     {
                         data.wind.map((value,key)=>{
@@ -46,19 +49,22 @@ let Component = React.createClass({
                     }
                     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2,actbt)}>返回</li>
                 </ul>   
-              // 区域表格（第一个）
+              {// 区域表格（第一个）
+              }
                 <div className={`${styles.areabox} ${styles.shadow}`}>
                     <div className={styles.bgccc}> <img src={icono}/></div>
                     <AreaTable text={actbt+1+'月集团各区域收益'} areaName={wind} areaRecordCost={windN} areaRecordProfit={windP} TBA={windPT} windFiedN={windFiedN} arr5={arr5}  keyy={keyyy}  height={410} width={1700} input_url={ipUrl}></AreaTable>
                           
                 </div>
-             // 风场表格（第二个）
+             {// 风场表格（第二个）
+             }
                 <div className={`${styles.windbox} ${styles.shadow}`}>
                     <div className={styles.bgccc}> <img src={icono}/></div>
                     <WindfieldTable  text={[actbt+1]+'月'+w11+'各风电场年收益'} windFiled={areaWindNames} windCost={areaWindCosts} windProfit={areaWindEarnings} TBA={areaWindRates}  keyy={keyyy}  areaWindids={areaWindids} height={410} input_url={ipUrl}></WindfieldTable>
                       
                 </div>
-             // 风机表格 （第三个）
+            { // 风机表格 （第三个）
+            }
                 <div className={`${styles.bigbox} ${styles.shadow}`}>          
                     <Fanchart pointWidth={15} areaRecordCostR={areaWindCostssT} areaRecordProfitR={areaWindEarningssT} machine={areaWindNamessT } height={440} TBAA={areaWindRatessT} pointPlacement={-0.06} width={850} text={(actbt+1)+'月'+w11+w111+'各风机收益'} ly={40} lx={-75}></Fanchart>    
                     <div className={styles.imgq}>
