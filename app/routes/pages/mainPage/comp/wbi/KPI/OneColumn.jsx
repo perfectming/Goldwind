@@ -72,7 +72,7 @@ let Component = React.createClass({
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-15,
+	                x:-18,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',
