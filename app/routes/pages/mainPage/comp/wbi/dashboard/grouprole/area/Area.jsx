@@ -477,7 +477,7 @@ const mapDispatchToProps = (dispatch) => {
         	
         },
         changepageProS:()=>{
-        	
+        	dispatch(actions.setVars('showPage', 'prospace'));
         },
     };
 };
