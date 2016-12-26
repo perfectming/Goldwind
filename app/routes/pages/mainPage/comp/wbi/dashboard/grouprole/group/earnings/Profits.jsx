@@ -1,9 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Profitstyle.scss';
-import React from 'react';
-import {connect} from 'react-redux';
-import styles from './Profitstyle.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
 import icono from '../../../../../../img/comp/收益率1.png';
@@ -11,7 +8,7 @@ var $=require('jquery');
 let input_url="10.68.100.32";
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
-let data=require('./Profit-data');
+let data=require('./Profit-data1');
 let text=data.text;
 let datee=new Date;
 let year=datee.getFullYear();

@@ -4,7 +4,7 @@ var actions = require('redux/actions');
 var $=require('jquery');
 var ReactHighcharts = require('react-highcharts');
 var input_url="10.68.100.32";
-let data = require('./Profit-data');
+let data = require('./Profit-data1');
 let sqy =data.areaRecordCostQY;
 let Component = React.createClass({
     componentWillMount() {
