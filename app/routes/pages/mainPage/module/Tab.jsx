@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('tabItemActive', 0));
             dispatch(actions.setVars('showPage', 'cockpit'));
-            dispatch(actions.setVars('navhide', false));
+           
         },
         changeTabItem: (key, page) => {
             

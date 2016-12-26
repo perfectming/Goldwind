@@ -58,35 +58,48 @@ const mapDispatchToProps = (dispatch) => {
 
 
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
-                    function setDatas(rdata){
-                        dispatch(actions.setVars('fModel', rdata));
+                    function setDatas(fmodel){
+                        dispatch(actions.setVars('fModel', fmodel));
                         TY.getRtData("DevicesMatrix", 8888800, setfData)
-                        function setfData(rdata){
-                        dispatch(actions.setVars('fData', rdata));
-                            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "WTLeftOverview", setDatas, "Screen", 0);
-                            function setDatas(rdata){
-                                dispatch(actions.setVars('leftm', rdata));
-                                TY.getRtData("WTLeftOverview", 8888800, setlData)
-                                function setlData(rdata){
-                                dispatch(actions.setVars('leftd', rdata));
-                                        setTimeout(function(){
-                                       dispatch(actions.setVars('boolmapbody', true));  
-                                        },1500)
+                        function setfData(fdata){
+                            if(fdata.ModelData[8888801] == undefined){
+                                TY.getRtData("DevicesMatrix", 8888800, setfData)
+                            }else{
+                                dispatch(actions.setVars('fData', fdata));
+                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "WTLeftOverview", setDatas, "Screen", 0);
+                                function setDatas(leftm){
+                                    dispatch(actions.setVars('leftm', leftm));
+                                    TY.getRtData("WTLeftOverview", 8888800, setlData)
+                                    function setlData(leftd){
+                                    if(leftd.ModelData['150801'] == undefined){
+                                         TY.getRtData("WTLeftOverview", 8888800, setlData)
+                                     }else{
+                                        console.log(leftd)
+                                        dispatch(actions.setVars('leftd', leftd));
+                                           setTimeout(function(){
+                                            dispatch(actions.setVars('boolmapbody', true)); 
+                                           },2000)
+                                           
+                                           } 
+                                            
+                                    }
                                 }
                             }
+                        
                         }
                     }
+
             time=setInterval(function(){
                          TY.getRtData("DevicesMatrix", 8888800, setfData)
-                        function setfData(rdata){
-                            dispatch(actions.setVars('fData', rdata));
+                        function setfData(fdata){
+                            dispatch(actions.setVars('fData', fdata));
                              TY.getRtData("WTLeftOverview", 8888800, setlData)
-                                function setlData(rdata){
-                                    dispatch(actions.setVars('leftd', rdata));
+                                function setlData(rdata2){
+                                    dispatch(actions.setVars('leftd', rdata2));
                                 }
             
                         }
-             },1500)
+             },2000)
         },
         init: () => {
         },

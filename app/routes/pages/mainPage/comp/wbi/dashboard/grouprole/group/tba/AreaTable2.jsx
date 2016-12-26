@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let data = require('./Profit-data2');
-let input_url="10.9.100.38";
+
 
 let Component = React.createClass({
     componentWillMount() {
@@ -175,7 +175,7 @@ let Component = React.createClass({
                    tickInterval: 30,
 
             title: {
-                text: '100%',
+                text: '(%)',
                 align:'high',
                 rotation:'0',
                y:-15,

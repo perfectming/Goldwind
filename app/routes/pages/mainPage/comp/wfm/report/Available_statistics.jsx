@@ -5,7 +5,7 @@ import jian from '../../../img/comp/jian_icon.png';
 import add from '../../../img/comp/add_icon.png';
 import Column from './colum.jsx';
 let type = require('./ywbb_date');
-let btype = type.comps.power;
+let btype = type.comps.available;
 var $ =require('jquery');
 var actions = require('redux/actions');
 
@@ -31,7 +31,6 @@ let Component = React.createClass({
         return (
             <div className={styles.faultBox}>
                 <div className={styles.search_tit}>
-
 
                     {
                         btype.map((value, key,valueName)=> {
@@ -127,17 +126,17 @@ let Component = React.createClass({
                                         return(
                                         <span key={key} style={{width:'83px'}}>{value}</span>
                                         ) 
-                                    }else if(key==6){
+                                    }else if(key==1){
                                         return(
                                         <span key={key} style={{width:'292px'}}>{value}</span>
                                         ) 
-                                    }else if(key==6 || key==7){
+                                    }else if(key==4){
                                         return(
-                                        <span key={key} style={{width:'303px'}}>{value}</span>
+                                        <span key={key} style={{width:'452px'}}>{value}</span>
                                         ) 
                                     }else{
                                         return(
-                                        <span key={key} style={{cursor:'pointer',width:'132px'}} id={'poin'+key} onClick={(e)=>clickitem(key,e.target)}>{value}</span>
+                                        <span key={key} style={{cursor:'pointer',width:'232px'}} id={'poin'+key} onClick={(e)=>clickitem(key,e.target)}>{value}</span>
                                         ) 
                                     }
                             })
@@ -213,10 +212,11 @@ const mapDispatchToProps = (dispatch) => {
                    
                     value.map(function(valueC,keyC){
                         $('#tabline>div').eq(key).append('<span>'+valueC+'</span>');
-                        $('#tabline>div').eq(key).find('span').width(130);
+                        $('#tabline>div').eq(key).find('span').width(230);
                         $('#tabline>div').eq(key).find('span').eq(0).width(80);
-                        $('#tabline>div').eq(key).find('span').eq(6).width(291);
-                        $('#tabline>div').eq(key).find('span').eq(7).width(301);
+                        $('#tabline>div').eq(key).find('span').eq(1).width(291);
+                        $('#tabline>div').eq(key).find('span').eq(2).text(value[2]+'%');
+                        $('#tabline>div').eq(key).find('span').eq(4).width(450);
                     })
                     if(key%2==0){
                         $('#tabline>div').eq(key).css('background','#30343f')
@@ -224,10 +224,10 @@ const mapDispatchToProps = (dispatch) => {
                         $('#tabline>div').eq(key).css('background','#272b34')
                     }
                    //默认显示第一条数据
-                $('#tablist span').eq(1).css('background','#333');
+                $('#tablist span').eq(2).css('background','#333');
                  //初始化默认收集第一层数据
-                chartnum.push(value[1]);
-                chartname.push(value[7]); 
+                chartnum.push(value[2]);
+                chartname.push(value[4]); 
                         
                 //显示highchart图标 
                 $('#colum').css('display','block');
@@ -236,7 +236,7 @@ const mapDispatchToProps = (dispatch) => {
                     //初始化默认显示第一层数据
                         dispatch(actions.setVars('chtnum',chartnum));
                         dispatch(actions.setVars('chtname',chartname));
-                        dispatch(actions.setVars('chtit','18')); 
+                        dispatch(actions.setVars('chtit','占比')); 
             }
 
             })

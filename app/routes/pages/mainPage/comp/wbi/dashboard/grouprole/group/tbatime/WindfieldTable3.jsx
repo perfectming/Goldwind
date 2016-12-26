@@ -94,7 +94,7 @@ let Component = React.createClass({
                         align:'high',
                         rotation:'0',
                         y: -15,
-                        x: 40,
+                        x: 30,
                         style:{
                             fontSize:'14px',
                             color:'#fff'
@@ -112,7 +112,7 @@ let Component = React.createClass({
                  minRange: 100,
 
             title: {
-                text: '100%',
+                text: '(%)',
                 align:'high',
                 rotation:'0',
                y:-15,

@@ -157,11 +157,11 @@ let Component = React.createClass({
 
 
             title: {
-                text:'（kWh）',
+                text:'(kWh)',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 50,
+                x: 46,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -179,7 +179,7 @@ let Component = React.createClass({
                  tickInterval: 30,
 
             title: {
-                text: '100%',
+                text: '(%)',
                  align:'high',
                 rotation:'0',
                 y: -15,

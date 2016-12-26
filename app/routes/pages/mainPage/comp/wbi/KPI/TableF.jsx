@@ -58,11 +58,20 @@ let Component = React.createClass({
                     borderWidth: 0,
                     pointWidth: 25,
                     borderRadius:2
+                },
+                series: {
+                    cursor: 'pointer',
+                    events: {
+                        click: function(e) {
+                            X1=e.point.category;
+                            AreaId=areaId[e.point.index];
+                            changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
+                        }
+                    }
                 }
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -126,13 +135,6 @@ let Component = React.createClass({
                 tooltip: {
 	                valueSuffix: 'kWh'
 	            },
-                events: {
-                    click: function(e) {
-                    	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
-                    	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
-                    }
-                }
             },{
                 name: '故障损失',
                 type: 'column',
@@ -141,13 +143,6 @@ let Component = React.createClass({
                 tooltip: {
 	                valueSuffix: 'kWh'
 	            },
-                events: {
-                    click: function(e) {
-                    	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
-                    	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
-                    }
-                }
             },{
             	name: '维护损失',
             	type: 'column',
@@ -156,13 +151,6 @@ let Component = React.createClass({
                 tooltip: {
 	                valueSuffix: 'kWh'
 	            },
-                events: {
-                    click: function(e) {
-                    	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
-                    	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
-                    }
-                }
             },{
             	name: '限功率损失',
             	type: 'column',
@@ -171,13 +159,6 @@ let Component = React.createClass({
                 tooltip: {
 	                valueSuffix: 'kWh'
 	            },
-                events: {
-                    click: function(e) {
-                    	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
-                    	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
-                    }
-                }
             },{
             	name: '非设备原因损失',
             	type: 'column',
@@ -186,13 +167,6 @@ let Component = React.createClass({
                 tooltip: {
 	                valueSuffix: 'kWh'
 	            },
-                events: {
-                    click: function(e) {
-                    	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
-                    	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
-                    }
-                }
             },{
             	name: 'PBA',
             	type: 'spline',
@@ -201,13 +175,6 @@ let Component = React.createClass({
                 tooltip: {
 	                valueSuffix: '%'
 	            },
-                events: {
-                    click: function(e) {
-                    	X1=e.point.category;
-                    	AreaId=areaId[e.point.index]
-                    	changedata1(wtData,X1,AreaId,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime);
-                    }
-                }
             }]
         };
         return (

@@ -189,7 +189,7 @@ let Component = React.createClass({
                 </div>
                   <div className={styles.tablebox} id='tablebox'>
                        
-                          <div className={styles.tabtit} id='tabtit' >
+                          <div className={`${styles.tabtit} ${styles.tabtit1}`} id='tabtit' >
                           {
                             tabledata2!=undefined && Tarr.map((value,key)=>{
 
@@ -421,8 +421,7 @@ const mapDispatchToProps = (dispatch) => {
                jsonp:"callback",    
                jsonpCallback:"testCall",    
                timeout:3000,       
-               success:function(json,textStatus){ 
-                console.log(json) 
+               success:function(json,textStatus){  
                 dispatch(actions.appendObjs('tabledata2',json));
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    

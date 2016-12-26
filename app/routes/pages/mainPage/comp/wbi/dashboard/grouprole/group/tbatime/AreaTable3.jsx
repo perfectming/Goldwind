@@ -155,7 +155,7 @@ let Component = React.createClass({
                 
 
             title: {
-                text: '100%',
+                text: '(%)',
                 align:'high',
                 rotation:'0',
                y:-15,
