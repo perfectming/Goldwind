@@ -159,7 +159,7 @@ const mapDispatchToProps = (dispatch) => {
                     //各区域   一区域二区域
                     let runtime1=[];       //实际发电量
                     let downtime1=[];       //故障损失
-                    let tba1=[];       //维护损失
+                    let tba1=[];             //维护损失
                     let name1=[];
                     let wfid1=[];
                     for (var i in data.data) {
@@ -167,7 +167,7 @@ const mapDispatchToProps = (dispatch) => {
                         name1.push(data.data[i].wfname)
                         runtime1.push(data.data[i].runtimes);   //实际发电量
                         downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(data.data[i].tba.toFixed(3)*100);   //维护损失
+                        tba1.push(Number((data.data[i].tba*100).toFixed(2)));   //维护损失
                         wfid1.push(data.data[0].wfid);   //维护损失
 
                     }
@@ -208,7 +208,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba.toFixed(3)*100); //维护损失
+                        tba2.push(Number((data.data[i].tba*100).toFixed(2))); //维护损失
 
                     }
                     dispatch(actions.setVars('runtime2', runtime2));
@@ -260,7 +260,7 @@ const mapDispatchToProps = (dispatch) => {
                         name1.push(data.data[i].wfname)
                         runtime1.push(data.data[i].runtimes);   //实际发电量
                         downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(data.data[i].tba.toFixed(3)*100);  //维护损失
+                        tba1.push(Number((data.data[i].tba*100).toFixed(2))); //维护损失
 
                     }
                     dispatch(actions.setVars('w11', data.data[0].wfname));
@@ -300,7 +300,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba.toFixed(3)*100);  //维护损失
+                        tba2.push(Number((data.data[i].tba*100).toFixed(2)));  //维护损失
 
                     }
                     dispatch(actions.setVars('runtime2', runtime2));
@@ -341,7 +341,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname);
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba.toFixed(3)*100);  //维护损失
+                        tba2.push(Number((data.data[i].tba*100).toFixed(2))); //维护损失
 
                     }
                     dispatch(actions.setVars('name2', name2));
@@ -387,7 +387,7 @@ const mapDispatchToProps = (dispatch) => {
                         name2.push(data.data[i].wtname)
                         runtime2.push(data.data[i].runtimes);   //实际发电量
                         downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(data.data[i].tba.toFixed(3)*100); //维护损失
+                        tba2.push(Number((data.data[i].tba*100).toFixed(2))); //维护损失
                     }
 
                     dispatch(actions.setVars('name2', name2));
@@ -414,7 +414,7 @@ const mapDispatchToProps = (dispatch) => {
                 barLotime3c.push(hhdata3.data[i].wtname)   //区域的横坐标
                 power3c.push(hhdata3.data[i].runtimes) //实际发电量
                 wrong30c.push(hhdata3.data[i].downtimes);   //故障损失
-                wrong31c.push(hhdata3.data[i].tba.toFixed(3)*100); //故障损失
+                wrong31c.push(Number((hhdata3.data[i].tba*100).toFixed(2))); //故障损失
 
             }
             let width0=barLotime3c.length*60;
@@ -444,7 +444,7 @@ const mapDispatchToProps = (dispatch) => {
                 name2.push(hhdata3.data[i].wtname)
                 runtime2.push(hhdata3.data[i].runtimes);   //实际发电量
                 downtime2.push(hhdata3.data[i].downtimes);   //故障损失
-                tba2.push(hhdata3.data[i].tba.toFixed(3)*100);   //维护损失
+                tba2.push(Number((hhdata3.data[i].tba*100).toFixed(2)));   //维护损失
 
             }
 
