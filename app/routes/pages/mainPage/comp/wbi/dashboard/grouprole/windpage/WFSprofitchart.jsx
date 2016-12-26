@@ -155,12 +155,12 @@ let Component = React.createClass({
                 {
                     name: '成本',
                     type: 'column',
-                    color:'#5298d3',
+                    color:'#70c080',
                     data: fanCost,
                     stack:'waste',
                     maxPointWidth: pointWidth,
                     borderRadius: borderRadius,
-                    color:'#FFFFFF',
+                   
                 },
                 {
                     name: '收益率',
