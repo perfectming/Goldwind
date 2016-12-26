@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => {
                             }
                         }
                     }
-            time=setInterval(function(){  
+            time=setInterval(function(){
                          TY.getRtData("DevicesMatrix", 8888800, setfData)
                         function setfData(rdata){
                             dispatch(actions.setVars('fData', rdata));
@@ -84,8 +84,8 @@ const mapDispatchToProps = (dispatch) => {
                                 function setlData(rdata){
                                     dispatch(actions.setVars('leftd', rdata));
                                 }
-
-                        }                  
+            
+                        }
              },1500)
         },
         init: () => {
