@@ -11,6 +11,7 @@ import Login from '../../../../../../components/common/Loading.jsx';
 import Pie2 from '../chart/Pie2.jsx';
 import jnjp from '../../../img/comp/jienengjp.png';
 import nlcojp from '../../../img/comp/nianleicojp.png';
+let parameter = require('./Monitorkb-parameter');//日期以及CDM场站参数文件引用//
 let time;
 
 var $ = require('jquery');
@@ -19,50 +20,57 @@ var $ = require('jquery');
 var actions = require('redux/actions');
 
 let Component = React.createClass({
+    //render渲染前执行的内容//
     componentWillMount() {
+        //ajax调用数据并打开实时数据刷新
         this.props.changedate();
     },
+    //该分页页面退出前执行的内容//
     componentWillUnmount() {
+        //清除该页面的数据实时刷新
         clearInterval(time)
     },
-
+    //render渲染后执行的内容//
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-
+        //moname是ajax调到的数据模型，modata是ajax调到的数据，boole是判断执行完ajax再执行dom操作的变量//
         let{moname,modata,boole=false}=this.props;
         if(boole){
             let mobd=modata.ModelData;
             let mod=moname.Model.dis;
             let datename=moname.Model.ens;
-            let arr=[];
-            let arrname=[];
-            let num=[];
-            let allnum=0;
-            let kbpjfs=Number((mobd[8888800].WindSpeed_DevAverValue)*mod.WindSpeed_DevAverValue.coeff).toFixed(mod.WindSpeed_DevAverValue.place);
-            let kbpjfzd=Number((mobd[8888800].PVTSI_Aver)*mod.PVTSI_Aver.coeff).toFixed(mod.PVTSI_Aver.place);
-            let zhzbgl1=(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2);
-            let zhzbgl2=(mobd[8888800].YearEgyAt/(mobd[8888800].YearPlanTotEgyAt/1+(mobd[8888800].YearLossElec.Sum/1))*100).toFixed(2);
-            let zhzbgl3=(mobd[8888800].MonthEgyAt/mobd[8888800].CurMonthPlanEgyAt*100).toFixed(2);
-            let zhzbgl4=(mobd[8888801].MonthLossElec.Sum/mobd[8888801].MonthEgyAt*100).toFixed(2);
-            let zhzbgl5=(mobd[8888802].MonthLossElec.Sum/mobd[8888802].MonthEgyAt*100).toFixed(2);
-            let kbnjhfdl=mobd[8888800].Last12MonthsPlanEgyAtStat.Value;
-            let kbnsjfdl=mobd[8888800].Last12MonthsEgyAtStat.Value;
-            let kbnjhfdl1=[];
-            let kbnsjfdl1=[];
-            let kbnfdwcl=[];
-            let czjhfdl=[];
-            let czsjfdl=[];
-            let czwcl1=[];
-            let gswcl1;
-            let gswcl2=[];
-            let czgzss1=[];
-            let czwhss1=[];
-            let czxdss1=[];
-            let czndxly1=[];
+            let arr=[];//各场站的装机容量值的数组，顺序与给出数据的顺序一致（下同）//
+            let arrname=[];//各场站名字的数组//
+            let num=[];//各场站的装机容量值和对应场站名的数组//
+            let allnum=0;//用于计算总装机容量//
+            let kbpjfs=Number((mobd[8888800].WindSpeed_DevAverValue)*mod.WindSpeed_DevAverValue.coeff).toFixed(mod.WindSpeed_DevAverValue.place);//平均风速//
+            let kbpjfzd=Number((mobd[8888800].PVTSI_Aver)*mod.PVTSI_Aver.coeff).toFixed(mod.PVTSI_Aver.place);//平均辐照度（coeff为系数；place为保留位数；下同）//
+            let zhzbgl1=(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2);//年发电完成率//
+            let zhzbgl2=(mobd[8888800].YearEgyAt/(mobd[8888800].YearPlanTotEgyAt/1+(mobd[8888800].YearLossElec.Sum/1))*100).toFixed(2);//年发电能力//
+            let zhzbgl3=(mobd[8888800].MonthEgyAt/mobd[8888800].CurMonthPlanEgyAt*100).toFixed(2);//月发电完成率//
+            let zhzbgl4=(mobd[8888801].MonthLossElec.Sum/mobd[8888801].MonthEgyAt*100).toFixed(2);//弃风率//
+            let zhzbgl5=(mobd[8888802].MonthLossElec.Sum/mobd[8888802].MonthEgyAt*100).toFixed(2);//弃光率//
+            let kbnjhfdl=mobd[8888800].Last12MonthsPlanEgyAtStat.Value;//原始最近十二个月计划发电量//
+            let kbnsjfdl=mobd[8888800].Last12MonthsEgyAtStat.Value;//原始最近十二个月实际发电量//
+            let kbnjhfdl1=[];//运算处理后最近十二个月计划发电量//
+            let kbnsjfdl1=[];//运算处理后最近十二个月实际发电量//
+            let kbnfdwcl=[];//总年发电量完成率（通过运算得出）//
+            let czjhfdl=[];//各场站计划发电量//
+            let czsjfdl=[];//各场站实际发电量//
+            let czwcl1=[];//各场站发电完成率//
+            let gswcl1;//集团发电完成率//
+            let gswcl2=[];//集团发电完成率（实现直线显示）//
+            let czgzss1=[];//各场站故障损失//
+            let czwhss1=[];//各场站维护损失//
+            let czxdss1=[];//各场站限电损失//
+            let czndxly1=[];//各场站年等效利用小时数//
+            let IntoCDMjp=0;//纳入CDM场站CO2减排量//
+            let NotIntoCDMjp=0;//未纳入CDM场站CO2减排量//
 
+            //以下是各个数据的提取、循环、计算的方法//
             (function(){
                 for(let i in kbnjhfdl){
                     kbnjhfdl1.push(Number((kbnjhfdl[i]*mod.Last12MonthsPlanEgyAtStat.coeff).toFixed(mod.Last12MonthsPlanEgyAtStat.place)));
@@ -72,6 +80,12 @@ let Component = React.createClass({
                 }
                 for(let i=0;i<kbnjhfdl1.length;i++){
                     kbnfdwcl.push(Number((kbnsjfdl1[i]/kbnjhfdl1[i]*100).toFixed(2)))
+                }
+                for(let i=0;i<parameter.IntoCDM.length;i++){
+                    IntoCDMjp += mobd[parameter.IntoCDM[i]].YearEgyAt*mod.YearEgyAt.coeff*parameter.Coefficient;
+                }
+                for(let i=0;i<parameter.NotIntoCDM.length;i++){
+                    NotIntoCDMjp += mobd[parameter.NotIntoCDM[i]].YearEgyAt*mod.YearEgyAt.coeff*parameter.Coefficient;
                 }
             }());
             (function(){
@@ -114,7 +128,9 @@ let Component = React.createClass({
             for(let x=0;x<arr.length;x++){
                 allnum+=arr[x]
             };
-            let urodz = new Date("11/12/2015");
+
+            //安全天数计算
+            let urodz = new Date(parameter.safeDate);
             let now = new Date();let ile = now.getTime() - urodz.getTime();
             let dni = Math.floor(ile / (1000 * 60 * 60 * 24));
             return(
@@ -141,11 +157,11 @@ let Component = React.createClass({
                     <div className={`${styles.zhzbgl} ${styles.box_shadow}`}>
                         <Title title={['综合指标概览']}></Title>
                         <div className={styles.zhzbglmain}>
-                            <div className={styles.zhzbglbox}><p>年发电完成率</p><Pie2 color={zhzbgl1>100? ['#1fe005','#39565e']:zhzbgl1>80?['#fbd500','#39565e']:zhzbgl1>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl1>100? {color:'#1fe005'} :zhzbgl1>80?{color:'#fbd500'}:zhzbgl1>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl1}<span className={styles.danweicc}>%</span></p></span></div>
-                            <div className={styles.zhzbglbox}><p>年发电能力</p><Pie2 color={zhzbgl2>100? ['#1fe005','#39565e']:zhzbgl2>80?['#fbd500','#39565e']:zhzbgl2>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1+mobd[8888800].YearLossElec.Sum/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl2>100? {color:'#1fe005'} :zhzbgl2>80?{color:'#fbd500'}:zhzbgl2>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl2}<span className={styles.danweicc}>%</span></p></span></div>
-                            <div className={styles.zhzbglbox}><p>月发电完成率</p><Pie2 color={zhzbgl3>100? ['#1fe005','#39565e']:zhzbgl3>80?['#fbd500','#39565e']:zhzbgl3>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].MonthEgyAt),Number(mobd[8888800].CurMonthPlanEgyAt/1-mobd[8888800].MonthEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl3>100? {color:'#1fe005'} :zhzbgl3>80?{color:'#fbd500'}:zhzbgl3>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl3}<span className={styles.danweicc}>%</span></p></span></div>
-                            <div className={styles.zhzbglbox}><p>弃风率</p><Pie2 color={zhzbgl4>100? ['#d06960','#39565e']:zhzbgl4>80?['#ff0000','#39565e']:zhzbgl4>60?['#fbd500','#39565e']:['#1fe005','#39565e']} num={[Number(mobd[8888801].MonthLossElec.Sum),Number(mobd[8888801].MonthEgyAt/1-mobd[8888801].MonthLossElec.Sum/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl4>100? {color:'#d06960'} :zhzbgl4>80?{color:'#ff0000'}:zhzbgl4>60?{color:'#fbd500'}:{color:'#1fe005'}}>{zhzbgl4}<span className={styles.danweicc}>%</span></p></span></div>
-                            <div className={styles.zhzbglbox}><p>弃光率</p><Pie2 color={zhzbgl5>100? ['#d06960','#39565e']:zhzbgl5>80?['#ff0000','#39565e']:zhzbgl5>60?['#fbd500','#39565e']:['#1fe005','#39565e']} num={[Number(mobd[8888802].MonthLossElec.Sum),Number(mobd[8888802].MonthEgyAt/1-mobd[8888802].MonthLossElec.Sum/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl5>100? {color:'#d06960'} :zhzbgl5>80?{color:'#ff0000'}:zhzbgl5>60?{color:'#fbd500'}:{color:'#1fe005'}}>{zhzbgl5}<span className={styles.danweicc}>%</span></p></span></div>
+                            <div className={styles.zhzbglbox}><p>年发电完成率</p><Pie2 color={zhzbgl1>100? ['#1fe005','#39565e']:zhzbgl1>80?['#fbd500','#39565e']:zhzbgl1>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl1>100? {color:'#1fe005'} :zhzbgl1>80?{color:'#fbd500'}:zhzbgl1>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl1=== "NaN" ? "--": zhzbgl1}<span className={styles.danweicc}>%</span></p></span></div>
+                            <div className={styles.zhzbglbox}><p>年发电能力</p><Pie2 color={zhzbgl2>100? ['#1fe005','#39565e']:zhzbgl2>80?['#fbd500','#39565e']:zhzbgl2>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1+mobd[8888800].YearLossElec.Sum/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl2>100? {color:'#1fe005'} :zhzbgl2>80?{color:'#fbd500'}:zhzbgl2>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl2=== "NaN" ? "--": zhzbgl2}<span className={styles.danweicc}>%</span></p></span></div>
+                            <div className={styles.zhzbglbox}><p>月发电完成率</p><Pie2 color={zhzbgl3>100? ['#1fe005','#39565e']:zhzbgl3>80?['#fbd500','#39565e']:zhzbgl3>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].MonthEgyAt),Number(mobd[8888800].CurMonthPlanEgyAt/1-mobd[8888800].MonthEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl3>100? {color:'#1fe005'} :zhzbgl3>80?{color:'#fbd500'}:zhzbgl3>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl3=== "NaN" ? "--": zhzbgl3}<span className={styles.danweicc}>%</span></p></span></div>
+                            <div className={styles.zhzbglbox}><p>弃风率</p><Pie2 color={zhzbgl4>100? ['#d06960','#39565e']:zhzbgl4>80?['#ff0000','#39565e']:zhzbgl4>60?['#fbd500','#39565e']:['#1fe005','#39565e']} num={[Number(mobd[8888801].MonthLossElec.Sum),Number(mobd[8888801].MonthEgyAt/1-mobd[8888801].MonthLossElec.Sum/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl4>100? {color:'#d06960'} :zhzbgl4>80?{color:'#ff0000'}:zhzbgl4>60?{color:'#fbd500'}:{color:'#1fe005'}}>{zhzbgl4=== "NaN" ? "--": zhzbgl4}<span className={styles.danweicc}>%</span></p></span></div>
+                            <div className={styles.zhzbglbox}><p>弃光率</p><Pie2 color={zhzbgl5>100? ['#d06960','#39565e']:zhzbgl5>80?['#ff0000','#39565e']:zhzbgl5>60?['#fbd500','#39565e']:['#1fe005','#39565e']} num={[Number(mobd[8888802].MonthLossElec.Sum),Number(mobd[8888802].MonthEgyAt/1-mobd[8888802].MonthLossElec.Sum/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl5>100? {color:'#d06960'} :zhzbgl5>80?{color:'#ff0000'}:zhzbgl5>60?{color:'#fbd500'}:{color:'#1fe005'}}>{zhzbgl5=== "NaN" ? "--": zhzbgl5}<span className={styles.danweicc}>%</span></p></span></div>
                         </div>
                     </div>
                     <div className={`${styles.czrlzb} ${styles.box_shadow}`}>
@@ -201,27 +217,27 @@ let Component = React.createClass({
                             <div className={styles.righttext}>节能减排</div>
                         </div>
                         <div className={`${styles.navitem} ${styles.bore1}`}>
-                            <div className={styles.leftimg} style={{width:'100%',textAlign:'center'}}>区域内场站数量:--个</div>
+                            <div className={styles.leftimg} style={{width:'100%',textAlign:'center'}}>区域内场站数量:{parameter.IntoCDM.length + parameter.NotIntoCDM.length}个</div>
                         </div>
                         <div className={styles.navitem}>
                             <div className={styles.leftimg}><img src={nlcojp}/></div>
-                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>--</b>{mod.YearCO2Emissions.unit}</h2></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{(IntoCDMjp+NotIntoCDMjp).toFixed(2)}</b>t</h2></div>
                         </div>
                         <div className={`${styles.navitem} ${styles.bore1}`}>
-                            <div className={styles.leftimg} style={{width:'100%'}}>纳入CDM场站数量:--个</div>
+                            <div className={styles.leftimg} style={{width:'100%'}}>纳入CDM场站数量:{parameter.IntoCDM.length}个</div>
                         </div>
 
                         <div className={styles.navitem}>
                             <div className={styles.leftimg}><img src={nlcojp}/></div>
-                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{Number((mobd[8888800].YearCO2Emissions)*mod.YearCO2Emissions.coeff).toFixed(mod.YearCO2Emissions.place)}</b>{mod.YearCO2Emissions.unit}</h2></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{IntoCDMjp.toFixed(2)}</b>t</h2></div>
                         </div>
                         <div className={`${styles.navitem} ${styles.bore1}`}>
-                            <div className={styles.leftimg} style={{width:'100%'}}>未纳入CDM场站数量:--个</div>
+                            <div className={styles.leftimg} style={{width:'100%'}}>未纳入CDM场站数量:{parameter.NotIntoCDM.length}个</div>
                         </div>
 
                         <div className={styles.navitem}>
                             <div className={styles.leftimg}><img src={nlcojp}/></div>
-                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>--</b>t</h2></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{NotIntoCDMjp.toFixed(2)}</b>t</h2></div>
                         </div>
 
                     </div>
@@ -236,7 +252,6 @@ let Component = React.createClass({
     }
 });
 
-
 const mapStateToProps = (state) => {
     return {
         moname:state.vars.moname,
@@ -247,30 +262,33 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        //接口调用方法//
         changedate:()=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
-            function momo(rdata){
-                dispatch(actions.setVars('moname', rdata));
+            function momo(moname){
+                dispatch(actions.setVars('moname', moname));
                 TY.getRtData("MonitorBoard", 8888800, ppo);
-                function ppo(rdata){
+                function ppo(modata){
                     TY.getRtData("MonitorBoard", 8888800, ppo);
-                    function ppo(rdata){
-                        dispatch(actions.setVars('modata', rdata));
+                    function ppo(modata){
+                        dispatch(actions.setVars('modata', modata));
                         setTimeout(function () {
                             dispatch(actions.setVars('boole', true));
                         },100)
                     }
                 }
             }
+            //数据刷新方法//
             time=setInterval(function(){
                 TY.getRtData("MonitorBoard", 8888800, ppo);
-                function ppo(rdata){
-                    dispatch(actions.setVars('modata', rdata));
+                function ppo(modata){
+                    dispatch(actions.setVars('modata', modata));
                     dispatch(actions.setVars('boole', true));
                 }
             },2000)
         },
         init: () => {
+            //当前页面下需要变化的全局变量，"navhide"控制三级菜单；"putpage"控制；"bodypage"控制//
             dispatch(actions.setVars('navhide', false));
             dispatch(actions.setVars('putpage', true));
             dispatch(actions.setVars('bodypage', true));
