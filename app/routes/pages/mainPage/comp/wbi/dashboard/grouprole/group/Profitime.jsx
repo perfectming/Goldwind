@@ -13,12 +13,11 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-
     render() {
         let {ipUrl,w0,GERa,GEAm,GENa,GEIn,GeR,GeM,GeE,GeC,actbt,changpage,backtop,befor_pagee='group',befor_pagee2}=this.props;
         return (
             <div className={styles.box}>
-            <div className={styles.padding}>
+            <div className={styles.paddingtop}>
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
                        <div className={styles.imgqwe}>

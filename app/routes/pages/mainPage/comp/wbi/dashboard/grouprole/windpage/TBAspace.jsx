@@ -53,7 +53,7 @@ let Component = React.createClass({
            
 
                 </ul>
-                <div className={styles.paddingtop}>
+               
                 <div className={styles.bigbox}>
                   
                       
@@ -63,7 +63,7 @@ let Component = React.createClass({
                        
                
                   
-                    <div className={styles.imgq}>
+                    <div className={styles.imgcq}>
                         <img src={icono}/>
                     </div>
 
@@ -73,7 +73,7 @@ let Component = React.createClass({
                       <button  onClick={()=>more(xxdwfId,actbt,btn,ipUrl)} className={btn===2? styles.btn0 : styles.btn1}>更多</button>
                    </div>
                 </div>
-                </div>
+               
             </div>
 
 

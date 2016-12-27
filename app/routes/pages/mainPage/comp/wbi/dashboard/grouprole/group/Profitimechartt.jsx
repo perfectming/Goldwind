@@ -23,8 +23,8 @@ let Component = React.createClass({
                 top:'-20px',
                 vertical:'top',
                
-                 x:120,
-                 y:14,
+                 x:107,
+                 y:15,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
@@ -106,7 +106,7 @@ let Component = React.createClass({
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 35,
+                x: 45,
                 style:{
                     fontSize:'14px',
                     color:'#fff'

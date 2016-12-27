@@ -9,10 +9,10 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {width,areaPlanDay,areaPlan,areaPlanDayT,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
+        let {height,text,width,areaPlanDay,areaPlan,areaPlanDayT,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
         let configPie = {
             chart: {
-                height:395,
+                height:height,
             
                  backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
@@ -22,14 +22,15 @@ let Component = React.createClass({
                
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                 x : "0",
+                 x : 105,
+                 y:14,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                
                 }

@@ -9,11 +9,11 @@ let Component = React.createClass({
     },
 
     render() {
-        let{windFiled,windCost,windProfit,w0,TBA}=this.props;
+        let{height,windFiled,windCost,windProfit,w0,TBA}=this.props;
         let configPie = {
             chart: {
-                height:430,
-                 backgroundColor: "rgba(44, 61, 71,0)",
+                height:height,
+                 backgroundColor: "rgba(44, 61, 71,.4)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -36,7 +36,6 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 x:-75,
                 y:20,
-                
                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
@@ -93,7 +92,7 @@ let Component = React.createClass({
                         align:'high',
                         rotation:'0',
                         y: -15,
-                        x: 30,
+                        x: 35,
                         style:{
                             fontSize:'14px',
                             color:'#fff'

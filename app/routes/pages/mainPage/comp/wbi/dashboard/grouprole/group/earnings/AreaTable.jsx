@@ -24,7 +24,7 @@ let Component = React.createClass({
                 align:'left',
                  x : "0",
                 x : 105,
-                y :11,
+                y :13,
                 style:{
                     color:"#fff",
                     fontSize:"16px",

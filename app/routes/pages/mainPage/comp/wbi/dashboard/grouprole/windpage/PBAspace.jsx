@@ -60,17 +60,17 @@ let Component = React.createClass({
     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
 
                 </ul>
-                <div className={styles.paddingtop}>
+          
                 <div className={styles.bigbox}>
                 
                     
                          
-                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={[actbt+1]+'月'+xxdwfNa+'各风机PBA'} ty={60} pointWidth={30}  pointPlacement={-0.07} borderRadius={7}></PBAspacechart>
+                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={[actbt+1]+'月'+xxdwfNa+'各风机PBA'} ty={40} pointWidth={30}  pointPlacement={-0.07} borderRadius={7}></PBAspacechart>
                         
                     
                        
                   
-                    <div className={styles.imgq}>
+                    <div className={styles.imgccq}>
                         <img src={icono}/>
                     </div>
                     <div className={styles.buttons}>
@@ -79,7 +79,7 @@ let Component = React.createClass({
                         <button className={btn===2? styles.btn0 : styles.btn1} onClick={()=>more(actbt,xxdwfId,ipUrl)}>更多</button>
                     </div>
                 </div>
-                </div>
+                
             </div>
 
 

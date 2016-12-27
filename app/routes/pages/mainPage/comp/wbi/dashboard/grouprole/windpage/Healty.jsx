@@ -52,13 +52,13 @@ let Component = React.createClass({
                     
                     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
                 </ul>
- <div className={styles.paddingtop}>
+
 
 
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                   
                       
-                               <Healtychart machineE={windP}         areaRecordProfit={wind} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机健康度'} ty={40} pointWidth={30} borderRadius={7}></Healtychart>
+                               <Healtychart machineE={windP}         areaRecordProfit={wind} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机健康度'} ty={35} pointWidth={30} borderRadius={7}></Healtychart>
                        
                         
                  
@@ -72,7 +72,7 @@ let Component = React.createClass({
                    </div>
                 </div>
  </div>
-                </div>
+                
           
 
 

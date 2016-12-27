@@ -8,11 +8,11 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {input_url,w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
+        let {height,input_url,w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
         let configPie = {
             chart: {
-                height:430,
-                backgroundColor: "rgba(44, 61, 71,0)",
+                height:height,
+                backgroundColor: "rgba(44, 61, 71,.4)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
