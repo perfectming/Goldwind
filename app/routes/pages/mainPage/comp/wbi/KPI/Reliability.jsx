@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './ReliabilityStyle.scss';
 import PBAdata from './TimeSelect-data';
 import ChartPie from './ChartPie.jsx';
-import OneColumn from './OneColumn.jsx';
+import TwoColumn from './TwoColumn.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
 
 var actions = require('redux/actions');
@@ -18,64 +18,66 @@ let Component = React.createClass({
     },
     
     render() {
-        let {machineTypeTwo=[],machineTypeOne=[],typeTwo=[],typeOne=[],typeNameTwo='可靠性指标分析',typeNameOne='可靠性指标分析',reliabilityNameOne='机型可靠性分析',reliabilityNameTwo='机型可靠性分析',reliabilityOne=[],reliabilityTwo=[],wtType,ipUrl,reliabilityBool=false,selectId,selectName,buttonAction,buttonReset,inputOnChange, onFocus,changeValueS,changeValueE} = this.props;
+        let {buttonResetA,buttonResetB,machineTypeTwo=[],machineTypeOne=[],typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne,reliabilityNameTwo,reliabilityOne=[],reliabilityTwo=[],wtType,ipUrl,reliabilityBool=false,selectId,selectName,buttonAction,buttonReset,inputOnChange, onFocus,changeValueS,changeValueE} = this.props;
         let comp = PBAdata.list;
         if(reliabilityBool){
             return(
                 <div className={styles.bodyBox}>
                     <div className={styles.inquireBox}>
-                    {
-                        comp.map((value, key)=> {
-                            if (value.type === 'date') {
-                                return (
-                                        <div className={styles.dateBox} key={key}>
-                                            <span>发生时间</span><input id="startTime" ref="startTime" placeholder={value.content} onChange={(e)=>changeValueS(e.target.value)} type={value.type} style={{width:value.width}}/>
-                                            <span>结束时间</span><input id="endTime" ref="endTime" placeholder={value.content} onChange={(e)=>changeValueE(e.target.value)} type={value.type} style={{width:value.width}}/>
-                                        </div>
-                                    )
-                            }else if (value.type === 'button') {
-                                return (
-                                        <div className={styles.btnBox} key={key}>
-                                            <div className={styles.bBox}>
-                                                <button onClick={()=>buttonAction(ipUrl,selectId,selectName,wtType,typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne='机型可靠性分析',reliabilityNameTwo='机型可靠性分析',reliabilityOne=[],reliabilityTwo=[],machineTypeTwo=[],machineTypeOne=[])}>{"查询"}</button>
+                        {
+                            comp.map((value, key)=> {
+                                if (value.type === 'date') {
+                                    return (
+                                            <div className={styles.dateBox} key={key}>
+                                                <span>发生时间</span><input id="startTime" ref="startTime" placeholder={value.content} onChange={(e)=>changeValueS(e.target.value)} type={value.type} style={{width:value.width}}/>
+                                                <span>结束时间</span><input id="endTime" ref="endTime" placeholder={value.content} onChange={(e)=>changeValueE(e.target.value)} type={value.type} style={{width:value.width}}/>
                                             </div>
-                                            <div className={styles.bBox}>
-                                                <button onClick={()=>buttonReset()}>{"重置"}</button>
+                                        )
+                                }else if (value.type === 'button') {
+                                    return (
+                                            <div className={styles.btnBox} key={key}>
+                                                <div className={styles.bBox}>
+                                                    <button onClick={()=>buttonAction(ipUrl,selectId,selectName,wtType,typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne,reliabilityNameTwo,reliabilityOne=[],reliabilityTwo=[],machineTypeTwo=[],machineTypeOne=[])}>{"查询"}</button>
+                                                </div>
+                                                <div className={styles.bBox}>
+                                                    <button onClick={()=>buttonReset()}>{"重置"}</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
-                            }
-                        })
-                    }
-                    <div className={styles.seleBox}>
-                                    <span>选择KPI损失电量对象</span>
-                                    <select>
-                                    {
-                                        selectName.map((value, key)=> {
-                                            return(
-                                                <option value={value} key={key}>{value}</option>
-                                            )
-                                       })
-                                    }
-                                    </select>
-                    </div>
+                                        )
+                                }
+                            })
+                        }
+                        <div className={styles.seleBox}>
+                                        <span>选择KPI损失电量对象</span>
+                                        <select>
+                                        {
+                                            selectName.map((value, key)=> {
+                                                return(
+                                                    <option value={value} key={key}>{value}</option>
+                                                )
+                                           })
+                                        }
+                                        </select>
+                        </div>
                     </div>
                     
                     <div className={styles.content}>
                         <div className={styles.floorOne}>
                             <div className={`${styles.pie} ${styles.boxShadow}`}>
-                                <ChartPie name={reliabilityNameOne} text={reliabilityNameOne} lose={reliabilityOne}></ChartPie>
+                                <div className={typeNameOne==undefined? styles.hide:styles.button} onClick={()=>buttonResetA()}>清除</div>
+                                <ChartPie unit={"h"} name={reliabilityNameOne} text={reliabilityNameOne} lose={reliabilityOne}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
-                                <OneColumn name={typeNameOne} title={typeNameOne} month={machineTypeOne} plan={typeOne} unit={"h"}></OneColumn>
+                                <TwoColumn name={typeNameOne} title={typeNameOne} month={machineTypeOne} plan={typeOne} unit={"h"}></TwoColumn>
                             </div>
                         </div>
                         <div className={styles.floorTwo}>
                             <div className={`${styles.pie} ${styles.boxShadow}`}>
-                                <ChartPie name={reliabilityNameOne} text={reliabilityNameTwo} lose={reliabilityTwo}></ChartPie>
+                                <div className={typeNameTwo==undefined? styles.hide:styles.button} onClick={()=>buttonResetB()}>清除</div>
+                                <ChartPie unit={"h"} name={reliabilityNameOne} text={reliabilityNameTwo} lose={reliabilityTwo}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
-                                <OneColumn name={typeNameTwo} title={typeNameTwo} month={machineTypeTwo} plan={typeTwo} unit={"h"}></OneColumn>
+                                <TwoColumn name={typeNameTwo} title={typeNameTwo} month={machineTypeTwo} plan={typeTwo} unit={"h"}></TwoColumn>
                             </div>
                         </div>
                     </div>
@@ -117,13 +119,13 @@ const mapDispatchToProps = (dispatch) => {
         init: (ipUrl,selectId,selectName) => {
             dispatch(actions.setVars('reliabilityNameOne', ));
             dispatch(actions.setVars('reliabilityOne', ));
-            dispatch(actions.setVars('typeNameOne', '可靠性指标分析'));
+            dispatch(actions.setVars('typeNameOne', ));
             dispatch(actions.setVars('typeOne', ));
             dispatch(actions.setVars('machineTypeOne', ));
 
             dispatch(actions.setVars('reliabilityNameTwo', ));
             dispatch(actions.setVars('reliabilityTwo', ));
-            dispatch(actions.setVars('typeNameTwo', '可靠性指标分析'));
+            dispatch(actions.setVars('typeNameTwo', ));
             dispatch(actions.setVars('typeTwo', ));
             dispatch(actions.setVars('machineTypeTwo', ));
             //初始日期为上月
@@ -185,20 +187,34 @@ const mapDispatchToProps = (dispatch) => {
         changeValueE:(e)=>{
             
         },
+        buttonResetA:()=>{
+            dispatch(actions.setVars('reliabilityNameOne', ));
+            dispatch(actions.setVars('reliabilityOne', ));
+            dispatch(actions.setVars('typeNameOne', ));
+            dispatch(actions.setVars('typeOne', ));
+            dispatch(actions.setVars('machineTypeOne', ));
+        },
+        buttonResetB:()=>{
+            dispatch(actions.setVars('reliabilityNameTwo', ));
+            dispatch(actions.setVars('reliabilityTwo', ));
+            dispatch(actions.setVars('typeNameTwo', ));
+            dispatch(actions.setVars('typeTwo', ));
+            dispatch(actions.setVars('machineTypeTwo', ));
+        },
         buttonReset:()=>{
             dispatch(actions.setVars('reliabilityNameOne', ));
             dispatch(actions.setVars('reliabilityOne', ));
-            dispatch(actions.setVars('typeNameOne', '可靠性指标分析'));
+            dispatch(actions.setVars('typeNameOne', ));
             dispatch(actions.setVars('typeOne', ));
             dispatch(actions.setVars('machineTypeOne', ));
 
             dispatch(actions.setVars('reliabilityNameTwo', ));
             dispatch(actions.setVars('reliabilityTwo', ));
-            dispatch(actions.setVars('typeNameTwo', '可靠性指标分析'));
+            dispatch(actions.setVars('typeNameTwo', ));
             dispatch(actions.setVars('typeTwo', ));
             dispatch(actions.setVars('machineTypeTwo', ));
         },
-        buttonAction:(ipUrl,selectId,selectName,wtType,typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne='机型可靠性分析',reliabilityNameTwo='机型可靠性分析',reliabilityOne=[],reliabilityTwo=[],machineTypeTwo=[],machineTypeOne=[])=>{
+        buttonAction:(ipUrl,selectId,selectName,wtType,typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne,reliabilityNameTwo,reliabilityOne=[],reliabilityTwo=[],machineTypeTwo=[],machineTypeOne=[])=>{
             var sTime = $('#startTime').val();
             //结束时间时间
             var eTime = $('#endTime').val();
@@ -220,22 +236,22 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',
                     data: {'startTime':sTime,'endTime':eTime,'wfid':selectId}, 
                     success: function (data) {
-                        if(typeNameOne=='可靠性指标分析'){
+                        if(typeNameOne==undefined){
                             reliabilityOne=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
                                 reliabilityOne.push([data.data[i].wttype,(data.data[i].totalloss).toFixed(1)/1]);
                             };
-                            reliabilityNameOne=A+'机型可靠性分析';
+                            reliabilityNameOne=A;
                             dispatch(actions.setVars('reliabilityNameOne', reliabilityNameOne));
                             dispatch(actions.setVars('reliabilityOne', reliabilityOne));
-                        }else if(typeNameOne!=='可靠性指标分析'&&typeNameTwo=='可靠性指标分析'){
+                        }else if(typeNameOne!==undefined&&typeNameTwo==undefined){
                             reliabilityTwo=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
                                 reliabilityTwo.push([data.data[i].wttype,(data.data[i].totalloss).toFixed(1)/1]);
                             };
-                            reliabilityNameTwo=A+'机型可靠性分析';
+                            reliabilityNameTwo=A;
                             dispatch(actions.setVars('reliabilityNameTwo', reliabilityNameTwo));
                             dispatch(actions.setVars('reliabilityTwo', reliabilityTwo));
                         }else{
@@ -250,9 +266,9 @@ const mapDispatchToProps = (dispatch) => {
                             dataType: 'json',
                             data: {'wttype':wtType,'startTime':sTime,'endTime':eTime,'wfid':selectId}, 
                             success: function (data) {
-                                if(typeNameOne=='可靠性指标分析'){
+                                if(typeNameOne==undefined){
                                     typeOne=[],machineTypeOne=[];
-                                    typeNameOne=wtType+'可靠性指标分析';
+                                    typeNameOne=wtType;
                                     for(var i in data.data){
                                         typeOne.push((data.data[i]).toFixed(1)/1);
                                         machineTypeOne.push(i);
@@ -260,9 +276,9 @@ const mapDispatchToProps = (dispatch) => {
                                     dispatch(actions.setVars('typeNameOne', typeNameOne));
                                     dispatch(actions.setVars('typeOne', typeOne));
                                     dispatch(actions.setVars('machineTypeOne', machineTypeOne));
-                                }else if(typeNameOne!=='可靠性指标分析'&&typeNameTwo=='可靠性指标分析'){
+                                }else if(typeNameOne!==undefined&&typeNameTwo==undefined){
                                     typeTwo=[],machineTypeTwo=[];
-                                    typeNameTwo=wtType+'可靠性指标分析';
+                                    typeNameTwo=wtType;
                                     for(var i in data.data){
                                         typeTwo.push((data.data[i]).toFixed(1)/1);
                                         machineTypeTwo.push(i);
@@ -278,36 +294,33 @@ const mapDispatchToProps = (dispatch) => {
                 });
             }else{
                 $.ajax({
-                    url:'http://'+ipUrl+'/wbi/KPI/getReliableAnalyse',//下拉框内容
+                    url:'http://'+ipUrl+'/wbi/KPI/getReliableAnalyse',//区域
                     type: 'post',
                     async: false,
                     dataType: 'json',
                     data: {'startTime':sTime,'endTime':eTime,'groupid':selectId}, 
                     success: function (data) {
-                        if(typeNameOne=='可靠性指标分析'){
+                        if(typeNameOne==undefined){
                             reliabilityOne=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
                                 reliabilityOne.push([data.data[i].wttype,(data.data[i].totalloss).toFixed(1)/1]);
                             };
-                            reliabilityNameOne=A+'机型可靠性分析';
+                            reliabilityNameOne=A;
                             dispatch(actions.setVars('reliabilityNameOne', reliabilityNameOne));
                             dispatch(actions.setVars('reliabilityOne', reliabilityOne));
-                        }else if(typeNameOne!=='可靠性指标分析'&&typeNameTwo=='可靠性指标分析'){
+                        }else if(typeNameOne!==undefined&&typeNameTwo==undefined){
                             reliabilityTwo=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
                                 reliabilityTwo.push([data.data[i].wttype,(data.data[i].totalloss).toFixed(1)/1]);
                             };
-                            reliabilityNameTwo=A+'机型可靠性分析';
-                            dispatch(actions.setVars('reliabilityNameOne', reliabilityNameOne));
-                            dispatch(actions.setVars('reliabilityOne', reliabilityOne));
+                            reliabilityNameTwo=A;
+                            dispatch(actions.setVars('reliabilityNameTwo', reliabilityNameTwo));
+                            dispatch(actions.setVars('reliabilityTwo', reliabilityTwo));
                         }else{
                             alert('请先重置清除数据');
                         }
-                        
-                        dispatch(actions.setVars('reliabilityNameTwo', reliabilityNameTwo));
-                        dispatch(actions.setVars('reliabilityTwo', reliabilityTwo));
                     },
                     complete : function(XMLHttpRequest,status) {
                         $.ajax({
@@ -317,9 +330,9 @@ const mapDispatchToProps = (dispatch) => {
                             dataType: 'json',
                             data: {'wttype':wtType,'startTime':sTime,'endTime':eTime,'groupid':selectId}, 
                             success: function (data) {
-                                if(typeNameOne=='可靠性指标分析'){
+                                if(typeNameOne==undefined){
                                     typeOne=[],machineTypeOne=[];
-                                    typeNameOne=wtType+'可靠性指标分析';
+                                    typeNameOne=wtType;
                                     for(var i in data.data){
                                         typeOne.push((data.data[i]).toFixed(1)/1);
                                         machineTypeOne.push(i);
@@ -327,9 +340,9 @@ const mapDispatchToProps = (dispatch) => {
                                     dispatch(actions.setVars('typeNameOne', typeNameOne));
                                     dispatch(actions.setVars('typeOne', typeOne));
                                     dispatch(actions.setVars('machineTypeOne', machineTypeOne));
-                                }else if(typeNameOne!=='可靠性指标分析'&&typeNameTwo=='可靠性指标分析'){
+                                }else if(typeNameOne!==undefined&&typeNameTwo==undefined){
                                     typeTwo=[],machineTypeTwo=[];
-                                    typeNameTwo=wtType+'可靠性指标分析';
+                                    typeNameTwo=wtType;
                                     for(var i in data.data){
                                         typeTwo.push((data.data[i]).toFixed(1)/1);
                                         machineTypeTwo.push(i);

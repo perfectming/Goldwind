@@ -5,6 +5,7 @@ import Title from '../super/Title.jsx';
 import Pie2 from './pie2.jsx';
 import Tuchart from './Tuchart.jsx';
 import Tuchart1 from './tuchar1.jsx';
+import Tuchart2 from './Tuchart1.jsx';
 
 import jnjp from '../../../img/comp/jienengjp.png';
 import nljys from '../../../img/comp/nianleijys.png';
@@ -18,7 +19,9 @@ import monBoardData from '../../../../../../../config/MonitorBoardData';
 import model from '../../../../../../../config/MonitorBoardModel';
 import Login from '../../../../../../components/common/Loading.jsx';
 let comp = require('./../runMonitor/fpinterface/date');
+let parameter = require('../monitorkb/Monitorkb-parameter');//日期以及CDM场站参数文件引用//
 var $ = require('jquery');
+let time;
 let arr=[];
 let arrname=[];
 let allnum=0;
@@ -34,164 +37,199 @@ for(let x=0;x<arr.length;x++){
 var actions = require('redux/actions');
 
 let Component = React.createClass({
-   componentWillMount() {
+    //render渲染前执行的内容//
+    componentWillMount() {
+        //ajax调用数据并打开实时数据刷新
         this.props.changedate();
     },
+    //该分页页面退出前执行的内容//
+    componentWillUnmount() {
+        //清除该页面的数据实时刷新
+        clearInterval(time)
+    },
+    //render渲染后执行的内容//
     componentDidMount() {
         this.props.init();
     },
-
     render() {
-        let{bloo=false}=this.props;
+        let{modata,moname,bloo=false}=this.props;
         if(bloo){
-        let mobd=monBoardData.ModelData;
-        let mod=model.Model;
-        let urodz = new Date("11/12/2015");
-        let now = new Date();let ile = now.getTime() - urodz.getTime();
-        let dni = Math.floor(ile / (1000 * 60 * 60 * 24));
-        return(
-            <div className={styles.bodyBox}>
-                <div className={`${styles.zhzb} ${styles.box_shadow}`}>
-                    <Title title={['综合指标']}></Title>
-                    <div className={styles.zhzbdown}><img src={anquan} className={styles.anquan}/>安全运行
-                        <span className={styles.daynum}> 1026</span> 天
-                    </div>
-                    <div className={styles.zhzbtop}>
-                        <div className={styles.zhzbtopbox}><div>全年发电量</div> <span className={styles.zhzbtopboxg}>71070.53</span>万kWh</div>
-                        <div className={styles.zhzbtopbox}><div>弃风率</div> <span className={styles.zhzbtopboxg}>38</span>%</div>
-                        <div className={styles.zhzbtopbox}><div>弃光率</div> <span className={styles.zhzbtopboxg}>46</span>%</div>
-                        <div className={styles.zhzbtopbox}><div>上网电量</div> <span className={styles.zhzbtopboxg}>6430.45</span>万kWh</div>
-                        <div className={styles.zhzbtopbox}><div>厂用电量</div> <span className={styles.zhzbtopboxg}>2255.21</span>万kWh</div>
-                        <div className={styles.zhzbtopbox}><div>购网电量</div> <span className={styles.zhzbtopboxg}>{mobd[8888800].MonthEgyAt}</span>万kWh</div>
-                        
-                    </div>
-                    
-                </div>
-                <div className={`${styles.zhzbgl} ${styles.box_shadow}`}>
-                    <Title title={['综合指标概览']}></Title>
-                    <div className={styles.zhzbglmain}>
-                        <div className={styles.zhzbglbox}><img src={up}/><p>投资收益率</p><Pie2 color={['#1fe005']} num={[100]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#1fe005'}}>{126.3}%</p></span></div>
-                        <div className={styles.zhzbglbox}><img src={up}/><p>年发电计划完成率</p><Pie2 color={['#fbd500','#32535C']} num={[89,11]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#fbd500'}}>{89.6}%</p></span></div>
-                        <div className={styles.zhzbglbox}><img src={down}/><p>年度PBA</p><Pie2 color={['#ff0000','#32535C']} num={[68,32]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#ff0000'}}>{68}%</p></span></div>
-                        <div className={styles.zhzbglbox}><img src={up}/><p>设备健康度</p><Pie2 color={['#d06960','#32535C']} num={[57,43]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#d06960'}}>{57}%</p></span></div>
-                        <div className={styles.zhzbglbox}><img src={down}/><p>任务完成度</p><Pie2 color={['#fbd500','#32535C']} num={[82,18]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#fbd500'}}>{82}%</p></span></div>
-                        <div className={styles.zhzbglbox}><img src={up}/><p>年度MTBF</p><Pie2 color={['#d06960','#32535C']} num={[30,70]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#d06960'}}>30h</p></span></div>
-                    </div>
-                </div>
-                <div className={styles.columbox}>
-                    <div className={`${styles.leftcolum} ${styles.box_shadow}`}>
-                    <Title title={['月发电量完成情况']}></Title>
-                        <Tuchart shuju={comp.jscnum.month}></Tuchart>
-                    </div>
-                    <div className={`${styles.rightcolum} ${styles.box_shadow}`}>
-                    <Title title={['月收益状况']}></Title>
-                     <Tuchart shuju={comp.jscnum.money}></Tuchart>
-                    </div>
-                </div>
-             
-                <div className={`${styles.fgzyfx} ${styles.box_shadow}`}>
+            let mobd=modata.ModelData;
+            let mod=moname.Model.dis;
+            let datename=moname.Model.ens;
+            let qfl=(mobd[8888801].MonthLossElec.Sum/mobd[8888801].MonthEgyAt*100).toFixed(2);//弃风率//
+            let qgl=(mobd[8888802].MonthLossElec.Sum/mobd[8888802].MonthEgyAt*100).toFixed(2);//弃光率//
+            let monthTimeHandle=[];//变形后的最近的十二个月的月份数组//
+            let kbnjhfdl=mobd[8888800].Last12MonthsPlanEgyAtStat.Value;//原始最近十二个月计划发电量//
+            let kbnsjfdl=mobd[8888800].Last12MonthsEgyAtStat.Value;//原始最近十二个月实际发电量//
+            let kbnjhfdl1=[];//运算处理后最近十二个月计划发电量//
+            let kbnsjfdl1=[];//运算处理后最近十二个月实际发电量//
+            let kbnfdwcl=[];//总年发电量完成率（通过运算得出）//
+            let IntoCDMjp=0;//纳入CDM场站CO2减排量//
+            let NotIntoCDMjp=0;//未纳入CDM场站CO2减排量//
 
-                    <Title title={['场站等效利用小时数']}></Title>
-                    <div className={styles.fgzyfxmain}>
+            (function(){
+                for(let i in kbnjhfdl){
+                    kbnjhfdl1.push(Number((kbnjhfdl[i]*mod.Last12MonthsPlanEgyAtStat.coeff).toFixed(mod.Last12MonthsPlanEgyAtStat.place)));
+                }
+                for(let i in kbnsjfdl){
+                    kbnsjfdl1.push(Number((kbnsjfdl[i]*mod.Last12MonthsEgyAtStat.coeff).toFixed(mod.Last12MonthsEgyAtStat.place)));
+                }
+                for(let i=0;i<kbnjhfdl1.length;i++){
+                    kbnfdwcl.push(Number((kbnsjfdl1[i]/kbnjhfdl1[i]*100).toFixed(2)))
+                }
+                for(let i=0;i<parameter.IntoCDM.length;i++){
+                    IntoCDMjp += mobd[parameter.IntoCDM[i]].YearEgyAt*mod.YearEgyAt.coeff*parameter.Coefficient*10;
+                }
+                for(let i=0;i<parameter.NotIntoCDM.length;i++){
+                    NotIntoCDMjp += mobd[parameter.NotIntoCDM[i]].YearEgyAt*mod.YearEgyAt.coeff*parameter.Coefficient*10;
+                }
+                for(let i=0;i<mobd[8888800].Last12MonthsEgyAtStat.Time.length;i++){
+                    monthTimeHandle.push(Number(mobd[8888800].Last12MonthsEgyAtStat.Time[i].substring(5))+'月')
+                }
+            }());
+
+            //计算安全天数//
+            let urodz = new Date(parameter.safeDate);
+            let now = new Date();let ile = now.getTime() - urodz.getTime();
+            let dni = Math.floor(ile / (1000 * 60 * 60 * 24));
+            return(
+                <div className={styles.bodyBox}>
+                    <div className={`${styles.zhzb} ${styles.box_shadow}`}>
+                        <Title title={['综合指标']}></Title>
+                        <div className={styles.zhzbdown}><img src={anquan} className={styles.anquan}/>安全运行
+                            <span className={styles.daynum}> {dni}</span> 天
+                        </div>
+                        <div className={styles.zhzbtop}>
+                            <div className={styles.zhzbtopbox}><div>全年发电量</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].YearEgyAt)*mod.YearEgyAt.coeff).toFixed(mod.YearEgyAt.place)}</span>{mod.YearEgyAt.unit}</div>
+                            <div className={styles.zhzbtopbox}><div>弃风率</div> <span className={styles.zhzbtopboxg}>{qfl=== "NaN" ? "--": qfl}</span>%</div>
+                            <div className={styles.zhzbtopbox}><div>弃光率</div> <span className={styles.zhzbtopboxg}>{qgl=== "NaN" ? "--": qgl}</span>%</div>
+                            <div className={styles.zhzbtopbox}><div>上网电量</div> <span className={styles.zhzbtopboxg}>6430.45</span>万kWh</div>
+                            <div className={styles.zhzbtopbox}><div>厂用电量</div> <span className={styles.zhzbtopboxg}>2255.21</span>万kWh</div>
+                            <div className={styles.zhzbtopbox}><div>购网电量</div> <span className={styles.zhzbtopboxg}>1111</span>万kWh</div>
+
+                        </div>
+
+                    </div>
+                    <div className={`${styles.zhzbgl} ${styles.box_shadow}`}>
+                        <Title title={['综合指标概览']}></Title>
+                        <div className={styles.zhzbglmain}>
+                            <div className={styles.zhzbglbox}><img src={up}/><p>投资收益率</p><Pie2 color={['#1fe005']} num={[100]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#1fe005'}}>{126.3}%</p></span></div>
+                            <div className={styles.zhzbglbox}><img src={up}/><p>年发电计划完成率</p><Pie2 color={['#fbd500','#32535C']} num={[89,11]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#fbd500'}}>{89.6}%</p></span></div>
+                            <div className={styles.zhzbglbox}><img src={down}/><p>年度PBA</p><Pie2 color={['#ff0000','#32535C']} num={[68,32]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#ff0000'}}>{68}%</p></span></div>
+                            <div className={styles.zhzbglbox}><img src={up}/><p>设备健康度</p><Pie2 color={['#d06960','#32535C']} num={[57,43]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#d06960'}}>{57}%</p></span></div>
+                            <div className={styles.zhzbglbox}><img src={down}/><p>任务完成度</p><Pie2 color={['#fbd500','#32535C']} num={[82,18]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#fbd500'}}>{82}%</p></span></div>
+                            <div className={styles.zhzbglbox}><img src={up}/><p>年度MTBF</p><Pie2 color={['#d06960','#32535C']} num={[30,70]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#d06960'}}>30h</p></span></div>
+                        </div>
+                    </div>
+                    <div className={styles.columbox}>
+                        <div className={`${styles.leftcolum} ${styles.box_shadow}`}>
+                        <Title title={['月发电量完成情况']}></Title>
+                            <Tuchart2 shuju={comp.jscnum.month} njhfdl={kbnjhfdl1} nsjfdl={kbnsjfdl1} nfdlwcl={kbnfdwcl} monthTime={monthTimeHandle}></Tuchart2>
+                        </div>
+                        <div className={`${styles.rightcolum} ${styles.box_shadow}`}>
+                        <Title title={['月收益状况']}></Title>
+                         <Tuchart shuju={comp.jscnum.money}></Tuchart>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.fgzyfx} ${styles.box_shadow}`}>
+
+                        <Title title={['场站等效利用小时数']}></Title>
+                        <div className={styles.fgzyfxmain}>
+                            <Tuchart shuju={comp.jscnum.mtbf}></Tuchart>
+                        </div>
+                    </div>
+
+                    <div className={`${styles.gzsbgl} ${styles.box_shadow}`}>
+                        <Title title={['场站MTBF排行']}></Title>
                         <Tuchart shuju={comp.jscnum.mtbf}></Tuchart>
                     </div>
-                </div>
-               
-                <div className={`${styles.gzsbgl} ${styles.box_shadow}`}>
-                    <Title title={['场站MTBF排行']}></Title>
-                    <Tuchart shuju={comp.jscnum.mtbf}></Tuchart>
-                </div>
-                 <div className={`${styles.ssdlqkfx} ${styles.box_shadow}`}>
-                    <Title title={['损失电量情况分析(万kWh)']}></Title>
-                    <Tuchart1 shuju={comp.jscnum.elect}></Tuchart1>
-                </div>
+                     <div className={`${styles.ssdlqkfx} ${styles.box_shadow}`}>
+                        <Title title={['损失电量情况分析(万kWh)']}></Title>
+                        <Tuchart1 shuju={comp.jscnum.elect}></Tuchart1>
+                    </div>
 
 
-                   <div className={`${styles.longbox} ${styles.box_shadow}`}>
-                   <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={jnjp}/></div>
-                        <div className={styles.righttext}>节能减排</div>
-                    </div>
-                    <div className={`${styles.navitem} ${styles.bore1}`}>
-                        <div className={styles.leftimg} style={{width:'100%',textAlign:'center'}}>区域内场站数量:12个</div>
-                    </div>
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={nlcojp}/></div>
-                        <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>73225</b>万吨</h2></div>
-                    </div>
-                    <div className={`${styles.navitem} ${styles.bore1}`}>
-                        <div className={styles.leftimg} style={{width:'100%'}}>纳入CDM场站数量:8个</div>
-                    </div>
-                    
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={nlcojp}/></div>
-                        <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{mobd[8888800].YearSO2Emissions}</b>万吨</h2></div>
-                    </div>
-                     <div className={`${styles.navitem} ${styles.bore1}`}>
-                        <div className={styles.leftimg} style={{width:'100%'}}>未纳入CDM场站数量:4个</div>
-                    </div>
-                    
-                    <div className={styles.navitem}>
-                        <div className={styles.leftimg}><img src={nlcojp}/></div>
-                        <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>24408</b>万吨</h2></div>
-                    </div>
-                 
-                </div>
-            </div>
+                    <div className={`${styles.longbox} ${styles.box_shadow}`}>
+                        <div className={styles.navitem}>
+                            <div className={styles.leftimg}><img src={jnjp}/></div>
+                            <div className={styles.righttext}>节能减排</div>
+                        </div>
+                        <div className={`${styles.navitem} ${styles.bore1}`}>
+                            <div className={styles.leftimg} style={{width:'100%',textAlign:'center'}}>区域内场站数量:{parameter.IntoCDM.length + parameter.NotIntoCDM.length}个</div>
+                        </div>
+                        <div className={styles.navitem}>
+                            <div className={styles.leftimg}><img src={nlcojp}/></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{(IntoCDMjp+NotIntoCDMjp).toFixed(2)}</b>t</h2></div>
+                        </div>
+                        <div className={`${styles.navitem} ${styles.bore1}`}>
+                            <div className={styles.leftimg} style={{width:'100%'}}>纳入CDM场站数量:{parameter.IntoCDM.length}个</div>
+                        </div>
 
-        )
-    }else{
-        return(
-            <Login></Login>
+                        <div className={styles.navitem}>
+                            <div className={styles.leftimg}><img src={nlcojp}/></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{IntoCDMjp.toFixed(2)}</b>t</h2></div>
+                        </div>
+                        <div className={`${styles.navitem} ${styles.bore1}`}>
+                            <div className={styles.leftimg} style={{width:'100%'}}>未纳入CDM场站数量:{parameter.NotIntoCDM.length}个</div>
+                        </div>
+
+                        <div className={styles.navitem}>
+                            <div className={styles.leftimg}><img src={nlcojp}/></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{NotIntoCDMjp.toFixed(2)}</b>t</h2></div>
+                        </div>
+
+                    </div>
+                </div>
+
             )
-    }
+        }else{
+            return(
+                <Login></Login>
+                )
+        }
     }
 });
 
 
 const mapStateToProps = (state) => {
     return {
-
-         bloo:state.vars.bloo,
+        moname:state.vars.moname,
+        modata:state.vars.modata,
+        bloo:state.vars.bloo,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         changedate:()=>{
-
-            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
-            function setData(rdata1){
-                dispatch(actions.setVars('zhzb', rdata1));
-                TY.getRtData("DataOverview", 8888800, setData1)
-                function setData1(rdata2){
-                    dispatch(actions.setVars('bbs', rdata2));
-                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
-                    function setDatas(rdata3){
-                        dispatch(actions.setVars('fModel', rdata3));
-                        TY.getRtData("DevicesMatrix", 8888800, setfData)
-                        function setfData(rdata4){
-                            if(rdata4.ModelData[8888801]==undefined){
-
-                                TY.getRtData("DevicesMatrix", 8888800, setfData)
-                            }else{
-
-                                dispatch(actions.setVars('fData', rdata4));
-                                setTimeout(function () {
-                                    dispatch(actions.setVars('bloo', true));
-                                },500)
-                            }
-
-                        }
+            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
+            function momo(moname){
+                dispatch(actions.setVars('moname', moname));
+                TY.getRtData("MonitorBoard", 8888800, ppo);
+                function ppo(modata){
+                    TY.getRtData("MonitorBoard", 8888800, ppo);
+                    function ppo(modata){
+                        dispatch(actions.setVars('modata', modata));
+                        setTimeout(function () {
+                            dispatch(actions.setVars('bloo', true));
+                        },100)
                     }
                 }
             }
-
+            //数据刷新方法//
+            time=setInterval(function(){
+                TY.getRtData("MonitorBoard", 8888800, ppo);
+                function ppo(modata){
+                    dispatch(actions.setVars('modata', modata));
+                    dispatch(actions.setVars('bloo', true));
+                }
+            },2000)
         },
         init: () => {
                 dispatch(actions.setVars('putpage', false));
                 dispatch(actions.setVars('bodypage', false));
-                dispatch(actions.setVars('navhide', false));
                 dispatch(actions.setVars('cssif2', false));
             var obj = {
                 test:''

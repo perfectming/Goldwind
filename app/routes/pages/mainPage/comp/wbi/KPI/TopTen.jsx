@@ -20,7 +20,7 @@ let Component = React.createClass({
     
 	render() {
 		let comp = PBAdata.list;
-		let {columnOneTitle='',columnTwoTitle='',columnOneName=[],columnTwoName=[],columnOne=[],columnTwo=[],wtType,topTitleOne,topTitleTwo,topPieOne=[],topPieTwo=[],ipUrl,topBool=false,selectId,selectName,buttonAction,buttonReset,checkedTop=1,checkedBoxTopPro,checkedBoxTopElec,changeValueS,changeValueE}=this.props;
+		let {storageTop,buttonResetA,buttonResetB,columnOneTitle='',columnTwoTitle='',columnOneName=[],columnTwoName=[],columnOne=[],columnTwo=[],wtType,topTitleOne,topTitleTwo,topPieOne=[],topPieTwo=[],ipUrl,topBool=false,selectId,selectName,buttonAction,buttonReset,checkedTop=1,checkedBoxTopPro,checkedBoxTopElec,changeValueS,changeValueE}=this.props;
 		if(topBool){
 			return(
 				<div className={styles.bodyBox}>
@@ -38,7 +38,7 @@ let Component = React.createClass({
 	                            return (
 	                                    <div className={styles.btnBox} key={key}>
 		                                    <div className={styles.bBox}>
-		                                        <button onClick={()=>buttonAction(columnTwoTitle,columnTwoTitle,columnOneName,columnTwoName,columnOne,columnTwo,wtType,ipUrl,checkedTop,selectName,selectId,topTitleOne,topTitleTwo,topPieOne,topPieTwo)}>{"查询"}</button>
+		                                        <button onClick={()=>buttonAction(storageTop,columnTwoTitle,columnTwoTitle,columnOneName,columnTwoName,columnOne,columnTwo,wtType,ipUrl,checkedTop,selectName,selectId,topTitleOne,topTitleTwo,topPieOne,topPieTwo)}>{"查询"}</button>
 		                                    </div>
 		                                    <div className={styles.bBox}>
 		                                        <button onClick={()=>buttonReset()}>{"重置"}</button>
@@ -74,18 +74,20 @@ let Component = React.createClass({
 					<div className={styles.content}>
 						<div className={styles.floorOne}>
 							<div className={`${styles.pie} ${styles.boxShadow}`}>
-								<ChartPie name={topTitleOne} text={topTitleOne} lose={topPieOne}></ChartPie>
+								<div className={topTitleOne==undefined? styles.hide:styles.button} onClick={()=>buttonResetA()}>清除</div>
+								<ChartPie unit={topTitleOne==undefined? "":storageTop==1? "kWh":"元"} name={topTitleOne==undefined? "":storageTop==1? topTitleOne+"故障损失电量":topTitleOne+"故障损失收入"} text={topTitleOne==undefined? "":storageTop==1? topTitleOne+"故障损失电量":topTitleOne+"故障损失收入"} lose={topPieOne}></ChartPie>
 							</div>
 							<div className={`${styles.column} ${styles.boxShadow}`}>
-								<OneColumn name={columnOneTitle} title={'Top10故障损失分析'+columnOneTitle} month={columnOneName} plan={columnOne} unit={'h'}></OneColumn>
+								<OneColumn name={columnOneTitle} title={columnOneTitle} month={columnOneName} plan={columnOne} unit={topTitleOne==undefined? "":storageTop==1? "kWh":"元"}></OneColumn>
 							</div>
 						</div>
 						<div className={styles.floorTwo}>
 							<div className={`${styles.pie} ${styles.boxShadow}`}>
-								<ChartPie name={topTitleOne} text={topTitleTwo} lose={topPieTwo}></ChartPie>
+								<div className={topTitleTwo==undefined? styles.hide:styles.button} onClick={()=>buttonResetB()}>清除</div>
+								<ChartPie unit={topTitleTwo==undefined? "":storageTop==1? "kWh":"元"} name={topTitleTwo==undefined? "":storageTop==1? topTitleTwo+"故障损失电量":topTitleTwo+"故障损失收入"} text={topTitleTwo==undefined? "":storageTop==1? topTitleTwo+"故障损失电量":topTitleTwo+"故障损失收入"} lose={topPieTwo}></ChartPie>
 							</div>
 							<div className={`${styles.column} ${styles.boxShadow}`}>
-								<OneColumn name={columnTwoTitle} title={'Top10故障损失分析'+columnTwoTitle} month={columnTwoName} plan={columnTwo} unit={'h'}></OneColumn>
+								<OneColumn name={columnTwoTitle} title={columnTwoTitle} month={columnTwoName} plan={columnTwo} unit={topTitleTwo==undefined? "":storageTop==1? "kWh":"元"}></OneColumn>
 							</div>
 						</div>
 					</div>
@@ -109,6 +111,7 @@ const mapStateToProps = (state) => {
     	ipUrl : state.vars.ipUrl,
     	checkedTop : state.vars.checkedTop,
     	topBool: state.vars.topBool,
+    	storageTop: state.vars.storageTop,
     	
     	topPieOne : state.vars.topPieOne,
     	topTitleOne: state.vars.topTitleOne,
@@ -197,158 +200,316 @@ const mapDispatchToProps = (dispatch) => {
 	    changeValueE : (e) => {
 	        	
 	    },
-	    buttonAction : (columnOneTitle,columnTwoTitle,columnOneName,columnTwoName,columnOne,columnTwo,wtType,ipUrl,checkedTop,selectName,selectId,topTitleOne,topTitleTwo,topPieOne,topPieTwo) => {
-	    	var sTime = $('#startTime').val();
-	        //结束时间时间
-	        var eTime = $('#endTime').val();
-			if(sTime == '' || eTime == '') {
-	            alert('请选择开始或者结束时间');
-	            return false;
-	        };
-	        var A=$('select').val();
-			for(var i in selectName){
-				if(selectName[i]==A){
-					selectId=selectId[i];
-				}
-			};
-			if(selectId<1000000){
-				$.ajax({
-			        url:'http://'+ipUrl+'/wbi/KPI/getTuFailureLoss',
-					type: 'post',
-					async: false,
-					dataType: 'json',
-					data: {'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
-					timeout : 60000, 
-					success: function (data) {
-						if (topTitleOne==undefined) {
-							topPieOne=[];
-							topTitleOne=A+'故障损失分析';
-							wtType=data.data[0].wttype;
-							for(var i in data.data){
-								topPieOne.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
-							}
-						    dispatch(actions.setVars('topTitleOne', topTitleOne));
-						    dispatch(actions.setVars('topPieOne', topPieOne));
-						    dispatch(actions.setVars('columnOneTitle', wtType));
-						}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
-							topPieTwo=[];
-							topTitleTwo=A+'故障损失分析';
-							wtType=data.data[0].wttype;
-							for(var i in data.data){
-								topPieTwo.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
-							}
-						    dispatch(actions.setVars('topTitleTwo', topTitleTwo));
-						    dispatch(actions.setVars('topPieTwo', topPieTwo));
-						    dispatch(actions.setVars('columnTwoTitle', wtType));
-						}else{
-							alert('请先重置清除数据')
+	    buttonAction : (storageTop,columnOneTitle,columnTwoTitle,columnOneName,columnTwoName,columnOne,columnTwo,wtType,ipUrl,checkedTop,selectName,selectId,topTitleOne,topTitleTwo,topPieOne,topPieTwo) => {
+	    	if(topTitleOne!==undefined){
+	    		if(checkedTop==storageTop){
+	    			var sTime = $('#startTime').val();
+			        //结束时间时间
+			        var eTime = $('#endTime').val();
+					if(sTime == '' || eTime == '') {
+			            alert('请选择开始或者结束时间');
+			            return false;
+			        };
+			        var A=$('select').val();
+					for(var i in selectName){
+						if(selectName[i]==A){
+							selectId=selectId[i];
 						}
-					},
-					complete : function(XMLHttpRequest,status) { 
+					};
+					if(selectId<1000000){
 						$.ajax({
-					        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
+					        url:'http://'+ipUrl+'/wbi/KPI/getTuFailureLoss',
 							type: 'post',
 							async: false,
 							dataType: 'json',
-							data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
+							data: {'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
 							timeout : 60000, 
 							success: function (data) {
-								if (topTitleOne!==undefined&&topTitleTwo==undefined) {
-									columnOneName=[],columnOne=[];
+								if (topTitleOne==undefined) {
+									topPieOne=[];
+									topTitleOne=A;
+									wtType=data.data[0].wttype;
 									for(var i in data.data){
-										columnOneName.push(data.data[i].blooeydescr);
-										columnOne.push((data.data[i].powerloss).toFixed(1)/1);
-									};
-									dispatch(actions.setVars('columnOneName', columnOneName));
-						    		dispatch(actions.setVars('columnOne', columnOne));
-								}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
-									columnTwoName=[],columnTwo=[];
+										topPieOne.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+									}
+								    dispatch(actions.setVars('topTitleOne', topTitleOne));
+								    dispatch(actions.setVars('topPieOne', topPieOne));
+								    dispatch(actions.setVars('columnOneTitle', wtType));
+								}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+									topPieTwo=[];
+									topTitleTwo=A;
+									wtType=data.data[0].wttype;
 									for(var i in data.data){
-										columnTwoName.push(data.data[i].blooeydescr);
-										columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
-									};
-									dispatch(actions.setVars('columnTwoName', columnTwoName));
-						    		dispatch(actions.setVars('columnTwo', columnTwo));
+										topPieTwo.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+									}
+								    dispatch(actions.setVars('topTitleTwo', topTitleTwo));
+								    dispatch(actions.setVars('topPieTwo', topPieTwo));
+								    dispatch(actions.setVars('columnTwoTitle', wtType));
 								}else{
 									alert('请先重置清除数据')
 								}
 							},
 							complete : function(XMLHttpRequest,status) { 
-								
+								$.ajax({
+							        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
+									type: 'post',
+									async: false,
+									dataType: 'json',
+									data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
+									timeout : 60000, 
+									success: function (data) {
+										if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+											columnOneName=[],columnOne=[];
+											for(var i in data.data){
+												columnOneName.push(data.data[i].blooeydescr);
+												columnOne.push((data.data[i].powerloss).toFixed(1)/1);
+											};
+											dispatch(actions.setVars('columnOneName', columnOneName));
+								    		dispatch(actions.setVars('columnOne', columnOne));
+										}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
+											columnTwoName=[],columnTwo=[];
+											for(var i in data.data){
+												columnTwoName.push(data.data[i].blooeydescr);
+												columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
+											};
+											dispatch(actions.setVars('columnTwoName', columnTwoName));
+								    		dispatch(actions.setVars('columnTwo', columnTwo));
+										}else{
+											alert('请先重置清除数据')
+										}
+									},
+									complete : function(XMLHttpRequest,status) { 
+										
+									},
+								});
 							},
 						});
-					},
-				});
-			}else{
-				$.ajax({
-			        url:'http://'+ipUrl+'/wbi/KPI/getTuFailureLoss',
-					type: 'post',
-					async: false,
-					dataType: 'json',
-					data: {'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
-					timeout : 60000, 
-					success: function (data) {
-						if (topTitleOne==undefined) {
-							topPieOne=[];
-							topTitleOne=A+'故障损失分析';
-							wtType=data.data[0].wttype;
-							for(var i in data.data){
-								topPieOne.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
-							}
-						    dispatch(actions.setVars('topTitleOne', topTitleOne));
-						    dispatch(actions.setVars('topPieOne', topPieOne));
-						    dispatch(actions.setVars('columnOneTitle', wtType));
-						}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
-							topPieTwo=[];
-							topTitleTwo=A+'故障损失分析';
-							wtType=data.data[0].wttype;
-							for(var i in data.data){
-								topPieTwo.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
-							}
-						    dispatch(actions.setVars('topTitleTwo', topTitleTwo));
-						    dispatch(actions.setVars('topPieTwo', topPieTwo));
-						    dispatch(actions.setVars('columnTwoTitle', wtType));
-						}else{
-							alert('请先重置清除数据')
-						}
-					},
-					complete : function(XMLHttpRequest,status) {},
-				});
-				$.ajax({
-					        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
+					}else{
+						$.ajax({
+					        url:'http://'+ipUrl+'/wbi/KPI/getTuFailureLoss',
 							type: 'post',
 							async: false,
 							dataType: 'json',
-							data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
+							data: {'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
 							timeout : 60000, 
 							success: function (data) {
-								if (topTitleOne!==undefined&&topTitleTwo==undefined) {
-									columnOneName=[],columnOne=[];
+								if (topTitleOne==undefined) {
+									topPieOne=[];
+									topTitleOne=A;
+									wtType=data.data[0].wttype;
 									for(var i in data.data){
-										columnOneName.push(data.data[i].blooeydescr);
-										columnOne.push((data.data[i].powerloss).toFixed(1)/1);
-									};
-									dispatch(actions.setVars('columnOneName', columnOneName));
-						    		dispatch(actions.setVars('columnOne', columnOne));
-								}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
-									columnTwoName=[],columnTwo=[];
+										topPieOne.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+									}
+								    dispatch(actions.setVars('topTitleOne', topTitleOne));
+								    dispatch(actions.setVars('topPieOne', topPieOne));
+								    dispatch(actions.setVars('columnOneTitle', wtType));
+								}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+									topPieTwo=[];
+									topTitleTwo=A;
+									wtType=data.data[0].wttype;
 									for(var i in data.data){
-										columnTwoName.push(data.data[i].blooeydescr);
-										columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
-									};
-									dispatch(actions.setVars('columnTwoName', columnTwoName));
-						    		dispatch(actions.setVars('columnTwo', columnTwo));
+										topPieTwo.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+									}
+								    dispatch(actions.setVars('topTitleTwo', topTitleTwo));
+								    dispatch(actions.setVars('topPieTwo', topPieTwo));
+								    dispatch(actions.setVars('columnTwoTitle', wtType));
 								}else{
 									alert('请先重置清除数据')
 								}
 							},
-							complete : function(XMLHttpRequest,status) { 
-								
-							},
-				});
-			}
+							complete : function(XMLHttpRequest,status) {},
+						});
+						$.ajax({
+							        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
+									type: 'post',
+									async: false,
+									dataType: 'json',
+									data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
+									timeout : 60000, 
+									success: function (data) {
+										if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+											columnOneName=[],columnOne=[];
+											for(var i in data.data){
+												columnOneName.push(data.data[i].blooeydescr);
+												columnOne.push((data.data[i].powerloss).toFixed(1)/1);
+											};
+											dispatch(actions.setVars('columnOneName', columnOneName));
+								    		dispatch(actions.setVars('columnOne', columnOne));
+										}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
+											columnTwoName=[],columnTwo=[];
+											for(var i in data.data){
+												columnTwoName.push(data.data[i].blooeydescr);
+												columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
+											};
+											dispatch(actions.setVars('columnTwoName', columnTwoName));
+								    		dispatch(actions.setVars('columnTwo', columnTwo));
+										}else{
+											alert('请先重置清除数据')
+										}
+									},
+									complete : function(XMLHttpRequest,status) { 
+										
+									},
+						});
+					}
+	    		}else{
+	    			alert("请选择同一个指标项");
+	    		}
+	    	}else{
+	    		dispatch(actions.setVars('storageTop', checkedTop));
+	    		var sTime = $('#startTime').val();
+		        //结束时间时间
+		        var eTime = $('#endTime').val();
+				if(sTime == '' || eTime == '') {
+		            alert('请选择开始或者结束时间');
+		            return false;
+		        };
+		        var A=$('select').val();
+				for(var i in selectName){
+					if(selectName[i]==A){
+						selectId=selectId[i];
+					}
+				};
+				if(selectId<1000000){
+					$.ajax({
+				        url:'http://'+ipUrl+'/wbi/KPI/getTuFailureLoss',
+						type: 'post',
+						async: false,
+						dataType: 'json',
+						data: {'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
+						timeout : 60000, 
+						success: function (data) {
+							if (topTitleOne==undefined) {
+								topPieOne=[];
+								topTitleOne=A;
+								wtType=data.data[0].wttype;
+								for(var i in data.data){
+									topPieOne.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+								}
+							    dispatch(actions.setVars('topTitleOne', topTitleOne));
+							    dispatch(actions.setVars('topPieOne', topPieOne));
+							    dispatch(actions.setVars('columnOneTitle', wtType));
+							}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+								topPieTwo=[];
+								topTitleTwo=A;
+								wtType=data.data[0].wttype;
+								for(var i in data.data){
+									topPieTwo.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+								}
+							    dispatch(actions.setVars('topTitleTwo', topTitleTwo));
+							    dispatch(actions.setVars('topPieTwo', topPieTwo));
+							    dispatch(actions.setVars('columnTwoTitle', wtType));
+							}else{
+								alert('请先重置清除数据')
+							}
+						},
+						complete : function(XMLHttpRequest,status) { 
+							$.ajax({
+						        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
+								type: 'post',
+								async: false,
+								dataType: 'json',
+								data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
+								timeout : 60000, 
+								success: function (data) {
+									if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+										columnOneName=[],columnOne=[];
+										for(var i in data.data){
+											columnOneName.push(data.data[i].blooeydescr);
+											columnOne.push((data.data[i].powerloss).toFixed(1)/1);
+										};
+										dispatch(actions.setVars('columnOneName', columnOneName));
+							    		dispatch(actions.setVars('columnOne', columnOne));
+									}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
+										columnTwoName=[],columnTwo=[];
+										for(var i in data.data){
+											columnTwoName.push(data.data[i].blooeydescr);
+											columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
+										};
+										dispatch(actions.setVars('columnTwoName', columnTwoName));
+							    		dispatch(actions.setVars('columnTwo', columnTwo));
+									}else{
+										alert('请先重置清除数据')
+									}
+								},
+								complete : function(XMLHttpRequest,status) { 
+									
+								},
+							});
+						},
+					});
+				}else{
+					$.ajax({
+				        url:'http://'+ipUrl+'/wbi/KPI/getTuFailureLoss',
+						type: 'post',
+						async: false,
+						dataType: 'json',
+						data: {'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
+						timeout : 60000, 
+						success: function (data) {
+							if (topTitleOne==undefined) {
+								topPieOne=[];
+								topTitleOne=A;
+								wtType=data.data[0].wttype;
+								for(var i in data.data){
+									topPieOne.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+								}
+							    dispatch(actions.setVars('topTitleOne', topTitleOne));
+							    dispatch(actions.setVars('topPieOne', topPieOne));
+							    dispatch(actions.setVars('columnOneTitle', wtType));
+							}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+								topPieTwo=[];
+								topTitleTwo=A;
+								wtType=data.data[0].wttype;
+								for(var i in data.data){
+									topPieTwo.push([data.data[i].wttype,(data.data[i].faultloss).toFixed(1)/1]);
+								}
+							    dispatch(actions.setVars('topTitleTwo', topTitleTwo));
+							    dispatch(actions.setVars('topPieTwo', topPieTwo));
+							    dispatch(actions.setVars('columnTwoTitle', wtType));
+							}else{
+								alert('请先重置清除数据')
+							}
+						},
+						complete : function(XMLHttpRequest,status) {},
+					});
+					$.ajax({
+						        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
+								type: 'post',
+								async: false,
+								dataType: 'json',
+								data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
+								timeout : 60000, 
+								success: function (data) {
+									if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+										columnOneName=[],columnOne=[];
+										for(var i in data.data){
+											columnOneName.push(data.data[i].blooeydescr);
+											columnOne.push((data.data[i].powerloss).toFixed(1)/1);
+										};
+										dispatch(actions.setVars('columnOneName', columnOneName));
+							    		dispatch(actions.setVars('columnOne', columnOne));
+									}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
+										columnTwoName=[],columnTwo=[];
+										for(var i in data.data){
+											columnTwoName.push(data.data[i].blooeydescr);
+											columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
+										};
+										dispatch(actions.setVars('columnTwoName', columnTwoName));
+							    		dispatch(actions.setVars('columnTwo', columnTwo));
+									}else{
+										alert('请先重置清除数据')
+									}
+								},
+								complete : function(XMLHttpRequest,status) { 
+									
+								},
+					});
+				}
+	    	}
+	    	
         },
-	    buttonReset : (e) => {
+	    buttonReset : (e) =>{
 	    	dispatch(actions.setVars('topTitleOne', ));
 			dispatch(actions.setVars('topPieOne', ));
 			dispatch(actions.setVars('topTitleTwo', ));
@@ -358,6 +519,20 @@ const mapDispatchToProps = (dispatch) => {
 	        dispatch(actions.setVars('columnTwoName', ));
 			dispatch(actions.setVars('columnTwo', ));
 			dispatch(actions.setVars('columnOneTitle', ));
+			dispatch(actions.setVars('columnTwoTitle', ));	
+	    },
+	    buttonResetA : () =>{
+	    	dispatch(actions.setVars('topTitleOne', ));
+			dispatch(actions.setVars('topPieOne', ));
+	        dispatch(actions.setVars('columnOneName', ));
+			dispatch(actions.setVars('columnOne', ));
+			dispatch(actions.setVars('columnOneTitle', ));	
+	    },
+	    buttonResetB : () =>{
+			dispatch(actions.setVars('topTitleTwo', ));
+			dispatch(actions.setVars('topPieTwo', ));	
+	        dispatch(actions.setVars('columnTwoName', ));
+			dispatch(actions.setVars('columnTwo', ));
 			dispatch(actions.setVars('columnTwoTitle', ));	
 	    },
         checkedBoxTopPro : () => {

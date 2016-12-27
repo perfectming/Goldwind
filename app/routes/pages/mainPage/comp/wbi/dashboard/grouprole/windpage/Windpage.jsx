@@ -41,7 +41,7 @@ let Component = React.createClass({
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
 	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthy.toFixed(1)}%</p>健康度</span>
-	           						<Pie2 color={(healthy/100)>1? ['#1fe005','#fbd500']:(healthy/100)>0.8?['#fbd500','#39565e']:(healthy/100)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[healthy,100]}></Pie2>
+	           						<Pie2 color={(healthy/100)>0.9? ['#62de88','#39565e']:(healthy/100)>0.8?['#e8952a','#39565e']:(healthy/100)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[healthy,100]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
@@ -53,8 +53,8 @@ let Component = React.createClass({
 	           					</div>
 	           					<div className={styles.sectionthree}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{wfTheory==0? 0:wfAct/wfTheory}%</p>PBA</span>
-	           						<Pie2 color={wfAct/wfTheory>1? ['#1fe005','#fbd500']:wfAct/wfTheory>0.8?['#fbd500','#39565e']:wfAct/wfTheory>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[wfAct,wfTheory-wfAct]}></Pie2>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{(wfAct/wfTheory).toFixed(1)}%</p>PBA</span>
+	           						<Pie2 color={(wfAct/wfTheory)>0.9? ['#62de88','#39565e']:(wfAct/wfTheory)>0.8?['#e8952a','#39565e']:(wfAct/wfTheory)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[wfAct,wfTheory-wfAct]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepagePBAS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepagePBAT()}></a>
@@ -67,9 +67,9 @@ let Component = React.createClass({
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
 	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{TBA.toFixed(1)}%</p>TBA</span>
-	           						<Pie2  color={TBA>1? ['#1fe005','#fbd500']:TBA>0.8?['#fbd500','#39565e']:TBA>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[runTime,downTime]}></Pie2>
+	           						<Pie2 color={TBA>0.9? ['#62de88','#39565e']:TBA>0.8?['#e8952a','#39565e']:TBA>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[runTime,downTime]}></Pie2>
 	           						</div>
-	           						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>
+	           						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>TBA
 	           						<a className={styles.time} onClick={()=>changepageTBAT()}></a>
 	           					</div>
 	           				</div>
@@ -81,21 +81,21 @@ let Component = React.createClass({
 	           						<a></a><span>年累计发电量</span>
 	           						<div className={styles.electricTotal}>{(wfYearAct/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
-	           							<div className={wfYearAct/wfYearPlan>1? styles.green:wfYearAct/wfYearPlan>.8? styles.yellow:wfYearAct/wfYearPlan>.6? styles.red:styles.redS} style={{width:((wfYearAct/wfYearPlan*100).toFixed(1))+"%"}}>{(wfYearAct/wfYearPlan*100).toFixed(1)}%</div>
+	           							<div className={wfYearAct/wfYearPlan>0.9? styles.green:wfYearAct/wfYearPlan>.8? styles.yellow:wfYearAct/wfYearPlan>.6? styles.red:styles.redS} style={{width:((wfYearAct/wfYearPlan*100).toFixed(1))+"%"}}>{(wfYearAct/wfYearPlan*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricSecond}>
 	           						<a></a><span>月累计发电量</span>
 	           						<div className={styles.electricTotal}>{(wfMonthAct/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
-	           							<div className={wfMonthAct/wfMonthPlan>1? styles.green:wfMonthAct/wfMonthPlan>.8? styles.yellow:wfMonthAct/wfMonthPlan>.6? styles.red:styles.redS} style={{width:((wfMonthAct/wfMonthPlan*100).toFixed(1))+"%"}}>{(wfMonthAct/wfMonthPlan*100).toFixed(1)}%</div>
+	           							<div className={wfMonthAct/wfMonthPlan>0.9? styles.green:wfMonthAct/wfMonthPlan>.8? styles.yellow:wfMonthAct/wfMonthPlan>.6? styles.red:styles.redS} style={{width:((wfMonthAct/wfMonthPlan*100).toFixed(1))+"%"}}>{(wfMonthAct/wfMonthPlan*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricThird}>
 	           						<a></a><span>日累计发电量</span>
 	           						<div className={styles.electricTotal}>{(wfDayAct/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
-	           							<div className={wfDayAct/wfDayPlan>1? styles.green:wfDayAct/wfDayPlan>.8? styles.yellow:wfDayAct/wfDayPlan>.6? styles.red:styles.redS} style={{width:((wfDayAct/wfDayPlan*100).toFixed(1))+"%"}}>{(wfDayAct/wfDayPlan*100).toFixed(1)}%</div>
+	           							<div className={wfDayAct/wfDayPlan>0.9? styles.green:wfDayAct/wfDayPlan>.8? styles.yellow:wfDayAct/wfDayPlan>.6? styles.red:styles.redS} style={{width:((wfDayAct/wfDayPlan*100).toFixed(1))+"%"}}>{(wfDayAct/wfDayPlan*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           				</div>

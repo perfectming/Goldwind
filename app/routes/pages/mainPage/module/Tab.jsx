@@ -10,7 +10,7 @@ let Component = React.createClass({
     render() {
         let {tabOpt, tab, itemActive, changeTabItem, hide=true} = this.props;
         return (
-            <div className={hide===true? styles.navTab : styles.navTab1}>
+            <div className={hide==true? styles.navTab : styles.navTab1}>
                 {
                     tabOpt && tabOpt.subPage[tab].page.map((value, key)=> {
                       

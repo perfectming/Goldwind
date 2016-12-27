@@ -39,7 +39,7 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-            <WFSprofitchart fanCost={WFSPCoM} machine={WFSPNaM} fanProfitQ={WFSPEaM} TBA={WFSPRaM} height={500} width={width}  ty={10} pointWidth={20} borderRadius={4} pointPlacement={0}></WFSprofitchart></div>
+            <WFSprofitchart fanCost={WFSPCoM} machine={WFSPNaM} fanProfitQ={WFSPEaM} TBA={WFSPRaM} height={481} width={width}  ty={10} pointWidth={20} borderRadius={4} pointPlacement={0}></WFSprofitchart></div>
 
              </div>
                 <ul className={styles.monthbox}>
@@ -52,13 +52,13 @@ let Component = React.createClass({
                
 
                 </ul>
-                <div className={styles.paddingtop}>
+            
                 <div className={styles.bigbox}>
                   
                       
-                            <div>
-                                <WFSprofitchart fanCost={WFSPCo} machine={WFSPNa} fanProfitQ={WFSPEa} TBA={WFSPRa} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机收益'} ty={50} pointWidth={30} borderRadius={7} pointPlacement={0}></WFSprofitchart>
-                            </div>
+                         
+                                <WFSprofitchart fanCost={WFSPCo} machine={WFSPNa} fanProfitQ={WFSPEa} TBA={WFSPRa} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机收益'} ty={40} pointWidth={30} borderRadius={7} pointPlacement={0} height={800}></WFSprofitchart>
+                           
                        
                
                   
@@ -72,7 +72,7 @@ let Component = React.createClass({
                       <button  onClick={()=>more(xxdwfId,actbt,btn,ipUrl)} className={btn===2? styles.btn0 : styles.btn1}>更多</button>
                    </div>
                 </div>
-                </div>
+                
             </div>
 
 
@@ -152,7 +152,7 @@ const mapDispatchToProps = (dispatch) => {
               	WFSPCo.push(costs);
 
               	let rate=WFSP[i].rate*100;
-              	WFSPRa.push(Number(rate.toFixed(1)));
+              	WFSPRa.push(Number(rate.toFixed(2)));
               }
           
               },
@@ -384,7 +384,7 @@ const mapDispatchToProps = (dispatch) => {
               	WFSPCo.push(costs);
 
               	let rate=WFSP[i].rate*100;
-              	WFSPRa.push(Number(rate.toFixed(1)));
+              	WFSPRa.push(Number(rate.toFixed(2)));
               }
           let length =WFSPNa.length;
           width=length*60;
@@ -399,7 +399,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('WFSPCo11',WFSPCo)); 
             dispatch(actions.setVars('WFSPRa11',WFSPRa)) ;
            
-             dispatch(actions.setVars('btnn',2)) ;
+         
               dispatch(actions.setVars('width1',width)) ;
          
         },

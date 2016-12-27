@@ -14,14 +14,13 @@ let Component = React.createClass({
 
     render() {
 
-        let {ip="10.68.100.32",actbt, changedata1, win, w0, wc1, hhdata1, hhdata2, barLotime, text, power1, wrong10, wrong11, wrong12, wrong13, pba1, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
+        let {actbt, changedata1, win, w0, wc1, hhdata1, hhdata2, barLotime, text, power1, wrong10, wrong11, wrong12, wrong13, pba1, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
 
 
         let configPie = {
             chart: {
                 height: 400,
                 backgroundColor: "rgba(44, 61, 71, 0.4)",
-                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -126,7 +125,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text: 'kWh',
+                    text: '(kWh)',
                     align: 'high',
                     rotation: '0',
                     y: -20,
@@ -147,7 +146,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
                 min:0,
                 title: {
-                    text: '100%',
+                    text: '(%)',
                     align: 'high',
                     rotation: '0',
                     y: -15,

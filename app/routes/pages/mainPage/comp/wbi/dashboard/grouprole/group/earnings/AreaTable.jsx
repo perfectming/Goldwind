@@ -3,16 +3,11 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var $=require('jquery');
 var ReactHighcharts = require('react-highcharts');
-var input_url="10.68.100.32";
-let data = require('./Profit-data1');
-let sqy =data.areaRecordCostQY;
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
         let {input_url,width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height}=this.props;
-       
-        
         let configPie = {
             chart: {
                 height:height,
@@ -29,7 +24,7 @@ let Component = React.createClass({
                 align:'left',
                  x : "0",
                 x : 105,
-                y :11,
+                y :13,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
@@ -136,7 +131,7 @@ let daycount = dayy.getDate();
 
                        
                       
-                     // 获取x轴的值内蒙达茂天润风电场
+              
                     
                     
             
@@ -185,7 +180,7 @@ let daycount = dayy.getDate();
 
                        
                       
-     // //                 // 获取x轴的值内蒙达茂天润风电场
+
                     
                     
             

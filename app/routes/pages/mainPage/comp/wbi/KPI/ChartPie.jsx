@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {text,lose,name}=this.props;
+    	let {unit,text,lose,name}=this.props;
         let configPie = {
             chart: {
                 height:380,
@@ -44,12 +44,12 @@ let Component = React.createClass({
             	}
             },
             tooltip: {
-                
+                valueSuffix: unit,
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [   '#5298d3', '#ffffff', '#e9c75c','#d06960', '#4cdb9d','#5b9bd5'],
+            colors: ['#5298d3', '#ffffff', '#e9c75c','#d06960', '#4cdb9d','#5b9bd5'],
             plotOptions: {
 	            pie: {
 	                allowPointSelect: true,
@@ -62,7 +62,6 @@ let Component = React.createClass({
 	        },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 0, //x轴刻度往下移动20px
@@ -75,7 +74,6 @@ let Component = React.createClass({
             },
             yAxis: {
                 labels: {
-                	// format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -84,10 +82,10 @@ let Component = React.createClass({
                 },
             },
             series: [{
-            type: 'pie',
-            name: name,
-            data: lose,
-        }]
+                type: 'pie',
+                name: name,
+                data: lose,
+            }]
         };
         return (
             <ReactHighcharts config={configPie}/>

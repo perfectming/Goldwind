@@ -1,136 +1,69 @@
-.box{
-    overflow:hidden;
-    padding:10px;
-    padding-right:40px;
-    padding-top:10px;
-    .back{
-      float:right;
-       align-items:center;
-       color: #20FEFF;
-       color:#fff;
-       border:1px solid #20FEFF;
-       width:100px;
-       height:40px;
-       line-height:40px;
-       position:relative;
-       top:-8px;
-       border-radius:45px;
+.box {
+  overflow: hidden;
+  padding: 10px;
 
-      cursor:pointer;
-       text-align:center;
+  position: relative;
+  padding-left: 10px;
+  //返回框
+  .paddingtop {
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    width: 98%;
+    height: 50px;
+    padding: 0;
+    padding-left: 0px;
+    position: relative;
+    border-bottom: 1px solid #31F3FB;
+    //返回按钮
+    .back {
+      float: right;
+      color: #fff;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      border-radius: 45px;
+      cursor: pointer;
+      text-align: center;
     }
-    .back:hover{
-     box-shadow:0px 0px 10px  #20FEFF;
-     color:#20FEFF
+  }
+//遮罩层
+  .boxcover {
+    position: fixed;
+    height: 100%;
+    width: 93%;
+    z-index: 1200;
+    background: black;
+    display: none;
+    opacity: 0.6;
+  }
+
+  .areabox {
+    position: relative;
+    width: 98%;
+    margin-left: 2px;
+    height: 410px;
+    margin-bottom: 15px;
+    margin-top:15px;
+ 
+    overflow: hidden;
+    .bgc {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 8px;
+    left: 53px;
+    z-index: 5;
+    img {
+      height: 16px;
+      width: 16px
     }
-    .monthbox{
-    width: 100%;
-    height: 80px;
-    list-style: none;
-    padding:0;
-    padding-left:10px;
-    position:relative;
-    background: linear-gradient(to bottom,#242a32 ,#1f2025);
-    li{
-     float:left;
-     font-size:16px;
-     font-family: '微软雅黑';
-     color:white;
-     height:35px;
-     line-height:33px;
-     text-align:center;
-     width:100px;
-     border-radius:17px;
-     margin:25px 10px;
-     font-weight:700;
-     cursor:pointer;
-      &:hover{
-                background:#20FEFF;
-     color:black;
-    box-shadow:0px 0px 10px  #20FEFF;
-            }
-     }
-     li:last-child{
-     color: #20FEFF;
-       position:absolute;
-       top:-5px;
-       right:412px;
-       border:1px solid #20FEFF;
-       width:110px;
-       height:45px;
-       line-height:45px;
-       margin-bottom:25px;
-       border-radius:45px;
-       background:radial-gradient(#1c444a, #1c3f46);
-       box-shadow:0px 0px 10px  #20FEFF;
-     }
-     li:nth-last-child(2){
-     
-     }
-      li:last-child:hover{
-      background:#156e74;
-      }
-    }
-    .shadow:hover{
-    box-shadow:0 0 15px #fff;
-    }
-    .areabox{
-            overflow:hidden;
-            width:100%;
-            margin:0 auto;
-            height:420px;
-            margin-bottom: 15px;
-            margin-top:32px;
-            background: rgba(44, 61, 71,0.4);
-            position:relative;
-            .bgcc{
-            position:absolute;
-              top:4px;
-              left:61px;
-              z-index: 10;
-              img{
-                height:16px;
-                width:16px;
-              }
-            }
-           }
-    .windbox{
-       width: 100%;
-       margin:0 auto;
-       height: 420px;
-       overflow:hidden;
-       position:relative;
-       margin-top:15px;
-        background: rgba(44, 61, 71,0.4);
-       .bgcc{
-       position:absolute;
-              top:4px;
-              left:61px;
-              z-index: 10;
-              img{
-              height:16px;
-                width:16px;
-              }
-       }
-    }
-    .buttons{
-    height:46px;
-    width:49%;
-    float:right;
-    }
-    .buttons{
-    height:60px;
-    line-height:60px;
-      button{
-      width:80px;
-      height:35px;
-      line-height:20px;
-      text-align:center;
-      font-size:16px;
-      border-radius:15px;
-      font-family:'微软雅黑';
-      margin-left:12px;
-      background-color:white;
-      }
-    }
+  }
+  }
+  .shadow:hover {
+    box-shadow: 0 0 15px #fff;
+  }
+
 }

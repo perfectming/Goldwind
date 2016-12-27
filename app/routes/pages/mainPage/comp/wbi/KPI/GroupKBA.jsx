@@ -44,7 +44,7 @@ let Component = React.createClass({
 						</div>
 						<div className={choice==3? styles.show:styles.hide}>
 							<div className={styles.header}>
-								<h3><a></a><span>风场PBA</span></h3>
+								<h3><a></a><span>PBA</span></h3>
 								<span onClick={()=>hide(wtData,choice,wtName,wtElec,wtLose,wtPBA)}>×</span>
 							</div>
 							<div className={styles.chart}>

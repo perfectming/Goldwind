@@ -97,7 +97,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 25,
+                    maxPointWidth: 30,
                     tooltip: {
                         valueSuffix:"°H",
                     },
@@ -128,7 +128,7 @@ let Component = React.createClass({
                     align:'high',
                     rotation:'0',
                     y: -10,
-                    x: 40,
+                    x: 30,
                     style:{
                         color:'#fff',
                         fontSize:'14px'
@@ -149,7 +149,8 @@ let Component = React.createClass({
                 name: '实际健康度',
                 type: 'column',
                 data: barLoPowerValue,
-                borderRadius: 7,
+                borderRadius: 4,
+                color:'#62de88',
             }
 
 

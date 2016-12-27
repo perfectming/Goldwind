@@ -152,7 +152,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('mon', month2 + "月"));
             $.ajax({
                 type: 'post',
-                url: 'http://10.9.100.75:8080/wbi/yield/getYieldByGroupid',
+                url: 'http://'+ipUrl+'/wbi/yield/getYieldByGroupid',
                 async: false,
                 data: {
                     'startdate': year + "-" + month2 + "-" + '1',
@@ -197,7 +197,7 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type: 'post',
-                url: 'http://10.9.100.75:8080/wbi/yield/getYieldByWfid',
+                url: 'http://'+ipUrl+'/wbi/yield/getYieldByWfid',
                 async: false,
                 data: {
                     'wfid': '150828',
