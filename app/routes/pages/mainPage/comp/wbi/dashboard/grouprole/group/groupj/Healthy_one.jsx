@@ -31,7 +31,7 @@ let Component = React.createClass({
         return (
             <div className={styles.box}>
 
-                <!--点击更多的组件 -->
+               {/*点击更多的组件 */}
 
                 <div className={styles.light} id="light"></div>
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`} id="boxhidden">
@@ -48,7 +48,7 @@ let Component = React.createClass({
                     </div>
                 </div>
 
-                <!-- 遍历月份,数据来源于Healthy-data.js -->
+                {/*遍历月份,数据来源于Healthy-data.js */}
 
                 <div className={styles.onmonth}>
                     {
@@ -64,7 +64,7 @@ let Component = React.createClass({
                     <div className={styles.return} onClick={() => returnit(befor_pages)}>返回</div>
                 </div>
 
-                <!-- 导入第一个健康度的组件t -->
+                {/*导入第一个健康度的组件t */}
 
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
@@ -77,7 +77,7 @@ let Component = React.createClass({
                     </div>
                 </div>
 
-                <!-- 导入第二个和第三个健康度的组件t -->
+                 {/*导入第二个和第三个健康度的组件t */}
 
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
@@ -93,7 +93,7 @@ let Component = React.createClass({
                         <div className={styles.rbox30}>
                         </div>
 
-                        <!-- 前十后十更多 -->
+                        {/* 前十后十更多 */}
 
                         <div className={styles.rbox3}>
                             <button className={bt0 === 0 ? styles.button : styles.button22}
