@@ -39,12 +39,12 @@ let Component = React.createClass({
 	           			<div className={styles.firstfloor}>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>当前{healthyArea}分<br/><br/>总分100分</span><br/><br/>
+	           						<span>当前{healthyArea.toFixed(1)}分<br/><br/>总分100分</span><br/><br/>
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
 	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthyArea.toFixed(1)}%</p>健康度</span>
-	           						<Pie2 color={(healthyArea/100)>1? ['#1fe005','#fbd500']:(healthyArea/100)>0.8?['#fbd500','#39565e']:(healthyArea/100)>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[healthyArea,100-healthyArea]}></Pie2>
+	           						<Pie2 color={(healthyArea/100)>0.9? ['#62de88','#39565e']:(healthyArea/100)>0.8?['#e8952a','#39565e']:(healthyArea/100)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[healthyArea,100-healthyArea]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
@@ -56,8 +56,8 @@ let Component = React.createClass({
 	           					</div>
 	           					<div className={styles.sectionthree}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{elecPlanPBA==0? 0:(elecActPBA/elecPlanPBA).toFixed(1)*100}%</p>PBA</span>
-	           						<Pie2 color={elecActPBA/elecPlanPBA>1? ['#1fe005','#fbd500']:elecActPBA/elecPlanPBA>0.8?['#fbd500','#39565e']:elecActPBA/elecPlanPBA>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[elecActPBA,elecPlanPBA-elecActPBA]}></Pie2>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{(elecActPBA/elecPlanPBA).toFixed(1)*100}%</p>PBA</span>
+	           						<Pie2 color={(elecActPBA/elecPlanPBA)>0.9? ['#62de88','#39565e']:(elecActPBA/elecPlanPBA)>0.8?['#e8952a','#39565e']:(elecActPBA/elecPlanPBA)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[elecActPBA,elecPlanPBA-elecActPBA]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepagePBAS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepagePBAT()}></a>
@@ -70,7 +70,7 @@ let Component = React.createClass({
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
 	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{(TBA*100).toFixed(1)}%</p>TBA</span>
-	           						<Pie2 color={TBA>1? ['#1fe005','#fbd500']:TBA>0.8?['#fbd500','#39565e']:TBA>0.6?['#ff3333','#39565e']:['#d06960','#39565e']} num={[runTime,downTime]}></Pie2>
+	           						<Pie2 color={TBA>0.9? ['#62de88','#39565e']:TBA>0.8?['#e8952a','#39565e']:TBA>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[runTime,downTime]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageTBAT()}></a>
@@ -84,21 +84,21 @@ let Component = React.createClass({
 	           						<a></a><span>年累计发电量</span>
 	           						<div className={styles.electricTotal}>{(yearElec/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
-	           							<div className={yearElec/yearPlanElec>1? styles.green:yearElec/yearPlanElec>.8? styles.yellow:yearElec/yearPlanElec>.6? styles.red:styles.redS} style={{width:((yearElec/yearPlanElec*100).toFixed(1))+"%"}}>{(yearElec/yearPlanElec*100).toFixed(1)}%</div>
+	           							<div className={yearElec/yearPlanElec>0.9? styles.green:yearElec/yearPlanElec>.8? styles.yellow:yearElec/yearPlanElec>.6? styles.red:styles.redS} style={{width:((yearElec/yearPlanElec*100).toFixed(1))+"%"}}>{(yearElec/yearPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricSecond}>
 	           						<a></a><span>月累计发电能量</span>
 	           						<div className={styles.electricTotal}>{(monthElec/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
-	           							<div className={monthElec/monthPlanElec>1? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:((monthElec/monthPlanElec*100).toFixed(1))+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
+	           							<div className={monthElec/monthPlanElec>0.9? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:((monthElec/monthPlanElec*100).toFixed(1))+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricThird}>
 	           						<a></a><span>日累计发电量</span>
 	           						<div className={styles.electricTotal}>{(dayElec/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
-	           							<div className={dayElec/dayPlanElec>1? styles.green:dayElec/dayPlanElec>.8? styles.yellow:dayElec/dayPlanElec>.6? styles.red:styles.redS} style={{width:((dayElec/dayPlanElec*100).toFixed(1))+"%"}}>{(dayElec/dayPlanElec*100).toFixed(1)}%</div>
+	           							<div className={dayElec/dayPlanElec>0.9? styles.green:dayElec/dayPlanElec>.8? styles.yellow:dayElec/dayPlanElec>.6? styles.red:styles.redS} style={{width:((dayElec/dayPlanElec*100).toFixed(1))+"%"}}>{(dayElec/dayPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           				</div>
@@ -474,7 +474,7 @@ const mapDispatchToProps = (dispatch) => {
         	dispatch(actions.setVars('showPage', 'regiopower'));
         },
         changepageProT:()=>{
-        	
+        	dispatch(actions.setVars('showPage', 'pro_time'));
         },
         changepageProS:()=>{
         	dispatch(actions.setVars('showPage', 'prospace'));

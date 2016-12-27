@@ -40,7 +40,7 @@
             .btnBox{
                     float:right;
                     margin-top:16px;
-                    margin-right:200px;
+                    margin-right:450px;
                     font-size:16px;
                     .bBox{
                        float:left;
@@ -61,6 +61,27 @@
                     float: left;
                     width: 24.2%;
                     height: 360px;
+                    position: relative;
+                    .button{
+                        cursor: pointer;
+                        z-index:9;
+                        box-sizing:border-box;
+                        border: 2px solid #dddddd;
+                        display: inline-block;
+                        height: 28px;
+                        width: 48px;
+                        position: absolute;
+                        left: 80%;
+                        top: 30px;
+                        background: #181a25;
+                        color: white;
+                        font-size:16px;
+                        line-height: 24px;
+                        text-align: center;
+                    }
+                    .hide{
+                        display: none;
+                    }
                 }
                 .areaSection:not(:last-child){
                     margin-right: 1%;
