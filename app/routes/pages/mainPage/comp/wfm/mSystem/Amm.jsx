@@ -12,6 +12,7 @@ import del from '../../../img/icon/tabDel.png';
 import add from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 import Ambox from './boxAm.jsx';
+let soam='http://10.9.100.95:8080/soam';
 let tabaleData = require('./data');
 
 let Component = React.createClass({
@@ -141,6 +142,42 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
+            // $.ajax({
+            //     url: soam+'/user/getAllUser',
+            //     type: 'post',
+            //     dataType: 'json',//here,
+            //     success:function (data) {
+            //         console.log(data);
+            //         dispatch(actions.setObjs('tableContent', data));
+            //     },
+            //     error:function(){
+            //         console.log('获取数据失败')
+            //     }
+            // });
+            // $.ajax({
+            //     url: soam+'/user/getRoleList',
+            //     type: 'post',
+            //     dataType: 'json',//here,
+            //     success:function (data) {
+            //         console.log(data);
+            //         dispatch(actions.setObjs('tableContent', data));
+            //     },
+            //     error:function(){
+            //         console.log('获取数据失败')
+            //     }
+            // });
+            $.ajax({
+                url: soam+'/user/getUserRoleList?id=1',
+                type: 'post',
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContent', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
         changeTableItem: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);

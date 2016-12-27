@@ -8,10 +8,10 @@ var {getState} = require('redux/store');
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';
 
-let nam=['Capacity','EnergyManager','AVC'];
+let nam=['Capacity','AGCState','StatusCode','AGCActPower','Transformer_P','AVCState','StatusCode','AVCGoalValue','Transformer_Q'];
 let header=['场站名称','装机容量MW','AGC系统','AVC系统'];
 let headerSize=[14,14,36,36];
-let contentSize=[14,36,36];
+let contentSize=[14,9,9,9,9,9,9,9,9];
 let agc=['AGC状态','有功自动状态','有功计划值','上网有功负荷'];
 let avc=['AVC状态','无功自动状态','无功计划值','上网无功负荷'];
 let Component = React.createClass({
@@ -20,20 +20,25 @@ let Component = React.createClass({
     },
     render() {
         let {table,changepage2,changepage3,model,tabaleData} = this.props;
-        if(model[150801]&&tabaleData[150801]) {
+        console.log(model,tabaleData);
+        if(model!= null &&tabaleData != null) {
             let arr1 = [];
             let arr2 = [];
+            let arrAll=[];
+            let mutable;
             let data = tabaleData.ModelData;
             let mode = model.Model.ens;
             for (let i in mode){
                 if(mode[i].wft=='Gf'){
                     arr1.push(i);
-                }
-                if(mode[i].wft=='Wf'){
+                }else if(mode[i].wft=='Wf'){
                     arr2.push(i);
+                    arrAll.push(mode[i]);
+                }else{
+                    arrAll.push(mode[i]);
                 }
             }
-            console.log(data,mode);
+            console.log(data,mode,arrAll);
             if (data[150801]){
         return (
             <div>
@@ -95,41 +100,58 @@ let Component = React.createClass({
                                              key={key} onClick={()=>changepage3(value,key)}>{mode[value]['name']}</div>
                                         {
                                             nam.map((valueC, keyC)=> {
-                                                if(keyC==5||keyC==6){
+                                                if(keyC>5){
+                                                    arrAll.map((valueD,keyD)=>{
+                                                        ((valueD.pid == value) && (valueD.det=='AVC')) && (mutable=valueD.cis);
+                                                        console.log(mutable);
+                                                    });
+                                                    if(keyC==6){
                                                     return (
                                                         <div className={styles.tableContentItem}
                                                              style={{width:contentSize[keyC]+'%'}}
-                                                             key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#669999'?styles.succ:(data[value+'801'][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
-                                                    )
-                                                }else if(keyC==7||keyC==8){
-                                                    return (
-                                                        <div className={styles.tableContentItem}
-                                                             style={{width:contentSize[keyC]+'%'}}
-                                                             key={keyC}>{value=='150811'?'--':data['150812801'][valueC]}</div>
-                                                    )
-                                                } else if(keyC==3){
-                                                    return (
-                                                        <div className={styles.tableContentItem}
-                                                             style={{width:contentSize[keyC]+'%'}}
-                                                             key={keyC}>{value=='150811'?data['150801704'][valueC]:data['150812801'][valueC]}</div>
-                                                    )
-                                                }else if(keyC==1||keyC==2){
-                                                    return (
-                                                        <div className={styles.tableContentItem}
-                                                             style={{width:contentSize[keyC]+'%'}}
-                                                             key={keyC}><div className={value=='150812'?(data[value+'801'][valueC]=='#669999'?styles.succ:(data[value+'801'][valueC]=='#FF0000'?styles.defa:styles.cutD)):(data['150801704'][valueC]=='#669999'?styles.succ:(data['150801704'][valueC]=='#FF0000'?styles.defa:styles.cutD))}></div></div>
-                                                    )
+                                                             key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='#669999'?styles.succ:(data[mutable][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                    )}else {
+                                                        return (
+                                                            <div className={styles.tableContentItem}
+                                                                 style={{width:contentSize[keyC]+'%'}}
+                                                                 key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
+                                                        )
+                                                    }
                                                 }else if(keyC==4){
-                                                return (
-                                                    <div className={styles.tableContentItem}
-                                                           style={{width:contentSize[keyC]+'%'}}
-                                                           key={keyC}>{value=='150811'?(data['150801704'][valueC]*10%1000==0?data['150801704'][valueC]/1000:(data['150801704'][valueC]/1000).toFixed(2)):(data['150812801'][valueC]*10%1000==0?data['150812801'][valueC]/1000:(data['150812801'][valueC]/1000).toFixed(2))}</div>
-                                                )}else{
+                                                    arrAll.map((valueD,keyD)=>{
+                                                        ((valueD.pid == value) && (valueD.det=="TransSubstation")) && (mutable=valueD.cis);
+                                                        console.log(mutable);
+                                                    });
                                                     return (
                                                         <div className={styles.tableContentItem}
                                                              style={{width:contentSize[keyC]+'%'}}
-                                                             key={keyC}>{data[value][valueC]%100==0?data[value][valueC]/1000:(data[value][valueC]/1000).toFixed(2)}</div>
-                                                    )}
+                                                             key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
+                                                    )
+                                                }else if(keyC==0){
+                                                    return (
+                                                        <div className={styles.tableContentItem}
+                                                             style={{width:contentSize[keyC]+'%'}}
+                                                             key={keyC}>{(data[value]&&data[value][valueC])?data[value][valueC]:'--'}</div>
+                                                    )
+                                                }else{
+                                                    arrAll.map((valueD,keyD)=>{
+                                                        ((valueD.pid == value) && (valueD.det=="EnergyManager")) && (mutable=valueD.cis);
+                                                    });
+                                                    if(keyC==3){
+                                                        return (
+                                                            <div className={styles.tableContentItem}
+                                                                 style={{width:contentSize[keyC]+'%'}}
+                                                                 key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
+                                                        )
+                                                    }else{
+                                                        return(
+                                                            <div className={styles.tableContentItem}
+                                                                 style={{width:contentSize[keyC]+'%'}}
+                                                                 key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='#669999'?styles.succ:(data[mutable][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                        )
+                                                    }
+                                                }
+
                                             })
                                         }
                                     </div>
@@ -144,47 +166,58 @@ let Component = React.createClass({
                                      key={key} onClick={()=>changepage2(value,key)}>{mode[value]['name']}</div>
                                 {
                                     nam.map((valueC, keyC)=> {
-                                        if(keyC==5||keyC==6){
-                                            return (
-                                                <div className={styles.tableContentItem}
-                                                     style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}><div className={data[value+'703'][valueC]=='#669999'?styles.succ:(data[value+'703'][valueC]=='#FF0000'?styles.defa:styles.cutD)}></div></div>
-                                            )
-                                        }else if(keyC==3){
-                                            return (
-                                                <div className={styles.tableContentItem}
-                                                     style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}>{data[value+'702'][valueC]}</div>
-                                            )
-                                        }else if(keyC==7){
-                                            return (
-                                                <div className={styles.tableContentItem}
-                                                     style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}>{data[value+'703'][valueC]}</div>
-                                            )
-                                        }else if(keyC==8){
-                                            return (
-                                                <div className={styles.tableContentItem}
-                                                     style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}>{value=='150801'?data[value+'703']['Transformer_Q_BMCJGF']:data[value+'703'][valueC]}</div>
-                                            )
-                                        }else if(keyC==1||keyC==2){
-                                            return (
-                                                <div className={styles.tableContentItem}
-                                                     style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}><div className={data[value+'702'][valueC]=='#669999'?styles.succ:(data[value+'702'][valueC]=='#FF0000'?styles.defa:styles.cutD)}></div></div>
-                                            )
+                                        if(keyC>5){
+                                            arrAll.map((valueD,keyD)=>{
+                                                ((valueD.pid == value) && (valueD.det=='AVC')) && (mutable=valueD.cis);
+                                                console.log(mutable);
+                                            });
+                                            if(keyC==6){
+                                                return (
+                                                    <div className={styles.tableContentItem}
+                                                         style={{width:contentSize[keyC]+'%'}}
+                                                         key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='#669999'?styles.succ:(data[mutable][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                )}else {
+                                                return (
+                                                    <div className={styles.tableContentItem}
+                                                         style={{width:contentSize[keyC]+'%'}}
+                                                         key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
+                                                )
+                                            }
                                         }else if(keyC==4){
+                                            arrAll.map((valueD,keyD)=>{
+                                                ((valueD.pid == value) && (valueD.det=="TransSubstation")) && (mutable=valueD.cis);
+                                                console.log(mutable);
+                                            });
                                             return (
                                                 <div className={styles.tableContentItem}
                                                      style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}>{data[value+'702'][valueC]*10%1000==0?data[value+'702'][valueC]/1000:(data[value+'702'][valueC]/1000).toFixed(2)}</div>
-                                            )}else{
+                                                     key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
+                                            )
+                                        }else if(keyC==0){
                                             return (
                                                 <div className={styles.tableContentItem}
                                                      style={{width:contentSize[keyC]+'%'}}
-                                                     key={keyC}>{data[value][valueC]%100==0?data[value][valueC]/1000:(data[value][valueC]/1000).toFixed(2)}</div>
-                                            )}
+                                                     key={keyC}>{(data[value]&&data[value][valueC])?data[value][valueC]:'--'}</div>
+                                            )
+                                        }else{
+                                            arrAll.map((valueD,keyD)=>{
+                                                ((valueD.pid == value) && (valueD.det=="EnergyManager")) && (mutable=valueD.cis);
+                                            });
+                                            if(keyC==3){
+                                                return (
+                                                    <div className={styles.tableContentItem}
+                                                         style={{width:contentSize[keyC]+'%'}}
+                                                         key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
+                                                )
+                                            }else{
+                                                return(
+                                                    <div className={styles.tableContentItem}
+                                                         style={{width:contentSize[keyC]+'%'}}
+                                                         key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='#669999'?styles.succ:(data[mutable][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                )
+                                            }
+                                        }
+
                                     })
                                 }
                             </div>
