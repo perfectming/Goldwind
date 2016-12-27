@@ -117,7 +117,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text: 'kWh',
+                    text: '(kWh)',
                     align: 'high',
                     rotation: '0',
                     y: -20,
@@ -138,7 +138,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
                 min:0,
                 title: {
-                    text: '100%',
+                    text: '(%)',
                     align: 'high',
                     rotation: '0',
                     y: -15,

@@ -126,7 +126,7 @@ let Component = React.createClass({
 
                         title: {
 
-                            text: '元',
+                            text: '(元)',
                             align: 'high',
                             rotation: '0',
                             y: -20,
@@ -150,7 +150,7 @@ let Component = React.createClass({
                     gridLineColor: '#6d6a6c',
                     min:0,
                     title: {
-                        text: '100%',
+                        text: '(%)',
                         align: 'high',
                         rotation: '0',
                         y: -15,
