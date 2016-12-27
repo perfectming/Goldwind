@@ -2,44 +2,48 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
+
+let data = require('./Profit-dataq');
+
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        
-       let {GERa,GEAm,GENa,GEIn,height,w0,TBA,text}=this.props;
+        let{xxdwfId,input_url,changedata2qw,areaRecordCostT,areaRecordProfitO,rate,text,areaPlan,areaPlanDay, areaPlanDayT,width,height,areaNameX,areaRecordCost}=this.props;
+     
         let configPie = {
             chart: {
                 height:height,
+                width:width,
                  backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
+                borderRadius:10
             },
             title: {
                 text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-               
-                 x:120,
-                 y:14,
+                 x : 120,
+                 y:20,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                  
+                    
                 }
             },
             // 插入图片
             //图例说明
             legend: {
+                y:40,
                 x:-75,
-                y:30,
                 align:"right",
                 verticalAlign: "top",
-                itemHoverStyle:{
+                 itemHoverStyle:{
                     color:'#31f3fb',
                 },
                 itemStyle: {
@@ -51,10 +55,10 @@ let Component = React.createClass({
                 }
             },
             tooltip: {
-                valueSuffix:'元'
+               valueSuffix:'元'
             },
             credits: {
-                enabled: false
+                enabled: false //不显示highCharts版权信息
             },
             //柱子颜色
             colors: [ '#1E664A', '#4CDB9D']
@@ -62,16 +66,57 @@ let Component = React.createClass({
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                   
-            
-                borderWidth:0,
-                    borderRadius: 4
+                  
+                    borderWidth: 0,
 
                 }, series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                           
+                            let    w0=e.point.index;
+                            let b= parseInt(w0);
+                       let arr1=[];
+            let arr2=[];
+            let arr3=[];
+            let arr4=[];
+            let date =new Date();
+            let year =date.getFullYear();
+                       
+                            $.ajax({
+             type:'post',
+             url:'http://'+input_url+'/wbi/yield/getWfieldMaxYieBayDay',  
+             async:false,
+            data:{
+             'year':year,
+             'month':w0+1,
+             'wfid':xxdwfId,
+            },
+             dataType:'json',
+             timeout:'3000',
+             success:function(data){
+           
+            
+        
+             let dataa=data.data;
+             for(let i in dataa){
+                 let day=dataa[i].day;
+                 arr1.push(day+'日');
+                 let incomes=dataa[i].incomes;
+                 arr2.push(incomes);
+                 let amounts=dataa[i].amounts;
+                 arr3.push(amounts);
+                 let rate=dataa[i].rate*100;
+                 arr4.push(Number(rate.toFixed(2)));
+
+             }
+         
+             },
+             error:function(){
+        
+            
+             },
+           });
+                              changedata2qw(w0,arr1,arr2,arr3,arr4,input_url,b)
                         }
                     }
                 }
@@ -81,32 +126,31 @@ let Component = React.createClass({
                 lineWidth: 1,
                 tickWidth: 0,
                 labels: {
-                    y: 20,
+                    y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',
-                        fontSize:'14px'
+                        fontSize:'14px',
+                        color:'#fff'  //字体
                     }
                 },
-                categories:GENa,
+                categories:areaNameX,
             },
-            yAxis: [
-            {
-                labels: {
+              yAxis: [{
+            labels: {
                 format: '',
                 style: {
                     color: '#fff',
                     fontSize:'14px'
                 }
-            },
-             gridLineDashStyle: 'Solid',
+            }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
+
             title: {
-                text:'(元)',
+                text:'（元）',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 35,
+                x:45,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -119,49 +163,57 @@ let Component = React.createClass({
                     color: '#fff',
                     fontSize:'14px'
                 }
-            }, gridLineDashStyle: 'Solid',
-                gridLineColor: '#6d6a6c',
-
+            },
+             gridLineDashStyle: 'Solid',
+            gridLineColor: '#6d6a6c',
+           tickInterval: 20,
+            minRange: 20,
+                
             title: {
-                text: '(%)',
-                 align:'high',
+                text: '100%',
+                align:'high',
                 rotation:'0',
                 y: -15,
-                x: -48,
+                x: -40,
                 style:{
                     color: '#fff',
                     fontSize:'14px'
                 }
 
             },
+            
             opposite: true
         }],
             //几条数据
             series: [{
                 name: '收入',
                 type: 'column',
-                data: GEIn,
+                data: areaRecordCostT,
                 color:'#33BAC0',
-                maxPointWidth: 20,
+                borderColor:'#5B9BD5',
+              maxPointWidth: 30,
+                borderRadius: 3
             },
             {
             	name: '成本',
                 type: 'column',
-                data:GEAm,
-                color:'#70c080',
-                maxPointWidth: 20,
-            },{
-                    name: '收益率',
-                    type: 'line',
-                    data:GERa,
+                data:areaRecordProfitO,
+               color:'#70c080',
+                maxPointWidth: 30,
+               
+                borderRadius: 3
+            },
+            {
+                    name:"收益率",
+                    type:'line',
                     color:'blue',
-                    opposite:true,
+                    data:rate,
                     yAxis:1,
+                    tickInterval: 1,
                      tooltip: {
                valueSuffix:'%'
             },
                 }
-
             ]
         };
         return (
@@ -172,15 +224,19 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {
-          w0 : state.vars.monthTD,
-    }
-   
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+           changedata2qw:(w0,arr1,arr2,arr3,arr4,input_url,b) => {
+             dispatch(actions.setVars('actbt',w0));
+            dispatch(actions.setVars('areaNamee',arr1));
+              dispatch(actions.setVars('wind',arr2));
+              dispatch(actions.setVars('windP',arr3));
+              dispatch(actions.setVars('arr4',arr4));
         },
     };
 };

@@ -284,15 +284,7 @@ const mapDispatchToProps = (dispatch) => {
                         areaWindNames1.push(areaWindName)
 
                     }
-                   
  
-
-                       
-                      
-                    // 获取x轴的值内蒙达茂天润风电场
-                    
-                    
-            
                 },
                 error:function(){
              

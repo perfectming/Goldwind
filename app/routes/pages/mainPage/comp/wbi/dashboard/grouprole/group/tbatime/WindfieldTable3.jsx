@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data3');
 
 let Component = React.createClass({
     componentWillMount() {
@@ -36,7 +35,7 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 x:-75,
-                y:10,
+                y:20,
                 
                 itemHoverStyle:{
                     color:'#31f3fb',
@@ -130,6 +129,7 @@ let Component = React.createClass({
                 data: windProfit,
                 maxPointWidth:20,
                 borderRadius:4,
+                color:'#4CDB9D'
             },
                 {
                     name: '停机时间',

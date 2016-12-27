@@ -5,20 +5,7 @@ import AreaTable from './AreaTable3.jsx';
 import WindfieldTable from './WindfieldTable3.jsx';
 import icono from '../../../../../../img/comp/TBA.png';
 var actions = require('redux/actions');
-let data=require('./Profit-data3');
 var $=require('jquery');
-let button=data.button;
-let input_url="10.68.100.32";
-
-
-// let tbaMonths2=tbaMonths;
-// let tbaruntimes2=tbaRunTimes;
-// let tbaDownTimes2=tbaDownTimes;
-// let tbaTba2=tbaTba;
- let text=data.text[0];
-// let windFiled=data.windFiled;
-// let windCost=data.windCost;
-// let windProfit=data.windProfit;
 
 let Component = React.createClass({
    componentWillMount() {
@@ -39,7 +26,7 @@ let Component = React.createClass({
                 <div className={`${styles.areabox} ${styles.shadow}`}>
                 <div className={styles.bgcc}><img src={icono}/></div>
                    <div>
-                     <AreaTable text={text} areaNamee={tbaMonths} areaRecordCostss={tbaDownTimes} areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl}></AreaTable>
+                     <AreaTable text={'集团每月TBA'} areaNamee={tbaMonths} areaRecordCostss={tbaDownTimes} areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl}></AreaTable>
                    </div>
                 </div>
                <div className={`${styles.windbox} ${styles.shadow}`}>

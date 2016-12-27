@@ -5,10 +5,6 @@ import Profitimechart from './Profitimechart.jsx';
 import Profitimechartt from './Profitimechartt.jsx';
 import icono from '../../../../../img/comp/收益率1.png';
 var actions = require('redux/actions');
-let data=require('./Profit-data3');
-let month=data.month;
-let button=data.button;
-
 let Component = React.createClass({
     componentWillMount() {
         let{ipUrl}=this.props;
@@ -25,12 +21,11 @@ let Component = React.createClass({
             <div className={styles.padding}>
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 <div className={styles.bigbox}>
-                   
                        <div className={styles.imgqwe}>
                         <img src={icono}/>
                        </div>
                             <div>
-                                <Profitimechart GeR={GeR} GeE={GeC} GeC={GeE} GeM={GeM} text={'集团每月收益'}height={420} input_url={ipUrl}></Profitimechart>
+                                <Profitimechart GeR={GeR} GeE={GeE} GeC={GeC} GeM={GeM} text={'集团每月收益'}height={420} input_url={ipUrl}></Profitimechart>
                             </div>
                 </div>
                  <div className={styles.bigbox}>
@@ -102,7 +97,7 @@ const mapDispatchToProps = (dispatch) => {
                          let groupname=GE[i].month+'月';
                          arr3.push(groupname);
                          let rate=GE[i].rate*100;
-                         arr4.push(Number(rate.toFixed(1)));
+                         arr4.push(Number(rate.toFixed(2)));
                      }
             dispatch(actions.setVars('GeE1',arr1));
             dispatch(actions.setVars('GeC1',arr2));
@@ -143,7 +138,7 @@ const mapDispatchToProps = (dispatch) => {
           GEAm.push(amounts);
 
           let rate=GE[i].rate*100
-      GERa.push(Number(rate.toFixed(1)));
+      GERa.push(Number(rate.toFixed(2)));
 
     let day=GE[i].day;
           GENa.push(day+'日');}

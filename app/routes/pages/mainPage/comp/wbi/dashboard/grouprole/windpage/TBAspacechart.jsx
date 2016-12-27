@@ -147,7 +147,7 @@ let Component = React.createClass({
                 name: '运行时间',
                 type: 'column',
                 data: fanProfitQ,
-                color:'#33BAC0',
+                color:'#4CDB9D',
                 shadow:true,
                 maxPointWidth: pointWidth,
                

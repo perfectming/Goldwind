@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
 let Component = React.createClass({
     componentWillMount() {
     },

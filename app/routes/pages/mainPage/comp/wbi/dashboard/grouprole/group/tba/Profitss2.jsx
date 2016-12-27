@@ -2,35 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Profitstyle2.scss';
 import AreaTable from './AreaTable2.jsx';
-import WindfieldTable from './WindfieldTable2.jsx';
 import icono from '../../../../../../img/comp/PBA.png';
 import Fanchart from './fanchart2.jsx';
 var actions = require('redux/actions');
-let data=require('./Profit-data2');
-let input_url="10.9.100.38";
-let month=data.month;
-let button=data.button;
-let areaName=data.areaName;
-let areaRecordCosts=data.areaRecordCosts;
-let areaRecordProfit=data.areaRecordProfit;
-let text0=data.text[0];
-
-
-let fanProfit=data.fanProfit;
-let fanCost=data.fanCost;
-let fanCost1=data.fanCost1;
-let fanCost2=data.fanCost2;
-let fanCost3=data.fanCost3;
-let text1=data.text[1];
-let windFiled=data.windFiled;
-let areaRecordProfitt=data.areaRecordProfitt;
-let areaRecordCostss=data.areaRecordCostss;
-let areaRecordCostsS1=data.areaRecordCostsS1;
-let areaRecordCostsS2=data.areaRecordCostsS2;
-let areaRecordCostsS3=data.areaRecordCostsS3;
-let areaRecordCostsS4=data.areaRecordCostsS4;
-let areaNamee=data.areaNamee;
-let text2=data.text[2];
 let Component = React.createClass({
     componentWillMount() {
       let{ipUrl}=this.props;
@@ -40,44 +14,32 @@ let Component = React.createClass({
      componentDidMount() {
         this.props.init();
     },
-
     render() {
       let{ipUrl,PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,wq='风场1',more,changpage,wind,windP,close,actbt=0,backtop,befor_pagee='group',befor_pagee2,w0,ww,}=this.props;
        
           return (
            <div className={styles.box}>
            <div className={styles.boxcover} id='boxcover'></div>
-             <div className={styles.more} id="sss">
-                <div className={styles.moretitle}>
-                <img src={icono}/>
-            
-                <div onClick={()=>close()}>x</div>
-                </div>
-                <Fanchart machine={PBAGroupFirstDayy} fanProfit={fanProfit} fanCost={fanCost} fanCost1={fanCost1}fanCost2={fanCost2}fanCost3={fanCost3} height={500} width={1760}></Fanchart>
-                 </div>
+
               <div className={styles.paddingtop}><div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
 
-               <div className={styles.covers}>
-                   <div className={styles.bgc}> <img src={icono}/></div>
+              
+                 
                    <div className={`${styles.areabox} ${styles.shadow}`}>
-                       <div>
-                           <AreaTable PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth} areaRecordProfit={PBAGroupPoweract} PBAGroupMaintainloss={PBAGroupMaintainloss} PBAGroupLimitloss={PBAGroupLimitloss} PBAGroupNodevreasonloss={PBAGroupNodevreasonloss} PBAGroupPba={PBAGroupPba}text0={text0} text1={text1} input_url={ipUrl}></AreaTable>
-                           <p className={styles.titww}>集团每月PBA</p>
-                       </div>
+                      <div className={styles.bgc}> <img src={icono}/></div>
+                           <AreaTable  height={410}PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth} areaRecordProfit={PBAGroupPoweract} PBAGroupMaintainloss={PBAGroupMaintainloss} PBAGroupLimitloss={PBAGroupLimitloss} PBAGroupNodevreasonloss={PBAGroupNodevreasonloss} PBAGroupPba={PBAGroupPba}text1={'集团每月PBA'} input_url={ipUrl}></AreaTable>
+                      
                    </div>
-               </div>
+             
              
                <div className={`${styles.bigbox} ${styles.shadow} ${styles.bigboxx}`}>
-                   <div className={styles.coverbox}>
-                       <div className={styles.windcebox}>
-                           <div>
-                               <Fanchart machine={PBAGroupFirstDayy} fanProfit={PBAGroupFirstPoweract} fanCost={PBAGroupFirstFaultloss} fanCost1={PBAGroupMaintainloss}fanCost2={PBAGroupFirstLimitloss}fanCost3={PBAGroupFirstNodevreasonloss} height={380} width={1730} PBAGroupFirstPba={PBAGroupFirstPba}></Fanchart>
-                           </div>
-                       </div>
-                       <div className={styles.tik}>
-                           <p>{PBAGroupMonthF+'每日PBA'}</p>
-                       </div>
-                   </div>
+                 
+                      
+                         
+                               <Fanchart machine={PBAGroupFirstDayy} fanProfit={PBAGroupFirstPoweract} fanCost={PBAGroupFirstFaultloss} fanCost1={PBAGroupMaintainloss}fanCost2={PBAGroupFirstLimitloss}fanCost3={PBAGroupFirstNodevreasonloss} height={410} width={1730} PBAGroupFirstPba={PBAGroupFirstPba} textf={PBAGroupMonthF+'每日PBA'}></Fanchart>
+                          
+                       
+      
                    <div className={styles.imgq}>
                        <img src={icono}/>
                    </div>
