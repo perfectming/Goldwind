@@ -23,7 +23,7 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : 120,
+                x : 107,
                 y :14,
                 style:{
                     color:"#fff",

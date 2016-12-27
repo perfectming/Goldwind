@@ -22,18 +22,20 @@ let Component = React.createClass({
           return (
 
            <div className={styles.box}>
-                <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div>
-                <div className={`${styles.areabox} ${styles.shadow}`}>
-                <div className={styles.bgcc}><img src={icono}/></div>
-                   <div>
-                     <AreaTable text={'集团每月TBA'} areaNamee={tbaMonths} areaRecordCostss={tbaDownTimes} areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl}></AreaTable>
-                   </div>
+                <div className={styles.paddingtop}>
+                    <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div>
                 </div>
-               <div className={`${styles.windbox} ${styles.shadow}`}>
-                <div className={styles.bgcc}><img src={icono}/></div>
-                   <div>
-                     <WindfieldTable windFiled={tbaDays3} windCost={tbaDayDownTimes3} windProfit={tbaDayRunTimes3} TBA={tbaDayTba3}></WindfieldTable>
-                   </div>
+                <div className={`${styles.areabox} ${styles.shadow}`}>
+                <div className={styles.bgc}><img src={icono}/></div>
+                
+                     <AreaTable text={'集团每月TBA'} areaNamee={tbaMonths} areaRecordCostss={tbaDownTimes} areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl} height={410}></AreaTable>
+                   
+                </div>
+               <div className={`${styles.areabox} ${styles.shadow}`}>
+                <div className={styles.bgc}><img src={icono}/></div>
+                  
+                     <WindfieldTable windFiled={tbaDays3} windCost={tbaDayDownTimes3} windProfit={tbaDayRunTimes3} TBA={tbaDayTba3} height={410}></WindfieldTable>
+                  
                </div>
                
            </div>

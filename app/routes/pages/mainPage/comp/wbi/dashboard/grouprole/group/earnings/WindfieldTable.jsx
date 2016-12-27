@@ -25,9 +25,8 @@ let Component = React.createClass({
             title:{
                 text:text,
                 align:'left',
-               
                  x : 105,
-                y :11,
+                y :13,
                 style:{
                     color:"#fff",
                     fontSize:"15px",
@@ -200,7 +199,7 @@ let daycount = dayy.getDate();
                 type: 'column',
                 data: windProfit,
                 pointPlacement:0,
-                pointPadding: 0.1,
+               
                     borderWidth: 0,
                    maxPointWidth: 30,
                     borderRadius: 4,
@@ -211,11 +210,11 @@ let daycount = dayy.getDate();
                 type: 'column',
                 data: windCost,
                 pointPlacement: -0.06,
-                pointPadding: 0.1,
+           
                     borderWidth: 0,
                    maxPointWidth: 30,
                     borderRadius: 4,
-                     colors:'#70c080',
+                     color:'#70c080',
             },
                 {
                     name:'收益率',

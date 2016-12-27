@@ -7,33 +7,38 @@
      }
     .btn1{
     color:#fff;
-    }s
-  
+    }
+    .paddingtop {
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    width: 100%;
+    height: 50px;
+    padding: 0;
+    padding-left: 0px;
+    position: relative;
+    border-bottom: 1px solid #31F3FB;
+    //返回按钮
+    .back {
+      float: right;
+      color: #fff;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      border-radius: 45px;
+      cursor: pointer;
+      text-align: center;
+    }
+  }
+    .shadow:hover {
+    box-shadow: 0 0 15px #fff;
+  }
     .bigbox:hover{
     box-shadow:0 0 15px #fff;
     }
-    .padding{
-  
-    height:23px;
-    }
-    .back{
-   float:right;
     
-       align-items:center;
-       color: #20FEFF;
-    
-       border:1px solid #20FEFF;
-       width:100px;
-       height:40px;
-       line-height:40px;
-       position:relative;
-       top:-8px;
-       right:0;
-       border-radius:45px;
-
-      cursor:pointer;
-       text-align:center;
-    }
      .back1{
    float:left;
     
@@ -61,7 +66,7 @@
      color:#20FEFF
     }
     .bigbox{
-    height:100%;
+    height:410px;
     width:100%;
     border:1px solid #282F37;
     position:relative;
@@ -76,7 +81,7 @@
         height:16px;
         position:absolute;
         top:3px;
-        left:86px;
+        left:68px;
         text-align:center;
         line-height:30px;
         img{
@@ -89,7 +94,7 @@
         height:16px;
         position:absolute;
         top:3px;
-        left:86px;
+        left:61px;
         text-align:center;
         line-height:30px;
         img{
@@ -102,7 +107,7 @@
         height:16px;
         position:absolute;
         top:6px;
-        left:56px; 
+        left:53px; 
         img{
           height:16px;
           width:16px;

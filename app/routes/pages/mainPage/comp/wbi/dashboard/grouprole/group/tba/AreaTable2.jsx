@@ -14,7 +14,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:height,
-              backgroundColor: "rgba(44, 61, 71,0)",
+              backgroundColor: "rgba(44, 61, 71,0.4)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -26,7 +26,7 @@ let Component = React.createClass({
                 text:text1,
                 align:'left',
                 x:105,
-                y:8,
+                y:15,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
@@ -157,7 +157,7 @@ let Component = React.createClass({
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 48,
+                        x: 50,
                         style:{
                             fontSize:'14px',
                             color:'#fff'

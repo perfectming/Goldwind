@@ -13,10 +13,10 @@ let Component = React.createClass({
     },
     render() {
 
-        let {input_url,xxdwfId,xxdwfNa,w0,wins,monthT,areaRecordProfitT,text,changedata1}=this.props;
+        let {height,text1,input_url,xxdwfId,xxdwfNa,w0,wins,monthT,areaRecordProfitT,text,changedata1}=this.props;
         let configPie = {
             chart: {
-                height:390,
+                height:height,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -25,19 +25,21 @@ let Component = React.createClass({
                  
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : "0",
+                y:14,
+                x:90,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                     
                 }
             },
             legend: {
+                y:30,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{

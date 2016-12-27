@@ -13,7 +13,7 @@ let Component = React.createClass({
             chart: {
                 height:height,
                 width:width,
-                backgroundColor: "rgba(44, 61, 71,0)",
+                backgroundColor: "rgba(44, 61, 71,0.4)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -26,7 +26,7 @@ let Component = React.createClass({
                 top:'-20px',
                 vertical:'top',
                x:105,
-               y:10,
+               y:15,
                 style:{
                     color:"#fff",
                     fontSize:"16px",

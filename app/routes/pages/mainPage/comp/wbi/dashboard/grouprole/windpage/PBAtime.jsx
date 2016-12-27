@@ -30,34 +30,33 @@ let Component = React.createClass({
         let{ipUrl,xxdwfId,xxdwfNa,PBATimeSecondPba,PBATimeSecondNodevreasonloss,PBATimeSecondLimitloss,PBATimeSecondMaintainloss,PBATimeSecondFaultloss,PBATimeSecondPoweract,PBATimeSecondDay,PBATimeFirstPba,PBATimeFirstNodevreasonloss,PBATimeFirstLimitloss,PBATimeFirstMaintainloss,PBATimeFirstFaultloss,PBATimeFirstPoweract,PBATimeFirstMonth,w0,winsss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
         return (
             <div className={styles.box}>
-             <div className={styles.padding}>
-            
+             <div className={styles.paddingtop}>           
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
-                <div className={styles.bigbox}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
-                            <div>
-                            <p className={styles.titleee}>{xxdwfNa+'每月PBA'}</p>
-                                <PBAtimechart monthT={PBATimeFirstMonth} profit={PBATimeFirstPoweract} cost={PBATimeFirstPba} fanCost={PBATimeFirstFaultloss} fanCostA={PBATimeFirstMaintainloss} fanCostB={PBATimeFirstLimitloss} fanCostC={PBATimeFirstNodevreasonloss} xxdwfId={xxdwfId} input_url={ipUrl}></PBAtimechart>
-                            </div>
+                <div className={`${styles.bigbox} ${styles.shadow}`}>
+                  
+                      
+                         
+                          
+                                <PBAtimechart monthT={PBATimeFirstMonth} profit={PBATimeFirstPoweract} cost={PBATimeFirstPba} fanCost={PBATimeFirstFaultloss} fanCostA={PBATimeFirstMaintainloss} fanCostB={PBATimeFirstLimitloss} fanCostC={PBATimeFirstNodevreasonloss} xxdwfId={xxdwfId} input_url={ipUrl} text={xxdwfNa+'每月PBA'} height={410}></PBAtimechart>
+                            
                            
-                        </div>
-                    </div>
+                   
+                  
                     <div className={styles.imgq}>
                         <img src={icono}/>
                     </div>
                     
                 </div>
-                 <div className={styles.bigbox}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
+                 <div className={`${styles.bigbox} ${styles.shadow}`}>
+                   
+                       
                            
-                            <div>
-                             <p className={styles.titleee}>{w0+xxdwfNa+'每日PBA'}</p>
-                                <PBAtimechartt areaPlan={PBATimeSecondDay} areaPlanDay={PBATimeSecondPoweract} areaPlanDayT={PBATimeSecondPba} fanCost={PBATimeSecondFaultloss} fanCostB={PBATimeSecondLimitloss} fanCostC={PBATimeSecondNodevreasonloss} fanCostA={PBATimeSecondMaintainloss} xxdwfId={xxdwfId} ></PBAtimechartt>
-                            </div>
-                        </div>
-                    </div>
+                         
+                          
+                                <PBAtimechartt areaPlan={PBATimeSecondDay} areaPlanDay={PBATimeSecondPoweract} areaPlanDayT={PBATimeSecondPba} fanCost={PBATimeSecondFaultloss} fanCostB={PBATimeSecondLimitloss} fanCostC={PBATimeSecondNodevreasonloss} fanCostA={PBATimeSecondMaintainloss} xxdwfId={xxdwfId} height={410} text={w0+xxdwfNa+'每日PBA'}></PBAtimechartt>
+                        
+                        
+                    
                     <div className={styles.imgq}>
                         <img src={icono}/>
                     </div>

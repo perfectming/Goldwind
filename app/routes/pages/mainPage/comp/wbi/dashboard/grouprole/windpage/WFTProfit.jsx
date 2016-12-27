@@ -49,7 +49,7 @@ let Component = React.createClass({
                 
         
              </div>
-                          <div className={styles.padding}>
+         <div className={styles.paddingtop}>
               
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
 
@@ -58,7 +58,7 @@ let Component = React.createClass({
                    
                    
                           
-                                <WFTprofitchartt input_url={ipUrl} xxdwfId={xxdwfId}areaNameX={month2}  areaRecordCostT={cost} areaRecordProfitO={income} colorO={colorO} colorT={colorT} pointWidth={30} height={420} text={xxdwfNa+'每月收益'}  rate={ratem}ly={40} pointPlacement={-0.07} borderRadius={7}></WFTprofitchartt>
+                                <WFTprofitchartt input_url={ipUrl} xxdwfId={xxdwfId}areaNameX={month2}  areaRecordCostT={cost} areaRecordProfitO={income} colorO={colorO} colorT={colorT} pointWidth={30} height={410} text={xxdwfNa+'每月收益'}  rate={ratem}ly={40} pointPlacement={-0.07} borderRadius={7}></WFTprofitchartt>
                           
                        
                        
@@ -72,7 +72,7 @@ let Component = React.createClass({
                    
                    
                           
-                                <WFTprofitchart areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={420} text={[actbt+1]+'月'+xxdwfNa+'每日收益'}  rate={rate}ly={40} pointPlacement={-0.07} borderRadius={7}></WFTprofitchart>
+                                <WFTprofitchart areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={410} text={[actbt+1]+'月'+xxdwfNa+'每日收益'}  rate={rate}ly={40} pointPlacement={-0.07} borderRadius={7}></WFTprofitchart>
                           
                        
                        

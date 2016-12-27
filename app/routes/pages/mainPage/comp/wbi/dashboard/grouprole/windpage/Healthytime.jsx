@@ -34,32 +34,29 @@ let Component = React.createClass({
 
             <div className={styles.box}>
 
-            <div className={styles.padding}>
+            <div className={styles.paddingtop}>
             <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div>
             </div>
              
-                <div className={styles.bigbox}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
-                            <div>
-                            <p className={styles.titleee}>{xxdwfNa+'每月健康度'}</p>
-                               <Healtytimechart  monthT={WTHealName} text={text} areaRecordProfitT={WTN} input_url={ipUrl}></Healtytimechart>
-                            </div>
-                        </div>
-                    </div>
+                <div className={`${styles.bigbox} ${styles.shadow}`}>
+                   
+                       
+                          
+                          
+                               <Healtytimechart  monthT={WTHealName} text={text} areaRecordProfitT={WTN} input_url={ipUrl} height={410} text={xxdwfNa+'每月健康度'}></Healtytimechart>
+                       
                     <div className={styles.imgq}>
                         <img src={icono}/>
                     </div>
                 </div>
-                <div className={styles.bigbox}>
-                    <div className={styles.coverbox}>
-                        <div className={styles.windcebox}>
-                            <div>
-                              <p className={styles.titleee}>{w0+xxdwfNa+'每日健康度'}</p>
-                                <Healtytimecharttt   areaPlan={WTHealNamee} areaPlanDay={WTNe}></Healtytimecharttt>
-                            </div>
-                        </div>
-                    </div>
+                <div className={`${styles.bigbox} ${styles.shadow}`}>
+                
+                        
+                        
+                                <Healtytimecharttt   areaPlan={WTHealNamee} areaPlanDay={WTNe} text1={w0+xxdwfNa+'每日健康度'} height={410}></Healtytimecharttt>
+                       
+                        
+                  
                     <div className={styles.imgq}>
                         <img src={icono}/>
                     </div>

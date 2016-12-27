@@ -33,9 +33,9 @@ let Component = React.createClass({
           return (
            <div className={styles.box}>
              <div className={styles.boxcover} id='boxcover'></div>
-              <div className={styles.padding}>
+              <div className={styles.paddingtop}>
               <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
-                   <div className={styles.paddingtop}>
+                
                 <div className={`${styles.biggbox} ${styles.shadow}`}>
                     
                        
@@ -51,8 +51,8 @@ let Component = React.createClass({
                                 </div>
           
                 </div>  
-            </div> 
-            <div className={styles.paddingtop}>
+            
+           
                 <div className={`${styles.biggbox} ${styles.shadow}`}>
                     
                        
@@ -69,7 +69,7 @@ let Component = React.createClass({
           
                 </div>  
             </div> 
-           </div>
+           
            
         
         );

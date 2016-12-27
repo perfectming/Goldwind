@@ -36,7 +36,7 @@ let Component = React.createClass({
                         <div onClick={()=>close()} className={styles.gg}>x</div>
                     </div>
                     <div className={styles.scroll}>
-                        <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={width} pointPlacement={0} ly={0} pointWidth={20} lx={-[width-2000]} ></Fanchart>
+                        <Fanchart x={40} areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore} machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={width} ly={0}  lx={-75} x={50}></Fanchart>
                     </div>
                 </div>
                 {//导航的月份
@@ -66,8 +66,8 @@ let Component = React.createClass({
             { // 风机表格 （第三个）
             }
                 <div className={`${styles.bigbox} ${styles.shadow}`}>          
-                    <Fanchart pointWidth={15} areaRecordCostR={areaWindCostssT} areaRecordProfitR={areaWindEarningssT} machine={areaWindNamessT } height={440} TBAA={areaWindRatessT} pointPlacement={-0.06} width={850} text={(actbt+1)+'月'+w11+w111+'各风机收益'} ly={40} lx={-75}></Fanchart>    
-                    <div className={styles.imgq}>
+                    <Fanchart x={45} areaRecordCostR={areaWindCostssT} areaRecordProfitR={areaWindEarningssT} machine={areaWindNamessT } height={440} TBAA={areaWindRatessT} pointPlacement={-0.06} width={850} text={(actbt+1)+'月'+w11+w111+'各风机收益'} ly={40} lx={-75}></Fanchart>
+                    <div className={styles.bgccc}>
                         <img src={icono}/>
                     </div>
                     <div className={styles.buttons}>
@@ -480,7 +480,7 @@ const mapDispatchToProps = (dispatch) => {
 
                        
                       
-                        // 获取x轴的值内蒙达茂天润风电场
+
                     
                     
             
@@ -594,7 +594,7 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:'3000',
                 success:function(data){
                  
-                     console.log(year+"-"+(actbt+1)+"-"+daycount)
+        
                     let dataA=data.data;
                     for (let i in dataA)
                     {
