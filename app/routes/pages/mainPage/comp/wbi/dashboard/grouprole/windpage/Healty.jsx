@@ -39,7 +39,7 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-          <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={450} ty={20} pointWidth={20} borderRadius={4}></Healtychart>
+          <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={483} ty={20} pointWidth={20} borderRadius={4}></Healtychart>
                 </div>
              </div>
                  <ul className={styles.monthbox}>
@@ -302,7 +302,7 @@ const mapDispatchToProps = (dispatch) => {
             width=length*45;
             dispatch(actions.setVars('WSHealH11',WSHealH ));
             dispatch(actions.setVars('WSHealName11',WSHealName ));
-             dispatch(actions.setVars('btnn',2));
+
             dispatch(actions.setVars('width1',width));
             
              },

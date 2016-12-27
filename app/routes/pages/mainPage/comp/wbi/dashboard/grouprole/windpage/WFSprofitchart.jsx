@@ -160,6 +160,7 @@ let Component = React.createClass({
                     stack:'waste',
                     maxPointWidth: pointWidth,
                     borderRadius: borderRadius,
+                    borderWidth: 0,
                    
                 },
                 {

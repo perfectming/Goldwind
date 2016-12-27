@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Profit-data3');
-
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -106,7 +104,7 @@ let Component = React.createClass({
           GEAm.push(amounts);
 
           let rate=GE[i].rate*100
-      GERa.push(Number(rate.toFixed(1)));
+      GERa.push(Number(rate.toFixed(2)));
 
     let day=GE[i].day;
           GENa.push(day+'日');}
@@ -118,10 +116,6 @@ let Component = React.createClass({
               }
           })
        
-        // dispatch(actions.setVars('GENa1',GENa));
-        // dispatch(actions.setVars('GEIn1',GEIn));
-        // dispatch(actions.setVars('GEAm1',GEAm));
-        // dispatch(actions.setVars('GERa1',GERa));
                      changedata3(month,GENa,GEIn,GEAm,GERa);
        }
  

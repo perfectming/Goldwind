@@ -114,7 +114,7 @@ let Component = React.createClass({
                           let nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
                           PBATimeSecondNodevreasonloss.push(nodevreasonloss);
                           let pba=PBATimeSecondPba[i].pba*100;
-                          PBATimeSecondPbaP.push(Number(pba.toFixed(1)));
+                          PBATimeSecondPbaP.push(Number(pba.toFixed(2)));
                       }
                     
 

@@ -171,7 +171,8 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordProfitt,
                 maxPointWidth:30,
-                color:'#4CDB9D'
+                color:'#4CDB9D',
+                borderWidth:0,
                
             },
             {

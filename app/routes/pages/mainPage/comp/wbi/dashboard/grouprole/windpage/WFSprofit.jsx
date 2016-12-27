@@ -39,7 +39,7 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-            <WFSprofitchart fanCost={WFSPCoM} machine={WFSPNaM} fanProfitQ={WFSPEaM} TBA={WFSPRaM} height={500} width={width}  ty={10} pointWidth={20} borderRadius={4} pointPlacement={0}></WFSprofitchart></div>
+            <WFSprofitchart fanCost={WFSPCoM} machine={WFSPNaM} fanProfitQ={WFSPEaM} TBA={WFSPRaM} height={481} width={width}  ty={10} pointWidth={20} borderRadius={4} pointPlacement={0}></WFSprofitchart></div>
 
              </div>
                 <ul className={styles.monthbox}>
@@ -152,7 +152,7 @@ const mapDispatchToProps = (dispatch) => {
               	WFSPCo.push(costs);
 
               	let rate=WFSP[i].rate*100;
-              	WFSPRa.push(Number(rate.toFixed(1)));
+              	WFSPRa.push(Number(rate.toFixed(2)));
               }
           
               },
@@ -384,7 +384,7 @@ const mapDispatchToProps = (dispatch) => {
               	WFSPCo.push(costs);
 
               	let rate=WFSP[i].rate*100;
-              	WFSPRa.push(Number(rate.toFixed(1)));
+              	WFSPRa.push(Number(rate.toFixed(2)));
               }
           let length =WFSPNa.length;
           width=length*60;
@@ -399,7 +399,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('WFSPCo11',WFSPCo)); 
             dispatch(actions.setVars('WFSPRa11',WFSPRa)) ;
            
-             dispatch(actions.setVars('btnn',2)) ;
+         
               dispatch(actions.setVars('width1',width)) ;
          
         },

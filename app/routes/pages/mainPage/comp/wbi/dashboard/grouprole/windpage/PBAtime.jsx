@@ -149,7 +149,7 @@ const mapDispatchToProps = (dispatch) => {
                          let nodevreasonloss=PBATimeFirstPba[i].nodevreasonloss;
                          PBATimeFirstNodevreasonloss.push(nodevreasonloss);
                          let pba=PBATimeFirstPba[i].pba*100;
-                         PBATimeFirstPbaP.push(Number(pba.toFixed(1)));
+                         PBATimeFirstPbaP.push(Number(pba.toFixed(2)));
                      }
                   
 
@@ -195,7 +195,7 @@ const mapDispatchToProps = (dispatch) => {
                          let nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
                          PBATimeSecondNodevreasonloss.push(nodevreasonloss);
                          let pba=PBATimeSecondPba[i].pba*100;
-                         PBATimeSecondPbaP.push(Number(pba.toFixed(1)));
+                         PBATimeSecondPbaP.push(Number(pba.toFixed(2)));
                      }
                 },
                 error:function(){

@@ -40,7 +40,7 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-            <TBAspacechart fanCost={wTBADownM} machine={wTBANaM} fanProfitQ={wTBARunM} TBA={wTBATM} height={500} width={width} ty={0} pointWidth={20} borderRadius={4} pointPlacement={0.07}></TBAspacechart></div>
+            <TBAspacechart fanCost={wTBADownM} machine={wTBANaM} fanProfitQ={wTBARunM} TBA={wTBATM} height={481} width={width} ty={0} pointWidth={20} borderRadius={4} pointPlacement={0.07}></TBAspacechart></div>
 
              </div>
                 <ul className={styles.monthbox}>
@@ -143,7 +143,7 @@ const mapDispatchToProps = (dispatch) => {
                 wTBARun.push(runtimes);
 
                 let tba=WTSpace[i].tba*100;
-                wTBAT.push(Number(tba.toFixed(1)));
+                wTBAT.push(Number(tba.toFixed(2)));
              }
    
 
@@ -198,7 +198,7 @@ const mapDispatchToProps = (dispatch) => {
                 wTBARun.push(runtimes);
 
                 let tba=WTSpace[i].tba*100;
-                wTBAT.push(Number(tba.toFixed(1)));
+                wTBAT.push(Number(tba.toFixed(2)));
              }
  
 
@@ -251,7 +251,7 @@ const mapDispatchToProps = (dispatch) => {
                  wTBARun.push(runtimes);
 
                 let tba=WTSpace[i].tba*100;
-                wTBAT.push(Number(tba.toFixed(1)));
+                wTBAT.push(Number(tba.toFixed(2)));
              }
  
              },
@@ -298,7 +298,7 @@ const mapDispatchToProps = (dispatch) => {
                  wTBARun.push(runtimes);
 
                 let tba=WTSpace[i].tba*100;
-                wTBAT.push(Number(tba.toFixed(1)));
+                wTBAT.push(Number(tba.toFixed(2)));
              }
              },
              error:function(){
@@ -346,7 +346,7 @@ const mapDispatchToProps = (dispatch) => {
                 wTBARunM.push(runtimes);
 
                 let tba=WTSpace[i].tba*100;
-                wTBATM.push(Number(tba.toFixed(1)));
+                wTBATM.push(Number(tba.toFixed(2)));
              }
    
       let length=wTBANaM.length;
@@ -360,7 +360,7 @@ const mapDispatchToProps = (dispatch) => {
            dispatch(actions.setVars('wTBARun1qM',wTBARunM)) ;
            dispatch(actions.setVars('wTBADown1qM',wTBADownM)); 
            dispatch(actions.setVars('wTBAT1qM',wTBATM)) ;
-           dispatch(actions.setVars('btnn',2)) ;
+           
            dispatch(actions.setVars('width1',width)) ;
          
         },

@@ -45,7 +45,7 @@ let Component = React.createClass({
                    fanCostA={PBASpaceMoreMaintainloss} 
                    fanCostB={PBASpaceMoreLimitloss} 
                    fanCostC={PBASpaceMoreNodevreasonloss} 
-                   PBA={PBASpaceMorePba} height={450} width={width} ty={10} pointWidth={20} pointPlacement={0.07} borderRadius={4}></PBAspacechart>
+                   PBA={PBASpaceMorePba} height={483} width={width} ty={10} pointWidth={20} pointPlacement={0.07} borderRadius={4}></PBAspacechart>
                  </div>
              </div>
                
@@ -211,7 +211,7 @@ const mapDispatchToProps = (dispatch) => {
                         let nodevreasonloss=PBASpaceFirstPba[i].nodevreasonloss;
                         PBASpaceFirstNodevreasonloss.push(nodevreasonloss);
                         let pba=PBASpaceFirstPba[i].pba*100
-                        PBASpaceFirstPbaP.push(Number(pba.toFixed(1)));
+                        PBASpaceFirstPbaP.push(Number(pba.toFixed(2)));
                     }
            
          
@@ -277,7 +277,7 @@ const mapDispatchToProps = (dispatch) => {
                         let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
                         let pba=PBASpacePba[i].pba*100;
-                        PBASpacePbaPBA.push(Number(pba.toFixed(1)));
+                        PBASpacePbaPBA.push(Number(pba.toFixed(2)));
                     }
                
 
@@ -336,7 +336,7 @@ const mapDispatchToProps = (dispatch) => {
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
                         let pba=PBASpacePba[i].pba*100;
 
-                        PBASpacePbaPBA.push(Number(pba.toFixed(1)));
+                        PBASpacePbaPBA.push(Number(pba.toFixed(2)));
                     }
                
              
@@ -401,7 +401,7 @@ const mapDispatchToProps = (dispatch) => {
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
                         let pba=PBASpacePba[i].pba*100;
 
-                        PBASpacePbaPBA.push(Number(pba.toFixed(1)));
+                        PBASpacePbaPBA.push(Number(pba.toFixed(2)));
                     }
                
 
@@ -465,7 +465,7 @@ const mapDispatchToProps = (dispatch) => {
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
                         let pba=PBASpacePba[i].pba*100;
 
-                        PBASpacePbaPBA.push(Number(pba.toFixed(1)));
+                        PBASpacePbaPBA.push(Number(pba.toFixed(2)));
                     }
         
              let length =PBASpaceWtname.length;
@@ -489,7 +489,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBASpaceFirstFaultloss11',PBASpaceFaultloss ));
             dispatch(actions.setVars('PBASpaceFirstNodevreasonloss11',PBASpaceNodevreasonloss ));
             dispatch(actions.setVars('PBASpaceFirstPba121',PBASpacePbaPBA ));
-            dispatch(actions.setVars('btnn',2));
+           
             dispatch(actions.setVars('width1',width));
 
          
