@@ -26,7 +26,6 @@ let Component = React.createClass({
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
-
         let text0=data.data.line_date;
 
         return (

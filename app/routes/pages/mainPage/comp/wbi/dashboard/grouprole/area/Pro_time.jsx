@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Reg_tbat from './Reg_tbat.jsx';
-import Reg_tbats from './Reg_tbats.jsx';
+import Pro_three from './Pro_three.jsx';
+import Pro_four from './Pro_four.jsx';
 var actions = require('redux/actions');
 let ip="10.68.100.32";
 
@@ -32,13 +32,13 @@ let Component = React.createClass({
                 <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Reg_tbat
-                                    name0={name0}
-                                    runtime={runtime}
-                                    downtime={downtime}
-                                    tba0={tba0}
-                                    text={"巴盟区域各月份TBA"}></Reg_tbat>
-                        <div className={styles.logo3}>
+                        <Pro_three
+                            name0={name0}
+                            runtime={runtime}
+                            downtime={downtime}
+                            tba0={tba0}
+                            text={"巴盟区域各月份收益率"}></Pro_three>
+                        <div className={styles.logo4}>
 
                         </div>
                     </div>
@@ -50,13 +50,13 @@ let Component = React.createClass({
 
                 <div className={`${styles.fbox} `}>
                     <div className={` ${styles.logofa} ${styles.box_shadow}`}>
-                        <Reg_tbats height={450}
+                        <Pro_four height={450}
                                    name2={name2}
                                    runtime2={runtime2}
                                    downtime2={downtime2}
                                    tba2={tba2}
-                                   text={mon+"每日TBA"}></Reg_tbats>
-                        <div className={styles.logomini3}>
+                                   text={mon+"收益率"}></Pro_four>
+                        <div className={styles.logomini4}>
 
                         </div>
                     </div>
@@ -98,11 +98,8 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/TBA/getMonthsTBAByG',
+                url:'http://'+ipUrl+'/wbi/yield/getAllRate',
                 async:false,
-                data:{
-                    "groupid":  '201612121721151',
-                },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
@@ -115,9 +112,9 @@ const mapDispatchToProps = (dispatch) => {
                     for (var i in data.data) {
                         //区域的横坐标
                         name1.push(data.data[i].month+"月")
-                        runtime1.push(data.data[i].runtimes);   //实际发电量
-                        downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(Number((data.data[i].tba*100).toFixed(2)));     //维护损失
+                        runtime1.push(data.data[i].earning);   //实际发电量
+                        downtime1.push(data.data[i].costs);   //故障损失
+                        tba1.push(Number((data.data[i].rate*100).toFixed(2)));     //维护损失
                         wfid1.push(data.data[0].wfid);   //维护损失
 
                     }
@@ -134,18 +131,16 @@ const mapDispatchToProps = (dispatch) => {
             })
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/TBA/getDaysTBAByG',
+                url:'http://'+ipUrl+'/wbi/yield/getMaxYieBayDay',
                 async:false,
                 data:{
                     "month":month2,
-                    "groupid":  '201612121721151',
+
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
                     //各区域   一区域二区域
-
-
                     let runtime2=[];       //实际发电量
                     let downtime2=[];       //故障损失
                     let tba2=[];       //维护损失
@@ -153,9 +148,9 @@ const mapDispatchToProps = (dispatch) => {
                     for (var i in data.data) {
                         //区域的横坐标
                         name2.push(data.data[i].day+"日");
-                        runtime2.push(data.data[i].runtimes);   //实际发电量
-                        downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(Number((data.data[i].tba*100).toFixed(2)));     //维护损失
+                        runtime2.push(data.data[i].incomes);   //实际发电量
+                        downtime2.push(data.data[i].amounts);   //故障损失
+                        tba2.push(Number((data.data[i].rate*100).toFixed(2)));     //维护损失
                     }
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));
