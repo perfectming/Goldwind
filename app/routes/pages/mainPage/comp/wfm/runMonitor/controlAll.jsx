@@ -36,7 +36,6 @@ let Component = React.createClass({
             let arr2 = [];
             let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
             let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-
             for(let x in obj_wfd){
                 arr1.push(x)
             }

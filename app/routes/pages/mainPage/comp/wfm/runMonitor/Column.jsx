@@ -16,7 +16,6 @@ let Component = React.createClass({
         var arr3=[];
         let ssg1 = tabaleData.ModelData;
         let ssg2=model.Model.ens;
-            console.log(ssg1,ssg2);
         for(let x in ssg2){
             ssg2[x].det=='TransSubstation' && arr.push(x);
         }

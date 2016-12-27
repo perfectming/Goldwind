@@ -28,7 +28,8 @@ let Component = React.createClass({
         }
         if(data2==undefined){
           data2=[];
-        }
+          alert('数据获取失败！')
+        }else{
         return (
 
             <div className={styles.bodyBox}>
@@ -162,6 +163,7 @@ let Component = React.createClass({
                
             </div>
         );
+      }
     }
 });
 

@@ -30,6 +30,7 @@ let Component = React.createClass({
 	componentWillMount() {     // 页面加载前执行的方法
 		let {value} = this.props;
         this.props.toinfopage(value);
+
     },
    componentWillUnmount() {
        clearInterval(times)  // 页面离开前执行的方法
@@ -71,10 +72,11 @@ let Component = React.createClass({
 			// console.log(fmvalue["WROT.Spd.Ra.F32"]);
 		// let qwer = "WTGS.PPV.Ra.F32.A";
 		let Value = [];
-		// let  fdv = fmvalue["DevStatusQuery"];
-		// if(fdv.Value == undefined){
-		// 	fdv[Value] = Value
-		// }
+		let  fdv = fmvalue["DevStatusQuery"];
+
+		if(fdv.Value == undefined){
+			fdv[Value] = Value
+		}
 		// console.log(3,fmvalue);
 		let WTURTemp = Math.ceil(fmvalue["WTUR.Temp.Ra.F32"]);
 		let WNACTemp = Math.ceil(fmvalue["WNAC.Temp.Ra.F32"]);
@@ -349,15 +351,15 @@ let Component = React.createClass({
 						<div className={styles.statusquery}>
 							{
 
-								// fdv.map((value, key)=>{
-								// 	return (
-								// 			<div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
-								// 				<span>{value.StatusDate}</span>
-								// 				<span>{value.StatusDescr}</span>
-								// 				<span>{value.StatusTime}</span>
-								// 			</div>
-								// 		)
-								// })
+								fdv.Value.map((value, key)=>{
+									return (
+											<div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
+												<span>{value.rectime}</span>
+												<span>{value.wtstatus}</span>
+												<span>{value.timelength}</span>
+											</div>
+										)
+								})
 							}
 						</div>
 					</div>
@@ -366,17 +368,17 @@ let Component = React.createClass({
 						<div className={styles.titlebox}><span>风机报警时间</span><span>报警描述</span><span>等级</span><span>报警类型</span><span>报警码</span></div>
 						<div className={styles.statusquery}>
 							{
-								// fmvalue.DevStatusQuery.Value.map((value, key)=>{
-								// 	return (
-								// 			<div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
-								// 				<span>{value.StatusDate}</span>
-								// 				<span>{value.StatusDescr}</span>
-								// 				<span>{value.StatusTime}</span>
-								// 				<span>{value.StatusTime}</span>
-								// 				<span>{value.StatusTime}</span>
-								// 			</div>
-								// 		)
-								// })
+								fmvalue.DevStatusQuery.Value!=undefined && fmvalue.DevStatusQuery.Value.map((value, key)=>{
+									return (
+											<div key={key} className={`${key%2===0 ? styles.nomalbox : styles.bgbox} ${styles.statusquerybox}`}>
+												<span>{value.StatusDate}</span>
+												<span>{value.StatusDescr}</span>
+												<span>{value.StatusTime}</span>
+												<span>{value.StatusTime}</span>
+												<span>{value.StatusTime}</span>
+											</div>
+										)
+								})
 							}
 						</div>
 					</div>

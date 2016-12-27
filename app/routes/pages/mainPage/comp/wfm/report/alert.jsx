@@ -3,9 +3,18 @@ import {connect} from 'react-redux';
 import styles from './alert.scss';
 var $ =require('jquery');
 var actions = require('redux/actions');
+let obj={
+    name:'sd',
+    name1:'sd1',
+    name2:'sd2',
+    name3:'sd3',
+    name4:'sd4',
+    name5:'sd5',
+    name6:'sd6',
+}
+let arr=[1,2,3,4,5,6]
 
-
-
+console.log(obj.length)
 
 
 
@@ -20,8 +29,11 @@ let Component = React.createClass({
 
 
     render() {
+      
         return (
             <div className={styles.faultBox}>
+ 
+            
                 <div className={styles.search_tit}>
                 56454545
                 </div>

@@ -126,6 +126,7 @@ const mapDispatchToProps = (dispatch) => {
         changetab:(page,act)=>{
             dispatch(actions.setVars('numpage', page));
             dispatch(actions.setVars('actbtn', act));
+            dispatch(actions.setVars('page1', 1));
         }
         
     };
