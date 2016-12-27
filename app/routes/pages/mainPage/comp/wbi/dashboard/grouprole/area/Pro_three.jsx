@@ -148,7 +148,7 @@ let Component = React.createClass({
                         }
                     }, gridLineDashStyle: 'Solid',
                     gridLineColor: '#6d6a6c',
-                    min:0,
+
                     title: {
                         text: '(%)',
                         align: 'high',
@@ -220,52 +220,40 @@ const mapDispatchToProps = (dispatch) => {
         },
         changedata1: (w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl) => {
 
-            dispatch(actions.setVars('w11', w10));
-            let wfid = hhdata2.data[wc1].wfid;
-            dispatch(actions.setVars('bt0', 0));
 
-            let date = new Date();
-            let year = date.getFullYear()
-            let month2 = date.getMonth();
-            let day = new Date(year, month2, 0);
-            let daycount = day.getDate();
 
 
 
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/yield/getYieldByWfid',
+                url:'http://'+ipUrl+'/wbi/yield/getMaxYieBayDay',
                 async:false,
                 data:{
-                    'startdate':year+"-"+(actbt+1)+"-"+'1',
-                    'enddate':year+"-"+(actbt+1)+"-"+daycount,
-                    'wfid':wfid,
-                    'methods':'desc',
+                    'month':wc1+1,
+
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    dispatch(actions.setVars('hhdata3',  data));
-                    dispatch(actions.setVars('w11',  w10));
-                    dispatch(actions.setVars('wfid',  wfid));
                     //各区域   一区域二区域
                     let runtime2 = [];       //实际发电量
                     let downtime2 = [];       //故障损失
                     let tba2 = [];       //维护损失
                     let name2 = [];
 
-                    for (var i =0;i<10;i++) {
+                    for (var i in data.data) {
                         //区域的横坐标
 
-                        name2.push(data.data[i].wtname);
-                        runtime2.push(data.data[i].earning);   //实际发电量
-                        downtime2.push(data.data[i].costs);   //故障损失
+                        name2.push(data.data[i].day+"日");
+                        runtime2.push(data.data[i].incomes);   //实际发电量
+                        downtime2.push(data.data[i].amounts);   //故障损失
                         tba2.push(Number((data.data[i].rate * 100).toFixed(2))); //维护损失
                     }
-                    dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));
                     dispatch(actions.setVars('tba2', tba2));
+                    dispatch(actions.setVars('name2', name2));
+                    dispatch(actions.setVars('mon', wc1+1+"月"));
 
 
                 },
