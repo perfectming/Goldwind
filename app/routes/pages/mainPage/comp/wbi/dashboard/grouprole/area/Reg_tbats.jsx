@@ -113,11 +113,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text: 'h',
+                    text: '(h)',
                     align: 'high',
                     rotation: '0',
                     y: -20,
-                    x: 45,
+                    x: 35,
                     style: {
                         fontSize: '14px',
                         color: '#fff'
@@ -134,7 +134,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
                 min:0,
                 title: {
-                    text: '100%',
+                    text: '(%)',
                     align: 'high',
                     rotation: '0',
                     y: -15,

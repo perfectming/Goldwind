@@ -10,33 +10,26 @@ let Component = React.createClass({
     },
 
     render() {
-        let barRotime = data.data.bar_rotime;
-        let barRotimes = data.data.bar_rotimes;
-        let barLoPowerValue = data.data.bar_roPowerses;
-        let barLoPowerValues = data.data.bar_roPower;
-        let barLdpowerValue = data.data.line_lpower;
-        let barLpdpowerValue = data.data.line_pdate;
 
+        let {height,text,name2,runtime2,downtime2,tba2,widths} = this.props;
         let configPie = {
             chart: {
-                height:430,
+                height:height,
+                width:widths,
                 backgroundColor: "rgba(44, 61, 71, 0.4)",
-                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                // plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-
                 borderRadius:10
             },
             title: {
-                text: '11月份1风场各风机PBA',
-
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
                     color:"#fff",
-                    fontSize:"20px",
-                    fontWight:'600',
+                    fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
             },
@@ -44,22 +37,23 @@ let Component = React.createClass({
             legend: {
                 align:"right",
                 verticalAlign: "top",
+                y:40,
+                x:-75,
+                itemHoverStyle:{
+                    color:'#31f3fb',
+                },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"18px",
+                    fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
             },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
 
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#4CDB9D', ' #A2D04D', '#FFD927' , '#FF9424', '#FF6124', '#000fff','#134833', '#082B1F']
+            colors: ['#4CDB9D', '#1E664A', '#000','#134833', '#082B1F']
             ,
             plotOptions: {
                 pie: {
@@ -76,13 +70,19 @@ let Component = React.createClass({
                     animation: true
                 },
                 column: {
-                    stacking: 'normal',
-
+                    pointPadding: 0.2,
                     borderWidth: 0,
+                    maxPointWidth: 20,
+                    //pointWidth:20
                     tooltip: {
-                        valueSuffix:'kWh'
+                        valueSuffix:'元'
                     },
-                }
+                },
+                line:{
+                    tooltip: {
+                        valueSuffix:'%'
+                    },
+                },
             },
 
             xAxis: {
@@ -96,7 +96,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:barRotimes,
+                categories:name2,
             },
             yAxis: [{
                 labels: {
@@ -109,7 +109,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text: 'kWh',
+                    text: '(元)',
                     align: 'high',
                     rotation: '0',
                     y: -20,
@@ -130,7 +130,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text: 'PBA%',
+                    text: '(%)',
                     align: 'high',
                     rotation: '0',
                     y: -15,
@@ -143,53 +143,26 @@ let Component = React.createClass({
                 },
                 opposite: true
             }],
-
             series: [{
-                name: '实际发电量',
+                name: '收益',
+                color:'#33BAC0',
                 type: 'column',
-                color: "#33BAC0",
-                data: power1,
-                borderRadius: 4,
-            }, {
-                name: '故障损失',
-                color: '#5298d3',
+                data: runtime2,
+                borderRadius: 2,
+            },{
+                name: '成本',
                 type: 'column',
-                data: wrong10,
-                stack: 'time',
-
+                color:'#70c080',
+                data: downtime2,
+                borderRadius: 2,
             },
                 {
-                    name: '维护损失',
-                    color: '#ffffff',
-                    type: 'column',
-                    data: wrong11,
-                    stack: 'time'
-                },
-                {
-                    name: '限功率损失',
-                    color: '#e9c75c',
-                    type: 'column',
-                    data: wrong12,
-                    stack: 'time'
-                },
-
-                {
-                    name: '非设备原因损失',
-                    color: '#d06960',
-                    type: 'column',
-                    data: wrong13,
-                    stack: 'time',
-                    borderRadius: 2,
-                },
-
-
-                {
-                    name: 'PBA',
+                    name: '收益率',
                     type: 'line',
-                    color: '#0000ff',
-                    data: pba1,
-                    yAxis: 1,
-                },
+                    color:'#0000ff',
+                    data: tba2,
+                    yAxis:1,
+                }
 
             ]
         };

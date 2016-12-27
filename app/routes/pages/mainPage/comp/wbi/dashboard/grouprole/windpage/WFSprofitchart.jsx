@@ -25,7 +25,7 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x:120,
+                x:110,
                 y:14,
                 style:{
                     color:"#fff",
@@ -106,11 +106,11 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'（元）',
+                text:'(元)',
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 45,
+                x: 42,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -132,7 +132,7 @@ let Component = React.createClass({
                  align:'high',
                 rotation:'0',
                 y: -15,
-                x: -48,
+                x: -43,
                 style:{
                     color: '#fff',
                     fontSize:'14px'
@@ -160,6 +160,7 @@ let Component = React.createClass({
                     stack:'waste',
                     maxPointWidth: pointWidth,
                     borderRadius: borderRadius,
+                    borderWidth: 0,
                    
                 },
                 {

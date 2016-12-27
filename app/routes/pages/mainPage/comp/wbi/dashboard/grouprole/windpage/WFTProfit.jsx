@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import WFTprofitchart from './WFTprofitchart.jsx';
-import icono from '../../../../../img/comp/wind_logo.png';
+import WFTprofitchartt from './WFTprofitchartt.jsx';
+import icono from '../../../../../img/comp/收益率1.png';
 var $=require('jquery');
 var actions = require('redux/actions');
 let data=require('./Profit-dataq')
@@ -30,7 +31,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let{rate,width,ipUrl,btn=0,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,areaNamee,back,more,close,backtop,befor_pagee='windpage',befor_page2,areaNameN,areaRecordCostN,areaRecordProfitN}=this.props;
+        let{befor_pagee='windpage',befor_pagee2,income,ratem,cost,month2,rate,width,ipUrl,btn=0,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,areaNamee,back,more,close,backtop,befor_page2,areaNameN,areaRecordCostN,areaRecordProfitN}=this.props;
        
           return (
            <div className={styles.box}>
@@ -38,31 +39,40 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{[actbt+1]+'月'+xxdwfNa+'各风机收益'}</p>
+                <p>{[actbt+1]+'月'+xxdwfNa+'各风机发电量'}</p>
                 <div className={styles.xx} onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-  <WFTprofitchart areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={20} width={width} height={483} ly={10} pointPlacement={0} borderRadius={3}></WFTprofitchart>
+  <WFTprofitchart areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={20} width={width} height={483} ly={10} pointPlacement={0} borderRadius={3} xxdwfId={xxdwfId}></WFTprofitchart>
                 </div>
 
                 
         
              </div>
-            <ul className={styles.monthbox}>
-                    {
-                        data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,ipUrl,xxdwfId)} key={key}>{value.name}</li>)
-                        })
-                    }
-        
-    <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
-       
-                </ul>
-               <div className={`${styles.bigbox} ${styles.shadow}`}>
+         <div className={styles.paddingtop}>
+              
+             <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
+
+         
+                  <div className={`${styles.biggbox} ${styles.shadow}`}>
                    
                    
                           
-                                <WFTprofitchart areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机收益'}  rate={rate}ly={40} pointPlacement={-0.07} borderRadius={7}></WFTprofitchart>
+                                <WFTprofitchartt input_url={ipUrl} xxdwfId={xxdwfId}areaNameX={month2}  areaRecordCostT={cost} areaRecordProfitO={income} colorO={colorO} colorT={colorT} pointWidth={30} height={410} text={xxdwfNa+'每月收益'}  rate={ratem}ly={40} pointPlacement={-0.07} borderRadius={7}></WFTprofitchartt>
+                          
+                       
+                       
+                             
+                <div className={styles.imgq}>
+                    <img src={icono}/>
+                </div>
+                </div>
+              
+               <div className={`${styles.biggbox} ${styles.shadow}`}>
+                   
+                   
+                          
+                                <WFTprofitchart areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={410} text={[actbt+1]+'月'+xxdwfNa+'每日收益'}  rate={rate}ly={40} pointPlacement={-0.07} borderRadius={7}></WFTprofitchart>
                           
                        
                        
@@ -100,6 +110,10 @@ const mapStateToProps = (state) => {
         ipUrl:state.vars.ipUrl,
         width:state.vars.width1,
         rate:state.vars.arr4,
+        month2:state.vars.month22,
+        cost:state.vars.cost22,
+        income:state.vars.income22,
+        ratem:state.vars.rateee,
     }
 };
 
@@ -114,7 +128,37 @@ const mapDispatchToProps = (dispatch) => {
             let date =new Date();
             let year =date.getFullYear();
             let month= date.getMonth();
+            let month2=[];
+            let cost=[];
+            let income=[];
+            let rate=[];
+            //huoqu  收益率12各月的
+          $.ajax({
+                                    url: 'http://'+input_url+'/wbi/yield/getWfAllRate',//收益柱图
+                                    type: 'post',
+                                    async:true,
+                                    data:{'wfid':xxdwfId},
+                                    dataType: 'json',//here
+                                    success:function (data) {
+                                     
+                                        month2=[],cost=[],income=[];
+                                        for(var i in data.data){
+                                            month2.push(data.data[i].month+"月");
+                                            cost.push(data.data[i].costs);
+                                            income.push(data.data[i].incomes);
+
+                                            rate.push(Number(data.data[i].rate.toFixed(2)))
+                                        };
+                                   
+                                        dispatch(actions.setVars('month22',month2 ));
+                                        dispatch(actions.setVars('cost22',cost ));
+                                        dispatch(actions.setVars('income22',income ));
+                                        dispatch(actions.setVars('rateee',rate ));
+                                    },
+                                     error:function(){
           
+             },
+           });
            $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/yield/getWfieldMaxYieBayDay',  
@@ -139,7 +183,7 @@ const mapDispatchToProps = (dispatch) => {
                  let amounts=dataa[i].amounts;
                  arr3.push(amounts);
                  let rate=dataa[i].rate*100;
-                 arr4.push(Number(rate.toFixed(1)));
+                 arr4.push(Number(rate.toFixed(2)));
 
              }
          
@@ -164,6 +208,9 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+         backtop:(befor_pagee,befor_page2)=>{
+            dispatch(actions.setVars('showPage',befor_pagee));
+        },
         changpage :(value,key,input_url,xxdwfId)=>{
             
            let arr1=[];
@@ -198,7 +245,7 @@ const mapDispatchToProps = (dispatch) => {
                  let amounts=dataa[i].amounts;
                  arr3.push(amounts);
                  let rate=dataa[i].rate*100;
-                 arr4.push(Number(rate.toFixed(1)));
+                 arr4.push(Number(rate.toFixed(2)));
 
              }
          

@@ -14,10 +14,10 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {input_url,width,xxdwfId,xxdfc,monthT,profit,cost,w0,winsss,changedata3,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
+        let {height,text,input_url,width,xxdwfId,xxdfc,monthT,profit,cost,w0,winsss,changedata3,machine,fanProfitQ,fanCost,fanCostA,fanCostB,fanCostC}=this.props;
         let configPie = {
             chart: {
-                height:395,
+                height:height,
               
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
@@ -26,14 +26,15 @@ let Component = React.createClass({
                 paddingLeft:100,
             },
             title: {
-                text: '',
+                text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : "0",
+                x : 105,
+                y:14,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                    
                 }
@@ -114,7 +115,7 @@ let Component = React.createClass({
                           let nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
                           PBATimeSecondNodevreasonloss.push(nodevreasonloss);
                           let pba=PBATimeSecondPba[i].pba*100;
-                          PBATimeSecondPbaP.push(Number(pba.toFixed(1)));
+                          PBATimeSecondPbaP.push(Number(pba.toFixed(2)));
                       }
                     
 

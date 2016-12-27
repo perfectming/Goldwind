@@ -35,7 +35,7 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 },
                 itemHoverStyle: {
-                color: '#31f3fb'
+                    color: '#31f3fb'
             	},
             	y: 0,
             },
@@ -49,7 +49,7 @@ let Component = React.createClass({
                     pointPadding: 0.1,
                     borderWidth: 0,
                     pointWidth: 15,
-                    borderRadius:5,
+                    borderRadius:3,
                 }
             },
             tooltip: {

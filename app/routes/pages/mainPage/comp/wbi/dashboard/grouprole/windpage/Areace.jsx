@@ -7,20 +7,6 @@ import Month from './Month';
 var $=require('jquery');
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3')
-let button=data.button;
-let areaName=data.areaName;
-let areaRecordCost=data.areaRecordCost;
-let areaRecordProfit=data.areaRecordProfit[0];
-let text=data.textF;
-let colorO='#5B9BD5';
-let colorT='#ED7D31';
-let input_url="10.68.100.32";
-let pointWidth=30;
-let x0=[];
-let x1=[];
-let x2=[];
-let x3=[];
-let windPT=data.windareace;
 let Component = React.createClass({
    componentWillMount() {
         let{xxdwfId,xxdwfNa,ipUrl}=this.props;
@@ -43,7 +29,7 @@ let Component = React.createClass({
                 <div className={styles.xx} onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-  <Windce areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT} pointWidth={20} width={width} height={483} ly={10} pointPlacement={0} borderRadius={4}></Windce>
+  <Windce areaNameX={areaNameN}  areaRecordCostT={areaRecordCostN} areaRecordProfitO={areaRecordProfitN} pointWidth={20} width={width} height={483} ly={10} pointPlacement={0} borderRadius={4}></Windce>
                 </div>
 
                 
@@ -63,7 +49,7 @@ let Component = React.createClass({
                    
                    
                           
-                                <Windce areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP} colorO={colorO} colorT={colorT} pointWidth={30} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机发电量'} ly={40} pointPlacement={-0.07} borderRadius={7}></Windce>
+                                <Windce areaNameX={areaNamee}  areaRecordCostT={wind} areaRecordProfitO={windP}  pointWidth={30} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机发电量'} ly={40}  borderRadius={7}></Windce>
                           
                        
                        

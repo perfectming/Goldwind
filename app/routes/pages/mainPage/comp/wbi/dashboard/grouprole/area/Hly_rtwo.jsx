@@ -109,7 +109,7 @@ let Component = React.createClass({
                     align:'high',
                     rotation:'0',
                     y: -10,
-                    x: 40,
+                    x: 30,
                     style:{
                         color:'#fff',
                         fontSize:'14px'
@@ -128,6 +128,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: healthy3,
                 borderRadius: 4,
+                color:'#62de88',
 
             }
                 // ,{
