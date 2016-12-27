@@ -111,7 +111,7 @@ let Component = React.createClass({
                     align:'high',
                     rotation:'0',
                     y: -10,
-                    x: 40,
+                    x: 30,
                     style:{
                         color:'#fff',
                         fontSize:'14px'
@@ -128,8 +128,8 @@ let Component = React.createClass({
             series: [{
                 name: '实际健康度',
                 type: 'column',
-                data: powerValue
-
+                data: powerValue,
+                color:'#62de88',
             }
             // ,{
             //     name:'停机时间',

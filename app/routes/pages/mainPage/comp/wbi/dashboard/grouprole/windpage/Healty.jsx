@@ -39,7 +39,7 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-          <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={450} ty={20} pointWidth={20} borderRadius={4}></Healtychart>
+          <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={483} ty={20} pointWidth={20} borderRadius={4}></Healtychart>
                 </div>
              </div>
                  <ul className={styles.monthbox}>
@@ -52,13 +52,13 @@ let Component = React.createClass({
                     
                     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
                 </ul>
- <div className={styles.paddingtop}>
+
 
 
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                   
                       
-                               <Healtychart machineE={windP}         areaRecordProfit={wind} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机健康度'} ty={40} pointWidth={30} borderRadius={7}></Healtychart>
+                               <Healtychart machineE={windP}         areaRecordProfit={wind} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机健康度'} ty={35} pointWidth={30} borderRadius={7}></Healtychart>
                        
                         
                  
@@ -72,7 +72,7 @@ let Component = React.createClass({
                    </div>
                 </div>
  </div>
-                </div>
+                
           
 
 
@@ -302,7 +302,7 @@ const mapDispatchToProps = (dispatch) => {
             width=length*45;
             dispatch(actions.setVars('WSHealH11',WSHealH ));
             dispatch(actions.setVars('WSHealName11',WSHealName ));
-             dispatch(actions.setVars('btnn',2));
+
             dispatch(actions.setVars('width1',width));
             
              },

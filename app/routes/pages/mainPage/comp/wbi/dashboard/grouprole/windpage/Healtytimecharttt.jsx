@@ -10,10 +10,10 @@ let Component = React.createClass({
     },
     render() {
         
-        let {w0,areaName,areaRecordCost,areaRecordProfit,machine,areaPlanDay,areaPlan}=this.props;
+        let {height,text1,w0,areaName,areaRecordCost,areaRecordProfit,machine,areaPlanDay,areaPlan}=this.props;
         let configPie = {
             chart: {
-                height:410,
+                height:height,
                  backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -22,19 +22,21 @@ let Component = React.createClass({
                 
             },
             title: {
-                text: '',
+                text: text1,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : "0",
+                x:90,
+                y:14,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
                   
                 }
             },
             legend: {
+                y:30,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{

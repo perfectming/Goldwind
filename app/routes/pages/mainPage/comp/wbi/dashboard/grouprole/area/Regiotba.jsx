@@ -38,7 +38,9 @@ let Component = React.createClass({
 
 
             <div className = {styles.box}>
+                <div className={styles.paddingtop}>
                 <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
+                </div>
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_pbath height={400} text={'巴盟每月PBA'}
