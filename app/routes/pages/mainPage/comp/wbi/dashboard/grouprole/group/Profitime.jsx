@@ -30,7 +30,7 @@ let Component = React.createClass({
                         <img src={icono}/>
                        </div>
                             <div>
-                                <Profitimechart GeR={GeR} GeE={GeC} GeC={GeE} GeM={GeM} text={'集团每月收益'}height={420} input_url={ipUrl}></Profitimechart>
+                                <Profitimechart GeR={GeR} GeE={GeE} GeC={GeC} GeM={GeM} text={'集团每月收益'}height={420} input_url={ipUrl}></Profitimechart>
                             </div>
                 </div>
                  <div className={styles.bigbox}>
