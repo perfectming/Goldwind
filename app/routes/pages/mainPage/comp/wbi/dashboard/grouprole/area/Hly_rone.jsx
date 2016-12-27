@@ -143,6 +143,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: healthy2,
                 borderRadius: 4,
+                color:'#62de88',
             }
                 // ,{
                 //     name:'停机时间',

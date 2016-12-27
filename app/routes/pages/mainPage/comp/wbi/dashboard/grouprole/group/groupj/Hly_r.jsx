@@ -19,8 +19,8 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:height,
-                backgroundColor: "rgba(44, 61, 71, 0.6)",
-                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                backgroundColor: "rgba(44, 61, 71, 0.4)",
+
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -90,7 +90,7 @@ let Component = React.createClass({
                     borderRadius: 4,
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth:20
+                    maxPointWidth:30
                 }
             },
 
@@ -139,6 +139,7 @@ let Component = React.createClass({
                 name: '实际健康度',
                 type: 'column',
                 data: barLoPowerValue,
+                color:'#62de88',
 
             }
 

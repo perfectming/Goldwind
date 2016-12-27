@@ -97,7 +97,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 25,
+                    maxPointWidth: 40,
                     tooltip: {
                         valueSuffix:'°H'
                     },
@@ -150,6 +150,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: barLoPowerValue,
                 borderRadius: 7,
+                color:'#62de88',
             }
 
 
