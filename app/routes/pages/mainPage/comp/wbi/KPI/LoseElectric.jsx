@@ -27,7 +27,7 @@ let Component = React.createClass({
     
 	render() {
 		let comp=PBAdata.list;
-		let {storage,loseElecBool=false,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne='',loseAreaNameTwo='',loseAreaNameThree='',loseAreaNameFour='',selectName,selectId,ipUrl,checkedLose=1,buttonAction,buttonReset, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
+		let {buttonResetA,buttonResetB,buttonResetC,buttonResetD,storage,loseElecBool=false,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne='',loseAreaNameTwo='',loseAreaNameThree='',loseAreaNameFour='',selectName,selectId,ipUrl,checkedLose=1,buttonAction,buttonReset, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
 		if(loseElecBool){
 			return(
 				<div className={styles.bodyBox}>
@@ -82,20 +82,24 @@ let Component = React.createClass({
 					<div className={styles.content}>
 						<div className={styles.areaLose}>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
-								<ChartOne name={loseAreaNameOne} text={loseAreaNameOne} lose={loseAreaOne}></ChartOne>
+								<div className={loseAreaNameOne==''? styles.hide:styles.button} onClick={()=>buttonResetA()}>清除</div>
+								<ChartOne unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameOne+'损失电量分析':loseAreaNameOne+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameOne+'损失电量分析':loseAreaNameOne+'损失收入分析'} lose={loseAreaOne}></ChartOne>
 							</div>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
-								<ChartOne name={loseAreaNameOne} text={loseAreaNameTwo} lose={loseAreaTwo}></ChartOne>
+								<div className={loseAreaNameTwo==''? styles.hide:styles.button} onClick={()=>buttonResetB()}>清除</div>
+								<ChartOne unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameTwo+'损失电量分析':loseAreaNameTwo+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameTwo+'损失电量分析':loseAreaNameTwo+'损失收入分析'} lose={loseAreaTwo}></ChartOne>
 							</div>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
-								<ChartOne name={loseAreaNameOne} text={loseAreaNameThree} lose={loseAreaThree}></ChartOne>
+								<div className={loseAreaNameThree==''? styles.hide:styles.button} onClick={()=>buttonResetC()}>清除</div>
+								<ChartOne unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameThree+'损失电量分析':loseAreaNameThree+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameThree+'损失电量分析':loseAreaNameThree+'损失收入分析'} lose={loseAreaThree}></ChartOne>
 							</div>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
-								<ChartOne name={loseAreaNameOne} text={loseAreaNameFour} lose={loseAreaFour}></ChartOne>
+								<div className={loseAreaNameFour==''? styles.hide:styles.button} onClick={()=>buttonResetD()}>清除</div>
+								<ChartOne unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameFour+'损失电量分析':loseAreaNameFour+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameFour+'损失电量分析':loseAreaNameFour+'损失收入分析'} lose={loseAreaFour}></ChartOne>
 							</div>
 						</div>
 						<div className={`${styles.lose} ${styles.boxShadow}`}>
-							<ChartFive title={'损失分析'} unit={storage==1? "kWh":"元"} loseA={loseA} loseB={loseB} loseC={loseC} loseD={loseD} nameOne={loseAreaNameOne} nameTwo={loseAreaNameTwo} nameThree={loseAreaNameThree} nameFour={loseAreaNameFour}></ChartFive>
+							<ChartFive title={storage==undefined? '':storage==1?'损失电量分析':'损失收入分析'} unit={storage==undefined? '':storage==1? "kWh":"元"} loseA={loseA} loseB={loseB} loseC={loseC} loseD={loseD} nameOne={loseAreaNameOne} nameTwo={loseAreaNameTwo} nameThree={loseAreaNameThree} nameFour={loseAreaNameFour}></ChartFive>
 						</div>
 					</div>
 				</div>
@@ -136,6 +140,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
     	init: () => {
+    		dispatch(actions.setVars('storage', ));
     		dispatch(actions.setVars('loseA', ));
 	    	dispatch(actions.setVars('loseB', ));
 	    	dispatch(actions.setVars('loseC', ));
@@ -217,6 +222,7 @@ const mapDispatchToProps = (dispatch) => {
 	    	dispatch(actions.setVars('checkedLose', 2));
 	    },
 	    buttonReset : (loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne,loseAreaNameTwo,loseAreaNameThree,loseAreaNameFour)=>{
+	    	dispatch(actions.setVars('storage', ));
 	    	dispatch(actions.setVars('loseA', ));
 	    	dispatch(actions.setVars('loseB', ));
 	    	dispatch(actions.setVars('loseC', ));
@@ -228,6 +234,26 @@ const mapDispatchToProps = (dispatch) => {
 	    	dispatch(actions.setVars('loseAreaNameOne', ));
 	    	dispatch(actions.setVars('loseAreaNameTwo', ));
 	    	dispatch(actions.setVars('loseAreaNameThree', ));
+	    	dispatch(actions.setVars('loseAreaNameFour', ));
+	    },
+	    buttonResetA : () =>{
+	    	dispatch(actions.setVars('loseA', ));
+	    	dispatch(actions.setVars('loseAreaOne', ));
+	    	dispatch(actions.setVars('loseAreaNameOne', ));
+	    },
+	    buttonResetB : () =>{
+	    	dispatch(actions.setVars('loseB', ));
+	    	dispatch(actions.setVars('loseAreaTwo', ));
+	    	dispatch(actions.setVars('loseAreaNameTwo', ));
+	    },
+	    buttonResetC : () =>{
+	    	dispatch(actions.setVars('loseC', ));
+	    	dispatch(actions.setVars('loseAreaThree', ));
+	    	dispatch(actions.setVars('loseAreaNameThree', ));
+	    },
+	    buttonResetD : () =>{
+	    	dispatch(actions.setVars('loseD', ));
+	    	dispatch(actions.setVars('loseAreaFour', ));
 	    	dispatch(actions.setVars('loseAreaNameFour', ));
 	    },
 	    buttonAction : (storage,selectId,selectName,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne,loseAreaNameTwo,loseAreaNameThree,loseAreaNameFour,checkedLose,ipUrl) => {

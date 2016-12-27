@@ -49,6 +49,9 @@ let Component = React.createClass({
                     borderRadius:8
                 }
             },
+            tooltip: {
+                valueSuffix: unit,
+            },
             xAxis: {
                 lineWidth: 1,
                //lineColor: "red",
@@ -69,7 +72,7 @@ let Component = React.createClass({
 	                offset: 0,
 	                rotation: 0,
 	                y: -15,
-	                x:-18,
+	                x:-5,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',
@@ -88,12 +91,6 @@ let Component = React.createClass({
                 type: 'column',
                 data: plan,
                 cursor: 'pointer',
-                events: {
-                    click: function(e) {
-                    	e.point.category;
-                    }
-                }
-
             }]
         };
         return (

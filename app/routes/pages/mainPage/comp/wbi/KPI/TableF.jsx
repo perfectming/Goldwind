@@ -18,39 +18,39 @@ let Component = React.createClass({
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                paddingLeft:100,
-                borderRadius:10
+                paddingLeft: 100,
+                borderRadius: 10,
             },
             title: {
                 text: '集团各区域PBA',
-                align:'left',
-                 x : "0",
+                align: 'left',
+                 x : 40,
                 style:{
-                    color:"#fff",
-                    fontSize:"16px",
-                    fontFamily:"微软雅黑"
+                    color: "#fff",
+                    fontSize: "16px",
+                    fontFamily: "微软雅黑"
                 }
             },
             //图例说明
             legend: {
-            	x:-50,
-                align:"right",
+            	x: -50,
+                y: 10,
+                align: "right",
                 verticalAlign: "top",
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"14px",
-                    fontWeight:"normal",
-                    fontFamily:"微软雅黑"
+                    fontSize: "14px",
+                    fontWeight: "normal",
+                    fontFamily: "微软雅黑"
                 },
                 itemHoverStyle: {
-                color: '#31f3fb'
+                    color: '#31f3fb'
             	}
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#5298d3', '#ffffff', '#e9c75c','#d06960','#5298d3']
-            ,
+            colors: [ '#33BAC0', '#5298d3', '#ffffff', '#e8952a','#d8403d','#0000ff'],
             plotOptions: {
                 column: {
                 	stacking:"normal",
@@ -111,7 +111,7 @@ let Component = React.createClass({
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-10,
+	                x: 10,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',
