@@ -184,8 +184,8 @@ const mapDispatchToProps = (dispatch) => {
                 function setDatas(rdata){
                     dispatch(actions.setVars('jyname', rdata));
                     TY.getRtData("RegulationOverview", 8888800, setfData)
-                    function setfData(rdata){
-                        dispatch(actions.setVars('jydata', rdata));
+                    function setfData(rdata1){
+                        dispatch(actions.setVars('jydata', rdata1));
                         dispatch(actions.setVars('booltkgl', true));
 
                     }
