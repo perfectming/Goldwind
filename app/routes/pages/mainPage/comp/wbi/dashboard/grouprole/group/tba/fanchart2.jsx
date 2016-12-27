@@ -2,15 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
-let data = require('./Profit-data2');
-
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
 
-      let {PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
+      let {textf,PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
     
         let configPie = {
             chart: {
@@ -24,22 +21,25 @@ let Component = React.createClass({
                
             },
             title: {
-                text: '',
+                text: textf,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-               
+               x:105,
+               y:10,
                 style:{
                     color:"#fff",
-                    fontSize:"25px",
+                    fontSize:"16px",
                     fontFamily:"微软雅黑",
-                    fontWeight:700,
+                    
                 }
             },
             // 插入图片
             //图例说明
             legend: {
                  x:-75,
+
+                y:30,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let data = require('./Profit-data2');
+
 
 
 let Component = React.createClass({
@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {textq,height,input_url,PBAGroupPba,PBAGroupNodevreasonloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupFaultloss,areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
+        let {text1,height,input_url,PBAGroupPba,PBAGroupNodevreasonloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupFaultloss,areaName,areaRecordCosts,areaRecordProfit,text0,w0,changedata1}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -23,9 +23,10 @@ let Component = React.createClass({
 
             },
             title: {
-                text:textq,
+                text:text1,
                 align:'left',
-                
+                x:105,
+                y:8,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
@@ -156,7 +157,7 @@ let Component = React.createClass({
                         align:'high',
                         rotation:'0',
                         y: -17,
-                        x: 45,
+                        x: 48,
                         style:{
                             fontSize:'14px',
                             color:'#fff'

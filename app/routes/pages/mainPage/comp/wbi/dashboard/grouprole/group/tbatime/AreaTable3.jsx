@@ -2,14 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let data = require('./Profit-data3');
 var $=require('jquery');
-let input_url="10.68.100.32";
+
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let { input_url,w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
+        let {input_url,w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
         let configPie = {
             chart: {
                 height:430,
@@ -20,7 +19,7 @@ let Component = React.createClass({
                 paddingLeft:100,
             },
             title: {
-                text: '集团每月TBA',
+                text: text,
                 align:'left',
                  x : "0",
                 style:{
@@ -32,7 +31,7 @@ let Component = React.createClass({
             },
             legend: {
                 x:-75,
-                y:10,
+                y:20,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{
@@ -172,6 +171,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: areaRecordProfitt,
                 maxPointWidth:30,
+                color:'#4CDB9D'
                
             },
             {
