@@ -154,7 +154,7 @@ let Component = React.createClass({
                             <div className={styles.zhzbtopbox}><div>{mod.MonthEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].MonthEgyAt)*mod.MonthEgyAt.coeff).toFixed(mod.MonthEgyAt.place)}</span><span className={styles.danweicc}>{mod.MonthEgyAt.unit}</span></div>
                             <div className={styles.zhzbtopbox}><div>光伏功率</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888802].TActPower)*mod.TActPower.coeff).toFixed(mod.TActPower.place)}</span><span className={styles.danweicc}>{mod.TActPower.unit}</span></div>
                             <div className={styles.zhzbtopbox}><div>{mod.PVTSI_Aver.name}</div> <span className={styles.zhzbtopboxg}>{kbpjfzd === "NaN" ? "--": kbpjfzd}</span><span className={styles.danweicc}>W/㎡</span></div>
-                            <div className={styles.zhzbtopbox}><div>{mod.YearEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888801].YearEgyAt)*mod.YearEgyAt.coeff).toFixed(mod.YearEgyAt.place)}</span><span className={styles.danweicc}>{mod.YearEgyAt.unit}</span></div>
+                            <div className={styles.zhzbtopbox}><div>{mod.YearEgyAt.name}</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].YearEgyAt)*mod.YearEgyAt.coeff).toFixed(mod.YearEgyAt.place)}</span><span className={styles.danweicc}>{mod.YearEgyAt.unit}</span></div>
                         </div>
 
                     </div>
