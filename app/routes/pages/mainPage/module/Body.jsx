@@ -55,7 +55,7 @@ import Regiotba from '../comp/wbi/dashboard/grouprole/area/Regiotba.jsx';
 import Regiotbas from '../comp/wbi/dashboard/grouprole/area/Regiotbas.jsx';
 import Input_cost from '../comp/wbi/dashboard/grouprole/area/Input_cost.jsx';
 import Prospace from '../comp/wbi/dashboard/grouprole/area/Prospace.jsx';
-// import Pro_time from '../comp/wbi/dashboard/grouprole/area/Pro_time.jsx';
+import Pro_time from '../comp/wbi/dashboard/grouprole/area/Pro_time.jsx';
 
 
 import Areace from '../comp/wbi/dashboard/grouprole/windpage/Areace.jsx';//薛旭东44
