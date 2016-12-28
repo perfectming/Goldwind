@@ -188,38 +188,37 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
          ajax: () => {
-            // 分页
-            let groupname=[];
-            console.log(1);
-               $.ajax({
-                type:'post',
-                url:'http://'+input_url+'/wbi/info/getStageprice',
-                async:false,
-                data:{
-                    'curpage':1,
-                    'pagesize':2,
-                    'year':2015,
-                    'wfid':150801,
+            // // 分页
+            // let groupname=[];
+            // console.log(1);
+            //    $.ajax({
+            //     type:'post',
+            //     url:'http://'+input_url+'/wbi/info/getStageprice',
+            //     async:false,
+            //     data:{
+            //         'curpage':1,
+            //         'pagesize':2,
+            //         'year':2015,
+            //         'wfid':150801,  
+            //     },
 
-
-                   
-                },
-                dataType:'json',
-                timeout:'3000',
-                success:function(data){
-               console.log(data)
+                
+            //     dataType:'json',
+            //     timeout:'3000',
+            //     success:function(data){
+            //    console.log(data)
 
                        
                   
                   
 
-                },
-                error:function(e){
-                   console.log(e)
-                },
-            });
+            //     },
+            //     error:function(e){
+            //        console.log(e)
+            //     },
+            // });
           
-            // dispatch(actions.setVars('PBATimeMonth1',PBATimeFirstMonth));
+            // // dispatch(actions.setVars('PBATimeMonth1',PBATimeFirstMonth));
         },
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
