@@ -109,7 +109,7 @@ var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
                                         return(
                                             obj_wfd[value].map((valueC,key)=>{
                                                 return(
-                                                    <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname+'      (  '+model_ens[value].name+'  )'}</span>
+                                                    <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname+'(  '+model_ens[value].name+'  )'}</span>
                                                 )
                                             })
                                         )
@@ -120,7 +120,7 @@ var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
                                         return(   
                                             obj_pvd[value].map((valueC,key)=>{
                                                 return(
-                                                    <span key={key} onClick = {()=> Topvinfo(valueC,value)}>{valueC.Wtname}</span>
+                                                    <span key={key} onClick = {()=> Topvinfo(valueC,value)}>{valueC.Wtname+'(  '+model_ens[value].name+'  )'}</span>
                                                 )
                                             })
 
@@ -174,7 +174,6 @@ const mapDispatchToProps = (dispatch) => {
                 $(this).siblings('div').toggle();
             })
             $("#seachtext").keyup(function(){
-                console.log(1);
                 $('#searcg_anser').show();
                 $('#searcg_anser span').hide();
                 $("#fclist").hide();

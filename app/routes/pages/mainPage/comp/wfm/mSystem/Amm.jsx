@@ -11,13 +11,14 @@ import refresh from '../../../img/comp/refresh.png';
 import del from '../../../img/icon/tabDel.png';
 import add from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
+import Login from '../../../../../../components/common/Loading.jsx';
 import Ambox from './boxAm.jsx';
 let soam='http://10.9.99.203:8080/soam';
 let tabaleData = require('./data');
 
 let Component = React.createClass({
     componentDidMount() {
-        this.props.init(tabaleData.ammData);
+        this.props.init();
     },
     buttonAction (){
         var tContent = this.refs.textContent5.value;
@@ -26,21 +27,21 @@ let Component = React.createClass({
         // 然后去更新图表
     },
     render() {
-        let {roles,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+        let {boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData=[];
-        console.log(table);
         let num=0;
         let arr=['id','name','loginname','password','phonecode','mailbox','logintype','dogcode','remark','id'];
-        for(let i=0;i<tabaleData.msData.header.length;i++){
+        for(let i=0;i<tabaleData.ammData.header.length;i++){
             newData.push('');
         }
         let comp=tabaleData.comps.from;
+        if(table&&boxData){
         return (
         <div className={styles.bodyBox}>
             <div className={styles.roleputBox}>
                 <div className={styles.inquireBox}>
                     {
-                        comp.map((value, key,valueName)=> {
+                        comp.map((value, key)=> {
                             if (key == 5) {
                                 return (
                                     <div className={styles.inputBox} key={key}>
@@ -66,7 +67,7 @@ let Component = React.createClass({
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         <div className={styles.tableHeaderItem}
-                             style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}>序 号</div>
+                             style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}>序号</div>
                         {
                             tabaleData.ammData.header.map((value, key)=> {
                                 return (
@@ -78,7 +79,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.tableContentBox}>
                         {
-                            tabaleData.ammData.content.map((value, key)=> {
+                            table.data.pagedata.map((value, key)=> {
                                 num++;
                                 return (
                                     <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
@@ -100,7 +101,7 @@ let Component = React.createClass({
                                                         <input className={styles.tableContentItem} key={keyC}
                                                            style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                            onClick={()=>{jump(value[valueC])}}
-                                                           type="button" value='设置'/>
+                                                           type="button" value='设 置'/>
                                                     )
                                                 }else {
                                                     return(
@@ -114,7 +115,7 @@ let Component = React.createClass({
                                             })
                                         }
                                         <div className={styles.tableContentItem} style={{width:(50/(tabaleData.ammData.header.length+2))+"%"}}>
-                                            <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content[key]))}/>
+                                            <img src={save} onClick={()=>alert("您保存的数据123为:" + JSON.stringify(table.content[key]))}/>
                                         </div>
                                         <div className={styles.tableContentItem} style={{width:(50/(tabaleData.ammData.header.length+2))+"%"}}>
                                             <img src={del} onClick={(e)=>deleData(key)}/>
@@ -125,10 +126,10 @@ let Component = React.createClass({
                         }
                     </div>
                 </div>
-                <Ambox></Ambox>
+                <Ambox dataBase={boxData}></Ambox>
             </div>
         </div>
-        );
+        );}else {return(<Login></Login>)}
     }
 });
 
@@ -136,7 +137,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContentAmm,
-        roles: state.objs.roles
+        boxData: state.objs.boxData,
     }
 };
 
@@ -149,7 +150,6 @@ const mapDispatchToProps = (dispatch) => {
                 data:'pageSize='+11+'&&page='+1+'&&username=',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                 },
                 error:function(){
@@ -161,18 +161,18 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
-                    dispatch(actions.setObjs('roles', data));
+                    dispatch(actions.appendObjs('boxData', data));
                 },
                 error:function(){
                     console.log('获取数据失败')
                 }
             });
+
         },
         changeTableItem: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.content[i][j] = value;
-            dispatch(actions.setObjs('tableContent', tableV));
+            dispatch(actions.setObjs('tableContentAmm', tableV));
         },
         jump: (id) => {
             $.ajax({
@@ -181,6 +181,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data);
+                    dispatch(actions.appendObjs('boxData', data));
                     $('#boxAm').parent().css('display','block');
                 },
                 error:function(){
@@ -194,12 +195,12 @@ const mapDispatchToProps = (dispatch) => {
         addData:(i) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.content.push(i);
-            dispatch(actions.setObjs('tableContent', tableV));
+            dispatch(actions.setObjs('tableContentAmm', tableV));
         },
         deleData:(j) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.content.splice(j,1);
-            dispatch(actions.setObjs('tableContent', tableV));
+            dispatch(actions.setObjs('tableContentAmm', tableV));
         }
     };
 };

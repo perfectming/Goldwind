@@ -60,7 +60,7 @@ module.exports = {
             },
             {
                 type: 'input',
-                valueName:'角色名称',
+                valueName:'用户名称',
                 content: '可输入关键字',
                 id: 'input7',
                 width:120

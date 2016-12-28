@@ -25,9 +25,10 @@ let Component = React.createClass({
                 text: ''
             },
             xAxis:{
+                tickInterval: 30,
                  categories:datenamel,
-                 max:datenamel.length-1,
-                 min:datenamel.length-30,
+                 // max:datenamel.length-1,
+                 // min:datenamel.length-30,
                  labels: {
                         style: {
                             color: '#fff',//颜色

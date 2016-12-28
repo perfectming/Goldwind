@@ -127,8 +127,9 @@
             }
           }
           .tableContentItemm{
-          
+          text-align:center;
             float: left;
+            width:100%;
            text-align:center;
             display:inline-block;
             height: 40px;
@@ -176,12 +177,16 @@
             }
           }
           .tableContentItemm{
+
             float: left;
+            text-align:center;
             overflow: hidden;
             text-align:center;
             height: 40px;
+            width:100%;
             line-height:40px;
             border:none;
+            
             background: #272b34;
             img{
               height:20px;

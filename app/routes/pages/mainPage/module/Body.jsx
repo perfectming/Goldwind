@@ -67,12 +67,12 @@ import Healthytime from '../comp/wbi/dashboard/grouprole/windpage/Healthytime.js
 import PBAtime from '../comp/wbi/dashboard/grouprole/windpage/PBAtime.jsx';
 import PBAspace from '../comp/wbi/dashboard/grouprole/windpage/PBAspace.jsx';
 import Profits from '../comp/wbi/dashboard/grouprole/group/earnings/Profits.jsx';
-import Profitss from '../comp/wbi/dashboard/grouprole/group/tba/Profitss2.jsx';
-import Profitsss from '../comp/wbi/dashboard/grouprole/group/tbatime/Profitsss3.jsx';
 import PEQII from '../comp/wbi/dashboard/grouprole/windpage/PEQII.jsx';
 import WFSprofit from '../comp/wbi/dashboard/grouprole/windpage/WFSprofit.jsx';
 import WFTprofit from '../comp/wbi/dashboard/grouprole/windpage/WFTprofit.jsx';
 import Profitime from '../comp/wbi/dashboard/grouprole/group/Profitime.jsx';
+import Profitss from '../comp/wbi/dashboard/grouprole/group/PBATime/GroupPBAT.jsx';
+import Profitsss from '../comp/wbi/dashboard/grouprole/group/TBATime/GroupTBAT.jsx';
 
 
 
