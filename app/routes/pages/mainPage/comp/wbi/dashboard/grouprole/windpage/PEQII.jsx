@@ -25,8 +25,8 @@ for(let i=0;i<=30;i++){
         arr3.push(ssg2[x].name);
     }}());
 arr3.splice(-2,2);
-let arr=[15,16,16,15,16,13];
-let arr2=[15,16,8,8,15,16,8];
+let arr=[15,16,10,15,22,13];
+let arr2=[15,16,6,4,15,22,8];
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
