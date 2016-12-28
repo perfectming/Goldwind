@@ -47,7 +47,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
     	X1 : state.vars.x1,
-    	ipUrl : state.vars.ipUrl,
+        ipUrl : state.vars.ipUrl,
     	areaId : state.vars.areaId,    	
     }
 };
