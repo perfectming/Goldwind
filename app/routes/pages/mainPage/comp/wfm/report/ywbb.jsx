@@ -10,10 +10,12 @@ let type = require('./ywbb_date');
 let btype = type.comps.from;
 var $ =require('jquery');
 var actions = require('redux/actions');
+var {browserHistory} = require('react-router');
 let url='54.223.200.134';
 
 let Component = React.createClass({
     componentWillMount() {
+
         this.props.ajax();
     },
     componentDidMount() {
@@ -26,56 +28,18 @@ let Component = React.createClass({
     },
    showTree (devurl){
     let{playjq,showtree,select_list,firstname,devtype}=this.props;
-    let one=[];
-    let two=[];
-    let three=[];  
-    let alltree=[];
-    let alltree1=[];
-            //点击切换下来选择项
+   
+     //点击切换下拉选择项
             for(let id in devtype.list){
               if(devtype.list[id].id==devurl){
                 firstname=devtype.list[id];
               }
 
             }
-              //获取设备类型对应的左侧树形二级和三级数据
-              for(let arg2 in select_list){
-                if(select_list[arg2].id &&select_list[arg2].id!=''){
-                    if(select_list[arg2].type=='wf'){
-                      one.push(select_list[arg2])
-                     }else if(select_list[arg2].type=='wl'){
-                      two.push(select_list[arg2])
-                     }else if(select_list[arg2].type=='wt' && select_list[arg2].args.devtype==devurl){
-                        three.push(select_list[arg2])
-                    }
-                }
-              }
-             //二级菜单
-          for(let i=0; i<one.length;i++){
-            let two1=[];
-            two.map((value,key)=>{
-            if(value.parentid==one[i].id){
-              two1.push(value)
-            }
-          })
-          alltree.push(two1)
-        }
-          //三级菜单
-        alltree.map(function(value,key){
-          for(let i=0; i<value.length;i++){
-            let two4=[];
-            three.map((valueC,keyC)=>{
-              if(valueC.parentid==value[i].id){
-              two4.push(valueC)
-              }
-            })
-            alltree1.push(two4)
-          }
-        })
+     
 
 
-
-    showtree(devurl,alltree,alltree1,firstname);
+    showtree(devurl,firstname);
     //初始化jquery方法
         setTimeout(function(){
             playjq();
@@ -83,13 +47,34 @@ let Component = React.createClass({
    },
 
     render() {
-         let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,select_list1,secondtree,threetree,tabledata,clickitem,chart,chartname,chartTitle} = this.props;
+         let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,tabledata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
            let treetype=[];
-           let lefttree=[];
-           let Tarr=[];
-           let Barr=[];
-           let Carr=[];
-           let Darr=[];
+           let Tarr=[]; //标题数组
+           let Barr=[];  //数据
+           let Carr=[];   //chart数据
+           let Darr=[];  //统计数组
+           let one=[]; //一级菜单
+           let two=[]; //二级菜单
+           let three=[]; //三级菜单 
+             console.log(select_list)
+              //获取设备类型对应的左侧树形二级和三级数据
+              for(let arg2 in select_list){
+                if(select_list[arg2].id &&select_list[arg2].id!=''){
+                    if(select_list[arg2].type=='wf'){
+                      one.push(select_list[arg2])
+                     }else if(select_list[arg2].type=='wl' || select_list[arg2].parentid.length==6){
+
+                      two.push(select_list[arg2])
+                     }else if(select_list[arg2].type=='wt' && select_list[arg2].parentid.length>6){
+                      
+                        three.push(select_list[arg2])
+                    }
+                }
+              }
+
+
+
+         
            //表格数据处理
            if(tabledata!=undefined){
             console.log(tabledata)
@@ -125,11 +110,6 @@ let Component = React.createClass({
                }
                // console.log(Barr)
                // console.log(Carr)
-
-
-
-
-
            }
 
             if(boolywbb){
@@ -139,18 +119,12 @@ let Component = React.createClass({
                     treetype.push(devtype.list[arg])
                 }
             }
-              //获取设备类型对应的左侧树形一级数据
-            for(let arg2 in select_list1){
-                if(select_list1[arg2].id &&　select_list1[arg2].id!=''){
-                    lefttree.push(select_list1[arg2])
-                }
-            }
 
             //初始化显示设备类型
             if(firstname==undefined){
             firstname=devtype.list._WindTurbine;
             }
-
+            
         return (
             <div className={styles.faultBox}>
                 <div className={styles.search_tit}>
@@ -179,7 +153,7 @@ let Component = React.createClass({
                     </div>
 
                     <div className={styles.btnBox}>
-                        <button id='searchall'><img src={'http://'+url+'/images/button/search.gif'}/>查询</button>
+                        <button id='searchall' onClick={()=>searchnum(devurls)}><img src={'http://'+url+'/images/button/search.gif'}/>查询</button>
                     </div>
                     <div className={styles.btnBox}>
                         <button><img src={'http://'+url+'/images/button/set.gif'}/>设置参数</button>
@@ -191,7 +165,7 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.leftlist} id='leftlist'>
                   {
-                     select_list !== undefined && lefttree.map((valueC,keyC)=>{
+                     select_list !== undefined && one.map((valueC,keyC)=>{
                         return(
                           <div key={keyC} className={styles.place} >
                             <a className={styles.ca}>
@@ -200,7 +174,11 @@ let Component = React.createClass({
                               <input type='checkbox' value='value'   />
                             </a>
                             {
-                                secondtree[keyC].map((valueD,keyD)=>{
+                                two.length>0 ?
+                                two.map((valueD,keyD)=>{
+                                 
+
+                                  if(valueD.parentid==valueC.id){
                                     return(
                                         <div className={styles.placename} key={keyD}>
                                             <a className={styles.da}>
@@ -208,9 +186,10 @@ let Component = React.createClass({
                                               <b><img src={'http://'+url+'/'+valueD.img}/>{valueD.text}</b>
                                               <input type='checkbox' value='value'  />
                                             </a>
-
-                                            {
-                                                threetree[keyD].map((valueE,keyE)=>{
+                                            { 
+                                             
+                                                three.map((valueE,keyE)=>{
+                                                 if(valueE.parentid==valueD.id && valueE.args.wfid==valueC.id){
                                                     return(
                                                         <div className={styles.placeline} key={keyE}>
                                                             <a className={styles.ea} >
@@ -219,12 +198,27 @@ let Component = React.createClass({
                                                             </a>
                                                         </div>
                                                     )
+                                                  }
                                                 })
+                                              
                                             }
+                                            
 
                                         </div>
                                     )
-                                })
+                                  }     
+                                }) : three.map((valueE,keyE)=>{
+                                                 if(valueE.args.wfid==valueC.id){
+                                                    return(
+                                                        <div className={styles.placename} key={keyE}>
+                                                            <a className={styles.da} >
+                                                               <b style={{cursor:'auto'}}><img src={'http://'+url+'/'+valueE.img}/>{valueE.text}</b>
+                                                              <input type='checkbox' value={valueE.id}  />
+                                                            </a>
+                                                        </div>
+                                                    )
+                                                  }
+                                                })
                               }
                           </div>
                           )
@@ -292,9 +286,13 @@ let Component = React.createClass({
                         
                            {
                             tabledata!=undefined && Darr.map((value,key)=>{
+                              if(value==0){
+
+                              }else{
                                   return(
                                       <span key={key}>{value.toFixed(2)}</span>
                                       ) 
+                                }
                             })
                           }
                         </div>
@@ -318,17 +316,16 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+       
         devtype:state.objs.devtype,
         boolywbb:state.vars.boolywbb,
         firstname:state.objs.firstname,
-        select_list:state.objs.select_list,
-        select_list1:state.objs.select_list1,
-        secondtree:state.objs.secondtree,
-        threetree:state.objs.threetree,
-        tabledata:state.objs.tabledata,
+        select_list:state.vars.select_list,
+        tabledata:state.vars.tabledata,
         chart:state.vars.chart,
         chartname:state.vars.chartname,
         chartTitle:state.vars.chartTitle,
+        devurls:state.vars.devurls,
     }
 };
 
@@ -350,7 +347,8 @@ const mapDispatchToProps = (dispatch) => {
                    gettreedata(); 
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
-                   console.log('获取数据失败！');    
+                   alert('获取数据失败！');   
+                   
                }    
             });
 
@@ -358,17 +356,17 @@ const mapDispatchToProps = (dispatch) => {
         function gettreedata(){
            $.ajax({    
                url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=getDevtree&crossDomain=true&zip=false',    
+               data:'functionname=GetWFInfoByMonNoWfType&devtype=WindTurbine&crossDomain=true&zip=false',    
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
                timeout:3000,       
                success:function(json,textStatus){    
-                dispatch(actions.appendObjs('select_list',json));
+                dispatch(actions.setVars('select_list',json));
                 dispatch(actions.setVars('boolywbb', true));
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
-                   console.log('获取数据失败！');    
+                   alert('获取数据失败！');    
                }    
             });
         }
@@ -420,7 +418,7 @@ const mapDispatchToProps = (dispatch) => {
                     $(this).siblings('img').attr('src', add);
                 }
             })
-              var all=[];
+              
              
               //查询按钮功能
             $('#searchall').on('click',function(){
@@ -429,50 +427,9 @@ const mapDispatchToProps = (dispatch) => {
              
               //显示表格
               $('#tablebox').show();
-              //清空数组
-               all.splice(0,all.length);//字段
+             
 
-               //获取查询时间
-               var startTime=$('#startTime').val();
-               var endTime=$('#endTime').val();
-              $('#leftlist input').each(function(){
-                 if($(this).prop('checked')==true){
-                    if($(this).val()!=='value'){
-                      all.push($(this).val())
-                    }
-                  }
-
-              })
-              if(all.length>50){
-                all.splice(50,all.length);
-              }
-              if(all.length==0){
-                alert('设备数据获取失败！')
-                return;
-              }
-
-               $.ajax({    
-               url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=CountDay&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&modelid=1DD28544-7805-4D86-8E39-09404726214A&devtype=WindTurbine&CountColumn=true&crossDomain=true&zip=false',    
-               dataType:"jsonp",    
-               jsonp:"callback",    
-               jsonpCallback:"testCall",    
-               timeout:3000,       
-               success:function(json,textStatus){  
-                let shu=[];
-                for(let i in json){
-                  shu.push(json[i])
-                }
-                if(shu.length==0){
-                  alert('没有符合条件的数据！')
-                }
-                
-                dispatch(actions.appendObjs('tabledata',json));
-               },    
-               error:function(XMLHttpRequest,textStatus,errorThrown){    
-                   console.log('获取数据失败！');    
-               }    
-            });
+               
 
             })
 
@@ -480,25 +437,24 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        showtree:(devurl,alltree,alltree1,firstname)=>{
+        showtree:(devurl,firstname)=>{
             dispatch(actions.setVars('boolywbb', false));
-            dispatch(actions.appendObjs('secondtree',alltree));
-            dispatch(actions.appendObjs('threetree',alltree1));
             dispatch(actions.appendObjs('firstname',firstname));
             //获取对应设备的数据
         $.ajax({    
                url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=GetWFInfoByMon&devtype='+devurl+'&crossDomain=true&zip=false',    
+               data:'functionname=GetWFInfoByMonNoWfType&devtype='+devurl+'&crossDomain=true&zip=false',    
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
                timeout:3000,       
                success:function(json,textStatus){  
-                dispatch(actions.appendObjs('select_list1',json));
+                dispatch(actions.setVars('select_list',json));
+                dispatch(actions.setVars('devurls',devurl));
                 dispatch(actions.setVars('boolywbb', true));
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
-                   console.log('获取数据失败！');    
+                   alert('获取数据失败！');    
                }    
             });
       
@@ -520,6 +476,55 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('chartTitle', even.innerHTML));
           $('#colum').show();
         },
+        searchnum:(devurls)=>{
+          dispatch(actions.setVars('tabledata',undefined));
+            var all=[];
+           //清空数组
+               all.splice(0,all.length);//字段
+
+               //获取查询时间
+               var startTime=$('#startTime').val();
+               var endTime=$('#endTime').val();
+              $('#leftlist input').each(function(){
+                 if($(this).prop('checked')==true){
+                    if($(this).val()!=='value'){
+                      all.push($(this).val())
+                    }
+                  }
+
+              })
+              if(all.length>50){
+                all.splice(50,all.length);
+              }
+              if(all.length==0){
+                alert('设备数据获取失败！')
+                return;
+              }
+
+
+          $.ajax({    
+               url:'http://'+url+'/Monitor/xml.aspx',    
+               data:'functionname=CountDay&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&modelid=1DD28544-7805-4D86-8E39-09404726214A&devtype='+devurls+'&CountColumn=true&crossDomain=true&zip=false',    
+               dataType:"jsonp",    
+               jsonp:"callback",    
+               jsonpCallback:"testCall",    
+               timeout:3000,       
+               success:function(json,textStatus){  
+                let shu=[];
+                for(let i in json){
+                  shu.push(json[i])
+                }
+                if(shu.length==0){
+                  alert('没有符合条件的数据！')
+                }
+                
+                dispatch(actions.setVars('tabledata',json));
+               },    
+               error:function(XMLHttpRequest,textStatus,errorThrown){    
+                   alert('获取数据失败！');    
+               }    
+            });
+        }
 
        
        

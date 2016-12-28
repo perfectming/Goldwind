@@ -41,14 +41,13 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 },
                 itemHoverStyle: {
-                color: '#31f3fb'
+                    color: '#31f3fb'
             	}
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
             colors: [ '#5298d3', '#ffffff', '#e9c75c','#d06960', '#ff6600','#5b9bd5'],
-            
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
@@ -57,9 +56,11 @@ let Component = React.createClass({
                     borderRadius:5
                 }
             },
+            tooltip: {
+                valueSuffix: unit,
+            },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -77,7 +78,7 @@ let Component = React.createClass({
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-18,
+	                x:-13,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',
@@ -117,7 +118,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

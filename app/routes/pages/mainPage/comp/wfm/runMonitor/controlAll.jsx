@@ -36,7 +36,6 @@ let Component = React.createClass({
             let arr2 = [];
             let obj_wfd = obj.ModelData[8888801].WFDevsStatus;
             let obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-
             for(let x in obj_wfd){
                 arr1.push(x)
             }
@@ -185,8 +184,8 @@ const mapDispatchToProps = (dispatch) => {
                 function setDatas(rdata){
                     dispatch(actions.setVars('jyname', rdata));
                     TY.getRtData("RegulationOverview", 8888800, setfData)
-                    function setfData(rdata){
-                        dispatch(actions.setVars('jydata', rdata));
+                    function setfData(rdata1){
+                        dispatch(actions.setVars('jydata', rdata1));
                         dispatch(actions.setVars('booltkgl', true));
 
                     }

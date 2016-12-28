@@ -28,7 +28,7 @@
 
     margin: 10px;
     .hidden_bottom{
-      overflow: scroll;
+      overflow-x: scroll;
 
     }
     .hidden_top {
@@ -101,7 +101,7 @@
   .tbox2 {
     width: 98%;
     height: 400px;
-    margin-top:48px;
+    margin-top:15px;
     margin-left: 5px;
 
 
@@ -501,26 +501,36 @@
   z-index: 2;
 }
 
-.return2 {
-  float: left;
-  align-items: center;
-  color: #20FEFF;
-  border: 1px solid #20FEFF;
-  width: 100px;
-  height: 40px;
-  line-height: 40px;
+.paddingtop {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  width: 98%;
+  height: 50px;
+  padding: 0;
+  padding-left: 0px;
   position: relative;
-  top: 0px;
-  left: 92%;
-  border-radius: 45px;
-  cursor: pointer;
-  box-shadow: 0px 0px 10px #20FEFF;
-  text-align: center;
+  border-bottom: 1px solid #31F3FB;
+  //返回按钮
+  .return2 {
+    float: right;
+    color: #fff;
+    border: 1px solid #20FEFF;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    border-radius: 45px;
+    cursor: pointer;
+    text-align: center;
+  }
+  .return2:hover {
+    box-shadow: 0 0 10px #fff;
+  }
 }
 
-.return2:hover {
-  box-shadow: 0 0 10px #fff;
-}
+
+
 
 
 

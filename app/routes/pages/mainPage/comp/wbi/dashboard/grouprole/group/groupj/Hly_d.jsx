@@ -126,6 +126,7 @@ let Component = React.createClass({
                 name: '实际健康度',
                 type: 'column',
                 data: healthy3,
+                color:'#62de88',
             },
 
             ]

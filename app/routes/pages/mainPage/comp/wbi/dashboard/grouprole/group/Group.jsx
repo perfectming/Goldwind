@@ -37,7 +37,7 @@ let Component = React.createClass({
                                 </div>
                                 <div className={styles.sectionBox}>
                                     <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{(rate*100).toFixed(1)}%</p>收益率</span>
-                                    <Pie2 color={rate>1? ['#1fe005','#fbd500']:rate>0.8?['#fbd500','#39565e']:rate>0.6?['#ff0000','#39565e']:['#d06960','#39565e']} num={[profit,amounts-profit]}></Pie2>
+                                    <Pie2 color={rate>0.9? ['#62de88','#39565e']:rate>0.8?['#e8952a','#39565e']:rate>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[profit,amounts-profit]}></Pie2>
                                 </div>
                             </div>
                             <div className={styles.section}>
@@ -49,7 +49,7 @@ let Component = React.createClass({
                                 </div>
                                 <div className={styles.sectionBox}>
                                     <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{healthy.toFixed(1)}%</p>健康度</span>
-                                    <Pie2 color={healthy/100>1? ['#1fe005','#fbd500']:healthy/100>0.8?['#fbd500','#39565e']:healthy/100>0.6?['#ff0000','#39565e']:['#d06960','#39565e']} num={[healthy,100-healthy]}></Pie2>
+                                    <Pie2 color={healthy/100>0.9? ['#62de88','#39565e']:healthy/100>0.8?['#e8952a','#39565e']:healthy/100>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[healthy,100-healthy]}></Pie2>
                                 </div>
                             </div>
                             <div className={styles.section}>
@@ -60,8 +60,8 @@ let Component = React.createClass({
                                     <a className={styles.time} onClick={()=>changepagePBAT()}></a>
                                 </div>
                                 <div className={styles.sectionBox}>
-                                    <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{shouldElec==0? 0:((actrulElec/shouldElec)*100).toFixed(1)}%</p>PBA</span>
-                                    <Pie2 color={actrulElec/shouldElec>1? ['#1fe005','#fbd500']:actrulElec/shouldElec>0.8?['#fbd500','#39565e']:actrulElec/shouldElec?['#ff0000','#39565e']:['#d06960','#39565e']} num={[actrulElec,shouldElec-actrulElec]}></Pie2>
+                                    <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{((actrulElec/shouldElec)*100).toFixed(1)}%</p>PBA</span>
+                                    <Pie2 color={actrulElec/shouldElec>0.9? ['#62de88','#39565e']:actrulElec/shouldElec>0.8?['#e8952a','#39565e']:actrulElec/shouldElec>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[actrulElec,shouldElec-actrulElec]}></Pie2>
                                 </div>
                             </div>
                             <div className={styles.section}>
@@ -73,7 +73,7 @@ let Component = React.createClass({
                                 </div>
                                 <div className={styles.sectionBox}>
                                     <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{(tba*100).toFixed(1)}%</p>TBA</span>
-                                    <Pie2 color={tba>1? ['#1fe005','#fbd500']:tba>0.8?['#fbd500','#39565e']:tba>0.6?['#ff0000','#39565e']:['#d06960','#39565e']} num={[runTime,downTime]}></Pie2>
+                                    <Pie2 color={tba>0.9? ['#62de88','#39565e']:tba>0.8?['#e8952a','#39565e']:tba>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[runTime,downTime]}></Pie2>
                                 </div>
                             </div>
                         </div>
@@ -84,21 +84,21 @@ let Component = React.createClass({
                                     <a></a><span>年累计发电量</span>
                                     <div className={styles.electricTotal}>{(yearELec/10000).toFixed(1)}万kWh</div>
                                     <div className={styles.electricPercent}>
-                                        <div className={yearELec/yearPlanELec>1? styles.green:yearELec/yearPlanELec>.8? styles.yellow:yearELec/yearPlanELec>.6? styles.red:styles.redS} style={{width:((yearELec/yearPlanELec*100))+"%"}}>{(yearELec/yearPlanELec*100).toFixed(1)}%</div>
+                                        <div className={yearELec/yearPlanELec>.9? styles.green:yearELec/yearPlanELec>.8? styles.yellow:yearELec/yearPlanELec>.6? styles.red:styles.redS} style={{width:((yearELec/yearPlanELec*100))+"%"}}>{(yearELec/yearPlanELec*100).toFixed(1)}%</div>
                                     </div>
                                 </div>
                                 <div className={styles.electricSecond}>
                                     <a></a><span>月累计发电量</span>
                                     <div className={styles.electricTotal}>{(monthElec/10000).toFixed(1)}万kWh</div>
                                     <div className={styles.electricPercent}>
-                                        <div className={monthElec/monthPlanElec>1? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:(monthElec/monthPlanElec*100)+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
+                                        <div className={monthElec/monthPlanElec>.9? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:(monthElec/monthPlanElec*100)+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
                                     </div>
                                 </div>
                                 <div className={styles.electricThird}>
                                     <a></a><span>日累计发电量</span>
                                     <div className={styles.electricTotal}>{(dayelec/10000).toFixed(1)}万kWh</div>
                                     <div className={styles.electricPercent}>
-                                        <div className={dayelec/dayPlanElec>1? styles.green:dayelec/dayPlanElec>.8? styles.yellow:dayelec/dayPlanElec>.6? styles.red:styles.redS} style={{width:(dayelec/dayPlanElec*100)+"%"}}>{(dayelec/dayPlanElec*100).toFixed(1)}%</div>
+                                        <div className={dayelec/dayPlanElec>.9? styles.green:dayelec/dayPlanElec>.8? styles.yellow:dayelec/dayPlanElec>.6? styles.red:styles.redS} style={{width:(dayelec/dayPlanElec*100)+"%"}}>{(dayelec/dayPlanElec*100).toFixed(1)}%</div>
                                     </div>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {shuju,ssdlnum}=this.props;
+        let {shuju,gczmc,gczdxlyxss}=this.props;
         let configPie = {
             chart: {
                 height:shuju.high,
@@ -18,7 +18,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                marginTop:0,
+                marginTop:60,
             },
             title: {
                 text:'',
@@ -38,16 +38,7 @@ let Component = React.createClass({
                 }
             },
             colors: ['#D06960','#E9C75C','#fff','#5298D3'],
-            tooltip: {
-                shared: true,
-                style:{
-                    color: '#333',
-                    fontSize: '14px',
-                    fontFamily:'微软雅黑'
-                },
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br>数值：<b>{point.y}</b><h6 style="font-size:12px">kWh</h6>'
-                // pointFormat: "<b>{point.percentage:.0f}%</b>"
-            },
+            tooltip: shuju.tooltip,
             credits: {
                 enabled: false //不显示highCharts版权信息
             }
@@ -58,19 +49,13 @@ let Component = React.createClass({
                     borderWidth: 0,
                     pointWidth: shuju.pointWidth,
                     borderRadius:5,
-                    // dataLabels:{
-                    //         enabled:true, // dataLabels设为true
-                    //         style:{
-                    //             color:'#D7DEE9'
-                    //         }
-                    //     }
                 },
                 pie: {
                     allowPointSelect: false,
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '{point.name}:<b>{point.percentage:.1f}%</b>',
+                        format: '{point.name}',
                         style: {
                             color: "#d1d2d3",
                             fontSize: '14px',
@@ -94,17 +79,41 @@ let Component = React.createClass({
                         fontFamily:"微软雅黑"
                     }
                 },
-                categories:shuju.categories,
+                categories:gczmc,
             },
-            yAxis:shuju.yAxis,
+            yAxis:[{
+                labels: {
+                    format: '{value:.,0f}',
+                    offset: 0,
+                    x:-5,
+                    style: {
+                        color: '#fff'
+                    }
+                },
+                gridLineWidth: 0,
+                lineWidth: 1,
+                title: {
+                    align: 'high',
+                    offset: 0,
+                    text: '(h)',
+                    rotation: 0,
+                    y: -10,
+                    style: {
+                        color: '#fff',
+                        top:0,
+                        right:0,
+                    }
+                }
+            }],
 
             series:[{ //第二个Y轴的数据
-                name: '类型占比',
-                type: 'pie',
-                // tooltip: {
-                //     valueSuffix: '%'
-                // },
-                data: [['故障',ssdlnum[0]],['维护',ssdlnum[1]],['限功率',ssdlnum[2]],['非设备原因',ssdlnum[3]]]
+                name: '场站等效利用小时数',
+                color: '#70C080',
+                type: 'column',
+                tooltip: {
+                    valueSuffix: 'h'
+                },
+                data: gczdxlyxss,
 
             }]
         };

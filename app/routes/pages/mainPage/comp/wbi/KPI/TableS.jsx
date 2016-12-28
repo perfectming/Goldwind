@@ -22,7 +22,7 @@ let Component = React.createClass({
             title: {
                 text: '集团'+X1+'PBA',
                 align:'left',
-                 x : "0",
+                 x : 40,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
@@ -32,6 +32,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
             	x:-50,
+                y: 10,
                 align:"right",
                 verticalAlign: "top",
                 itemStyle: {
@@ -47,14 +48,14 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#70c080','#5298d3','#5b9bd5']
+            colors: [ '#33BAC0', '#70c080','#0000ff','#5b9bd5']
             ,
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
                     pointWidth: 15,
-                    borderRadius:5
+                    borderRadius:3
                 },
                 series: {
                     cursor: 'pointer',
@@ -69,7 +70,6 @@ let Component = React.createClass({
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
@@ -109,7 +109,7 @@ let Component = React.createClass({
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-10,
+	                x: 10,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'#fff',

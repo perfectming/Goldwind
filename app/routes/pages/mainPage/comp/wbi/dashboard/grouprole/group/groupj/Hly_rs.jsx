@@ -128,8 +128,8 @@ let Component = React.createClass({
             series: [{
                 name: '实际健康度',
                 type: 'column',
-                data: powerValue
-
+                data: powerValue,
+                color:'#62de88',
             }
             // ,{
             //     name:'停机时间',

@@ -67,27 +67,17 @@ const mapDispatchToProps = (dispatch) => {
         codeNew+=codeChars[Math.floor(Math.random()*36)]
       }
       dispatch(actions.setVars('verificationCode', codeNew));}else {
-        browserHistory.push('/app/all/page/main');
-        dispatch(actions.setVars('userInfo', true));
-        try {
-          Base.returnPlay();
-        } catch (e) {
-        }
-        ;
-        try {
-          if (TY == null) {
-          }
-        } catch (e) {
-          alert("配置文件加载失败!");
-          return;
-        }
-        TY.dataUrl = "http://54.223.200.134/System/data.aspx";
-        TY.crossDomain = true;
-        TY.Zip = false;
-        TY.TT.timeOutlength = 1000 * 60 * 1;
+            browserHistory.push('/app/all/page/main')  ;
+            dispatch(actions.setVars('userInfo', true));
+            try { Base.returnPlay(); } catch (e) { };
+            try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }
+            TY.dataUrl = "http://54.223.200.134/System/data.aspx";
+            TY.crossDomain = true;
+            TY.Zip =false;
+            TY.TT.timeOutlength = 1000*60*1;
       }
           /*$.ajax({
-            url: 'http://10.9.0.16:9080/soam/user/login',
+            url: 'http://10.9.100.95:8080/soam/user/login',
             type: 'post',
             data:'name='+$('#username1')[0].value+'&&password='+$('#password1')[0].value,
             dataType: 'json',//here,
