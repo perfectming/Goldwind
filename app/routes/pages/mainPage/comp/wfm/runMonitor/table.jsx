@@ -20,7 +20,6 @@ let Component = React.createClass({
     },
     render() {
         let {table,changepage2,changepage3,model,tabaleData} = this.props;
-        console.log(model,tabaleData);
         if(model!= null &&tabaleData != null) {
             let arr1 = [];
             let arr2 = [];
@@ -38,7 +37,6 @@ let Component = React.createClass({
                     arrAll.push(mode[i]);
                 }
             }
-            console.log(data,mode,arrAll);
             if (data[150801]){
         return (
             <div>
@@ -103,7 +101,6 @@ let Component = React.createClass({
                                                 if(keyC>5){
                                                     arrAll.map((valueD,keyD)=>{
                                                         ((valueD.pid == value) && (valueD.det=='AVC')) && (mutable=valueD.cis);
-                                                        console.log(mutable);
                                                     });
                                                     if(keyC==6){
                                                     return (
@@ -120,7 +117,6 @@ let Component = React.createClass({
                                                 }else if(keyC==4){
                                                     arrAll.map((valueD,keyD)=>{
                                                         ((valueD.pid == value) && (valueD.det=="TransSubstation")) && (mutable=valueD.cis);
-                                                        console.log(mutable);
                                                     });
                                                     return (
                                                         <div className={styles.tableContentItem}
@@ -169,7 +165,6 @@ let Component = React.createClass({
                                         if(keyC>5){
                                             arrAll.map((valueD,keyD)=>{
                                                 ((valueD.pid == value) && (valueD.det=='AVC')) && (mutable=valueD.cis);
-                                                console.log(mutable);
                                             });
                                             if(keyC==6){
                                                 return (
@@ -186,7 +181,6 @@ let Component = React.createClass({
                                         }else if(keyC==4){
                                             arrAll.map((valueD,keyD)=>{
                                                 ((valueD.pid == value) && (valueD.det=="TransSubstation")) && (mutable=valueD.cis);
-                                                console.log(mutable);
                                             });
                                             return (
                                                 <div className={styles.tableContentItem}

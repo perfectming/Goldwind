@@ -2,9 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 var {getState} = require('redux/store');
 var actions = require('redux/actions');
-
+var $ =require('jquery');
 import styles from './Amm.scss';
-
+let pageSize=11;
 
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';
@@ -12,7 +12,7 @@ import del from '../../../img/icon/tabDel.png';
 import add from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 import Ambox from './boxAm.jsx';
-let soam='http://10.9.100.95:8080/soam';
+let soam='http://10.9.99.203:8080/soam';
 let tabaleData = require('./data');
 
 let Component = React.createClass({
@@ -26,9 +26,11 @@ let Component = React.createClass({
         // 然后去更新图表
     },
     render() {
-        let {deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+        let {roles,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData=[];
+        console.log(table);
         let num=0;
+        let arr=['id','name','loginname','password','phonecode','mailbox','logintype','dogcode','remark','id'];
         for(let i=0;i<tabaleData.msData.header.length;i++){
             newData.push('');
         }
@@ -59,13 +61,12 @@ let Component = React.createClass({
                     }
                 </div>
                 <div className={styles.actionBox}>
-                    <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
                     <img src={add} onClick={()=>addData(newData)}/>
                 </div>
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         <div className={styles.tableHeaderItem}
-                             style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}>序号</div>
+                             style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}>序 号</div>
                         {
                             tabaleData.ammData.header.map((value, key)=> {
                                 return (
@@ -85,20 +86,20 @@ let Component = React.createClass({
                                                style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                readOnly="true" value={num}/>
                                         {
-                                            value.map((valueC, keyC)=> {
+                                            arr.map((valueC, keyC)=> {
                                                 if (keyC==3){
                                                     return(
                                                         <input className={styles.tableContentItem}
                                                                style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                                key={keyC} contentEditable="true"
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                               value={valueC} type="password"/>
+                                                               value={value[valueC]} type="password"/>
                                                     )
                                                 }else if (keyC==tabaleData.ammData.header.length-1){
-                                                return (
-                                                    <input className={styles.tableContentItem} key={keyC}
+                                                    return (
+                                                        <input className={styles.tableContentItem} key={keyC}
                                                            style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                           onClick={()=>{$('#boxAm').parent().css('display','block')}}
+                                                           onClick={()=>{jump(value[valueC])}}
                                                            type="button" value='设置'/>
                                                     )
                                                 }else {
@@ -107,7 +108,7 @@ let Component = React.createClass({
                                                                style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                                key={keyC} contentEditable="true"
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                               value={valueC}/>
+                                                               value={value[valueC]}/>
                                                     )
                                                 }
                                             })
@@ -134,45 +135,34 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        table: state.objs.tableContent,
+        table: state.objs.tableContentAmm,
+        roles: state.objs.roles
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: (obj) => {
-            dispatch(actions.setObjs('tableContent', obj));
-            // $.ajax({
-            //     url: soam+'/user/getAllUser',
-            //     type: 'post',
-            //     dataType: 'json',//here,
-            //     success:function (data) {
-            //         console.log(data);
-            //         dispatch(actions.setObjs('tableContent', data));
-            //     },
-            //     error:function(){
-            //         console.log('获取数据失败')
-            //     }
-            // });
-            // $.ajax({
-            //     url: soam+'/user/getRoleList',
-            //     type: 'post',
-            //     dataType: 'json',//here,
-            //     success:function (data) {
-            //         console.log(data);
-            //         dispatch(actions.setObjs('tableContent', data));
-            //     },
-            //     error:function(){
-            //         console.log('获取数据失败')
-            //     }
-            // });
+        init: () => {
             $.ajax({
-                url: soam+'/user/getUserRoleList?id=1',
+                url: soam+'/user/getAllUser',
+                type: 'post',
+                data:'pageSize='+11+'&&page='+1+'&&username=',
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContentAmm', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+            $.ajax({
+                url: soam+'/user/getRoleList',
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data);
-                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setObjs('roles', data));
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -183,6 +173,20 @@ const mapDispatchToProps = (dispatch) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.content[i][j] = value;
             dispatch(actions.setObjs('tableContent', tableV));
+        },
+        jump: (id) => {
+            $.ajax({
+                url: soam+'/user/getUserRoleList?id='+id,
+                type: 'post',
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    $('#boxAm').parent().css('display','block');
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
         inputOnChange:(value,id)=>{
 

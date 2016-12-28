@@ -66,7 +66,6 @@ let str=d.getDate();
     } 
 }
 }());
-      
         return (
           <div className={ styles.navbox}>
                      <div className={styles.tit}>
