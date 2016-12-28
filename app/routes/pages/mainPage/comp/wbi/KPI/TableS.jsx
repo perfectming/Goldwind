@@ -68,6 +68,9 @@ let Component = React.createClass({
                     }
                 }
             },
+            tooltip: {
+                shared: true
+            },
             xAxis: {
                 lineWidth: 1,
                 tickWidth: 0,

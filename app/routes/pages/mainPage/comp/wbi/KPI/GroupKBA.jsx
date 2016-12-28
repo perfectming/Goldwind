@@ -158,6 +158,8 @@ const mapDispatchToProps = (dispatch) => {
 				    dispatch(actions.setVars('wtLose', wtLose));
 				    dispatch(actions.setVars('wtPBA', wtPBA));
 				    dispatch(actions.setVars('wtData',wtData ));
+				    dispatch(actions.setVars('x1', areaName[0]));
+            		dispatch(actions.setVars('x2',wfName[0]));
 		        },
 		        complete : function(XMLHttpRequest,status){ 
 			　　　　	dispatch(actions.setVars('groupKBABool',true ));

@@ -51,8 +51,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#33BAC0', '#70c080','#0000ff','#a1c0e5', '#ffd689','#5b9bd5']
-            ,
+            colors: ['#33BAC0', '#70c080','#0000ff','#a1c0e5', '#ffd689','#5b9bd5'],
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
@@ -60,6 +59,9 @@ let Component = React.createClass({
                     pointWidth: 15,
                     borderRadius:3
                 }
+            },
+            tooltip: {
+                shared: true
             },
             xAxis: {
                 lineWidth: 1,

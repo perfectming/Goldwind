@@ -42,8 +42,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#70c080','#31BAC0','#134833', '#082B1F']
-            ,
+            colors: [ '#33BAC0', '#70c080','#31BAC0','#134833', '#082B1F'],
             plotOptions: {
                 column: {
                     pointPadding: 0.1,
@@ -54,6 +53,7 @@ let Component = React.createClass({
             },
             tooltip: {
 	            valueSuffix: unit,
+                shared: true
 	        },
             xAxis: {
             	gridLineDashStyle: 'Solid',
@@ -76,7 +76,7 @@ let Component = React.createClass({
 	                offset: 0,
 	                rotation: 0,
 	                y: -20,
-	                x:10,
+	                x: -15,
 	                style:{
 	                	fontSize:'10px',
 	                	color:'white',
