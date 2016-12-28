@@ -101,7 +101,7 @@
            width:100%;
            height:20px;
            line-height:20px;
-           margin-top:10px;
+           margin-top:13px;
            color:#fff;
            display:inline-block;
            .anum1{
@@ -137,7 +137,7 @@
            width:100%;
            height:20px;
            line-height:20px;
-           margin-top:10px;
+           margin-top:13px;
            color:#fff;
            display:inline-block;
            .anum1{
@@ -162,9 +162,69 @@
             }
           }
         }
-
+     }
+     .mapenter{ width:100px;height:70px;position:absolute; cursor:pointer;}
+     .soninfo{
+      width:240px;
+      height:150px;
+      position:absolute;
+      background-image:url('../../../img/comp/soninfo1.png');
+      .sontit{
+          width:90%;height:30px;line-height:30px;font-size:14px; color:#fff;border-bottom:1px solid #fff;margin-left:auto;margin-right:auto;overflow:hidden;margin-top:2px;
+          .anum1{
+            width:50%;
+              font-family:'微软雅黑';
+              display:inline-block;
+              font-size:14px;
+              padding-left:8px;
+              color:#fff;
+            }
+           .anum{
+            width:50%;
+              display:inline-block;
+              font-size:10px;
+              color:#fff;
+              text-align:right;
+              span{width:35px; display:inline-block;text-align:left}
+              b{
+                font-size:14px;
+                color:#31f3fb;
+                margin-right:5px;                              
+                font-weight:normal;
+              }
+            }
+      }
+      .sontit1{
+          width:90%;height:20px;line-height:20px;font-size:12px; color:#fff;margin-left:auto;margin-right:auto;overflow:hidden;margin-top:2px;
+          .anum1{
+            width:50%;
+              font-family:'微软雅黑';
+              display:inline-block;
+              font-size:12px;
+              padding-left:8px;
+              color:#fff;
+            }
+           .anum{
+            width:50%;
+              display:inline-block;
+              font-size:10px;
+              color:#fff;
+              text-align:right;
+              span{width:35px; display:inline-block;text-align:left}
+              b{
+                font-size:12px;
+                color:#31f3fb;
+                margin-right:5px;                              
+                font-weight:normal;
+              }
+            }
+      }
 
      }
+     .soninfo2{background-image:url('../../../img/comp/soninfo2.png');}
+     .soninfo3{background-image:url('../../../img/comp/soninfo3.png');padding-left:6px;}
+     .soninfo4{background-image:url('../../../img/comp/soninfo4.png');padding-left:6px;}
+     .soninfo5{background-image:url('../../../img/comp/soninfo5.png');padding-top:10px;}
     }
     .animat4{
      width:1100px;
