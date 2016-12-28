@@ -49,7 +49,7 @@ let Component = React.createClass({
             let kbpjfs=Number((mobd[8888800].WindSpeed_DevAverValue)*mod.WindSpeed_DevAverValue.coeff).toFixed(mod.WindSpeed_DevAverValue.place);//平均风速//
             let kbpjfzd=Number((mobd[8888800].PVTSI_Aver)*mod.PVTSI_Aver.coeff).toFixed(mod.PVTSI_Aver.place);//平均辐照度（coeff为系数；place为保留位数；下同）//
             let zhzbgl1=(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2);//年发电完成率//
-            let zhzbgl2=(mobd[8888800].YearEgyAt/(mobd[8888800].YearPlanTotEgyAt/1+(mobd[8888800].YearLossElec.Sum/1))*100).toFixed(2);//年发电能力//
+            let zhzbgl2=(mobd[8888800].YearEgyAt/(mobd[8888800].YearPlanTotEgyAt/1+(mobd[8888800].YearLossElec.Sum/1))*100).toFixed(2);//年度PBA//
             let zhzbgl3=(mobd[8888800].MonthEgyAt/mobd[8888800].CurMonthPlanEgyAt*100).toFixed(2);//月发电完成率//
             let zhzbgl4=(mobd[8888801].MonthLossElec.Sum/mobd[8888801].MonthEgyAt*100).toFixed(2);//弃风率//
             let zhzbgl5=(mobd[8888802].MonthLossElec.Sum/mobd[8888802].MonthEgyAt*100).toFixed(2);//弃光率//
@@ -123,15 +123,15 @@ let Component = React.createClass({
                 }
 
                 play();
-            }())
+            }());
             function play(){
                 for(let i=0;i<arr.length;i++){
                     num.push([arrname[i],arr[i]])
                 }
-            };
+            }
             for(let x=0;x<arr.length;x++){
                 allnum+=arr[x]
-            };
+            }
 
             //安全天数计算
             let urodz = new Date(parameter.safeDate);
@@ -162,7 +162,7 @@ let Component = React.createClass({
                         <Title title={['综合指标概览']}></Title>
                         <div className={styles.zhzbglmain}>
                             <div className={styles.zhzbglbox}><p>年发电完成率</p><Pie2 color={zhzbgl1>100? ['#1fe005','#39565e']:zhzbgl1>80?['#fbd500','#39565e']:zhzbgl1>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl1>100? {color:'#1fe005'} :zhzbgl1>80?{color:'#fbd500'}:zhzbgl1>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl1=== "NaN" ? "--": zhzbgl1}<span className={styles.danweicc}>%</span></p></span></div>
-                            <div className={styles.zhzbglbox}><p>年发电能力</p><Pie2 color={zhzbgl2>100? ['#1fe005','#39565e']:zhzbgl2>80?['#fbd500','#39565e']:zhzbgl2>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1+mobd[8888800].YearLossElec.Sum/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl2>100? {color:'#1fe005'} :zhzbgl2>80?{color:'#fbd500'}:zhzbgl2>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl2=== "NaN" ? "--": zhzbgl2}<span className={styles.danweicc}>%</span></p></span></div>
+                            <div className={styles.zhzbglbox}><p>年度PBA</p><Pie2 color={zhzbgl2>100? ['#1fe005','#39565e']:zhzbgl2>80?['#fbd500','#39565e']:zhzbgl2>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number(mobd[8888800].YearPlanTotEgyAt/1+mobd[8888800].YearLossElec.Sum/1-mobd[8888800].YearEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl2>100? {color:'#1fe005'} :zhzbgl2>80?{color:'#fbd500'}:zhzbgl2>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl2=== "NaN" ? "--": zhzbgl2}<span className={styles.danweicc}>%</span></p></span></div>
                             <div className={styles.zhzbglbox}><p>月发电完成率</p><Pie2 color={zhzbgl3>100? ['#1fe005','#39565e']:zhzbgl3>80?['#fbd500','#39565e']:zhzbgl3>60?['#ff0000','#39565e']:['#d06960','#39565e']} num={[Number(mobd[8888800].MonthEgyAt),Number(mobd[8888800].CurMonthPlanEgyAt/1-mobd[8888800].MonthEgyAt/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl3>100? {color:'#1fe005'} :zhzbgl3>80?{color:'#fbd500'}:zhzbgl3>60?{color:'#ff0000'}:{color:'#d06960'}}>{zhzbgl3=== "NaN" ? "--": zhzbgl3}<span className={styles.danweicc}>%</span></p></span></div>
                             <div className={styles.zhzbglbox}><p>弃风率</p><Pie2 color={zhzbgl4>100? ['#d06960','#39565e']:zhzbgl4>80?['#ff0000','#39565e']:zhzbgl4>60?['#fbd500','#39565e']:['#1fe005','#39565e']} num={[Number(mobd[8888801].MonthLossElec.Sum),Number(mobd[8888801].MonthEgyAt/1-mobd[8888801].MonthLossElec.Sum/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl4>100? {color:'#d06960'} :zhzbgl4>80?{color:'#ff0000'}:zhzbgl4>60?{color:'#fbd500'}:{color:'#1fe005'}}>{zhzbgl4=== "NaN" ? "--": zhzbgl4}<span className={styles.danweicc}>%</span></p></span></div>
                             <div className={styles.zhzbglbox}><p>弃光率</p><Pie2 color={zhzbgl5>100? ['#d06960','#39565e']:zhzbgl5>80?['#ff0000','#39565e']:zhzbgl5>60?['#fbd500','#39565e']:['#1fe005','#39565e']} num={[Number(mobd[8888802].MonthLossElec.Sum),Number(mobd[8888802].MonthEgyAt/1-mobd[8888802].MonthLossElec.Sum/1)]}></Pie2><span className={styles.zhzbglboxnum}><p style={zhzbgl5>100? {color:'#d06960'} :zhzbgl5>80?{color:'#ff0000'}:zhzbgl5>60?{color:'#fbd500'}:{color:'#1fe005'}}>{zhzbgl5=== "NaN" ? "--": zhzbgl5}<span className={styles.danweicc}>%</span></p></span></div>
@@ -270,15 +270,23 @@ const mapDispatchToProps = (dispatch) => {
         changedate:()=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
             function momo(moname){
-                dispatch(actions.setVars('moname', moname));
-                TY.getRtData("MonitorBoard", 8888800, ppo);
-                function ppo(modata){
+                if(moname.Model.dis==undefined||moname.Model.ens==undefined){
+                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
+                }else {
+                    dispatch(actions.setVars('moname', moname));
                     TY.getRtData("MonitorBoard", 8888800, ppo);
                     function ppo(modata){
-                        dispatch(actions.setVars('modata', modata));
-                        setTimeout(function () {
-                            dispatch(actions.setVars('boole', true));
-                        },100)
+                        TY.getRtData("MonitorBoard", 8888800, ppo);
+                        function ppo(modata){
+                            if (modata.ModelData[8888801]==undefined){
+                                TY.getRtData("MonitorBoard", 8888800, ppo);
+                            }else{
+                                dispatch(actions.setVars('modata', modata));
+                                setTimeout(function () {
+                                    dispatch(actions.setVars('boole', true));
+                                },100)
+                            }
+                        }
                     }
                 }
             }
@@ -286,8 +294,12 @@ const mapDispatchToProps = (dispatch) => {
             time=setInterval(function(){
                 TY.getRtData("MonitorBoard", 8888800, ppo);
                 function ppo(modata){
-                    dispatch(actions.setVars('modata', modata));
-                    dispatch(actions.setVars('boole', true));
+                    if(modata.ModelData[8888801]==undefined){
+                        TY.getRtData("MonitorBoard", 8888800, ppo);
+                    }else {
+                        dispatch(actions.setVars('modata', modata));
+                        dispatch(actions.setVars('bloo', true));
+                    }
                 }
             },2000)
         },
