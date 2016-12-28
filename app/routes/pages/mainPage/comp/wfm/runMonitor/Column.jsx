@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
     render() {
         let {model,tabaleData} = this.props;
-        if (model&&tabaleData){
+        if (model&&tabaleData.ModelData[150801]){
         var arr = [];
         var arr1 = [];
         var arr2=[];
