@@ -22,7 +22,7 @@ let Component = React.createClass({
             <div className={css.whole}>
             <form className={css.loginBox}>
               <input placeholder=" 用户名:" className={css.int} id="username1" type="text" name="username"/><br/>
-              <input placeholder=" 密码:" className={css.int} id="password1" type="password" name="password"/><br/>
+              <input placeholder=" 密 码:" className={css.int} id="password1" type="password" name="password"/><br/>
               <input placeholder=" 验证码:" className={css.ints} id="check" type="text" name="check"/>
               <input value={code} readOnly="readOnly" id="checked" onClick={()=>{change()}} className={css.pages}/><br/>
               <input className={css.submit} type="submit " value='登      陆' readOnly="true" onClick={()=>login()}/>
@@ -36,7 +36,8 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
   return {
     userInfo: state.vars.userInfo,
-    code:state.vars.verificationCode
+    code:state.vars.verificationCode,
+    userMessage:state.objs.userMessage
   }
 };
 
@@ -67,14 +68,30 @@ const mapDispatchToProps = (dispatch) => {
         codeNew+=codeChars[Math.floor(Math.random()*36)]
       }
       dispatch(actions.setVars('verificationCode', codeNew));}else {
-            browserHistory.push('/app/all/page/main')  ;
-            dispatch(actions.setVars('userInfo', true));
-            try { Base.returnPlay(); } catch (e) { };
-            try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }
-            TY.dataUrl = "http://54.223.200.134/System/data.aspx";
-            TY.crossDomain = true;
-            TY.Zip =false;
-            TY.TT.timeOutlength = 1000*60*1;
+          $.ajax({
+              url: 'http://10.68.100.32:8080/soam/user/login',
+              type: 'post',
+              data:'name='+$('#username1')[0].value+'&&password='+$('#password1')[0].value,
+              dataType: 'json',//here,
+              success:function (data) {
+                  console.log(data);
+                  data.data.result==='False'?
+                      alert('用户名或密码错误'):
+                      browserHistory.push('/app/all/page/main')  ;
+                  dispatch(actions.setObjs('userMessage', data));
+                  dispatch(actions.setVars('userInfo', true));
+                  try { Base.returnPlay(); } catch (e) { };
+                  try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }
+                  TY.dataUrl = "http://54.223.200.134/System/data.aspx";
+                  TY.crossDomain = true;
+                  TY.Zip =false;
+                  TY.TT.timeOutlength = 1000*60*1;
+
+              },
+              error:function(){
+                  console.log('获取数据失败')
+              }
+          });
       }
           /*$.ajax({
             url: 'http://10.9.100.95:8080/soam/user/login',
