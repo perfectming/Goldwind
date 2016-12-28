@@ -57,7 +57,9 @@ let Component = React.createClass({
 	                dataLabels: {
 	                    enabled: true,
                         style: {
-                            color: 'white'
+                            color: 'white',
+                            fontWeight: 'normal',
+                            fontSize:'14'
                         }
 	                },
 	                showInLegend: true
