@@ -68,15 +68,15 @@ const mapDispatchToProps = (dispatch) => {
         codeNew+=codeChars[Math.floor(Math.random()*36)]
       }
       dispatch(actions.setVars('verificationCode', codeNew));}else {
-          $.ajax({
-              url: 'http://10.68.100.32:8080/soam/user/login',
-              type: 'post',
-              data:'name='+$('#username1')[0].value+'&&password='+$('#password1')[0].value,
-              dataType: 'json',//here,
-              success:function (data) {
-                  console.log(data);
-                  data.data.result==='False'?
-                      alert('用户名或密码错误'):
+          // $.ajax({
+          //     url: 'http://10.68.100.32:8080/soam/user/login',
+          //     type: 'post',
+          //     data:'name='+$('#username1')[0].value+'&&password='+$('#password1')[0].value,
+          //     dataType: 'json',//here,
+          //     success:function (data) {
+          //         console.log(data);
+          //         data.data.result==='False'?
+          //             alert('用户名或密码错误'):
                       browserHistory.push('/app/all/page/main')  ;
                   dispatch(actions.setObjs('userMessage', data));
                   dispatch(actions.setVars('userInfo', true));
@@ -87,11 +87,11 @@ const mapDispatchToProps = (dispatch) => {
                   TY.Zip =false;
                   TY.TT.timeOutlength = 1000*60*1;
 
-              },
-              error:function(){
-                  console.log('获取数据失败')
-              }
-          });
+          //     },
+          //     error:function(){
+          //         console.log('获取数据失败')
+          //     }
+          // });
       }
           /*$.ajax({
             url: 'http://10.9.100.95:8080/soam/user/login',
