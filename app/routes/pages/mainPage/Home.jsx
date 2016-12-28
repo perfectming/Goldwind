@@ -60,7 +60,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         Verification:(userMessage)=>{
-            console.log(userMessage.data.token) 
+            // console.log(userMessage.data.token) 
             //获取登入时的时间
             // let length=userMessage.data.token.lastIndexOf('-')
             // let oldTime=userMessage.data.token.substring(length+1,userMessage.data.token.length)
