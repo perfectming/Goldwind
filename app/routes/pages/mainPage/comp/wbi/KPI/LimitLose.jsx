@@ -66,8 +66,7 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
-        }
-        ,
+        },
     };
 };
 

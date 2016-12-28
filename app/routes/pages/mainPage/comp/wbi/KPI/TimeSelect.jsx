@@ -97,9 +97,16 @@ const mapDispatchToProps = (dispatch) => {
         var sTime = $('#startTime').val();
         //结束时间时间
         var eTime = $('#endTime').val();
-		if(sTime == '' || eTime == ''){
-            alert('请选择开始或者结束时间');
-            return false;
+		var oDate1 = new Date(sTime);
+        var oDate2 = new Date(eTime);
+        if(sTime == '' || eTime == '') {
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择开始或者结束时间'));
+                return false;
+        }else if(oDate1.getTime() > oDate2.getTime()){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择正确的开始或者结束时间'));
+                return false;
         };
         dispatch(actions.setVars('startTime', sTime));
         dispatch(actions.setVars('endTime', eTime));

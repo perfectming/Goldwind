@@ -18,7 +18,8 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {border1=true,closeboxAm,Tofaninfo1} = this.props;
+        let {dataBase,border1=true,closeboxAm,Tofaninfo1} = this.props;
+        console.log(dataBase)
         return (
 
             <div className={styles.fiexdbox} style={{top: 294, left:672}}>
@@ -30,15 +31,24 @@ let Component = React.createClass({
                             <a>所有</a>
                             <div className={styles.list_span}>
                                 {
-                                    arr1.map((valueC,key)=>{
-
-                                        return(
-                                            <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC)}>
-                                                <input type='checkbox' name='checkname' value={valueC} />
-                                                {valueC}
-                                            </div>
-
-                                        )
+                                    dataBase.data.map((valueC,key)=>{
+                                        if(valueC.ids==true){
+                                            return(
+                                                <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC)}>
+                                                    <input type='checkbox' checked="checked" name={valueC.id} value={valueC.name} />
+                                                    {valueC.name}
+                                                </div>
+                                            )
+                                        }else{
+                                            {
+                                                return(
+                                                    <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC)}>
+                                                        <input type='checkbox' name={valueC.id} value={valueC.name} />
+                                                        {valueC.name}
+                                                    </div>
+                                                )
+                                            }
+                                        }
                                     })
 
                                 }
@@ -61,7 +71,6 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         border1: state.vars.bordershow1,
-
     }
 };
 

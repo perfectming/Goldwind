@@ -79,6 +79,8 @@ const mapDispatchToProps = (dispatch) => {
           //             alert('用户名或密码错误'):
                       browserHistory.push('/app/all/page/main')  ;
                   dispatch(actions.setObjs('userMessage', data));
+          browserHistory.push('/app/all/page/main')  ;
+                  // dispatch(actions.setObjs('userMessage', data));
                   dispatch(actions.setVars('userInfo', true));
                   try { Base.returnPlay(); } catch (e) { };
                   try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }

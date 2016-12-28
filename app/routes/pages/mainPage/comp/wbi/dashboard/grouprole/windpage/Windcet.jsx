@@ -39,7 +39,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
-                y:40,
+                y:25,
                 align:"right",
                 verticalAlign: "top",
                  itemHoverStyle:{

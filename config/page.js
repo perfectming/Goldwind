@@ -93,6 +93,7 @@ module.exports = {
                     }]
             }],
         },{
+            
             name: '健康管理',
             iconNormal: require('../app/routes/pages/mainPage/img/comp/jkgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/jkgl_active.png'),
