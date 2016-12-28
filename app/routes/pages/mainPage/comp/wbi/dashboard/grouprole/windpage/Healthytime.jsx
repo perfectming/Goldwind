@@ -45,7 +45,7 @@ let Component = React.createClass({
                           
                                <Healtytimechart  monthT={WTHealName} text={text} areaRecordProfitT={WTN} input_url={ipUrl} height={410} text={xxdwfNa+'每月健康度'}></Healtytimechart>
                        
-                    <div className={styles.imgq}>
+                    <div className={styles.imgqz}>
                         <img src={icono}/>
                     </div>
                 </div>
@@ -57,7 +57,7 @@ let Component = React.createClass({
                        
                         
                   
-                    <div className={styles.imgq}>
+                    <div className={styles.imgqz}>
                         <img src={icono}/>
                     </div>
                 </div>

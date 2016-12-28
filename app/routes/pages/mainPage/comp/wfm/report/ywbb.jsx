@@ -184,7 +184,7 @@ let Component = React.createClass({
                                             <a className={styles.da}>
                                               <img src={add} />
                                               <b><img src={'http://'+url+'/'+valueD.img}/>{valueD.text}</b>
-                                              <input type='checkbox' value='value'  />
+                                              <input type='checkbox' value={valueD.children ? 'value' : valueD.id}  />
                                             </a>
                                             { 
                                              
@@ -490,6 +490,7 @@ const mapDispatchToProps = (dispatch) => {
                     if($(this).val()!=='value'){
                       all.push($(this).val())
                     }
+                    console.log($(this).val())
                   }
 
               })
@@ -497,6 +498,7 @@ const mapDispatchToProps = (dispatch) => {
                 all.splice(50,all.length);
               }
               if(all.length==0){
+
                 alert('设备数据获取失败！')
                 return;
               }
