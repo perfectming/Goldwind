@@ -5,7 +5,8 @@ import Title from '../super/Title.jsx';
 import Pie2 from './pie2.jsx';
 import Tuchart from './Tuchart.jsx';
 import Tuchart1 from './tuchar1.jsx';
-import Tuchart2 from './Tuchart1.jsx';
+import Tuchart2 from './Tuchart2.jsx';
+import Tuchart3 from './Tuchart3.jsx';
 
 import jnjp from '../../../img/comp/jienengjp.png';
 import nljys from '../../../img/comp/nianleijys.png';
@@ -19,6 +20,7 @@ import monBoardData from '../../../../../../../config/MonitorBoardData';
 import model from '../../../../../../../config/MonitorBoardModel';
 import Login from '../../../../../../components/common/Loading.jsx';
 let comp = require('./../runMonitor/fpinterface/date');
+var {browerHistory} = require('react-router');
 let parameter = require('../monitorkb/Monitorkb-parameter');//日期以及CDM场站参数文件引用//
 var $ = require('jquery');
 let time;
@@ -57,6 +59,7 @@ let Component = React.createClass({
             let mobd=modata.ModelData;
             let mod=moname.Model.dis;
             let datename=moname.Model.ens;
+            let arrname=[];//各场站名字的数组//
             let qfl=(mobd[8888801].MonthLossElec.Sum/mobd[8888801].MonthEgyAt*100).toFixed(2);//弃风率//
             let qgl=(mobd[8888802].MonthLossElec.Sum/mobd[8888802].MonthEgyAt*100).toFixed(2);//弃光率//
             let monthTimeHandle=[];//变形后的最近的十二个月的月份数组//
@@ -65,8 +68,11 @@ let Component = React.createClass({
             let kbnjhfdl1=[];//运算处理后最近十二个月计划发电量//
             let kbnsjfdl1=[];//运算处理后最近十二个月实际发电量//
             let kbnfdwcl=[];//总年发电量完成率（通过运算得出）//
+            let czndxly1=[];//各场站年等效利用小时数//
+            let ssdlqkfx=[];//损失电量情况分析//
             let IntoCDMjp=0;//纳入CDM场站CO2减排量//
             let NotIntoCDMjp=0;//未纳入CDM场站CO2减排量//
+
 
             (function(){
                 for(let i in kbnjhfdl){
@@ -86,6 +92,23 @@ let Component = React.createClass({
                 }
                 for(let i=0;i<mobd[8888800].Last12MonthsEgyAtStat.Time.length;i++){
                     monthTimeHandle.push(Number(mobd[8888800].Last12MonthsEgyAtStat.Time[i].substring(5))+'月')
+                }
+                for(let i in mobd){
+                    if (mobd[i].PVTSI_Aver && !mobd[i].YearCO2Emissions){
+                        czndxly1.push(Number((mobd[i].YearEgyAt/mobd[i].Capacity).toFixed(2)))
+
+                    }
+                }
+                ssdlqkfx.push(Number((mobd[8888800].YearLossElec.Fault/1).toFixed(2)));
+                ssdlqkfx.push(Number((mobd[8888800].YearLossElec.Maintain/1).toFixed(2)));
+                ssdlqkfx.push(Number((mobd[8888800].YearLossElec.Limit/1).toFixed(2)));
+                ssdlqkfx.push(Number((mobd[8888800].YearLossElec.NoDevReason/1).toFixed(2)));
+            }());
+            (function(){
+                for(let i in datename){
+                    if (datename[i].wft){
+                        arrname.push(datename[i].name);
+                    }
                 }
             }());
 
@@ -118,7 +141,7 @@ let Component = React.createClass({
                             <div className={styles.zhzbglbox}><img src={up}/><p>年发电计划完成率</p><Pie2 color={['#fbd500','#32535C']} num={[89,11]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#fbd500'}}>{89.6}%</p></span></div>
                             <div className={styles.zhzbglbox}><img src={down}/><p>年度PBA</p><Pie2 color={['#ff0000','#32535C']} num={[68,32]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#ff0000'}}>{68}%</p></span></div>
                             <div className={styles.zhzbglbox}><img src={up}/><p>设备健康度</p><Pie2 color={['#d06960','#32535C']} num={[57,43]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#d06960'}}>{57}%</p></span></div>
-                            <div className={styles.zhzbglbox}><img src={down}/><p>任务完成度</p><Pie2 color={['#fbd500','#32535C']} num={[82,18]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#fbd500'}}>{82}%</p></span></div>
+                            <div className={styles.zhzbglbox}><img src={down}/><p>工单完成率</p><Pie2 color={['#fbd500','#32535C']} num={[82,18]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#fbd500'}}>{82}%</p></span></div>
                             <div className={styles.zhzbglbox}><img src={up}/><p>年度MTBF</p><Pie2 color={['#d06960','#32535C']} num={[30,70]}></Pie2><span className={styles.zhzbglboxnum}><p style={{color:'#d06960'}}>30h</p></span></div>
                         </div>
                     </div>
@@ -137,7 +160,7 @@ let Component = React.createClass({
 
                         <Title title={['场站等效利用小时数']}></Title>
                         <div className={styles.fgzyfxmain}>
-                            <Tuchart shuju={comp.jscnum.mtbf}></Tuchart>
+                            <Tuchart3 shuju={comp.jscnum.hour} gczmc={arrname} gczdxlyxss={czndxly1}></Tuchart3>
                         </div>
                     </div>
 
@@ -146,8 +169,8 @@ let Component = React.createClass({
                         <Tuchart shuju={comp.jscnum.mtbf}></Tuchart>
                     </div>
                      <div className={`${styles.ssdlqkfx} ${styles.box_shadow}`}>
-                        <Title title={['损失电量情况分析(万kWh)']}></Title>
-                        <Tuchart1 shuju={comp.jscnum.elect}></Tuchart1>
+                        <Title title={['损失电量情况分析(kWh)']}></Title>
+                        <Tuchart1 shuju={comp.jscnum.elect} ssdlnum={ssdlqkfx}></Tuchart1>
                     </div>
 
 
@@ -206,15 +229,46 @@ const mapDispatchToProps = (dispatch) => {
         changedate:()=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
             function momo(moname){
-                dispatch(actions.setVars('moname', moname));
-                TY.getRtData("MonitorBoard", 8888800, ppo);
-                function ppo(modata){
+                if(moname.Model.dis==undefined||moname.Model.ens==undefined){
+                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
+                }else {
+                    dispatch(actions.setVars('moname', moname));
                     TY.getRtData("MonitorBoard", 8888800, ppo);
                     function ppo(modata){
-                        dispatch(actions.setVars('modata', modata));
-                        setTimeout(function () {
-                            dispatch(actions.setVars('bloo', true));
-                        },100)
+                        TY.getRtData("MonitorBoard", 8888800, ppo);
+                        function ppo(modata){
+                            if(modata.ModelData[8888801]==undefined){
+                                TY.getRtData("MonitorBoard", 8888800, ppo);
+                            }else {
+                                dispatch(actions.setVars('modata', modata));
+
+                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                                function setData(rdata1){
+                                    dispatch(actions.setVars('zhzb', rdata1));
+                                    TY.getRtData("DataOverview", 8888800, setData1);
+                                    function setData1(rdata2){
+                                        dispatch(actions.setVars('bbs', rdata2));
+                                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
+                                        function setDatas(rdata3){
+                                            dispatch(actions.setVars('fModel', rdata3));
+                                            TY.getRtData("DevicesMatrix", 8888800, setfData);
+                                            function setfData(rdata4){
+                                                if(rdata4.ModelData[8888801]==undefined){
+
+                                                    TY.getRtData("DevicesMatrix", 8888800, setfData)
+                                                }else{
+
+                                                    dispatch(actions.setVars('fData', rdata4));
+                                                    setTimeout(function () {
+                                                        dispatch(actions.setVars('bloo', true));
+                                                    },500)
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -222,8 +276,12 @@ const mapDispatchToProps = (dispatch) => {
             time=setInterval(function(){
                 TY.getRtData("MonitorBoard", 8888800, ppo);
                 function ppo(modata){
-                    dispatch(actions.setVars('modata', modata));
-                    dispatch(actions.setVars('bloo', true));
+                    if(modata.ModelData[8888801]==undefined){
+                        TY.getRtData("MonitorBoard", 8888800, ppo);
+                    }else {
+                        dispatch(actions.setVars('modata', modata));
+                        dispatch(actions.setVars('bloo', true));
+                    }
                 }
             },2000)
         },
