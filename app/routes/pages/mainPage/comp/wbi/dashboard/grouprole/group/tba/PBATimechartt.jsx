@@ -7,8 +7,7 @@ let Component = React.createClass({
     },
     render() {
 
-      let {textf,PBAGroupFirstPba,machine,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
-    
+      let {text,PBAGroupFirstPba,PBAMaintainloss,PBAFaultloss,PBAx,PBAPoweract,PBALimitloss,PBANodevreasonloss,PBAPba,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -21,7 +20,7 @@ let Component = React.createClass({
                
             },
             title: {
-                text: textf,
+                text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
@@ -37,8 +36,7 @@ let Component = React.createClass({
             // 插入图片
             //图例说明
             legend: {
-                 x:-75,
-
+                x:-75,
                 y:30,
                 align:"right",
                 verticalAlign: "top",
@@ -72,10 +70,7 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                           wq=e.point.category;
-                        let  a=wq.toString().split("");
-                        let b=a[0];
-                        changedata10(wq,b);
+                       
                         }
                     }
                 }
@@ -91,7 +86,7 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-                categories:machine,
+                categories:PBAx,
             },
              yAxis:
                 [{labels: {
@@ -142,7 +137,7 @@ let Component = React.createClass({
             series: [{
                 name: '实际发电量',
                 type: 'column',
-                data: fanProfit,
+                data: PBAPoweract,
                 borderRadius: 4,
                 color:'#33BAC0',
                 maxPointWidth:20,
@@ -150,16 +145,16 @@ let Component = React.createClass({
             {
                 name: '故障损失',
                 type: 'column',
-                data: fanCost,
+                data: PBAFaultloss,
                 stack:'waste',
                 borderRadius: 2,
-                color:'#5298d3',
+                color:'#5298d2',
                  maxPointWidth:20,
             },
                 {
                     name: '维护损失',
                     type: 'column',
-                    data: fanCost1,
+                    data: PBAMaintainloss,
                     stack:'waste',
                      color:'#ffffff',
                       maxPointWidth:20,
@@ -168,25 +163,25 @@ let Component = React.createClass({
                 {
                     name: '限功率损失',
                     type: 'column',
-                    data: fanCost2,
+                    data: PBALimitloss,
                     stack:'waste',
-                     color:'#e9c75c',
+                     color:'#e8952a',
                       maxPointWidth:20,
                        borderRadius: 2,
                 },
                 {
                     name: '非设备原因损失',
                     type: 'column',
-                    data: fanCost3,
+                    data: PBANodevreasonloss,
                     stack:'waste',
-                    color:'#d06960',
+                    color:'#d8403d',
                      maxPointWidth:20,
                       borderRadius: 2,
                 },
                 {
                     name: 'PBA',
                     type: 'line',
-                    data: PBAGroupFirstPba,
+                    data: PBAPba,
                     color:'blue',
                     yAxis:1,
                      tooltip: {
@@ -212,11 +207,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata10 :(wq,b)=>{
-            dispatch(actions.setVars('wr',wq)); 
-            
-           
-        },
+      
     };
 };
 

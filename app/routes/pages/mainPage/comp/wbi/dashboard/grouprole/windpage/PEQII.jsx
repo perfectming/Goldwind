@@ -15,6 +15,7 @@ let comps = require('./data');
 let ssg2=mod.Model.ens;
 let arr3=[];
 let years=[];
+let input_url='10.9.99.203:8080';
 let thDate=new Date();
 let thYear=thDate.getFullYear();
 for(let i=0;i<=30;i++){
@@ -29,6 +30,10 @@ let arr=[15,16,10,15,22,13];
 let arr2=[15,16,6,4,15,22,8];
 let comp = comps.peqi.table;
 let Component = React.createClass({
+    componentWillMount() {
+        
+        this.props.ajax();
+    },
     componentDidMount() {
         this.props.init(comp);
     },
@@ -176,11 +181,46 @@ const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
         page: state.vars.page1,
+
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+         ajax: () => {
+            // 分页
+            let groupname=[];
+            console.log(1);
+               $.ajax({
+                type:'post',
+                url:'http://'+input_url+'/wbi/info/getStageprice',
+                async:false,
+                data:{
+                    'curpage':1,
+                    'pagesize':2,
+                    'year':2015,
+                    'wfid':150801,
+
+
+                   
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+               console.log(data)
+
+                       
+                  
+                  
+
+                },
+                error:function(e){
+                   console.log(e)
+                },
+            });
+          
+            // dispatch(actions.setVars('PBATimeMonth1',PBATimeFirstMonth));
+        },
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
         },

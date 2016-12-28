@@ -155,7 +155,7 @@ let Component = React.createClass({
                     stack:'waste',
                      maxPointWidth: 20,
                      borderRadius: 3,
-                     color:'#5298d3',
+                     color:'#5298d2',
 
                      
                 },
@@ -174,7 +174,7 @@ let Component = React.createClass({
                     type: 'column',
                     data: fanCostB,
                     stack:'waste',
-                    color:'#e9c75c',
+                    color:'#e8952a',
                      maxPointWidth: 20,
                       borderRadius:3,
                      
@@ -185,7 +185,7 @@ let Component = React.createClass({
                     data: fanCostC,
                     stack:'waste',
                    maxPointWidth: 20,
-                    color:'#d06960',
+                    color:'#d8403d',
                      borderRadius:3,
                     
                 },

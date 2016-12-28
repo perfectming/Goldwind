@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Profitstyle2.scss';
-import AreaTable from './AreaTable2.jsx';
+import GroupPBAT from './GroupPBAT.jsx';
 import icono from '../../../../../../img/comp/PBA.png';
-import Fanchart from './fanchart2.jsx';
+import PBAtimechartt from './PBAtimechartt.jsx';
 var actions = require('redux/actions');
 let Component = React.createClass({
     componentWillMount() {
+        
         let {ipUrl}=this.props;
         this.props.ajax(ipUrl);
 
@@ -15,7 +16,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {ipUrl,PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,wq='风场1',more,changpage,wind,windP,close,actbt=0,backtop,befor_pagee='group',befor_pagee2,w0,ww,}=this.props;
+        let {ipUrl,PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,close,backtop,befor_pagee='group',befor_pagee2,}=this.props;
 
         return (
             <div className={styles.box}>
@@ -33,21 +34,21 @@ let Component = React.createClass({
                 }
                 <div className={`${styles.areabox} ${styles.shadow}`}>
                     <div className={styles.bgc}><img src={icono}/></div>
-                    <AreaTable height={410} PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth}
+                    <GroupPBAT height={410} PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth}
                                areaRecordProfit={PBAGroupPoweract} PBAGroupMaintainloss={PBAGroupMaintainloss}
                                PBAGroupLimitloss={PBAGroupLimitloss} PBAGroupNodevreasonloss={PBAGroupNodevreasonloss}
-                               PBAGroupPba={PBAGroupPba} text1={'集团每月PBA'} input_url={ipUrl}></AreaTable>
+                               PBAGroupPba={PBAGroupPba} text1={'集团每月PBA'} input_url={ipUrl}></GroupPBAT>
 
                 </div>
 
                {// 每月每天的数据
                }
                 <div className={`${styles.areabox} ${styles.shadow}`}>
-                    <Fanchart machine={PBAGroupFirstDayy} fanProfit={PBAGroupFirstPoweract}
-                              fanCost={PBAGroupFirstFaultloss} fanCost1={PBAGroupMaintainloss}
-                              fanCost2={PBAGroupFirstLimitloss} fanCost3={PBAGroupFirstNodevreasonloss} height={410}
-                              width={1730} PBAGroupFirstPba={PBAGroupFirstPba}
-                              textf={PBAGroupMonthF+'每日PBA'}></Fanchart>
+                    <PBAtimechartt PBAx={PBAGroupFirstDayy} PBAPoweract={PBAGroupFirstPoweract}
+                              PBAFaultloss={PBAGroupFirstFaultloss} PBAMaintainloss={PBAGroupMaintainloss}
+                              PBALimitloss={PBAGroupFirstLimitloss} PBANodevreasonloss={PBAGroupFirstNodevreasonloss} height={410}
+                              width={1730} PBAPba={PBAGroupFirstPba}
+                              text={PBAGroupMonthF+'每日PBA'}></PBAtimechartt>
 
 
                     <div className={styles.bgc}>
@@ -63,16 +64,10 @@ let Component = React.createClass({
 });
 const mapStateToProps = (state) => {
     return {
-        actbt: state.vars.actbt,
-        wind: state.vars.wind,
-        windP: state.vars.windP,
-        areaNamee: state.vars.areaNamee,
+        // 返回的对应页面
         befor_pagee: state.vars.befor_pagee,
         befor_page2: state.vars.befor_pagee2,
-        w0: state.vars.PBAGroupPbaName,
-        winss: state.vars.wins1,
-        ww: state.vars.ww,
-        wq: state.vars.wr,
+        // 12个月的数据
         PBAGroupMonthF: state.vars.PBAGroupPbaName,
         PBAGroupMonth: state.vars.PBAGroupMonth1,
         PBAGroupPoweract: state.vars.PBAGroupPoweract1,
@@ -81,7 +76,7 @@ const mapStateToProps = (state) => {
         PBAGroupLimitloss: state.vars.PBAGroupLimitloss1,
         PBAGroupNodevreasonloss: state.vars.PBAGroupNodevreasonloss1,
         PBAGroupPba: state.vars.PBAGroupPba1,
-        // 获取默认的月份上个月
+        // 获取对应月份的数据
         PBAGroupFirstDayy: state.vars.PBAGroupFirstDayy1,
         PBAGroupFirstPoweract: state.vars.PBAGroupFirstPoweract1,
         PBAGroupFirstFaultloss: state.vars.PBAGroupFirstFaultloss1,
@@ -98,21 +93,23 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: (input_url) => {
+          // 集团的PBA12个月
             let PBAGroupMonth = [];
-            let PBAGroupFirstDay = [];
             let PBAGroupPoweract = [];
             let PBAGroupFaultloss = [];
             let PBAGroupMaintainloss = [];
             let PBAGroupLimitloss = [];
             let PBAGroupNodevreasonloss = [];
             let PBAGroupPba = [];
+        // 集团的PBA12个月每天
+            let PBAGroupFirstDay = [];
             let PBAGroupFirstPoweract = [];
             let PBAGroupFirstFaultloss = [];
             let PBAGroupFirstMaintainloss = [];
             let PBAGroupFirstLimitloss = [];
             let PBAGroupFirstNodevreasonloss = [];
             let PBAGroupFirstPba = [];
-            // 获取12个月的PBA
+            // 获取12个月的PBA 赋值第一个表
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi//PBA/getCompanyTimePBA',
@@ -124,38 +121,51 @@ const mapDispatchToProps = (dispatch) => {
                     let PBAGroupSpace = data.data[0];
 
                     for (let i in PBAGroupSpace) {
+
                         let month = PBAGroupSpace[i].month + '月';
                         PBAGroupMonth.push(month);
+
                         let poweract = PBAGroupSpace[i].poweract;
                         PBAGroupPoweract.push(poweract);
+
                         let faultloss = PBAGroupSpace[i].faultloss;
                         PBAGroupFaultloss.push(faultloss);
+
                         let maintainloss = PBAGroupSpace[i].maintainloss;
                         PBAGroupMaintainloss.push(maintainloss);
+
                         let limitloss = PBAGroupSpace[i].limitloss;
                         PBAGroupLimitloss.push(limitloss);
+
                         let nodevreasonloss = PBAGroupSpace[i].nodevreasonloss;
                         PBAGroupNodevreasonloss.push(nodevreasonloss);
+
                         let pba = PBAGroupSpace[i].pba * 100;
                         PBAGroupPba.push(Number(pba.toFixed(1)));
                     }
 
-                    // 默认的月份
+                    // 上一个的月的数据  每天的数据
                     let PBAGroupFirstMonth = data.data[1];
 
                     for (let i in PBAGroupFirstMonth) {
                         let day = PBAGroupFirstMonth[i].day + '日';
                         PBAGroupFirstDay.push(day);
+
                         let poweract = PBAGroupFirstMonth[i].poweract;
                         PBAGroupFirstPoweract.push(poweract);
+
                         let faultloss = PBAGroupFirstMonth[i].faultloss;
                         PBAGroupFirstFaultloss.push(faultloss);
+
                         let maintainloss = PBAGroupFirstMonth[i].maintainloss;
                         PBAGroupFirstMaintainloss.push(maintainloss);
+
                         let limitloss = PBAGroupFirstMonth[i].limitloss;
                         PBAGroupFirstLimitloss.push(limitloss);
+
                         let nodevreasonloss = PBAGroupFirstMonth[i].nodevreasonloss;
                         PBAGroupFirstNodevreasonloss.push(nodevreasonloss);
+
                         let pba = PBAGroupFirstMonth[i].pba * 100;
                         PBAGroupFirstPba.push(Number(pba.toFixed(1)));
                     }
@@ -192,24 +202,9 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
-
-        more: ()=> {
-            $("#sss").show();
-            $('#boxcover').show();
-        },
-        close: ()=> {
-            $("#sss").hide();
-            $('#boxcover').hide();
-        },
+        // 返回功能
         backtop: (befor_pagee, befor_pagee2)=> {
             dispatch(actions.setVars('showPage', befor_pagee));
-        },
-        changpage: (value, key)=> {
-
-            dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('wind', value.plan));
-            dispatch(actions.setVars('windP', value.actrul));
-            dispatch(actions.setVars('ww', value.name))
         },
     };
 };

@@ -142,7 +142,7 @@ let Component = React.createClass({
                 name: '运行时间',
                 type: 'column',
                 data: areaPlanDay,
-                color:'#4CDB9D',
+                color:'#62de88',
                maxPointWidth: 20,
             },
             {

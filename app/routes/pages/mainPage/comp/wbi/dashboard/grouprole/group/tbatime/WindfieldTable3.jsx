@@ -128,7 +128,7 @@ let Component = React.createClass({
                 data: windProfit,
                 maxPointWidth:20,
                 borderRadius:4,
-                color:'#4CDB9D'
+                color:'#62de88'
             },
                 {
                     name: '停机时间',
