@@ -67,9 +67,9 @@ let Component = React.createClass({
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
 	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{TBA.toFixed(1)}%</p>TBA</span>
-	           						<Pie2 color={TBA>0.9? ['#62de88','#39565e']:TBA>0.8?['#e8952a','#39565e']:TBA>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[runTime,downTime]}></Pie2>
+	           						<Pie2 color={TBA>0.9? ['#62de88','#39565e']:TBA>0.8?['#e8952a','#39565e']:TBA>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={runTime==0&&downTime==0? [0,1]:[runTime,downTime]}></Pie2>
 	           						</div>
-	           						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>TBA
+	           						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageTBAT()}></a>
 	           					</div>
 	           				</div>

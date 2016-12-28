@@ -507,14 +507,14 @@ const mapDispatchToProps = (dispatch) => {
 						complete : function(XMLHttpRequest,status) {},
 					});
 					$.ajax({
-						        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
-								type: 'post',
-								async: false,
-								dataType: 'json',
-								data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
-								timeout : 60000, 
-								success: function (data) {
-									if (columnOneName.length==0){
+						    url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
+							type: 'post',
+							async: false,
+							dataType: 'json',
+							data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
+							timeout : 60000, 
+							success: function (data) {
+								if (columnOneName.length==0){
 										columnOneName=[],columnOne=[];
 										for(var i in data.data){
 											columnOneName.push(data.data[i].blooeydescr);
@@ -522,7 +522,7 @@ const mapDispatchToProps = (dispatch) => {
 										};
 										dispatch(actions.setVars('columnOneName', columnOneName));
 							    		dispatch(actions.setVars('columnOne', columnOne));
-									}else if(columnOneName.length!==0&&columnTwoName.length==0){
+								}else if(columnOneName.length!==0&&columnTwoName.length==0){
 										columnTwoName=[],columnTwo=[];
 										for(var i in data.data){
 											columnTwoName.push(data.data[i].blooeydescr);
@@ -530,15 +530,15 @@ const mapDispatchToProps = (dispatch) => {
 										};
 										dispatch(actions.setVars('columnTwoName', columnTwoName));
 							    		dispatch(actions.setVars('columnTwo', columnTwo));
-									}else{
+								}else{
 										dispatch(actions.setVars('alertBool', false));
 								        dispatch(actions.setVars('alertText', '请先重置或清除数据'));
 								        return false;
-									}
-								},
-								complete : function(XMLHttpRequest,status) { 
+								}
+							},
+							complete : function(XMLHttpRequest,status) { 
 									
-								},
+							},
 					});
 				}
 	    	}

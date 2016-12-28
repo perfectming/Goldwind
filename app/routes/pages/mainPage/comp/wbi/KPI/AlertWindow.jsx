@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './AlertStyle.scss';
 
 var actions = require('redux/actions');
-var $ =require("jQuery");
+
 let Component = React.createClass({
     componentDidMount() {
     	this.props.init();
