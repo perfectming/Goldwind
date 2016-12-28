@@ -56,7 +56,7 @@ let Component = React.createClass({
 	           					</div>
 	           					<div className={styles.sectionthree}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{(elecActPBA/elecPlanPBA).toFixed(1)*100}%</p>PBA</span>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{elecActPBA!==0&&elecPlanPBA==0? (elecActPBA/elecPlanPBA):(elecActPBA/elecPlanPBA).toFixed(1)*100+'%'}</p>PBA</span>
 	           						<Pie2 color={(elecActPBA/elecPlanPBA)>0.9? ['#62de88','#39565e']:(elecActPBA/elecPlanPBA)>0.8?['#e8952a','#39565e']:(elecActPBA/elecPlanPBA)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[elecActPBA,elecPlanPBA-elecActPBA]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepagePBAS()}></a><br/>
@@ -70,7 +70,7 @@ let Component = React.createClass({
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
 	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{(TBA*100).toFixed(1)}%</p>TBA</span>
-	           						<Pie2 color={TBA>0.9? ['#62de88','#39565e']:TBA>0.8?['#e8952a','#39565e']:TBA>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[runTime,downTime]}></Pie2>
+	           						<Pie2 color={TBA>0.9? ['#62de88','#39565e']:TBA>0.8?['#e8952a','#39565e']:TBA>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={runTime==0&&downTime==0? [0,1]:[runTime,downTime]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageTBAT()}></a>
@@ -200,7 +200,7 @@ const mapDispatchToProps = (dispatch) => {
     	ajax: (ipUrl) => {
     		dispatch(actions.setVars('actb',0 ));
     		$.ajax({
-        		url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//获得各区域ID和名字-YES
+        		url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//获得各区域ID和名字
 		        type: 'post',
 		        async:true,
 		        dataType: 'json',
@@ -346,7 +346,7 @@ const mapDispatchToProps = (dispatch) => {
 		        type: 'post',
 		        async:true,
 		        data:{'groupid':areaId[key]},
-		        dataType: 'json',//here
+		        dataType: 'json',
 		        success:function (data) {
 		        	clickAreaId=areaId[key];
 		        	areaMonth=[],areaProfit=[],areaCost=[];
