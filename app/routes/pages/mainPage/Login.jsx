@@ -78,7 +78,7 @@ const mapDispatchToProps = (dispatch) => {
           //         data.data.result==='False'?
           //             alert('用户名或密码错误'):
                       browserHistory.push('/app/all/page/main')  ;
-                  dispatch(actions.setObjs('userMessage', data));
+                  // dispatch(actions.setObjs('userMessage', data));
           browserHistory.push('/app/all/page/main')  ;
                   // dispatch(actions.setObjs('userMessage', data));
                   dispatch(actions.setVars('userInfo', true));

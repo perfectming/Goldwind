@@ -99,7 +99,7 @@ let Component = React.createClass({
                             <Pie arn={arrname} nu={num}></Pie>
                         </div>
                         <span className={styles.chartnum}><p>{(allnum/10000).toFixed(1)}</p><p>万kWh</p></span>
-                            <Title title={['日发电量统计(kWh)']}></Title>
+                            <Title title={['日发电量统计']}></Title>
                         </div>
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
                             <Line1 date={date03} datenamel={datename00} height={220} name={'当前出力'} unit={mod.dis.CurDayPowerCurve.unit}></Line1>
