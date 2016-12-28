@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestylee.scss';
 import TBAtimechart from './TBAtimechart.jsx';
-import TBAtimechartt from './TBAtimechartt.jsx';
+import TBATimechartt from '../group/TBATime/TBATimechartt.jsx';
 import icono from '../../../../../img/comp/TBA.png';;
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
@@ -33,9 +33,10 @@ let Component = React.createClass({
                           <TBAtimechart xxdwfNa={xxdwfNa}montht={montht} profit={profit} cost={cost} TBA={TBA} height={410} xxdwfId={xxdwfId} input_url={ipUrl} pointWidth={30}></TBAtimechart>
    
                 </div>
-                   <div className={styles.bigbox}>
+                   <div className={styles.bigboxx}>
                
-                                <TBAtimechartt areaPlan={areaPlan} areaPlanDay={areaPlanDay} areaPlanDayT={areaPlanDayT} TBA={TBAAA}height={410} text={w0+xxdwfNa+'每日TBA'}></TBAtimechartt>
+                               
+                                <TBATimechartt TBAx={areaPlan} TBADownTimes={areaPlanDayT} TBARunTimes={areaPlanDay} TBAtba={TBAAA} height={410} text={w0+xxdwfNa+'每日TBA'}></TBATimechartt>
 
                      <div className={styles.imgqq}>
                         <img  className={styles.img}src={icono}/>

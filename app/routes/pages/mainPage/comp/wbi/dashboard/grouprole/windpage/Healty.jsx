@@ -6,32 +6,24 @@ import icono from '../../../../../img/comp/健康度1.png';
 var $=require('jquery');
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
-let month=data.month;
-let button=data.button;
-let input_url="10.9.100.38";
-let x0=[];
-let x1=[];
-let x2=[];
-let healthy=data.healthy;
 let Component = React.createClass({
   componentWillMount() {
+    // 引入风场id 和全局变量ip
     let{xxdwfId,xxdwfNa,ipUrl}=this.props;
         this.props.ajax(xxdwfId,xxdwfNa,ipUrl);
-    
     },
     componentDidMount() {
         this.props.init();
     },
 
     render() {
-        let areaRecordProfit=data.areaRecordProfit;
-        let machineE=data.machineE;
-        let text =data.textHealty;
-      let{width,ipUrl,xxdwfNa,xxdwfId,WText,back,actbt,btn=0,changpage,wind,gogogo,windP,windPP,windd,actbtt,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+      let{width,ipUrl,xxdwfNa,xxdwfId,back,actbt,btn=0,changpage,wind,gogogo,windP,windPP,windd,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
         return (
 
-            <div className={styles.box}>
+        <div className={styles.box}>
             <div className={styles.boxcover} id='boxcover'></div>
+               {// 更多弹出的表格
+               }
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
@@ -39,9 +31,11 @@ let Component = React.createClass({
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-          <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={483} ty={20} pointWidth={20} borderRadius={4}></Healtychart>
+                 <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={483} ty={20} pointWidth={20} borderRadius={4}></Healtychart>
                 </div>
              </div>
+             {// 导航的月份
+             }
                  <ul className={styles.monthbox}>
                     {
                         data.healthy.map((value,key)=>{
@@ -54,7 +48,8 @@ let Component = React.createClass({
                 </ul>
 
 
-
+           { // 就一个大表部分
+           }
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                   
                       
@@ -71,7 +66,7 @@ let Component = React.createClass({
                       <button  onClick={()=>more(xxdwfNa,xxdwfId,actbt,btn,ipUrl)} className={btn===2? styles.btn0 : styles.btn1}>更多</button>
                    </div>
                 </div>
- </div>
+          </div>
                 
           
 
@@ -84,16 +79,19 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        // 控制点击对应的月份高亮显示
          actbt:state.vars.actbt,
+        // 图标数据
          wind:state.vars.WSHealH1,
          windP:state.vars.WSHealName1,
          windd:state.vars.WSHealH11,
          windPP:state.vars.WSHealName11,
-        
-         befor_pagee : state.vars.befor_pagee,
+        // 返回的页面
+        befor_pagee : state.vars.befor_pagee,
         befor_page2 : state.vars.befor_page2,
+        // 控制前十 后十高亮显示
         btn:state.vars.btnn,
-        WText:state.vars.WText1,
+        //从windpage里传过来的风场id，风场名字，和ip
         xxdwfId:state.vars.xxdwfId1,
         xxdwfNa:state.vars.xxdwfNa1,
         ipUrl:state.vars.ipUrl,
@@ -106,16 +104,17 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       
-
+ // 页面预加载
        ajax: (xxdwfId,xxdwfNa,input_url) => {
 
       
 
        let WSHealH=[];
        let WSHealName=[];
+       // 获取当前月的上一个月
        let date = new Date();
        let month =date.getMonth();
-      
+    let year =date.getFullYear();
              $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/Health/getWfieldHealth',  
@@ -123,12 +122,12 @@ const mapDispatchToProps = (dispatch) => {
             data:{
              'wfid':xxdwfId,
              'month':month,
-             'year':2016
+             'year':year
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-             
+          
             let WSHeal=data.data;
             for(var i=0 ; i<10;i++){
               let fanHealth=WSHeal[i].fanHealth;
@@ -156,6 +155,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        // 点击月份改变
         changpage :(xxdwfId,xxdwfNa,value,key,btn,input_url)=>{
         let WSHealH=[];
         let WSHealName=[];
@@ -195,9 +195,10 @@ const mapDispatchToProps = (dispatch) => {
            });
             
         },
+        // 前十
          gogogo:(key,btn,input_url,xxdwfId)=>{
-       let date=new Date();
-       let year =date.getFullYear()
+        let date=new Date();
+        let year =date.getFullYear()
         let WSHealH=[];
         let WSHealName=[];
      
@@ -216,8 +217,9 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
             let WSHeal=data.data;
             for(var i=0 ; i<10;i++){
-              let fanHealth=WSHeal[i].fanHealth;
+               let fanHealth=WSHeal[i].fanHealth;
                WSHealH.push(fanHealth);
+
               let wtname=WSHeal[i].wtname;
               WSHealName.push(wtname);
             }
@@ -232,10 +234,10 @@ const mapDispatchToProps = (dispatch) => {
            });
           },
            back:(xxdwfNa,xxdwfId,key,btn,input_url)=>{
- let date=new Date();
-       let year =date.getFullYear()
-        let WSHealH=[];
-        let WSHealName=[];
+         let date=new Date();
+         let year =date.getFullYear()
+         let WSHealH=[];
+         let WSHealName=[];
        
         let month =date.getMonth();
              $.ajax({
@@ -256,6 +258,7 @@ const mapDispatchToProps = (dispatch) => {
             for(let i=length ; i>length-10;i--){
               let fanHealth=WSHeal[i].fanHealth;
                WSHealH.push(fanHealth);
+
               let wtname=WSHeal[i].wtname;
               WSHealName.push(wtname);
             }
@@ -269,11 +272,12 @@ const mapDispatchToProps = (dispatch) => {
              },
            });
           },
+          // 更多
           more:(xxdwfNa,xxdwfId,key,btn,input_url)=>{
              $("#sss").show();
              $('#boxcover').show();
-              let date=new Date();
-       let year =date.getFullYear();
+            let date=new Date();
+            let year =date.getFullYear();
             let WSHealH=[];
             let WSHealName=[];
            let width=0;
@@ -295,10 +299,12 @@ const mapDispatchToProps = (dispatch) => {
             for(var i in WSHeal){
               let fanHealth=WSHeal[i].fanHealth;
                WSHealH.push(fanHealth);
+
               let wtname=WSHeal[i].wtname;
               WSHealName.push(wtname);
             }
             let length=WSHealName.length;
+            // 更多表格的宽度
             width=length*45;
             dispatch(actions.setVars('WSHealH11',WSHealH ));
             dispatch(actions.setVars('WSHealName11',WSHealName ));
@@ -311,10 +317,12 @@ const mapDispatchToProps = (dispatch) => {
              },
            });
         },
+        // 表格关闭按钮
         close:()=>{
             $("#sss").hide();
               $('#boxcover').hide();
         },
+        // 页面返回按钮
          backtop:(befor_pagee,befor_page2)=>{
             dispatch(actions.setVars('showPage',befor_pagee));
         },

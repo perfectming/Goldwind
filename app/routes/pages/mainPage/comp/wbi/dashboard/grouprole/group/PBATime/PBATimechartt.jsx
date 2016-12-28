@@ -2,33 +2,35 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let data = require('./../group/Profit-data3');
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        
-       let {areaPlan,areaPlanDay,areaPlanDayT,height,w0,TBA,text}=this.props;
+
+      let {text,PBAGroupFirstPba,PBAMaintainloss,PBAFaultloss,PBAx,PBAPoweract,PBALimitloss,PBANodevreasonloss,PBAPba,fanProfit,fanCost,fanCost1,fanCost2,fanCost3,TBA,height,width,wq,changedata10}=this.props;
         let configPie = {
             chart: {
                 height:height,
-                 backgroundColor: "rgba(44, 61, 71,0)",
+             
+                backgroundColor: "rgba(44, 61, 71,0.4)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                // paddingLeft:100,
+                paddingLeft:0,
+               
             },
             title: {
                 text: text,
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                 x : "0",
+               x:105,
+               y:15,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
-                 
+                    
                 }
             },
             // 插入图片
@@ -49,28 +51,26 @@ let Component = React.createClass({
 
                 }
             },
-            tooltip: {
-                valueSuffix:'h'
+             tooltip: {
+               valueSuffix:'kWh'
             },
+            
             credits: {
-                enabled: false
+                enabled: false //不显示highCharts版权信息
             },
             //柱子颜色
-            colors: [ '#1E664A', '#4CDB9D']
-            ,
+                colors: [ '#64DC83', '#AACE4A','#FFD924','#FD9C31','#EB6B34'],
+
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
-                  
-                  
                     borderWidth:0,
-                    borderRadius: 4
-
+                    stacking:'normal',
                 }, series: {
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
-                           
+                       
                         }
                     }
                 }
@@ -80,39 +80,16 @@ let Component = React.createClass({
                 lineWidth: 1,
                 tickWidth: 0,
                 labels: {
-                    y: 20,
+                    y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',
-                        fontSize:'14px'
+                        color: '#fff',//颜色
+                        fontSize:'14px'  //字体
                     }
                 },
-                categories:areaPlan,
+                categories:PBAx,
             },
-            yAxis: [
-            {
-                labels: {
-                format: '',
-                style: {
-                    color: '#fff',
-                    fontSize:'14px'
-                }
-            },
-             gridLineDashStyle: 'Solid',
-                gridLineColor: '#6d6a6c',
-
-            title: {
-                text:'(h)',
-                align:'high',
-                rotation:'0',
-                y: -20,
-                x: 37,
-                style:{
-                    fontSize:'14px',
-                    color:'#fff'
-                }
-            }
-        }, {
-             labels: {
+             yAxis:
+                [{labels: {
                 format: '',
                 style: {
                     color: '#fff',
@@ -120,50 +97,98 @@ let Component = React.createClass({
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-                minRange:100,
-                max:100,
 
-            title: {
-                text: '(%)',
-                 align:'high',
-                rotation:'0',
-                y: -15,
-                x: -40,
-                style:{
+                    title:{
+                        text:'(kWh)',
+                        align:'high',
+                        rotation:'0',
+                        y: -17,
+                        x: 45,
+                        style:{
+                            color:'#fff',
+                            fontSize:'14px'
+                        }
+                    }
+                }, {
+                    labels: {
+                format: '',
+                style: {
                     color: '#fff',
                     fontSize:'14px'
                 }
+            }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+                 minRange: 100,
 
+            title: {
+                text: '(%)',
+                align:'high',
+                rotation:'0',
+                 y: -17,
+                x: -40,
+                style:{
+                    color:'#fff',
+                    fontSize:'14px'
+                }
             },
             opposite: true
         }],
             //几条数据
             series: [{
-                name: '运行时间',
+                name: '实际发电量',
                 type: 'column',
-                data: areaPlanDay,
-                color:'#62de88',
-               maxPointWidth: 20,
+                data: PBAPoweract,
+                borderRadius: 4,
+                color:'#33BAC0',
+                maxPointWidth:20,
             },
             {
-            	name: '停机时间',
+                name: '故障损失',
                 type: 'column',
-                data:areaPlanDayT,
-                color:'#ccc',
-               maxPointWidth: 20,
-            },{
-                    name: 'TBA',
+                data: PBAFaultloss,
+                stack:'waste',
+                borderRadius: 2,
+                color:'#5298d2',
+                 maxPointWidth:20,
+            },
+                {
+                    name: '维护损失',
+                    type: 'column',
+                    data: PBAMaintainloss,
+                    stack:'waste',
+                     color:'#ffffff',
+                      maxPointWidth:20,
+                       borderRadius: 2,
+                },
+                {
+                    name: '限功率损失',
+                    type: 'column',
+                    data: PBALimitloss,
+                    stack:'waste',
+                     color:'#e8952a',
+                      maxPointWidth:20,
+                       borderRadius: 2,
+                },
+                {
+                    name: '非设备原因损失',
+                    type: 'column',
+                    data: PBANodevreasonloss,
+                    stack:'waste',
+                    color:'#d8403d',
+                     maxPointWidth:20,
+                      borderRadius: 2,
+                },
+                {
+                    name: 'PBA',
                     type: 'line',
-                    data:TBA,
+                    data: PBAPba,
                     color:'blue',
-                     opposite:true,
                     yAxis:1,
                      tooltip: {
                valueSuffix:'%'
             },
-                }
 
-            ]
+                },]
         };
         return (
             <ReactHighcharts config={configPie}/>
@@ -174,15 +199,15 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-          w0 : state.vars.monthTD,
+          wq : state.vars.wr,
     }
-   
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
+      
     };
 };
 

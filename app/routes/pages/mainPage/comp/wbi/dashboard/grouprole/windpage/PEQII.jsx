@@ -83,19 +83,17 @@ let Component = React.createClass({
                                                 value.map((valueC, keyC)=> {
                                                     if(keyC==0){
                                                             return(
-                                                            <select name="" id=""  className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
-                                                            <option value="" className={styles.tableContentItemm}>华北</option>
-                                                            <option value="" className={styles.tableContentItemm}>华南</option>
-                                                            <option value="" className={styles.tableContentItemm}>东北</option></select>
+                                                            <div name="" id=""  className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
+                                                            <p value="" className={styles.tableContentItemm}></p>
+                                                            </div>
 
                                                             )
                                                         }       
                                                       if(keyC==1){
                                                             return(
-                                                            <select name="" id=""  className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
-                                                            <option value="" className={styles.tableContentItemm}>风场1</option>
-                                                            <option value="" className={styles.tableContentItemm}>风场2</option>
-                                                            <option value="" className={styles.tableContentItemm}>风场3</option></select>
+                                                            <div name="" id=""  className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
+                                                            <p value="" className={styles.tableContentItemm}>风场1</p>
+                                                           </div>
 
                                                             )
                                                         }                                                
@@ -188,37 +186,66 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
          ajax: () => {
-            // // 分页
-            // let groupname=[];
-            // console.log(1);
-            //    $.ajax({
-            //     type:'post',
-            //     url:'http://'+input_url+'/wbi/info/getStageprice',
-            //     async:false,
-            //     data:{
-            //         'curpage':1,
-            //         'pagesize':2,
-            //         'year':2015,
-            //         'wfid':150801,  
-            //     },
+            // 分页
+            let groupname=[];
+            let wfname=[];
+            let price=[];
+            let enddate=[];
+            let array=[[1],[1],[1]];
+            console.log(1);
+               $.ajax({
+                type:'post',
+                url:'http://'+input_url+'/wbi/info/getStageprice',
+                async:false,
+                data:{
+                    'curpage':1,
+                    'pageSize':10,
+                      
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+                 console.log(data);
+                 let dataa=data.data.pagedata;
+                 for(let i in dataa)
+                 {
+                    console.log(array[i][0])
+                 //    for(let j=0;j<3;j++)
+                 // {
+    //                 let groupnamee=dataa[i].groupname;
+    //                 array[0][1].push(groupnamee);
+    // console.log(i)
+    //                 let wfnamee=dataa[i].wfname;
+    //                 array[0][1].push(wfnamee);
 
-                
-            //     dataType:'json',
-            //     timeout:'3000',
-            //     success:function(data){
-            //    console.log(data)
+    //                 let pricee=dataa[i].price;
+    //                 array[0][1].push(pricee);
 
-                       
-                  
-                  
+    //                 // let startdatee=dataa[i].startdate;
+    //                 // // console.log(startdatee);
 
-            //     },
-            //     error:function(e){
-            //        console.log(e)
-            //     },
-            // });
+    //                 //  let  d = new Date(startdatee);
+    //                 //  // console.log(d.toISOString());
+
+    //                 //  let enddatee=dataa[i].enddate;
+    //                 // // console.log(enddatee);
+    //                 // let  c = new Date(enddatee);
+    //                 //  // console.log(c.toISOString());
+                 // }
+             }
+         // console.log(array)        
+// console.log(wfname);
+// console.log(groupname);
+// console.log(price);
+
+
+                },
+                error:function(e){
+                   console.log(e)
+                },
+            });
           
-            // // dispatch(actions.setVars('PBATimeMonth1',PBATimeFirstMonth));
+            // dispatch(actions.setVars('PBATimeMonth1',PBATimeFirstMonth));
         },
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));

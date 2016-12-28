@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Profitstyle2.scss';
-import GroupPBAT from './GroupPBAT.jsx';
+import GroupPBAT from './GroupPBATchart.jsx';
 import icono from '../../../../../../img/comp/PBA.png';
 import PBAtimechartt from './PBAtimechartt.jsx';
 var actions = require('redux/actions');
@@ -47,7 +47,7 @@ let Component = React.createClass({
                     <PBAtimechartt PBAx={PBAGroupFirstDayy} PBAPoweract={PBAGroupFirstPoweract}
                               PBAFaultloss={PBAGroupFirstFaultloss} PBAMaintainloss={PBAGroupMaintainloss}
                               PBALimitloss={PBAGroupFirstLimitloss} PBANodevreasonloss={PBAGroupFirstNodevreasonloss} height={410}
-                              width={1730} PBAPba={PBAGroupFirstPba}
+                              PBAPba={PBAGroupFirstPba}
                               text={PBAGroupMonthF+'每日PBA'}></PBAtimechartt>
 
 

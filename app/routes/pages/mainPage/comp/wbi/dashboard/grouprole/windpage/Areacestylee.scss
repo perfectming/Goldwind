@@ -42,6 +42,12 @@
     .bigbox:hover{
     box-shadow:0 0 15px #fff;
     }
+    .bigboxx:hover{
+    box-shadow:0 0 15px #fff;
+    }
+     .biggbox:hover{
+    box-shadow:0 0 15px #fff;
+    }
     
      .back1{
    float:left;
@@ -77,6 +83,68 @@
     margin:10px auto;
     margin-top:15px;
      background: rgba(44, 61, 71,0.4);
+      .coverbox{
+        margin-top:20px;
+      }
+        .imgqz{
+        width:16px;
+        height:16px;
+        position:absolute;
+        top:3px;
+        left:48px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:18px;
+          width:16px;
+        }
+      }
+      .imgq{
+        width:16px;
+        height:16px;
+        position:absolute;
+        top:3px;
+        left:68px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:18px;
+          width:16px;
+        }
+      }
+       .imgqwe{
+        width:16px;
+        height:16px;
+        position:absolute;
+        top:3px;
+        left:61px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:17px;
+          width:17px;
+        }
+      }
+      .imgqq{
+        width:16px;
+        height:16px;
+        position:absolute;
+        top:6px;
+        left:53px; 
+        img{
+          height:16px;
+          width:16px;
+        }
+      }
+    }
+     .bigboxx{
+    height:410px;
+    width:100%;
+    border:1px solid #282F37;
+    position:relative;
+    margin:10px auto;
+    margin-top:15px;
+    
       .coverbox{
         margin-top:20px;
       }
