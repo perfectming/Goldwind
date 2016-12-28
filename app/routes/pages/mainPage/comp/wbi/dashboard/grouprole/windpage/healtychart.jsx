@@ -30,7 +30,7 @@ let Component = React.createClass({
 
                 vertical:'top',
           
-                 x : 120,
+                 x : 90,
                 y :20,
                 style:{
                     color:"#fff",

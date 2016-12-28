@@ -38,7 +38,7 @@
             .btnBox{
                     float:right;
                     margin-top:16px;
-                    margin-right:200px;
+                    margin-right:800px;
                     font-size:16px;
                     .bBox{
                        float:left;
@@ -57,9 +57,30 @@
             .floorOne{
                 width: 100%;
                 .pie{
+                    position: relative;
                     float: left;
                     width: 30%;
                     height: 380px;
+                    .button{
+                        cursor: pointer;
+                        z-index:9;
+                        box-sizing:border-box;
+                        border: 2px solid #dddddd;
+                        display: inline-block;
+                        height: 28px;
+                        width: 48px;
+                        position: absolute;
+                        left: 80%;
+                        top: 30px;
+                        background: #181a25;
+                        color: white;
+                        font-size:16px;
+                        line-height: 24px;
+                        text-align: center;
+                    }
+                    .hide{
+                        display: none;
+                    }
                 }
                 .column{
                     float: left;
@@ -73,9 +94,30 @@
                 top: 15px;
                 width: 100%;
                 .pie{
+                    position: relative;
                     float: left;
                     width: 30%;
                     height: 380px;
+                    .button{
+                        cursor: pointer;
+                        z-index:9;
+                        box-sizing:border-box;
+                        border: 2px solid #dddddd;
+                        display: inline-block;
+                        height: 28px;
+                        width: 48px;
+                        position: absolute;
+                        left: 80%;
+                        top: 30px;
+                        background: #181a25;
+                        color: white;
+                        font-size:16px;
+                        line-height: 24px;
+                        text-align: center;
+                    }
+                    .hide{
+                        display: none;
+                    }
                 }
                 .column{
                     float: left;

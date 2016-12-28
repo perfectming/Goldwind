@@ -25,31 +25,38 @@
      margin:auto;
      position:relative;
      height:815px;
-     background-image:url('../../../img/comp/big_map.png');
+     background-image:url('../../../img/comp/big_map1.png');
      background-size:100% 100%;
      .place1{
       width:258px;
-      height:265px;
+      height:215px;
       position:absolute;
-      right:62px;
+      right:20px;
       bottom:277px;
       cursor:pointer;
-      &:hover{
-        opacity:0.4;
-        background-image:url('../../../img/comp/placetm.png');
-        background-size:100% 100%;
-        }
+     }
+     .place2{
+      width:210px;
+      height:200px;
+      position:absolute;
+      left:314px;
+      bottom:68px;
+      cursor:pointer;
+     }
+     .allinfo{
+        width:350px;
+        height:350px;
+        position:absolute;
+        left:100px;
+        bottom:340px;
+        background-image:url('../../../img/comp/bginfo.png');
+        display:none;
      }
     }
     .animat4{
      width:1100px;
      height:815px;
-     background-image:url('../../../img/comp/small_map.png');
-     .place1{
-        &:hover{
-         opacity:0;
-        }
-      }
+     background-image:url('../../../img/comp/small_map1.png');
      animation:small 1s;
     -moz-animation:small 1s; /* Firefox */
     -webkit-animation:small 1s; /* Safari and Chrome */
@@ -58,7 +65,7 @@
   .animat5{
      width:1100px;
      height:815px;
-    background-image:url('../../../img/comp/big_map.png');
+    background-image:url('../../../img/comp/big_map1.png');
      animation:big 1s;
     -moz-animation:big 1s; /* Firefox */
     -webkit-animation:big 1s; /* Safari and Chrome */
@@ -236,50 +243,50 @@
 
   @keyframes small
 {
-0%   { background-image:url('../../../img/comp/big_map.png');}
-100% {background-image:url('../../../img/comp/small_map.png');}
+0%   { background-image:url('../../../img/comp/big_map1.png');}
+100% {background-image:url('../../../img/comp/small_map1.png');}
 }
 
 @-moz-keyframes small /* Firefox */
 {
-0%   { background-image:url('../../../img/comp/big_map.png');}
-100% {background-image:url('../../../img/comp/small_map.png');}
+0%   { background-image:url('../../../img/comp/big_map1.png');}
+100% {background-image:url('../../../img/comp/small_map1.png');}
 }
 
 @-webkit-keyframes small /* Safari and Chrome */
 {
-0%   { background-image:url('../../../img/comp/big_map.png');}
-100% {background-image:url('../../../img/comp/small_map.png');}
+0%   { background-image:url('../../../img/comp/big_map1.png');}
+100% {background-image:url('../../../img/comp/small_map1.png');}
 }
 
 @-o-keyframes small /* Opera */
 {
-0%   { background-image:url('../../../img/comp/big_map.png');}
-100% {background-image:url('../../../img/comp/small_map.png');}
+0%   { background-image:url('../../../img/comp/big_map1.png');}
+100% {background-image:url('../../../img/comp/small_map1.png');}
 }
 
 
 
  @keyframes big
 {
-0%   { background-image:url('../../../img/comp/small_map.png');}
-100% {background-image:url('../../../img/comp/big_map.png');}
+0%   { background-image:url('../../../img/comp/small_map1.png');}
+100% {background-image:url('../../../img/comp/big_map1.png');}
 }
 
 @-moz-keyframes big /* Firefox */
 {
-0%   { background-image:url('../../../img/comp/small_map.png');}
-100% {background-image:url('../../../img/comp/big_map.png');}
+0%   { background-image:url('../../../img/comp/small_map1.png');}
+100% {background-image:url('../../../img/comp/big_map1.png');}
 }
 
 @-webkit-keyframes big /* Safari and Chrome */
 {
-0%   { background-image:url('../../../img/comp/small_map.png');}
-100% {background-image:url('../../../img/comp/big_map.png');}
+0%   { background-image:url('../../../img/comp/small_map1.png');}
+100% {background-image:url('../../../img/comp/big_map1.png');}
 }
 
 @-o-keyframes big /* Opera */
 {
-0%   { background-image:url('../../../img/comp/small_map.png');}
-100% {background-image:url('../../../img/comp/big_map.png');}
+0%   { background-image:url('../../../img/comp/small_map1.png');}
+100% {background-image:url('../../../img/comp/big_map1.png');}
 }

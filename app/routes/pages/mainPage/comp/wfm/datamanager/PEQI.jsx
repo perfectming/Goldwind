@@ -12,14 +12,14 @@ var actions = require('redux/actions');
 let comps = require('./../../../../../../../config/data');
 let ssg2=mod.Model.ens;
 let arr3=[];
-let years=[];
+let yeares=[];
 var pageSize=11;//设置每页的条目数量
 let page=1;//设置初始页码
-let soam='http://10.9.100.75:8080/soam';//设置接口
+let soam='http://10.9.100.95:8080/soam';//设置接口
 let thDate=new Date();
 let thYear=thDate.getFullYear();//定义变量，路径
 for(let i=0;i<=30;i++){
-    years.push(thYear-15+i)
+    yeares.push(thYear-15+i)
 }
 (function(){
     for(let x in ssg2){
@@ -33,10 +33,11 @@ let Component = React.createClass({
         this.props.init(page);
     },
     render() {
-        let {wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table, changeTableItem1} = this.props;
+        let {wfidCount,wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table,years,changeTableItem1,wfids} = this.props;
         let newData={};
         let opti=[];
         let num=0;
+        console.log(wfidCount);
         let arr=[16,16,16,16,16,10];
         for(let i=0;i<arr1.length;i++){
             newData[arr1[i]]='';
@@ -49,7 +50,7 @@ let Component = React.createClass({
                         <div className={styles.seleBox}>
                             <span>年度</span>
                             <select id='textContent5'>
-                                {years.map((value, key)=> {
+                                {yeares.map((value, key)=> {
                                     return (
                                         <option value={value} key={key}>{value}</option>
                                     )
@@ -72,7 +73,7 @@ let Component = React.createClass({
                             <button onClick={(e)=>{buttonAction(e.target)}}>查询</button>
                         </div>
                         <div className={styles.btnBox}>
-                            <div>单位：kWh</div>
+                            <div>单 位：kWh</div>
                         </div>
                     </div>
                     <div className={styles.table}>
@@ -95,9 +96,9 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.tableContentBox}>
                                 {
-                                    table.data.map((value, key)=> {
+                                    table.data.pagedata.map((value, key)=> {
                                         num++;
-                                        if(key<pageSize){
+                                        if(key<wfidCount/1){
                                             return (
                                                 <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                                     <input className={styles.tableContentItem}
@@ -198,11 +199,11 @@ let Component = React.createClass({
                         </div>
                     </div>
                     <div className={styles.pageplus}>
-                        <span onClick={()=>theOne(page)}>首页</span>
-                        <span onClick={()=>lastPage(page)}>上一页</span>
-                        <span>{page+"/"+Math.ceil(table.count / pageSize)}</span>
-                        <span onClick={()=>nextPage(page,table.count,pageSize)}>下一页</span>
-                        <span onClick={()=>theLast(page,table.count,pageSize)}>末页</span>
+                        <span onClick={()=>theOne(page,years,wfids)}>首页</span>
+                        <span onClick={()=>lastPage(page,years,wfids)}>上一页</span>
+                        <span>{page+"/"+table.data.totalPage}</span>
+                        <span onClick={()=>nextPage(page,table.data.totalRecord,pageSize,years,wfids)}>下一页</span>
+                        <span onClick={()=>theLast(page,table.data.totalRecord,pageSize,years,wfids)}>末页</span>
                     </div>
                 </div>
             );}else{return(<div></div>)}
@@ -215,6 +216,7 @@ const mapStateToProps = (state) => {
         table: state.objs.tableContent,
         page: state.vars.page1,
         wtidAll: state.objs.wtidAll,
+        wfidCount:state.vars.wfidCount,
         wfids:state.vars.wfids,
         years:state.vars.years
     }
@@ -230,8 +232,9 @@ const mapDispatchToProps = (dispatch) => {
                 data:'pageSize='+pageSize+'&&nowPage='+1+'&&year=&&wfids=',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
+                    console.log(data.data.pagedata.length);
                     dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -254,7 +257,9 @@ const mapDispatchToProps = (dispatch) => {
             // 获取select 选择的内容
             var tContent = $('#textContent5')[0].value;
             var tContent1 = $('#textContent6')[0].value;
-            alert(tContent+tContent1);
+            dispatch(actions.setVars('page1', 1));
+            dispatch(actions.setVars('years', tContent));
+            dispatch(actions.setVars('wfids', tContent1));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
@@ -271,7 +276,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         saveTableItem:(line)=>{
             let tableV = _.clone(getState().objs.tableContent);
-            let asd=tableV.data[line];
+            let asd=tableV.data.pagedata[line];
             let wfp;
             wfp=JSON.stringify(asd);
             $.ajax({
@@ -287,26 +292,38 @@ const mapDispatchToProps = (dispatch) => {
                     console.log('获取数据失败')
                 }
             });
+            $.ajax({
+                url: soam+'/ELEC/getWfelec',
+                type: 'post',
+                data:'pageSize='+pageSize+'&&nowPage=1',
+                dataType: 'json',//here,
+                success:function (data) {
+                    dispatch(actions.setObjs('tableContent', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
         changeTableItem1: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);
-            tableV.data[i][arr1[j]] = value;
-            console.log(tableV.data[i][arr1[j]]);
+            tableV.data.pagedata[i][arr1[j]] = value;
+            console.log(tableV.data.pagedata[i][arr1[j]]);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         changeTableItem2: (value, table, i, j) => {
-            table.data[i][arr1[j]] = value;
+            table.data.pagedata[i][arr1[j]] = value;
             console.log(value);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         addData:(i) => {
             let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.push(i);
+            tableV.data.pagedata.push(i);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         addDate:(li)=>{
             let tableV = _.clone(getState().objs.tableContent);
-            let wfs=tableV.data[li];
+            let wfs=tableV.data.pagedata[li];
             let ddv;
             ddv=JSON.stringify(wfs);
             console.log(wfs,ddv);
@@ -338,9 +355,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         deleData:(j) => {
             let tableV = _.clone(getState().objs.tableContent);
-            let fid=tableV.data[j]['wfid'];
-            let rection=tableV.data[j]['rectime'];
-            let daytype=tableV.data[j]['datetype'];
+            let fid=tableV.data.pagedata[j]['wfid'];
+            let rection=tableV.data.pagedata[j]['rectime'];
+            let daytype=tableV.data.pagedata[j]['datetype'];
             console.log('wfid='+fid+'&rectime='+rection+'&datetype='+daytype);
             $.ajax({
                 url: soam+'/ELEC/delWfelec',
@@ -355,10 +372,24 @@ const mapDispatchToProps = (dispatch) => {
                     console.log('获取数据失败')
                 }
             });
+            $.ajax({
+                url: soam+'/ELEC/getWfelec',
+                type: 'post',
+                data:'pageSize='+pageSize+'&&nowPage=1',
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data.data.pagedata.length);
+                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
         deleDate:(j) => {
             let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.splice(j,1);
+            tableV.data.pagedata.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         lastPage:(page,years,wfids)=>{
@@ -367,28 +398,30 @@ const mapDispatchToProps = (dispatch) => {
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+page,
+                data:'pageSize='+pageSize+'&&nowPage='+page+'&&year='+years+'&&wfids='+wfids,
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error:function(){
                     console.log('获取数据失败')
                 }
             });
         },
-        nextPage:(page,i,j)=>{
+        nextPage:(page,i,j,years,wfids)=>{
             (page<Math.ceil(i/j)) ? page++:page;
             dispatch(actions.setVars('page1', page));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+page,
+                data:'pageSize='+pageSize+'&&nowPage='+page+'&&year='+years+'&&wfids='+wfids,
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data)
+                    console.log(data.data.pagedata.length)
                     dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -396,34 +429,36 @@ const mapDispatchToProps = (dispatch) => {
             });
 
         },
-        theOne :(page)=>{
+        theOne :(page,years,wfids)=>{
             page=1;
             dispatch(actions.setVars('page1', page));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+page,
+                data:'pageSize='+pageSize+'&&nowPage='+page+'&&year='+years+'&&wfids='+wfids,
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error:function(){
                     console.log('获取数据失败')
                 }
             });
         },
-        theLast :(page,i,j)=>{
+        theLast :(page,i,j,years,wfids)=>{
             page=Math.ceil(i / j);
             dispatch(actions.setVars('page1', page));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+page,
+                data:'pageSize='+pageSize+'&&nowPage='+page+'&&year='+years+'&&wfids='+wfids,
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error:function(){
                     console.log('获取数据失败')

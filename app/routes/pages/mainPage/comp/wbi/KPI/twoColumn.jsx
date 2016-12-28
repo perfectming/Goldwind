@@ -3,16 +3,16 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-
 let Component = React.createClass({
     componentWillMount() {
+
     },
 
     render() {
-    	let {unit,text,lose,name}=this.props;
+    	let {name,title,month,plan,unit,nameOne}=this.props;
         let configPie = {
             chart: {
-                height:360,
+                height:380,
                 backgroundColor: 'rgba(44, 61, 71, 0.4)',
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -21,8 +21,9 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: text,
-                align:'center',
+                text: title,
+                align:'left',
+                 x : "0",
                 style:{
                     color:"#fff",
                     fontSize:"16px",
@@ -31,50 +32,53 @@ let Component = React.createClass({
             },
             //图例说明
             legend: {
-                align:"center",
-                verticalAlign: "bottom",
-                itemStyle: {
-                    color: "#fff",
-                    fontSize:"14px",
-                    fontWeight:"normal",
-                    fontFamily:"微软雅黑"
-                },
-                itemHoverStyle: {
+            	enabled:false,
+            	itemHoverStyle: {
                 color: '#31f3fb'
             	}
-            },
-            tooltip: {
-                valueSuffix: unit,
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#5298d3', '#ffffff', '#e9c75c','#d06960','#856ffe','#009a46',],
+            colors: [ '#33BAC0', '#33545c','#000','#134833', '#082B1F']
+            ,
             plotOptions: {
-	            pie: {
-	                allowPointSelect: true,
-	                cursor: 'pointer',
-	                dataLabels: {
-	                    enabled: false
-	                },
-	                showInLegend: true
-	            }
-	        },
+                column: {
+                    pointPadding: 0.1,
+                    borderWidth: 0,
+                    pointWidth: 25,
+                    borderRadius:8
+                }
+            },
             xAxis: {
                 lineWidth: 1,
                 tickWidth: 0,
                 labels: {
-                    y: 0, //x轴刻度往下移动20px
+                    y: 20, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
                         fontSize:'14px'  //字体
                     }
                 },
-                
+                categories:month,
+            },
+            tooltip: {
+                valueSuffix: 'h'
             },
             yAxis: {
+                title:{
+                	text:unit,
+                	align: 'high',
+	                offset: 0,
+	                rotation: 0,
+	                y: -15,
+	                x:-18,
+	                style:{
+	                	fontSize:'14px',
+	                	color:'white',
+	                }
+                },
                 labels: {
-                	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
                         color: '#fff',//颜色
@@ -83,10 +87,11 @@ let Component = React.createClass({
                 },
             },
             series: [{
-            type: 'pie',
-            name: name,
-            data: lose,
-        }]
+            	name: name,
+                type: 'column',
+                data: plan,
+                cursor: 'pointer',
+            }]
         };
         return (
             <ReactHighcharts config={configPie}/>
@@ -107,3 +112,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
+
+
+

@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0='一区域',w10='风场1',mon="十一月份",widths, power1,text, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,height} = this.props;
+        let {w0,w10,mon,widths, power1,text, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,height} = this.props;
 
         let configPie = {
             chart: {
@@ -117,7 +117,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
                 title: {
-                    text: 'kWh',
+                    text: '(kWh)',
                     align: 'high',
                     rotation: '0',
                     y: -20,
@@ -138,7 +138,7 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
                 min:0,
                 title: {
-                    text: '100%',
+                    text: '(%)',
                     align: 'high',
                     rotation: '0',
                     y: -15,

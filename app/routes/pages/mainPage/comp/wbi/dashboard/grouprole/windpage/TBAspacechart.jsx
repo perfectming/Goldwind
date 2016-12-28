@@ -25,7 +25,7 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : 120,
+                x : 95,
                 y:20,
                 style:{
                     color:"#fff",
@@ -111,7 +111,7 @@ let Component = React.createClass({
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 30,
+                x: 35,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -147,7 +147,7 @@ let Component = React.createClass({
                 name: '运行时间',
                 type: 'column',
                 data: fanProfitQ,
-                color:'#33BAC0',
+                color:'#4CDB9D',
                 shadow:true,
                 maxPointWidth: pointWidth,
                

@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {ip="10.68.100.32",w0="一区域",w10="风场1",mon="十一月份",widths,barRotime,barlopowers,barlopowerp,text,height,name0,powerplan1,poweract2,} = this.props;
+        let {ip="10.68.100.32",w0,w10,mon,widths,barRotime,barlopowers,barlopowerp,text,height,name0,powerplan1,poweract2,} = this.props;
 
 
         let configPie = {
@@ -28,7 +28,7 @@ let Component = React.createClass({
                 borderRadius:10
             },
             title: {
-                text: mon+w0+"各风机PBA",
+                text: text,
                 align:'left',
                 x : "0",
                 style:{
@@ -105,7 +105,7 @@ let Component = React.createClass({
                     align:'high',
                     rotation:'0',
                     y: -10,
-                    x: 40,
+                    x: 50,
                     style:{
                         color:'#fff',
                         fontSize:'14px'

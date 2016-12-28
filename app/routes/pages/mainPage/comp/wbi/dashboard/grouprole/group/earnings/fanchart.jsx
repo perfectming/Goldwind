@@ -2,13 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
        
-     let{lx,adc=2,pointWidth,ly,text,areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement,width}=this.props
+     let{x,lx,adc=2,pointWidth,ly,text,areaRecordCostR,areaRecordProfitR,machine,TBAA,height,pointPlacement,width}=this.props
         let configPie = {
             chart: {
                 height:height,
@@ -25,6 +24,7 @@ let Component = React.createClass({
                 top:'-20px',
                 vertical:'top',
                 x:103,
+                y:13,
                 style:{
                     color:"#fff",
                     fontSize:"16px",
@@ -107,7 +107,7 @@ let Component = React.createClass({
                 align:'high',
                 rotation:'0',
                 y: -20,
-                x: 40,
+                x: x,
                 style:{
                     fontSize:'14px',
                     color:'#fff'
@@ -146,7 +146,7 @@ let Component = React.createClass({
                 data: areaRecordProfitR,
                 
                 borderRadius: 4,
-                pointPlacement:0,
+               
                maxPointWidth:20,
 
             },
