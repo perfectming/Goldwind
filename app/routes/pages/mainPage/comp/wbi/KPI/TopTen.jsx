@@ -5,6 +5,7 @@ import PBAdata from './TimeSelect-data';
 import TimeSelect from './TimeSelectTwo.jsx';
 import ChartPie from './ChartPie.jsx';
 import OneColumn from './OneColumn.jsx';
+import AlertWindow from './AlertWindow.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
 
 var actions = require('redux/actions');
@@ -15,15 +16,16 @@ let Component = React.createClass({
         this.props.init(ipUrl,selectId,selectName);
         setTimeout(function(){
         	init(ipUrl,selectId,selectName)
-        },800)
+        },600)
     },
     
 	render() {
 		let comp = PBAdata.list;
-		let {storageTop,buttonResetA,buttonResetB,columnOneTitle='',columnTwoTitle='',columnOneName=[],columnTwoName=[],columnOne=[],columnTwo=[],wtType,topTitleOne,topTitleTwo,topPieOne=[],topPieTwo=[],ipUrl,topBool=false,selectId,selectName,buttonAction,buttonReset,checkedTop=1,checkedBoxTopPro,checkedBoxTopElec,changeValueS,changeValueE}=this.props;
+		let {alertText,storageTop,buttonResetA,buttonResetB,columnOneTitle='',columnTwoTitle='',columnOneName=[],columnTwoName=[],columnOne=[],columnTwo=[],wtType,topTitleOne,topTitleTwo,topPieOne=[],topPieTwo=[],ipUrl,topBool=false,selectId,selectName,buttonAction,buttonReset,checkedTop=1,checkedBoxTopPro,checkedBoxTopElec,changeValueS,changeValueE}=this.props;
 		if(topBool){
 			return(
 				<div className={styles.bodyBox}>
+					<AlertWindow text={alertText}></AlertWindow>
 					<div className={styles.inquireBox}>
 	                {
 	                    comp.map((value, key)=> {
@@ -106,6 +108,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+    	alertText : state.vars.alertText,
     	selectId : state.vars.selectId,
     	selectName : state.vars.selectName,
     	ipUrl : state.vars.ipUrl,
@@ -140,8 +143,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(actions.setVars('columnTwo', ));
 			dispatch(actions.setVars('columnOneTitle', ));
 			dispatch(actions.setVars('columnTwoTitle', ));
-
-          	//初始日期为上月
+			//初始日期为上月
         	var date = new Date();
         	var yearString=date.getFullYear();
         	var monthString=date.getMonth()+1;
@@ -206,19 +208,27 @@ const mapDispatchToProps = (dispatch) => {
 	    			var sTime = $('#startTime').val();
 			        //结束时间时间
 			        var eTime = $('#endTime').val();
-					if(sTime == '' || eTime == '') {
-			            alert('请选择开始或者结束时间');
-			            return false;
-			        };
+					var oDate1 = new Date(sTime);
+		            var oDate2 = new Date(eTime);
+		            if(sTime == '' || eTime == '') {
+		                dispatch(actions.setVars('alertBool', false));
+		                dispatch(actions.setVars('alertText', '请选择开始或者结束时间'));
+		                return false;
+		            }else if(oDate1.getTime() > oDate2.getTime()){
+		                dispatch(actions.setVars('alertBool', false));
+		                dispatch(actions.setVars('alertText', '请选择正确的开始或者结束时间'));
+		                return false;
+		            };
 			        var A=$('select').val();
 					for(var i in selectName){
 						if(selectName[i]==A){
 							selectId=selectId[i];
 						}
 					};
+					//判断区域还是风场，if为风场，else为集团
 					if(selectId<1000000){
 						$.ajax({
-					        url:'http://'+ipUrl+'/wbi/KPI/getTuFailureLoss',
+					        url:'http://'+ipUrl+'/wbi/KPI/getTuFailureLoss',//Pie
 							type: 'post',
 							async: false,
 							dataType: 'json',
@@ -246,19 +256,21 @@ const mapDispatchToProps = (dispatch) => {
 								    dispatch(actions.setVars('topPieTwo', topPieTwo));
 								    dispatch(actions.setVars('columnTwoTitle', wtType));
 								}else{
-									alert('请先重置清除数据')
+									dispatch(actions.setVars('alertBool', false));
+			            			dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+			            			return false;
 								}
 							},
 							complete : function(XMLHttpRequest,status) { 
 								$.ajax({
-							        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
+							        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',//column
 									type: 'post',
 									async: false,
 									dataType: 'json',
 									data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
 									timeout : 60000, 
 									success: function (data) {
-										if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+										if (columnOneName.length==0) {
 											columnOneName=[],columnOne=[];
 											for(var i in data.data){
 												columnOneName.push(data.data[i].blooeydescr);
@@ -266,7 +278,7 @@ const mapDispatchToProps = (dispatch) => {
 											};
 											dispatch(actions.setVars('columnOneName', columnOneName));
 								    		dispatch(actions.setVars('columnOne', columnOne));
-										}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
+										}else if(columnOneName.length!==0&&columnTwoName.length==0){
 											columnTwoName=[],columnTwo=[];
 											for(var i in data.data){
 												columnTwoName.push(data.data[i].blooeydescr);
@@ -275,7 +287,9 @@ const mapDispatchToProps = (dispatch) => {
 											dispatch(actions.setVars('columnTwoName', columnTwoName));
 								    		dispatch(actions.setVars('columnTwo', columnTwo));
 										}else{
-											alert('请先重置清除数据')
+											dispatch(actions.setVars('alertBool', false));
+					            			dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+					            			return false;
 										}
 									},
 									complete : function(XMLHttpRequest,status) { 
@@ -314,7 +328,9 @@ const mapDispatchToProps = (dispatch) => {
 								    dispatch(actions.setVars('topPieTwo', topPieTwo));
 								    dispatch(actions.setVars('columnTwoTitle', wtType));
 								}else{
-									alert('请先重置清除数据')
+									dispatch(actions.setVars('alertBool', false));
+			            			dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+			            			return false;
 								}
 							},
 							complete : function(XMLHttpRequest,status) {},
@@ -327,7 +343,7 @@ const mapDispatchToProps = (dispatch) => {
 									data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
 									timeout : 60000, 
 									success: function (data) {
-										if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+										if (columnOneName.length==0) {
 											columnOneName=[],columnOne=[];
 											for(var i in data.data){
 												columnOneName.push(data.data[i].blooeydescr);
@@ -335,7 +351,7 @@ const mapDispatchToProps = (dispatch) => {
 											};
 											dispatch(actions.setVars('columnOneName', columnOneName));
 								    		dispatch(actions.setVars('columnOne', columnOne));
-										}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
+										}else if(columnOneName.length!==0&&columnTwoName.length==0){
 											columnTwoName=[],columnTwo=[];
 											for(var i in data.data){
 												columnTwoName.push(data.data[i].blooeydescr);
@@ -344,7 +360,9 @@ const mapDispatchToProps = (dispatch) => {
 											dispatch(actions.setVars('columnTwoName', columnTwoName));
 								    		dispatch(actions.setVars('columnTwo', columnTwo));
 										}else{
-											alert('请先重置清除数据')
+											dispatch(actions.setVars('alertBool', false));
+					            			dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+					            			return false;
 										}
 									},
 									complete : function(XMLHttpRequest,status) { 
@@ -353,17 +371,26 @@ const mapDispatchToProps = (dispatch) => {
 						});
 					}
 	    		}else{
-	    			alert("请选择同一个指标项");
+	    			dispatch(actions.setVars('alertBool', false));
+			        dispatch(actions.setVars('alertText', '请选择同一个指标项'));
+			        return false;
 	    		}
 	    	}else{
 	    		dispatch(actions.setVars('storageTop', checkedTop));
 	    		var sTime = $('#startTime').val();
 		        //结束时间时间
 		        var eTime = $('#endTime').val();
-				if(sTime == '' || eTime == '') {
-		            alert('请选择开始或者结束时间');
-		            return false;
-		        };
+				var oDate1 = new Date(sTime);
+	            var oDate2 = new Date(eTime);
+	            if(sTime == '' || eTime == '') {
+	                dispatch(actions.setVars('alertBool', false));
+	                dispatch(actions.setVars('alertText', '请选择开始或者结束时间'));
+	                return false;
+	            }else if(oDate1.getTime() > oDate2.getTime()){
+	                dispatch(actions.setVars('alertBool', false));
+	                dispatch(actions.setVars('alertText', '请选择正确的开始或者结束时间'));
+	                return false;
+	            };
 		        var A=$('select').val();
 				for(var i in selectName){
 					if(selectName[i]==A){
@@ -400,7 +427,9 @@ const mapDispatchToProps = (dispatch) => {
 							    dispatch(actions.setVars('topPieTwo', topPieTwo));
 							    dispatch(actions.setVars('columnTwoTitle', wtType));
 							}else{
-								alert('请先重置清除数据')
+								dispatch(actions.setVars('alertBool', false));
+						        dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+						        return false;
 							}
 						},
 						complete : function(XMLHttpRequest,status) { 
@@ -412,7 +441,7 @@ const mapDispatchToProps = (dispatch) => {
 								data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
 								timeout : 60000, 
 								success: function (data) {
-									if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+									if (columnOneName.length==0) {
 										columnOneName=[],columnOne=[];
 										for(var i in data.data){
 											columnOneName.push(data.data[i].blooeydescr);
@@ -420,7 +449,7 @@ const mapDispatchToProps = (dispatch) => {
 										};
 										dispatch(actions.setVars('columnOneName', columnOneName));
 							    		dispatch(actions.setVars('columnOne', columnOne));
-									}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
+									}else if(columnOneName.length!==0&&columnTwoName.length==0){
 										columnTwoName=[],columnTwo=[];
 										for(var i in data.data){
 											columnTwoName.push(data.data[i].blooeydescr);
@@ -429,7 +458,9 @@ const mapDispatchToProps = (dispatch) => {
 										dispatch(actions.setVars('columnTwoName', columnTwoName));
 							    		dispatch(actions.setVars('columnTwo', columnTwo));
 									}else{
-										alert('请先重置清除数据')
+										dispatch(actions.setVars('alertBool', false));
+								        dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+								        return false;
 									}
 								},
 								complete : function(XMLHttpRequest,status) { 
@@ -468,7 +499,9 @@ const mapDispatchToProps = (dispatch) => {
 							    dispatch(actions.setVars('topPieTwo', topPieTwo));
 							    dispatch(actions.setVars('columnTwoTitle', wtType));
 							}else{
-								alert('请先重置清除数据')
+								dispatch(actions.setVars('alertBool', false));
+								dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+								return false;
 							}
 						},
 						complete : function(XMLHttpRequest,status) {},
@@ -481,7 +514,7 @@ const mapDispatchToProps = (dispatch) => {
 								data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
 								timeout : 60000, 
 								success: function (data) {
-									if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+									if (columnOneName.length==0){
 										columnOneName=[],columnOne=[];
 										for(var i in data.data){
 											columnOneName.push(data.data[i].blooeydescr);
@@ -489,7 +522,7 @@ const mapDispatchToProps = (dispatch) => {
 										};
 										dispatch(actions.setVars('columnOneName', columnOneName));
 							    		dispatch(actions.setVars('columnOne', columnOne));
-									}else if(topTitleOne!==undefined&&topTitleTwo!==undefined){
+									}else if(columnOneName.length!==0&&columnTwoName.length==0){
 										columnTwoName=[],columnTwo=[];
 										for(var i in data.data){
 											columnTwoName.push(data.data[i].blooeydescr);
@@ -498,7 +531,9 @@ const mapDispatchToProps = (dispatch) => {
 										dispatch(actions.setVars('columnTwoName', columnTwoName));
 							    		dispatch(actions.setVars('columnTwo', columnTwo));
 									}else{
-										alert('请先重置清除数据')
+										dispatch(actions.setVars('alertBool', false));
+								        dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+								        return false;
 									}
 								},
 								complete : function(XMLHttpRequest,status) { 

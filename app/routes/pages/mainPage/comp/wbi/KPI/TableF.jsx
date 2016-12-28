@@ -50,7 +50,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#5298d3', '#ffffff', '#e8952a','#d8403d','#0000ff'],
+            colors: [ '#33BAC0', '#5298d2', '#ffffff', '#e8952a','#d8403d','#0000ff'],
             plotOptions: {
                 column: {
                 	stacking:"normal",

@@ -60,7 +60,7 @@ let Component = React.createClass({
                                     <a className={styles.time} onClick={()=>changepagePBAT()}></a>
                                 </div>
                                 <div className={styles.sectionBox}>
-                                    <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{((actrulElec/shouldElec)*100).toFixed(1)}%</p>PBA</span>
+                                    <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{actrulElec!==0&&shouldElec==0? (actrulElec/shouldElec):((actrulElec/shouldElec)*100).toFixed(1)+'%'}</p>PBA</span>
                                     <Pie2 color={actrulElec/shouldElec>0.9? ['#62de88','#39565e']:actrulElec/shouldElec>0.8?['#e8952a','#39565e']:actrulElec/shouldElec>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[actrulElec,shouldElec-actrulElec]}></Pie2>
                                 </div>
                             </div>
@@ -244,7 +244,7 @@ const mapDispatchToProps = (dispatch) => {
                                                 },
                                                 complete : function(XMLHttpRequest,status){
                                                     $.ajax({
-                                                        url:'http://'+ipUrl+'/wbi/Health/getCompanyHealth',//TBA饼图
+                                                        url:'http://'+ipUrl+'/wbi/Health/getCompanyHealth',//健康度饼图
                                                         type: 'post',
                                                         data: 'type=0&groupid=&wfid=',
                                                         async:true,
