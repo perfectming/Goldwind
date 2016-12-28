@@ -55,7 +55,10 @@ let Component = React.createClass({
 	                allowPointSelect: true,
 	                cursor: 'pointer',
 	                dataLabels: {
-	                    enabled: false
+	                    enabled: true,
+                        style: {
+                            color: 'white'
+                        }
 	                },
 	                showInLegend: true
 	            }

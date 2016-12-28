@@ -75,37 +75,37 @@ let Component = React.createClass({
                                 <div className={styles.sontit}><a className={styles.anum1}>川井光伏电站</a><a className={styles.anum}><b>{Number((mapdata[150811].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.InverterCount.name}</a><a className={styles.anum}><b>{mapdata[150811].InverterCount}</b>台</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{mapdata[150811].PVTSI_Aver ==='null' ? '--':Number(mapdata[150811].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150811].TActPower ==='' ? '--':Number(mapdata[150811].TActPower).toFixed(2)}</b>kW</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{mapdata[150811].TActPower/mapdata[150811].Capacity}</b>%</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150811].TActPower ==='' ? '--':Number(mapdata[150811].TActPower/1000).toFixed(2)}</b>MW</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{(mapdata[150811].TActPower/mapdata[150811].Capacity).toFixed(2)}</b>%</a></div>
                             </div>
                             <div className={`${styles.soninfo} ${styles.soninfo2}`} style={{top:'40px',left:'20px'}}>
                                  
                                  <div className={styles.sontit}><a className={styles.anum1}>川井风电场</a><a className={styles.anum}><b>{Number((mapdata[150801].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
                                  <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.WTCount.name}</a><a className={styles.anum}><b>{mapdata[150801].WTCount}</b>台</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{mapdata[150801].WindSpeed_DevAverValue ==='null' ? '--':Number(mapdata[150801].WindSpeed_DevAverValue).toFixed(2)}</b>m/s</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150801].TActPower ==='' ? '--':Number(mapdata[150801].TActPower).toFixed(2)}</b>kW</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{mapdata[150801].TActPower/mapdata[150801].Capacity}</b>%</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150801].TActPower ==='' ? '--':Number(mapdata[150801].TActPower/1000).toFixed(2)}</b>MW</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{(mapdata[150801].TActPower/mapdata[150801].Capacity).toFixed(2)}</b>%</a></div>
                             </div>
                             <div className={`${styles.soninfo} ${styles.soninfo3}`} style={{top:'285px',left:'360px'}}>
                                  <div className={styles.sontit}><a className={styles.anum1}>道勒光伏电站</a><a className={styles.anum}><b>{Number((mapdata[150803].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
                                   <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.InverterCount.name}</a><a className={styles.anum}><b>{mapdata[150803].InverterCount}</b>台</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{mapdata[150803].PVTSI_Aver ==='null' ? '--':Number(mapdata[150803].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150803].TActPower ==='' ? '--':Number(mapdata[150803].TActPower).toFixed(2)}</b>kW</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{mapdata[150803].TActPower/mapdata[150803].Capacity}</b>%</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150803].TActPower ==='' ? '--':Number(mapdata[150803].TActPower/1000).toFixed(2)}</b>MW</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{(mapdata[150803].TActPower/mapdata[150803].Capacity).toFixed(2)}</b>%</a></div>
                             </div>
                             <div className={`${styles.soninfo} ${styles.soninfo4}`} style={{top:'465px',left:'520px'}}>
                                  <div className={styles.sontit}><a className={styles.anum1}>乌漫光伏电站</a><a className={styles.anum}><b>{Number((mapdata[150812].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
                                   <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.InverterCount.name}</a><a className={styles.anum}><b>{mapdata[150812].InverterCount}</b>台</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{mapdata[150812].PVTSI_Aver ==='null' ? '--':Number(mapdata[150812].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150812].TActPower ==='' ? '--':Number(mapdata[150812].TActPower).toFixed(2)}</b>kW</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{mapdata[150812].TActPower/mapdata[150812].Capacity}</b>%</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150812].TActPower ==='' ? '--':Number(mapdata[150812].TActPower/1000).toFixed(2)}</b>MW</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{(mapdata[150812].TActPower/mapdata[150812].Capacity).toFixed(2)}</b>%</a></div>
                             </div>
                             <div className={`${styles.soninfo} ${styles.soninfo5}`} style={{top:'380px',left:'-20px'}}>
                                 <div className={styles.sontit}><a className={styles.anum1}>敖包风电场</a><a className={styles.anum}><b>{Number((mapdata[150828].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
                                  <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.WTCount.name}</a><a className={styles.anum}><b>{mapdata[150828].WTCount}</b>台</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{mapdata[150828].WindSpeed_DevAverValue ==='null' ? '--':Number(mapdata[150828].WindSpeed_DevAverValue).toFixed(2)}</b>m/s</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150828].TActPower ==='' ? '--':Number(mapdata[150828].TActPower).toFixed(2)}</b>kW</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{mapdata[150828].TActPower/mapdata[150828].Capacity}</b>%</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150828].TActPower ==='' ? '--':Number(mapdata[150828].TActPower/1000).toFixed(2)}</b>MW</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{(mapdata[150828].TActPower/mapdata[150828].Capacity).toFixed(2)}</b>%</a></div>
                             </div>
                         </div>
                         <div className={styles.allinfo} id='allinfo'>
@@ -120,7 +120,7 @@ let Component = React.createClass({
                               <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.WFCount.name}</a><a className={styles.anum}><b>{mapdata[8888801].WFCount}</b>个</a></div>
                               <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.WTCount.name}</a><a className={styles.anum}><b>{mapdata[8888800].WTCount}</b>台</a></div>
                               <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{Number(mapdata[8888800].WindSpeed_DevAverValue).toFixed(2)=='NaN' ? '--' : Number(mapdata[8888800].WindSpeed_DevAverValue).toFixed(2)}</b>{mapmodel.dis.WindSpeed_DevAverValue.unit}</a></div>
-                              <div className={styles.allitem}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{wTact==0 ? '--' : wTact }</b>kW</a></div>
+                              <div className={styles.allitem}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{wTact==0 ? '--' : (wTact/1000).toFixed(2) }</b>MW</a></div>
                             </div>
                             <div className={styles.light}>
                              <div className={styles.ptit}>光伏指标</div>
@@ -128,7 +128,7 @@ let Component = React.createClass({
                               <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.PVCount.name}</a><a className={styles.anum}><b>{mapdata[8888802].PVCount}</b>个</a></div>
                               <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.InverterCount.name}</a><a className={styles.anum}><b>{mapdata[8888802].InverterCount}</b>台</a></div>
                               <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{mapdata[8888802].PVTSI_Aver ==='null' ? '--':Number(mapdata[8888802].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></div>
-                              <div className={styles.allitem}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{lTact==0 ? '--' : lTact }</b>kW</a></div>
+                              <div className={styles.allitem}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{lTact==0 ? '--' : (lTact/1000).toFixed(2) }</b>MW</a></div>
                             </div>
                         </div>
                         
@@ -201,6 +201,7 @@ const mapDispatchToProps = (dispatch) => {
                                          TY.getRtData("DataOverview", 8888800, setData1)
                                     }else{
                                     dispatch(actions.appendObjs('mapdata', mapdata.ModelData));
+                                     start();
                                     setTimeout(function(){
                                        dispatch(actions.setVars('mapbool', true)); 
                                        document.getElementById('sonitem').style.display='none';
@@ -213,14 +214,17 @@ const mapDispatchToProps = (dispatch) => {
                     }
                 }
 
-
-                 // time=setInterval(function(){
-                 //    TY.getRtData("DataOverview", 8888800, setData1)
-                 //        function setData1(bbs1){
-                 //            dispatch(actions.setVars('bbs', bbs1));
+                function start(){
+                     time=setInterval(function(){
+                    TY.getRtData("DataOverview", 8888800, setData5)
+                        function setData5(mapdata5){
+                            dispatch(actions.setVars('bbs', mapdata5));
+                            dispatch(actions.appendObjs('mapdata', mapdata5.ModelData));
    
-                 //        }
-                 // },2000)
+                        }
+                 },2000)
+                }
+                
                                                    
             
         },

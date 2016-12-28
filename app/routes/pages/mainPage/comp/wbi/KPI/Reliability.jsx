@@ -15,7 +15,7 @@ let Component = React.createClass({
         this.props.init(ipUrl,selectId,selectName);
         setTimeout(function(){
             init(ipUrl,selectId,selectName)
-        },600)
+        },800)
     },
     
     render() {
@@ -344,7 +344,6 @@ const mapDispatchToProps = (dispatch) => {
                             dataType: 'json',
                             data: {'wttype':wtType,'startTime':sTime,'endTime':eTime,'groupid':selectId}, 
                             success: function (data) {
-                                console.log(data)
                                 if(typeNameOne==undefined){
                                     typeOne=[],machineTypeOne=[];
                                     typeNameOne=wtType;
