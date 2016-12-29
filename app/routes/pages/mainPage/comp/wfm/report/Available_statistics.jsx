@@ -26,7 +26,7 @@ let Component = React.createClass({
    
 
     render() {
-         let {changeselect,select_list,sent_info,tabarr,clickitem,chtnum,chtname,chtit} = this.props;
+         let {changeselect,select_list5,sent_info,tabarr5,clickitem,chtnum5,chtname5,chtit5} = this.props;
             
         return (
             <div className={styles.faultBox}>
@@ -76,7 +76,7 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.leftlist} id='leftlist'>
                     {
-                      select_list !== undefined && select_list.arr.map((valueC,keyC)=>{
+                      select_list5 !== undefined && select_list5.arr.map((valueC,keyC)=>{
                         return(
                             <div key={keyC} className={styles.place}>
                             <a className={styles.ca}><img src={add} /><b>{valueC.name}</b><input type='checkbox' onClick={(e)=>sent_info(valueC,e.target)} /></a>
@@ -116,12 +116,12 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.righttable}>
                     <div className={styles.columnbox} id='colum'>
-                     { chtnum !==undefined && <Column cnum={chtnum} cname={chtname} ctit={chtit} ></Column> }
+                     { chtnum5 !==undefined && <Column cnum={chtnum5} cname={chtname5} ctit={chtit5} ></Column> }
                     </div>
                     <div className={styles.tablebox} id='tablebox'>
                         <div className={styles.tabtit} id='tablist' style={{width:'100%'}}>
                         {
-                            select_list !== undefined && select_list.param.map((value,key)=>{
+                            select_list5 !== undefined && select_list5.param.map((value,key)=>{
                                 if(key==0){
                                         return(
                                         <span key={key} style={{width:'83px'}}>{value}</span>
@@ -155,11 +155,11 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        select_list:state.vars.select_list,
-        tabarr:state.vars.tabarr,
-        chtnum:state.vars.chtnum,
-        chtname:state.vars.chtname,
-        chtit:state.vars.chtit,
+        select_list5:state.vars.select_list5,
+        tabarr5:state.vars.tabarr5,
+        chtnum5:state.vars.chtnum5,
+        chtname5:state.vars.chtname5,
+        chtit5:state.vars.chtit5,
     }
 };
 
@@ -193,10 +193,10 @@ const mapDispatchToProps = (dispatch) => {
                     chartnum=[];
                     chartname=[];
                 //初始化highchart数据与表格数据
-                dispatch(actions.setVars('chtnum',''));
-                 dispatch(actions.setVars('chtname',''));
-                 dispatch(actions.setVars('tabarr',''));
-                 dispatch(actions.setVars('chtit',''));
+                dispatch(actions.setVars('chtnum5',''));
+                 dispatch(actions.setVars('chtname5',''));
+                 dispatch(actions.setVars('tabarr5',''));
+                 dispatch(actions.setVars('chtit5',''));
                 $('#tabline').empty();
                 //初始化按钮颜色
                 $('#tablist span').css('background','#464c58');
@@ -234,9 +234,9 @@ const mapDispatchToProps = (dispatch) => {
                      
                 })
                     //初始化默认显示第一层数据
-                        dispatch(actions.setVars('chtnum',chartnum));
-                        dispatch(actions.setVars('chtname',chartname));
-                        dispatch(actions.setVars('chtit','占比')); 
+                        dispatch(actions.setVars('chtnum5',chartnum));
+                        dispatch(actions.setVars('chtname5',chartname));
+                        dispatch(actions.setVars('chtit5','占比')); 
             }
 
             })
@@ -252,13 +252,13 @@ const mapDispatchToProps = (dispatch) => {
             //初始化选中数组
             allnum=[];
             //初始化highchart数据与表格数据
-                dispatch(actions.setVars('chtnum',''));
-                 dispatch(actions.setVars('chtname',''));
-                 dispatch(actions.setVars('tabarr',''));
-                 dispatch(actions.setVars('chtit',''));
+                dispatch(actions.setVars('chtnum5',''));
+                 dispatch(actions.setVars('chtname5',''));
+                 dispatch(actions.setVars('tabarr5',''));
+                 dispatch(actions.setVars('chtit5',''));
            
             //select初始化option个数
-            dispatch(actions.setVars('select_list', btype[0].select[0]));
+            dispatch(actions.setVars('select_list5', btype[0].select[0]));
         },
          inputOnChange:(value,id)=>{
            console.log(value,id)
@@ -274,11 +274,11 @@ const mapDispatchToProps = (dispatch) => {
             chartnum=[];
             chartname=[];
             //初始化highchart数据与表格数据
-                dispatch(actions.setVars('chtnum',''));
-                 dispatch(actions.setVars('chtname',''));
-                 dispatch(actions.setVars('tabarr',''));
-                 dispatch(actions.setVars('chtit',''));
-            dispatch(actions.setVars('select_list', value[$('#selectop').val()]));
+                dispatch(actions.setVars('chtnum5',''));
+                 dispatch(actions.setVars('chtname5',''));
+                 dispatch(actions.setVars('tabarr5',''));
+                 dispatch(actions.setVars('chtit5',''));
+            dispatch(actions.setVars('select_list5', value[$('#selectop').val()]));
         },
         sent_info:(value,even)=>{
           
@@ -383,14 +383,14 @@ const mapDispatchToProps = (dispatch) => {
            //      }
                 
            //  }
-          dispatch(actions.setVars('tabarr', allnum));
+          dispatch(actions.setVars('tabarr5', allnum));
         },
         clickitem:(kk,even)=>{
 
             if($('#tabline').has('div').length){
                 //点击初始化数据
-            dispatch(actions.setVars('chtnum',''));
-            dispatch(actions.setVars('chtname',''));
+            dispatch(actions.setVars('chtnum5',''));
+            dispatch(actions.setVars('chtname5',''));
 
             //初始化对应数组
             chartnum=[];
@@ -401,9 +401,9 @@ const mapDispatchToProps = (dispatch) => {
                  chartname.push(valueC[1]);
                   // console.log(chartnum);
                   // console.log(chartname) 
-                 dispatch(actions.setVars('chtnum',chartnum));
-                 dispatch(actions.setVars('chtname',chartname));
-                 dispatch(actions.setVars('chtit',$('#'+even.id).text()));  
+                 dispatch(actions.setVars('chtnum5',chartnum));
+                 dispatch(actions.setVars('chtname5',chartname));
+                 dispatch(actions.setVars('chtit5',$('#'+even.id).text()));  
                 
             })
             }else{

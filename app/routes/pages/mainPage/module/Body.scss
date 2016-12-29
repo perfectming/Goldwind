@@ -13,14 +13,32 @@
   .fiexd{
     width:169px;
     height:50px;
-    position:absolute;
-    top:8px;
+    position:fixed;
+    top:74px;
     right:23px;
     padding-top:10px;
     z-index:999;
-    img{
-    margin-right:10px;
-    cursor:pointer;
+    .imgicon{
+      position:relative;
+      width:169px;
+      height:50px;
+      img{
+        margin-right:10px;
+        cursor:pointer;
+      }
+      .info1{
+            width:22px;height:22px;line-height:22px;position:absolute;top:-10px;left:60px;
+            color:#fff; background-image:url("../img/comp/informainfo.png");text-align:center;font-size:12px;
+            }
+      .info2{
+            width:22px;height:22px; color:#fff;position:absolute;top:-10px;left:100px;
+            background-image:url("../img/comp/informainfo.png");line-height:22px;text-align:center;font-size:12px;
+            }
+      .info3{
+            width:22px;height:22px; color:#fff; position:absolute;top:-10px;left:140px;
+            background-image:url("../img/comp/informainfo.png");line-height:22px;text-align:center;font-size:12px;
+            }
+      
     }
    
   }

@@ -101,15 +101,21 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {showPage, tabOpt, tab, flag=true,cssif2='sdfdf',legend=false,navlegend=false,changelegend,ifshow=false} = this.props;
+        let {showPage, tabOpt, tab, flag=true,cssif2='sdfdf',legend=false,navlegend=false,changelegend,ifshow=false,alarm} = this.props;
         return (
             <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2==='left'? styles.animate : styles.sdsd} ${cssif2==='right'? styles.animate1 : styles.sdsd}`}>
                 <div className={ifshow===true? styles.fiexd :styles.ifshow}>
+                  <div className={styles.imgicon}>
                     <img src={u871} onClick={()=>changelegend(legend)}/>
-                    <img src={u865}/>
-                    <img src={u867}/>
-                    <img src={u869}/>
+                    <img src={u865} onClick={()=>alarm()}/>
+                    <img src={u867} onClick={()=>alarm()}/>
+                    <img src={u869} onClick={()=>alarm()}/>
+                    <div className={styles.info1} >11</div>
+                    <div className={styles.info2} >22</div>
+                    <div className={styles.info3}>33</div>
                     {legend===true && <Legend></Legend>}
+                  </div>
+                    
                 </div>
                 <Tab tabOpt={tabOpt} tab={tab}/>
                 {showPage === 'super' && <Super></Super>}
@@ -231,6 +237,11 @@ const mapDispatchToProps = (dispatch) => {
             legend=true;
             dispatch(actions.setVars('legend', legend));
         },
+        alarm:()=>{
+            dispatch(actions.setVars('showPage', 'alarm'));
+            dispatch(actions.setVars('treeItemActive', 2));
+            dispatch(actions.setVars('tabItemActive', 0));
+        }
 
 
     };

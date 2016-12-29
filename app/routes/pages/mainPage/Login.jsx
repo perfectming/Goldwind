@@ -63,7 +63,6 @@ const mapDispatchToProps = (dispatch) => {
     login:()=>{
       if ($('#check')[0].value!==$('#checked')[0].value){
           alert('验证码输入错误');
-<<<<<<< HEAD
       // let codeNew='';
       // for (let i=0;i<4;i++){
       //   codeNew+=codeChars[Math.floor(Math.random()*36)]
@@ -93,7 +92,6 @@ const mapDispatchToProps = (dispatch) => {
       //             console.log('获取数据失败')
       //         }
       //     });
-=======
       let codeNew='';
       for (let i=0;i<4;i++){
         codeNew+=codeChars[Math.floor(Math.random()*36)]
@@ -125,7 +123,6 @@ const mapDispatchToProps = (dispatch) => {
           //         console.log('获取数据失败')
           //     }
           // });
->>>>>>> df22118856b3c51092eb25f7c3f6ba1d17b67e1d
       }
           /*$.ajax({
             url: 'http://10.9.100.95:8080/soam/user/login',
