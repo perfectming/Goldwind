@@ -59,7 +59,8 @@ let Component = React.createClass({
                         style: {
                             color: 'white',
                             fontWeight: 'normal',
-                            fontSize:'14'
+                            fontSize:'14',
+                            fontFamily: '微软雅黑'
                         }
 	                },
 	                showInLegend: true
