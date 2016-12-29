@@ -44,7 +44,6 @@ let Component = React.createClass({
         lineplan.map((value,key)=>{
             line.push(Number(((partent/partentplan)*100).toFixed(2)))
         })
-        console.log(arr)
          arr.sort(function(a,b){return b-a})//数据排列
          key.sort(function(a,b){
             return b[1]-a[1]

@@ -61,7 +61,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         Verification:(userMessage)=>{
             // console.log(userMessage.data.token) 
-            //获取登入时的时间
+            // //获取登入时的时间
             // let length=userMessage.data.token.lastIndexOf('-')
             // let oldTime=userMessage.data.token.substring(length+1,userMessage.data.token.length)
             // //获取当前点击的时间
@@ -73,7 +73,7 @@ const mapDispatchToProps = (dispatch) => {
             //     browserHistory.push('/app/all/page/login');
             // }else{
             //     $.ajax({
-            //     url:'http://10.9.0.6:9080/soam/token/verifyToken',
+            //     url:'http://10.9.0.4:9080/soam/token/verifyToken',
             //     data:'userid='+userMessage.data.id+'&token='+userMessage.data.token+'',
             //     type:'post',
             //     dataType:"json",

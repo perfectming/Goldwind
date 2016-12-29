@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areastyle.scss';
-import Yearelectric from '../Yearelectric.jsx';
-import Pie2 from '../PieTwo';
-import Login from '../../../../../../../../components/common/Loading.jsx';
+import Yearelectric from '../Yearelectric.jsx';//柱状图组件
+import Pie2 from '../PieTwo';//饼图组件
+import Login from '../../../../../../../../components/common/Loading.jsx';//加载跳转页面
 var $ =require("jQuery");
 var actions = require('redux/actions');
 
@@ -65,7 +65,7 @@ let Component = React.createClass({
 	           				</div>
 	           				<div className={`${styles.sectionSmall} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>停机时间<br/>{downTime}h <br/>运行时间<br/>{runTime}h</span><br/><br/>
+	           						<span>停机时间<br/>{downTime.toFixed(1)}h <br/>运行时间<br/>{runTime.toFixed(1)}h</span><br/><br/>
 	           					</div>
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
@@ -82,21 +82,21 @@ let Component = React.createClass({
 	           					<div className={styles.electricHeader}><a></a>发电量</div>
 	           					<div className={styles.electricFirst}>
 	           						<a></a><span>年累计发电量</span>
-	           						<div className={styles.electricTotal}>{(yearElec/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.electricTotal}  style={(yearElec/yearPlanElec)>.9? {color:'#62de88'}:(yearElec/yearPlanElec)>.8? {color:'#e8952a'}:(yearElec/yearPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(yearElec/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
 	           							<div className={yearElec/yearPlanElec>0.9? styles.green:yearElec/yearPlanElec>.8? styles.yellow:yearElec/yearPlanElec>.6? styles.red:styles.redS} style={{width:((yearElec/yearPlanElec*100).toFixed(1))+"%"}}>{(yearElec/yearPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricSecond}>
 	           						<a></a><span>月累计发电能量</span>
-	           						<div className={styles.electricTotal}>{(monthElec/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.electricTotal} style={(monthElec/monthPlanElec)>.9? {color:'#62de88'}:(monthElec/monthPlanElec)>.8? {color:'#e8952a'}:(monthElec/monthPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(monthElec/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
 	           							<div className={monthElec/monthPlanElec>0.9? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:((monthElec/monthPlanElec*100).toFixed(1))+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricThird}>
 	           						<a></a><span>日累计发电量</span>
-	           						<div className={styles.electricTotal}>{(dayElec/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.electricTotal} style={(dayElec/dayPlanElec)>.9? {color:'#62de88'}:(dayElec/dayPlanElec)>.8? {color:'#e8952a'}:(dayElec/dayPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(dayElec/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
 	           							<div className={dayElec/dayPlanElec>0.9? styles.green:dayElec/dayPlanElec>.8? styles.yellow:dayElec/dayPlanElec>.6? styles.red:styles.redS} style={{width:((dayElec/dayPlanElec*100).toFixed(1))+"%"}}>{(dayElec/dayPlanElec*100).toFixed(1)}%</div>
 	           						</div>
@@ -197,7 +197,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    	ajax: (ipUrl) => {
+    	ajax: (ipUrl) => {//请求初始数据
     		dispatch(actions.setVars('actb',0 ));
     		$.ajax({
         		url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//获得各区域ID和名字
@@ -329,13 +329,13 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             } 
         },
-        changepageSort:(flag,flagTime,areaArr)=>{
+        changepageSort:(flag,flagTime,areaArr)=>{//各风场停机时间排序
         	flagTime==false? dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return b.downtime-a.downtime})));
         	dispatch(actions.setVars('flag',false ));
         	dispatch(actions.setVars('flagTime',!flagTime ));
         	
         },
-        changepageSort1:(flag,flagPba,areaArr)=>{
+        changepageSort1:(flag,flagPba,areaArr)=>{//各风场PBA排序
         	flagPba==true? dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
         	dispatch(actions.setVars('flag',true ));
         	dispatch(actions.setVars('flagPba',!flagPba ));
