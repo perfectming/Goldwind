@@ -82,21 +82,21 @@ let Component = React.createClass({
 	           					<div className={styles.electricHeader}><a></a>发电量</div>
 	           					<div className={styles.electricFirst}>
 	           						<a></a><span>年累计发电量</span>
-	           						<div className={styles.electricTotal}>{(yearElec/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.electricTotal}  style={(yearElec/yearPlanElec)>.9? {color:'#62de88'}:(yearElec/yearPlanElec)>.8? {color:'#e8952a'}:(yearElec/yearPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(yearElec/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
 	           							<div className={yearElec/yearPlanElec>0.9? styles.green:yearElec/yearPlanElec>.8? styles.yellow:yearElec/yearPlanElec>.6? styles.red:styles.redS} style={{width:((yearElec/yearPlanElec*100).toFixed(1))+"%"}}>{(yearElec/yearPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricSecond}>
 	           						<a></a><span>月累计发电能量</span>
-	           						<div className={styles.electricTotal}>{(monthElec/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.electricTotal} style={(monthElec/monthPlanElec)>.9? {color:'#62de88'}:(monthElec/monthPlanElec)>.8? {color:'#e8952a'}:(monthElec/monthPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(monthElec/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
 	           							<div className={monthElec/monthPlanElec>0.9? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:((monthElec/monthPlanElec*100).toFixed(1))+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricThird}>
 	           						<a></a><span>日累计发电量</span>
-	           						<div className={styles.electricTotal}>{(dayElec/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.electricTotal} style={(dayElec/dayPlanElec)>.9? {color:'#62de88'}:(dayElec/dayPlanElec)>.8? {color:'#e8952a'}:(dayElec/dayPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(dayElec/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
 	           							<div className={dayElec/dayPlanElec>0.9? styles.green:dayElec/dayPlanElec>.8? styles.yellow:dayElec/dayPlanElec>.6? styles.red:styles.redS} style={{width:((dayElec/dayPlanElec*100).toFixed(1))+"%"}}>{(dayElec/dayPlanElec*100).toFixed(1)}%</div>
 	           						</div>

@@ -79,21 +79,21 @@ let Component = React.createClass({
 	           					<div className={styles.electricHeader}><a></a>发电量</div>
 	           					<div className={styles.electricFirst}>
 	           						<a></a><span>年累计发电量</span>
-	           						<div className={styles.electricTotal}>{(wfYearAct/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.electricTotal}  style={(wfYearAct/wfYearPlan)>.9? {color:'#62de88'}:(wfYearAct/wfYearPlan)>.8? {color:'#e8952a'}:(wfYearAct/wfYearPlan)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(wfYearAct/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
 	           							<div className={wfYearAct/wfYearPlan>0.9? styles.green:wfYearAct/wfYearPlan>.8? styles.yellow:wfYearAct/wfYearPlan>.6? styles.red:styles.redS} style={{width:((wfYearAct/wfYearPlan*100).toFixed(1))+"%"}}>{(wfYearAct/wfYearPlan*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricSecond}>
 	           						<a></a><span>月累计发电量</span>
-	           						<div className={styles.electricTotal}>{(wfMonthAct/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.electricTotal}  style={(wfMonthAct/wfMonthPlan)>.9? {color:'#62de88'}:(wfMonthAct/wfMonthPlan)>.8? {color:'#e8952a'}:(wfMonthAct/wfMonthPlan)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(wfMonthAct/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
 	           							<div className={wfMonthAct/wfMonthPlan>0.9? styles.green:wfMonthAct/wfMonthPlan>.8? styles.yellow:wfMonthAct/wfMonthPlan>.6? styles.red:styles.redS} style={{width:((wfMonthAct/wfMonthPlan*100).toFixed(1))+"%"}}>{(wfMonthAct/wfMonthPlan*100).toFixed(1)}%</div>
-	           						</div>
+	           						</div> 
 	           					</div>
 	           					<div className={styles.electricThird}>
 	           						<a></a><span>日累计发电量</span>
-	           						<div className={styles.electricTotal}>{(wfDayAct/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.electricTotal} style={(wfDayAct/wfDayPlan)>.9? {color:'#62de88'}:(wfDayAct/wfDayPlan)>.8? {color:'#e8952a'}:(wfDayAct/wfDayPlan)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(wfDayAct/10000).toFixed(1)}万kWh</div>
 	           						<div className={styles.electricPercent}>
 	           							<div className={wfDayAct/wfDayPlan>0.9? styles.green:wfDayAct/wfDayPlan>.8? styles.yellow:wfDayAct/wfDayPlan>.6? styles.red:styles.redS} style={{width:((wfDayAct/wfDayPlan*100).toFixed(1))+"%"}}>{(wfDayAct/wfDayPlan*100).toFixed(1)}%</div>
 	           						</div>

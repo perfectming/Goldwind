@@ -106,46 +106,21 @@ const mapDispatchToProps = (dispatch) => {
           //         console.log(data);
           //         data.data.result==='False'?
           //             alert('用户名或密码错误'):
-                      browserHistory.push('/app/all/page/main')  ;
-                  // dispatch(actions.setObjs('userMessage', data));
           browserHistory.push('/app/all/page/main')  ;
-                  // dispatch(actions.setObjs('userMessage', data));
-                  dispatch(actions.setVars('userInfo', true));
-                  try { Base.returnPlay(); } catch (e) { };
-                  try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }
-                  TY.dataUrl = "http://54.223.200.134/System/data.aspx";
-                  TY.crossDomain = true;
-                  TY.Zip =false;
-                  TY.TT.timeOutlength = 1000*60*1;
-
+          // dispatch(actions.setObjs('userMessage', data));
+          dispatch(actions.setVars('userInfo', true));
+          try { Base.returnPlay(); } catch (e) { };
+          try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }
+          TY.dataUrl = "http://54.223.200.134/System/data.aspx";
+          TY.crossDomain = true;
+          TY.Zip =false;
+          TY.TT.timeOutlength = 1000*60*1;
           //     },
           //     error:function(){
           //         console.log('获取数据失败')
           //     }
           // });
       }
-          /*$.ajax({
-            url: 'http://10.9.100.95:8080/soam/user/login',
-            type: 'post',
-            data:'name='+$('#username1')[0].value+'&&password='+$('#password1')[0].value,
-            dataType: 'json',//here,
-            success:function (data) {
-              data.data.result==='False'?
-              alert('用户名或密码错误'):
-              browserHistory.push('/app/all/page/main')  ;
-              dispatch(actions.setVars('userInfo', true));
-              try { Base.returnPlay(); } catch (e) { };
-              try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }
-              TY.dataUrl = "http://54.223.200.134/System/data.aspx";
-              TY.crossDomain = true;
-              TY.Zip =false;
-              TY.TT.timeOutlength = 1000*60*1;
-
-            },
-            error:function(){
-              console.log('获取数据失败')
-            }
-          });*/
     }
   }
 };
