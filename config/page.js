@@ -25,12 +25,6 @@ module.exports = {
                      {
                         name:'监控看板1',
                         page:'monitorkb',
-                    },{
-                        name:'监控看板2',
-                        page:'',
-                    },{
-                        name:'监控看板3',
-                        page:'',
                     }]
             },{
                 name:'运行监视',
@@ -142,33 +136,6 @@ module.exports = {
                         name:'',
                         page:'',
                     }]
-            },{
-                name:'',
-                page:[
-                        
-                        {
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    }]
-            },{
-                name:'',
-                page:[
-                    {
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    }]
             }],
         },{
             name: '业务智能',
@@ -231,7 +198,7 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/sjtb1.png'),
                 page:[
                      {
-                        name:'阶段上网电量',
+                        name:'阶段上网电价',
                         page:'peqii',
                     },{
                         name:'成本录入',

@@ -20,8 +20,8 @@ let Component = React.createClass({
                     <div className={styles.fiexdbox}>
                         <img src={close} className={styles.close} onClick={()=>closebox1()}/>
                         <p className={styles.fctitle}>{ptitle}</p>
-                       <div className={styles.listbox} id='list'>
-                            <ul id='fclist'>
+                       <div className={styles.listbox} id='lista'>
+                            <ul>
                                 {  
                                     name.map((value,key)=>{
                                         return(
@@ -77,8 +77,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            $('#list ul li a').on('click',function(){
-                var bg=$(this).css("background-image");
+            $('#lista ul li a').on('click',function(){
+                let bg=$(this).css("background-image");
                 if(bg=='url("'+add+'")'){
                     $(this).css("background-image",'url('+jian+')');
                 }else{

@@ -62,8 +62,8 @@ let Component = React.createClass({
                     <div className={styles.item}>
                         <div className={styles.itemimg1}></div>
                         <div className={styles.itembox}>
-                            <p className={styles.itemp}>{data.cft[1].name}</p>
-                            <p><b>{data.cft[1].num}</b><a>{data.cft[1].unit}</a></p>
+                            <p className={styles.itemp}>十米辐照度</p>
+                            <p><b>{data.cft[1].num}</b><a>W/㎡</a></p>
                         </div>
                     </div>
                 </div>

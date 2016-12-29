@@ -26,7 +26,6 @@ let Component = React.createClass({
         
         
         if(mapbool){
-            console.log(mapmodel)
              
         let wind=[];
         let light=[];

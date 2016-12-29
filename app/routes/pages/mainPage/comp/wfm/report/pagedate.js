@@ -56,7 +56,7 @@ module.exports = {
         },
          {
             name: '状态统计报表',
-            page: '',
+            page: 'StateStatistics',
             rightpagge:[
                   {
                     tabname:'设备状态统计用例规划',
@@ -80,7 +80,7 @@ module.exports = {
         },
          {
             name: '功率曲线报表',
-            page: '',
+            page: 'PowerCurve',
             rightpagge:[
                   {
                     tabname:'风频统计用例规划',
@@ -105,7 +105,7 @@ module.exports = {
         },
          {
             name: '故障报表',
-            page: '',
+            page: 'FaultReport',
             rightpagge:[
                   {
                     tabname:'故障明细统计用例规划',
@@ -129,7 +129,7 @@ module.exports = {
         },
          {
             name: '功率调控报表',
-            page: '',
+            page: 'PowerControl',
             rightpagge:[
                   {
                     tabname:'AGC调控效果报表用例规范',
@@ -145,7 +145,7 @@ module.exports = {
         },
          {
             name: '集合预报报表',
-            page: '',
+            page: 'CombinedForecasting',
             rightpagge:[
                   {
                     tabname:'短期预测用例规约',

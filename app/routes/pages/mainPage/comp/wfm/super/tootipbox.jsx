@@ -50,7 +50,7 @@ var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
                             <div className={`${styles.line_title} ${styles.add_border}`} id='fc' >风场</div>
                             <div className={styles.line_title} id='gfc' >光伏场</div>
                        </div>
-                       <div className={styles.listbox} id='list'>
+                       <div className={styles.listbox} id='listb'>
                             <ul id='fclist'>
                                 {  
                                     arr1.map((value,key)=>{
@@ -163,8 +163,8 @@ const mapDispatchToProps = (dispatch) => {
                 $("#fclist").hide();
                 $("#searcg_anser").hide();
             })
-            $('#list ul li a').on('click',function(){
-                var bg=$(this).css("background-image");
+            $('#listb ul li a').on('click',function(){
+                let bg=$(this).css("background-image");
                 if(bg=='url("'+add+'")'){
                     $(this).css("background-image",'url('+jian+')');
                 }else{

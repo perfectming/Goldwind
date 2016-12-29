@@ -157,6 +157,9 @@ const mapDispatchToProps = (dispatch) => {
          changedate:()=>{ 
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                 function setData(zhzb){
+                    if(zhzb.Model.ens==undefined){
+                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                    }else{
                     dispatch(actions.setVars('zhzb', zhzb));
                     TY.getRtData("DataOverview", 8888800, setData1)
                         function setData1(bbs){
@@ -170,6 +173,7 @@ const mapDispatchToProps = (dispatch) => {
                                      
                                 }
                         }
+                    }
                 }
 
 
