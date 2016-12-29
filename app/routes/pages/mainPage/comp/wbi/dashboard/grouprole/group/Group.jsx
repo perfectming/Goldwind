@@ -177,7 +177,6 @@ const mapDispatchToProps = (dispatch) => {
                 async:true,
                 dataType: 'json',
                 success:function (data) {
-                    console.log(data)
                     profit = (data.data.incomes/10000).toFixed(1);
                     amounts =(data.data.amounts/10000).toFixed(1);
                     costs =(data.data.costs/10000).toFixed(1);
