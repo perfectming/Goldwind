@@ -50,7 +50,10 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: [ '#33BAC0', '#5298d3', '#ffffff', '#e8952a','#d8403d','#0000ff'],
+            colors: [ '#33BAC0', '#5298d2', '#ffffff', '#e8952a','#d8403d','#0000ff'],
+            tooltip: {
+                shared: true
+            },
             plotOptions: {
                 column: {
                 	stacking:"normal",
@@ -133,7 +136,7 @@ let Component = React.createClass({
                 stack:"male",
                 data: areaElec,
                 tooltip: {
-	                valueSuffix: 'kWh'
+	                valueSuffix: 'kWh',
 	            },
             },{
                 name: '故障损失',
@@ -141,7 +144,7 @@ let Component = React.createClass({
                 stack:"female",
                 data: areaFault,
                 tooltip: {
-	                valueSuffix: 'kWh'
+	                valueSuffix: 'kWh',
 	            },
             },{
             	name: '维护损失',
@@ -149,7 +152,7 @@ let Component = React.createClass({
                 stack:"female",
                 data: areaMaintain,
                 tooltip: {
-	                valueSuffix: 'kWh'
+	                valueSuffix: 'kWh',
 	            },
             },{
             	name: '限功率损失',
@@ -157,7 +160,7 @@ let Component = React.createClass({
                 stack:"female",
                 data: areaLimit,
                 tooltip: {
-	                valueSuffix: 'kWh'
+	                valueSuffix: 'kWh',
 	            },
             },{
             	name: '非设备原因损失',
@@ -165,7 +168,7 @@ let Component = React.createClass({
                 stack:"female",
                 data: areaDevice,
                 tooltip: {
-	                valueSuffix: 'kWh'
+	                valueSuffix: 'kWh',
 	            },
             },{
             	name: 'PBA',
@@ -173,7 +176,7 @@ let Component = React.createClass({
                 data: areaPBA,
                 yAxis: 1,
                 tooltip: {
-	                valueSuffix: '%'
+	                valueSuffix: '%',
 	            },
             }]
         };

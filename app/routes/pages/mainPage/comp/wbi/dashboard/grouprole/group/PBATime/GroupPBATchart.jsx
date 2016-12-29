@@ -65,7 +65,9 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function(e) {
+                            // 每一个柱状图下面的x
                        let  w0=e.point.category;
+                       // 对应的柱状图的序列号  下面的b取值是多余
                         let PBAGroupIndex=e.point.index;
                         let  a=w0.toString().split("");
                         let b=a[0];
@@ -204,7 +206,7 @@ let Component = React.createClass({
                 stack:'first',
                 borderRadius: 2,
                maxPointWidth:30,
-                color:'#5298d3',
+                color:'#5298d2',
             },
             {
                 name: '维护损失',
@@ -220,7 +222,7 @@ let Component = React.createClass({
                 data: PBAGroupLimitloss,
                 stack:'first',
                 maxPointWidth:30,
-                color:'#e9c75c',
+                color:'#e8952a',
             },
             {
                 name: '非设备原因损失',
@@ -229,7 +231,7 @@ let Component = React.createClass({
                 stack:'first',
                 borderRadius: 2,
                 maxPointWidth:30,
-                color:'#d06960'
+                color:'#d8403d'
             },
                 {
                     name: 'PBA',
@@ -255,8 +257,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
           w0 : state.vars.PBAGroupPbaName,
-        wins: state.vars.wins1,
-    }
+            }
 };
 
 const mapDispatchToProps = (dispatch) => {

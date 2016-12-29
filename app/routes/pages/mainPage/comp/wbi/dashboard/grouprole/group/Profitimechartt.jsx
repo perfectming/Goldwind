@@ -36,7 +36,7 @@ let Component = React.createClass({
             //图例说明
             legend: {
                 x:-75,
-                y:30,
+                y:25,
                 align:"right",
                 verticalAlign: "top",
                 itemHoverStyle:{

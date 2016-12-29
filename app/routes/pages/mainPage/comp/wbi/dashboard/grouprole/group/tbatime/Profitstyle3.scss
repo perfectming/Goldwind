@@ -1,7 +1,6 @@
 .box {
   overflow: hidden;
   padding: 10px;
-
   position: relative;
   padding-left: 10px;
   //返回框
@@ -16,7 +15,7 @@
     position: relative;
     border-bottom: 1px solid #31F3FB;
     //返回按钮
-    .back {
+    .back {                          
       float: right;
       color: #fff;
       border: 1px solid #20FEFF;
@@ -28,18 +27,11 @@
       cursor: pointer;
       text-align: center;
     }
+     .back:hover{
+    box-shadow: 0 0 15px #fff;
+    color:#20FEFF
+    }
   }
-//遮罩层
-  .boxcover {
-    position: fixed;
-    height: 100%;
-    width: 93%;
-    z-index: 1200;
-    background: black;
-    display: none;
-    opacity: 0.6;
-  }
-
   .areabox {
     position: relative;
     width: 98%;
@@ -47,13 +39,12 @@
     height: 410px;
     margin-bottom: 15px;
     margin-top:15px;
- 
     overflow: hidden;
     .bgc {
     position: absolute;
     height: 16px;
     width: 16px;
-    top: 8px;
+    top: 6px;
     left: 53px;
     z-index: 5;
     img {

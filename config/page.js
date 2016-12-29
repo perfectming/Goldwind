@@ -25,12 +25,6 @@ module.exports = {
                      {
                         name:'监控看板1',
                         page:'monitorkb',
-                    },{
-                        name:'监控看板2',
-                        page:'',
-                    },{
-                        name:'监控看板3',
-                        page:'',
                     }]
             },{
                 name:'运行监视',
@@ -93,6 +87,7 @@ module.exports = {
                     }]
             }],
         },{
+            
             name: '健康管理',
             iconNormal: require('../app/routes/pages/mainPage/img/comp/jkgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/jkgl_active.png'),
@@ -129,33 +124,6 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/zcgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/zcgl_active.png'),
             subPage: [{
-                name:'',
-                page:[
-                    {
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    }]
-            },{
-                name:'',
-                page:[
-                        
-                        {
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    }]
-            },{
                 name:'',
                 page:[
                     {
@@ -212,13 +180,7 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/bbfx1.png'),
                 page:[
                      {
-                        name:'业务分析3-1',
-                        page:'',
-                    },{
-                        name:'业务分析3-2',
-                        page:'',
-                    },{
-                        name:'业务分析3-3',
+                        name:'',
                         page:'',
                     }]
             },{
@@ -227,13 +189,7 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/fxgj1.png'),
                 page:[
                      {
-                        name:'业务分析3-1',
-                        page:'',
-                    },{
-                        name:'业务分析3-2',
-                        page:'',
-                    },{
-                        name:'业务分析3-3',
+                        name:'',
                         page:'',
                     }]
             },{
@@ -242,7 +198,7 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/sjtb1.png'),
                 page:[
                      {
-                        name:'阶段上网电量',
+                        name:'阶段上网电价',
                         page:'peqii',
                     },{
                         name:'成本录入',
@@ -260,20 +216,6 @@ module.exports = {
                         name:'',
                         page:'',
                     }]
-            },{
-                name:'',
-                page:[
-                    {
-                        name:'',
-                        page:'',
-                    }]
-            },{
-                name:'',
-                page:[
-                     {
-                        name:'',
-                        page:'',
-                    }]
             }],
         },{
             name: '系统管理',
@@ -283,40 +225,15 @@ module.exports = {
                 name:'角色管理',
                 page:[
                     {
-                        name:'系统管理1-1',
+                        name:'角色管理',
                         page:'ms',
-                    },{
-                        name:'系统管理1-2',
-                        page:'',
-                    },{
-                        name:'系统管理1-3',
-                        page:'',
                     }]
             },{
                 name:'用户管理',
                 page:[
                     {
-                        name:'系统管理2-1',
+                        name:'用户管理',
                         page:'amm',
-                    },{
-                        name:'系统管理2-2',
-                        page:'',
-                    },{
-                        name:'系统管理2-3',
-                        page:'',
-                    }]
-            },{
-                name:'系统管理-3',
-                page:[
-                     {
-                        name:'系统管理3-1',
-                        page:'',
-                    },{
-                        name:'系统管理3-2',
-                        page:'',
-                    },{
-                        name:'系统管理3-3',
-                        page:'',
                     }]
             }],
         },

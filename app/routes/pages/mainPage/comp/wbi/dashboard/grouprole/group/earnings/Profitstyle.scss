@@ -61,7 +61,7 @@
       img {
         position: absolute;
         top: 22px;
-        left: 5%;
+        left: 4%;
         height: 16px;
         width: 17px;
       }
@@ -127,7 +127,7 @@
     position: relative;
     width: 98%;
     margin-left: 2px;
-    height: 415px;
+    height: 420px;
     background: rgba(44, 61, 71, 0.4);
     margin-bottom: 15px;
     .bgccc {
@@ -135,7 +135,7 @@
       height: 16px;
       width: 17px;
       top: 5px;
-      left: 75px;
+      left: 69px;
       z-index: 5;
       img {
         height: 16px;
@@ -147,16 +147,17 @@
   .windbox {
     float: left;
     width: 48%;
-    height: 430px;
+    height: 420px;
     margin-right: 15px;
     position: relative;
-    background: rgba(44, 61, 71, 0.4);
+   overflow:hidden;
+    border: 1px solid #282F37;
     .bgccc {
       position: absolute;
       height: 16px;
       width: 17px;
       top: 5px;
-      left: 75px;
+      left: 69px;
       z-index: 5;
       img {
         height: 16px;
@@ -167,7 +168,7 @@
   //风场表格第三个
   .bigbox {
     float: right;
-    height: 430px;
+    height: 420px;
     overflow: hidden;
     width: 49.3%;
     margin-right: 30px;
@@ -179,7 +180,7 @@
       height: 16px;
       width: 17px;
       top: 5px;
-      left: 75px;
+      left: 69px;
       z-index: 5;
       img {
         height: 16px;

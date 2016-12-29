@@ -18,7 +18,8 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {border1=true,closeboxAm,Tofaninfo1} = this.props;
+        let {saveAll,dataBase,border1=true,closeboxAm,Tofaninfo1} = this.props;
+        if(dataBase){
         return (
 
             <div className={styles.fiexdbox} style={{top: 294, left:672}}>
@@ -28,17 +29,26 @@ let Component = React.createClass({
                     <ul id='fclist'>
                         <li>
                             <a>所有</a>
-                            <div className={styles.list_span}>
+                            <div className={styles.list_span} id="amBox">
                                 {
-                                    arr1.map((valueC,key)=>{
-
-                                        return(
-                                            <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC)}>
-                                                <input type='checkbox' name='checkname' value={valueC} />
-                                                {valueC}
-                                            </div>
-
-                                        )
+                                    dataBase.data.map((valueC,key)=>{
+                                        if(valueC.ids==true){
+                                            return(
+                                                <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC)}>
+                                                    <input type='checkbox' checked="checked" name={valueC.id} value={valueC.id} />
+                                                    {valueC.name}
+                                                </div>
+                                            )
+                                        }else{
+                                            {
+                                                return(
+                                                    <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC)}>
+                                                        <input type='checkbox' name={valueC.id} value={valueC.id} />
+                                                        {valueC.name}
+                                                    </div>
+                                                )
+                                            }
+                                        }
                                     })
 
                                 }
@@ -49,11 +59,13 @@ let Component = React.createClass({
 
                 </div>
                 <div className={styles.btnbox}>
-                    <a id='sent'>确定</a>
+                    <a id='sent' onClick={()=>saveAll()}>确定</a>
                     <a  onClick={()=>closeboxAm()}>取消</a>
                 </div>
             </div>
-        );
+        );}else {
+            return(<div></div>)
+        }
     }
 });
 
@@ -61,7 +73,6 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         border1: state.vars.bordershow1,
-
     }
 };
 
@@ -93,10 +104,18 @@ const mapDispatchToProps = (dispatch) => {
             $("#boxAm").parent().css("display","none");
         },
         Tofaninfo1: (value)=> {
-
-
-
         },
+        saveAll: ()=> {
+            let all=[];
+            $('#amBox input').each(function(){
+                if($(this).prop('checked')==true){
+                    all.push($(this).val());
+                }
+            });
+            dispatch(actions.setVars('roleIds', all));
+            $("#boxAm").parent().css("display","none");
+        },
+
 
 
     };

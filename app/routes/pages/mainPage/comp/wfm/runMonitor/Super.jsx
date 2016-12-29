@@ -99,7 +99,7 @@ let Component = React.createClass({
                             <Pie arn={arrname} nu={num}></Pie>
                         </div>
                         <span className={styles.chartnum}><p>{(allnum/10000).toFixed(1)}</p><p>万kWh</p></span>
-                            <Title title={['日发电量统计(kWh)']}></Title>
+                            <Title title={['日发电量统计']}></Title>
                         </div>
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
                             <Line1 date={date03} datenamel={datename00} height={220} name={'当前出力'} unit={mod.dis.CurDayPowerCurve.unit}></Line1>
@@ -154,9 +154,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-         changedate:()=>{
+         changedate:()=>{ 
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                 function setData(zhzb){
+                    if(zhzb.Model.ens==undefined){
+                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                    }else{
                     dispatch(actions.setVars('zhzb', zhzb));
                     TY.getRtData("DataOverview", 8888800, setData1)
                         function setData1(bbs){
@@ -170,6 +173,7 @@ const mapDispatchToProps = (dispatch) => {
                                      
                                 }
                         }
+                    }
                 }
 
 

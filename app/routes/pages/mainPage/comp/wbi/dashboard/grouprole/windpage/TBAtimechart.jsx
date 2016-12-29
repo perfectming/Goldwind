@@ -182,7 +182,7 @@ let Component = React.createClass({
                 name: '运行时间',
                 type: 'column',
                 data: profit,
-                color:'#4CDB9D',
+                color:'#62de88',
                 shadow:true,
                 maxPointWidth: pointWidth,
                

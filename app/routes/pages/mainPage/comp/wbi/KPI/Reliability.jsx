@@ -4,6 +4,7 @@ import styles from './ReliabilityStyle.scss';
 import PBAdata from './TimeSelect-data';
 import ChartPie from './ChartPie.jsx';
 import TwoColumn from './TwoColumn.jsx';
+import AlertWindow from './AlertWindow.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
 
 var actions = require('redux/actions');
@@ -18,11 +19,12 @@ let Component = React.createClass({
     },
     
     render() {
-        let {buttonResetA,buttonResetB,machineTypeTwo=[],machineTypeOne=[],typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne,reliabilityNameTwo,reliabilityOne=[],reliabilityTwo=[],wtType,ipUrl,reliabilityBool=false,selectId,selectName,buttonAction,buttonReset,inputOnChange, onFocus,changeValueS,changeValueE} = this.props;
+        let {alertText,buttonResetA,buttonResetB,machineTypeTwo=[],machineTypeOne=[],typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne,reliabilityNameTwo,reliabilityOne=[],reliabilityTwo=[],wtType,ipUrl,reliabilityBool=false,selectId,selectName,buttonAction,buttonReset,inputOnChange, onFocus,changeValueS,changeValueE} = this.props;
         let comp = PBAdata.list;
         if(reliabilityBool){
             return(
                 <div className={styles.bodyBox}>
+                    <AlertWindow text={alertText}></AlertWindow>
                     <div className={styles.inquireBox}>
                         {
                             comp.map((value, key)=> {
@@ -95,6 +97,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        alertText : state.vars.alertText,
         selectId : state.vars.selectId,
         selectName : state.vars.selectName,
         ipUrl : state.vars.ipUrl,
@@ -218,8 +221,15 @@ const mapDispatchToProps = (dispatch) => {
             var sTime = $('#startTime').val();
             //结束时间时间
             var eTime = $('#endTime').val();
+            var oDate1 = new Date(sTime);
+            var oDate2 = new Date(eTime);
             if(sTime == '' || eTime == '') {
-                alert('请选择开始或者结束时间');
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择开始或者结束时间'));
+                return false;
+            }else if(oDate1.getTime() > oDate2.getTime()){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择正确的开始或者结束时间'));
                 return false;
             };
             var A=$('select').val();
@@ -228,9 +238,9 @@ const mapDispatchToProps = (dispatch) => {
                     selectId=selectId[i];
                 }
             };
-            if(selectId<1000000){
+            if(selectId<1000000){//风场
                 $.ajax({
-                    url:'http://'+ipUrl+'/wbi/KPI/getReliableAnalyse',
+                    url:'http://'+ipUrl+'/wbi/KPI/getReliableAnalyse',//Pie饼图
                     type: 'post',
                     async: false,
                     dataType: 'json',
@@ -255,12 +265,12 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('reliabilityNameTwo', reliabilityNameTwo));
                             dispatch(actions.setVars('reliabilityTwo', reliabilityTwo));
                         }else{
-                            alert('请先重置清除数据');
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+                            return false;
                         }
-                    },
-                    complete : function(XMLHttpRequest,status) {
                         $.ajax({
-                            url:'http://'+ipUrl+'/wbi/KPI/getReliableNormAnalyse',
+                            url:'http://'+ipUrl+'/wbi/KPI/getReliableNormAnalyse',//column柱图
                             type: 'post',
                             async: false,
                             dataType: 'json',
@@ -291,10 +301,13 @@ const mapDispatchToProps = (dispatch) => {
                             complete : function(XMLHttpRequest,status) {},
                         });
                     },
+                    complete : function(XMLHttpRequest,status) {
+                        
+                    },
                 });
-            }else{
+            }else{//区域
                 $.ajax({
-                    url:'http://'+ipUrl+'/wbi/KPI/getReliableAnalyse',//区域
+                    url:'http://'+ipUrl+'/wbi/KPI/getReliableAnalyse',//Pie饼图
                     type: 'post',
                     async: false,
                     dataType: 'json',
@@ -319,12 +332,12 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('reliabilityNameTwo', reliabilityNameTwo));
                             dispatch(actions.setVars('reliabilityTwo', reliabilityTwo));
                         }else{
-                            alert('请先重置清除数据');
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+                            return false;
                         }
-                    },
-                    complete : function(XMLHttpRequest,status) {
                         $.ajax({
-                            url:'http://'+ipUrl+'/wbi/KPI/getReliableNormAnalyse',
+                            url:'http://'+ipUrl+'/wbi/KPI/getReliableNormAnalyse',//column柱图
                             type: 'post',
                             async: false,
                             dataType: 'json',
@@ -354,6 +367,9 @@ const mapDispatchToProps = (dispatch) => {
                             },
                             complete : function(XMLHttpRequest,status) {},
                         });
+                    },
+                    complete : function(XMLHttpRequest,status) {
+                        
                     },
                 });
             }

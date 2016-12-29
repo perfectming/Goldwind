@@ -158,12 +158,12 @@ let Component = React.createClass({
                 {
                     name: '故障损失',
                     type: 'column',
-                    color:'#FC794E',
+                   
                     data: fanCost,
                     stack:'waste',
                     maxPointWidth: pointWidth,
                     borderRadius: borderRadius,
-                     color:'#5298d3',
+                     color:'#5298d2',
                    
                 },
                 {
@@ -180,7 +180,7 @@ let Component = React.createClass({
                     type: 'column',
                     data: fanCostB,
                     stack:'waste',
-                    color:'#e9c75c',
+                    color:'#e8952a',
                     maxPointWidth:pointWidth,
                     
                 },
@@ -190,7 +190,7 @@ let Component = React.createClass({
                     data: fanCostC,
                     stack:'waste',
                     maxPointWidth: pointWidth,
-                    color:'#d06960',
+                    color:'#d8403d',
                     
                 },
                 {

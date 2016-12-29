@@ -348,7 +348,7 @@ const mapDispatchToProps = (dispatch) => {
                 let tba=WTSpace[i].tba*100;
                 wTBATM.push(Number(tba.toFixed(2)));
              }
-   
+ 
       let length=wTBANaM.length;
       width=length*60;
              },
