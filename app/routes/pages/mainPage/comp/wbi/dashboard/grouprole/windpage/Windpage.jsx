@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Windstyle.scss';
-import Yearelectric from '../Yearelectric.jsx';
-import Pie2 from '../PieTwo';
-import Login from '../../../../../../../../components/common/Loading.jsx';
+import Yearelectric from '../Yearelectric.jsx';//柱状图组件
+import Pie2 from '../PieTwo';//饼图组件
+import Login from '../../../../../../../../components/common/Loading.jsx';//加载跳转页面
 var $ =require("jQuery");
 var actions = require('redux/actions');
 
@@ -11,7 +11,7 @@ let healthy,actbt=0,wfName=[],wfId=[],areaId=[],wfTheory,wfAct,wtArr=[],wfYearPl
 let month=[],monthAct=[],monthPlan=[],month2,income,cost,runTime,downTime,TBA;
 
 let Component = React.createClass({
-	componentWillMount() {
+	componentWillMount() {//加载初始数据
 		let {clickAreaId,ipUrl}=this.props;
         this.props.ajax(clickAreaId,ipUrl);
     },
@@ -36,12 +36,12 @@ let Component = React.createClass({
 	           			<div className={styles.firstfloor}>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>当前<br/>{healthy}分<br/>总分<br/>100分</span>
+	           						<span>当前<br/>{healthy.toFixed(1)}分<br/>总分<br/>100分</span>
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
 	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthy.toFixed(1)}%</p>健康度</span>
-	           						<Pie2 color={(healthy/100)>0.9? ['#62de88','#39565e']:(healthy/100)>0.8?['#e8952a','#39565e']:(healthy/100)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[healthy,100]}></Pie2>
+	           						<Pie2 color={(healthy/100)>0.9? ['#62de88','#39565e']:(healthy/100)>0.8?['#e8952a','#39565e']:(healthy/100)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[healthy,100-healthy]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
@@ -62,7 +62,7 @@ let Component = React.createClass({
 	           				</div>
 	           				<div className={`${styles.sectionSmall} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>停机时间<br/>{downTime}h <br/>运行时间<br/>{runTime}h</span>
+	           						<span>停机时间<br/>{downTime.toFixed(1)}h <br/>运行时间<br/>{runTime.toFixed(1)}h</span>
 	           					</div>
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
@@ -374,13 +374,13 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        changepageSort:(flag2,flagTime2,wtArr)=>{
+        changepageSort:(flag2,flagTime2,wtArr)=>{//各风机停机时间排序
         	flagTime2==false? dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return b.downtime-a.downtime})));
         	dispatch(actions.setVars('flag2',false ));
         	dispatch(actions.setVars('flagTime2',!flagTime2 ));
         	
         },
-        changepageSort1:(flag2,flagPba2,wtArr)=>{
+        changepageSort1:(flag2,flagPba2,wtArr)=>{//各风机PBA排序
         	flagPba2==true? dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
         	dispatch(actions.setVars('flag2',true ));
         	dispatch(actions.setVars('flagPba2',!flagPba2 ));

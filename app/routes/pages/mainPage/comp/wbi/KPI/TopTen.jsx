@@ -260,8 +260,6 @@ const mapDispatchToProps = (dispatch) => {
 			            			dispatch(actions.setVars('alertText', '请先重置或清除数据'));
 			            			return false;
 								}
-							},
-							complete : function(XMLHttpRequest,status) { 
 								$.ajax({
 							        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',//column
 									type: 'post',
@@ -296,6 +294,9 @@ const mapDispatchToProps = (dispatch) => {
 										
 									},
 								});
+							},
+							complete : function(XMLHttpRequest,status) { 
+								
 							},
 						});
 					}else{
@@ -431,8 +432,6 @@ const mapDispatchToProps = (dispatch) => {
 						        dispatch(actions.setVars('alertText', '请先重置或清除数据'));
 						        return false;
 							}
-						},
-						complete : function(XMLHttpRequest,status) { 
 							$.ajax({
 						        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
 								type: 'post',
@@ -467,6 +466,9 @@ const mapDispatchToProps = (dispatch) => {
 									
 								},
 							});
+						},
+						complete : function(XMLHttpRequest,status) { 
+							
 						},
 					});
 				}else{

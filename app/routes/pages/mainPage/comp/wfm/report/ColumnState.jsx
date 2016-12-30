@@ -9,11 +9,11 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {month,actrul,plan,unit,nameOne,nameTwo}=this.props;
+    	let {month,arr1,arr2,unit1,unit2,nameOne,nameTwo,title}=this.props;
         let configPie = {
             chart: {
-                height:282,
-                backgroundColor: 'rgba(44, 61, 71, 0.4)',
+                height:380,
+                backgroundColor: 'rgba(44, 61, 71, 0)',
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -21,7 +21,7 @@ let Component = React.createClass({
                 marginTop: 50,
             },
             title: {
-                text: null
+                text: title
             },
             //图例说明
             legend: {
@@ -36,7 +36,8 @@ let Component = React.createClass({
                 itemHoverStyle: {
                     color: '#31f3fb'
             	},
-            	y: 0,
+            	y: -10,
+                x: -20,
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -46,12 +47,11 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 15,
-                    borderRadius:2,
+                    pointWidth: 45,
+                    borderRadius:10,
                 }
             },
             tooltip: {
-	            valueSuffix: unit,
                 shared: true
 	        },
             xAxis: {
@@ -68,18 +68,38 @@ let Component = React.createClass({
                 },
                 categories:month,
             },
-            yAxis: {
+            yAxis: [{
             	title:{
-                	text:unit,
+                	text:unit1,
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
-	                y: -20,
-	                x: -15,
+	                y: -15,
+	                x: 0,
 	                style:{
 	                	fontSize:'10px',
-	                	color:'white',
+	                	color:'#fff',
 	                }
+                },
+                labels: {
+                    y: 10, //x轴刻度往下移动20px
+                    style: {
+                        color: '#fff',//颜色
+                        fontSize:'10px'  //字体
+                    }
+                },
+            },{
+                title:{
+                    text: unit2,
+                    align: 'high',
+                    offset: 0,
+                    rotation: 0,
+                    y: -15,
+                    x: 10,
+                    style:{
+                        fontSize:'14px',
+                        color:'#fff',
+                    }
                 },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
@@ -88,27 +108,17 @@ let Component = React.createClass({
                         fontSize:'14px'  //字体
                     }
                 },
-            },
+                opposite: true
+            }],
             series: [{
                 name: nameOne,
                 type: 'column',
-                data: plan,
-                cursor: 'pointer',
-                events: {
-                    click: function(e) {
-                    	e.point.category;
-                    }
-                }
-
+                data: arr1,
             },{
             	name: nameTwo,
                 type: 'column',
-                data: actrul,
-                cursor: 'pointer',
-                events: {
-                    click: function(e) {}
-                    }
-
+                data: arr2,
+                yAxis: 1,
             }]
         };
         return (

@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {shuju,gczmc,gczdxlyxss}=this.props;
+        let {shuju,cbsj,srsj,monthTime}=this.props;
         let configPie = {
             chart: {
                 height:shuju.high,
@@ -44,11 +44,20 @@ let Component = React.createClass({
             }
             ,
             plotOptions: {
+                series:{
+                    animation:false
+                },
                 column: {
                     pointPadding: 5,
                     borderWidth: 0,
                     pointWidth: shuju.pointWidth,
                     borderRadius:5,
+                    // dataLabels:{
+                    //         enabled:true, // dataLabels设为true
+                    //         style:{
+                    //             color:'#D7DEE9'
+                    //         }
+                    //     }
                 },
                 pie: {
                     allowPointSelect: false,
@@ -79,24 +88,25 @@ let Component = React.createClass({
                         fontFamily:"微软雅黑"
                     }
                 },
-                categories:gczmc,
+                categories:monthTime,
             },
             yAxis:[{
                 labels: {
-                    format: '{value:.,0f}',
                     offset: 0,
+                    format: '{value:.,0f}',
                     x:-5,
                     style: {
                         color: '#fff'
+
                     }
                 },
-                gridLineWidth: 0,
                 lineWidth: 1,
+                gridLineWidth: 1,
                 title: {
                     align: 'high',
                     offset: 0,
-                    text: '(h)',
-                    rotation: 0,
+                    text: '(万元)',
+                    rotation: 1,
                     y: -10,
                     style: {
                         color: '#fff',
@@ -104,18 +114,64 @@ let Component = React.createClass({
                         right:0,
                     }
                 }
+            }, { //第二个Y轴，序号为1
+                title: {
+                    align: 'high',
+                    offset: 0,
+                    text: '(%)',
+                    rotation: 1,
+                    y: -10,
+                    style: {
+                        color: '#fff',
+                        top:0,
+                        right:0,
+                    }
+
+                },
+                gridLineWidth: 1,
+                lineWidth: 1,
+                labels: {
+                    x:5,
+                    style: {
+                        color: '#fff'
+                    }
+                },
+                opposite: true
             }],
 
             series:[{ //第二个Y轴的数据
-                name: '场站年等效利用小时数',
+                name: '成本',
+                color: '#33BAC0',
+                type: 'column',
+
+                data:  cbsj,
+                tooltip: {
+                    valueSuffix: '万元'
+                }
+
+            }, { //第一个Y轴的数据
+                name: '收入',
                 color: '#70C080',
                 type: 'column',
-                tooltip: {
-                    valueSuffix: 'h'
-                },
-                data: gczdxlyxss,
 
-            }]
+                data: srsj,
+                tooltip: {
+                    valueSuffix: '万元'
+                }
+
+            },
+                // { //第一个Y轴的数据
+                //     name: '收益率',
+                //     color: '#2ff4fb',
+                //     type: 'line',
+                //     yAxis: 1,//坐标轴序号
+                //     data:sylsj,
+                //     tooltip: {
+                //         valueSuffix: '%'
+                //     }
+                //
+                // }
+                ]
         };
         return (
             <ReactHighcharts config={configPie}/>

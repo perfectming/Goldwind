@@ -1,16 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Groupstyle.scss';
-import Yearelectric from '../Yearelectric.jsx';
-import Pie2 from '../PieTwo';
-import Login from '../../../../../../../../components/common/Loading.jsx';
+import Yearelectric from '../Yearelectric.jsx';//柱状图组件
+import Pie2 from '../PieTwo';//饼图组件
+import Login from '../../../../../../../../components/common/Loading.jsx';//加载跳转页面
 
 
 var ipUrl='10.68.100.32:8080';
 var actions = require('redux/actions');
 var $ =require("jQuery");
 
-let healthy,profit,amounts,rate,yearPro,month2,cost,incomes,shouldElec,actrulElec,sortArr,yearELec,yearPlanELec,monthElec,monthPlanElec,dayelec,dayPlanElec,arrPlan=[],month1=[],arrAct=[],runTime,downTime,tba;
+let costs,healthy,profit,amounts,rate,yearPro,month2,cost,incomes,shouldElec,actrulElec,sortArr,yearELec,yearPlanELec,monthElec,monthPlanElec,dayelec,dayPlanElec,arrPlan=[],month1=[],arrAct=[],runTime,downTime,tba;
 
 var actions = require('redux/actions');
 
@@ -31,18 +31,18 @@ let Component = React.createClass({
                     <div className={styles.left}>
                         <div className={`${styles.firstfloor} ${styles.boxShadow}`}>
                             <div className={styles.section}>
-                                <div className={styles.text1}>收益:{profit}万元·投资:{amounts}万元</div>
+                                <div className={styles.text1}>收益:{profit/1-costs/1}万元·投资:{amounts}万元</div>
                                 <div className={styles.alink}>
                                     <a className={styles.space} onClick={()=>changepageProfitS()}></a>
                                 </div>
                                 <div className={styles.sectionBox}>
                                     <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{(rate*100).toFixed(1)}%</p>收益率</span>
-                                    <Pie2 color={rate>0.9? ['#62de88','#39565e']:rate>0.8?['#e8952a','#39565e']:rate>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[profit,amounts-profit]}></Pie2>
+                                    <Pie2 color={rate>0.9? ['#62de88','#39565e']:rate>0.8?['#e8952a','#39565e']:rate>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[profit/1,amounts/1-profit/1]}></Pie2>
                                 </div>
                             </div>
                             <div className={styles.section}>
                                 <div className={styles.border}></div>
-                                <div className={styles.text1}>当前{healthy}分·总分100分</div>
+                                <div className={styles.text1}>当前{healthy.toFixed(1)}分·总分100分</div>
                                 <div className={styles.alink}>
                                     <a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/><br/>
                                     <a className={styles.time} onClick={()=>changepageHealthyT()}></a>
@@ -66,7 +66,7 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.section}>
                                 <div className={styles.border}></div>
-                                <div className={styles.text1}>停机时间{downTime}h·运行时间{runTime}h</div>
+                                <div className={styles.text1}>停机时间{downTime.toFixed(1)}h·运行时间{runTime.toFixed(1)}h</div>
                                 <div className={styles.alink}>
                                     <a className={styles.space} onClick={()=>changepageTBAS()}></a><br/><br/>
                                     <a className={styles.time} onClick={()=>changepageTBAT()}></a>
@@ -177,8 +177,9 @@ const mapDispatchToProps = (dispatch) => {
                 async:true,
                 dataType: 'json',
                 success:function (data) {
-                    profit = (data.data.incomes/10000).toFixed(1)/1;
-                    amounts =(data.data.amounts/10000).toFixed(1)/1;
+                    profit = (data.data.incomes/10000).toFixed(1);
+                    amounts =(data.data.amounts/10000).toFixed(1);
+                    costs =(data.data.costs/10000).toFixed(1);
                     rate = data.data.rate;
                     dispatch(actions.setVars('navhide', true));
                 },
@@ -189,6 +190,7 @@ const mapDispatchToProps = (dispatch) => {
                         async:true,
                         dataType: 'json',
                         success:function (data) {
+                            console.log(data)
                             yearPro=data.data;
                             month2=[],cost=[],incomes=[];
                             for(var i in yearPro){
@@ -272,13 +274,13 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('ipUrl', ipUrl));
         },
 
-        changepageSort:(flag1,flagTime1,sortArr)=>{
+        changepageSort:(flag1,flagTime1,sortArr)=>{//区域停机时间排序
             flagTime1==false? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.downtime-a.downtime})));
             dispatch(actions.setVars('flag1',false ));
             dispatch(actions.setVars('flagTime1',!flagTime1 ));
 
         },
-        changepageSort1:(flag1,flagPba1,sortArr)=>{
+        changepageSort1:(flag1,flagPba1,sortArr)=>{//区域PBA排序
             flagPba1==true? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
             dispatch(actions.setVars('flag1',true ));
             dispatch(actions.setVars('flagPba1',!flagPba1 ));

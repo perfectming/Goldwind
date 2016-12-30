@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areastyle.scss';
-import Yearelectric from '../Yearelectric.jsx';
-import Pie2 from '../PieTwo';
-import Login from '../../../../../../../../components/common/Loading.jsx';
+import Yearelectric from '../Yearelectric.jsx';//柱状图组件
+import Pie2 from '../PieTwo';//饼图组件
+import Login from '../../../../../../../../components/common/Loading.jsx';//加载跳转页面
 var $ =require("jQuery");
 var actions = require('redux/actions');
 
@@ -65,7 +65,7 @@ let Component = React.createClass({
 	           				</div>
 	           				<div className={`${styles.sectionSmall} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>停机时间<br/>{downTime}h <br/>运行时间<br/>{runTime}h</span><br/><br/>
+	           						<span>停机时间<br/>{downTime.toFixed(1)}h <br/>运行时间<br/>{runTime.toFixed(1)}h</span><br/><br/>
 	           					</div>
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
@@ -197,7 +197,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    	ajax: (ipUrl) => {
+    	ajax: (ipUrl) => {//请求初始数据
     		dispatch(actions.setVars('actb',0 ));
     		$.ajax({
         		url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//获得各区域ID和名字
@@ -329,13 +329,13 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             } 
         },
-        changepageSort:(flag,flagTime,areaArr)=>{
+        changepageSort:(flag,flagTime,areaArr)=>{//各风场停机时间排序
         	flagTime==false? dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return b.downtime-a.downtime})));
         	dispatch(actions.setVars('flag',false ));
         	dispatch(actions.setVars('flagTime',!flagTime ));
         	
         },
-        changepageSort1:(flag,flagPba,areaArr)=>{
+        changepageSort1:(flag,flagPba,areaArr)=>{//各风场PBA排序
         	flagPba==true? dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
         	dispatch(actions.setVars('flag',true ));
         	dispatch(actions.setVars('flagPba',!flagPba ));
