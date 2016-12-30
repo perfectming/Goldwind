@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {shuju,gczmc,gczdxlyxss}=this.props;
+        let {shuju,gczmc,gczmtbf}=this.props;
         let configPie = {
             chart: {
                 height:shuju.high,
@@ -107,13 +107,13 @@ let Component = React.createClass({
             }],
 
             series:[{ //第二个Y轴的数据
-                name: '场站年等效利用小时数',
+                name: '场站MTBF',
                 color: '#70C080',
                 type: 'column',
                 tooltip: {
                     valueSuffix: 'h'
                 },
-                data: gczdxlyxss,
+                data: gczmtbf,
 
             }]
         };

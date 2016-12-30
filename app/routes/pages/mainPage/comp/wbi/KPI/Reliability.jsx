@@ -269,8 +269,6 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('alertText', '请先重置或清除数据'));
                             return false;
                         }
-                    },
-                    complete : function(XMLHttpRequest,status) {
                         $.ajax({
                             url:'http://'+ipUrl+'/wbi/KPI/getReliableNormAnalyse',//column柱图
                             type: 'post',
@@ -302,6 +300,9 @@ const mapDispatchToProps = (dispatch) => {
                             },
                             complete : function(XMLHttpRequest,status) {},
                         });
+                    },
+                    complete : function(XMLHttpRequest,status) {
+                        
                     },
                 });
             }else{//区域
@@ -335,8 +336,6 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('alertText', '请先重置或清除数据'));
                             return false;
                         }
-                    },
-                    complete : function(XMLHttpRequest,status) {
                         $.ajax({
                             url:'http://'+ipUrl+'/wbi/KPI/getReliableNormAnalyse',//column柱图
                             type: 'post',
@@ -368,6 +367,9 @@ const mapDispatchToProps = (dispatch) => {
                             },
                             complete : function(XMLHttpRequest,status) {},
                         });
+                    },
+                    complete : function(XMLHttpRequest,status) {
+                        
                     },
                 });
             }
