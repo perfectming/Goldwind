@@ -13,7 +13,7 @@ import add from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 import Login from '../../../../../../components/common/Loading.jsx';
 import Ambox from './boxAm.jsx';
-let soam='http://10.9.99.68:8080/soam';
+let soam='http://10.9.99.90:8080/soam';
 let tabaleData = require('./data');
 let arr=['id','name','loginname','password','phonecode','mailbox','logintype','dogcode','remark','roleids'];
 let Component = React.createClass({
@@ -21,7 +21,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {ids,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+        let {init,checkId,checkName,ids,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData={};
         let num=0;
         for(let i=0;i<arr.length-1;i++){
@@ -56,6 +56,7 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.actionBox}>
                     <img src={add} onClick={()=>addData(newData)}/>
+                    <img src={refresh} onClick={()=>init()}/>
                 </div>
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
@@ -104,7 +105,7 @@ let Component = React.createClass({
                                                         <input className={styles.tableContentItem} key={keyC}
                                                            style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                            onClick={()=>{jump(value['id'])}}
-                                                           type="button" value='设 置'/>
+                                                           type="button" value='设置'/>
                                                     )
                                                 }else {
                                                     return(
@@ -132,7 +133,23 @@ let Component = React.createClass({
                                                    readOnly="true" value={num}/>
                                             {
                                                 arr.map((valueC, keyC)=> {
-                                                    if (keyC==3){
+                                                    if (keyC==0){
+                                                        return(
+                                                            <input className={styles.tableContentItem}
+                                                                   style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                                   key={keyC} contentEditable="true" onBlur={(e)=>checkId(e.target,key,keyC)}
+                                                                   onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                                   value={value[valueC]}/>
+                                                        )
+                                                    }else if (keyC==1){
+                                                        return(
+                                                            <input className={styles.tableContentItem}
+                                                                   style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                                   key={keyC} contentEditable="true" onBlur={(e)=>checkName(e.target,key,keyC)}
+                                                                   onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                                   value={value[valueC]}/>
+                                                        )
+                                                    }else if (keyC==3){
                                                         return(
                                                             <input className={styles.tableContentItem}
                                                                    style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
@@ -145,7 +162,7 @@ let Component = React.createClass({
                                                             <input className={styles.tableContentItem} key={keyC}
                                                                    style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                                    onClick={()=>{jump(value['id'])}}
-                                                                   type="button" value='设置'/>
+                                                                   type="button" value='设  置'/>
                                                         )
                                                     }else {
                                                         return(
@@ -209,7 +226,6 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
                     dispatch(actions.appendObjs('boxData', data));
                 },
                 error:function(){
@@ -217,6 +233,40 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
 
+        },
+        checkId(id,i,j){
+            $.ajax({
+                url: soam+'/user/getByIDUserAuthentication?id='+id.value,
+                type: 'post',
+                dataType: 'json',//here,
+                success:function (data) {
+                    if(data.data==true){alert('用户编号重复');
+                        let tableV = _.clone(getState().objs.tableContentAmm);
+                        tableV.data.pagedata[i][arr[j]] = '';
+                        dispatch(actions.setObjs('tableContentAmm', tableV));
+                    }
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        checkName(name,i,j){
+            $.ajax({
+                url: soam+'/user/getByNameUserAuthentication?name='+name.value,
+                type: 'post',
+                dataType: 'json',//here,
+                success:function (data) {
+                    if(data.data==true){alert('用户名重复');
+                        let tableV = _.clone(getState().objs.tableContentAmm);
+                        tableV.data.pagedata[i][arr[j]] = '';
+                        dispatch(actions.setObjs('tableContentAmm', tableV));
+                    }
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
         buttonAction (){
             var tContent = $('#textContent5')[0].value;
@@ -227,7 +277,6 @@ const mapDispatchToProps = (dispatch) => {
                     data:'pageSize='+pageSize+'&&page='+1+'&&username='+tContent,
                     dataType: 'json',//here,
                     success:function (data) {
-                        console.log(data);
                         dispatch(actions.setObjs('tableContentAmm', data));
                     },
                     error:function(){
@@ -247,7 +296,6 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
                     dispatch(actions.appendObjs('boxData', data));
                     $('#boxAm').parent().css('display','block');
                 },
@@ -261,7 +309,6 @@ const mapDispatchToProps = (dispatch) => {
             let wfs=tableV.data.pagedata[li];
             wfs['roleids']=ids;
             let ddv=JSON.stringify(wfs);
-            console.log(wfs,ddv);
             $.ajax({
                 url: soam+'/user/addUser?userinfo=data',
                 type: 'post',
@@ -299,7 +346,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         addData:(i) => {
             let tableV = _.clone(getState().objs.tableContentAmm);
-            console.log(tableV);
             tableV.data.pagedata.push(i);
             dispatch(actions.setObjs('tableContentAmm', tableV));
         },
@@ -310,7 +356,6 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
                     dispatch(actions.appendObjs('boxData', data));
                     $('#boxAm').parent().css('display','block');
                 },
@@ -318,8 +363,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log('获取数据失败')
                 }
             });
-            tableV.data.pagedata.splice(j,1);
-            dispatch(actions.setObjs('tableContentAmm', tableV));
+            alert('已删除');
             $.ajax({
                 url: soam+'/user/getAllUser',
                 type: 'post',
