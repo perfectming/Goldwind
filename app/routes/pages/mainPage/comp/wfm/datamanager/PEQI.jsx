@@ -97,7 +97,7 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.tableContentBox}>
                                 {
-                                    table.data.pagedata.map((value, key)=> {
+                                    table.data.pagedata && table.data.pagedata.map((value, key)=> {
                                         num++;
                                         if(key<wfidCount/1){
                                             return (
