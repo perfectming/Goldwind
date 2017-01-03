@@ -15,6 +15,7 @@
     }
   }
   .methodBox {
+    position:relative;
     text-align: right;
     height:70px;
     .itemBox {
@@ -32,6 +33,7 @@
       }
       span {
         color: #eee;
+        
       }
       
     }
@@ -57,6 +59,33 @@
     }
     .nobor{
       border:none;
+    }
+    .pagestyle{
+     width:125px;
+     height:136px;
+     display:none;
+     position:absolute;
+     top:55px;
+     right:140px;
+     background:#102b46;
+     border: 1px solid #2ff4fb;
+     z-index:999999;
+     .itemstyle{
+      width:86px;
+      height:25px;
+      margin:14px auto;
+      border-radius:10px;
+      border: 2px solid #2ff4fb;
+      text-align:center;
+      line-height:20px;
+      font-size:14px;
+      color:#fff;
+      cursor:pointer;
+      &:hover{
+        color:#2ff4fb;
+      }
+
+     }
     }
   }
 }

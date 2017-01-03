@@ -161,6 +161,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: runtime3,
                 borderRadius: 4,
+                color:'#62de88',
 
             }
                 ,{

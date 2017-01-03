@@ -94,6 +94,9 @@ import LimitLose from '../comp/wbi/KPI/LimitLose.jsx';
 import Reliability from '../comp/wbi/KPI/Reliability.jsx';
 
 
+import Demo from '../comp/wfm/report/demo.jsx';
+
+
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
 let Component = React.createClass({
@@ -207,6 +210,8 @@ let Component = React.createClass({
                 {showPage === 'peqii' && <PEQII></PEQII>}
                 {showPage === 'input_cost' && <Input_cost></Input_cost>}
                 {showPage === 'cs' && <CS></CS>}
+
+                {showPage === 'demo' && <Demo></Demo>}
 
 
                 <div className={styles.clearbox}></div>

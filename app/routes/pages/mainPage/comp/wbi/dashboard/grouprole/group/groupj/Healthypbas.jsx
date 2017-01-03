@@ -423,7 +423,7 @@ const mapDispatchToProps = (dispatch) => {
                         downtime2.push(data.data[i].downtimes);   //故障损失
                         tba2.push(Number((data.data[i].tba*100).toFixed(2)));  //维护损失
                     }
-
+                    console.log(tba2)
                     dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));
@@ -448,7 +448,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid": '201612121721151',
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "0",
-                    "year": '2016',
+                    "year": '',
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -492,7 +492,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid": '201612121721151',
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "1",
-                    "year": '2016',
+                    "year": '',
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -555,7 +555,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-
+            dispatch(actions.setVars('bt0', 0));
 
             let runtime2=[];       //实际发电量
             let downtime2=[];       //故障损失
