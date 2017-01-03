@@ -47,7 +47,6 @@ var actions = require('redux/actions');
 let Component = React.createClass({
     //render渲染前执行的内容//
     componentWillMount() {
-        this.props.ajax();
         let{bloo}=this.props;
         //ajax调用数据并打开实时数据刷新
         this.props.changedate(bloo);
@@ -157,7 +156,7 @@ let Component = React.createClass({
                                 <p>投资收益率</p>
                                 <Pie2 color={rate>0.9? ['#62de88','#39565e']:rate>0.8?['#e8952a','#39565e']:rate>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[profit,amounts-profit]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
-                                    <p style={rate>0.9? {color:'#62de88'} :rate>0.8?{color:'#e8952a'}:rate>0.6?{color:'#a32124'}:{color:'#d8403d'}}>{(rate*100).toFixed(1)}%</p>
+                                    <p style={rate>0.9? {color:'#62de88'} :rate>0.8?{color:'#e8952a'}:rate>0.6?{color:'#a32124'}:{color:'#d8403d'}}>{rate=="NaN"?"--":(rate*100).toFixed(1)}%</p>
                                 </span>
                             </div>
                             <div className={styles.zhzbglbox}><img src={up}/>
@@ -306,15 +305,42 @@ const mapDispatchToProps = (dispatch) => {
                                             TY.getRtData("DevicesMatrix", 8888800, setfData);
                                             function setfData(rdata4){
                                                 if(rdata4.ModelData==undefined || rdata4.ModelData[8888800]==undefined){
-
                                                     TY.getRtData("DevicesMatrix", 8888800, setfData)
                                                 }else{
-
                                                     dispatch(actions.setVars('fData', rdata4));
-                                                    setTimeout(function () {
-                                                        dispatch(actions.setVars('bloo', true));
-                                                        clearTimeout(onceTime);
-                                                    },100)
+
+                                                    $.ajax({
+                                                        url:'http://'+ipUrl+'/wbi/yield/getMaxYie',//收益率饼图
+                                                        type: 'post',
+                                                        async:true,
+                                                        dataType: 'json',
+                                                        success:function (data) {
+                                                            profit = (data.data.incomes/10000).toFixed(1)/1;
+                                                            amounts =(data.data.amounts/10000).toFixed(1)/1;
+                                                            rate = data.data.rate;
+                                                        },
+                                                        complete : function(XMLHttpRequest,status){
+                                                            $.ajax({
+                                                                url:'http://'+ipUrl+'/wbi/yield/getAllRate',//年收益表
+                                                                type: 'post',
+                                                                async:true,
+                                                                dataType: 'json',
+                                                                success:function (data) {
+                                                                    yearPro=data.data;
+                                                                    month2=[],cost=[],incomes=[];
+                                                                    for(let i in yearPro){
+                                                                        month2.push(yearPro[i].month+"月");
+                                                                        cost.push(Number((yearPro[i].costs).toFixed(1)/1));
+                                                                        incomes.push(Number((yearPro[i].earning).toFixed(1)/1));
+                                                                    }
+                                                                    setTimeout(function () {
+                                                                        dispatch(actions.setVars('bloo', true));
+                                                                        clearTimeout(onceTime);
+                                                                    },100)
+                                                                }
+                                                            })
+                                                        }
+                                                    })
                                                 }
                                             }
                                         }
@@ -338,41 +364,40 @@ const mapDispatchToProps = (dispatch) => {
                         TY.getRtData("Cockpit", 8888800, ppo);
                     }else {
                         dispatch(actions.setVars('mmodata', mmodata));
-                        dispatch(actions.setVars('bloo', true));
                     }
                 }
             },2000)
         },
-        ajax: () => {
-            $.ajax({
-                url:'http://'+ipUrl+'/wbi/yield/getMaxYie',//收益率饼图
-                type: 'post',
-                async:true,
-                dataType: 'json',
-                success:function (data) {
-                    profit = (data.data.incomes/10000).toFixed(1)/1;
-                    amounts =(data.data.amounts/10000).toFixed(1)/1;
-                    rate = data.data.rate;
-                },
-                complete : function(XMLHttpRequest,status){
-                    $.ajax({
-                        url:'http://'+ipUrl+'/wbi/yield/getAllRate',//年收益表
-                        type: 'post',
-                        async:true,
-                        dataType: 'json',
-                        success:function (data) {
-                            yearPro=data.data;
-                            month2=[],cost=[],incomes=[];
-                            for(let i in yearPro){
-                                month2.push(yearPro[i].month+"月");
-                                cost.push(Number((yearPro[i].costs).toFixed(1)/1));
-                                incomes.push(Number((yearPro[i].earning).toFixed(1)/1));
-                            }
-                        }
-                    })
-                }
-            })
-        },
+        // ajax: () => {
+        //     $.ajax({
+        //         url:'http://'+ipUrl+'/wbi/yield/getMaxYie',//收益率饼图
+        //         type: 'post',
+        //         async:true,
+        //         dataType: 'json',
+        //         success:function (data) {
+        //             profit = (data.data.incomes/10000).toFixed(1)/1;
+        //             amounts =(data.data.amounts/10000).toFixed(1)/1;
+        //             rate = data.data.rate;
+        //         },
+        //         complete : function(XMLHttpRequest,status){
+        //             $.ajax({
+        //                 url:'http://'+ipUrl+'/wbi/yield/getAllRate',//年收益表
+        //                 type: 'post',
+        //                 async:true,
+        //                 dataType: 'json',
+        //                 success:function (data) {
+        //                     yearPro=data.data;
+        //                     month2=[],cost=[],incomes=[];
+        //                     for(let i in yearPro){
+        //                         month2.push(yearPro[i].month+"月");
+        //                         cost.push(Number((yearPro[i].costs).toFixed(1)/1));
+        //                         incomes.push(Number((yearPro[i].earning).toFixed(1)/1));
+        //                     }
+        //                 }
+        //             })
+        //         }
+        //     })
+        // },
         init: () => {
                 dispatch(actions.setVars('putpage', false));
                 dispatch(actions.setVars('bodypage', false));
