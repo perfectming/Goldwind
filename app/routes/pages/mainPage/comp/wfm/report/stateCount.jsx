@@ -4,7 +4,7 @@ import styles from './stateCountStyle.scss';
 import jian from '../../../img/comp/jian_icon.png';
 import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
-import Column from './colum.jsx';
+import ColumnState from './ColumnState.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
@@ -41,15 +41,15 @@ let Component = React.createClass({
     },
 
     render() {
-            let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,tabledata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
-            let treetype=[];
-            let Tarr=[]; //标题数组
-            let Barr=[];  //数据
-            let Carr=[];   //chart数据
-            let Darr=[];  //统计数组
+            let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,chartData} = this.props;
+            let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
             let three=[]; //三级菜单
+            let stateArr=[];//状态数组
+            let numberArr=[];//次数数组
+            let timeArr=[];//时长数组
+            let timeDescribe=[];//时长描述
             //获取设备类型对应的左侧树形二级和三级数据
             for(let arg2 in select_list){
                 if(select_list[arg2].id &&select_list[arg2].id!=''){
@@ -63,34 +63,23 @@ let Component = React.createClass({
                 }
             }
             //表格数据处理
-            if(tabledata!=undefined){
-                //获取标题
-                for(let title in tabledata){
-                    if(tabledata[title].Unit!=''){
-                        Tarr.push(tabledata[title].Caption+'('+tabledata[title].Unit+')')
-                    }else{
-                        Tarr.push(tabledata[title].Caption)
-                    }
+            if(chartData!==undefined&&chartData.wtid!==undefined){
+                let arrString1,arrString2,arrString3;
+                stateArr=chartData.blooeydescr.Values.split(',');
+                arrString1=chartData.happencount.Values.split(',');
+                arrString2=chartData.timelength.Values.split(',');
+                arrString3=chartData.datelength.Values.split(',');
+                for (var i=0 ; i< arrString1.length ; i++){
+                        numberArr.push(arrString1[i]/1);
                 }
-               //获取统计
-                for(let title in tabledata){
-                    if(tabledata[title].OK!='wtid' && tabledata[title].OK!='wtname')
-                    Darr.push(tabledata[title].Count)
+                for (var i=0 ; i< arrString2.length ; i++){
+                        timeArr.push(arrString2[i]/1);
                 }
-                var len;
-                //获取数据
-                for(let val in tabledata){
-                    Barr.push(tabledata[val].Values.split(','))
-                    len=tabledata[val].Values.split(',').length
+                for (var i=0 ; i< arrString3.length ; i++){
+                        timeDescribe.push(arrString3[i]/1);
                 }
-               
-                for(let i=0;i<len;i++){
-                    let num=[];
-                    Barr.map(function(value,key){
-                        num.push(value[i])
-                    })
-                    Carr.push(num)
-                }
+            }else{
+                chartData=undefined;
             }
             if(boolywbb){
                 //获取设备类型数组
@@ -102,7 +91,7 @@ let Component = React.createClass({
 
                 //初始化显示设备类型
                 if(firstname==undefined){
-                firstname=devtype.list._WindTurbine;
+                    firstname=devtype.list._WindTurbine;
                 }
             
                 return (
@@ -132,10 +121,7 @@ let Component = React.createClass({
                             </div>
 
                             <div className={styles.btnBox}>
-                                <button id='searchall' onClick={()=>searchnum(devurls)}><img src={'http://'+url+'/images/button/search.gif'}/>查询</button>
-                            </div>
-                            <div className={styles.btnBox}>
-                                <button><img src={'http://'+url+'/images/button/set.gif'}/>设置参数</button>
+                                <button id='searchall' onClick={()=>searchnum()}><img src={'http://'+url+'/images/button/search.gif'}/>查询</button>
                             </div>
                             <div className={styles.btnBox}>
                                 <button><img src={'http://'+url+'/images/button/outbox.gif'}/>导出Excel</button>
@@ -200,75 +186,21 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.righttable}>
                             <div className={styles.columnbox} id='colum'>
-                                { chart !==undefined && <Column cnum={chart} cname={chartname} ctit={chartTitle} ></Column> }
+                                {chartData!==undefined && <ColumnState month={stateArr} arr1={numberArr} arr2={timeArr} unit1={'次'} unit2={'s'} nameOne={'发生次数'} nameTwo={'状态时长'} title={'状态统计'}></ColumnState>}
                             </div>
                             <div className={styles.tablebox} id='tablebox'>
-                                <div className={styles.tabtit} id='tabtit' >
-                                    {
-                                        tabledata!=undefined && Tarr.map((value,key)=>{
-                                            if(key==0){
-                                                return(
-                                                    <span key={key} style={{width:'140px'}}>{value}</span>
-                                                ) 
-                                            }else if(key==1){
-                                                return(
-                                                    <span key={key} style={{width:'200px'}}>{value}</span>
-                                                ) 
-                                            }else{
-                                                return(
-                                                    <span key={key} style={{cursor:'pointer'}} id={'e'+key} onClick={(e)=>clickitem(key,e.target)}>{value}</span>
-                                                ) 
-                                            }
-                                        })
-                                    }
-                                </div>
-                                <div className={styles.tabody} id='tabody'>
-                                    <table id='tablist'>
-                                        <tbody>
-                                        {
-                                            tabledata!=undefined && Carr.map((value,key)=>{
-                                                return(
-                                                    <tr className={key%2==0 ? styles.tabline :styles.tabline1} key ={key}>
-                                                    {
-                                                        value.map((valueC,keyC)=>{
-                                                        
-                                                            if(keyC==0){
-                                                                    return(
-                                                                        <td key={keyC} style={{width:'140px'}}>{valueC}</td>
-                                                                    ) 
-                                                            }else if(keyC==1){
-                                                                    return(
-                                                                        <td key={keyC} style={{width:'200px'}}>{valueC}</td>
-                                                                    ) 
-                                                            }else{
-                                                                    return(
-                                                                        <td key={keyC} style={{cursor:'pointer'}}>{Number(valueC).toFixed(2)}</td>
-                                                                    ) 
-                                                            }
-                                                          
-                                                        })
-                                                    }
-                                                    </tr>
-                                                )
-                                            })
-                                        }
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div className={styles.bot}>
-                                <span style={{width:'360px'}}>统计</span>
-                                    {
-                                        tabledata!=undefined && Darr.map((value,key)=>{
-                                            if(value==0){
-
-                                            }else{
-                                                return(
-                                                    <span key={key}>{value.toFixed(2)}</span>
-                                                ) 
-                                            }
-                                        })
-                                    }
-                                </div>
+                                {chartData!==undefined &&
+                                <table>
+                                    <tbody>
+                                        <tr><th>序号</th><th>设备状态</th><th>状态代码</th><th>发生次数</th><th>状态时长(s)</th><th>时长描述(h)</th></tr>
+                                        <tr><th>1</th><th>停机过程</th><th>1</th><th>{numberArr[0]}</th><th>{timeArr[0]}</th><th>{timeDescribe[0]}</th></tr>
+                                        <tr><th>2</th><th>停机</th><th>2</th><th>{numberArr[1]}</th><th>{timeArr[1]}</th><th>{timeDescribe[1]}</th></tr>
+                                        <tr><th>3</th><th>待机</th><th>3</th><th>{numberArr[2]}</th><th>{timeArr[2]}</th><th>{timeDescribe[2]}</th></tr>
+                                        <tr><th>4</th><th>启动</th><th>4</th><th>{numberArr[3]}</th><th>{timeArr[3]}</th><th>{timeDescribe[3]}</th></tr>
+                                        <tr><th>5</th><th>并网</th><th>5</th><th>{numberArr[4]}</th><th>{timeArr[4]}</th><th>{timeDescribe[4]}</th></tr>
+                                    </tbody>
+                                </table>
+                                }
                             </div>
                         </div>
                     </div>
@@ -288,11 +220,8 @@ const mapStateToProps = (state) => {
         boolywbb:state.vars.boolywbb,
         firstname:state.objs.firstname,
         select_list:state.vars.select_list,
-        tabledata:state.vars.tabledata,
-        chart:state.vars.chart,
-        chartname:state.vars.chartname,
-        chartTitle:state.vars.chartTitle,
         devurls:state.vars.devurls,
+        chartData:state.objs.chartData,
     }
 };
 
@@ -309,7 +238,7 @@ const mapDispatchToProps = (dispatch) => {
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
                 timeout:3000,       
-                success:function(json,textStatus){    
+                success:function(json,textStatus){  
                     dispatch(actions.appendObjs('devtype',json));
                     gettreedata(); 
                 },    
@@ -404,26 +333,8 @@ const mapDispatchToProps = (dispatch) => {
                 }    
             });
         },
-        clickitem:(kk,even)=>{
-            let knum=[];
-            let Tname=[];
-            $('#'+even.id).css('background','#369').siblings().css('background','none');
-            $('#tabody tr').each(function(){
-                $(this).children('td').eq(kk).css('background','#369').siblings().css('background','none');
-                knum.push(Number($(this).children('td').eq(kk).text()));
-                Tname.push($(this).children('td').eq(1).text());
-            })
-            dispatch(actions.setVars('chart', knum));
-            dispatch(actions.setVars('chartname', Tname));
-            dispatch(actions.setVars('chartTitle', even.innerHTML));
-            $('#colum').show();
-        },
-        searchnum:(devurls)=>{
-            dispatch(actions.setVars('tabledata',undefined));
+        searchnum:()=>{
             var all=[];
-            //清空数组
-            all.splice(0,all.length);//字段
-
             //获取查询时间
             var startTime=$('#startTime').val();
             var endTime=$('#endTime').val();
@@ -433,7 +344,7 @@ const mapDispatchToProps = (dispatch) => {
                         all.push($(this).val())
                     }
                 }
-            })
+            });
             if(all.length>50){
                 all.splice(50,all.length);
             }
@@ -443,25 +354,24 @@ const mapDispatchToProps = (dispatch) => {
             }
             $.ajax({    
                 url:'http://'+url+'/Monitor/xml.aspx',    
-                data:'functionname=CountDay&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&modelid=1DD28544-7805-4D86-8E39-09404726214A&devtype='+devurls+'&CountColumn=true&crossDomain=true&zip=false',    
+                data:'functionname=CountStationInfo&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&groupbydevice=0&crossDomain=true&zip=false',    
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
                 timeout:3000,       
-                success:function(json,textStatus){  
-                    let shu=[];
-                    for(let i in json){
-                        shu.push(json[i])
-                    }
-                    if(shu.length==0){
-                        alert('没有符合条件的数据！')
-                    }
-                    dispatch(actions.setVars('tabledata',json));
+                success:function(json,textStatus){ 
+                    if(json.wtid==undefined){
+                        alert('无数据');
+                        return;
+                    } 
+                    dispatch(actions.setObjs('chartData',json));
+
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     alert('获取数据失败！');    
                 }    
             });
+            
         }
     };
 };

@@ -19,7 +19,7 @@ let Component = React.createClass({
     },
     render() {
         let {saveAll,dataBase,border1=true,closeboxAm,Tofaninfo1} = this.props;
-        if(dataBase){
+        if(dataBase.data!==true){
         return (
 
             <div className={styles.fiexdbox} style={{top: 294, left:672}}>

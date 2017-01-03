@@ -453,7 +453,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"0",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -507,7 +507,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"1",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -557,7 +557,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"2",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',

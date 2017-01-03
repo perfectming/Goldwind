@@ -160,7 +160,7 @@ let Component = React.createClass({
                 borderRadius: 4,
             }, {
                 name: '故障损失',
-                color: '#5298d3',
+                color: '#5298d2',
                 type: 'column',
                 data: wrong10,
                 stack: 'time',
@@ -176,7 +176,7 @@ let Component = React.createClass({
                 },
                 {
                     name: '限功率损失',
-                    color: '#e9c75c',
+                    color: '#e8952a',
                     type: 'column',
                     data: wrong12,
                     stack: 'time'
@@ -184,7 +184,7 @@ let Component = React.createClass({
 
                 {
                     name: '非设备原因损失',
-                    color: '#d06960',
+                    color: '#d8403d',
                     type: 'column',
                     data: wrong13,
                     stack: 'time',

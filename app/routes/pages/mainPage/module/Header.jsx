@@ -2,18 +2,22 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Header.scss';
 import icon from './../img/icon/cloudlink.png';
+import changeC from './../img/comp/colorchange.png';
 var actions = require('redux/actions');
 var {browserHistory} = require('react-router');
 let Component = React.createClass({
+     componentDidMount() {
+        this.props.init();
+    },
     render() {
-        let {headerInfo, itemActive, changeHeaderItem,login} = this.props;
+        let {headerInfo, itemActive, changeHeaderItem,login,userNameT} = this.props;
         return (
             <div className={styles.navHeader}>
                 <div className={styles.navIcon}>
                     <img src={icon}/>
                 </div>
                 <div className={styles.methodBox}>
-                    {
+                    {  console.log(headerInfo[0].iconActive),
                         headerInfo.map((value, key) => {
                           
                             
@@ -26,9 +30,17 @@ let Component = React.createClass({
                             )
                         })
 
+
                     }
                     <div className={`${styles.itemBoxAct} ${styles.nobor}`}><span>|</span></div>
-                    <div className={styles.itemBox}><span onClick={()=>login()}>退出</span></div>
+                    <div className={styles.itemBox}><span style={{fontSize:'16px',marginRight:'0px'}}><img src={changeC} id='citem'/></span></div>
+                    <div className={ styles.pagestyle} id='shows'>
+                        <div className={ styles.itemstyle} style={{borderColor:'#000'}}>魅力纯黑</div>
+                        <div className={ styles.itemstyle} style={{borderColor:'#2ff4fb'}}>海蓝之心</div>
+                        <div className={ styles.itemstyle} style={{borderColor:'#fff'}}>洁白天使</div>
+                    </div>
+                    <div className={styles.itemBox}><span style={{fontSize:'16px',marginRight:'10px'}}>{userNameT}</span></div>
+                    <div className={styles.itemBox}><span style={{fontSize:'16px'}} onClick={()=>login()}>退出</span></div>
                 </div>
             </div>
         );
@@ -41,11 +53,20 @@ const mapStateToProps = (state) => {
     return {
         itemActive: state.vars.headerItemActive,
         userInfo: state.vars.userInfo,
+        userNameT: state.vars.userNameT,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        init:()=>{
+            $('#citem').on('click',function(){
+                $('#shows').show();
+            })
+             $('#shows').mouseleave(function(){
+            $(this).hide()
+            })
+        },
         changeHeaderItem: (key,page) => {
             dispatch(actions.setVars('headerItemActive', key));
             dispatch(actions.setVars('treeItemActive', 0));

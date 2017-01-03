@@ -124,11 +124,11 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/zcgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/zcgl_active.png'),
             subPage: [{
-                name:'',
+                name:'asas',
                 page:[
                     {
-                        name:'',
-                        page:'',
+                        name:'demo',
+                        page:'demo',
                     },{
                         name:'',
                         page:'',
@@ -223,6 +223,8 @@ module.exports = {
             iconActive: require('../app/routes/pages/mainPage/img/comp/xtgl_active.png'),
             subPage: [{
                 name:'角色管理',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/rolem.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/rolem_active.png'),
                 page:[
                     {
                         name:'角色管理',
@@ -230,6 +232,8 @@ module.exports = {
                     }]
             },{
                 name:'用户管理',
+                 iconNormal: require('../app/routes/pages/mainPage/img/comp/userm.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/userm_active.png'),
                 page:[
                     {
                         name:'用户管理',

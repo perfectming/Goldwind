@@ -190,6 +190,7 @@ const mapDispatchToProps = (dispatch) => {
                         async:true,
                         dataType: 'json',
                         success:function (data) {
+                            console.log(data)
                             yearPro=data.data;
                             month2=[],cost=[],incomes=[];
                             for(var i in yearPro){
