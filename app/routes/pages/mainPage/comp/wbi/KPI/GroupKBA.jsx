@@ -5,6 +5,7 @@ import TimeSelect from './TimeSelect.jsx';
 import TableF from './TableF.jsx';
 import TableS from './TableS.jsx';
 import TableT from './TableT.jsx';
+import AlertWindow from './AlertWindow.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
 
 
@@ -20,10 +21,11 @@ let Component = React.createClass({
     },
     
 	render() {
-		let {groupKBABool=false,X2,X1,areaId,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,hide,topTen,bottomTen,more,choice=1,wtName,wtElec,wtPBA,wtLose,wtNameMore,wtElecMore,wtPBAMore,wtLoseMore}=this.props;
+		let {alertText,groupKBABool=false,X2,X1,areaId,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,hide,topTen,bottomTen,more,choice=1,wtName,wtElec,wtPBA,wtLose,wtNameMore,wtElecMore,wtPBAMore,wtLoseMore}=this.props;
 		if(groupKBABool){
 			return(
 				<div className={styles.gbaBox}>
+						<AlertWindow text={alertText}></AlertWindow>
 						<TimeSelect></TimeSelect>
 						<div className={styles.content}>
 							<div className={`${styles.area} ${styles.boxShadow}`}>
@@ -67,6 +69,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+    	alertText : state.vars.alertText,
     	groupKBABool : state.vars.groupKBABool,
     	ipUrl : state.vars.ipUrl,
     	wtData : state.vars.wtData,
@@ -155,6 +158,8 @@ const mapDispatchToProps = (dispatch) => {
 				    dispatch(actions.setVars('wtLose', wtLose));
 				    dispatch(actions.setVars('wtPBA', wtPBA));
 				    dispatch(actions.setVars('wtData',wtData ));
+				    dispatch(actions.setVars('x1', areaName[0]));
+            		dispatch(actions.setVars('x2',wfName[0]));
 		        },
 		        complete : function(XMLHttpRequest,status){ 
 			　　　　	dispatch(actions.setVars('groupKBABool',true ));

@@ -57,7 +57,7 @@ let Component = React.createClass({
                     
                        
                            
-                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} height={410} text={[actbt+1]+'月'+xxdwfNa+'每日发电量'}></Windcet>
+                                <Windcet areaPlan={areaPlan}  areaPlanDay={wind} areaPlanDayT={windP} height={410} text={[actbt+1]+'月'+xxdwfNa+'每日发电量'} ></Windcet>
                           
                        
                            

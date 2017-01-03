@@ -7,7 +7,6 @@
     overflow-x: scroll;
 
   }
-
     .paddingtop {
     display:flex;
     align-items:center;
@@ -31,10 +30,13 @@
       cursor: pointer;
       text-align: center;
     }
+     .back:hover{
+    box-shadow: 0 0 15px #fff;
+    color:#20FEFF
+    }
   }
     .padding{
     height:31px;
-   
     }
      .back{
       float:right;
@@ -47,7 +49,7 @@
        position:relative;
        top:px;
        border-radius:45px;
-    cursor:pointer;
+      cursor:pointer;
        box-shadow:0px 0px 10px  #20FEFF;
        text-align:center;
     }

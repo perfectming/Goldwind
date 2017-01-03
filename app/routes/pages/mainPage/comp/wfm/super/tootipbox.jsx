@@ -50,7 +50,7 @@ var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
                             <div className={`${styles.line_title} ${styles.add_border}`} id='fc' >风场</div>
                             <div className={styles.line_title} id='gfc' >光伏场</div>
                        </div>
-                       <div className={styles.listbox} id='list'>
+                       <div className={styles.listbox} id='listb'>
                             <ul id='fclist'>
                                 {  
                                     arr1.map((value,key)=>{
@@ -109,7 +109,7 @@ var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
                                         return(
                                             obj_wfd[value].map((valueC,key)=>{
                                                 return(
-                                                    <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname+'      (  '+model_ens[value].name+'  )'}</span>
+                                                    <span key={key} onClick = {()=> Tofaninfo(valueC,value)}>{valueC.Wtname+'(  '+model_ens[value].name+'  )'}</span>
                                                 )
                                             })
                                         )
@@ -120,7 +120,7 @@ var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
                                         return(   
                                             obj_pvd[value].map((valueC,key)=>{
                                                 return(
-                                                    <span key={key} onClick = {()=> Topvinfo(valueC,value)}>{valueC.Wtname}</span>
+                                                    <span key={key} onClick = {()=> Topvinfo(valueC,value)}>{valueC.Wtname+'(  '+model_ens[value].name+'  )'}</span>
                                                 )
                                             })
 
@@ -163,8 +163,8 @@ const mapDispatchToProps = (dispatch) => {
                 $("#fclist").hide();
                 $("#searcg_anser").hide();
             })
-            $('#list ul li a').on('click',function(){
-                var bg=$(this).css("background-image");
+            $('#listb ul li a').on('click',function(){
+                let bg=$(this).css("background-image");
                 if(bg=='url("'+add+'")'){
                     $(this).css("background-image",'url('+jian+')');
                 }else{
@@ -174,7 +174,6 @@ const mapDispatchToProps = (dispatch) => {
                 $(this).siblings('div').toggle();
             })
             $("#seachtext").keyup(function(){
-                console.log(1);
                 $('#searcg_anser').show();
                 $('#searcg_anser span').hide();
                 $("#fclist").hide();

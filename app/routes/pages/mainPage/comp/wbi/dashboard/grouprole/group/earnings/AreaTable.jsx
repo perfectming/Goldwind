@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
-var $=require('jquery');
+var $ = require('jquery');
 var ReactHighcharts = require('react-highcharts');
 let Component = React.createClass({
     componentWillMount() {
@@ -10,56 +10,56 @@ let Component = React.createClass({
         let {input_url,width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height}=this.props;
         let configPie = {
             chart: {
-                height:height,
-                width:width,
+                height: height,
+                width: width,
                 backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                paddingLeft:0,
-               
+                paddingLeft: 0,
+
             },
             title: {
                 text: text,
-                align:'left',
-                 x : "0",
-                x : 105,
-                y :13,
-                style:{
-                    color:"#fff",
-                    fontSize:"16px",
-                    fontFamily:"微软雅黑",
-                   
+                align: 'left',
+                x: "0",
+                x: 105,
+                y: 13,
+                style: {
+                    color: "#fff",
+                    fontSize: "16px",
+                    fontFamily: "微软雅黑",
+
                 }
             },
             // 插入图片
 
             //图例说明
             legend: {
-               x:-75,
-               y:25,
-                align:"right",
+                x: -75,
+                y: 25,
+                align: "right",
                 verticalAlign: "top",
-                itemHoverStyle:{
-                    color:'#31f3fb',
+                itemHoverStyle: {
+                    color: '#31f3fb',
                 },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"14px",
-                    fontWeight:"normal",
-                    fontFamily:"微软雅黑",
+                    fontSize: "14px",
+                    fontWeight: "normal",
+                    fontFamily: "微软雅黑",
 
                 }
             },
             tooltip: {
-              valueSuffix:'元'
+                valueSuffix: '元'
             },
             credits: {
                 enabled: false
             },
             //柱子颜色
-            colors: [ '#33BAC0', '#70c080'],
-            
+            colors: ['#33BAC0', '#70c080'],
+
             plotOptions: {
                 column: {
                     maxPointWidth: 40,
@@ -67,132 +67,110 @@ let Component = React.createClass({
                 series: {
                     cursor: 'pointer',
                     events: {
-                        click: function(e) {
-                            
-                             w11=e.point.category;
-                         let     index=e.point.index;
-                            let w111=windFiedN;
-                            let datee=new Date;
-let year=datee.getFullYear();
+                        click: function (e) {
 
-let dayy = new Date(year,keyy,0); 
+                            w11 = e.point.category;
+                            let index = e.point.index;
+                            let w111 = windFiedN;
+                            let datee = new Date;
+                            let year = datee.getFullYear();
+
+                            let dayy = new Date(year, keyy, 0);
 //获取天数：
-let daycount = dayy.getDate();
-                          
-                        let  a=w11.toString().split("");
-                        let b=a[0];
-                    
-                        let areaWindCosts=[];
-                         let areaWindEarnings=[];
-                         let areaWindRates=[];
-                         let areaWindids=[];
-                         let areaWindNames=[];
-                         let areaWindCosts1=[];
-                         let areaWindEarnings1=[];
-                         let areaWindRates1=[];
-                         let areaWindids1=[];
-                         let areaWindNames1=[];
-                        // 点击第一张图第二张变
-                         $.ajax({
-                     type:'post',
-                     url:'http://'+input_url+'/wbi/yield/getYieldByGroupid',
-                     async:false,
-                    data:{
-                   'startdate':year+"-"+(keyy)+"-"+'1',
-                 'enddate':year+"-"+(keyy)+"-"+daycount,
-                'groupid':arr5[index],
+                            let daycount = dayy.getDate();
 
-                    },
-                     dataType:'json',
-                     timeout:'3000',
-                     success:function(data){
-                    
-                     
+                            let a = w11.toString().split("");
+                            let b = a[0];
+
+                            let areaWindCosts = [];
+                            let areaWindEarnings = [];
+                            let areaWindRates = [];
+                            let areaWindids = [];
+                            let areaWindNames = [];
+                            let areaWindCosts1 = [];
+                            let areaWindEarnings1 = [];
+                            let areaWindRates1 = [];
+                            let areaWindids1 = [];
+                            let areaWindNames1 = [];
+                            // 点击第一张图第二张变
+                            $.ajax({
+                                type: 'post',
+                                url: 'http://' + input_url + '/wbi/yield/getYieldByGroupid',
+                                async: false,
+                                data: {
+                                    'startdate': year + "-" + (keyy) + "-" + '1',
+                                    'enddate': year + "-" + (keyy) + "-" + daycount,
+                                    'groupid': arr5[index],
+
+                                },
+                                dataType: 'json',
+                                timeout: '3000',
+                                success: function (data) {
 
 
+                                    var dataA = data.data;
+                                    for (var i in dataA) {
+                                        var areaWindCost = dataA[i].costs;
+                                        areaWindCosts.push(areaWindCost);
+                                        var areaWindEarning = dataA[i].earning;
+                                        areaWindEarnings.push(areaWindEarning);
+                                        var areaWindRate = dataA[i].rate * 100;
+                                        areaWindRates.push(Number(areaWindRate.toFixed(1)));
+                                        var areaWindid = dataA[i].wfid;
+                                        areaWindids.push(areaWindid);
+                                        var areaWindName = dataA[i].wfname;
+                                        areaWindNames.push(areaWindName)
 
-                         var dataA=data.data;
-                         for (var i in dataA)
-                         {
-                             var areaWindCost=dataA[i].costs;
-                             areaWindCosts.push(areaWindCost);
-                             var areaWindEarning=dataA[i].earning;
-                             areaWindEarnings.push(areaWindEarning);
-                             var areaWindRate=dataA[i].rate*100;
-                             areaWindRates.push(Number(areaWindRate.toFixed(1)));
-                             var areaWindid=dataA[i].wfid;
-                             areaWindids.push(areaWindid);
-                             var areaWindName =dataA[i].wfname;
-                             areaWindNames.push(areaWindName)
-
-                         }
+                                    }
 
 
-
-                       
-                      
-              
-                    
-                    
-            
-            },
-            error:function(){
-               
-
-                
-            },
-          });
-                         // 点击第一张图第三张图变
-      $.ajax({
-                      type:'post',
-                      url:'http://'+input_url+'/wbi/yield/getYieldByWfid',
-                      async:false,
-                     data:{
-                   
-                    'startdate':year+"-"+(keyy)+"-"+'1',
-                  'enddate':year+"-"+(keyy)+"-"+daycount,
-                 'wfid':areaWindids[0],
-                 'methods':'desc',
-  
-                     },
-                      dataType:'json',
-                      timeout:'3000',
-                      success:function(data){
-             
-               
-                          var dataA=data.data;
-                          for (var i in dataA)
-                          {
-                              var areaWindCost=dataA[i].costs;
-                              areaWindCosts1.push(areaWindCost);
-                              var areaWindEarning=dataA[i].earning;
-                              areaWindEarnings1.push(areaWindEarning);
-                              var areaWindRate=dataA[i].rate*100;
-                              areaWindRates1.push(Number(areaWindRate.toFixed(1)));
-                              var areaWindid=dataA[i].wtid;
-                              areaWindids1.push(areaWindid);
-                              var areaWindName =dataA[i].wtname;
-                              areaWindNames1.push(areaWindName) 
-
-                          }
-                   
- 
-
-                       
-                      
-
-                    
-                    
-            
-            },
-            error:function(){
-              
+                                },
+                                error: function () {
 
 
-            
-              },
-            });
-                        changedataq(w11,sqy,b,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNames1,areaWindCosts1,areaWindEarnings1,areaWindRates1);
+                                },
+                            });
+                            // 点击第一张图第三张图变
+                            $.ajax({
+                                type: 'post',
+                                url: 'http://' + input_url + '/wbi/yield/getYieldByWfid',
+                                async: false,
+                                data: {
+
+                                    'startdate': year + "-" + (keyy) + "-" + '1',
+                                    'enddate': year + "-" + (keyy) + "-" + daycount,
+                                    'wfid': areaWindids[0],
+                                    'methods': 'desc',
+
+                                },
+                                dataType: 'json',
+                                timeout: '3000',
+                                success: function (data) {
+
+
+                                    var dataA = data.data;
+                                    for (var i in dataA) {
+                                        var areaWindCost = dataA[i].costs;
+                                        areaWindCosts1.push(areaWindCost);
+                                        var areaWindEarning = dataA[i].earning;
+                                        areaWindEarnings1.push(areaWindEarning);
+                                        var areaWindRate = dataA[i].rate * 100;
+                                        areaWindRates1.push(Number(areaWindRate.toFixed(1)));
+                                        var areaWindid = dataA[i].wtid;
+                                        areaWindids1.push(areaWindid);
+                                        var areaWindName = dataA[i].wtname;
+                                        areaWindNames1.push(areaWindName)
+
+                                    }
+
+
+                                },
+                                error: function () {
+
+
+                                },
+                            });
+                            changedataq(w11, sqy, b, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, areaWindids, areaWindNames1, areaWindCosts1, areaWindEarnings1, areaWindRates1);
                         }
                     }
                 }
@@ -206,91 +184,91 @@ let daycount = dayy.getDate();
                     y: 20,
                     style: {
                         color: '#fff',
-                        fontSize:'14px'
+                        fontSize: '14px'
                     }
                 },
-                categories:areaName,
+                categories: areaName,
             },
-           yAxis: [{
-            labels: {
-                format: '',
-                style: {
-                    color: '#fff',
-                    fontSize:'14px'
-                }
-            }, gridLineDashStyle: 'Solid',
+            yAxis: [{
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
 
-            title: {
-                text:'（元）',
-                align:'high',
-                rotation:'0',
-                y: -20,
-                x:45,
-                style:{
-                    fontSize:'14px',
-                    color:'#fff'
+                title: {
+                    text: '（元）',
+                    align: 'high',
+                    rotation: '0',
+                    y: -20,
+                    x: 45,
+                    style: {
+                        fontSize: '14px',
+                        color: '#fff'
+                    }
                 }
-            }
-        }, {
-             labels: {
-                format: '',
-                style: {
-                    color: '#fff',
-                    fontSize:'14px'
-                }
-            },
-             gridLineDashStyle: 'Solid',
-            gridLineColor: '#6d6a6c',
-            tickInterval: 20,
-            minRange: 20,
-                
-            title: {
-                text: '（%）',
-                align:'high',
-                rotation:'0',
-                y: -15,
-                x: -45,
-                style:{
-                    color: '#fff',
-                    fontSize:'14px'
-                }
+            }, {
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                },
+                gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+                tickInterval: 20,
+                minRange: 20,
 
-            },
-            
-            opposite: true
-        }],
+                title: {
+                    text: '（%）',
+                    align: 'high',
+                    rotation: '0',
+                    y: -15,
+                    x: -45,
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+
+                },
+
+                opposite: true
+            }],
 
             series: [{
                 name: '收益',
                 type: 'column',
                 data: areaRecordProfit,
                 borderRadius: 7,
-                color:'#33BAC0',
-                borderWidth:0,
+                color: '#33BAC0',
+                borderWidth: 0,
                 maxPointWidth: 40,
             },
-            {
-            	name: '成本',
-                type: 'column',
-                data: areaRecordCost,
-                borderRadius: 7,
-                color:'#70c080',
-                
-                 borderWidth:0,
-            },{
-                    name:"收益率",
-                    type:'line',
-                    color:'blue',
-                    data:TBA,
-                    yAxis:1,
+                {
+                    name: '成本',
+                    type: 'column',
+                    data: areaRecordCost,
+                    borderRadius: 7,
+                    color: '#70c080',
+
+                    borderWidth: 0,
+                }, {
+                    name: "收益率",
+                    type: 'line',
+                    color: 'blue',
+                    data: TBA,
+                    yAxis: 1,
                     tickInterval: 1,
-                     tooltip: {
-               valueSuffix:'%'
-            },
+                    tooltip: {
+                        valueSuffix: '%'
+                    },
                 }
-                ]
+            ]
         };
         return (
             <ReactHighcharts config={configPie}/>
@@ -301,11 +279,10 @@ let daycount = dayy.getDate();
 
 const mapStateToProps = (state) => {
     return {
-         w11 : state.vars.w1,
-         sqy : state.vars.wins1,
-      
-         
-        
+        w11: state.vars.w1,
+
+
+
     }
 };
 
@@ -313,25 +290,24 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-         changedataq :(w11,sqy,b,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNames1,areaWindCosts1,areaWindEarnings1,areaWindRates1)=>{
-            dispatch(actions.setVars('w1',w11)); 
-          
-             dispatch(actions.setVars('areaWindNamess',areaWindNames));
-             dispatch(actions.setVars('areaWindCostss',areaWindCosts));
-             dispatch(actions.setVars('areaWindEarningss',areaWindEarnings));
-             dispatch(actions.setVars('areaWindRatess',areaWindRates));
-             dispatch(actions.setVars('areaWindidss',areaWindids));
-             dispatch(actions.setVars('areaWindidsss',areaWindids));
+        changedataq: (w11, sqy, b, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, areaWindids, areaWindNames1, areaWindCosts1, areaWindEarnings1, areaWindRates1)=> {
+            dispatch(actions.setVars('w1', w11));
 
-             dispatch(actions.setVars('areaWindNamesss',areaWindNames1));
-             dispatch(actions.setVars('areaWindCostsss',areaWindCosts1));
-             dispatch(actions.setVars('areaWindEarningsss',areaWindEarnings1));
-             dispatch(actions.setVars('areaWindRatesss',areaWindRates1));
-              dispatch(actions.setVars('w123',areaWindNames[0]));
-              dispatch(actions.setVars('btnn',0));
-            
+            dispatch(actions.setVars('areaWindNamess', areaWindNames));
+            dispatch(actions.setVars('areaWindCostss', areaWindCosts));
+            dispatch(actions.setVars('areaWindEarningss', areaWindEarnings));
+            dispatch(actions.setVars('areaWindRatess', areaWindRates));
+            dispatch(actions.setVars('areaWindidss', areaWindids));
+            dispatch(actions.setVars('areaWindidsss', areaWindids));
 
-          
+            dispatch(actions.setVars('areaWindNamesss', areaWindNames1));
+            dispatch(actions.setVars('areaWindCostsss', areaWindCosts1));
+            dispatch(actions.setVars('areaWindEarningsss', areaWindEarnings1));
+            dispatch(actions.setVars('areaWindRatesss', areaWindRates1));
+            dispatch(actions.setVars('w123', areaWindNames[0]));
+            dispatch(actions.setVars('btnn', 0));
+
+
         },
     };
 };

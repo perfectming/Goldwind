@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areacestylee.scss';
 import PBAtimechart from './PBAtimechart.jsx';
-import PBAtimechartt from './PBAtimechartt.jsx';
+
+import PBAtimechartt from '../group/PBATime/PBAtimechartt.jsx';
 import icono from '../../../../../img/comp/PBA.png';
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
@@ -47,14 +48,14 @@ let Component = React.createClass({
                     </div>
                     
                 </div>
-                 <div className={`${styles.bigbox} ${styles.shadow}`}>
-                   
-                       
-                           
-                         
-                          
-                                <PBAtimechartt areaPlan={PBATimeSecondDay} areaPlanDay={PBATimeSecondPoweract} areaPlanDayT={PBATimeSecondPba} fanCost={PBATimeSecondFaultloss} fanCostB={PBATimeSecondLimitloss} fanCostC={PBATimeSecondNodevreasonloss} fanCostA={PBATimeSecondMaintainloss} xxdwfId={xxdwfId} height={410} text={w0+xxdwfNa+'每日PBA'}></PBAtimechartt>
-                        
+                 <div className={`${styles.bigboxx} ${styles.shadow}`}>                        
+                               
+                              <PBAtimechartt PBAx={PBATimeSecondDay} PBAPoweract={PBATimeSecondPoweract}
+                              PBAFaultloss={PBATimeSecondFaultloss} PBAMaintainloss={PBATimeSecondMaintainloss}
+                              PBALimitloss={PBATimeSecondLimitloss} PBANodevreasonloss={PBATimeSecondNodevreasonloss} height={410}
+                              PBAPba={PBATimeSecondPba}
+                              text={w0+xxdwfNa+'每日PBA'}>
+                              </PBAtimechartt>
                         
                     
                     <div className={styles.imgq}>

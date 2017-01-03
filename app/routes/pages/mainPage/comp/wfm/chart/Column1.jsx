@@ -23,10 +23,13 @@ let Component = React.createClass({
         let{mod,date}=this.props;
         for(let num in date){
              if(date[num].WTCount=='0' || date[num].InverterCount =='0'){
-                
                 line.push(Number(date[num].MonthEgyAt));
                  lineplan.push(Number(date[num].CurMonthPlanEgyAt));
+                 if(date[num].MonthEgyAt/date[num].CurMonthPlanEgyAt=='Infinity'){
+                    arr.push(0)
+                 }else{
                  arr.push(Number(((date[num].MonthEgyAt/date[num].CurMonthPlanEgyAt)*100).toFixed(2)));
+                    }
                 key.push([num,Number(((date[num].MonthEgyAt/date[num].CurMonthPlanEgyAt)*100).toFixed(2))]);
                 }
 
@@ -41,7 +44,6 @@ let Component = React.createClass({
         lineplan.map((value,key)=>{
             line.push(Number(((partent/partentplan)*100).toFixed(2)))
         })
-        
          arr.sort(function(a,b){return b-a})//数据排列
          key.sort(function(a,b){
             return b[1]-a[1]

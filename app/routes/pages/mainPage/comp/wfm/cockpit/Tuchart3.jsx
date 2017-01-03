@@ -107,7 +107,7 @@ let Component = React.createClass({
             }],
 
             series:[{ //第二个Y轴的数据
-                name: '场站等效利用小时数',
+                name: '场站年等效利用小时数',
                 color: '#70C080',
                 type: 'column',
                 tooltip: {

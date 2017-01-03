@@ -4,6 +4,7 @@ import styles from './LoseElectricstyle.scss';
 import PBAdata from './TimeSelect-data';
 import ChartOne from './ChartOne.jsx';
 import ChartFive from './ChartFive.jsx';
+import AlertWindow from './AlertWindow.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
 
 var actions = require('redux/actions');
@@ -27,10 +28,11 @@ let Component = React.createClass({
     
 	render() {
 		let comp=PBAdata.list;
-		let {buttonResetA,buttonResetB,buttonResetC,buttonResetD,storage,loseElecBool=false,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne='',loseAreaNameTwo='',loseAreaNameThree='',loseAreaNameFour='',selectName,selectId,ipUrl,checkedLose=1,buttonAction,buttonReset, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
+		let {alertText,buttonResetA,buttonResetB,buttonResetC,buttonResetD,storage,loseElecBool=false,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne='',loseAreaNameTwo='',loseAreaNameThree='',loseAreaNameFour='',selectName,selectId,ipUrl,checkedLose=1,buttonAction,buttonReset, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
 		if(loseElecBool){
 			return(
 				<div className={styles.bodyBox}>
+					<AlertWindow text={alertText}></AlertWindow>
 					<div className={styles.inquireBox}>
 		                {
 		                    comp.map((value, key,valueName)=> {
@@ -114,6 +116,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+    	alertText : state.vars.alertText,
     	loseElecBool : state.vars.loseElecBool,
     	ipUrl : state.vars.ipUrl,
     	checkedLose : state.vars.checkedLose,
@@ -262,17 +265,24 @@ const mapDispatchToProps = (dispatch) => {
 	    			var sTime = $('#startTime').val();
 			        //结束时间时间
 			        var eTime = $('#endTime').val();
-					if(sTime == '' || eTime == '') {
-			            alert('请选择开始或者结束时间');
-			            return false;
-			        };
+					var oDate1 = new Date(sTime);
+		            var oDate2 = new Date(eTime);
+		            if(sTime == '' || eTime == '') {
+		                dispatch(actions.setVars('alertBool', false));
+		                dispatch(actions.setVars('alertText', '请选择开始或者结束时间'));
+		                return false;
+		            }else if(oDate1.getTime() > oDate2.getTime()){
+		                dispatch(actions.setVars('alertBool', false));
+		                dispatch(actions.setVars('alertText', '请选择正确的开始或者结束时间'));
+		                return false;
+		            };
 			        var A=$('select').val();
 					for(var i in selectName){
 						if(selectName[i]==A){
 							selectId=selectId[i];
 						}
 					};
-					if(selectId<1000000){
+					if(selectId<1000000){//风场
 						$.ajax({
 			    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//Pie表
 					        type: 'post',
@@ -297,7 +307,9 @@ const mapDispatchToProps = (dispatch) => {
 					        		loseAreaFour=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
 					        		loseD=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
 					        	}else{
-					        		alert("请先重置清除数据");
+					        		dispatch(actions.setVars('alertBool', false));
+					        		dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+			            			return false;
 					        	}
 							},
 					        complete : function(XMLHttpRequest,status) { 
@@ -306,9 +318,9 @@ const mapDispatchToProps = (dispatch) => {
 							　　　}
 							},
 						});
-					}else{
+					}else{//区域
 						$.ajax({
-			    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//Pie表
+			    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//column表
 					        type: 'post',
 					        async:false,
 					        dataType: 'json',
@@ -331,7 +343,9 @@ const mapDispatchToProps = (dispatch) => {
 					        		loseAreaFour=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
 					        		loseD=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
 					        	}else{
-					        		alert("请先重置清除数据");
+					        		dispatch(actions.setVars('alertBool', false));
+					        		dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+			            			return false;
 					        	}
 							},
 					        complete : function(XMLHttpRequest,status) { 
@@ -354,17 +368,26 @@ const mapDispatchToProps = (dispatch) => {
 					dispatch(actions.setVars('loseAreaNameThree', loseAreaNameThree));
 					dispatch(actions.setVars('loseAreaNameFour', loseAreaNameFour));
 	    		}else{
-	    			alert("请选择同一个指标项")
+	    			dispatch(actions.setVars('alertBool', false));
+	    			dispatch(actions.setVars('alertText', '请选择同一指标项'));
+			        return false;
 	    		}
 	    	}else{
 	    		dispatch(actions.setVars('storage', checkedLose));
 	    		var sTime = $('#startTime').val();
 		        //结束时间时间
 		        var eTime = $('#endTime').val();
-				if(sTime == '' || eTime == '') {
-		            alert('请选择开始或者结束时间');
-		            return false;
-		        };
+				var oDate1 = new Date(sTime);
+	            var oDate2 = new Date(eTime);
+	            if(sTime == '' || eTime == '') {
+	                dispatch(actions.setVars('alertBool', false));
+	                dispatch(actions.setVars('alertText', '请选择开始或者结束时间'));
+	                return false;
+	            }else if(oDate1.getTime() > oDate2.getTime()){
+	                dispatch(actions.setVars('alertBool', false));
+	                dispatch(actions.setVars('alertText', '请选择正确的开始或者结束时间'));
+	                return false;
+	            };
 		        var A=$('select').val();
 				for(var i in selectName){
 					if(selectName[i]==A){
@@ -396,7 +419,9 @@ const mapDispatchToProps = (dispatch) => {
 				        		loseAreaFour=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
 				        		loseD=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
 				        	}else{
-				        		alert("请先重置清除数据");
+				        		dispatch(actions.setVars('alertBool', false));
+				        		dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+			        			return false;
 				        	}
 						},
 				        complete : function(XMLHttpRequest,status) { 
@@ -407,7 +432,7 @@ const mapDispatchToProps = (dispatch) => {
 					});
 				}else{
 					$.ajax({
-		    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//Pie表
+		    			url:'http://'+ipUrl+'/wbi/KPI/getKPILoseElec',//column表
 				        type: 'post',
 				        async:false,
 				        dataType: 'json',
@@ -430,7 +455,9 @@ const mapDispatchToProps = (dispatch) => {
 				        		loseAreaFour=[['故障损失',(data.data[0].faultloss).toFixed(1)/1],['维护损失',(data.data[0].maintainloss).toFixed(1)/1],['限功率损失',(data.data[0].limitloss).toFixed(1)/1],['非设备原因损失',(data.data[0].nodevreasonloss).toFixed(1)/1]];
 				        		loseD=[(data.data[0].faultloss).toFixed(1)/1,(data.data[0].maintainloss).toFixed(1)/1,(data.data[0].limitloss).toFixed(1)/1,(data.data[0].nodevreasonloss).toFixed(1)/1];
 				        	}else{
-				        		alert("请先重置清除数据");
+				        		dispatch(actions.setVars('alertBool', false));
+				        		dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+			        			return false;
 				        	}
 						},
 				        complete : function(XMLHttpRequest,status) { 

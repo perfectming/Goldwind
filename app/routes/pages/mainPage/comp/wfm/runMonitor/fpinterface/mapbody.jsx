@@ -55,7 +55,7 @@ const mapDispatchToProps = (dispatch) => {
          changedate:()=>{
              
             //     console.log('刷新')
-
+               dispatch(actions.setVars('boolmapbody', false)); 
 
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
                     function setDatas(fmodel){

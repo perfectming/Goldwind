@@ -58,6 +58,7 @@ let Component = React.createClass({
             },
             tooltip: {
                 valueSuffix: unit,
+                shared: true
             },
             xAxis: {
                 lineWidth: 1,
