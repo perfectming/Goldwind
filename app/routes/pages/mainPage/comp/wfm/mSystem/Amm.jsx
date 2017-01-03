@@ -13,7 +13,7 @@ import add from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 import Login from '../../../../../../components/common/Loading.jsx';
 import Ambox from './boxAm.jsx';
-let soam='http://10.9.99.90:8080/soam';
+let soam='http://10.9.100.18:8080/soam';
 let tabaleData = require('./data');
 let arr=['id','name','loginname','password','phonecode','mailbox','logintype','dogcode','remark','roleids'];
 let Component = React.createClass({
