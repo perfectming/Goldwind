@@ -17,7 +17,7 @@ let Component = React.createClass({
                     <img src={icon}/>
                 </div>
                 <div className={styles.methodBox}>
-                    {  console.log(headerInfo[0].iconActive),
+                    {
                         headerInfo.map((value, key) => {
                           
                             
