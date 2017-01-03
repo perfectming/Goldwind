@@ -21,7 +21,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {init,checkId,checkName,ids,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+        let {lastPage,nextPage,theOne,theLast,init,checkId,checkName,ids,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData={};
         let num=0;
         for(let i=0;i<arr.length-1;i++){
@@ -372,6 +372,80 @@ const mapDispatchToProps = (dispatch) => {
                 success:function (data) {
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        lastPage:(page,years,wfids)=>{
+            page>1 ? page--:page;
+            dispatch(actions.setVars('page1', page));
+            $.ajax({
+                url: soam+'/ELEC/getWfelec',
+                type: 'post',
+                data:{pageSize:pageSize,nowPage:page,year:years,wfids:wfids},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data)
+                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        nextPage:(page,i,j,years,wfids)=>{
+            (page<Math.ceil(i/j)) ? page++:page;
+            console.log(page,years,wfids);
+            dispatch(actions.setVars('page1', page));
+            $.ajax({
+                url: soam+'/ELEC/getWfelec',
+                type: 'post',
+                data:{pageSize:pageSize,nowPage:page,year:years,wfids:wfids},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data.data.pagedata.length);
+                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+
+        },
+        theOne :(page,years,wfids)=>{
+            page=1;
+            dispatch(actions.setVars('page1', page));
+            $.ajax({
+                url: soam+'/ELEC/getWfelec',
+                type: 'post',
+                data:{pageSize:pageSize,nowPage:page,year:years,wfids:wfids},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data)
+                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        theLast :(page,i,j,years,wfids)=>{
+            page=Math.ceil(i / j);
+            dispatch(actions.setVars('page1', page));
+            $.ajax({
+                url: soam+'/ELEC/getWfelec',
+                type: 'post',
+                data:{pageSize:pageSize,nowPage:page,year:years,wfids:wfids},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data)
+                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error:function(){
                     console.log('获取数据失败')
