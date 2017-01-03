@@ -156,7 +156,7 @@ let Component = React.createClass({
             },
                 {
                     name: '故障损失',
-                    color: '#5298d3',
+                    color: '#5298d2',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time',
@@ -172,7 +172,7 @@ let Component = React.createClass({
                 },
                 {
                     name: '限功率损失',
-                    color: '#e9c75c',
+                    color: '#e8952a',
                     type: 'column',
                     data: barLoPowerValue,
                     stack:'time'
@@ -181,7 +181,8 @@ let Component = React.createClass({
                     name: '非设备原因损失',
                     type: 'column',
                     data: barLoPowerValue,
-                    stack:'time'
+                    stack:'time',
+                    color: '#d8403d',
                 },
                 {
                     name: 'PBA',

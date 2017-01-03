@@ -1,5 +1,16 @@
 module.exports = {
     data:{
+        group0:[
+            {
+                groupid:"201612121721151",
+                groupname:"巴盟"
+            },
+            {
+                groupid:"201612121721151",
+                groupname:"巴盟",
+            }
+        ],
+
         header:[
             '序号',
             '设备类型',

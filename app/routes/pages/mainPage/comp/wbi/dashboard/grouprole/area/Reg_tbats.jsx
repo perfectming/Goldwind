@@ -152,6 +152,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: runtime2,
                 borderRadius: 2,
+                color:'#62de88',
             },{
                 name: '停机时间',
                 type: 'column',
