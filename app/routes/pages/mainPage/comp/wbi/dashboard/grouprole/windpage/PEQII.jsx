@@ -353,7 +353,7 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test: ''
             }
-            alert("准备获取数据")
+            console.log("准备获取数据")
             dispatch(actions.setVars('page1', 1));
 
             $.ajax({
@@ -425,7 +425,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('wfids', tContent1));
 
             $.ajax({
-                url: soam+'/info/getWfcosts',
+                url: soam+'/info/getStageprice',
                 type: 'post',
                 data:'pageSize='+pageSize+'&&curpage='+page+'&&year='+tContent+'&&wfids='+tContent1,
                 dataType: 'json',//here,
@@ -450,7 +450,7 @@ const mapDispatchToProps = (dispatch) => {
             page=totalpage;
             dispatch(actions.setVars('page1', page));
             $.ajax({
-                url: soam+'/info/getWfcosts',
+                url: soam+'/info/getStageprice',
                 type: 'post',
                 data:{
                     "curpage": page,
@@ -497,7 +497,7 @@ const mapDispatchToProps = (dispatch) => {
             let ddv=JSON.stringify(wfs);
             console.log(ddv)
             $.ajax({
-                url: soam+'/info/getSaveWfcost',
+                url: soam+'/info/getSaveStageprice',
                 type: 'post',
 
                 data:ddv,

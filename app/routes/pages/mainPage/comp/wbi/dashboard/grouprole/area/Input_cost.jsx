@@ -353,7 +353,8 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test: ''
             }
-            alert("准备获取数据")
+
+            console.log("准备获取数据")
             dispatch(actions.setVars('page1', 1));
 
             $.ajax({
