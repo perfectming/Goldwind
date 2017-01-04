@@ -190,8 +190,8 @@ let Component = React.createClass({
                             <span onClick={()=>{$('#box1').parent().css('display','block')}}>点击</span>
                         </div>
                     </div>
-                    <div className={styles.tanC} id="center3" key='4' style={{top: 100, left:300}}>
-                        <div className={styles.upName}>角色权限<img src={close} className={styles.wrong} onClick={()=>{$('#center3').css('display','none')}}/></div>
+                    <div className={styles.tanC} id="center3" key='4' style={{width:812,top: 100, left:700,paddingLeft:300}}>
+                        <div className={styles.upName}> 角色权限<img src={close} className={styles.wrong} onClick={()=>{$('#center3').css('display','none')}}/></div>
                         <div className={styles.tableHeaderBox}>
                             <div className={styles.tableHeaderItem}
                                  style={{width:(100/(tabaleData.msData.center.header.length+1)-10)+"%"}}>序号</div>
@@ -232,6 +232,10 @@ let Component = React.createClass({
                                                         }
                                                     })
                                                 }
+                                                <div style={{width:(100/(tabaleData.msData.center.header.length+1))+"%"}}
+                                                     className={styles.tableContentItem}>
+                                                    <input type="checkbox"/>
+                                                </div>
                                             </div>
                                         )
                                     })
@@ -243,9 +247,9 @@ let Component = React.createClass({
                             <span>{'记录合计：'+num2}</span>
                             <span onClick={()=>{$('#box2').parent().css('display','block')}}>点击</span>
                         </div>
+                        <Bbox></Bbox>
                     </div>
                     <Abox></Abox>
-                    <Bbox></Bbox>
                     <Cbox></Cbox>
                 </div>
             </div>

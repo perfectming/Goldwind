@@ -146,9 +146,12 @@ const mapDispatchToProps = (dispatch) => {
             let month2 = date.getMonth();
             let day = new Date(year, month2, 0);
             let daycountT = day.getDate();
-
+            if(month2==0){
+                month2=12;
+                year=year-1;
+            }
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt', 10));
+            dispatch(actions.setVars('actbt', month2-1));
             dispatch(actions.setVars('mon', month2 + "月"));
             $.ajax({
                 type: 'post',
@@ -162,7 +165,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
+console.log(data)
                     dispatch(actions.setVars('hhdata2', data));
                     dispatch(actions.setVars('w11', data.data[0].wfname));
 

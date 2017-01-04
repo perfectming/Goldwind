@@ -9,8 +9,7 @@ import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
 //导航月份自己引入
 let data = require('./Profit-data1');
-let date = new Date;
-let year = date.getFullYear();
+
 //arr5是区域id
 let arr5 = [];
 let Component = React.createClass({
@@ -38,7 +37,7 @@ let Component = React.createClass({
                         <div onClick={()=>close()} className={styles.gg}>x</div>
                     </div>
                     <div className={styles.scroll}>
-                        <Fanchart x={40} areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore}
+                        <Fanchart areaRecordCostR={areaWindCostMore} areaRecordProfitR={areaWindEarningMore}
                                   machine={areaWindNameMore} height={500} TBAA={areaWindRateMore} width={width} ly={0}
                                   lx={-75} x={50}></Fanchart>
                     </div>
@@ -168,8 +167,12 @@ const mapDispatchToProps = (dispatch) => {
 
 
             let datee = new Date;
-            //获取当前月
+            let year = datee.getFullYear();
             let monthF = datee.getMonth();
+            if(monthF==0){
+                monthF=12;
+                year=year-1;
+            }
 
             let day = new Date(year, monthF, 0);
             //获取当前月的总天数
@@ -319,6 +322,13 @@ const mapDispatchToProps = (dispatch) => {
         },
         // 点击月份下面所有的变化
         changpage: (value, key, input_url)=> {
+            let datee = new Date;
+            let year = datee.getFullYear();
+            let monthF = datee.getMonth();
+            if(monthF==0){
+                monthF=12;
+                year=year-1;
+            }
             let arr1 = [];
             let arr2 = [];
             let arr3 = [];
@@ -494,13 +504,18 @@ const mapDispatchToProps = (dispatch) => {
         },
         //这是前十；
         gogogo: (btn, areaWindidssT, index2, actbt, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, input_url)=> {
-
+            let datee = new Date;
+            let year = datee.getFullYear();
+            let monthF = datee.getMonth();
+            if(monthF==0){
+                monthF=12;
+                year=year-1;
+            }
             let areaWindCosts12 = [];
             let areaWindEarnings12 = [];
             let areaWindRates12 = [];
             let areaWindids12 = [];
             let areaWindNames12 = [];
-            let date = new Date();
             let dayy = new Date(year, actbt + 1, 0);
             let daycount = dayy.getDate();
             $.ajax({
@@ -558,7 +573,13 @@ const mapDispatchToProps = (dispatch) => {
             areaWindRates = [];
 
             areaWindNames = [];
-            let date = new Date();
+            let datee = new Date;
+            let year = datee.getFullYear();
+            let monthF = datee.getMonth();
+            if(monthF==0){
+                monthF=12;
+                year=year-1;
+            }
             let dayy = new Date(year, actbt + 1, 0);
             let daycount = dayy.getDate();
             let width = 0;
@@ -619,7 +640,13 @@ const mapDispatchToProps = (dispatch) => {
             areaWindEarnings = [];
             areaWindRates = [];
             areaWindNames = [];
-            let date = new Date();
+            let datee = new Date;
+            let year = datee.getFullYear();
+            let monthF = datee.getMonth();
+            if(monthF==0){
+                monthF=12;
+                year=year-1;
+            }
             let dayy = new Date(year, actbt + 1, 0);
             let daycount = dayy.getDate();
             $.ajax({

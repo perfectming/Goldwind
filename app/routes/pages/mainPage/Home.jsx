@@ -28,8 +28,8 @@ let Component = React.createClass({
                 menu.push(
                     {
                         name:value.name,
-                        iconNormal: 'http://10.68.100.29:2992/_assets/'+value.smallpicture+'.png',
-                        iconActive: 'http://10.68.100.29:2992/_assets/'+value.largepicture+'.png',
+                        iconNormal: 'http://10.9.99.33:2992/_assets/'+value.smallpicture+'.png',
+                        iconActive: 'http://10.9.99.33:2992/_assets/'+value.largepicture+'.png',
                         subPage:[]
                     }
                 );
@@ -39,8 +39,8 @@ let Component = React.createClass({
                         menu[key].subPage.push(
                             {
                                 name:valueC.name,
-                                iconNormal: 'http://10.68.100.29:2992/_assets/'+valueC.smallpicture+'.png',
-                                iconActive: 'http://10.68.100.29:2992/_assets/'+valueC.largepicture+'.png',
+                                iconNormal: 'http://10.9.99.33:2992/_assets/'+valueC.smallpicture+'.png',
+                                iconActive: 'http://10.9.99.33:2992/_assets/'+valueC.largepicture+'.png',
                                 page:[]
                             }
                         )
@@ -118,18 +118,19 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         Verification:(userMessage)=>{
-            console.log(userMessage.data.token)
+            // console.log(userMessage.data.token);
             //获取登入时的时间
-            let length=userMessage.data.token.lastIndexOf('-')
-            let oldTime=userMessage.data.token.substring(length+1,userMessage.data.token.length)
+            let length=userMessage.data.token.lastIndexOf('-');
+            let oldTime=userMessage.data.token.substring(length+1,userMessage.data.token.length);
             //获取当前点击的时间
             let newTime = (new Date()).getTime();
             //获取时间间隔
             let Time=(newTime-oldTime)/60000;
-            console.log(Time);
-            if(Time>20){
-                // alert('由于您长时间没有进行操作,请您重新登入！')
-                // browserHistory.push('/app/all/page/login');
+            if( Time>20&& Time<(newTime/60000)){
+                alert('由于您长时间没有进行操作,请您重新登入！');
+                browserHistory.push('/app/all/page/login');
+            }else if(oldTime=0){
+                ()=>Verification(userMessage);
             }else{
                 $.ajax({
                 url:'http://10.68.100.32:8080/soam/token/verifyToken',

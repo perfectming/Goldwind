@@ -81,6 +81,11 @@ let Component = React.createClass({
             let arr4=[];
             let date =new Date();
             let year =date.getFullYear();
+            let month=date.getMonth();
+                            if (month == 0) {
+                                month = 12;
+                                year=year-1;
+                            }
                        
                             $.ajax({
              type:'post',

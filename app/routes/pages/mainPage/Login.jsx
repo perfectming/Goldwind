@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     login:(even)=>{
          $.ajax({
-              url: 'http://54.223.200.134/System/mlogin.aspx?loginType=4&P_username=bmjk&P_password=1&crossDomain=true',
+              url: 'http://54.223.200.134/System/mlogin.aspx?loginType=4&P_username='+$('#username1')[0].value+'&P_password='+$('#password1')[0].value+'&crossDomain=true',
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
