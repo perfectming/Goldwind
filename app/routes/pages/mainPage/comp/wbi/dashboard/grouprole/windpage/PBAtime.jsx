@@ -31,8 +31,12 @@ let Component = React.createClass({
         let{ipUrl,xxdwfId,xxdwfNa,PBATimeSecondPba,PBATimeSecondNodevreasonloss,PBATimeSecondLimitloss,PBATimeSecondMaintainloss,PBATimeSecondFaultloss,PBATimeSecondPoweract,PBATimeSecondDay,PBATimeFirstPba,PBATimeFirstNodevreasonloss,PBATimeFirstLimitloss,PBATimeFirstMaintainloss,PBATimeFirstFaultloss,PBATimeFirstPoweract,PBATimeFirstMonth,w0,winsss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
         return (
             <div className={styles.box}>
-             <div className={styles.paddingtop}>           
+             <div className={styles.paddingtop}>
+                 {//返回
+                      }
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
+                {//12个月
+                     }
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                   
                       
@@ -48,6 +52,8 @@ let Component = React.createClass({
                     </div>
                     
                 </div>
+                {//每个月的每天
+                     }
                  <div className={`${styles.bigboxx} ${styles.shadow}`}>                        
                                
                               <PBAtimechartt PBAx={PBATimeSecondDay} PBAPoweract={PBATimeSecondPoweract}
@@ -106,6 +112,9 @@ const mapDispatchToProps = (dispatch) => {
 
            let date=new Date();
            let month=date.getMonth();
+            if (month == 0) {
+                month = 12;
+            }
           // 第一个图的数据
             let PBATimeFirstMonth=[];
             let PBATimeFirstPoweract=[];
@@ -136,18 +145,25 @@ const mapDispatchToProps = (dispatch) => {
                
                      let PBATimeFirstPba=data.data;
                      for ( let i in PBATimeFirstPba){
+                         // 12个月的数据
                          let month=PBATimeFirstPba[i].month+'月';
                          PBATimeFirstMonth.push(month);
+                         // 实际发电量
                          let poweract=PBATimeFirstPba[i].poweract;
                          PBATimeFirstPoweract.push(poweract);
+                         // 故障损失
                          let faultloss=PBATimeFirstPba[i].faultloss;
                          PBATimeFirstFaultloss.push(faultloss);
+                         // 维护损失
                          let maintainloss=PBATimeFirstPba[i].maintainloss;
                          PBATimeFirstMaintainloss.push(maintainloss);
+                         // 限功率损失
                          let limitloss=PBATimeFirstPba[i].limitloss;
                          PBATimeFirstLimitloss.push(limitloss);
+                         // 非设备原因损失
                          let nodevreasonloss=PBATimeFirstPba[i].nodevreasonloss;
                          PBATimeFirstNodevreasonloss.push(nodevreasonloss);
+                         // PBA
                          let pba=PBATimeFirstPba[i].pba*100;
                          PBATimeFirstPbaP.push(Number(pba.toFixed(2)));
                      }
@@ -182,18 +198,25 @@ const mapDispatchToProps = (dispatch) => {
               
                      let PBATimeSecondPba=data.data;
                      for ( let i in PBATimeSecondPba){
+                         // 每天的数据
                          let day=PBATimeSecondPba[i].day+'日';
                          PBATimeSecondDay.push(day);
+                         // 计划发电量
                          let poweract=PBATimeSecondPba[i].poweract;
                          PBATimeSecondPoweract.push(poweract);
+                         // 故障损失
                          let faultloss=PBATimeSecondPba[i].faultloss;
                          PBATimeSecondFaultloss.push(faultloss);
+                         // 维护损失
                          let maintainloss=PBATimeSecondPba[i].maintainloss;
                          PBATimeSecondMaintainloss.push(maintainloss);
+                         // 限功率损失
                          let limitloss=PBATimeSecondPba[i].limitloss;
                          PBATimeSecondLimitloss.push(limitloss);
+                         // 非设备原因损失
                          let nodevreasonloss=PBATimeSecondPba[i].nodevreasonloss;
                          PBATimeSecondNodevreasonloss.push(nodevreasonloss);
+                         // PBA
                          let pba=PBATimeSecondPba[i].pba*100;
                          PBATimeSecondPbaP.push(Number(pba.toFixed(2)));
                      }
@@ -218,8 +241,8 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
-        }
-        ,
+        },
+        // 返回
         backtop:(befor_pagee,befor_page2)=>{
             dispatch(actions.setVars('showPage',befor_pagee));
         },

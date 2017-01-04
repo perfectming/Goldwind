@@ -31,7 +31,11 @@ let Component = React.createClass({
         return (
            
             <div className={styles.box}>
+                {//遮罩层
+                     }
              <div className={styles.boxcover} id='boxcover'></div>
+                {//更多弹出
+                     }
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
@@ -57,7 +61,7 @@ let Component = React.createClass({
                   
                       
                          
-                                <WFSprofitchart fanCost={WFSPCo} machine={WFSPNa} fanProfitQ={WFSPEa} TBA={WFSPRa} height={800} text={[actbt+1]+'月'+xxdwfNa+'各风机收益'} ty={40} pointWidth={30} borderRadius={7} pointPlacement={0} height={800}></WFSprofitchart>
+                                <WFSprofitchart fanCost={WFSPCo} machine={WFSPNa} fanProfitQ={WFSPEa} TBA={WFSPRa} text={[actbt+1]+'月'+xxdwfNa+'各风机收益'} ty={40} pointWidth={30} borderRadius={7} pointPlacement={0} height={800}></WFSprofitchart>
                            
                        
                
@@ -123,6 +127,10 @@ const mapDispatchToProps = (dispatch) => {
           let month=date.getMonth();
           let day = new Date(year,month,0); 
           let  daycountT = day.getDate();
+           if (month == 0) {
+               month = 12;
+               year=year-1;
+           }
  
             $.ajax({
              type:'post',
@@ -142,15 +150,16 @@ const mapDispatchToProps = (dispatch) => {
               let WFSP=data.data;
               for (let i in WFSP)
               {
+                  // 初始风场名字
               	let wtname=WFSP[i].wtname;
               	WFSPNa.push(wtname);
-
+// 初始收入
               	let earning=WFSP[i].earning;
               	WFSPEa.push(earning);
-
+// 初始成本
               	let costs=WFSP[i].costs;
               	WFSPCo.push(costs);
-
+// 初始收益率
               	let rate=WFSP[i].rate*100;
               	WFSPRa.push(Number(rate.toFixed(2)));
               }
@@ -175,6 +184,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        // 点击月份改变
          changpage :(value,key,xxdwfId,input_url)=>{
           
           let WFSPNa=[];
@@ -186,6 +196,10 @@ const mapDispatchToProps = (dispatch) => {
           let month=date.getMonth();
           let day = new Date(year,(key+1),0); 
           let  daycountT = day.getDate();
+             if (month == 0) {
+                 month = 12;
+                 year=year-1;
+             }
  
             $.ajax({
              type:'post',
@@ -231,6 +245,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('actbtWFP',key)) ;
              dispatch(actions.setVars('btnn',0)) ;
         },
+        // 前十
          gogogo:(xxdwfId,actbt,btn,input_url)=>{
            let WFSPNa=[];
           let WFSPEa=[];
@@ -241,6 +256,10 @@ const mapDispatchToProps = (dispatch) => {
           let month=date.getMonth();
           let day = new Date(year,(actbt+1),0); 
           let  daycountT = day.getDate();
+             if (month == 0) {
+                 month = 12;
+                 year=year-1;
+             }
  
             $.ajax({
              type:'post',
@@ -287,6 +306,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('btnn',0)) ;
            
         },
+        // 后十
        back:(xxdwfId,actbt,btn,input_url)=>{
            let WFSPNa=[];
           let WFSPEa=[];
@@ -297,6 +317,10 @@ const mapDispatchToProps = (dispatch) => {
           let month=date.getMonth();
           let day = new Date(year,(actbt+1),0); 
           let  daycountT = day.getDate();
+           if (month == 0) {
+               month = 12;
+                year=year-1;
+           }
  
             $.ajax({
              type:'post',
@@ -342,6 +366,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('btnn',1)) ;
 
         },
+        // 更多
          more:(xxdwfId,actbt,btn,input_url)=>{
              $("#sss").show();
              $('#boxcover').show();
@@ -355,6 +380,10 @@ const mapDispatchToProps = (dispatch) => {
           let month=date.getMonth();
           let day = new Date(year,(actbt+1),0); 
           let  daycountT = day.getDate();
+             if (month == 0) {
+                 month = 12;
+                 year=year-1;
+             }
  
             $.ajax({
              type:'post',
@@ -403,10 +432,12 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('width1',width)) ;
          
         },
+        // 关闭更多
         close:()=>{
             $("#sss").hide();
               $('#boxcover').hide();
         },
+        // 返回
         backtop:(befor_pagee,befor_page2)=>{
             dispatch(actions.setVars('showPage',befor_pagee));
         },

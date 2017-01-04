@@ -42,7 +42,7 @@ let Component = React.createClass({
                             name:valueC.name,
                             iconNormal: valueC.smallpicture+'.png',
                             iconActive: valueC.largepicture+'.png',
-                            page:[] 
+                            page:[]
                         }
                     )
                     //获取三级菜单

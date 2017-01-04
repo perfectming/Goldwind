@@ -94,6 +94,14 @@ const mapDispatchToProps = (dispatch) => {
     return {
         ajax: (input_url) => {
           // 集团的PBA12个月
+            let datee = new Date;
+            let year = datee.getFullYear();
+            let monthF = datee.getMonth();
+            if(monthF==0){
+                monthF=12;
+                year=year-1;
+            }
+            dispatch(actions.setVars('PBAGroupPbaName', monthF+"月"));
             let PBAGroupMonth = [];
             let PBAGroupPoweract = [];
             let PBAGroupFaultloss = [];

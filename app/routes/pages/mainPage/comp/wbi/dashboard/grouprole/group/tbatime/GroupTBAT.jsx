@@ -80,6 +80,15 @@ const mapDispatchToProps = (dispatch) => {
     return {
         ajax: (input_url) => {
             //获取十二个月的TBA
+            let datee = new Date;
+            let year = datee.getFullYear();
+            let month = datee.getMonth();
+            if(month==0){
+                month=12;
+                year=year-1;
+            }
+
+            dispatch(actions.setVars('qwe', month+"月"));
             let TBAtimedata;
             let TBAdaydata;
             let tbaMonths = [];
@@ -90,8 +99,7 @@ const mapDispatchToProps = (dispatch) => {
             let tbaDayRunTimes3 = [];
             let tbaDayDownTimes3 = [];
             let tbaDayTba3 = [];
-            let date = new Date();
-            let month = date.getMonth();
+
            // 获取所有的月份
             $.ajax({
                 type: 'post',
@@ -172,7 +180,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('tbaDayRunTimes31', tbaDayRunTimes3));
             dispatch(actions.setVars('tbaDayDownTimes31', tbaDayDownTimes3));
             dispatch(actions.setVars('tbaDayTba31', tbaDayTba3));
-            dispatch(actions.setVars('qwe', month + '月'));
+
 
 
         }

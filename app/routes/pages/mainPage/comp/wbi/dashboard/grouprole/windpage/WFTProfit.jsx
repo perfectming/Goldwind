@@ -128,6 +128,10 @@ const mapDispatchToProps = (dispatch) => {
             let date =new Date();
             let year =date.getFullYear();
             let month= date.getMonth();
+           if (month == 0) {
+               month = 12;
+               year=year-1;
+           }
             let month2=[];
             let cost=[];
             let income=[];
@@ -159,6 +163,7 @@ const mapDispatchToProps = (dispatch) => {
           
              },
            });
+          // 每天的收益
            $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/yield/getWfieldMaxYieBayDay',  
@@ -208,9 +213,11 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+        // 返回
          backtop:(befor_pagee,befor_page2)=>{
             dispatch(actions.setVars('showPage',befor_pagee));
         },
+
         changpage :(value,key,input_url,xxdwfId)=>{
             
            let arr1=[];
@@ -220,6 +227,10 @@ const mapDispatchToProps = (dispatch) => {
             let date =new Date();
             let year =date.getFullYear();
             let month= date.getMonth();
+            if (month == 0) {
+                month = 12;
+                year=year-1;
+            }
           
            $.ajax({
              type:'post',
@@ -266,6 +277,10 @@ const mapDispatchToProps = (dispatch) => {
         gogogo:(actbt,input_url,xxdwfId)=>{
        let date=new Date();
        let year= date.getFullYear();
+            if (month == 0) {
+                month = 12;
+                year=year-1;
+            }
         var arr1=[];
             var arr2=[];
             var arr3=[];
@@ -315,6 +330,11 @@ const mapDispatchToProps = (dispatch) => {
             var arr3=[];
              let date=new Date();
        let year= date.getFullYear();
+       let month=date.getMonth();
+            if (month == 0) {
+                month = 12;
+                year=year-1;
+            }
            $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/ELEC/getPageSize',  
@@ -358,6 +378,11 @@ const mapDispatchToProps = (dispatch) => {
               let date=new Date();
 
        let year= date.getFullYear();
+       let month=date.getMonth();
+            if (month == 0) {
+                month = 12;
+                year=year-1;
+            }
              let arr4=[];
             let arr5=[];
             let arr6=[];
