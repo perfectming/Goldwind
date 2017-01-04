@@ -32,18 +32,17 @@ let newData={};
 let pagingOptions = {
     showNumber: 3
 }
-let arr1=['groupid','wfid','year','month','cost','remark','startdate','enddate','costtype','uuid','day'];
+let arr1=['groupid','wfid','year','month','cost','remark',];
 for(let i=0;i<arr1.length;i++){
     newData[arr1[i]]='';
 }
-newData['datetype']=1;
 (function(){
     for(let x in ssg2){
         arr3.push(ssg2[x].name);
     }}());
 arr3.splice(-2,2);
 let arr=[15,16,10,15,22,13];
-let arr2=[15,16,6,4,15,22,8,];
+let arr2=[15,16,6,4,15,22,8,0,0,0,0,0];
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentWillMount() {
@@ -459,19 +458,22 @@ const mapDispatchToProps = (dispatch) => {
             wtid.data.map((value,key)=>{
                 (value.wfid==wfs.wfid) && (wfs['wfname']=value.wfname);
             });
-            wfs['groupname']=groupname.data[wfs.groupid]
+            wfs['groupname']=groupname.data[wfs.groupid];
+            wfs['startdate']=null;
+            wfs['enddate']=null;
+            wfs['costtype']=null;
+            wfs['uuid']=null;
+            wfs['day']=null;
+            wfs['id']=null;
             //wfs.push({groupname:"巴盟"});
             console.log(wfs);
             let ddv=JSON.stringify(wfs);
-
+console.log(ddv)
             $.ajax({
                 url: soam+'/info/getSaveWfcost',
                 type: 'post',
-                data: {
-                    ddv,
-                   // "month":month2+1,
-                   // "year": thYear,
-                },
+
+              data:ddv,
                 dataType: 'json',//here,
                 contentType:'application/json;charset=UTF-8',
                 success:function (data) {
