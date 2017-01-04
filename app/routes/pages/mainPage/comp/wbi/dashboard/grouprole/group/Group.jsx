@@ -138,7 +138,7 @@ let Component = React.createClass({
                             </tr>
                             {
                                 sortArr.slice(0,15).map((value,key)=>{
-                                    return(<tr key={key}><th>{key+1}</th><th>{value.groupname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{value.downtime}分钟</th></tr>)
+                                    return(<tr key={key}><th>{key+1}</th><th>{value.groupname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime).toFixed(1)}分钟</th></tr>)
                                 })
                             }
                             </tbody>
@@ -190,7 +190,6 @@ const mapDispatchToProps = (dispatch) => {
                         async:true,
                         dataType: 'json',
                         success:function (data) {
-                            console.log(data)
                             yearPro=data.data;
                             month2=[],cost=[],incomes=[];
                             for(var i in yearPro){
