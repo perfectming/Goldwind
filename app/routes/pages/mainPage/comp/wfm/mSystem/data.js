@@ -167,7 +167,7 @@ module.exports = {
             ],
         },
         center: {
-            header: ['设备','查询权','控制权'],
+            header: ['设备','查询权','控制权','监控权'],
             content: [
                 ['Uilk FA01', 1, 0],
                 ['Uilk FA01', 1, 0],

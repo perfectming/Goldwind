@@ -4,7 +4,7 @@ var {getState} = require('redux/store');
 var actions = require('redux/actions');
 var $ =require('jquery');
 import styles from './Amm.scss';
-let pageSize=1;
+let pageSize=11;
 
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';
@@ -13,7 +13,7 @@ import add from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 import Login from '../../../../../../components/common/Loading.jsx';
 import Ambox from './boxAm.jsx';
-let soam='http://10.9.100.48:8080/soam';
+let soam='http://10.68.100.32:8080/soam';
 let tabaleData = require('./data');
 let arr=['id','name','loginname','password','phonecode','mailbox','logintype','dogcode','remark','roleids'];
 let Component = React.createClass({

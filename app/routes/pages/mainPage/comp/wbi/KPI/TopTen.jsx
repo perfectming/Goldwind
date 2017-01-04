@@ -377,6 +377,11 @@ const mapDispatchToProps = (dispatch) => {
 			        return false;
 	    		}
 	    	}else{
+	    		if(topTitleTwo!==undefined&&checkedTop!==storageTop){
+	    			dispatch(actions.setVars('alertBool', false));
+			        dispatch(actions.setVars('alertText', '请选择同一个指标项'));
+			        return false;
+	    		}
 	    		dispatch(actions.setVars('storageTop', checkedTop));
 	    		var sTime = $('#startTime').val();
 		        //结束时间时间

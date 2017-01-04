@@ -20,7 +20,7 @@ let month=datee.getMonth();
 if (month == 0) {
     month = 12;
 }
-console.log(month)
+
   let key=month;
 let Component = React.createClass({
      componentWillMount() {

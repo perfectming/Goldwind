@@ -200,7 +200,7 @@ let daycount = dayy.getDate();
         }],
 
             series: [{
-                name: '收益',
+                name: '收入',
                 type: 'column',
                 data: windProfit,
                 pointPlacement:0,

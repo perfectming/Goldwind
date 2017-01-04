@@ -1,0 +1,133 @@
+
+.fiexdbox{
+  width:300px;
+  height:400px;
+  background:#50545f;
+  margin-top:-30px;
+  margin-left:73px;
+  border:1px solid #10141f;
+  position:absolute;
+  .fctitle{
+    text-align:center;
+    line-height:40px;
+    font-size:16px;
+    margin:0px;
+    border-bottom: 1px solid #485b7b;
+    background: #000;
+  }
+  .close{
+    position:absolute;
+    top:5px;
+    right:5px;
+    margin-rignt:0px;
+    cursor:pointer;
+  }
+  color:#fff;
+  .listbox{
+    width:100%;
+    height:330px;
+    border:1px solid #202030;
+    background: #223;
+    border-top:none;
+    overflow-x:hidden;
+    overflow-y:auto;
+    ul{padding:0px;}
+    .show{
+      display:none;
+    }
+    ul li{
+      width:300px;
+      height:auto;
+      line-height:30px;
+      list-style:none;
+      font-size:14px;
+      margin:0px;
+      padding:0px;
+      margin-bottom:3px;
+
+      a{
+        display:inline-block;
+        width:300px;
+        padding-left:40px;
+        height:auto;
+        line-height:30px;
+        font-size:14px;
+        cursor:pointer;
+        color:#fff;
+        background-color:#272b34;
+        background-image:url('../../../img/comp/add_down.png');
+        background-repeat: no-repeat;
+        background-position: 15px center;
+        &:hover{
+          background-color:#345;
+        }
+      }
+      .list_span{
+        width:100%;
+        display:none;
+        .listitem{
+          width:100%;
+          height:30px;
+          line-height:33px;
+          font-size:14px;
+          padding-left:50px;
+
+          color:#fff;
+          background-image:url('../../../img/comp/son_down.png');
+          background-repeat: no-repeat;
+          background-position: 15px center;
+          input{
+            width:15px;
+            height:15px;
+            cursor:pointer;
+            vertical-align:middle;
+            margin:0px;
+          }
+        }
+
+      }
+
+    }
+  }
+  .btnbox{
+    width:100%;
+    overflow:hidden;
+    a{
+      width:50px;
+      height:30px;
+      line-height:30px;
+      float:left;
+      cursor:pointer;
+      margin:9px 10px 0 50px;
+      border:1px solid #000;
+      text-align:center;
+      border-radius:5px;color:#fff;
+      &:hover{color:#272b34;box-shadow:0px 0px 5px #346;}
+    }
+  }
+
+
+}
+
+.listbox::-webkit-scrollbar {
+  width:10px;
+  height:10px;
+  border:1px solid #346;
+}
+.listbox::-webkit-scrollbar-button    {
+  background-color:#272b34;
+  display:none;
+}
+.listbox::-webkit-scrollbar-track     {
+  background:#091a2a;
+}
+.listbox::-webkit-scrollbar-thumb{
+  background:#272b34;
+  border-radius:10px;
+}
+.listbox::-webkit-scrollbar-corner {
+  background:#346;
+}
+.listbox::-webkit-scrollbar-resizer  {
+  background:#FF0BEE;
+}

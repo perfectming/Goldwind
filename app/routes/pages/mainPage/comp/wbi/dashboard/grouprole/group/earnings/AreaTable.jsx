@@ -246,7 +246,7 @@ let Component = React.createClass({
             }],
 
             series: [{
-                name: '收益',
+                name: '收入',
                 type: 'column',
                 data: areaRecordProfit,
                 borderRadius: 7,
