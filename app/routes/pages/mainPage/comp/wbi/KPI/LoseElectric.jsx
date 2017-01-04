@@ -373,6 +373,19 @@ const mapDispatchToProps = (dispatch) => {
 			        return false;
 	    		}
 	    	}else{
+	    		if(loseAreaTwo!==undefined && checkedLose!==storage){
+	    			dispatch(actions.setVars('alertBool', false));
+	                dispatch(actions.setVars('alertText', '请选择同一指标项'));
+	                return false;
+	    		}else if(loseAreaThree!==undefined && checkedLose!==storage){
+	    			dispatch(actions.setVars('alertBool', false));
+	                dispatch(actions.setVars('alertText', '请选择同一指标项'));
+	                return false;
+	    		}else if(loseAreaFour!==undefined && checkedLose!==storage){
+	    			dispatch(actions.setVars('alertBool', false));
+	                dispatch(actions.setVars('alertText', '请选择同一指标项'));
+	                return false;
+	    		};
 	    		dispatch(actions.setVars('storage', checkedLose));
 	    		var sTime = $('#startTime').val();
 		        //结束时间时间
