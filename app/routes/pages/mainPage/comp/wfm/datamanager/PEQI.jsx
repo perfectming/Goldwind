@@ -16,7 +16,7 @@ let arr3=[];
 let yeares=[];
 var pageSize=11;//设置每页的条目数量
 let page=1;//设置初始页码
-let soam='http://10.9.100.18:8080/soam';//设置接口
+let soam='http://10.68.100.32:8080/soam';//设置接口
 let thDate=new Date();
 let thYear=thDate.getFullYear();//定义变量，路径
 for(let i=0;i<=30;i++){
