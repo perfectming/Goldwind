@@ -90,9 +90,7 @@ let Component = React.createClass({
                     stacking: 'normal',
                     maxPointWidth: 40,
                     borderWidth: 0,
-                    tooltip: {
-                        valueSuffix:'kWh'
-                    },
+
                 },
                 line:{
                     tooltip: {
@@ -166,12 +164,18 @@ let Component = React.createClass({
                 color: "#33BAC0",
                 data: power1,
                 borderRadius: 4,
+                tooltip: {
+                    valueSuffix:'kWh'
+                },
             }, {
                 name: '故障损失',
                 color: '#5298d2',
                 type: 'column',
                 data: wrong10,
                 stack: 'time',
+                tooltip: {
+                    valueSuffix:'kWh'
+                },
 
             },
                 {
@@ -179,14 +183,20 @@ let Component = React.createClass({
                     color: '#ffffff',
                     type: 'column',
                     data: wrong11,
-                    stack: 'time'
+                    stack: 'time',
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
                 },
                 {
                     name: '限功率损失',
                     color: '#e8952a',
                     type: 'column',
                     data: wrong12,
-                    stack: 'time'
+                    stack: 'time',
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
                 },
 
                 {
@@ -196,6 +206,9 @@ let Component = React.createClass({
                     data: wrong13,
                     stack: 'time',
                     borderRadius: 2,
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
                 },
 
 
