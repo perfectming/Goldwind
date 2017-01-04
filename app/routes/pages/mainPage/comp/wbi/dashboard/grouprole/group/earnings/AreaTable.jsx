@@ -74,7 +74,12 @@ let Component = React.createClass({
                             let w111 = windFiedN;
                             let datee = new Date;
                             let year = datee.getFullYear();
-
+                            let month2=datee.getMonth();
+                            if(month2==0){
+                                month2=12;
+                               year=year-1;
+                            }
+                            keyy=month2;
                             let dayy = new Date(year, keyy, 0);
 //获取天数：
                             let daycount = dayy.getDate();
@@ -170,7 +175,7 @@ let Component = React.createClass({
 
                                 },
                             });
-                            changedataq(w11, sqy, b, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, areaWindids, areaWindNames1, areaWindCosts1, areaWindEarnings1, areaWindRates1);
+                            changedataq(w11,  b, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, areaWindids, areaWindNames1, areaWindCosts1, areaWindEarnings1, areaWindRates1);
                         }
                     }
                 }
@@ -290,7 +295,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedataq: (w11, sqy, b, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, areaWindids, areaWindNames1, areaWindCosts1, areaWindEarnings1, areaWindRates1)=> {
+        changedataq: (w11, b, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, areaWindids, areaWindNames1, areaWindCosts1, areaWindEarnings1, areaWindRates1)=> {
             dispatch(actions.setVars('w1', w11));
 
             dispatch(actions.setVars('areaWindNamess', areaWindNames));

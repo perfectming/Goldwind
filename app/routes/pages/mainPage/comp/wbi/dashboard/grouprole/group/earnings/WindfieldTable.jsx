@@ -71,6 +71,11 @@ let Component = React.createClass({
                             let datee=new Date;
                         let year=datee.getFullYear();
 
+                            let monthF = datee.getMonth();
+                            if(monthF==0){
+                                keyy=12;
+                                year=year-1;
+                            }
 let dayy = new Date(year,keyy,0); 
 //获取天数：
 let daycount = dayy.getDate();

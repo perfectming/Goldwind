@@ -233,15 +233,20 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            if(month2==0){
+                month2=12;
+            }
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('actbt',  month2-1));
             dispatch(actions.setVars('mon',  month2+"月"));
 
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/PBA/getCompanySpacePBA',
                 async: false,
-                data: 'month=11',
+                data: {
+                    "month": month2,
+                },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {

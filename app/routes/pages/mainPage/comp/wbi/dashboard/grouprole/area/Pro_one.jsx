@@ -229,7 +229,9 @@ const mapDispatchToProps = (dispatch) => {
             let month2 = date.getMonth();
             let day = new Date(year, month2, 0);
             let daycount = day.getDate();
-
+            if(month2==0){
+                month2=12;
+            }
 
 
             $.ajax({

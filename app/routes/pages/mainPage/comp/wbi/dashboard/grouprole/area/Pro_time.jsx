@@ -92,6 +92,9 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            if(month2==0){
+                month2=12;
+            }
             dispatch(actions.setVars('bt0',  0));
             dispatch(actions.setVars('actbt',  10));
             dispatch(actions.setVars('mon',  month2+"月"));
@@ -129,6 +132,8 @@ const mapDispatchToProps = (dispatch) => {
                 error:function(){
                 },
             })
+
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/yield/getMaxYieBayDay',
@@ -140,6 +145,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+
                     //各区域   一区域二区域
                     let runtime2=[];       //实际发电量
                     let downtime2=[];       //故障损失

@@ -173,8 +173,11 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            if(month2==0){
+                month2=12;
+            }
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('actbt',  month2));
             dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
                 type:'post',
