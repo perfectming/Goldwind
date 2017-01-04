@@ -31,7 +31,7 @@ let Component = React.createClass({
                     <div className={styles.left}>
                         <div className={`${styles.firstfloor} ${styles.boxShadow}`}>
                             <div className={styles.section}>
-                                <div className={styles.text1}>收益:{profit/1-costs/1}万元·投资:{amounts}万元</div>
+                                <div className={styles.text1}>收入:{profit}万元·成本:{costs}万元</div>
                                 <div className={styles.alink}>
                                     <a className={styles.space} onClick={()=>changepageProfitS()}></a>
                                 </div>
