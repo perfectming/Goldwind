@@ -21,7 +21,6 @@ let Component = React.createClass({
     },
     render() {
         let {itemHeaderActive, itemTreeAct, flag=true,userMessage,Verification}=this.props;
-        console.log(userMessage)
         let menu=[];
         if(userMessage){
             userMessage.data.tlist.map(function(value,key){
@@ -29,8 +28,8 @@ let Component = React.createClass({
                 menu.push(
                     {
                         name:value.name,
-                        iconNormal: 'http://10.9.100.7:2992/_assets/'+value.smallpicture+'.png',
-                        iconActive: 'http://10.9.100.7:2992/_assets/'+value.largepicture+'.png',
+                        iconNormal: 'http://10.68.100.29:2992/_assets/'+value.smallpicture+'.png',
+                        iconActive: 'http://10.68.100.29:2992/_assets/'+value.largepicture+'.png',
                         subPage:[]
                     }
                 );
@@ -40,8 +39,8 @@ let Component = React.createClass({
                         menu[key].subPage.push(
                             {
                                 name:valueC.name,
-                                iconNormal: 'http://10.9.100.7:2992/_assets/'+valueC.smallpicture+'.png',
-                                iconActive: 'http://10.9.100.7:2992/_assets/'+valueC.largepicture+'.png',
+                                iconNormal: 'http://10.68.100.29:2992/_assets/'+valueC.smallpicture+'.png',
+                                iconActive: 'http://10.68.100.29:2992/_assets/'+valueC.largepicture+'.png',
                                 page:[]
                             }
                         )
@@ -81,9 +80,6 @@ let Component = React.createClass({
             })
         }
 
-        console.log(menu)
-
-
         return (
 
             <FixedContent mode="fullWidth" width={1920}>
@@ -121,39 +117,40 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('putpage', false));
 
         },
-        // Verification:(userMessage)=>{
-        //     console.log(userMessage.data.token)
-        //     //获取登入时的时间
-        //     let length=userMessage.data.token.lastIndexOf('-')
-        //     let oldTime=userMessage.data.token.substring(length+1,userMessage.data.token.length)
-        //     //获取当前点击的时间
-        //     let newTime = (new Date()).getTime();
-        //     //获取时间间隔
-        //     let Time=(newTime-oldTime)/60000;
-        //     if(Time>100){
-        //         alert('由于您长时间没有进行操作,请您重新登入！')
-        //         browserHistory.push('/app/all/page/login');
-        //     }else{
-        //         $.ajax({
-        //         url:'http://10.68.100.32:8080/soam/token/verifyToken',
-        //         data:'userid='+userMessage.data.id+'&token='+userMessage.data.token+'',
-        //         type:'post',
-        //         dataType:"json",
-        //         timeout:3000,
-        //         success:function(json,textStatus){
-        //
-        //           userMessage.data.token=json.data;
-        //         },
-        //        error:function(XMLHttpRequest,textStatus,errorThrown){
-        //            alert('获取数据失败！');
-        //
-        //        }
-        //
-        //         })
-        //
-        //     }
-        //
-        // }
+        Verification:(userMessage)=>{
+            console.log(userMessage.data.token)
+            //获取登入时的时间
+            let length=userMessage.data.token.lastIndexOf('-')
+            let oldTime=userMessage.data.token.substring(length+1,userMessage.data.token.length)
+            //获取当前点击的时间
+            let newTime = (new Date()).getTime();
+            //获取时间间隔
+            let Time=(newTime-oldTime)/60000;
+            console.log(Time);
+            if(Time>20){
+                // alert('由于您长时间没有进行操作,请您重新登入！')
+                // browserHistory.push('/app/all/page/login');
+            }else{
+                $.ajax({
+                url:'http://10.68.100.32:8080/soam/token/verifyToken',
+                data:'userid='+userMessage.data.id+'&token='+userMessage.data.token+'',
+                type:'post',
+                dataType:"json",
+                timeout:3000,
+                success:function(json,textStatus){
+
+                  userMessage.data.token=json.data;
+                },
+               error:function(XMLHttpRequest,textStatus,errorThrown){
+                   alert('获取数据失败！');
+
+               }
+
+                })
+
+            }
+
+        }
     }
 };
 
