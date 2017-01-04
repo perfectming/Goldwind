@@ -1,26 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './box.scss';
+import styles from './boxB.scss';
 import jian from '../../../img/comp/jian_down.png';
 import add from '../../../img/comp/add_down.png';
 import close from '../../../img/comp/close_down.png';
 let $ =require('jquery');
 var actions = require('redux/actions');
 let matrixdata = require('../../../../../../../config/MatrixData');
-let model = require('../../../../../../../config/Model');
-let modeldata = require('../../../../../../../config/ModelData');
-let data=modeldata.ModelData;
-let mod=model.Model;
-let mat=model.Model;
-let matD=matrixdata.ModelData;
-let model_data = modeldata.ModelData;
-var model_ens = model.Model.ens;
 let arr1 = [];
 let arr2 = [];
 var obj = matrixdata;
 var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
 var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-
 
 (function(){
     for(var x in obj_wfd){
@@ -33,8 +24,6 @@ var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
 
 }());
 
-
-
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -43,9 +32,8 @@ let Component = React.createClass({
         let {border1=true,closebox2,Tofaninfo1} = this.props;
         return (
 
-            <div className={styles.fiexdbox}  style={{top: 130, left:734}}>
+            <div className={styles.fiexdbox}  style={{top: 30, left:-73}}>
                 <span>设备选择</span>
-                <img src={close} className={styles.close} onClick={()=>closebox2()}/>
                 <div className={styles.listbox} id='box2'>
                     <ul id='fclist'>
                         {
@@ -56,34 +44,20 @@ let Component = React.createClass({
                                         <div className={styles.list_span}>
                                             {
                                                 obj_pvd[value].map((valueC,key)=>{
-
                                                     return(
-
-
                                                         <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC,value)}>
                                                             <input type='checkbox' name='checknameB' value={valueC.Wtname} />
                                                             {valueC.Wtname}
                                                         </div>
-
                                                     )
                                                 })
-
                                             }
-
                                         </div>
                                     </li>
-
                                 )
                             })
                         }
-
                     </ul>
-
-
-                </div>
-                <div className={styles.btnbox}>
-                    <a id='sentB'>确定</a>
-                    <a onClick={()=>closebox2()}>取消</a>
                 </div>
             </div>
         );
