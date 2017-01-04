@@ -140,7 +140,7 @@ let Component = React.createClass({
 	                			</tr>
 	                			{
 	                				areaArr.slice(0,15).map((value,key)=>{
-			                    		return(<tr key={key}><th>{key+1}</th><th>{value.wfname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{value.downtime}分钟</th></tr>)
+			                    		return(<tr key={key}><th>{key+1}</th><th>{value.wfname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime).toFixed(1)}分钟</th></tr>)
 			                    	})
 	                			}
 	                		</tbody>	
