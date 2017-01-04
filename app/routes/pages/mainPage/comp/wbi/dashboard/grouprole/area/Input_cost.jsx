@@ -23,7 +23,7 @@ let page=1;//设置初始页码
 let thDate=new Date();
 let thYear=thDate.getFullYear();
 let month2=thDate.getMonth();
-let soam='http://10.68.100.32:8080/wbi';//设置接口
+let soam='http://10.9.100.48:8080/wbi';//设置接口
 for(let i=0;i<=30;i++){
     yeares.push(thYear-15+i)
 }
@@ -32,7 +32,7 @@ let newData={};
 let pagingOptions = {
     showNumber: 3
 }
-let arr1=['groupid','wfid','year','month','cost','remark'];
+let arr1=['groupid','wfid','year','month','cost','remark','startdate','enddate','costtype','uuid','day'];
 for(let i=0;i<arr1.length;i++){
     newData[arr1[i]]='';
 }
@@ -43,7 +43,7 @@ newData['datetype']=1;
     }}());
 arr3.splice(-2,2);
 let arr=[15,16,10,15,22,13];
-let arr2=[15,16,6,4,15,22,8];
+let arr2=[15,16,6,4,15,22,8,];
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentWillMount() {
@@ -360,10 +360,8 @@ const mapDispatchToProps = (dispatch) => {
                 url: soam+'/info/getWfcosts',
                 type: 'post',
                 data:{
-
                     "curpage": 1,
                     "pageSize": pageSize,
-
                 },
                 dataType: 'json',//here,
               //  timeout:'3000',

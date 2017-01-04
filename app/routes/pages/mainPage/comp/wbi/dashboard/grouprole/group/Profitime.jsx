@@ -76,7 +76,10 @@ const mapDispatchToProps = (dispatch) => {
             let month =date.getMonth();
             let day = new Date(year,month,0); 
             let  daycount = day.getDate();
-           
+          if(month==0){
+              month=12;
+              year=year-1;
+          }
           $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/yield/getAllRate',  
