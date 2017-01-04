@@ -52,10 +52,10 @@ let Component = React.createClass({
         this.props.init(comp);
     },
     render() {
-        let {deleData,deleDate,addData,wfidCount,addDate,table,year,wtidAll,groupAll,saveTableItem, changeTableItem1,page,nextPage,lastPage,theOne,years=2016,theLast,dataenter,buttonAction,boll=false} = this.props;
+        let {deleData,deleDate,addData, num=0,wfidCount,addDate,wfids,table,year,wtidAll,groupAll,totalpage,saveTableItem, changeTableItem1,page,nextPage,lastPage,theOne,years0=null,theLast,dataenter,buttonAction,boll=false} = this.props;
 
         //
-        let num=0;
+
 
 
         if (boll){//判断数据是否存在
@@ -99,7 +99,7 @@ let Component = React.createClass({
                         <div className={styles.actionBox}>
                             <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.data))}/>
                             <img src={refresh}/>
-                            <img src={add} onClick={()=>addData(newData,page)}/>
+                            <img src={add} onClick={()=>addData(newData,totalpage,years0,wfids)}/>
                         </div>
                         <div  className={styles.cx}></div>
                         <div className={styles.tableBox}>
@@ -120,7 +120,7 @@ let Component = React.createClass({
                                 {
                                     table.data.pagedata.map((value, key)=> {
                                         num++;
-                                        if(pageSize*(page-1)<=key&&key<(pageSize*(page-1)+pageSize)){
+
 
                                             if(key<wfidCount/1){
                                             return (
@@ -196,7 +196,7 @@ let Component = React.createClass({
                                                         })
                                                     }
                                                     <div className={styles.tableContentItemm} style={{width:7+"%"}}>
-                                                        <img src={save} onClick={(e)=>saveTableItem(key,)}/>
+                                                        <img src={save} onClick={(e)=>saveTableItem(key,value,wtidAll,groupAll)}/>
                                                     </div>
                                                     <div className={styles.tableContentItemm} style={{width:7+"%"}}>
                                                         <img src={del} onClick={(e)=>deleData(key,)}/>
@@ -301,7 +301,7 @@ let Component = React.createClass({
                                             }
 
 
-                                            }
+
 
                                     })
                                 }
@@ -318,11 +318,11 @@ let Component = React.createClass({
 
                     </div>
                     <div className={styles.buttonss}>
-                        <span  className={styles.first} onClick={()=>theOne(page,years,)}>首页</span>
-                        <span className={styles.first}  onClick={()=>lastPage(page,years,)}>上一页</span>
-                        <span className={styles.first}>{page+"/"+Math.ceil(table.data.pagedata.length/pageSize)}</span>
-                        <span className={styles.first} onClick={()=>nextPage(page,table.data.totalRecord,pageSize,years,)}>下一页</span>
-                        <span className={styles.first} onClick={()=>theLast(page,table.data.totalRecord,pageSize,years,)}>末页</span>
+                        <span  className={styles.first} onClick={()=>theOne(page,years0,wfids)}>首页</span>
+                        <span className={styles.first}  onClick={()=>lastPage(page,years0,wfids)}>上一页</span>
+                        <span className={styles.first}>{page+"/"+totalpage}</span>
+                        <span className={styles.first} onClick={()=>nextPage(page,table.data.totalRecord,pageSize,years0,wfids)}>下一页</span>
+                        <span className={styles.first} onClick={()=>theLast(page,table.data.totalRecord,pageSize,years0,wfids)}>末页</span>
                     </div>
 
                 </div>
@@ -342,7 +342,8 @@ const mapStateToProps = (state) => {
         wtidAll: state.objs.wtidAll,
         groupAll: state.objs.groupAll,
         boll: state.vars.boll,
-        years:state.vars.years
+        years0:state.vars.years0,
+        totalpage:state.vars.totalpage,
     }
 };
 
@@ -367,7 +368,9 @@ const mapDispatchToProps = (dispatch) => {
                 success:function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('totalpage', data.data.totalPage));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+
                     getgroupid()
                 },
                 error:function(){
@@ -418,7 +421,7 @@ const mapDispatchToProps = (dispatch) => {
             var tContent = $('#textContent5')[0].value;
             var tContent1 = $('#textContent6')[0].value;
             dispatch(actions.setVars('page1', 1));
-            dispatch(actions.setVars('years', tContent));
+            dispatch(actions.setVars('years0', tContent));
             dispatch(actions.setVars('wfids', tContent1));
 
             $.ajax({
@@ -443,12 +446,36 @@ const mapDispatchToProps = (dispatch) => {
             console.log(tableV.data.pagedata[i][arr1[j]]);
             dispatch(actions.setObjs('tableContent', tableV));
         },
-        addData:(i,page) => {
+        addData:(i,totalpage,years0,wfids) => {
+            page=totalpage;
+            dispatch(actions.setVars('page1', page));
+            $.ajax({
+                url: soam+'/info/getWfcosts',
+                type: 'post',
+                data:{
+                    "curpage": page,
+                    "pageSize": pageSize,
+                    "year": years0,
+                    "wfid": wfids,
+
+                },
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data)
+                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+
+                    jiang();
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+            function jiang() {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.data.pagedata.push(i);
             dispatch(actions.setObjs('tableContent', tableV));
-            page=Math.ceil(tableV.data.pagedata.length/16);
-            dispatch(actions.setVars('page1', page));
+        }
 
         },
         saveTableItem:(li,dis,wtid,groupname)=>{
@@ -526,13 +553,19 @@ console.log(ddv)
             tableV.data.pagedata.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
         },
-        lastPage:(page,years,wfids)=>{
+        lastPage:(page,years0,wfids)=>{
             page>1 ? page--:page;
             dispatch(actions.setVars('page1', page));
             $.ajax({
-                url: soam+'/info/getWfcosts',
+                url: soam+'/info/getStageprice',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&curPage='+page+'&&year='+years,
+                data:{
+                    "curpage": page,
+                    "pageSize": pageSize,
+                    "year": years0,
+                    "wfid": wfids,
+
+                },
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)
@@ -544,16 +577,32 @@ console.log(ddv)
                 }
             });
         },
-        nextPage:(page,i,j,years,wfids)=>{
+        nextPage:(page,i,j,years0,wfids)=>{
             (page<Math.ceil(i/j)) ? page++:page;
             dispatch(actions.setVars('page1', page));
+            if(wfids==undefined){
+                wfids=null;
+            }
+
+
+            console.log(page)
+            console.log(pageSize)
+            console.log(years0)
+            console.log(wfids)
             $.ajax({
-                url: soam+'/info/getWfcosts',
+                url: soam+'/info/getStageprice',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&curPage='+page+'&&year='+years,
+
+                data:{
+                    "curpage": page,
+                    "pageSize": pageSize,
+                    "year": years0,
+                    "wfid": wfids,
+
+                },
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data.data.pagedata.length)
+                    console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
@@ -563,13 +612,19 @@ console.log(ddv)
             });
 
         },
-        theOne :(page,years,wfids)=>{
+        theOne :(page,years0,wfids)=>{
             page=1;
             dispatch(actions.setVars('page1', page));
             $.ajax({
-                url: soam+'/info/getWfcosts',
+                url: soam+'/info/getStageprice',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&curPage='+page+'&&year='+years,
+                data:{
+                    "curpage": page,
+                    "pageSize": pageSize,
+                    "year": years0,
+                    "wfid": wfids,
+
+                },
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)
@@ -581,13 +636,19 @@ console.log(ddv)
                 }
             });
         },
-        theLast :(page,i,j,years,wfids)=>{
+        theLast :(page,i,j,years0,wfids)=>{
             page=Math.ceil(i / j);
             dispatch(actions.setVars('page1', page));
             $.ajax({
-                url: soam+'/info/getWfcosts',
+                url: soam+'/info/getStageprice',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&curPage='+page+'&&year='+years,
+                data:{
+                    "curpage": page,
+                    "pageSize": pageSize,
+                    "year": years0,
+                    "wfid": wfids,
+
+                },
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)

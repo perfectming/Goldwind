@@ -13,37 +13,36 @@ var $ = require("jquery");
 var actions = require('redux/actions');
 var {getState} = require('redux/store');
 let comps = require('./../area/datas');
-let ssg2 = mod.Model.ens;
-let arr3 = [];
-let yeares = [];
-let month4 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-let group0 = comps.data.group0;
-let pageSize = 16;//设置每页的条目数量
-let page = 1;//设置初始页码
-let thDate = new Date();
-let thYear = thDate.getFullYear();
-let month2 = thDate.getMonth();
-let soam = 'http://10.9.100.48:8080/wbi';//设置接口
-for (let i = 0; i <= 30; i++) {
-    yeares.push(thYear - 15 + i)
+let ssg2=mod.Model.ens;
+let arr3=[];
+let yeares=[];
+let month4=[1,2,3,4,5,6,7,8,9,10,11,12];
+let group0=comps.data.group0;
+let pageSize=16;//设置每页的条目数量
+let page=1;//设置初始页码
+let thDate=new Date();
+let thYear=thDate.getFullYear();
+let month2=thDate.getMonth();
+let soam='http://10.9.100.48:8080/wbi';//设置接口
+for(let i=0;i<=30;i++){
+    yeares.push(thYear-15+i)
 }
-let newData = {};
+let newData={};
 
 let pagingOptions = {
     showNumber: 3
 }
-let arr1 = ['groupid', 'wfid', 'year', 'month', 'price', 'remark',];
-for (let i = 0; i < arr1.length; i++) {
-    newData[arr1[i]] = '';
+let arr1=['groupid','wfid','year','month','price','remark',];
+for(let i=0;i<arr1.length;i++){
+    newData[arr1[i]]='';
 }
-(function () {
-    for (let x in ssg2) {
+(function(){
+    for(let x in ssg2){
         arr3.push(ssg2[x].name);
-    }
-}());
-arr3.splice(-2, 2);
-let arr = [15, 16, 10, 15, 22, 13];
-let arr2 = [15, 16, 6, 4, 15, 22, 8, 0, 0, 0, 0, 0];
+    }}());
+arr3.splice(-2,2);
+let arr=[15,16,10,15,22,13];
+let arr2=[15,16,6,4,15,22,8,0,0,0,0,0];
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentWillMount() {
@@ -53,13 +52,14 @@ let Component = React.createClass({
         this.props.init(comp);
     },
     render() {
-        let {deleData, deleDate, addData, wfidCount, addDate, table, year, wtidAll, groupAll, saveTableItem, changeTableItem1, page, nextPage, lastPage, theOne, years = 2016, theLast, dataenter, buttonAction, boll = false} = this.props;
+        let {deleData,deleDate,addData, num=0,wfidCount,addDate,wfids,table,year,wtidAll,groupAll,totalpage,saveTableItem, changeTableItem1,page,nextPage,lastPage,theOne,years0=null,theLast,dataenter,buttonAction,boll=false} = this.props;
 
         //
-        let num = 0;
 
 
-        if (boll) {//判断数据是否存在
+
+        if (boll){//判断数据是否存在
+
 
 
             return (
@@ -69,7 +69,7 @@ let Component = React.createClass({
                         <div className={styles.seleBox}>
                             <span>年度</span>
                             <select id='textContent5'>
-                                {yeares.map((value, key) => {
+                                {yeares.map((value, key)=> {
                                     return (
                                         <option value={value} key={key}>{value}</option>
                                     )
@@ -80,19 +80,16 @@ let Component = React.createClass({
                         <div className={styles.seleBox}>
                             <span>场站</span>
                             <select id='textContent6'>
-                                {wtidAll.data.map((value, key) => {
+                                {wtidAll.data.map((value, key)=> {
                                     return (
-                                        <option value={value.wfid} key={key}>{value.wfname}</option>
+                                        <option  value={value.wfid} key={key}>{value.wfname}</option>
                                     )
                                 })
                                 }
                             </select>{/*map遍历年度*/}
                         </div>
                         <div className={styles.inputBox}>
-                            <button onClick={(e) => {
-                                buttonAction(e.target)
-                            }}>查询
-                            </button>
+                            <button onClick={(e)=>{buttonAction(e.target)}}>查询</button>
                         </div>
                         <div className={styles.btnBox}>
                             <div>单 位：万元</div>
@@ -100,21 +97,20 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.table}>
                         <div className={styles.actionBox}>
-                            <img src={save} onClick={() => alert("您保存的数据为:" + JSON.stringify(table.data))}/>
+                            <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.data))}/>
                             <img src={refresh}/>
-                            <img src={add} onClick={() => addData(newData, page)}/>
+                            <img src={add} onClick={()=>addData(newData,totalpage,years0,wfids)}/>
                         </div>
-                        <div className={styles.cx}></div>
+                        <div  className={styles.cx}></div>
                         <div className={styles.tableBox}>
                             <div className={styles.tableHeaderBox}>
                                 <div className={styles.tableHeaderItem}
-                                     style={{width: 8 + '%'}}>序号
-                                </div>
+                                     style={{width:8+'%'}}>序号</div>
                                 {
-                                    comp.data.header2.map((value, key) => {
+                                    comp.data.header2.map((value, key)=> {
                                         return (
                                             <div className={styles.tableHeaderItem}
-                                                 style={{width: arr[key] + "%"}} key={key}>{value}</div>
+                                                 style={{width:arr[key]+"%"}} key={key}>{value}</div>
                                         )
                                     })
                                 }
@@ -122,242 +118,215 @@ let Component = React.createClass({
                             <div className={styles.tableContentBox}>
 
                                 {
-                                    table.data.pagedata.map((value, key) => {
+                                    table.data.pagedata.map((value, key)=> {
                                         num++;
-                                        if (pageSize * (page - 1) <= key && key < (pageSize * (page - 1) + pageSize)) {
 
-                                            if (key < wfidCount / 1) {
-                                                return (
-                                                    <div
-                                                        className={key % 2 === 0 ? styles.tableContentLine : styles.tableContentLine1}
-                                                        key={key}>
-                                                        <input className={styles.tableContentItem}
-                                                               style={{width: 8 + "%"}}
-                                                               readOnly="true" value={num}/>
-                                                        {
-                                                            arr1.map((valueC, keyC) => {
-                                                                if (keyC == 0) {
-                                                                    return (
 
+                                        if(key<wfidCount/1){
+                                            return (
+                                                <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
+                                                    <input className={styles.tableContentItem}
+                                                           style={{width:8+"%"}}
+                                                           readOnly="true" value={num}/>
+                                                    {
+                                                        arr1.map((valueC, keyC)=> {
+                                                            if(keyC==0){
+                                                                return(
+
+                                                                    <input className={styles.tableContentItem}
+                                                                           style={{width:arr2[keyC]+'%'}}
+                                                                           key={keyC} contentEditable="true"
+                                                                           onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                                           value={value['groupname']}/>
+
+
+                                                                )
+                                                            }
+                                                            if(keyC==1){
+                                                                return(
+
+                                                                    <input className={styles.tableContentItem}
+                                                                           style={{width:arr2[keyC]+'%'}}
+                                                                           key={keyC} contentEditable="true"
+                                                                           onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                                           value={value['wfname']}/>
+
+
+                                                                )
+                                                            }
+                                                            if(keyC==2){
+                                                                return(
+                                                                    <div className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
                                                                         <input className={styles.tableContentItem}
-                                                                               style={{width: arr2[keyC] + '%'}}
+                                                                               style={{width:60+'%'}}
                                                                                key={keyC} contentEditable="true"
-                                                                               onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
-                                                                               value={value['groupname']}/>
+                                                                               onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                                               value={value["startdate"].substring(6,10)}/>
+                                                                        <span>年</span>
 
+                                                                    </div>
 
-                                                                    )
-                                                                }
-                                                                if (keyC == 1) {
-                                                                    return (
-
+                                                                )
+                                                            }
+                                                            if(keyC==3){
+                                                                return(
+                                                                    <div className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
                                                                         <input className={styles.tableContentItem}
-                                                                               style={{width: arr2[keyC] + '%'}}
+                                                                               style={{width:60+'%'}}
                                                                                key={keyC} contentEditable="true"
-                                                                               onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
-                                                                               value={value['wfname']}/>
+                                                                               onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                                               value={value['startdate'].substring(3,5)}/>
+                                                                        <span>月</span>
+
+                                                                    </div>
+
+                                                                )
+                                                            }
+                                                            else {
+                                                                return(
+                                                                    <input className={styles.tableContentItem}
+                                                                           style={{width:arr2[keyC]+'%'}}
+                                                                           key={keyC} contentEditable="true"
+                                                                           onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                                           value={value[valueC]}/>
+                                                                )
+                                                            }
 
 
-                                                                    )
-                                                                }
-                                                                if (keyC == 2) {
-                                                                    return (
-                                                                        <div className={styles.tableContentItemm}
-                                                                             style={{width: arr2[keyC] + '%'}}>
-                                                                            <input className={styles.tableContentItem}
-                                                                                   style={{width: 60 + '%'}}
-                                                                                   key={keyC} contentEditable="true"
-                                                                                   onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
-                                                                                   value={value["startdate"]}/>
-                                                                            <span>年</span>
-
-                                                                        </div>
-
-                                                                    )
-                                                                }
-                                                                if (keyC == 3) {
-                                                                    return (
-                                                                        <div className={styles.tableContentItemm}
-                                                                             style={{width: arr2[keyC] + '%'}}>
-                                                                            <input className={styles.tableContentItem}
-                                                                                   style={{width: 60 + '%'}}
-                                                                                   key={keyC} contentEditable="true"
-                                                                                   onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
-                                                                                   value={value['startdate']}/>
-                                                                            <span>月</span>
-
-                                                                        </div>
-
-                                                                    )
-                                                                }
-                                                                else {
-                                                                    return (
-                                                                        <input className={styles.tableContentItem}
-                                                                               style={{width: arr2[keyC] + '%'}}
-                                                                               key={keyC} contentEditable="true"
-                                                                               onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
-                                                                               value={value[valueC]}/>
-                                                                    )
-                                                                }
-
-
-                                                            })
-                                                        }
-                                                        <div className={styles.tableContentItemm}
-                                                             style={{width: 7 + "%"}}>
-                                                            <img src={save} onClick={(e) => saveTableItem(key,)}/>
-                                                        </div>
-                                                        <div className={styles.tableContentItemm}
-                                                             style={{width: 7 + "%"}}>
-                                                            <img src={del} onClick={(e) => deleData(key,)}/>
-                                                        </div>
+                                                        })
+                                                    }
+                                                    <div className={styles.tableContentItemm} style={{width:7+"%"}}>
+                                                        <img src={save} onClick={(e)=>saveTableItem(key,value,wtidAll,groupAll)}/>
                                                     </div>
-                                                )
-                                            } else {
-                                                return (
-                                                    <div
-                                                        className={key % 2 === 0 ? styles.tableContentLine : styles.tableContentLine1}
-                                                        key={key}>
-                                                        <input className={styles.tableContentItem}
-                                                               style={{width: 8 + "%"}}
-                                                               readOnly="true" value={num}/>
-                                                        {
-                                                            arr1.map((valueC, keyC) => {
-                                                                if (keyC == 0) {
-                                                                    return (
+                                                    <div className={styles.tableContentItemm} style={{width:7+"%"}}>
+                                                        <img src={del} onClick={(e)=>deleData(key,)}/>
+                                                    </div>
+                                                </div>
+                                            )}else {
+                                            return (
+                                                <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
+                                                    <input className={styles.tableContentItem}
+                                                           style={{width:8+"%"}}
+                                                           readOnly="true" value={num}/>
+                                                    {
+                                                        arr1.map((valueC, keyC)=> {
+                                                            if(keyC==0){
+                                                                return(
+                                                                    <select className={styles.tableContentItemm}
+                                                                            style={{width:arr[keyC]+"%"}} key={keyC}
+                                                                            onChange={(e)=>changeTableItem1(e.target.value,newData,key,keyC)}>
+                                                                        {group0.map((value, key)=> {
+                                                                            return (
+                                                                                <option className={styles.tableContentItem}  value={value.groupid} key={key}>{value.groupname}</option>
+                                                                            )
+                                                                        })
+                                                                        }
+                                                                    </select>
+                                                                )
+                                                            }
+                                                            if(keyC==1){
+                                                                return(
+                                                                    <select className={styles.tableContentItemm}
+                                                                            style={{width:arr[keyC]+"%"}} key={keyC}
+                                                                            onChange={(e)=>changeTableItem1(e.target.value,newData,key,keyC)}>
+                                                                        {wtidAll.data.map((value, key)=> {
+                                                                            return (
+                                                                                <option className={styles.tableContentItem}  value={value.wfid} key={key}>{value.wfname}</option>
+                                                                            )
+                                                                        })
+                                                                        }
+                                                                    </select>
+                                                                )
+                                                            }
+                                                            if(keyC==2){
+                                                                return(
+                                                                    <div className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
                                                                         <select className={styles.tableContentItemm}
-                                                                                style={{width: arr[keyC] + "%"}}
-                                                                                key={keyC}
-                                                                                onChange={(e) => changeTableItem1(e.target.value, newData, key, keyC)}>
-                                                                            {group0.map((value, key) => {
+                                                                                onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                                                style={{width:60+'%'}}>
+                                                                            {yeares.map((value, key)=> {
                                                                                 return (
-                                                                                    <option
-                                                                                        className={styles.tableContentItem}
-                                                                                        value={value.groupid}
-                                                                                        key={key}>{value.groupname}</option>
+                                                                                    <option value={value} className={styles.tableContentItem} key={key}>{value}</option>
                                                                                 )
                                                                             })
                                                                             }
                                                                         </select>
-                                                                    )
-                                                                }
-                                                                if (keyC == 1) {
-                                                                    return (
+                                                                        <span>年</span>
+
+                                                                    </div>
+
+                                                                )
+                                                            }
+                                                            if(keyC==3){
+                                                                return(
+                                                                    <div className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
                                                                         <select className={styles.tableContentItemm}
-                                                                                style={{width: arr[keyC] + "%"}}
-                                                                                key={keyC}
-                                                                                onChange={(e) => changeTableItem1(e.target.value, newData, key, keyC)}>
-                                                                            {wtidAll.data.map((value, key) => {
+                                                                                onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                                                style={{width:60+'%'}}>
+                                                                            {month4.map((value, key)=> {
                                                                                 return (
-                                                                                    <option
-                                                                                        className={styles.tableContentItem}
-                                                                                        value={value.wfid}
-                                                                                        key={key}>{value.wfname}</option>
+                                                                                    <option value={value} className={styles.tableContentItem} key={key}>{value}</option>
                                                                                 )
                                                                             })
                                                                             }
                                                                         </select>
-                                                                    )
-                                                                }
-                                                                if (keyC == 2) {
-                                                                    return (
-                                                                        <div className={styles.tableContentItemm}
-                                                                             style={{width: arr2[keyC] + '%'}}>
-                                                                            <select className={styles.tableContentItemm}
-                                                                                    onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
-                                                                                    style={{width: 60 + '%'}}>
-                                                                                {yeares.map((value, key) => {
-                                                                                    return (
-                                                                                        <option value={value}
-                                                                                                className={styles.tableContentItem}
-                                                                                                key={key}>{value}</option>
-                                                                                    )
-                                                                                })
-                                                                                }
-                                                                            </select>
-                                                                            <span>年</span>
+                                                                        <span>月</span>
 
-                                                                        </div>
+                                                                    </div>
 
-                                                                    )
-                                                                }
-                                                                if (keyC == 3) {
-                                                                    return (
-                                                                        <div className={styles.tableContentItemm}
-                                                                             style={{width: arr2[keyC] + '%'}}>
-                                                                            <select className={styles.tableContentItemm}
-                                                                                    onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
-                                                                                    style={{width: 60 + '%'}}>
-                                                                                {month4.map((value, key) => {
-                                                                                    return (
-                                                                                        <option value={value}
-                                                                                                className={styles.tableContentItem}
-                                                                                                key={key}>{value}</option>
-                                                                                    )
-                                                                                })
-                                                                                }
-                                                                            </select>
-                                                                            <span>月</span>
-
-                                                                        </div>
-
-                                                                    )
-                                                                }
-                                                                else {
-                                                                    return (
-                                                                        <input className={styles.tableContentItem}
-                                                                               style={{width: arr2[keyC] + '%'}}
-                                                                               key={keyC} contentEditable="true"
-                                                                               onChange={(e) => changeTableItem1(e.target.value, newData, key, keyC)}
-                                                                               value={value[valueC]}/>
-                                                                    )
-                                                                }
+                                                                )
+                                                            }
+                                                            else {
+                                                                return(
+                                                                    <input className={styles.tableContentItem}
+                                                                           style={{width:arr2[keyC]+'%'}}
+                                                                           key={keyC} contentEditable="true"
+                                                                           onChange={(e)=>changeTableItem1(e.target.value,newData,key,keyC)}
+                                                                           value={value[valueC]}/>
+                                                                )
+                                                            }
 
 
-                                                            })
-                                                        }
-                                                        <div className={styles.tableContentItemm}
-                                                             style={{width: 7 + "%"}}>
-                                                            <img src={save}
-                                                                 onClick={(e) => saveTableItem(key, value, wtidAll, groupAll)}/>
-                                                        </div>
-                                                        <div className={styles.tableContentItemm}
-                                                             style={{width: 7 + "%"}}>
-                                                            <img src={del} onClick={(e) => deleDate(key,)}/>
-                                                        </div>
+                                                        })
+                                                    }
+                                                    <div className={styles.tableContentItemm} style={{width:7+"%"}}>
+                                                        <img src={save} onClick={(e)=>saveTableItem(key,value,wtidAll,groupAll)}/>
                                                     </div>
-                                                )
-
-                                            }
-
+                                                    <div className={styles.tableContentItemm} style={{width:7+"%"}}>
+                                                        <img src={del} onClick={(e)=>deleDate(key,)}/>
+                                                    </div>
+                                                </div>
+                                            )
 
                                         }
+
+
+
 
                                     })
                                 }
                             </div>
 
 
+
+
+
+
                         </div>
+
 
 
                     </div>
                     <div className={styles.buttonss}>
-                        <span className={styles.first} onClick={() => theOne(page, years,)}>首页</span>
-                        <span className={styles.first} onClick={() => lastPage(page, years,)}>上一页</span>
-                        <span
-                            className={styles.first}>{page + "/" + Math.ceil(table.data.pagedata.length / pageSize)}</span>
-                        <span className={styles.first}
-                              onClick={() => nextPage(page, table.data.totalRecord, pageSize, years,)}>下一页</span>
-                        <span className={styles.first}
-                              onClick={() => theLast(page, table.data.totalRecord, pageSize, years,)}>末页</span>
+                        <span  className={styles.first} onClick={()=>theOne(page,years0,wfids)}>首页</span>
+                        <span className={styles.first}  onClick={()=>lastPage(page,years0,wfids)}>上一页</span>
+                        <span className={styles.first}>{page+"/"+totalpage}</span>
+                        <span className={styles.first} onClick={()=>nextPage(page,table.data.totalRecord,pageSize,years0,wfids)}>下一页</span>
+                        <span className={styles.first} onClick={()=>theLast(page,table.data.totalRecord,pageSize,years0,wfids)}>末页</span>
                     </div>
 
                 </div>
-            );
-        } else {
-            return (<Login></Login>)
-        }
+            );}else{return(<Login></Login>)}
 
 
     }
@@ -369,11 +338,12 @@ const mapStateToProps = (state) => {
         table: state.objs.tableContent,
         page: state.vars.page1,
         dataenter: state.vars.dataenter,
-        wfidCount: state.vars.wfidCount,
+        wfidCount:state.vars.wfidCount,
         wtidAll: state.objs.wtidAll,
         groupAll: state.objs.groupAll,
         boll: state.vars.boll,
-        years: state.vars.years
+        years0:state.vars.years0,
+        totalpage:state.vars.totalpage,
     }
 };
 
@@ -383,31 +353,33 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test: ''
             }
-            console.log("准备获取数据")
+            alert("准备获取数据")
             dispatch(actions.setVars('page1', 1));
 
             $.ajax({
-                url: soam + '/info/getStageprice',
+                url: soam+'/info/getStageprice',
                 type: 'post',
-                data: {
+                data:{
                     "curpage": 1,
                     "pageSize": pageSize,
                 },
                 dataType: 'json',//here,
                 //  timeout:'3000',
-                success: function (data) {
+                success:function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('totalpage', data.data.totalPage));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+
                     getgroupid()
                 },
-                error: function () {
+                error:function(){
                     console.log('获取数据失败')
                 }
             });
             function getgroupid() {
                 $.ajax({
-                    url: soam + '/BaseData/getGroup',
+                    url: soam+'/BaseData/getGroup',
                     type: 'post',
                     dataType: 'json',//here,
                     success: function (data) {
@@ -421,7 +393,6 @@ const mapDispatchToProps = (dispatch) => {
                     }
                 });
             }
-
             function getwtid() {
                 $.ajax({
                     url: 'http://10.68.100.32:8080/soam/wf/getAll',
@@ -450,20 +421,20 @@ const mapDispatchToProps = (dispatch) => {
             var tContent = $('#textContent5')[0].value;
             var tContent1 = $('#textContent6')[0].value;
             dispatch(actions.setVars('page1', 1));
-            dispatch(actions.setVars('years', tContent));
+            dispatch(actions.setVars('years0', tContent));
             dispatch(actions.setVars('wfids', tContent1));
 
             $.ajax({
-                url: soam + '/info/getWfcosts',
+                url: soam+'/info/getWfcosts',
                 type: 'post',
-                data: 'pageSize=' + pageSize + '&&curpage=' + page + '&&year=' + tContent + '&&wfids=' + tContent1,
+                data:'pageSize='+pageSize+'&&curpage='+page+'&&year='+tContent+'&&wfids='+tContent1,
                 dataType: 'json',//here,
-                success: function (data) {
+                success:function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
-                error: function () {
+                error:function(){
                     console.log('获取数据失败')
                 }
             });
@@ -475,161 +446,216 @@ const mapDispatchToProps = (dispatch) => {
             console.log(tableV.data.pagedata[i][arr1[j]]);
             dispatch(actions.setObjs('tableContent', tableV));
         },
-        addData: (i, page) => {
-            let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.pagedata.push(i);
-            dispatch(actions.setObjs('tableContent', tableV));
-            page = Math.ceil(tableV.data.pagedata.length / 16);
+        addData:(i,totalpage,years0,wfids) => {
+            page=totalpage;
             dispatch(actions.setVars('page1', page));
+            $.ajax({
+                url: soam+'/info/getWfcosts',
+                type: 'post',
+                data:{
+                    "curpage": page,
+                    "pageSize": pageSize,
+                    "year": years0,
+                    "wfid": wfids,
+
+                },
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data)
+                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+
+                    jiang();
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+            function jiang() {
+                let tableV = _.clone(getState().objs.tableContent);
+                tableV.data.pagedata.push(i);
+                dispatch(actions.setObjs('tableContent', tableV));
+            }
 
         },
-        saveTableItem: (li, dis, wtid, groupname) => {
+        saveTableItem:(li,dis,wtid,groupname)=>{
             console.log(wtid)
             let tableV = _.clone(getState().objs.tableContent);
-            let wfs = tableV.data.pagedata[li];
-            wtid.data.map((value, key) => {
-                (value.wfid == wfs.wfid) && (wfs['wfname'] = value.wfname);
+            let wfs=tableV.data.pagedata[li];
+            wtid.data.map((value,key)=>{
+                (value.wfid==wfs.wfid) && (wfs['wfname']=value.wfname);
             });
-            wfs['groupname'] = groupname.data[wfs.groupid];
-            wfs['startdate'] = null;
-            wfs['enddate'] = null;
-            wfs['costtype'] = null;
-            wfs['uuid'] = null;
-            wfs['day'] = null;
-            wfs['id'] = null;
+            wfs['groupname']=groupname.data[wfs.groupid];
+            wfs['startdate']=null;
+            wfs['enddate']=null;
+            wfs['costtype']=null;
+            wfs['uuid']=null;
+            wfs['day']=null;
+            wfs['id']=null;
             //wfs.push({groupname:"巴盟"});
             console.log(wfs);
-            let ddv = JSON.stringify(wfs);
+            let ddv=JSON.stringify(wfs);
             console.log(ddv)
             $.ajax({
-                url: soam + '/info/getSaveStageprice',
+                url: soam+'/info/getSaveWfcost',
                 type: 'post',
-                data: {
-                    'wfcost': wfs,
-                    // "month":month2+1,
-                    // "year": thYear,
-                },
+
+                data:ddv,
                 dataType: 'json',//here,
-                contentType: 'application/json;charset=UTF-8',
-                success: function (data) {
+                contentType:'application/json;charset=UTF-8',
+                success:function (data) {
                     console.log(data)
                 },
-                error: function () {
+                error:function(){
                     console.log('获取数据失败')
                 }
             });
 
         },
-        deleData: (j,) => {
+        deleData:(j,) => {
             let tableV = _.clone(getState().objs.tableContent);
-            let uuid = tableV.data.pagedata[j].uuid;
+            let uuid=tableV.data.pagedata[j].uuid;
 
 
             $.ajax({
-                url: soam + '/info/getDeleteWfcost',
+                url: soam+'/info/getDeleteWfcost',
                 type: 'post',
-                data: {
-                    "uuid": uuid,
+                data:{
+                    "uuid":uuid,
                 },
                 dataType: 'json',//here,
-                success: function (data) {
+                success:function (data) {
                     console.log(data)
                 },
-                error: function () {
+                error:function(){
                     console.log('获取数据失败')
                 }
             });
             $.ajax({
-                url: soam + '/info/getWfcosts',
+                url: soam+'/info/getWfcosts',
                 type: 'post',
-                data: {
+                data:{
                     "curpage": 1,
                     "pageSize": pageSize,
                 },
                 dataType: 'json',//here,
-                success: function (data) {
+                success:function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
                 },
-                error: function () {
+                error:function(){
                     console.log('获取数据失败')
                 }
             });
         },
-        deleDate: (j) => {
+        deleDate:(j) => {
             let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.pagedata.splice(j, 1);
+            tableV.data.pagedata.splice(j,1);
             dispatch(actions.setObjs('tableContent', tableV));
         },
-        lastPage: (page, years, wfids) => {
-            page > 1 ? page-- : page;
+        lastPage:(page,years0,wfids)=>{
+            page>1 ? page--:page;
             dispatch(actions.setVars('page1', page));
             $.ajax({
-                url: soam + '/info/getWfcosts',
+                url: soam+'/info/getWfcosts',
                 type: 'post',
-                data: 'pageSize=' + pageSize + '&&curPage=' + page + '&&year=' + years,
+                data:{
+                    "curpage": page,
+                    "pageSize": pageSize,
+                    "year": years0,
+                    "wfid": wfids,
+
+                },
                 dataType: 'json',//here,
-                success: function (data) {
+                success:function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
-                error: function () {
+                error:function(){
                     console.log('获取数据失败')
                 }
             });
         },
-        nextPage: (page, i, j, years, wfids) => {
-            (page < Math.ceil(i / j)) ? page++ : page;
+        nextPage:(page,i,j,years0,wfids)=>{
+            (page<Math.ceil(i/j)) ? page++:page;
             dispatch(actions.setVars('page1', page));
+            if(wfids==undefined){
+                wfids=null;
+            }
+
+
+            console.log(page)
+            console.log(pageSize)
+            console.log(years0)
+            console.log(wfids)
             $.ajax({
-                url: soam + '/info/getWfcosts',
+                url: soam+'/info/getWfcosts',
                 type: 'post',
-                data: 'pageSize=' + pageSize + '&&curPage=' + page + '&&year=' + years,
+
+                data:{
+                    "curpage": page,
+                    "pageSize": pageSize,
+                    "year": years0,
+                    "wfid": wfids,
+
+                },
                 dataType: 'json',//here,
-                success: function (data) {
-                    console.log(data.data.pagedata.length)
+                success:function (data) {
+                    console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
-                error: function () {
+                error:function(){
                     console.log('获取数据失败')
                 }
             });
 
         },
-        theOne: (page, years, wfids) => {
-            page = 1;
+        theOne :(page,years0,wfids)=>{
+            page=1;
             dispatch(actions.setVars('page1', page));
             $.ajax({
-                url: soam + '/info/getWfcosts',
+                url: soam+'/info/getWfcosts',
                 type: 'post',
-                data: 'pageSize=' + pageSize + '&&curPage=' + page + '&&year=' + years,
+                data:{
+                    "curpage": page,
+                    "pageSize": pageSize,
+                    "year": years0,
+                    "wfid": wfids,
+
+                },
                 dataType: 'json',//here,
-                success: function (data) {
+                success:function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
-                error: function () {
+                error:function(){
                     console.log('获取数据失败')
                 }
             });
         },
-        theLast: (page, i, j, years, wfids) => {
-            page = Math.ceil(i / j);
+        theLast :(page,i,j,years0,wfids)=>{
+            page=Math.ceil(i / j);
             dispatch(actions.setVars('page1', page));
             $.ajax({
-                url: soam + '/info/getWfcosts',
+                url: soam+'/info/getWfcosts',
                 type: 'post',
-                data: 'pageSize=' + pageSize + '&&curPage=' + page + '&&year=' + years,
+                data:{
+                    "curpage": page,
+                    "pageSize": pageSize,
+                    "year": years0,
+                    "wfid": wfids,
+
+                },
                 dataType: 'json',//here,
-                success: function (data) {
+                success:function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
-                error: function () {
+                error:function(){
                     console.log('获取数据失败')
                 }
             });

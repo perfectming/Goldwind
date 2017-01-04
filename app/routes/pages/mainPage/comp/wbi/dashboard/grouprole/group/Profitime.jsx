@@ -87,11 +87,12 @@ const mapDispatchToProps = (dispatch) => {
              dataType:'json',
              timeout:'3000',
              success:function(data){
-               
+
             let GE=data.data;
           
             
              for (let i in GE){
+
                          let earnings=GE[i].earning;
                          arr1.push(earnings);
                          let costs=GE[i].costs;
