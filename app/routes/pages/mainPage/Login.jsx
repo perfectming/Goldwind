@@ -68,7 +68,7 @@ const mapDispatchToProps = (dispatch) => {
                jsonpCallback:"testCall",    
                timeout:3000,       
                success:function(json,textStatus){ 
-               console.log(json)   
+               // console.log(json)
                   
                },    
                error:function(XMLHttpRequest,textStatus,errorThrown){    
@@ -126,7 +126,7 @@ const mapDispatchToProps = (dispatch) => {
               data:'name='+$('#username1')[0].value+'&&password='+$('#password1')[0].value,
               dataType: 'json',//here,
               success:function (data) {
-                  console.log(data);
+                  // console.log(data);
                   data.data.result==='False'?
                       alert('用户名或密码错误'):
           browserHistory.push('/app/all/page/main')  ;
