@@ -52,11 +52,11 @@ let Component = React.createClass({
 	           				</div>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>实发<br/>{(elecActPBA/10000).toFixed(1)}万kWh<br/>应发<br/>{elecPlanPBA.toFixed(1)}kWh</span><br/><br/>
+	           						<span>实发<br/>{(elecActPBA/10000).toFixed(1)}万kWh<br/>应发<br/>{(elecPlanPBA/10000).toFixed(1)}万kWh</span><br/><br/>
 	           					</div>
 	           					<div className={styles.sectionthree}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{elecActPBA!==0&&elecPlanPBA==0? (elecActPBA/elecPlanPBA):(elecActPBA/elecPlanPBA).toFixed(1)*100+'%'}</p>PBA</span>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{elecActPBA!==0&&elecPlanPBA==0? (elecActPBA/elecPlanPBA):(elecActPBA/elecPlanPBA*100).toFixed(1)+'%'}</p>PBA</span>
 	           						<Pie2 color={(elecActPBA/elecPlanPBA)>0.9? ['#62de88','#39565e']:(elecActPBA/elecPlanPBA)>0.8?['#e8952a','#39565e']:(elecActPBA/elecPlanPBA)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[elecActPBA,elecPlanPBA-elecActPBA]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepagePBAS()}></a><br/>
