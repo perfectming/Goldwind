@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
+var jquery = require('jquery');
 let data = require('./Healthy-data');
 
 let Component = React.createClass({
@@ -107,7 +107,8 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-
+                //max:'${max}',
+                tickInterval: 10,
                 title: {
                     text: '(h)',
                     align: 'high',
@@ -128,6 +129,8 @@ let Component = React.createClass({
                     }
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
+
+
                 min:0,
                 title: {
                     text: '(%)',
@@ -148,6 +151,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: runtime2,
                 borderRadius: 2,
+                color:'#62de88',
             },{
                 name: '停机时间',
                 type: 'column',
