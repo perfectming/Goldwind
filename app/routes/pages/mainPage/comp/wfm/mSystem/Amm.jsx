@@ -4,7 +4,7 @@ var {getState} = require('redux/store');
 var actions = require('redux/actions');
 var $ =require('jquery');
 import styles from './Amm.scss';
-let pageSize=11;
+let pageSize=1;
 
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';
@@ -13,7 +13,7 @@ import add from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 import Login from '../../../../../../components/common/Loading.jsx';
 import Ambox from './boxAm.jsx';
-let soam='http://10.9.99.90:8080/soam';
+let soam='http://10.9.100.48:8080/soam';
 let tabaleData = require('./data');
 let arr=['id','name','loginname','password','phonecode','mailbox','logintype','dogcode','remark','roleids'];
 let Component = React.createClass({
@@ -21,7 +21,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {init,checkId,checkName,ids,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+        let {page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,ids,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData={};
         let num=0;
         for(let i=0;i<arr.length-1;i++){
@@ -189,6 +189,14 @@ let Component = React.createClass({
                     </div>
                 </div>
                 <Ambox dataBase={boxData}></Ambox>
+                <div className={styles.pageplus}>
+                    <span onClick={()=>theOne(page,uName)}>首页</span>
+                    <span onClick={()=>lastPage(page,uName)}>上一页</span>
+                    <span>{page+"/"+table.data.totalPage}</span>
+                    <span onClick={()=>nextPage(page,table.data.totalRecord,pageSize,uName)}>下一页</span>
+                    <span onClick={()=>theLast(page,table.data.totalRecord,pageSize,uName)}>末页</span>
+                </div>
+
             </div>
         </div>
         );}else {return(<Login></Login>)}
@@ -202,18 +210,23 @@ const mapStateToProps = (state) => {
         boxData: state.objs.boxData,
         ammCount:state.vars.ammCount,
         ids:state.vars.roleIds,
+        page:state.vars.pageAmm,
+        uName:state.vars.nameAmm
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('nameAmm', null));
+            dispatch(actions.setVars('pageAmm', 1));
             $.ajax({
                 url: soam+'/user/getAllUser',
                 type: 'post',
-                data:'pageSize='+11+'&&page='+1+'&&username=',
+                data:'pageSize='+pageSize+'&&page='+1+'&&username=',
                 dataType: 'json',//here,
                 success:function (data) {
+                    console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                 },
@@ -271,6 +284,8 @@ const mapDispatchToProps = (dispatch) => {
         buttonAction (){
             var tContent = $('#textContent5')[0].value;
             // 在这个下边获取这个时间段的数据就行了
+            dispatch(actions.setVars('pageAmm', 1));
+            dispatch(actions.setVars('nameAmm', tContent));
             $.ajax({
                     url: soam+'/user/getAllUser',
                     type: 'post',
@@ -370,6 +385,79 @@ const mapDispatchToProps = (dispatch) => {
                 data:'pageSize='+11+'&&page='+1+'&&username=',
                 dataType: 'json',//here,
                 success:function (data) {
+                    dispatch(actions.setObjs('tableContentAmm', data));
+                    dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        lastPage:(page,name)=>{
+            page>1 ? page--:page;
+            dispatch(actions.setVars('pageAmm', page));
+            $.ajax({
+                url: soam+'/user/getAllUser',
+                type: 'post',
+                data:{pageSize:pageSize,page:page,username:name},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContentAmm', data));
+                    dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        nextPage:(page,i,j,name)=>{
+            (page<Math.ceil(i/j)) ? page++:page;
+            console.log(page,name);
+            dispatch(actions.setVars('pageAmm', page));
+            $.ajax({
+                url: soam+'/user/getAllUser',
+                type: 'post',
+                data:{pageSize:pageSize,page:page,username:name},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContentAmm', data));
+                    dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        theOne :(page,name)=>{
+            page=1;
+            dispatch(actions.setVars('pageAmm', page));
+            $.ajax({
+                url: soam+'/user/getAllUser',
+                type: 'post',
+                data:{pageSize:pageSize,page:page,username:name},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContentAmm', data));
+                    dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        theLast :(page,i,j,name)=>{
+            page=Math.ceil(i / j);
+            dispatch(actions.setVars('pageAmm', page));
+            $.ajax({
+                url: soam+'/user/getAllUser',
+                type: 'post',
+                data:{pageSize:pageSize,page:page,username:name},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                 },

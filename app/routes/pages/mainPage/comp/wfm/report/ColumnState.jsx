@@ -21,7 +21,12 @@ let Component = React.createClass({
                 marginTop: 50,
             },
             title: {
-                text: title
+                text: title,
+                style: {
+                    color: '#fff',
+                    fontSize:"14px",
+                    fontFamily:"微软雅黑"
+                }
             },
             //图例说明
             legend: {

@@ -37,7 +37,7 @@ let Component = React.createClass({
         //初始化jquery方法
         setTimeout(function(){
             playjq();
-        },1000)
+        },1500)
     },
 
     render() {
@@ -50,6 +50,8 @@ let Component = React.createClass({
             let numberArr=[];//次数数组
             let timeArr=[];//时长数组
             let timeDescribe=[];//时长描述
+            let stateCode=[];//状态代码
+            let devState=[];//设备状态
             //获取设备类型对应的左侧树形二级和三级数据
             for(let arg2 in select_list){
                 if(select_list[arg2].id &&select_list[arg2].id!=''){
@@ -64,11 +66,16 @@ let Component = React.createClass({
             }
             //表格数据处理
             if(chartData!==undefined&&chartData.wtid!==undefined){
-                let arrString1,arrString2,arrString3;
-                stateArr=chartData.blooeydescr.Values.split(',');
+                let arrString0,arrString1,arrString2,arrString3,arrString4,arrString5;
+                arrString0=chartData.blooeydescr.Values.split(',');
                 arrString1=chartData.happencount.Values.split(',');
                 arrString2=chartData.timelength.Values.split(',');
                 arrString3=chartData.datelength.Values.split(',');
+                arrString4=chartData.changedata.Values.split(',');
+                arrString5=chartData.blooeydescr.Values.split(',');
+                for (var i=0 ; i< arrString0.length ; i++){
+                    stateArr.push(arrString0[i]);
+                }
                 for (var i=0 ; i< arrString1.length ; i++){
                         numberArr.push(arrString1[i]/1);
                 }
@@ -77,6 +84,12 @@ let Component = React.createClass({
                 }
                 for (var i=0 ; i< arrString3.length ; i++){
                         timeDescribe.push(arrString3[i]/1);
+                }
+                for (var i=0 ; i< arrString4.length ; i++){
+                        stateCode.push(arrString4[i]);
+                }
+                for (var i=0 ; i< arrString5.length ; i++){
+                        devState.push(arrString5[i]);
                 }
             }else{
                 chartData=undefined;
@@ -192,12 +205,14 @@ let Component = React.createClass({
                                 {chartData!==undefined &&
                                 <table>
                                     <tbody>
-                                        <tr><th>序号</th><th>设备状态</th><th>状态代码</th><th>发生次数</th><th>状态时长(s)</th><th>时长描述(h)</th></tr>
-                                        <tr><th>1</th><th>停机过程</th><th>1</th><th>{numberArr[0]}</th><th>{timeArr[0]}</th><th>{timeDescribe[0]}</th></tr>
-                                        <tr><th>2</th><th>停机</th><th>2</th><th>{numberArr[1]}</th><th>{timeArr[1]}</th><th>{timeDescribe[1]}</th></tr>
-                                        <tr><th>3</th><th>待机</th><th>3</th><th>{numberArr[2]}</th><th>{timeArr[2]}</th><th>{timeDescribe[2]}</th></tr>
-                                        <tr><th>4</th><th>启动</th><th>4</th><th>{numberArr[3]}</th><th>{timeArr[3]}</th><th>{timeDescribe[3]}</th></tr>
-                                        <tr><th>5</th><th>并网</th><th>5</th><th>{numberArr[4]}</th><th>{timeArr[4]}</th><th>{timeDescribe[4]}</th></tr>
+                                        <tr className={styles.thState}><th>序号</th><th>设备状态</th><th>状态代码</th><th>发生次数</th><th>状态时长(s)</th><th>时长描述(h)</th></tr>
+                                        {
+                                            stateCode.map((value,key)=>{
+                                                return(
+                                                    <tr key={key} className={styles.thState}><th>{key+1}</th><th>{devState[key]}</th><th>{value}</th><th>{numberArr[key]}</th><th>{timeArr[key]}</th><th>{timeDescribe[key]}</th></tr>
+                                                )
+                                            })
+                                        }
                                     </tbody>
                                 </table>
                                 }
@@ -272,8 +287,38 @@ const mapDispatchToProps = (dispatch) => {
         playjq:()=>{
             //初始化日期
             var date = new Date();
-            var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-            var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()-1);
+            if(date.getMonth()==0&&date.getDate()==1){
+                var dateString = date.getFullYear()+"-01"+"-01";
+                var dateString1 = (date.getFullYear()-1)+"-12"+"-31";
+            }else{
+                if(date.getMonth()<9){
+                    if(date.getDate()<10){
+                       var dateString = date.getFullYear()+"-0"+(date.getMonth()+1)+"-0"+date.getDate(); 
+                    }else{
+                       var dateString = date.getFullYear()+"-0"+(date.getMonth()+1)+"-"+date.getDate(); 
+                    }
+                }else{
+                    if(date.getDate()<10){
+                       var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-0"+date.getDate(); 
+                    }else{
+                       var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate(); 
+                    }
+                }
+                if(date.getMonth()<9){
+                    if(date.getDate()<11){
+                       var dateString1 = date.getFullYear()+"-0"+(date.getMonth()+1)+"-0"+(date.getDate()-1); 
+                    }else{
+                       var dateString1 = date.getFullYear()+"-0"+(date.getMonth()+1)+"-"+(date.getDate()-1); 
+                    }
+                }else{
+                    if(date.getDate()<11){
+                       var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-0"+(date.getDate()-1); 
+                    }else{
+                       var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()-1); 
+                    }
+                }
+            }
+            
             //获取今天与昨天的日期
             $('#startTime').val(dateString1);
             $('#endTime').val(dateString);
@@ -365,7 +410,7 @@ const mapDispatchToProps = (dispatch) => {
                         return;
                     } 
                     dispatch(actions.setObjs('chartData',json));
-
+                    console.log(json)
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     alert('获取数据失败！');    

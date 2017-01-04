@@ -17,20 +17,19 @@ let tabaleData = require('../../../../config/table-data');
 
 let Component = React.createClass({
     componentDidMount() {
-        // console.log('high',ReactHighcharts);
         this.props.init(this.props.userInfo);
     },
     render() {
         let {itemHeaderActive, itemTreeAct, flag=true,userMessage,Verification}=this.props;
-        console.log(userMessage)
         let menu=[];
-        userMessage.data.tlist.map(function(value,key){
-            //获取一级菜单
-            menu.push(
+        if(userMessage){
+            userMessage.data.tlist.map(function(value,key){
+                //获取一级菜单
+                menu.push(
                     {
                         name:value.name,
-                        iconNormal: value.smallpicture+'.png',
-                        iconActive: value.largepicture+'.png',
+                        iconNormal: 'http://10.68.100.29:2992/_assets/'+value.smallpicture+'.png',
+                        iconActive: 'http://10.68.100.29:2992/_assets/'+value.largepicture+'.png',
                         subPage:[]
                     }
                     );
@@ -48,49 +47,38 @@ let Component = React.createClass({
                     //获取三级菜单
                      if(valueC.thlist.length>0){
                         valueC.thlist.map(function(valueD,keyD){
+                                menu[key].subPage[keyC].page.push(
+                                    {
+                                        name:valueD.name,
+                                        page:valueD.url
+                                    }
+                                )
+                            })
+                        }else{
                             menu[key].subPage[keyC].page.push(
-                                {
-                                    name:valueD.name,
-                                    page:valueD.url
-                                }
-                            )
-                        })
-                    }else{
-                         menu[key].subPage[keyC].page.push(
                                 {
                                     name:valueC.name,
                                     page:valueC.url
                                 }
                             )
-                    }
-                })
-            }else{
-                 menu[key].subPage.push(
+                        }
+                    })
+                }else{
+                    menu[key].subPage.push(
                         {
                             name:value.name,
                             page:[]
                         }
-                )
-                menu[key].subPage[0].page.push(
+                    )
+                    menu[key].subPage[0].page.push(
                         {
                             name:value.name,
                             page:value.url
                         }
                     )
-            }
-        })
-        console.log(menu)
-
-
-
-
-
-
-
-
-
-
-
+                }
+            })
+        }
 
         return (
 
@@ -130,7 +118,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         Verification:(userMessage)=>{
-            console.log(userMessage.data.token) 
+            console.log(userMessage.data.token)
             //获取登入时的时间
             let length=userMessage.data.token.lastIndexOf('-')
             let oldTime=userMessage.data.token.substring(length+1,userMessage.data.token.length)
@@ -138,9 +126,10 @@ const mapDispatchToProps = (dispatch) => {
             let newTime = (new Date()).getTime();
             //获取时间间隔
             let Time=(newTime-oldTime)/60000;
-            if(Time>10){
-                alert('由于您长时间没有进行操作,请您重新登入！')
-                browserHistory.push('/app/all/page/login');
+            console.log(Time);
+            if(Time>20){
+                // alert('由于您长时间没有进行操作,请您重新登入！')
+                // browserHistory.push('/app/all/page/login');
             }else{
                 $.ajax({
                 url:'http://10.68.100.32:8080/soam/token/verifyToken',
@@ -148,19 +137,19 @@ const mapDispatchToProps = (dispatch) => {
                 type:'post',
                 dataType:"json",
                 timeout:3000,
-                success:function(json,textStatus){  
+                success:function(json,textStatus){
 
                   userMessage.data.token=json.data;
-                },    
-               error:function(XMLHttpRequest,textStatus,errorThrown){    
-                   alert('获取数据失败！');   
-                   
-               }   
+                },
+               error:function(XMLHttpRequest,textStatus,errorThrown){
+                   alert('获取数据失败！');
+
+               }
 
                 })
 
             }
-            
+
         }
     }
 };
