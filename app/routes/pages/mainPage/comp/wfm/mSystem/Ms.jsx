@@ -6,7 +6,7 @@ import add from '../../../img/icon/tabAdd.png';
 var actions = require('redux/actions');
 import styles from './Ms.scss';
 var $ = require('jquery');
-let soam='http://10.9.99.68:8080/soam';
+let soam='http://10.9.100.48:8080/soam';
 import Abox from './boxA';
 import Bbox from './boxB';
 import Cbox from './boxC';
@@ -267,7 +267,7 @@ const mapDispatchToProps = (dispatch) => {
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
             // $.ajax({
-            //     url: soam+'/role/getByRoleidAllMenu',
+            //     url: soam+'/role/getByRoleidAllMenu?roleid=1',
             //     type: 'post',
             //     dataType: 'json',//here,
             //     success:function (data) {
