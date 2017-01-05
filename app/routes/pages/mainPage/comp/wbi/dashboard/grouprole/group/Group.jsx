@@ -12,8 +12,6 @@ var $ =require("jQuery");
 
 let costs,healthy,profit,amounts,rate,yearPro,month2,cost,incomes,shouldElec,actrulElec,sortArr,yearELec,yearPlanELec,monthElec,monthPlanElec,dayelec,dayPlanElec,arrPlan=[],month1=[],arrAct=[],runTime,downTime,tba;
 
-var actions = require('redux/actions');
-
 let Component = React.createClass({
     componentWillMount() {
         this.props.ajax();
@@ -37,7 +35,7 @@ let Component = React.createClass({
                                 </div>
                                 <div className={styles.sectionBox}>
                                     <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{(rate*100).toFixed(1)}%</p>收益率</span>
-                                    <Pie2 color={rate>0.9? ['#62de88','#39565e']:rate>0.8?['#e8952a','#39565e']:rate>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[profit/1,amounts/1-profit/1]}></Pie2>
+                                    <Pie2 color={rate/0.12>0.9? ['#62de88','#39565e']:rate/0.12>0.8?['#e8952a','#39565e']:rate/0.12>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[profit/1,amounts/1-profit/1]}></Pie2>
                                 </div>
                             </div>
                             <div className={styles.section}>

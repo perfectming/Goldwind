@@ -4,7 +4,7 @@ import styles from './stateCountStyle.scss';
 import jian from '../../../img/comp/jian_icon.png';
 import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
-import ColumnState from './ColumnState.jsx';
+import LineChart from './lineChart.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
@@ -41,17 +41,21 @@ let Component = React.createClass({
     },
 
     render() {
-            let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,chartData} = this.props;
+            let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,runCheckData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
             let three=[]; //三级菜单
             let stateArr=[];//状态数组
-            let numberArr=[];//次数数组
+            let numberArr=[];//时间数组
             let timeArr=[];//时长数组
             let timeDescribe=[];//时长描述
             let stateCode=[];//状态代码
-            let devState=[];//设备状态
+            let beiZhu=[];//备注
+            let yTime=[];//原时间
+            let yModle=[];//原模型
+            let cycle=[];//周期
+            let cycleDescribe=[];//周期描述
             //获取设备类型对应的左侧树形二级和三级数据
             for(let arg2 in select_list){
                 if(select_list[arg2].id &&select_list[arg2].id!=''){
@@ -65,34 +69,50 @@ let Component = React.createClass({
                 }
             }
             //表格数据处理
-            if(chartData!==undefined&&chartData.wtid!==undefined){
-                let arrString0,arrString1,arrString2,arrString3,arrString4,arrString5;
-                arrString0=chartData.blooeydescr.Values.split(',');
-                arrString1=chartData.happencount.Values.split(',');
-                arrString2=chartData.timelength.Values.split(',');
-                arrString3=chartData.datelength.Values.split(',');
-                arrString4=chartData.changedata.Values.split(',');
-                arrString5=chartData.blooeydescr.Values.split(',');
+            if(runCheckData!==undefined && runCheckData.rectime!==undefined){
+                let arrString0,arrString1,arrString2,arrString3,arrString4,arrString5,arrString6,arrString7,arrString8,arrString9;
+                arrString0=runCheckData.blooeydescr.Values.split(',');//代码解释
+                arrString1=runCheckData.WTUR0Other0Wn0I160StopModeWord.Values.split(',');//停机模式字
+                arrString2=runCheckData.dateperiod.Values.split(',');//周期描述
+                arrString3=runCheckData.datelength.Values.split(',');//时长描述
+                arrString4=runCheckData.rectime.Values.split(',');//时间
+                arrString5=runCheckData.remark.Values.split(',');//备注
+                arrString6=runCheckData.srcblooeydescr.Values.split(',');//原模式
+                arrString7=runCheckData.srcrectime.Values.split(',');//原时间
+                arrString8=runCheckData.timelength.Values.split(',');//时长
+                arrString9=runCheckData.timeperiod.Values.split(',');//周期
                 for (var i=0 ; i< arrString0.length ; i++){
-                    stateArr.push(arrString0[i]);
+                    stateArr.push(arrString0[i]);//代码解释
                 }
                 for (var i=0 ; i< arrString1.length ; i++){
-                        numberArr.push(arrString1[i]/1);
-                }
-                for (var i=0 ; i< arrString2.length ; i++){
-                        timeArr.push(arrString2[i]/1);
-                }
-                for (var i=0 ; i< arrString3.length ; i++){
-                        timeDescribe.push(arrString3[i]/1);
+                    stateCode.push(arrString1[i]/1);//停机模式字
                 }
                 for (var i=0 ; i< arrString4.length ; i++){
-                        stateCode.push(arrString4[i]);
+                    numberArr.push(new Date(arrString4[i]/1).toLocaleDateString()+' '+new Date(arrString4[i]/1).toLocaleTimeString());//时间
+                }
+                for (var i=0 ; i< arrString3.length ; i++){
+                    timeDescribe.push(arrString3[i]);//时长描述
+                }
+                for (var i=0 ; i< arrString2.length ; i++){
+                    cycleDescribe.push(arrString2[i]);//周期描述
                 }
                 for (var i=0 ; i< arrString5.length ; i++){
-                        devState.push(arrString5[i]);
+                    beiZhu.push(arrString5[i]);//备注
+                }
+                for (var i=0 ; i< arrString6.length ; i++){
+                    yModle.push(arrString6[i]);//原模式
+                }
+                for (var i=0 ; i< arrString7.length ; i++){
+                    yTime.push(arrString7[i]);//原时间
+                }
+                for (var i=0 ; i< arrString8.length ; i++){
+                    timeArr.push(arrString8[i]);//时长
+                }
+                for (var i=0 ; i< arrString9.length ; i++){
+                    cycle.push(arrString9[i]);//周期
                 }
             }else{
-                chartData=undefined;
+                runCheckData=undefined;
             }
             if(boolywbb){
                 //获取设备类型数组
@@ -148,7 +168,6 @@ let Component = React.createClass({
                                             <a className={styles.ca}>
                                                 <img src={add}/>
                                                 <b><img src={'http://'+url+'/'+valueC.img}/>{valueC.text}</b>
-                                                <input type='checkbox' value='value'/>
                                             </a>
                                             {
                                                 two.length>0 ?
@@ -159,7 +178,6 @@ let Component = React.createClass({
                                                                 <a className={styles.da}>
                                                                     <img src={add} />
                                                                     <b><img src={'http://'+url+'/'+valueD.img}/>{valueD.text}</b>
-                                                                    <input type='checkbox' value={valueD.children ? 'value' : valueD.id}/>
                                                                 </a>
                                                                 { 
                                                                     three.map((valueE,keyE)=>{
@@ -168,7 +186,7 @@ let Component = React.createClass({
                                                                                 <div className={styles.placeline} key={keyE}>
                                                                                     <a className={styles.ea} >
                                                                                         <b style={{cursor:'auto'}}><img src={'http://'+url+'/'+valueE.img}/>{valueE.text}</b>
-                                                                                        <input type='checkbox' value={valueE.id}  />
+                                                                                        <input type='radio' name='radioBox' value={valueE.id}  />
                                                                                     </a>
                                                                                 </div>
                                                                             )
@@ -185,7 +203,7 @@ let Component = React.createClass({
                                                             <div className={styles.placename} key={keyE}>
                                                                 <a className={styles.da} >
                                                                     <b style={{cursor:'auto'}}><img src={'http://'+url+'/'+valueE.img}/>{valueE.text}</b>
-                                                                    <input type='checkbox' value={valueE.id}  />
+                                                                    <input type='radio' name='222' value={valueE.id}  />
                                                                 </a>
                                                             </div>
                                                         )
@@ -199,17 +217,17 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.righttable}>
                             <div className={styles.columnbox} id='colum'>
-                                {chartData!==undefined && <ColumnState month={stateArr} arr1={numberArr} arr2={timeArr} unit1={'次'} unit2={'s'} nameOne={'发生次数'} nameTwo={'状态时长'} title={'状态统计'}></ColumnState>}
+                                {runCheckData!==undefined && <LineChart title={'设备状态查询用例规划'} month={numberArr} data={stateCode} unit1={'状态代码'}></LineChart>}
                             </div>
                             <div className={styles.tablebox} id='tablebox'>
-                                {chartData!==undefined &&
+                                {runCheckData!==undefined &&
                                 <table>
                                     <tbody>
-                                        <tr className={styles.thState}><th>序号</th><th>状态时间</th><th>状态代码</th><th>设备状态</th><th>状态时长(s)</th><th>时长描述(h)</th></tr>
+                                        <tr className={styles.runCheck}><th>序号</th><th>原时间</th><th>原模式</th><th>时间</th><th>停机模式字</th><th>代码解释</th><th>时长(s)</th><th>时长描述(h)</th><th>周期(s)</th><th>周期描述(h)</th><th>备注</th></tr>
                                         {
                                             stateCode.map((value,key)=>{
                                                 return(
-                                                    <tr key={key} className={styles.thState}><th>{key+1}</th><th>{devState[key]}</th><th>{value}</th><th>{numberArr[key]}</th><th>{timeArr[key]}</th><th>{timeDescribe[key]}</th></tr>
+                                                    <tr key={key} className={styles.runCheck}><th>{key+1}</th><th>{yTime[key]}</th><th>{yModle[key]}</th><th>{numberArr[key]}</th><th>{value}</th><th>{stateArr[key]}</th><th>{timeArr[key]}</th><th>{timeDescribe[key]}</th><th>{cycle[key]}</th><th>{cycleDescribe[key]}</th><th>{beiZhu[key]}</th></tr>
                                                 )
                                             })
                                         }
@@ -236,7 +254,7 @@ const mapStateToProps = (state) => {
         firstname:state.objs.firstname,
         select_list:state.vars.select_list,
         devurls:state.vars.devurls,
-        chartData:state.objs.chartData,
+        runCheckData:state.objs.runCheckData,
     }
 };
 
@@ -335,10 +353,6 @@ const mapDispatchToProps = (dispatch) => {
                 $('#showitem').html($(this).html());
                 $('#selectye').hide();
             });
-            //复选框状态跟随
-            $("#leftlist input").change(function(){
-                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
-            });
             //下拉点击事件
             $("#leftlist b").on('click',function(){
                 $(this).parent().siblings().toggle();
@@ -399,18 +413,17 @@ const mapDispatchToProps = (dispatch) => {
             }
             $.ajax({    
                 url:'http://'+url+'/RealTimeInfo/xml.aspx',    
-                data:'functionname=GetStatData&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&proid=1162&iec=WTUR.Other.Wn.I16.StopModeWord&BTZ=480&crossDomain=true&zip=false',    
+                data:'functionname=GetStatData&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&iec=WTUR.Other.Wn.I16.StopModeWord&proid=1467&BTZ=480&crossDomain=true&zip=false',    
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
                 timeout:3000,       
                 success:function(json,textStatus){ 
-                    // if(json.wtid==undefined){
-                    //     alert('无数据');
-                    //     return;
-                    // } 
-                    // dispatch(actions.setObjs('chartData',json));
-                    console.log(json)
+                    if(json.rectime==undefined){
+                        alert('无数据');
+                        return;
+                    } 
+                    dispatch(actions.setObjs('runCheckData',json));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     alert('获取数据失败！');    
