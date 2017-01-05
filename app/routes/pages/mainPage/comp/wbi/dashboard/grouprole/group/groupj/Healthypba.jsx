@@ -500,6 +500,8 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         back: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
+console.log(actbt)
+console.log(wfid)
 
             dispatch(actions.setVars('bt0', 1));
 
@@ -517,7 +519,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
+                    console.log(data)
                     let barLotime3c = [];    //各区域   一区域二区域
                     let power3c = [];       //实际发电量
                     let wrong30c = [];       //故障损失

@@ -144,12 +144,13 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
-            let day = new Date(year, month2, 0);
-            let daycountT = day.getDate();
             if(month2==0){
                 month2=12;
                 year=year-1;
             }
+            let day = new Date(year, month2, 0);
+            let daycountT = day.getDate();
+
             dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('actbt', month2-1));
             dispatch(actions.setVars('mon', month2 + "月"));
@@ -165,7 +166,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-console.log(data)
                     dispatch(actions.setVars('hhdata2', data));
                     dispatch(actions.setVars('w11', data.data[0].wfname));
 
@@ -347,8 +347,16 @@ console.log(data)
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            if(month2==0){
+                month2=12;
+            }
             let day = new Date(year, month2, 0);
             let daycount = day.getDate();
+
+            console.log(year)
+            console.log(actbt)
+            console.log(wfid)
+            console.log(daycount)
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',
@@ -367,7 +375,7 @@ console.log(data)
                     let downtime2 = [];       //故障损失
                     let tba2 = [];       //维护损失
 
-
+console.log(data)
                     for (let i = 0; i < 10; i++) {
                         //区域的横坐标
                         name2.push(data.data[i].wtname);
@@ -395,6 +403,9 @@ console.log(data)
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            if(month2==0){
+                month2=12;
+            }
             let day = new Date(year, month2, 0);
             let daycount = day.getDate();
             $.ajax({
@@ -440,8 +451,12 @@ console.log(data)
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            if(month2==0){
+                month2=12;
+            }
             let day = new Date(year, month2, 0);
             let daycount = day.getDate();
+
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',
