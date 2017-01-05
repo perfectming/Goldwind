@@ -221,6 +221,7 @@ const mapDispatchToProps = (dispatch) => {
                         // 限功率损失
                         let limitloss=PBASpaceFirstPba[i].limitloss;
                         PBASpaceFirstLimitloss.push(limitloss);
+                        let nodevreasonloss=PBASpaceFirstPba[i].nodevreasonloss;
                         PBASpaceFirstNodevreasonloss.push(nodevreasonloss);
                         let pba=PBASpaceFirstPba[i].pba*100;
                         // PBA

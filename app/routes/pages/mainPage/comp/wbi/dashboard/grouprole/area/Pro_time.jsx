@@ -29,7 +29,9 @@ let Component = React.createClass({
 
 
             <div className = {styles.box}>
-                <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
+                <div className={styles.paddingtop}>
+                    <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
+                </div>
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Pro_three
@@ -136,16 +138,18 @@ const mapDispatchToProps = (dispatch) => {
 
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/yield/getMaxYieBayDay',
+                url:'http://'+ipUrl+'/wbi/yield/getByGroupidDay',
                 async:false,
                 data:{
+
                     "month":month2,
+                    "groupid":'201612121721151',
 
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-
+console.log(data)
                     //各区域   一区域二区域
                     let runtime2=[];       //实际发电量
                     let downtime2=[];       //故障损失

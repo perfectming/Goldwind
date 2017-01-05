@@ -56,11 +56,7 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
 
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -119,6 +115,9 @@ let Component = React.createClass({
                     }
                 },
                 categories:barRotime,
+            },
+            tooltip: {
+                shared: true
             },
             yAxis: [{
                 labels: {
