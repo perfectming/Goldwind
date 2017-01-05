@@ -74,6 +74,11 @@ let Component = React.createClass({
             let IntoCDMjp=0;//纳入CDM场站CO2减排量//
             let NotIntoCDMjp=0;//未纳入CDM场站CO2减排量//
             let monthTimeHandle=[];//变形后的最近的十二个月的月份数组//
+            let gzsbglvalue=mobd[8888800].DevFaultOverview.Value;//所有故障设备的信息集合//
+            let gzsbgltime1=[];//故障时间在2-12小时之间//
+            let gzsbgltime2=[];//故障时间在12-24小时之间//
+            let gzsbgltime3=[];//故障时间在24-72小时之间//
+            let gzsbgltime4=[];//故障时间在72小时以上//
 
             //以下是各个数据的提取、循环、计算的方法//
             (function(){
@@ -94,6 +99,17 @@ let Component = React.createClass({
                 }
                 for(let i=0;i<mobd[8888800].Last12MonthsEgyAtStat.Time.length;i++){
                     monthTimeHandle.push(Number(mobd[8888800].Last12MonthsEgyAtStat.Time[i].substring(5))+'月')
+                }
+                for(let i in gzsbglvalue){
+                    if((Number(gzsbglvalue[i].timelength)>=7200) && (Number(gzsbglvalue[i].timelength)<43200)){
+                        gzsbgltime1.push(Number(gzsbglvalue[i].timelength))
+                    }else if((Number(gzsbglvalue[i].timelength)>=43200) && (Number(gzsbglvalue[i].timelength)<86400)){
+                        gzsbgltime2.push(Number(gzsbglvalue[i].timelength))
+                    }else if((Number(gzsbglvalue[i].timelength)>=86400) && (Number(gzsbglvalue[i].timelength)<259200)){
+                        gzsbgltime3.push(Number(gzsbglvalue[i].timelength))
+                    }else if((Number(gzsbglvalue[i].timelength)>=259200)){
+                        gzsbgltime4.push(Number(gzsbglvalue[i].timelength))
+                    }
                 }
             }());
             (function(){
@@ -231,10 +247,10 @@ let Component = React.createClass({
                     <div className={`${styles.ssdlqkfx} ${styles.box_shadow}`}>
                         <Title title={['故障设备概览']}></Title>
                         <div className={styles.ssdlqkfxmain}>
-                            <span className={styles.tsstyle1}>--<span className={styles.tsstyled1}>台</span></span>
-                            <span className={styles.tsstyle2}>--<span className={styles.tsstyled2}>台</span></span>
-                            <span className={styles.tsstyle3}>--<span className={styles.tsstyled3}>台</span></span>
-                            <span className={styles.tsstyle4}>--<span className={styles.tsstyled4}>台</span></span>
+                            <span className={styles.tsstyle1}><span className={styles.tsstyled1}>{gzsbgltime1.length}</span>台</span>
+                            <span className={styles.tsstyle2}><span className={styles.tsstyled2}>{gzsbgltime2.length}</span>台</span>
+                            <span className={styles.tsstyle3}><span className={styles.tsstyled3}>{gzsbgltime3.length}</span>台</span>
+                            <span className={styles.tsstyle4}><span className={styles.tsstyled4}>{gzsbgltime4.length}</span>台</span>
                             <span className={styles.timestyle}>
                                 <span className={styles.timestylee}>2<span className={styles.danweicc}>h</span></span>
                                 <span className={styles.timestylee}>12<span className={styles.danweicc}>h</span></span>
@@ -285,7 +301,6 @@ let Component = React.createClass({
             return(
                 <Login></Login>
             )
-
         }
     }
 });
@@ -329,12 +344,12 @@ const mapDispatchToProps = (dispatch) => {
                 alert('数据获取失败！请重新登入');
                 browserHistory.push('/app/all/page/login');
                 dispatch(actions.setVars('userInfo', false));
-            },7000)
+            },7000);
             //数据刷新方法//
             time=setInterval(function(){
                 TY.getRtData("MonitorBoard", 8888800, ppo);
                 function ppo(modata){
-                    if(modata.ModelData[8888801]==undefined){
+                    if(modata.ModelData==undefined){
                         TY.getRtData("MonitorBoard", 8888800, ppo);
                     }else {
                         dispatch(actions.setVars('modata', modata));

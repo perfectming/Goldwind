@@ -154,9 +154,9 @@ let Component = React.createClass({
                         <div className={styles.zhzbglmain}>
                             <div className={styles.zhzbglbox}><img src={up}/>
                                 <p>投资收益率</p>
-                                <Pie2 color={rate>0.9? ['#62de88','#39565e']:rate>0.8?['#e8952a','#39565e']:rate>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[profit,amounts-profit]}></Pie2>
+                                <Pie2 color={rate>0.12? ['#62de88','#39565e']:rate>0.108?['#e8952a','#39565e']:rate>0.096?['#a32124','#39565e']:['#d8403d','#39565e']} num={[profit,amounts-profit]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
-                                    <p style={rate>0.9? {color:'#62de88'} :rate>0.8?{color:'#e8952a'}:rate>0.6?{color:'#a32124'}:{color:'#d8403d'}}>{rate=="NaN"?"--":(rate*100).toFixed(1)}%</p>
+                                    <p style={rate>0.12? {color:'#62de88'} :rate>0.108?{color:'#e8952a'}:rate>0.096?{color:'#a32124'}:{color:'#d8403d'}}>{rate=="NaN"?"--":(rate*100).toFixed(1)}%</p>
                                 </span>
                             </div>
                             <div className={styles.zhzbglbox}><img src={up}/>

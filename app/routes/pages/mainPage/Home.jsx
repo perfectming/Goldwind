@@ -22,14 +22,15 @@ let Component = React.createClass({
     render() {
         let {itemHeaderActive, itemTreeAct, flag=true,userMessage,Verification}=this.props;
         let menu=[];
+        // console.log(userMessage);
         if(userMessage){
             userMessage.data.tlist.map(function(value,key){
                 //获取一级菜单
                 menu.push(
                     {
                         name:value.name,
-                        iconNormal: 'http://10.9.99.33:2992/_assets/'+value.smallpicture+'.png',
-                        iconActive: 'http://10.9.99.33:2992/_assets/'+value.largepicture+'.png',
+                        iconNormal: 'http://10.68.100.29:2992/_assets/'+value.smallpicture+'.png',
+                        iconActive: 'http://10.68.100.29:2992/_assets/'+value.largepicture+'.png',
                         subPage:[]
                     }
                 );
@@ -39,8 +40,8 @@ let Component = React.createClass({
                         menu[key].subPage.push(
                             {
                                 name:valueC.name,
-                                iconNormal: 'http://10.9.99.33:2992/_assets/'+valueC.smallpicture+'.png',
-                                iconActive: 'http://10.9.99.33:2992/_assets/'+valueC.largepicture+'.png',
+                                iconNormal: 'http://10.68.100.29:2992/_assets/'+valueC.smallpicture+'.png',
+                                iconActive: 'http://10.68.100.29:2992/_assets/'+valueC.largepicture+'.png',
                                 page:[]
                             }
                         )
@@ -102,6 +103,7 @@ const mapStateToProps = (state) => {
         itemTreeAct: state.vars.treeItemActive,
         userInfo: state.vars.userInfo,
         flag: state.vars.putpage,
+        areaid: state.vars.areaid,
         userMessage:state.objs.userMessage
     }
 };
