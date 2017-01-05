@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Hly_tt from '../group/groupj/Hly_tt.jsx';
+import Hly_ttt from './Hly_ttt.jsx';
 import Hly_d from '../group/groupj/Hly_d.jsx';
 var actions = require('redux/actions');
 
@@ -35,9 +35,9 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_tt barLoTime={monthx}
+                        <Hly_ttt barLoTime={monthx}
                                 barLoPowerValue={healthy2}
-                                text={"巴盟每月健康度"}></Hly_tt>
+                                text={"巴盟每月健康度"}></Hly_ttt>
 
                         <div className={styles.logo1}>
 

@@ -352,6 +352,11 @@ const mapDispatchToProps = (dispatch) => {
             }
             let day = new Date(year, month2, 0);
             let daycount = day.getDate();
+
+            console.log(year)
+            console.log(actbt)
+            console.log(wfid)
+            console.log(daycount)
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',
@@ -370,7 +375,7 @@ const mapDispatchToProps = (dispatch) => {
                     let downtime2 = [];       //故障损失
                     let tba2 = [];       //维护损失
 
-
+console.log(data)
                     for (let i = 0; i < 10; i++) {
                         //区域的横坐标
                         name2.push(data.data[i].wtname);

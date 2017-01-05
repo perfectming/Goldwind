@@ -74,8 +74,8 @@ let Component = React.createClass({
                             let a = w0.toString().split("");
                             let b = a[0];
                             let WTHealH = [];
-                            let WTHealName = ["1日", "2日", "3日", "4日", "5日", "6日", "7日", "8日", "9日", "10日", "11日", "12日", "13日", "14日",];
-                            let WTN = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                            let WTHealName = [];
+                            let WTN = [];
 
                             let date = new Date();
 
