@@ -606,7 +606,7 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
             function jiang3() {
-                
+
                 $.ajax({
                     url: soam + '/info/getWfcosts',
                     type: 'post',

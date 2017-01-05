@@ -204,7 +204,6 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:'3000',
                 success:function(data){
 
-
                     let barlotimes2 = [];
                     let barlopowers2 = [];
                     let barlopowerp2 = [];

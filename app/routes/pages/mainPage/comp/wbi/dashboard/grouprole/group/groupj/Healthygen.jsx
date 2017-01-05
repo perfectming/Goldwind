@@ -171,7 +171,7 @@ const mapDispatchToProps = (dispatch) => {
             if(month2==0){
                 month2=12;
             }
-            console.log(month2)
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/ELEC/getSpaceElec',
@@ -326,7 +326,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": wfid==undefined? '150828':wfid,
+                    "wfid": wfid==undefined? '150801':wfid,
                     "type":"0",
                     "year":""
                 },
@@ -370,7 +370,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     "month": actbt + 1,
                     "groupid":  '201612121721151',
-                    "wfid": wfid==undefined? '150828':wfid,
+                    "wfid": wfid==undefined? '150801':wfid,
                     "type":"1",
                     "year":""
                 },
