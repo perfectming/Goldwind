@@ -25,7 +25,7 @@ let thYear = thDate.getFullYear();
 let month2 = thDate.getMonth();
 let soam = 'http://10.68.100.32:8080/wbi';//设置接口
 for (let i = 0; i <= 30; i++) {
-    yeares.push(thYear - 15 + i)
+    yeares.push(thYear - 2 + i)
 }
 let newData = {};
 
@@ -69,6 +69,11 @@ let Component = React.createClass({
                             <span>年度</span>
                             <select id='textContent5'>
                                 {yeares.map((value, key) => {
+                                    if(key==1){
+                                        return (
+                                            <option selected="selected" value={value} key={key}>{value}</option>
+                                        )
+                                    }
                                     return (
                                         <option value={value} key={key}>{value}</option>
                                     )
@@ -80,6 +85,11 @@ let Component = React.createClass({
                             <span>场站</span>
                             <select id='textContent6'>
                                 {wtidAll.data.map((value, key) => {
+                                    if(key==0){
+                                        return (
+                                            <option selected="selected" value={value.wfid} key={key}>{value.wfname}</option>
+                                        )
+                                    }
                                     return (
                                         <option value={value.wfid} key={key}>{value.wfname}</option>
                                     )
@@ -206,7 +216,7 @@ let Component = React.createClass({
                                                              onClick={(e) => saveTableItem2(key, value, wtidAll, groupAll, page)}/>
                                                     </div>
                                                     <div className={styles.tableContentItemm} style={{width: 7 + "%"}}>
-                                                        <img src={del} onClick={(e) => deleData(key,)}/>
+                                                        <img src={del} onClick={(e) => deleData(key,page)}/>
                                                     </div>
                                                 </div>
                                             )
@@ -522,48 +532,50 @@ const mapDispatchToProps = (dispatch) => {
             wfs['day'] = null;
             wfs['id'] = null;
             //wfs.push({groupname:"巴盟"});
-
-            let ddv = JSON.stringify(wfs);
-
-            $.ajax({
-                url: soam + '/info/getSaveStageprice',
-                type: 'post',
-                data: ddv,
-                dataType: 'json',//here,
-                contentType: 'application/json;charset=UTF-8',
-                success: function (data) {
-
-                    jiang2();
-                },
-                error: function () {
-                    console.log('获取数据失败')
-                }
-            });
-            function jiang2() {
-
+            if(wfs.wfid==''||wfs.groupid==''||wfs.year==''||wfs.month==''){
+                alert("请选择正确的区域,风场,年,月")
+            }else {
+                let ddv = JSON.stringify(wfs);
 
                 $.ajax({
-                    url: soam + '/info/getStageprice',
+                    url: soam + '/info/getSaveStageprice',
                     type: 'post',
-                    data: {
-                        "curpage": page,
-                        "pageSize": pageSize,
-                    },
+                    data: ddv,
                     dataType: 'json',//here,
-                    //  timeout:'3000',
+                    contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
 
-                        dispatch(actions.setObjs('tableContent', data));
-                        dispatch(actions.setVars('totalpage', data.data.totalPage));
-                        dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
-
+                        jiang2();
                     },
                     error: function () {
                         console.log('获取数据失败')
                     }
                 });
-            }
+                function jiang2() {
 
+
+                    $.ajax({
+                        url: soam + '/info/getStageprice',
+                        type: 'post',
+                        data: {
+                            "curpage": page,
+                            "pageSize": pageSize,
+                        },
+                        dataType: 'json',//here,
+                        //  timeout:'3000',
+                        success: function (data) {
+
+                            dispatch(actions.setObjs('tableContent', data));
+                            dispatch(actions.setVars('totalpage', data.data.totalPage));
+                            dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+
+                        },
+                        error: function () {
+                            console.log('获取数据失败')
+                        }
+                    });
+                }
+            }
         },
         saveTableItem2: (li, dis, wtid, groupname, page) => {
 
@@ -583,26 +595,72 @@ const mapDispatchToProps = (dispatch) => {
             wfs['day'] = null;
             wfs['id'] = id;
             //wfs.push({groupname:"巴盟"});
+            if(wfs.wfid==''||wfs.groupid==''||wfs.year==''||wfs.month==''){
+                alert("请选择正确的区域,风场,年,月")
+            }else {
+                let ddv = JSON.stringify(wfs);
 
-            let ddv = JSON.stringify(wfs);
+                $.ajax({
+                    url: soam + '/StagePrice/update',
+                    type: 'post',
+                    data: ddv,
+                    dataType: 'json',//here,
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (data) {
 
-            $.ajax({
-                url: soam + '/StagePrice/update',
-                type: 'post',
-                data: ddv,
-                dataType: 'json',//here,
-                contentType: 'application/json;charset=UTF-8',
-                success: function (data) {
+                        jiang2();
+                    },
+                    error: function () {
+                        console.log('获取数据失败')
+                    }
+                });
+                function jiang2() {
 
-                    jiang2();
-                },
-                error: function () {
-                    console.log('获取数据失败')
+
+                    $.ajax({
+                        url: soam + '/info/getStageprice',
+                        type: 'post',
+                        data: {
+                            "curpage": page,
+                            "pageSize": pageSize,
+                        },
+                        dataType: 'json',//here,
+                        //  timeout:'3000',
+                        success: function (data) {
+
+                            dispatch(actions.setObjs('tableContent', data));
+                            dispatch(actions.setVars('totalpage', data.data.totalPage));
+                            dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+
+                        },
+                        error: function () {
+                            console.log('获取数据失败')
+                        }
+                    });
                 }
-            });
-            function jiang2() {
+            }
+        },
+        deleData: (j, page) => {
+            let w=confirm("确认要删除这条数据吗?删除不可恢复");
+            if(w==true) {
+                let tableV = _.clone(getState().objs.tableContent);
+                let uuid = tableV.data.pagedata[j].uuid;
 
-
+                $.ajax({
+                    url: soam + '/StagePrice/delete',
+                    type: 'post',
+                    data: {
+                        "uuid": uuid,
+                    },
+                    dataType: 'json',//here,
+                    success: function (data) {
+                    },
+                    error: function () {
+                        console.log('获取数据失败')
+                    }
+                });
+                console.log(page)
+                console.log(pageSize)
                 $.ajax({
                     url: soam + '/info/getStageprice',
                     type: 'post',
@@ -611,54 +669,17 @@ const mapDispatchToProps = (dispatch) => {
                         "pageSize": pageSize,
                     },
                     dataType: 'json',//here,
-                    //  timeout:'3000',
                     success: function (data) {
 
                         dispatch(actions.setObjs('tableContent', data));
-                        dispatch(actions.setVars('totalpage', data.data.totalPage));
-                        dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
-
                     },
                     error: function () {
                         console.log('获取数据失败')
                     }
                 });
+            }else {
+
             }
-
-        },
-        deleData: (j, page) => {
-            let tableV = _.clone(getState().objs.tableContent);
-            let uuid = tableV.data.pagedata[j].uuid;
-
-            $.ajax({
-                url: soam + '/StagePrice/delete',
-                type: 'post',
-                data: {
-                    "uuid": uuid,
-                },
-                dataType: 'json',//here,
-                success: function (data) {
-                },
-                error: function () {
-                    console.log('获取数据失败')
-                }
-            });
-            $.ajax({
-                url: soam + '/info/getStageprice',
-                type: 'post',
-                data: {
-                    "curpage": page,
-                    "pageSize": pageSize,
-                },
-                dataType: 'json',//here,
-                success: function (data) {
-
-                    dispatch(actions.setObjs('tableContent', data));
-                },
-                error: function () {
-                    console.log('获取数据失败')
-                }
-            });
         },
         deleDate: (j) => {
             let tableV = _.clone(getState().objs.tableContent);
@@ -669,7 +690,7 @@ const mapDispatchToProps = (dispatch) => {
             page > 1 ? page-- : page;
             dispatch(actions.setVars('page1', page));
             $.ajax({
-                url: soam + '/info/getWfcosts',
+                url: soam + '/info/getStageprice',
                 type: 'post',
                 data: {
                     "curpage": page,
@@ -698,7 +719,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
             $.ajax({
-                url: soam + '/info/getWfcosts',
+                url: soam + '/info/getStageprice',
                 type: 'post',
 
                 data: {
@@ -724,7 +745,7 @@ const mapDispatchToProps = (dispatch) => {
             page = 1;
             dispatch(actions.setVars('page1', page));
             $.ajax({
-                url: soam + '/info/getWfcosts',
+                url: soam + '/info/getStageprice',
                 type: 'post',
                 data: {
                     "curpage": page,
@@ -748,7 +769,7 @@ const mapDispatchToProps = (dispatch) => {
             page = Math.ceil(i / j);
             dispatch(actions.setVars('page1', page));
             $.ajax({
-                url: soam + '/info/getWfcosts',
+                url: soam + '/info/getStageprice',
                 type: 'post',
                 data: {
                     "curpage": page,

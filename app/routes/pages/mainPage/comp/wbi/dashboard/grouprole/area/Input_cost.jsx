@@ -25,7 +25,7 @@ let thYear = thDate.getFullYear();
 let month2 = thDate.getMonth();
 let soam = 'http://10.68.100.32:8080/wbi';//设置接口
 for (let i = 0; i <= 30; i++) {
-    yeares.push(thYear - 15 + i)
+    yeares.push(thYear - 2 + i)
 }
 let newData = {};
 
@@ -69,6 +69,11 @@ let Component = React.createClass({
                             <span>年度</span>
                             <select id='textContent5'>
                                 {yeares.map((value, key) => {
+                                    if(key==1){
+                                        return (
+                                            <option selected="selected" value={value} key={key}>{value}</option>
+                                        )
+                                    }
                                     return (
                                         <option value={value} key={key}>{value}</option>
                                     )
@@ -80,6 +85,7 @@ let Component = React.createClass({
                             <span>场站</span>
                             <select id='textContent6'>
                                 {wtidAll.data.map((value, key) => {
+
                                     return (
                                         <option value={value.wfid} key={key}>{value.wfname}</option>
                                     )
@@ -226,6 +232,7 @@ let Component = React.createClass({
                                                                             style={{width: arr[keyC] + "%"}} key={keyC}
                                                                             onChange={(e) => changeTableItem1(e.target.value, newData, key, keyC)}>
                                                                         {group0.map((value, key) => {
+
                                                                             return (
                                                                                 <option
                                                                                     className={styles.tableContentItem}
@@ -243,6 +250,7 @@ let Component = React.createClass({
                                                                             style={{width: arr[keyC] + "%"}} key={keyC}
                                                                             onChange={(e) => changeTableItem1(e.target.value, newData, key, keyC)}>
                                                                         {wtidAll.data.map((value, key) => {
+
                                                                             return (
                                                                                 <option
                                                                                     className={styles.tableContentItem}
@@ -262,6 +270,7 @@ let Component = React.createClass({
                                                                                 onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
                                                                                 style={{width: 60 + '%'}}>
                                                                             {yeares.map((value, key) => {
+
                                                                                 return (
                                                                                     <option value={value}
                                                                                             className={styles.tableContentItem}
@@ -284,6 +293,7 @@ let Component = React.createClass({
                                                                                 onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
                                                                                 style={{width: 60 + '%'}}>
                                                                             {month4.map((value, key) => {
+
                                                                                 return (
                                                                                     <option value={value}
                                                                                             className={styles.tableContentItem}
@@ -393,6 +403,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('totalpage', data.data.totalPage));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    dispatch(actions.setVars('years0', null));
+                    dispatch(actions.setVars('wfids', null));
 
                     getgroupid()
                 },
@@ -529,46 +541,51 @@ const mapDispatchToProps = (dispatch) => {
             wfs['day'] = null;
             wfs['id'] = id;
             //wfs.push({groupname:"巴盟"});
-
-            let ddv = JSON.stringify(wfs);
-
-            $.ajax({
-                url: soam + '/info/getUpdateOneWfcost',
-                type: 'post',
-                data: ddv,
-                dataType: 'json',//here,
-                contentType: 'application/json;charset=UTF-8',
-                success: function (data) {
-
-                    jiang2();
-                },
-                error: function () {
-                    console.log('获取数据失败')
-                }
-            });
-            function jiang2() {
-
+            console.log(wfs)
+            if(wfs.wfid==''||wfs.groupid==''||wfs.year==''||wfs.month==''){
+                alert("请选择正确的区域,风场,年,月")
+            }else {
+                let ddv = JSON.stringify(wfs);
 
                 $.ajax({
-                    url: soam + '/info/getWfcosts',
+                    url: soam + '/info/getUpdateOneWfcost',
                     type: 'post',
-                    data: {
-                        "curpage": page,
-                        "pageSize": 16,
-                    },
+                    data: ddv,
                     dataType: 'json',//here,
-                    //  timeout:'3000',
+                    contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
-
-                        dispatch(actions.setObjs('tableContent', data));
-                        dispatch(actions.setVars('totalpage', data.data.totalPage));
-                        dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
-
+                        dispatch(actions.setVars('years0', null));
+                        dispatch(actions.setVars('wfids', null));
+                        jiang2();
                     },
                     error: function () {
                         console.log('获取数据失败')
                     }
                 });
+                function jiang2() {
+
+
+                    $.ajax({
+                        url: soam + '/info/getWfcosts',
+                        type: 'post',
+                        data: {
+                            "curpage": page,
+                            "pageSize": 16,
+                        },
+                        dataType: 'json',//here,
+                        //  timeout:'3000',
+                        success: function (data) {
+
+                            dispatch(actions.setObjs('tableContent', data));
+                            dispatch(actions.setVars('totalpage', data.data.totalPage));
+                            dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+
+                        },
+                        error: function () {
+                            console.log('获取数据失败')
+                        }
+                    });
+                }
             }
 
         },
@@ -587,50 +604,56 @@ const mapDispatchToProps = (dispatch) => {
             wfs['day'] = null;
             wfs['id'] = null;
             //wfs.push({groupname:"巴盟"});
-
-            let ddv = JSON.stringify(wfs);
-
-            $.ajax({
-                url: soam + '/info/getSaveWfcost',
-                type: 'post',
-
-                data: ddv,
-                dataType: 'json',//here,
-                contentType: 'application/json;charset=UTF-8',
-                success: function (data) {
-
-                    jiang3();
-                },
-                error: function () {
-                    console.log('获取数据失败')
-                }
-            });
-            function jiang3() {
-
+            console.log(wfs)
+            if(wfs.wfid==''||wfs.groupid==''||wfs.year==''||wfs.month==''){
+                alert("请选择正确的区域,风场,年,月")
+            }else {
+                let ddv = JSON.stringify(wfs);
                 $.ajax({
-                    url: soam + '/info/getWfcosts',
+                    url: soam + '/info/getSaveWfcost',
                     type: 'post',
-                    data: {
-                        "curpage": page,
-                        "pageSize": pageSize,
-                    },
+
+                    data: ddv,
                     dataType: 'json',//here,
-                    //  timeout:'3000',
+                    contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
-
-                        dispatch(actions.setObjs('tableContent', data));
-                        dispatch(actions.setVars('totalpage', data.data.totalPage));
-                        dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
-
+                        dispatch(actions.setVars('years0', null));
+                        dispatch(actions.setVars('wfids', null));
+                        jiang3();
                     },
                     error: function () {
                         console.log('获取数据失败')
                     }
                 });
+                function jiang3() {
+
+                    $.ajax({
+                        url: soam + '/info/getWfcosts',
+                        type: 'post',
+                        data: {
+                            "curpage": page,
+                            "pageSize": pageSize,
+                        },
+                        dataType: 'json',//here,
+                        //  timeout:'3000',
+                        success: function (data) {
+
+                            dispatch(actions.setObjs('tableContent', data));
+                            dispatch(actions.setVars('totalpage', data.data.totalPage));
+                            dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+
+                        },
+                        error: function () {
+                            console.log('获取数据失败')
+                        }
+                    });
+                }
             }
 
         },
         deleData: (j, page) => {
+            let w=confirm("确认要删除这条数据吗?删除不可恢复");
+            if(w==true){
             let tableV = _.clone(getState().objs.tableContent);
             let uuid = tableV.data.pagedata[j].uuid;
 
@@ -665,6 +688,9 @@ const mapDispatchToProps = (dispatch) => {
                     console.log('获取数据失败')
                 }
             });
+            }else {
+
+            }
         },
         deleDate: (j) => {
             let tableV = _.clone(getState().objs.tableContent);
