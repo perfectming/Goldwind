@@ -129,19 +129,19 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
-            $.ajax({
-                url: soam+'/Alarm/getAlarm',
-                type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+1,
-                dataType: 'json',//here,
-                success:function (data) {
-                    console.log(data);
-                    dispatch(actions.setObjs('tableContent', data));
-                },
-                error:function(){
-                    console.log('获取数据失败')
-                }
-            });
+            // $.ajax({
+            //     url: soam+'/Alarm/getAlarm',
+            //     type: 'post',
+            //     data:'pageSize='+pageSize+'&&nowPage='+1,
+            //     dataType: 'json',//here,
+            //     success:function (data) {
+            //         console.log(data);
+            //         dispatch(actions.setObjs('tableContent', data));
+            //     },
+            //     error:function(){
+            //         console.log('获取数据失败')
+            //     }
+            // });
         },
         changeTableItem: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);

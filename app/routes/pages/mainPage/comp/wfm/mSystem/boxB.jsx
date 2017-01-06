@@ -9,27 +9,16 @@ var actions = require('redux/actions');
 let matrixdata = require('../../../../../../../config/MatrixData');
 let arr1 = [];
 let arr2 = [];
+let soamMs='http://10.9.100.48:8080/soam';
 var obj = matrixdata;
 var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
 var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-
-(function(){
-    for(var x in obj_wfd){
-        arr1.push(x)
-    }
-    for(var m in obj_pvd){
-        arr2.push(m)
-    }
-    arr2.splice(1,arr1.length-1);
-
-}());
-
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
     render() {
-        let {border1=true,closebox2,Tofaninfo1} = this.props;
+        let {boxCenterId,wfBoxB,border1=true,closebox2,Tofaninfo1} = this.props;
         return (
 
             <div className={styles.fiexdbox}  style={{top: 30, left:-73}}>
@@ -37,17 +26,16 @@ let Component = React.createClass({
                 <div className={styles.listbox} id='box2'>
                     <ul id='fclist'>
                         {
-                            arr2.map((value,key)=>{
+                            wfBoxB && wfBoxB.data.map((value,key)=>{
                                 return(
-                                    <li key={key} >
-                                        <a>所有</a>
+                                    <li key={key}>
+                                        <a>{value.name}</a>
                                         <div className={styles.list_span}>
                                             {
-                                                obj_pvd[value].map((valueC,key)=>{
+                                                value.wfinfos.map((valueC,keyC)=>{
                                                     return(
-                                                        <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC,value)}>
-                                                            <input type='checkbox' name='checknameB' value={valueC.Wtname} />
-                                                            {valueC.Wtname}
+                                                        <div className={styles.listitem} key={keyC} onClick = {()=> Tofaninfo1(valueC.id,boxCenterId)}>
+                                                            {valueC.name}
                                                         </div>
                                                     )
                                                 })
@@ -68,13 +56,26 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         border1: state.vars.bordershow1,
-
+        wfBoxB: state.objs.wfBoxB,
+        boxCenterId: state.objs.boxCenterId,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            $.ajax({
+                url: soamMs+'/roleright/getGroupInfoList',
+                type: 'post',
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('wfBoxB', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
             $('#box2 ul li a').on('click',function(){
                 var bg=$(this).css("background-image");
                 if(bg=='url("'+add+'")'){
@@ -99,8 +100,20 @@ const mapDispatchToProps = (dispatch) => {
         closebox2:()=>{
             $("#box2").parent().css("display","none");
         },
-        Tofaninfo1: (value)=> {
-
+        Tofaninfo1: (id,name)=> {
+            $.ajax({
+                url: soamMs+'/roleright/getByWfidRolerRightMapList',
+                type: 'post',
+                data:{wfid:id,roleid:name},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data,id,name);
+                    dispatch(actions.setObjs('boxCenter', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
 
 
