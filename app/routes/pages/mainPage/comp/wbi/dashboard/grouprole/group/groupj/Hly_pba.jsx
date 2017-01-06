@@ -117,6 +117,9 @@ let Component = React.createClass({
                 },
                 categories:barLotime2,
             },
+            tooltip: {
+                shared: true
+            },
             yAxis: [{
                 labels: {
                     format: '',

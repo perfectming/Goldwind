@@ -41,7 +41,7 @@ let Component = React.createClass({
     },
 
     render() {
-            let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,runData} = this.props;
+            let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,chartData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
@@ -50,10 +50,8 @@ let Component = React.createClass({
             let numberArr=[];//次数数组
             let timeArr=[];//时长数组
             let timeDescribe=[];//时长描述
-            let maxDescribe=[];//最大周期描述
-            let maxTime=[];//最大周期
-            let minDescribe=[];//最小周期描述
-            let minTime=[];//最小周期
+            let stateCode=[];//状态代码
+            let devState=[];//设备状态
             //获取设备类型对应的左侧树形二级和三级数据
             for(let arg2 in select_list){
                 if(select_list[arg2].id &&select_list[arg2].id!=''){
@@ -67,16 +65,14 @@ let Component = React.createClass({
                 }
             }
             //表格数据处理
-            if(runData!==undefined&&runData.happencount!==undefined){
-                let arrString0,arrString1,arrString2,arrString3,arrString4,arrString5,arrString6,arrString7;
-                arrString0=runData.iecvaluetypedescr.Values.split(',');
-                arrString1=runData.happencount.Values.split(',');
-                arrString2=runData.timelength.Values.split(',');
-                arrString3=runData.datelength.Values.split(',');
-                arrString4=runData.maxdateperiod.Values.split(',');
-                arrString5=runData.maxtimeperiod.Values.split(',');
-                arrString6=runData.mindateperiod.Values.split(',');
-                arrString7=runData.mintimeperiod.Values.split(',');
+            if(chartData!==undefined&&chartData.wtid!==undefined){
+                let arrString0,arrString1,arrString2,arrString3,arrString4,arrString5;
+                arrString0=chartData.blooeydescr.Values.split(',');
+                arrString1=chartData.happencount.Values.split(',');
+                arrString2=chartData.timelength.Values.split(',');
+                arrString3=chartData.datelength.Values.split(',');
+                arrString4=chartData.changedata.Values.split(',');
+                arrString5=chartData.blooeydescr.Values.split(',');
                 for (var i=0 ; i< arrString0.length ; i++){
                     stateArr.push(arrString0[i]);
                 }
@@ -90,19 +86,13 @@ let Component = React.createClass({
                         timeDescribe.push(arrString3[i]/1);
                 }
                 for (var i=0 ; i< arrString4.length ; i++){
-                        maxDescribe.push(arrString4[i]/1);
+                        stateCode.push(arrString4[i]);
                 }
                 for (var i=0 ; i< arrString5.length ; i++){
-                        maxTime.push(arrString5[i]/1);
-                }
-                for (var i=0 ; i< arrString6.length ; i++){
-                        minDescribe.push(arrString6[i]/1);
-                }
-                for (var i=0 ; i< arrString7.length ; i++){
-                        minTime.push(arrString7[i]/1);
+                        devState.push(arrString5[i]);
                 }
             }else{
-                runData=undefined;
+                chartData=undefined;
             }
             if(boolywbb){
                 //获取设备类型数组
@@ -209,19 +199,19 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.righttable}>
                             <div className={styles.columnbox} id='colum'>
-                                {runData!==undefined && <ColumnState month={stateArr} arr1={numberArr} arr2={timeArr} unit1={'次'} unit2={'s'} nameOne={'发生次数'} nameTwo={'状态时长'} title={'设备运行模式字统计用例规划'}></ColumnState>}
+                                {chartData!==undefined && <ColumnState month={stateArr} arr1={numberArr} arr2={timeArr} unit1={'次'} unit2={'s'} nameOne={'发生次数'} nameTwo={'状态时长'} title={'设备状态统计用例规划'}></ColumnState>}
                             </div>
                             <div className={styles.tablebox} id='tablebox'>
-                                {runData!==undefined &&
+                                {chartData!==undefined &&
                                 <table>
                                     <tbody>
-                                        <tr className={styles.thRun}><th>序号</th><th>分类描述</th><th>发生次数</th><th>状态时长(s)</th><th>时长描述(s)</th><th>最小周期(s)</th><th>最小周期描述(h)</th><th>最大周期(s)</th><th>最大周期描述(h)</th></tr>
+                                        <tr className={styles.thState}><th>序号</th><th>设备状态</th><th>状态代码</th><th>发生次数</th><th>状态时长(s)</th><th>时长描述(h)</th></tr>
                                         {
-                                            stateArr.map((value,key)=>{
+                                            stateCode.map((value,key)=>{
                                                 return(
-                                                    <tr key={key} className={styles.thRun}><th>{key+1}</th><th>{stateArr[key]}</th><th>{numberArr[key]}</th><th>{timeArr[key]}</th><th>{timeDescribe[key]}</th><th>{minTime[key]}</th><th>{minDescribe[key]}</th><th>{maxTime[key]}</th><th>{maxDescribe[key]}</th></tr>
+                                                    <tr key={key} className={styles.thState}><th>{key+1}</th><th>{devState[key]}</th><th>{value}</th><th>{numberArr[key]}</th><th>{timeArr[key]}</th><th>{timeDescribe[key]}</th></tr>
                                                 )
-                                            }) 
+                                            })
                                         }
                                     </tbody>
                                 </table>
@@ -246,7 +236,7 @@ const mapStateToProps = (state) => {
         firstname:state.objs.firstname,
         select_list:state.vars.select_list,
         devurls:state.vars.devurls,
-        runData:state.objs.runData,
+        chartData:state.objs.chartData,
     }
 };
 
@@ -409,17 +399,17 @@ const mapDispatchToProps = (dispatch) => {
             }
             $.ajax({    
                 url:'http://'+url+'/Monitor/xml.aspx',    
-                data:'functionname=CountStateData&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&iec=WTUR.Other.Wn.I16.StopModeWord&groupbydevice=0&crossDomain=true&zip=false',    
+                data:'functionname=CountStationInfo&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&groupbydevice=0&crossDomain=true&zip=false',    
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
                 timeout:3000,       
                 success:function(json,textStatus){ 
-                    if(json.datelength==undefined){
+                    if(json.wtid==undefined){
                         alert('无数据');
                         return;
-                    }
-                    dispatch(actions.setObjs('runData',json));
+                    } 
+                    dispatch(actions.setObjs('chartData',json));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     alert('获取数据失败！');    

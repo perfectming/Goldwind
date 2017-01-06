@@ -9,6 +9,13 @@ import LoseElectric_Statistics from './loseElectric_Statistics.jsx';
 import PowerCurveStatistics from './Power_curve_statistics.jsx';
 import AvailableStatistics from './Available_statistics.jsx';
 import Alert from './alert.jsx';
+
+import RunCount from './runCount.jsx';
+import RunCheck from './runCheck.jsx';
+import StateCheck from './stateCheck.jsx';
+import StateStatistics from './StateStatistics.jsx';
+import PowerCurve from './powerCurve.jsx';
+import PowerCount from './powerCount.jsx';
 var $ =require('jquery');
 var actions = require('redux/actions');
 let paged = require('./pagedate');
@@ -47,17 +54,20 @@ let Component = React.createClass({
                     }
                 </div>
 
-               { showbb==='ywbb' && <Generating1></Generating1>}
-               { showbb==='Electric_table' && <Electric_table></Electric_table>}
-               { showbb==='Completion' && <Completion></Completion>}
-               { showbb==='lose_detail' && <Lose_detail></Lose_detail>}
-               { showbb==='loseelectric_statistics' && <LoseElectric_Statistics></LoseElectric_Statistics>}
-               { showbb==='PowerCurveStatistics' && <PowerCurveStatistics></PowerCurveStatistics>}
-               { showbb==='AvailableStatistics' && <AvailableStatistics></AvailableStatistics>}
-
-
-
-               { showbb==='alert' && <Alert></Alert>}
+                { showbb==='ywbb' && <Generating1></Generating1>}
+                { showbb==='Electric_table' && <Electric_table></Electric_table>}
+                { showbb==='Completion' && <Completion></Completion>}
+                { showbb==='lose_detail' && <Lose_detail></Lose_detail>}
+                { showbb==='loseelectric_statistics' && <LoseElectric_Statistics></LoseElectric_Statistics>}
+                { showbb==='PowerCurveStatistics' && <PowerCurveStatistics></PowerCurveStatistics>}
+                { showbb==='AvailableStatistics' && <AvailableStatistics></AvailableStatistics>}
+                { showbb==='runCheck' && <RunCheck></RunCheck>}
+                { showbb==='runCount' && <RunCount></RunCount>}
+                { showbb==='StateStatistics' && <StateStatistics></StateStatistics>}
+                { showbb==='stateCheck' && <StateCheck></StateCheck>}
+                { showbb==='powerCurve' && <PowerCurve></PowerCurve>}
+                { showbb==='powerCount' && <PowerCount></PowerCount>}
+                { showbb==='alert' && <Alert></Alert>}
 
             </div>
         );

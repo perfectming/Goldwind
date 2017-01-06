@@ -4,7 +4,7 @@ import styles from './stateCountStyle.scss';
 import jian from '../../../img/comp/jian_icon.png';
 import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
-import ColumnState from './ColumnState.jsx';
+import OneColumn from './oneColumn.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
@@ -25,36 +25,19 @@ let Component = React.createClass({
             playjq();
         },1000)
     },
-    showTree (devurl){
-        let{playjq,showtree,select_list,firstname,devtype}=this.props;
-        //点击切换下拉选择项
-            for(let id in devtype.list){
-                if(devtype.list[id].id==devurl){
-                    firstname=devtype.list[id];
-                }
-            }
-    showtree(devurl,firstname);
-        //初始化jquery方法
-        setTimeout(function(){
-            playjq();
-        },1500)
-    },
 
     render() {
-            let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,runData} = this.props;
+            let {boolywbb=false,playjq,select_list,searchnum,powerCurveData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
             let three=[]; //三级菜单
-            let stateArr=[];//状态数组
-            let numberArr=[];//次数数组
+            let stateArr=[];//风速区间数组
             let timeArr=[];//时长数组
-            let timeDescribe=[];//时长描述
-            let maxDescribe=[];//最大周期描述
-            let maxTime=[];//最大周期
-            let minDescribe=[];//最小周期描述
-            let minTime=[];//最小周期
-            //获取设备类型对应的左侧树形二级和三级数据
+            let windSpeed=[];//平均风速
+            let frequency=[];//频次
+            let percentArr=[];//百分比数组
+            //获取左侧树形二级和三级数据
             for(let arg2 in select_list){
                 if(select_list[arg2].id &&select_list[arg2].id!=''){
                     if(select_list[arg2].type=='wf'){
@@ -67,75 +50,36 @@ let Component = React.createClass({
                 }
             }
             //表格数据处理
-            if(runData!==undefined&&runData.happencount!==undefined){
-                let arrString0,arrString1,arrString2,arrString3,arrString4,arrString5,arrString6,arrString7;
-                arrString0=runData.iecvaluetypedescr.Values.split(',');
-                arrString1=runData.happencount.Values.split(',');
-                arrString2=runData.timelength.Values.split(',');
-                arrString3=runData.datelength.Values.split(',');
-                arrString4=runData.maxdateperiod.Values.split(',');
-                arrString5=runData.maxtimeperiod.Values.split(',');
-                arrString6=runData.mindateperiod.Values.split(',');
-                arrString7=runData.mintimeperiod.Values.split(',');
-                for (var i=0 ; i< arrString0.length ; i++){
-                    stateArr.push(arrString0[i]);
-                }
+            if(powerCurveData!==undefined&&powerCurveData.areadescr!==undefined){
+                let arrString1,arrString2,arrString3,arrString4,arrString5;
+                arrString1=powerCurveData.areadescr.Values.split(',');//风速区间
+                arrString2=powerCurveData.windhour.Values.split(',');//累计时长
+                arrString3=powerCurveData.averspeed.Values.split(',');//平均风速
+                arrString4=powerCurveData.frecount.Values.split(',');//频次
+                arrString5=powerCurveData.percent.Values.split(',');//百分比
                 for (var i=0 ; i< arrString1.length ; i++){
-                        numberArr.push(arrString1[i]/1);
+                        stateArr.push(arrString1[i]);
                 }
                 for (var i=0 ; i< arrString2.length ; i++){
-                        timeArr.push(arrString2[i]/1);
+                        timeArr.push((arrString2[i]/1).toFixed(2));
                 }
                 for (var i=0 ; i< arrString3.length ; i++){
-                        timeDescribe.push(arrString3[i]/1);
+                        windSpeed.push((arrString3[i]/1).toFixed(2));
                 }
                 for (var i=0 ; i< arrString4.length ; i++){
-                        maxDescribe.push(arrString4[i]/1);
+                        frequency.push(arrString4[i]/1);
                 }
                 for (var i=0 ; i< arrString5.length ; i++){
-                        maxTime.push(arrString5[i]/1);
-                }
-                for (var i=0 ; i< arrString6.length ; i++){
-                        minDescribe.push(arrString6[i]/1);
-                }
-                for (var i=0 ; i< arrString7.length ; i++){
-                        minTime.push(arrString7[i]/1);
+                        percentArr.push((arrString5[i]/1).toFixed(2));
                 }
             }else{
-                runData=undefined;
+                powerCurveData=undefined;
             }
             if(boolywbb){
-                //获取设备类型数组
-                for(let arg in devtype.list){
-                    if(devtype.list[arg].args.name){
-                        treetype.push(devtype.list[arg])
-                    }
-                }
-
-                //初始化显示设备类型
-                if(firstname==undefined){
-                    firstname=devtype.list._WindTurbine;
-                }
-            
                 return (
                     <div className={styles.faultBox}>
                         <div className={styles.search_tit}>
-                            <div className={styles.seleBox}>
-                                <span>设备类型:</span>
-                                <div className={styles.select}>
-                                    <span id='showitem'><img src={'http://'+url+'/'+firstname.img}/>{firstname.args.name}</span>
-                                    <img src={drop} id='slide' className={styles.topimg}/>
-                                    <div className={styles.selectye} id='selectye'>
-                                        {
-                                            treetype.map((value, key)=> {
-                                                return (
-                                                    <div className={styles.item} key={key} onClick={()=>{this.showTree(value.id)}}><img src={'http://'+url+'/'+value.img}/>{value.args.name}</div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                </div> 
-                            </div>
+                            
                             <div className={styles.seleBox}>
                                 <div className={styles.dateBox}>
                                     <span>发生时间</span><input id="startTime" type='date'/>
@@ -144,7 +88,7 @@ let Component = React.createClass({
                             </div>
 
                             <div className={styles.btnBox}>
-                                <button id='searchall' onClick={()=>searchnum()}><img src={'http://'+url+'/images/button/search.gif'}/>查询</button>
+                                <button id='searchall' onClick={()=>searchnum()}><img src={'http://'+url+'/images/button/search.gif'} />查询</button>
                             </div>
                             <div className={styles.btnBox}>
                                 <button><img src={'http://'+url+'/images/button/outbox.gif'}/>导出Excel</button>
@@ -209,19 +153,19 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.righttable}>
                             <div className={styles.columnbox} id='colum'>
-                                {runData!==undefined && <ColumnState month={stateArr} arr1={numberArr} arr2={timeArr} unit1={'次'} unit2={'s'} nameOne={'发生次数'} nameTwo={'状态时长'} title={'设备运行模式字统计用例规划'}></ColumnState>}
+                                {powerCurveData!==undefined && <OneColumn month={stateArr} arr1={frequency} unit1={'次'} nameOne={'频次'} title={'风频图'}></OneColumn>}
                             </div>
                             <div className={styles.tablebox} id='tablebox'>
-                                {runData!==undefined &&
+                                {powerCurveData!==undefined &&
                                 <table>
                                     <tbody>
-                                        <tr className={styles.thRun}><th>序号</th><th>分类描述</th><th>发生次数</th><th>状态时长(s)</th><th>时长描述(s)</th><th>最小周期(s)</th><th>最小周期描述(h)</th><th>最大周期(s)</th><th>最大周期描述(h)</th></tr>
+                                        <tr className={styles.thState}><th>序号</th><th>风速区间</th><th>频次</th><th>平均风速(m/s)</th><th>累计时长(h)</th><th>百分比(%)</th></tr>
                                         {
                                             stateArr.map((value,key)=>{
                                                 return(
-                                                    <tr key={key} className={styles.thRun}><th>{key+1}</th><th>{stateArr[key]}</th><th>{numberArr[key]}</th><th>{timeArr[key]}</th><th>{timeDescribe[key]}</th><th>{minTime[key]}</th><th>{minDescribe[key]}</th><th>{maxTime[key]}</th><th>{maxDescribe[key]}</th></tr>
+                                                    <tr key={key} className={styles.thState}><th>{key+1}</th><th>{value}</th><th>{frequency[key]}</th><th>{windSpeed[key]}</th><th>{timeArr[key]}</th><th>{percentArr[key]}</th></tr>
                                                 )
-                                            }) 
+                                            })
                                         }
                                     </tbody>
                                 </table>
@@ -241,12 +185,9 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        devtype:state.objs.devtype,
         boolywbb:state.vars.boolywbb,
-        firstname:state.objs.firstname,
         select_list:state.vars.select_list,
-        devurls:state.vars.devurls,
-        runData:state.objs.runData,
+        powerCurveData:state.objs.powerCurveData,
     }
 };
 
@@ -254,27 +195,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         ajax:()=>{
             dispatch(actions.setVars('boolywbb', false));
-            dispatch(actions.setObjs('tabledata',undefined));
-            //获取设备类型信息
             $.ajax({    
-                url:'http://'+url+'/Monitor/xml.aspx',    
-                data:'functionname=GetDevTypeTree&crossDomain=true&zip=false&menuid=1DD28544-7805-4D86-8E39-09404726214A&sysid=1',    
-                dataType:"jsonp",    
-                jsonp:"callback",    
-                jsonpCallback:"testCall",    
-                timeout:3000,       
-                success:function(json,textStatus){  
-                    dispatch(actions.appendObjs('devtype',json));
-                    gettreedata(); 
-                },    
-                error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    alert('获取数据失败！');   
-                }    
-            });
-
-
-            function gettreedata(){
-                $.ajax({    
                     url:'http://'+url+'/Monitor/xml.aspx',    
                     data:'functionname=GetWFInfoByMonNoWfType&devtype=WindTurbine&crossDomain=true&zip=false',    
                     dataType:"jsonp",    
@@ -288,8 +209,8 @@ const mapDispatchToProps = (dispatch) => {
                     error:function(XMLHttpRequest,textStatus,errorThrown){    
                         alert('获取数据失败！');    
                     }    
-                });
-            }
+            });
+            
         },
         init: () => {
 
@@ -332,19 +253,6 @@ const mapDispatchToProps = (dispatch) => {
             //获取今天与昨天的日期
             $('#startTime').val(dateString1);
             $('#endTime').val(dateString);
-            //显示下拉菜单
-            $('#slide').on('click',function(){
-                $('#selectye').show();
-            });
-            //鼠标移出隐藏下拉菜单
-            $('#selectye').mouseleave(function(){
-                $(this).hide()
-            });
-            //选择显示设备类型并隐藏下拉菜单
-            $('#selectye>div').on('click',function(){
-                $('#showitem').html($(this).html());
-                $('#selectye').hide();
-            });
             //复选框状态跟随
             $("#leftlist input").change(function(){
                 $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
@@ -367,27 +275,6 @@ const mapDispatchToProps = (dispatch) => {
                 $('#tablebox').show();
             })
         },
-        showtree:(devurl,firstname)=>{
-            dispatch(actions.setVars('boolywbb', false));
-            dispatch(actions.appendObjs('firstname',firstname));
-            //获取对应设备的数据
-            $.ajax({    
-                url:'http://'+url+'/Monitor/xml.aspx',    
-                data:'functionname=GetWFInfoByMonNoWfType&devtype='+devurl+'&crossDomain=true&zip=false',    
-                dataType:"jsonp",    
-                jsonp:"callback",    
-                jsonpCallback:"testCall",    
-                timeout:3000,       
-                success:function(json,textStatus){  
-                    dispatch(actions.setVars('select_list',json));
-                    dispatch(actions.setVars('devurls',devurl));
-                    dispatch(actions.setVars('boolywbb', true));
-                },    
-                error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    alert('获取数据失败！');    
-                }    
-            });
-        },
         searchnum:()=>{
             var all=[];
             //获取查询时间
@@ -409,23 +296,22 @@ const mapDispatchToProps = (dispatch) => {
             }
             $.ajax({    
                 url:'http://'+url+'/Monitor/xml.aspx',    
-                data:'functionname=CountStateData&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&iec=WTUR.Other.Wn.I16.StopModeWord&groupbydevice=0&crossDomain=true&zip=false',    
+                data:'functionname=DrawFrequency&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&groupbydevice=0&BTZ=480&crossDomain=true&zip=false',    
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
                 timeout:3000,       
                 success:function(json,textStatus){ 
-                    if(json.datelength==undefined){
+                    if(json.areadescr==undefined){
                         alert('无数据');
                         return;
-                    }
-                    dispatch(actions.setObjs('runData',json));
+                    } 
+                    dispatch(actions.setObjs('powerCurveData',json));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     alert('获取数据失败！');    
                 }    
             });
-            
         }
     };
 };

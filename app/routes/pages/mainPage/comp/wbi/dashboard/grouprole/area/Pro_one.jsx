@@ -166,7 +166,7 @@ let Component = React.createClass({
                     opposite: true
                 }],
             series: [{
-                name: '收益',
+                name: '收入',
                 color:'#33BAC0',
                 type: 'column',
                 data: runtime,
