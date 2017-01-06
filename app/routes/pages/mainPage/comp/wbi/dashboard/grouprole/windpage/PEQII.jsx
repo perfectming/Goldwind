@@ -23,7 +23,7 @@ let page = 1;//设置初始页码
 let thDate = new Date();
 let thYear = thDate.getFullYear();
 let month2 = thDate.getMonth();
-let soam = 'http://10.9.100.48:8080/wbi';//设置接口
+let soam = 'http://10.68.100.32:8080/wbi';//设置接口
 for (let i = 0; i <= 30; i++) {
     yeares.push(thYear - 15 + i)
 }
@@ -99,7 +99,6 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.table}>
                         <div className={styles.actionBox}>
-                            <img src={save} onClick={() => alert("您保存的数据为:" + JSON.stringify(table.data))}/>
                             <img src={refresh} onClick={() => ajax()}/>
                             <img src={add} onClick={() => addData(newData, totalpage, years0, wfids)}/>
                         </div>

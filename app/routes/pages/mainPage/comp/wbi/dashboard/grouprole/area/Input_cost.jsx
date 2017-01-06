@@ -23,7 +23,7 @@ let page = 1;//设置初始页码
 let thDate = new Date();
 let thYear = thDate.getFullYear();
 let month2 = thDate.getMonth();
-let soam = 'http://10.9.100.48:8080/wbi';//设置接口
+let soam = 'http://10.68.100.32:8080/wbi';//设置接口
 for (let i = 0; i <= 30; i++) {
     yeares.push(thYear - 15 + i)
 }
@@ -606,7 +606,7 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
             function jiang3() {
-                
+
                 $.ajax({
                     url: soam + '/info/getWfcosts',
                     type: 'post',
