@@ -310,14 +310,16 @@ const mapDispatchToProps = (dispatch) => {
             var startTime=$('#startTime').val();
             var endTime=$('#endTime').val();
             $('#leftlist input').each(function(){
-                if($(this).prop('checked')==true && $("input[name^='firstId']")){
+                if($(this).prop('checked')==true && $(this).prop('name')=='firstId'){
                     firstId.push($(this).val());
-                }else if($(this).prop('checked')==true && $("input[name^='secondId']")){
+                }else if($(this).prop('checked')==true && $(this).prop('name')=='secondId'){
                     secondId.push($(this).val());
-                }else if($(this).prop('checked')==true && $("input[name^='thirdId']")){
+                }else if($(this).prop('checked')==true && $(this).prop('name')=='thirdId'){
                     thirdId.push($(this).val());
                 }
             });
+            console.log(firstId);
+            console.log(secondId);
             if(firstId.length>50){
                 firstId.splice(50,firstId.length);
             }
