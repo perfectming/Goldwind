@@ -55,8 +55,8 @@ let Component = React.createClass({
                     }
                 </div>
                 <div className={styles.actionBox}>
-                    <img src={add} onClick={()=>addData(newData)}/>
                     <img src={refresh} onClick={()=>init()}/>
+                    <img src={add} onClick={()=>addData(newData)}/>
                 </div>
                 <div className={styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
@@ -188,7 +188,7 @@ let Component = React.createClass({
                         }
                     </div>
                 </div>
-                <Ambox dataBase={boxData}></Ambox>
+                <Ambox></Ambox>
                 <div className={styles.pageplus}>
                     <span onClick={()=>theOne(page,uName)}>首页</span>
                     <span onClick={()=>lastPage(page,uName)}>上一页</span>
@@ -240,6 +240,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     dispatch(actions.appendObjs('boxData', data));
+                    dispatch(actions.appendObjs('initData', data));
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -330,8 +331,8 @@ const mapDispatchToProps = (dispatch) => {
                 data: ddv,
                 dataType: 'json',//here,
                 contentType:'application/json;charset=UTF-8',
-                success:function (data) {
-                    console.log(data);
+                success:function () {
+                    alert('保存成功');
                 },
                 error:function(){
                     console.log('获取数据失败')

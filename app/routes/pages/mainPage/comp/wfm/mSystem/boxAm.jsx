@@ -19,7 +19,7 @@ let Component = React.createClass({
     },
     render() {
         let {saveAll,dataBase,border1=true,closeboxAm,Tofaninfo1} = this.props;
-        if(dataBase.data!==true){
+        if(dataBase && (dataBase.data instanceof Array)){
         return (
 
             <div className={styles.fiexdbox} style={{top: 294, left:672}}>
@@ -73,6 +73,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         border1: state.vars.bordershow1,
+        dataBase: state.objs.boxData,
     }
 };
 
