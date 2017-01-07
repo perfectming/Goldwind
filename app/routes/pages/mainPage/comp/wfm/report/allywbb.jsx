@@ -20,6 +20,8 @@ import FaultReport from './FaultReport.jsx';
 import FaultClass from './FaultClass.jsx';
 import CompareCurve from './CompareCurve.jsx';
 import StationAlert from './StationAlert.jsx';
+import ACAlert from './ACAlert.jsx';
+import PowerAlert from './PowerAlert.jsx';
 var $ =require('jquery');
 var actions = require('redux/actions');
 let paged = require('./pagedate');
@@ -76,6 +78,8 @@ let Component = React.createClass({
                 { showbb==='compareCurve' && <CompareCurve></CompareCurve>}
                 { showbb==='alert' && <Alert></Alert>}
                 { showbb==='StationAlert' && <StationAlert></StationAlert>}
+                { showbb==='PowerAlert' && <PowerAlert></PowerAlert>}
+                { showbb==='ACAlert' && <ACAlert></ACAlert>}
             </div>
         );
     }

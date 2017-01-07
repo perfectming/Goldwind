@@ -182,7 +182,7 @@ let Component = React.createClass({
                                         {
                                             treetype.map((value, key)=> {
                                                 return (
-                                                    <div className={styles.item} key={key} onClick={()=>selectType(key)}>{value}</div>
+                                                    <div className={styles.item} key={key} onClick={()=>selectType(key)}><span>{value}</span></div>
                                                 )
                                             })
                                         }

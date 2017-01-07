@@ -169,11 +169,11 @@ module.exports = {
                 },
                  {
                     tabname:'AGC/ AVC告警查询',
-                    rpage:''
+                    rpage:'ACAlert'
                 },
                  {
                     tabname:'功率预测告警查询',
-                    rpage:''
+                    rpage:'PowerAlert'
                 }
 
             ]
