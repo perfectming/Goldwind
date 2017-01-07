@@ -244,11 +244,41 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             //初始化日期
             var date = new Date();
-            var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-            var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()+1);
+            if(date.getMonth()==0&&date.getDate()==1){
+                var dateString = date.getFullYear()+"-01"+"-01";
+                var dateString1 = (date.getFullYear()-1)+"-12"+"-31";
+            }else{
+                if(date.getMonth()<9){
+                    if(date.getDate()<10){
+                       var dateString = date.getFullYear()+"-0"+(date.getMonth()+1)+"-0"+date.getDate(); 
+                    }else{
+                       var dateString = date.getFullYear()+"-0"+(date.getMonth()+1)+"-"+date.getDate(); 
+                    }
+                }else{
+                    if(date.getDate()<10){
+                       var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-0"+date.getDate(); 
+                    }else{
+                       var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate(); 
+                    }
+                }
+                if(date.getMonth()<9){
+                    if(date.getDate()<11){
+                       var dateString1 = date.getFullYear()+"-0"+(date.getMonth()+1)+"-0"+(date.getDate()-1); 
+                    }else{
+                       var dateString1 = date.getFullYear()+"-0"+(date.getMonth()+1)+"-"+(date.getDate()-1); 
+                    }
+                }else{
+                    if(date.getDate()<11){
+                       var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-0"+(date.getDate()-1); 
+                    }else{
+                       var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()-1); 
+                    }
+                }
+            }
             //获取今天与明天的日期
-            $('#startTime').val(dateString);
-            $('#endTime').val(dateString1)
+            $('#startTime').val(dateString1);
+            $('#endTime').val(dateString);
+            $('#timelength').val(dateString1);
             //初始化选中数组
             allnum=[];
             //初始化highchart数据与表格数据

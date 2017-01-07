@@ -6,6 +6,7 @@ import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
 import LineChart from './lineChart.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
+import AlertWindow from './AlertWindow.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
 var $ =require('jquery');
@@ -41,7 +42,7 @@ let Component = React.createClass({
     },
 
     render() {
-            let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,runCheckData} = this.props;
+            let {alertText,devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,runCheckData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
@@ -129,6 +130,7 @@ let Component = React.createClass({
             
                 return (
                     <div className={styles.faultBox}>
+                        <AlertWindow text={alertText}></AlertWindow>
                         <div className={styles.search_tit}>
                             <div className={styles.seleBox}>
                                 <span>设备类型:</span>
@@ -178,6 +180,7 @@ let Component = React.createClass({
                                                                 <a className={styles.da}>
                                                                     <img src={add} />
                                                                     <b><img src={'http://'+url+'/'+valueD.img}/>{valueD.text}</b>
+                                                                    {valueD.children==undefined && <input type='radio' name='radioBox' value={valueD.id} />}
                                                                 </a>
                                                                 { 
                                                                     three.map((valueE,keyE)=>{
@@ -249,6 +252,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        alertText : state.vars.alertText,
         devtype:state.objs.devtype,
         boolywbb:state.vars.boolywbb,
         firstname:state.objs.firstname,
@@ -276,7 +280,8 @@ const mapDispatchToProps = (dispatch) => {
                     gettreedata(); 
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    alert('获取数据失败！');   
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败！')); 
                 }    
             });
 
@@ -294,7 +299,8 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boolywbb', true));
                     },    
                     error:function(XMLHttpRequest,textStatus,errorThrown){    
-                        alert('获取数据失败！');    
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败！'));    
                     }    
                 });
             }
@@ -388,7 +394,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('boolywbb', true));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    alert('获取数据失败！');    
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败！'));    
                 }    
             });
         },
@@ -408,7 +415,8 @@ const mapDispatchToProps = (dispatch) => {
                 all.splice(0,all.length-1);
             }
             if(all.length==0){
-                alert('设备数据获取失败！')
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择设备！'));
                 return;
             }
             $.ajax({    
@@ -420,13 +428,15 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:3000,       
                 success:function(json,textStatus){ 
                     if(json.rectime==undefined){
-                        alert('无数据');
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '无数据'));
                         return;
                     } 
                     dispatch(actions.setObjs('runCheckData',json));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    alert('获取数据失败！');    
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败！'));
                 }    
             });
         }

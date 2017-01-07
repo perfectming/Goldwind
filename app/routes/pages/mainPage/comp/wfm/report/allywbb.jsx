@@ -16,6 +16,10 @@ import StateCheck from './stateCheck.jsx';
 import StateStatistics from './StateStatistics.jsx';
 import PowerCurve from './powerCurve.jsx';
 import PowerCount from './powerCount.jsx';
+import FaultReport from './FaultReport.jsx';
+import FaultClass from './FaultClass.jsx';
+import CompareCurve from './CompareCurve.jsx';
+import StationAlert from './StationAlert.jsx';
 var $ =require('jquery');
 var actions = require('redux/actions');
 let paged = require('./pagedate');
@@ -67,8 +71,11 @@ let Component = React.createClass({
                 { showbb==='stateCheck' && <StateCheck></StateCheck>}
                 { showbb==='powerCurve' && <PowerCurve></PowerCurve>}
                 { showbb==='powerCount' && <PowerCount></PowerCount>}
+                { showbb==='FaultReport' && <FaultReport></FaultReport>}
+                { showbb==='FaultClass' && <FaultClass></FaultClass>}
+                { showbb==='compareCurve' && <CompareCurve></CompareCurve>}
                 { showbb==='alert' && <Alert></Alert>}
-
+                { showbb==='StationAlert' && <StationAlert></StationAlert>}
             </div>
         );
     }
