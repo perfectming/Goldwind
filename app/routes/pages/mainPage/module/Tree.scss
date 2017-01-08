@@ -19,7 +19,7 @@
   }
   .treeItem {
     padding-top: 15px;
-    background-color: #252932;;
+    background-color: #252932;
     line-height: 30px;
     font-size:18px;
     height:80px;
@@ -78,7 +78,7 @@
   }
 
 }
-.navTree-blue {
+.navTreeBlue {
   width: 100px;
   min-height: 1010px;
   background-color: #041022;
@@ -158,7 +158,7 @@
   }
 
 }
-.navTree-white {
+.navTreeWhite {
   width: 100px;
   min-height: 1010px;
   background-color: #d0d1d3;
@@ -171,17 +171,17 @@
     line-height: 30px;
     height:80px;
     font-size:18px;
-    color: #3BAAAF;
     text-align: center;
     cursor: pointer;
     position: relative;
-    border-left: 5px solid #2f828a;
+    border-left: 5px solid #277db7;
   }
   .treeItem {
     padding-top: 15px;
     background-color: #d0d1d3;
     line-height: 30px;
     font-size:18px;
+    color: #277db7;
     height:80px;
     text-align: center;
     cursor: pointer;
@@ -225,8 +225,8 @@
     background-repeat:no-repeat;
     z-index:25;
     display:block;
-    span{padding-right:25px;}
-    &:hover{color:#2ff4fb;}
+    span{padding-right:25px;color:#2ff4fb;}
+    span:hover{color:#FFFFFF;}
   }
   .fc_search1{
 
