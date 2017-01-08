@@ -10,8 +10,8 @@ let ip="10.68.100.32";
 
 let Component = React.createClass({
     componentWillMount() {
-        let {ipUrl}=this.props
-        this.props.ajax(ipUrl);
+        let {ipUrl,areaId}=this.props
+        this.props.ajax(ipUrl,areaId);
     },
     componentDidMount() {
         this.props.init();
@@ -20,7 +20,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area',ipUrl, returnit,actbt=10,changecolor,day0,poweract,powerplan} = this.props;
+        let {befor_pages='area',ipUrl,areaId, returnit,actbt=10,changecolor,day0,poweract,powerplan} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button = data.data.button;
@@ -40,7 +40,7 @@ let Component = React.createClass({
                     {
                         data.data.yearelectric[0].wind.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl)}>
+                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl,areaId)}>
                                     {value.name}
                                 </div>
                             )
@@ -79,40 +79,47 @@ const mapStateToProps = (state) => {
         powerplan:state.vars.powerplan1,
         poweract:state.vars.poweract1,
         ipUrl:state.vars.ipUrl,
+        areaId: state.vars.areaId,
 
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
+        ajax: (ipUrl,areaId) => {
             var obj = {
                 test: ''
             }
+            areaId=areaId[0];
             let date=new Date();
             let year=date.getFullYear()
             let month2=date.getMonth();
-
-            dispatch(actions.setVars('actbt',  10));
+            if(month2==0){
+                month2=12;
+            }
+            dispatch(actions.setVars('actbt',  month2-1));
             dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/ELEC/getSpaceTimeElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getAreaTimesElec',
                 async:false,
                 data:{
-                    "month": 11,
-                    "groupid":  '201612121721151',
+                    "month": month2,
+                    "groupid":  areaId==undefined? '201612121721151':areaId,
+                    "years":'',
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+                    console.log(data)
                     let day0=[];
                     let poweract=[];
                     let powerplan=[];
-                    for(var i in data.data){
-                        day0.push(data.data[i].day+"日");
-                        poweract.push(Number((data.data[i].poweract).toFixed(2)));
-                        powerplan.push(Number((data.data[i].powerplan).toFixed(2)));
+                    for(var i in data.data.areaTimeElec){
+
+                        day0.push(data.data.areaTimeElec[i].day+"日");
+                        poweract.push(Number((data.data.areaTimeElec[i].poweract).toFixed(2)));
+                        powerplan.push(Number((data.data.areaTimeElec[i].powerplan).toFixed(2)));
 
                     }
                     dispatch(actions.setVars('day1',day0 ));
@@ -132,26 +139,32 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor :(value,key,ipUrl)=>{
+        changecolor :(value,key,ipUrl,areaId)=>{
+            areaId=areaId[0];
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('wind',value.plan ));
             dispatch(actions.setVars('winds',value.actrul ));
 
             $.ajax({
                 type:'post',
-                url:'http://' + ipUrl + '/wbi/ELEC/getSpaceTimeElec',
+                url:'http://' + ipUrl + '/wbi/ELEC/getAreaTimesElec',
                 async:false,
-                data:{"month":key+1},
+                data:{
+                    "month": key+1,
+                    "groupid":  areaId==undefined? '201612121721151':areaId,
+                    "years":'',
+                },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+                    console.log(data)
                     let day0=[];
                     let poweract=[];
                     let powerplan=[];
-                    for(var i in data.data){
-                        day0.push(data.data[i].day+"日");
-                        poweract.push(Number((data.data[i].poweract).toFixed(2)));
-                        powerplan.push(Number((data.data[i].powerplan).toFixed(2)));
+                    for(var i in data.data.areaTimeElec){
+                        day0.push(data.data.areaTimeElec[i].day+"日");
+                        poweract.push(Number((data.data.areaTimeElec[i].poweract).toFixed(2)));
+                        powerplan.push(Number((data.data.areaTimeElec[i].powerplan).toFixed(2)));
 
                     }
                     dispatch(actions.setVars('day1',day0 ));

@@ -256,7 +256,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('w1', w0));
                     dispatch(actions.setVars('w11', w10));
                     dispatch(actions.setVars('hhdata', data));
-
+                    dispatch(actions.setVars('grid', data.data[2].groupid));
                     let barLotime1 = [];    //各区域   一区域二区域
                     let power1 = [];       //实际发电量
                     let wrong10 = [];       //故障损失
@@ -363,6 +363,7 @@ const mapDispatchToProps = (dispatch) => {
                 success: function (data) {
                     let w12 = data.data[1][0].wfname;
                     dispatch(actions.setVars('hhdata', data));
+                    dispatch(actions.setVars('grid', data.data[2].groupid));
                     let barLotime1 = [];    //各区域   一区域二区域
                     let power1 = [];       //实际发电量
                     let wrong10 = [];       //故障损失
