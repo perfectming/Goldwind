@@ -7,12 +7,8 @@ import close from '../../../img/comp/close_down.png';
 let $ =require('jquery');
 var actions = require('redux/actions');
 let matrixdata = require('../../../../../../../config/MatrixData');
-let arr1 = [];
-let arr2 = [];
-let soamMs='http://10.9.100.48:8080/soam';
-var obj = matrixdata;
-var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+
+let soamMs='http://10.68.100.32:8080/soam';
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -69,7 +65,6 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
                     dispatch(actions.setObjs('wfBoxB', data));
                 },
                 error:function(){
@@ -108,6 +103,8 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data,id,name);
+                    $("#center3 input[name='checkItOut']").prop('checked',true);
+                    $("#center3 input[name='checkItIn']").prop('checked',false);
                     dispatch(actions.setObjs('boxCenter', data));
                 },
                 error:function(){

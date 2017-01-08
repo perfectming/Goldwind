@@ -17,12 +17,13 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_pagee = 'windpage', befor_page2, areaNameN, areaRecordCostN, areaRecordProfitN}=this.props;
+        let {width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_pagee = 'windpage',  areaNameN, areaRecordCostN, areaRecordProfitN}=this.props;
 
         return (
             <div className={styles.box}>
                 {//遮罩层
                      }
+
                 <div className={styles.boxcover} id='boxcover'></div>
                 {//更多弹出框
                 }
@@ -49,7 +50,7 @@ let Component = React.createClass({
                         })
                     }
 
-                    <li className={styles.back} onClick={() => backtop(befor_pagee, befor_page2)}>返回</li>
+                    <li className={styles.back} onClick={() => backtop(befor_pagee,)}>返回</li>
 
                 </ul>
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
@@ -93,9 +94,7 @@ const mapStateToProps = (state) => {
         areaRecordCostN: state.vars.areaRecordCostNb,
         areaRecordProfitN: state.vars.areaRecordProfitNb,
         areaNamee: state.vars.areaNamee,
-
         befor_pagee: state.vars.befor_pagee,
-        befor_page2: state.vars.befor_page2,
         xxdwfId: state.vars.xxdwfId1,
         xxdwfNa: state.vars.xxdwfNa1,
         btn: state.vars.btnn,
@@ -162,7 +161,7 @@ const mapDispatchToProps = (dispatch) => {
         }
         ,
         init: () => {
-            var obj = {
+            let obj = {
                 test: ''
             }
         }
@@ -170,11 +169,11 @@ const mapDispatchToProps = (dispatch) => {
         // 点击月份变化
         changpage: (value, key, input_url, xxdwfId) => {
 
-            var arr1 = [];
-            var arr2 = [];
-            var arr3 = [];
-            var areaids = [];
-            var windids = [];
+            let arr1 = [];
+            let arr2 = [];
+            let arr3 = [];
+            let areaids = [];
+            let windids = [];
 
             let date = new Date();
             let monthh = date.getMonth();
@@ -200,15 +199,15 @@ const mapDispatchToProps = (dispatch) => {
 
                     // 获取x轴的值内蒙达茂天润风电场
 
-                    for (var i = 0; i < 10; i++) {
+                    for (let i = 0; i < 10; i++) {
                         // 风场时间
-                        var xWild = data.data[i].wtname;
+                        let xWild = data.data[i].wtname;
                         arr1.push(xWild);
                         // 计划发电量
-                        var yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
+                        let yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
                         arr2.push(yPowerPlan);
                         // 实际发电量
-                        var yPowerAct = Number(data.data[i].poweract.toFixed(2));
+                        let yPowerAct = Number(data.data[i].poweract.toFixed(2));
                         arr3.push(yPowerAct);
                     }
 
@@ -233,9 +232,9 @@ const mapDispatchToProps = (dispatch) => {
                 month = 12;
                 year = year - 1;
             }
-            var arr1 = [];
-            var arr2 = [];
-            var arr3 = [];
+            let arr1 = [];
+            let arr2 = [];
+            let arr3 = [];
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi/ELEC/getPageSize',
@@ -253,15 +252,15 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-                    var dataa = data.data;
-                    for (var i = 0; i < 10; i++) {
+                    let dataa = data.data;
+                    for (let i = 0; i < 10; i++) {
                         // 风场名字
-                        var xWild = data.data[i].wtname;
+                        let xWild = data.data[i].wtname;
                         arr1.push(xWild);
 
-                        var yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
+                        let yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
                         arr2.push(yPowerPlan);
-                        var yPowerAct = Number(data.data[i].poweract.toFixed(2));
+                        let yPowerAct = Number(data.data[i].poweract.toFixed(2));
                         arr3.push(yPowerAct);
                     }
 
@@ -279,9 +278,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         // 后十
         back: (actbt, input_url, xxdwfId) => {
-            var arr1 = [];
-            var arr2 = [];
-            var arr3 = [];
+            let arr1 = [];
+            let arr2 = [];
+            let arr3 = [];
             let date = new Date();
             let year = date.getFullYear();
 
@@ -311,13 +310,13 @@ const mapDispatchToProps = (dispatch) => {
 
 
                     // 获取x轴的值内蒙达茂天润风电场
-                    var dataa = data.data;
-                    for (var i = 0; i < 10; i++) {
-                        var xWild = data.data[i].wtname;
+                    let dataa = data.data;
+                    for (let i = 0; i < 10; i++) {
+                        let xWild = data.data[i].wtname;
                         arr1.push(xWild);
-                        var yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
+                        let yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
                         arr2.push(yPowerPlan);
-                        var yPowerAct = Number(data.data[i].poweract.toFixed(2));
+                        let yPowerAct = Number(data.data[i].poweract.toFixed(2));
                         arr3.push(yPowerAct);
                     }
 
@@ -336,7 +335,6 @@ const mapDispatchToProps = (dispatch) => {
             $("#sss").show();
             $('#boxcover').show();
             let date = new Date();
-
             let year = date.getFullYear();
             let month = date.getMonth();
             if (month == 0) {
@@ -366,12 +364,12 @@ const mapDispatchToProps = (dispatch) => {
 
                     // 获取x轴的值内蒙达茂天润风电场
                     let dataa = data.data;
-                    for (var i = 0; i < dataa.length; i++) {
-                        var xWild = data.data[i].wtname;
+                    for (let i = 0; i < dataa.length; i++) {
+                        let xWild = data.data[i].wtname;
                         arr4.push(xWild);
-                        var yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
+                        let yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
                         arr5.push(yPowerPlan);
-                        var yPowerAct = Number(data.data[i].poweract.toFixed(2));
+                        let yPowerAct = Number(data.data[i].poweract.toFixed(2));
                         arr6.push(yPowerAct);
 
 
@@ -397,7 +395,7 @@ const mapDispatchToProps = (dispatch) => {
             $("#sss").hide();
             $('#boxcover').hide();
         },
-        backtop: (befor_pagee, befor_page2) => {
+        backtop: (befor_pagee,) => {
             dispatch(actions.setVars('showPage', befor_pagee));
         },
     };

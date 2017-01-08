@@ -1,16 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
+var {getState} = require('redux/store');
+import _ from 'lodash';
 import styles from './boxA.scss';
 import jian from '../../../img/comp/jian_down.png';
 import add from '../../../img/comp/add_down.png';
 let type = require('../report/ywbb_date');
 var $ =require('jquery');
 var actions = require('redux/actions');
-let url='54.223.200.134';
 let Component = React.createClass({
     componentWillMount() {
-
-        this.props.ajax();
     },
     componentDidMount() {
         this.props.init();
@@ -29,13 +28,13 @@ let Component = React.createClass({
                     <span>菜单选择</span>
                     <div className={styles.leftlist} id='box1'>
                         {
-                            boxRole !== undefined && boxRole.data.map((valueC,keyC)=>{
+                            (boxRole && boxRole.data) && boxRole.data.map((valueC,keyC)=>{
                                 return(
                                     <div key={keyC} className={styles.place}>
                                         <a className={styles.ca}>
                                             <img src={add}/>
                                             <b>{valueC.name}</b>
-                                            <input type='checkbox' value='value'/>
+                                            <input type='checkbox' value={valueC.id} title={valueC.rightstype}/>
                                         </a>
                                         {
                                             valueC.tlist.length>0 && valueC.tlist.map((valueD,keyD)=>{
@@ -44,7 +43,7 @@ let Component = React.createClass({
                                                                 <a className={styles.da}>
                                                                     <img src={add} />
                                                                     <b>{valueD.name}</b>
-                                                                    <input type='checkbox' value={valueD.thlist.length>0 ? 'value' : valueD.id}  />
+                                                                    <input type='checkbox' value={valueD.id} title={valueD.rightstype} />
                                                                 </a>
                                                                 {
                                                                     valueD.thlist.map((valueE,keyE)=>{
@@ -52,7 +51,7 @@ let Component = React.createClass({
                                                                                 <div className={styles.placeline} key={keyE}>
                                                                                     <a className={styles.ea} >
                                                                                         <b style={{cursor:'auto'}}>{valueE.name}</b>
-                                                                                        <input type='checkbox' value={valueE.id}  />
+                                                                                        <input type='checkbox' title={valueE.rightstype} value={valueE.id}  />
                                                                                     </a>
                                                                                 </div>
                                                                             )
@@ -80,6 +79,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         boxRole: state.objs.boxRole,
+        boxRoleId: state.objs.boxRoleId,
 
         devtype:state.objs.devtype,
         boolywbb:state.vars.boolywbb,
@@ -95,52 +95,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax:()=>{
-            dispatch(actions.setVars('boolywbb', false));
-            dispatch(actions.setObjs('tabledata',undefined));
-            //获取设备类型信息
-            $.ajax({
-                url:'http://'+url+'/Monitor/xml.aspx',
-                data:'functionname=GetDevTypeTree&crossDomain=true&zip=false&menuid=1DD28544-7805-4D86-8E39-09404726214A&sysid=1',
-                dataType:"jsonp",
-                jsonp:"callback",
-                jsonpCallback:"testCall",
-                timeout:3000,
-                success:function(json,textStatus){
-                    dispatch(actions.appendObjs('devtype',json));
-                    gettreedata();
-                },
-                error:function(XMLHttpRequest,textStatus,errorThrown){
-                    alert('获取数据失败！');
-
-                }
-            });
-
-
-            function gettreedata(){
-                $.ajax({
-                    url:'http://'+url+'/Monitor/xml.aspx',
-                    data:'functionname=GetWFInfoByMonNoWfType&devtype=WindTurbine&crossDomain=true&zip=false',
-                    dataType:"jsonp",
-                    jsonp:"callback",
-                    jsonpCallback:"testCall",
-                    timeout:3000,
-                    success:function(json,textStatus){
-                        dispatch(actions.setVars('select_list',json));
-                        dispatch(actions.setVars('boolywbb', true));
-                    },
-                    error:function(XMLHttpRequest,textStatus,errorThrown){
-                        alert('获取数据失败！');
-                    }
-                });
-            }
-
-
-
-
-
-        },
-
         init: () => {
         },
         closeboxA:()=>{
@@ -162,14 +116,19 @@ const mapDispatchToProps = (dispatch) => {
             })
         },
         saveAll: ()=> {
+            let typeIdTemp = _.clone(getState().vars.boxRoleId);
             let all=[];
             $('#box1 input').each(function(){
                 if($(this).prop('checked')==true){
-                    all.push($(this).val());
+                    let temp={};
+                    temp['menuid']=$(this).val();
+                    temp['roleid']=typeIdTemp;
+                    temp['rightstype']=$(this).attr('title');
+                    all.push(temp);
                 }
             });
-            dispatch(actions.setVars('roleIds', all));
-            $("#box1").parent().css("display","none");
+            dispatch(actions.setVars('boxRoleArr', all));
+            console.log(all);
         },
     };
 };

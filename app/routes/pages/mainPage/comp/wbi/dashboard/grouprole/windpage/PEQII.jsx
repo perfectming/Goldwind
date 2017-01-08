@@ -13,6 +13,7 @@ var $ = require("jquery");
 var actions = require('redux/actions');
 var {getState} = require('redux/store');
 let comps = require('./../area/datas');
+let tktk =require('./../../../KPI/AlertWindow')
 let ssg2 = mod.Model.ens;
 let arr3 = [];
 let yeares = [];
@@ -23,7 +24,7 @@ let page = 1;//设置初始页码
 let thDate = new Date();
 let thYear = thDate.getFullYear();
 let month2 = thDate.getMonth();
-let soam = 'http://10.68.100.32:8080/wbi';//设置接口
+let soam = 'http://10.9.100.48:8080/wbi';//设置接口
 for (let i = 0; i <= 30; i++) {
     yeares.push(thYear - 2 + i)
 }
@@ -53,7 +54,7 @@ let Component = React.createClass({
         this.props.init(comp);
     },
     render() {
-        let {deleData, deleDate, addData, num = 0, wfidCount, addDate, wfids, table, ajax, wtidAll, groupAll, totalpage, saveTableItem, saveTableItem2, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll2 = false} = this.props;
+        let {deleData, deleDate, addData, num = 0, wfidCount,changeTableItem12, addDate, wfids, table, ajax, wtidAll, groupAll, totalpage, saveTableItem, saveTableItem2, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll2 = false} = this.props;
 
         //
 
@@ -131,6 +132,8 @@ let Component = React.createClass({
 
                                 {
                                     table.data.pagedata.map((value, key) => {
+                                        {/*遍历已经有的后台数据*/}
+
                                         num++;
 
 
@@ -198,6 +201,15 @@ let Component = React.createClass({
 
                                                                 )
                                                             }
+                                                            if(keyC==4){
+                                                                return (
+                                                                    <input className={styles.tableContentItem}
+                                                                           style={{width: arr2[keyC] + '%'}}
+                                                                           key={keyC} contentEditable="true"
+                                                                           onChange={(e) => changeTableItem12(e.target.value, table, key, keyC)}
+                                                                           value={value[valueC]}/>
+                                                                )
+                                                            }
                                                             else {
                                                                 return (
                                                                     <input className={styles.tableContentItem}
@@ -212,11 +224,13 @@ let Component = React.createClass({
                                                         })
                                                     }
                                                     <div className={styles.tableContentItemm} style={{width: 7 + "%"}}>
+                                                        {/*保存*/}
                                                         <img src={save}
                                                              onClick={(e) => saveTableItem2(key, value, wtidAll, groupAll, page)}/>
                                                     </div>
                                                     <div className={styles.tableContentItemm} style={{width: 7 + "%"}}>
-                                                        <img src={del} onClick={(e) => deleData(key,page)}/>
+                                                        {/*删除*/}
+                                                        <img src={del} onClick={(e) => deleData(key,page,num)}/>
                                                     </div>
                                                 </div>
                                             )
@@ -228,6 +242,8 @@ let Component = React.createClass({
                                                     <input className={styles.tableContentItem}
                                                            style={{width: 8 + "%"}}
                                                            readOnly="true" value={num}/>
+
+                                                    {/*遍历新增的数据*/}
                                                     {
                                                         arr1.map((valueC, keyC) => {
                                                             if (keyC == 0) {
@@ -272,6 +288,15 @@ let Component = React.createClass({
                                                                                 onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
                                                                                 style={{width: 60 + '%'}}>
                                                                             {yeares.map((value, key) => {
+                                                                                if(key==1){
+                                                                                    return (
+                                                                                        <option value={value}
+                                                                                                selected="selected"
+                                                                                                className={styles.tableContentItem}
+                                                                                                key={key}>{value}</option>
+
+                                                                                    )
+                                                                                }
                                                                                 return (
                                                                                     <option value={value}
                                                                                             className={styles.tableContentItem}
@@ -308,6 +333,15 @@ let Component = React.createClass({
 
                                                                 )
                                                             }
+                                                            if(keyC==4){
+                                                                return (
+                                                                    <input className={styles.tableContentItem}
+                                                                           style={{width: arr2[keyC] + '%'}}
+                                                                           key={keyC} contentEditable="true"
+                                                                           onChange={(e) => changeTableItem12(e.target.value, table, key, keyC)}
+                                                                           value={value[valueC]}/>
+                                                                )
+                                                            }
                                                             else {
                                                                 return (
                                                                     <input className={styles.tableContentItem}
@@ -322,10 +356,12 @@ let Component = React.createClass({
                                                         })
                                                     }
                                                     <div className={styles.tableContentItemm} style={{width: 7 + "%"}}>
+                                                        {/*保存*/}
                                                         <img src={save}
-                                                             onClick={(e) => saveTableItem(key, value, wtidAll, groupAll, page)}/>
+                                                             onClick={(e) => saveTableItem(key, value, wtidAll, groupAll, page,num)}/>
                                                     </div>
                                                     <div className={styles.tableContentItemm} style={{width: 7 + "%"}}>
+                                                        {/*删除*/}
                                                         <img src={del} onClick={(e) => deleDate(key,)}/>
                                                     </div>
                                                 </div>
@@ -381,6 +417,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        // 刚加载页面获取数据
         ajax: () => {
             var obj = {
                 test: ''
@@ -409,6 +446,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log('获取数据失败')
                 }
             });
+          //  获取区域
             function getgroupid() {
                 $.ajax({
                     url: soam + '/BaseData/getGroup',
@@ -425,7 +463,7 @@ const mapDispatchToProps = (dispatch) => {
                     }
                 });
             }
-
+            //获取风场
             function getwtid() {
                 $.ajax({
                     url: 'http://10.68.100.32:8080/soam/wf/getAll',
@@ -449,6 +487,7 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(actions.setObjs('tableContent', obj));
         },
+        //查询
         buttonAction (sit,){
             // 获取select 选择的内容
             var tContent = $('#textContent5')[0].value;
@@ -461,7 +500,7 @@ const mapDispatchToProps = (dispatch) => {
                 url: soam + '/info/getStageprice',
                 type: 'post',
                 data: {
-                    "curpage": page,
+                    "curpage": 1,
                     "pageSize": pageSize,
                     "year": tContent,
                     "wfid": tContent1,
@@ -471,6 +510,7 @@ const mapDispatchToProps = (dispatch) => {
                 success: function (data) {
 
                     dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('totalpage', data.data.totalPage));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error: function () {
@@ -478,6 +518,7 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
         },
+        //修改页面的内容
 
         changeTableItem1: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);
@@ -485,6 +526,18 @@ const mapDispatchToProps = (dispatch) => {
             console.log(tableV.data.pagedata[i][arr1[j]]);
             dispatch(actions.setObjs('tableContent', tableV));
         },
+        changeTableItem12: (value, table, i, j) => {
+            let tableV = _.clone(getState().objs.tableContent);
+            tableV.data.pagedata[i][arr1[j]] = value;
+            let reyz = /^[0-9]+.?[0-9]*$/;
+            if (!reyz.test(value)){
+                alert("请输入数字类型的成本(例:0.02)");
+                tableV.data.pagedata[i][arr1[j]]='';
+            }
+            console.log(tableV.data.pagedata[i][arr1[j]]);
+            dispatch(actions.setObjs('tableContent', tableV));
+        },
+        //增加
         addData: (i, totalpage, years0, wfids) => {
             page = totalpage;
             dispatch(actions.setVars('page1', page));
@@ -502,6 +555,7 @@ const mapDispatchToProps = (dispatch) => {
                 success: function (data) {
                     console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('totalpage', data.data.totalPage));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
 
                     jiang();
@@ -512,12 +566,17 @@ const mapDispatchToProps = (dispatch) => {
             });
             function jiang() {
                 let tableV = _.clone(getState().objs.tableContent);
+                i.cost='';
+                i.remark='';
+                i.year='';
+                i.month='';
                 tableV.data.pagedata.push(i);
                 dispatch(actions.setObjs('tableContent', tableV));
             }
 
         },
-        saveTableItem: (li, dis, wtid, groupname, page) => {
+       // 新增内容的保存
+        saveTableItem: (li, dis, wtid, groupname, page,num) => {
 
             let tableV = _.clone(getState().objs.tableContent);
             let wfs = tableV.data.pagedata[li];
@@ -532,8 +591,23 @@ const mapDispatchToProps = (dispatch) => {
             wfs['day'] = null;
             wfs['id'] = null;
             //wfs.push({groupname:"巴盟"});
-            if(wfs.wfid==''||wfs.groupid==''||wfs.year==''||wfs.month==''){
-                alert("请选择正确的区域,风场,年,月")
+            if (wfs.groupid==''){
+                wfs.groupid="201612121721151"
+                wfs.groupname="巴盟"
+            }
+            if (wfs.wfid==''){
+                wfs.wfid="150801"
+                wfs.wfname="川井风电场"
+            }
+            if (wfs.year==''){
+                wfs.year="2016"
+            }
+            if (wfs.month==''){
+                wfs.month="1"
+            }
+            console.log(wfs)
+            if(wfs.cost==null){
+                alert("成本不能为空")
             }else {
                 let ddv = JSON.stringify(wfs);
 
@@ -544,16 +618,26 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
-
-                        jiang2();
+                        console.log(data)
+                        dispatch(actions.setVars('years0', null));
+                        dispatch(actions.setVars('wfids', null));
+                        if(data.data==true){
+                        alert("保存成功")
+                        }
+                        if(data.code=="0000100"){
+                            alert("该月已有值")
+                        }
+                        jiang2(num);
                     },
                     error: function () {
                         console.log('获取数据失败')
                     }
                 });
-                function jiang2() {
-
-
+                function jiang2(num) {
+                    //保存后重新加载
+                    if (num>pageSize){
+                        page=page+1;
+                    }
                     $.ajax({
                         url: soam + '/info/getStageprice',
                         type: 'post',
@@ -568,6 +652,7 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setObjs('tableContent', data));
                             dispatch(actions.setVars('totalpage', data.data.totalPage));
                             dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                            dispatch(actions.setVars('page1', page));
 
                         },
                         error: function () {
@@ -577,6 +662,7 @@ const mapDispatchToProps = (dispatch) => {
                 }
             }
         },
+        //修改之后的保存
         saveTableItem2: (li, dis, wtid, groupname, page) => {
 
             let tableV = _.clone(getState().objs.tableContent);
@@ -595,9 +681,12 @@ const mapDispatchToProps = (dispatch) => {
             wfs['day'] = null;
             wfs['id'] = id;
             //wfs.push({groupname:"巴盟"});
-            if(wfs.wfid==''||wfs.groupid==''||wfs.year==''||wfs.month==''){
-                alert("请选择正确的区域,风场,年,月")
-            }else {
+            console.log(wfs)
+            if (wfs.price == null || wfs.price == '') {
+                wfs.price = 0.0;
+            }
+
+
                 let ddv = JSON.stringify(wfs);
 
                 $.ajax({
@@ -607,6 +696,14 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
+                        dispatch(actions.setVars('years0', null));
+                        dispatch(actions.setVars('wfids', null));
+                        if(data.data==true){
+                            alert("修改成功")
+                        }
+                        else{
+                            alert("修改失败,请重试")
+                        }
 
                         jiang2();
                     },
@@ -616,7 +713,7 @@ const mapDispatchToProps = (dispatch) => {
                 });
                 function jiang2() {
 
-
+                    //修改后的重新加载
                     $.ajax({
                         url: soam + '/info/getStageprice',
                         type: 'post',
@@ -638,9 +735,10 @@ const mapDispatchToProps = (dispatch) => {
                         }
                     });
                 }
-            }
+
         },
-        deleData: (j, page) => {
+       // 删除
+        deleData: (j, page,num) => {
             let w=confirm("确认要删除这条数据吗?删除不可恢复");
             if(w==true) {
                 let tableV = _.clone(getState().objs.tableContent);
@@ -654,38 +752,50 @@ const mapDispatchToProps = (dispatch) => {
                     },
                     dataType: 'json',//here,
                     success: function (data) {
-                    },
-                    error: function () {
-                        console.log('获取数据失败')
-                    }
-                });
-                console.log(page)
-                console.log(pageSize)
-                $.ajax({
-                    url: soam + '/info/getStageprice',
-                    type: 'post',
-                    data: {
-                        "curpage": page,
-                        "pageSize": pageSize,
-                    },
-                    dataType: 'json',//here,
-                    success: function (data) {
+                        console.log(data)
+                        if(data.data==1){
+                            alert("删除成功")
 
-                        dispatch(actions.setObjs('tableContent', data));
+                        }
+                        jiang4(num);
                     },
                     error: function () {
                         console.log('获取数据失败')
                     }
                 });
+                function jiang4(num) {
+                    if(num==1){
+                        page=page-1;
+                    }
+                    $.ajax({
+                        url: soam + '/info/getStageprice',
+                        type: 'post',
+                        data: {
+                            "curpage": page,
+                            "pageSize": pageSize,
+                        },
+                        dataType: 'json',//here,
+                        success: function (data) {
+
+                            dispatch(actions.setObjs('tableContent', data));
+                        },
+                        error: function () {
+                            console.log('获取数据失败')
+                        }
+                    });
+                }
             }else {
 
             }
         },
+        // 新增的删除
         deleDate: (j) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.data.pagedata.splice(j, 1);
             dispatch(actions.setObjs('tableContent', tableV));
         },
+
+        //上一页
         lastPage: (page, years0, wfids) => {
             page > 1 ? page-- : page;
             dispatch(actions.setVars('page1', page));
@@ -710,6 +820,7 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
         },
+        //下一页
         nextPage: (page, i, j, years0, wfids) => {
             (page < Math.ceil(i / j)) ? page++ : page;
             dispatch(actions.setVars('page1', page));
@@ -734,6 +845,7 @@ const mapDispatchToProps = (dispatch) => {
 
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+
                 },
                 error: function () {
                     console.log('获取数据失败')
@@ -741,6 +853,7 @@ const mapDispatchToProps = (dispatch) => {
             });
 
         },
+        //第一页
         theOne: (page, years0, wfids) => {
             page = 1;
             dispatch(actions.setVars('page1', page));
@@ -765,6 +878,7 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
         },
+       // 末页
         theLast: (page, i, j, years0, wfids) => {
             page = Math.ceil(i / j);
             dispatch(actions.setVars('page1', page));

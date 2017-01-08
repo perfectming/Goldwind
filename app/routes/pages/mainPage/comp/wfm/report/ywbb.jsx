@@ -532,7 +532,7 @@ const mapDispatchToProps = (dispatch) => {
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
-               timeout:3000,       
+               timeout:6000,       
                success:function(json,textStatus){  
                 let shu=[];
                 for(let i in json){
