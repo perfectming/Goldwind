@@ -91,8 +91,7 @@ const mapDispatchToProps = (dispatch) => {
                 month2=12;
             }
             areaId=areaId[0];
-            console.log(month2)
-            console.log(areaId)
+
 
             $.ajax({
                 type: 'post',
@@ -106,7 +105,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-                    console.log(data)
+
                     dispatch(actions.setVars('hhdata', data));
                     dispatch(actions.setVars('mon', month2 + "月"));
 

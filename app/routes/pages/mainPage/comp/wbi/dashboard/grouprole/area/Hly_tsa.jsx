@@ -11,7 +11,7 @@ let Component = React.createClass({
 
     render() {
         let {text,name0,runtime,downtime,tba0,changedata1,hhdata,w10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
-        console.log(ipUrl)
+
 
         let configPie = {
             chart: {

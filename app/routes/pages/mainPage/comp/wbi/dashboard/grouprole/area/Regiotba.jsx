@@ -143,7 +143,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
+
                     dispatch(actions.setVars('hhdata4',  data));
 
                     let barLotime21 = [];    //各区域   一区域二区域
@@ -187,7 +187,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
+
                     dispatch(actions.setVars('hhdata4',  data));
 
                     let barLotime21q = [];    //各区域   一区域二区域
