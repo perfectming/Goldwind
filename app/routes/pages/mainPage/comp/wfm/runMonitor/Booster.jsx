@@ -28,21 +28,42 @@ let Component = React.createClass({
             let moddis=jyname.Model.dis;
             let moddata=jydata.ModelData;
             let arr1=[];//电站编号默认排行//
+            let arr2=[];//电站编号默认排行//
+            let arr3={};//电站编号默认排行//
+            let arr4={};//电站编号默认排行//
             let dcname=[];//电站名字//
             let zjrl=[];//场站装机容量//
-            let czdyagc=[];//场站对应AGC编号//
-            let czdyavc=[];//场站对应AVC编号//
-            let jhgl=[];//升压站计划功率//
+            let czdagc=[];//AGC对应的场站编号//
+            let czdavc=[];//AVC对应的场站编号//
+            let jhgl=[];//升压站计划功率//l
             (function(){
                 for(let i in modens){
                     if ( modens[i].wft=='Wf'|| modens[i].wft=='Gf'){
                         arr1.push(i);
+                        arr2.push(i);
                         dcname.push(modens[i].name);
                     }
                 }
                 for(let i=0;i<arr1.length;i++){
                     zjrl.push((Number(moddata[arr1[i]].Capacity)*0.001).toFixed(2))
                 }
+                arr1.map((value, key)=>{
+                    for(let i in modens){
+                        if ( modens[i].det=='EnergyManager'&& modens[i].pid == value){
+                            czdagc.push([key,modens[i].cis]);
+                            arr3[""+value]= modens[i].cis;
+
+                            // czdagc.key.push(modens[i].cis)
+                        }
+                        if ( modens[i].det=='TransSubstation'&& modens[i].pid == value){
+                            czdavc.push([key,modens[i].cis]);
+                            arr4[""+value]= modens[i].cis;
+                        }
+                    }
+                });
+                // console.log(arr4);
+                // console.log(moddata[arr3["150801"]].AGCState);
+
             }());
             return(
                 <div className={styles.bodyBox}>
@@ -53,12 +74,17 @@ let Component = React.createClass({
                                     <div className={styles.titlep}><span onClick={()=>changepage(value,key)}>{dcname[key]}</span></div>
                                     <div className={styles.lastt}>
                                         <div className={styles.lasttt}>装机容量 : {zjrl[key]} <span className={styles.lastttt}>MW</span></div>
-                                        {/*<div className={styles.lasttt}>计划功率 : {[(moddata[value].PlanActPower*0.001).toFixed(0)]} <span className={styles.lastttt}>MW</span></div>*/}
-                                        {/*<div className={styles.lasttt}>负荷 : {[(moddata[value].Transformer_P*0.001).toFixed(2)]} <span className={styles.lastttt}>MW</span></div>*/}
-                                        {/*<div className={styles.lasttt}>AGC/AVC :*/}
-                                            {/*<div className={arr1agc[key]=='#669999'?styles.succ:(arr1agc[key]=='#FF0000'?styles.defa:styles.cutD)}></div>*/}
-                                            {/*<div className={arr1avc[key]=='#669999'?styles.succ:(arr1avc[key]=='#FF0000'?styles.defa:styles.cutD)}></div>*/}
-                                        {/*</div>*/}
+                                        <div className={styles.lasttt}>计划功率 : {moddata[arr3[value]] == undefined ?"--":[(moddata[arr3[value]].AGCActPower*0.001).toFixed(0)]} <span className={styles.lastttt}>MW</span></div>
+                                        <div className={styles.lasttt}>负荷 : {moddata[arr4[value]] == undefined ?"--":
+                                            (value == "150811" ?[(moddata[arr4[value]].Transformer_P_BMCJGF/1).toFixed(2)]:
+                                                (value == "150801" ?[((moddata[arr4[value]].Transformer_P/1)-(moddata[arr4[value]].Transformer_P_BMCJGF/1)).toFixed(2)]:
+                                                    [(moddata[arr4[value]].Transformer_P/1).toFixed(2)]))} <span className={styles.lastttt}>MW</span></div>
+                                        <div className={styles.lasttt}>AGC/AVC :
+                                            <div className={moddata[arr3[value]] == undefined ?styles.cutD:
+                                                (moddata[arr3[value]].AGCState=='#669999'?styles.succ:(moddata[arr3[value]].AGCState=='#FF0000'?styles.defa:styles.cutD))}></div>
+                                            <div className={moddata[arr4[value]] == undefined ?styles.cutD:
+                                                (moddata[arr4[value]].AVCState=='#669999'?styles.succ:(moddata[arr4[value]].AVCState=='#FF0000'?styles.defa:styles.cutD))}></div>
+                                        </div>
                                     </div>
                                     <div className={styles.mainn}>
 
