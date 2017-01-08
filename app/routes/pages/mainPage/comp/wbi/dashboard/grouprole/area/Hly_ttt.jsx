@@ -184,8 +184,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl,groupid)=>{
             dispatch(actions.setVars('mon',w0 ));
-            console.log(groupid)
-            console.log(wc1)
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getAreaTimHealth',

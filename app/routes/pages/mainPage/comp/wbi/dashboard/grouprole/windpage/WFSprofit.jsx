@@ -52,7 +52,7 @@ let Component = React.createClass({
                             return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId,ipUrl)} key={key}>{value.name}</li>)
                         })
                     }
-                    <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
+                    <li className={styles.back} onClick={()=>backtop(befor_pagee,)}>返回</li>
                
 
                 </ul>
@@ -228,8 +228,8 @@ const mapDispatchToProps = (dispatch) => {
               	let costs=WFSP[i].costs;
               	WFSPCo.push(costs);
 
-              	let rate=WFSP[i].rate;
-              	WFSPRa.push(rate);
+              	let rate=WFSP[i].rate*100;
+              	WFSPRa.push(Number(rate.toFixed(2)));
               }
           
 
@@ -288,8 +288,8 @@ const mapDispatchToProps = (dispatch) => {
               	let costs=WFSP[i].costs;
               	WFSPCo.push(costs);
 
-              	let rate=WFSP[i].rate;
-              	WFSPRa.push(rate);
+              	let rate=WFSP[i].rate*100;
+              	WFSPRa.push(Number(rate.toFixed(2)));
               }
           
 
@@ -348,8 +348,8 @@ const mapDispatchToProps = (dispatch) => {
               	let costs=WFSP[i].costs;
               	WFSPCo.push(costs);
 
-              	let rate=WFSP[i].rate;
-              	WFSPRa.push(rate);
+              	let rate=WFSP[i].rate*100;
+              	WFSPRa.push(Number(rate.toFixed(2)));
               }
           
 
@@ -438,7 +438,7 @@ const mapDispatchToProps = (dispatch) => {
               $('#boxcover').hide();
         },
         // 返回
-        backtop:(befor_pagee,befor_page2)=>{
+        backtop:(befor_pagee,)=>{
             dispatch(actions.setVars('showPage',befor_pagee));
         },
     };

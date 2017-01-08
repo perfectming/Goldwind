@@ -440,7 +440,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 //  timeout:'3000',
                 success: function (data) {
-                    console.log(data)
+
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('totalpage', data.data.totalPage));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
@@ -572,7 +572,7 @@ const mapDispatchToProps = (dispatch) => {
             });
             function jiang() {
                 let tableV = _.clone(getState().objs.tableContent);
-                console.log(i)
+
                 i.cost='';
                 i.remark='';
                 i.year='';
@@ -603,7 +603,7 @@ const mapDispatchToProps = (dispatch) => {
             wfs['id'] = id;
 
             //wfs.push({groupname:"巴盟"});
-            console.log(wfs)
+
 
 
                 if (wfs.cost == null || wfs.cost == '') {
@@ -693,7 +693,7 @@ const mapDispatchToProps = (dispatch) => {
             if (wfs.month==''){
                 wfs.month="1"
             }
-            console.log(wfs)
+
             if(wfs.cost==null){
                 alert("成本不能为空")
             }else {
@@ -705,7 +705,7 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
-                        console.log(data)
+
                         dispatch(actions.setVars('years0', null));
                         dispatch(actions.setVars('wfids', null));
                         jiang3(num);

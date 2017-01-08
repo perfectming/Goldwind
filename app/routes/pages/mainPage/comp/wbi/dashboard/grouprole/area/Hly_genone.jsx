@@ -177,7 +177,7 @@ const mapDispatchToProps = (dispatch) => {
         changedata1 :(areaId,ipUrl,w10,win,wc1,hhdata,actbt)=>{
             dispatch(actions.setVars('bt0',  0));
 
-            console.log(hhdata)
+
             let wfid=hhdata.data.AreaWtids[wc1].wfid;
 
             $.ajax({

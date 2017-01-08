@@ -17,12 +17,13 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_pagee = 'windpage', befor_page2, areaNameN, areaRecordCostN, areaRecordProfitN}=this.props;
+        let {width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_pagee = 'windpage',  areaNameN, areaRecordCostN, areaRecordProfitN}=this.props;
 
         return (
             <div className={styles.box}>
                 {//遮罩层
                      }
+
                 <div className={styles.boxcover} id='boxcover'></div>
                 {//更多弹出框
                 }
@@ -49,7 +50,7 @@ let Component = React.createClass({
                         })
                     }
 
-                    <li className={styles.back} onClick={() => backtop(befor_pagee, befor_page2)}>返回</li>
+                    <li className={styles.back} onClick={() => backtop(befor_pagee,)}>返回</li>
 
                 </ul>
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
@@ -93,9 +94,7 @@ const mapStateToProps = (state) => {
         areaRecordCostN: state.vars.areaRecordCostNb,
         areaRecordProfitN: state.vars.areaRecordProfitNb,
         areaNamee: state.vars.areaNamee,
-
         befor_pagee: state.vars.befor_pagee,
-        befor_page2: state.vars.befor_page2,
         xxdwfId: state.vars.xxdwfId1,
         xxdwfNa: state.vars.xxdwfNa1,
         btn: state.vars.btnn,
@@ -336,7 +335,6 @@ const mapDispatchToProps = (dispatch) => {
             $("#sss").show();
             $('#boxcover').show();
             let date = new Date();
-
             let year = date.getFullYear();
             let month = date.getMonth();
             if (month == 0) {
@@ -397,7 +395,7 @@ const mapDispatchToProps = (dispatch) => {
             $("#sss").hide();
             $('#boxcover').hide();
         },
-        backtop: (befor_pagee, befor_page2) => {
+        backtop: (befor_pagee,) => {
             dispatch(actions.setVars('showPage', befor_pagee));
         },
     };
