@@ -6,6 +6,7 @@ import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
 import ColumnState from './ColumnState.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
+import AlertWindow from './AlertWindow.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
 var $ =require('jquery');
@@ -41,7 +42,7 @@ let Component = React.createClass({
     },
 
     render() {
-            let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,chartData} = this.props;
+            let {alertText,devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,chartData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
@@ -109,6 +110,7 @@ let Component = React.createClass({
             
                 return (
                     <div className={styles.faultBox}>
+                        <AlertWindow text={alertText}></AlertWindow>
                         <div className={styles.search_tit}>
                             <div className={styles.seleBox}>
                                 <span>设备类型:</span>
@@ -128,6 +130,7 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.seleBox}>
                                 <div className={styles.dateBox}>
+                                    <span>日期维度</span><input id='timelength' type='date'/>
                                     <span>发生时间</span><input id="startTime" type='date'/>
                                     <span>结束时间</span><input id="endTime" type='date'/>
                                 </div>
@@ -231,6 +234,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        alertText : state.vars.alertText,
         devtype:state.objs.devtype,
         boolywbb:state.vars.boolywbb,
         firstname:state.objs.firstname,
@@ -258,7 +262,8 @@ const mapDispatchToProps = (dispatch) => {
                     gettreedata(); 
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    alert('获取数据失败！');   
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败！'));   
                 }    
             });
 
@@ -276,7 +281,8 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boolywbb', true));
                     },    
                     error:function(XMLHttpRequest,textStatus,errorThrown){    
-                        alert('获取数据失败！');    
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败！'));   
                     }    
                 });
             }
@@ -322,6 +328,7 @@ const mapDispatchToProps = (dispatch) => {
             //获取今天与昨天的日期
             $('#startTime').val(dateString1);
             $('#endTime').val(dateString);
+            $('#timelength').val(dateString1);
             //显示下拉菜单
             $('#slide').on('click',function(){
                 $('#selectye').show();
@@ -374,7 +381,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('boolywbb', true));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    alert('获取数据失败！');    
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败！'));   
                 }    
             });
         },
@@ -394,7 +402,8 @@ const mapDispatchToProps = (dispatch) => {
                 all.splice(50,all.length);
             }
             if(all.length==0){
-                alert('设备数据获取失败！')
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择设备！'));
                 return;
             }
             $.ajax({    
@@ -406,13 +415,15 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:3000,       
                 success:function(json,textStatus){ 
                     if(json.wtid==undefined){
-                        alert('无数据');
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '无数据'));
                         return;
                     } 
                     dispatch(actions.setObjs('chartData',json));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    alert('获取数据失败！');    
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败！'));   
                 }    
             });
             
