@@ -8,7 +8,6 @@ import add from '../../../img/comp/add_down.png';
 let type = require('../report/ywbb_date');
 var $ =require('jquery');
 var actions = require('redux/actions');
-let url='54.223.200.134';
 let Component = React.createClass({
     componentWillMount() {
     },

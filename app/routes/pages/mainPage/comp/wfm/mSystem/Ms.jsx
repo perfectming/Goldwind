@@ -6,7 +6,7 @@ import add from '../../../img/icon/tabAdd.png';
 var actions = require('redux/actions');
 import styles from './Ms.scss';
 var $ = require('jquery');
-let soamMs='http://10.9.100.48:8080/soam';
+let soamMs='http://10.68.100.32:8080/soam';
 import Abox from './boxA';
 import Bbox from './boxB';
 import Login from '../../../../../../components/common/Loading.jsx';
