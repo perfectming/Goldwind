@@ -60,8 +60,7 @@ let Component = React.createClass({
                 enabled: false //不显示highCharts版权信息
             },
             //柱子颜色
-            colors: [ '#1E664A', '#4CDB9D']
-            ,
+
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {

@@ -390,28 +390,28 @@ const mapDispatchToProps = (dispatch) => {
             }else{
                 if(date.getMonth()<9){
                     if(date.getDate()<10){
-                       var dateString = date.getFullYear()+"-0"+(date.getMonth()+1)+"-0"+date.getDate(); 
+                        var dateString = date.getFullYear()+"-0"+(date.getMonth()+1)+"-0"+date.getDate();
                     }else{
-                       var dateString = date.getFullYear()+"-0"+(date.getMonth()+1)+"-"+date.getDate(); 
+                        var dateString = date.getFullYear()+"-0"+(date.getMonth()+1)+"-"+date.getDate();
                     }
                 }else{
                     if(date.getDate()<10){
-                       var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-0"+date.getDate(); 
+                        var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-0"+date.getDate();
                     }else{
-                       var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate(); 
+                        var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
                     }
                 }
                 if(date.getMonth()<9){
                     if(date.getDate()<11){
-                       var dateString1 = date.getFullYear()+"-0"+(date.getMonth()+1)+"-0"+(date.getDate()-1); 
+                        var dateString1 = date.getFullYear()+"-0"+(date.getMonth()+1)+"-0"+(date.getDate()-1);
                     }else{
-                       var dateString1 = date.getFullYear()+"-0"+(date.getMonth()+1)+"-"+(date.getDate()-1); 
+                        var dateString1 = date.getFullYear()+"-0"+(date.getMonth()+1)+"-"+(date.getDate()-1);
                     }
                 }else{
                     if(date.getDate()<11){
-                       var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-0"+(date.getDate()-1); 
+                        var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-0"+(date.getDate()-1);
                     }else{
-                       var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()-1); 
+                        var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()-1);
                     }
                 }
             }

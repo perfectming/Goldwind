@@ -108,7 +108,6 @@ let Component = React.createClass({
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 //max:'${max}',
-                tickInterval: 10,
                 title: {
                     text: '(h)',
                     align: 'high',
@@ -132,6 +131,7 @@ let Component = React.createClass({
 
 
                 min:0,
+                max:120,
                 title: {
                     text: '(%)',
                     align: 'high',

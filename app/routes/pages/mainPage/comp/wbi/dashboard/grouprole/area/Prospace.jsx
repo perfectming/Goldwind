@@ -259,6 +259,10 @@ const mapDispatchToProps = (dispatch) => {
             let monthh = key + 1;
             let datee = new Date;
             let year = datee.getFullYear();
+            let month2=datee.getMonth();
+            if(month2==0){
+                    year=year-1;
+            }
             let day = new Date(year, monthh, 0);
             let daycount = day.getDate();    //获取天数：
 
@@ -349,12 +353,13 @@ const mapDispatchToProps = (dispatch) => {
             let month2 = date.getMonth();
             if(month2==0){
                 month2=12;
+                year=year-1;
             }
-            let day = new Date(year, month2, 0);
+            let day = new Date(year, actbt+1, 0);
             let daycount = day.getDate();
 
             console.log(year)
-            console.log(actbt)
+            console.log(month2)
             console.log(wfid)
             console.log(daycount)
             $.ajax({
@@ -370,12 +375,12 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
+                    console.log(data)
                     let name2 = [];
                     let runtime2 = [];       //实际发电量
                     let downtime2 = [];       //故障损失
                     let tba2 = [];       //维护损失
 
-console.log(data)
                     for (let i = 0; i < 10; i++) {
                         //区域的横坐标
                         name2.push(data.data[i].wtname);
@@ -405,8 +410,9 @@ console.log(data)
             let month2 = date.getMonth();
             if(month2==0){
                 month2=12;
+                year=year-1;
             }
-            let day = new Date(year, month2, 0);
+            let day = new Date(year, actbt+1, 0);
             let daycount = day.getDate();
             $.ajax({
                 type: 'post',
@@ -453,8 +459,9 @@ console.log(data)
             let month2 = date.getMonth();
             if(month2==0){
                 month2=12;
+                year=year-1;
             }
-            let day = new Date(year, month2, 0);
+            let day = new Date(year, actbt+1, 0);
             let daycount = day.getDate();
 
             $.ajax({

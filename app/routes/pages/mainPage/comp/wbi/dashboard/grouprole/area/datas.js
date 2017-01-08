@@ -5,10 +5,7 @@ module.exports = {
                 groupid:"201612121721151",
                 groupname:"巴盟"
             },
-            {
-                groupid:"201612121721151",
-                groupname:"巴盟",
-            }
+
         ],
 
         header:[
@@ -171,7 +168,7 @@ module.exports = {
                     '区域',
                     '风场',
                     '数据时段',
-                    '成本金额(万元)',
+                    '成本(万元)',
                     '备注',
                     '操作',
 

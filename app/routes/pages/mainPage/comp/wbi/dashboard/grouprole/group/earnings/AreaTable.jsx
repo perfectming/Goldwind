@@ -113,17 +113,17 @@ let Component = React.createClass({
                                 success: function (data) {
 
 
-                                    var dataA = data.data;
-                                    for (var i in dataA) {
-                                        var areaWindCost = dataA[i].costs;
+                                    let dataA = data.data;
+                                    for (let i in dataA) {
+                                        let areaWindCost = dataA[i].costs;
                                         areaWindCosts.push(areaWindCost);
-                                        var areaWindEarning = dataA[i].earning;
+                                        let areaWindEarning = dataA[i].earning;
                                         areaWindEarnings.push(areaWindEarning);
-                                        var areaWindRate = dataA[i].rate * 100;
+                                        let areaWindRate = dataA[i].rate * 100;
                                         areaWindRates.push(Number(areaWindRate.toFixed(1)));
-                                        var areaWindid = dataA[i].wfid;
+                                        let areaWindid = dataA[i].wfid;
                                         areaWindids.push(areaWindid);
-                                        var areaWindName = dataA[i].wfname;
+                                        let areaWindName = dataA[i].wfname;
                                         areaWindNames.push(areaWindName)
 
                                     }
@@ -153,17 +153,17 @@ let Component = React.createClass({
                                 success: function (data) {
 
 
-                                    var dataA = data.data;
-                                    for (var i in dataA) {
-                                        var areaWindCost = dataA[i].costs;
+                                    let dataA = data.data;
+                                    for (let i in dataA) {
+                                        let areaWindCost = dataA[i].costs;
                                         areaWindCosts1.push(areaWindCost);
-                                        var areaWindEarning = dataA[i].earning;
+                                        let areaWindEarning = dataA[i].earning;
                                         areaWindEarnings1.push(areaWindEarning);
-                                        var areaWindRate = dataA[i].rate * 100;
+                                        let areaWindRate = dataA[i].rate * 100;
                                         areaWindRates1.push(Number(areaWindRate.toFixed(1)));
-                                        var areaWindid = dataA[i].wtid;
+                                        let areaWindid = dataA[i].wtid;
                                         areaWindids1.push(areaWindid);
-                                        var areaWindName = dataA[i].wtname;
+                                        let areaWindName = dataA[i].wtname;
                                         areaWindNames1.push(areaWindName)
 
                                     }

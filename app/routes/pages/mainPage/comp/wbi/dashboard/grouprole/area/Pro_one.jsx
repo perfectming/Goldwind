@@ -231,6 +231,7 @@ const mapDispatchToProps = (dispatch) => {
             let daycount = day.getDate();
             if(month2==0){
                 month2=12;
+                year=year-1;
             }
 
 
