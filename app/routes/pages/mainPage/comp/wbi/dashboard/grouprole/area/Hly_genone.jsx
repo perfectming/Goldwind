@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0,wc1,mon="十一月份",w10,name0,powerplan1,text,poweract2,height,changedata1,windplan=win,hhdata,actbt=10} = this.props;
+        let {w0,wc1,mon,areaId,ipUrl,w10,name0,powerplan1,text,poweract2,height,changedata1,windplan=win,hhdata,actbt=10} = this.props;
 
 
         let configPie = {
@@ -80,7 +80,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc1=e.point.index;
-                            changedata1(w10,win,wc1,hhdata,actbt);
+                            changedata1(areaId,ipUrl,w10,win,wc1,hhdata,actbt);
 
                         }
                     }
@@ -164,6 +164,8 @@ const mapStateToProps = (state) => {
         actbt : state.vars.actbt,
         hhdata : state.vars.hhdata,
         windplan : state.vars.windplan,
+        areaId: state.vars.areaId,
+        ipUrl: state.vars.ipUrl,
     }
 };
 
@@ -172,35 +174,37 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(w10,win,wc1,hhdata,actbt)=>{
+        changedata1 :(areaId,ipUrl,w10,win,wc1,hhdata,actbt)=>{
             dispatch(actions.setVars('bt0',  0));
-            let wfid=hhdata.data[1][wc1].wfid;
+
+            console.log(hhdata)
+            let wfid=hhdata.data.AreaWtids[wc1].wfid;
 
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/ELEC/getSpaceByGroupidElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getWtAreaElec',
                 async:false,
                 data:{
                     "months":actbt+1,
-                    "groupid":201612121721151,
                     "wfid":wfid,
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    dispatch(actions.setVars('hhdata', data));
+                    console.log(data)
 
                     let barlotimes2 = [];
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
                     for (var i=0;i<10;i++) {
-                        barlotimes2.push(data.data[0][i].wtname);    //区域的横坐标
-                        barlopowers2.push(Number((data.data[0][i].powerplan).toFixed(2)));   //计划发电量
-                        barlopowerp2.push(Number((data.data[0][i].poweract).toFixed(2)));  //实际发电量
+                        barlotimes2.push(data.data[i].wtname);    //区域的横坐标
+                        barlopowers2.push(Number((data.data[i].powerplan).toFixed(2)));   //计划发电量
+                        barlopowerp2.push(Number((data.data[i].poweract).toFixed(2)));  //实际发电量
                     }
                     dispatch(actions.setVars('barlotimes2', barlotimes2));
                     dispatch(actions.setVars('barlopowers2', barlopowers2));
                     dispatch(actions.setVars('barlopowerp2', barlopowerp2));
+                    dispatch(actions.setVars('wfid', wfid));
 
 
 

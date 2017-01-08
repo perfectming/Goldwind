@@ -55,8 +55,7 @@ let Component = React.createClass({
            let Darr=[];  //统计数组
            let one=[]; //一级菜单
            let two=[]; //二级菜单
-           let three=[]; //三级菜单 
-             console.log(select_list)
+           let three=[]; //三级菜单
               //获取设备类型对应的左侧树形二级和三级数据
               for(let arg2 in select_list){
                 if(select_list[arg2].id &&select_list[arg2].id!=''){
@@ -77,7 +76,6 @@ let Component = React.createClass({
          
            //表格数据处理
            if(tabledata!=undefined){
-            console.log(tabledata)
               //获取标题
               for(let title in tabledata){
                 if(tabledata[title].Unit!=''){
@@ -108,8 +106,6 @@ let Component = React.createClass({
                 })
                 Carr.push(num)
                }
-               // console.log(Barr)
-               // console.log(Carr)
            }
 
             if(boolywbb){
@@ -380,12 +376,39 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
         },
         playjq:()=>{
-         
-
-          //初始化日期
+         //初始化日期
             var date = new Date();
-            var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-            var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()-1);
+            if(date.getMonth()==0&&date.getDate()==1){
+                var dateString = date.getFullYear()+"-01"+"-01";
+                var dateString1 = (date.getFullYear()-1)+"-12"+"-31";
+            }else{
+                if(date.getMonth()<9){
+                    if(date.getDate()<10){
+                       var dateString = date.getFullYear()+"-0"+(date.getMonth()+1)+"-0"+date.getDate(); 
+                    }else{
+                       var dateString = date.getFullYear()+"-0"+(date.getMonth()+1)+"-"+date.getDate(); 
+                    }
+                }else{
+                    if(date.getDate()<10){
+                       var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-0"+date.getDate(); 
+                    }else{
+                       var dateString = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate(); 
+                    }
+                }
+                if(date.getMonth()<9){
+                    if(date.getDate()<11){
+                       var dateString1 = date.getFullYear()+"-0"+(date.getMonth()+1)+"-0"+(date.getDate()-1); 
+                    }else{
+                       var dateString1 = date.getFullYear()+"-0"+(date.getMonth()+1)+"-"+(date.getDate()-1); 
+                    }
+                }else{
+                    if(date.getDate()<11){
+                       var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-0"+(date.getDate()-1); 
+                    }else{
+                       var dateString1 = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()-1); 
+                    }
+                }
+            }
             //获取今天与昨天的日期
             $('#startTime').val(dateString1);
             $('#endTime').val(dateString)
@@ -490,7 +513,6 @@ const mapDispatchToProps = (dispatch) => {
                     if($(this).val()!=='value'){
                       all.push($(this).val())
                     }
-                    console.log($(this).val())
                   }
 
               })
@@ -510,7 +532,7 @@ const mapDispatchToProps = (dispatch) => {
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
-               timeout:3000,       
+               timeout:6000,       
                success:function(json,textStatus){  
                 let shu=[];
                 for(let i in json){

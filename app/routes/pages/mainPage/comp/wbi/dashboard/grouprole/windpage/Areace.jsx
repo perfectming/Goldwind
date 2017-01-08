@@ -162,7 +162,7 @@ const mapDispatchToProps = (dispatch) => {
         }
         ,
         init: () => {
-            var obj = {
+            let obj = {
                 test: ''
             }
         }
@@ -170,11 +170,11 @@ const mapDispatchToProps = (dispatch) => {
         // 点击月份变化
         changpage: (value, key, input_url, xxdwfId) => {
 
-            var arr1 = [];
-            var arr2 = [];
-            var arr3 = [];
-            var areaids = [];
-            var windids = [];
+            let arr1 = [];
+            let arr2 = [];
+            let arr3 = [];
+            let areaids = [];
+            let windids = [];
 
             let date = new Date();
             let monthh = date.getMonth();
@@ -200,15 +200,15 @@ const mapDispatchToProps = (dispatch) => {
 
                     // 获取x轴的值内蒙达茂天润风电场
 
-                    for (var i = 0; i < 10; i++) {
+                    for (let i = 0; i < 10; i++) {
                         // 风场时间
-                        var xWild = data.data[i].wtname;
+                        let xWild = data.data[i].wtname;
                         arr1.push(xWild);
                         // 计划发电量
-                        var yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
+                        let yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
                         arr2.push(yPowerPlan);
                         // 实际发电量
-                        var yPowerAct = Number(data.data[i].poweract.toFixed(2));
+                        let yPowerAct = Number(data.data[i].poweract.toFixed(2));
                         arr3.push(yPowerAct);
                     }
 
@@ -233,9 +233,9 @@ const mapDispatchToProps = (dispatch) => {
                 month = 12;
                 year = year - 1;
             }
-            var arr1 = [];
-            var arr2 = [];
-            var arr3 = [];
+            let arr1 = [];
+            let arr2 = [];
+            let arr3 = [];
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi/ELEC/getPageSize',
@@ -253,15 +253,15 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-                    var dataa = data.data;
-                    for (var i = 0; i < 10; i++) {
+                    let dataa = data.data;
+                    for (let i = 0; i < 10; i++) {
                         // 风场名字
-                        var xWild = data.data[i].wtname;
+                        let xWild = data.data[i].wtname;
                         arr1.push(xWild);
 
-                        var yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
+                        let yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
                         arr2.push(yPowerPlan);
-                        var yPowerAct = Number(data.data[i].poweract.toFixed(2));
+                        let yPowerAct = Number(data.data[i].poweract.toFixed(2));
                         arr3.push(yPowerAct);
                     }
 
@@ -279,9 +279,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         // 后十
         back: (actbt, input_url, xxdwfId) => {
-            var arr1 = [];
-            var arr2 = [];
-            var arr3 = [];
+            let arr1 = [];
+            let arr2 = [];
+            let arr3 = [];
             let date = new Date();
             let year = date.getFullYear();
 
@@ -311,13 +311,13 @@ const mapDispatchToProps = (dispatch) => {
 
 
                     // 获取x轴的值内蒙达茂天润风电场
-                    var dataa = data.data;
-                    for (var i = 0; i < 10; i++) {
-                        var xWild = data.data[i].wtname;
+                    let dataa = data.data;
+                    for (let i = 0; i < 10; i++) {
+                        let xWild = data.data[i].wtname;
                         arr1.push(xWild);
-                        var yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
+                        let yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
                         arr2.push(yPowerPlan);
-                        var yPowerAct = Number(data.data[i].poweract.toFixed(2));
+                        let yPowerAct = Number(data.data[i].poweract.toFixed(2));
                         arr3.push(yPowerAct);
                     }
 
@@ -366,12 +366,12 @@ const mapDispatchToProps = (dispatch) => {
 
                     // 获取x轴的值内蒙达茂天润风电场
                     let dataa = data.data;
-                    for (var i = 0; i < dataa.length; i++) {
-                        var xWild = data.data[i].wtname;
+                    for (let i = 0; i < dataa.length; i++) {
+                        let xWild = data.data[i].wtname;
                         arr4.push(xWild);
-                        var yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
+                        let yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
                         arr5.push(yPowerPlan);
-                        var yPowerAct = Number(data.data[i].poweract.toFixed(2));
+                        let yPowerAct = Number(data.data[i].poweract.toFixed(2));
                         arr6.push(yPowerAct);
 
 

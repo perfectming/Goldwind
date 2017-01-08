@@ -13,8 +13,8 @@ let data = require('./Healthy-data');
 
 let Component = React.createClass({
     componentWillMount() {
-        let {ipUrl}=this.props;
-        this.props.ajax(ipUrl);
+        let {ipUrl,areaId}=this.props;
+        this.props.ajax(ipUrl,areaId);
     },
     componentDidMount() {
         this.props.init();
@@ -22,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {ipUrl, monthx, monthx2, healthy2, healthy3, monthx3, befor_pages = 'area', mon, returnit} = this.props;
+        let {ipUrl,areaId, monthx, monthx2, healthy2, healthy3, monthx3, befor_pages = 'area', mon, returnit} = this.props;
         let data = require('./Healthy-data');
         return (
 
@@ -73,13 +73,13 @@ const mapStateToProps = (state) => {
         healthy2: state.vars.healthy2,
         healthy3: state.vars.healthy3,
         mon: state.vars.mon,
-
+        areaId: state.vars.areaId,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
+        ajax: (ipUrl,areaId) => {
             var obj = {
                 test: ''
             }
@@ -90,18 +90,23 @@ const mapDispatchToProps = (dispatch) => {
             if(month2==0){
                 month2=12;
             }
+            areaId=areaId[0];
+            console.log(month2)
+            console.log(areaId)
+
             $.ajax({
                 type: 'post',
-                url: 'http://' + ipUrl + '/wbi/Health/getCompanyMonthHealth',
+                url: 'http://' + ipUrl + '/wbi/Health/getAreaTimHealth',
                 async: false,
                 data: {
-                    "month": '',
+                    "month": month2,
                     "year": '',
-
+                    "groupid":areaId,
                 },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
+                    console.log(data)
                     dispatch(actions.setVars('hhdata', data));
                     dispatch(actions.setVars('mon', month2 + "月"));
 

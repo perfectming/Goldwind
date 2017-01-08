@@ -6,6 +6,7 @@ import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
 import OneColumn from './oneColumn.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
+import AlertWindow from './AlertWindow.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
 var $ =require('jquery');
@@ -27,7 +28,7 @@ let Component = React.createClass({
     },
 
     render() {
-            let {boolywbb=false,playjq,select_list,searchnum,powerCurveData} = this.props;
+            let {alertText,boolywbb=false,playjq,select_list,searchnum,powerCurveData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
@@ -78,8 +79,8 @@ let Component = React.createClass({
             if(boolywbb){
                 return (
                     <div className={styles.faultBox}>
+                        <AlertWindow text={alertText}></AlertWindow>
                         <div className={styles.search_tit}>
-                            
                             <div className={styles.seleBox}>
                                 <div className={styles.dateBox}>
                                     <span>发生时间</span><input id="startTime" type='date'/>
@@ -185,6 +186,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        alertText : state.vars.alertText,
         boolywbb:state.vars.boolywbb,
         select_list:state.vars.select_list,
         powerCurveData:state.objs.powerCurveData,
@@ -207,7 +209,8 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boolywbb', true));
                     },    
                     error:function(XMLHttpRequest,textStatus,errorThrown){    
-                        alert('获取数据失败！');    
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败！'));    
                     }    
             });
             
@@ -291,7 +294,8 @@ const mapDispatchToProps = (dispatch) => {
                 all.splice(50,all.length);
             }
             if(all.length==0){
-                alert('设备数据获取失败！')
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择设备！'));  
                 return;
             }
             $.ajax({    
@@ -303,13 +307,15 @@ const mapDispatchToProps = (dispatch) => {
                 timeout:3000,       
                 success:function(json,textStatus){ 
                     if(json.areadescr==undefined){
-                        alert('无数据');
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '无数据！'));  
                         return;
                     } 
                     dispatch(actions.setObjs('powerCurveData',json));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    alert('获取数据失败！');    
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败！'));      
                 }    
             });
         }

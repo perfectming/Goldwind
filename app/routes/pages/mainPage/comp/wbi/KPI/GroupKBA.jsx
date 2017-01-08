@@ -82,7 +82,6 @@ const mapStateToProps = (state) => {
     	wtElecMore : state.vars.wtElecMore,
     	wtLoseMore : state.vars.wtLoseMore,
     	wtPBAMore : state.vars.wtPBAMore,
-    	areaId: state.vars.areaId,
     	X1 : state.vars.x1,
     	X2 : state.vars.x2,
     	

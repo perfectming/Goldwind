@@ -88,7 +88,7 @@ module.exports = {
                 },
                  {
                     tabname:'风玫瑰统计用例规划',
-                    rpage:''//暂不开发
+                    rpage:'lose_detail'//暂不开发
                 },
                  {
                     tabname:'功率曲线统计用例规划',
@@ -96,7 +96,7 @@ module.exports = {
                 },
                  {
                     tabname:'功率曲线对比用例规划',
-                    rpage:''
+                    rpage:'compareCurve'
                 },
 
 
@@ -107,21 +107,21 @@ module.exports = {
             name: '故障报表',
             page: 'FaultReport',
             rightpagge:[
-                  {
+                {
                     tabname:'故障明细统计用例规划',
-                    rpage:''
+                    rpage:'FaultReport'
                 },
                 {
                     tabname:'故障汇总用例规划',
-                    rpage:''//接口待开发，蒋重义考虑需求；
+                    rpage:'lose_detail'//接口待开发，蒋重义考虑需求；
                 },
                 {
                     tabname:'故障处理时长统计用例规划',
-                    rpage:''//暂不开发
+                    rpage:'lose_detail'//暂不开发
                 },
                 {
                     tabname:'故障分类统计用例规划',
-                    rpage:''
+                    rpage:'FaultClass'
                 }
 
             ]
@@ -133,11 +133,11 @@ module.exports = {
             rightpagge:[
                   {
                     tabname:'AGC调控效果报表用例规范',
-                    rpage:''//暂不开发，功能需求数据库待确定
+                    rpage:'lose_detail'//暂不开发，功能需求数据库待确定
                 },
                 {
                     tabname:'AVC调控效果报表用例规范',
-                    rpage:''//暂不开发，功能需求数据库待确定
+                    rpage:'lose_detail'//暂不开发，功能需求数据库待确定
                 }
 
             ]
@@ -161,19 +161,19 @@ module.exports = {
         },
          {
             name: '告警报表',
-            page: 'alert',
+            page: 'StationAlert',
             rightpagge:[
                   {
                     tabname:'升压站告警查询',
-                    rpage:'alert'
+                    rpage:'StationAlert'
                 },
                  {
                     tabname:'AGC/ AVC告警查询',
-                    rpage:''
+                    rpage:'ACAlert'
                 },
                  {
                     tabname:'功率预测告警查询',
-                    rpage:''
+                    rpage:'PowerAlert'
                 }
 
             ]

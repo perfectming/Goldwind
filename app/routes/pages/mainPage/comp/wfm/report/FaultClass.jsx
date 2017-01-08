@@ -42,19 +42,16 @@ let Component = React.createClass({
     },
 
     render() {
-            let {alertText,devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,runData} = this.props;
+            let {alertText,devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,faultClassData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
             let three=[]; //三级菜单
-            let stateArr=[];//状态数组
+
+            let stateArr=[];//故障数组
             let numberArr=[];//次数数组
             let timeArr=[];//时长数组
             let timeDescribe=[];//时长描述
-            let maxDescribe=[];//最大周期描述
-            let maxTime=[];//最大周期
-            let minDescribe=[];//最小周期描述
-            let minTime=[];//最小周期
             //获取设备类型对应的左侧树形二级和三级数据
             for(let arg2 in select_list){
                 if(select_list[arg2].id &&select_list[arg2].id!=''){
@@ -68,16 +65,12 @@ let Component = React.createClass({
                 }
             }
             //表格数据处理
-            if(runData!==undefined&&runData.happencount!==undefined){
-                let arrString0,arrString1,arrString2,arrString3,arrString4,arrString5,arrString6,arrString7;
-                arrString0=runData.iecvaluetypedescr.Values.split(',');
-                arrString1=runData.happencount.Values.split(',');
-                arrString2=runData.timelength.Values.split(',');
-                arrString3=runData.datelength.Values.split(',');
-                arrString4=runData.maxdateperiod.Values.split(',');
-                arrString5=runData.maxtimeperiod.Values.split(',');
-                arrString6=runData.mindateperiod.Values.split(',');
-                arrString7=runData.mintimeperiod.Values.split(',');
+            if(faultClassData!==undefined&&faultClassData.iecvaluetypedescr!==undefined){
+                let arrString0,arrString1,arrString2,arrString3;
+                arrString0=faultClassData.iecvaluetypedescr.Values.split(',');//故障分类
+                arrString1=faultClassData.happencount.Values.split(',');//发生次数
+                arrString2=faultClassData.timelength.Values.split(',');//时长
+                arrString3=faultClassData.datelength.Values.split(',');//时长描述
                 for (var i=0 ; i< arrString0.length ; i++){
                     stateArr.push(arrString0[i]);
                 }
@@ -90,20 +83,8 @@ let Component = React.createClass({
                 for (var i=0 ; i< arrString3.length ; i++){
                         timeDescribe.push(arrString3[i]/1);
                 }
-                for (var i=0 ; i< arrString4.length ; i++){
-                        maxDescribe.push(arrString4[i]/1);
-                }
-                for (var i=0 ; i< arrString5.length ; i++){
-                        maxTime.push(arrString5[i]/1);
-                }
-                for (var i=0 ; i< arrString6.length ; i++){
-                        minDescribe.push(arrString6[i]/1);
-                }
-                for (var i=0 ; i< arrString7.length ; i++){
-                        minTime.push(arrString7[i]/1);
-                }
             }else{
-                runData=undefined;
+                faultClassData=undefined;
             }
             if(boolywbb){
                 //获取设备类型数组
@@ -119,8 +100,9 @@ let Component = React.createClass({
                 }
             
                 return (
+                	
                     <div className={styles.faultBox}>
-                        <AlertWindow text={alertText}></AlertWindow>
+                    	<AlertWindow text={alertText}></AlertWindow>
                         <div className={styles.search_tit}>
                             <div className={styles.seleBox}>
                                 <span>设备类型:</span>
@@ -212,19 +194,19 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.righttable}>
                             <div className={styles.columnbox} id='colum'>
-                                {runData!==undefined && <ColumnState month={stateArr} arr1={numberArr} arr2={timeArr} unit1={'次'} unit2={'s'} nameOne={'发生次数'} nameTwo={'状态时长'} title={'设备运行模式字统计用例规划'}></ColumnState>}
+                                {faultClassData!==undefined && <ColumnState month={stateArr} arr1={numberArr} arr2={timeArr} unit1={'次'} unit2={'s'} nameOne={'发生次数'} nameTwo={'故障时长'} title={'故障分类统计'}></ColumnState>}
                             </div>
                             <div className={styles.tablebox} id='tablebox'>
-                                {runData!==undefined &&
+                                {faultClassData!==undefined &&
                                 <table>
                                     <tbody>
-                                        <tr className={styles.thRun}><th>序号</th><th>分类描述</th><th>发生次数</th><th>状态时长(s)</th><th>时长描述(s)</th><th>最小周期(s)</th><th>最小周期描述(h)</th><th>最大周期(s)</th><th>最大周期描述(h)</th></tr>
+                                        <tr className={styles.thState}><th>序号</th><th>故障分类</th><th>发生次数</th><th>故障时长(s)</th><th>故障时长描述(h)</th></tr>
                                         {
                                             stateArr.map((value,key)=>{
                                                 return(
-                                                    <tr key={key} className={styles.thRun}><th>{key+1}</th><th>{stateArr[key]}</th><th>{numberArr[key]}</th><th>{timeArr[key]}</th><th>{timeDescribe[key]}</th><th>{minTime[key]}</th><th>{minDescribe[key]}</th><th>{maxTime[key]}</th><th>{maxDescribe[key]}</th></tr>
+                                                    <tr key={key} className={styles.thState}><th>{key+1}</th><th>{value}</th><th>{numberArr[key]}</th><th>{timeArr[key]}</th><th>{timeDescribe[key]}</th></tr>
                                                 )
-                                            }) 
+                                            })
                                         }
                                     </tbody>
                                 </table>
@@ -244,13 +226,13 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        alertText : state.vars.alertText,
+    	alertText : state.vars.alertText,
         devtype:state.objs.devtype,
         boolywbb:state.vars.boolywbb,
         firstname:state.objs.firstname,
         select_list:state.vars.select_list,
         devurls:state.vars.devurls,
-        runData:state.objs.runData,
+        faultClassData:state.objs.faultClassData,
     }
 };
 
@@ -273,7 +255,7 @@ const mapDispatchToProps = (dispatch) => {
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));  
+                	dispatch(actions.setVars('alertText', '获取数据失败！'));   
                 }    
             });
 
@@ -292,7 +274,7 @@ const mapDispatchToProps = (dispatch) => {
                     },    
                     error:function(XMLHttpRequest,textStatus,errorThrown){    
                         dispatch(actions.setVars('alertBool', false));
-                        dispatch(actions.setVars('alertText', '获取数据失败！'));  
+                		dispatch(actions.setVars('alertText', '获取数据失败！'));       
                     }    
                 });
             }
@@ -392,7 +374,7 @@ const mapDispatchToProps = (dispatch) => {
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));    
+                	dispatch(actions.setVars('alertText', '获取数据失败！'));     
                 }    
             });
         },
@@ -413,27 +395,27 @@ const mapDispatchToProps = (dispatch) => {
             }
             if(all.length==0){
                 dispatch(actions.setVars('alertBool', false));
-                dispatch(actions.setVars('alertText', '请选择设备！'));
+                dispatch(actions.setVars('alertText', '获取设备数据失败！'));   
                 return;
             }
             $.ajax({    
                 url:'http://'+url+'/Monitor/xml.aspx',    
-                data:'functionname=CountStateData&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&iec=WTUR.Other.Wn.I16.StopModeWord&groupbydevice=0&crossDomain=true&zip=false',    
+                data:'functionname=CountFailureInfoType&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&groupbydevice=0&crossDomain=true&zip=false',    
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
                 timeout:3000,       
                 success:function(json,textStatus){ 
-                    if(json.datelength==undefined){
+                    if(json.iecvaluetype==undefined){
                         dispatch(actions.setVars('alertBool', false));
-                        dispatch(actions.setVars('alertText', '无数据'));
+                		dispatch(actions.setVars('alertText', '无数据！'));   
                         return;
-                    }
-                    dispatch(actions.setObjs('runData',json));
+                    } 
+                    dispatch(actions.setObjs('faultClassData',json));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));  
+                	dispatch(actions.setVars('alertText', '获取数据失败！'));       
                 }    
             });
             

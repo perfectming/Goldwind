@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {ip="10.68.100.32",hhdata4,actbt=10,text,changedata1,w0='一区域',wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
+        let {ipUrl,hhdata4,actbt=10,text,changedata1,w0='一区域',wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
 
 
         let configPie = {
@@ -81,7 +81,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc1=e.point.index;
-                            changedata1(w10,e,wc1,actbt,hhdata4);
+                            changedata1(ipUrl,w10,e,wc1,actbt,hhdata4);
 
                         }
                     }
@@ -233,6 +233,7 @@ const mapStateToProps = (state) => {
         windplan : state.vars.windplan,
         hhdata4 : state.vars.hhdata4,
         actbt : state.vars.actbt,
+        ipUrl : state.vars.ipUrl,
 
     }
 };
@@ -242,12 +243,12 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('w1',w0 ));
         },
-        changedata1 :(w10,e,wc1,actbt,hhdata4)=> {
+        changedata1 :(ipUrl,w10,e,wc1,actbt,hhdata4)=> {
             dispatch(actions.setVars('bt0', 0));
-            let wfid =hhdata4.data[1][wc1].wfid;
+
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/PBA/getCompanyDayTimePBA',
+                url:'http://'+ipUrl+'/wbi/PBA/getCompanyDayTimePBA',
                 async:false,
                 data:{
                     "month":wc1+1,

@@ -9,62 +9,62 @@ let Component = React.createClass({
     },
 
     render() {
-        let{text,TBAx,TBADownTimes,TBARunTimes,TBAtba,height,windFiled,windCost,windProfit,w0,TBA}=this.props;
+        let {text, TBAx, TBADownTimes, TBARunTimes, TBAtba, height, windFiled, windCost, windProfit, w0, TBA}=this.props;
         let configPie = {
             chart: {
-                height:height,
-                 backgroundColor: "rgba(44, 61, 71,.4)",
+                height: height,
+                backgroundColor: "rgba(44, 61, 71,.4)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
-                paddingLeft:100,
+                paddingLeft: 100,
             },
             title: {
-                text:text,
-                align:'left',
-                 x : "0",
-                style:{
-                    color:"#fff",
-                    fontSize:"16px",
-                    fontFamily:"微软雅黑",
-                    
+                text: text,
+                align: 'left',
+                x: "0",
+                style: {
+                    color: "#fff",
+                    fontSize: "16px",
+                    fontFamily: "微软雅黑",
+
                 }
             },
             //图例说明
             legend: {
-                align:"right",
+                align: "right",
                 verticalAlign: "top",
-                x:-75,
-                y:20,
-                itemHoverStyle:{
-                    color:'#31f3fb',
+                x: -75,
+                y: 20,
+                itemHoverStyle: {
+                    color: '#31f3fb',
                 },
                 itemStyle: {
                     color: "#fff",
-                    fontSize:"14px",
-                    fontWeight:"normal",
-                    fontFamily:"微软雅黑",
+                    fontSize: "14px",
+                    fontWeight: "normal",
+                    fontFamily: "微软雅黑",
                 }
             },
             tooltip: {
-                  valueSuffix:'h'
+                valueSuffix: 'h'
             },
             credits: {
                 enabled: false
             },
             plotOptions: {
                 column: {
-                     borderWidth:0,
+                    borderWidth: 0,
                 }, series: {
                     cursor: 'pointer',
                     events: {
-                        click: function(e) {
-                           
+                        click: function (e) {
+
                         }
                     }
                 }
             },
-          
+
             xAxis: {
                 lineWidth: 1,
                 tickWidth: 0,
@@ -72,84 +72,82 @@ let Component = React.createClass({
                     y: 20,
                     style: {
                         color: '#fff',
-                        fontSize:'14px'  
+                        fontSize: '14px'
                     }
                 },
-                categories:TBAx,
+                categories: TBAx,
             },
-            yAxis:
-                [{labels: {
-                format: '',
-                style: {
-                    color: '#fff',
-                    fontSize:'14px'
-                }
-            }, gridLineDashStyle: 'Solid',
-                gridLineColor: '#6d6a6c',
-
-                    title:{
-                        text:'(h)',
-                        align:'high',
-                        rotation:'0',
-                        y: -15,
-                        x: 35,
-                        style:{
-                            fontSize:'14px',
-                            color:'#fff'
-                        }
+            yAxis: [{
+                labels: {
+                    format: '',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
                     }
-                }, {
-                    labels: {
-               
-                style: {
-                    color: '#fff',
-                    fontSize:'14px'
-                }
-            }, gridLineDashStyle: 'Solid',
+                }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
-                 minRange: 100,
 
-            title: {
-                text: '(%)',
-                align:'high',
-                rotation:'0',
-               y:-15,
-               x:-40,
-                style:{
-                    color:'#fff',
-                    fontSize:'14px'
+                title: {
+                    text: '(h)',
+                    align: 'high',
+                    rotation: '0',
+                    y: -15,
+                    x: 35,
+                    style: {
+                        fontSize: '14px',
+                        color: '#fff'
+                    }
                 }
-            },
-            opposite: true
-        }],
+            }, {
+                labels: {
+
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                }, gridLineDashStyle: 'Solid',
+                gridLineColor: '#6d6a6c',
+                minRange: 100,
+
+                title: {
+                    text: '(%)',
+                    align: 'high',
+                    rotation: '0',
+                    y: -15,
+                    x: -40,
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+                },
+                opposite: true
+            }],
             series: [{
                 name: '运行时间',
                 type: 'column',
                 data: TBARunTimes,
-                maxPointWidth:20,
-                borderRadius:4,
-                color:'#62de88'
+                maxPointWidth: 20,
+                borderRadius: 4,
+                color: '#62de88'
             },
                 {
                     name: '停机时间',
                     type: 'column',
                     data: TBADownTimes,
-                    color:'#ccc',
-                     maxPointWidth:20,
-                     borderRadius:4,
-                },{
-                    name:'TBA',
-                    type:'line',
-                    data:TBAtba,
-                    yAxis:1,
-                    
-                    color:'blue',
-                     tooltip: {
-               valueSuffix:'%'
-            },
+                    color: '#ccc',
+                    maxPointWidth: 20,
+                    borderRadius: 4,
+                }, {
+                    name: 'TBA',
+                    type: 'line',
+                    data: TBAtba,
+                    yAxis: 1,
+
+                    color: 'blue',
+                    tooltip: {
+                        valueSuffix: '%'
+                    },
                 }
-
-
 
 
             ]
@@ -163,7 +161,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-         w0 : state.vars.qwe,
+        w0: state.vars.qwe,
     }
 };
 
