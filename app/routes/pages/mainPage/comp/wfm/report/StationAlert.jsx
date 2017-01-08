@@ -26,7 +26,7 @@ let Component = React.createClass({
     
 
     render() {
-            let {logType,alertText,devtype,AlertBool=false,showType,showTypeId,playjq,searchnum} = this.props;
+            let {StationAlertData,logType,alertText,devtype,AlertBool=false,showType,showTypeId,playjq,searchnum} = this.props;
             if(AlertBool){
                 //获取设备类型数组
                 let treetype=[],logTypeArr=[];//设备类型
@@ -260,19 +260,20 @@ const mapDispatchToProps = (dispatch) => {
             var endTime=$('#endTime').val();
             
             $.ajax({    
-                url:'http://'+url+'/Monitor/xml.aspx',    
-                data:'functionname=CountStationInfo&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&groupbydevice=0&crossDomain=true&zip=false',    
+                url:'http://'+url+'/Monitor/xml.aspx',                                               //sysid系统名称   //typeid日志类型
+                data:'functionname=GetRunLog&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&&sysid=1&typeid=-1&crossDomain=true&zip=false',    
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
                 timeout:3000,       
                 success:function(json,textStatus){ 
-                    if(json.wtid==undefined){
-                        dispatch(actions.setVars('alertBool', false));
-                        dispatch(actions.setVars('alertText', '无数据'));
-                        return;
-                    } 
-                    dispatch(actions.setObjs('chartData',json));
+                    // if(json.wtid==undefined){
+                    //     dispatch(actions.setVars('alertBool', false));
+                    //     dispatch(actions.setVars('alertText', '无数据'));
+                    //     return;
+                    // } 
+                    dispatch(actions.setObjs('StationAlertData',json));
+                    console.log(json)
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
