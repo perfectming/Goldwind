@@ -1,0 +1,163 @@
+.faultBox{
+  display:none;
+  width:300px;
+  height:400px;
+  border:1px solid #10141f;
+  background:#50545f;
+  position:absolute;
+  border-radius: 10px;
+  span{
+    color: #fff;
+  }
+  .leftlist{
+    width:300px;
+    height:330px;
+    overflow:auto;
+    background: #223;
+    .place{
+      width:100%;
+      line-height:35px;
+      overflow:hidden;
+      margin-top:3px;
+      input{
+        margin-left:5px;
+        cursor:pointer;
+        width:16px;
+        height:16px;
+        vertical-align:middle;
+        margin-top:0px;
+      }
+
+      .ca{
+        width:100%;
+        height:35px;
+        font-size:16px;
+        display:inline-block;
+        color:#fff;
+        padding-left:20px;
+        background-color: #272b34;
+        img{margin-right:10px; margin-top:-5px;}
+        b{
+          cursor:pointer;
+          font-weight:normal;
+        }
+      }
+      .placename{
+        width:100%;
+        overflow:hidden;
+        padding:0px;
+        display:none;
+
+        .da{
+          width:100%;
+          height:35px;
+          line-height:35px;
+          margin:0px;
+          img{margin-right:10px;}
+          b{
+            cursor:pointer;
+            font-weight:normal;
+          }
+          font-size:16px;
+          display:inline-block;
+          color:#fff;
+          padding-left:53px;
+          background-image:url('../../../img/comp/son_down.png');
+          background-repeat: no-repeat;
+          background-position: 15px center;
+
+        }
+        .placeline{
+          width:100%;
+          overflow:hidden;
+          padding:0px;
+          display:none;
+
+          .ea{
+            width:100%;
+            height:35px;
+            line-height:35px;
+            margin:0px;
+            img{margin-right:10px;}
+            b{
+              cursor:pointer;
+              font-weight:normal;
+            }
+            font-size:16px;
+            display:inline-block;
+            color:#fff;
+            padding-left:88px;
+            background-image:url('../../../img/comp/son_fan.png');
+            background-repeat: no-repeat;
+            background-position: 50px center;
+
+          }
+          .placefan{
+            width:100%;
+            overflow:hidden;
+            display:none;
+            padding:0px;
+            .fa{
+              width:100%;
+              height:35px;
+              line-height:35px;
+              margin:0px;
+              span{
+                cursor:pointer;
+              }
+              font-size:16px;
+              display:inline-block;
+              color:#fff;
+              padding-left:129px;
+              background-image:url('../../../img/comp/son_fan.png');
+              background-repeat: no-repeat;
+              background-position: 90px center;
+
+            }
+          }
+        }
+
+      }
+    }
+  }
+  .btnbox{
+    width:100%;
+    overflow:hidden;
+    a{
+      width:50px;
+      height:30px;
+      line-height:30px;
+      float:left;
+      cursor:pointer;
+      margin:9px 10px 0 50px;
+      border:1px solid #000;
+      text-align:center;
+      border-radius:5px;color:#fff;
+      &:hover{color:#272b34;box-shadow:0px 0px 5px #346;}
+    }
+  }
+  .leftlist1{height:826px;}
+
+}
+.leftlist::-webkit-scrollbar {
+  width:10px;
+  height:10px;
+  border:1px solid #346;
+}
+.leftlist::-webkit-scrollbar-button    {
+  background-color:#272b34;
+  display:none;
+}
+.leftlist::-webkit-scrollbar-track     {
+  background:#091a2a;
+}
+.leftlist::-webkit-scrollbar-thumb{
+  background:#272b34;
+  border-radius:10px;
+}
+.leftlist::-webkit-scrollbar-corner {
+  background:#346;
+}
+.leftlist::-webkit-scrollbar-resizer  {
+  background:#FF0BEE;
+}

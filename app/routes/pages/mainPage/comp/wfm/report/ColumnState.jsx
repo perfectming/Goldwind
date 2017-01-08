@@ -52,8 +52,8 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.1,
                     borderWidth: 0,
-                    pointWidth: 45,
-                    borderRadius:10,
+                    pointWidth: 25,
+                    borderRadius:4,
                 }
             },
             tooltip: {
