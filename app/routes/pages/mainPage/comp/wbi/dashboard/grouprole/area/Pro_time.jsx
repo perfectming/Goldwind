@@ -50,8 +50,8 @@ let Component = React.createClass({
 
                 </div>
 
-                <div className={`${styles.fbox} `}>
-                    <div className={` ${styles.logofa} ${styles.box_shadow}`}>
+                <div className={`${styles.fbox} ${styles.logofa} `}>
+                    <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Pro_four height={450}
                                    name2={name2}
                                    runtime2={runtime2}

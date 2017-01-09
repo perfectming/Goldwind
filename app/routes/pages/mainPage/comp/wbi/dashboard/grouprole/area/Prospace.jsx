@@ -81,8 +81,8 @@ let Component = React.createClass({
                 <div className={styles.clear}>
 
                 </div>
-                <div className={`${styles.fbox} `}>
-                    <div className={` ${styles.logofa} ${styles.box_shadow}`}>
+                <div className={`${styles.fbox} ${styles.logofa}`}>
+                    <div className={`  ${styles.box_shadow}  ${styles.fbox2}`}>
                         <div className={styles.rbox33}>
                             <button className={bt0 === 0 ? styles.button : styles.button22}
                                     onClick={() => gogogo(bt0, ipUrl, wfid, actbt)}>前10

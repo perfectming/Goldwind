@@ -22,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {areaId,ipUrl,befor_pages='area',wc1,width0,wfid,wc2,bt0=0,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {areaId,ipUrl,befor_pages='area',skinStyle,wc1,width0,wfid,wc2,bt0=0,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
@@ -37,7 +37,7 @@ let Component = React.createClass({
 
 
 
-            <div className = {styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.paddingtop}>
                 <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
                 </div>
@@ -62,8 +62,8 @@ let Component = React.createClass({
 
                 </div>
 
-                <div className={`${styles.fbox} `}>
-                    <div className={` ${styles.logofa} ${styles.box_shadow}`}>
+                <div className={`${styles.fbox} ${styles.logofa} `}>
+                    <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Hly_pbatwo height={450} text={mon+"每日PBA"}
                                     barRotimes={barLotime1}
                                     power1={power1}
@@ -117,6 +117,7 @@ const mapStateToProps = (state) => {
         wfid: state.vars.wfid,
         width0: state.vars.width0,
         areaId: state.vars.areaId,
+        skinStyle: state.vars.skinStyle,
     }
 };
 

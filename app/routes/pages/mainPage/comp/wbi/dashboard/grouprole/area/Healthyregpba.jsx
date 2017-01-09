@@ -22,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {areaId,ipUrl,befor_pages='area',width0,w10,wc1,wfid,bt0=0,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {areaId,ipUrl,befor_pages='area',width0,w10,wc1,wfid,bt0=0,skinStyle,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
@@ -33,7 +33,7 @@ let Component = React.createClass({
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
                 <div className={styles.light} id="light"> </div>
 
@@ -164,7 +164,7 @@ const mapStateToProps = (state) => {
         wfid: state.vars.wfid,
         width0: state.vars.width0,
         areaId: state.vars.areaId,
-
+        skinStyle: state.vars.skinStyle,
     }
 };
 
