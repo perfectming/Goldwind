@@ -36,7 +36,6 @@ let Component = React.createClass({
     render() {
         let {init,wfidCount,wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table,years,changeTableItem1,wfids} = this.props;
         let newData={};
-        let opti=[];
         let num=0;
         console.log(wfidCount);
         let arr=[16,16,16,16,16,10];
