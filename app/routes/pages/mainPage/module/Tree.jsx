@@ -37,37 +37,40 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {treeOpt, itemAct, changeTreeItem, trunleft,cssif,colorAct=false,changecolor,legend1=false,show,showbox,legend2=false,showbox1} = this.props;
+        let {treeOpt, itemAct, changeTreeItem, trunleft,cssif,colorAct=false,changecolor,legend1=false,show,showbox,legend2=false,showbox1,skinStyle} = this.props;
         return (
-            <div className={`${styles.navTree} ${cssif==='left'? styles.animate : styles.navTree} ${cssif==='right'? styles.animate1 : styles.navTree}`}>
+            <div className={`${skinStyle==1?styles.navTreeBlue:skinStyle==2?styles.navTreeWhite:styles.navTree}
+            ${cssif==='left'? styles.animate : skinStyle==1?styles.navTreeblue:skinStyle==2?styles.navTreewhite:styles.navTree}
+            ${cssif==='right'? styles.animate1 : skinStyle==1?styles.navTreeblue:skinStyle==2?styles.navTreewhite:styles.navTree}`}>
                 {treeOpt && treeOpt.subPage.map((value, key)=> {
                     if(cssif=='left'){
 
                         if(value.name=='批量控制'){
-
                             return (
-                                <div key={key} className={colorAct === true ? styles.treeItemAct : styles.treeItem} onClick={()=>changecolor(colorAct,show)} id='plkz'>
-                                    <img src={colorAct === true ? value.iconActive : value.iconNormal}/>
+                                <div key={key} className={colorAct === true ? styles.treeItemAct : styles.treeItem}
+                                     onClick={()=>changecolor(colorAct,show)} id='plkz'>
+                                    <img src={skinStyle==2?(colorAct === true ? value.iconNormal : value.iconActive):
+                                        (colorAct === true ? value.iconActive : value.iconNormal)}/>
                                 </div>
                             )
                         }
                             return (
                                 <div key={key} className={itemAct == key ? styles.treeItemAct : styles.treeItem} onClick={()=>changeTreeItem(key,value.page[0].page)}>
-                                    <img src={itemAct == key ? value.iconActive : value.iconNormal}/>
+                                    <img src={skinStyle==2?(itemAct == key ? value.iconNormal : value.iconActive):(itemAct == key ? value.iconActive : value.iconNormal)}/>
                                 </div>
                             )
                     }else{
                         if(value.name=='批量控制'){
                             return (
                                 <div key={key} className={colorAct === true ? styles.treeItemAct : styles.treeItem} onClick={()=>changecolor(colorAct,show)} id='plkz'>
-                                    <img src={colorAct === true ? value.iconActive : value.iconNormal}/>
+                                    <img src={skinStyle==2?(colorAct === true ? value.iconNormal : value.iconActive):(colorAct === true ? value.iconActive : value.iconNormal)}/>
                                     <p>{value.name}</p>
                                 </div>
                             )
                         }
                             return (
                                 <div key={key} className={itemAct == key ? styles.treeItemAct : styles.treeItem} onClick={()=>changeTreeItem(key,value.page[0].page)}>
-                                    <img src={itemAct == key ? value.iconActive : value.iconNormal}/>
+                                    <img src={skinStyle==2?(itemAct == key ? value.iconNormal : value.iconActive):(itemAct == key ? value.iconActive : value.iconNormal)}/>
                                     <p>{value.name}</p>
                                 </div>
                             )
@@ -96,6 +99,7 @@ const mapStateToProps = (state) => {
         show: state.vars.show,
         legend1: state.vars.legend1,
         legend2: state.vars.legend2,
+        skinStyle: state.vars.skinStyle
     }
 };
 
@@ -105,8 +109,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('treeItemActive', 0));
             dispatch(actions.setVars('navhide', false));
             dispatch(actions.setVars('cssif', ''));
-          
-
 
         },
         changeTreeItem: (key,page) => {

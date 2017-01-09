@@ -20,7 +20,7 @@ let Component = React.createClass({
         this.props.init(this.props.userInfo);
     },
     render() {
-        let {itemHeaderActive, itemTreeAct, flag=true,userMessage,Verification}=this.props;
+        let {itemHeaderActive, itemTreeAct, flag=true,userMessage,Verification,skinStyle}=this.props;
         let menu=[];
         // console.log(userMessage);
         if(userMessage){
@@ -84,7 +84,7 @@ let Component = React.createClass({
         return (
 
             <FixedContent mode="fullWidth" width={1920}>
-                <div className={styles.bgbox} onClick={()=>Verification(userMessage)}>
+                <div className={skinStyle==1?styles.bgboxblue:skinStyle==2?styles.bgboxwhite:styles.bgbox} onClick={()=>Verification(userMessage)}>
                     <Header headerInfo={menu}></Header>
                     {
                         flag && <Tree treeOpt={menu[itemHeaderActive]} style={{overflow:'hidden'}}></Tree>
@@ -104,6 +104,7 @@ const mapStateToProps = (state) => {
         userInfo: state.vars.userInfo,
         flag: state.vars.putpage,
         areaid: state.vars.areaid,
+        skinStyle: state.vars.skinStyle,
         userMessage:state.objs.userMessage
     }
 };
@@ -117,7 +118,12 @@ const mapDispatchToProps = (dispatch) => {
             }
             dispatch(actions.setVars('headerItemActive', 0));
             dispatch(actions.setVars('putpage', false));
-
+            if( localStorage.skinStyle){
+                dispatch(actions.setVars('skinStyle',localStorage.skinStyle ));
+                console.log(localStorage.skinStyle)
+            }else {
+                dispatch(actions.setVars('skinStyle',0 ));
+            }
         },
         Verification:(userMessage)=>{
             // console.log(userMessage.data.token);
