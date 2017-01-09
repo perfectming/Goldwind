@@ -35,13 +35,13 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area',areaId,w0,w10,width0, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
+        let {befor_pages='area',skinStyle,areaId,w0,w10,width0, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
         return (
 
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
                 <div className={styles.light} id="light"> </div>
 
@@ -144,6 +144,7 @@ const mapStateToProps = (state) => {
         mon:state.vars.mon,
         width0:state.vars.width0,
         areaId: state.vars.areaId,
+        skinStyle: state.vars.skinStyle,
     }
 };
 

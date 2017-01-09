@@ -18,14 +18,14 @@ let Component = React.createClass({
 
 
     render() {
-        let {ipUrl, monthx, monthx2, healthy2, healthy3, monthx3, befor_pages = 'group', mon, returnit} = this.props;
+        let {ipUrl, monthx, skinStyle, healthy2, healthy3, monthx3, befor_pages = 'group', mon, returnit} = this.props;
      let data = require('./../../area/Healthy-data');
         return (
 
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.paddingtop}>
                 <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
                 </div>
@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
         healthy2: state.vars.healthy2,
         healthy3: state.vars.healthy3,
         mon: state.vars.mon,
-
+        skinStyle: state.vars.skinStyle
     }
 };
 

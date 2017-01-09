@@ -1,9 +1,38 @@
 .box {
   height: 940px;
-
   overflow: hidden;
   //background: linear-gradient(to bottom,#242a32 ,#1f2025);
 
+
+  .paddingtop {
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    width: 98%;
+    height: 50px;
+    padding: 0;
+    padding-left: 0px;
+    position: relative;
+    border-bottom: 1px solid #31F3FB;
+    margin-top: 5px;
+    //返回按钮
+    .return2 {
+      float: right;
+      color: #fff;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      border-radius: 45px;
+      cursor: pointer;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    .return2:hover {
+      box-shadow: 0 0 10px #fff;
+    }
+  }
   .light {
     z-index: 20;
     display: none;
@@ -29,6 +58,7 @@
     margin: 10px;
     .hidden_bottom{
       overflow-x: scroll;
+      background: rgba(44, 61, 71, 0.4);
 
     }
     .hidden_top {
@@ -108,7 +138,7 @@
 
     .logofa {
       position: relative;
-
+      background: rgba(44, 61, 71, 0.4);
       .logo1 {
         position: absolute;
         left: 47px;
@@ -173,7 +203,7 @@
 
     .logofa {
       position: relative;
-
+      background: rgba(44, 61, 71, 0.4);
       .logo1 {
         position: absolute;
         left: 47px;
@@ -229,7 +259,7 @@
 
   }
   .fbox2 {
-
+    background: rgba(44, 61, 71, 0.4);
     position: relative;
 
     .rbox31 {
@@ -262,7 +292,7 @@
     float: left;
     width: 49.3%;
     height: 400px;
-
+    background: rgba(44, 61, 71, 0.4);
     margin-left: 2px;
   }
   .rbox2 {
@@ -273,7 +303,480 @@
     position: relative;
     margin-left: 15px;
     .rbox4 {
+      background: rgba(44, 61, 71, 0.4);
+    }
 
+  }
+  .rbox30 {
+    height: 35px;
+    position: absolute;
+    left: 30px;
+    top: 20px;
+
+    div {
+      width: 30px;
+      height: 30px;
+      background: url("../../../../../img/comp/wind_logo.png") no-repeat;
+      background-size: 16px;
+      // background: red;
+      float: left;
+
+      margin-top: 1px;
+    }
+    span {
+      color: #fff;
+      font-size: 16px;
+      font-family: "微软雅黑";
+      float: left;
+    }
+
+  }
+  .rbox3 {
+
+    width: 500px;
+    height: 50px;
+    z-index: 10;
+    position: absolute;
+    left: 70%;
+    top: 21px;
+  }
+
+  .rbox33 {
+
+    width: 500px;
+    height: 50px;
+    z-index: 10;
+    position: absolute;
+    left: 70%;
+    top: 10px;
+  }
+  .button {
+    width: 70px;
+    height: 30px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 15px;
+    font-family: '微软雅黑';
+    margin-left: 12px;
+    background: none;
+    color: #20FEFF;
+    border: 1px solid #20FEFF;
+    box-shadow: 0px 0px 10px #20FEFF;
+
+  }
+  .button22 {
+    width: 70px;
+    height: 30px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 15px;
+    font-family: '微软雅黑';
+    margin-left: 12px;
+    background: none;
+    color: #FFFFFF;
+    border: 1px solid #20FEFF;
+
+  }
+
+  .fbox {
+    width: 98%;
+    height: 600px;
+    margin-top: 15px;
+    margin-left: 5px;
+    position: relative;
+  }
+  .fbox10 {
+    width: 98%;
+    height: 700px;
+    margin-top: 50px;
+    margin-left: 5px;
+    position: relative;
+  }
+  .qbox > div {
+    width: 100%
+  }
+  .qbox > div:hover {
+    border: 1px solid #ddd;
+  }
+  .onmonth {
+    width: 100%;
+    height: 80px;
+    list-style: none;
+    color: #E6E7E8;
+    padding-top: 20px;
+    padding-left: 10px;
+    border-bottom: 1px solid #31F3FB;
+    .inmonth2 {
+      height: 40px;
+      width: 100px;
+      border: 1px solid #31F3FB;
+      line-height: 38px;
+      float: left;
+      font-family: "微软雅黑";
+      text-align: center;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        color: #31F3FB;
+        box-shadow: 0 0 10px #fff;
+      }
+    }
+    .inmonth {
+      height: 40px;
+      width: 100px;
+      border: 1px solid #31F3FB;
+      line-height: 38px;
+      float: left;
+      font-family: "微软雅黑";
+      text-align: center;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #31F3FB;
+      box-shadow: 0 0 10px #fff;
+    }
+    //.inmonth2:hover{
+    //  background: #20FEFF;
+    //  color: #282f37;
+    //}
+    .return {
+      float: left;
+      align-items: center;
+      color: #20FEFF;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      top: 0px;
+      left: 20px;
+      border-radius: 45px;
+      cursor: pointer;
+      box-shadow: 0px 0px 10px #20FEFF;
+      text-align: center;
+    }
+
+    .return:hover {
+      box-shadow: 0 0 10px #fff;
+    }
+
+
+    //div:hover{
+    //  background: #20FEFF;
+    //  color:#282f37;
+    //}
+  }
+
+}
+.boxBlue {
+  height: 940px;
+  overflow: hidden;
+  //background: linear-gradient(to bottom,#242a32 ,#1f2025);
+
+
+  .paddingtop {
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    width: 98%;
+    height: 50px;
+    padding: 0;
+    padding-left: 0px;
+    position: relative;
+    border-bottom: 1px solid #31F3FB;
+    margin-top: 5px;
+    //返回按钮
+    .return2 {
+      float: right;
+      color: #fff;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      border-radius: 45px;
+      cursor: pointer;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    .return2:hover {
+      box-shadow: 0 0 10px #fff;
+    }
+  }
+  .light {
+    z-index: 20;
+    display: none;
+    opacity: 0.6;
+    background: black;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+  }
+  .boxhidden {
+    border: 1px solid #1e8087;
+    overflow: hidden;
+    display: none;
+    width: 90%;
+    position: absolute;
+    z-index: 21;
+    height: 560px;
+    left: 5%;
+    background-color: #21242a;
+    top: 200px;
+
+    margin: 10px;
+    .hidden_bottom{
+      overflow-x: scroll;
+      background: #112a48;
+
+    }
+    .hidden_top {
+      color: #fff;
+      height: 60px;
+      line-height: 50px;
+      background-color: #21242a;
+      font-size: 16px;
+      margin-left: 40px;
+      padding: 4px 6px;
+
+      .logo1 {
+        background: url("../../../../../img/comp/HEA.png") no-repeat;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo2 {
+        background: url("../../../../../img/comp/PBA.png") no-repeat;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo3 {
+        background: url("../../../../../img/comp/TBA.png") no-repeat;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo4 {
+        background: url("../../../../../img/comp/MON.png") no-repeat;
+        background-size: 21px  21px;
+        width: 21px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo5 {
+        background: url("../../../../../img/comp/wind_logo.png") no-repeat;
+        background-size: 21px  21px;
+        width: 21px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo30 {
+        float: left;
+        margin-left: 20px;
+      }
+    }
+    span {
+      color: #fff;
+      font-size: 20px;
+      float: right;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  }
+  .tbox2 {
+    width: 98%;
+    height: 400px;
+    margin-top:15px;
+    margin-left: 5px;
+
+
+
+    .logofa {
+      position: relative;
+      background: #112a48;
+      .logo1 {
+        position: absolute;
+        left: 47px;
+        top: 9px;
+        background: url("../../../../../img/comp/HEA.png") no-repeat;
+        background-size: 17px 21px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo2 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("../../../../../img/comp/PBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo3 {
+        position: absolute;
+        left: 47px;
+        top: 9px;
+        background: url("../../../../../img/comp/TBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo4 {
+        position: absolute;
+        left: 60px;
+        top: 9px;
+        background: url("../../../../../img/comp/MON.png") no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        z-index: 1;
+      }
+      .logo5 {
+        position: absolute;
+        left: 70px;
+        top: 9px;
+        background: url("../../../../../img/comp/wind_logo.png") no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        z-index: 1;
+      }
+
+    }
+
+  }
+  .tbox {
+    width: 98%;
+    height: 400px;
+    margin-top:20px;
+    margin-left: 5px;
+
+
+
+    .logofa {
+      position: relative;
+      background: #112a48;
+      .logo1 {
+        position: absolute;
+        left: 47px;
+        top: 9px;
+        background: url("../../../../../img/comp/HEA.png") no-repeat;
+        background-size: 17px 21px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo2 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("../../../../../img/comp/PBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo3 {
+        position: absolute;
+        left: 47px;
+        top: 9px;
+        background: url("../../../../../img/comp/TBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo4 {
+        position: absolute;
+        left: 60px;
+        top: 9px;
+        background: url("../../../../../img/comp/MON.png") no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        z-index: 1;
+      }
+      .logo5 {
+        position: absolute;
+        left: 70px;
+        top: 9px;
+        background: url("../../../../../img/comp/wind_logo.png") no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        z-index: 1;
+      }
+
+    }
+
+  }
+  .fbox2 {
+    background: #112a48;
+    position: relative;
+
+    .rbox31 {
+      height: 35px;
+      position: absolute;
+      left: 79px;
+      top: 5px;
+      z-index: 10;
+
+      div {
+        width: 16px;
+        height: 16px;
+        background: url("../../../../../img/comp/wind_logo.png") no-repeat;
+        background-size: 16px;
+        // background: red;
+        float: left;
+
+        margin-top: 3px;
+      }
+      span {
+        color: #fff;
+        font-size: 16px;
+        font-family: "微软雅黑";
+        float: left;
+      }
+
+    }
+  }
+  .rbox {
+    float: left;
+    width: 49.3%;
+    height: 400px;
+    background: #112a48;
+    margin-left: 2px;
+  }
+  .rbox2 {
+
+    float: left;
+    width: 49.6%;
+    height: 400px;
+    position: relative;
+    margin-left: 15px;
+    .rbox4 {
+      background: #112a48;
     }
 
   }
@@ -442,6 +945,486 @@
 
 }
 
+.boxWhite {
+  height: 940px;
+  overflow: hidden;
+  //background: linear-gradient(to bottom,#242a32 ,#1f2025);
+
+
+  .paddingtop {
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    width: 98%;
+    height: 50px;
+    padding: 0;
+    padding-left: 0px;
+    position: relative;
+    border-bottom: 1px solid #31F3FB;
+    margin-top: 5px;
+    //返回按钮
+    .return2 {
+      float: right;
+      color: #fff;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      border-radius: 45px;
+      cursor: pointer;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    .return2:hover {
+      box-shadow: 0 0 10px #fff;
+    }
+  }
+  .light {
+    z-index: 20;
+    display: none;
+    opacity: 0.6;
+    background: black;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+  }
+  .boxhidden {
+    border: 1px solid #1e8087;
+    overflow: hidden;
+    display: none;
+    width: 90%;
+    position: absolute;
+    z-index: 21;
+    height: 560px;
+    left: 5%;
+    background-color: #21242a;
+    top: 200px;
+
+    margin: 10px;
+    .hidden_bottom{
+      overflow-x: scroll;
+      background: rgba(44, 61, 71, 0.4);
+
+    }
+    .hidden_top {
+      color: #fff;
+      height: 60px;
+      line-height: 50px;
+      background-color: #21242a;
+      font-size: 16px;
+      margin-left: 40px;
+      padding: 4px 6px;
+
+      .logo1 {
+        background: url("../../../../../img/comp/HEA.png") no-repeat;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo2 {
+        background: url("../../../../../img/comp/PBA.png") no-repeat;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo3 {
+        background: url("../../../../../img/comp/TBA.png") no-repeat;
+        background-size: 17px  21px;
+        width: 17px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo4 {
+        background: url("../../../../../img/comp/MON.png") no-repeat;
+        background-size: 21px  21px;
+        width: 21px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo5 {
+        background: url("../../../../../img/comp/wind_logo.png") no-repeat;
+        background-size: 21px  21px;
+        width: 21px;
+        height: 21px;
+        border-radius: 8px;
+        float: left;
+        margin-top: 16px;
+      }
+      .logo30 {
+        float: left;
+        margin-left: 20px;
+      }
+    }
+    span {
+      color: #fff;
+      font-size: 20px;
+      float: right;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  }
+  .tbox2 {
+    width: 98%;
+    height: 400px;
+    margin-top:15px;
+    margin-left: 5px;
+
+
+
+    .logofa {
+      position: relative;
+
+      background: #f5f5f5;
+      .logo1 {
+        position: absolute;
+        left: 47px;
+        top: 9px;
+        background: url("../../../../../img/comp/HEA.png") no-repeat;
+        background-size: 17px 21px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo2 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("../../../../../img/comp/PBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo3 {
+        position: absolute;
+        left: 47px;
+        top: 9px;
+        background: url("../../../../../img/comp/TBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo4 {
+        position: absolute;
+        left: 60px;
+        top: 9px;
+        background: url("../../../../../img/comp/MON.png") no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        z-index: 1;
+      }
+      .logo5 {
+        position: absolute;
+        left: 70px;
+        top: 9px;
+        background: url("../../../../../img/comp/wind_logo.png") no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        z-index: 1;
+      }
+
+    }
+
+  }
+  .tbox {
+    width: 98%;
+    height: 400px;
+    margin-top:20px;
+    margin-left: 5px;
+
+
+
+    .logofa {
+      position: relative;
+      background: #f5f5f5;
+      .logo1 {
+        position: absolute;
+        left: 47px;
+        top: 9px;
+        background: url("../../../../../img/comp/HEA.png") no-repeat;
+        background-size: 17px 21px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo2 {
+        position: absolute;
+        left: 63px;
+        top: 9px;
+        background: url("../../../../../img/comp/PBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo3 {
+        position: absolute;
+        left: 47px;
+        top: 9px;
+        background: url("../../../../../img/comp/TBA.png") no-repeat;
+        background-size: 17px 19px;
+        width: 17px;
+        height: 21px;
+        z-index: 1;
+      }
+      .logo4 {
+        position: absolute;
+        left: 60px;
+        top: 9px;
+        background: url("../../../../../img/comp/MON.png") no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        z-index: 1;
+      }
+      .logo5 {
+        position: absolute;
+        left: 70px;
+        top: 9px;
+        background: url("../../../../../img/comp/wind_logo.png") no-repeat;
+        background-size: 17px 17px;
+        width: 17px;
+        height: 17px;
+        z-index: 1;
+      }
+
+    }
+
+  }
+  .fbox2 {
+    background: #f5f5f5;
+    position: relative;
+
+    .rbox31 {
+      height: 35px;
+      position: absolute;
+      left: 79px;
+      top: 5px;
+      z-index: 10;
+
+      div {
+        width: 16px;
+        height: 16px;
+        background: url("../../../../../img/comp/wind_logo.png") no-repeat;
+        background-size: 16px;
+        // background: red;
+        float: left;
+
+        margin-top: 3px;
+      }
+      span {
+        color: #fff;
+        font-size: 16px;
+        font-family: "微软雅黑";
+        float: left;
+      }
+
+    }
+  }
+  .rbox {
+    float: left;
+    width: 49.3%;
+    height: 400px;
+    background: #f5f5f5;
+    margin-left: 2px;
+  }
+  .rbox2 {
+
+    float: left;
+    width: 49.6%;
+    height: 400px;
+    position: relative;
+    margin-left: 15px;
+    .rbox4 {
+      background: #f5f5f5;
+    }
+
+  }
+  .rbox30 {
+    height: 35px;
+    position: absolute;
+    left: 30px;
+    top: 20px;
+
+    div {
+      width: 30px;
+      height: 30px;
+      background: url("../../../../../img/comp/wind_logo.png") no-repeat;
+      background-size: 16px;
+      // background: red;
+      float: left;
+
+      margin-top: 1px;
+    }
+    span {
+      color: #fff;
+      font-size: 16px;
+      font-family: "微软雅黑";
+      float: left;
+    }
+
+  }
+  .rbox3 {
+
+    width: 500px;
+    height: 50px;
+    z-index: 10;
+    position: absolute;
+    left: 70%;
+    top: 21px;
+  }
+
+  .rbox33 {
+
+    width: 500px;
+    height: 50px;
+    z-index: 10;
+    position: absolute;
+    left: 70%;
+    top: 10px;
+  }
+  .button {
+    width: 70px;
+    height: 30px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 15px;
+    font-family: '微软雅黑';
+    margin-left: 12px;
+    background: none;
+    color: #20FEFF;
+    border: 1px solid #20FEFF;
+    box-shadow: 0px 0px 10px #20FEFF;
+
+  }
+  .button22 {
+    width: 70px;
+    height: 30px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 15px;
+    font-family: '微软雅黑';
+    margin-left: 12px;
+    background: none;
+    color: #FFFFFF;
+    border: 1px solid #20FEFF;
+
+  }
+
+  .fbox {
+    width: 98%;
+    height: 600px;
+    margin-top: 15px;
+    margin-left: 5px;
+    position: relative;
+  }
+  .fbox10 {
+    width: 98%;
+    height: 700px;
+    margin-top: 50px;
+    margin-left: 5px;
+    position: relative;
+  }
+  .qbox > div {
+    width: 100%
+  }
+  .qbox > div:hover {
+    border: 1px solid #ddd;
+  }
+  .onmonth {
+    width: 100%;
+    height: 80px;
+    list-style: none;
+    color: #ddd;
+    padding-top: 20px;
+    padding-left: 10px;
+    border-bottom: 1px solid #31F3FB;
+    .inmonth2 {
+      height: 40px;
+      width: 100px;
+      border: 1px solid #31F3FB;
+      line-height: 38px;
+      float: left;
+      font-family: "微软雅黑";
+      text-align: center;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      background: #f5f5f5;
+      &:hover {
+        color: #555555;
+        box-shadow: 0 0 10px #555555;
+      }
+    }
+    .inmonth {
+      height: 40px;
+      width: 100px;
+      border: 1px solid #31F3FB;
+      line-height: 38px;
+      float: left;
+      font-family: "微软雅黑";
+      text-align: center;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      background: #f5f5f5;
+      color: #555555;
+      box-shadow: 0 0 10px #555555;
+    }
+    //.inmonth2:hover{
+    //  background: #20FEFF;
+    //  color: #282f37;
+    //}
+    .return {
+      float: left;
+      align-items: center;
+      color: #ddd;
+      border: 1px solid #20FEFF;
+      background: #f5f5f5;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      top: 0px;
+      left: 20px;
+      border-radius: 45px;
+      cursor: pointer;
+      box-shadow: 0px 0px 10px #555555;
+      text-align: center;
+    }
+
+    .return:hover {
+      color: #555555;
+      box-shadow: 0 0 10px #555555;
+    }
+
+
+    //div:hover{
+    //  background: #20FEFF;
+    //  color:#282f37;
+    //}
+  }
+
+}
+
+
 .clear {
   clear: both;
 }
@@ -501,33 +1484,7 @@
   z-index: 2;
 }
 
-.paddingtop {
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  width: 98%;
-  height: 50px;
-  padding: 0;
-  padding-left: 0px;
-  position: relative;
-  border-bottom: 1px solid #31F3FB;
-  //返回按钮
-  .return2 {
-    float: right;
-    color: #fff;
-    border: 1px solid #20FEFF;
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
-    position: relative;
-    border-radius: 45px;
-    cursor: pointer;
-    text-align: center;
-  }
-  .return2:hover {
-    box-shadow: 0 0 10px #fff;
-  }
-}
+
 
 
 

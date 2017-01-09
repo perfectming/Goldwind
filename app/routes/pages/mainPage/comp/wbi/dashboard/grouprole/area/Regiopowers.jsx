@@ -20,7 +20,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area',ipUrl,areaId, returnit,actbt=10,changecolor,day0,poweract,powerplan} = this.props;
+        let {befor_pages='area',ipUrl,areaId,skinStyle, returnit,actbt=10,changecolor,day0,poweract,powerplan} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button = data.data.button;
@@ -33,7 +33,7 @@ let Component = React.createClass({
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
 
                 <div className={styles.onmonth}>
@@ -80,7 +80,7 @@ const mapStateToProps = (state) => {
         poweract:state.vars.poweract1,
         ipUrl:state.vars.ipUrl,
         areaId: state.vars.areaId,
-
+        skinStyle: state.vars.skinStyle,
     }
 };
 
