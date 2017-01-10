@@ -113,7 +113,7 @@ let Component = React.createClass({
                                                                         {value['wfname']}
                                                                     </div>
                                                                 )
-                                                            }else if(keyC==1){
+                                                            }else if(keyC==2){
                                                                 return (
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
@@ -121,7 +121,7 @@ let Component = React.createClass({
                                                                                type="date" readOnly="readOnly" value={value[valueC].slice(0,10)}/>
                                                                     </div>
                                                                 )
-                                                            }else if(keyC<3){
+                                                            }else if(keyC==1){
                                                                 return (
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>

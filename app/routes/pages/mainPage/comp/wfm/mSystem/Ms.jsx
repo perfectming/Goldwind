@@ -35,7 +35,7 @@ let Component = React.createClass({
         }
         newData['typeid']=1;
         newData['ids']=false;
-        let comp=tabaleData.comps.from;
+        let comp=tabaleData.msData.from;
         if(table){
         return (
 
@@ -121,12 +121,12 @@ let Component = React.createClass({
                                                 }
                                                 <div className={styles.tableContentItem}
                                                      style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
-                                                    <img src={save}
+                                                    <img src={save} style={{cursor:'pointer'}}
                                                          onClick={()=>saveDatabase(key,value.id)}/>
                                                 </div>
                                                 <div className={styles.tableContentItem}
                                                      style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
-                                                    <img src={del} onClick={(e)=>deleData(key,value.id)}/>
+                                                    <img style={{cursor:'pointer'}} src={del} onClick={(e)=>deleData(key,value.id)}/>
                                                 </div>
                                             </div>
                                         )}else{
@@ -182,12 +182,12 @@ let Component = React.createClass({
                                                 }
                                                 <div className={styles.tableContentItem}
                                                      style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
-                                                    <img src={save}
-                                                         onClick={()=>addDate(key,value.id)}/>
+                                                    <img src={save} style={{cursor:'pointer'}}
+                                                         onClick={()=>addDate(key,value.id,value.name)}/>
                                                 </div>
                                                 <div className={styles.tableContentItem}
                                                      style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
-                                                    <img src={del} onClick={(e)=>deleDate(key)}/>
+                                                    <img style={{cursor:'pointer'}} src={del} onClick={(e)=>deleDate(key)}/>
                                                 </div>
                                             </div>
                                         )
@@ -235,7 +235,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.downCount}>
                             <span>{'记录合计：'+num1}</span>
-                            <span onClick={()=>changeRole(boxRoleId)}>点击</span>
+                            <span onClick={()=>changeRole(boxRoleId)}>菜单选择</span>
                         </div>
                     </div>
                     <div className={styles.tanC} id="center3" key='4' style={{width:1000,top: 100, left:400,paddingLeft:300}}>
@@ -442,7 +442,11 @@ const mapDispatchToProps = (dispatch) => {
                         let tableV = _.clone(getState().objs.tableContentMs);
                         tableV.data.pagedata[i][arr[j]] = '';
                         dispatch(actions.setObjs('tableContentMs', tableV));
-                    }else if(!data.data){alert('请输入角色ID')}
+                    }else if(!id.value){
+                        let tableV = _.clone(getState().objs.tableContentMs);
+                        tableV.data.pagedata[i][arr[j]] = '请输入角色ID';
+                        dispatch(actions.setObjs('tableContentMs', tableV));
+                    }
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -460,7 +464,11 @@ const mapDispatchToProps = (dispatch) => {
                         let tableV = _.clone(getState().objs.tableContentMs);
                         tableV.data.pagedata[i][arr[j]] = '';
                         dispatch(actions.setObjs('tableContentMs', tableV));
-                    }else if(!data.data){alert('请输入角色名称')}
+                    }else if(!name.value){
+                        let tableV = _.clone(getState().objs.tableContentMs);
+                        tableV.data.pagedata[i][arr[j]] = '请输入角色名称';
+                        dispatch(actions.setObjs('tableContentMs', tableV));
+                    }
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -481,7 +489,8 @@ const mapDispatchToProps = (dispatch) => {
         inputOnChange:(value,id)=>{
 
         },
-        addDate:(li,ids)=>{
+        addDate:(li,ids,names)=>{
+            if(ids && names){
             let tableV = _.clone(getState().objs.tableContentMs);
             let boxArr = _.clone(getState().vars.boxRoleArr);
             let cenAdd = _.clone(getState().objs.boxCenter);
@@ -567,7 +576,9 @@ const mapDispatchToProps = (dispatch) => {
                 error:function(){
                     console.log('获取数据失败')
                 }
-            });
+            });}else {
+                alert('请输入角色名和ID');
+            }
         },
         saveDatabase:(li,ids)=>{
             let tableV = _.clone(getState().objs.tableContentMs);
