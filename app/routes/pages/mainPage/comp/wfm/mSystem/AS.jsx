@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var $ =require('jquery');
 import styles from './AS.scss';
-let soam='http://10.68.100.32:8080/soam';//设置接口
+let soam='http://10.9.100.80:8080/soam';//设置接口
+import Login from '../../../../../../components/common/Loading.jsx';
 var {getState} = require('../../../../../../redux/store');
 import del from '../../../img/icon/tabDel.png';//定义图片路径
 import save from '../../../img/comp/save.png';
-var pageSize=11;
-let page=1;//设置初始页码
+var pageSize=11;//设置初始页码
 import refresh from '../../../img/comp/refresh.png';
 import tabAdd from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
@@ -33,7 +33,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {wttypedefine,protocolid,init,wfidCount,buttonAction,onFocus,inputOnChange,add,table, changeTableItem,dele} = this.props;
+        let {saveTableItem,addData,deleData,page,theOne,lastPage,nextPage,theLast,wttypedefine,protocolid,init,wfidCount,buttonAction,onFocus,inputOnChange,add,table, changeTableItem,dele} = this.props;
         let num=0;
         let newData={};
         for(let i=0;i<arr.length;i++){
@@ -49,7 +49,7 @@ let Component = React.createClass({
                                     return (
                                         <div className={styles.inputBox} key={key}>
                                             <span>{tabaleData.as.comps[key].valueName}</span>
-                                            <input ref={'textContent' + key} placeholder={value.content}
+                                            <input id={'textContent' + key} placeholder={value.content}
                                                    onChange={(e)=>inputOnChange(e.target.value, value.id)}
                                                    onFocus={()=>onFocus} style={{width: value.width}}/>
                                         </div>
@@ -86,7 +86,7 @@ let Component = React.createClass({
                             {
                                 table.data.pagedata && table.data.pagedata.map((value, key)=> {
                                     num++;
-                                    if (key < wfidCount / 1) {
+                                    {/*if (key < wfidCount / 1) {*/}
                                         return (
                                             <div
                                                 className={key % 2 === 0 ? styles.tableContentLine : styles.tableContentLine1}
@@ -109,46 +109,46 @@ let Component = React.createClass({
                                                 <div className={styles.tableContentItem}
                                                      style={{width: (50 / (header.length + 1)) + "%"}}>
                                                     <img src={save}
-                                                         onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content[key]))}/>
+                                                         onClick={()=>saveTableItem(key)}/>
                                                 </div>
-                                                <div className={styles.tableContentItem}
-                                                     style={{width: (50 / (header.length + 1)) + "%"}}>
-                                                    <img src={del} onClick={(e)=>dele(key)}/>
-                                                </div>
+                                                {/*<div className={styles.tableContentItem}*/}
+                                                     {/*style={{width: (50 / (header.length + 1)) + "%"}}>*/}
+                                                    {/*<img src={del} onClick={(e)=>deleData(key)}/>*/}
+                                                {/*</div>*/}
                                             </div>
                                         )
-                                    } else {
-                                        return (
-                                            <div
-                                                className={key % 2 === 0 ? styles.tableContentLine : styles.tableContentLine1}
-                                                key={key}>
-                                                <input className={styles.tableContentItem}
-                                                       style={{width: (100 / (header.length + 1)) + "%"}}
-                                                       readOnly="true"
-                                                       value={num}/>
-                                                {
-                                                    arr.map((valueC, keyC)=> {
-                                                        return (
-                                                            <input className={styles.tableContentItem}
-                                                                   style={{width: (100 / (header.length + 1)) + "%"}}
-                                                                   key={keyC}
-                                                                   onChange={(e)=>changeTableItem(e.target.value, table, key, keyC)}
-                                                                   value={value[valueC]}/>
-                                                        )
-                                                    })
-                                                }
-                                                <div className={styles.tableContentItem}
-                                                     style={{width: (50 / (header.length + 1)) + "%"}}>
-                                                    <img src={save}
-                                                         onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content[key]))}/>
-                                                </div>
-                                                <div className={styles.tableContentItem}
-                                                     style={{width: (50 / (header.length + 1)) + "%"}}>
-                                                    <img src={del} onClick={(e)=>dele(key)}/>
-                                                </div>
-                                            </div>
-                                        )
-                                    }
+                                    {/*} else {*/}
+                                        {/*return (*/}
+                                            {/*<div*/}
+                                                {/*className={key % 2 === 0 ? styles.tableContentLine : styles.tableContentLine1}*/}
+                                                {/*key={key}>*/}
+                                                {/*<input className={styles.tableContentItem}*/}
+                                                       {/*style={{width: (100 / (header.length + 1)) + "%"}}*/}
+                                                       {/*readOnly="true"*/}
+                                                       {/*value={num}/>*/}
+                                                {/*{*/}
+                                                    {/*arr.map((valueC, keyC)=> {*/}
+                                                        {/*return (*/}
+                                                            {/*<input className={styles.tableContentItem}*/}
+                                                                   {/*style={{width: (100 / (header.length + 1)) + "%"}}*/}
+                                                                   {/*key={keyC}*/}
+                                                                   {/*onChange={(e)=>changeTableItem(e.target.value, table, key, keyC)}*/}
+                                                                   {/*value={value[valueC]}/>*/}
+                                                        {/*)*/}
+                                                    {/*})*/}
+                                                {/*}*/}
+                                                {/*<div className={styles.tableContentItem}*/}
+                                                     {/*style={{width: (50 / (header.length + 1)) + "%"}}>*/}
+                                                    {/*<img src={save}*/}
+                                                         {/*onClick={()=>addData(key)}/>*/}
+                                                {/*</div>*/}
+                                                {/*<div className={styles.tableContentItem}*/}
+                                                     {/*style={{width: (50 / (header.length + 1)) + "%"}}>*/}
+                                                    {/*<img src={del} onClick={(e)=>dele(key)}/>*/}
+                                                {/*</div>*/}
+                                            {/*</div>*/}
+                                        {/*)*/}
+                                    {/*}*/}
                                 })
                             }
                         </div>
@@ -163,7 +163,7 @@ let Component = React.createClass({
                     </div>
                 </div>
             )
-        }else{return(<div></div>)}
+        }else{return(<Login></Login>)}
     }
 })
 
@@ -171,7 +171,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContentAS,
-        page:state.vars.page1,
+        page:state.vars.pageAS,
         wttypedefine:state.vars.wttypedefine,
         protocolid:state.vars.protocolid,
         ASCount:state.vars.ASCount,
@@ -181,9 +181,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            dispatch(actions.setVars('page1', null));
+            dispatch(actions.setVars('pageAS', 1));
             dispatch(actions.setVars('wttypedefine', null));
-            dispatch(actions.setVars('protocolid', 1));
+            dispatch(actions.setVars('protocolid', null));
             $.ajax({
                 url: soam+'/Alarm/getAlarmruleInfoList',
                 type: 'post',
@@ -203,11 +203,11 @@ const mapDispatchToProps = (dispatch) => {
             // 获取select 选择的内容
             var tContent = $('#textContent5')[0].value;
             var tContent1 = $('#textContent6')[0].value;
-            dispatch(actions.setVars('page1', 1));
+            dispatch(actions.setVars('pageAS', 1));
             dispatch(actions.setVars('wttypedefine', tContent));
             dispatch(actions.setVars('protocolid', tContent1));
             $.ajax({
-                url: soam+'/ELEC/getWfelec',
+                url: soam+'/Alarm/getAlarmruleInfoList',
                 type: 'post',
                 data:{pageSize:pageSize,curpage:1,wttypedefine:tContent,protocolid:tContent1},
                 dataType: 'json',//here,
@@ -220,34 +220,106 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
         },
+        saveTableItem:(line)=>{
+            let tableV = _.clone(getState().objs.tableContentAS);
+            let asd=tableV.data.pagedata[line];
+            let wfp;
+            wfp=JSON.stringify(asd);
+            $.ajax({
+                url: soam+'/Alarm/uppAlarm?alarm=data',
+                type: 'post',
+                data: wfp,
+                dataType: 'json',//here,
+                contentType:'application/json;charset=UTF-8',
+                success:function (data) {
+                    console.log(data,'Victory');
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+            $.ajax({
+                url: soam+'/Alarm/getAlarmruleInfoList',
+                type: 'post',
+                data:{pageSize:pageSize,curpage:1},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setObjs('tableContentAS', data));
+                    dispatch(actions.setVars('ASCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
         changeTableItem: (value, table, i, j) => {
-            let tableV = _.clone(getState().objs.tableContent);
-            tableV.content[i][j] = value;
-            dispatch(actions.setObjs('tableContent', tableV));
+            let tableV = _.clone(getState().objs.tableContentAS);
+            tableV.data.pagedata[i][arr[j]] = value;
+            dispatch(actions.setObjs('tableContentAS', tableV));
         },
         add:(i) => {
-            let tableV = _.clone(getState().objs.tableContent);
-            tableV.content.push(i);
-            dispatch(actions.setObjs('tableContent', tableV));
+            let tableV = _.clone(getState().objs.tableContentAS);
+            tableV.data.pagedata.push(i);
+            dispatch(actions.setObjs('tableContentAS', tableV));
         },
-        dele:(j) => {
-            let tableV = _.clone(getState().objs.tableContent);
-            tableV.content.splice(j,1);
-            dispatch(actions.setObjs('tableContent', tableV));
+        addData:(li)=>{
+            let tableV = _.clone(getState().objs.tableContentAS);
+            let wfs=tableV.data.pagedata[li];
+            (wfs.wfid==='') && (wfs.wfid='150801');
+            let ddv;
+            ddv=JSON.stringify(wfs);
+            console.log(wfs,ddv);
+            $.ajax({
+                url: soam+'/Alarm/addAlarm?alarm=data',
+                type: 'post',
+                data: ddv,
+                dataType: 'json',//here,
+                contentType:'application/json;charset=UTF-8',
+                success:function (data) {
+                    console.log(data);
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+            $.ajax({
+                url: soam+'/Alarm/getAlarmruleInfoList',
+                type: 'post',
+                data:'pageSize='+pageSize+'&&curpage=1',
+                dataType: 'json',//here,
+                success:function (data) {
+                    dispatch(actions.setVars('ASCount', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentAS', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
-        inputOnChange:(value,id)=>{
-
-        },
-        lastPage:(page,x,y)=>{
-            page>1 ? page--:page;
-            dispatch(actions.setVars('page1', page));
+        deleData:(j) => {
+            let tableV = _.clone(getState().objs.tableContentAS);
+            let fid=tableV.data.pagedata[j]['id'];
+            $.ajax({
+                url: soam+'/Alarm/delAlarm',
+                type: 'post',
+                data:'id='+fid,
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    alert('删除成功');
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:{pageSize:pageSize,curpage:1,wttypedefine:x,protocolid:y},
+                data:'pageSize='+pageSize+'&&nowPage=1',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data)
+                    console.log(data.data.pagedata.length);
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
@@ -256,19 +328,45 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
         },
-        nextPage:(page,i,j,x,y)=>{
-            (page<Math.ceil(i/j)) ? page++:page;
-            console.log(page,years,wfids);
-            dispatch(actions.setVars('page1', page));
+        dele:(j) => {
+            let tableV = _.clone(getState().objs.tableContentAS);
+            tableV.data.pagedata.splice(j,1);
+            dispatch(actions.setObjs('tableContentAS', tableV));
+        },
+        inputOnChange:(value,id)=>{
+
+        },
+        lastPage:(page,x,y)=>{
+            page>1 ? page--:page;
+            dispatch(actions.setVars('pageAS', page));
             $.ajax({
-                url: soam+'/ELEC/getWfelec',
+                url: soam+'/Alarm/getAlarmruleInfoList',
                 type: 'post',
-                data:{pageSize:pageSize,curpage:1,wttypedefine:x,protocolid:y},
+                data:{pageSize:pageSize,curpage:page,wttypedefine:x,protocolid:y},
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentAS', data));
+                    dispatch(actions.setVars('ASCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        nextPage:(page,i,j,x,y)=>{
+            (page<Math.ceil(i/j)) ? page++:page;
+            console.log(page,i,j);
+            dispatch(actions.setVars('pageAS', page));
+            $.ajax({
+                url: soam+'/Alarm/getAlarmruleInfoList',
+                type: 'post',
+                data:{pageSize:pageSize,curpage:page,wttypedefine:x,protocolid:y},
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data)
+                    dispatch(actions.setObjs('tableContentAS', data));
+                    dispatch(actions.setVars('ASCount', data.data.pagedata.length));
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -278,16 +376,16 @@ const mapDispatchToProps = (dispatch) => {
         },
         theOne :(page,x,y)=>{
             page=1;
-            dispatch(actions.setVars('page1', page));
+            dispatch(actions.setVars('pageAS', page));
             $.ajax({
-                url: soam+'/ELEC/getWfelec',
+                url: soam+'/Alarm/getAlarmruleInfoList',
                 type: 'post',
-                data:{pageSize:pageSize,curpage:1,wttypedefine:x,protocolid:y},
+                data:{pageSize:pageSize,curpage:page,wttypedefine:x,protocolid:y},
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentAS', data));
+                    dispatch(actions.setVars('ASCount', data.data.pagedata.length));
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -296,16 +394,16 @@ const mapDispatchToProps = (dispatch) => {
         },
         theLast :(page,i,j,x,y)=>{
             page=Math.ceil(i / j);
-            dispatch(actions.setVars('page1', page));
+            dispatch(actions.setVars('pageAS', page));
             $.ajax({
-                url: soam+'/ELEC/getWfelec',
+                url: soam+'/Alarm/getAlarmruleInfoList',
                 type: 'post',
-                data:{pageSize:pageSize,curpage:1,wttypedefine:x,protocolid:y},
+                data:{pageSize:pageSize,curpage:page,wttypedefine:x,protocolid:y},
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentAS', data));
+                    dispatch(actions.setVars('ASCount', data.data.pagedata.length));
                 },
                 error:function(){
                     console.log('获取数据失败')
