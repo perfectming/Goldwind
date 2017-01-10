@@ -34,7 +34,8 @@ let Component = React.createClass({
                                         <a className={styles.ca}>
                                             <img src={add}/>
                                             <b>{valueC.name}</b>
-                                            <input type='checkbox' value={valueC.id} title={valueC.rightstype}/>
+                                            <input type='checkbox' value={valueC.id} title={valueC.rightstype}
+                                                   name={valueC['ids']==false?'checkItInbox':'checkItOutbox'}/>
                                         </a>
                                         {
                                             valueC.tlist.length>0 && valueC.tlist.map((valueD,keyD)=>{
@@ -43,7 +44,8 @@ let Component = React.createClass({
                                                                 <a className={styles.da}>
                                                                     <img src={add} />
                                                                     <b>{valueD.name}</b>
-                                                                    <input type='checkbox' value={valueD.id} title={valueD.rightstype} />
+                                                                    <input type='checkbox' value={valueD.id} title={valueD.rightstype}
+                                                                           name={valueD['ids']==false?'checkItInbox':'checkItOutbox'}/>
                                                                 </a>
                                                                 {
                                                                     valueD.thlist.map((valueE,keyE)=>{
@@ -51,7 +53,8 @@ let Component = React.createClass({
                                                                                 <div className={styles.placeline} key={keyE}>
                                                                                     <a className={styles.ea} >
                                                                                         <b style={{cursor:'auto'}}>{valueE.name}</b>
-                                                                                        <input type='checkbox' title={valueE.rightstype} value={valueE.id}  />
+                                                                                        <input type='checkbox' title={valueE.rightstype} value={valueE.id}
+                                                                                               name={valueE['ids']==false?'checkItInbox':'checkItOutbox'}/>
                                                                                     </a>
                                                                                 </div>
                                                                             )

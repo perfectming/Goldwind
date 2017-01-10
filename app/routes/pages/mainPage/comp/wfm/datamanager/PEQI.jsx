@@ -36,7 +36,6 @@ let Component = React.createClass({
     render() {
         let {init,wfidCount,wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table,years,changeTableItem1,wfids} = this.props;
         let newData={};
-        let opti=[];
         let num=0;
         console.log(wfidCount);
         let arr=[16,16,16,16,16,10];
@@ -114,7 +113,7 @@ let Component = React.createClass({
                                                                         {value['wfname']}
                                                                     </div>
                                                                 )
-                                                            }else if(keyC==1){
+                                                            }else if(keyC==2){
                                                                 return (
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
@@ -122,7 +121,7 @@ let Component = React.createClass({
                                                                                type="date" readOnly="readOnly" value={value[valueC].slice(0,10)}/>
                                                                     </div>
                                                                 )
-                                                            }else if(keyC<3){
+                                                            }else if(keyC==1){
                                                                 return (
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>

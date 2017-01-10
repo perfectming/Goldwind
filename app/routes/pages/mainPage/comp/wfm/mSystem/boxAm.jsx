@@ -32,23 +32,13 @@ let Component = React.createClass({
                             <div className={styles.list_span} id="amBox">
                                 {
                                     dataBase.data.map((valueC,key)=>{
-                                        if(valueC.ids==true){
                                             return(
                                                 <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC)}>
-                                                    <input type='checkbox' checked="checked" name={valueC.id} value={valueC.id} />
+                                                    <input type='checkbox' title={valueC.ids==true?"checkedIn":"checkedOut"}
+                                                           name={valueC.id} value={valueC.id} />
                                                     {valueC.name}
                                                 </div>
                                             )
-                                        }else{
-                                            {
-                                                return(
-                                                    <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC)}>
-                                                        <input type='checkbox' name={valueC.id} value={valueC.id} />
-                                                        {valueC.name}
-                                                    </div>
-                                                )
-                                            }
-                                        }
                                     })
 
                                 }
@@ -99,7 +89,7 @@ const mapDispatchToProps = (dispatch) => {
                         check_val.push(obj[k].value);
                 }
                 alert('选中角色'+check_val);
-            })
+            });
         },
         closeboxAm:()=>{
             $("#boxAm").parent().css("display","none");
