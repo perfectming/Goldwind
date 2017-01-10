@@ -34,7 +34,7 @@ let Component = React.createClass({
     },
 
     render() {
-      let {devtype1,boolywbb1=false,showtree,playjq,select_list2,select_list21,secondtree1,threetree1,tabledata1,clickitem,chart1,chart1name,chart1Title} = this.props;
+      let {skinStyle,devtype1,boolywbb1=false,showtree,playjq,select_list2,select_list21,secondtree1,threetree1,tabledata1,clickitem,chart1,chart1name,chart1Title} = this.props;
       let treetype=[];
       let lefttree=[];
       let Tarr=[];
@@ -108,7 +108,7 @@ let Component = React.createClass({
               }
           }
         return (
-            <div className={styles.faultBox}>
+            <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
                 <div className={styles.search_tit}>
                     <div className={styles.seleBox}>
                         <span>设备类型:</span>
@@ -237,6 +237,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        skinStyle: state.vars.skinStyle, //全局换肤
         devtype1:state.objs.devtype1,
         boolywbb1:state.vars.boolywbb1,
         select_list2:state.objs.select_list2,

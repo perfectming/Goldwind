@@ -26,7 +26,7 @@ let Component = React.createClass({
     
 
     render() {
-            let {StationAlertData,logType,alertText,devtype,AlertBool=false,showType,showTypeId,playjq,searchnum} = this.props;
+            let {skinStyle,StationAlertData,logType,alertText,devtype,AlertBool=false,showType,showTypeId,playjq,searchnum} = this.props;
             if(AlertBool){
                 //获取设备类型数组
                 let treetype=[],logTypeArr=[];//设备类型
@@ -41,7 +41,7 @@ let Component = React.createClass({
                     }
                 }
                 return (
-                    <div className={styles.faultBox}>
+                    <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
                         <AlertWindow text={alertText}></AlertWindow>
                         <div className={styles.search_tit}>
                             <div className={styles.seleBox}>
@@ -106,6 +106,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        skinStyle: state.vars.skinStyle, //全局换肤
         alertText : state.vars.alertText,
         devtype:state.objs.devtype,
         logType:state.objs.logType,

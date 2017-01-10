@@ -47,7 +47,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,Powdata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
+        let {skinStyle,devtype,boolywbb=false,showtree,playjq,firstname,select_list,Powdata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
         let treetype=[];
         let Tarr=[]; //标题数组
         let Barr=[];  //数据
@@ -139,7 +139,7 @@ let Component = React.createClass({
             }
 
             return (
-                <div className={styles.faultBox}>
+                <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
                     <div className={styles.search_tit}>
                         <div className={styles.seleBox}>
                             <span>设备类型:</span>
@@ -274,7 +274,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-
+        skinStyle: state.vars.skinStyle, //全局换肤
         devtype:state.objs.devtype,
         boolywbb:state.vars.boolywbb,
         firstname:state.objs.firstname,

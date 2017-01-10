@@ -26,7 +26,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {devtype2,boolywbb2=false,showtree,playjq,select_list3,select_list31,tabledata2,clickitem,chart2,chart2name,chart2Title} = this.props;
+        let {skinStyle,devtype2,boolywbb2=false,showtree,playjq,select_list3,select_list31,tabledata2,clickitem,chart2,chart2name,chart2Title} = this.props;
         let treetype=[];
         let lefttree=[];
         let Tarr=[];
@@ -126,7 +126,7 @@ let Component = React.createClass({
             }
 
             return (
-                <div className={styles.faultBox}>
+                <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
 
                     <div className={`${styles.leftlist} ${styles.leftlist1}`} id='leftlist'>
                         {
@@ -283,6 +283,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        skinStyle: state.vars.skinStyle, //全局换肤
         devtype2:state.objs.devtype2,
         boolywbb2:state.vars.boolywbb2,
         select_list3:state.objs.select_list3,
