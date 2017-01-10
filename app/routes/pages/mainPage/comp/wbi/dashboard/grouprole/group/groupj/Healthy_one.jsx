@@ -23,13 +23,13 @@ let Component = React.createClass({
     },
     render() {
 
-        let {w0, w10, mon, ipUrl, width0, bt0 = 0, hhdata, befor_pages = 'group', namex3, healthy3, namex2, healthy2, wfid, namex1, healthy1, returnit, hideit, actbt = 0, changecolor, gogogo, back, more} = this.props;
+        let {w0, w10, mon, ipUrl,skinStyle, width0, bt0 = 0, hhdata, befor_pages = 'group', namex3, healthy3, namex2, healthy2, wfid, namex1, healthy1, returnit, hideit, actbt = 0, changecolor, gogogo, back, more} = this.props;
 //从左到右依次的变量  :
 
 // 区域名字 风场名字  月份名字  全局ip  宽度  前十后十更多的高亮   ajax返回的数据   点击返回返回的页面   风场名  健康度  风机名 健康度 全局风场id  风场名  健康度  返回的方法   点击更多的小× 月份高亮值   改变月份高亮的方法   前十的方法  后十的方法  更多的方法
 
         return (
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
                {/*点击更多的组件 */}
 
@@ -42,6 +42,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                         <Hly_rs height={450}
+                                jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#333333":"#fff"}
                                 powerValue={healthy3}
                                 barRotimes={namex3} widths={width0}
                                 text={''}></Hly_rs>
@@ -69,6 +70,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_t
+                            jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#333333":"#fff"}
                             barLoTime={namex1}
                             barLoPowerValue={healthy1}
                             text={mon + "各区域健康度"}></Hly_t>
@@ -82,6 +84,7 @@ let Component = React.createClass({
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
                         <Hly_r height={400}
+                               jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#333333":"#fff"}
                                barRotime={namex2}
                                barLoPowerValue={healthy2}
                                text={mon + w0 + "各风场健康度" }></Hly_r>
@@ -108,6 +111,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.rbox4}>
                             <Hly_rs height={400}
+                                    jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#333333":"#fff"}
                                     powerValue={healthy3}
                                     barRotimes={namex3}
                                     text={mon + w0 + w10 + "各风机健康度"}></Hly_rs>
@@ -140,7 +144,7 @@ const mapStateToProps = (state) => {
         healthy3: state.vars.healthy3,  //健康度
         hhdata: state.vars.hhdata,      //整体数据
         width0: state.vars.width0,      //组件宽度
-
+        skinStyle: state.vars.skinStyle //全局换肤
 
     }
 };

@@ -42,7 +42,7 @@ let Component = React.createClass({
     },
 
     render() {
-            let {alertText,devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,stateCheckData} = this.props;
+            let {skinStyle,alertText,devtype,boolywbb=false,showtree,playjq,firstname,select_list,devurls='WindTurbine',searchnum,stateCheckData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
@@ -104,7 +104,7 @@ let Component = React.createClass({
                 }
             
                 return (
-                    <div className={styles.faultBox}>
+                    <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
                         <AlertWindow text={alertText}></AlertWindow>
                         <div className={styles.search_tit}>
                             <div className={styles.seleBox}>
@@ -227,6 +227,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        skinStyle: state.vars.skinStyle, //全局换肤
         alertText : state.vars.alertText,
         devtype:state.objs.devtype,
         boolywbb:state.vars.boolywbb,
@@ -249,7 +250,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){  
                     dispatch(actions.appendObjs('devtype',json));
                     gettreedata(); 
@@ -268,7 +269,7 @@ const mapDispatchToProps = (dispatch) => {
                     dataType:"jsonp",    
                     jsonp:"callback",    
                     jsonpCallback:"testCall",    
-                    timeout:3000,       
+                    timeout:5000,       
                     success:function(json,textStatus){    
                         dispatch(actions.setVars('select_list',json));
                         dispatch(actions.setVars('boolywbb', true));
@@ -362,7 +363,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){  
                     dispatch(actions.setVars('select_list',json));
                     dispatch(actions.setVars('devurls',devurl));
@@ -400,7 +401,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){ 
                     if(json.rectime==undefined){
                         dispatch(actions.setVars('alertBool', false));

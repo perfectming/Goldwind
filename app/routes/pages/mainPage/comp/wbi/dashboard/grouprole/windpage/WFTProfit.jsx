@@ -215,10 +215,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
-        // 返回
-        backtop: (befor_pagee, befor_page2) => {
-            dispatch(actions.setVars('showPage', befor_pagee));
-        },
+
 
         changpage: (value, key, input_url, xxdwfId) => {
 

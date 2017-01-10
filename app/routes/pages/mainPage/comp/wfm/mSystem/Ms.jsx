@@ -25,7 +25,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {changeBoxItem,boxRoleArr,deleDate,fits,centerControl,addDate,changeRole,boxRoleId,roleList,boxRoleList,init,nextPage,lastPage,theOne,theLast,boxRole,boxCenter,page,ids,msCount,uName,remark,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem1} = this.props;
+        let {saveDatabase,checkId,checkName,changeBoxItem,boxRoleArr,deleDate,fits,centerControl,addDate,changeRole,boxRoleId,roleList,boxRoleList,init,nextPage,lastPage,theOne,theLast,boxRole,boxCenter,page,ids,msCount,uName,remark,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem1} = this.props;
         let num1=0;
         let num2=0;
         let newData={};
@@ -35,7 +35,7 @@ let Component = React.createClass({
         }
         newData['typeid']=1;
         newData['ids']=false;
-        let comp=tabaleData.comps.from;
+        let comp=tabaleData.msData.from;
         if(table){
         return (
 
@@ -121,12 +121,12 @@ let Component = React.createClass({
                                                 }
                                                 <div className={styles.tableContentItem}
                                                      style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
-                                                    <img src={save}
-                                                         onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content[key]))}/>
+                                                    <img src={save} style={{cursor:'pointer'}}
+                                                         onClick={()=>saveDatabase(key,value.id)}/>
                                                 </div>
                                                 <div className={styles.tableContentItem}
                                                      style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
-                                                    <img src={del} onClick={(e)=>deleData(key,value.id)}/>
+                                                    <img style={{cursor:'pointer'}} src={del} onClick={(e)=>deleData(key,value.id)}/>
                                                 </div>
                                             </div>
                                         )}else{
@@ -153,6 +153,22 @@ let Component = React.createClass({
                                                                        key={keyC} type="button" value='设置'
                                                                        onClick={()=>centerControl(value.id)}/>
                                                             )
+                                                        } else if(keyC==0){
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} contentEditable="true" onBlur={(e)=>checkId(e.target,key, keyC)}
+                                                                       onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                       value={value[valueC]}/>
+                                                            )
+                                                        } else if(keyC==1){
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} contentEditable="true" onBlur={(e)=>checkName(e.target,key, keyC)}
+                                                                       onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                       value={value[valueC]}/>
+                                                            )
                                                         } else {
                                                             return (
                                                                 <input className={styles.tableContentItem}
@@ -166,12 +182,12 @@ let Component = React.createClass({
                                                 }
                                                 <div className={styles.tableContentItem}
                                                      style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
-                                                    <img src={save}
-                                                         onClick={()=>addDate(key,value.id)}/>
+                                                    <img src={save} style={{cursor:'pointer'}}
+                                                         onClick={()=>addDate(key,value.id,value.name)}/>
                                                 </div>
                                                 <div className={styles.tableContentItem}
                                                      style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
-                                                    <img src={del} onClick={(e)=>deleDate(key)}/>
+                                                    <img style={{cursor:'pointer'}} src={del} onClick={(e)=>deleDate(key)}/>
                                                 </div>
                                             </div>
                                         )
@@ -219,7 +235,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.downCount}>
                             <span>{'记录合计：'+num1}</span>
-                            <span onClick={()=>changeRole(boxRoleId)}>点击</span>
+                            <span onClick={()=>changeRole(boxRoleId)}>菜单选择</span>
                         </div>
                     </div>
                     <div className={styles.tanC} id="center3" key='4' style={{width:1000,top: 100, left:400,paddingLeft:300}}>
@@ -236,7 +252,7 @@ let Component = React.createClass({
                                 })
                             }
                         </div>
-                        <div className={styles.newBox}>
+                        <div className={styles.newBox} style={{width: 690}}>
                             <div className={styles.tableContentBox}>
                                 {
                                     (boxCenter && boxCenter.data) && boxCenter.data.map((value, key)=> {
@@ -360,25 +376,26 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('boxCenterId', i));
             $('#center3').css('display','block');
 
-            $.ajax({
-                url: soamMs+'/roleright/getRolerRightMapList',
-                type: 'post',
-                data:{roleid:i},
-                dataType: 'json',//here,
-                success:function (data) {
-                    console.log(data);
-                    dispatch(actions.setObjs('boxCenter', data));
-                        $("#center3 input[name='checkItOut']").prop('checked', true);
-                        $("#center3 input[name='checkItIn']").prop('checked', false);
-                },
-                error:function(){
-                    console.log('获取数据失败')
-                }
-            });
+            // $.ajax({
+            //     url: soamMs+'/roleright/getRolerRightMapList',
+            //     type: 'post',
+            //     data:{roleid:i},
+            //     dataType: 'json',//here,
+            //     success:function (data) {
+            //         console.log(data);
+            //         dispatch(actions.setObjs('boxCenter', data));
+            //             $("#center3 input[name='checkItOut']").prop('checked', true);
+            //             $("#center3 input[name='checkItIn']").prop('checked', false);
+            //     },
+            //     error:function(){
+            //         console.log('获取数据失败')
+            //     }
+            // });
 
         },
         changeRole(j){
             console.log(j);
+
             $('#box1').parent().css('display','block');
             $.ajax({
                 url: soamMs+'/role/getByRoleidAllMenu',
@@ -388,6 +405,10 @@ const mapDispatchToProps = (dispatch) => {
                 success:function (data) {
                     console.log(data);
                     data.data && dispatch(actions.setObjs('boxRole', data));
+                    if(data){
+                        $("#box1 input[name='checkItOutbox']").prop('checked',true);
+                        $("#box1 input[name='checkItInbox']").prop('checked',false);
+                    }
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -416,9 +437,14 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
+                    console.log(data);
                     if(data.data==true){alert('用户编号重复');
                         let tableV = _.clone(getState().objs.tableContentMs);
                         tableV.data.pagedata[i][arr[j]] = '';
+                        dispatch(actions.setObjs('tableContentMs', tableV));
+                    }else if(!id.value){
+                        let tableV = _.clone(getState().objs.tableContentMs);
+                        tableV.data.pagedata[i][arr[j]] = '请输入角色ID';
                         dispatch(actions.setObjs('tableContentMs', tableV));
                     }
                 },
@@ -433,9 +459,14 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
+                    console.log(data);
                     if(data.data==true){alert('用户名重复');
                         let tableV = _.clone(getState().objs.tableContentMs);
                         tableV.data.pagedata[i][arr[j]] = '';
+                        dispatch(actions.setObjs('tableContentMs', tableV));
+                    }else if(!name.value){
+                        let tableV = _.clone(getState().objs.tableContentMs);
+                        tableV.data.pagedata[i][arr[j]] = '请输入角色名称';
                         dispatch(actions.setObjs('tableContentMs', tableV));
                     }
                 },
@@ -458,7 +489,8 @@ const mapDispatchToProps = (dispatch) => {
         inputOnChange:(value,id)=>{
 
         },
-        addDate:(li,ids)=>{
+        addDate:(li,ids,names)=>{
+            if(ids && names){
             let tableV = _.clone(getState().objs.tableContentMs);
             let boxArr = _.clone(getState().vars.boxRoleArr);
             let cenAdd = _.clone(getState().objs.boxCenter);
@@ -508,6 +540,97 @@ const mapDispatchToProps = (dispatch) => {
                                 url: soamMs+'/roleright/saveRolerRight?rights=data',
                                 type: 'post',
                                 data: builtY,
+                                dataType: 'json',//here,
+                                contentType:'application/json;charset=UTF-8',
+                                success:function () {
+                                    alert('保存成功');
+                                },
+                                error:function(){
+                                    console.log('获取三级失败')
+                                }
+                            });
+                        },
+                        error:function(){
+                            console.log('获取二级失败')
+                        }
+                    });
+                },
+                error:function(){
+                    console.log('获取一级失败')
+                }
+            });
+            console.log(addArr,wfs.id)
+
+
+
+            $.ajax({
+                url: soamMs+'/role/likeRole',
+                type: 'post',
+                data:{curpage:1,pageSize:pageSize},
+                dataType: 'json',//here,
+                success:function (data) {
+                    // console.log(data);
+                    dispatch(actions.setObjs('tableContentMs', data));
+                    dispatch(actions.setVars('msCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });}else {
+                alert('请输入角色名和ID');
+            }
+        },
+        saveDatabase:(li,ids)=>{
+            let tableV = _.clone(getState().objs.tableContentMs);
+            let boxArr = _.clone(getState().vars.boxRoleArr);
+            let cenAdd = _.clone(getState().objs.boxCenter);
+            let addArr=[];
+            boxArr && boxArr.map((value, key)=> {
+                addArr.push(value.menuid)
+            });
+            let addCen=[];
+            // console.log(cenAdd);
+            cenAdd && cenAdd.data.map((value, key)=> {
+                let cost={};
+                cost['wfid']=value.wfid;
+                cost['wtid']=value.wtid;
+                cost['controlrights']=value.controlrights;
+                cost['queryrights']=value.queryrights;
+                cost['superviseright']=value.superviseright;
+                cost['roleid']=ids;
+                addCen.push(cost);
+            });
+            let wfs=tableV.data.pagedata[li];
+            wfs['ids']=false;
+            wfs['typeid']=1;
+            console.log(wfs);
+            let ddv=JSON.stringify(wfs);
+            $.ajax({
+                url: soamMs+'/role/updateRoleInfo?roleInfo=data',
+                type: 'post',
+                data: ddv,
+                dataType: 'json',//here,
+                contentType:'application/json;charset=UTF-8',
+                success:function () {
+                    let cosin={};
+                    cosin['roleid']=wfs.id;
+                    cosin['rightstype']=1;
+                    cosin['menuids']=addArr;
+                    console.log(cosin);
+                    let build=JSON.stringify(cosin);
+                    $.ajax({
+                        url: soamMs+'/rolemenu/getByRoleIdUpdateMenu?roleMenuVO=data',
+                        type: 'post',
+                        data: build,
+                        dataType: 'json',//here,
+                        contentType:'application/json;charset=UTF-8',
+                        success:function () {
+                            let builtSave=JSON.stringify(addCen);
+                            console.log(addCen);
+                            $.ajax({
+                                url: soamMs+'/roleright/updateRolerRight?rights=data',
+                                type: 'post',
+                                data: builtSave,
                                 dataType: 'json',//here,
                                 contentType:'application/json;charset=UTF-8',
                                 success:function () {

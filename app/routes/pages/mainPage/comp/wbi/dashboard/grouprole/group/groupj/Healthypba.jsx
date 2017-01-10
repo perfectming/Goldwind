@@ -30,7 +30,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata3,ipUrl,wfid,width0, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
+        let {hhdata3,ipUrl,wfid,width0,skinStyle, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
 
 
          let data = require('./../../area/Healthy-data');
@@ -44,7 +44,7 @@ let Component = React.createClass({
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
                 <div className={styles.light} id="light"></div>
 
@@ -223,6 +223,7 @@ const mapStateToProps = (state) => {
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
         width0:state.vars.width0,
+        skinStyle: state.vars.skinStyle
 
     }
 };

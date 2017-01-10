@@ -55,13 +55,13 @@ let Component = React.createClass({
 
 
     render() {
-        let {ipUrl,befor_pages='area',width0,mon,w0,w10,wfid,hhdata,bt0, returnit,hideit,namex2,namex3,healthy2,healthy3,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
+        let {ipUrl,befor_pages='area',width0,mon,w0,w10,wfid,hhdata,bt0,skinStyle, returnit,hideit,namex2,namex3,healthy2,healthy3,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
         return (
 
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.light} id="light"> </div>
 
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
@@ -154,6 +154,7 @@ const mapStateToProps = (state) => {
         ipUrl:state.vars.ipUrl,
         wfid:state.vars.wfid,
         width0:state.vars.width0,
+        skinStyle: state.vars.skinStyle,
     }
 };
 

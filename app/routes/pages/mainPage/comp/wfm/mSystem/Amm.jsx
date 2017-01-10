@@ -16,12 +16,13 @@ import Ambox from './boxAm.jsx';
 let soam='http://10.68.100.32:8080/soam';
 let tabaleData = require('./data');
 let arr=['id','name','loginname','password','phonecode','mailbox','logintype','dogcode','remark','roleids'];
+let logintypeArr=['密码验证','手机验证','加密狗验证'];
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
     render() {
-        let {page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,ids,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+        let {saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData={};
         let num=0;
         for(let i=0;i<arr.length-1;i++){
@@ -91,14 +92,49 @@ let Component = React.createClass({
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                value={value[valueC]}/>
                                                     )
-                                                }
-                                                if (keyC==3){
+                                                }else if (keyC==6){
+                                                    return (
+                                                        <select className={styles.tableContentItem} key={keyC}
+                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                               style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                                type="button">
+                                                            {
+                                                                logintypeArr.map((valueD,keyD)=>{
+                                                                    if (value[valueC]==keyD){
+                                                                return(
+                                                                    < option className={styles.opt} selected="selected" value={keyD} key={keyD}>{valueD}</option>
+                                                                )
+                                                                    }else{
+                                                                        return(
+                                                                            < option className={styles.opt} value={keyD} key={keyD}>{valueD}</option>
+                                                                        )
+                                                                    }
+                                                                })
+                                                            }
+                                                        </select>
+                                                    )
+                                                }else if (keyC==3){
                                                     return(
                                                         <input className={styles.tableContentItem}
                                                                style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                                key={keyC} contentEditable="true"
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                value={value[valueC]} type="password"/>
+                                                    )
+                                                }else if (keyC==6){
+                                                    return (
+                                                        <select className={styles.tableContentItem} key={keyC}
+                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                                style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                                type="button">
+                                                            {
+                                                                logintypeArr.map((valueD,keyD)=>{
+                                                                    return(
+                                                                        < option className={styles.opt} value={keyD} key={keyD}>{valueD}</option>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </select>
                                                     )
                                                 }else if (keyC==tabaleData.ammData.header.length-1){
                                                     return (
@@ -119,10 +155,10 @@ let Component = React.createClass({
                                             })
                                         }
                                         <div className={styles.tableContentItem} style={{width:(50/(tabaleData.ammData.header.length+2))+"%"}}>
-                                            <img src={save} onClick={()=>alert("您保存的数据123为:" + JSON.stringify(table.content[key]))}/>
+                                            <img style={{cursor:'pointer'}} src={save} onClick={()=>saveDataAmm(key)}/>
                                         </div>
                                         <div className={styles.tableContentItem} style={{width:(50/(tabaleData.ammData.header.length+2))+"%"}}>
-                                            <img src={del} onClick={(e)=>deleData(key,value.id)}/>
+                                            <img style={{cursor:'pointer'}} src={del} onClick={(e)=>deleData(key,value.id)}/>
                                         </div>
                                     </div>
                                 )}else {
@@ -176,10 +212,10 @@ let Component = React.createClass({
                                                 })
                                             }
                                             <div className={styles.tableContentItem} style={{width:(50/(tabaleData.ammData.header.length+2))+"%"}}>
-                                                <img src={save} onClick={(e)=>addDate(key,ids)}/>
+                                                <img style={{cursor:'pointer'}} src={save} onClick={(e)=>addDate(key)}/>
                                             </div>
                                             <div className={styles.tableContentItem} style={{width:(50/(tabaleData.ammData.header.length+2))+"%"}}>
-                                                <img src={del} onClick={(e)=>deleDate(key)}/>
+                                                <img style={{cursor:'pointer'}} src={del} onClick={(e)=>deleDate(key)}/>
                                             </div>
                                         </div>
                                     )
@@ -306,24 +342,78 @@ const mapDispatchToProps = (dispatch) => {
             tableV.data.pagedata[i][arr[j]] = value;
             dispatch(actions.setObjs('tableContentAmm', tableV));
         },
-        jump: (id) => {
+        saveDataAmm:(li)=>{
+            let tableV = _.clone(getState().objs.tableContentAmm);
+            let ids = _.clone(getState().vars.roleIds);
+            let wfs=tableV.data.pagedata[li];
+            wfs['roleids']=ids;
+            let roleObj={};
+            roleObj['userid']=wfs.id;
+            roleObj['roleids']=ids;
+            let ddv=JSON.stringify(wfs);
+            let idsString=JSON.stringify(roleObj);
             $.ajax({
-                url: soam+'/user/getUserRoleList?id='+id,
+                url: soam+'/user/updateUserInfo?userInfo=data',
                 type: 'post',
+                data: ddv,
                 dataType: 'json',//here,
-                success:function (data) {
-                    dispatch(actions.appendObjs('boxData', data));
-                    $('#boxAm').parent().css('display','block');
+                contentType:'application/json;charset=UTF-8',
+                success:function () {
+                    $.ajax({
+                        url: soam+'/user/getSetUpUserRole?roleVO=data',
+                        type: 'post',
+                        data: idsString,
+                        dataType: 'json',//here,
+                        contentType:'application/json;charset=UTF-8',
+                        success:function () {
+                            $.ajax({
+                                url: soam+'/user/getAllUser',
+                                type: 'post',
+                                data:'pageSize='+pageSize+'&&page='+1+'&&username=',
+                                dataType: 'json',//here,
+                                success:function (data) {
+                                    dispatch(actions.setObjs('tableContentAmm', data));
+                                    dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                                },
+                                error:function(){
+                                    console.log('获取数据失败')
+                                }
+                            });
+                        },
+                        error:function(){
+                            console.log('获取数据失败')
+                        }
+                    });
                 },
                 error:function(){
                     console.log('获取数据失败')
                 }
             });
         },
-        addDate:(li,ids)=>{
+        jump: (id) => {
+            if(id){
+                $.ajax({
+                    url: soam+'/user/getUserRoleList?id='+id,
+                    type: 'post',
+                    dataType: 'json',//here,
+                    success:function (data) {
+                        dispatch(actions.appendObjs('boxData', data));
+                        $('#boxAm').parent().css('display','block');
+                        $("#boxAm input[title='checkedIn']").prop('checked',true);
+                        $("#boxAm input[title='checkedOut']").prop('checked',false);
+                    },
+                    error:function(){
+                        console.log('获取数据失败')
+                    }
+                });
+            }else {alert('请输入用户ID')}
+        },
+        addDate:(li)=>{
             let tableV = _.clone(getState().objs.tableContentAmm);
+            let ids = _.clone(getState().vars.roleIds);
             let wfs=tableV.data.pagedata[li];
             wfs['roleids']=ids;
+            (wfs['logintype']) && (wfs['logintype']=0);
             let ddv=JSON.stringify(wfs);
             $.ajax({
                 url: soam+'/user/addUser?userinfo=data',

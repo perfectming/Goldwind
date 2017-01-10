@@ -28,7 +28,7 @@ let Component = React.createClass({
 
 
 
-            <div className = {styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.paddingtop}>
                     <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
                 </div>
@@ -50,8 +50,8 @@ let Component = React.createClass({
 
                 </div>
 
-                <div className={`${styles.fbox} `}>
-                    <div className={` ${styles.logofa} ${styles.box_shadow}`}>
+                <div className={`${styles.fbox} ${styles.logofa} `}>
+                    <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Pro_four height={450}
                                    name2={name2}
                                    runtime2={runtime2}

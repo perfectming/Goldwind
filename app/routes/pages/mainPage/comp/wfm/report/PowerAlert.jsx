@@ -26,7 +26,7 @@ let Component = React.createClass({
     
 
     render() {
-            let {logType,alertText,devtype,AlertBool=false,showType,showTypeId,playjq,searchnum} = this.props;
+            let {skinStyle,logType,alertText,devtype,AlertBool=false,showType,showTypeId,playjq,searchnum} = this.props;
             if(AlertBool){
                 //获取设备类型数组
                 let treetype=[],logTypeArr=[];//设备类型
@@ -41,7 +41,7 @@ let Component = React.createClass({
                     }
                 }
                 return (
-                    <div className={styles.faultBox}>
+                    <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
                         <AlertWindow text={alertText}></AlertWindow>
                         <div className={styles.search_tit}>
                             <div className={styles.seleBox}>
@@ -106,6 +106,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        skinStyle: state.vars.skinStyle, //全局换肤
         alertText : state.vars.alertText,
         devtype:state.objs.devtype,
         logType:state.objs.logType,
@@ -124,7 +125,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){  
                     dispatch(actions.appendObjs('devtype',json));
                     
@@ -138,7 +139,7 @@ const mapDispatchToProps = (dispatch) => {
                         dataType:"jsonp",    
                         jsonp:"callback",    
                         jsonpCallback:"testCall",    
-                        timeout:3000,       
+                        timeout:5000,       
                         success:function(json,textStatus){  
                             console.log(json)
                             dispatch(actions.appendObjs('logType',json));
@@ -166,7 +167,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){  
                     console.log(json)
                     dispatch(actions.setObjs('logType',json));
@@ -265,7 +266,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){ 
                     if(json.wtid==undefined){
                         dispatch(actions.setVars('alertBool', false));

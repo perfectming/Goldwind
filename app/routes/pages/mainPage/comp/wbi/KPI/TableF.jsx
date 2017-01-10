@@ -14,7 +14,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:380,
-                backgroundColor: 'rgba(44, 61, 71, 0.4)',
+                backgroundColor: null,
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -87,12 +87,12 @@ let Component = React.createClass({
             },
             yAxis: [{
                 title:{
-                	text:'kWh',
+                	text:'(kWh)',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
 	                y: -10,
-	                x:-15,
+	                x:-10,
 	                style:{
 	                	fontSize:'14px',
 	                	color:'white',
@@ -109,7 +109,7 @@ let Component = React.createClass({
             },{
             	min:0,
             	title:{
-            		text:'100%',
+            		text:'(100%)',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,

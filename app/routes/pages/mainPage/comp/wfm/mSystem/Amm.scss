@@ -56,6 +56,7 @@
   img {
     width: 30px;
     margin-left: 50px;
+    cursor:pointer;
   }
 }
 
@@ -95,12 +96,21 @@
             width:20px;
           }
         }
-        input{
+        select,input{
           background: #30343f;
           border:6px solid transparent;
           &:hover{
             background:#485b7b;
           }
+          option{
+            font-size: 10px;
+            padding: 0 0 0 0px;
+          }
+          text-align: center;
+          height: 30px;
+        }
+        select{
+          padding: 0 0 0 40px;
         }
         .tableLineNum {
           width: 65px;
@@ -129,12 +139,21 @@
             width:20px;
           }
         }
-        input{
+        select,input{
           background: #272b34;
           border:6px solid transparent;
           &:hover{
             background:#485b7b;
           }
+          option{
+            font-size: 10px;
+            padding: 0 0 0 0px;
+          }
+          text-align: center;
+          height: 30px;
+        }
+        select{
+          padding: 0 0 0 40px;
         }
         .tableLineNum {
           width: 65px;

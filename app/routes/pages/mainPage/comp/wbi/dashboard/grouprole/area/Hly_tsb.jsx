@@ -15,7 +15,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:400,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -163,6 +163,7 @@ let Component = React.createClass({
                 data: runtime3,
                 borderRadius: 4,
                 color:'#62de88',
+                pointPlacement:0.1,
 
             }
                 ,{
@@ -171,6 +172,7 @@ let Component = React.createClass({
                     color:'#cccccc',
                     data: downtime3,
                     borderRadius: 4,
+                    pointPlacement:-0.1,
                 }
                 ,
                 {
@@ -179,6 +181,7 @@ let Component = React.createClass({
                     color:'#0000ff',
                     data: tba3,
                     yAxis:1,
+
                 }
 
 

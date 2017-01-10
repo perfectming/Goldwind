@@ -23,7 +23,7 @@ let page = 1;//设置初始页码
 let thDate = new Date();
 let thYear = thDate.getFullYear();
 let month2 = thDate.getMonth();
-let soam = 'http://10.9.100.48:8080/wbi';//设置接口
+let soam = 'http://10.68.100.32:8080/wbi';//设置接口
 for (let i = 0; i <= 30; i++) {
     yeares.push(thYear - 2 + i)
 }
@@ -76,7 +76,7 @@ let Component = React.createClass({
                                 {yeares.map((value, key) => {
                                     if(key==1){
                                         return (
-                                            <option selected="selected" value={value} key={key}>{value}</option>
+                                            <option name="selectOpt" value={value} key={key}>{value}</option>
                                         )
                                     }
                                     return (
@@ -293,7 +293,7 @@ let Component = React.createClass({
                                                                                 if(key==1){
                                                                                     return (
                                                                                         <option value={value}
-                                                                                                selected="selected"
+                                                                                                name="selectOpt2"
                                                                                                 className={styles.tableContentItem}
                                                                                                 key={key}>{value}</option>
 
@@ -488,6 +488,8 @@ const mapDispatchToProps = (dispatch) => {
         },
         init: () => {
 
+            $("option[name='selectOpt']").prop('selected',true);
+
 
            // dispatch(actions.setObjs('tableContent', obj));
 
@@ -514,10 +516,13 @@ const mapDispatchToProps = (dispatch) => {
                 },
                 dataType: 'json',//here,
                 success: function (data) {
-
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('totalpage', data.data.totalPage));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    if(data.data==null){
+                        alert("找不到您想要的数据")
+                    }else {
+                        dispatch(actions.setObjs('tableContent', data));
+                        dispatch(actions.setVars('totalpage', data.data.totalPage));
+                        dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    }
                 },
                 error: function () {
                     console.log('获取数据失败')
@@ -544,6 +549,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         //增加
         addData: (i, totalpage, years0, wfids) => {
+
             page = totalpage;
             dispatch(actions.setVars('page1', page));
 
@@ -579,6 +585,7 @@ const mapDispatchToProps = (dispatch) => {
                 i.month='';
                 tableV.data.pagedata.push(i);
                 dispatch(actions.setObjs('tableContent', tableV));
+                $("option[name='selectOpt2']").prop('selected',true);
             }
 
         },

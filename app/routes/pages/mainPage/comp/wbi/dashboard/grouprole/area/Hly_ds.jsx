@@ -16,7 +16,7 @@ let Component = React.createClass({
             chart: {
                 height:height,
                 width:widths,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 // plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -129,9 +129,8 @@ let Component = React.createClass({
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
-
                 min:0,
-                max:120,
+                max:100,
                 title: {
                     text: '(%)',
                     align: 'high',
