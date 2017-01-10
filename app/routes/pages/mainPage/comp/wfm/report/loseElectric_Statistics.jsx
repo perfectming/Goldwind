@@ -306,7 +306,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",
                 jsonp:"callback",
                 jsonpCallback:"testCall",
-                timeout:3000,
+                timeout:5000,
                 success:function(json,textStatus){
 
                     dispatch(actions.appendObjs('devtype2',json));
@@ -324,7 +324,7 @@ const mapDispatchToProps = (dispatch) => {
                     dataType:"jsonp",
                     jsonp:"callback",
                     jsonpCallback:"testCall",
-                    timeout:3000,
+                    timeout:5000,
                     success:function(json,textStatus){
 
                         dispatch(actions.appendObjs('select_list3',json));
@@ -448,7 +448,7 @@ const mapDispatchToProps = (dispatch) => {
                     dataType:"jsonp",
                     jsonp:"callback",
                     jsonpCallback:"testCall",
-                    timeout:3000,
+                    timeout:5000,
                     success:function(json,textStatus){
                         dispatch(actions.appendObjs('tabledata2',json));
                     },

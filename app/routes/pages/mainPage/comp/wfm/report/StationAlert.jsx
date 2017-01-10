@@ -124,7 +124,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){  
                     dispatch(actions.appendObjs('devtype',json));
                     
@@ -138,7 +138,7 @@ const mapDispatchToProps = (dispatch) => {
                         dataType:"jsonp",    
                         jsonp:"callback",    
                         jsonpCallback:"testCall",    
-                        timeout:3000,       
+                        timeout:5000,       
                         success:function(json,textStatus){  
                             console.log(json)
                             dispatch(actions.appendObjs('logType',json));
@@ -166,7 +166,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){  
                     console.log(json)
                     dispatch(actions.setObjs('logType',json));
@@ -265,7 +265,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){ 
                     // if(json.wtid==undefined){
                     //     dispatch(actions.setVars('alertBool', false));

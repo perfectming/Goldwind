@@ -1,247 +1,245 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './all.scss';
+import styles from './stateCountStyle.scss';
 import jian from '../../../img/comp/jian_icon.png';
 import add from '../../../img/comp/add_icon.png';
-import Column from './colum.jsx';
+import drop from '../../../img/comp/drop2.gif';
+import OneColumn from './oneColumn.jsx';
+import Login from '../../../../../../components/common/Loading.jsx';
+import AlertWindow from './AlertWindow.jsx';
 let type = require('./ywbb_date');
-let btype = type.comps.available;
+let btype = type.comps.from;
 var $ =require('jquery');
 var actions = require('redux/actions');
-
-
-let allnum=[];
-let chartnum=[];
-let chartname=[];
+var {browserHistory} = require('react-router');
+let url='54.223.200.134';
 
 let Component = React.createClass({
+    componentWillMount() {
+        this.props.ajax();
+    },
     componentDidMount() {
         this.props.init();
         let{playjq}=this.props;
         //初始化jquery方法
         setTimeout(function(){
             playjq();
-        },100)
+        },1000)
     },
-   
 
     render() {
-         let {changeselect,select_list5,sent_info,tabarr5,clickitem,chtnum5,chtname5,chtit5} = this.props;
-            
-        return (
-            <div className={styles.faultBox}>
-                <div className={styles.search_tit}>
-
-                    {
-                        btype.map((value, key,valueName)=> {
-                            if (value.type === 'date') {
-                                return (
-                                    <div className={styles.dateBox} key={key}>
-                                        <span>日期维度</span><input id='timelength'  placeholder={value.content} type={value.type} style={{width:value.width}}/>
-                                        <span>发生时间</span><input id="startTime"  placeholder={value.content} type={value.type} style={{width:value.width}}/>
-                                        <span>结束时间</span><input id="endTime"  placeholder={value.content} type={value.type} style={{width:value.width}}/>
-                                    </div>
-                                )
-                            } else  if (value.type === 'input') {
-                                return (
-                                    <div className={styles.inputBox} key={key}>
-                                        <span>{btype[key].valueName}</span>
-                                        <input ref={'textContent'+key} placeholder={value.content}
-                                               onChange={(e)=>inputOnChange(e.target.value, value.id)}
-                                               onFocus={()=>onFocus} style={{width:value.width}}/>
-                                    </div>
-                                )
-                            }else if (value.type === 'select') {
-                                return (
-                                    <div className={styles.seleBox} key={key}>
-                                        <span>{btype[key].valueName}</span>
-                                        <select ref={'selectType'+key} onChange={()=>changeselect(value.select)}  id='selectop'>
-                                            {value.select.map((value, key)=> {
-                        
-                                                return (
-                                                    <option value={key} key={key}>{value.name}</option>
-                                                )
-                                            })}
-                                        </select>
-                                    </div>
-                                )
-                            }
-                                   
-                           
-                        })
+            let {alertText,boolywbb=false,playjq,select_list,searchnum,AvaData} = this.props;
+            let treetype=[];//设备类型
+            let one=[]; //一级菜单
+            let two=[]; //二级菜单
+            let three=[]; //三级菜单
+            let wfname=[];//风场名
+            let avaPercent=[];//可利用率
+            let name=[];//名称
+            let type=[];//机组类型
+            let timeS=[];//开始时间
+            let timeE=[];//结束时间
+            let timeFault=[];//故障时长
+            let timeRemain=[];//剩余可控时间
+            let result=[];//监控结果
+            //获取左侧树形二级和三级数据
+            for(let arg2 in select_list){
+                if(select_list[arg2].id &&select_list[arg2].id!=''){
+                    if(select_list[arg2].type=='wf'){
+                        one.push(select_list[arg2])
+                    }else if(select_list[arg2].type=='wl' || select_list[arg2].parentid.length==6){
+                        two.push(select_list[arg2])
+                    }else if(select_list[arg2].type=='wt' && select_list[arg2].parentid.length>6){
+                        three.push(select_list[arg2])
                     }
-                     <div className={styles.btnBox}>
-                        <button id='searchall'>查询</button>
-                    </div>
-                </div>
-                <div className={styles.leftlist} id='leftlist'>
-                    {
-                      select_list5 !== undefined && select_list5.arr.map((valueC,keyC)=>{
-                        return(
-                            <div key={keyC} className={styles.place}>
-                            <a className={styles.ca}><img src={add} /><b>{valueC.name}</b><input type='checkbox' onClick={(e)=>sent_info(valueC,e.target)} /></a>
+                }
+            }
+            //表格数据处理
+            if(AvaData!==undefined&&AvaData.wfid!==undefined){
+                let arrString1,arrString2,arrString3,arrString4,arrString5,arrString6,arrString7,arrString8,arrString9;
+                arrString1=AvaData.wfname.Values.split(',');//风场名
+                arrString2=AvaData.usepercent.Values.split(',');//可利用率
+                arrString3=AvaData.wtname.Values.split(',');//名称
+                arrString4=AvaData.wttypedefine.Values.split(',');//机组类型
+                arrString5=AvaData.databeginTime.Values.split(',');//开始时间
+                arrString6=AvaData.dataendTime.Values.split(',');//结束时间
+                arrString7=AvaData.faulttime.Values.split(',');//故障时长
+                arrString8=AvaData.controltime.Values.split(',');//剩余可控时间
+                arrString9=AvaData.monitorresult.Values.split(',');//监控结果
+                for (var i=0 ; i< arrString1.length ; i++){
+                        wfname.push(arrString1[i]);
+                }
+                for (var i=0 ; i< arrString2.length ; i++){
+                        avaPercent.push(arrString2[i]/1);
+                }
+                for (var i=0 ; i< arrString3.length ; i++){
+                        name.push(arrString3[i]);
+                }
+                for (var i=0 ; i< arrString4.length ; i++){
+                        type.push(arrString4[i]);
+                }
+                for (var i=0 ; i< arrString5.length ; i++){
+                        timeS.push(new Date(arrString5[i]/1).toLocaleDateString()+' '+new Date(arrString5[i]/1).toLocaleTimeString());
+                }
+                for (var i=0 ; i< arrString6.length ; i++){
+                        timeE.push(new Date(arrString6[i]/1).toLocaleDateString()+' '+new Date(arrString6[i]/1).toLocaleTimeString());
+                }
+                for (var i=0 ; i< arrString7.length ; i++){
+                        timeFault.push(arrString7[i]);
+                }
+                for (var i=0 ; i< arrString8.length ; i++){
+                        timeRemain.push(arrString8[i]);
+                }
+                for (var i=0 ; i< arrString9.length ; i++){
+                        result.push(arrString9[i]);
+                }
+            }else{
+                AvaData=undefined;
+            }
+            if(boolywbb){
+                return (
+                    <div className={styles.faultBox}>
+                        <AlertWindow text={alertText}></AlertWindow>
+                        <div className={styles.search_tit}>
+                            <div className={styles.seleBox}>
+                                <div className={styles.dateBox}>
+                                    <span>日期维度</span><input id="timeLenth" type='date'/>
+                                    <span>发生时间</span><input id="startTime" type='date'/>
+                                    <span>结束时间</span><input id="endTime" type='date'/>
+                                </div>
+                            </div>
+
+                            <div className={styles.btnBox}>
+                                <button id='searchall' onClick={()=>searchnum()}><img src={'http://'+url+'/images/button/search.gif'} />查询</button>
+                            </div>
+                            <div className={styles.btnBox}>
+                                <button><img src={'http://'+url+'/images/button/outbox.gif'}/>导出Excel</button>
+                            </div>
+                        </div>
+                        <div className={styles.leftlist} id='leftlist'>
                             {
-                                valueC.arr.map((valueD,keyD)=>{
+                                select_list !== undefined && one.map((valueC,keyC)=>{
                                     return(
-                                        <div className={styles.placename} key={keyD}>
-                                            <a className={styles.da}><img src={add} /><b>{valueD.name}</b><input type='checkbox' onClick={(e)=>sent_info(valueD,e.target)} /></a>
-                                             {
-                                                valueD.arr.map((valueE,keyE)=>{
-                                                    return(
-                                                        <div className={styles.placeline} key={keyE}>
-                                                            <a className={styles.ea}><img src={add} /><b>{valueE.name}</b><input type='checkbox' onClick={(e)=>sent_info(valueE,e.target)}/></a>
-                                                                {
-                                                                    valueE.arr.map((valueF,keyF)=>{
-                                                                        return(
-                                                                            <div className={styles.placefan} key={keyF}>
-                                                                                <a className={styles.fa}><b>{valueF.name}</b><input type='checkbox' onClick={(e)=>sent_info(valueF,e.target)} /></a>
-                                            
-                                                                            </div>
-                                                                        )
+                                        <div key={keyC} className={styles.place} >
+                                            <a className={styles.ca}>
+                                                <img src={add}/>
+                                                <b><img src={'http://'+url+'/'+valueC.img}/>{valueC.text}</b>
+                                                <input type='checkbox' value='value'/>
+                                            </a>
+                                            {
+                                                two.length>0 ?
+                                                two.map((valueD,keyD)=>{
+                                                    if(valueD.parentid==valueC.id){
+                                                        return(
+                                                            <div className={styles.placename} key={keyD}>
+                                                                <a className={styles.da}>
+                                                                    <img src={add} />
+                                                                    <b><img src={'http://'+url+'/'+valueD.img}/>{valueD.text}</b>
+                                                                    <input type='checkbox' value={valueD.children ? 'value' : valueD.id}/>
+                                                                </a>
+                                                                { 
+                                                                    three.map((valueE,keyE)=>{
+                                                                        if(valueE.parentid==valueD.id && valueE.args.wfid==valueC.id){
+                                                                            return(
+                                                                                <div className={styles.placeline} key={keyE}>
+                                                                                    <a className={styles.ea} >
+                                                                                        <b style={{cursor:'auto'}}><img src={'http://'+url+'/'+valueE.img}/>{valueE.text}</b>
+                                                                                        <input type='checkbox' value={valueE.id}  />
+                                                                                    </a>
+                                                                                </div>
+                                                                            )
+                                                                        }
                                                                     })
+                                                                  
                                                                 }
-                                                        </div>
-                                                    )
+                                                            </div>
+                                                        )
+                                                    }     
+                                                }) : three.map((valueE,keyE)=>{
+                                                    if(valueE.args.wfid==valueC.id){
+                                                        return(
+                                                            <div className={styles.placename} key={keyE}>
+                                                                <a className={styles.da} >
+                                                                    <b style={{cursor:'auto'}}><img src={'http://'+url+'/'+valueE.img}/>{valueE.text}</b>
+                                                                    <input type='checkbox' value={valueE.id}  />
+                                                                </a>
+                                                            </div>
+                                                        )
+                                                    }
                                                 })
                                             }
                                         </div>
-                                        )
+                                    )
                                 })
                             }
-                            </div>
-                            )
-                      })
-                        
-                    }
-                </div>
-                <div className={styles.righttable}>
-                    <div className={styles.columnbox} id='colum'>
-                     { chtnum5 !==undefined && <Column cnum={chtnum5} cname={chtname5} ctit={chtit5} ></Column> }
-                    </div>
-                    <div className={styles.tablebox} id='tablebox'>
-                        <div className={styles.tabtit} id='tablist' style={{width:'100%'}}>
-                        {
-                            select_list5 !== undefined && select_list5.param.map((value,key)=>{
-                                if(key==0){
-                                        return(
-                                        <span key={key} style={{width:'83px'}}>{value}</span>
-                                        ) 
-                                    }else if(key==1){
-                                        return(
-                                        <span key={key} style={{width:'292px'}}>{value}</span>
-                                        ) 
-                                    }else if(key==4){
-                                        return(
-                                        <span key={key} style={{width:'452px'}}>{value}</span>
-                                        ) 
-                                    }else{
-                                        return(
-                                        <span key={key} style={{cursor:'pointer',width:'232px'}} id={'poin'+key} onClick={(e)=>clickitem(key,e.target)}>{value}</span>
-                                        ) 
-                                    }
-                            })
-                        }
                         </div>
-                        <div  className={styles.tabline} id='tabline' style={{width:'100%'}}></div>
+                        <div className={styles.righttable}>
+                            <div className={styles.columnbox} id='colum'>
+                                {AvaData!==undefined && <OneColumn month={name} arr1={avaPercent} unit1={'%'} nameOne={'可利用率'} title={'可利用率统计分析'}></OneColumn>}
+                            </div>
+                            <div className={styles.tablebox} id='tablebox'>
+                                {AvaData!==undefined &&
+                                <table>
+                                    <tbody>
+                                        <tr className={styles.thTen}><th>序号</th><th>电场名称</th><th>可利用率</th><th>名称</th><th>机组类型</th><th>开始时间</th><th>结束时间</th><th>故障时长(h)</th><th>剩余可控时间(h)</th><th>监控结果</th></tr>
+                                        {
+                                            wfname.map((value,key)=>{
+                                                return(
+                                                    <tr key={key} className={styles.thTen}><th>{key+1}</th><th>{wfname[key]}</th><th>{avaPercent[key]}</th><th>{name[key]}</th><th>{type[key]}</th><th>{timeS[key]}</th><th>{timeE[key]}</th><th>{timeFault[key]}</th><th>{timeRemain[key]}</th><th>{result[key]}</th></tr>
+                                                )
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
+                                }
+                            </div>
+                        </div>
                     </div>
-                    
-                </div>
-
-            </div>
-        );
-    }
+                );
+            }else{
+                return(
+                    <Login></Login>
+                )
+            }
+        }
 });
 
 
 const mapStateToProps = (state) => {
     return {
-        select_list5:state.vars.select_list5,
-        tabarr5:state.vars.tabarr5,
-        chtnum5:state.vars.chtnum5,
-        chtname5:state.vars.chtname5,
-        chtit5:state.vars.chtit5,
+        alertText : state.vars.alertText,
+        boolywbb:state.vars.boolywbb,
+        select_list:state.vars.select_list,
+        AvaData:state.objs.AvaData,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
-        playjq:()=>{
-             //select选择事件隐藏DIV
-            $('#selectop').change(function(){
-                $("#leftlist>div div").hide();
-                $("#leftlist>div img").attr('src', add);
-                $("#leftlist input").prop('checked', false);
-            })
-
-            //复选框状态跟随
-            $("#leftlist input").change(function(){
-                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
-            })
-            //select下拉事件
-            $("#leftlist b").on('click',function(){
-                $(this).parent().siblings().toggle();
-                if($(this).siblings('img').attr('src') == add){
-                    $(this).siblings('img').attr('src', jian);
-                }else{
-                    $(this).siblings('img').attr('src', add);
-                }
-            })
-            //查询按钮功能
-            $('#searchall').on('click',function(){
-                 //初始化对应数组
-                    chartnum=[];
-                    chartname=[];
-                //初始化highchart数据与表格数据
-                dispatch(actions.setVars('chtnum5',''));
-                 dispatch(actions.setVars('chtname5',''));
-                 dispatch(actions.setVars('tabarr5',''));
-                 dispatch(actions.setVars('chtit5',''));
-                $('#tabline').empty();
-                //初始化按钮颜色
-                $('#tablist span').css('background','#464c58');
-                if($('#startTime').val() == '' || $('#endTime').val() == ''){
-                    alert('请选择开始或者结束时间');
-                }else if(allnum.length==0){
-                    alert('请选择要查询的字段')
-                }else if($('#timelength').val() == ''){
-                    alert('请选择日期维度')
-                }else{
-                allnum.map(function(value,key){
-                    $('#tabline').append('<div style="width:100%"></div>');
-                   
-                    value.map(function(valueC,keyC){
-                        $('#tabline>div').eq(key).append('<span>'+valueC+'</span>');
-                        $('#tabline>div').eq(key).find('span').width(230);
-                        $('#tabline>div').eq(key).find('span').eq(0).width(80);
-                        $('#tabline>div').eq(key).find('span').eq(1).width(291);
-                        $('#tabline>div').eq(key).find('span').eq(2).text(value[2]+'%');
-                        $('#tabline>div').eq(key).find('span').eq(4).width(450);
-                    })
-                    if(key%2==0){
-                        $('#tabline>div').eq(key).css('background','#30343f')
-                    }else{
-                        $('#tabline>div').eq(key).css('background','#272b34')
-                    }
-                   //默认显示第一条数据
-                $('#tablist span').eq(2).css('background','#333');
-                 //初始化默认收集第一层数据
-                chartnum.push(value[2]);
-                chartname.push(value[4]); 
-                        
-                //显示highchart图标 
-                $('#colum').css('display','block');
-                     
-                })
-                    //初始化默认显示第一层数据
-                        dispatch(actions.setVars('chtnum5',chartnum));
-                        dispatch(actions.setVars('chtname5',chartname));
-                        dispatch(actions.setVars('chtit5','占比')); 
-            }
-
-            })
+        ajax:()=>{
+            dispatch(actions.setVars('boolywbb', false));
+            $.ajax({    
+                    url:'http://'+url+'/Monitor/xml.aspx',    
+                    data:'functionname=GetWFInfoByMonNoWfType&devtype=WindTurbine&crossDomain=true&zip=false',    
+                    dataType:"jsonp",    
+                    jsonp:"callback",    
+                    jsonpCallback:"testCall",    
+                    timeout:5000,       
+                    success:function(json,textStatus){    
+                        dispatch(actions.setVars('select_list',json));
+                        dispatch(actions.setVars('boolywbb', true));
+                    },    
+                    error:function(XMLHttpRequest,textStatus,errorThrown){    
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败！'));    
+                    }    
+            });
+            
         },
         init: () => {
+
+        },
+        playjq:()=>{
             //初始化日期
             var date = new Date();
             if(date.getMonth()==0&&date.getDate()==1){
@@ -275,177 +273,75 @@ const mapDispatchToProps = (dispatch) => {
                     }
                 }
             }
-            //获取今天与明天的日期
+            
+            //获取今天与昨天的日期
             $('#startTime').val(dateString1);
             $('#endTime').val(dateString);
-            $('#timelength').val(dateString1);
-            //初始化选中数组
-            allnum=[];
-            //初始化highchart数据与表格数据
-                dispatch(actions.setVars('chtnum5',''));
-                 dispatch(actions.setVars('chtname5',''));
-                 dispatch(actions.setVars('tabarr5',''));
-                 dispatch(actions.setVars('chtit5',''));
-           
-            //select初始化option个数
-            dispatch(actions.setVars('select_list5', btype[0].select[0]));
-        },
-         inputOnChange:(value,id)=>{
-           console.log(value,id)
-        },
-        changeselect:(value)=>{
-            //初始化按钮颜色
-            $('#tablist span').css('background','#464c58');
-            //初始化选中数组
-            allnum=[];
-            //初始化显示条目数组
-            $('#tabline').empty();
-             //初始化对应数组
-            chartnum=[];
-            chartname=[];
-            //初始化highchart数据与表格数据
-                dispatch(actions.setVars('chtnum5',''));
-                 dispatch(actions.setVars('chtname5',''));
-                 dispatch(actions.setVars('tabarr5',''));
-                 dispatch(actions.setVars('chtit5',''));
-            dispatch(actions.setVars('select_list5', value[$('#selectop').val()]));
-        },
-        sent_info:(value,even)=>{
-          
-            if(even.checked){
-            let num=[];
-            if(value.name){
-                value.arr.map((valueA,keyA)=>{
-                    if(valueA.name){
-                       valueA.arr.map((valueB,keyB)=>{
-                          if(valueB.name){
-                            valueB.arr.map((valueC,keyC)=>{
-                                if(valueC.name){  
-                                    valueC.arr.map((valueD,keyD)=>{
-                                        num.push(valueD);
-                                       if(keyD==valueC.arr.length-1){
-                                        allnum.push(num);
-                                         num=[];
-                                       }
-                                    })
-                                }else{
-                                    num.push(valueC);
-                                     if(keyC==valueB.arr.length-1){
-                                        allnum.push(num);
-                                         num=[];
-                                       }
-                                }
-                            }) 
-                            }else{
-                                    num.push(valueB);
-                                    if(keyB==valueA.arr.length-1){
-                                        allnum.push(num);
-                                         num=[];
-                                       }
-                                }
-                        }) 
-                    }else{
-                                    num.push(valueA);
-                                    if(keyA==value.arr.length-1){
-                                        allnum.push(num);
-                                        
-                                         num=[];
-                                       }
-                                }
-                })
-            }
-           
-            // console.log(allnum)
-           }else{
-                let num=[];
-            if(value.name){
-                value.arr.map((valueA,keyA)=>{
-                    if(valueA.name){
-                       valueA.arr.map((valueB,keyB)=>{
-                          if(valueB.name){
-                            valueB.arr.map((valueC,keyC)=>{
-                                if(valueC.name){  
-                                    valueC.arr.map((valueD,keyD)=>{
-                                        num.push(valueD);
-                                       if(keyD==valueC.arr.length-1){
-                                        allnum.pop(num);
-                                        
-                                         num=[];
-                                       }
-                                    })
-                                }else{
-                                    num.push(valueC);
-                                     if(keyC==valueB.arr.length-1){
-                                        allnum.pop(num);
-                                        
-                                         num=[];
-                                       }
-                                }
-                            }) 
-                            }else{
-                                    num.push(valueB);
-                                    if(keyB==valueA.arr.length-1){
-                                        allnum.pop(num);
-                                       
-                                         num=[];
-                                       }
-                                }
-                        }) 
-                    }else{
-                                    num.push(valueA);
-                                    if(keyA==value.arr.length-1){
-                                        allnum.pop(num);
-                                        
-                                         num=[];
-                                       }
-                                }
-                })
-            }
-
-            
-            // console.log(allnum)
-           }
-           // for(var one=0;one<allnum.length-1;one++){
-           //      for(var two=one+1;two<allnum.length;two++){
-           //         if( allnum[one][0]===allnum[two][0]){
-           //          allnum.splice(allnum[two],1);
-           //        }
-           //      }
-                
-           //  }
-          dispatch(actions.setVars('tabarr5', allnum));
-        },
-        clickitem:(kk,even)=>{
-
-            if($('#tabline').has('div').length){
-                //点击初始化数据
-            dispatch(actions.setVars('chtnum5',''));
-            dispatch(actions.setVars('chtname5',''));
-
-            //初始化对应数组
-            chartnum=[];
-            chartname=[];
-            allnum.map((valueC,keyC)=>{
-               
-                 chartnum.push(valueC[kk]);
-                 chartname.push(valueC[1]);
-                  // console.log(chartnum);
-                  // console.log(chartname) 
-                 dispatch(actions.setVars('chtnum5',chartnum));
-                 dispatch(actions.setVars('chtname5',chartname));
-                 dispatch(actions.setVars('chtit5',$('#'+even.id).text()));  
-                
+            $('#timeLenth').val(dateString1);
+            //复选框状态跟随
+            $("#leftlist input").change(function(){
+                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
+            });
+            //下拉点击事件
+            $("#leftlist b").on('click',function(){
+                $(this).parent().siblings().toggle();
+                if($(this).siblings('img').attr('src') == add){
+                    $(this).siblings('img').attr('src', jian);
+                }else{
+                    $(this).siblings('img').attr('src', add);
+                }
+            });
+            //查询按钮功能
+            $('#searchall').on('click',function(){
+                $('#tabtit span').css('background','none');
+                $('#tablist td').css('background','none');
+             
+                //显示表格
+                $('#tablebox').show();
             })
-            }else{
-                 alert('没有查询到数据！')
+        },
+        searchnum:()=>{
+            var all=[];
+            //获取查询时间
+            var startTime=$('#startTime').val();
+            var endTime=$('#endTime').val();
+            $('#leftlist input').each(function(){
+                if($(this).prop('checked')==true){
+                    if($(this).val()!=='value'){
+                        all.push($(this).val())
+                    }
+                }
+            });
+            if(all.length>50){
+                all.splice(50,all.length);
             }
-            
-            $('#'+even.id).css('background','#333').siblings('span').css('background','#464c58')
-
+            if(all.length==0){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择设备！'));  
+                return;
+            }
+            $.ajax({    
+                url:'http://'+url+'/Monitor/xml.aspx',    
+                data:'functionname=GetUsepercentStat&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&stype=1&avli=100&BTZ=480&crossDomain=true&zip=false',    
+                dataType:"jsonp",    
+                jsonp:"callback",    
+                jsonpCallback:"testCall",    
+                timeout:5000,       
+                success:function(json,textStatus){ 
+                    if(json.wfid==undefined){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '无数据！'));  
+                        return;
+                    } 
+                    dispatch(actions.setObjs('AvaData',json));
+                    console.log(json)
+                },    
+                error:function(XMLHttpRequest,textStatus,errorThrown){    
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败！'));      
+                }    
+            });
         }
-    
-       
-       
     };
 };
 

@@ -263,7 +263,7 @@ const mapDispatchToProps = (dispatch) => {
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
-               timeout:3000,       
+               timeout:5000,       
                success:function(json,textStatus){
  
                    dispatch(actions.appendObjs('devtype1',json));
@@ -280,7 +280,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){  
                     dispatch(actions.appendObjs('select_list2',json));
                     gettabdata();
@@ -299,7 +299,7 @@ const mapDispatchToProps = (dispatch) => {
                   dataType:"jsonp",    
                   jsonp:"callback",    
                   jsonpCallback:"testCall",    
-                  timeout:3000,       
+                  timeout:5000,       
                   success:function(json,textStatus){
                     dispatch(actions.appendObjs('select_list21',json));
                     dispatch(actions.setVars('boolywbb1', true));
@@ -413,7 +413,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){ 
                     dispatch(actions.appendObjs('tabledata1',json));
                 },    

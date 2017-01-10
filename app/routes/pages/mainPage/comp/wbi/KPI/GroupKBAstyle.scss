@@ -69,6 +69,503 @@
             position: relative;
             width: 100%;
             .area{
+                background-color: rgba(44, 61, 71, 0.4);
+                position: relative;
+                height: 380px;
+                overflow: hidden;
+                .img{
+                    position: absolute;
+                    z-index: 5;
+                    top: 5px;
+                    left: 15px;
+                    a{
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 12.5px;
+                        background: url(../../../img/comp/rank.png)no-repeat;
+                    }
+                }
+            }
+            .wind{
+                position: relative;
+                overflow: hidden;
+                top: 15px;
+                float: left;
+                height: 380px;
+                margin-right: 1%;
+                width: 49.5%;
+                background-color: rgba(44, 61, 71, 0.4);
+                .img{
+                    position: absolute;
+                    z-index: 5;
+                    top: 5px;
+                    left: 15px;
+                    a{
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 12.5px;
+                        background: url(../../../img/comp/rank.png)no-repeat;
+                    }
+                }
+            }
+            .fan{
+                position: relative;
+                overflow: hidden;
+                top: 15px;
+                float: left;
+                height: 380px;
+                width: 49.5%;
+                background-color: rgba(44, 61, 71, 0.4);
+                .img{
+                    position: absolute;
+                    z-index: 5;
+                    top: 5px;
+                    left: 15px;
+                    a{
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 12.5px;
+                        background: url(../../../img/comp/rank.png)no-repeat;
+                    }
+                }
+                .topLight{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:#20FEFE;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 174px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    box-shadow: 0 0 15px #20FEFE;
+                }
+                .top{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:white;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 174px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    &:hover{
+                        box-shadow: 0 0 15px #20FEFE;
+                    }
+                }
+                .bottomLight{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:#20FEFE;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 94px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    box-shadow: 0 0 15px #20FEFE;
+                }
+                .bottom{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:white;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 94px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    &:hover{
+                        box-shadow: 0 0 15px #20FEFE;
+                    }
+                }
+                .moreLight{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:#20FEFE;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 12px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    box-shadow: 0 0 15px #20FEFE;
+                }
+                .more{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:white;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 12px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    &:hover{
+                        box-shadow: 0 0 15px #20FEFE;
+                    }
+                }
+            }
+        }
+        .boxShadow:hover{
+           box-shadow:0 0 15px #fff;
+       } 
+}
+
+.gbaBoxBlue{
+        width: 1780px;
+        padding: 0 30px 0 10px;
+        .show{
+            height:460px;
+            width: 1740px;
+            background-color: #21242a;
+            position: absolute;
+            border: 1px solid #1e8087;
+            top: 200px;
+            display:block;
+            z-index: 8;
+            .header{
+                position: relative;
+                color: #fff;
+                height: 60px;
+                line-height: 50px;
+                background-color: #1c405b;
+                font-size: 16px;
+                padding: 4px 6px;
+                h3{
+                    position: absolute;
+                    display: inline-block;
+                    height: 60px;
+                    width: 200px;
+                    line-height: 60px;
+                    top: -20px;
+                    left: 20px;
+                    font-size: 16px;
+                    a{
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 12.5px;
+                        background: url(../../../img/comp/rank.png)no-repeat;
+                    }
+                    span{
+                        display: inline-block;
+                        height: 25px;
+                        width: 150px;
+                    }
+                }
+                span{
+                    display: inline-block;
+                    position: absolute;
+                    height: 50px;
+                    width: 50px;
+                    line-height: 50px;
+                    top: 0;
+                    right: 10px;
+                    cursor: pointer;
+                    text-align: center;
+                }
+            }
+            .chart{
+                height: 400px;
+                width: 100%;
+                overflow: scroll;
+                background-color: #112a48;
+                div{
+                    height: 380px;
+                    width: 12000px; 
+                }
+            } 
+        }
+        .hide{
+            display: none;
+        }
+        .content{
+            position: relative;
+            width: 100%;
+            .area{
+                position: relative;
+                height: 380px;
+                overflow: hidden;
+                background-color: #112a48;
+                .img{
+                    position: absolute;
+                    z-index: 5;
+                    top: 5px;
+                    left: 15px;
+                    a{
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 12.5px;
+                        background: url(../../../img/comp/rank.png)no-repeat;
+                    }
+                }
+            }
+            .wind{
+                position: relative;
+                overflow: hidden;
+                top: 15px;
+                float: left;
+                height: 380px;
+                margin-right: 1%;
+                width: 49.5%;
+                background-color: #112a48;
+                .img{
+                    position: absolute;
+                    z-index: 5;
+                    top: 5px;
+                    left: 15px;
+                    a{
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 12.5px;
+                        background: url(../../../img/comp/rank.png)no-repeat;
+                    }
+                }
+            }
+            .fan{
+                position: relative;
+                overflow: hidden;
+                top: 15px;
+                float: left;
+                height: 380px;
+                width: 49.5%;
+                background-color: #112a48;
+                .img{
+                    position: absolute;
+                    z-index: 5;
+                    top: 5px;
+                    left: 15px;
+                    a{
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 12.5px;
+                        background: url(../../../img/comp/rank.png)no-repeat;
+                    }
+                }
+                .topLight{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:#20FEFE;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 174px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    box-shadow: 0 0 15px #20FEFE;
+                }
+                .top{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:white;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 174px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    &:hover{
+                        box-shadow: 0 0 15px #20FEFE;
+                    }
+                }
+                .bottomLight{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:#20FEFE;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 94px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    box-shadow: 0 0 15px #20FEFE;
+                }
+                .bottom{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:white;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 94px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    &:hover{
+                        box-shadow: 0 0 15px #20FEFE;
+                    }
+                }
+                .moreLight{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:#20FEFE;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 12px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    box-shadow: 0 0 15px #20FEFE;
+                }
+                .more{
+                    z-index: 5;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-family: '微软雅黑';
+                    position: absolute;
+                    color:white;
+                    border: 1px solid #20FEFE;
+                    top: 5px;
+                    right: 12px;
+                    height: 30px;
+                    width: 70px;
+                    line-height: 30px;
+                    border-radius: 15px;
+                    text-align: center;
+                    &:hover{
+                        box-shadow: 0 0 15px #20FEFE;
+                    }
+                }
+            }
+        }
+        .boxShadow:hover{
+           box-shadow:0 0 15px #fff;
+       } 
+}
+
+.gbaBoxWhite{
+        width: 1780px;
+        padding: 0 30px 0 10px;
+        .show{
+            height:460px;
+            width: 1740px;
+            background-color: #21242a;
+            position: absolute;
+            border: 1px solid #1e8087;
+            top: 200px;
+            display:block;
+            z-index: 8;
+            .header{
+                position: relative;
+                color: #fff;
+                height: 60px;
+                line-height: 50px;
+                background-color: #464c58;
+                font-size: 16px;
+                padding: 4px 6px;
+                h3{
+                    position: absolute;
+                    display: inline-block;
+                    height: 60px;
+                    width: 200px;
+                    line-height: 60px;
+                    top: -20px;
+                    left: 20px;
+                    font-size: 16px;
+                    a{
+                        display: inline-block;
+                        height: 25px;
+                        width: 25px;
+                        border-radius: 12.5px;
+                        background: url(../../../img/comp/rank.png)no-repeat;
+                    }
+                    span{
+                        display: inline-block;
+                        height: 25px;
+                        width: 150px;
+                    }
+                }
+                span{
+                    display: inline-block;
+                    position: absolute;
+                    height: 50px;
+                    width: 50px;
+                    line-height: 50px;
+                    top: 0;
+                    right: 10px;
+                    cursor: pointer;
+                    text-align: center;
+                }
+            }
+            .chart{
+                height: 400px;
+                width: 100%;
+                overflow: scroll;
+                div{
+                    height: 380px;
+                    width: 12000px; 
+                }
+            } 
+        }
+        .hide{
+            display: none;
+        }
+        .content{
+            position: relative;
+            width: 100%;
+            .area{
                 position: relative;
                 height: 380px;
                 overflow: hidden;
@@ -242,4 +739,3 @@
            box-shadow:0 0 15px #fff;
        } 
 }
-

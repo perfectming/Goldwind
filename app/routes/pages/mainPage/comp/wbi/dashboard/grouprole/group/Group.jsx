@@ -22,10 +22,10 @@ let Component = React.createClass({
 
 
     render() {
-        let{groupbool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{skinStyle,groupbool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(groupbool){
             return (
-                <div className={styles.box}>
+                <div className={skinStyle==1? styles.boxBlue:skinStyle==2? styles.boxWhite:styles.box}>
                     <div className={styles.left}>
                         <div className={`${styles.firstfloor} ${styles.boxShadow}`}>
                             <div className={styles.section}>
@@ -108,7 +108,7 @@ let Component = React.createClass({
                                         <div className={styles.links}><a className={styles.time} onClick={()=>changepageEleT()}></a></div>
                                     </div>
                                 </div>
-                                <Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+                                <Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
                             </div>
                             <div className={`${styles.yearprofit} ${styles.boxShadow}`}>
                                 <div className={styles.header}>
@@ -118,7 +118,7 @@ let Component = React.createClass({
                                         <div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
                                     </div>
                                 </div>
-                                <div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"元"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
+                                <div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"(元)"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
                             </div>
                         </div>
                     </div>
@@ -136,7 +136,7 @@ let Component = React.createClass({
                             </tr>
                             {
                                 sortArr.slice(0,15).map((value,key)=>{
-                                    return(<tr key={key}><th>{key+1}</th><th>{value.groupname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime).toFixed(1)}分钟</th></tr>)
+                                    return(<tr key={key}><th>{key+1}</th><th>{value.groupname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime/60).toFixed(1)}小时</th></tr>)
                                 })
                             }
                             </tbody>
@@ -157,6 +157,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return{
+        skinStyle: state.vars.skinStyle, //全局换肤
         sortArr : state.vars.sortArr,
         flag1 : state.vars.flag1,
         flagPba1 : state.vars.flagPba1,
