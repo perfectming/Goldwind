@@ -21,14 +21,14 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata,mon,w0="巴盟",w10,hhdata1,width0,hhdata2,hhdata3,changecolor, befor_pages = 'area',bt0, ipUrl, wfid,actbt=10, returnit,ip="10.68.100.32",runtime,downtime,tba0,name0,name2,runtime2,downtime2,tba2,gogogo,back,more,hideit} = this.props;
+        let {hhdata,mon,w0="巴盟",w10,skinStyle,width0,hhdata2,hhdata3,changecolor, befor_pages = 'area',bt0, ipUrl, wfid,actbt=10, returnit,ip="10.68.100.32",runtime,downtime,tba0,name0,name2,runtime2,downtime2,tba2,gogogo,back,more,hideit} = this.props;
 
         return (
 
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 {/*返回按钮*/}
                 <div className={styles.light} id="light"> </div>
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}   id="boxhidden">
@@ -80,8 +80,8 @@ let Component = React.createClass({
                 <div className={styles.clear}>
 
                 </div>
-                <div className={`${styles.fbox} `}>
-                    <div className={` ${styles.logofa} ${styles.box_shadow}`}>
+                <div className={`${styles.fbox}  ${styles.logofa}`}>
+                    <div className={` ${styles.box_shadow} ${styles.fbox2}`}>
                         <div className={styles.rbox33}>
                             <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0, ipUrl, wfid,actbt)}>前10</button>
                             <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, ipUrl, wfid,actbt)}>后10</button>
@@ -125,7 +125,7 @@ const mapStateToProps = (state) => {
         wfid:state.vars.wfid,
         bt0: state.vars.bt0,
         width0: state.vars.width0,
-
+        skinStyle: state.vars.skinStyle
     }
 };
 

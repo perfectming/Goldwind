@@ -23,8 +23,8 @@ let Component = React.createClass({
                 height:400,
 
 
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
-                plotBackgroundColor: "rgba(46, 46, 65, 0)",
+                backgroundColor: null,
+                //plotBackgroundColor: "rgba(46, 46, 65, 0)",
 
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -184,8 +184,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl,groupid)=>{
             dispatch(actions.setVars('mon',w0 ));
-            console.log(groupid)
-            console.log(wc1)
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getAreaTimHealth',

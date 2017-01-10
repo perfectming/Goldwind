@@ -19,7 +19,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:height,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -264,7 +264,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
+
                     let barLotime21q = [];    //各区域   一区域二区域
                     let power21q=[];       //实际发电量
                     let wrong201q=[];       //故障损失

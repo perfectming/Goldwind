@@ -22,14 +22,14 @@ let Component = React.createClass({
 
 
     render() {
-        let {ipUrl,areaId, monthx, monthx2, healthy2, healthy3, monthx3, befor_pages = 'area', mon, returnit} = this.props;
+        let {ipUrl,areaId,skinStyle, monthx, monthx2, healthy2, healthy3, monthx3, befor_pages = 'area', mon, returnit} = this.props;
         let data = require('./Healthy-data');
         return (
 
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.paddingtop}>
                 <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
                 </div>
@@ -48,8 +48,8 @@ let Component = React.createClass({
                 <div className={styles.clear}>
 
                 </div>
-                <div className={`${styles.fbox}  ${styles.logofa}`}>
-                    <div className={`${styles.box_shadow}`}>
+                <div className={`${styles.fbox} ${styles.logofa} `}>
+                    <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Hly_d monthx3={monthx3}
                                healthy3={healthy3}
                                text={mon + "巴盟每日健康度"}></Hly_d>
@@ -74,6 +74,7 @@ const mapStateToProps = (state) => {
         healthy3: state.vars.healthy3,
         mon: state.vars.mon,
         areaId: state.vars.areaId,
+        skinStyle: state.vars.skinStyle,
     }
 };
 
@@ -91,8 +92,7 @@ const mapDispatchToProps = (dispatch) => {
                 month2=12;
             }
             areaId=areaId[0];
-            console.log(month2)
-            console.log(areaId)
+
 
             $.ajax({
                 type: 'post',
@@ -106,7 +106,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-                    console.log(data)
+
                     dispatch(actions.setVars('hhdata', data));
                     dispatch(actions.setVars('mon', month2 + "月"));
 

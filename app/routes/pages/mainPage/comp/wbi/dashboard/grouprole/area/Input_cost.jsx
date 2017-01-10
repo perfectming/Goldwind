@@ -23,7 +23,7 @@ let page = 1;//设置初始页码
 let thDate = new Date();
 let thYear = thDate.getFullYear();
 let month2 = thDate.getMonth();
-let soam = 'http://10.9.100.48:8080/wbi';//设置接口
+let soam = 'http://10.68.100.32:8080/wbi';//设置接口
 for (let i = 0; i <= 30; i++) {
     yeares.push(thYear - 2 + i)
 }
@@ -440,7 +440,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 //  timeout:'3000',
                 success: function (data) {
-                    console.log(data)
+
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('totalpage', data.data.totalPage));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
@@ -514,10 +514,13 @@ const mapDispatchToProps = (dispatch) => {
                 },
                 dataType: 'json',//here,
                 success: function (data) {
-
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('totalpage', data.data.totalPage));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    if(data.data==null){
+                        alert("找不到您想要的数据")
+                    }else {
+                        dispatch(actions.setObjs('tableContent', data));
+                        dispatch(actions.setVars('totalpage', data.data.totalPage));
+                        dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    }
                 },
                 error: function () {
                     console.log('获取数据失败')
@@ -572,7 +575,7 @@ const mapDispatchToProps = (dispatch) => {
             });
             function jiang() {
                 let tableV = _.clone(getState().objs.tableContent);
-                console.log(i)
+
                 i.cost='';
                 i.remark='';
                 i.year='';
@@ -603,7 +606,7 @@ const mapDispatchToProps = (dispatch) => {
             wfs['id'] = id;
 
             //wfs.push({groupname:"巴盟"});
-            console.log(wfs)
+
 
 
                 if (wfs.cost == null || wfs.cost == '') {
@@ -693,7 +696,7 @@ const mapDispatchToProps = (dispatch) => {
             if (wfs.month==''){
                 wfs.month="1"
             }
-            console.log(wfs)
+
             if(wfs.cost==null){
                 alert("成本不能为空")
             }else {
@@ -705,7 +708,7 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
-                        console.log(data)
+
                         dispatch(actions.setVars('years0', null));
                         dispatch(actions.setVars('wfids', null));
                         jiang3(num);

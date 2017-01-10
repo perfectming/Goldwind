@@ -29,13 +29,13 @@ let Component = React.createClass({
         let areaPlanDayT = data.areaPlanDayT;
         let text = data.textT;
 
-        let {wftpowerplan, wftmonth, wftpoweract, ipUrl, xxdwfId, xxdwfNa, actbt = 0, changpage, wind, windP, gogogo, back, more, close, backtop, befor_pagee = 'windpage', befor_pagee2, areaPlan}=this.props;
+        let {wftpowerplan, wftmonth, wftpoweract, ipUrl, xxdwfId, xxdwfNa, actbt = 0,  wind, windP, backtop, befor_pagee = 'windpage', areaPlan}=this.props;
         return (
             <div className={styles.box}>
 
-                <div className={styles.boxcover} id='boxcover'></div>
+
                 <div className={styles.paddingtop}>
-                    <div className={styles.back} onClick={() => backtop(befor_pagee, befor_pagee2)}>返回</div>
+                    <div className={styles.back} onClick={() => backtop(befor_pagee,)}>返回</div>
                 </div>
                 {//12个 月的数据
                      }
@@ -81,7 +81,6 @@ const mapStateToProps = (state) => {
         wind: state.vars.areaRecordCostNP,
         windP: state.vars.areaRecordProfitNP,
         befor_pagee: state.vars.befor_pagee,
-        befor_page2: state.vars.befor_page2,
         xxdwfId: state.vars.xxdwfId1,
         xxdwfNa: state.vars.xxdwfNa1,
         btn: state.vars.btnn,
@@ -119,7 +118,6 @@ const mapDispatchToProps = (dispatch) => {
                 data: {'wfid': xxdwfId},
                 dataType: 'json',//here
                 success: function (data) {
-
 
                     for (let i in data.data.wfieldsMonthsElec) {
                         let month = data.data.wfieldsMonthsElec[i].month;
@@ -236,44 +234,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('areaRecordProfitNP', arr3w));
 
         },
-        gogogo: (wind) => {
-            (function () {
-                windPT.sort(function (a, b) {
-                    return b.areaRecordCost - a.areaRecordCost;
-                })
-                for (var i = 0; i < 12; i++) {
-                    x0[i] = wind[i].name;
-                    x1[i] = wind[i].areaRecordCost;
-                }
-            })()
-            dispatch(actions.setVars('areaNamee', x0));
-            dispatch(actions.setVars('windP', x1))
 
-        },
-        back: (wind) => {
-            (function () {
-                windPT.sort(function (a, b) {
-                    return a.areaRecordCost - b.areaRecordCost;
-                })
-                for (var i = 0; i < 12; i++) {
-                    x2[i] = wind[i].name;
-                    x3[i] = wind[i].areaRecordCost;
-                }
-            })()
-            dispatch(actions.setVars('areaNamee', x2));
-            dispatch(actions.setVars('windP', x3))
-
-        },
-        more: () => {
-            $("#sss").show();
-            $('#boxcover').show();
-            // $('.box').css('opacity',".5")
-        },
-        close: () => {
-            $("#sss").hide();
-            $('#boxcover').hide();
-        },
-        backtop: (befor_pagee, befor_page2) => {
+        backtop: (befor_pagee, ) => {
             dispatch(actions.setVars('showPage', befor_pagee));
         },
     };

@@ -19,7 +19,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:height,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                // plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -177,7 +177,7 @@ const mapDispatchToProps = (dispatch) => {
         changedata1 :(areaId,ipUrl,w10,win,wc1,hhdata,actbt)=>{
             dispatch(actions.setVars('bt0',  0));
 
-            console.log(hhdata)
+
             let wfid=hhdata.data.AreaWtids[wc1].wfid;
 
             $.ajax({

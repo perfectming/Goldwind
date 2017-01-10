@@ -21,7 +21,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wfid,ipUrl,barlotimes1,bt0=0,width0,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,barlotimes3,barlopowers3,barlopowerp3,hhdata,hhdata1, w0 , w10 , mon , befor_pages = 'group', returnit, hideit, arr, arr2,arr3, gogogo, back, more, actbt = 10, changecolor,wc1,wc2} = this.props;
+        let {wfid,ipUrl,barlotimes1,skinStyle,bt0=0,width0,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,barlotimes3,barlopowers3,barlopowerp3,hhdata,hhdata1, w0 , w10 , mon , befor_pages = 'group', returnit, hideit, arr, arr2,arr3, gogogo, back, more, actbt = 10, changecolor,wc1,wc2} = this.props;
 
         let data = require('./../../area/Healthy-data');
         let month = data.data.line_month;
@@ -34,7 +34,7 @@ let Component = React.createClass({
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.light} id="light"></div>
 
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`} id="boxhidden">
@@ -157,7 +157,7 @@ const mapStateToProps = (state) => {
         ipUrl:state.vars.ipUrl,
         wfid:state.vars.wfid,
         width0:state.vars.width0,
-
+        skinStyle: state.vars.skinStyle
     }
 };
 

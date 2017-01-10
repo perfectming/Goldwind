@@ -6,7 +6,7 @@ import add from '../../../img/icon/tabAdd.png';
 var actions = require('redux/actions');
 import styles from './Ms.scss';
 var $ = require('jquery');
-let soamMs='http://10.9.100.48:8080/soam';
+let soamMs='http://10.68.100.32:8080/soam';
 import Abox from './boxA';
 import Bbox from './boxB';
 import Login from '../../../../../../components/common/Loading.jsx';
@@ -16,8 +16,8 @@ import refresh from '../../../img/comp/refresh.png';
 import _ from 'lodash';
 let pageSize=3;
 let arr=['id','name','descr','',''];
-let roleCenterArr=['wtname','queryrights','controlrights','superviseright'];
-
+let roleCenterArr=['wfid','wfname','wtid','wtname','queryrights','controlrights','superviseright'];
+let roleCenterTitle=['风场id','风场名称','风机id','风机名称','查询权','控制权','监控权'];
 let tabaleData = require('./data');
 let Component = React.createClass({
     componentDidMount() {
@@ -25,14 +25,16 @@ let Component = React.createClass({
     },
     render() {
 
-        let {centerControl,changeRole,boxRoleId,roleList,boxRoleList,init,nextPage,lastPage,theOne,theLast,boxRole,boxCenter,page,ids,msCount,uName,remark,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem1} = this.props;
-        let newData=[];
-        let num=0;
+        let {saveDatabase,checkId,checkName,changeBoxItem,boxRoleArr,deleDate,fits,centerControl,addDate,changeRole,boxRoleId,roleList,boxRoleList,init,nextPage,lastPage,theOne,theLast,boxRole,boxCenter,page,ids,msCount,uName,remark,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem1} = this.props;
         let num1=0;
         let num2=0;
-        for(let i=0;i<tabaleData.msData.header.length;i++){
-            newData.push('');
+        let newData={};
+        let num=0;
+        for(let i=0;i<arr.length-2;i++){
+            newData[arr[i]]='';
         }
+        newData['typeid']=1;
+        newData['ids']=false;
         let comp=tabaleData.comps.from;
         if(table){
         return (
@@ -41,7 +43,7 @@ let Component = React.createClass({
                 <div className={styles.roleputBox}>
                     <div className={styles.inquireBox} key='0'>
                         {
-                            comp.map((value, key,valueName)=> {
+                            comp.map((value, key)=> {
                                 if (value.type === 'input') {
                                     return (
                                         <div className={styles.inputBox} key={key}>
@@ -80,48 +82,116 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.tableContentBox}>
                             {
-                                table.data.pagedata.map((value, key)=> {
+                                table.data.pagedata && table.data.pagedata.map((value, key)=> {
                                     num++;
-                                    return (
-                                        <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
-                                            <input className={styles.tableContentItem}
-                                                   style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}
-                                                   readOnly="true" value={num}/>
-                                            {
-                                                arr.map((valueC, keyC)=> {
-                                                    if(keyC==3) {
-                                                        return (
-                                                            <input className={styles.tableContentItem}
-                                                                   style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}
-                                                                   key={keyC} type="button" value='设置'
-                                                                   onClick={()=>roleList(value.id)}/>
-                                                        )
-                                                    }else if(keyC==4) {
-                                                        return (
-                                                            <input className={styles.tableContentItem}
-                                                                   style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}
-                                                                   key={keyC} type="button" value='设置'
-                                                                   onClick={()=>centerControl(value.id)}/>
-                                                        )
-                                                    }else {
-                                                        return (
-                                                            <input className={styles.tableContentItem}
-                                                                   style={{width:(100/(tabaleData.msData.header.length+2))+"%"}}
-                                                                   key={keyC} contentEditable="true"
-                                                                   onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
-                                                                   value={value[valueC]}/>
-                                                        )
-                                                    }
-                                                })
-                                            }
-                                            <div className={styles.tableContentItem} style={{width:(50/(tabaleData.msData.header.length+2))+"%"}}>
-                                                <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.content[key]))}/>
+                                    if(key<msCount/1) {
+                                        return (
+                                            <div
+                                                className={key % 2 === 0 ? styles.tableContentLine : styles.tableContentLine1}
+                                                key={key}>
+                                                <input className={styles.tableContentItem}
+                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                       readOnly="true" value={num}/>
+                                                {
+                                                    arr.map((valueC, keyC)=> {
+                                                        if (keyC == 3) {
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} type="button" value='设置'
+                                                                       onClick={()=>roleList(value.id)}/>
+                                                            )
+                                                        } else if (keyC == 4) {
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} type="button" value='设置'
+                                                                       onClick={()=>centerControl(value.id)}/>
+                                                            )
+                                                        } else {
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} contentEditable="true"
+                                                                       onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                       value={value[valueC]}/>
+                                                            )
+                                                        }
+                                                    })
+                                                }
+                                                <div className={styles.tableContentItem}
+                                                     style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
+                                                    <img src={save}
+                                                         onClick={()=>saveDatabase(key,value.id)}/>
+                                                </div>
+                                                <div className={styles.tableContentItem}
+                                                     style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
+                                                    <img src={del} onClick={(e)=>deleData(key,value.id)}/>
+                                                </div>
                                             </div>
-                                            <div className={styles.tableContentItem} style={{width:(50/(tabaleData.msData.header.length+2))+"%"}}>
-                                                <img src={del} onClick={(e)=>deleData(key)}/>
+                                        )}else{
+                                        return (
+                                            <div
+                                                className={key % 2 === 0 ? styles.tableContentLine : styles.tableContentLine1}
+                                                key={key}>
+                                                <input className={styles.tableContentItem}
+                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                       readOnly="true" value={num}/>
+                                                {
+                                                    arr.map((valueC, keyC)=> {
+                                                        if (keyC == 3) {
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} type="button" value='设置'
+                                                                       onClick={()=>roleList(value.id)}/>
+                                                            )
+                                                        } else if (keyC == 4) {
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} type="button" value='设置'
+                                                                       onClick={()=>centerControl(value.id)}/>
+                                                            )
+                                                        } else if(keyC==0){
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} contentEditable="true" onBlur={(e)=>checkId(e.target,key, keyC)}
+                                                                       onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                       value={value[valueC]}/>
+                                                            )
+                                                        } else if(keyC==1){
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} contentEditable="true" onBlur={(e)=>checkName(e.target,key, keyC)}
+                                                                       onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                       value={value[valueC]}/>
+                                                            )
+                                                        } else {
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} contentEditable="true"
+                                                                       onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                       value={value[valueC]}/>
+                                                            )
+                                                        }
+                                                    })
+                                                }
+                                                <div className={styles.tableContentItem}
+                                                     style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
+                                                    <img src={save}
+                                                         onClick={()=>addDate(key,value.id)}/>
+                                                </div>
+                                                <div className={styles.tableContentItem}
+                                                     style={{width: (50 / (tabaleData.msData.header.length + 2)) + "%"}}>
+                                                    <img src={del} onClick={(e)=>deleDate(key)}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )
+                                        )
+                                    }
                                 })
                             }
                         </div>
@@ -143,7 +213,7 @@ let Component = React.createClass({
                         <div className={styles.newBox}>
                             <div className={styles.tableContentBox}>
                                 {
-                                    boxRoleList && boxRoleList.data.map((value, key)=> {
+                                    (boxRoleList && boxRoleList.data) && boxRoleList.data.map((value, key)=> {
                                         num1++;
                                         return (
                                             <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
@@ -168,21 +238,21 @@ let Component = React.createClass({
                             <span onClick={()=>changeRole(boxRoleId)}>点击</span>
                         </div>
                     </div>
-                    <div className={styles.tanC} id="center3" key='4' style={{width:812,top: 100, left:700,paddingLeft:300}}>
+                    <div className={styles.tanC} id="center3" key='4' style={{width:1000,top: 100, left:400,paddingLeft:300}}>
                         <div className={styles.upName}>角色权限<img src={close} className={styles.wrong} onClick={()=>{$('#center3').css('display','none')}}/></div>
                         <div className={styles.tableHeaderBox}>
                             <div className={styles.tableHeaderItem}
-                                 style={{width:(100/(tabaleData.msData.center.header.length+1)-10)+"%"}}>序号</div>
+                                 style={{width:(100/(tabaleData.msData.center.header.length+1)-12)+"%"}}>序号</div>
                             {
-                                tabaleData.msData.center.header.map((value, key)=> {
+                                roleCenterTitle.map((value, key)=> {
                                     return (
                                         <div className={styles.tableHeaderItem}
-                                             style={{width:(100/(tabaleData.msData.center.header.length+1))+"%"}} key={key}>{value}</div>
+                                             style={{width:(100/(roleCenterTitle.length+1))+"%"}} key={key}>{value}</div>
                                     )
                                 })
                             }
                         </div>
-                        <div className={styles.newBox}>
+                        <div className={styles.newBox} style={{width: 690}}>
                             <div className={styles.tableContentBox}>
                                 {
                                     (boxCenter && boxCenter.data) && boxCenter.data.map((value, key)=> {
@@ -190,34 +260,25 @@ let Component = React.createClass({
                                         return (
                                             <div className={key%2===0? styles.tableContentLine : styles.tableContentLine1} key={key}>
                                                 <input className={styles.tableContentItem}
-                                                       style={{width:(100/(tabaleData.msData.center.header.length+1)-10)+"%"}}
+                                                       style={{width:(100/(roleCenterTitle.length)-6)+"%"}}
                                                        readOnly="true" value={num2}/>
                                                 {
                                                     roleCenterArr.map((valueC, keyC)=> {
-                                                        if(keyC==0){
+                                                        if(keyC<4){
                                                             return (
                                                                 <input className={styles.tableContentItem}
-                                                                       style={{width:(100/(tabaleData.msData.center.header.length+1))+"%"}}
+                                                                       style={{width:(100/(roleCenterTitle.length+1))+"%"}}
                                                                        key={keyC} readOnly="true" value={value[valueC]}/>
                                                             )
                                                         }else {
-                                                            if(value[valueC]===0) {
                                                                 return (
                                                                     <div
-                                                                        style={{width: (100 / (tabaleData.msData.center.header.length + 1)) + "%"}}
+                                                                        style={{width: (100 / (roleCenterTitle.length + 1)) + "%"}}
                                                                         className={styles.tableContentItem} key={keyC}>
-                                                                        <input type="checkbox"/>
+                                                                        <input type="checkbox" onChange={(e)=>changeBoxItem(e.target,boxCenter,key,keyC)}
+                                                                               name={value[valueC]==0?'checkItIn':'checkItOut'}/>
                                                                     </div>
                                                                 )
-                                                            }else {
-                                                                return (
-                                                                    <div
-                                                                        style={{width: (100 / (tabaleData.msData.center.header.length + 1)) + "%"}}
-                                                                        className={styles.tableContentItem} key={keyC}>
-                                                                        <input type="checkbox" checked="checked"/>
-                                                                    </div>
-                                                                )
-                                                            }
                                                         }
                                                     })
                                                 }
@@ -229,13 +290,12 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.downCount}>
                             <span>{'记录合计：'+num2}</span>
-                            <span onClick={()=>{$('#box2').parent().css('display','block')}}>点击</span>
                         </div>
                         <Bbox></Bbox>
                     </div>
                     <Abox></Abox>
                     <div className={styles.pageplus}>
-                        <span onClick={()=>theOne(page,uName,remark)}>首 页</span>
+                        <span onClick={()=>theOne(page,uName,remark)}>首页</span>
                         <span onClick={()=>lastPage(page,uName,remark)}>上一页</span>
                         <span>{page+"/"+table.data.totalPage}</span>
                         <span onClick={()=>nextPage(page,table.data.totalRecord,pageSize,uName,remark)}>下一页</span>
@@ -252,6 +312,7 @@ const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContentMs,
         boxRole: state.objs.boxRole,
+        boxRoleArr: state.vars.boxRoleArr,
         boxRoleId: state.vars.boxRoleId,
         boxRoleList: state.objs.boxRoleList,
         boxCenter: state.objs.boxCenter,
@@ -289,24 +350,14 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
-                    // console.log(data);
+                    console.log(data);
                     dispatch(actions.setObjs('boxRole', data));
                 },
                 error:function(){
                     console.log('获取数据失败')
                 }
             });
-            $.ajax({
-                url: soamMs+'/roleright/getRolerRight?wfid=150801',
-                type: 'post',
-                dataType: 'json',//here,
-                success:function (data) {
-                    // console.log(data);
-                },
-                error:function(){
-                    console.log('获取数据失败')
-                }
-            });
+
             // $.ajax({
             //     url: soam+'/role/getByRoleidAllMenu?roleid=1',
             //     type: 'post',
@@ -322,25 +373,29 @@ const mapDispatchToProps = (dispatch) => {
             // });
         },
         centerControl(i){
-            console.log(i);
             dispatch(actions.setObjs('boxCenterId', i));
             $('#center3').css('display','block');
-            $.ajax({
-                url: soamMs+'/roleright/getRolerRightMapList',
-                type: 'post',
-                data:{roleid:i},
-                dataType: 'json',//here,
-                success:function (data) {
-                    console.log(data);
-                    dispatch(actions.setObjs('boxCenter', data));
-                },
-                error:function(){
-                    console.log('获取数据失败')
-                }
-            });
+
+            // $.ajax({
+            //     url: soamMs+'/roleright/getRolerRightMapList',
+            //     type: 'post',
+            //     data:{roleid:i},
+            //     dataType: 'json',//here,
+            //     success:function (data) {
+            //         console.log(data);
+            //         dispatch(actions.setObjs('boxCenter', data));
+            //             $("#center3 input[name='checkItOut']").prop('checked', true);
+            //             $("#center3 input[name='checkItIn']").prop('checked', false);
+            //     },
+            //     error:function(){
+            //         console.log('获取数据失败')
+            //     }
+            // });
+
         },
         changeRole(j){
             console.log(j);
+
             $('#box1').parent().css('display','block');
             $.ajax({
                 url: soamMs+'/role/getByRoleidAllMenu',
@@ -349,7 +404,11 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data);
-                    dispatch(actions.setObjs('boxRole', data));
+                    data.data && dispatch(actions.setObjs('boxRole', data));
+                    if(data){
+                        $("#box1 input[name='checkItOutbox']").prop('checked',true);
+                        $("#box1 input[name='checkItInbox']").prop('checked',false);
+                    }
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -374,15 +433,16 @@ const mapDispatchToProps = (dispatch) => {
         },
         checkId(id,i,j){
             $.ajax({
-                url: soam+'/role/getByIDUserAuthentication?id='+id.value,
+                url: soamMs+'/role/getByIDUserAuthentication?id='+id.value,
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
+                    console.log(data);
                     if(data.data==true){alert('用户编号重复');
                         let tableV = _.clone(getState().objs.tableContentMs);
                         tableV.data.pagedata[i][arr[j]] = '';
                         dispatch(actions.setObjs('tableContentMs', tableV));
-                    }
+                    }else if(!data.data){alert('请输入角色ID')}
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -391,15 +451,16 @@ const mapDispatchToProps = (dispatch) => {
         },
         checkName(name,i,j){
             $.ajax({
-                url: soam+'/role/getByNameUserAuthentication?name='+name.value,
+                url: soamMs+'/role/getByNameUserAuthentication?name='+name.value,
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
+                    console.log(data);
                     if(data.data==true){alert('用户名重复');
                         let tableV = _.clone(getState().objs.tableContentMs);
                         tableV.data.pagedata[i][arr[j]] = '';
                         dispatch(actions.setObjs('tableContentMs', tableV));
-                    }
+                    }else if(!data.data){alert('请输入角色名称')}
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -408,21 +469,234 @@ const mapDispatchToProps = (dispatch) => {
         },
         changeTableItem1: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContentMs);
-            tableV.content[i][j] = value;
+            tableV.data.pagedata[i][arr[j]] = value;
             dispatch(actions.setObjs('tableContentMs', tableV));
+        },
+        changeBoxItem: (value, table, i, j) => {
+            let tableV = _.clone(getState().objs.boxCenter);
+            value.checked ? tableV.data[i][roleCenterArr[j]] = 1 : tableV.data[i][roleCenterArr[j]]=0 ;
+            console.log(tableV.data[i][roleCenterArr[j]]);
+            dispatch(actions.setObjs('boxCenter', tableV));
         },
         inputOnChange:(value,id)=>{
 
         },
+        addDate:(li,ids)=>{
+            let tableV = _.clone(getState().objs.tableContentMs);
+            let boxArr = _.clone(getState().vars.boxRoleArr);
+            let cenAdd = _.clone(getState().objs.boxCenter);
+            let addArr=[];
+            boxArr && boxArr.map((value, key)=> {
+                addArr.push(value.menuid)
+            });
+            let addCen=[];
+            // console.log(cenAdd);
+            cenAdd && cenAdd.data.map((value, key)=> {
+                let cost={};
+                cost['wfid']=value.wfid;
+                cost['wtid']=value.wtid;
+                cost['controlrights']=value.controlrights;
+                cost['queryrights']=value.queryrights;
+                cost['superviseright']=value.superviseright;
+                cost['roleid']=ids;
+                addCen.push(cost);
+            });
+            let wfs=tableV.data.pagedata[li];
+            wfs['ids']=false;
+            wfs['typeid']=1;
+            // console.log(addCen);
+            let ddv=JSON.stringify(wfs);
+            $.ajax({
+                url: soamMs+'/role/getSaveRoleInfo?roleInfo=data',
+                type: 'post',
+                data: ddv,
+                dataType: 'json',//here,
+                contentType:'application/json;charset=UTF-8',
+                success:function () {
+                    let cosin={};
+                    cosin['roleid']=wfs.id;
+                    cosin['rightstype']=1;
+                    cosin['menuids']=addArr;
+                    let built=JSON.stringify(cosin);
+                    $.ajax({
+                        url: soamMs+'/rolemenu/getByRoleIdAddMenu?roleInfoVO=data',
+                        type: 'post',
+                        data: built,
+                        dataType: 'json',//here,
+                        contentType:'application/json;charset=UTF-8',
+                        success:function () {
+                            let builtY=JSON.stringify(addCen);
+                            // console.log(addCen);
+                            $.ajax({
+                                url: soamMs+'/roleright/saveRolerRight?rights=data',
+                                type: 'post',
+                                data: builtY,
+                                dataType: 'json',//here,
+                                contentType:'application/json;charset=UTF-8',
+                                success:function () {
+                                    alert('保存成功');
+                                },
+                                error:function(){
+                                    console.log('获取三级失败')
+                                }
+                            });
+                        },
+                        error:function(){
+                            console.log('获取二级失败')
+                        }
+                    });
+                },
+                error:function(){
+                    console.log('获取一级失败')
+                }
+            });
+            console.log(addArr,wfs.id)
+
+
+
+            $.ajax({
+                url: soamMs+'/role/likeRole',
+                type: 'post',
+                data:{curpage:1,pageSize:pageSize},
+                dataType: 'json',//here,
+                success:function (data) {
+                    // console.log(data);
+                    dispatch(actions.setObjs('tableContentMs', data));
+                    dispatch(actions.setVars('msCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        saveDatabase:(li,ids)=>{
+            let tableV = _.clone(getState().objs.tableContentMs);
+            let boxArr = _.clone(getState().vars.boxRoleArr);
+            let cenAdd = _.clone(getState().objs.boxCenter);
+            let addArr=[];
+            boxArr && boxArr.map((value, key)=> {
+                addArr.push(value.menuid)
+            });
+            let addCen=[];
+            // console.log(cenAdd);
+            cenAdd && cenAdd.data.map((value, key)=> {
+                let cost={};
+                cost['wfid']=value.wfid;
+                cost['wtid']=value.wtid;
+                cost['controlrights']=value.controlrights;
+                cost['queryrights']=value.queryrights;
+                cost['superviseright']=value.superviseright;
+                cost['roleid']=ids;
+                addCen.push(cost);
+            });
+            let wfs=tableV.data.pagedata[li];
+            wfs['ids']=false;
+            wfs['typeid']=1;
+            console.log(wfs);
+            let ddv=JSON.stringify(wfs);
+            $.ajax({
+                url: soamMs+'/role/updateRoleInfo?roleInfo=data',
+                type: 'post',
+                data: ddv,
+                dataType: 'json',//here,
+                contentType:'application/json;charset=UTF-8',
+                success:function () {
+                    let cosin={};
+                    cosin['roleid']=wfs.id;
+                    cosin['rightstype']=1;
+                    cosin['menuids']=addArr;
+                    console.log(cosin);
+                    let build=JSON.stringify(cosin);
+                    $.ajax({
+                        url: soamMs+'/rolemenu/getByRoleIdUpdateMenu?roleMenuVO=data',
+                        type: 'post',
+                        data: build,
+                        dataType: 'json',//here,
+                        contentType:'application/json;charset=UTF-8',
+                        success:function () {
+                            let builtSave=JSON.stringify(addCen);
+                            console.log(addCen);
+                            $.ajax({
+                                url: soamMs+'/roleright/updateRolerRight?rights=data',
+                                type: 'post',
+                                data: builtSave,
+                                dataType: 'json',//here,
+                                contentType:'application/json;charset=UTF-8',
+                                success:function () {
+                                    alert('保存成功');
+                                },
+                                error:function(){
+                                    console.log('获取三级失败')
+                                }
+                            });
+                        },
+                        error:function(){
+                            console.log('获取二级失败')
+                        }
+                    });
+                },
+                error:function(){
+                    console.log('获取一级失败')
+                }
+            });
+            console.log(addArr,wfs.id)
+
+
+
+            $.ajax({
+                url: soamMs+'/role/likeRole',
+                type: 'post',
+                data:{curpage:1,pageSize:pageSize},
+                dataType: 'json',//here,
+                success:function (data) {
+                    // console.log(data);
+                    dispatch(actions.setObjs('tableContentMs', data));
+                    dispatch(actions.setVars('msCount', data.data.pagedata.length));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
         addData:(i) => {
             let tableV = _.clone(getState().objs.tableContentMs);
-            tableV.content.push(i);
+            tableV.data.pagedata.push(i);
             dispatch(actions.setObjs('tableContentMs', tableV));
         },
-        deleData:(j) => {
+        deleDate:(j) => {
             let tableV = _.clone(getState().objs.tableContentMs);
-            tableV.content.splice(j,1);
+            tableV.data.pagedata.splice(j,1);
             dispatch(actions.setObjs('tableContentMs', tableV));
+        },
+        deleData:(j,k) => {
+            $.ajax({
+                url: soamMs+'/role/getDeleteRoleInfo?roleid='+k,
+                type: 'post',
+                dataType: 'json',//here,
+                success:function (data) {
+                    dispatch(actions.setVars('remarkMs', null));
+                    dispatch(actions.setVars('nameMs', null));
+                    dispatch(actions.setVars('pageMs', 1));
+                    // dispatch(actions.appendObjs('boxData', data));
+                    $.ajax({
+                        url: soamMs+'/role/likeRole',
+                        type: 'post',
+                        data:{curpage:1,pageSize:pageSize},
+                        dataType: 'json',//here,
+                        success:function (data) {
+                            // console.log(data);
+                            dispatch(actions.setObjs('tableContentMs', data));
+                            dispatch(actions.setVars('msCount', data.data.pagedata.length));
+                        },
+                        error:function(){
+                            console.log('获取数据失败')
+                        }
+                    });
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
         buttonAction (){
 
