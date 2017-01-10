@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var $ =require('jquery');
 import styles from './AS.scss';
-let soam='http://10.9.100.80:8080/soam';//设置接口
+let soam='http://10.68.100.32:8080/soam';//设置接口
 import Login from '../../../../../../components/common/Loading.jsx';
 var {getState} = require('../../../../../../redux/store');
 import del from '../../../img/icon/tabDel.png';//定义图片路径
