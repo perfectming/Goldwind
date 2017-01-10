@@ -163,6 +163,7 @@ let Component = React.createClass({
                 data: runtime3,
                 borderRadius: 4,
                 color:'#62de88',
+                pointPlacement:0.1,
 
             }
                 ,{
@@ -171,6 +172,7 @@ let Component = React.createClass({
                     color:'#cccccc',
                     data: downtime3,
                     borderRadius: 4,
+                    pointPlacement:-0.1,
                 }
                 ,
                 {
@@ -179,6 +181,7 @@ let Component = React.createClass({
                     color:'#0000ff',
                     data: tba3,
                     yAxis:1,
+
                 }
 
 

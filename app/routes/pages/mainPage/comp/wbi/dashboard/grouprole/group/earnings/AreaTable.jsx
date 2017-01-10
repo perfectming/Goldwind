@@ -251,6 +251,7 @@ let Component = React.createClass({
                 color: '#33BAC0',
                 borderWidth: 0,
                 maxPointWidth: 40,
+                pointPlacement:0.1,
             },
                 {
                     name: '成本',
@@ -258,7 +259,7 @@ let Component = React.createClass({
                     data: areaRecordCost,
                     borderRadius: 7,
                     color: '#70c080',
-
+                    pointPlacement:-0.1,
                     borderWidth: 0,
                 }, {
                     name: "收益率",
