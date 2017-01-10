@@ -10,7 +10,7 @@ module.exports = {
                     {
                         name:'驾驶舱',
                         page:'cockpit',
-                        
+
                     }]
             }],
         },{
@@ -66,7 +66,7 @@ module.exports = {
                 name:'批量控制',
                 iconNormal: require('../app/routes/pages/mainPage/img/comp/pl.png'),
                 iconActive: require('../app/routes/pages/mainPage/img/comp/pl_active.png'),
-                
+
             },{
                 name:'业务报表',
                 iconNormal: require('../app/routes/pages/mainPage/img/comp/yw.png'),
@@ -87,7 +87,7 @@ module.exports = {
                     }]
             }],
         },{
-            
+
             name: '健康管理',
             iconNormal: require('../app/routes/pages/mainPage/img/comp/jkgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/jkgl_active.png'),

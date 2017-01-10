@@ -25,7 +25,7 @@ let Component = React.createClass({
 
     render() {
          
-        let {zhzb,bbs,all,boolsuper=false}=this.props;
+        let {zhzb,bbs,all,boolsuper=false,skinStyle}=this.props;
        if(boolsuper){
         let data=bbs.ModelData;
         let mod=zhzb.Model;
@@ -84,11 +84,9 @@ let Component = React.createClass({
                 for(let i=0;i<arr.length;i++){
                     num.push([arrname[i],arr[i]])
                 }
-
             }
         return (
-            <div className={styles.bodyBox}>
-
+            <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
                 <div className={styles.leftBox}>
                     <Superleftbox></Superleftbox>
                 </div>
@@ -149,6 +147,7 @@ const mapStateToProps = (state) => {
         zhzb: state.vars.zhzb,
         bbs: state.vars.bbs,
         boolsuper:state.vars.boolsuper,
+        skinStyle: state.vars.skinStyle
     }
 };
 
