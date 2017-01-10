@@ -22,7 +22,6 @@ module.exports={
 	
 },{
 	name:"7月",
-	
 
 },{
 	name:"8月",

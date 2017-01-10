@@ -57,8 +57,8 @@ let Component = React.createClass({
             credits: {
                 enabled: false
             },
-            colors: ['#1E664A', '#4CDB9D']
-            ,
+
+
             plotOptions: {
                 column: {
 

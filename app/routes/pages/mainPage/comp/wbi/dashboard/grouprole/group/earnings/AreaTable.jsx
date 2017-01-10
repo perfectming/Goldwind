@@ -22,7 +22,6 @@ let Component = React.createClass({
             title: {
                 text: text,
                 align: 'left',
-                x: "0",
                 x: 105,
                 y: 13,
                 style: {
@@ -58,7 +57,7 @@ let Component = React.createClass({
                 enabled: false
             },
             //柱子颜色
-            colors: ['#33BAC0', '#70c080'],
+
 
             plotOptions: {
                 column: {
@@ -71,7 +70,6 @@ let Component = React.createClass({
 
                             w11 = e.point.category;
                             let index = e.point.index;
-                            let w111 = windFiedN;
                             let datee = new Date;
                             let year = datee.getFullYear();
                             let month2=datee.getMonth();
