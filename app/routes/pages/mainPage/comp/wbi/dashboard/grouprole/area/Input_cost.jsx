@@ -76,7 +76,7 @@ let Component = React.createClass({
                                 {yeares.map((value, key) => {
                                     if(key==1){
                                         return (
-                                            <option selected="selected" value={value} key={key}>{value}</option>
+                                            <option name="selectOpt" value={value} key={key}>{value}</option>
                                         )
                                     }
                                     return (
@@ -293,7 +293,7 @@ let Component = React.createClass({
                                                                                 if(key==1){
                                                                                     return (
                                                                                         <option value={value}
-                                                                                                selected="selected"
+                                                                                                name="selectOpt2"
                                                                                                 className={styles.tableContentItem}
                                                                                                 key={key}>{value}</option>
 
@@ -488,6 +488,8 @@ const mapDispatchToProps = (dispatch) => {
         },
         init: () => {
 
+            $("option[name='selectOpt']").prop('selected',true);
+
 
            // dispatch(actions.setObjs('tableContent', obj));
 
@@ -547,6 +549,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         //增加
         addData: (i, totalpage, years0, wfids) => {
+
             page = totalpage;
             dispatch(actions.setVars('page1', page));
 
@@ -582,6 +585,7 @@ const mapDispatchToProps = (dispatch) => {
                 i.month='';
                 tableV.data.pagedata.push(i);
                 dispatch(actions.setObjs('tableContent', tableV));
+                $("option[name='selectOpt2']").prop('selected',true);
             }
 
         },
