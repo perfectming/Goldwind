@@ -21,10 +21,10 @@ let Component = React.createClass({
    
 
     render() {
-        let {healthy,wfName,wfId,areaId,wfTheory,wfAct,wtArr,wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct,month,monthAct,monthPlan,month2,income,cost,runTime,downTime,TBA,ipUrl,windBool=false,actbt,flagTime2=true,flagPba2=true,flag2=true,changepageSort1,changepageProT,changepageProS,changepageSort,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let {skinStyle,healthy,wfName,wfId,areaId,wfTheory,wfAct,wtArr,wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct,month,monthAct,monthPlan,month2,income,cost,runTime,downTime,TBA,ipUrl,windBool=false,actbt,flagTime2=true,flagPba2=true,flag2=true,changepageSort1,changepageProT,changepageProS,changepageSort,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(windBool){
         	return (
-	            <div className={styles.box}>
+	            <div className={skinStyle==1? styles.boxBlue:skinStyle==2? styles.boxWhite:styles.box}>
 	           		<ul className={styles.monthbox}>
 	                    {
 	                    	wfName.map((value,key)=>{
@@ -125,14 +125,14 @@ let Component = React.createClass({
 	           		</div>
 	                <div className={`${styles.right} ${styles.boxShadow}`}>
 	                	<h3>
-	                		<a></a><span>TBA排序</span>
+	                		<a></a><span>PBA排序</span>
 	                	</h3>
 	                	<table>
 	                		<tbody>
 	                			<tr>
 		                			<th>排名</th>
 		           					<th>风机名</th>
-		           					<th onClick={()=>changepageSort1(flag2,flagPba2,wtArr)} className={flag2==true? styles.clickPba1:styles.clickPba4}>TBA <span className={flagPba2==true? styles.arrow:styles.bottom}></span></th>
+		           					<th onClick={()=>changepageSort1(flag2,flagPba2,wtArr)} className={flag2==true? styles.clickPba1:styles.clickPba4}>PBA <span className={flagPba2==true? styles.arrow:styles.bottom}></span></th>
 		           					<th onClick={()=>changepageSort(flag2,flagTime2,wtArr)} className={flag2==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime2==true? styles.arrow:styles.bottom}></span></th>
 	                			</tr>
 	                			{
@@ -158,6 +158,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+    	skinStyle: state.vars.skinStyle, //全局换肤
     	wbiUserId:state.vars.wbiUserId,//用户id
     	actbt : state.vars.actbt,
     	wtArr : state.vars.wtArr,

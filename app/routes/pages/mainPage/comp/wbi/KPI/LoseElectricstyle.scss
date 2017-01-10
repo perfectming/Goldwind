@@ -62,6 +62,7 @@
                     width: 24.2%;
                     height: 360px;
                     position: relative;
+                    background-color: rgba(44, 61, 71, 0.4);
                     .button{
                         cursor: pointer;
                         z-index:9;
@@ -91,6 +92,109 @@
                 margin-top: 15px;
                 height: 380px;
                 width: 100%;
+                background-color: rgba(44, 61, 71, 0.4);
+            }
+        }
+        .boxShadow:hover{
+           box-shadow:0 0 15px #fff;
+       } 
+}
+
+.bodyBoxBlue{
+        width: 1780px;
+        padding: 0 30px 0 10px;
+        .inquireBox{
+            width: 100%;
+            height: 80px;
+            margin-bottom: 40px;
+            padding: 10px;
+            border-top: 1px solid #676971;
+            border-bottom: 1px solid #676971;
+            span{
+                color:#fff;
+                margin-right:10px;
+                margin-left:20px;
+                line-height:60px;
+            }
+            .dateBox{
+                float: left;
+                input{
+                    color: #fff;
+                    background: #181a25; 
+                }
+            }
+            .seleBox{
+                font-size:16px;
+                float: left;
+                select{
+                    color: #fff;
+                    font-size: 16px;
+                    background: #181a25; 
+                    option{
+                        font-size: 10px;
+                    } 
+                }
+            }
+            .radioBox{
+                font-size:16px;
+                float: left;
+            }
+            .btnBox{
+                    float:right;
+                    margin-top:16px;
+                    margin-right:450px;
+                    font-size:16px;
+                    .bBox{
+                       float:left;
+                       margin-left: 20px; 
+                    }
+                    button{
+                        color: #fff;
+                        background: #181a25;
+                    }
+            }
+        }
+        .content{
+            width: 100%;
+            .areaLose{
+                height: 360px;
+                width: 100%;
+                .areaSection{
+                    float: left;
+                    width: 24.2%;
+                    height: 360px;
+                    position: relative;
+                    background-color: #112a48;
+                    .button{
+                        cursor: pointer;
+                        z-index:9;
+                        box-sizing:border-box;
+                        border: 2px solid #dddddd;
+                        display: inline-block;
+                        height: 28px;
+                        width: 48px;
+                        position: absolute;
+                        left: 80%;
+                        top: 30px;
+                        background: #181a25;
+                        color: white;
+                        font-size:16px;
+                        line-height: 24px;
+                        text-align: center;
+                    }
+                    .hide{
+                        display: none;
+                    }
+                }
+                .areaSection:not(:last-child){
+                    margin-right: 1%;
+                }
+            }
+            .lose{
+                margin-top: 15px;
+                height: 380px;
+                width: 100%;
+                background-color: #112a48;
             }
         }
         .boxShadow:hover{

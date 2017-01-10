@@ -22,10 +22,10 @@ let Component = React.createClass({
 
 
     render() {
-        let{groupbool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{skinStyle,groupbool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(groupbool){
             return (
-                <div className={styles.box}>
+                <div className={skinStyle==1? styles.boxBlue:skinStyle==2? styles.boxWhite:styles.box}>
                     <div className={styles.left}>
                         <div className={`${styles.firstfloor} ${styles.boxShadow}`}>
                             <div className={styles.section}>
@@ -124,14 +124,14 @@ let Component = React.createClass({
                     </div>
                     <div className={`${styles.right} ${styles.boxShadow}`}>
                         <h3>
-                            <a></a><span>TBA排序</span>
+                            <a></a><span>PBA排序</span>
                         </h3>
                         <table>
                             <tbody>
                             <tr>
                                 <th>排名</th>
                                 <th>区域名</th>
-                                <th onClick={()=>changepageSort1(flag1,flagPba1,sortArr)} className={flag1==true? styles.clickPba1:styles.clickPba4} >TBA <span className={flagPba1==true? styles.arrow:styles.bottom}></span></th>
+                                <th onClick={()=>changepageSort1(flag1,flagPba1,sortArr)} className={flag1==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba1==true? styles.arrow:styles.bottom}></span></th>
                                 <th onClick={()=>changepageSort(flag1,flagTime1,sortArr)} className={flag1==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime1==true? styles.arrow:styles.bottom}></span></th>
                             </tr>
                             {
@@ -157,6 +157,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return{
+        skinStyle: state.vars.skinStyle, //全局换肤
         sortArr : state.vars.sortArr,
         flag1 : state.vars.flag1,
         flagPba1 : state.vars.flagPba1,

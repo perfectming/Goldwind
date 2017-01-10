@@ -23,10 +23,10 @@ let Component = React.createClass({
    
 
     render() {
-        let{healthyArea,clickAreaId,areaName,areaId,areaCost,areaProfit,areaMonth,runTime,downTime,TBA,areaArr,actb,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month,elecPlan,elecAct,ipUrl,areaBool=false,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{skinStyle,healthyArea,clickAreaId,areaName,areaId,areaCost,areaProfit,areaMonth,runTime,downTime,TBA,areaArr,actb,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month,elecPlan,elecAct,ipUrl,areaBool=false,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(areaBool){
         	return (
-	            <div className={styles.box}>
+	            <div className={skinStyle==1? styles.boxBlue:skinStyle==2? styles.boxWhite:styles.box}>
 	           		<ul className={styles.monthbox}>
 	                    {
 	                    	areaName.map((value,key)=>{
@@ -128,14 +128,14 @@ let Component = React.createClass({
 	           		</div>
 	                <div className={`${styles.right} ${styles.boxShadow}`}>
 	                	<h3>
-	                		<a></a><span>TBA排序</span>
+	                		<a></a><span>PBA排序</span>
 	                	</h3>
 	                	<table>
 	                		<tbody>
 	                			<tr>
 		                			<th>排名</th>
 		           					<th>风场名</th>
-		           					<th onClick={()=>changepageSort1(flag,flagPba,areaArr)} className={flag==true? styles.clickPba1:styles.clickPba4} >TBA <span className={flagPba==true? styles.arrow:styles.bottom}></span></th>
+		           					<th onClick={()=>changepageSort1(flag,flagPba,areaArr)} className={flag==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba==true? styles.arrow:styles.bottom}></span></th>
 		           					<th onClick={()=>changepageSort(flag,flagTime,areaArr)} className={flag==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime==true? styles.arrow:styles.bottom}></span></th>
 	                			</tr>
 	                			{
@@ -162,6 +162,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+    	skinStyle: state.vars.skinStyle, //全局换肤
     	actb : state.vars.actb,
     	wbiUserId:state.vars.wbiUserId,
     	flag : state.vars.flag,

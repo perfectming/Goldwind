@@ -19,11 +19,11 @@ let Component = React.createClass({
     },
     
     render() {
-        let {alertText,buttonResetA,buttonResetB,machineTypeTwo=[],machineTypeOne=[],typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne,reliabilityNameTwo,reliabilityOne=[],reliabilityTwo=[],wtType,ipUrl,reliabilityBool=false,selectId,selectName,buttonAction,buttonReset,inputOnChange, onFocus,changeValueS,changeValueE} = this.props;
+        let {skinStyle,alertText,buttonResetA,buttonResetB,machineTypeTwo=[],machineTypeOne=[],typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne,reliabilityNameTwo,reliabilityOne=[],reliabilityTwo=[],wtType,ipUrl,reliabilityBool=false,selectId,selectName,buttonAction,buttonReset,inputOnChange, onFocus,changeValueS,changeValueE} = this.props;
         let comp = PBAdata.list;
         if(reliabilityBool){
             return(
-                <div className={styles.bodyBox}>
+                <div className={skinStyle==1? styles.bodyBoxBlue:skinStyle==2? styles.bodyBoxWhite:styles.bodyBox}>
                     <AlertWindow text={alertText}></AlertWindow>
                     <div className={styles.inquireBox}>
                         {
@@ -97,6 +97,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        skinStyle: state.vars.skinStyle, //全局换肤
         alertText : state.vars.alertText,
         selectId : state.vars.selectId,
         selectName : state.vars.selectName,

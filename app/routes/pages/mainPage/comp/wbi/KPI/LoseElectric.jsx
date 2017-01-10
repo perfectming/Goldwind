@@ -28,10 +28,10 @@ let Component = React.createClass({
     
 	render() {
 		let comp=PBAdata.list;
-		let {alertText,buttonResetA,buttonResetB,buttonResetC,buttonResetD,storage,loseElecBool=false,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne='',loseAreaNameTwo='',loseAreaNameThree='',loseAreaNameFour='',selectName,selectId,ipUrl,checkedLose=1,buttonAction,buttonReset, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
+		let {skinStyle,alertText,buttonResetA,buttonResetB,buttonResetC,buttonResetD,storage,loseElecBool=false,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne='',loseAreaNameTwo='',loseAreaNameThree='',loseAreaNameFour='',selectName,selectId,ipUrl,checkedLose=1,buttonAction,buttonReset, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
 		if(loseElecBool){
 			return(
-				<div className={styles.bodyBox}>
+				<div className={skinStyle==1? styles.bodyBoxBlue:skinStyle==2? styles.bodyBoxWhite:styles.bodyBox}>
 					<AlertWindow text={alertText}></AlertWindow>
 					<div className={styles.inquireBox}>
 		                {
@@ -116,6 +116,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+    	skinStyle: state.vars.skinStyle, //全局换肤
     	alertText : state.vars.alertText,
     	loseElecBool : state.vars.loseElecBool,
     	ipUrl : state.vars.ipUrl,
