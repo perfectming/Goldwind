@@ -77,7 +77,7 @@ let Component = React.createClass({
             },
             yAxis: [{
                 title:{
-                	text:'kWh',
+                	text:'(kWh)',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,
@@ -96,8 +96,9 @@ let Component = React.createClass({
                     }
                 },
             },,{
+                min:0,
             	title:{
-                	text:'100%',
+                	text:'(100%)',
                 	align: 'high',
 	                offset: 0,
 	                rotation: 0,

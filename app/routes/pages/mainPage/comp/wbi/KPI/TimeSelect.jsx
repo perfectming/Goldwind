@@ -73,8 +73,8 @@ const mapDispatchToProps = (dispatch) => {
         			dayString=29;
         		}
         		dayString=28;
-        	}else if(monthString==4||6||9||11){
-        		dayString=30;
+        	}else if(monthString==4||monthString==6||monthString==9||monthString==11){
+                dayString=30;
         	}else{
         		dayString=31;
         	};

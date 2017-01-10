@@ -14,8 +14,8 @@ let actb=0,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearEle
 
 let Component = React.createClass({
 	componentWillMount() {
-		let {ipUrl}=this.props;
-        this.props.ajax(ipUrl);
+		let {ipUrl,wbiUserId}=this.props;
+        this.props.ajax(ipUrl,wbiUserId);
     },
     componentDidMount() {
         this.props.init();
@@ -109,7 +109,7 @@ let Component = React.createClass({
 		           						<div className={styles.space} onClick={()=>changepageEleS()}></div>&nbsp;
 		           						<div className={styles.time} onClick={()=>changepageEleT()}></div>
 	           						</div>
-	           						<Yearelectric month={month} plan={elecPlan} actrul={elecAct} unit={'kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+	           						<Yearelectric month={month} plan={elecPlan} actrul={elecAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
@@ -121,26 +121,26 @@ let Component = React.createClass({
 		           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
 	           							</div>
 		           					</div>
-	           						<Yearelectric month={areaMonth} plan={areaProfit} actrul={areaCost} unit={'元'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
+	           						<Yearelectric month={areaMonth} plan={areaProfit} actrul={areaCost} unit={'(元)'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           			</div>
 	           		</div>
 	                <div className={`${styles.right} ${styles.boxShadow}`}>
 	                	<h3>
-	                		<a></a><span>PBA排序</span>
+	                		<a></a><span>TBA排序</span>
 	                	</h3>
 	                	<table>
 	                		<tbody>
 	                			<tr>
 		                			<th>排名</th>
 		           					<th>风场名</th>
-		           					<th onClick={()=>changepageSort1(flag,flagPba,areaArr)} className={flag==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba==true? styles.arrow:styles.bottom}></span></th>
+		           					<th onClick={()=>changepageSort1(flag,flagPba,areaArr)} className={flag==true? styles.clickPba1:styles.clickPba4} >TBA <span className={flagPba==true? styles.arrow:styles.bottom}></span></th>
 		           					<th onClick={()=>changepageSort(flag,flagTime,areaArr)} className={flag==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime==true? styles.arrow:styles.bottom}></span></th>
 	                			</tr>
 	                			{
 	                				areaArr.slice(0,15).map((value,key)=>{
-			                    		return(<tr key={key}><th>{key+1}</th><th>{value.wfname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime).toFixed(1)}分钟</th></tr>)
+			                    		return(<tr key={key}><th>{key+1}</th><th>{value.wfname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime/60).toFixed(1)}小时</th></tr>)
 			                    	})
 	                			}
 	                		</tbody>	
@@ -163,7 +163,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
     	actb : state.vars.actb,
-    	
+    	wbiUserId:state.vars.wbiUserId,
     	flag : state.vars.flag,
     	flagPba : state.vars.flagPba,
     	flagTime : state.vars.flagTime,
@@ -197,21 +197,34 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    	ajax: (ipUrl) => {//请求初始数据
+    	ajax: (ipUrl,wbiUserId) => {//请求初始数据
+    		// console.log(wbiUserId)
+			// $.ajax({
+   			//   	url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//固定获得各区域ID和名字
+			//      type: 'post',
+			//      async:true,
+			//      dataType: 'json',
+			//      data:'type=0',
+			//      timeout : 60000,
+    		//		success:function (data) {
+		 	//        	console.log(data)
+		 	//       },
+		 	// });
+
     		dispatch(actions.setVars('actb',0 ));
-    		$.ajax({
-        		url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//获得各区域ID和名字
+    		 	$.ajax({
+        		url:'http://'+ipUrl+'/wbi/user/getByUserIDGroup',//获得各区域ID和名字
 		        type: 'post',
 		        async:true,
 		        dataType: 'json',
-		        data:'type=0',
+		        data:{'userid':wbiUserId},
 		        timeout : 60000, 
 		        success:function (data) {
 		        	areaName=[];
 		        	areaId=[];
 		        	for(var i in data.data){
-		        		areaName.push(data.data[i]);
-		        		areaId.push(i);
+		        		areaName.push(data.data[i].groupname);
+		        		areaId.push(data.data[i].groupid);
 		        	};
 		        	dispatch(actions.setVars('areaName',areaName ));
 		        	dispatch(actions.setVars('areaId',areaId ));

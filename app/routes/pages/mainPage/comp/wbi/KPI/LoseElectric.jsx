@@ -101,7 +101,7 @@ let Component = React.createClass({
 							</div>
 						</div>
 						<div className={`${styles.lose} ${styles.boxShadow}`}>
-							<ChartFive title={storage==undefined? '':storage==1?'损失电量分析':'损失收入分析'} unit={storage==undefined? '':storage==1? "kWh":"元"} loseA={loseA} loseB={loseB} loseC={loseC} loseD={loseD} nameOne={loseAreaNameOne} nameTwo={loseAreaNameTwo} nameThree={loseAreaNameThree} nameFour={loseAreaNameFour}></ChartFive>
+							<ChartFive title={storage==undefined? '':storage==1?'损失电量分析':'损失收入分析'} unit={storage==undefined? '':storage==1? "(kWh)":"(元)"} loseA={loseA} loseB={loseB} loseC={loseC} loseD={loseD} nameOne={loseAreaNameOne} nameTwo={loseAreaNameTwo} nameThree={loseAreaNameThree} nameFour={loseAreaNameFour}></ChartFive>
 						</div>
 					</div>
 				</div>
@@ -174,7 +174,7 @@ const mapDispatchToProps = (dispatch) => {
         			dayString=29;
         		}
         		dayString=28;
-        	}else if(monthString==4||6||9||11){
+        	}else if(monthString==4||monthString==6||monthString==9||monthString==11){
         		dayString=30;
         	}else{
         		dayString=31;

@@ -249,7 +249,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){  
                     dispatch(actions.appendObjs('devtype',json));
                     gettreedata(); 
@@ -268,7 +268,7 @@ const mapDispatchToProps = (dispatch) => {
                     dataType:"jsonp",    
                     jsonp:"callback",    
                     jsonpCallback:"testCall",    
-                    timeout:3000,       
+                    timeout:5000,       
                     success:function(json,textStatus){    
                         dispatch(actions.setVars('select_list',json));
                         dispatch(actions.setVars('boolywbb', true));
@@ -362,7 +362,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){  
                     dispatch(actions.setVars('select_list',json));
                     dispatch(actions.setVars('devurls',devurl));
@@ -400,7 +400,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",    
                 jsonp:"callback",    
                 jsonpCallback:"testCall",    
-                timeout:3000,       
+                timeout:5000,       
                 success:function(json,textStatus){ 
                     if(json.rectime==undefined){
                         dispatch(actions.setVars('alertBool', false));

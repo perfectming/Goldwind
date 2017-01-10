@@ -70,7 +70,7 @@ let Component = React.createClass({
                                 <ChartPie unit={"h"} name={reliabilityNameOne} text={reliabilityNameOne} lose={reliabilityOne}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
-                                <TwoColumn name={typeNameOne} title={typeNameOne} month={machineTypeOne} plan={typeOne} unit={"h"}></TwoColumn>
+                                <TwoColumn name={typeNameOne} title={typeNameOne} month={machineTypeOne} plan={typeOne} unit={"(h)"}></TwoColumn>
                             </div>
                         </div>
                         <div className={styles.floorTwo}>
@@ -79,7 +79,7 @@ let Component = React.createClass({
                                 <ChartPie unit={"h"} name={reliabilityNameOne} text={reliabilityNameTwo} lose={reliabilityTwo}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
-                                <TwoColumn name={typeNameTwo} title={typeNameTwo} month={machineTypeTwo} plan={typeTwo} unit={"h"}></TwoColumn>
+                                <TwoColumn name={typeNameTwo} title={typeNameTwo} month={machineTypeTwo} plan={typeTwo} unit={"(h)"}></TwoColumn>
                             </div>
                         </div>
                     </div>
@@ -149,7 +149,7 @@ const mapDispatchToProps = (dispatch) => {
                     dayString=29;
                 }
                 dayString=28;
-            }else if(monthString==4||6||9||11){
+            }else if(monthString==4||monthString==6||monthString==9||monthString==11){
                 dayString=30;
             }else{
                 dayString=31;

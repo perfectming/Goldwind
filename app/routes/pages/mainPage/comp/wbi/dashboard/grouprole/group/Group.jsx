@@ -108,7 +108,7 @@ let Component = React.createClass({
                                         <div className={styles.links}><a className={styles.time} onClick={()=>changepageEleT()}></a></div>
                                     </div>
                                 </div>
-                                <Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+                                <Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
                             </div>
                             <div className={`${styles.yearprofit} ${styles.boxShadow}`}>
                                 <div className={styles.header}>
@@ -118,25 +118,25 @@ let Component = React.createClass({
                                         <div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
                                     </div>
                                 </div>
-                                <div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"元"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
+                                <div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"(元)"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
                             </div>
                         </div>
                     </div>
                     <div className={`${styles.right} ${styles.boxShadow}`}>
                         <h3>
-                            <a></a><span>PBA排序</span>
+                            <a></a><span>TBA排序</span>
                         </h3>
                         <table>
                             <tbody>
                             <tr>
                                 <th>排名</th>
                                 <th>区域名</th>
-                                <th onClick={()=>changepageSort1(flag1,flagPba1,sortArr)} className={flag1==true? styles.clickPba1:styles.clickPba4} >PBA <span className={flagPba1==true? styles.arrow:styles.bottom}></span></th>
+                                <th onClick={()=>changepageSort1(flag1,flagPba1,sortArr)} className={flag1==true? styles.clickPba1:styles.clickPba4} >TBA <span className={flagPba1==true? styles.arrow:styles.bottom}></span></th>
                                 <th onClick={()=>changepageSort(flag1,flagTime1,sortArr)} className={flag1==true? styles.clickTime1:styles.clickTime4}>停机时间 <span className={flagTime1==true? styles.arrow:styles.bottom}></span></th>
                             </tr>
                             {
                                 sortArr.slice(0,15).map((value,key)=>{
-                                    return(<tr key={key}><th>{key+1}</th><th>{value.groupname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime).toFixed(1)}分钟</th></tr>)
+                                    return(<tr key={key}><th>{key+1}</th><th>{value.groupname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime/60).toFixed(1)}小时</th></tr>)
                                 })
                             }
                             </tbody>

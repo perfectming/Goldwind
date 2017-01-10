@@ -305,6 +305,23 @@
                 border: 1px solid #fff;
                 width: 100%;
                 tbody{
+                    .thTen{
+                        width: 100%;
+                        height: 52px;
+                        &:first-child{
+                            background:#0d293f
+                        }
+                        &:hover{
+                            background:#0d293f;
+                        }
+                        th{
+                            width: 10%;
+                            height: 52px;
+                            text-align: center;
+                            color: #fff;
+                            border: 1px solid #fff;
+                        }
+                    }
                     .thState{
                         width: 100%;
                         height: 52px;

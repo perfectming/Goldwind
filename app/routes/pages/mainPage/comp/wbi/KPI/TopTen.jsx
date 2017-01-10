@@ -80,7 +80,7 @@ let Component = React.createClass({
 								<ChartPie unit={topTitleOne==undefined? "":storageTop==1? "kWh":"元"} name={topTitleOne==undefined? "":storageTop==1? topTitleOne+"故障损失电量":topTitleOne+"故障损失收入"} text={topTitleOne==undefined? "":storageTop==1? topTitleOne+"故障损失电量":topTitleOne+"故障损失收入"} lose={topPieOne}></ChartPie>
 							</div>
 							<div className={`${styles.column} ${styles.boxShadow}`}>
-								<OneColumn name={columnOneTitle} title={columnOneTitle} month={columnOneName} plan={columnOne} unit={topTitleOne==undefined? "":storageTop==1? "kWh":"元"}></OneColumn>
+								<OneColumn name={columnOneTitle} title={columnOneTitle} month={columnOneName} plan={columnOne} unit={topTitleOne==undefined? "":storageTop==1? "(kWh)":"(元)"}></OneColumn>
 							</div>
 						</div>
 						<div className={styles.floorTwo}>
@@ -89,7 +89,7 @@ let Component = React.createClass({
 								<ChartPie unit={topTitleTwo==undefined? "":storageTop==1? "kWh":"元"} name={topTitleTwo==undefined? "":storageTop==1? topTitleTwo+"故障损失电量":topTitleTwo+"故障损失收入"} text={topTitleTwo==undefined? "":storageTop==1? topTitleTwo+"故障损失电量":topTitleTwo+"故障损失收入"} lose={topPieTwo}></ChartPie>
 							</div>
 							<div className={`${styles.column} ${styles.boxShadow}`}>
-								<OneColumn name={columnTwoTitle} title={columnTwoTitle} month={columnTwoName} plan={columnTwo} unit={topTitleTwo==undefined? "":storageTop==1? "kWh":"元"}></OneColumn>
+								<OneColumn name={columnTwoTitle} title={columnTwoTitle} month={columnTwoName} plan={columnTwo} unit={topTitleTwo==undefined? "":storageTop==1? "(kWh)":"(元)"}></OneColumn>
 							</div>
 						</div>
 					</div>
@@ -161,7 +161,7 @@ const mapDispatchToProps = (dispatch) => {
         			dayString=29;
         		}
         		dayString=28;
-        	}else if(monthString==4||6||9||11){
+        	}else if(monthString==4||monthString==6||monthString==9||monthString==11){
         		dayString=30;
         	}else{
         		dayString=31;

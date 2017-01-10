@@ -47,7 +47,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,tabledata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
+        let {devtype,boolywbb=false,showtree,playjq,firstname,select_list,Powdata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
         let treetype=[];
         let Tarr=[]; //标题数组
         let Barr=[];  //数据
@@ -56,7 +56,32 @@ let Component = React.createClass({
         let one=[]; //一级菜单
         let two=[]; //二级菜单
         let three=[]; //三级菜单
-        console.log(select_list)
+
+        let arr3=[]; //风速3
+        let arr4=[]; //风速
+        let arr5=[]; //风速
+        let arr6=[]; //风速
+        let arr7=[]; //风速
+        let arr8=[]; //风速
+        let arr9=[]; //风速
+        let arr10=[]; //风速
+        let arr11=[]; //风速
+        let arr12=[]; //风速
+        let arr13=[]; //风速
+        let arr14=[]; //风速
+        let arr15=[]; //风速
+        let arr16=[]; //风速
+        let arr17=[]; //风速
+        let arr18=[]; //风速
+        let arr19=[]; //风速
+        let arr20=[]; //风速
+        let arr21=[]; //风速
+        let arr22=[]; //风速
+        let wfName=[]; //电场名称
+        let name=[]; //名称
+        let conform=[]; //符合度
+        let point=[]; //数据点数
+        let valid=[]; //是否有效
         //获取设备类型对应的左侧树形二级和三级数据
         for(let arg2 in select_list){
             if(select_list[arg2].id &&select_list[arg2].id!=''){
@@ -71,45 +96,33 @@ let Component = React.createClass({
                 }
             }
         }
-
-
-
-
         //表格数据处理
-        if(tabledata!=undefined){
-            console.log(tabledata)
-            //获取标题
-            for(let title in tabledata){
-                if(tabledata[title].Unit!=''){
-                    Tarr.push(tabledata[title].Caption+'('+tabledata[title].Unit+')')
-                }else{
-                    Tarr.push(tabledata[title].Caption)
-                }
-            }
-            //获取统计
-            for(let title in tabledata){
-                if(tabledata[title].OK!='wtid' && tabledata[title].OK!='wtname')
-                    Darr.push(tabledata[title].Count)
-
-            }
-            var len;
-            //获取数据
-            for(let val in tabledata){
-
-                Barr.push(tabledata[val].Values.split(','))
-                len=tabledata[val].Values.split(',').length
-
-            }
-
-            for(let i=0;i<len;i++){
-                let num=[];
-                Barr.map(function(value,key){
-                    num.push(value[i])
-                })
-                Carr.push(num)
-            }
-            // console.log(Barr)
-            // console.log(Carr)
+        if(Powdata!==undefined && Powdata.wfname!==undefined){
+            // arr3=Powdata.3.Values.split(',');
+            // arr4=Powdata.4.Values.split(',');
+            // arr5=Powdata.5.Values.split(','); 
+            // arr6=Powdata.6.Values.split(','); 
+            // arr7=Powdata.7.Values.split(','); 
+            // arr8=Powdata.8.Values.split(','); 
+            // arr9=Powdata.9.Values.split(','); 
+            // arr10=Powdata.10.Values.split(','); 
+            // arr11=Powdata.11.Values.split(','); 
+            // arr12=Powdata.12.Values.split(','); 
+            // arr13=Powdata.13.Values.split(','); 
+            // arr14=Powdata.14.Values.split(','); 
+            // arr15=Powdata.15.Values.split(','); 
+            // arr16=Powdata.16.Values.split(','); 
+            // arr17=Powdata.17.Values.split(','); 
+            // arr18=Powdata.18.Values.split(','); 
+            // arr19=Powdata.19.Values.split(','); 
+            // arr20=Powdata.20.Values.split(','); 
+            // arr21=Powdata.21.Values.split(','); 
+            // arr22=Powdata.22.Values.split(','); 
+            // wfName=Powdata.wfname.Values.split(','); 
+            // name=Powdata.wtname.Values.split(','); 
+            // conform=Powdata.fit.Values.split(','); 
+            // point=Powdata.datacount.Values.split(','); 
+            // valid=Powdata.iseffective.Values.split(','); 
         }
 
         if(boolywbb){
@@ -129,7 +142,7 @@ let Component = React.createClass({
                 <div className={styles.faultBox}>
                     <div className={styles.search_tit}>
                         <div className={styles.seleBox}>
-                            <span>曲线种类:</span>
+                            <span>设备类型:</span>
                             <div className={styles.select}>
                                 <span id='showitem'><img src={'http://'+url+'/'+firstname.img}/>{firstname.args.name}</span>
                                 <img src={drop} id='slide' className={styles.topimg}/>
@@ -227,75 +240,20 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.righttable}>
                         <div className={styles.tablebox} id='tablebox'>
-
-                            <div className={styles.tabtit} id='tabtit' >
-                                {
-                                    tabledata!=undefined && Tarr.map((value,key)=>{
-
-                                        if(key==0){
-                                            return(
-                                                <span key={key} style={{width:'140px'}}>{value}</span>
-                                            )
-                                        }else if(key==1){
-                                            return(
-                                                <span key={key} style={{width:'200px'}}>{value}</span>
-                                            )
-                                        }else{
-                                            return(
-                                                <span key={key} style={{cursor:'pointer'}} id={'e'+key} onClick={(e)=>clickitem(key,e.target)}>{value}</span>
-                                            )
-                                        }
-                                    })
-                                }
-                            </div>
-                            <div className={styles.tabody} id='tabody'>
-                                <table id='tablist'>
+                            {Powdata!==undefined &&
+                                <table>
                                     <tbody>
-                                    {
-                                        tabledata!=undefined && Carr.map((value,key)=>{
-                                            return(
-                                                <tr className={key%2==0 ? styles.tabline :styles.tabline1} key ={key}>
-                                                    {
-                                                        value.map((valueC,keyC)=>{
-
-                                                            if(keyC==0){
-                                                                return(
-                                                                    <td key={keyC} style={{width:'140px'}}>{valueC}</td>
-                                                                )
-                                                            }else if(keyC==1){
-                                                                return(
-                                                                    <td key={keyC} style={{width:'200px'}}>{valueC}</td>
-                                                                )
-                                                            }else{
-                                                                return(
-                                                                    <td key={keyC} style={{cursor:'pointer'}}>{Number(valueC).toFixed(2)}</td>
-                                                                )
-                                                            }
-
-                                                        })
-                                                    }
-                                                </tr>
-                                            )
-                                        })
-                                    }
+                                        <tr className={styles.thState}><th>序号</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>电场名称</th><th>名称</th><th>符合度（%）</th><th>数据点数（月）</th><th>是否有效</th></tr>
+                                        {
+                                            arr3.map((value,key)=>{
+                                                return(
+                                                    <tr key={key} className={styles.thState}><th>{key+1}</th><th>{arr3[key]}</th><th>{arr4[key]}</th><th>{arr5[key]}</th><th>{arr6[key]}</th><th>{arr7[key]}</th><th>{arr8[key]}</th><th>{arr9[key]}</th><th>{arr10[key]}</th><th>{arr11[key]}</th><th>{arr12[key]}</th><th>{arr13[key]}</th><th>{arr14[key]}</th><th>{arr15[key]}</th><th>{arr16[key]}</th><th>{arr17[key]}</th><th>{arr18[key]}</th><th>{arr19[key]}</th><th>{arr20[key]}</th><th>{arr21[key]}</th><th>{arr22[key]}</th><th>{wfName[key]}</th><th>{name[key]}</th><th>{conform[key]}</th><th>{point[key]}</th><th>{valid[key]}</th></tr>
+                                                )
+                                            })
+                                        }
                                     </tbody>
                                 </table>
-                            </div>
-                            <div className={styles.bot}>
-                                <span style={{width:'360px'}}>统计</span>
-
-                                {
-                                    tabledata!=undefined && Darr.map((value,key)=>{
-                                        if(value==0){
-
-                                        }else{
-                                            return(
-                                                <span key={key}>{value.toFixed(2)}</span>
-                                            )
-                                        }
-                                    })
-                                }
-                            </div>
+                            }
                         </div>
 
                         <div className={styles.columnbox} id='colum'>
@@ -321,7 +279,7 @@ const mapStateToProps = (state) => {
         boolywbb:state.vars.boolywbb,
         firstname:state.objs.firstname,
         select_list:state.vars.select_list,
-        tabledata:state.vars.tabledata,
+        Powdata:state.vars.Powdata,
         chart:state.vars.chart,
         chartname:state.vars.chartname,
         chartTitle:state.vars.chartTitle,
@@ -333,7 +291,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         ajax:()=>{
             dispatch(actions.setVars('boolywbb', false));
-            dispatch(actions.setObjs('tabledata',undefined));
+            dispatch(actions.setObjs('Powdata',undefined));
             //获取设备类型信息
             $.ajax({
                 url:'http://'+url+'/Monitor/xml.aspx',
@@ -341,9 +299,8 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",
                 jsonp:"callback",
                 jsonpCallback:"testCall",
-                timeout:3000,
+                timeout:5000,
                 success:function(json,textStatus){
-                    console.log(json)
                     dispatch(actions.appendObjs('devtype',json));
                     gettreedata();
                 },
@@ -361,7 +318,7 @@ const mapDispatchToProps = (dispatch) => {
                     dataType:"jsonp",
                     jsonp:"callback",
                     jsonpCallback:"testCall",
-                    timeout:3000,
+                    timeout:5000,
                     success:function(json,textStatus){
                         dispatch(actions.setVars('select_list',json));
                         dispatch(actions.setVars('boolywbb', true));
@@ -453,13 +410,8 @@ const mapDispatchToProps = (dispatch) => {
             $('#searchall').on('click',function(){
                 $('#tabtit span').css('background','none');
                 $('#tablist td').css('background','none');
-
-                //显示表格
+                 //显示表格
                 $('#tablebox').show();
-
-
-
-
             })
 
 
@@ -476,7 +428,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:"jsonp",
                 jsonp:"callback",
                 jsonpCallback:"testCall",
-                timeout:3000,
+                timeout:5000,
                 success:function(json,textStatus){
                     dispatch(actions.setVars('select_list',json));
                     dispatch(actions.setVars('devurls',devurl));
@@ -506,7 +458,7 @@ const mapDispatchToProps = (dispatch) => {
             $('#colum').show();
         },
         searchnum:(devurls)=>{
-            dispatch(actions.setVars('tabledata',undefined));
+            dispatch(actions.setVars('Powdata',undefined));
             var all=[];
             //清空数组
             all.splice(0,all.length);//字段
@@ -519,38 +471,26 @@ const mapDispatchToProps = (dispatch) => {
                     if($(this).val()!=='value'){
                         all.push($(this).val())
                     }
-                    console.log($(this).val())
                 }
 
-            })
-            console.log(all)
+            });
             if(all.length>50){
                 all.splice(50,all.length);
             }
             if(all.length==0){
-
                 alert('设备数据获取失败！')
                 return;
             }
-
-
             $.ajax({
                 url:'http://'+url+'/Monitor/xml.aspx',
-                data:'functionname=CountDay&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&outputype=1&BTZ=480&Zip=false&wfid=true&wlid=false',
+                data:'functionname=GetPowcurveStdAnalysis&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&BTZ=480&Zip=false',
                 dataType:"jsonp",
                 jsonp:"callback",
                 jsonpCallback:"testCall",
-                timeout:3000,
+                timeout:5000,
                 success:function(json,textStatus){
-                    let shu=[];
-                    for(let i in json){
-                        shu.push(json[i])
-                    }
-                    if(shu.length==0){
-                        alert('没有符合条件的数据！')
-                    }
-
-                    dispatch(actions.setVars('tabledata',json));
+                    console.log(json)
+                    dispatch(actions.setVars('Powdata',json));
                 },
                 error:function(XMLHttpRequest,textStatus,errorThrown){
                     alert('获取数据失败！');
