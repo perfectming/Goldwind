@@ -43,7 +43,7 @@ let Component = React.createClass({
 	           			<div className={styles.firstfloor}>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>当前{healthyArea.toFixed(1)}分<br/><br/>总分100分</span><br/><br/>
+	           						<span>当前<br/>{healthyArea.toFixed(1)}分<br/>总分<br/>100分</span><br/>
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
