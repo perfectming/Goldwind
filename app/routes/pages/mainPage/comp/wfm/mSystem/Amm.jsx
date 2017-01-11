@@ -14,7 +14,7 @@ import _ from 'lodash';
 import Login from '../../../../../../components/common/Loading.jsx';
 import Ambox from './boxAm.jsx';
 import Load from './load';
-let soam='http://10.9.99.142:8080/soam';
+let soam='http://10.68.100.32:8080/soam';
 let tabaleData = require('./data');
 let arr=['id','name','loginname','password','phonecode','mailbox','logintype','dogcode','remark','roleids'];
 let logintypeArr=['密码验证','手机验证','加密狗验证'];

@@ -33,9 +33,6 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        buttonClose: (boolAlert) => {
-            dispatch(actions.setVars('boolAlert', true));
-        },
     }
 };
 
