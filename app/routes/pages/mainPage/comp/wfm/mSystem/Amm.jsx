@@ -137,7 +137,6 @@ let Component = React.createClass({
                                                     return (
                                                         <input className={styles.tableContentItem} key={keyC}
                                                            style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                           onClick={()=>{jump(value['id'])}}
                                                            type="button" value='设置'/>
                                                     )
                                                 }else {
@@ -225,7 +224,7 @@ let Component = React.createClass({
                                                         return (
                                                             <input className={styles.tableContentItem} key={keyC}
                                                                    style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-
+                                                                   onClick={()=>{jump(value['id'])}}
                                                                    type="button" value='设置'/>
                                                         )
                                                     }else {
