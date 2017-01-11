@@ -97,13 +97,23 @@ let Component = React.createClass({
                                                        value={num}/>
                                                 {
                                                     arr.map((valueC, keyC)=> {
-                                                        return (
-                                                            <input className={styles.tableContentItem}
-                                                                   style={{width: (100 / (header.length + 1)) + "%"}}
-                                                                   key={keyC}
-                                                                   onChange={(e)=>changeTableItem(e.target.value, table, key, keyC)}
-                                                                   value={value[valueC]}/>
-                                                        )
+                                                        if(valueC=='wttypedefine'||valueC=='protocolid'||valueC=='faulttype'){
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (header.length + 1)) + "%"}}
+                                                                       key={keyC} readOnly="readOnly"
+                                                                       onChange={(e)=>changeTableItem(e.target.value, table, key, keyC)}
+                                                                       value={value[valueC]}/>
+                                                            )
+                                                        }else{
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (header.length + 1)) + "%"}}
+                                                                       key={keyC}
+                                                                       onChange={(e)=>changeTableItem(e.target.value, table, key, keyC)}
+                                                                       value={value[valueC]}/>
+                                                            )
+                                                        }
                                                     })
                                                 }
                                                 <div className={styles.tableContentItem}

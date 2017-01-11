@@ -6,15 +6,16 @@ import add from '../../../img/icon/tabAdd.png';
 var actions = require('redux/actions');
 import styles from './Ms.scss';
 var $ = require('jquery');
-let soamMs='http://10.68.100.32:8080/soam';
+let soamMs='http://10.9.99.142:8080/soam';
 import Abox from './boxA';
 import Bbox from './boxB';
+import Load from './load';
 import Login from '../../../../../../components/common/Loading.jsx';
 import save from '../../../img/comp/save.png';
 import close from '../../../img/comp/close_down.png';
 import refresh from '../../../img/comp/refresh.png';
 import _ from 'lodash';
-let pageSize=3;
+let pageSize=10;
 let arr=['id','name','descr','',''];
 let roleCenterArr=['wfid','wfname','wtid','wtname','queryrights','controlrights','superviseright'];
 let roleCenterTitle=['风场id','风场名称','风机id','风机名称','查询权','控制权','监控权'];
@@ -38,8 +39,8 @@ let Component = React.createClass({
         let comp=tabaleData.msData.from;
         if(table){
         return (
-
             <div className={styles.bodyBox}>
+                <Load></Load>
                 <div className={styles.roleputBox}>
                     <div className={styles.inquireBox} key='0'>
                         {
@@ -290,6 +291,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.downCount}>
                             <span>{'记录合计：'+num2}</span>
+                            <span onClick={()=>{$('#center3').css('display','none')}}>确定</span>
                         </div>
                         <Bbox></Bbox>
                     </div>
@@ -499,7 +501,7 @@ const mapDispatchToProps = (dispatch) => {
                 addArr.push(value.menuid)
             });
             let addCen=[];
-            // console.log(cenAdd);
+            console.log(cenAdd);
             cenAdd && cenAdd.data.map((value, key)=> {
                 let cost={};
                 cost['wfid']=value.wfid;
@@ -513,8 +515,9 @@ const mapDispatchToProps = (dispatch) => {
             let wfs=tableV.data.pagedata[li];
             wfs['ids']=false;
             wfs['typeid']=1;
-            // console.log(addCen);
+            console.log(cenAdd);
             let ddv=JSON.stringify(wfs);
+            dispatch(actions.setVars('boolAlert', false));
             $.ajax({
                 url: soamMs+'/role/getSaveRoleInfo?roleInfo=data',
                 type: 'post',
@@ -543,7 +546,21 @@ const mapDispatchToProps = (dispatch) => {
                                 dataType: 'json',//here,
                                 contentType:'application/json;charset=UTF-8',
                                 success:function () {
-                                    alert('保存成功');
+                                    $.ajax({
+                                        url: soamMs+'/role/likeRole',
+                                        type: 'post',
+                                        data:{curpage:1,pageSize:pageSize},
+                                        dataType: 'json',//here,
+                                        success:function (data) {
+                                            // console.log(data);
+                                            dispatch(actions.setVars('boolAlert', true));
+                                            dispatch(actions.setObjs('tableContentMs', data));
+                                            dispatch(actions.setVars('msCount', data.data.pagedata.length));
+                                        },
+                                        error:function(){
+                                            console.log('获取数据失败')
+                                        }
+                                    });
                                 },
                                 error:function(){
                                     console.log('获取三级失败')
@@ -559,24 +576,8 @@ const mapDispatchToProps = (dispatch) => {
                     console.log('获取一级失败')
                 }
             });
-            console.log(addArr,wfs.id)
-
-
-
-            $.ajax({
-                url: soamMs+'/role/likeRole',
-                type: 'post',
-                data:{curpage:1,pageSize:pageSize},
-                dataType: 'json',//here,
-                success:function (data) {
-                    // console.log(data);
-                    dispatch(actions.setObjs('tableContentMs', data));
-                    dispatch(actions.setVars('msCount', data.data.pagedata.length));
-                },
-                error:function(){
-                    console.log('获取数据失败')
-                }
-            });}else {
+            console.log(addArr,wfs.id);
+            }else {
                 alert('请输入角色名和ID');
             }
         },
@@ -584,12 +585,21 @@ const mapDispatchToProps = (dispatch) => {
             let tableV = _.clone(getState().objs.tableContentMs);
             let boxArr = _.clone(getState().vars.boxRoleArr);
             let cenAdd = _.clone(getState().objs.boxCenter);
+            let wfs=tableV.data.pagedata[li];
+            wfs['ids']=false;
+            wfs['typeid']=1;
+            console.log(wfs);
+            let ddv=JSON.stringify(wfs);
             let addArr=[];
             boxArr && boxArr.map((value, key)=> {
-                addArr.push(value.menuid)
+                let telecome={};
+                telecome['menuid']=value.menuid;
+                telecome['roleid']=wfs.id;
+                telecome['rightstype']=value.rightstype;
+                addArr.push(telecome);
             });
             let addCen=[];
-            // console.log(cenAdd);
+            console.log(boxArr);
             cenAdd && cenAdd.data.map((value, key)=> {
                 let cost={};
                 cost['wfid']=value.wfid;
@@ -600,11 +610,8 @@ const mapDispatchToProps = (dispatch) => {
                 cost['roleid']=ids;
                 addCen.push(cost);
             });
-            let wfs=tableV.data.pagedata[li];
-            wfs['ids']=false;
-            wfs['typeid']=1;
-            console.log(wfs);
-            let ddv=JSON.stringify(wfs);
+
+            dispatch(actions.setVars('boolAlert', false));
             $.ajax({
                 url: soamMs+'/role/updateRoleInfo?roleInfo=data',
                 type: 'post',
@@ -614,17 +621,17 @@ const mapDispatchToProps = (dispatch) => {
                 success:function () {
                     let cosin={};
                     cosin['roleid']=wfs.id;
-                    cosin['rightstype']=1;
-                    cosin['menuids']=addArr;
-                    console.log(cosin);
+                    cosin['roleMenus']=addArr;
                     let build=JSON.stringify(cosin);
+                    console.log(build);
                     $.ajax({
                         url: soamMs+'/rolemenu/getByRoleIdUpdateMenu?roleMenuVO=data',
                         type: 'post',
                         data: build,
                         dataType: 'json',//here,
                         contentType:'application/json;charset=UTF-8',
-                        success:function () {
+                        success:function (data) {
+                            console.log(data);
                             let builtSave=JSON.stringify(addCen);
                             console.log(addCen);
                             $.ajax({
@@ -634,40 +641,41 @@ const mapDispatchToProps = (dispatch) => {
                                 dataType: 'json',//here,
                                 contentType:'application/json;charset=UTF-8',
                                 success:function () {
-                                    alert('保存成功');
+                                    $.ajax({
+                                        url: soamMs+'/role/likeRole',
+                                        type: 'post',
+                                        data:{curpage:1,pageSize:pageSize},
+                                        dataType: 'json',//here,
+                                        success:function (data) {
+                                            // console.log(data);
+                                            dispatch(actions.setVars('boolAlert', true));
+                                            dispatch(actions.setObjs('tableContentMs', data));
+                                            dispatch(actions.setVars('msCount', data.data.pagedata.length));
+                                        },
+                                        error:function(){
+                                            dispatch(actions.setVars('boolAlert', true));
+                                            console.log('获取数据失败')
+                                        }
+                                    });
                                 },
                                 error:function(){
+                                    dispatch(actions.setVars('boolAlert', true));
                                     console.log('获取三级失败')
                                 }
                             });
                         },
                         error:function(){
+                            dispatch(actions.setVars('boolAlert', true));
                             console.log('获取二级失败')
                         }
                     });
                 },
                 error:function(){
+                    dispatch(actions.setVars('boolAlert', true));
                     console.log('获取一级失败')
                 }
             });
             console.log(addArr,wfs.id)
-
-
-
-            $.ajax({
-                url: soamMs+'/role/likeRole',
-                type: 'post',
-                data:{curpage:1,pageSize:pageSize},
-                dataType: 'json',//here,
-                success:function (data) {
-                    // console.log(data);
-                    dispatch(actions.setObjs('tableContentMs', data));
-                    dispatch(actions.setVars('msCount', data.data.pagedata.length));
-                },
-                error:function(){
-                    console.log('获取数据失败')
-                }
-            });
         },
         addData:(i) => {
             let tableV = _.clone(getState().objs.tableContentMs);
@@ -680,6 +688,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('tableContentMs', tableV));
         },
         deleData:(j,k) => {
+            if(confirm("确定要删除数据吗？")){
+                dispatch(actions.setVars('boolAlert', false));
             $.ajax({
                 url: soamMs+'/role/getDeleteRoleInfo?roleid='+k,
                 type: 'post',
@@ -696,6 +706,7 @@ const mapDispatchToProps = (dispatch) => {
                         dataType: 'json',//here,
                         success:function (data) {
                             // console.log(data);
+                            dispatch(actions.setVars('boolAlert', true));
                             dispatch(actions.setObjs('tableContentMs', data));
                             dispatch(actions.setVars('msCount', data.data.pagedata.length));
                         },
@@ -708,6 +719,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log('获取数据失败')
                 }
             });
+            }
         },
         buttonAction (){
 
