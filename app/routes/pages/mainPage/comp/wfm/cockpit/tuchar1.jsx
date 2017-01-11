@@ -8,10 +8,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let {shuju,ssdlnum}=this.props;
+        let {ssdlnum,lettercolor}=this.props;
         let configPie = {
             chart: {
-                height:shuju.high,
+                height:230,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -30,14 +30,14 @@ let Component = React.createClass({
                 y:-10,
                 itemHoverStyle:{color:'#2ff4fb'},
                 itemStyle: {
-                    color: "#fff",
+                    color: lettercolor,
 
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
             },
-            colors: ['#D06960','#E9C75C','#fff','#5298D3'],
+            colors: ['#D06960','#E9C75C','#DDDDDD','#5298D3'],
             tooltip: {
                 shared: true,
                 style:{
@@ -56,7 +56,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 5,
                     borderWidth: 0,
-                    pointWidth: shuju.pointWidth,
+                    pointWidth: 30,
                     borderRadius:5,
                     // dataLabels:{
                     //         enabled:true, // dataLabels设为true
@@ -72,7 +72,7 @@ let Component = React.createClass({
                         enabled: true,
                         format: '{point.name}:<b>{point.percentage:.1f}%</b>',
                         style: {
-                            color: "#d1d2d3",
+                            color: lettercolor,
                             fontSize: '14px',
                             fontFamily:"微软雅黑"
 
@@ -89,14 +89,35 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: lettercolor,//颜色
                         fontSize:'10px',  //字体
                         fontFamily:"微软雅黑"
                     }
-                },
-                categories:shuju.categories,
+                }
             },
-            yAxis:shuju.yAxis,
+            yAxis: [{
+                labels: {
+                    format: '{value:.,0f}',
+                    offset: 0,
+                    x:-5,
+                    style: {
+                        color: lettercolor
+                    }
+                },
+                gridLineWidth: 0,
+                title: {
+                    align: 'high',
+                    offset: 0,
+                    text: '(h)',
+                    rotation: 0,
+                    y: -10,
+                    style: {
+                        color: lettercolor,
+                        top:0,
+                        right:0,
+                    }
+                }
+            }],
 
             series:[{ //第二个Y轴的数据
                 name: '类型占比',

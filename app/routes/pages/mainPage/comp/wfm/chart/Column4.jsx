@@ -30,7 +30,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{unit,czname,sjfdl,jhfdl,czwcl,gswcl}=this.props;
+        let{unit,czname,sjfdl,jhfdl,czwcl,gswcl,lettercolor}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -53,7 +53,7 @@ let Component = React.createClass({
             xAxis: {
                 labels: {
                     style: {
-                        color: '#fff',//颜色
+                        color: lettercolor,//颜色
                         fontSize:'12px'  //字体
                     },
                     rotation: 0
@@ -65,7 +65,7 @@ let Component = React.createClass({
                 title: {
                     text:  '('+unit+')',
                     style: {
-                        color: '#ffffff'
+                        color: lettercolor
                     },
                     align: 'high',
                     rotation: 1,
@@ -74,7 +74,7 @@ let Component = React.createClass({
                 },
                 labels: {
                     style: {
-                        color: '#fff',//颜色
+                        color:lettercolor,//颜色
                         fontSize:'12px'  //字体
                     }
                 },
@@ -84,7 +84,7 @@ let Component = React.createClass({
                 title: {
                     text:  '(%)',
                     style: {
-                        color: '#ffffff'
+                        color: lettercolor
                     },
                     align: 'high',
                     rotation: 1,
@@ -93,7 +93,7 @@ let Component = React.createClass({
                 },
                 labels: {
                     style: {
-                        color: '#fff',//颜色
+                        color: lettercolor,//颜色
                         fontSize:'12px'  //字体
                     }
                 },
@@ -106,7 +106,7 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 itemStyle: {
-                    color: "#fff",
+                    color: lettercolor,
                     //fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"

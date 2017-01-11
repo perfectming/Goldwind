@@ -137,6 +137,7 @@ const mapDispatchToProps = (dispatch) => {
                   data.data.result==='False'? alert(data.message): browserHistory.push('/app/all/page/main') ;
                   dispatch(actions.setObjs('userMessage', data));
                   dispatch(actions.setVars('userNameT', $('#username1').val()));
+                  dispatch(actions.setVars('wbiUserId', data.data.id));
                   dispatch(actions.setVars('userInfo', true));
                   try { Base.returnPlay(); } catch (e) { };
                   try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }

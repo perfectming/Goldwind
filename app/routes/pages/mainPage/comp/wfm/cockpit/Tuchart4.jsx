@@ -8,10 +8,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let {shuju,cbsj,srsj,monthTime}=this.props;
+        let {cbsj,srsj,monthTime,lettercolor}=this.props;
         let configPie = {
             chart: {
-                height:shuju.high,
+                height:300,
                 backgroundColor: "rgba(46, 46, 65, 0)",
                 plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
@@ -30,7 +30,7 @@ let Component = React.createClass({
                 y:-10,
                 itemHoverStyle:{color:'#2ff4fb'},
                 itemStyle: {
-                    color: "#fff",
+                    color: lettercolor,
 
                     fontSize:"14px",
                     fontWeight:"normal",
@@ -38,7 +38,16 @@ let Component = React.createClass({
                 }
             },
             colors: ['#D06960','#E9C75C','#fff','#5298D3'],
-            tooltip: shuju.tooltip,
+            tooltip: {
+                shared: true,
+                style:{
+                    color: '#333',
+                    fontSize: '12px',
+                    fontFamily:'微软雅黑'
+                },
+                //pointFormat: '{series.name}: <b>{point.y}</b>',
+                // pointFormat: "<b>{point.percentage:.0f}%</b>"
+            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             }
@@ -50,7 +59,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 5,
                     borderWidth: 0,
-                    pointWidth: shuju.pointWidth,
+                    pointWidth: 15,
                     borderRadius:5,
                     // dataLabels:{
                     //         enabled:true, // dataLabels设为true
@@ -59,22 +68,6 @@ let Component = React.createClass({
                     //         }
                     //     }
                 },
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.name}',
-                        style: {
-                            color: "#d1d2d3",
-                            fontSize: '14px',
-                            fontFamily:"微软雅黑"
-
-                        },
-
-                    },
-
-                }
             },
             xAxis: {
                 lineWidth: 1,
@@ -83,7 +76,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: lettercolor,//颜色
                         fontSize:'10px',  //字体
                         fontFamily:"微软雅黑"
                     }
@@ -96,8 +89,7 @@ let Component = React.createClass({
                     format: '{value:.,0f}',
                     x:-5,
                     style: {
-                        color: '#fff'
-
+                        color: lettercolor
                     }
                 },
                 lineWidth: 1,
@@ -109,7 +101,7 @@ let Component = React.createClass({
                     rotation: 1,
                     y: -10,
                     style: {
-                        color: '#fff',
+                        color: lettercolor,
                         top:0,
                         right:0,
                     }
@@ -122,7 +114,7 @@ let Component = React.createClass({
                     rotation: 1,
                     y: -10,
                     style: {
-                        color: '#fff',
+                        color: lettercolor,
                         top:0,
                         right:0,
                     }
@@ -133,7 +125,7 @@ let Component = React.createClass({
                 labels: {
                     x:5,
                     style: {
-                        color: '#fff'
+                        color: lettercolor
                     }
                 },
                 opposite: true
@@ -159,18 +151,7 @@ let Component = React.createClass({
                     valueSuffix: '万元'
                 }
 
-            },
-                // { //第一个Y轴的数据
-                //     name: '收益率',
-                //     color: '#2ff4fb',
-                //     type: 'line',
-                //     yAxis: 1,//坐标轴序号
-                //     data:sylsj,
-                //     tooltip: {
-                //         valueSuffix: '%'
-                //     }
-                //
-                // }
+            }
                 ]
         };
         return (
