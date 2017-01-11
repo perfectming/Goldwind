@@ -99,13 +99,13 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.rbox3}>
                             <button className={bt0 === 0 ? styles.button : styles.button22}
-                                    onClick={() => gogogo(bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid)}>前10
+                                    onClick={() => gogogo(bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth)}>前10
                             </button>
                             <button className={bt0 === 1 ? styles.button : styles.button22}
-                                    onClick={() => back(bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid)}>后10
+                                    onClick={() => back(bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth)}>后10
                             </button>
                             <button className={styles.button22}
-                                    onClick={() => more(bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid)}>更多
+                                    onClick={() => more(bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth)}>更多
                             </button>
                         </div>
 
@@ -285,7 +285,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "year":value[key].year,
-                    "month": key + 1,
+                    "month": value[key].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -343,18 +343,18 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid) => {
+        gogogo: (bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth) => {
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
+                    "month": mapmonth[actbt].yearpoweract,
                     "groupid": '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type": "0",
-                    "year": ""
+                    "year": mapmonth[actbt].year,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -385,18 +385,18 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid) => {
+        back: (bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth) => {
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
+                    "month": mapmonth[actbt].yearpoweract,
                     "groupid": '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type": "1",
-                    "year": ""
+                    "year": mapmonth[actbt].year,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -425,7 +425,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid) => {
+        more: (bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth) => {
             dispatch(actions.setVars('bt0', 2));
 
             $.ajax({
@@ -433,11 +433,11 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
+                    "month": mapmonth[actbt].yearpoweract,
                     "groupid": '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type": "2",
-                    "year": ""
+                    "year": mapmonth[actbt].year,
                 },
                 dataType: 'json',
                 timeout: '3000',
