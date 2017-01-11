@@ -57,7 +57,7 @@ let Component = React.createClass({
                                       barLpdpowerValue={powerplan}
                                       barLdpowerValue={day0}
                                       text={mon+"每日集团发电量"}></Hly_genday>
-                        <div className={styles.logomini5}>
+                        <div className={styles.logo5}>
 
                         </div>
                     </div>

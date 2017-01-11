@@ -45,7 +45,7 @@ let Component = React.createClass({
 
                 </div>
                 <div className={`${styles.fbox}  ${styles.logofa}`}>
-                    <div className={`${styles.box_shadow}`}>
+                    <div className={`${styles.box_shadow} ${styles.fbox2}`}>
                         <Hly_d monthx3={monthx3}
                                healthy3={healthy3}
                                text={mon + "巴盟每日健康度"}></Hly_d>

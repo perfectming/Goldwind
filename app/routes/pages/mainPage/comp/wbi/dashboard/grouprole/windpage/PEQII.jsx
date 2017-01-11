@@ -72,7 +72,7 @@ let Component = React.createClass({
                                 {yeares.map((value, key) => {
                                     if(key==1){
                                         return (
-                                            <option selected="selected" value={value} key={key}>{value}</option>
+                                            <option name="selectOpt"  value={value} key={key}>{value}</option>
                                         )
                                     }
                                     return (
@@ -291,7 +291,7 @@ let Component = React.createClass({
                                                                                 if(key==1){
                                                                                     return (
                                                                                         <option value={value}
-                                                                                                selected="selected"
+                                                                                                name="selectOpt2"
                                                                                                 className={styles.tableContentItem}
                                                                                                 key={key}>{value}</option>
 
@@ -485,6 +485,7 @@ console.log(data)
             var obj = {
                 test: ''
             }
+            $("option[name='selectOpt']").prop('selected',true);
             dispatch(actions.setObjs('tableContent', obj));
         },
         //查询
@@ -556,7 +557,6 @@ console.log(data)
                 },
                 dataType: 'json',//here,
                 success: function (data) {
-                    console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('totalpage', data.data.totalPage));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
@@ -575,6 +575,7 @@ console.log(data)
                 i.month='';
                 tableV.data.pagedata.push(i);
                 dispatch(actions.setObjs('tableContent', tableV));
+                $("option[name='selectOpt2']").prop('selected',true);
             }
 
         },

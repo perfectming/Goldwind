@@ -12,11 +12,11 @@ let Component = React.createClass({
 
     render() {
 
-       let {title,arr } = this.props;
+       let {title,arr,skinStyle} = this.props;
        
         return (
            <div >
-                <div className={Tit.titlep}>
+                <div className={skinStyle==1?Tit.titlepBlue:skinStyle==2?Tit.titlepWhite:Tit.titlep}>
                 {
 
                     title && title.map((value, key)=> {
@@ -39,7 +39,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        skinStyle: state.vars.skinStyle
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

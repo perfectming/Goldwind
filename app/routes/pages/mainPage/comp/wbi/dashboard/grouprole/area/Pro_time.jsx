@@ -28,7 +28,7 @@ let Component = React.createClass({
 
 
 
-            <div className = {styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.paddingtop}>
                     <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
                 </div>

@@ -42,7 +42,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                         <Hly_rs height={450}
-                                jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#555555":"#fff"}
+                                jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#333333":"#fff"}
                                 powerValue={healthy3}
                                 barRotimes={namex3} widths={width0}
                                 text={''}></Hly_rs>
@@ -70,7 +70,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_t
-                            jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#555555":"#fff"}
+                            jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#333333":"#fff"}
                             barLoTime={namex1}
                             barLoPowerValue={healthy1}
                             text={mon + "各区域健康度"}></Hly_t>
@@ -84,7 +84,7 @@ let Component = React.createClass({
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
                         <Hly_r height={400}
-                               jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#555555":"#fff"}
+                               jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#333333":"#fff"}
                                barRotime={namex2}
                                barLoPowerValue={healthy2}
                                text={mon + w0 + "各风场健康度" }></Hly_r>
@@ -111,7 +111,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.rbox4}>
                             <Hly_rs height={400}
-                                    jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#555555":"#fff"}
+                                    jhpcolor={skinStyle==1?"#fff":skinStyle==2?"#333333":"#fff"}
                                     powerValue={healthy3}
                                     barRotimes={namex3}
                                     text={mon + w0 + w10 + "各风机健康度"}></Hly_rs>

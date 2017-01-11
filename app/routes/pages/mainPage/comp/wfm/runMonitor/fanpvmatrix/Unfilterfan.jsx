@@ -78,7 +78,7 @@ let Component = React.createClass({
        
 
 
-        let {pageTo_1,pageTo_2,Tofaninfo1,Topvinfo1,zhzb,fModel,fData,chooses ='all',chooses2 = 'PVall'}=this.props;
+        let {pageTo_1,pageTo_2,Tofaninfo1,Topvinfo1,zhzb,fModel,fData,chooses ='all',chooses2 = 'PVall',skinStyle}=this.props;
         // console.log(fModel);
         // console.log(fData);
         // console.log(zhzb);
@@ -114,7 +114,7 @@ let Component = React.createClass({
                     {
                     arr1.map((value, key)=> {
                         return (
-                            <div className={styles.listheaderBox} key={key}>
+                            <div className={skinStyle==1?styles.listheaderBoxBlue:skinStyle==2?styles.listheaderBoxWhite:styles.listheaderBox} key={key}>
                                 <button className={styles.listbtn} onClick={()=>pageTo_1(value,key,fData)}>{model_ens[value].name}</button>
                                 <div className={styles.listopt}>
                                     {
@@ -243,7 +243,7 @@ let Component = React.createClass({
                     {
                     arr2.map((value, key)=> {
                         return (
-                            <div className={styles.listheaderBox} key={key}>
+                            <div className={skinStyle==1?styles.listheaderBoxBlue:skinStyle==2?styles.listheaderBoxWhite:styles.listheaderBox} key={key}>
                                 <button className={styles.listbtn} onClick={()=>pageTo_2(value,key,fData)}>{model_ens[value].name}</button>
                                 <div className={styles.listopt}>
                                     {
@@ -355,12 +355,13 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {   
-            zhzb: state.vars.zhzb,
-            // bbs: state.vars.bbs,
-            fModel: state.vars.fModel,
-            fData: state.vars.fData,    
-            chooses: state.vars.chooses,   
-            chooses2: state.vars.chooses2,   
+        zhzb: state.vars.zhzb,
+        // bbs: state.vars.bbs,
+        fModel: state.vars.fModel,
+        fData: state.vars.fData,
+        chooses: state.vars.chooses,
+        chooses2: state.vars.chooses2,
+        skinStyle: state.vars.skinStyle
     }
 };
 

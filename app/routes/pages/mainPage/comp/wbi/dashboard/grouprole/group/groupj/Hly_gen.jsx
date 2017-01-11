@@ -141,6 +141,7 @@ let Component = React.createClass({
                 color:'#33BAC0',
                 type: 'column',
                 data: power1,
+                pointPlacement:0.1,
 
 
             }
@@ -149,6 +150,7 @@ let Component = React.createClass({
                     type: 'column',
                     color:'#70c080',
                     data: power2,
+                    pointPlacement:-0.1,
 
                 }
 
