@@ -18,11 +18,15 @@ let Component = React.createClass({
     },
     componentDidMount() {
         this.props.init();
+        let {display}=this.props;
+        setTimeout(function(){
+            display();
+        },2000)
     },
 
 
     render() {
-        let{skinStyle,groupbool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{display,skinStyle,groupbool = false,flag1=true,flagPba1=true,flagTime1=true,changepageProS,changepageProT,changepageSort1,changepageSort,changepageProfitS,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(groupbool){
             return (
                 <div className={skinStyle==1? styles.boxBlue:skinStyle==2? styles.boxWhite:styles.box}>
@@ -81,21 +85,33 @@ let Component = React.createClass({
                                 <div className={styles.electricFirst}>
                                     <a></a><span>年累计发电量</span>
                                     <div className={styles.electricTotal} style={(yearELec/yearPlanELec)>.9? {color:'#62de88'}:(yearELec/yearPlanELec)>.8? {color:'#e8952a'}:(yearELec/yearPlanELec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(yearELec/10000).toFixed(1)}万kWh</div>
-                                    <div className={styles.electricPercent}>
+                                    <div className={styles.hoverBox} id="hoverBoxY">
+                                        <span>累计发电量<br/>{(yearELec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(yearPlanELec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+                                    <div className={styles.electricPercent} id="BoxY">
                                         <div className={yearELec/yearPlanELec>.9? styles.green:yearELec/yearPlanELec>.8? styles.yellow:yearELec/yearPlanELec>.6? styles.red:styles.redS} style={{width:((yearELec/yearPlanELec*100))+"%"}}>{(yearELec/yearPlanELec*100).toFixed(1)}%</div>
                                     </div>
                                 </div>
                                 <div className={styles.electricSecond}>
                                     <a></a><span>月累计发电量</span>
                                     <div className={styles.electricTotal} style={(monthElec/monthPlanElec)>.9? {color:'#62de88'}:(monthElec/monthPlanElec)>.8? {color:'#e8952a'}:(monthElec/monthPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(monthElec/10000).toFixed(1)}万kWh</div>
-                                    <div className={styles.electricPercent}>
+                                    <div className={styles.hoverBox} id="hoverBoxM">
+                                        <span>累计发电量<br/>{(monthElec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(monthPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+                                    <div className={styles.electricPercent} id="BoxM">
                                         <div className={monthElec/monthPlanElec>.9? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:(monthElec/monthPlanElec*100)+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
                                     </div>
                                 </div>
                                 <div className={styles.electricThird}>
                                     <a></a><span>日累计发电量</span>
                                     <div className={styles.electricTotal} style={(dayelec/dayPlanElec)>.9? {color:'#62de88'}:(dayelec/dayPlanElec)>.8? {color:'#e8952a'}:(dayelec/dayPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(dayelec/10000).toFixed(1)}万kWh</div>
-                                    <div className={styles.electricPercent}>
+                                    <div className={styles.hoverBox} id="hoverBoxD">
+                                        <span>累计发电量<br/>{(dayelec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(dayPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+                                    <div className={styles.electricPercent} id="BoxD">
                                         <div className={(dayelec/dayPlanElec)>.9? styles.green:(dayelec/dayPlanElec)>.8? styles.yellow:(dayelec/dayPlanElec)>.6? styles.red:styles.redS} style={{width:(dayelec/dayPlanElec*100)+"%"}}>{(dayelec/dayPlanElec*100).toFixed(1)}%</div>
                                     </div>
                                 </div>
@@ -271,7 +287,26 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('ipUrl', ipUrl));
         },
-
+        display:() =>{
+            $('#BoxD').mouseover(function(){
+                $('#hoverBoxD').css('display','block');
+            });
+            $('#BoxD').mouseleave(function(){
+                $('#hoverBoxD').css('display','none');
+            });
+            $('#BoxM').mouseover(function(){
+                $('#hoverBoxM').css('display','block');
+            });
+            $('#BoxM').mouseleave(function(){
+                $('#hoverBoxM').css('display','none');
+            });
+            $('#BoxY').mouseover(function(){
+                $('#hoverBoxY').css('display','block');
+            });
+            $('#BoxY').mouseleave(function(){
+                $('#hoverBoxY').css('display','none');
+            });
+        },
         changepageSort:(flag1,flagTime1,sortArr)=>{//区域停机时间排序
             flagTime1==false? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.downtime-a.downtime})));
             dispatch(actions.setVars('flag1',false ));
