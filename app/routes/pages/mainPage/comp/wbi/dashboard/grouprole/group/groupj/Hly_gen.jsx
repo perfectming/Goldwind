@@ -13,7 +13,7 @@ let Component = React.createClass({
 
     render() {
 
-        let {ipUrl,actbt=10,w0,changedata1,windplan1 = win,text,hhdata,wc1,wc2,power2,power1,name0} = this.props;
+        let {ipUrl,actbt=10,w0,changedata1,mapmonth,text,hhdata,wc1,wc2,power2,power1,name0} = this.props;
 
 
 
@@ -83,7 +83,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w0=e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl);
+                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl,mapmonth);
 
                         }
                     }
@@ -141,6 +141,7 @@ let Component = React.createClass({
                 color:'#33BAC0',
                 type: 'column',
                 data: power1,
+                pointPlacement:0.1,
 
 
             }
@@ -149,6 +150,7 @@ let Component = React.createClass({
                     type: 'column',
                     color:'#70c080',
                     data: power2,
+                    pointPlacement:-0.1,
 
                 }
 
@@ -173,6 +175,7 @@ const mapStateToProps = (state) => {
         hhdata : state.vars.hhdata,
         actbt:state.vars.actbt,
         ipUrl:state.vars.ipUrl,
+        mapmonth: state.vars.mapmonth,
 
     }
 };
@@ -182,13 +185,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl)=>{
-
-
-
-           // grid=hhdata.data[2][wc1].groupid;
-
-
+        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl,mapmonth)=>{
 
 
             $.ajax({
@@ -196,7 +193,8 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/ELEC/getSpaceByGroupidElec',
                 async:false,
                 data:{
-                    "months":actbt+1,
+                    "year": mapmonth[actbt].year,
+                    "months":mapmonth[actbt].yearpoweract,
                     "groupid": '201612121721151',
                     "wfid":'',
                 },

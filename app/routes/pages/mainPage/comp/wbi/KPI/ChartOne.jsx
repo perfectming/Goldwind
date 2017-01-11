@@ -58,6 +58,7 @@ let Component = React.createClass({
             colors: [ '#5298d3', '#ffffff', '#e9c75c','#d06960','#856ffe','#009a46',],
             plotOptions: {
 	            pie: {
+                    size:180,
 	                allowPointSelect: false,
 	                cursor: 'pointer',
 	                dataLabels: {

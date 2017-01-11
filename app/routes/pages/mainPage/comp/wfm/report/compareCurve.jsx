@@ -27,7 +27,7 @@ let Component = React.createClass({
     },
 
     render() {
-            let {selectType,lineType=1,boolywbb=false,playjq,select_list,searchnum,powerCurveData} = this.props;
+            let {skinStyle,selectType,lineType=1,boolywbb=false,playjq,select_list,searchnum,powerCurveData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
@@ -78,7 +78,7 @@ let Component = React.createClass({
             if(boolywbb){
                 let treetype=["原始曲线","矫正曲线","对比曲线","分析曲线"];
                 return (
-                    <div className={styles.faultBox}>
+                    <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
                         <div className={styles.search_tit}>
                             <div className={styles.seleBox}>
                                 <span>曲线种类:</span>
@@ -260,6 +260,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        skinStyle: state.vars.skinStyle, //全局换肤
         boolywbb:state.vars.boolywbb,
         select_list:state.vars.select_list,
         powerCurveData:state.objs.powerCurveData,

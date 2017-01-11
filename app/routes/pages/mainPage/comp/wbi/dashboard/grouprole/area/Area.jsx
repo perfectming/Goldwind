@@ -19,11 +19,15 @@ let Component = React.createClass({
     },
     componentDidMount() {
         this.props.init();
+        let {display}=this.props;
+        setTimeout(function(){
+            display();
+        },2000)
     },
    
 
     render() {
-        let{skinStyle,healthyArea,clickAreaId,areaName,areaId,areaCost,areaProfit,areaMonth,runTime,downTime,TBA,areaArr,actb,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month,elecPlan,elecAct,ipUrl,areaBool=false,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{display,skinStyle,healthyArea,clickAreaId,areaName,areaId,areaCost,areaProfit,areaMonth,runTime,downTime,TBA,areaArr,actb,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month,elecPlan,elecAct,ipUrl,areaBool=false,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(areaBool){
         	return (
 	            <div className={skinStyle==1? styles.boxBlue:skinStyle==2? styles.boxWhite:styles.box}>
@@ -39,7 +43,7 @@ let Component = React.createClass({
 	           			<div className={styles.firstfloor}>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>当前{healthyArea.toFixed(1)}分<br/><br/>总分100分</span><br/><br/>
+	           						<span>当前<br/>{healthyArea.toFixed(1)}分<br/>总分<br/>100分</span><br/>
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
@@ -83,21 +87,33 @@ let Component = React.createClass({
 	           					<div className={styles.electricFirst}>
 	           						<a></a><span>年累计发电量</span>
 	           						<div className={styles.electricTotal}  style={(yearElec/yearPlanElec)>.9? {color:'#62de88'}:(yearElec/yearPlanElec)>.8? {color:'#e8952a'}:(yearElec/yearPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(yearElec/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.electricPercent}>
+	           						<div className={styles.hoverBox} id="hoverBoxY">
+                                        <span>累计发电量<br/>{(yearElec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(yearPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+	           						<div className={styles.electricPercent} id="BoxY">
 	           							<div className={yearElec/yearPlanElec>0.9? styles.green:yearElec/yearPlanElec>.8? styles.yellow:yearElec/yearPlanElec>.6? styles.red:styles.redS} style={{width:((yearElec/yearPlanElec*100).toFixed(1))+"%"}}>{(yearElec/yearPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricSecond}>
 	           						<a></a><span>月累计发电能量</span>
 	           						<div className={styles.electricTotal} style={(monthElec/monthPlanElec)>.9? {color:'#62de88'}:(monthElec/monthPlanElec)>.8? {color:'#e8952a'}:(monthElec/monthPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(monthElec/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.electricPercent}>
+	           						<div className={styles.hoverBox} id="hoverBoxM">
+                                        <span>累计发电量<br/>{(monthElec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(monthPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+	           						<div className={styles.electricPercent} id="BoxM">
 	           							<div className={monthElec/monthPlanElec>0.9? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:((monthElec/monthPlanElec*100).toFixed(1))+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricThird}>
 	           						<a></a><span>日累计发电量</span>
 	           						<div className={styles.electricTotal} style={(dayElec/dayPlanElec)>.9? {color:'#62de88'}:(dayElec/dayPlanElec)>.8? {color:'#e8952a'}:(dayElec/dayPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(dayElec/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.electricPercent}>
+	           						<div className={styles.hoverBox} id="hoverBoxD">
+                                        <span>累计发电量<br/>{(dayElec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(dayPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+	           						<div className={styles.electricPercent} id="BoxD">
 	           							<div className={dayElec/dayPlanElec>0.9? styles.green:dayElec/dayPlanElec>.8? styles.yellow:dayElec/dayPlanElec>.6? styles.red:styles.redS} style={{width:((dayElec/dayPlanElec*100).toFixed(1))+"%"}}>{(dayElec/dayPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
@@ -342,6 +358,26 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             } 
+        },
+        display:() =>{
+            $('#BoxD').mouseover(function(){
+                $('#hoverBoxD').css('display','block');
+            });
+            $('#BoxD').mouseleave(function(){
+                $('#hoverBoxD').css('display','none');
+            });
+            $('#BoxM').mouseover(function(){
+                $('#hoverBoxM').css('display','block');
+            });
+            $('#BoxM').mouseleave(function(){
+                $('#hoverBoxM').css('display','none');
+            });
+            $('#BoxY').mouseover(function(){
+                $('#hoverBoxY').css('display','block');
+            });
+            $('#BoxY').mouseleave(function(){
+                $('#hoverBoxY').css('display','none');
+            });
         },
         changepageSort:(flag,flagTime,areaArr)=>{//各风场停机时间排序
         	flagTime==false? dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return b.downtime-a.downtime})));

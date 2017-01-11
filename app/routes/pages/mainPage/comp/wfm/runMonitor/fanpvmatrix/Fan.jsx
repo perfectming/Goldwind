@@ -105,10 +105,7 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.listrightBox}>
                     <div className={styles.listbodyBox1}>
-                        <Unfilterfan></Unfilterfan> 
-                        
-                    
-                
+                        <Unfilterfan></Unfilterfan>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,6 @@
   height: 63px;
   line-height: 63px;
   font-size: 18px;
-  color: #e6e7e8;
   overflow:hidden;
   .tabItemAct {
     //min-width: 120px;
@@ -23,6 +22,60 @@
     float:left;
     font-size:20px;
     color:#fff;
+    padding:0 12px;
+  }
+}
+.navTabBlue {
+  width: 100%;
+  height: 63px;
+  line-height: 63px;
+  font-size: 18px;
+  overflow:hidden;
+  .tabItemAct {
+    //min-width: 120px;
+    //display: inline-block;
+    color: #2ff4fb;
+    cursor: pointer;
+    float:left;
+  }
+  .tabItem {
+    //min-width: 120px;
+    display: inline-block;
+    color: #e6e7e8;
+    cursor: pointer;
+    float:left;
+  }
+  .tabItemIcon{
+    float:left;
+    font-size:20px;
+    color:#fff;
+    padding:0 12px;
+  }
+}
+.navTabWhite {
+  width: 100%;
+  height: 63px;
+  line-height: 63px;
+  font-size: 18px;
+  overflow:hidden;
+  .tabItemAct {
+    //min-width: 120px;
+    //display: inline-block;
+    color: #258fc3;
+    cursor: pointer;
+    float:left;
+  }
+  .tabItem {
+    //min-width: 120px;
+    display: inline-block;
+    color: #333333;
+    cursor: pointer;
+    float:left;
+  }
+  .tabItemIcon{
+    float:left;
+    font-size:20px;
+    color:#333333;
     padding:0 12px;
   }
 }

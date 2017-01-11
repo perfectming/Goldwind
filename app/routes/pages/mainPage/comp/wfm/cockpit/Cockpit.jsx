@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import styles from './Cockpit.scss';
 import Title from '../super/Title.jsx';
 import Pie2 from './pie2.jsx';
-import Tuchart from './Tuchart.jsx';
 import Tuchart1 from './tuchar1.jsx';
 import Tuchart2 from './Tuchart2.jsx';
 import Tuchart3 from './Tuchart3.jsx';
@@ -62,7 +61,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let{mmodata,mmoname,bloo=false}=this.props;
+        let{mmodata,mmoname,bloo=false,skinStyle}=this.props;
         if(bloo){
             let mobd=mmodata.ModelData;
             let mod=mmoname.Model.dis;
@@ -87,8 +86,11 @@ let Component = React.createClass({
             let ssdlqkfx=[];//损失电量情况分析//
             let IntoCDMjp=0;//纳入CDM场站CO2减排量//
             let NotIntoCDMjp=0;//未纳入CDM场站CO2减排量//
+            let annularPlate='#39565e';//环状图底色，用于换肤//
 
-
+            if(skinStyle==2){
+                annularPlate='#C0E2EA';
+            }
             (function(){
                 for(let i in kbynjhfdl){
                     kbynjhfdl1.push(Number((kbynjhfdl[i]*mod.Last12MonthsPlanEgyAtStat.coeff).toFixed(mod.Last12MonthsPlanEgyAtStat.place)));
@@ -132,7 +134,7 @@ let Component = React.createClass({
             let now = new Date();let ile = now.getTime() - urodz.getTime();
             let dni = Math.floor(ile / (1000 * 60 * 60 * 24));
             return(
-                <div className={styles.bodyBox}>
+                <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
                     <div className={`${styles.zhzb} ${styles.box_shadow}`}>
                         <Title title={['综合指标']}></Title>
                         <div className={styles.zhzbdown}><img src={anquan} className={styles.anquan}/>安全运行
@@ -154,42 +156,42 @@ let Component = React.createClass({
                         <div className={styles.zhzbglmain}>
                             <div className={styles.zhzbglbox}><img src={up}/>
                                 <p>投资收益率</p>
-                                <Pie2 color={rate>0.12? ['#62de88','#39565e']:rate>0.108?['#e8952a','#39565e']:rate>0.096?['#a32124','#39565e']:['#d8403d','#39565e']} num={[profit,amounts-profit]}></Pie2>
+                                <Pie2 color={rate>0.12? ['#62de88',annularPlate]:rate>0.108?['#e8952a',annularPlate]:rate>0.096?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[profit,amounts-profit]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
                                     <p style={rate>0.12? {color:'#62de88'} :rate>0.108?{color:'#e8952a'}:rate>0.096?{color:'#a32124'}:{color:'#d8403d'}}>{rate=="NaN"?"--":(rate*100).toFixed(1)}%</p>
                                 </span>
                             </div>
                             <div className={styles.zhzbglbox}><img src={up}/>
                                 <p>年发电计划完成率</p>
-                                <Pie2 color={nfdjhwcl>90? ['#62de88','#39565e']:nfdjhwcl>80?['#e8952a','#39565e']:nfdjhwcl>60?['#a32124','#39565e']:['#d8403d','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number((mobd[8888800].YearPlanTotEgyAt/1)-(mobd[8888800].YearEgyAt/1))]}></Pie2>
+                                <Pie2 color={nfdjhwcl>90? ['#62de88',annularPlate]:nfdjhwcl>80?['#e8952a',annularPlate]:nfdjhwcl>60?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearEgyAt),Number((mobd[8888800].YearPlanTotEgyAt/1)-(mobd[8888800].YearEgyAt/1))]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
                                     <p style={nfdjhwcl>90? {color:'#62de88'} :nfdjhwcl>80?{color:'#e8952a'}:nfdjhwcl>60?{color:'#a32124'}:{color:'#d8403d'}}>{nfdjhwcl}%</p>
                                 </span>
                             </div>
                             <div className={styles.zhzbglbox}><img src={down}/>
                                 <p>年度PBA</p>
-                                <Pie2 color={ndpba>90? ['#62de88','#39565e']:ndpba>80?['#e8952a','#39565e']:ndpba>60?['#a32124','#39565e']:['#d8403d','#39565e']} num={[Number(mobd[8888800].YearEgyAt),Number((mobd[8888800].YearEgyAt/1)+(mobd[8888800].YearLossElec.Sum/1)-(mobd[8888800].YearEgyAt/1))]}></Pie2>
+                                <Pie2 color={ndpba>90? ['#62de88',annularPlate]:ndpba>80?['#e8952a',annularPlate]:ndpba>60?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearEgyAt),Number((mobd[8888800].YearEgyAt/1)+(mobd[8888800].YearLossElec.Sum/1)-(mobd[8888800].YearEgyAt/1))]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
                                     <p style={ndpba>90? {color:'#62de88'} :ndpba>80?{color:'#e8952a'}:ndpba>60?{color:'#a32124'}:{color:'#d8403d'}}>{ndpba}%</p>
                                 </span>
                             </div>
                             <div className={styles.zhzbglbox}><img src={up}/>
                                 <p>设备健康度</p>
-                                <Pie2 color={['#d06960','#32535C']} num={[57,43]}></Pie2>
+                                <Pie2 color={['#d06960',annularPlate]} num={[57,43]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
                                     <p style={{color:'#d06960'}}>{57}%</p>
                                 </span>
                             </div>
                             <div className={styles.zhzbglbox}><img src={down}/>
                                 <p>工单完成率</p>
-                                <Pie2 color={['#fbd500','#32535C']} num={[82,18]}></Pie2>
+                                <Pie2 color={['#fbd500',annularPlate]} num={[82,18]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
                                     <p style={{color:'#fbd500'}}>{82}%</p>
                                 </span>
                             </div>
                             <div className={styles.zhzbglbox}><img src={up}/>
                                 <p>年度MTBF</p>
-                                <Pie2 color={zmtbf>7884? ['#62de88','#39565e']:zmtbf>7708?['#e8952a','#39565e']:zmtbf>5256?['#a32124','#39565e']:['#d8403d','#39565e']} num={[Number(mobd[8888800].YearMTBF),8760-Number(mobd[8888800].YearMTBF)]}></Pie2>
+                                <Pie2 color={zmtbf>7884? ['#62de88',annularPlate]:zmtbf>7708?['#e8952a',annularPlate]:zmtbf>5256?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearMTBF),8760-Number(mobd[8888800].YearMTBF)]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
                                     <p style={zmtbf>7884? {color:'#62de88'} :zmtbf>7708?{color:'#e8952a'}:zmtbf>5256?{color:'#a32124'}:{color:'#d8403d'}}>{zmtbf}h</p>
                                 </span>
@@ -199,11 +201,11 @@ let Component = React.createClass({
                     <div className={styles.columbox}>
                         <div className={`${styles.leftcolum} ${styles.box_shadow}`}>
                             <Title title={['月发电量完成情况']}></Title>
-                            <Tuchart2 shuju={comp.jscnum.month} njhfdl={kbynjhfdl1} nsjfdl={kbynsjfdl1} nfdlwcl={kbynfdwcl} monthTime={monthTimeHandle}></Tuchart2>
+                            <Tuchart2 njhfdl={kbynjhfdl1} nsjfdl={kbynsjfdl1} nfdlwcl={kbynfdwcl} monthTime={monthTimeHandle} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Tuchart2>
                         </div>
                         <div className={`${styles.rightcolum} ${styles.box_shadow}`}>
                             <Title title={['月收益状况']}></Title>
-                            <Tuchart4 shuju={comp.jscnum.money} cbsj={cost} srsj={incomes} monthTime={month2}></Tuchart4>
+                            <Tuchart4 cbsj={cost} srsj={incomes} monthTime={month2} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Tuchart4>
                         </div>
                     </div>
 
@@ -211,17 +213,17 @@ let Component = React.createClass({
 
                         <Title title={['场站年等效利用小时数']}></Title>
                         <div className={styles.fgzyfxmain}>
-                            <Tuchart3 shuju={comp.jscnum.hour} gczmc={arrname} gczdxlyxss={czndxly1}></Tuchart3>
+                            <Tuchart3 gczmc={arrname} gczdxlyxss={czndxly1} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Tuchart3>
                         </div>
                     </div>
 
                     <div className={`${styles.gzsbgl} ${styles.box_shadow}`}>
                         <Title title={['场站MTBF排行']}></Title>
-                        <Tuchart5 shuju={comp.jscnum.mtbf} gczmc={arrname} gczmtbf={czmtbf}></Tuchart5>
+                        <Tuchart5 gczmc={arrname} gczmtbf={czmtbf} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Tuchart5>
                     </div>
                      <div className={`${styles.ssdlqkfx} ${styles.box_shadow}`}>
                         <Title title={['损失电量情况分析(kWh)']}></Title>
-                        <Tuchart1 shuju={comp.jscnum.elect} ssdlnum={ssdlqkfx}></Tuchart1>
+                        <Tuchart1 ssdlnum={ssdlqkfx} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Tuchart1>
                     </div>
 
 
@@ -272,6 +274,7 @@ const mapStateToProps = (state) => {
         mmoname:state.vars.mmoname,
         mmodata:state.vars.mmodata,
         bloo:state.vars.bloo,
+        skinStyle: state.vars.skinStyle
     }
 };
 
@@ -286,8 +289,6 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('mmoname', mmoname));
                     TY.getRtData("Cockpit", 8888800, ppo);
                     function ppo(mmodata){
-                        TY.getRtData("Cockpit", 8888800, ppo);
-                        function ppo(mmodata){
                             if(mmodata.ModelData==undefined||mmodata.ModelData[8888800]==undefined){
                                 TY.getRtData("Cockpit", 8888800, ppo);
                             }else {
@@ -347,7 +348,7 @@ const mapDispatchToProps = (dispatch) => {
                                     }
                                 }
                             }
-                        }
+
                     }
                 }
             }
@@ -360,7 +361,7 @@ const mapDispatchToProps = (dispatch) => {
             time=setInterval(function(){
                 TY.getRtData("Cockpit", 8888800, ppo);
                 function ppo(mmodata){
-                    if(mmodata.ModelData[8888801]==undefined){
+                    if(mmodata.ModelData[8888800]==undefined){
                         TY.getRtData("Cockpit", 8888800, ppo);
                     }else {
                         dispatch(actions.setVars('mmodata', mmodata));

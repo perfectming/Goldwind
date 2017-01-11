@@ -22,7 +22,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{jyname,jydata,changepage,changepage2,boolebooster=false}=this.props;
+        let{jyname,jydata,changepage,changepage2,boolebooster=false,skinStyle}=this.props;
         if(boolebooster){
             let modens=jyname.Model.ens;
             let moddis=jyname.Model.dis;
@@ -35,7 +35,7 @@ let Component = React.createClass({
             let zjrl=[];//场站装机容量//
             let czdagc=[];//AGC对应的场站编号//
             let czdavc=[];//AVC对应的场站编号//
-            let jhgl=[];//升压站计划功率//l
+            let jhgl=[];//升压站计划功率//
             (function(){
                 for(let i in modens){
                     if ( modens[i].wft=='Wf'|| modens[i].wft=='Gf'){
@@ -66,7 +66,7 @@ let Component = React.createClass({
 
             }());
             return(
-                <div className={styles.bodyBox}>
+                <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
                     {
                         arr1.map((value, key)=> {
                             return (
@@ -112,6 +112,7 @@ const mapStateToprops = (state) => {
         jyname: state.vars.jyname,
         jydata: state.vars.jydata,
         boolebooster: state.vars.boolebooster,
+        skinStyle: state.vars.skinStyle
     }
 };
 
