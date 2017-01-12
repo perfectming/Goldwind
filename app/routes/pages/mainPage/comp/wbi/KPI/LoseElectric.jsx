@@ -17,7 +17,7 @@ let Component = React.createClass({
         this.props.init();
         setTimeout(function(){
         	init()
-        },800)
+        },2000)
     },
 	componentWillMount() {
     	let {ipUrl}=this.props;
@@ -207,6 +207,11 @@ const mapDispatchToProps = (dispatch) => {
 				    dispatch(actions.setVars('selectId', selectId));
 				    dispatch(actions.setVars('selectName', selectName));
 				},
+				error:function(XMLHttpRequest,textStatus,errorThrown){    
+                    dispatch(actions.setVars('alertBool', false));
+				    dispatch(actions.setVars('alertText', '网络不稳定，请求超时'));
+			        return false;  
+                },
 				complete : function(XMLHttpRequest,status) { 
 					dispatch(actions.setVars('loseElecBool', true));
 				},
@@ -313,11 +318,11 @@ const mapDispatchToProps = (dispatch) => {
 			            			return false;
 					        	}
 							},
-					        complete : function(XMLHttpRequest,status) { 
-							　　　if(status=='timeout') {
-							　　　　　 console.log('超时');
-							　　　}
-							},
+					        error:function(XMLHttpRequest,textStatus,errorThrown){    
+	                          	dispatch(actions.setVars('alertBool', false));
+					        	dispatch(actions.setVars('alertText', '网络不稳定，请求超时'));
+				        		return false;  
+	                    	} 
 						});
 					}else{//区域
 						$.ajax({
@@ -349,11 +354,11 @@ const mapDispatchToProps = (dispatch) => {
 			            			return false;
 					        	}
 							},
-					        complete : function(XMLHttpRequest,status) { 
-							　　　if(status=='timeout') {
-							　　　　　 console.log('超时');
-							　　　}
-							},
+					        error:function(XMLHttpRequest,textStatus,errorThrown){    
+	                          	dispatch(actions.setVars('alertBool', false));
+					        	dispatch(actions.setVars('alertText', '网络不稳定，请求超时'));
+				        		return false;  
+                    		} 
 						});
 					}
 					dispatch(actions.setVars('loseA', loseA));
@@ -438,11 +443,11 @@ const mapDispatchToProps = (dispatch) => {
 			        			return false;
 				        	}
 						},
-				        complete : function(XMLHttpRequest,status) { 
-						　　　if(status=='timeout') {
-						　　　　　 console.log('超时');
-						　　　}
-						},
+				        error:function(XMLHttpRequest,textStatus,errorThrown){    
+                          	dispatch(actions.setVars('alertBool', false));
+				        	dispatch(actions.setVars('alertText', '网络不稳定，请求超时'));
+			        		return false;  
+                    	} 
 					});
 				}else{
 					$.ajax({
@@ -474,11 +479,11 @@ const mapDispatchToProps = (dispatch) => {
 			        			return false;
 				        	}
 						},
-				        complete : function(XMLHttpRequest,status) { 
-						　　　if(status=='timeout') {
-						　　　　　 console.log('超时');
-						　　　}
-						},
+				        error:function(XMLHttpRequest,textStatus,errorThrown){    
+                          	dispatch(actions.setVars('alertBool', false));
+				        	dispatch(actions.setVars('alertText', '网络不稳定，请求超时'));
+			        		return false;  
+                    	} 
 					});
 				}
 				dispatch(actions.setVars('loseA', loseA));

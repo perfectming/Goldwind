@@ -19,11 +19,15 @@ let Component = React.createClass({
     },
     componentDidMount() {
         this.props.init();
+        let {display}=this.props;
+        setTimeout(function(){
+            display();
+        },2000)
     },
    
 
     render() {
-        let{skinStyle,healthyArea,clickAreaId,areaName,areaId,areaCost,areaProfit,areaMonth,runTime,downTime,TBA,areaArr,actb,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month,elecPlan,elecAct,ipUrl,areaBool=false,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{display,skinStyle,healthyArea,clickAreaId,areaName,areaId,areaCost,areaProfit,areaMonth,runTime,downTime,TBA,areaArr,actb,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month,elecPlan,elecAct,ipUrl,areaBool=false,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(areaBool){
         	return (
 	            <div className={skinStyle==1? styles.boxBlue:skinStyle==2? styles.boxWhite:styles.box}>
@@ -39,7 +43,7 @@ let Component = React.createClass({
 	           			<div className={styles.firstfloor}>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>当前{healthyArea.toFixed(1)}分<br/><br/>总分100分</span><br/><br/>
+	           						<span>当前<br/>{healthyArea.toFixed(1)}分<br/>总分<br/>100分</span><br/>
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
@@ -83,21 +87,33 @@ let Component = React.createClass({
 	           					<div className={styles.electricFirst}>
 	           						<a></a><span>年累计发电量</span>
 	           						<div className={styles.electricTotal}  style={(yearElec/yearPlanElec)>.9? {color:'#62de88'}:(yearElec/yearPlanElec)>.8? {color:'#e8952a'}:(yearElec/yearPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(yearElec/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.electricPercent}>
+	           						<div className={styles.hoverBox} id="hoverBoxY">
+                                        <span>累计发电量<br/>{(yearElec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(yearPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+	           						<div className={styles.electricPercent} id="BoxY">
 	           							<div className={yearElec/yearPlanElec>0.9? styles.green:yearElec/yearPlanElec>.8? styles.yellow:yearElec/yearPlanElec>.6? styles.red:styles.redS} style={{width:((yearElec/yearPlanElec*100).toFixed(1))+"%"}}>{(yearElec/yearPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricSecond}>
 	           						<a></a><span>月累计发电能量</span>
 	           						<div className={styles.electricTotal} style={(monthElec/monthPlanElec)>.9? {color:'#62de88'}:(monthElec/monthPlanElec)>.8? {color:'#e8952a'}:(monthElec/monthPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(monthElec/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.electricPercent}>
+	           						<div className={styles.hoverBox} id="hoverBoxM">
+                                        <span>累计发电量<br/>{(monthElec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(monthPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+	           						<div className={styles.electricPercent} id="BoxM">
 	           							<div className={monthElec/monthPlanElec>0.9? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:((monthElec/monthPlanElec*100).toFixed(1))+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricThird}>
 	           						<a></a><span>日累计发电量</span>
 	           						<div className={styles.electricTotal} style={(dayElec/dayPlanElec)>.9? {color:'#62de88'}:(dayElec/dayPlanElec)>.8? {color:'#e8952a'}:(dayElec/dayPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(dayElec/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.electricPercent}>
+	           						<div className={styles.hoverBox} id="hoverBoxD">
+                                        <span>累计发电量<br/>{(dayElec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(dayPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+	           						<div className={styles.electricPercent} id="BoxD">
 	           							<div className={dayElec/dayPlanElec>0.9? styles.green:dayElec/dayPlanElec>.8? styles.yellow:dayElec/dayPlanElec>.6? styles.red:styles.redS} style={{width:((dayElec/dayPlanElec*100).toFixed(1))+"%"}}>{(dayElec/dayPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
@@ -211,7 +227,7 @@ const mapDispatchToProps = (dispatch) => {
 		 	//        	console.log(data)
 		 	//       },
 		 	// });
-
+			dispatch(actions.setVars('areaBool', false));
     		dispatch(actions.setVars('actb',0 ));
     		 	$.ajax({
         		url:'http://'+ipUrl+'/wbi/user/getByUserIDGroup',//获得各区域ID和名字
@@ -237,8 +253,7 @@ const mapDispatchToProps = (dispatch) => {
 				        async:true,
 				        data:{'groupid':areaId[0]},
 				        dataType: 'json',//here
-				        success:function (data) {
-				        	areaMonth=[],areaProfit=[],areaCost=[];
+				        success:function (data) {				        	areaMonth=[],areaProfit=[],areaCost=[];
 				        	for(var i in data.data){
 				        		areaMonth.push(data.data[i].month+"月");
 				        		areaProfit.push((data.data[i].incomes).toFixed(1)/1);
@@ -265,10 +280,11 @@ const mapDispatchToProps = (dispatch) => {
 						        	month=[],elecPlan=[],elecAct=[];
 						        	for(var i in data.data.twAreaMonthElec){
 						        		elecAct.push((data.data.twAreaMonthElec[i].poweract).toFixed(1)/1);
+						        		month.push(data.data.twAreaMonthElec[i].month+"月");
 						        	};
 						        	for(var i in data.data.twAreaMonthPlanElec){
 						        		elecPlan.push((data.data.twAreaMonthPlanElec[i]).toFixed(1)/1);
-						        		month.push(i+"月");
+						        		
 						        	};
 						        	dispatch(actions.setVars('yearElec',yearElec ));
 						        	dispatch(actions.setVars('monthElec',monthElec ));
@@ -296,11 +312,19 @@ const mapDispatchToProps = (dispatch) => {
 								        	dispatch(actions.setVars('areaArr',areaArr ));
 								        },
 								        complete : function(XMLHttpRequest,status){ 
+								        		var date = new Date();
+										            if(date.getMonth()==0){
+										            	var yearString = date.getFullYear()-1;
+										            	var monthString = 12;
+										            }else{
+										                var yearString = date.getFullYear();
+										                var monthString = date.getMonth();										                
+										            }
 									　　　　	$.ajax({
 								        		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA饼图
 										        type: 'post',
 										        async:true,
-										        data:{'groupid':areaId[0]},
+										        data:{'groupid':areaId[0],'year':yearString,'month':monthString},
 										        dataType: 'json',//here
 										        success:function (data) {
 										        	runTime=data.data[0].runtimes;
@@ -343,6 +367,26 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             } 
         },
+        display:() =>{
+            $('#BoxD').mouseover(function(){
+                $('#hoverBoxD').css('display','block');
+            });
+            $('#BoxD').mouseleave(function(){
+                $('#hoverBoxD').css('display','none');
+            });
+            $('#BoxM').mouseover(function(){
+                $('#hoverBoxM').css('display','block');
+            });
+            $('#BoxM').mouseleave(function(){
+                $('#hoverBoxM').css('display','none');
+            });
+            $('#BoxY').mouseover(function(){
+                $('#hoverBoxY').css('display','block');
+            });
+            $('#BoxY').mouseleave(function(){
+                $('#hoverBoxY').css('display','none');
+            });
+        },
         changepageSort:(flag,flagTime,areaArr)=>{//各风场停机时间排序
         	flagTime==false? dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return b.downtime-a.downtime})));
         	dispatch(actions.setVars('flag',false ));
@@ -355,6 +399,7 @@ const mapDispatchToProps = (dispatch) => {
         	dispatch(actions.setVars('flagPba',!flagPba ));
         },
         changepage :(ipUrl,value,key,areaId,areaMonth,areaProfit,areaCost,clickAreaId)=>{
+        	dispatch(actions.setVars('areaBool', false));
         	$.ajax({
         		url: 'http://'+ipUrl+'/wbi/yield/getGroupAllRate',//收益柱图
 		        type: 'post',
@@ -449,7 +494,7 @@ const mapDispatchToProps = (dispatch) => {
 										        	dispatch(actions.setVars('TBA',TBA));
 										        },
 										        complete : function(XMLHttpRequest,status){ 
-											　　　　
+											　　　　dispatch(actions.setVars('areaBool', true));　
 											　　},
 										    });
 									　　},

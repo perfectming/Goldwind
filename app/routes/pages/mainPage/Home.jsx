@@ -120,7 +120,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('putpage', false));
             if( localStorage.skinStyle){
                 dispatch(actions.setVars('skinStyle',localStorage.skinStyle ));
-                console.log(localStorage.skinStyle)
             }else {
                 dispatch(actions.setVars('skinStyle',0 ));
             }

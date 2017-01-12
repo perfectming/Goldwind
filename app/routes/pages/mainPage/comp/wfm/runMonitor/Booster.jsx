@@ -127,17 +127,14 @@ const mapDispatchToprops = (dispatch) => {
                     dispatch(actions.setVars('jyname', jyname));
                     TY.getRtData("RegulationOverview", 8888800, ppo);
                     function ppo(jydata){
-                        TY.getRtData("RegulationOverview", 8888800, ppo);
-                        function ppo(jydata){
-                            if (jydata.ModelData==undefined){
-                                TY.getRtData("MonitorBoard", 8888800, ppo);
-                            }else{
-                                dispatch(actions.setVars('jydata', jydata));
-                                setTimeout(function () {
-                                    dispatch(actions.setVars('boolebooster', true));
-                                    clearTimeout(onceTime);
-                                },100)
-                            }
+                        if (jydata.ModelData==undefined){
+                            TY.getRtData("RegulationOverview", 8888800, ppo);
+                        }else{
+                            dispatch(actions.setVars('jydata', jydata));
+                            setTimeout(function () {
+                                dispatch(actions.setVars('boolebooster', true));
+                                clearTimeout(onceTime);
+                            },100)
                         }
                     }
                 }
@@ -146,7 +143,7 @@ const mapDispatchToprops = (dispatch) => {
                 alert('数据获取失败！请重新登入');
                 browserHistory.push('/app/all/page/login');
                 dispatch(actions.setVars('userInfo', false));
-            },7000);
+            },10000);
             time=setInterval(function(){
                 TY.getRtData("RegulationOverview", 8888800, ppo);
                 function ppo(jydata){

@@ -4,8 +4,8 @@ var {getState} = require('redux/store');
 var actions = require('redux/actions');
 var $ =require('jquery');
 import styles from './Amm.scss';
-let pageSize=11;
-
+let pageSize=10;
+// onClick={()=>jump(value['id'])}
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';
 import del from '../../../img/icon/tabDel.png';
@@ -13,6 +13,7 @@ import add from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 import Login from '../../../../../../components/common/Loading.jsx';
 import Ambox from './boxAm.jsx';
+import Load from './load';
 let soam='http://10.68.100.32:8080/soam';
 let tabaleData = require('./data');
 let arr=['id','name','loginname','password','phonecode','mailbox','logintype','dogcode','remark','roleids'];
@@ -22,7 +23,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+        let {checkPhone,checkMail,saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData={};
         let num=0;
         for(let i=0;i<arr.length-1;i++){
@@ -32,6 +33,7 @@ let Component = React.createClass({
         if(table&&boxData){
         return (
         <div className={styles.bodyBox}>
+            <Load></Load>
             <div className={styles.roleputBox}>
                 <div className={styles.inquireBox}>
                     {
@@ -92,7 +94,7 @@ let Component = React.createClass({
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                value={value[valueC]}/>
                                                     )
-                                                }else if (keyC==6){
+                                                }else if (valueC=='logintype'){
                                                     return (
                                                         <select className={styles.tableContentItem} key={keyC}
                                                                 onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
@@ -100,20 +102,30 @@ let Component = React.createClass({
                                                                 type="button">
                                                             {
                                                                 logintypeArr.map((valueD,keyD)=>{
-                                                                    if (value[valueC]==keyD){
                                                                 return(
-                                                                    < option className={styles.opt} selected="selected" value={keyD} key={keyD}>{valueD}</option>
+                                                                    < option className={styles.opt} name={value[valueC]==keyD?"selectOpt":'seleOpt'} value={keyD} key={keyD}>{valueD}</option>
                                                                 )
-                                                                    }else{
-                                                                        return(
-                                                                            < option className={styles.opt} value={keyD} key={keyD}>{valueD}</option>
-                                                                        )
-                                                                    }
                                                                 })
                                                             }
                                                         </select>
                                                     )
-                                                }else if (keyC==3){
+                                                }else if (valueC=='phonecode'){
+                                                    return(
+                                                        <input className={styles.tableContentItem}
+                                                               style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                               key={keyC} contentEditable="true" onBlur={(e)=>checkPhone(e.target.value,key,keyC)}
+                                                               onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                               value={value[valueC]}/>
+                                                    )
+                                                }else if (valueC=='mailbox'){
+                                                    return(
+                                                        <input className={styles.tableContentItem}
+                                                               style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                               key={keyC} contentEditable="true" onBlur={(e)=>checkMail(e.target.value,key,keyC)}
+                                                               onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                               value={value[valueC]}/>
+                                                    )
+                                                }else if (valueC=='password'){
                                                     return(
                                                         <input className={styles.tableContentItem}
                                                                style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
@@ -121,26 +133,10 @@ let Component = React.createClass({
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                value={value[valueC]} type="password"/>
                                                     )
-                                                }else if (keyC==6){
-                                                    return (
-                                                        <select className={styles.tableContentItem} key={keyC}
-                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                                style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                                type="button">
-                                                            {
-                                                                logintypeArr.map((valueD,keyD)=>{
-                                                                    return(
-                                                                        < option className={styles.opt} value={keyD} key={keyD}>{valueD}</option>
-                                                                    )
-                                                                })
-                                                            }
-                                                        </select>
-                                                    )
-                                                }else if (keyC==tabaleData.ammData.header.length-1){
+                                                }else if (valueC=='roleids'){
                                                     return (
                                                         <input className={styles.tableContentItem} key={keyC}
                                                            style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                           onClick={()=>{jump(value['id'])}}
                                                            type="button" value='设置'/>
                                                     )
                                                 }else {
@@ -185,7 +181,23 @@ let Component = React.createClass({
                                                                    onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                    value={value[valueC]}/>
                                                         )
-                                                    }else if (keyC==3){
+                                                    }else if (valueC=='phonecode'){
+                                                        return(
+                                                            <input className={styles.tableContentItem}
+                                                                   style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                                   key={keyC} contentEditable="true" onBlur={(e)=>checkPhone(e.target.value,key,keyC)}
+                                                                   onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                                   value={value[valueC]}/>
+                                                        )
+                                                    }else if (valueC=='mailbox'){
+                                                        return(
+                                                            <input className={styles.tableContentItem}
+                                                                   style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                                   key={keyC} contentEditable="true" onBlur={(e)=>checkMail(e.target.value,key,keyC)}
+                                                                   onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                                   value={value[valueC]}/>
+                                                        )
+                                                    }else if (valueC=='password'){
                                                         return(
                                                             <input className={styles.tableContentItem}
                                                                    style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
@@ -193,12 +205,27 @@ let Component = React.createClass({
                                                                    onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                    value={value[valueC]} type="password"/>
                                                         )
-                                                    }else if (keyC==tabaleData.ammData.header.length-1){
+                                                    }else if (valueC=='logintype'){
+                                                        return (
+                                                            <select className={styles.tableContentItem} key={keyC}
+                                                                    onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
+                                                                    style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                                    type="button">
+                                                                {
+                                                                    logintypeArr.map((valueD,keyD)=>{
+                                                                        return(
+                                                                            < option className={styles.opt} value={keyD} key={keyD}>{valueD}</option>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </select>
+                                                        )
+                                                    }else if (valueC=='roleids'){
                                                         return (
                                                             <input className={styles.tableContentItem} key={keyC}
                                                                    style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                                    onClick={()=>{jump(value['id'])}}
-                                                                   type="button" value='设  置'/>
+                                                                   type="button" value='设置'/>
                                                         )
                                                     }else {
                                                         return(
@@ -254,6 +281,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            $("option[name='selectOpt']").prop('selected',true);
             dispatch(actions.setVars('nameAmm', null));
             dispatch(actions.setVars('pageAmm', 1));
             $.ajax({
@@ -318,6 +346,24 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
         },
+        checkPhone(value,i,j){
+            let phone=/^1\d{10}$/;
+            if(!phone.test(value)){
+                alert('请输入正确的手机号码');
+                let tableV = _.clone(getState().objs.tableContentAmm);
+                tableV.data.pagedata[i][arr[j]] = '';
+                dispatch(actions.setObjs('tableContentAmm', tableV));
+            }
+        },
+        checkMail(value,i,j){
+            let mail=/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+            if(!mail.test(value)){
+                alert('请输入正确的邮箱');
+                let tableV = _.clone(getState().objs.tableContentAmm);
+                tableV.data.pagedata[i][arr[j]] = '';
+                dispatch(actions.setObjs('tableContentAmm', tableV));
+            }
+        },
         buttonAction (){
             var tContent = $('#textContent5')[0].value;
             // 在这个下边获取这个时间段的数据就行了
@@ -330,6 +376,7 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     success:function (data) {
                         dispatch(actions.setObjs('tableContentAmm', data));
+                        $("option[name='selectOpt']").prop('selected',true);
                     },
                     error:function(){
                         console.log('获取数据失败')
@@ -352,6 +399,7 @@ const mapDispatchToProps = (dispatch) => {
             roleObj['roleids']=ids;
             let ddv=JSON.stringify(wfs);
             let idsString=JSON.stringify(roleObj);
+            dispatch(actions.setVars('boolAlert', false));
             $.ajax({
                 url: soam+'/user/updateUserInfo?userInfo=data',
                 type: 'post',
@@ -366,12 +414,14 @@ const mapDispatchToProps = (dispatch) => {
                         dataType: 'json',//here,
                         contentType:'application/json;charset=UTF-8',
                         success:function () {
+                            dispatch(actions.setVars('pageAmm', 1));
                             $.ajax({
                                 url: soam+'/user/getAllUser',
                                 type: 'post',
                                 data:'pageSize='+pageSize+'&&page='+1+'&&username=',
                                 dataType: 'json',//here,
                                 success:function (data) {
+                                    dispatch(actions.setVars('boolAlert', true));
                                     dispatch(actions.setObjs('tableContentAmm', data));
                                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                                 },
@@ -415,6 +465,7 @@ const mapDispatchToProps = (dispatch) => {
             wfs['roleids']=ids;
             (wfs['logintype']) && (wfs['logintype']=0);
             let ddv=JSON.stringify(wfs);
+            dispatch(actions.setVars('boolAlert', false));
             $.ajax({
                 url: soam+'/user/addUser?userinfo=data',
                 type: 'post',
@@ -422,20 +473,22 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 contentType:'application/json;charset=UTF-8',
                 success:function () {
-                    alert('保存成功');
-                },
-                error:function(){
-                    console.log('获取数据失败')
-                }
-            });
-            $.ajax({
-                url: soam+'/user/getAllUser',
-                type: 'post',
-                data:'pageSize='+11+'&&page='+1+'&&username=',
-                dataType: 'json',//here,
-                success:function (data) {
-                    dispatch(actions.setObjs('tableContentAmm', data));
-                    dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                    dispatch(actions.setVars('pageAmm', 1));
+                    $.ajax({
+                        url: soam+'/user/getAllUser',
+                        type: 'post',
+                        data:'pageSize='+pageSize+'&&page='+1+'&&username=',
+                        dataType: 'json',//here,
+                        success:function (data) {
+                            dispatch(actions.setVars('boolAlert', true));
+                            dispatch(actions.setObjs('tableContentAmm', data));
+                            dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                        },
+                        error:function(){
+                            dispatch(actions.setVars('boolAlert', true));
+                            console.log('获取数据失败')
+                        }
+                    });
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -445,7 +498,7 @@ const mapDispatchToProps = (dispatch) => {
         deleDate:(j) => {
             let tableV = _.clone(getState().objs.tableContentAmm);
             tableV.data.pagedata.splice(j,1);
-            dispatch(actions.setObjs('tableContent', tableV));
+            dispatch(actions.setObjs('tableContentAmm', tableV));
         },
         inputOnChange:(value,id)=>{
 
@@ -456,7 +509,9 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('tableContentAmm', tableV));
         },
         deleData:(j,k) => {
+            if(confirm("确定要删除数据吗？")){
             let tableV = _.clone(getState().objs.tableContentAmm);
+                dispatch(actions.setVars('boolAlert', false));
             $.ajax({
                 url: soam+'/user/getByIDDeleteUser?id='+k,
                 type: 'post',
@@ -464,25 +519,28 @@ const mapDispatchToProps = (dispatch) => {
                 success:function (data) {
                     dispatch(actions.appendObjs('boxData', data));
                     $('#boxAm').parent().css('display','block');
+                    dispatch(actions.setVars('pageAmm', 1));
+                    $.ajax({
+                        url: soam+'/user/getAllUser',
+                        type: 'post',
+                        data:'pageSize='+pageSize+'&&page='+1+'&&username=',
+                        dataType: 'json',//here,
+                        success:function (data) {
+                            dispatch(actions.setVars('boolAlert', true));
+                            dispatch(actions.setObjs('tableContentAmm', data));
+                            dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                        },
+                        error:function(){
+                            console.log('获取数据失败')
+                        }
+                    });
                 },
                 error:function(){
                     console.log('获取数据失败')
                 }
             });
             alert('已删除');
-            $.ajax({
-                url: soam+'/user/getAllUser',
-                type: 'post',
-                data:'pageSize='+11+'&&page='+1+'&&username=',
-                dataType: 'json',//here,
-                success:function (data) {
-                    dispatch(actions.setObjs('tableContentAmm', data));
-                    dispatch(actions.setVars('ammCount', data.data.pagedata.length));
-                },
-                error:function(){
-                    console.log('获取数据失败')
-                }
-            });
+            }
         },
         lastPage:(page,name)=>{
             page>1 ? page--:page;
@@ -496,6 +554,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                    $("option[name='selectOpt']").prop('selected',true);
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -515,6 +574,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                    $("option[name='selectOpt']").prop('selected',true);
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -533,6 +593,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                    $("option[name='selectOpt']").prop('selected',true);
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -551,6 +612,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                    $("option[name='selectOpt']").prop('selected',true);
                 },
                 error:function(){
                     console.log('获取数据失败')

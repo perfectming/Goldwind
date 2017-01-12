@@ -17,14 +17,6 @@
     text-decoration: underline;
     margin-top: -40px;
   }
-  .columnTitle{
-    position: absolute;
-    height:40px;
-    width: 170px;
-    background: #30343f;
-    top:25px;
-    left:1600px;
-  }
   .tableBox {
     font-size: 16px;
     overflow: auto;
@@ -135,6 +127,270 @@
       width: 100px;
       height: 30px;
       background: #000;
+    }
+  }
+}
+.tkglBoxBlue{
+  position: relative;
+  .mw{
+    position: absolute;
+    color: #aaa;
+    left: 5px;
+    width:8%;
+    top:40px;
+    font-size: 12px;
+  }
+  .agc{
+    cursor: pointer;
+    color: #fff;
+    margin-left: 85%;
+    width:8%;
+    font-size: 20px;
+    text-decoration: underline;
+    margin-top: -40px;
+  }
+  .tableBox {
+    font-size: 16px;
+    overflow: auto;
+    width:1000px;
+    position: absolute;
+    top: 33px;
+    left:780px;
+    display: none;
+    z-index:100;
+    background:#111;
+    .closeA{
+      position: absolute;
+      top:5px;
+      right: 5px;
+    }
+    .tableHeaderBox {
+      overflow: hidden;
+      background: #1C405B;
+      .tableHeaderItem {
+        float: left;
+        height:58px;
+        line-height:58px;
+        overflow: hidden;
+        color:#fff;
+        text-align: center;
+      }
+    }
+    .tableContentBox {
+      .tableContentLine {
+        color:#fff;
+        background: #15324E;
+        overflow: hidden;
+        input{
+          background: #15324E;
+        }
+        &:hover{
+          background:#676e82;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 42px;
+          line-height:42px;
+          border: none;
+          position: relative;
+          .turn{
+            background-size: 50px 30px;
+            height: 30px;
+            width: 50px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -25px;
+            margin-top: -15px;
+          }
+        }
+        .tableLineNum {
+          width: 45px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+      .tableContentLine1 {
+        color:#fff;
+        background: #112A48;
+        overflow: hidden;
+        input{
+          background: #112A48;
+        }
+        &:hover{
+          background:#676e82;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 42px;
+          line-height:42px;
+          border: none;
+          position: relative;
+          .turn{
+            background-size: 50px 30px;
+            height: 30px;
+            width: 50px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -25px;
+            margin-top: -15px;
+          }
+        }
+        .tableLineNum {
+          width: 45px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+    }
+    .close{
+      border-radius: 8px;
+      margin-top: 5px;
+      line-height: 14px;
+      width: 100px;
+      height: 30px;
+      background: #111732;
+    }
+  }
+}
+.tkglBoxWhite{
+  position: relative;
+  .mw{
+    position: absolute;
+    color: #aaa;
+    left: 5px;
+    width:8%;
+    top:40px;
+    font-size: 12px;
+  }
+  .agc{
+    cursor: pointer;
+    color: #fff;
+    margin-left: 85%;
+    width:8%;
+    font-size: 20px;
+    text-decoration: underline;
+    margin-top: -40px;
+  }
+  .tableBox {
+    font-size: 16px;
+    overflow: auto;
+    width:1000px;
+    position: absolute;
+    top: 33px;
+    left:780px;
+    display: none;
+    z-index:100;
+    background:#000;
+    .closeA{
+      position: absolute;
+      top:5px;
+      right: 5px;
+    }
+    .tableHeaderBox {
+      overflow: hidden;
+      background: #F2F4F5;
+      .tableHeaderItem {
+        float: left;
+        height:58px;
+        line-height:58px;
+        overflow: hidden;
+        color:#333333;
+        text-align: center;
+      }
+    }
+    .tableContentBox {
+      .tableContentLine {
+        color:#333333;
+        background: #E8F0F6;
+        overflow: hidden;
+        input{
+          background: #E8F0F6;
+        }
+        &:hover{
+          background: #b0b8cd;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 42px;
+          line-height:42px;
+          border: none;
+          position: relative;
+          .turn{
+            background-size: 50px 30px;
+            height: 30px;
+            width: 50px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -25px;
+            margin-top: -15px;
+          }
+        }
+        .tableLineNum {
+          width: 45px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #F2F4F5;
+          float: left;
+        }
+      }
+      .tableContentLine1 {
+        color:#333333;
+        background: #F2F4F5;
+        overflow: hidden;
+        input{
+          background: #F2F4F5;
+        }
+        &:hover{
+          background: #b1b9cd;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 42px;
+          line-height:42px;
+          border: none;
+          position: relative;
+          .turn{
+            background-size: 50px 30px;
+            height: 30px;
+            width: 50px;
+            left: 50%;
+            position: absolute;
+            top:50%;
+            margin-left: -25px;
+            margin-top: -15px;
+          }
+        }
+        .tableLineNum {
+          width: 45px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+    }
+    .close{
+      border-radius: 8px;
+      margin-top: 5px;
+      line-height: 14px;
+      width: 100px;
+      height: 30px;
+      background: #dddddd;
     }
   }
 }

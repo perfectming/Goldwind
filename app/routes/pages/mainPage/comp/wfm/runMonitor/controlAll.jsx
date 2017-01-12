@@ -33,7 +33,7 @@ let Component = React.createClass({
         this.props.init(data);
     },
     render() {
-        let {change,change1,table,openAGC,closeAGC,changeTableItem,jyname,jydata,booltkgl=false} = this.props;
+        let {change,change1,table,openAGC,closeAGC,changeTableItem,jyname,jydata,booltkgl=false,skinStyle} = this.props;
         if(booltkgl){
             let arr1 = [];
             let arr2 = [];
@@ -47,7 +47,7 @@ let Component = React.createClass({
             }
             let plan=0,power=0,allC=0;
             return (
-                <div className={styles.tkglBox}>
+                <div className={skinStyle==1?styles.tkglBoxBlue:skinStyle==2?styles.tkglBoxWhite:styles.tkglBox}>
                     <span className={styles.mw}>(MW)</span><span onClick={openAGC} className={styles.agc}>AGC调节</span>
                     <div className={styles.tableBox} id="AGC">
                         <div className={styles.tableHeaderBox}>
@@ -150,9 +150,8 @@ let Component = React.createClass({
                             </div>
                         </div>
                     </div>
-                    <div className={styles.columnTitle}></div>
                     <div className={styles.upBox}>
-                        <Column model={jyname} tabaleData={jydata}></Column>
+                        <Column model={jyname} tabaleData={jydata} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Column>
                     </div>
                     <div className={styles.downBox}>
                         <Table model={jyname} tabaleData={jydata}></Table>
@@ -174,6 +173,7 @@ const mapStateToProps = (state) => {
         jyname: state.vars.jyname,
         jydata: state.vars.jydata,
         booltkgl: state.vars.booltkgl,
+        skinStyle: state.vars.skinStyle
     }
 };
 
