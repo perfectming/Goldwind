@@ -13,14 +13,14 @@ let Component = React.createClass({
     },
 
     render() {
-        let {ip="10.68.100.32",hhdata,hhdata2,changedata1,w0='一区域',wc1=0,wc2=0,mon='一月份',actbt=10,windplan=win,w10,text,height,power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
+        let {grid,ipUrl,hhdata,hhdata2,changedata1,w0='一区域',wc1=0,wc2=0,mon='一月份',actbt=10,windplan=win,w10,text,height,power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
 
 
 
         let configPie = {
             chart: {
                 height:height,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -84,7 +84,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w10 = e.point.category;
                             wc2 = e.point.index;
-                            changedata1(w10, win, wc1,wc2, actbt,hhdata,);
+                            changedata1(ipUrl,w10, win, wc1,wc2, actbt,hhdata,grid);
 
                         }
                     }
@@ -116,6 +116,9 @@ let Component = React.createClass({
                     }
                 },
                 categories:barLotime2,
+            },
+            tooltip: {
+                shared: true
             },
             yAxis: [{
                 labels: {
@@ -173,7 +176,7 @@ let Component = React.createClass({
             },
                 {
                     name: '故障损失',
-                    color: '#5298d3',
+                    color: '#5298d2',
                     type: 'column',
                     data: wrong20,
                     stack:'time',
@@ -190,7 +193,7 @@ let Component = React.createClass({
                 },
                 {
                     name: '限功率损失',
-                    color: '#e9c75c',
+                    color: '#e8952a',
                     type: 'column',
                     data: wrong22,
                     stack:'time',
@@ -198,7 +201,7 @@ let Component = React.createClass({
                 },
                 {
                     name: '非设备原因损失',
-                    color: '#d06960',
+                    color: '#d8403d',
                     type: 'column',
                     data: wrong23,
                     stack:'time',
@@ -236,6 +239,8 @@ const mapStateToProps = (state) => {
         windplan : state.vars.windplan,
         hhdata : state.vars.hhdata,
         actbt: state.vars.actbt,
+        ipUrl: state.vars.ipUrl,
+        grid: state.vars.grid,
 
 
     }
@@ -246,7 +251,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(w10, win,wc1, wc2, actbt,hhdata,)=> {
+        changedata1 :(ipUrl,w10, win,wc1, wc2, actbt,hhdata,grid)=> {
             dispatch(actions.setVars('w11', w10,));
             dispatch(actions.setVars('bt0', 0));
 
@@ -257,11 +262,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('wfid', wfid));
             $.ajax({
                 type: 'post',
-                url: 'http://10.68.100.32:8080/wbi/PBA/getCompanySpacesWfieldFans',
+                url: 'http://'+ipUrl+'/wbi/PBA/getCompanySpacesWfieldFans',
                 async: false,
                 data: {
                     "month": actbt + 1,
-                    "groupid":  '201612121721151',
+                    "groupid":  grid==undefined? '201612121721151':grid,
                     "wfid": wfid==undefined? '150801':wfid,
                 },
                 dataType: 'json',

@@ -8,7 +8,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {model,tabaleData} = this.props;
+        let {model,tabaleData,lettercolor} = this.props;
         if (model&&tabaleData.ModelData[150801]){
         var arr = [];
         var arr1 = [];
@@ -47,7 +47,7 @@ let Component = React.createClass({
             title: {
                 text: '升压站负荷概览',
                 style:{
-                    color:"#fff",
+                    color:lettercolor,
                     fontSize:"16px",
                     fontFamily:"Microsoft YaHei"
                 }
@@ -55,7 +55,7 @@ let Component = React.createClass({
             tooltip: {
                 valueSuffix:'MW',
                 style:{
-                    color: '#333',
+                    color: lettercolor,
                     fontSize: '13px',
                     fontFamily:'微软雅黑'
                 }
@@ -65,7 +65,7 @@ let Component = React.createClass({
             xAxis: {
                 labels: {
                     style: {
-                        color: '#fff',//颜色
+                        color: lettercolor,//颜色
                         fontSize:'15px'  //字体
                     }
                 },
@@ -100,7 +100,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 y:-10,
                 itemStyle: {
-                    color: "#fff",
+                    color: "#333",
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"

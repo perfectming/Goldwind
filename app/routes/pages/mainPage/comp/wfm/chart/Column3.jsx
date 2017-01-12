@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{njhfdl,nsjfdl,nfdlwcl,unit,monthTime}=this.props;
+        let{njhfdl,nsjfdl,nfdlwcl,unit,monthTime,lettercolor}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -25,7 +25,7 @@ let Component = React.createClass({
             title: {
                 text: '',
                 style:{
-                    color:"#fff",
+                    color:lettercolor,
                     fontSize:"24px",
                     fontFamily:"Microsoft YaHei"
                 }
@@ -33,7 +33,7 @@ let Component = React.createClass({
             xAxis: {
                 labels: {
                     style: {
-                        color: '#fff',//颜色
+                        color: lettercolor,//颜色
                         fontSize:'12px'  //字体
                     },
                     rotation: 0
@@ -45,7 +45,7 @@ let Component = React.createClass({
                 title: {
                     text: '('+unit+')',
                     style: {
-                        color: '#ffffff',
+                        color: lettercolor,
                         fontSize:'10px'
                     },
                     align: 'high',
@@ -56,7 +56,7 @@ let Component = React.createClass({
                 lineWidth: 1,
                 labels: {
                     style: {
-                        color: '#fff',//颜色
+                        color: lettercolor,//颜色
                         fontSize:'12px'  //字体
                     }
                 },
@@ -65,7 +65,7 @@ let Component = React.createClass({
                 title: {
                     text:  '(%)',
                     style: {
-                        color: '#ffffff'
+                        color: lettercolor
                     },
                     align: 'high',
                     rotation: 1,
@@ -74,7 +74,7 @@ let Component = React.createClass({
                 },
                 labels: {
                     style: {
-                        color: '#fff',//颜色
+                        color: lettercolor,//颜色
                         fontSize:'12px'  //字体
                     }
                 },
@@ -90,7 +90,7 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 itemStyle: {
-                    color: "#fff",
+                    color: lettercolor,
                     //fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"

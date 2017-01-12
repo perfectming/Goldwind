@@ -17,6 +17,10 @@ let height=700;
 let moree;
  let datee=new Date;
 let month=datee.getMonth();
+if (month == 0) {
+    month = 12;
+}
+
   let key=month;
 let Component = React.createClass({
      componentWillMount() {
@@ -31,11 +35,11 @@ let Component = React.createClass({
         let{width,ipUrl,xxdwfId,xxdwfNa,btn=0,PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt=0,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
         return (
             <div className={styles.box} >
-            {//遮罩层
-                }
+                {//遮罩层
+                     }
             <div className={styles.boxcover} id='boxcover'></div>
-            {// 更多部分
-            }
+                {//更多弹出框
+                     }
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
@@ -156,7 +160,7 @@ const mapDispatchToProps = (dispatch) => {
                         areaIds.push(i);
                     }
                
-                    // 获取x轴的值内蒙达茂天润风电场
+
             
                 },
                 error:function(){
@@ -180,7 +184,7 @@ const mapDispatchToProps = (dispatch) => {
                     }
                 
 
-                   
+                    // 获取x轴的值内蒙达茂天润风电场
             
                 },
                 error:function(){
@@ -214,18 +218,17 @@ const mapDispatchToProps = (dispatch) => {
                         // 维护损失
                         let maintainloss=PBASpaceFirstPba[i].maintainloss;
                         PBASpaceFirstMaintainloss.push(maintainloss);
-                        // 先功率损失
+                        // 限功率损失
                         let limitloss=PBASpaceFirstPba[i].limitloss;
                         PBASpaceFirstLimitloss.push(limitloss);
-                        // 非设备原因损失
                         let nodevreasonloss=PBASpaceFirstPba[i].nodevreasonloss;
                         PBASpaceFirstNodevreasonloss.push(nodevreasonloss);
-                        // PBA
                         let pba=PBASpaceFirstPba[i].pba*100;
+                        // PBA
                         PBASpaceFirstPbaP.push(Number(pba.toFixed(2)));
                     }
-           
-         
+
+
                
             
                 },
@@ -275,25 +278,18 @@ const mapDispatchToProps = (dispatch) => {
            
                     let PBASpacePba=data.data;
                     for  ( let  i=0;i<10;i++){
-                        // 风场名字
                         let wtname=PBASpacePba[i].wtname;
                         PBASpaceWtname.push(wtname);
-                        // 风场实际发电量
                         let poweract=PBASpacePba[i].poweract;
                         PBASpacePoweract.push(poweract);
-                        // 故障损失
                         let faultloss=PBASpacePba[i].faultloss;
                         PBASpaceFaultloss.push(faultloss);
-                         // 维护损失
                         let maintainloss=PBASpacePba[i].maintainloss;
                         PBASpaceMaintainloss.push(maintainloss);
-                        // 限功率损失
                         let limitloss=PBASpacePba[i].limitloss;
                         PBASpaceLimitloss.push(limitloss);
-                        // 非设备原因损失
                         let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
-                        // PBA
                         let pba=PBASpacePba[i].pba*100;
                         PBASpacePbaPBA.push(Number(pba.toFixed(2)));
                     }
@@ -316,6 +312,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('btnn',0));
           
         },
+        // 前十
         gogogo:(actbt,xxdwfId,input_url)=>{
            
             let PBASpaceWtname=[];
@@ -343,7 +340,7 @@ const mapDispatchToProps = (dispatch) => {
                         // 风场名字
                         let wtname=PBASpacePba[i].wtname;
                         PBASpaceWtname.push(wtname);
-                        // 风场实际发电量
+                        // 计划发电量
                         let poweract=PBASpacePba[i].poweract;
                         PBASpacePoweract.push(poweract);
                         // 故障损失
@@ -360,6 +357,7 @@ const mapDispatchToProps = (dispatch) => {
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
                         // PBA
                         let pba=PBASpacePba[i].pba*100;
+
                         PBASpacePbaPBA.push(Number(pba.toFixed(2)));
                     }
                
@@ -412,25 +410,18 @@ const mapDispatchToProps = (dispatch) => {
                     let length=PBASpacePba.length-10;
 
                     for  ( let i = length;i>length-10;i--){
-                        // 风场名字
                         let wtname=PBASpacePba[i].wtname;
                         PBASpaceWtname.push(wtname);
-                        // 风场实际发电量
                         let poweract=PBASpacePba[i].poweract;
                         PBASpacePoweract.push(poweract);
-                        // 故障损失
                         let faultloss=PBASpacePba[i].faultloss;
                         PBASpaceFaultloss.push(faultloss);
-                        // 维护损失
                         let maintainloss=PBASpacePba[i].maintainloss;
                         PBASpaceMaintainloss.push(maintainloss);
-                        // 限功率损失
                         let limitloss=PBASpacePba[i].limitloss;
                         PBASpaceLimitloss.push(limitloss);
-                        // 非设备原因损失
                         let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
-                        // PBA
                         let pba=PBASpacePba[i].pba*100;
 
                         PBASpacePbaPBA.push(Number(pba.toFixed(2)));
@@ -484,30 +475,23 @@ const mapDispatchToProps = (dispatch) => {
                 
                     let PBASpacePba=data.data;
                     for  ( let i in PBASpacePba){
-                        // 风场名字
                         let wtname=PBASpacePba[i].wtname;
                         PBASpaceWtname.push(wtname);
-                        // 实际发电量
                         let poweract=PBASpacePba[i].poweract;
                         PBASpacePoweract.push(poweract);
-                        // 故障损失
                         let faultloss=PBASpacePba[i].faultloss;
                         PBASpaceFaultloss.push(faultloss);
-                        // 维护损失
                         let maintainloss=PBASpacePba[i].maintainloss;
                         PBASpaceMaintainloss.push(maintainloss);
-                        // 限功率损失
                         let limitloss=PBASpacePba[i].limitloss;
                         PBASpaceLimitloss.push(limitloss);
-                        // 非设备原因损失
                         let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
                         PBASpaceNodevreasonloss.push(nodevreasonloss);
-                        // PBA
                         let pba=PBASpacePba[i].pba*100;
 
                         PBASpacePbaPBA.push(Number(pba.toFixed(2)));
                     }
-         // 更多弹出的框的宽度
+        
              let length =PBASpaceWtname.length;
               width=length*60;
            
@@ -535,7 +519,7 @@ const mapDispatchToProps = (dispatch) => {
          
             // $('.box').css('opacity',".5")
         },
-        // 关闭更多弹窗
+        // 关闭更多弹出
         close:()=>{
             $("#sss").hide();
             $('#boxcover').hide();

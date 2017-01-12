@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Areastyle.scss';
-import Yearelectric from '../Yearelectric.jsx';
-import Pie2 from '../PieTwo';
-import Login from '../../../../../../../../components/common/Loading.jsx';
+import Yearelectric from '../Yearelectric.jsx';//柱状图组件
+import Pie2 from '../PieTwo';//饼图组件
+import Login from '../../../../../../../../components/common/Loading.jsx';//加载跳转页面
 var $ =require("jQuery");
 var actions = require('redux/actions');
 
@@ -14,19 +14,23 @@ let actb=0,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearEle
 
 let Component = React.createClass({
 	componentWillMount() {
-		let {ipUrl}=this.props;
-        this.props.ajax(ipUrl);
+		let {ipUrl,wbiUserId}=this.props;
+        this.props.ajax(ipUrl,wbiUserId);
     },
     componentDidMount() {
         this.props.init();
+        let {display}=this.props;
+        setTimeout(function(){
+            display();
+        },2000)
     },
    
 
     render() {
-        let{healthyArea,clickAreaId,areaName,areaId,areaCost,areaProfit,areaMonth,runTime,downTime,TBA,areaArr,actb,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month,elecPlan,elecAct,ipUrl,areaBool=false,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let{display,skinStyle,healthyArea,clickAreaId,areaName,areaId,areaCost,areaProfit,areaMonth,runTime,downTime,TBA,areaArr,actb,elecPlanPBA,elecActPBA,yearPlanElec,monthPlanElec,dayPlanElec,yearElec,monthElec,dayElec,month,elecPlan,elecAct,ipUrl,areaBool=false,flag=true,flagPba=true,flagTime=true,changepageProT,changepageProS,changepageSort1,changepageSort,changepage,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(areaBool){
         	return (
-	            <div className={styles.box}>
+	            <div className={skinStyle==1? styles.boxBlue:skinStyle==2? styles.boxWhite:styles.box}>
 	           		<ul className={styles.monthbox}>
 	                    {
 	                    	areaName.map((value,key)=>{
@@ -39,7 +43,7 @@ let Component = React.createClass({
 	           			<div className={styles.firstfloor}>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>当前{healthyArea.toFixed(1)}分<br/><br/>总分100分</span><br/><br/>
+	           						<span>当前<br/>{healthyArea.toFixed(1)}分<br/>总分<br/>100分</span><br/>
 	           					</div>
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
@@ -52,11 +56,11 @@ let Component = React.createClass({
 	           				</div>
 	           				<div className={`${styles.section} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>实发<br/>{(elecActPBA/10000).toFixed(1)}万kWh<br/>应发<br/>{elecPlanPBA.toFixed(1)}kWh</span><br/><br/>
+	           						<span>实发<br/>{(elecActPBA/10000).toFixed(1)}万kWh<br/>应发<br/>{(elecPlanPBA/10000).toFixed(1)}万kWh</span><br/><br/>
 	           					</div>
 	           					<div className={styles.sectionthree}>
 	           						<div className={styles.pie}>
-	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{elecActPBA!==0&&elecPlanPBA==0? (elecActPBA/elecPlanPBA):(elecActPBA/elecPlanPBA).toFixed(1)*100+'%'}</p>PBA</span>
+	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{elecActPBA!==0&&elecPlanPBA==0? (elecActPBA/elecPlanPBA):(elecActPBA/elecPlanPBA*100).toFixed(1)+'%'}</p>PBA</span>
 	           						<Pie2 color={(elecActPBA/elecPlanPBA)>0.9? ['#62de88','#39565e']:(elecActPBA/elecPlanPBA)>0.8?['#e8952a','#39565e']:(elecActPBA/elecPlanPBA)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[elecActPBA,elecPlanPBA-elecActPBA]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepagePBAS()}></a><br/>
@@ -65,7 +69,7 @@ let Component = React.createClass({
 	           				</div>
 	           				<div className={`${styles.sectionSmall} ${styles.boxShadow}`}>
 	           					<div className={styles.sectionbar}>
-	           						<span>停机时间<br/>{downTime}h <br/>运行时间<br/>{runTime}h</span><br/><br/>
+	           						<span>停机时间<br/>{downTime.toFixed(1)}h <br/>运行时间<br/>{runTime.toFixed(1)}h</span><br/><br/>
 	           					</div>
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
@@ -82,22 +86,34 @@ let Component = React.createClass({
 	           					<div className={styles.electricHeader}><a></a>发电量</div>
 	           					<div className={styles.electricFirst}>
 	           						<a></a><span>年累计发电量</span>
-	           						<div className={styles.electricTotal}>{(yearElec/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.electricPercent}>
+	           						<div className={styles.electricTotal}  style={(yearElec/yearPlanElec)>.9? {color:'#62de88'}:(yearElec/yearPlanElec)>.8? {color:'#e8952a'}:(yearElec/yearPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(yearElec/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.hoverBox} id="hoverBoxY">
+                                        <span>累计发电量<br/>{(yearElec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(yearPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+	           						<div className={styles.electricPercent} id="BoxY">
 	           							<div className={yearElec/yearPlanElec>0.9? styles.green:yearElec/yearPlanElec>.8? styles.yellow:yearElec/yearPlanElec>.6? styles.red:styles.redS} style={{width:((yearElec/yearPlanElec*100).toFixed(1))+"%"}}>{(yearElec/yearPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricSecond}>
 	           						<a></a><span>月累计发电能量</span>
-	           						<div className={styles.electricTotal}>{(monthElec/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.electricPercent}>
+	           						<div className={styles.electricTotal} style={(monthElec/monthPlanElec)>.9? {color:'#62de88'}:(monthElec/monthPlanElec)>.8? {color:'#e8952a'}:(monthElec/monthPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(monthElec/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.hoverBox} id="hoverBoxM">
+                                        <span>累计发电量<br/>{(monthElec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(monthPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+	           						<div className={styles.electricPercent} id="BoxM">
 	           							<div className={monthElec/monthPlanElec>0.9? styles.green:monthElec/monthPlanElec>.8? styles.yellow:monthElec/monthPlanElec>.6? styles.red:styles.redS} style={{width:((monthElec/monthPlanElec*100).toFixed(1))+"%"}}>{(monthElec/monthPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricThird}>
 	           						<a></a><span>日累计发电量</span>
-	           						<div className={styles.electricTotal}>{(dayElec/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.electricPercent}>
+	           						<div className={styles.electricTotal} style={(dayElec/dayPlanElec)>.9? {color:'#62de88'}:(dayElec/dayPlanElec)>.8? {color:'#e8952a'}:(dayElec/dayPlanElec)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(dayElec/10000).toFixed(1)}万kWh</div>
+	           						<div className={styles.hoverBox} id="hoverBoxD">
+                                        <span>累计发电量<br/>{(dayElec/10000).toFixed(1)}万kWh</span><br/>
+                                        <span>计划发电量<br/>{(dayPlanElec/10000).toFixed(1)}万kWh</span>
+                                    </div>
+	           						<div className={styles.electricPercent} id="BoxD">
 	           							<div className={dayElec/dayPlanElec>0.9? styles.green:dayElec/dayPlanElec>.8? styles.yellow:dayElec/dayPlanElec>.6? styles.red:styles.redS} style={{width:((dayElec/dayPlanElec*100).toFixed(1))+"%"}}>{(dayElec/dayPlanElec*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
@@ -109,7 +125,7 @@ let Component = React.createClass({
 		           						<div className={styles.space} onClick={()=>changepageEleS()}></div>&nbsp;
 		           						<div className={styles.time} onClick={()=>changepageEleT()}></div>
 	           						</div>
-	           						<Yearelectric month={month} plan={elecPlan} actrul={elecAct} unit={'kWh'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+	           						<Yearelectric month={month} plan={elecPlan} actrul={elecAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
@@ -121,7 +137,7 @@ let Component = React.createClass({
 		           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
 	           							</div>
 		           					</div>
-	           						<Yearelectric month={areaMonth} plan={areaProfit} actrul={areaCost} unit={'元'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
+	           						<Yearelectric month={areaMonth} plan={areaProfit} actrul={areaCost} unit={'(元)'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           			</div>
@@ -140,7 +156,7 @@ let Component = React.createClass({
 	                			</tr>
 	                			{
 	                				areaArr.slice(0,15).map((value,key)=>{
-			                    		return(<tr key={key}><th>{key+1}</th><th>{value.wfname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{value.downtime}分钟</th></tr>)
+			                    		return(<tr key={key}><th>{key+1}</th><th>{value.wfname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime/60).toFixed(1)}小时</th></tr>)
 			                    	})
 	                			}
 	                		</tbody>	
@@ -162,8 +178,9 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+    	skinStyle: state.vars.skinStyle, //全局换肤
     	actb : state.vars.actb,
-    	
+    	wbiUserId:state.vars.wbiUserId,
     	flag : state.vars.flag,
     	flagPba : state.vars.flagPba,
     	flagTime : state.vars.flagTime,
@@ -197,21 +214,34 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    	ajax: (ipUrl) => {
+    	ajax: (ipUrl,wbiUserId) => {//请求初始数据
+    		// console.log(wbiUserId)
+			// $.ajax({
+   			//   	url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//固定获得各区域ID和名字
+			//      type: 'post',
+			//      async:true,
+			//      dataType: 'json',
+			//      data:'type=0',
+			//      timeout : 60000,
+    		//		success:function (data) {
+		 	//        	console.log(data)
+		 	//       },
+		 	// });
+
     		dispatch(actions.setVars('actb',0 ));
-    		$.ajax({
-        		url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//获得各区域ID和名字
+    		 	$.ajax({
+        		url:'http://'+ipUrl+'/wbi/user/getByUserIDGroup',//获得各区域ID和名字
 		        type: 'post',
 		        async:true,
 		        dataType: 'json',
-		        data:'type=0',
+		        data:{'userid':wbiUserId},
 		        timeout : 60000, 
 		        success:function (data) {
 		        	areaName=[];
 		        	areaId=[];
 		        	for(var i in data.data){
-		        		areaName.push(data.data[i]);
-		        		areaId.push(i);
+		        		areaName.push(data.data[i].groupname);
+		        		areaId.push(data.data[i].groupid);
 		        	};
 		        	dispatch(actions.setVars('areaName',areaName ));
 		        	dispatch(actions.setVars('areaId',areaId ));
@@ -329,13 +359,33 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             } 
         },
-        changepageSort:(flag,flagTime,areaArr)=>{
+        display:() =>{
+            $('#BoxD').mouseover(function(){
+                $('#hoverBoxD').css('display','block');
+            });
+            $('#BoxD').mouseleave(function(){
+                $('#hoverBoxD').css('display','none');
+            });
+            $('#BoxM').mouseover(function(){
+                $('#hoverBoxM').css('display','block');
+            });
+            $('#BoxM').mouseleave(function(){
+                $('#hoverBoxM').css('display','none');
+            });
+            $('#BoxY').mouseover(function(){
+                $('#hoverBoxY').css('display','block');
+            });
+            $('#BoxY').mouseleave(function(){
+                $('#hoverBoxY').css('display','none');
+            });
+        },
+        changepageSort:(flag,flagTime,areaArr)=>{//各风场停机时间排序
         	flagTime==false? dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return b.downtime-a.downtime})));
         	dispatch(actions.setVars('flag',false ));
         	dispatch(actions.setVars('flagTime',!flagTime ));
         	
         },
-        changepageSort1:(flag,flagPba,areaArr)=>{
+        changepageSort1:(flag,flagPba,areaArr)=>{//各风场PBA排序
         	flagPba==true? dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('areaArr', areaArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
         	dispatch(actions.setVars('flag',true ));
         	dispatch(actions.setVars('flagPba',!flagPba ));

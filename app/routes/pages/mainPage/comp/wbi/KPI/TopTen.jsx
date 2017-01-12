@@ -16,15 +16,15 @@ let Component = React.createClass({
         this.props.init(ipUrl,selectId,selectName);
         setTimeout(function(){
         	init(ipUrl,selectId,selectName)
-        },800)
+        },1000)
     },
     
 	render() {
 		let comp = PBAdata.list;
-		let {alertText,storageTop,buttonResetA,buttonResetB,columnOneTitle='',columnTwoTitle='',columnOneName=[],columnTwoName=[],columnOne=[],columnTwo=[],wtType,topTitleOne,topTitleTwo,topPieOne=[],topPieTwo=[],ipUrl,topBool=false,selectId,selectName,buttonAction,buttonReset,checkedTop=1,checkedBoxTopPro,checkedBoxTopElec,changeValueS,changeValueE}=this.props;
+		let {skinStyle,alertText,storageTop,buttonResetA,buttonResetB,columnOneTitle='',columnTwoTitle='',columnOneName=[],columnTwoName=[],columnOne=[],columnTwo=[],wtType,topTitleOne,topTitleTwo,topPieOne=[],topPieTwo=[],ipUrl,topBool=false,selectId,selectName,buttonAction,buttonReset,checkedTop=1,checkedBoxTopPro,checkedBoxTopElec,changeValueS,changeValueE}=this.props;
 		if(topBool){
 			return(
-				<div className={styles.bodyBox}>
+				<div className={skinStyle==1? styles.bodyBoxBlue:skinStyle==2? styles.bodyBoxWhite:styles.bodyBox}>
 					<AlertWindow text={alertText}></AlertWindow>
 					<div className={styles.inquireBox}>
 	                {
@@ -80,7 +80,7 @@ let Component = React.createClass({
 								<ChartPie unit={topTitleOne==undefined? "":storageTop==1? "kWh":"元"} name={topTitleOne==undefined? "":storageTop==1? topTitleOne+"故障损失电量":topTitleOne+"故障损失收入"} text={topTitleOne==undefined? "":storageTop==1? topTitleOne+"故障损失电量":topTitleOne+"故障损失收入"} lose={topPieOne}></ChartPie>
 							</div>
 							<div className={`${styles.column} ${styles.boxShadow}`}>
-								<OneColumn name={columnOneTitle} title={columnOneTitle} month={columnOneName} plan={columnOne} unit={topTitleOne==undefined? "":storageTop==1? "kWh":"元"}></OneColumn>
+								<OneColumn name={columnOneTitle} title={columnOneTitle} month={columnOneName} plan={columnOne} unit={topTitleOne==undefined? "":storageTop==1? "(kWh)":"(元)"}></OneColumn>
 							</div>
 						</div>
 						<div className={styles.floorTwo}>
@@ -89,7 +89,7 @@ let Component = React.createClass({
 								<ChartPie unit={topTitleTwo==undefined? "":storageTop==1? "kWh":"元"} name={topTitleTwo==undefined? "":storageTop==1? topTitleTwo+"故障损失电量":topTitleTwo+"故障损失收入"} text={topTitleTwo==undefined? "":storageTop==1? topTitleTwo+"故障损失电量":topTitleTwo+"故障损失收入"} lose={topPieTwo}></ChartPie>
 							</div>
 							<div className={`${styles.column} ${styles.boxShadow}`}>
-								<OneColumn name={columnTwoTitle} title={columnTwoTitle} month={columnTwoName} plan={columnTwo} unit={topTitleTwo==undefined? "":storageTop==1? "kWh":"元"}></OneColumn>
+								<OneColumn name={columnTwoTitle} title={columnTwoTitle} month={columnTwoName} plan={columnTwo} unit={topTitleTwo==undefined? "":storageTop==1? "(kWh)":"(元)"}></OneColumn>
 							</div>
 						</div>
 					</div>
@@ -108,6 +108,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+    	skinStyle: state.vars.skinStyle, //全局换肤
     	alertText : state.vars.alertText,
     	selectId : state.vars.selectId,
     	selectName : state.vars.selectName,
@@ -161,7 +162,7 @@ const mapDispatchToProps = (dispatch) => {
         			dayString=29;
         		}
         		dayString=28;
-        	}else if(monthString==4||6||9||11){
+        	}else if(monthString==4||monthString==6||monthString==9||monthString==11){
         		dayString=30;
         	}else{
         		dayString=31;
@@ -213,11 +214,11 @@ const mapDispatchToProps = (dispatch) => {
 		            if(sTime == '' || eTime == '') {
 		                dispatch(actions.setVars('alertBool', false));
 		                dispatch(actions.setVars('alertText', '请选择开始或者结束时间'));
-		                return false;
+		                return;
 		            }else if(oDate1.getTime() > oDate2.getTime()){
 		                dispatch(actions.setVars('alertBool', false));
 		                dispatch(actions.setVars('alertText', '请选择正确的开始或者结束时间'));
-		                return false;
+		                return;
 		            };
 			        var A=$('select').val();
 					for(var i in selectName){
@@ -258,12 +259,10 @@ const mapDispatchToProps = (dispatch) => {
 								}else{
 									dispatch(actions.setVars('alertBool', false));
 			            			dispatch(actions.setVars('alertText', '请先重置或清除数据'));
-			            			return false;
+			            			return;
 								}
-							},
-							complete : function(XMLHttpRequest,status) { 
 								$.ajax({
-							        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',//column
+									url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',//column
 									type: 'post',
 									async: false,
 									dataType: 'json',
@@ -277,7 +276,7 @@ const mapDispatchToProps = (dispatch) => {
 												columnOne.push((data.data[i].powerloss).toFixed(1)/1);
 											};
 											dispatch(actions.setVars('columnOneName', columnOneName));
-								    		dispatch(actions.setVars('columnOne', columnOne));
+										    dispatch(actions.setVars('columnOne', columnOne));
 										}else if(columnOneName.length!==0&&columnTwoName.length==0){
 											columnTwoName=[],columnTwo=[];
 											for(var i in data.data){
@@ -285,19 +284,23 @@ const mapDispatchToProps = (dispatch) => {
 												columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
 											};
 											dispatch(actions.setVars('columnTwoName', columnTwoName));
-								    		dispatch(actions.setVars('columnTwo', columnTwo));
+										    dispatch(actions.setVars('columnTwo', columnTwo));
 										}else{
 											dispatch(actions.setVars('alertBool', false));
-					            			dispatch(actions.setVars('alertText', '请先重置或清除数据'));
-					            			return false;
+							            	dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+							            	return;
 										}
 									},
 									complete : function(XMLHttpRequest,status) { 
-										
+												
 									},
 								});
 							},
+							complete : function(XMLHttpRequest,status) { 
+								
+							},
 						});
+						
 					}else{
 						$.ajax({
 					        url:'http://'+ipUrl+'/wbi/KPI/getTuFailureLoss',
@@ -330,12 +333,9 @@ const mapDispatchToProps = (dispatch) => {
 								}else{
 									dispatch(actions.setVars('alertBool', false));
 			            			dispatch(actions.setVars('alertText', '请先重置或清除数据'));
-			            			return false;
+			            			return;
 								}
-							},
-							complete : function(XMLHttpRequest,status) {},
-						});
-						$.ajax({
+								$.ajax({
 							        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
 									type: 'post',
 									async: false,
@@ -362,20 +362,29 @@ const mapDispatchToProps = (dispatch) => {
 										}else{
 											dispatch(actions.setVars('alertBool', false));
 					            			dispatch(actions.setVars('alertText', '请先重置或清除数据'));
-					            			return false;
+					            			return;
 										}
 									},
 									complete : function(XMLHttpRequest,status) { 
 										
 									},
+								});
+							},
+							complete : function(XMLHttpRequest,status) {},
 						});
+						
 					}
 	    		}else{
 	    			dispatch(actions.setVars('alertBool', false));
 			        dispatch(actions.setVars('alertText', '请选择同一个指标项'));
-			        return false;
+			        return;
 	    		}
 	    	}else{
+	    		if(topTitleTwo!==undefined&&checkedTop!==storageTop){
+	    			dispatch(actions.setVars('alertBool', false));
+			        dispatch(actions.setVars('alertText', '请选择同一个指标项'));
+			        return;
+	    		}
 	    		dispatch(actions.setVars('storageTop', checkedTop));
 	    		var sTime = $('#startTime').val();
 		        //结束时间时间
@@ -385,11 +394,11 @@ const mapDispatchToProps = (dispatch) => {
 	            if(sTime == '' || eTime == '') {
 	                dispatch(actions.setVars('alertBool', false));
 	                dispatch(actions.setVars('alertText', '请选择开始或者结束时间'));
-	                return false;
+	                return;
 	            }else if(oDate1.getTime() > oDate2.getTime()){
 	                dispatch(actions.setVars('alertBool', false));
 	                dispatch(actions.setVars('alertText', '请选择正确的开始或者结束时间'));
-	                return false;
+	                return;
 	            };
 		        var A=$('select').val();
 				for(var i in selectName){
@@ -429,12 +438,10 @@ const mapDispatchToProps = (dispatch) => {
 							}else{
 								dispatch(actions.setVars('alertBool', false));
 						        dispatch(actions.setVars('alertText', '请先重置或清除数据'));
-						        return false;
+						        return;
 							}
-						},
-						complete : function(XMLHttpRequest,status) { 
 							$.ajax({
-						        url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
+								url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
 								type: 'post',
 								async: false,
 								dataType: 'json',
@@ -448,7 +455,7 @@ const mapDispatchToProps = (dispatch) => {
 											columnOne.push((data.data[i].powerloss).toFixed(1)/1);
 										};
 										dispatch(actions.setVars('columnOneName', columnOneName));
-							    		dispatch(actions.setVars('columnOne', columnOne));
+									    dispatch(actions.setVars('columnOne', columnOne));
 									}else if(columnOneName.length!==0&&columnTwoName.length==0){
 										columnTwoName=[],columnTwo=[];
 										for(var i in data.data){
@@ -456,19 +463,23 @@ const mapDispatchToProps = (dispatch) => {
 											columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
 										};
 										dispatch(actions.setVars('columnTwoName', columnTwoName));
-							    		dispatch(actions.setVars('columnTwo', columnTwo));
+									    dispatch(actions.setVars('columnTwo', columnTwo));
 									}else{
 										dispatch(actions.setVars('alertBool', false));
-								        dispatch(actions.setVars('alertText', '请先重置或清除数据'));
-								        return false;
+										dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+										return;
 									}
 								},
 								complete : function(XMLHttpRequest,status) { 
-									
+											
 								},
 							});
 						},
+						complete : function(XMLHttpRequest,status) { 
+							
+						},
 					});
+					
 				}else{
 					$.ajax({
 				        url:'http://'+ipUrl+'/wbi/KPI/getTuFailureLoss',
@@ -501,45 +512,46 @@ const mapDispatchToProps = (dispatch) => {
 							}else{
 								dispatch(actions.setVars('alertBool', false));
 								dispatch(actions.setVars('alertText', '请先重置或清除数据'));
-								return false;
+								return;
 							}
+							$.ajax({
+								    url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
+									type: 'post',
+									async: false,
+									dataType: 'json',
+									data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
+									timeout : 60000, 
+									success: function (data) {
+										if (columnOneName.length==0){
+												columnOneName=[],columnOne=[];
+												for(var i in data.data){
+													columnOneName.push(data.data[i].blooeydescr);
+													columnOne.push((data.data[i].powerloss).toFixed(1)/1);
+												};
+												dispatch(actions.setVars('columnOneName', columnOneName));
+									    		dispatch(actions.setVars('columnOne', columnOne));
+										}else if(columnOneName.length!==0&&columnTwoName.length==0){
+												columnTwoName=[],columnTwo=[];
+												for(var i in data.data){
+													columnTwoName.push(data.data[i].blooeydescr);
+													columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
+												};
+												dispatch(actions.setVars('columnTwoName', columnTwoName));
+									    		dispatch(actions.setVars('columnTwo', columnTwo));
+										}else{
+												dispatch(actions.setVars('alertBool', false));
+										        dispatch(actions.setVars('alertText', '请先重置或清除数据'));
+										        return;
+										}
+									},
+									complete : function(XMLHttpRequest,status) { 
+											
+									},
+							});
 						},
 						complete : function(XMLHttpRequest,status) {},
 					});
-					$.ajax({
-						    url:'http://'+ipUrl+'/wbi/KPI/getAboutTopFailureLoss',
-							type: 'post',
-							async: false,
-							dataType: 'json',
-							data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'groupid':selectId},
-							timeout : 60000, 
-							success: function (data) {
-								if (columnOneName.length==0){
-										columnOneName=[],columnOne=[];
-										for(var i in data.data){
-											columnOneName.push(data.data[i].blooeydescr);
-											columnOne.push((data.data[i].powerloss).toFixed(1)/1);
-										};
-										dispatch(actions.setVars('columnOneName', columnOneName));
-							    		dispatch(actions.setVars('columnOne', columnOne));
-								}else if(columnOneName.length!==0&&columnTwoName.length==0){
-										columnTwoName=[],columnTwo=[];
-										for(var i in data.data){
-											columnTwoName.push(data.data[i].blooeydescr);
-											columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
-										};
-										dispatch(actions.setVars('columnTwoName', columnTwoName));
-							    		dispatch(actions.setVars('columnTwo', columnTwo));
-								}else{
-										dispatch(actions.setVars('alertBool', false));
-								        dispatch(actions.setVars('alertText', '请先重置或清除数据'));
-								        return false;
-								}
-							},
-							complete : function(XMLHttpRequest,status) { 
-									
-							},
-					});
+					
 				}
 	    	}
 	    	

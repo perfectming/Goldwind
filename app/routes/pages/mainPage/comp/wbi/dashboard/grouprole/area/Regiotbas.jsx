@@ -19,7 +19,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages = 'area', returnit,name0,ipUrl,runtime,downtime,tba0,name2,runtime2,downtime2,tba2,actbt,hhdata,w0,mon} = this.props;
+        let {befor_pages = 'area',skinStyle, returnit,name0,ipUrl,runtime,downtime,tba0,name2,runtime2,downtime2,tba2,actbt,hhdata,w0,mon} = this.props;
         let data = require('./Healthy-data');
         let month=data.data.line_month;
         let text0=data.data.line_date;
@@ -28,7 +28,7 @@ let Component = React.createClass({
 
 
 
-            <div className = {styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.paddingtop}>
                 <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
                 </div>
@@ -50,8 +50,8 @@ let Component = React.createClass({
 
                 </div>
 
-                <div className={`${styles.fbox} `}>
-                    <div className={` ${styles.logofa} ${styles.box_shadow}`}>
+                <div className={`${styles.fbox} ${styles.logofa} `}>
+                    <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Reg_tbats height={450}
                                    name2={name2}
                                    runtime2={runtime2}
@@ -85,6 +85,7 @@ const mapStateToProps = (state) => {
         hhdata: state.vars.hhdata,
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
+        skinStyle: state.vars.skinStyle,
     }
 };
 
@@ -94,8 +95,11 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            if(month2==0){
+                month2=12;
+            }
             dispatch(actions.setVars('bt0',  0));
-            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('actbt',  month2-1));
             dispatch(actions.setVars('mon',  month2+"月"));
 
             $.ajax({

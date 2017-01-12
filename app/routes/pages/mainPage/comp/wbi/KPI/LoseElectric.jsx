@@ -17,7 +17,7 @@ let Component = React.createClass({
         this.props.init();
         setTimeout(function(){
         	init()
-        },800)
+        },1000)
     },
 	componentWillMount() {
     	let {ipUrl}=this.props;
@@ -28,10 +28,10 @@ let Component = React.createClass({
     
 	render() {
 		let comp=PBAdata.list;
-		let {alertText,buttonResetA,buttonResetB,buttonResetC,buttonResetD,storage,loseElecBool=false,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne='',loseAreaNameTwo='',loseAreaNameThree='',loseAreaNameFour='',selectName,selectId,ipUrl,checkedLose=1,buttonAction,buttonReset, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
+		let {skinStyle,alertText,buttonResetA,buttonResetB,buttonResetC,buttonResetD,storage,loseElecBool=false,loseA,loseB,loseC,loseD,loseAreaOne,loseAreaTwo,loseAreaThree,loseAreaFour,loseAreaNameOne='',loseAreaNameTwo='',loseAreaNameThree='',loseAreaNameFour='',selectName,selectId,ipUrl,checkedLose=1,buttonAction,buttonReset, inputOnChange,changeValueST,changeValueET,checkedBoxPro,checkedBoxElec}=this.props;
 		if(loseElecBool){
 			return(
-				<div className={styles.bodyBox}>
+				<div className={skinStyle==1? styles.bodyBoxBlue:skinStyle==2? styles.bodyBoxWhite:styles.bodyBox}>
 					<AlertWindow text={alertText}></AlertWindow>
 					<div className={styles.inquireBox}>
 		                {
@@ -101,7 +101,7 @@ let Component = React.createClass({
 							</div>
 						</div>
 						<div className={`${styles.lose} ${styles.boxShadow}`}>
-							<ChartFive title={storage==undefined? '':storage==1?'损失电量分析':'损失收入分析'} unit={storage==undefined? '':storage==1? "kWh":"元"} loseA={loseA} loseB={loseB} loseC={loseC} loseD={loseD} nameOne={loseAreaNameOne} nameTwo={loseAreaNameTwo} nameThree={loseAreaNameThree} nameFour={loseAreaNameFour}></ChartFive>
+							<ChartFive title={storage==undefined? '':storage==1?'损失电量分析':'损失收入分析'} unit={storage==undefined? '':storage==1? "(kWh)":"(元)"} loseA={loseA} loseB={loseB} loseC={loseC} loseD={loseD} nameOne={loseAreaNameOne} nameTwo={loseAreaNameTwo} nameThree={loseAreaNameThree} nameFour={loseAreaNameFour}></ChartFive>
 						</div>
 					</div>
 				</div>
@@ -116,6 +116,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+    	skinStyle: state.vars.skinStyle, //全局换肤
     	alertText : state.vars.alertText,
     	loseElecBool : state.vars.loseElecBool,
     	ipUrl : state.vars.ipUrl,
@@ -174,7 +175,7 @@ const mapDispatchToProps = (dispatch) => {
         			dayString=29;
         		}
         		dayString=28;
-        	}else if(monthString==4||6||9||11){
+        	}else if(monthString==4||monthString==6||monthString==9||monthString==11){
         		dayString=30;
         	}else{
         		dayString=31;
@@ -206,6 +207,11 @@ const mapDispatchToProps = (dispatch) => {
 				    dispatch(actions.setVars('selectId', selectId));
 				    dispatch(actions.setVars('selectName', selectName));
 				},
+				error:function(XMLHttpRequest,textStatus,errorThrown){    
+                    dispatch(actions.setVars('alertBool', false));
+				    dispatch(actions.setVars('alertText', '网络不稳定，请求超时'));
+			        return false;  
+                },
 				complete : function(XMLHttpRequest,status) { 
 					dispatch(actions.setVars('loseElecBool', true));
 				},
@@ -312,11 +318,11 @@ const mapDispatchToProps = (dispatch) => {
 			            			return false;
 					        	}
 							},
-					        complete : function(XMLHttpRequest,status) { 
-							　　　if(status=='timeout') {
-							　　　　　 console.log('超时');
-							　　　}
-							},
+					        error:function(XMLHttpRequest,textStatus,errorThrown){    
+	                          	dispatch(actions.setVars('alertBool', false));
+					        	dispatch(actions.setVars('alertText', '网络不稳定，请求超时'));
+				        		return false;  
+	                    	} 
 						});
 					}else{//区域
 						$.ajax({
@@ -348,11 +354,11 @@ const mapDispatchToProps = (dispatch) => {
 			            			return false;
 					        	}
 							},
-					        complete : function(XMLHttpRequest,status) { 
-							　　　if(status=='timeout') {
-							　　　　　 console.log('超时');
-							　　　}
-							},
+					        error:function(XMLHttpRequest,textStatus,errorThrown){    
+	                          	dispatch(actions.setVars('alertBool', false));
+					        	dispatch(actions.setVars('alertText', '网络不稳定，请求超时'));
+				        		return false;  
+                    		} 
 						});
 					}
 					dispatch(actions.setVars('loseA', loseA));
@@ -373,6 +379,19 @@ const mapDispatchToProps = (dispatch) => {
 			        return false;
 	    		}
 	    	}else{
+	    		if(loseAreaTwo!==undefined && checkedLose!==storage){
+	    			dispatch(actions.setVars('alertBool', false));
+	                dispatch(actions.setVars('alertText', '请选择同一指标项'));
+	                return false;
+	    		}else if(loseAreaThree!==undefined && checkedLose!==storage){
+	    			dispatch(actions.setVars('alertBool', false));
+	                dispatch(actions.setVars('alertText', '请选择同一指标项'));
+	                return false;
+	    		}else if(loseAreaFour!==undefined && checkedLose!==storage){
+	    			dispatch(actions.setVars('alertBool', false));
+	                dispatch(actions.setVars('alertText', '请选择同一指标项'));
+	                return false;
+	    		};
 	    		dispatch(actions.setVars('storage', checkedLose));
 	    		var sTime = $('#startTime').val();
 		        //结束时间时间
@@ -424,11 +443,11 @@ const mapDispatchToProps = (dispatch) => {
 			        			return false;
 				        	}
 						},
-				        complete : function(XMLHttpRequest,status) { 
-						　　　if(status=='timeout') {
-						　　　　　 console.log('超时');
-						　　　}
-						},
+				        error:function(XMLHttpRequest,textStatus,errorThrown){    
+                          	dispatch(actions.setVars('alertBool', false));
+				        	dispatch(actions.setVars('alertText', '网络不稳定，请求超时'));
+			        		return false;  
+                    	} 
 					});
 				}else{
 					$.ajax({
@@ -460,11 +479,11 @@ const mapDispatchToProps = (dispatch) => {
 			        			return false;
 				        	}
 						},
-				        complete : function(XMLHttpRequest,status) { 
-						　　　if(status=='timeout') {
-						　　　　　 console.log('超时');
-						　　　}
-						},
+				        error:function(XMLHttpRequest,textStatus,errorThrown){    
+                          	dispatch(actions.setVars('alertBool', false));
+				        	dispatch(actions.setVars('alertText', '网络不稳定，请求超时'));
+			        		return false;  
+                    	} 
 					});
 				}
 				dispatch(actions.setVars('loseA', loseA));

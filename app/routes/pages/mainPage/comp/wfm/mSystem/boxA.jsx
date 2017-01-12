@@ -1,139 +1,140 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './box.scss';
+var {getState} = require('redux/store');
+import _ from 'lodash';
+import styles from './boxA.scss';
 import jian from '../../../img/comp/jian_down.png';
 import add from '../../../img/comp/add_down.png';
-import close from '../../../img/comp/close_down.png';
-let $ =require('jquery');
+let type = require('../report/ywbb_date');
+var $ =require('jquery');
 var actions = require('redux/actions');
-let matrixdata = require('../../../../../../../config/MatrixData');
-let model = require('../../../../../../../config/Model');
-let modeldata = require('../../../../../../../config/ModelData');
-let data=modeldata.ModelData;
-let mod=model.Model;
-let mat=model.Model;
-let matD=matrixdata.ModelData;
-let model_data = modeldata.ModelData;
-var model_ens = model.Model.ens;
-let arr1 = [];
-let arr2 = [];
-var obj = matrixdata;
-var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
-
-
-(function(){
-    for(var x in obj_wfd){
-        arr1.push(x)
-    }
-    for(var m in obj_pvd){
-        arr2.push(m)
-
-    }
-
-}());
-
-
-
 let Component = React.createClass({
+    componentWillMount() {
+    },
     componentDidMount() {
         this.props.init();
+        let{playjq}=this.props;
+        //初始化jquery方法
+        setTimeout(function(){
+            playjq();
+        },1000)
     },
+
     render() {
-        let {border1=true,closebox1,Tofaninfo1} = this.props;
-        return (
-
-            <div className={styles.fiexdbox} style={{top: 232, left:833}}>
-                <span>菜单选择</span>
-                <img src={close} className={styles.close} onClick={()=>closebox1()}/>
-                <div className={styles.listbox} id='box1'>
-                    <ul id='fclist'>
+        let {saveAll,closeboxA,boxRole} = this.props;
+        //表格数据处理
+            return (
+                <div className={styles.faultBox} style={{top: 200, left:906}}>
+                    <span>菜单选择</span>
+                    <div className={styles.leftlist} id='box1'>
                         {
-                            arr1.map((value,key)=>{
+                            (boxRole && boxRole.data) && boxRole.data.map((valueC,keyC)=>{
                                 return(
-                                    <li key={key} >
-                                        <a>{model_ens[value].name}</a>
-                                        <div className={styles.list_span}>
-                                            {
-                                                obj_wfd[value].map((valueC,key)=>{
-
+                                    <div key={keyC} className={styles.place}>
+                                        <a className={styles.ca}>
+                                            <img src={add}/>
+                                            <b>{valueC.name}</b>
+                                            <input type='checkbox' value={valueC.id} title={valueC.rightstype}
+                                                   name={valueC['ids']==false?'checkItInbox':'checkItOutbox'}/>
+                                        </a>
+                                        {
+                                            valueC.tlist.length>0 && valueC.tlist.map((valueD,keyD)=>{
                                                     return(
-
-
-                                                        <div className={styles.listitem} key={key} onClick = {()=> Tofaninfo1(valueC,value)}>
-                                                            <input type='checkbox' name='checknameA' value={valueC.Wtname} />
-                                                            {valueC.Wtname}
-                                                        </div>
-
-                                                    )
+                                                            <div className={styles.placename} key={keyD}>
+                                                                <a className={styles.da}>
+                                                                    <img src={add} />
+                                                                    <b>{valueD.name}</b>
+                                                                    <input type='checkbox' value={valueD.id} title={valueD.rightstype}
+                                                                           name={valueD['ids']==false?'checkItInbox':'checkItOutbox'}/>
+                                                                </a>
+                                                                {
+                                                                    valueD.thlist.map((valueE,keyE)=>{
+                                                                            return(
+                                                                                <div className={styles.placeline} key={keyE}>
+                                                                                    <a className={styles.ea} >
+                                                                                        <b style={{cursor:'auto'}}>{valueE.name}</b>
+                                                                                        <input type='checkbox' title={valueE.rightstype} value={valueE.id}
+                                                                                               name={valueE['ids']==false?'checkItInbox':'checkItOutbox'}/>
+                                                                                    </a>
+                                                                                </div>
+                                                                            )
+                                                                    })
+                                                                }
+                                                            </div>
+                                                        )
                                                 })
-
-                                            }
-
-                                        </div>
-                                    </li>
-
+                                        }
+                                    </div>
                                 )
                             })
                         }
-
-                    </ul>
-
-
+                    </div>
+                    <div className={styles.btnbox}>
+                        <a id='sent' onClick={()=>saveAll()}>确定</a>
+                        <a  onClick={()=>closeboxA()}>取消</a>
+                    </div>
                 </div>
-                <div className={styles.btnbox}>
-                    <a id='sentA'>确定</a>
-                    <a onClick={()=>closebox1()}>取消</a>
-                </div>
-            </div>
-        );
+            );
     }
 });
 
 
 const mapStateToProps = (state) => {
     return {
-        border1: state.vars.bordershow1,
+        boxRole: state.objs.boxRole,
+        boxRoleId: state.objs.boxRoleId,
 
+        devtype:state.objs.devtype,
+        boolywbb:state.vars.boolywbb,
+        firstname:state.objs.firstname,
+        select_list:state.vars.select_list,
+        tabledata:state.vars.tabledata,
+        chart:state.vars.chart,
+        chartname:state.vars.chartname,
+        chartTitle:state.vars.chartTitle,
+        devurls:state.vars.devurls,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            $('#box1 ul li a').on('click',function(){
-                var bg=$(this).css("background-image");
-                if(bg=='url("'+add+'")'){
-                    $(this).css("background-image",'url('+jian+')');
-                }else{
-                    $(this).css("background-image",'url('+add+')');
-                }
-
-                $(this).siblings('div').toggle();
-            })
-            //获取选中风机的信息
-            $("#sentA").on('click',function(){
-                var obj = document.getElementsByName("checknameA");
-                var check_val = [];
-                for(var k in obj){
-                    if(obj[k].checked)
-                        check_val.push(obj[k].value);
-                }
-                alert(check_val);
-            })
-
-
         },
-        closebox1:()=>{
+        closeboxA:()=>{
             $("#box1").parent().css("display","none");
         },
-        Tofaninfo1: (value)=> {
-
-
-
+        playjq:()=>{
+            //复选框状态跟随
+            $("#box1 input").change(function(){
+                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
+            })
+            //下拉点击事件
+            $("#box1 b").on('click',function(){
+                $(this).parent().siblings().toggle();
+                if($(this).siblings('img').attr('src') == add){
+                    $(this).siblings('img').attr('src', jian);
+                }else{
+                    $(this).siblings('img').attr('src', add);
+                }
+            })
         },
-
-
+        saveAll: ()=> {
+            let typeIdTemp = _.clone(getState().vars.boxRoleId);
+            let all=[];
+            $('#box1 input').each(function(){
+                if($(this).prop('checked')==true){
+                    let temp={};
+                    temp['menuid']=$(this).val();
+                    temp['roleid']=typeIdTemp;
+                    temp['rightstype']=$(this).attr('title');
+                    all.push(temp);
+                }
+            });
+            dispatch(actions.setVars('boxRoleArr', all));
+            console.log(all);
+            $("#aids").css("display","none");
+            $("#box1").parent().css("display","none");
+        },
     };
 };
 

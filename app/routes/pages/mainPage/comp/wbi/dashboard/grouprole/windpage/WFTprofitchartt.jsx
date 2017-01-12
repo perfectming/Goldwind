@@ -61,8 +61,8 @@ let Component = React.createClass({
                 enabled: false //不显示highCharts版权信息
             },
             //柱子颜色
-            colors: [ '#1E664A', '#4CDB9D']
-            ,
+
+
             // 柱子宽 柱子间隔 柱子边框；
             plotOptions: {
                 column: {
@@ -81,6 +81,11 @@ let Component = React.createClass({
             let arr4=[];
             let date =new Date();
             let year =date.getFullYear();
+            let month=date.getMonth();
+                            if (month == 0) {
+                                month = 12;
+                                year=year-1;
+                            }
                        
                             $.ajax({
              type:'post',

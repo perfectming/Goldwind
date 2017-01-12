@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
-let data = require('./Instrument-data');
 
 let Component = React.createClass({
     componentWillMount() {
@@ -14,7 +13,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:282,
-                backgroundColor: 'rgba(44, 61, 71, 0.4)',
+                backgroundColor: null,
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,

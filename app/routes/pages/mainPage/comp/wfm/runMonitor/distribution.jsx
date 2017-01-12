@@ -22,11 +22,8 @@ let Component = React.createClass({
     },
 
     render() {
-        let {clickNumber, showFlag, changeFlag, flag,play,map=false,map1=false,show_allinfo,mapbool=false,mapmodel,mapdata,enterpage,enterpage1} = this.props;
-        
-        
+        let {clickNumber, showFlag, changeFlag, flag,play,map=false,map1=false,show_allinfo,mapbool=false,mapmodel,mapdata,enterpage,enterpage1,skinStyle} = this.props;
         if(mapbool){
-            console.log(mapmodel)
              
         let wind=[];
         let light=[];
@@ -54,7 +51,7 @@ let Component = React.createClass({
       
         
         return (
-            <div className={styles.bodyBox}>
+            <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
                     <div className={styles.leftBox}>
                         <Superleftbox></Superleftbox>
                     </div>
@@ -76,7 +73,7 @@ let Component = React.createClass({
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.InverterCount.name}</a><a className={styles.anum}><b>{mapdata[150811].InverterCount}</b>台</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{mapdata[150811].PVTSI_Aver ==='null' ? '--':Number(mapdata[150811].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150811].TActPower ==='' ? '--':Number(mapdata[150811].TActPower/1000).toFixed(2)}</b>MW</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{(mapdata[150811].TActPower/mapdata[150811].Capacity).toFixed(2)}</b>%</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{((mapdata[150811].TActPower/mapdata[150811].Capacity)*100).toFixed(2)}</b>%</a></div>
                             </div>
                             <div className={`${styles.soninfo} ${styles.soninfo2}`} style={{top:'40px',left:'20px'}}>
                                  
@@ -84,28 +81,28 @@ let Component = React.createClass({
                                  <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.WTCount.name}</a><a className={styles.anum}><b>{mapdata[150801].WTCount}</b>台</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{mapdata[150801].WindSpeed_DevAverValue ==='null' ? '--':Number(mapdata[150801].WindSpeed_DevAverValue).toFixed(2)}</b>m/s</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150801].TActPower ==='' ? '--':Number(mapdata[150801].TActPower/1000).toFixed(2)}</b>MW</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{(mapdata[150801].TActPower/mapdata[150801].Capacity).toFixed(2)}</b>%</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{((mapdata[150801].TActPower/mapdata[150801].Capacity)*100).toFixed(2)}</b>%</a></div>
                             </div>
                             <div className={`${styles.soninfo} ${styles.soninfo3}`} style={{top:'285px',left:'360px'}}>
                                  <div className={styles.sontit}><a className={styles.anum1}>道勒光伏电站</a><a className={styles.anum}><b>{Number((mapdata[150803].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
                                   <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.InverterCount.name}</a><a className={styles.anum}><b>{mapdata[150803].InverterCount}</b>台</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{mapdata[150803].PVTSI_Aver ==='null' ? '--':Number(mapdata[150803].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150803].TActPower ==='' ? '--':Number(mapdata[150803].TActPower/1000).toFixed(2)}</b>MW</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{(mapdata[150803].TActPower/mapdata[150803].Capacity).toFixed(2)}</b>%</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{((mapdata[150803].TActPower/mapdata[150803].Capacity)*100).toFixed(2)}</b>%</a></div>
                             </div>
                             <div className={`${styles.soninfo} ${styles.soninfo4}`} style={{top:'465px',left:'520px'}}>
                                  <div className={styles.sontit}><a className={styles.anum1}>乌漫光伏电站</a><a className={styles.anum}><b>{Number((mapdata[150812].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
                                   <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.InverterCount.name}</a><a className={styles.anum}><b>{mapdata[150812].InverterCount}</b>台</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{mapdata[150812].PVTSI_Aver ==='null' ? '--':Number(mapdata[150812].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150812].TActPower ==='' ? '--':Number(mapdata[150812].TActPower/1000).toFixed(2)}</b>MW</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{(mapdata[150812].TActPower/mapdata[150812].Capacity).toFixed(2)}</b>%</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{((mapdata[150812].TActPower/mapdata[150812].Capacity)*100).toFixed(2)}</b>%</a></div>
                             </div>
                             <div className={`${styles.soninfo} ${styles.soninfo5}`} style={{top:'380px',left:'-20px'}}>
                                 <div className={styles.sontit}><a className={styles.anum1}>敖包风电场</a><a className={styles.anum}><b>{Number((mapdata[150828].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
                                  <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.WTCount.name}</a><a className={styles.anum}><b>{mapdata[150828].WTCount}</b>台</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>{mapmodel.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{mapdata[150828].WindSpeed_DevAverValue ==='null' ? '--':Number(mapdata[150828].WindSpeed_DevAverValue).toFixed(2)}</b>m/s</a></div>
                                 <div className={styles.sontit1}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{mapdata[150828].TActPower ==='' ? '--':Number(mapdata[150828].TActPower/1000).toFixed(2)}</b>MW</a></div>
-                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{(mapdata[150828].TActPower/mapdata[150828].Capacity).toFixed(2)}</b>%</a></div>
+                                <div className={styles.sontit1}><a className={styles.anum1}>出力率</a><a className={styles.anum}><b>{((mapdata[150828].TActPower/mapdata[150828].Capacity)*100).toFixed(2)}</b>%</a></div>
                             </div>
                         </div>
                         <div className={styles.allinfo} id='allinfo'>
@@ -178,6 +175,7 @@ const mapStateToProps = (state) => {
         mapbool:state.vars.mapbool,
         mapmodel:state.objs.mapmodel,
         mapdata:state.objs.mapdata,
+        skinStyle: state.vars.skinStyle
     }
 };
 

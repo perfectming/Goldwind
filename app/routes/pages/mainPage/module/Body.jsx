@@ -73,7 +73,7 @@ import WFTprofit from '../comp/wbi/dashboard/grouprole/windpage/WFTprofit.jsx';
 import Profitime from '../comp/wbi/dashboard/grouprole/group/Profitime.jsx';
 import Profitss from '../comp/wbi/dashboard/grouprole/group/PBATime/GroupPBAT.jsx';
 import Profitsss from '../comp/wbi/dashboard/grouprole/group/TBATime/GroupTBAT.jsx';
-import ProjectSta from '../comp/wbi/dashboard/grouprole/windpage/ProjectSta.jsx';
+// import ProjectSta from '../comp/wbi/dashboard/grouprole/windpage/ProjectSta.jsx';
 
 
 
@@ -95,6 +95,9 @@ import LimitLose from '../comp/wbi/KPI/LimitLose.jsx';
 import Reliability from '../comp/wbi/KPI/Reliability.jsx';
 
 
+import Demo from '../comp/wfm/report/demo.jsx';
+
+
 var actions = require('redux/actions');
 let page = require('../../../../../config/page');
 let Component = React.createClass({
@@ -102,15 +105,21 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {showPage, tabOpt, tab, flag=true,cssif2='sdfdf',legend=false,navlegend=false,changelegend,ifshow=false} = this.props;
+        let {showPage, tabOpt, tab, flag=true,cssif2='sdfdf',legend=false,navlegend=false,changelegend,ifshow=false,alarm} = this.props;
         return (
             <div className={`${flag===true?styles.bodyBox : styles.bodyBox1} ${cssif2==='left'? styles.animate : styles.sdsd} ${cssif2==='right'? styles.animate1 : styles.sdsd}`}>
                 <div className={ifshow===true? styles.fiexd :styles.ifshow}>
+                  <div className={styles.imgicon}>
                     <img src={u871} onClick={()=>changelegend(legend)}/>
-                    <img src={u865}/>
-                    <img src={u867}/>
-                    <img src={u869}/>
+                    <img src={u865} onClick={()=>alarm()}/>
+                    <img src={u867} onClick={()=>alarm()}/>
+                    <img src={u869} onClick={()=>alarm()}/>
+                    <div className={styles.info1} >11</div>
+                    <div className={styles.info2} >22</div>
+                    <div className={styles.info3}>33</div>
                     {legend===true && <Legend></Legend>}
+                  </div>
+                    
                 </div>
                 <Tab tabOpt={tabOpt} tab={tab}/>
                 {showPage === 'super' && <Super></Super>}
@@ -204,6 +213,8 @@ let Component = React.createClass({
                 {showPage === 'input_cost' && <Input_cost></Input_cost>}
                 {showPage === 'cs' && <CS></CS>}
 
+                {showPage === 'demo' && <Demo></Demo>}
+
 
                 <div className={styles.clearbox}></div>
             </div>
@@ -233,6 +244,11 @@ const mapDispatchToProps = (dispatch) => {
             legend=true;
             dispatch(actions.setVars('legend', legend));
         },
+        alarm:()=>{
+            dispatch(actions.setVars('showPage', 'alarm'));
+            dispatch(actions.setVars('treeItemActive', 2));
+            dispatch(actions.setVars('tabItemActive', 0));
+        }
 
 
     };

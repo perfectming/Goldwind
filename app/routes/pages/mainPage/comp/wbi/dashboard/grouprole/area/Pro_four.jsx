@@ -16,7 +16,7 @@ let Component = React.createClass({
             chart: {
                 height:height,
                 width:widths,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 // plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -144,7 +144,7 @@ let Component = React.createClass({
                 opposite: true
             }],
             series: [{
-                name: '收益',
+                name: '收入',
                 color:'#33BAC0',
                 type: 'column',
                 data: runtime2,

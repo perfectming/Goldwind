@@ -16,7 +16,7 @@ let Component = React.createClass({
         this.props.init(tabaleData);
     },
     render() {
-        let {table, changeTableItem,changepage,zhzb,bbs} = this.props;
+        let {table, changeTableItem,changepage,zhzb,bbs,skinStyle} = this.props;
 let date=bbs.ModelData;
 let placename=zhzb.Model.ens;
 let arrname=[];
@@ -68,7 +68,7 @@ let number=[];
         return (
             <div>
                 
-                <div className={styles.tableBox}>
+                <div className={skinStyle==1?styles.tableBoxBlue:skinStyle==2?styles.tableBoxWhite:styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
                             tabaleData.data.header1.map((value, key)=> {
@@ -172,6 +172,7 @@ const mapStateToProps = (state) => {
         table: state.objs.tableContent,
          zhzb: state.vars.zhzb,
         bbs: state.vars.bbs,
+        skinStyle: state.vars.skinStyle
     }
 };
 

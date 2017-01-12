@@ -21,10 +21,10 @@ let Component = React.createClass({
     },
     
 	render() {
-		let {alertText,groupKBABool=false,X2,X1,areaId,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,hide,topTen,bottomTen,more,choice=1,wtName,wtElec,wtPBA,wtLose,wtNameMore,wtElecMore,wtPBAMore,wtLoseMore}=this.props;
+		let {skinStyle,alertText,groupKBABool=false,X2,X1,areaId,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,hide,topTen,bottomTen,more,choice=1,wtName,wtElec,wtPBA,wtLose,wtNameMore,wtElecMore,wtPBAMore,wtLoseMore}=this.props;
 		if(groupKBABool){
 			return(
-				<div className={styles.gbaBox}>
+				<div className={skinStyle==1? styles.gbaBoxBlue:skinStyle==2? styles.gbaBoxWhite:styles.gbaBox}>
 						<AlertWindow text={alertText}></AlertWindow>
 						<TimeSelect></TimeSelect>
 						<div className={styles.content}>
@@ -69,6 +69,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+    	skinStyle: state.vars.skinStyle, //全局换肤
     	alertText : state.vars.alertText,
     	groupKBABool : state.vars.groupKBABool,
     	ipUrl : state.vars.ipUrl,
@@ -82,7 +83,6 @@ const mapStateToProps = (state) => {
     	wtElecMore : state.vars.wtElecMore,
     	wtLoseMore : state.vars.wtLoseMore,
     	wtPBAMore : state.vars.wtPBAMore,
-    	areaId: state.vars.areaId,
     	X1 : state.vars.x1,
     	X2 : state.vars.x2,
     	

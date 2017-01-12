@@ -30,7 +30,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata3,ipUrl,wfid,width0, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
+        let {hhdata3,ipUrl,wfid,width0,skinStyle, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
 
 
          let data = require('./../../area/Healthy-data');
@@ -44,7 +44,7 @@ let Component = React.createClass({
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
                 <div className={styles.light} id="light"></div>
 
@@ -223,6 +223,7 @@ const mapStateToProps = (state) => {
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
         width0:state.vars.width0,
+        skinStyle: state.vars.skinStyle
 
     }
 };
@@ -233,15 +234,20 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            if(month2==0){
+                month2=12;
+            }
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('actbt',  month2-1));
             dispatch(actions.setVars('mon',  month2+"月"));
 
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/PBA/getCompanySpacePBA',
                 async: false,
-                data: 'month=11',
+                data: {
+                    "month": month2,
+                },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
@@ -251,7 +257,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('w1', w0));
                     dispatch(actions.setVars('w11', w10));
                     dispatch(actions.setVars('hhdata', data));
-
+                    dispatch(actions.setVars('grid', data.data[2].groupid));
                     let barLotime1 = [];    //各区域   一区域二区域
                     let power1 = [];       //实际发电量
                     let wrong10 = [];       //故障损失
@@ -358,6 +364,7 @@ const mapDispatchToProps = (dispatch) => {
                 success: function (data) {
                     let w12 = data.data[1][0].wfname;
                     dispatch(actions.setVars('hhdata', data));
+                    dispatch(actions.setVars('grid', data.data[2].groupid));
                     let barLotime1 = [];    //各区域   一区域二区域
                     let power1 = [];       //实际发电量
                     let wrong10 = [];       //故障损失
@@ -453,7 +460,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"0",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -495,6 +502,8 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         back: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
+console.log(actbt)
+console.log(wfid)
 
             dispatch(actions.setVars('bt0', 1));
 
@@ -507,12 +516,12 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"1",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
+                    console.log(data)
                     let barLotime3c = [];    //各区域   一区域二区域
                     let power3c = [];       //实际发电量
                     let wrong30c = [];       //故障损失
@@ -557,7 +566,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"2",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',

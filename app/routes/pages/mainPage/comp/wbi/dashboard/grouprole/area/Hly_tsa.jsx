@@ -11,12 +11,12 @@ let Component = React.createClass({
 
     render() {
         let {text,name0,runtime,downtime,tba0,changedata1,hhdata,w10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
-        console.log(ipUrl)
+
 
         let configPie = {
             chart: {
                 height:400,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -150,6 +150,7 @@ let Component = React.createClass({
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                     min:0,
+                    max:100,
                 title: {
                     text: '(%)',
                     align: 'high',
@@ -171,6 +172,7 @@ let Component = React.createClass({
                 type: 'column',
                 data: runtime,
                 borderRadius: 4,
+                color:'#62de88',
 
             }
                 ,{

@@ -81,8 +81,8 @@ let Component = React.createClass({
                 <div className={styles.clear}>
 
                 </div>
-                <div className={`${styles.fbox} `}>
-                    <div className={` ${styles.logofa} ${styles.box_shadow}`}>
+                <div className={`${styles.fbox} ${styles.logofa}`}>
+                    <div className={`  ${styles.box_shadow}  ${styles.fbox2}`}>
                         <div className={styles.rbox33}>
                             <button className={bt0 === 0 ? styles.button : styles.button22}
                                     onClick={() => gogogo(bt0, ipUrl, wfid, actbt)}>前10
@@ -144,11 +144,15 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            if(month2==0){
+                month2=12;
+                year=year-1;
+            }
             let day = new Date(year, month2, 0);
             let daycountT = day.getDate();
 
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt', 10));
+            dispatch(actions.setVars('actbt', month2-1));
             dispatch(actions.setVars('mon', month2 + "月"));
             $.ajax({
                 type: 'post',
@@ -162,7 +166,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
                     dispatch(actions.setVars('hhdata2', data));
                     dispatch(actions.setVars('w11', data.data[0].wfname));
 
@@ -256,6 +259,10 @@ const mapDispatchToProps = (dispatch) => {
             let monthh = key + 1;
             let datee = new Date;
             let year = datee.getFullYear();
+            let month2=datee.getMonth();
+            if(month2==0){
+                    year=year-1;
+            }
             let day = new Date(year, monthh, 0);
             let daycount = day.getDate();    //获取天数：
 
@@ -344,8 +351,17 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
-            let day = new Date(year, month2, 0);
+            if(month2==0){
+                month2=12;
+                year=year-1;
+            }
+            let day = new Date(year, actbt+1, 0);
             let daycount = day.getDate();
+
+            console.log(year)
+            console.log(month2)
+            console.log(wfid)
+            console.log(daycount)
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',
@@ -359,11 +375,11 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
+                    console.log(data)
                     let name2 = [];
                     let runtime2 = [];       //实际发电量
                     let downtime2 = [];       //故障损失
                     let tba2 = [];       //维护损失
-
 
                     for (let i = 0; i < 10; i++) {
                         //区域的横坐标
@@ -392,7 +408,11 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
-            let day = new Date(year, month2, 0);
+            if(month2==0){
+                month2=12;
+                year=year-1;
+            }
+            let day = new Date(year, actbt+1, 0);
             let daycount = day.getDate();
             $.ajax({
                 type: 'post',
@@ -437,8 +457,13 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
-            let day = new Date(year, month2, 0);
+            if(month2==0){
+                month2=12;
+                year=year-1;
+            }
+            let day = new Date(year, actbt+1, 0);
             let daycount = day.getDate();
+
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',

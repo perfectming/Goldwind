@@ -13,13 +13,13 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",mon="一月份",ipUrl,w10,height,changedata1,power2,power1,text,name0,hhdata,actbt=10,wc1=0,wc2,} = this.props;
+        let {w0="一区域",mapmonth,ipUrl,w10,height,changedata1,power2,power1,text,name0,hhdata,actbt=10,wc1=0,wc2,} = this.props;
 
 
         let configPie = {
             chart: {
                 height:height,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -80,7 +80,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc2=e.point.index;
-                            changedata1(w0,w10,win,wc1,wc2,hhdata,actbt,ipUrl);
+                            changedata1(w0,w10,win,wc1,wc2,hhdata,actbt,ipUrl,mapmonth);
 
                         }
                     }
@@ -167,6 +167,7 @@ const mapStateToProps = (state) => {
         hhdata : state.vars.hhdata,
         actbt:state.vars.actbt,
         ipUrl:state.vars.ipUrl,
+        mapmonth: state.vars.mapmonth,
     }
 };
 
@@ -175,7 +176,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(w0,w10,win,wc1,wc2,hhdata,actbt,ipUrl)=> {
+        changedata1 :(w0,w10,win,wc1,wc2,hhdata,actbt,ipUrl,mapmonth)=> {
            // let grid=hhdata.data[2][wc1].groupid;
             let wfid=hhdata.data[1][wc2].wfid;
 
@@ -184,7 +185,8 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/ELEC/getSpaceByGroupidElec',
                 async:false,
                 data:{
-                    "months":actbt+1,
+                    "year": mapmonth[actbt].year,
+                    "months":mapmonth[actbt].yearpoweract,
                     "groupid":'201612121721151',
                     "wfid":wfid,
                 },

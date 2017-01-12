@@ -16,7 +16,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:400,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -166,7 +166,7 @@ let Component = React.createClass({
                     opposite: true
                 }],
             series: [{
-                name: '收益',
+                name: '收入',
                 color:'#33BAC0',
                 type: 'column',
                 data: runtime,
@@ -229,7 +229,10 @@ const mapDispatchToProps = (dispatch) => {
             let month2 = date.getMonth();
             let day = new Date(year, month2, 0);
             let daycount = day.getDate();
-
+            if(month2==0){
+                month2=12;
+                year=year-1;
+            }
 
 
             $.ajax({

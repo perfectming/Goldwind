@@ -18,7 +18,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0,ipUrl,tbaMonths,tbaRunTimes,tbaDownTimes,tbaTba,befor_pagee='group',backtop,befor_pagee2,tbaDays3,tbaDayRunTimes3,tbaDayDownTimes3,tbaDayTba3}=this.props;
+        let {w0,ipUrl,tbaMonths,tbaRunTimes,tbaDownTimes,tbaTba,befor_pagee='group',backtop,befor_pagee2,tbaDays3,tbaDayRunTimes3,tbaDayDownTimes3,tbaDayTba3,TBAtimedata}=this.props;
 
         return (
 
@@ -34,7 +34,7 @@ let Component = React.createClass({
                     <div className={styles.bgc}><img src={icono}/></div>
 
                     <GroupTBAT text={'集团每月TBA'} areaNamee={tbaMonths} areaRecordCostss={tbaDownTimes}
-                               areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl} height={410}></GroupTBAT>
+                               areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl} height={410} TBAdaydata={TBAtimedata}></GroupTBAT>
 
                 </div>
                 {//每天TBA
@@ -72,6 +72,7 @@ const mapStateToProps = (state) => {
         tbaDayTba3: state.vars.tbaDayTba31,
         // 全局ip
         ipUrl: state.vars.ipUrl,
+        TBAtimedata: state.vars.TBAtimedata,
 
     }
 };
@@ -80,6 +81,15 @@ const mapDispatchToProps = (dispatch) => {
     return {
         ajax: (input_url) => {
             //获取十二个月的TBA
+            let datee = new Date;
+            let year = datee.getFullYear();
+            let month = datee.getMonth();
+            if(month==0){
+                month=12;
+                year=year-1;
+            }
+
+            dispatch(actions.setVars('qwe', month+"月"));
             let TBAtimedata;
             let TBAdaydata;
             let tbaMonths = [];
@@ -90,8 +100,7 @@ const mapDispatchToProps = (dispatch) => {
             let tbaDayRunTimes3 = [];
             let tbaDayDownTimes3 = [];
             let tbaDayTba3 = [];
-            let date = new Date();
-            let month = date.getMonth();
+
            // 获取所有的月份
             $.ajax({
                 type: 'post',
@@ -99,7 +108,12 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 dataType: 'json',
                 timeout: '3000',
+                data:{
+                    'year':year,
+                    'month':month
+                },
                 success: function (data) {
+
 
                     TBAtimedata = data.data;
                     for (let i in TBAtimedata) {
@@ -114,7 +128,7 @@ const mapDispatchToProps = (dispatch) => {
                         tbaDownTimes.push(downtimes);
 
                         let tba = TBAtimedata[i].tba * 100;
-                        tbaTba.push(Number(tba.toFixed(1)));
+                        tbaTba.push(Number(tba.toFixed(2)));
 
                     }
 
@@ -139,11 +153,11 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 dataType: 'json',
                 data: {
+                    'year':year,
                     'month': month,
                 },
                 timeout: '3000',
                 success: function (data) {
-
                     TBAdaydata = data.data;
                     for (var i in TBAdaydata) {
                         var tbaDay = TBAdaydata[i].day + '日';
@@ -172,7 +186,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('tbaDayRunTimes31', tbaDayRunTimes3));
             dispatch(actions.setVars('tbaDayDownTimes31', tbaDayDownTimes3));
             dispatch(actions.setVars('tbaDayTba31', tbaDayTba3));
-            dispatch(actions.setVars('qwe', month + '月'));
+            dispatch(actions.setVars('TBAtimedata', TBAtimedata));
+
 
 
         }

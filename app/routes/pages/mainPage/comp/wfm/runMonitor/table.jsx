@@ -19,7 +19,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {table,changepage2,changepage3,model,tabaleData} = this.props;
+        let {table,changepage2,changepage3,model,tabaleData,skinStyle} = this.props;
         if(model!= null &&tabaleData != null) {
             let arr1 = [];
             let arr2 = [];
@@ -44,7 +44,7 @@ let Component = React.createClass({
                     <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
                     <img src={refresh}/>
                 </div>
-                <div className={styles.tableBox}>
+                <div className={skinStyle==1?styles.tableBoxBlue:skinStyle==2?styles.tableBoxWhite:styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
                             header.map((value, key)=> {
@@ -230,6 +230,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
+        skinStyle: state.vars.skinStyle
     }
 };
 

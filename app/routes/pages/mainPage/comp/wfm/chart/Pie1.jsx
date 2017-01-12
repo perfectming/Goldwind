@@ -11,7 +11,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{arrname1,num1,unit}=this.props;
+        let{arrname1,num1,unit,lettercolor}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -46,12 +46,13 @@ let Component = React.createClass({
                     size: '60%',
                     innerSize: '40%',
                     dataLabels: {
+                        distance: 15,
                         enabled: true,
                         format: '{point.name}:<b>{point.percentage:.1f}%</b>',
                         style: {
-                            color: "#d1d2d3",
+                            color: lettercolor,
                             fontSize: '14px',
-                            fontFamily:"微软雅黑"
+                            fontFamily:"微软雅黑",
 
                         },
 

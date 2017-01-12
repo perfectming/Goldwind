@@ -254,51 +254,59 @@
       background: url(../../../img/comp/gzsbglbg.png) no-repeat;
       background-size: 100% 100%;
       .tsstyle1{
-        margin-left: 75px;
-        margin-top: 11px;
+        width: 44px;
+        text-align: center;
+        margin-left: 65px;
+        margin-top: 13px;
         color: #D06960;
-        font-size: 20px;
+        font-size: 10px;
         display: inline-block;
         position: absolute;
         overflow: hidden;
         .tsstyled1{
-          font-size: 10px;
+          font-size: 18px;
         }
       }
       .tsstyle2{
-        margin-left: 139px;
-        margin-top: 143px;
+        width: 44px;
+        text-align: center;
+        margin-left: 132px;
+        margin-top: 146px;
         color: #D06960;
-        font-size: 20px;
+        font-size: 10px;
         display: inline-block;
         position: absolute;
         overflow: hidden;
         .tsstyled2{
-          font-size: 10px;
+          font-size: 18px;
         }
       }
       .tsstyle3{
-        margin-left: 252px;
-        margin-top: 11px;
+        width: 44px;
+        text-align: center;
+        margin-left: 245px;
+        margin-top: 13px;
         color: #D06960;
-        font-size: 20px;
+        font-size: 10px;
         display: inline-block;
         position: absolute;
         overflow: hidden;
         .tsstyled3{
-          font-size: 10px;
+          font-size: 18px;
         }
       }
       .tsstyle4{
-        margin-left: 319px;
-        margin-top: 144px;
+        width: 44px;
+        text-align: center;
+        margin-left: 312px;
+        margin-top: 146px;
         color: #D06960;
-        font-size: 20px;
+        font-size: 10px;
         display: inline-block;
         position: absolute;
         overflow: hidden;
         .tsstyled4{
-          font-size: 10px;
+          font-size: 18px;
         }
       }
       .timestyle{
@@ -327,6 +335,689 @@
     position: relative;
     border:1px solid #3e4c67;
     background: rgba(44,61,71,0.4);
+    .gzsbglmain{
+      margin-top: 10px;
+    }
+  }
+}
+.bodyBoxBlue{
+  .box_shadow:hover{
+    box-shadow:0 0 20px #fff;
+  }
+  overflow: hidden;
+  padding-top: 50px;
+  .zhzb{
+    width:480px;
+    height:260px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #1C405B;
+    background: #112A48;
+    .zhzbtop{
+      width:440px;
+      height:177px;
+      margin-left: 20px;
+      overflow: hidden;
+      background: url(../../../img/comp/zhzbgb.png) no-repeat;
+      background-size: 96% 93%;
+      background-position:top left;
+      .zhzbtopbox {
+        width:145px;
+        height:50px;
+        margin-top: 7px;
+        display: inline-block;
+        color: #ffffff;
+        font-size: 14px;
+        overflow: hidden;
+        text-align: center;
+        .zhzbtopboxg{
+          color:#26f4ff;
+          font-size: 18px;
+        }
+        .danweicc{
+          font-size: 10px;
+        }
+      }
+    }
+    .zhzbdown{
+      width:440px;
+      height:38px;
+      margin-top: 35px;
+      margin-left: 20px;
+      padding: 3px;
+      color: #ffffff;
+      text-align: center;
+      font-size: 16px;
+      overflow: hidden;
+      .daynum{
+        font-size: 20px;
+        color:#2ff4fb;
+      }
+      .danweicc{
+        font-size: 10px;
+      }
+    }
+  }
+  .zhzbgl{
+    width:1252px;
+    height:260px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #1C405B;
+    background: #112A48;
+    .zhzbglmain{
+      margin-top: 25px;
+      .zhzbglbox{
+        width: 195px;
+        height:190px;
+        display: inline-block;
+        margin-left: 45px;
+        img{position:absolute;bottom:-10px;right:0px;z-index:3;}
+        margin-top: 30px;
+        position: relative;
+        p{margin-bottom:5px;text-align:center; color:#fff;}
+        .zhzbglboxnum{
+          position:absolute;
+          top:42%;
+          left:37%;
+          width:110px;
+          text-align: center;
+          height:40px;
+          line-height:18px;
+          font-size: 16px;
+          z-index:11;
+          margin-left:-30px;
+          margin-top:-15px;
+          display:inline-block;
+          padding:0 5px;
+          color: #ffffff;
+          p{
+            font-size: 24px;
+            margin-top:30px;
+            .danweicc{
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .czrlzb{
+    width:480px;
+    height:275px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #1C405B;
+    background: #112A48;
+    .czrlzdmain{
+      margin-top: 20px;
+      .chartnum{
+        position:absolute;
+        top:55%;
+        left:50%;
+        width:60px;
+        height:40px;
+        line-height:18px;
+        z-index:11;
+        margin-left:-30px;
+        margin-top:-15px;
+        display:inline-block;
+        padding:0 5px;
+        color: #07a3ff;
+        p{
+          font-size: 16px;
+          text-align:center;
+          margin:0;
+        }
+        .danweicc{
+          font-size: 10px;
+        }
+      }
+    }
+  }
+  .nfdlwcqk{
+    width:618px;
+    height:275px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #1C405B;
+    background: #112A48;
+    .nfdlwcqkmain{
+      margin-top: 10px;
+    }
+  }
+  .czydfdqk{
+    width:618px;
+    height:275px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #1C405B;
+    background: #112A48;
+    .czydfdqkmain{
+      margin-top: 10px;
+    }
+  }
+  .longbox{
+    width:1748px;
+    height:75px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #1C405B;
+    background: #112A48;
+    .navitem{
+      width:14.23%;
+      height:60px;
+      margin-top: 5px;
+      float:left;
+      border-right:1px solid #111;
+      .leftimg{
+        width:40%;
+        float:left;
+        height:70px;
+        line-height:70px;
+        font-size:20px;
+        color:#fff;
+        text-align:right;
+        img{margin:0px 18px 0 0;}
+
+      }
+      .righttext{
+        width:60%;
+        float:left;
+        height:70px;
+        line-height:70px;
+        font-size:22px;
+        color:#fff;
+      }
+      .righttext1{
+        width:60%;
+        float:left;
+        font-size:16px;
+        padding-top:10px;
+        height:90px;
+        color:#fff;
+        h2{
+          font-weight:normal;
+          font-size:16px;
+          margin:0px 0 10px 0;
+          b{font-size:20px; margin-right:5px;
+            color: #2ff4fb;}
+        }
+      }
+    }
+    .bore{
+      border-right:none;
+    }
+    .bore1{
+      border-right:none;
+    }
+  }
+  .fgzyfx{
+    width:622px;
+    height:265px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #1C405B;
+    background: #112A48;
+    .fgzyfxmain{
+      margin-top: 10px;
+    }
+  }
+  .ssdlqkfx{
+    width:500px;
+    height:265px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #1C405B;
+    background: #112A48;
+    .ssdlqkfxmain{
+      width:392px;
+      height:182px;
+      margin-top: 65px;
+      margin-left: 50px;
+      position: relative;
+      overflow: hidden;
+      background: url(../../../img/comp/gzsbglbg.png) no-repeat;
+      background-size: 100% 100%;
+      .tsstyle1{
+        width: 44px;
+        text-align: center;
+        margin-left: 65px;
+        margin-top: 13px;
+        color: #D06960;
+        font-size: 10px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        .tsstyled1{
+          font-size: 18px;
+        }
+      }
+      .tsstyle2{
+        width: 44px;
+        text-align: center;
+        margin-left: 132px;
+        margin-top: 146px;
+        color: #D06960;
+        font-size: 10px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        .tsstyled2{
+          font-size: 18px;
+        }
+      }
+      .tsstyle3{
+        width: 44px;
+        text-align: center;
+        margin-left: 245px;
+        margin-top: 13px;
+        color: #D06960;
+        font-size: 10px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        .tsstyled3{
+          font-size: 18px;
+        }
+      }
+      .tsstyle4{
+        width: 44px;
+        text-align: center;
+        margin-left: 312px;
+        margin-top: 146px;
+        color: #D06960;
+        font-size: 10px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        .tsstyled4{
+          font-size: 18px;
+        }
+      }
+      .timestyle{
+        margin-left: 30px;
+        margin-top: 97px;
+        color: #CCCCCC;
+        font-size: 16px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        .timestylee{
+          margin-right: 67px;
+          .danweicc{
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+  .gzsbgl{
+    width:595px;
+    height:265px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #1C405B;
+    background: #112A48;
+    .gzsbglmain{
+      margin-top: 10px;
+    }
+  }
+}
+.bodyBoxWhite{
+  .box_shadow:hover{
+    box-shadow:0 0 20px #fff;
+  }
+  overflow: hidden;
+  padding-top: 50px;
+  .zhzb{
+    width:480px;
+    height:260px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #DDDDDD;
+    background: #E7F1FA;
+    .zhzbtop{
+      width:440px;
+      height:177px;
+      margin-left: 20px;
+      overflow: hidden;
+      background: url(../../../img/comp/zhzbgb12.png) no-repeat;
+      background-size: 96% 93%;
+      background-position:top left;
+      .zhzbtopbox {
+        width:145px;
+        height:50px;
+        margin-top: 7px;
+        display: inline-block;
+        color: #333333;
+        font-size: 14px;
+        overflow: hidden;
+        text-align: center;
+        .zhzbtopboxg{
+          color:#26CCD7;
+          font-size: 18px;
+        }
+        .danweicc{
+          font-size: 10px;
+        }
+      }
+    }
+    .zhzbdown{
+      width:440px;
+      height:38px;
+      margin-top: 35px;
+      margin-left: 20px;
+      padding: 3px;
+      color: #333333;
+      text-align: center;
+      font-size: 16px;
+      overflow: hidden;
+      .daynum{
+        font-size: 20px;
+        color:#26CCD7;
+      }
+      .danweicc{
+        font-size: 10px;
+      }
+    }
+  }
+  .zhzbgl{
+    width:1252px;
+    height:260px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #DDDDDD;
+    background: #E7F1FA;
+    .zhzbglmain{
+      margin-top: 25px;
+      .zhzbglbox{
+        width: 195px;
+        height:190px;
+        display: inline-block;
+        margin-left: 45px;
+        img{position:absolute;bottom:-10px;right:0px;z-index:3;}
+        margin-top: 30px;
+        position: relative;
+        p{margin-bottom:5px;text-align:center; color:#333333;}
+        .zhzbglboxnum{
+          position:absolute;
+          top:42%;
+          left:37%;
+          width:110px;
+          text-align: center;
+          height:40px;
+          line-height:18px;
+          font-size: 16px;
+          z-index:11;
+          margin-left:-30px;
+          margin-top:-15px;
+          display:inline-block;
+          padding:0 5px;
+          color: #333333;
+          p{
+            font-size: 24px;
+            margin-top:30px;
+            .danweicc{
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .czrlzb{
+    width:480px;
+    height:275px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #DDDDDD;
+    background: #E7F1FA;
+    .czrlzdmain{
+      margin-top: 20px;
+      .chartnum{
+        position:absolute;
+        top:55%;
+        left:50%;
+        width:60px;
+        height:40px;
+        line-height:18px;
+        z-index:11;
+        margin-left:-30px;
+        margin-top:-15px;
+        display:inline-block;
+        padding:0 5px;
+        color: #07a3ff;
+        p{
+          font-size: 16px;
+          text-align:center;
+          margin:0;
+        }
+        .danweicc{
+          font-size: 10px;
+        }
+      }
+    }
+  }
+  .nfdlwcqk{
+    width:618px;
+    height:275px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #DDDDDD;
+    background: #E7F1FA;
+    .nfdlwcqkmain{
+      margin-top: 10px;
+    }
+  }
+  .czydfdqk{
+    width:618px;
+    height:275px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #DDDDDD;
+    background: #E7F1FA;
+    .czydfdqkmain{
+      margin-top: 10px;
+    }
+  }
+  .longbox{
+    width:1748px;
+    height:75px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #DDDDDD;
+    background: #E7F1FA;
+    .navitem{
+      width:14.23%;
+      height:60px;
+      margin-top: 5px;
+      float:left;
+      border-right:1px solid #DDDDDD;
+      .leftimg{
+        width:40%;
+        float:left;
+        height:70px;
+        line-height:70px;
+        font-size:20px;
+        color:#333333;
+        text-align:right;
+        img{margin:0px 18px 0 0;}
+      }
+      .righttext{
+        width:60%;
+        float:left;
+        height:70px;
+        line-height:70px;
+        font-size:22px;
+        color:#333333;
+      }
+      .righttext1{
+        width:60%;
+        float:left;
+        font-size:16px;
+        padding-top:10px;
+        height:90px;
+        color:#333333;
+        h2{
+          font-weight:normal;
+          font-size:16px;
+          margin:0px 0 10px 0;
+          b{font-size:20px; margin-right:5px;
+            color: #26CCD7;}
+        }
+      }
+    }
+    .bore{
+      border-right:none;
+    }
+    .bore1{
+      border-right:none;
+    }
+  }
+  .fgzyfx{
+    width:622px;
+    height:265px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #DDDDDD;
+    background: #E7F1FA;
+    .fgzyfxmain{
+      margin-top: 10px;
+    }
+  }
+  .ssdlqkfx{
+    width:500px;
+    height:265px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #DDDDDD;
+    background: #E7F1FA;
+    .ssdlqkfxmain{
+      width:392px;
+      height:182px;
+      margin-top: 65px;
+      margin-left: 50px;
+      position: relative;
+      overflow: hidden;
+      background: url(../../../img/comp/gzsbglbg.png) no-repeat;
+      background-size: 100% 100%;
+      .tsstyle1{
+        width: 44px;
+        text-align: center;
+        margin-left: 65px;
+        margin-top: 13px;
+        color: #D06960;
+        font-size: 10px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        .tsstyled1{
+          font-size: 18px;
+        }
+      }
+      .tsstyle2{
+        width: 44px;
+        text-align: center;
+        margin-left: 132px;
+        margin-top: 146px;
+        color: #D06960;
+        font-size: 10px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        .tsstyled2{
+          font-size: 18px;
+        }
+      }
+      .tsstyle3{
+        width: 44px;
+        text-align: center;
+        margin-left: 245px;
+        margin-top: 13px;
+        color: #D06960;
+        font-size: 10px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        .tsstyled3{
+          font-size: 18px;
+        }
+      }
+      .tsstyle4{
+        width: 44px;
+        text-align: center;
+        margin-left: 312px;
+        margin-top: 146px;
+        color: #D06960;
+        font-size: 10px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        .tsstyled4{
+          font-size: 18px;
+        }
+      }
+      .timestyle{
+        margin-left: 30px;
+        margin-top: 97px;
+        color: #333333;
+        font-size: 16px;
+        display: inline-block;
+        position: absolute;
+        overflow: hidden;
+        .timestylee{
+          margin-right: 67px;
+          .danweicc{
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+  .gzsbgl{
+    width:595px;
+    height:265px;
+    margin:8px;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    border:1px solid #DDDDDD;
+    background: #E7F1FA;
     .gzsbglmain{
       margin-top: 10px;
     }

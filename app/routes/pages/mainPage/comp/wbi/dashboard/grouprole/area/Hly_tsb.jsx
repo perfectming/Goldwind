@@ -15,7 +15,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:400,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -84,7 +84,7 @@ let Component = React.createClass({
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    pointWidth: 30,
+                    maxPointWidth: 40,
                     tooltip: {
                         valueSuffix:'h'
                     },
@@ -142,6 +142,7 @@ let Component = React.createClass({
                 }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 min:0,
+                max:100,
                 title: {
                     text: '(%)',
                     align: 'high',
@@ -161,6 +162,8 @@ let Component = React.createClass({
                 type: 'column',
                 data: runtime3,
                 borderRadius: 4,
+                color:'#62de88',
+                pointPlacement:0.1,
 
             }
                 ,{
@@ -169,6 +172,7 @@ let Component = React.createClass({
                     color:'#cccccc',
                     data: downtime3,
                     borderRadius: 4,
+                    pointPlacement:-0.1,
                 }
                 ,
                 {
@@ -177,6 +181,7 @@ let Component = React.createClass({
                     color:'#0000ff',
                     data: tba3,
                     yAxis:1,
+
                 }
 
 

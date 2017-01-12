@@ -10,7 +10,7 @@ module.exports = {
                     {
                         name:'驾驶舱',
                         page:'cockpit',
-                        
+
                     }]
             }],
         },{
@@ -25,12 +25,6 @@ module.exports = {
                      {
                         name:'监控看板1',
                         page:'monitorkb',
-                    },{
-                        name:'监控看板2',
-                        page:'',
-                    },{
-                        name:'监控看板3',
-                        page:'',
                     }]
             },{
                 name:'运行监视',
@@ -72,7 +66,7 @@ module.exports = {
                 name:'批量控制',
                 iconNormal: require('../app/routes/pages/mainPage/img/comp/pl.png'),
                 iconActive: require('../app/routes/pages/mainPage/img/comp/pl_active.png'),
-                
+
             },{
                 name:'业务报表',
                 iconNormal: require('../app/routes/pages/mainPage/img/comp/yw.png'),
@@ -93,7 +87,7 @@ module.exports = {
                     }]
             }],
         },{
-            
+
             name: '健康管理',
             iconNormal: require('../app/routes/pages/mainPage/img/comp/jkgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/jkgl_active.png'),
@@ -130,38 +124,11 @@ module.exports = {
             iconNormal: require('../app/routes/pages/mainPage/img/comp/zcgl.png'),
             iconActive: require('../app/routes/pages/mainPage/img/comp/zcgl_active.png'),
             subPage: [{
-                name:'',
+                name:'asas',
                 page:[
                     {
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    }]
-            },{
-                name:'',
-                page:[
-                        
-                        {
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    },{
-                        name:'',
-                        page:'',
-                    }]
-            },{
-                name:'',
-                page:[
-                    {
-                        name:'',
-                        page:'',
+                        name:'demo',
+                        page:'demo',
                     },{
                         name:'',
                         page:'',
@@ -231,7 +198,7 @@ module.exports = {
                 iconActive: require('../app/routes/pages/mainPage/img/comp/sjtb1.png'),
                 page:[
                      {
-                        name:'阶段上网电量',
+                        name:'阶段上网电价',
                         page:'peqii',
                     },{
                         name:'成本录入',
@@ -256,6 +223,8 @@ module.exports = {
             iconActive: require('../app/routes/pages/mainPage/img/comp/xtgl_active.png'),
             subPage: [{
                 name:'角色管理',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/rolem.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/rolem_active.png'),
                 page:[
                     {
                         name:'角色管理',
@@ -263,6 +232,8 @@ module.exports = {
                     }]
             },{
                 name:'用户管理',
+                 iconNormal: require('../app/routes/pages/mainPage/img/comp/userm.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/userm_active.png'),
                 page:[
                     {
                         name:'用户管理',

@@ -158,7 +158,6 @@ let Component = React.createClass({
                 {
                     name: '停机时间',
                     type: 'column',
-                    color:'#5298d3',
                     data: fanCost,
                     stack:'waste',
                     maxPointWidth: pointWidth,

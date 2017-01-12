@@ -63,9 +63,6 @@ let Component = React.createClass({
                 enabled: false
             },
 
-            colors: [ '#1E664A', '#4CDB9D']
-            ,
-
             plotOptions: {
                 column: {
                     borderWidth: 0,
@@ -74,12 +71,6 @@ let Component = React.createClass({
                     
                 }, series: {
                     cursor: 'pointer',
-                    events: {
-                        click: function(e) {
-                            w0=e.point.category;
-                            changedata1(w0,win);
-                        }
-                    }
                 }
             },
 

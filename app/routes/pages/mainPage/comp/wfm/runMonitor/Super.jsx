@@ -25,7 +25,7 @@ let Component = React.createClass({
 
     render() {
          
-        let {zhzb,bbs,all,boolsuper=false}=this.props;
+        let {zhzb,bbs,all,boolsuper=false,skinStyle}=this.props;
        if(boolsuper){
         let data=bbs.ModelData;
         let mod=zhzb.Model;
@@ -84,11 +84,9 @@ let Component = React.createClass({
                 for(let i=0;i<arr.length;i++){
                     num.push([arrname[i],arr[i]])
                 }
-
             }
         return (
-            <div className={styles.bodyBox}>
-
+            <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
                 <div className={styles.leftBox}>
                     <Superleftbox></Superleftbox>
                 </div>
@@ -149,6 +147,7 @@ const mapStateToProps = (state) => {
         zhzb: state.vars.zhzb,
         bbs: state.vars.bbs,
         boolsuper:state.vars.boolsuper,
+        skinStyle: state.vars.skinStyle
     }
 };
 
@@ -157,6 +156,9 @@ const mapDispatchToProps = (dispatch) => {
          changedate:()=>{ 
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                 function setData(zhzb){
+                    if(zhzb.Model.ens==undefined){
+                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                    }else{
                     dispatch(actions.setVars('zhzb', zhzb));
                     TY.getRtData("DataOverview", 8888800, setData1)
                         function setData1(bbs){
@@ -170,6 +172,7 @@ const mapDispatchToProps = (dispatch) => {
                                      
                                 }
                         }
+                    }
                 }
 
 

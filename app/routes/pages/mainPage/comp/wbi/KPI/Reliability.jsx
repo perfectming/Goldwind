@@ -15,15 +15,15 @@ let Component = React.createClass({
         this.props.init(ipUrl,selectId,selectName);
         setTimeout(function(){
             init(ipUrl,selectId,selectName)
-        },800)
+        },1000)
     },
     
     render() {
-        let {alertText,buttonResetA,buttonResetB,machineTypeTwo=[],machineTypeOne=[],typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne,reliabilityNameTwo,reliabilityOne=[],reliabilityTwo=[],wtType,ipUrl,reliabilityBool=false,selectId,selectName,buttonAction,buttonReset,inputOnChange, onFocus,changeValueS,changeValueE} = this.props;
+        let {skinStyle,alertText,buttonResetA,buttonResetB,machineTypeTwo=[],machineTypeOne=[],typeTwo=[],typeOne=[],typeNameTwo,typeNameOne,reliabilityNameOne,reliabilityNameTwo,reliabilityOne=[],reliabilityTwo=[],wtType,ipUrl,reliabilityBool=false,selectId,selectName,buttonAction,buttonReset,inputOnChange, onFocus,changeValueS,changeValueE} = this.props;
         let comp = PBAdata.list;
         if(reliabilityBool){
             return(
-                <div className={styles.bodyBox}>
+                <div className={skinStyle==1? styles.bodyBoxBlue:skinStyle==2? styles.bodyBoxWhite:styles.bodyBox}>
                     <AlertWindow text={alertText}></AlertWindow>
                     <div className={styles.inquireBox}>
                         {
@@ -70,7 +70,7 @@ let Component = React.createClass({
                                 <ChartPie unit={"h"} name={reliabilityNameOne} text={reliabilityNameOne} lose={reliabilityOne}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
-                                <TwoColumn name={typeNameOne} title={typeNameOne} month={machineTypeOne} plan={typeOne} unit={"h"}></TwoColumn>
+                                <TwoColumn name={typeNameOne} title={typeNameOne} month={machineTypeOne} plan={typeOne} unit={"(h)"}></TwoColumn>
                             </div>
                         </div>
                         <div className={styles.floorTwo}>
@@ -79,7 +79,7 @@ let Component = React.createClass({
                                 <ChartPie unit={"h"} name={reliabilityNameOne} text={reliabilityNameTwo} lose={reliabilityTwo}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
-                                <TwoColumn name={typeNameTwo} title={typeNameTwo} month={machineTypeTwo} plan={typeTwo} unit={"h"}></TwoColumn>
+                                <TwoColumn name={typeNameTwo} title={typeNameTwo} month={machineTypeTwo} plan={typeTwo} unit={"(h)"}></TwoColumn>
                             </div>
                         </div>
                     </div>
@@ -97,6 +97,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        skinStyle: state.vars.skinStyle, //全局换肤
         alertText : state.vars.alertText,
         selectId : state.vars.selectId,
         selectName : state.vars.selectName,
@@ -149,7 +150,7 @@ const mapDispatchToProps = (dispatch) => {
                     dayString=29;
                 }
                 dayString=28;
-            }else if(monthString==4||6||9||11){
+            }else if(monthString==4||monthString==6||monthString==9||monthString==11){
                 dayString=30;
             }else{
                 dayString=31;
@@ -269,8 +270,6 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('alertText', '请先重置或清除数据'));
                             return false;
                         }
-                    },
-                    complete : function(XMLHttpRequest,status) {
                         $.ajax({
                             url:'http://'+ipUrl+'/wbi/KPI/getReliableNormAnalyse',//column柱图
                             type: 'post',
@@ -302,6 +301,9 @@ const mapDispatchToProps = (dispatch) => {
                             },
                             complete : function(XMLHttpRequest,status) {},
                         });
+                    },
+                    complete : function(XMLHttpRequest,status) {
+                        
                     },
                 });
             }else{//区域
@@ -335,8 +337,6 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('alertText', '请先重置或清除数据'));
                             return false;
                         }
-                    },
-                    complete : function(XMLHttpRequest,status) {
                         $.ajax({
                             url:'http://'+ipUrl+'/wbi/KPI/getReliableNormAnalyse',//column柱图
                             type: 'post',
@@ -368,6 +368,9 @@ const mapDispatchToProps = (dispatch) => {
                             },
                             complete : function(XMLHttpRequest,status) {},
                         });
+                    },
+                    complete : function(XMLHttpRequest,status) {
+                        
                     },
                 });
             }

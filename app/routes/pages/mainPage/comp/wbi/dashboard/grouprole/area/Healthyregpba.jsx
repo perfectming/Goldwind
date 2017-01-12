@@ -13,8 +13,8 @@ let ip="10.68.100.32";
 
 let Component = React.createClass({
     componentWillMount() {
-        let {ipUrl}=this.props
-        this.props.ajax(ipUrl);
+        let {ipUrl,areaId}=this.props
+        this.props.ajax(ipUrl,areaId);
     },
     componentDidMount() {
         this.props.init();
@@ -22,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {ip="10.68.100.32",ipUrl,befor_pages='area',width0,w10,wc1,wfid,bt0=0,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {areaId,ipUrl,befor_pages='area',width0,w10,wc1,wfid,bt0=0,skinStyle,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
@@ -33,7 +33,7 @@ let Component = React.createClass({
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
                 <div className={styles.light} id="light"> </div>
 
@@ -163,18 +163,24 @@ const mapStateToProps = (state) => {
         ipUrl: state.vars.ipUrl,
         wfid: state.vars.wfid,
         width0: state.vars.width0,
-
+        areaId: state.vars.areaId,
+        skinStyle: state.vars.skinStyle,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
+        ajax: (ipUrl,areaId) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            areaId=areaId[0];
+            if(month2==0){
+                month2=12;
+            }
+
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt',  10));
+            dispatch(actions.setVars('actbt',  month2-1));
             dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
                 type:'post',
@@ -182,7 +188,7 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     "month":month2,
-                    "groupid":'201612121721151',
+                    "groupid": areaId==undefined? '201612121721151':areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -277,7 +283,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
+
                     let w10 = data.data[1][0].wfname;
                     dispatch(actions.setVars('w11', w10));
                     dispatch(actions.setVars('hhdata4',  data));
@@ -345,7 +351,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"0",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -402,7 +408,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"1",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -454,7 +460,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"2",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -495,7 +501,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
             $("#light").show();
-            $("#boxhidden").show();;
+            $("#boxhidden").show();
         },
         hideit: (power1, wrong10, wrong11, wrong12, wrong13, pba1,barLotime1) =>{
             dispatch(actions.setVars('bt0', 0));

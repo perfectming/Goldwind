@@ -13,7 +13,7 @@ let Component = React.createClass({
         let configPie = {
             chart: {
                 height:360,
-                backgroundColor: 'rgba(44, 61, 71, 0.4)',
+                backgroundColor: null,
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -44,7 +44,13 @@ let Component = React.createClass({
             	}
             },
             tooltip: {
-                valueSuffix: unit,
+                shared: true,
+                style:{
+                    color: '#333',
+                    fontSize: '12px',
+                    fontFamily:'微软雅黑'
+                },
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br>数值：<b>{point.y}</b><h6 style="font-size:12px">'+unit+'</h6>'
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -52,17 +58,21 @@ let Component = React.createClass({
             colors: [ '#5298d3', '#ffffff', '#e9c75c','#d06960','#856ffe','#009a46',],
             plotOptions: {
 	            pie: {
-	                allowPointSelect: true,
+                    size:180,
+	                allowPointSelect: false,
 	                cursor: 'pointer',
 	                dataLabels: {
 	                    enabled: true,
                         style: {
-                            color: 'white'
+                            color: '#d1d2d3',
+                            fontWeight: 'normal',
+                            fontSize:'14px',
+                            fontFamily: '微软雅黑',
                         }
 	                },
 	                showInLegend: true
 	            }
-	        },
+            },
             xAxis: {
                 lineWidth: 1,
                 tickWidth: 0,

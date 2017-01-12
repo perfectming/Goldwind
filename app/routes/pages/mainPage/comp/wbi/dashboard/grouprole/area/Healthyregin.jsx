@@ -55,13 +55,13 @@ let Component = React.createClass({
 
 
     render() {
-        let {ipUrl,befor_pages='area',width0,mon,w0,w10,wfid,hhdata,bt0, returnit,hideit,namex2,namex3,healthy2,healthy3,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
+        let {ipUrl,befor_pages='area',width0,mon,w0,w10,wfid,hhdata,bt0,skinStyle, returnit,hideit,namex2,namex3,healthy2,healthy3,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
         return (
 
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.light} id="light"> </div>
 
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}  id="boxhidden">
@@ -154,6 +154,7 @@ const mapStateToProps = (state) => {
         ipUrl:state.vars.ipUrl,
         wfid:state.vars.wfid,
         width0:state.vars.width0,
+        skinStyle: state.vars.skinStyle,
     }
 };
 
@@ -167,7 +168,9 @@ const mapDispatchToProps = (dispatch) => {
             let date=new Date();
             let year=date.getFullYear()
             let month2=date.getMonth();
-
+            if(month2==0){
+                month2=12;
+            }
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getAreaRoleHealth',
@@ -182,7 +185,7 @@ const mapDispatchToProps = (dispatch) => {
                 success:function(data){
 
                     dispatch(actions.setVars('hhdata',  data));
-                    dispatch(actions.setVars('actbt',  10));
+                    dispatch(actions.setVars('actbt',  month2-1));
                     dispatch(actions.setVars('mon',  month2+"月"));
 
 
@@ -298,7 +301,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid==undefined? '150801':wfid,
                     "type":"0",
-                    "year":"2016"
+                    "year":""
 
                 },
                 dataType:'json',
@@ -336,7 +339,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid==undefined? '150801':wfid,
                     "type":"1",
-                    "year":"2016"
+                    "year":""
 
                 },
                 dataType:'json',
@@ -372,7 +375,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid==undefined? '150801':wfid,
                     "type":"2",
-                    "year":"2016"
+                    "year":""
 
                 },
                 dataType:'json',

@@ -20,7 +20,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wfid, ipUrl, bt0 = 0,width0, hhdata,hhdata2,hhdata3, w0 = "巴盟", w10 , mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2, runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, name3, runtime3, downtime3, tba3} = this.props;
+        let {wfid, ipUrl, bt0 = 0,width0,skinStyle, hhdata,hhdata2,hhdata3, w0 = "巴盟", w10 , mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2, runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, name3, runtime3, downtime3, tba3} = this.props;
 
          let data = require('./../../area/Healthy-data');
         let month = data.data.line_month;
@@ -32,7 +32,7 @@ let Component = React.createClass({
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.light} id="light"></div>
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`} id="boxhidden">
                     <div className={styles.hidden_top}>
@@ -162,6 +162,7 @@ const mapStateToProps = (state) => {
         wfid:state.vars.wfid,
         bt0:state.vars.bt0,
         width0:state.vars.width0,
+        skinStyle: state.vars.skinStyle
 
     }
 };
@@ -176,8 +177,10 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
-
-            dispatch(actions.setVars('actbt',  10));
+            if(month2==0){
+                month2=12;
+            }
+            dispatch(actions.setVars('actbt',  month2-1));
             dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
                 type: 'post',
@@ -423,7 +426,6 @@ const mapDispatchToProps = (dispatch) => {
                         downtime2.push(data.data[i].downtimes);   //故障损失
                         tba2.push(Number((data.data[i].tba*100).toFixed(2)));  //维护损失
                     }
-
                     dispatch(actions.setVars('name2', name2));
                     dispatch(actions.setVars('runtime2', runtime2));
                     dispatch(actions.setVars('downtime2', downtime2));
@@ -448,7 +450,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid": '201612121721151',
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "0",
-                    "year": '2016',
+                    "year": '',
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -492,7 +494,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid": '201612121721151',
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "1",
-                    "year": '2016',
+                    "year": '',
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -555,7 +557,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-
+            dispatch(actions.setVars('bt0', 0));
 
             let runtime2=[];       //实际发电量
             let downtime2=[];       //故障损失

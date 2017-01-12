@@ -19,7 +19,7 @@
   }
   .treeItem {
     padding-top: 15px;
-    background-color: #252932;;
+    background-color: #252932;
     line-height: 30px;
     font-size:18px;
     height:80px;
@@ -67,6 +67,166 @@
     display:block;
     span{padding-right:25px;}
     &:hover{color:#2ff4fb;}
+  }
+  .fc_search1{
+
+    display:none;
+  }
+  .gfcbg{
+    top:283px;
+    background-image:url('../img/comp/treegfc.png');
+  }
+
+}
+.navTreeBlue {
+  width: 100px;
+  min-height: 1010px;
+  background-color: #041022;
+  float: left;
+  color:#fff;
+  position:relative;
+  .treeItemAct {
+    padding-top: 15px;
+    background-color: #111926;
+    line-height: 30px;
+    height:80px;
+    font-size:18px;
+    color: #3BAAAF;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    border-left: 5px solid #2f828a;
+  }
+  .treeItem {
+    padding-top: 15px;
+    background-color: #041022;
+    line-height: 30px;
+    font-size:18px;
+    height:80px;
+    text-align: center;
+    cursor: pointer;
+    position:relative;
+  }
+  .trunleft{
+    width:100%;
+    height:50px;
+    background:url('../img/comp/trunright.png') no-repeat center center;
+    position:absolute;
+    left:0px;
+    text-align:center;
+    bottom:200px;
+    cursor:pointer;
+  }
+  .trunright{
+    width:100%;
+    height:50px;
+    background:url('../img/comp/trunleft.png') no-repeat center center;
+    position:absolute;
+    left:0px;
+    text-align:center;
+    bottom:200px;
+    cursor:pointer;
+
+  }
+  .fc_search{
+    width:80px;
+    height:30px;
+    line-height:30px;
+    padding-left:10px;
+    position:absolute;
+    top:243px;
+    right:-80px;
+    border:1px solid #2ff4fb;
+    border-left:none;
+    border-radius:0 20px 20px 0;
+    background:#041022;
+    background-image:url('../img/comp/treefc.png');
+    background-position:right center;
+    background-repeat:no-repeat;
+    z-index:25;
+    display:block;
+    span{padding-right:25px;}
+    &:hover{color:#2ff4fb;}
+  }
+  .fc_search1{
+
+    display:none;
+  }
+  .gfcbg{
+    top:283px;
+    background-image:url('../img/comp/treegfc.png');
+  }
+
+}
+.navTreeWhite {
+  width: 100px;
+  min-height: 1010px;
+  background-color: #d0d1d3;
+  float: left;
+  color:#fff;
+  position:relative;
+  .treeItemAct {
+    padding-top: 15px;
+    background-color: #245D93;
+    line-height: 30px;
+    height:80px;
+    font-size:18px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    border-left: 5px solid #258fc3;
+  }
+  .treeItem {
+    padding-top: 15px;
+    background-color: #d0d1d3;
+    line-height: 30px;
+    font-size:18px;
+    color: #277db7;
+    height:80px;
+    text-align: center;
+    cursor: pointer;
+    position:relative;
+  }
+  .trunleft{
+    width:100%;
+    height:50px;
+    background:url('../img/comp/trunright.png') no-repeat center center;
+    position:absolute;
+    left:0px;
+    text-align:center;
+    bottom:200px;
+    cursor:pointer;
+  }
+  .trunright{
+    width:100%;
+    height:50px;
+    background:url('../img/comp/trunleft.png') no-repeat center center;
+    position:absolute;
+    left:0px;
+    text-align:center;
+    bottom:200px;
+    cursor:pointer;
+
+  }
+  .fc_search{
+    width:80px;
+    height:30px;
+    line-height:30px;
+    padding-left:10px;
+    position:absolute;
+    top:243px;
+    right:-80px;
+    border:1px solid #2ff4fb;
+    border-left:none;
+    border-radius:0 20px 20px 0;
+    background:#d0d1d3;
+    background-image:url('../img/comp/treefc.png');
+    background-position:right center;
+    background-repeat:no-repeat;
+    z-index:25;
+    display:block;
+    span{padding-right:25px;color:#2ff4fb;}
+    span:hover{color:#FFFFFF;}
   }
   .fc_search1{
 

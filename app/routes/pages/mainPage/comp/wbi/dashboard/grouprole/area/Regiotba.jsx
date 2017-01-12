@@ -13,8 +13,8 @@ let ip="10.68.100.32";
 
 let Component = React.createClass({
     componentWillMount() {
-        let {ipUrl}=this.props
-        this.props.ajax(ipUrl);
+        let {ipUrl,areaId}=this.props
+        this.props.ajax(ipUrl,areaId);
     },
     componentDidMount() {
         this.props.init();
@@ -22,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {ip="10.68.100.32",ipUrl,befor_pages='area',wc1,width0,wfid,wc2,bt0=0,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {areaId,ipUrl,befor_pages='area',skinStyle,wc1,width0,wfid,wc2,bt0=0,hhdata,w0,mon="十一月份", returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
@@ -37,7 +37,7 @@ let Component = React.createClass({
 
 
 
-            <div className = {styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.paddingtop}>
                 <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
                 </div>
@@ -62,8 +62,8 @@ let Component = React.createClass({
 
                 </div>
 
-                <div className={`${styles.fbox} `}>
-                    <div className={` ${styles.logofa} ${styles.box_shadow}`}>
+                <div className={`${styles.fbox} ${styles.logofa} `}>
+                    <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Hly_pbatwo height={450} text={mon+"每日PBA"}
                                     barRotimes={barLotime1}
                                     power1={power1}
@@ -116,35 +116,36 @@ const mapStateToProps = (state) => {
         ipUrl: state.vars.ipUrl,
         wfid: state.vars.wfid,
         width0: state.vars.width0,
-
+        areaId: state.vars.areaId,
+        skinStyle: state.vars.skinStyle,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
+        ajax: (ipUrl,areaId) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
-
-            dispatch(actions.setVars('actbt',  10));
+            if(month2==0){
+                month2=12;
+            }
+            areaId=areaId[0];
+            dispatch(actions.setVars('actbt',  month2-1));
             dispatch(actions.setVars('mon',  month2+"月"));
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/PBA/getCompanyTimePBA',
+                url:'http://'+ipUrl+'/wbi/PBA/getCompanyByGroupidMonthPBA',
                 async:false,
                 data:{
                     "month":month2,
-                    "groupid":'201612121721151',
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+
                     dispatch(actions.setVars('hhdata4',  data));
-
-                    let w0 = data.data[1][0].wfname;
-                    dispatch(actions.setVars('w1', w0));
-
 
                     let barLotime21 = [];    //各区域   一区域二区域
                     let power21=[];       //实际发电量
@@ -153,14 +154,14 @@ const mapDispatchToProps = (dispatch) => {
                     let wrong221=[];       //限功率损失
                     let wrong231=[];       //非设备原因损失
                     let pba21=[];
-                    for (var i in data.data[0]) {
-                        barLotime21.push(data.data[0][i].month+"月");    //区域的横坐标
-                        power21.push(data.data[0][i].poweract);   //实际发电量
-                        wrong201.push(data.data[0][i].faultloss);   //故障损失
-                        wrong211.push(data.data[0][i].maintainloss);   //维护损失
-                        wrong221.push(data.data[0][i].limitloss);   //限功率损失
-                        wrong231.push(data.data[0][i].nodevreasonloss);   //非设备原因损失
-                        pba21.push(Number((data.data[0][i].pba*100).toFixed(2)));    //非设备原因损失
+                    for (var i in data.data) {
+                        barLotime21.push(data.data[i].month+"月");    //区域的横坐标
+                        power21.push(data.data[i].poweract);   //实际发电量
+                        wrong201.push(data.data[i].faultloss);   //故障损失
+                        wrong211.push(data.data[i].maintainloss);   //维护损失
+                        wrong221.push(data.data[i].limitloss);   //限功率损失
+                        wrong231.push(data.data[i].nodevreasonloss);   //非设备原因损失
+                        pba21.push(Number((data.data[i].pba*100).toFixed(2)));    //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime21', barLotime21));
                     dispatch(actions.setVars('power21', power21));
@@ -170,6 +171,26 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wrong231', wrong231));
                     dispatch(actions.setVars('pba21', pba21));
 
+
+                },
+                error:function(){
+
+                },
+            })
+            $.ajax({
+                type:'post',
+                url:'http://'+ipUrl+'/wbi/PBA/getCompanyByGroupidDayPBA',
+                async:false,
+                data:{
+                    "month":month2,
+                    "groupid":areaId==undefined? '201612121721151':areaId,
+                },
+                dataType:'json',
+                timeout:'3000',
+                success:function(data){
+
+                    dispatch(actions.setVars('hhdata4',  data));
+
                     let barLotime21q = [];    //各区域   一区域二区域
                     let power21q=[];       //实际发电量
                     let wrong201q=[];       //故障损失
@@ -177,14 +198,14 @@ const mapDispatchToProps = (dispatch) => {
                     let wrong221q=[];       //限功率损失
                     let wrong231q=[];       //非设备原因损失
                     let pba21q=[];
-                    for (var i in data.data[1]) {
-                        barLotime21q.push(data.data[1][i].day+"日");    //区域的横坐标
-                        power21q.push(data.data[1][i].poweract);   //实际发电量
-                        wrong201q.push(data.data[1][i].faultloss);   //故障损失
-                        wrong211q.push(data.data[1][i].maintainloss);   //维护损失
-                        wrong221q.push(data.data[1][i].limitloss);   //限功率损失
-                        wrong231q.push(data.data[1][i].nodevreasonloss);   //非设备原因损失
-                        pba21q.push(Number((data.data[1][i].pba*100).toFixed(2)));    //非设备原因损失
+                    for (var i in data.data) {
+                        barLotime21q.push(data.data[i].day+"日");    //区域的横坐标
+                        power21q.push(data.data[i].poweract);   //实际发电量
+                        wrong201q.push(data.data[i].faultloss);   //故障损失
+                        wrong211q.push(data.data[i].maintainloss);   //维护损失
+                        wrong221q.push(data.data[i].limitloss);   //限功率损失
+                        wrong231q.push(data.data[i].nodevreasonloss);   //非设备原因损失
+                        pba21q.push(Number((data.data[i].pba*100).toFixed(2)));    //非设备原因损失
                     }
                     dispatch(actions.setVars('barLotime1', barLotime21q));
                     dispatch(actions.setVars('power1', power21q));
@@ -293,7 +314,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type":"0",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -349,7 +370,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type":"1",
-                    "year":"2016"
+                    "year":""
                 },
                 dataType: 'json',
                 timeout: '3000',

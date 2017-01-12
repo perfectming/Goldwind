@@ -18,19 +18,22 @@ let mode=model.Model.ens;
 let nam=['AVC','AGC','PlanActPower','TActPower'];
 let header=['场站名称', '有功自动控制','无功自动控制','计划值','出力'];
 let time;
+let onceTime;
 
 let Component = React.createClass({
     componentWillMount() {
-        this.props.changedate();
+        let{booltkgl}=this.props;
+        this.props.changedate(booltkgl);
     },
     componentWillUnmount() {
-        clearInterval(time)
+        clearInterval(time);
+        clearTimeout(onceTime);
     },
     componentDidMount() {
         this.props.init(data);
     },
     render() {
-        let {change,change1,table,openAGC,closeAGC,changeTableItem,jyname,jydata,booltkgl=false} = this.props;
+        let {change,change1,table,openAGC,closeAGC,changeTableItem,jyname,jydata,booltkgl=false,skinStyle} = this.props;
         if(booltkgl){
             let arr1 = [];
             let arr2 = [];
@@ -44,7 +47,7 @@ let Component = React.createClass({
             }
             let plan=0,power=0,allC=0;
             return (
-                <div className={styles.tkglBox}>
+                <div className={skinStyle==1?styles.tkglBoxBlue:skinStyle==2?styles.tkglBoxWhite:styles.tkglBox}>
                     <span className={styles.mw}>(MW)</span><span onClick={openAGC} className={styles.agc}>AGC调节</span>
                     <div className={styles.tableBox} id="AGC">
                         <div className={styles.tableHeaderBox}>
@@ -147,9 +150,8 @@ let Component = React.createClass({
                             </div>
                         </div>
                     </div>
-                    <div className={styles.columnTitle}></div>
                     <div className={styles.upBox}>
-                        <Column model={jyname} tabaleData={jydata}></Column>
+                        <Column model={jyname} tabaleData={jydata} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Column>
                     </div>
                     <div className={styles.downBox}>
                         <Table model={jyname} tabaleData={jydata}></Table>
@@ -171,28 +173,36 @@ const mapStateToProps = (state) => {
         jyname: state.vars.jyname,
         jydata: state.vars.jydata,
         booltkgl: state.vars.booltkgl,
+        skinStyle: state.vars.skinStyle
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changedate:()=>{
-            time=setInterval(function(){
-                //     console.log('刷新')
-
-                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", setDatas, "Screen", 0);
-                function setDatas(rdata){
-                    dispatch(actions.setVars('jyname', rdata));
-                    TY.getRtData("RegulationOverview", 8888800, setfData)
-                    function setfData(rdata1){
-                        dispatch(actions.setVars('jydata', rdata1));
+        changedate:(booltkgl)=>{
+            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", setDatas, "Screen", 0);
+            function setDatas(rdata){
+                dispatch(actions.setVars('jyname', rdata));
+                TY.getRtData("RegulationOverview", 8888800, setfData)
+                function setfData(rdata1){
+                    dispatch(actions.setVars('jydata', rdata1));
+                    setTimeout(function () {
                         dispatch(actions.setVars('booltkgl', true));
-
-                    }
+                        clearTimeout(onceTime);
+                    },100)
                 }
-
-
-            },2000)
+            }
+            time=setInterval(function(){
+                TY.getRtData("RegulationOverview", 8888800, setfData);
+                function setfData(rdata1){
+                    dispatch(actions.setVars('jydata', rdata1));
+                }
+            },2000);
+            onceTime=setTimeout(function(){
+                alert('数据获取失败！请重新登入');
+                browserHistory.push('/app/all/page/login');
+                dispatch(actions.setVars('userInfo', false));
+            },7000)
         },
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));

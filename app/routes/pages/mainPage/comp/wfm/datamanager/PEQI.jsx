@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './PEQI.scss';
 import save from '../../../img/comp/save.png';
 import del from '../../../img/icon/tabDel.png';
+import refresh from '../../../img/comp/refresh.png';
 import add from '../../../img/icon/tabAdd.png';
 var {getState} = require('../../../../../../redux/store');
 var $ = require('jquery');
@@ -15,7 +16,7 @@ let arr3=[];
 let yeares=[];
 var pageSize=11;//设置每页的条目数量
 let page=1;//设置初始页码
-let soam='http://10.9.100.95:8080/soam';//设置接口
+let soam='http://10.68.100.32:8080/soam';//设置接口
 let thDate=new Date();
 let thYear=thDate.getFullYear();//定义变量，路径
 for(let i=0;i<=30;i++){
@@ -26,16 +27,15 @@ for(let i=0;i<=30;i++){
         arr3.push(ssg2[x].name);
     }}());
 arr3.splice(-2,2);//清理数据格式
-let arr1=['wfname','rectime','operationtime','operator','planelec'];//设置每列的属性
+let arr1=['wfid','rectime','operationtime','operator','planelec'];//设置每列的属性
 let comp = comps.peqi.table;
 let Component = React.createClass({
     componentDidMount() {
         this.props.init(page);
     },
     render() {
-        let {wfidCount,wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table,years,changeTableItem1,wfids} = this.props;
+        let {userNameT,init,wfidCount,wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table,years,changeTableItem1,wfids} = this.props;
         let newData={};
-        let opti=[];
         let num=0;
         console.log(wfidCount);
         let arr=[16,16,16,16,16,10];
@@ -43,7 +43,7 @@ let Component = React.createClass({
             newData[arr1[i]]='';
         }
         newData['datetype']=1;
-        if (table){//判断数据是否存在
+        if (table && wtidAll){//判断数据是否存在
             return (
                 <div className={styles.powerBox}>
                     <div className={styles.inquireBox}>
@@ -78,7 +78,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.table}>
                         <div className={styles.actionBox}>
-                            <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table.data))}/>
+                            <img src={refresh} onClick={()=>init()}/>
                             <img src={add} onClick={()=>addData(newData)}/>
                         </div>
                         <div className={styles.tableBox}>
@@ -96,7 +96,7 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.tableContentBox}>
                                 {
-                                    table.data.pagedata.map((value, key)=> {
+                                    table.data.pagedata && table.data.pagedata.map((value, key)=> {
                                         num++;
                                         if(key<wfidCount/1){
                                             return (
@@ -110,10 +110,10 @@ let Component = React.createClass({
                                                                 return (
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%"}} key={keyC}>
-                                                                        {value[valueC]}
+                                                                        {value['wfname']}
                                                                     </div>
                                                                 )
-                                                            }else if(keyC==1){
+                                                            }else if(keyC==2){
                                                                 return (
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
@@ -121,7 +121,7 @@ let Component = React.createClass({
                                                                                type="date" readOnly="readOnly" value={value[valueC].slice(0,10)}/>
                                                                     </div>
                                                                 )
-                                                            }else if(keyC<3){
+                                                            }else if(keyC==1){
                                                                 return (
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
@@ -154,26 +154,42 @@ let Component = React.createClass({
                                                            readOnly="true" value={num}/>
                                                     {
                                                         arr1.map((valueC, keyC)=> {
-                                                            if(keyC<1){
+                                                            if(keyC==0){
                                                                 return(
                                                                     <select className={styles.tableContentItem}
                                                                             style={{width:arr[keyC]+"%"}} key={keyC}
                                                                             onChange={(e)=>changeTableItem1(e.target.value,newData,key,keyC)}>
                                                                         {wtidAll.data.map((value, key)=> {
                                                                             return (
-                                                                                <option className={styles.opt} value={value.wfid} key={key}>{value.wfname}</option>
+                                                                                <option className={styles.opt} value={value[valueC]} key={key}>{value.wfname}</option>
                                                                             )
                                                                         })
                                                                         }
                                                                     </select>
                                                                 )
-                                                            }else if(keyC<3){
+                                                            }else if(keyC==1){
                                                                 return (
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
                                                                         <input onChange={(e)=>changeTableItem1(e.target.value,newData,key,keyC)}
+                                                                               onBlur={(e)=>checkDate(e.target.value,newData,key,keyC)}
                                                                                type="date"/>
                                                                     </div>
+                                                                )
+                                                            }else if(keyC==2){
+                                                                return (
+                                                                    <div className={styles.tableContentItem}
+                                                                         style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
+                                                                        <input readOnly="readOnly"
+                                                                               type="date" value={new Date().getFullYear()+'-'+(new Date().getMonth()+1<10?'0'+(new Date().getMonth()+1):new Date().getMonth()+1)+'-'+(new Date().getDate()<10?'0'+new Date().getDate():new Date().getDate())}/>
+                                                                    </div>
+                                                                )
+                                                            }else if(keyC==3){
+                                                                return (
+                                                                    <input className={styles.tableContentItem} style={{width:arr[keyC]+"%"}}
+                                                                           readOnly="readOnly" value={userNameT}
+                                                                           key={keyC} contentEditable="true"
+                                                                           onChange={(e)=>changeTableItem1(e.target.value,newData,key,keyC)}/>
                                                                 )
                                                             }else{
                                                                 return (
@@ -215,6 +231,7 @@ const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
         page: state.vars.page1,
+        userNameT: state.vars.userNameT,
         wtidAll: state.objs.wtidAll,
         wfidCount:state.vars.wfidCount,
         wfids:state.vars.wfids,
@@ -225,6 +242,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('wfids', null));
+            dispatch(actions.setVars('years', null));
             dispatch(actions.setVars('page1', 1));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
@@ -252,6 +271,9 @@ const mapDispatchToProps = (dispatch) => {
                     console.log('获取数据失败')
                 }
             });
+        },
+        checkDate(value,newData,key,keyC){
+            console.log(value);
         },
         buttonAction (sit){
             // 获取select 选择的内容
@@ -311,11 +333,6 @@ const mapDispatchToProps = (dispatch) => {
             console.log(tableV.data.pagedata[i][arr1[j]]);
             dispatch(actions.setObjs('tableContent', tableV));
         },
-        changeTableItem2: (value, table, i, j) => {
-            table.data.pagedata[i][arr1[j]] = value;
-            console.log(value);
-            dispatch(actions.setObjs('tableContent', tableV));
-        },
         addData:(i) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.data.pagedata.push(i);
@@ -324,6 +341,7 @@ const mapDispatchToProps = (dispatch) => {
         addDate:(li)=>{
             let tableV = _.clone(getState().objs.tableContent);
             let wfs=tableV.data.pagedata[li];
+            (wfs.wfid==='') && (wfs.wfid='150801');
             let ddv;
             ddv=JSON.stringify(wfs);
             console.log(wfs,ddv);
@@ -346,6 +364,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:'pageSize='+pageSize+'&&nowPage=1',
                 dataType: 'json',//here,
                 success:function (data) {
+                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                     dispatch(actions.setObjs('tableContent', data));
                 },
                 error:function(){
@@ -366,7 +385,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data);
-                    dispatch(actions.setObjs('tableContent', data));
+                    alert('删除成功');
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -398,7 +417,7 @@ const mapDispatchToProps = (dispatch) => {
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+page+'&&year='+years+'&&wfids='+wfids,
+                data:{pageSize:pageSize,nowPage:page,year:years,wfids:wfids},
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)
@@ -412,14 +431,15 @@ const mapDispatchToProps = (dispatch) => {
         },
         nextPage:(page,i,j,years,wfids)=>{
             (page<Math.ceil(i/j)) ? page++:page;
+            console.log(page,years,wfids);
             dispatch(actions.setVars('page1', page));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+page+'&&year='+years+'&&wfids='+wfids,
+                data:{pageSize:pageSize,nowPage:page,year:years,wfids:wfids},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data.data.pagedata.length)
+                    console.log(data.data.pagedata.length);
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
@@ -435,7 +455,7 @@ const mapDispatchToProps = (dispatch) => {
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+page+'&&year='+years+'&&wfids='+wfids,
+                data:{pageSize:pageSize,nowPage:page,year:years,wfids:wfids},
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)
@@ -453,7 +473,7 @@ const mapDispatchToProps = (dispatch) => {
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage='+page+'&&year='+years+'&&wfids='+wfids,
+                data:{pageSize:pageSize,nowPage:page,year:years,wfids:wfids},
                 dataType: 'json',//here,
                 success:function (data) {
                     console.log(data)

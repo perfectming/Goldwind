@@ -141,7 +141,7 @@ let Component = React.createClass({
 
             //几条数据
             series: [{
-                name: '收益',
+                name: '收入',
                 type: 'column',
                 data: areaRecordProfitR,
                 

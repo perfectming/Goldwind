@@ -13,13 +13,13 @@ let Component = React.createClass({
     },
 
     render() {
-        let {ip="10.68.100.32",hhdata4,actbt=10,text,changedata1,w0='一区域',wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
+        let {areaId,hhdata4,actbt=10,text,changedata1,ipUrl,w0='一区域',wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
 
 
         let configPie = {
             chart: {
                 height:height,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -56,11 +56,7 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
 
-            },
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
@@ -86,7 +82,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc1=e.point.index;
-                            changedata1(w10,e,wc1,actbt,hhdata4);
+                            changedata1(ipUrl,w10,e,wc1,actbt,hhdata4,areaId);
 
                         }
                     }
@@ -119,6 +115,9 @@ let Component = React.createClass({
                     }
                 },
                 categories:barRotime,
+            },
+            tooltip: {
+                shared: true
             },
             yAxis: [{
                 labels: {
@@ -174,7 +173,7 @@ let Component = React.createClass({
                 borderRadius: 4,
             }, {
                 name: '故障损失',
-                color: '#5298d3',
+                color: '#5298d2',
                 type: 'column',
                 data: wrong20,
                 stack: 'time',
@@ -189,7 +188,7 @@ let Component = React.createClass({
                 },
                 {
                     name: '限功率损失',
-                    color: '#e9c75c',
+                    color: '#e8952a',
                     type: 'column',
                     data: wrong22,
                     stack: 'time'
@@ -201,6 +200,7 @@ let Component = React.createClass({
                     data: wrong23,
                     stack: 'time',
                     borderRadius: 2,
+                    color: '#d8403d',
                 },
 
 
@@ -234,6 +234,8 @@ const mapStateToProps = (state) => {
         windplan : state.vars.windplan,
         hhdata4 : state.vars.hhdata4,
         actbt : state.vars.actbt,
+        areaId: state.vars.areaId,
+        ipUrl: state.vars.ipUrl,
 
     }
 };
@@ -243,22 +245,26 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(w10,e,wc1,actbt,hhdata4)=> {
+        changedata1 :(ipUrl,w10,e,wc1,actbt,hhdata4,areaId)=> {
             dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('w11', w10));
+            areaId=areaId[0];
             let wfid =hhdata4.data[1][wc1].wfid;
+
+
             $.ajax({
                 type:'post',
-                url:'http://10.68.100.32:8080/wbi/PBA/getCompanySpacesWfieldFans',
+                url:'http://'+ipUrl+'/wbi/PBA/getCompanySpacesWfieldFans',
                 async:false,
                 data:{
                     "month":actbt+1,
-                    "groupid":'201612121721151',
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid":wfid,
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+
                     let barLotime21q = [];    //各区域   一区域二区域
                     let power21q=[];       //实际发电量
                     let wrong201q=[];       //故障损失

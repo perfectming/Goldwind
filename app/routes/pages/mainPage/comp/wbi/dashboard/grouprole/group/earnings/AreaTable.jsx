@@ -7,7 +7,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {input_url,width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height}=this.props;
+        let {input_url,width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height,value,newIndex}=this.props;
         let configPie = {
             chart: {
                 height: height,
@@ -22,7 +22,6 @@ let Component = React.createClass({
             title: {
                 text: text,
                 align: 'left',
-                x: "0",
                 x: 105,
                 y: 13,
                 style: {
@@ -58,7 +57,7 @@ let Component = React.createClass({
                 enabled: false
             },
             //柱子颜色
-            colors: ['#33BAC0', '#70c080'],
+
 
             plotOptions: {
                 column: {
@@ -71,11 +70,15 @@ let Component = React.createClass({
 
                             w11 = e.point.category;
                             let index = e.point.index;
-                            let w111 = windFiedN;
                             let datee = new Date;
                             let year = datee.getFullYear();
-
-                            let dayy = new Date(year, keyy, 0);
+                            let month2=datee.getMonth();
+                            if(month2==0){
+                                month2=12;
+                               year=year-1;
+                            }
+                            keyy=month2;
+                            let dayy = new Date(value[newIndex].year, value[newIndex].yearpoweract, 0);
 //获取天数：
                             let daycount = dayy.getDate();
 
@@ -98,27 +101,27 @@ let Component = React.createClass({
                                 url: 'http://' + input_url + '/wbi/yield/getYieldByGroupid',
                                 async: false,
                                 data: {
-                                    'startdate': year + "-" + (keyy) + "-" + '1',
-                                    'enddate': year + "-" + (keyy) + "-" + daycount,
+                                    'startdate': value[newIndex].year + "-" + value[newIndex].yearpoweract + "-" + '1',
+                                    'enddate':  value[newIndex].year + "-" + value[newIndex].yearpoweract  + "-" + daycount,
                                     'groupid': arr5[index],
 
                                 },
                                 dataType: 'json',
                                 timeout: '3000',
                                 success: function (data) {
+  
 
-
-                                    var dataA = data.data;
-                                    for (var i in dataA) {
-                                        var areaWindCost = dataA[i].costs;
+                                    let dataA = data.data;
+                                    for (let i in dataA) {
+                                        let areaWindCost = dataA[i].costs;
                                         areaWindCosts.push(areaWindCost);
-                                        var areaWindEarning = dataA[i].earning;
+                                        let areaWindEarning = dataA[i].earning;
                                         areaWindEarnings.push(areaWindEarning);
-                                        var areaWindRate = dataA[i].rate * 100;
+                                        let areaWindRate = dataA[i].rate * 100;
                                         areaWindRates.push(Number(areaWindRate.toFixed(1)));
-                                        var areaWindid = dataA[i].wfid;
+                                        let areaWindid = dataA[i].wfid;
                                         areaWindids.push(areaWindid);
-                                        var areaWindName = dataA[i].wfname;
+                                        let areaWindName = dataA[i].wfname;
                                         areaWindNames.push(areaWindName)
 
                                     }
@@ -137,8 +140,8 @@ let Component = React.createClass({
                                 async: false,
                                 data: {
 
-                                    'startdate': year + "-" + (keyy) + "-" + '1',
-                                    'enddate': year + "-" + (keyy) + "-" + daycount,
+                                    'startdate': value[newIndex].year + "-" + value[newIndex].yearpoweract + "-" + '1',
+                                    'enddate': value[newIndex].year + "-" + value[newIndex].yearpoweract + "-" + daycount,
                                     'wfid': areaWindids[0],
                                     'methods': 'desc',
 
@@ -146,19 +149,17 @@ let Component = React.createClass({
                                 dataType: 'json',
                                 timeout: '3000',
                                 success: function (data) {
-
-
-                                    var dataA = data.data;
-                                    for (var i in dataA) {
-                                        var areaWindCost = dataA[i].costs;
+                                    let dataA = data.data;
+                                    for (let i in dataA) {
+                                        let areaWindCost = dataA[i].costs;
                                         areaWindCosts1.push(areaWindCost);
-                                        var areaWindEarning = dataA[i].earning;
+                                        let areaWindEarning = dataA[i].earning;
                                         areaWindEarnings1.push(areaWindEarning);
-                                        var areaWindRate = dataA[i].rate * 100;
+                                        let areaWindRate = dataA[i].rate * 100;
                                         areaWindRates1.push(Number(areaWindRate.toFixed(1)));
-                                        var areaWindid = dataA[i].wtid;
+                                        let areaWindid = dataA[i].wtid;
                                         areaWindids1.push(areaWindid);
-                                        var areaWindName = dataA[i].wtname;
+                                        let areaWindName = dataA[i].wtname;
                                         areaWindNames1.push(areaWindName)
 
                                     }
@@ -170,7 +171,7 @@ let Component = React.createClass({
 
                                 },
                             });
-                            changedataq(w11, sqy, b, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, areaWindids, areaWindNames1, areaWindCosts1, areaWindEarnings1, areaWindRates1);
+                            changedataq(w11,  b, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, areaWindids, areaWindNames1, areaWindCosts1, areaWindEarnings1, areaWindRates1);
                         }
                     }
                 }
@@ -241,13 +242,14 @@ let Component = React.createClass({
             }],
 
             series: [{
-                name: '收益',
+                name: '收入',
                 type: 'column',
                 data: areaRecordProfit,
                 borderRadius: 7,
                 color: '#33BAC0',
                 borderWidth: 0,
                 maxPointWidth: 40,
+                pointPlacement:0.1,
             },
                 {
                     name: '成本',
@@ -255,7 +257,7 @@ let Component = React.createClass({
                     data: areaRecordCost,
                     borderRadius: 7,
                     color: '#70c080',
-
+                    pointPlacement:-0.1,
                     borderWidth: 0,
                 }, {
                     name: "收益率",
@@ -290,7 +292,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedataq: (w11, sqy, b, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, areaWindids, areaWindNames1, areaWindCosts1, areaWindEarnings1, areaWindRates1)=> {
+        changedataq: (w11, b, areaWindNames, areaWindCosts, areaWindEarnings, areaWindRates, areaWindids, areaWindNames1, areaWindCosts1, areaWindEarnings1, areaWindRates1)=> {
             dispatch(actions.setVars('w1', w11));
 
             dispatch(actions.setVars('areaWindNamess', areaWindNames));

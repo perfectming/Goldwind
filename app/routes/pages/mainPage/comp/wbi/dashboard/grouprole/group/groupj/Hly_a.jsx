@@ -14,13 +14,13 @@ let Component = React.createClass({
 
     render() {
 
-        let {actbt, changedata1, win, w0, wc1, hhdata1, hhdata2, barLotime, text, power1, wrong10, wrong11, wrong12, wrong13, pba1, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
+        let {actbt, changedata1,grid, win,ipUrl, w0, wc1, hhdata1, hhdata, barLotime, text, power1, wrong10, wrong11, wrong12, wrong13, pba1, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
 
 
         let configPie = {
             chart: {
                 height: 400,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -81,7 +81,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w0 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w0, win, wc1, actbt, hhdata2, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3);
+                            changedata1(grid,ipUrl,w0, win, wc1, actbt, hhdata, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3);
 
                         }
                     }
@@ -90,9 +90,9 @@ let Component = React.createClass({
                     stacking: 'normal',
                     maxPointWidth: 40,
                     borderWidth: 0,
-                    tooltip: {
-                        valueSuffix:'kWh'
-                    },
+
+
+
                 },
                 line:{
                     tooltip: {
@@ -113,6 +113,9 @@ let Component = React.createClass({
                     }
                 },
                 categories: barLotime,
+            },
+            tooltip: {
+                shared: true
             },
             yAxis: [{
                 labels: {
@@ -166,12 +169,20 @@ let Component = React.createClass({
                 color: "#33BAC0",
                 data: power1,
                 borderRadius: 4,
+                pointPlacement:0.1,
+                tooltip: {
+                    valueSuffix:'kWh'
+                },
             }, {
                 name: '故障损失',
-                color: '#5298d3',
+                color: '#5298d2',
                 type: 'column',
                 data: wrong10,
                 stack: 'time',
+                pointPlacement:-0.1,
+                tooltip: {
+                    valueSuffix:'kWh'
+                },
 
             },
                 {
@@ -179,23 +190,35 @@ let Component = React.createClass({
                     color: '#ffffff',
                     type: 'column',
                     data: wrong11,
-                    stack: 'time'
+                    stack: 'time',
+                    pointPlacement:-0.1,
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
                 },
                 {
                     name: '限功率损失',
-                    color: '#e9c75c',
+                    color: '#e8952a',
                     type: 'column',
                     data: wrong12,
-                    stack: 'time'
+                    stack: 'time',
+                    pointPlacement:-0.1,
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
                 },
 
                 {
                     name: '非设备原因损失',
-                    color: '#d06960',
+                    color: '#d8403d',
                     type: 'column',
                     data: wrong13,
                     stack: 'time',
                     borderRadius: 2,
+                    pointPlacement:-0.1,
+                    tooltip: {
+                        valueSuffix:'kWh'
+                    },
                 },
 
 
@@ -221,8 +244,9 @@ const mapStateToProps = (state) => {
         w0: state.vars.w1,
         win: state.vars.win1,
         windplan1: state.vars.windplan1,
-        hhdata2: state.vars.hhdata,
+        hhdata: state.vars.hhdata,
         hhdata1: state.vars.hhdata1,
+        ipUrl:state.vars.ipUrl,
 
 
     }
@@ -232,20 +256,20 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1: (w0, win, wc1, actbt, hhdata2, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power3 = [], wrong30 = [], wrong31 = [], wrong32 = [], wrong33 = [], pba3 = [], barLotime3 = []) => {
+        changedata1: (grid,ipUrl,w0, win, wc1, actbt, hhdata, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power3 = [], wrong30 = [], wrong31 = [], wrong32 = [], wrong33 = [], pba3 = [], barLotime3 = []) => {
 
             dispatch(actions.setVars('w1', w0));
             dispatch(actions.setVars('win1', win));
-            let grid = hhdata2.data[2][wc1].groupid;
+
 
 
             $.ajax({
                 type: 'post',
-                url: 'http://10.68.100.32:8080/wbi/PBA/getCompanySpacesWfields',
+                url: 'http://'+ipUrl+'/wbi/PBA/getCompanySpacesWfields',
                 async: false,
                 data: {
                     "month": actbt + 1,
-                    "groupid":  '201612121721151',
+                    "groupid":   grid==undefined? '201612121721151':grid,
                     "wfid": '',
                 },
                 dataType: 'json',
@@ -291,7 +315,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
                     dispatch(actions.setVars('bt0', 0));
-                    dispatch(actions.setVars('hhdata', data));
+
 
 
 

@@ -12,6 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
+        let{mod,date,lettercolor}=this.props;
         let arr=[];
         let line=[];
         let lineplan=[];
@@ -20,7 +21,6 @@ let Component = React.createClass({
         let key=[];
         let allname=[];
         let allname1=[];
-        let{mod,date}=this.props;
         for(let num in date){
              if(date[num].WTCount=='0' || date[num].InverterCount =='0'){
                 line.push(Number(date[num].MonthEgyAt));
@@ -44,7 +44,6 @@ let Component = React.createClass({
         lineplan.map((value,key)=>{
             line.push(Number(((partent/partentplan)*100).toFixed(2)))
         })
-        console.log(arr)
          arr.sort(function(a,b){return b-a})//数据排列
          key.sort(function(a,b){
             return b[1]-a[1]
@@ -78,16 +77,6 @@ let Component = React.createClass({
 
          }
          allname1.push(one,two,three,foure)
-        
-           
-
-            
-            
-            
-            
-        
-   
-       
 
         let configPie = {
             chart: {
@@ -113,7 +102,7 @@ let Component = React.createClass({
                        rotation:0,
                         y: 20, //x轴刻度往下移动20px
                         style: {
-                            color: '#fff',//颜色
+                            color: lettercolor,//颜色
                             fontSize:'14px',  //字体
                             fontFamily:"微软雅黑"
 
@@ -129,7 +118,7 @@ let Component = React.createClass({
                         rotation: 0,
                         text: "%",
                         style:{
-                        color: "#fff"
+                        color: lettercolor
                             },
                         },
                     labels: {
@@ -137,7 +126,7 @@ let Component = React.createClass({
                         rotation: 0,
                         y: 20, //x轴刻度往下移动20px
                         style: {
-                            color: '#fff',//颜色
+                            color: lettercolor,//颜色
                             fontSize:'14px'  //字体
                             }
                         }
@@ -150,7 +139,7 @@ let Component = React.createClass({
                   y:-15,
                   itemHoverStyle:{color:'#2ff4fb'},
                   itemStyle:{
-                    color: "#fff",
+                    color: lettercolor,
                     fontSize:12,
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"

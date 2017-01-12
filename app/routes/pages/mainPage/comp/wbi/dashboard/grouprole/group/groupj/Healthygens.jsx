@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from '../../area/Hindex.scss';
 import Hly_genday from './Hly_genday.jsx';
-
+import Login from '../../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let ip="10.68.100.32";
 
@@ -21,28 +21,22 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='group', returnit,actbt=10,changecolor,day0,poweract,powerplan,mon,ipUrl} = this.props;
+        let {befor_pages='group',mapmonth,boll4,skinStyle, returnit,actbt=10,changecolor,day0,poweract,powerplan,mon,ipUrl} = this.props;
           let data = require('./../../area/Healthy-data');
-        let month = data.data.line_month;
-        let button = data.data.button;
-        let barLdpowerValue1 = data.data.line_date;
-        let barLpdpowerValue1 = data.data.line_pdate;
-        let barLpdpowerValues1 = data.data.line_pdates;
-        let text0=data.data.line_date
+
+        if(boll4){
         return (
 
-
-
-
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
 
                 <div className={styles.onmonth}>
                     {
-                        data.data.yearelectric[0].wind.map((value, key) => {
+                        mapmonth.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key)}>
-                                    {value.name}
+                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key}
+                                     onClick={()=>changecolor(value,key,ipUrl)}>
+                                    {value.yearpoweract+"月"}
                                 </div>
                             )
                         })
@@ -57,7 +51,7 @@ let Component = React.createClass({
                                       barLpdpowerValue={powerplan}
                                       barLdpowerValue={day0}
                                       text={mon+"每日集团发电量"}></Hly_genday>
-                        <div className={styles.logomini5}>
+                        <div className={styles.logo5}>
 
                         </div>
                     </div>
@@ -66,7 +60,9 @@ let Component = React.createClass({
 
 
             </div>
-        );
+        );}else{
+            return (<Login></Login>)
+        }
     }
 });
 
@@ -81,27 +77,51 @@ const mapStateToProps = (state) => {
         poweract:state.vars.poweract1,
         mon:state.vars.mon,
         ipUrl: state.vars.ipUrl,
-
+        skinStyle: state.vars.skinStyle,
+        boll4: state.vars.boll4,
+        mapmonth: state.vars.mapmonth,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: (ipUrl) => {
-            var obj = {
-                test: ''
-            }
-            let date = new Date();
-            let year = date.getFullYear()
-            let month2 = date.getMonth();
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ipUrl + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {
 
-            dispatch(actions.setVars('actbt',  10));
-            dispatch(actions.setVars('mon',  month2+"月"));
+                },
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    console.log(data)
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon',  data.data[10].yearpoweract+"月"));
+                    jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+
+
+
+           function jiang(year) {
+
+
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/ELEC/getSpaceTimeElec',
                 async:false,
-                data:'month=11',
+                data: {
+                    "year": year[10].year,
+                    "month": year[10].yearpoweract,
+                },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
@@ -117,11 +137,13 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('day1',day0 ));
                     dispatch(actions.setVars('poweract1',poweract ));
                     dispatch(actions.setVars('powerplan1',powerplan ))
+                    dispatch(actions.setVars('boll4',true ))
                 },
                 error:function(){
                     alert(2)
                 },
             })
+           }
 
 
         },
@@ -131,24 +153,29 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor :(value,key)=>{
+        changecolor :(value,key,ipUrl)=>{
             dispatch(actions.setVars('actbt',key ));
-            dispatch(actions.setVars('mon', value.name));
-            dispatch(actions.setVars('wind',value.plan ));
-            dispatch(actions.setVars('winds',value.actrul ));
+            dispatch(actions.setVars('mon', value.yearpoweract+"月"));
 
+console.log(value.year)
             $.ajax({
                 type:'post',
-                url:'http://'+ip+':8080/wbi/ELEC/getSpaceTimeElec',
+                url:'http://'+ipUrl+'/wbi/ELEC/getSpaceTimeElec',
                 async:false,
-                data:{"month":key+1},
+                data:{
+                    "year":value.year,
+                    "month": value.yearpoweract,
+                },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+                    console.log(data)
+
                     let day0=[];
                     let poweract=[];
                     let powerplan=[];
                     for(var i in data.data){
+
                         day0.push(data.data[i].day+"日");
                         poweract.push(Number((data.data[i].poweract).toFixed(2)));
                         powerplan.push(Number((data.data[i].powerplan).toFixed(2)));

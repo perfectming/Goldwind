@@ -18,7 +18,7 @@ let Component = React.createClass({
             chart: {
                 height:height,
                 width:widths,
-                backgroundColor: "rgba(44, 61, 71, 0.4)",
+                backgroundColor: null,
                 //plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -53,11 +53,6 @@ let Component = React.createClass({
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
-            },
-            tooltip: {
-                // pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                // pointFormatter: "<b>{point.percentage:.0f}%</b>"
-
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -105,6 +100,9 @@ let Component = React.createClass({
                     }
                 },
                 categories:barRotimes,
+            },
+            tooltip: {
+                shared: true
             },
             yAxis: [{
                 labels: {
@@ -160,7 +158,7 @@ let Component = React.createClass({
                 borderRadius: 4,
             }, {
                 name: '故障损失',
-                color: '#5298d3',
+                color: '#5298d2',
                 type: 'column',
                 data: wrong10,
                 stack: 'time',
@@ -176,7 +174,7 @@ let Component = React.createClass({
                 },
                 {
                     name: '限功率损失',
-                    color: '#e9c75c',
+                    color: '#e8952a',
                     type: 'column',
                     data: wrong12,
                     stack: 'time'
@@ -184,7 +182,7 @@ let Component = React.createClass({
 
                 {
                     name: '非设备原因损失',
-                    color: '#d06960',
+                    color: '#d8403d',
                     type: 'column',
                     data: wrong13,
                     stack: 'time',

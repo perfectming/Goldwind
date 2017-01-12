@@ -1,30 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-import Hly_tt from '../group/groupj/Hly_tt.jsx';
+import Hly_ttt from './Hly_ttt.jsx';
 import Hly_d from '../group/groupj/Hly_d.jsx';
 var actions = require('redux/actions');
 
 
 let data = require('./Healthy-data');
-let month = data.data.line_month;
-let button = data.data.button;
-let barLoTime1 = data.data.line_month;
-let barLoPowerValue1 = data.data.bar_loPower;
-let text0=data.data.line_date;
-let text1=data.data.text5;
-let barRotime = data.data.bar_rotime;
-let barLotime = data.data.bar_lotime;
-let barLoPowerValue = data.data.bar_loPower;
-let barLdpowerValue1 = data.data.line_date;
-let barLpdpowerValue1 = data.data.line_pdate;
+
 
 
 
 let Component = React.createClass({
     componentWillMount() {
-        let {ipUrl}=this.props;
-        this.props.ajax(ipUrl);
+        let {ipUrl,areaId}=this.props;
+        this.props.ajax(ipUrl,areaId);
     },
     componentDidMount() {
         this.props.init();
@@ -32,22 +22,22 @@ let Component = React.createClass({
 
 
     render() {
-        let {ipUrl, monthx, monthx2, healthy2, healthy3, monthx3, befor_pages = 'area', mon, returnit} = this.props;
+        let {ipUrl,areaId,skinStyle, monthx, monthx2, healthy2, healthy3, monthx3, befor_pages = 'area', mon, returnit} = this.props;
         let data = require('./Healthy-data');
         return (
 
 
 
 
-            <div className={styles.box}>
+            <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.paddingtop}>
                 <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
                 </div>
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
-                        <Hly_tt barLoTime={monthx}
+                        <Hly_ttt barLoTime={monthx}
                                 barLoPowerValue={healthy2}
-                                text={"巴盟每月健康度"}></Hly_tt>
+                                text={"巴盟每月健康度"}></Hly_ttt>
 
                         <div className={styles.logo1}>
 
@@ -58,8 +48,8 @@ let Component = React.createClass({
                 <div className={styles.clear}>
 
                 </div>
-                <div className={`${styles.fbox}  ${styles.logofa}`}>
-                    <div className={`${styles.box_shadow}`}>
+                <div className={`${styles.fbox} ${styles.logofa} `}>
+                    <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Hly_d monthx3={monthx3}
                                healthy3={healthy3}
                                text={mon + "巴盟每日健康度"}></Hly_d>
@@ -83,13 +73,14 @@ const mapStateToProps = (state) => {
         healthy2: state.vars.healthy2,
         healthy3: state.vars.healthy3,
         mon: state.vars.mon,
-
+        areaId: state.vars.areaId,
+        skinStyle: state.vars.skinStyle,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
+        ajax: (ipUrl,areaId) => {
             var obj = {
                 test: ''
             }
@@ -97,19 +88,25 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
+            if(month2==0){
+                month2=12;
+            }
+            areaId=areaId[0];
+
 
             $.ajax({
                 type: 'post',
-                url: 'http://' + ipUrl + '/wbi/Health/getCompanyMonthHealth',
+                url: 'http://' + ipUrl + '/wbi/Health/getAreaTimHealth',
                 async: false,
                 data: {
-                    "month": '',
+                    "month": month2,
                     "year": '',
-
+                    "groupid":areaId,
                 },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
+
                     dispatch(actions.setVars('hhdata', data));
                     dispatch(actions.setVars('mon', month2 + "月"));
 
@@ -124,18 +121,20 @@ const mapDispatchToProps = (dispatch) => {
                         }
 
                     })
-                    let monthx=[];
-                    let qq = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, ];
-                    for(let i in qq){
-                        monthx.push(qq[i]+"日")
+                    let WTHea2 = data.data.dayHealth;
+                    let WTN2 = [];
+                    let WTHealName2 = [];
+
+                    for(let m in WTHea2){
+                        WTN2.push(WTHea2[m]);
+                        WTHealName2.push(m.slice(6,8)+"日")
                     }
-                    let healthy3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ]
 
                     dispatch(actions.setVars('healthy2', WTN));
                     dispatch(actions.setVars('monthx', WTHealName));
 
-                    dispatch(actions.setVars('monthx3', monthx));
-                    dispatch(actions.setVars('healthy3', healthy3));
+                    dispatch(actions.setVars('monthx3', WTHealName2));
+                    dispatch(actions.setVars('healthy3', WTN2));
 
                 },
                 error: function () {
