@@ -35,7 +35,8 @@ let Component = React.createClass({
              <div className={styles.boxcover} id='boxcover'></div>
               <div className={styles.paddingtop}>
               <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
-                
+                {// 12个月数据
+                }
                 <div className={`${styles.biggbox} ${styles.shadow}`}>
                     
                        
@@ -51,7 +52,8 @@ let Component = React.createClass({
                                 </div>
           
                 </div>  
-            
+             {// 每个月的数据
+                }
            
                 <div className={`${styles.biggbox} ${styles.shadow}`}>
                     
@@ -121,8 +123,10 @@ const mapDispatchToProps = (dispatch) => {
                                
                                 for(let i in data.data.wfieldsMonthsElec)
                                 {
+                                    // 获取月份
                                 let month=data.data.wfieldsMonthsElec[i].month;
                                 wftmonth.push(month+'月');
+                                // 实际发电量
                                 let poweract=data.data.wfieldsMonthsElec[i].poweract;
                                 wftpoweract.push(poweract);
                                 
@@ -130,7 +134,7 @@ const mapDispatchToProps = (dispatch) => {
                             }
                             for( let j in data.data.wfieldsMonthsPlanElec)
                             {
-                               
+                               // 计划发电量
                                 wftpowerplan.push(data.data.wfieldsMonthsPlanElec[j]);
                             }
                          
@@ -154,13 +158,16 @@ const mapDispatchToProps = (dispatch) => {
              timeout:'3000',
              success:function(data){
               
-             // 获取x轴的值内蒙达茂天润风电场
+           
              let dataa=data.data;
              for(let i=0;i<dataa.length;i++){
+                // 获取天数
                  let xDay=data.data[i].day+'日';
                  arr1.push(xDay);
+                 // 获取每天的计划发电量
                  let yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
                  arr2.push(yPowerPlan);
+                 // 获取每天的实际发电量
                  let yPowerAct=Number(data.data[i].poweract.toFixed(1));
                  arr3.push(yPowerAct);
              }
@@ -184,6 +191,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
+    
          changpage :(value,key,xxdwfId,input_url)=>{
             dispatch(actions.setVars('actbtt',key ));
            let date=new Date();

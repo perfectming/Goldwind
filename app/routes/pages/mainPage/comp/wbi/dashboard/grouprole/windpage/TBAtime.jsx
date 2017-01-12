@@ -105,14 +105,16 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
              let wTBATime=data.data;
              for (let i in wTBATime){
+                // 12个月份
              let month=wTBATime[i].month+'月';
              wTBAMonth.push(month);
+             //初始停机时间
              let downtimes=wTBATime[i].downtimes;
              wTBADown.push(downtimes);
-
+          // 初始运行时间
                 let runtimes=wTBATime[i].runtimes;
                 wTBARun.push(runtimes);
-
+  // 初始TBA
                 let tba=wTBATime[i].tba*100;
                 wTBAT.push(Number(tba.toFixed(1)));
 
@@ -145,15 +147,16 @@ const mapDispatchToProps = (dispatch) => {
            
              let wTBATime=data.data;
              for (let i in wTBATime){
+                // 初始月份天数
                 let day=wTBATime[i].day+'日';
                  wTBADaD.push(day);
-
+          // 初始停机时间
                  let downtimes=wTBATime[i].downtimes;
                  wTBADownD.push(downtimes);
-
+      // 初始运行时间
                 let runtimes=wTBATime[i].runtimes;
                 wTBARunD.push(runtimes);
-
+    // 初始TBA
                 let tba=wTBATime[i].tba*100;
                 wTBATD.push(Number(tba.toFixed(1)));
              }

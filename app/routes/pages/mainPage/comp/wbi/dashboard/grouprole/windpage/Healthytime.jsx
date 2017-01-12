@@ -7,7 +7,6 @@ import Healtytimecharttt from './Healtytimecharttt.jsx';
 import icono from '../../../../../img/comp/健康度1.png';
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
-let input_url="10.68.100.32";
 let month=data.month;
 let button=data.button;
 let areaRecordProfitT=data.areaRecordProfitT;
@@ -37,7 +36,8 @@ let Component = React.createClass({
             <div className={styles.paddingtop}>
             <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div>
             </div>
-             
+              {//健康度12个月
+              }
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                    
                        
@@ -49,6 +49,8 @@ let Component = React.createClass({
                         <img src={icono}/>
                     </div>
                 </div>
+                {//健康度每个月的数据
+                }
                 <div className={`${styles.bigbox} ${styles.shadow}`}>
                 
                         
@@ -72,6 +74,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        // 接收初始的月份
          w0 : state.vars.wfH,
         WTHealName:state.vars.WTHealName1,
         WTN:state.vars.WTN1,
@@ -80,8 +83,6 @@ const mapStateToProps = (state) => {
          xxdwfId:state.vars.xxdwfId1,
         xxdwfNa:state.vars.xxdwfNa1,
         ipUrl:state.vars.ipUrl,
-
-        
 
     }
 };
@@ -93,11 +94,12 @@ const mapDispatchToProps = (dispatch) => {
        let WTHealH=[];
        let WTHealName=[];
        let WTN=[];
-     
+     let WTHealNamee=[];
+     let WTNN=[];
        let date = new Date();
        let month =date.getMonth();
        let year=date.getFullYear();
-
+// 获取当前月的上一个月的数据
               $.ajax({
               type:'post',
               url:'http://'+input_url+'/wbi/Health/getWfieldTimHealth',  
@@ -112,6 +114,7 @@ const mapDispatchToProps = (dispatch) => {
               success:function(data){
         
                           let WTHeal=data.data.monthHealth;
+                          // 获取12个月份
                WTHeal.map(function(value,key){
                     for(let n in value){
                       
@@ -120,8 +123,8 @@ const mapDispatchToProps = (dispatch) => {
                     }
 
                })
-           let WTHealNamee=["1日","2日","3日","4日","5日","6日","7日","8日","9日","10日","11日","12日","13日","14日",,"15日","16日","17日","18日","19日","20日","21日","22日","23日","24日","25日","26日","27日","28日","29日","30日"];
-             let WTNN=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]  
+           let WTHealNamee=[];
+             let WTNN=[];
                let WHDayH=data.data
               dispatch(actions.setVars('WTHealName12',WTHealNamee));
               dispatch(actions.setVars('WTHealName1',WTHealName));
@@ -136,6 +139,48 @@ const mapDispatchToProps = (dispatch) => {
                 
               },
             });
+              $.ajax({
+              type:'post',
+              url:'http://'+input_url+'/wbi/Health/getWfieldTimHealth',  
+              async:false,
+             data:{
+                'year':year,
+                'month':month,
+              'wfid':xxdwfId,
+             },
+              dataType:'json',
+              timeout:'3000',
+              success:function(data){
+           
+       
+               let WTHeal=data.data.dayHealth;
+               let WTHeall=data.data.monthHealth;
+         for (let i in WTHeal){
+          if(i<10)
+           { WTHealNamee.push(i.slice(0,8)+'日');
+            WTNN.push(WTHeal[i])
+          }
+            else{
+              WTHealNamee.push(i.slice(6,8)+'日');
+            WTNN.push(WTHeal[i])
+            }
+
+         }
+       
+    
+                         
+             
+   
+              
+             
+            
+              },
+              error:function(){
+                
+              },
+            });
+                    dispatch(actions.setVars('WTHealName12',WTHealNamee));
+             dispatch(actions.setVars('WTN12',WTNN ));
         }
         ,
         init: () => {

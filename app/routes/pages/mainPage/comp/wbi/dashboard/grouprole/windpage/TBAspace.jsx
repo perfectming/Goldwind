@@ -32,7 +32,11 @@ let Component = React.createClass({
         return (
            
             <div className={styles.box}>
+            {//遮罩层
+            }
              <div className={styles.boxcover} id='boxcover'></div>
+             {// 弹出的更多
+             }
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
@@ -53,6 +57,7 @@ let Component = React.createClass({
            
 
                 </ul>
+
                
                 <div className={styles.bigbox}>
                   
@@ -133,15 +138,16 @@ const mapDispatchToProps = (dispatch) => {
              let WTSpace=data.data
              for (let i=0;i<10;i++)
              {
-
+           //初始的风场的名字
               let wtname=WTSpace[i].wtname;
              wTBANa.push(wtname);
+             // 初始停机时间
              let downtimes=WTSpace[i].downtimes;
              wTBADown.push(downtimes);
-
+// 初始运行时间
                 let runtimes=WTSpace[i].runtimes;
                 wTBARun.push(runtimes);
-
+// 初始TBA
                 let tba=WTSpace[i].tba*100;
                 wTBAT.push(Number(tba.toFixed(2)));
              }
@@ -188,15 +194,16 @@ const mapDispatchToProps = (dispatch) => {
              let WTSpace=data.data
              for (let i=0;i<10;i++)
              {
-
+     //风场的名字
               let wtname=WTSpace[i].wtname;
              wTBANa.push(wtname);
+             // 停机时间
              let downtimes=WTSpace[i].downtimes;
              wTBADown.push(downtimes);
-
+    // 运行时间
                 let runtimes=WTSpace[i].runtimes;
                 wTBARun.push(runtimes);
-
+ // TBA
                 let tba=WTSpace[i].tba*100;
                 wTBAT.push(Number(tba.toFixed(2)));
              }

@@ -8,6 +8,8 @@ import del from '../../../../../img/icon/tabDel.png';
 import add from '../../../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 import mod from '../../../../../../../../../config/Model';
+import Login from '../../../../../../../../components/common/Loading.jsx';
+
 var $ = require("jquery");
 var actions = require('redux/actions');
 var {getState} = require('redux/store');
@@ -15,7 +17,7 @@ let comps = require('./data');
 let ssg2=mod.Model.ens;
 let arr3=[];
 let years=[];
-let input_url='10.9.99.203:8080';
+let input_url="10.9.99.90:8080";
 let thDate=new Date();
 let thYear=thDate.getFullYear();
 for(let i=0;i<=30;i++){
@@ -29,32 +31,68 @@ arr3.splice(-2,2);
 let arr=[15,16,10,15,22,13];
 let arr2=[15,16,6,4,15,22,8];
 let comp = comps.peqi.table;
+let arr1=['groupname','wfname','startdate','startdate','price','remark'];//设置每列的属性
 let Component = React.createClass({
-    componentWillMount() {
-        
+     componentWillMount() {
         this.props.ajax();
     },
     componentDidMount() {
-        this.props.init(comp);
+        this.props.init();
     },
+
     render() {
-        let {deleData,addData,table, changeTableItem1,page=1,nextpage,lastpage,theone,thelast} = this.props;
+        let {wtidAll,Go,tableT,deleData,addData,table, changeTableItem1,page=1,nextpage,lastpage,theone,thelast} = this.props;
         let newData=[];
         let num=0;
+            
         let pagingOptions = {
             showNumber: 3
         }
         for(let i=0;i<comp.data.header.length;i++){
             newData.push('');
         }
+        if(Go){
         return (
             <div className={styles.powerBox}>
+             <div className={styles.inquireBox}>
+                        <div className={styles.seleBox}>
+                            <span>年度</span>
+                            <select id='textContent5'>
+                                {years.map((value, key)=> {
+                                    return (
+                                        <option value={value} key={key}>{value}</option>
+                                    )
+                                })
+                                }
+                            </select>{/*map遍历年度*/}
+                        </div>
+                        <div className={styles.seleBox}>
+                            <span>场站</span>
+                            <select id='textContent6'>
+                                {wtidAll.data.map((value, key)=> {
+                                    return (
+                                        <option className={styles.opt} value={value.wfid} key={key}>{value.wfname}</option>
+                                    )
+                                })
+                                }
+                            </select>{/*map遍历年度*/}
+                        </div>
+                        <div className={styles.inputBox}>
+                            <button onClick={(e)=>{buttonAction(e.target)}}>查询</button>
+                        </div>
+                        <div className={styles.btnBox}>
+                            <div>单 位：kWh</div>
+                        </div>
+                    </div>
+
                 <div className={styles.table}>
+              
                     <div className={styles.actionBox}>
                         <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
                         <img src={refresh}/>
                         <img src={add} onClick={()=>addData(newData)}/>
                     </div>
+                
                     <div  className={styles.cx}></div>
                     <div className={styles.tableBox}>
                         <div className={styles.tableHeaderBox}>
@@ -71,7 +109,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.tableContentBox}>
                             {
-                                comp.data.content.map((value, key)=> {
+                                tableT.data.pagedata.map((value, key)=> {
                                     num++;
                                     if(16*(page-1)<=key&&key<(16*(page-1)+16)){
                                     return (
@@ -80,58 +118,61 @@ let Component = React.createClass({
                                                    style={{width:8+"%"}}
                                                    readOnly="true" value={num}/>
                                             {
-                                                value.map((valueC, keyC)=> {
+                                                arr1.map((valueC, keyC)=> {
                                                     if(keyC==0){
                                                             return(
-                                                            <div name="" id=""  className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
-                                                            <p value="" className={styles.tableContentItemm}></p>
-                                                            </div>
-
+                                                         
+                                                                    <div className={styles.tableContentItemm}
+                                                                         style={{width:arr2[keyC]+"%"}} key={keyC}>
+                                                                        {value[valueC]}
+                                                                    </div>
                                                             )
                                                         }       
                                                       if(keyC==1){
                                                             return(
-                                                            <div name="" id=""  className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
-                                                            <p value="" className={styles.tableContentItemm}>风场1</p>
-                                                           </div>
+                                                         <div className={styles.tableContentItemm}
+                                                                         style={{width:arr2[keyC]+"%"}} key={keyC}>
+                                                                        {value[valueC]}
+                                                                    </div>                    
 
                                                             )
                                                         }                                                
                                                         if(keyC==2){
                                                             return(
-                                                               <div className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
-                                                            <select name="" id=""   className={styles.tableContentItemm} style={{width:60+'%'}}>
-                                                            <option value="" className={styles.tableContentItemm}>2015</option>
-                                                            <option value="" className={styles.tableContentItemm}>2016</option>
-                                                            <option value="" className={styles.tableContentItemm}>2017</option></select>
-                                                            <span>年</span>
-                                                        
-                                                               </div>
-                         
+                                                             
+                                                             <div className={styles.tableContentItemm}
+                                                                         style={{width:arr2[keyC]+"%"}} key={keyC}>
+                                                                        {(new Date(value[valueC])).toISOString().slice(0,4)}
+                                                                        <span>年</span>
+                                                                    </div>
                                                             )
                                                         }
-                                                                 if(keyC==3){
+                                                           if(keyC==3){
                                                             return(
-                                                               <div className={styles.tableContentItemm} style={{width:arr2[keyC]+'%'}}>
-                                                            <select name="" id=""   className={styles.tableContentItemm} style={{width:60+'%'}}>
-                                                            <option value="" className={styles.tableContentItemm}>1</option>
-                                                            <option value="" className={styles.tableContentItemm}>2</option>
-                                                            <option value="" className={styles.tableContentItemm}>3</option></select>
-                                                            <span>月</span>
-                                                        
-                                                               </div>
-                         
+                                                             
+                                                             <div className={styles.tableContentItemm}
+                                                                         style={{width:arr2[keyC]+"%"}} key={keyC}>
+                                                                        {(new Date(value[valueC])).toISOString().slice(8,9)}<span>月</span>
+                                                                    </div>
+                                                            )
+                                                        }
+                                                                 if(keyC==4){
+                                                            return(
+                                                            
+                                                                 <div className={styles.tableContentItemm}
+                                                                         style={{width:arr2[keyC]+"%"}} key={keyC}>
+                                                                        {value[valueC]}
+                                                                </div>
                                                             )
                                                         }
                                                           
                                                         
                                                         else{
                                                             return(
-                                                            <input className={styles.tableContentItem}
-                                                            style={{width:arr2[keyC]+'%'}}
-                                                               key={keyC} contentEditable="true"
-                                                               onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
-                                                               value={valueC}/>
+                                                         <div className={styles.tableContentItemm}
+                                                                         style={{width:arr2[keyC]+"%"}} key={keyC}>
+                                                                        {value[valueC]}
+                                                                    </div>
                                                             )
                                                         }
 
@@ -170,7 +211,12 @@ let Component = React.createClass({
 
             </div>
 
-        );
+        )}
+        else{
+            return(
+            <Login></Login>
+            );
+        }
     }
 });
 
@@ -179,113 +225,89 @@ const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
         page: state.vars.page1,
-
+        tableT:state.vars.tableContentT,
+        Go:state.vars.Goo,
+        wtidAll:state.vars.wtidAlll
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
          ajax: () => {
-            // 分页
-            let groupname=[];
-            let wfname=[];
-            let price=[];
-            let enddate=[];
-            let array=[[1],[1],[1]];
-            console.log(1);
-               $.ajax({
-                type:'post',
-                url:'http://'+input_url+'/wbi/info/getStageprice',
-                async:false,
+           // console.log(1);
+            $.ajax({
+                 url:'http://'+input_url+'/wbi/info/getStageprice',
+                type: 'post',
                 data:{
                     'curpage':1,
-                    'pageSize':10,
-                      
+                    'pageSize':16,
+                  
                 },
-                dataType:'json',
-                timeout:'3000',
-                success:function(data){
-                 console.log(data);
-                 let dataa=data.data.pagedata;
-                 for(let i in dataa)
-                 {
-                    console.log(array[i][0])
-                 //    for(let j=0;j<3;j++)
-                 // {
-    //                 let groupnamee=dataa[i].groupname;
-    //                 array[0][1].push(groupnamee);
-    // console.log(i)
-    //                 let wfnamee=dataa[i].wfname;
-    //                 array[0][1].push(wfnamee);
-
-    //                 let pricee=dataa[i].price;
-    //                 array[0][1].push(pricee);
-
-    //                 // let startdatee=dataa[i].startdate;
-    //                 // // console.log(startdatee);
-
-    //                 //  let  d = new Date(startdatee);
-    //                 //  // console.log(d.toISOString());
-
-    //                 //  let enddatee=dataa[i].enddate;
-    //                 // // console.log(enddatee);
-    //                 // let  c = new Date(enddatee);
-    //                 //  // console.log(c.toISOString());
-                 // }
-             }
-         // console.log(array)        
-// console.log(wfname);
-// console.log(groupname);
-// console.log(price);
-
-
+                dataType: 'json',//here,
+                success:function (data) {
+          console.log(data)
+                     dispatch(actions.setVars('tableContentT', data));
+                      dispatch(actions.setVars('Goo', true));
+                    // dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
-                error:function(e){
-                   console.log(e)
-                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
             });
-          
-            // dispatch(actions.setVars('PBATimeMonth1',PBATimeFirstMonth));
+            $.ajax({
+                // url: soam+'/wf/getAll',
+                 url:'http://'+input_url+'/wf/getAll',
+                type: 'post',
+                dataType: 'json',//here,
+                success:function (data) {
+                    console.log(data);
+                    dispatch(actions.setVars('wtidAlll', data));
+                     // dispatch(actions.setObjs('wtidAlll', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
         },
         init: (obj) => {
             dispatch(actions.setObjs('tableContent', obj));
         },
-        changeTableItem1: (value, table, i, j) => {
-            let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.content[i][j] = value;
-            dispatch(actions.setObjs('tableContent', tableV));
+        // changeTableItem1: (value, table, i, j) => {
+        //     let tableV = _.clone(getState().objs.tableContent);
+        //     tableV.data.content[i][j] = value;
+        //     dispatch(actions.setObjs('tableContent', tableV));
 
-        },
-        addData:(i,page) => {
+        // },
+        // addData:(i,page) => {
             
-            let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.content.push(i.splice(0,6));
-            dispatch(actions.setObjs('tableContent', tableV));
-            page=Math.ceil(comps.peqi.table.data.content.length/16);
-            dispatch(actions.setVars('page1', page));
-        },
-        deleData:(j) => {
-            let tableV = _.clone(getState().objs.tableContent);
-            tableV.data.content.splice(j,1);
-            dispatch(actions.setObjs('tableContent', tableV));
-        },
-        lastpage:(page)=>{
-            page>1 ? page--:page;
-            dispatch(actions.setVars('page1', page));
-        },
-        nextpage:(page)=>{
-            (page<(comp.data.content.length/16)) ? page++:page;
-            dispatch(actions.setVars('page1', page));
+        //     let tableV = _.clone(getState().objs.tableContent);
+        //     tableV.data.content.push(i.splice(0,6));
+        //     dispatch(actions.setObjs('tableContent', tableV));
+        //     page=Math.ceil(comps.peqi.table.data.content.length/16);
+        //     dispatch(actions.setVars('page1', page));
+        // },
+        // deleData:(j) => {
+        //     let tableV = _.clone(getState().objs.tableContent);
+        //     tableV.data.content.splice(j,1);
+        //     dispatch(actions.setObjs('tableContent', tableV));
+        // },
+        // lastpage:(page)=>{
+        //     page>1 ? page--:page;
+        //     dispatch(actions.setVars('page1', page));
+        // },
+        // nextpage:(page)=>{
+        //     (page<(comp.data.content.length/16)) ? page++:page;
+        //     dispatch(actions.setVars('page1', page));
 
-        },
-        theone :(page)=>{
-            page=1;
-            dispatch(actions.setVars('page1', page));
-        },
-        thelast :(page)=>{
-            page=comp.data.content.length/16;
-            dispatch(actions.setVars('page1', page));
-        },
+        // },
+        // theone :(page)=>{
+        //     page=1;
+        //     dispatch(actions.setVars('page1', page));
+        // },
+        // thelast :(page)=>{
+        //     page=comp.data.content.length/16;
+        //     dispatch(actions.setVars('page1', page));
+        // },
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

@@ -10,7 +10,6 @@ let data=require('./../group/Profit-data3')
 let Component = React.createClass({
    componentWillMount() {
         let{xxdwfId,xxdwfNa,ipUrl}=this.props;
-
         this.props.ajax(xxdwfId,xxdwfNa,ipUrl);
     },
     componentDidMount() {
@@ -21,7 +20,11 @@ let Component = React.createClass({
        
           return (
            <div className={styles.box}>
+           {//遮罩层
+           }
               <div className={styles.boxcover} id='boxcover'></div>
+              {//弹出的更多 
+           }
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
@@ -97,12 +100,16 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
        ajax: (xxdwfId,xxdwfNa,input_url) => {
-    
+           // 风场名字
             let arr1=[];
+           // 风场计划发电量
             let arr2=[];
+           // 实际发电量
             let arr3=[];
+            // 获取当前年
             let date =new Date();
             let year =date.getFullYear();
+            // 上个月
             let month= date.getMonth();
            // adsas
            $.ajax({
@@ -118,7 +125,7 @@ const mapDispatchToProps = (dispatch) => {
              timeout:'3000',
              success:function(data){
            
-             // 获取x轴的值内蒙达茂天润风电场
+             
              let dataa=data.data;
              for(let i=0;i<10;i++){
                  let xWild=data.data[i].wtname;
@@ -134,10 +141,12 @@ const mapDispatchToProps = (dispatch) => {
                 
              },
            });
+           // 月份高亮
            dispatch(actions.setVars('actbt',month-1 ));
            dispatch(actions.setVars('areaNamee',arr1));
              dispatch(actions.setVars('wind',arr3));
              dispatch(actions.setVars('windP',arr2));
+             //前十高亮
               dispatch(actions.setVars('btnn',0));
 
           
@@ -176,13 +185,16 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
 
 
-             // 获取x轴的值内蒙达茂天润风电场
+            
           
              for(var i=0;i<10;i++){
                  var xWild=data.data[i].wtname;
+                 // 风场名字
                  arr1.push(xWild);
+                 // 计划发电量
                  var yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
                  arr2.push(yPowerPlan);
+                 // 实际发电量
                  var yPowerAct=Number(data.data[i].poweract.toFixed(1));
                  arr3.push(yPowerAct);
              }
@@ -192,13 +204,16 @@ const mapDispatchToProps = (dispatch) => {
                  
              },
            });
+          // 月份高亮显示
            dispatch(actions.setVars('actbt',key));
            dispatch(actions.setVars('areaNamee',arr1));
              dispatch(actions.setVars('wind',arr3));
              dispatch(actions.setVars('windP',arr2));
+             // 前10高亮显示
              dispatch(actions.setVars('btnn',0));
             
         },
+        // 前十
         gogogo:(actbt,input_url,xxdwfId)=>{
        let date=new Date();
        let year= date.getFullYear();
@@ -221,13 +236,16 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
            
           
-             // 获取x轴的值内蒙达茂天润风电场
+            
              var dataa=data.data;
              for(var i=0;i<10;i++){
                  var xWild=data.data[i].wtname;
+                 // 名字
                  arr1.push(xWild);
+                 // 计划发电量
                  var yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
                  arr2.push(yPowerPlan);
+                 // 实际发电量
                  var yPowerAct=Number(data.data[i].poweract.toFixed(1));
                  arr3.push(yPowerAct);
              }
@@ -244,6 +262,7 @@ const mapDispatchToProps = (dispatch) => {
            
 
         },
+        // 后十
         back:(actbt,input_url,xxdwfId)=>{
              var arr1=[];
             var arr2=[];
@@ -287,15 +306,22 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('windP',arr2));
               dispatch(actions.setVars('btnn',1));
         },
+        // 更多
         more:(actbt,input_url,xxdwfId)=>{
+            // 弹框弹出
              $("#sss").show();
+             // 遮罩层弹出
              $('#boxcover').show();
               let date=new Date();
 
        let year= date.getFullYear();
+       // 风场名字
              let arr4=[];
+             // 计划发电量
             let arr5=[];
+            // 实际发电量
             let arr6=[];
+            // 设置弹出框的宽度
             let width=0;
 
            $.ajax({
@@ -314,15 +340,17 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
            
              
-             // 获取x轴的值内蒙达茂天润风电场
+            
              let dataa=data.data;
              for(var i=0;i<dataa.length;i++){
+                     // 名字
                  var xWild=data.data[i].wtname;
                  arr4.push(xWild);
                  var yPowerPlan=Number(data.data[i].powerplan.toFixed(1));
-                 arr5.push(yPowerPlan);
+                 arr5.push(yPowerPlan);//计划发电量
+
                  var yPowerAct=Number(data.data[i].poweract.toFixed(1));
-                 arr6.push(yPowerAct);
+                 arr6.push(yPowerAct);//实际发电量
 
 
              }
@@ -347,6 +375,7 @@ const mapDispatchToProps = (dispatch) => {
             $("#sss").hide();
               $('#boxcover').hide();
         },
+        // 返回
          backtop:(befor_pagee,befor_page2)=>{
             dispatch(actions.setVars('showPage',befor_pagee));
         },
