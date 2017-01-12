@@ -227,7 +227,7 @@ const mapDispatchToProps = (dispatch) => {
 		 	//        	console.log(data)
 		 	//       },
 		 	// });
-
+			dispatch(actions.setVars('areaBool', false));
     		dispatch(actions.setVars('actb',0 ));
     		 	$.ajax({
         		url:'http://'+ipUrl+'/wbi/user/getByUserIDGroup',//获得各区域ID和名字
@@ -253,8 +253,7 @@ const mapDispatchToProps = (dispatch) => {
 				        async:true,
 				        data:{'groupid':areaId[0]},
 				        dataType: 'json',//here
-				        success:function (data) {
-				        	areaMonth=[],areaProfit=[],areaCost=[];
+				        success:function (data) {				        	areaMonth=[],areaProfit=[],areaCost=[];
 				        	for(var i in data.data){
 				        		areaMonth.push(data.data[i].month+"月");
 				        		areaProfit.push((data.data[i].incomes).toFixed(1)/1);
@@ -281,10 +280,11 @@ const mapDispatchToProps = (dispatch) => {
 						        	month=[],elecPlan=[],elecAct=[];
 						        	for(var i in data.data.twAreaMonthElec){
 						        		elecAct.push((data.data.twAreaMonthElec[i].poweract).toFixed(1)/1);
+						        		month.push(data.data.twAreaMonthElec[i].month+"月");
 						        	};
 						        	for(var i in data.data.twAreaMonthPlanElec){
 						        		elecPlan.push((data.data.twAreaMonthPlanElec[i]).toFixed(1)/1);
-						        		month.push(i+"月");
+						        		
 						        	};
 						        	dispatch(actions.setVars('yearElec',yearElec ));
 						        	dispatch(actions.setVars('monthElec',monthElec ));
@@ -312,11 +312,19 @@ const mapDispatchToProps = (dispatch) => {
 								        	dispatch(actions.setVars('areaArr',areaArr ));
 								        },
 								        complete : function(XMLHttpRequest,status){ 
+								        		var date = new Date();
+										            if(date.getMonth()==0){
+										            	var yearString = date.getFullYear()-1;
+										            	var monthString = 12;
+										            }else{
+										                var yearString = date.getFullYear();
+										                var monthString = date.getMonth();										                
+										            }
 									　　　　	$.ajax({
 								        		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA饼图
 										        type: 'post',
 										        async:true,
-										        data:{'groupid':areaId[0]},
+										        data:{'groupid':areaId[0],'year':yearString,'month':monthString},
 										        dataType: 'json',//here
 										        success:function (data) {
 										        	runTime=data.data[0].runtimes;
@@ -391,6 +399,7 @@ const mapDispatchToProps = (dispatch) => {
         	dispatch(actions.setVars('flagPba',!flagPba ));
         },
         changepage :(ipUrl,value,key,areaId,areaMonth,areaProfit,areaCost,clickAreaId)=>{
+        	dispatch(actions.setVars('areaBool', false));
         	$.ajax({
         		url: 'http://'+ipUrl+'/wbi/yield/getGroupAllRate',//收益柱图
 		        type: 'post',
@@ -485,7 +494,7 @@ const mapDispatchToProps = (dispatch) => {
 										        	dispatch(actions.setVars('TBA',TBA));
 										        },
 										        complete : function(XMLHttpRequest,status){ 
-											　　　　
+											　　　　dispatch(actions.setVars('areaBool', true));　
 											　　},
 										    });
 									　　},
