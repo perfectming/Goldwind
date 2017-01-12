@@ -95,7 +95,15 @@ let Component = React.createClass({
                                                        readOnly="true" value={num}/>
                                                 {
                                                     arr.map((valueC, keyC)=> {
-                                                        if (keyC == 3) {
+                                                        if(keyC ==0){
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                       key={keyC} contentEditable="true" readOnly="readOnly"
+                                                                       onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                       value={value[valueC]}/>
+                                                            )
+                                                        }else if (keyC == 3) {
                                                             return (
                                                                 <input className={styles.tableContentItem}
                                                                        style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
