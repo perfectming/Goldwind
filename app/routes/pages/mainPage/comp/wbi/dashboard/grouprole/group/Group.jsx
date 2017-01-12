@@ -186,6 +186,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: () => {
+            dispatch(actions.setVars('groupbool', false));
             $.ajax({
                 url:'http://'+ipUrl+'/wbi/yield/getMaxYie',//收益率饼图
                 type: 'post',
