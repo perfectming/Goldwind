@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {text,name0,runtime,downtime,tba0,changedata1,hhdata,w10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
+        let {text,name0,runtime,downtime,tba0,changedata1,mapmonth,w10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
 
 
         let configPie = {
@@ -77,7 +77,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w10 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl);
+                            changedata1(w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth);
 
                         }
                     }
@@ -213,6 +213,7 @@ const mapStateToProps = (state) => {
         wc1: state.vars.wc1,
         w10: state.vars.w11,
         ipUrl: state.vars.ipUrl,
+        mapmonth: state.vars.mapmonth,
     }
 };
 
@@ -220,7 +221,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1: (w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl) => {
+        changedata1: (w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth) => {
 
             dispatch(actions.setVars('w11', w10));
 
@@ -234,7 +235,8 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     "groupid":'201612121721151',
-                    "month":actbt+1,
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                     "wfid":wfid,
                 },
                 dataType:'json',

@@ -14,7 +14,7 @@ let Component = React.createClass({
 
     render() {
 
-        let {actbt, changedata1,grid, win,ipUrl, w0, wc1, hhdata1, hhdata, barLotime, text, power1, wrong10, wrong11, wrong12, wrong13, pba1, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
+        let {actbt, changedata1,grid, win,ipUrl, w0, wc1, mapmonth, hhdata, barLotime, text, power1, wrong10, wrong11, wrong12, wrong13, pba1, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
 
 
         let configPie = {
@@ -81,7 +81,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w0 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(grid,ipUrl,w0, win, wc1, actbt, hhdata, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3);
+                            changedata1(grid,ipUrl,w0, win, wc1, actbt, hhdata,mapmonth );
 
                         }
                     }
@@ -247,7 +247,7 @@ const mapStateToProps = (state) => {
         hhdata: state.vars.hhdata,
         hhdata1: state.vars.hhdata1,
         ipUrl:state.vars.ipUrl,
-
+        mapmonth: state.vars.mapmonth,
 
     }
 };
@@ -256,11 +256,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1: (grid,ipUrl,w0, win, wc1, actbt, hhdata, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power3 = [], wrong30 = [], wrong31 = [], wrong32 = [], wrong33 = [], pba3 = [], barLotime3 = []) => {
+        changedata1: (grid,ipUrl,w0, win, wc1, actbt, hhdata,mapmonth ) => {
 
             dispatch(actions.setVars('w1', w0));
             dispatch(actions.setVars('win1', win));
-
 
 
             $.ajax({
@@ -268,15 +267,32 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://'+ipUrl+'/wbi/PBA/getCompanySpacesWfields',
                 async: false,
                 data: {
-                    "month": actbt + 1,
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                     "groupid":   grid==undefined? '201612121721151':grid,
-                    "wfid": '',
                 },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
 
+                        console.log(data)
 
+
+                    let barLotime2 = [];    //各区域   一区域二区域
+                    let power2 = [];       //实际发电量
+                    let wrong20 = [];       //故障损失
+                    let wrong21 = [];       //维护损失
+                    let wrong22 = [];       //限功率损失
+                    let wrong23 = [];       //非设备原因损失
+                    let pba2 = [];
+
+                    let barLotime3 = [];    //各区域   一区域二区域
+                    let power3 = [];       //实际发电量
+                    let wrong30 = [];       //故障损失
+                    let wrong31 = [];       //维护损失
+                    let wrong32 = [];       //限功率损失
+                    let wrong33 = [];       //非设备原因损失
+                    let pba3 = [];
 
                     for (var i in data.data[0]) {
                         barLotime2.push(data.data[0][i].wfname);    //区域的横坐标
@@ -315,6 +331,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
                     dispatch(actions.setVars('bt0', 0));
+                    dispatch(actions.setVars('w11', data.data[0][0].wfname));
 
 
 

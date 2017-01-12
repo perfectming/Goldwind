@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0,wc1,mon,areaId,ipUrl,w10,name0,powerplan1,text,poweract2,height,changedata1,windplan=win,hhdata,actbt=10} = this.props;
+        let {w0,wc1,mon,areaId,ipUrl,w10,name0,powerplan1,mapmonth,text,poweract2,height,changedata1,windplan=win,hhdata,actbt=10} = this.props;
 
 
         let configPie = {
@@ -80,7 +80,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc1=e.point.index;
-                            changedata1(areaId,ipUrl,w10,win,wc1,hhdata,actbt);
+                            changedata1(areaId,ipUrl,w10,win,wc1,hhdata,actbt,mapmonth);
 
                         }
                     }
@@ -166,6 +166,7 @@ const mapStateToProps = (state) => {
         windplan : state.vars.windplan,
         areaId: state.vars.areaId,
         ipUrl: state.vars.ipUrl,
+        mapmonth: state.vars.mapmonth,
     }
 };
 
@@ -174,7 +175,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(areaId,ipUrl,w10,win,wc1,hhdata,actbt)=>{
+        changedata1 :(areaId,ipUrl,w10,win,wc1,hhdata,actbt,mapmonth)=>{
             dispatch(actions.setVars('bt0',  0));
 
 
@@ -185,7 +186,8 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/ELEC/getWtAreaElec',
                 async:false,
                 data:{
-                    "months":actbt+1,
+                    "year": mapmonth[actbt].year,
+                    "months":mapmonth[actbt].yearpoweract,
                     "wfid":wfid,
                 },
                 dataType:'json',

@@ -20,7 +20,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wfid, ipUrl,boll3, barlotimes1, skinStyle, bt0 = 0, width0,mapmonth, barlopowers1, barlopowerp1, barlotimes2, barlopowers2, barlopowerp2, barlotimes3, barlopowers3, barlopowerp3, hhdata, hhdata1, w0, w10, mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2} = this.props;
+        let {wfid, ipUrl,boll3=false, barlotimes1, skinStyle, bt0 = 0, width0,mapmonth, barlopowers1, barlopowerp1, barlotimes2, barlopowers2, barlopowerp2, barlotimes3, barlopowers3, barlopowerp3, hhdata, hhdata1, w0, w10, mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2} = this.props;
 
         let data = require('./../../area/Healthy-data');
         let month = data.data.line_month;

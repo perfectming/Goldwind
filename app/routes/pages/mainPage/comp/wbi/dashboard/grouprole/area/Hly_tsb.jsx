@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {text,name3,runtime3,downtime3,tba3,changedata1,hhdata,w0,W10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
+        let {text,name3,runtime3,downtime3,tba3,changedata1,mapmonth,w0,W10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
 
         let configPie = {
             chart: {
@@ -76,7 +76,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w0 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w0, wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl);
+                            changedata1(w0, wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth);
 
                         }
                     }
@@ -203,6 +203,7 @@ const mapStateToProps = (state) => {
         w0: state.vars.w1,
         w10: state.vars.w10,
         ipUrl: state.vars.ipUrl,
+        mapmonth : state.vars.mapmonth,
     }
 };
 
@@ -210,7 +211,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1: (w0,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl) => {
+        changedata1: (w0,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth) => {
 
 
             dispatch(actions.setVars('bt0', 0));
@@ -223,7 +224,8 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     "groupid":'201612121721151',
-                    "month":actbt+1,
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -264,7 +266,8 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     "groupid":  '201612121721151',
-                    "month":actbt+1,
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                     "wfid":'150801',
                 },
                 dataType:'json',

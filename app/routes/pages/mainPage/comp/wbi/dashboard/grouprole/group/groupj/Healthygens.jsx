@@ -21,7 +21,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='group',mapmonth,boll4,skinStyle, returnit,actbt=10,changecolor,day0,poweract,powerplan,mon,ipUrl} = this.props;
+        let {befor_pages='group',mapmonth,boll4=false,skinStyle, returnit,actbt=10,changecolor,day0,poweract,powerplan,mon,ipUrl} = this.props;
           let data = require('./../../area/Healthy-data');
 
         if(boll4){
@@ -157,7 +157,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('mon', value.yearpoweract+"月"));
 
-console.log(value.year)
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/ELEC/getSpaceTimeElec',

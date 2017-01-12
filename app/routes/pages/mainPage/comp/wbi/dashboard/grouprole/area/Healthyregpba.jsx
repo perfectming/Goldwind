@@ -31,8 +31,6 @@ let Component = React.createClass({
         return (
 
 
-
-
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
                 <div className={styles.light} id="light"> </div>

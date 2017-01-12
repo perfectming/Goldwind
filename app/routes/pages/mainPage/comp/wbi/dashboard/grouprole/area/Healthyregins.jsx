@@ -90,6 +90,7 @@ const mapDispatchToProps = (dispatch) => {
             let month2 = date.getMonth();
             if(month2==0){
                 month2=12;
+                year=year-1;
             }
             areaId=areaId[0];
 
@@ -100,7 +101,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "month": month2,
-                    "year": '',
+                    "year": year,
                     "groupid":areaId,
                 },
                 dataType: 'json',
@@ -108,19 +109,25 @@ const mapDispatchToProps = (dispatch) => {
                 success: function (data) {
 
                     dispatch(actions.setVars('hhdata', data));
-                    dispatch(actions.setVars('mon', month2 + "月"));
+
 
                     let WTHeal = data.data.monthHealth;
                     let WTN = [];
                     let WTHealName = [];
+                    let WTHealName0 = [];
                     WTHeal.map(function (value, key) {
                         for (let n in value) {
 
                             WTN.push(value[n]);
-                            WTHealName.push(n + "月")
+                            WTHealName0.push(n.substring(0,4));
+                            WTHealName.push(n.substring(4,6));
                         }
 
                     })
+                    dispatch(actions.setVars('mon', WTHealName[10]+"月"));
+                    dispatch(actions.setVars('hlyyear', WTHealName0));
+                    dispatch(actions.setVars('hlymonth', WTHealName));
+
                     let WTHea2 = data.data.dayHealth;
                     let WTN2 = [];
                     let WTHealName2 = [];
@@ -129,9 +136,14 @@ const mapDispatchToProps = (dispatch) => {
                         WTN2.push(WTHea2[m]);
                         WTHealName2.push(m.slice(6,8)+"日")
                     }
+                    let WTHealName3=[]
+                    for(let i in WTHealName){
+
+                        WTHealName3.push(WTHealName[i]+"月")
+                    }
 
                     dispatch(actions.setVars('healthy2', WTN));
-                    dispatch(actions.setVars('monthx', WTHealName));
+                    dispatch(actions.setVars('monthx', WTHealName3));
 
                     dispatch(actions.setVars('monthx3', WTHealName2));
                     dispatch(actions.setVars('healthy3', WTN2));

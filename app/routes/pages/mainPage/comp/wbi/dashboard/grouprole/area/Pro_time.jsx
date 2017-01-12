@@ -19,7 +19,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages = 'area', returnit,name0,ipUrl,runtime,downtime,tba0,name2,runtime2,downtime2,tba2,actbt,hhdata,w0,mon} = this.props;
+        let {befor_pages = 'area',skinStyle, returnit,name0,ipUrl,runtime,downtime,tba0,name2,runtime2,downtime2,tba2,actbt,hhdata,w0,mon} = this.props;
         let data = require('./Healthy-data');
         let month=data.data.line_month;
         let text0=data.data.line_date;
@@ -85,6 +85,7 @@ const mapStateToProps = (state) => {
         hhdata: state.vars.hhdata,
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
+        skinStyle: state.vars.skinStyle,
     }
 };
 

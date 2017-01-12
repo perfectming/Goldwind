@@ -17,7 +17,7 @@ let Component = React.createClass({
    render() {
 
 
-        let {w0,changedata1,x,jhpcolor,barLoTime,text,barLoPowerValue,wc1,hhdata,actbt,ipUrl}=this.props;
+        let {w0,changedata1,x,mapmonth,jhpcolor,barLoTime,text,barLoPowerValue,wc1,hhdata,actbt,ipUrl}=this.props;
         let configPie = {
             chart: {
                 height:400,
@@ -89,7 +89,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w0=e.point.category;
                             wc1=e.point.index;
-                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl);
+                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl,mapmonth);
 
                         }
                     }
@@ -173,7 +173,7 @@ const mapStateToProps = (state) => {
         hhddata : state.vars.hhdata,
         actbt : state.vars.actbt,
         ipUrl : state.vars.ipUrl,
-
+        mapmonth: state.vars.mapmonth,
 
     }
 };
@@ -182,7 +182,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl)=>{
+        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl,mapmonth)=>{
             dispatch(actions.setVars('w1',w0 ));
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
@@ -190,7 +190,8 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/Health/getAreaHealth',
                 async:false,
                 data:{
-                    "month":actbt+1,
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                     "groupid":'201612121721151',
 
                 },

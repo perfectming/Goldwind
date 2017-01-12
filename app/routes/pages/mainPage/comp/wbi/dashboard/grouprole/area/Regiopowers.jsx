@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
 import Hly_genday from '../group/groupj/Hly_genday.jsx';
-
+import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let ip="10.68.100.32";
 
@@ -20,7 +20,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area',ipUrl,areaId,skinStyle, returnit,actbt=10,changecolor,day0,poweract,powerplan} = this.props;
+        let {befor_pages='area',ipUrl,areaId,mapmonth,skinStyle,boll6=false, returnit,actbt=10,changecolor,day0,poweract,powerplan} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button = data.data.button;
@@ -28,20 +28,19 @@ let Component = React.createClass({
         let barLpdpowerValue1 = data.data.line_pdate;
         let barLpdpowerValues1 = data.data.line_pdates;
         let text0=data.data.line_date
+
+        if(boll6){
         return (
-
-
-
-
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
 
                 <div className={styles.onmonth}>
                     {
-                        data.data.yearelectric[0].wind.map((value, key) => {
+                        mapmonth.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl,areaId)}>
-                                    {value.name}
+                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key}
+                                     onClick={()=>changecolor(value,key,ipUrl,areaId)}>
+                                    {value.yearpoweract+"月"}
                                 </div>
                             )
                         })
@@ -66,6 +65,9 @@ let Component = React.createClass({
 
             </div>
         );
+        } else {
+            return (<Login></Login>)
+        }
     }
 });
 
@@ -81,32 +83,48 @@ const mapStateToProps = (state) => {
         ipUrl:state.vars.ipUrl,
         areaId: state.vars.areaId,
         skinStyle: state.vars.skinStyle,
+        boll6: state.vars.boll6,
+        mapmonth: state.vars.mapmonth,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: (ipUrl,areaId) => {
-            var obj = {
-                test: ''
-            }
+
             areaId=areaId[0];
-            let date=new Date();
-            let year=date.getFullYear()
-            let month2=date.getMonth();
-            if(month2==0){
-                month2=12;
-            }
-            dispatch(actions.setVars('actbt',  month2-1));
-            dispatch(actions.setVars('mon',  month2+"月"));
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ipUrl + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {
+
+                },
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon',  data.data[10].yearpoweract+"月"));
+                    jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+            function jiang(year) {
+
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/ELEC/getAreaTimesElec',
                 async:false,
                 data:{
-                    "month": month2,
+
                     "groupid":  areaId==undefined? '201612121721151':areaId,
-                    "years":'',
+                    "year": year[10].year,
+                    "month": year[10].yearpoweract,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -125,11 +143,14 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('day1',day0 ));
                     dispatch(actions.setVars('poweract1',poweract ));
                     dispatch(actions.setVars('powerplan1',powerplan ))
+                    dispatch(actions.setVars('boll6',true ))
+
                 },
                 error:function(){
                     alert(2)
                 },
             })
+            }
 
 
         },
@@ -150,9 +171,9 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://' + ipUrl + '/wbi/ELEC/getAreaTimesElec',
                 async:false,
                 data:{
-                    "month": key+1,
                     "groupid":  areaId==undefined? '201612121721151':areaId,
-                    "years":'',
+                    "year":value.year,
+                    "month": value.yearpoweract,
                 },
                 dataType:'json',
                 timeout:'3000',
