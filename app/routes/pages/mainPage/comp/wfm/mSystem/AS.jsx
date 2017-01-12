@@ -33,7 +33,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {saveTableItem,addData,deleData,page,theOne,lastPage,nextPage,theLast,wttypedefine,protocolid,init,wfidCount,buttonAction,onFocus,inputOnChange,add,table, changeTableItem,dele} = this.props;
+        let {skinStyle,saveTableItem,addData,deleData,page,theOne,lastPage,nextPage,theLast,wttypedefine,protocolid,init,wfidCount,buttonAction,onFocus,inputOnChange,add,table, changeTableItem,dele} = this.props;
         let num=0;
         let newData={};
         for(let i=0;i<arr.length;i++){
@@ -42,7 +42,7 @@ let Component = React.createClass({
         if (table) {//判断数据是否存在
             return (
                 <div>
-                    <div className={styles.inquireBox}>
+                    <div className={skinStyle==2?styles.inquireBoxWhite:styles.inquireBox}>
                         {
                             tabaleData.as.comps.map((value, key)=> {
                                 if (value.type === 'input') {
@@ -69,7 +69,7 @@ let Component = React.createClass({
                         <img src={tabAdd} onClick={()=>add(newData)}/>
                     </div>
 
-                    <div className={styles.tableBox}>
+                    <div className={skinStyle==1?styles.tableBoxBlue:skinStyle==2?styles.tableBoxWhite:styles.tableBox}>
                         <div className={styles.tableHeaderBox}>
                             {
                                 header.map((value, key)=> {
@@ -163,7 +163,7 @@ let Component = React.createClass({
                             }
                         </div>
                     </div>
-                    <div className={styles.pageplus}>
+                    <div className={skinStyle==2?styles.pageplusWhite:styles.pageplus}>
                         <span onClick={()=>theOne(page, wttypedefine, protocolid)}>首页</span>
                         <span onClick={()=>lastPage(page, wttypedefine, protocolid)}>上一页</span>
                         <span>{page + "/" + table.data.totalPage}</span>
@@ -185,6 +185,7 @@ const mapStateToProps = (state) => {
         wttypedefine:state.vars.wttypedefine,
         protocolid:state.vars.protocolid,
         ASCount:state.vars.ASCount,
+        skinStyle: state.vars.skinStyle
     }
 };
 
