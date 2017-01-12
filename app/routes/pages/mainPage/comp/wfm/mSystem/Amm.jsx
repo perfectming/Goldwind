@@ -23,7 +23,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {checkPhone,checkMail,saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+        let {saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData={};
         let num=0;
         for(let i=0;i<arr.length-1;i++){
@@ -90,7 +90,7 @@ let Component = React.createClass({
                                                     return(
                                                         <input className={styles.tableContentItem}
                                                                style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                               key={keyC} contentEditable="true"
+                                                               key={keyC} contentEditable="true" readOnly="readOnly"
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                value={value[valueC]}/>
                                                     )
@@ -109,22 +109,6 @@ let Component = React.createClass({
                                                             }
                                                         </select>
                                                     )
-                                                }else if (valueC=='phonecode'){
-                                                    return(
-                                                        <input className={styles.tableContentItem}
-                                                               style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                               key={keyC} contentEditable="true" onBlur={(e)=>checkPhone(e.target.value,key,keyC)}
-                                                               onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                               value={value[valueC]}/>
-                                                    )
-                                                }else if (valueC=='mailbox'){
-                                                    return(
-                                                        <input className={styles.tableContentItem}
-                                                               style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                               key={keyC} contentEditable="true" onBlur={(e)=>checkMail(e.target.value,key,keyC)}
-                                                               onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                               value={value[valueC]}/>
-                                                    )
                                                 }else if (valueC=='password'){
                                                     return(
                                                         <input className={styles.tableContentItem}
@@ -137,6 +121,7 @@ let Component = React.createClass({
                                                     return (
                                                         <input className={styles.tableContentItem} key={keyC}
                                                            style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
+                                                               onClick={()=>jump(value['id'])}
                                                            type="button" value='设置'/>
                                                     )
                                                 }else {
@@ -178,22 +163,6 @@ let Component = React.createClass({
                                                             <input className={styles.tableContentItem}
                                                                    style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
                                                                    key={keyC} contentEditable="true" onBlur={(e)=>checkName(e.target,key,keyC)}
-                                                                   onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                                   value={value[valueC]}/>
-                                                        )
-                                                    }else if (valueC=='phonecode'){
-                                                        return(
-                                                            <input className={styles.tableContentItem}
-                                                                   style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                                   key={keyC} contentEditable="true" onBlur={(e)=>checkPhone(e.target.value,key,keyC)}
-                                                                   onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                                   value={value[valueC]}/>
-                                                        )
-                                                    }else if (valueC=='mailbox'){
-                                                        return(
-                                                            <input className={styles.tableContentItem}
-                                                                   style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                                   key={keyC} contentEditable="true" onBlur={(e)=>checkMail(e.target.value,key,keyC)}
                                                                    onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                    value={value[valueC]}/>
                                                         )
@@ -346,24 +315,6 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
         },
-        checkPhone(value,i,j){
-            let phone=/^1\d{10}$/;
-            if(!phone.test(value)){
-                alert('请输入正确的手机号码');
-                let tableV = _.clone(getState().objs.tableContentAmm);
-                tableV.data.pagedata[i][arr[j]] = '';
-                dispatch(actions.setObjs('tableContentAmm', tableV));
-            }
-        },
-        checkMail(value,i,j){
-            let mail=/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
-            if(!mail.test(value)){
-                alert('请输入正确的邮箱');
-                let tableV = _.clone(getState().objs.tableContentAmm);
-                tableV.data.pagedata[i][arr[j]] = '';
-                dispatch(actions.setObjs('tableContentAmm', tableV));
-            }
-        },
         buttonAction (){
             var tContent = $('#textContent5')[0].value;
             // 在这个下边获取这个时间段的数据就行了
@@ -426,16 +377,19 @@ const mapDispatchToProps = (dispatch) => {
                                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                                 },
                                 error:function(){
+                                    dispatch(actions.setVars('boolAlert', true));
                                     console.log('获取数据失败')
                                 }
                             });
                         },
                         error:function(){
+                            dispatch(actions.setVars('boolAlert', true));
                             console.log('获取数据失败')
                         }
                     });
                 },
                 error:function(){
+                    dispatch(actions.setVars('boolAlert', true));
                     console.log('获取数据失败')
                 }
             });
@@ -459,11 +413,28 @@ const mapDispatchToProps = (dispatch) => {
             }else {alert('请输入用户ID')}
         },
         addDate:(li)=>{
+            let phone=/^1\d{10}$/;
+            let mail=/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
             let tableV = _.clone(getState().objs.tableContentAmm);
             let ids = _.clone(getState().vars.roleIds);
             let wfs=tableV.data.pagedata[li];
             wfs['roleids']=ids;
-            (wfs['logintype']) && (wfs['logintype']=0);
+            (!wfs['logintype']) && (wfs['logintype']=0);
+            if(!wfs.id){alert('请输入用户编号')}
+            else if(!phone.test(wfs.phonecode)){
+                alert('请输入正确的手机号码')
+                tableV.data.pagedata[li]['phonecode'] = '';
+                dispatch(actions.setObjs('tableContentAmm', tableV));
+            }else if(!mail.test(wfs.mailbox)){
+                alert('请输入正确的邮箱');
+                tableV.data.pagedata[li]['mailbox'] = '';
+                dispatch(actions.setObjs('tableContentAmm', tableV));
+            }
+            else if(!wfs.name){alert('请输入用户名')}
+            else if(!wfs.password){alert('请输入用户密码')}
+            else if(!wfs.loginname){alert('请输入用户别名')}
+            else if(!ids){alert('请选择对应角色')}
+            else {
             let ddv=JSON.stringify(wfs);
             dispatch(actions.setVars('boolAlert', false));
             $.ajax({
@@ -493,7 +464,7 @@ const mapDispatchToProps = (dispatch) => {
                 error:function(){
                     console.log('获取数据失败')
                 }
-            });
+            });}
         },
         deleDate:(j) => {
             let tableV = _.clone(getState().objs.tableContentAmm);
@@ -529,6 +500,7 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('boolAlert', true));
                             dispatch(actions.setObjs('tableContentAmm', data));
                             dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                            alert('已删除');
                         },
                         error:function(){
                             console.log('获取数据失败')
@@ -539,7 +511,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log('获取数据失败')
                 }
             });
-            alert('已删除');
+
             }
         },
         lastPage:(page,name)=>{

@@ -13,10 +13,10 @@ let Component = React.createClass({
     },
 
     render() {
-         let {searchinfo} = this.props;
+         let {skinStyle,searchinfo} = this.props;
         let comp = comps.comps.from;
         return (
-            <div className={styles.alarmBox}>
+            <div className={skinStyle==2?styles.alarmBoxWhite:styles.alarmBox}>
                 <div className={styles.inquireBox} id='allselect'>
                     <div className={styles.seleBox}>
                         <span>告警级别</span>
@@ -61,7 +61,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        skinStyle: state.vars.skinStyle
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

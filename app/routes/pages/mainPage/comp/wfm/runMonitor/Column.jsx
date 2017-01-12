@@ -79,7 +79,7 @@ let Component = React.createClass({
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#37545c', '#32c5cd']
+            colors: ['#607F87', '#32c5cd']
             ,
             plotOptions: {
                 series: {

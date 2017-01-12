@@ -16,7 +16,7 @@ let Component = React.createClass({
         this.props.init(ipUrl,selectId,selectName);
         setTimeout(function(){
         	init(ipUrl,selectId,selectName)
-        },1000)
+        },3000)
     },
     
 	render() {
@@ -77,7 +77,7 @@ let Component = React.createClass({
 						<div className={styles.floorOne}>
 							<div className={`${styles.pie} ${styles.boxShadow}`}>
 								<div className={topTitleOne==undefined? styles.hide:styles.button} onClick={()=>buttonResetA()}>清除</div>
-								<ChartPie unit={topTitleOne==undefined? "":storageTop==1? "kWh":"元"} name={topTitleOne==undefined? "":storageTop==1? topTitleOne+"故障损失电量":topTitleOne+"故障损失收入"} text={topTitleOne==undefined? "":storageTop==1? topTitleOne+"故障损失电量":topTitleOne+"故障损失收入"} lose={topPieOne}></ChartPie>
+								<ChartPie judge={3} clickArr={topPieOne} unit={topTitleOne==undefined? "":storageTop==1? "kWh":"元"} name={topTitleOne==undefined? "":storageTop==1? topTitleOne+"故障损失电量":topTitleOne+"故障损失收入"} text={topTitleOne==undefined? "":storageTop==1? topTitleOne+"故障损失电量":topTitleOne+"故障损失收入"} lose={topPieOne}></ChartPie>
 							</div>
 							<div className={`${styles.column} ${styles.boxShadow}`}>
 								<OneColumn name={columnOneTitle} title={columnOneTitle} month={columnOneName} plan={columnOne} unit={topTitleOne==undefined? "":storageTop==1? "(kWh)":"(元)"}></OneColumn>
@@ -86,7 +86,7 @@ let Component = React.createClass({
 						<div className={styles.floorTwo}>
 							<div className={`${styles.pie} ${styles.boxShadow}`}>
 								<div className={topTitleTwo==undefined? styles.hide:styles.button} onClick={()=>buttonResetB()}>清除</div>
-								<ChartPie unit={topTitleTwo==undefined? "":storageTop==1? "kWh":"元"} name={topTitleTwo==undefined? "":storageTop==1? topTitleTwo+"故障损失电量":topTitleTwo+"故障损失收入"} text={topTitleTwo==undefined? "":storageTop==1? topTitleTwo+"故障损失电量":topTitleTwo+"故障损失收入"} lose={topPieTwo}></ChartPie>
+								<ChartPie judge={4} clickArr={topPieTwo} unit={topTitleTwo==undefined? "":storageTop==1? "kWh":"元"} name={topTitleTwo==undefined? "":storageTop==1? topTitleTwo+"故障损失电量":topTitleTwo+"故障损失收入"} text={topTitleTwo==undefined? "":storageTop==1? topTitleTwo+"故障损失电量":topTitleTwo+"故障损失收入"} lose={topPieTwo}></ChartPie>
 							</div>
 							<div className={`${styles.column} ${styles.boxShadow}`}>
 								<OneColumn name={columnTwoTitle} title={columnTwoTitle} month={columnTwoName} plan={columnTwo} unit={topTitleTwo==undefined? "":storageTop==1? "(kWh)":"(元)"}></OneColumn>
@@ -237,6 +237,9 @@ const mapDispatchToProps = (dispatch) => {
 							timeout : 60000, 
 							success: function (data) {
 								if (topTitleOne==undefined) {
+									dispatch(actions.setVars('selectId3', selectId));
+									dispatch(actions.setVars('sTime3', sTime));
+                            		dispatch(actions.setVars('eTime3', eTime));
 									topPieOne=[];
 									topTitleOne=A;
 									wtType=data.data[0].wttype;
@@ -247,6 +250,9 @@ const mapDispatchToProps = (dispatch) => {
 								    dispatch(actions.setVars('topPieOne', topPieOne));
 								    dispatch(actions.setVars('columnOneTitle', wtType));
 								}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+									dispatch(actions.setVars('selectId4', selectId));
+									dispatch(actions.setVars('sTime4', sTime));
+                            		dispatch(actions.setVars('eTime4', eTime));
 									topPieTwo=[];
 									topTitleTwo=A;
 									wtType=data.data[0].wttype;
@@ -311,6 +317,9 @@ const mapDispatchToProps = (dispatch) => {
 							timeout : 60000, 
 							success: function (data) {
 								if (topTitleOne==undefined) {
+									dispatch(actions.setVars('selectId3', selectId));
+									dispatch(actions.setVars('sTime3', sTime));
+                            		dispatch(actions.setVars('eTime3', eTime));
 									topPieOne=[];
 									topTitleOne=A;
 									wtType=data.data[0].wttype;
@@ -321,6 +330,9 @@ const mapDispatchToProps = (dispatch) => {
 								    dispatch(actions.setVars('topPieOne', topPieOne));
 								    dispatch(actions.setVars('columnOneTitle', wtType));
 								}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+									dispatch(actions.setVars('selectId4', selectId));
+									dispatch(actions.setVars('sTime4', sTime));
+                            		dispatch(actions.setVars('eTime4', eTime));
 									topPieTwo=[];
 									topTitleTwo=A;
 									wtType=data.data[0].wttype;
@@ -415,7 +427,11 @@ const mapDispatchToProps = (dispatch) => {
 						data: {'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
 						timeout : 60000, 
 						success: function (data) {
+							console.log(data)
 							if (topTitleOne==undefined) {
+								dispatch(actions.setVars('selectId3', selectId));
+								dispatch(actions.setVars('sTime3', sTime));
+                            	dispatch(actions.setVars('eTime3', eTime));
 								topPieOne=[];
 								topTitleOne=A;
 								wtType=data.data[0].wttype;
@@ -426,6 +442,9 @@ const mapDispatchToProps = (dispatch) => {
 							    dispatch(actions.setVars('topPieOne', topPieOne));
 							    dispatch(actions.setVars('columnOneTitle', wtType));
 							}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+								dispatch(actions.setVars('selectId4', selectId));
+								dispatch(actions.setVars('sTime4', sTime));
+                            	dispatch(actions.setVars('eTime4', eTime));
 								topPieTwo=[];
 								topTitleTwo=A;
 								wtType=data.data[0].wttype;
@@ -490,6 +509,9 @@ const mapDispatchToProps = (dispatch) => {
 						timeout : 60000, 
 						success: function (data) {
 							if (topTitleOne==undefined) {
+								dispatch(actions.setVars('selectId3', selectId));
+								dispatch(actions.setVars('sTime3', sTime));
+                            	dispatch(actions.setVars('eTime3', eTime));
 								topPieOne=[];
 								topTitleOne=A;
 								wtType=data.data[0].wttype;
@@ -500,6 +522,9 @@ const mapDispatchToProps = (dispatch) => {
 							    dispatch(actions.setVars('topPieOne', topPieOne));
 							    dispatch(actions.setVars('columnOneTitle', wtType));
 							}else if (topTitleOne!==undefined&&topTitleTwo==undefined) {
+								dispatch(actions.setVars('selectId4', selectId));
+								dispatch(actions.setVars('sTime4', sTime));
+                            	dispatch(actions.setVars('eTime4', eTime));
 								topPieTwo=[];
 								topTitleTwo=A;
 								wtType=data.data[0].wttype;

@@ -213,6 +213,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
     	ajax: (clickAreaId,ipUrl,wbiUserId) => {
     		dispatch(actions.setVars('actbt',0 ));
+    		dispatch(actions.setVars('windBool', false));
     		$.ajax({
 	        		url:'http://'+ipUrl+'/wbi/user/getByUserIDWf',//根据userid获取风场id name
 			        type: 'post',
@@ -228,6 +229,8 @@ const mapDispatchToProps = (dispatch) => {
 			        	};
 			        	dispatch(actions.setVars('wfName',wfName ));
 			        	dispatch(actions.setVars('wfId',wfId ));
+			        	dispatch(actions.setVars('xxdwfNa1', wfName[0]));
+			        	dispatch(actions.setVars('xxdwfId1', wfId[0]));
 			        },
 			        complete : function(XMLHttpRequest,status){ 
 						$.ajax({
@@ -295,11 +298,19 @@ const mapDispatchToProps = (dispatch) => {
 									        	dispatch(actions.setVars('income',income ));
 									        },
 									        complete : function(XMLHttpRequest,status){ 
+									        		var date = new Date();
+										            if(date.getMonth()==0){
+										            	var yearString = date.getFullYear()-1;
+										            	var monthString = 12;
+										            }else{
+										                var yearString = date.getFullYear();
+										                var monthString = date.getMonth();										                
+										            }
 										　　　　	$.ajax({
 									        		url: 'http://'+ipUrl+'/wbi/TBA/getWfLastMonthTBA',//TBA饼图
 											        type: 'post',
 											        async:true,
-											        data:{'wfid':wfId[0]},
+											        data:{'wfid':wfId[0],'year':yearString,'month':monthString},
 											        dataType: 'json',//here
 											        success:function (data) {
 											        	runTime=data.data[0].runtimes;
@@ -441,6 +452,7 @@ const mapDispatchToProps = (dispatch) => {
         	dispatch(actions.setVars('flagPba2',!flagPba2 ));
         },
         changepageW :(value,key,ipUrl)=>{
+        	dispatch(actions.setVars('windBool', false));
             dispatch(actions.setVars('actbt',key ));
            	$.ajax({
 	        		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyWfPBA',//PBA饼图和风机列表
@@ -539,8 +551,8 @@ const mapDispatchToProps = (dispatch) => {
 											        	dispatch(actions.setVars('TBA',TBA ));
 											        },
 											        complete : function(XMLHttpRequest,status){ 
-												　　　　	
-												　　	},
+												　　　　dispatch(actions.setVars('windBool', true));　	
+												　　},
 											    });
 										　	},
 										});

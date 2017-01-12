@@ -17,7 +17,7 @@ let Component = React.createClass({
         this.props.init();
         setTimeout(function(){
         	init()
-        },1000)
+        },2000)
     },
 	componentWillMount() {
     	let {ipUrl}=this.props;
