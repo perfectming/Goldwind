@@ -132,6 +132,8 @@ const mapDispatchToProps = (dispatch) => {
             });
             dispatch(actions.setVars('boxRoleArr', all));
             console.log(all);
+            $("#aids").css("display","none");
+            $("#box1").parent().css("display","none");
         },
     };
 };

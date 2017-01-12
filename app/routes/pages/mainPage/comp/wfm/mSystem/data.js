@@ -100,7 +100,7 @@ module.exports = {
             '用户名',
             '用户别名',
             '密码',
-            '电话号码',
+            '手机号码',
             '邮箱',
             '登录类型',
             '加密狗码',
@@ -184,7 +184,7 @@ module.exports = {
             },
             {
                 type: 'input',
-                valueName:'角色名',
+                valueName:'角色名称',
                 content: '可输入关键字',
                 id: 'input7',
                 width:120
@@ -215,7 +215,7 @@ module.exports = {
             '角色名称',
             '描述',
             '角色菜单',
-            '中央监控',
+            '设备权限',
         ],
         content:[
             [12,13,14,15,16,],

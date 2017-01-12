@@ -34,7 +34,7 @@ let Component = React.createClass({
         this.props.init(page);
     },
     render() {
-        let {init,wfidCount,wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table,years,changeTableItem1,wfids} = this.props;
+        let {userNameT,init,wfidCount,wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table,years,changeTableItem1,wfids} = this.props;
         let newData={};
         let num=0;
         console.log(wfidCount);
@@ -154,7 +154,7 @@ let Component = React.createClass({
                                                            readOnly="true" value={num}/>
                                                     {
                                                         arr1.map((valueC, keyC)=> {
-                                                            if(keyC<1){
+                                                            if(keyC==0){
                                                                 return(
                                                                     <select className={styles.tableContentItem}
                                                                             style={{width:arr[keyC]+"%"}} key={keyC}
@@ -167,13 +167,29 @@ let Component = React.createClass({
                                                                         }
                                                                     </select>
                                                                 )
-                                                            }else if(keyC<3){
+                                                            }else if(keyC==1){
                                                                 return (
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
                                                                         <input onChange={(e)=>changeTableItem1(e.target.value,newData,key,keyC)}
+                                                                               onBlur={(e)=>checkDate(e.target.value,newData,key,keyC)}
                                                                                type="date"/>
                                                                     </div>
+                                                                )
+                                                            }else if(keyC==2){
+                                                                return (
+                                                                    <div className={styles.tableContentItem}
+                                                                         style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
+                                                                        <input readOnly="readOnly"
+                                                                               type="date" value={new Date().getFullYear()+'-'+(new Date().getMonth()+1<10?'0'+(new Date().getMonth()+1):new Date().getMonth()+1)+'-'+(new Date().getDate()<10?'0'+new Date().getDate():new Date().getDate())}/>
+                                                                    </div>
+                                                                )
+                                                            }else if(keyC==3){
+                                                                return (
+                                                                    <input className={styles.tableContentItem} style={{width:arr[keyC]+"%"}}
+                                                                           readOnly="readOnly" value={userNameT}
+                                                                           key={keyC} contentEditable="true"
+                                                                           onChange={(e)=>changeTableItem1(e.target.value,newData,key,keyC)}/>
                                                                 )
                                                             }else{
                                                                 return (
@@ -215,6 +231,7 @@ const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
         page: state.vars.page1,
+        userNameT: state.vars.userNameT,
         wtidAll: state.objs.wtidAll,
         wfidCount:state.vars.wfidCount,
         wfids:state.vars.wfids,
@@ -254,6 +271,9 @@ const mapDispatchToProps = (dispatch) => {
                     console.log('获取数据失败')
                 }
             });
+        },
+        checkDate(value,newData,key,keyC){
+            console.log(value);
         },
         buttonAction (sit){
             // 获取select 选择的内容
