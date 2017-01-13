@@ -239,7 +239,6 @@ const mapDispatchToProps = (dispatch) => {
 							        data:{'wfid':wfId[0]},
 							        dataType: 'json',//here
 							        success:function (data) {
-							        	console.log(data);
 							        	wfYearPlan=data.data.yearPlanElec;
 							        	wfYearAct=data.data.yearElec;
 							        	wfMonthPlan=data.data.monthPlanElec;

@@ -234,7 +234,6 @@ const mapDispatchToProps = (dispatch) => {
                                         async:true,
                                         dataType: 'json',
                                         success:function (data) {
-                                            console.log(data)
                                             yearELec = data.data.yearELec;
                                             yearPlanELec=data.data.yearplanElec;
                                             monthElec = data.data.monthElec;

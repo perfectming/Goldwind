@@ -272,7 +272,6 @@ const mapDispatchToProps = (dispatch) => {
 						        data:{'groupid':areaId[0]},
 						        dataType: 'json',//here
 						        success:function (data) {
-						        	console.log(data);
 						        	yearElec=data.data.areasyearElec;
 						        	monthElec=data.data.areaMonthsElec;
 						        	dayElec=data.data.dayelec;
