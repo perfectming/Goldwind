@@ -17,7 +17,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {ipUrl,xxdwfNa,xxdwfId,changedata2,TBA,TBAAA,montht,profit,cost,areaPlan,areaPlanDay,areaPlanDayT,w0,winss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
+        let {ipUrl,xxdwfNa="川井风电场",xxdwfId,changedata2,TBA,TBAAA,montht,profit,cost,areaPlan,areaPlanDay,areaPlanDayT,w0,winss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
         
         return (
             <div className={`${styles.box} ${styles.shadow}`}>
@@ -86,8 +86,10 @@ const mapDispatchToProps = (dispatch) => {
            ajax: (xxdwfId,xxdwfNa,input_url) => {
             let date=new Date;
             let monthT=date.getMonth();
+            let year=date.getFullYear();
                if (monthT == 0) {
                    monthT = 12;
+                   year=year-1;
                }
             // 12个月的TBA
             let wTBAMonth=[];
@@ -106,13 +108,14 @@ const mapDispatchToProps = (dispatch) => {
              url:'http://'+input_url+'/wbi/TBA/getMonthsTBAByWf',  
              async:false,
             data:{
-             'wfid':xxdwfId,
+             'wfid':xxdwfId==undefined? "150801":xxdwfId,
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
              let wTBATime=data.data;
-             for (let i in wTBATime){
+                 dispatch(actions.setVars('hhdata',data))
+                 for (let i in wTBATime){
              let month=wTBATime[i].month+'月';
              wTBAMonth.push(month);
              let downtimes=wTBATime[i].downtimes;
@@ -144,8 +147,11 @@ const mapDispatchToProps = (dispatch) => {
              url:'http://'+input_url+'/wbi/TBA/getDaysTBAByWf',  
              async:false,
             data:{
-             'wfid':xxdwfId,
+                'wfid':xxdwfId==undefined? "150801":xxdwfId,
              'month':monthT,
+                'year':year,
+
+
             },
              dataType:'json',
              timeout:'3000',

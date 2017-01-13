@@ -108,7 +108,7 @@ let Component = React.createClass({
                     borderWidth: 0
                 }
             },
-            colors: ['#32C5CD','#37545C','#D06960']
+            colors: ['#32C5CD','#607F87','#D06960']
             ,
             series: [{
                 name:'年等效利用小时数',

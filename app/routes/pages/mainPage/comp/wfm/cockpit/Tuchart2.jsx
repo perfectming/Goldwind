@@ -131,7 +131,7 @@ let Component = React.createClass({
             }],
 
             series:[{ //第二个Y轴的数据
-                name: '月实际发电量',
+                name: '月计划发电量',
                 color: '#33BAC0',
                 type: 'column',
 
@@ -141,7 +141,7 @@ let Component = React.createClass({
                 }
 
             }, { //第一个Y轴的数据
-                name: '月计划发电量',
+                name: '月实际发电量',
                 color: '#70C080',
                 type: 'column',
 

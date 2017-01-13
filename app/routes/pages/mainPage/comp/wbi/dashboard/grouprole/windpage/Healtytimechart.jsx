@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {height, text1, input_url, xxdwfId, xxdwfNa, w0, wins, monthT, areaRecordProfitT, text, changedata1}=this.props;
+        let {height, text1, input_url,hlyyear,hlymonth, xxdwfId, xxdwfNa, w0, wins, monthT, areaRecordProfitT, text, changedata1}=this.props;
         let configPie = {
             chart: {
                 height: height,
@@ -68,23 +68,15 @@ let Component = React.createClass({
                 }, series: {
                     cursor: 'pointer',
                     events: {
-                        click: function (e) {
+                        click: function (e,) {
                             let w0 = e.point.category;
-                            let month = e.point.index + 1;
+                            let wc1 = e.point.index ;
                             let a = w0.toString().split("");
                             let b = a[0];
                             let WTHealH = [];
                             let WTHealName = [];
                             let WTN = [];
 
-                            let date = new Date();
-
-                            let year = date.getFullYear();
-
-                            if (month == 0) {
-                                month = 12;
-                                year = year - 1;
-                            }
 
 
                             $.ajax({
@@ -92,9 +84,9 @@ let Component = React.createClass({
                                 url: 'http://' + input_url + '/wbi/Health/getWfieldTimHealth',
                                 async: false,
                                 data: {
-                                    'year': year,
-                                    'month': month,
-                                    'wfid': xxdwfId,
+                                    "month":hlymonth[wc1],
+                                    "year":hlyyear[wc1],
+                                    'wfid':xxdwfId==undefined? "150801":xxdwfId,
                                 },
                                 dataType: 'json',
                                 timeout: '3000',
@@ -203,6 +195,8 @@ const mapStateToProps = (state) => {
         windplan1: state.vars.windplan1,
         xxdwfId: state.vars.xxdwfId1,
         xxdwfNa: state.vars.xxdwfNa1,
+        hlyyear : state.vars.hlyyear,
+        hlymonth : state.vars.hlymonth,
 
 
     }

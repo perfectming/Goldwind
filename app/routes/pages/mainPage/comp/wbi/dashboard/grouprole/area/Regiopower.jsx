@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-
+import Login from '../../../../../../../../components/common/Loading.jsx';
 import Hly_genone from './Hly_genone.jsx';
 import Hly_gentwo from './Hly_gentwo.jsx';
 
@@ -35,11 +35,11 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area',skinStyle,areaId,w0,w10,width0, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
+        let {befor_pages='area',boll5=false,skinStyle,areaId,w0,w10,width0,mapmonth, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
+        if(boll5){
+
+
         return (
-
-
-
 
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
@@ -54,6 +54,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                     <Hly_gentwo    widths={width0}  height={450}
+                                   jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                    name0={barlotimes2}
                                    powerplan1={barlopowers2}
                                    poweract2={barlopowerp2}
@@ -65,10 +66,11 @@ let Component = React.createClass({
 
                 <div className={styles.onmonth}>
                     {
-                        data.data.yearelectric[0].wind.map((value, key) => {
+                        mapmonth.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl,areaId)}>
-                                    {value.name}
+                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key}
+                                     onClick={()=>changecolor(value,key,ipUrl,areaId)}>
+                                    {value.yearpoweract+"月"}
                                 </div>
                             )
                         })
@@ -80,6 +82,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_genone height={400}
+                                    jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                     name0={barlotimes1}
                                     powerplan1={barlopowers1}
                                     poweract2={barlopowerp1}
@@ -99,11 +102,12 @@ let Component = React.createClass({
 
                         </div>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo( bt0,actbt, hhdata,ipUrl, wfid,)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, actbt, hhdata,ipUrl, wfid,)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(bt0, actbt, hhdata, ipUrl, wfid)}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo( bt0,actbt, hhdata,ipUrl, wfid,mapmonth,areaId)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, actbt, hhdata,ipUrl, wfid,mapmonth,areaId)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId)}>更多</button>
                         </div>
                         <Hly_gentwo    height={390}
+                                       jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                        name0={barlotimes2}
                                        powerplan1={barlopowers2}
                                        poweract2={barlopowerp2}
@@ -114,7 +118,9 @@ let Component = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        );}else {
+            return (<Login></Login>)
+        }
     }
 });
 
@@ -145,6 +151,8 @@ const mapStateToProps = (state) => {
         width0:state.vars.width0,
         areaId: state.vars.areaId,
         skinStyle: state.vars.skinStyle,
+        mapmonth: state.vars.mapmonth,
+        boll5: state.vars.boll5,
     }
 };
 
@@ -157,24 +165,46 @@ const mapDispatchToProps = (dispatch) => {
             if(month2==0){
                 month2=12;
             }
+
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ipUrl + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    console.log(data)
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon',  data.data[10].yearpoweract+"月"));
+                    jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+
             dispatch(actions.setVars('bt0',  0));
-            dispatch(actions.setVars('actbt',  month2-1));
-            dispatch(actions.setVars('mon',  month2+"月"));
+
+            function jiang(year) {
+
+
             areaId=areaId[0];
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/ELEC/getAreaSpaceElec',
                 async:false,
                 data:{
-                    "month":month2,
                     "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid":'',
-                    "year":'',
+                    "year": year[10].year,
+                    "month": year[10].yearpoweract,
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-
                     dispatch(actions.setVars('hhdata',  data));
 
                     let barlotimes1 = [];
@@ -205,20 +235,15 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('barlopowers2', barlopowers2));
                     dispatch(actions.setVars('barlopowerp2', barlopowerp2));
 
-
-
-
-
                     dispatch(actions.setVars('w11',w10 ));
-
-
-
+                    dispatch(actions.setVars('boll5',true ));
 
                 },
                 error:function(){
 
                 },
             })
+            }
 
 
 
@@ -228,18 +253,15 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         init: () => {
-            dispatch(actions.setVars('ip', ip));
-            var obj = {
-                test: ''
-            }
+
+
         },
         changecolor:(value,key,ipUrl,areaId)=>{
 
             dispatch(actions.setVars('bt0',  0));
-            dispatch(actions.setVars('mon', value.name));
-            dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('wind',value.plan ));
-            dispatch(actions.setVars('winds',value.actrul ));
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('mon', value.yearpoweract+"月"));
+
 
             areaId=areaId[0];
             $.ajax({
@@ -247,10 +269,11 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/ELEC/getAreaSpaceElec',
                 async:false,
                 data:{
-                    "month":key+1,
+
                     "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid":'',
-                    "year":'',
+                    "year":value.year,
+                    "month": value.yearpoweract,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -294,21 +317,19 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0, actbt, hhdata, ipUrl, wfid) => {
+        gogogo: (bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 0));
-
-
-
+            areaId=areaId[0];
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
-                    "groupid":  '201612121721151',
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid":wfid == undefined ? '150828' : wfid,
                     "type":"0",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -342,18 +363,19 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, actbt, hhdata, ipUrl, wfid) => {
+        back: (bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 1));
+            areaId=areaId[0];
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
-                    "groupid":  '201612121721151',
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid":wfid == undefined ? '150828' : wfid,
                     "type":"1",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -381,18 +403,18 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (bt0, actbt, hhdata, ipUrl, wfid) => {
-
+        more: (bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId) => {
+            areaId=areaId[0];
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
-                    "groupid":  '201612121721151',
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid":wfid == undefined ? '150828' : wfid,
                     "type":"2",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',

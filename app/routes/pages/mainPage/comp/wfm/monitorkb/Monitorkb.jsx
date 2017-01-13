@@ -186,17 +186,17 @@ let Component = React.createClass({
                         <Title title={['综合指标概览']}></Title>
                         <div className={styles.zhzbglmain}>
                             <div className={styles.zhzbglbox}>
-                                <p>年发电完成率</p>
-                                <Pie2 color={zhzbgl1>90? ['#62de88',annularPlate]:zhzbgl1>80?['#e8952a',annularPlate]:zhzbgl1>60?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearEgyAt),Number((mobd[8888800].YearPlanTotEgyAt/1)-(mobd[8888800].YearEgyAt/1))]}></Pie2>
-                                <span className={styles.zhzbglboxnum}>
-                                    <p style={zhzbgl1>90? {color:'#62de88'} :zhzbgl1>80?{color:'#e8952a'}:zhzbgl1>60?{color:'#a32124'}:{color:'#d8403d'}}>{zhzbgl1=== "NaN" ? "--": zhzbgl1}<span className={styles.danweicc}>%</span></p>
-                                </span>
-                            </div>
-                            <div className={styles.zhzbglbox}>
                                 <p>年度PBA</p>
                                 <Pie2 color={zhzbgl2>90? ['#62de88',annularPlate]:zhzbgl2>80?['#e8952a',annularPlate]:zhzbgl2>60?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearEgyAt),Number((mobd[8888800].YearEgyAt/1)+(mobd[8888800].YearLossElec.Sum/1)-(mobd[8888800].YearEgyAt/1))]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
                                     <p style={zhzbgl2>90? {color:'#62de88'} :zhzbgl2>80?{color:'#e8952a'}:zhzbgl2>60?{color:'#a32124'}:{color:'#d8403d'}}>{zhzbgl2=== "NaN" ? "--": zhzbgl2}<span className={styles.danweicc}>%</span></p>
+                                </span>
+                            </div>
+                            <div className={styles.zhzbglbox}>
+                                <p>年发电完成率</p>
+                                <Pie2 color={zhzbgl1>90? ['#62de88',annularPlate]:zhzbgl1>80?['#e8952a',annularPlate]:zhzbgl1>60?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearEgyAt),Number((mobd[8888800].YearPlanTotEgyAt/1)-(mobd[8888800].YearEgyAt/1))]}></Pie2>
+                                <span className={styles.zhzbglboxnum}>
+                                    <p style={zhzbgl1>90? {color:'#62de88'} :zhzbgl1>80?{color:'#e8952a'}:zhzbgl1>60?{color:'#a32124'}:{color:'#d8403d'}}>{zhzbgl1=== "NaN" ? "--": zhzbgl1}<span className={styles.danweicc}>%</span></p>
                                 </span>
                             </div>
                             <div className={styles.zhzbglbox}>
@@ -230,7 +230,7 @@ let Component = React.createClass({
                         </div>
                     </div>
                     <div className={`${styles.nfdlwcqk} ${styles.box_shadow}`}>
-                        <Title title={['年发电量完成情况']}></Title>
+                        <Title title={['集团年发电量完成情况']}></Title>
                         <div className={styles.nfdlwcqkmain}>
                             <Column njhfdl={kbnjhfdl1} nsjfdl={kbnsjfdl1} nfdlwcl={kbnfdwcl} unit={mod.Last12MonthsPlanEgyAtStat.unit} monthTime={monthTimeHandle} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Column>
                         </div>
