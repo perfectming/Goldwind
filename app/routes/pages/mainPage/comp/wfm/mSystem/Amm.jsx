@@ -23,7 +23,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+        let {skinStyle,saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData={};
         let num=0;
         for(let i=0;i<arr.length-1;i++){
@@ -32,7 +32,7 @@ let Component = React.createClass({
         let comp=tabaleData.comps.from;
         if(table&&boxData){
         return (
-        <div className={styles.bodyBox}>
+        <div className={skinStyle==1?styles.bodyBoxBlue:(skinStyle==2?styles.bodyBoxWhite:styles.bodyBox)}>
             <Load></Load>
             <div className={styles.roleputBox}>
                 <div className={styles.inquireBox}>
@@ -240,6 +240,7 @@ const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContentAmm,
         boxData: state.objs.boxData,
+        skinStyle:state.vars.skinStyle,
         ammCount:state.vars.ammCount,
         ids:state.vars.roleIds,
         page:state.vars.pageAmm,

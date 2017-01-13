@@ -4,6 +4,7 @@ import styles from './Areacestyle.scss';
 import Windce from './Windce.jsx';
 import icono from '../../../../../img/comp/wind_logo.png';
 import Month from './Month';
+import Login from '../../../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
 let data = require('./../group/Profit-data3')
@@ -17,8 +18,8 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_pagee = 'windpage',  areaNameN, areaRecordCostN, areaRecordProfitN}=this.props;
-
+        let {width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_pagee = 'windpage',  areaNameN, areaRecordCostN, areaRecordProfitN,mapmonth,mon,Go2=false}=this.props;
+if(Go2){
         return (
             <div className={styles.box}>
                 {//遮罩层
@@ -30,7 +31,7 @@ let Component = React.createClass({
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
                         <img src={icono}/>
-                        <p>{[actbt + 1] + '月' + xxdwfNa + '各风机发电量'}</p>
+                        <p>{mon + xxdwfNa + '各风机发电量'}</p>
                         <div className={styles.xx} onClick={() => close()}>x</div>
                     </div>
                     <div className={styles.scroll}>
@@ -43,10 +44,10 @@ let Component = React.createClass({
                 </div>
                 <ul className={styles.monthbox}>
                     {
-                        data.wind.map((value, key) => {
+                        mapmonth.map((value, key) => {
                             return (<li className={actbt === key ? styles.red : styles.green}
                                         onClick={() => changpage(value, key, ipUrl, xxdwfId)}
-                                        key={key}>{value.name}</li>)
+                                        key={key}>{value.yearpoweract+'月'}</li>)
                         })
                     }
 
@@ -57,7 +58,7 @@ let Component = React.createClass({
 
 
                     <Windce areaNameX={areaNamee} areaRecordCostT={wind} areaRecordProfitO={windP} pointWidth={30}
-                            height={800} text={[actbt + 1] + '月' + xxdwfNa + '各风机发电量'} ly={40}
+                            height={800} text={mon+ xxdwfNa + '各风机发电量'} ly={40}
                             borderRadius={7}></Windce>
 
 
@@ -66,13 +67,13 @@ let Component = React.createClass({
                     </div>
                     <div className={`${styles.buttons} ${styles.buttonss}`}>
                         <button className={btn === 0 ? styles.btn0 : styles.btn1}
-                                onClick={() => gogogo(actbt, ipUrl, xxdwfId)}> 前10
+                                onClick={() => gogogo(actbt, ipUrl, xxdwfId,mapmonth)}> 前10
                         </button>
                         <button className={btn === 1 ? styles.btn0 : styles.btn1}
-                                onClick={() => back(actbt, ipUrl, xxdwfId)}>后10
+                                onClick={() => back(actbt, ipUrl, xxdwfId,mapmonth)}>后10
                         </button>
                         <button className={btn === 2 ? styles.btn0 : styles.btn1}
-                                onClick={() => more(actbt, ipUrl, xxdwfId)}>更多
+                                onClick={() => more(actbt, ipUrl, xxdwfId,mapmonth)}>更多
                         </button>
                     </div>
                 </div>
@@ -80,7 +81,13 @@ let Component = React.createClass({
 
 
         );
+}
+else{
+    return(
+        <Login></Login>)
+}
     }
+
 });
 
 
@@ -101,6 +108,9 @@ const mapStateToProps = (state) => {
         // 传过来的ip
         ipUrl: state.vars.ipUrl,
         width: state.vars.width1,
+        mapmonth: state.vars.mapmonth,
+        mon: state.vars.mon,
+        Go2: state.vars.Go2,
     }
 };
 
@@ -118,6 +128,27 @@ const mapDispatchToProps = (dispatch) => {
                 month = 12;
                 year = year - 1;
             }
+          //新建
+             $.ajax({
+                type: 'post',
+                url: 'http://' + input_url + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon', data.data[10].yearpoweract + "月"));
+                    // jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+             
+             //结束            
             // 初始数据
             $.ajax({
                 type: 'post',
@@ -131,8 +162,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
-
                     let dataa = data.data;
                     for (let i = 0; i < 10; i++) {
                         // 风场名字
@@ -151,11 +180,11 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
             });
-            dispatch(actions.setVars('actbt', month - 1));
             dispatch(actions.setVars('areaNamee', arr1));
             dispatch(actions.setVars('wind', arr3));
             dispatch(actions.setVars('windP', arr2));
             dispatch(actions.setVars('btnn', 0));
+            dispatch(actions.setVars('Go2', true));
 
 
         }
@@ -178,6 +207,7 @@ const mapDispatchToProps = (dispatch) => {
             let date = new Date();
             let monthh = date.getMonth();
             let year = date.getFullYear();
+            let amonth=value.yearpoweract;
             if (monthh == 0) {
                 monthh = 12;
                 year = year - 1;
@@ -188,8 +218,8 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + input_url + '/wbi/ELEC/getWtAreaElec',
                 async: false,
                 data: {
-                    'year': year,
-                    'month': key + 1,
+                    'year': value.year,
+                    'month': value.yearpoweract,
                     'wfid': xxdwfId,
                 },
                 dataType: 'json',
@@ -221,10 +251,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('wind', arr3));
             dispatch(actions.setVars('windP', arr2));
             dispatch(actions.setVars('btnn', 0));
+            dispatch(actions.setVars('mon', amonth+'月'));
 
         },
         // 前十
-        gogogo: (actbt, input_url, xxdwfId) => {
+        gogogo: (actbt, input_url, xxdwfId,value) => {
             let date = new Date();
             let year = date.getFullYear();
             let month = date.getMonth();
@@ -235,13 +266,14 @@ const mapDispatchToProps = (dispatch) => {
             let arr1 = [];
             let arr2 = [];
             let arr3 = [];
+
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
-                    'year': year,
-                    'month': actbt + 1,
+                    'year': value[actbt].year,
+                    'month': value[actbt].yearpoweract,
                     'wfid': xxdwfId,
                     'type': 0,
                     'groupid': '',
@@ -255,6 +287,7 @@ const mapDispatchToProps = (dispatch) => {
                     let dataa = data.data;
                     for (let i = 0; i < 10; i++) {
                         // 风场名字
+                       
                         let xWild = data.data[i].wtname;
                         arr1.push(xWild);
 
@@ -277,7 +310,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         // 后十
-        back: (actbt, input_url, xxdwfId) => {
+        back: (actbt, input_url, xxdwfId,value) => {
             let arr1 = [];
             let arr2 = [];
             let arr3 = [];
@@ -298,8 +331,8 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + input_url + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
-                    'year': year,
-                    'month': actbt + 1,
+                    'year': value[actbt].year,
+                    'month': value[actbt].yearpoweract,
                     'wfid': xxdwfId,
                     'type': 1,
                     'groupid': '',
@@ -331,7 +364,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('btnn', 1));
         },
         // 更多
-        more: (actbt, input_url, xxdwfId) => {
+        more: (actbt, input_url, xxdwfId,value) => {
             $("#sss").show();
             $('#boxcover').show();
             let date = new Date();
@@ -351,8 +384,8 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + input_url + '/wbi/ELEC/getPageSize',
                 async: false,
                 data: {
-                    'year': year,
-                    'month': actbt + 1,
+                    'year': value[actbt].year,
+                    'month': value[actbt].yearpoweract,
                     'wfid': xxdwfId,
                     'type': 2,
                     'groupid': '',

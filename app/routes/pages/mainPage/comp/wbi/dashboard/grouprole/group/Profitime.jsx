@@ -14,7 +14,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {ipUrl,w0,GERa,GEAm,GENa,GEIn,GeR,GeM,GeE,GeC,actbt,changpage,backtop,befor_pagee='group',befor_pagee2}=this.props;
+        let {ipUrl,w0,GERa,GEAm,GENa,GEIn,GeR,GeM,GeE,GeC,actbt,changpage,backtop,befor_pagee='group',befor_pagee2,GE}=this.props;
         return (
             <div className={styles.box}>
             <div className={styles.paddingtop}>
@@ -24,7 +24,7 @@ let Component = React.createClass({
                         <img src={icono}/>
                        </div>
                             <div>
-                                <Profitimechart GeR={GeR} GeE={GeE} GeC={GeC} GeM={GeM} text={'集团每月收益'}height={420} input_url={ipUrl}></Profitimechart>
+                                <Profitimechart GeR={GeR} GeE={GeE} GeC={GeC} GeM={GeM} text={'集团每月收益'}height={420} input_url={ipUrl} GE={GE}></Profitimechart>
                             </div>
                 </div>
                  <div className={styles.bigbox}>
@@ -59,6 +59,7 @@ const mapStateToProps = (state) => {
         GEAm:state.vars.GEAm1,
         GERa:state.vars.GERa1,
         w0:state.vars.w0GE,
+        GE:state.vars.GE,
         ipUrl:state.vars.ipUrl,
     }
 };
@@ -89,7 +90,7 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
 
             let GE=data.data;
-          
+
             
              for (let i in GE){
 
@@ -108,6 +109,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('GeR1',arr4));
             dispatch(actions.setVars('actbtm',10 ));
             dispatch(actions.setVars('w0GE',month+'月' ))
+            dispatch(actions.setVars('GE',GE))
             
              },
              error:function(){
@@ -126,12 +128,13 @@ const mapDispatchToProps = (dispatch) => {
              url:'http://'+input_url+'/wbi/yield/getMaxYieBayDay',  
              async:false,
              data:{
+             'year':year,
               'month':month,
              },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-                 
+
            let GE=data.data;
            for( let i in GE){
           let incomes=GE[i].incomes
@@ -149,9 +152,7 @@ const mapDispatchToProps = (dispatch) => {
              
              },
              error:function(){
-                console.log(2);
-                console.log(month);
-                console.log('http://'+input_url+'/wbi/yield/getMaxYieBayDay')
+          
               }
           })
        

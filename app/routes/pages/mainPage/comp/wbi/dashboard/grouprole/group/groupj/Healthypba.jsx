@@ -1,13 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from '../../area/Hindex.scss';
-import Hly_t from './Hly_t.jsx';
 import Hly_a from './Hly_a.jsx';
 import Hly_pba from './Hly_pba.jsx';
 import Hly_pbas from './Hly_pbas.jsx';
-import Hly_r from './Hly_r.jsx';
-import Hly_rs from './Hly_rs.jsx';
-import Hly_d from './Hly_d.jsx';
+import Login from '../../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 var $ = require('jquery');
 let ip = "10.68.100.32";
@@ -30,7 +27,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata3,ipUrl,wfid,width0,skinStyle, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
+        let {hhdata3,ipUrl,wfid,width0,skinStyle,boll8=false,mapmonth, hhdata1,wc1,wc2,bt0=0, pba3 = [], wrong32 = [], wrong33 = [], wrong31 = [], wrong30 = [], power3 = [], barLotime3 = [], hhdata, w0, w10, mon, win, windplan = win, befor_pages = 'group', returnit, hideit, wind, winds, windss, buttonAction, actbt = 10, changecolor, gogogo, back, more, power2 = [], wrong20 = [], wrong21 = [], wrong22 = [], wrong23 = [], pba2 = [], barLotime2 = [], power1 = [], wrong10 = [], wrong11 = [], wrong12 = [], wrong13 = [], pba1 = [], barLotime1 = []} = this.props;
 
 
          let data = require('./../../area/Healthy-data');
@@ -38,12 +35,8 @@ let Component = React.createClass({
         let button = data.data.button;
         let text0 = data.data.line_date;
 
-
+        if (boll8){
         return (
-
-
-
-
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
                 <div className={styles.light} id="light"></div>
@@ -61,6 +54,7 @@ let Component = React.createClass({
                     <div className={styles.hidden_bottom}>
 
                         <Hly_pbas text={""}
+                                  jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                   widths={width0}
                                   height={450}
                                   barLotime3={barLotime3}
@@ -78,11 +72,11 @@ let Component = React.createClass({
 
                 <div className={styles.onmonth}>
                     {
-                        data.data.yearelectric[0].wind.map((value, key) => {
+                        mapmonth.map((value, key) => {
                             return (
                                 <div className={actbt === key ? styles.inmonth : styles.inmonth2} key={key}
                                      onClick={() => changecolor(value, key,ipUrl)}>
-                                    {value.name}
+                                    {value.yearpoweract+"月"}
                                 </div>
                             )
                         })
@@ -94,6 +88,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_a text={mon + "集团各区域PBA"}
+                               jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                barLotime={barLotime1}
                                power1={power1}
                                wrong10={wrong10}
@@ -115,17 +110,9 @@ let Component = React.createClass({
                 </div>
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
-                        {/*<Hly_pba text={mon+w0 + "各风场PBA"}*/}
-                        {/*barLotime2={barLotime2}*/}
-                        {/*power2={power2}*/}
-                        {/*wrong20={wrong20}*/}
-                        {/*wrong21={wrong21}*/}
-                        {/*wrong22={wrong22}*/}
-                        {/*wrong23={wrong23}*/}
-                        {/*pba2={pba2}*/}
 
-                        {/*></Hly_pba>*/}
                         <Hly_pba text={mon + w0 + "各风场PBA"}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                  barLotime2={barLotime2 == null ? barLotime21 : barLotime2}
                                  power2={power2 == null ? power21 : power2}
                                  wrong20={wrong20 == null ? wrong201 : wrong20}
@@ -149,19 +136,21 @@ let Component = React.createClass({
                         <div className={styles.rbox3}>
 
                             <button className={bt0===0? styles.button : styles.button22}
-                                    onClick={() => gogogo(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid)}>
+                                    onClick={() => gogogo(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth)}>
                                 前10
                             </button>
                             <button className={bt0===1? styles.button : styles.button22}
-                                    onClick={() => back(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid)}>
+                                    onClick={() => back(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth)}>
                                 后10
                             </button>
-                            <button className={bt0===2? styles.button : styles.button22} onClick={() => more(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid)}>更多</button>
+                            <button className={bt0===2? styles.button : styles.button22}
+                                    onClick={() => more(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth)}>更多</button>
                         </div>
 
 
                         <div className={styles.rbox4}>
                             <Hly_pbas text={mon + w0 + w10 + "各风机PBA"}
+                                      jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                       barLotime3={barLotime3 == null ? barLotime31 : barLotime3}
                                       power3={power3 == null ? power31 : power3}
                                       wrong30={ wrong30 == null ? wrong301 : wrong30}
@@ -177,7 +166,9 @@ let Component = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        );}else {
+            return (<Login></Login>)
+        }
     }
 });
 
@@ -223,7 +214,9 @@ const mapStateToProps = (state) => {
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
         width0:state.vars.width0,
-        skinStyle: state.vars.skinStyle
+        skinStyle: state.vars.skinStyle,
+        mapmonth: state.vars.mapmonth,
+        boll8: state.vars.boll8,
 
     }
 };
@@ -231,27 +224,42 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: (ipUrl) => {
-            let date = new Date();
-            let year = date.getFullYear()
-            let month2 = date.getMonth();
-            if(month2==0){
-                month2=12;
-            }
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt',  month2-1));
-            dispatch(actions.setVars('mon',  month2+"月"));
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ipUrl + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon', data.data[10].yearpoweract + "月"));
+                    jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+
+            function jiang(year) {
+
+
 
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/PBA/getCompanySpacePBA',
                 async: false,
                 data: {
-                    "month": month2,
+                    "year": year[10].year,
+                    "month": year[10].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
+                    console.log(data)
                     let w0 = data.data[2][0].groupname;
                     let w10 = data.data[1][0].wfname;
                     dispatch(actions.setVars('w1', w0));
@@ -330,12 +338,14 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wrong12a', wrong12))
                     dispatch(actions.setVars('wrong13a', wrong13))
                     dispatch(actions.setVars('pba1a', pba1))
+                    dispatch(actions.setVars('boll8', true))
 
                 },
                 error: function () {
 
                 },
             })
+            }
 
 
         },
@@ -347,18 +357,18 @@ const mapDispatchToProps = (dispatch) => {
         },
 
         changecolor: (value, key,ipUrl) => {
-            dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('wind', value.plan));
-            dispatch(actions.setVars('winds', value.actrul));
-            dispatch(actions.setVars('windss', value.actruls));
+            dispatch(actions.setVars('mon', value.yearpoweract + "月"));
             dispatch(actions.setVars('bt0', 0));
 
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/PBA/getCompanySpacePBA',
                 async: false,
-                data: {"month": key + 1},
+                data: {
+                    "year": value.year,
+                    "month": value.yearpoweract,
+                },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
@@ -447,7 +457,7 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
+        gogogo: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth) => {
             dispatch(actions.setVars('bt0', 0));
           //  let grid = hhdata.data[2][0].groupid;
 
@@ -456,11 +466,12 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
+
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"0",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month": mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -501,7 +512,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
+        back: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth) => {
 console.log(actbt)
 console.log(wfid)
 
@@ -512,11 +523,11 @@ console.log(wfid)
                 url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"1",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month": mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -555,18 +566,19 @@ console.log(wfid)
             });
 
         },
-        more: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
+        more: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth) => {
             dispatch(actions.setVars('bt0', 2));
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
+
                     "groupid":  '201612121721151',
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"2",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month": mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',

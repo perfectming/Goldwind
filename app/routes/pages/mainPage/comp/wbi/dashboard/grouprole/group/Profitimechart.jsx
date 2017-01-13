@@ -7,7 +7,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() { 
-      let{input_url,changedata3,height,GeR,GeM,GeE,GeC,text}=this.props;
+      let{input_url,changedata3,height,GeR,GeM,GeE,GeC,text,GE}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -72,6 +72,7 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                             let month=e.point.index+1;
+                            let pIndex=e.point.index;
                             let date =new Date();
             let year =date.getFullYear();
            
@@ -83,18 +84,19 @@ let Component = React.createClass({
         let GERa=[];
     let    GENa=[];
      
-          
+           
+           let  monthX=GE[pIndex].month;
            $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/yield/getMaxYieBayDay',  
              async:false,
              data:{
-              'month':month,
+              'year':GE[pIndex].year,
+              'month':GE[pIndex].month,
              },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-           
            let GE=data.data;
            for( let i in GE){
           let incomes=GE[i].incomes
@@ -112,11 +114,11 @@ let Component = React.createClass({
              
              },
              error:function(){
-                console.log(1)
+             
               }
           })
        
-                     changedata3(month,GENa,GEIn,GEAm,GERa);
+                     changedata3(monthX,GENa,GEIn,GEAm,GERa);
        }
  
       
@@ -233,12 +235,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-         changedata3:(month,GENa,GEIn,GEAm,GERa)=>{
+         changedata3:(monthX,GENa,GEIn,GEAm,GERa)=>{
              dispatch(actions.setVars('GENa1',GENa));
        dispatch(actions.setVars('GEIn1',GEIn));
        dispatch(actions.setVars('GEAm1',GEAm));
        dispatch(actions.setVars('GERa1',GERa));
-       dispatch(actions.setVars('w0GE',month+'月' ))
+       dispatch(actions.setVars('w0GE',monthX+'月'))
          }
     };
 };

@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {storageTop,changeColumnOne,changeColumnTwo,changeColumnThree,changeColumnFour,unit,text,lose,name,clickArr,judge,eTime1,sTime1,eTime2,sTime2,eTime3,sTime3,eTime4,sTime4,selectId1,selectId2,selectId3,selectId4}=this.props;
+    	let {color,storageTop,changeColumnOne,changeColumnTwo,changeColumnThree,changeColumnFour,unit,text,lose,name,clickArr,judge,eTime1,sTime1,eTime2,sTime2,eTime3,sTime3,eTime4,sTime4,selectId1,selectId2,selectId3,selectId4}=this.props;
         let configPie = {
             chart: {
                 height:380,
@@ -24,7 +24,7 @@ let Component = React.createClass({
                 text: text,
                 align:'center',
                 style:{
-                    color:"#fff",
+                    color:color,
                     fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
@@ -34,7 +34,7 @@ let Component = React.createClass({
                 align:"center",
                 verticalAlign: "bottom",
                 itemStyle: {
-                    color: "#fff",
+                    color: color,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
@@ -46,7 +46,7 @@ let Component = React.createClass({
             tooltip: {
                 shared: true,
                 style:{
-                    color: '#333',
+                    color: color,
                     fontSize: '12px',
                     fontFamily:'微软雅黑'
                 },
@@ -64,7 +64,7 @@ let Component = React.createClass({
                     dataLabels: {
                         enabled: true,
                         style: {
-                            color: '#d1d2d3',
+                            color: color,
                             fontWeight: 'normal',
                             fontSize:'14px',
                             fontFamily: '微软雅黑',
@@ -79,7 +79,7 @@ let Component = React.createClass({
                 labels: {
                     y: 0, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -89,7 +89,7 @@ let Component = React.createClass({
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'14px'  //字体
                     }
                 },

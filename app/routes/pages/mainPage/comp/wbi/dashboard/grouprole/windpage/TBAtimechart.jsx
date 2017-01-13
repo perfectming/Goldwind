@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {pointWidth, input_url, xxdwfNa, xxdwfId, w0, areaName, montht, profit, cost, height, TBA, changedata2qw}=this.props;
+        let {pointWidth, input_url, xxdwfNa, xxdwfId, w0, hhdata, montht, profit, cost, height, TBA, changedata2qw}=this.props;
         let configPie = {
             chart: {
                 height: height,
@@ -71,20 +71,23 @@ let Component = React.createClass({
                     events: {
                         click: function (e) {
                             w0 = e.point.category;
-
+                            let w3 = e.point.index;
                             let b = parseInt(w0);
 
                             let wTBADaD = [];
                             let wTBARunD = [];
                             let wTBADownD = [];
                             let wTBATD = [];
+
+                            console.log(hhdata)
                             $.ajax({
                                 type: 'post',
                                 url: 'http://' + input_url + '/wbi/TBA/getDaysTBAByWf',
                                 async: false,
                                 data: {
-                                    'wfid': xxdwfId,
-                                    'month': b,
+                                    'wfid':xxdwfId==undefined? "150801":xxdwfId,
+                                    'month': hhdata.data[w3].month,
+                                    'year': hhdata.data[w3].year,
                                 },
                                 dataType: 'json',
                                 timeout: '3000',
@@ -220,7 +223,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        hhdata:state.vars.hhdata,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

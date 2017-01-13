@@ -182,6 +182,372 @@
     }
   }
 }
+.bodyBoxBlue{
+  .roleputBox{
+    width:100%;
+    height:100%;
+    border:1px solid #3B888F;
+
+    .inquireBox{
+      width:100%;
+      height:80px;
+      border-top: 1px solid #676971;
+      border-bottom: 1px solid #676971;
+      margin-bottom:40px;
+      padding: 10px;
+      overflow:hidden;
+      color: #fff;
+      input,select,button,option{
+        background: #181a25;
+      }
+      span{
+        color:#fff;
+        margin-right:10px;
+        margin-left:20px;
+        line-height:60px;
+      }
+      .seleBox{
+        float:left;
+      }
+      .inputBox{
+        float:left;
+      }
+      .dateBox{
+        float:left;
+      }
+      .btnBox{
+        float:left;
+        margin-top:16px;
+        margin-left:20px;
+        font-size:16px;
+        button{
+          &:hover{
+            background:#485b7b;
+            color:#fff;
+          }
+        }
+
+      }
+    }
+
+  }
+  .actionBox {
+    width: 100%;
+    text-align: left;
+    margin: 30px 0 30px 30px;
+    overflow: hidden;
+    img {
+      width: 30px;
+      margin-left: 50px;
+      cursor:pointer;
+    }
+  }
+
+  .tableBox {
+
+    overflow: hidden;
+    .tableHeaderBox {
+      overflow: hidden;
+      background: #1C405B;
+      .tableHeaderItem {
+        float: left;
+        height:40px;
+        line-height:40px;
+        overflow: hidden;
+        color:#fff;
+        text-align: center;
+      }
+    }
+    .tableContentBox {
+      font-size: 14px;
+      .tableContentLine {
+        color:#fff;
+        background: #112A48;
+        overflow: hidden;
+        &:hover{
+          border:1px solid #2ff4fb;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 40px;
+          line-height:40px;
+          border: none;
+          img{
+            height:20px;
+            width:20px;
+          }
+        }
+        select,input{
+          background: #112A48;
+          border:6px solid transparent;
+          &:hover{
+            background:#213A58;
+          }
+          option{
+            font-size: 10px;
+            padding: 0 0 0 0px;
+          }
+          text-align: center;
+          height: 30px;
+        }
+        select{
+          padding: 0 0 0 40px;
+        }
+        .tableLineNum {
+          width: 65px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+      .tableContentLine1 {
+        color:#fff;
+        overflow: hidden;
+        background: #15324E;
+        &:hover{
+          border:1px solid #2ff4fb;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          line-height:40px;
+          text-align: center;
+          height: 40px;
+          border: none;
+          img{
+            height:20px;
+            width:20px;
+          }
+        }
+        select,input{
+          background: #15324E;
+          border:6px solid transparent;
+          &:hover{
+            background:#485b7b;
+          }
+          option{
+            font-size: 10px;
+            padding: 0 0 0 0px;
+          }
+          text-align: center;
+          height: 30px;
+        }
+        select{
+          padding: 0 0 0 40px;
+        }
+        .tableLineNum {
+          width: 65px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+    }
+  }
+  .pageplus{
+    text-align:center;
+    height:60px;
+    width:100%;
+    margin-top: 20px;
+    span{
+      width:70px;
+      height:30px;
+      background: none;
+      border: none;
+      margin-left:23px;
+      border-radius:3px;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+  }
+}
+.bodyBoxWhite{
+  .roleputBox{
+    width:100%;
+    height:100%;
+    border:1px solid #3B888F;
+
+    .inquireBox{
+      width:100%;
+      height:80px;
+      border-top: 1px solid #676971;
+      border-bottom: 1px solid #676971;
+      margin-bottom:40px;
+      padding: 10px;
+      overflow:hidden;
+      color: #333;
+      input,select,button,option{
+        background: #eee;
+      }
+      span{
+        color:#333;
+        margin-right:10px;
+        margin-left:20px;
+        line-height:60px;
+      }
+      .seleBox{
+        float:left;
+      }
+      .inputBox{
+        float:left;
+      }
+      .dateBox{
+        float:left;
+      }
+      .btnBox{
+        float:left;
+        margin-top:16px;
+        margin-left:20px;
+        font-size:16px;
+        button{
+          &:hover{
+            background:#eee;
+            color:#333;
+          }
+        }
+
+      }
+    }
+
+  }
+  .actionBox {
+    width: 100%;
+    text-align: left;
+    margin: 30px 0 30px 30px;
+    overflow: hidden;
+    img {
+      width: 30px;
+      margin-left: 50px;
+      cursor:pointer;
+    }
+  }
+
+  .tableBox {
+
+    overflow: hidden;
+    .tableHeaderBox {
+      overflow: hidden;
+      background: #F2F3F4;
+      .tableHeaderItem {
+        float: left;
+        height:40px;
+        line-height:40px;
+        overflow: hidden;
+        color:#333333;
+        text-align: center;
+      }
+    }
+    .tableContentBox {
+      font-size: 14px;
+      .tableContentLine {
+        color:#333333;
+        background: #E8F0F6;
+        overflow: hidden;
+        &:hover{
+          border:1px solid #2ff4fb;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          text-align: center;
+          height: 40px;
+          line-height:40px;
+          border: none;
+          img{
+            height:20px;
+            width:20px;
+          }
+        }
+        select,input{
+          background: #E8F0F6;
+          border:6px solid transparent;
+          &:hover{
+            background:#485b7b;
+          }
+          option{
+            font-size: 10px;
+            padding: 0 0 0 0px;
+          }
+          text-align: center;
+          height: 30px;
+        }
+        select{
+          padding: 0 0 0 40px;
+        }
+        .tableLineNum {
+          width: 65px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+      .tableContentLine1 {
+        color:#333333;
+        overflow: hidden;
+        background: #F2F4F5;
+        &:hover{
+          border:1px solid #2ff4fb;
+        }
+        .tableContentItem {
+          float: left;
+          overflow: hidden;
+          line-height:40px;
+          text-align: center;
+          height: 40px;
+          border: none;
+          img{
+            height:20px;
+            width:20px;
+          }
+        }
+        select,input{
+          background: #F2F4F5;
+          border:6px solid transparent;
+          &:hover{
+            background:#485b7b;
+          }
+          option{
+            font-size: 10px;
+            padding: 0 0 0 0px;
+          }
+          text-align: center;
+          height: 30px;
+        }
+        select{
+          padding: 0 0 0 40px;
+        }
+        .tableLineNum {
+          width: 65px;
+          padding: 10px 0 10px;
+          text-align: center;
+          background-color: #E4E5E6;
+          float: left;
+        }
+      }
+    }
+  }
+  .pageplus{
+    text-align:center;
+    height:60px;
+    width:100%;
+    margin-top: 20px;
+    span{
+      width:70px;
+      height:30px;
+      background: none;
+      border: none;
+      margin-left:23px;
+      border-radius:3px;
+      color: #333;
+      cursor: pointer;
+    }
+  }
+}
 
 
 

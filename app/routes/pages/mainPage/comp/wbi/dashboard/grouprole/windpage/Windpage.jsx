@@ -17,15 +17,11 @@ let Component = React.createClass({
     },
     componentDidMount() {
         this.props.init();
-        let {display}=this.props;
-        setTimeout(function(){
-            display();
-        },2000)
     },
    
 
     render() {
-        let {display,skinStyle,healthy,wfName,wfId,areaId,wfTheory,wfAct,wtArr,wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct,month,monthAct,monthPlan,month2,income,cost,runTime,downTime,TBA,ipUrl,windBool=false,actbt,flagTime2=true,flagPba2=true,flag2=true,changepageSort1,changepageProT,changepageProS,changepageSort,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
+        let {skinStyle,healthy,wfName,wfId,areaId,wfTheory,wfAct,wtArr,wfYearPlan,wfYearAct,wfMonthPlan,wfMonthAct,wfDayPlan,wfDayAct,month,monthAct,monthPlan,month2,income,cost,runTime,downTime,TBA,ipUrl,windBool=false,actbt,flagTime2=true,flagPba2=true,flag2=true,changepageSort1,changepageProT,changepageProS,changepageSort,changepageW,changepageHealthyT,changepageHealthyS,changepageTBAT,changepageTBAS,changepagePBAT,changepagePBAS,changepageEleT,changepageEleS}=this.props;
         if(windBool){
         	return (
 	            <div className={skinStyle==1? styles.boxBlue:skinStyle==2? styles.boxWhite:styles.box}>
@@ -84,33 +80,21 @@ let Component = React.createClass({
 	           					<div className={styles.electricFirst}>
 	           						<a></a><span>年累计发电量</span>
 	           						<div className={styles.electricTotal}  style={(wfYearAct/wfYearPlan)>.9? {color:'#62de88'}:(wfYearAct/wfYearPlan)>.8? {color:'#e8952a'}:(wfYearAct/wfYearPlan)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(wfYearAct/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.hoverBox} id="hoverBoxY">
-                                        <span>累计发电量<br/>{(wfYearAct/10000).toFixed(1)}万kWh</span><br/>
-                                        <span>计划发电量<br/>{(wfYearPlan/10000).toFixed(1)}万kWh</span>
-                                    </div>
-	           						<div className={styles.electricPercent} id="BoxY">
+	           						<div className={styles.electricPercent}>
 	           							<div className={wfYearAct/wfYearPlan>0.9? styles.green:wfYearAct/wfYearPlan>.8? styles.yellow:wfYearAct/wfYearPlan>.6? styles.red:styles.redS} style={{width:((wfYearAct/wfYearPlan*100).toFixed(1))+"%"}}>{(wfYearAct/wfYearPlan*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
 	           					<div className={styles.electricSecond}>
 	           						<a></a><span>月累计发电量</span>
 	           						<div className={styles.electricTotal}  style={(wfMonthAct/wfMonthPlan)>.9? {color:'#62de88'}:(wfMonthAct/wfMonthPlan)>.8? {color:'#e8952a'}:(wfMonthAct/wfMonthPlan)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(wfMonthAct/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.hoverBox} id="hoverBoxM">
-                                        <span>累计发电量<br/>{(wfMonthAct/10000).toFixed(1)}万kWh</span><br/>
-                                        <span>计划发电量<br/>{(wfMonthPlan/10000).toFixed(1)}万kWh</span>
-                                    </div>
-	           						<div className={styles.electricPercent} id="BoxM">
+	           						<div className={styles.electricPercent}>
 	           							<div className={wfMonthAct/wfMonthPlan>0.9? styles.green:wfMonthAct/wfMonthPlan>.8? styles.yellow:wfMonthAct/wfMonthPlan>.6? styles.red:styles.redS} style={{width:((wfMonthAct/wfMonthPlan*100).toFixed(1))+"%"}}>{(wfMonthAct/wfMonthPlan*100).toFixed(1)}%</div>
 	           						</div> 
 	           					</div>
 	           					<div className={styles.electricThird}>
 	           						<a></a><span>日累计发电量</span>
 	           						<div className={styles.electricTotal} style={(wfDayAct/wfDayPlan)>.9? {color:'#62de88'}:(wfDayAct/wfDayPlan)>.8? {color:'#e8952a'}:(wfDayAct/wfDayPlan)>.6? {color:'#a32124'}:{color:'#d8403d'}}>{(wfDayAct/10000).toFixed(1)}万kWh</div>
-	           						<div className={styles.hoverBox} id="hoverBoxD">
-                                        <span>累计发电量<br/>{(wfDayAct/10000).toFixed(1)}万kWh</span><br/>
-                                        <span>计划发电量<br/>{(wfDayPlan/10000).toFixed(1)}万kWh</span>
-                                    </div>
-	           						<div className={styles.electricPercent} id="BoxD">
+	           						<div className={styles.electricPercent}>
 	           							<div className={wfDayAct/wfDayPlan>0.9? styles.green:wfDayAct/wfDayPlan>.8? styles.yellow:wfDayAct/wfDayPlan>.6? styles.red:styles.redS} style={{width:((wfDayAct/wfDayPlan*100).toFixed(1))+"%"}}>{(wfDayAct/wfDayPlan*100).toFixed(1)}%</div>
 	           						</div>
 	           					</div>
@@ -122,7 +106,7 @@ let Component = React.createClass({
 	           							<div className={styles.space} onClick={()=>changepageEleS()}></div>
 	           							<div className={styles.time} onClick={()=>changepageEleT()}></div>
 	           						</div>
-	           						<Yearelectric month={month} plan={monthPlan} actrul={monthAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+	           						<Yearelectric color={skinStyle==2? '#333':'#fff'} month={month} plan={monthPlan} actrul={monthAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
@@ -134,7 +118,7 @@ let Component = React.createClass({
 		           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
 	           							</div>
 		           					</div>
-	           						<Yearelectric month={month2} plan={income} actrul={cost} unit={'(元)'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
+	           						<Yearelectric color={skinStyle==2? '#333':'#fff'} month={month2} plan={income} actrul={cost} unit={'(元)'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           			</div>
@@ -262,12 +246,14 @@ const mapDispatchToProps = (dispatch) => {
 							        	wfDayPlan=data.data.dayPlanElec;
 							        	wfDayAct=data.data.dayelec;
 							        	month=[],monthAct=[],monthPlan=[];
+							        	var monthNum=[];
 							        	for(var i in data.data.wfieldsMonthsElec){
 											month.push(data.data.wfieldsMonthsElec[i].month+"月");
-											monthAct.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
+											month.push(data.data.wfieldsMonthsElec[i].month);
+											monthNum.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
 										};
-										for(var i in data.data.wfieldsMonthsPlanElec){
-											monthPlan.push((data.data.wfieldsMonthsPlanElec[i]).toFixed(1)/1);
+										for(var i=0;i<monthNum.length;i++){
+											monthPlan.push((data.data.wfieldsMonthsPlanElec[monthNum[i]]).toFixed(1)/1);
 										};
 										dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
 										dispatch(actions.setVars('wfYearAct',wfYearAct ));
@@ -420,26 +406,6 @@ const mapDispatchToProps = (dispatch) => {
                 test:''
             }
         },
-        display:() =>{
-            $('#BoxD').mouseover(function(){
-                $('#hoverBoxD').css('display','block');
-            });
-            $('#BoxD').mouseleave(function(){
-                $('#hoverBoxD').css('display','none');
-            });
-            $('#BoxM').mouseover(function(){
-                $('#hoverBoxM').css('display','block');
-            });
-            $('#BoxM').mouseleave(function(){
-                $('#hoverBoxM').css('display','none');
-            });
-            $('#BoxY').mouseover(function(){
-                $('#hoverBoxY').css('display','block');
-            });
-            $('#BoxY').mouseleave(function(){
-                $('#hoverBoxY').css('display','none');
-            });
-        },
         changepageSort:(flag2,flagTime2,wtArr)=>{//各风机停机时间排序
         	flagTime2==false? dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('wtArr', wtArr.sort(function(a,b){return b.downtime-a.downtime})));
         	dispatch(actions.setVars('flag2',false ));
@@ -497,12 +463,14 @@ const mapDispatchToProps = (dispatch) => {
 							        	wfDayPlan=data.data.dayPlanElec;
 							        	wfDayAct=data.data.dayelec;
 							        	month=[],monthAct=[],monthPlan=[];
+							        	var monthNum=[];
 							        	for(var i in data.data.wfieldsMonthsElec){
 											month.push(data.data.wfieldsMonthsElec[i].month+"月");
-											monthAct.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
+											month.push(data.data.wfieldsMonthsElec[i].month);
+											monthNum.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
 										};
-										for(var i in data.data.wfieldsMonthsPlanElec){
-											monthPlan.push((data.data.wfieldsMonthsPlanElec[i]).toFixed(1)/1);
+										for(var i=0;i<monthNum.length;i++){
+											monthPlan.push((data.data.wfieldsMonthsPlanElec[monthNum[i]]).toFixed(1)/1);
 										};
 										dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
 										dispatch(actions.setVars('wfYearAct',wfYearAct ));

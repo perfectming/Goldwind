@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {wtData,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime,AreaId,X1,changedata1,areaId,areaName,areaElec,areaFault,areaMaintain,areaLimit,areaDevice,areaPBA}=this.props;
+    	let {color,wtData,wfName,wfId,wfElec,wfLose,wfPBA,wtElec,wtLose,wtPBA,wtName,ipUrl,sTime,eTime,AreaId,X1,changedata1,areaId,areaName,areaElec,areaFault,areaMaintain,areaLimit,areaDevice,areaPBA}=this.props;
         let configPie = {
             chart: {
                 height:380,
@@ -26,7 +26,7 @@ let Component = React.createClass({
                 align: 'left',
                  x : 40,
                 style:{
-                    color: "#fff",
+                    color: color,
                     fontSize: "16px",
                     fontFamily: "微软雅黑"
                 }
@@ -38,7 +38,7 @@ let Component = React.createClass({
                 align: "right",
                 verticalAlign: "top",
                 itemStyle: {
-                    color: "#fff",
+                    color: color,
                     fontSize: "14px",
                     fontWeight: "normal",
                     fontFamily: "微软雅黑"
@@ -79,7 +79,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -95,13 +95,13 @@ let Component = React.createClass({
 	                x:-10,
 	                style:{
 	                	fontSize:'14px',
-	                	color:'white',
+	                	color:color,
 	                }
                 },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -117,14 +117,14 @@ let Component = React.createClass({
 	                x: 10,
 	                style:{
 	                	fontSize:'14px',
-	                	color:'white',
+	                	color:color,
 	                }
                },
                labels: {
                		format: '',
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
