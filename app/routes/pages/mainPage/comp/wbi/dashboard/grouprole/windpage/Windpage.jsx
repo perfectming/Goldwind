@@ -229,6 +229,8 @@ const mapDispatchToProps = (dispatch) => {
 			        	};
 			        	dispatch(actions.setVars('wfName',wfName ));
 			        	dispatch(actions.setVars('wfId',wfId ));
+			        	dispatch(actions.setVars('xxdwfNa1', wfName[0]));
+			        	dispatch(actions.setVars('xxdwfId1', wfId[0]));
 			        },
 			        complete : function(XMLHttpRequest,status){ 
 						$.ajax({

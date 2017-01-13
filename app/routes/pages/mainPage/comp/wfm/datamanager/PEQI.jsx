@@ -106,6 +106,14 @@ let Component = React.createClass({
                                                            readOnly="true" value={num}/>
                                                     {
                                                         arr1.map((valueC, keyC)=> {
+                                                            if(valueC=='operator'){
+                                                                return (
+                                                                    <div className={styles.tableContentItem}
+                                                                         style={{width:arr[keyC]+"%"}} key={keyC}>
+                                                                        {value[valueC]}
+                                                                    </div>
+                                                                )
+                                                            }else
                                                             if(keyC==0){
                                                                 return (
                                                                     <div className={styles.tableContentItem}
@@ -298,8 +306,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         saveTableItem:(line)=>{
             let tableV = _.clone(getState().objs.tableContent);
+            let horizon = _.clone(getState().vars.userNameT);
             let asd=tableV.data.pagedata[line];
             let wfp;
+            asd['operator']=horizon;
             wfp=JSON.stringify(asd);
             $.ajax({
                 url: soam+'/ELEC/uppWfelec?newwfp=data',

@@ -116,7 +116,7 @@ const mapDispatchToProps = (dispatch) => {
                        $('#denglu1')[0].value='登 入 中...';
                        $.ajax({
                            url: 'http://10.68.100.32:8080/soam/user/login',
-                           // url: 'http://10.9.0.19:9080/soam/user/login',
+                           // url: 'http://10.9.100.25:8080/soam/user/login',
                            type: 'post',
                            data:'name='+$('#username1')[0].value+'&&password='+$('#password1')[0].value,
                            dataType: 'json',//here,

@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {unit,text,lose,name}=this.props;
+    	let {storageTop,changeColumnOne,changeColumnTwo,changeColumnThree,changeColumnFour,unit,text,lose,name,clickArr,judge,eTime1,sTime1,eTime2,sTime2,eTime3,sTime3,eTime4,sTime4,selectId1,selectId2,selectId3,selectId4}=this.props;
         let configPie = {
             chart: {
                 height:380,
@@ -98,6 +98,21 @@ let Component = React.createClass({
                 type: 'pie',
                 name: name,
                 data: lose,
+                events: {
+                        click: function(e) {
+                            var j=e.point.index;
+                            if( judge==1){
+                                changeColumnOne(clickArr[j][0],sTime1,eTime1,selectId1);
+                            }else if(judge==2){
+                                changeColumnTwo(clickArr[j][0],sTime2,eTime2,selectId2);
+                            }else if(judge==3){
+                                changeColumnThree(clickArr[j][0],sTime3,eTime3,selectId3,storageTop);
+                            }else if(judge==4){
+                                changeColumnFour(clickArr[j][0],sTime4,eTime4,selectId4,storageTop);
+                            }
+
+                        }
+                }
             }]
         };
         return (
@@ -108,12 +123,192 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        sTime1 : state.vars.sTime1,
+        eTime1 : state.vars.eTime1,
+        sTime2 : state.vars.sTime2,
+        eTime2 : state.vars.eTime2,
+        sTime3 : state.vars.sTime3,
+        eTime3 : state.vars.eTime3,
+        sTime4 : state.vars.sTime4,
+        eTime4 : state.vars.eTime4,
+        selectId1 : state.vars.selectId1,
+        selectId2 : state.vars.selectId2,
+        selectId3 : state.vars.selectId3,
+        selectId4 : state.vars.selectId4,
+        storageTop: state.vars.storageTop,
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        init: () => {
+        changeColumnOne:(clickArr,sTime1,eTime1,selectId1) =>{
+            if(selectId1<1000000){
+                $.ajax({
+                url:'http://10.68.100.32:8080/wbi/KPI/getReliableNormAnalyse',
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                data: {'wttype':clickArr,'startTime':sTime1,'endTime':eTime1,'wfid':selectId1}, 
+                success: function (data) {
+                    var typeOne=[],machineTypeOne=[],typeNameOne=clickArr;
+                    for(var i in data.data){
+                        typeOne.push((data.data[i]).toFixed(1)/1);
+                        machineTypeOne.push(i);
+                    }
+                    dispatch(actions.setVars('typeNameOne', typeNameOne));
+                    dispatch(actions.setVars('typeOne', typeOne));
+                    dispatch(actions.setVars('machineTypeOne', machineTypeOne));
+                },
+                complete : function(XMLHttpRequest,status) {},
+            });
+            }else{
+                $.ajax({
+                url:'http://10.68.100.32:8080/wbi/KPI/getReliableNormAnalyse',
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                data: {'wttype':clickArr,'startTime':sTime1,'endTime':eTime1,'groupid':selectId1}, 
+                success: function (data) {
+                    var typeOne=[],machineTypeOne=[],typeNameOne=clickArr;
+                    for(var i in data.data){
+                        typeOne.push((data.data[i]).toFixed(1)/1);
+                        machineTypeOne.push(i);
+                    }
+                    dispatch(actions.setVars('typeNameOne', typeNameOne));
+                    dispatch(actions.setVars('typeOne', typeOne));
+                    dispatch(actions.setVars('machineTypeOne', machineTypeOne));
+                },
+                complete : function(XMLHttpRequest,status) {},
+            });
+            }
+            
+        },
+        changeColumnTwo:(clickArr,sTime2,eTime2,selectId2) =>{
+            if(selectId2<1000000){
+                $.ajax({
+                    url:'http://10.68.100.32:8080/wbi/KPI/getReliableNormAnalyse',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {'wttype':clickArr,'startTime':sTime2,'endTime':eTime2,'wfid':selectId2}, 
+                    success: function (data) {
+                        var typeTwo=[],machineTypeTwo=[],typeNameTwo=clickArr;
+                        for(var i in data.data){
+                            typeTwo.push((data.data[i]).toFixed(1)/1);
+                            machineTypeTwo.push(i);
+                        }
+                        dispatch(actions.setVars('typeNameTwo', typeNameTwo));
+                        dispatch(actions.setVars('typeTwo', typeTwo));
+                        dispatch(actions.setVars('machineTypeTwo', machineTypeTwo));
+                    },
+                    complete : function(XMLHttpRequest,status) {},
+                });
+            }else{
+                $.ajax({
+                    url:'http://10.68.100.32:8080/wbi/KPI/getReliableNormAnalyse',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {'wttype':clickArr,'startTime':sTime2,'endTime':eTime2,'groupid':selectId2}, 
+                    success: function (data) {
+                        var typeTwo=[],machineTypeTwo=[],typeNameTwo=clickArr;
+                        for(var i in data.data){
+                            typeTwo.push((data.data[i]).toFixed(1)/1);
+                            machineTypeTwo.push(i);
+                        }
+                        dispatch(actions.setVars('typeNameTwo', typeNameTwo));
+                        dispatch(actions.setVars('typeTwo', typeTwo));
+                        dispatch(actions.setVars('machineTypeTwo', machineTypeTwo));
+                    },
+                    complete : function(XMLHttpRequest,status) {},
+                });
+            }
+                        
+        },
+        changeColumnThree:(clickArr,sTime3,eTime3,selectId3,storageTop) =>{
+            if(selectId3<1000000){
+                $.ajax({
+                    url:'http://10.68.100.32:8080/wbi/KPI/getAboutTopFailureLoss',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {'wttype':clickArr,'flag':storageTop,'startTime':sTime3,'endTime':eTime3,'wfid':selectId3},
+                    timeout : 60000, 
+                    success: function (data) {
+                        var columnOneName=[],columnOne=[];
+                        for(var i in data.data){
+                            columnOneName.push(data.data[i].blooeydescr);
+                            columnOne.push((data.data[i].powerloss).toFixed(1)/1);
+                        };
+                        dispatch(actions.setVars('columnOneName', columnOneName));
+                        dispatch(actions.setVars('columnOne', columnOne));
+                    },
+                    complete : function(XMLHttpRequest,status) {},
+                });
+            }else{
+                $.ajax({
+                    url:'http://10.68.100.32:8080/wbi/KPI/getAboutTopFailureLoss',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {'wttype':clickArr,'flag':storageTop,'startTime':sTime3,'endTime':eTime3,'groupid':selectId3},
+                    timeout : 60000, 
+                    success: function (data) {
+                        var columnOneName=[],columnOne=[];
+                        for(var i in data.data){
+                            columnOneName.push(data.data[i].blooeydescr);
+                            columnOne.push((data.data[i].powerloss).toFixed(1)/1);
+                        };
+                        dispatch(actions.setVars('columnOneName', columnOneName));
+                        dispatch(actions.setVars('columnOne', columnOne));
+                    },
+                    complete : function(XMLHttpRequest,status) {},
+                });
+            }
+            
+        },
+        changeColumnFour:(clickArr,sTime4,eTime4,selectId4,storageTop) =>{
+            if(selectId4<1000000){
+                $.ajax({
+                    url:'http://10.68.100.32:8080/wbi/KPI/getAboutTopFailureLoss',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {'wttype':clickArr,'flag':storageTop,'startTime':sTime4,'endTime':eTime4,'wfid':selectId4},
+                    timeout : 60000, 
+                    success: function (data) {
+                        var columnTwoName=[],columnTwo=[];
+                        for(var i in data.data){
+                            columnTwoName.push(data.data[i].blooeydescr);
+                            columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
+                        };
+                        dispatch(actions.setVars('columnTwoName', columnTwoName));
+                        dispatch(actions.setVars('columnTwo', columnTwo));
+                    },
+                    complete : function(XMLHttpRequest,status) {},
+                });
+            }else{
+                $.ajax({
+                    url:'http://10.68.100.32:8080/wbi/KPI/getAboutTopFailureLoss',
+                    type: 'post',
+                    async: false,
+                    dataType: 'json',
+                    data: {'wttype':clickArr,'flag':storageTop,'startTime':sTime4,'endTime':eTime4,'groupid':selectId4},
+                    timeout : 60000, 
+                    success: function (data) {
+                        var columnTwoName=[],columnTwo=[];
+                        for(var i in data.data){
+                            columnTwoName.push(data.data[i].blooeydescr);
+                            columnTwo.push((data.data[i].powerloss).toFixed(1)/1);
+                        };
+                        dispatch(actions.setVars('columnTwoName', columnTwoName));
+                        dispatch(actions.setVars('columnTwo', columnTwo));
+                    },
+                    complete : function(XMLHttpRequest,status) {},
+                });
+            }
+
         },
     };
 };

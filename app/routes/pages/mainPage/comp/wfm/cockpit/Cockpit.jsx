@@ -133,6 +133,18 @@ let Component = React.createClass({
             let urodz = new Date(parameter.safeDate);
             let now = new Date();let ile = now.getTime() - urodz.getTime();
             let dni = Math.floor(ile / (1000 * 60 * 60 * 24));
+
+            //今年已经过去的小时数//
+            let nowa = new Date();
+            let firstDay = new Date(nowa.getFullYear(),0,1);
+            //计算当前时间与本年第一天的时差(返回一串数值，代表两个日期相差的毫秒数)
+            let dateDiff = nowa - firstDay;
+            //一小时的毫秒数
+            let msPerDay = 1000 * 60 * 60 ;
+            //计算天数
+            let diffDays = Math.ceil(dateDiff/ msPerDay);
+            console.log(diffDays);
+
             return(
                 <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
                     <div className={`${styles.zhzb} ${styles.box_shadow}`}>
@@ -191,9 +203,9 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.zhzbglbox}><img src={up}/>
                                 <p>年度MTBF</p>
-                                <Pie2 color={zmtbf>7884? ['#62de88',annularPlate]:zmtbf>7708?['#e8952a',annularPlate]:zmtbf>5256?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearMTBF),8760-Number(mobd[8888800].YearMTBF)]}></Pie2>
+                                <Pie2 color={zmtbf>diffDays*0.9? ['#62de88',annularPlate]:zmtbf>diffDays*0.8?['#e8952a',annularPlate]:zmtbf>diffDays*0.6 ?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearMTBF),diffDays-Number(mobd[8888800].YearMTBF)]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
-                                    <p style={zmtbf>7884? {color:'#62de88'} :zmtbf>7708?{color:'#e8952a'}:zmtbf>5256?{color:'#a32124'}:{color:'#d8403d'}}>{zmtbf}h</p>
+                                    <p style={zmtbf>diffDays*0.9? {color:'#62de88'} :zmtbf>diffDays*0.8?{color:'#e8952a'}:zmtbf>diffDays*0.6?{color:'#a32124'}:{color:'#d8403d'}}>{zmtbf}h</p>
                                 </span>
                             </div>
                         </div>
@@ -356,7 +368,7 @@ const mapDispatchToProps = (dispatch) => {
                 alert('数据获取失败！请重新登入');
                 browserHistory.push('/app/all/page/login');
                 dispatch(actions.setVars('userInfo', false));
-            },7000)
+            },10000)
             //数据刷新//
             time=setInterval(function(){
                 TY.getRtData("Cockpit", 8888800, ppo);

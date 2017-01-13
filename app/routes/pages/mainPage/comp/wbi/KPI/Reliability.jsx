@@ -67,7 +67,7 @@ let Component = React.createClass({
                         <div className={styles.floorOne}>
                             <div className={`${styles.pie} ${styles.boxShadow}`}>
                                 <div className={typeNameOne==undefined? styles.hide:styles.button} onClick={()=>buttonResetA()}>清除</div>
-                                <ChartPie unit={"h"} name={reliabilityNameOne} text={reliabilityNameOne} lose={reliabilityOne}></ChartPie>
+                                <ChartPie judge={1} clickArr={reliabilityOne} unit={"h"} name={reliabilityNameOne} text={reliabilityNameOne} lose={reliabilityOne}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
                                 <TwoColumn name={typeNameOne} title={typeNameOne} month={machineTypeOne} plan={typeOne} unit={"(h)"}></TwoColumn>
@@ -76,7 +76,7 @@ let Component = React.createClass({
                         <div className={styles.floorTwo}>
                             <div className={`${styles.pie} ${styles.boxShadow}`}>
                                 <div className={typeNameTwo==undefined? styles.hide:styles.button} onClick={()=>buttonResetB()}>清除</div>
-                                <ChartPie unit={"h"} name={reliabilityNameOne} text={reliabilityNameTwo} lose={reliabilityTwo}></ChartPie>
+                                <ChartPie judge={2} clickArr={reliabilityTwo} unit={"h"} name={reliabilityNameOne} text={reliabilityNameTwo} lose={reliabilityTwo}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
                                 <TwoColumn name={typeNameTwo} title={typeNameTwo} month={machineTypeTwo} plan={typeTwo} unit={"(h)"}></TwoColumn>
@@ -248,6 +248,9 @@ const mapDispatchToProps = (dispatch) => {
                     data: {'startTime':sTime,'endTime':eTime,'wfid':selectId}, 
                     success: function (data) {
                         if(typeNameOne==undefined){
+                            dispatch(actions.setVars('selectId1', selectId));
+                            dispatch(actions.setVars('sTime1', sTime));
+                            dispatch(actions.setVars('eTime1', eTime));
                             reliabilityOne=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
@@ -257,6 +260,9 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('reliabilityNameOne', reliabilityNameOne));
                             dispatch(actions.setVars('reliabilityOne', reliabilityOne));
                         }else if(typeNameOne!==undefined&&typeNameTwo==undefined){
+                            dispatch(actions.setVars('selectId2', selectId));
+                            dispatch(actions.setVars('sTime2', sTime));
+                            dispatch(actions.setVars('eTime2', eTime));
                             reliabilityTwo=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
@@ -315,6 +321,9 @@ const mapDispatchToProps = (dispatch) => {
                     data: {'startTime':sTime,'endTime':eTime,'groupid':selectId}, 
                     success: function (data) {
                         if(typeNameOne==undefined){
+                            dispatch(actions.setVars('selectId1', selectId));
+                            dispatch(actions.setVars('sTime1', sTime));
+                            dispatch(actions.setVars('eTime1', eTime));
                             reliabilityOne=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
@@ -324,6 +333,9 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('reliabilityNameOne', reliabilityNameOne));
                             dispatch(actions.setVars('reliabilityOne', reliabilityOne));
                         }else if(typeNameOne!==undefined&&typeNameTwo==undefined){
+                            dispatch(actions.setVars('selectId2', selectId));
+                            dispatch(actions.setVars('sTime2', sTime));
+                            dispatch(actions.setVars('eTime2', eTime));
                             reliabilityTwo=[];
                             wtType=data.data[0].wttype;
                             for(var i in data.data){
