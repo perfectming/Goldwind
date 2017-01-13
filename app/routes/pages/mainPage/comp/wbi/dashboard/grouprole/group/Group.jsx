@@ -22,7 +22,7 @@ let Component = React.createClass({
         let {display}=this.props;
         setTimeout(function(){
             display();
-        },2000)
+        },3000)
     },
 
 
