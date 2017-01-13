@@ -22,7 +22,7 @@ let Component = React.createClass({
         let {display}=this.props;
         setTimeout(function(){
             display();
-        },2000)
+        },3000)
     },
    
 
@@ -286,7 +286,7 @@ const mapDispatchToProps = (dispatch) => {
 						        		monthNum.push(data.data.twAreaMonthElec[i].month);
 						        	};
 						        	for(var i=0;i<monthNum.length;i++){
-						        		elecPlan.push((data.data.twAreaMonthPlanElec[monthNum[i]]).toFixed(1)/1);
+						        		elecPlan.push((data.data.twAreaMonthPlanElec[monthNum[i]]));
 						        		
 						        	};
 						        	dispatch(actions.setVars('yearElec',yearElec ));
@@ -456,7 +456,7 @@ const mapDispatchToProps = (dispatch) => {
 						        		monthNum.push(data.data.twAreaMonthElec[i].month);
 						        	}
 						        	for(var i=0;i<monthNum.length;i++){
-						        		elecPlan.push((data.data.twAreaMonthPlanElec[monthNum[i]]).toFixed(1)/1);
+						        		elecPlan.push((data.data.twAreaMonthPlanElec[monthNum[i]]));
 						        	}
 						        	dispatch(actions.setVars('yearElec',yearElec ));
 						        	dispatch(actions.setVars('monthElec',monthElec ));
@@ -484,11 +484,19 @@ const mapDispatchToProps = (dispatch) => {
 								        	dispatch(actions.setVars('areaArr',areaArr));
 								        },
 								        complete : function(XMLHttpRequest,status){ 
+								        		var date = new Date();
+										            if(date.getMonth()==0){
+										            	var yearString = date.getFullYear()-1;
+										            	var monthString = 12;
+										            }else{
+										                var yearString = date.getFullYear();
+										                var monthString = date.getMonth();										                
+										            }
 									　　　　	$.ajax({
 								        		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA饼图
 										        type: 'post',
 										        async:true,
-										        data:{'groupid':areaId[key]},
+										        data:{'groupid':areaId[key],'year':yearString,'month':monthString},
 										        dataType: 'json',//here
 										        success:function (data) {
 										        	runTime=data.data[0].runtimes;
