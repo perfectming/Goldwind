@@ -31,7 +31,7 @@ let Component = React.createClass({
               <input placeholder=" 密 码:" className={css.int} id="password1" type="password" name="password" /><br/>
               <input placeholder=" 验证码:" className={css.ints} id="check" type="text" name="check" />
               <input value={code} readOnly="readOnly" id="checked" onClick={()=>{change()}} className={css.pages}/><br/>
-              <input className={css.submit} id="denglu1" type="submit " value='登      陆' readOnly="true" onClick={()=>login()} />
+              <input className={css.submit} id="denglu1" type="submit " value='登      录' readOnly="true" onClick={()=>login()} />
             </form>
           </div>
           }
@@ -77,7 +77,7 @@ const mapDispatchToProps = (dispatch) => {
                    // console.log(json);
                    if ($('#check')[0].value!==$('#checked')[0].value){
                        alert('验证码输入错误');
-                       $('#denglu1')[0].value='登     入';
+                       $('#denglu1')[0].value='登     录';
                        // let codeNew='';
                        // for (let i=0;i<4;i++){
                        //   codeNew+=codeChars[Math.floor(Math.random()*36)]
@@ -113,7 +113,7 @@ const mapDispatchToProps = (dispatch) => {
                        }
                        dispatch(actions.setVars('verificationCode', codeNew));
                    }else {
-                       $('#denglu1')[0].value='登 入 中...';
+                       $('#denglu1')[0].value='登 录 中...';
                        $.ajax({
                            url: 'http://10.68.100.32:8080/soam/user/login',
                            // url: 'http://10.9.100.25:8080/soam/user/login',
@@ -135,7 +135,7 @@ const mapDispatchToProps = (dispatch) => {
                                TY.TT.timeOutlength = 1000*60*1;
                            },
                            error:function(){
-                               $('#denglu1')[0].value='登     入';
+                               $('#denglu1')[0].value='登     录';
                                console.log('获取数据失败')
                            }
                        });
@@ -154,7 +154,7 @@ const mapDispatchToProps = (dispatch) => {
 
       if ($('#check')[0].value!==$('#checked')[0].value){
           alert('验证码输入错误');
-          $('#denglu1')[0].value='登     入';
+          $('#denglu1')[0].value='登     录';
       // let codeNew='';
       // for (let i=0;i<4;i++){
       //   codeNew+=codeChars[Math.floor(Math.random()*36)]
@@ -190,7 +190,7 @@ const mapDispatchToProps = (dispatch) => {
       }
       dispatch(actions.setVars('verificationCode', codeNew));
     }else {
-          $('#denglu1')[0].value='登 入 中...';
+          $('#denglu1')[0].value='登 录 中...';
           $.ajax({
               url: 'http://10.68.100.32:8080/soam/user/login',
               // url: 'http://10.9.0.10:9080/soam/user/login',
@@ -212,7 +212,7 @@ const mapDispatchToProps = (dispatch) => {
                   TY.TT.timeOutlength = 1000*60*1;
               },
               error:function(){
-                  $('#denglu1')[0].value='登     入';
+                  $('#denglu1')[0].value='登     录';
                   console.log('获取数据失败')
               }
           });

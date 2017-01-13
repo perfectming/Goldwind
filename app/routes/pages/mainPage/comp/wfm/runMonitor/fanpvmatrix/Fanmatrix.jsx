@@ -65,7 +65,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{valuepage,Tofaninfo,zhzb,fData,fModel}=this.props;
+        let{valuepage,Tofaninfo,zhzb,fData,fModel,skinStyle}=this.props;
         // console.log(fData);
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
@@ -86,7 +86,7 @@ let Component = React.createClass({
         // console.log(arr1,arr2)
         
         return (
-            <div className={styles.listbodyBox}>
+            <div className={skinStyle==1?styles.listbodyBoxBlue:skinStyle==2?styles.listbodyBoxWhite:styles.listbodyBox}>
                 {
                 obj_wfd[valuepage].map((value, key)=> {
                     // let bordercolor = value.WTStateColor;
@@ -163,6 +163,7 @@ const mapStateToProps = (state) => {
     return {
         valuepage : state.vars.valuepage,
         fData : state.vars.fData,
+        skinStyle: state.vars.skinStyle
     }
 };
 
