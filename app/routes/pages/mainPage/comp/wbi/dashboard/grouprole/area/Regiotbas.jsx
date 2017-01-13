@@ -10,8 +10,8 @@ let ip="10.68.100.32";
 
 let Component = React.createClass({
     componentWillMount() {
-        let {ipUrl}=this.props
-        this.props.ajax(ipUrl);
+        let {ipUrl,areaId}=this.props
+        this.props.ajax(ipUrl,areaId);
     },
     componentDidMount() {
         this.props.init();
@@ -86,17 +86,20 @@ const mapStateToProps = (state) => {
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
         skinStyle: state.vars.skinStyle,
+        areaId: state.vars.areaId,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
+        ajax: (ipUrl,areaId) => {
+            areaId=areaId[0];
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
             if(month2==0){
                 month2=12;
+                year=year-1;
             }
             dispatch(actions.setVars('bt0',  0));
             dispatch(actions.setVars('actbt',  month2-1));
@@ -107,7 +110,9 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/TBA/getMonthsTBAByG',
                 async:false,
                 data:{
-                    "groupid":  '201612121721151',
+                    "year":year,
+                    "month":month2,
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -143,8 +148,9 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/TBA/getDaysTBAByG',
                 async:false,
                 data:{
+                    "year":year,
                     "month":month2,
-                    "groupid":  '201612121721151',
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                 },
                 dataType:'json',
                 timeout:'3000',

@@ -28,7 +28,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {ipUrl,WTHealNamee,WTNe,areaName,areaRecordCost,xxdwfNa,WTN,WTHealName,w0='11月',wins,befor_pagee='windpage',backtop,befor_pagee2,areaPlan,areaPlanDay}=this.props;
+        let {ipUrl,WTHealNamee,WTNe,hlyyear,hlymonth,xxdwfNa="川井风电场",WTN,WTHealName,w0='11月',wins,befor_pagee='windpage',backtop,befor_pagee2,areaPlan,areaPlanDay}=this.props;
         return (
 
             <div className={styles.box}>
@@ -42,8 +42,12 @@ let Component = React.createClass({
 
 
 
-
-                    <Healtytimechart  monthT={WTHealName}  areaRecordProfitT={WTN} input_url={ipUrl} height={410} text={xxdwfNa+'每月健康度'}></Healtytimechart>
+                    <Healtytimechart  monthT={WTHealName}
+                                      areaRecordProfitT={WTN}
+                                      input_url={ipUrl} height={410}
+                                      hlyyear={hlyyear}
+                                      hlymonth={hlymonth}
+                                      text={xxdwfNa+'每月健康度'}></Healtytimechart>
 
                     <div className={styles.imgqz}>
                         <img src={icono}/>
@@ -95,6 +99,7 @@ const mapDispatchToProps = (dispatch) => {
 
             let WTHealH=[];
             let WTHealName=[];
+            let WTHealName0 = [];
             let WTN=[];
             let WTHealNamee=[];
             let WTNN=[];
@@ -111,31 +116,42 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+input_url+'/wbi/Health/getWfieldTimHealth',
                 async:false,
                 data:{
-                    'year':'',
+                    'year':year,
                     'month':month,
-                    'wfid':xxdwfId,
+                    'wfid':xxdwfId==undefined? "150801":xxdwfId,
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+                    console.log(data)
                     let WTHeal=data.data.monthHealth;
                     // 获取12个月份
                     WTHeal.map(function(value,key){
-                        for(let n in value){
+                        for (let n in value) {
 
                             WTN.push(value[n]);
-                            WTHealName.push(n+"月")
+                            WTHealName0.push(n.substring(0,4));
+                            WTHealName.push(n.substring(4,6));
                         }
 
                     })
                     let WTHealNamee=[];
                     let WTNN=[];
                     let WHDayH=data.data
+
+                    let WTHealName3=[]
+                    for(let i in WTHealName){
+
+                        WTHealName3.push(WTHealName[i]+"月")
+                    }
+
+                    dispatch(actions.setVars('hlyyear', WTHealName0));
+                    dispatch(actions.setVars('hlymonth', WTHealName));
                     dispatch(actions.setVars('WTHealName12',WTHealNamee));
-                    dispatch(actions.setVars('WTHealName1',WTHealName));
+                    dispatch(actions.setVars('WTHealName1',WTHealName3));
                     dispatch(actions.setVars('WTN1',WTN ));
                     dispatch(actions.setVars('WHmonth',month));
-                    dispatch(actions.setVars('wfH',month+'月'));
+                    dispatch(actions.setVars('wfh', WTHealName[10]+"月"));
                     dispatch(actions.setVars('WTN12',WTNN ));
 
 
@@ -149,14 +165,14 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+input_url+'/wbi/Health/getWfieldTimHealth',
                 async:false,
                 data:{
-                    'year':'',
+                    'year':year,
                     'month':month,
-                    'wfid':xxdwfId,
+                    'wfid':xxdwfId==undefined? "150801":xxdwfId,
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-
+console.log(data)
                     let WTHeal=data.data.dayHealth;
                     let WTHeall=data.data.monthHealth;
                     for (let i in WTHeal){

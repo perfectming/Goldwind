@@ -185,13 +185,14 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('w11', w10));
             dispatch(actions.setVars('bt0', 0));
             let wfid=hhdata.data[1][wc2].wfid;
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getByWfidFanHealth',
                 async:false,
                 data:{
                     "year": mapmonth[actbt].year,
-                    "months":mapmonth[actbt].yearpoweract,
+                    "month":mapmonth[actbt].yearpoweract,
                     "groupid": areaId==undefined? '201612121721151':areaId,
                     "wfid": wfid,
 

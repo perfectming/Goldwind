@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Hindex.scss';
 import Hly_pbaone from './Hly_pbaone.jsx';
 import Hly_pbatwo from './Hly_pbatwo.jsx';
-
+import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 var $ = require("jquery");
 let ip="10.68.100.32";
@@ -22,15 +22,14 @@ let Component = React.createClass({
 
 
     render() {
-        let {areaId,ipUrl,befor_pages='area',width0,w10,wc1,wfid,bt0=0,skinStyle,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {areaId,ipUrl,befor_pages='area',mapmonth,jhp=false,width0,w10,wc1,wfid,bt0=0,skinStyle,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
         let text0=data.data.line_date;
 
+        if(jhp){
         return (
-
-
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
                 <div className={styles.light} id="light"> </div>
@@ -63,10 +62,11 @@ let Component = React.createClass({
 
                 <div className={styles.onmonth}>
                     {
-                        data.data.yearelectric[0].wind.map((value, key) => {
+                        mapmonth.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl)}>
-                                    {value.name}
+                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key}
+                                     onClick={()=>changecolor(value,key,ipUrl,areaId)}>
+                                    {value.yearpoweract+"月"}
                                 </div>
                             )
                         })
@@ -103,9 +103,9 @@ let Component = React.createClass({
 
                         </div>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid)}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth)}>更多</button>
                         </div>
 
                         <Hly_pbatwo height={390} text={mon+w10+"各风机PBA"}
@@ -123,7 +123,9 @@ let Component = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        );}else {
+            return (<Login></Login>)
+        }
     }
 });
 
@@ -160,32 +162,50 @@ const mapStateToProps = (state) => {
         bt0: state.vars.bt0,
         ipUrl: state.vars.ipUrl,
         wfid: state.vars.wfid,
+        jhp: state.vars.jhp,
         width0: state.vars.width0,
         areaId: state.vars.areaId,
         skinStyle: state.vars.skinStyle,
+        mapmonth: state.vars.mapmonth,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         ajax: (ipUrl,areaId) => {
-            let date = new Date();
-            let year = date.getFullYear()
-            let month2 = date.getMonth();
             areaId=areaId[0];
-            if(month2==0){
-                month2=12;
-            }
 
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt',  month2-1));
-            dispatch(actions.setVars('mon',  month2+"月"));
+
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ipUrl + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    console.log(data)
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon',  data.data[10].yearpoweract+"月"));
+                    jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+            function jiang(year) {
+
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/PBA/getAreaWFieldPBA',
                 async:false,
                 data:{
-                    "month":month2,
+                    "year": year[10].year,
+                    "month": year[10].yearpoweract,
                     "groupid": areaId==undefined? '201612121721151':areaId,
                 },
                 dataType:'json',
@@ -245,6 +265,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wrong12', wrong221q));
                     dispatch(actions.setVars('wrong13', wrong231q));
                     dispatch(actions.setVars('pba1', pba21q));
+                    dispatch(actions.setVars('jhp', true));
 
 
                 },
@@ -252,6 +273,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
             })
+            }
             var obj = {
                 test: ''
             }
@@ -262,21 +284,20 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor:(value,key,ipUrl)=>{
+        changecolor:(value,key,ipUrl,areaId)=>{
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('mon', value.name));
-            dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('wind',value.plan ));
-            dispatch(actions.setVars('winds',value.actrul ));
-            dispatch(actions.setVars('windss',value.actruls ));
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('mon', value.yearpoweract+"月"));
+            areaId=areaId[0];
 
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/PBA/getAreaWFieldPBA',
                 async:false,
                 data:{
-                    "month":key+1,
-                    "groupid":'201612121721151',
+                    "year":value.year,
+                    "month": value.yearpoweract,
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -338,18 +359,19 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        gogogo: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
+        gogogo: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth) => {
             dispatch(actions.setVars('bt0', 0));
+            areaId=areaId[0];
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
-                    "groupid":  '201612121721151',
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"0",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -395,18 +417,20 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
+        back: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth) => {
             dispatch(actions.setVars('bt0', 1));
+            areaId=areaId[0];
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
-                    "groupid":  '201612121721151',
+
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"1",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -446,19 +470,20 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid) => {
-
+        more: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth) => {
+            areaId=areaId[0];
             dispatch(actions.setVars('bt0', 2));
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
-                    "groupid":  '201612121721151',
+
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type":"2",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -470,7 +495,7 @@ const mapDispatchToProps = (dispatch) => {
                     let wrong31c = [];       //维护损失
                     let wrong32c = [];       //限功率损失
                     let wrong33c = [];       //非设备原因损失
-                    let pba3c = [];      //故障损失
+                    let pba3c = [];            //pba
 
 
                     for (var i in data.data) {

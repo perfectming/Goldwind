@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Hindex.scss';
 import Pro_one from './Pro_one.jsx';
 import Pro_two from './Pro_two.jsx';
-
+import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let ip = "10.9.101.15";
 
@@ -12,8 +12,8 @@ let text222 = data.data.line_date;
 
 let Component = React.createClass({
     componentWillMount() {
-        let {ipUrl}=this.props
-        this.props.ajax(ipUrl);
+        let {ipUrl,areaId}=this.props
+        this.props.ajax(ipUrl,areaId);
     },
     componentDidMount() {
         this.props.init();
@@ -21,12 +21,11 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata, mon, w0 = "巴盟", w10, skinStyle, width0, hhdata2, hhdata3, changecolor, befor_pages = 'area', bt0, ipUrl, wfid, actbt = 10, returnit, ip = "10.68.100.32", runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, gogogo, back, more, hideit} = this.props;
+        let {jhp=false, mon, mapmonth, w10, areaId,skinStyle, width0, hhdata2, hhdata3, changecolor, befor_pages = 'area', bt0, ipUrl, wfid, actbt = 10, returnit, ip = "10.68.100.32", runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, gogogo, back, more, hideit} = this.props;
+        if(jhp){
+
 
         return (
-
-
-
 
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 {/*返回按钮*/}
@@ -54,11 +53,11 @@ let Component = React.createClass({
 
                 <div className={styles.onmonth}>
                     {
-                        data.data.yearelectric[0].wind.map((value, key) => {
+                        mapmonth.map((value, key) => {
                             return (
                                 <div className={actbt === key ? styles.inmonth : styles.inmonth2} key={key}
-                                     onClick={() => changecolor(value, key, ipUrl)}>
-                                    {value.name}
+                                     onClick={() => changecolor(value, key, ipUrl,areaId)}>
+                                    {value.yearpoweract+"月"}
                                 </div>
                             )
                         })
@@ -85,12 +84,12 @@ let Component = React.createClass({
                     <div className={`  ${styles.box_shadow}  ${styles.fbox2}`}>
                         <div className={styles.rbox33}>
                             <button className={bt0 === 0 ? styles.button : styles.button22}
-                                    onClick={() => gogogo(bt0, ipUrl, wfid, actbt)}>前10
+                                    onClick={() => gogogo(bt0, ipUrl, wfid, actbt,areaId,mapmonth)}>前10
                             </button>
                             <button className={bt0 === 1 ? styles.button : styles.button22}
-                                    onClick={() => back(bt0, ipUrl, wfid, actbt)}>后10
+                                    onClick={() => back(bt0, ipUrl, wfid, actbt,areaId,mapmonth)}>后10
                             </button>
-                            <button className={styles.button22} onClick={() => more(bt0, ipUrl, wfid, actbt)}>更多</button>
+                            <button className={styles.button22} onClick={() => more(bt0, ipUrl, wfid, actbt,areaId,mapmonth)}>更多</button>
                         </div>
                         <Pro_two text={mon + w10 + "各风机年收益"}
                                  names={'TBA'}
@@ -104,7 +103,9 @@ let Component = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        );   }else {
+            return (<Login></Login>)
+        }
     }
 });
 
@@ -131,38 +132,59 @@ const mapStateToProps = (state) => {
         bt0: state.vars.bt0,
         width0: state.vars.width0,
         skinStyle: state.vars.skinStyle,
-
+        mapmonth: state.vars.mapmonth,
+        jhp: state.vars.jhp,
+        areaId: state.vars.areaId,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
+        ajax: (ipUrl,areaId) => {
             var obj = {
                 test: ''
             }
+            dispatch(actions.setVars('bt0', 0));
+            areaId=areaId[0];
 
-            let date = new Date();
-            let year = date.getFullYear()
-            let month2 = date.getMonth();
-            if(month2==0){
-                month2=12;
-                year=year-1;
-            }
-            let day = new Date(year, month2, 0);
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ipUrl + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    console.log(data)
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon',  data.data[10].yearpoweract+"月"));
+                    jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+
+            function jiang(year,areaId) {
+
+
+
+            let day = new Date(year[10].year, year[10].yearpoweract, 0);
             let daycountT = day.getDate();
 
-            dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt', month2-1));
-            dispatch(actions.setVars('mon', month2 + "月"));
+
+
+
             $.ajax({
                 type: 'post',
                 url: 'http://'+ipUrl+'/wbi/yield/getYieldByGroupid',
                 async: false,
                 data: {
-                    'startdate': year + "-" + month2 + "-" + '1',
-                    'enddate': year + "-" + month2 + "-" + daycountT,
-                    'groupid': '201612121721151',
+                    'startdate': year[10].year + "-" + year[10].yearpoweract + "-" + '1',
+                    'enddate': year[10].year + "-" + year[10].yearpoweract + "-" + daycountT,
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -205,8 +227,8 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     'wfid': '150828',
-                    'startdate': year + "-" + month2 + "-" + '1',
-                    'enddate': year + "-" + month2 + "-" + daycountT,
+                    'startdate': year[10].year + "-" + year[10].yearpoweract + "-" + '1',
+                    'enddate': year[10].year + "-" + year[10].yearpoweract + "-" + daycountT,
                     'methods': 'desc',
 
                 },
@@ -234,12 +256,14 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('downtime2', downtime2));
                     dispatch(actions.setVars('tba2', tba2));
                     dispatch(actions.setVars('name2', name2));
+                    dispatch(actions.setVars('jhp', true));
 
                 },
                 error: function () {
 
                 },
             })
+            }
         },
 
         init: () => {
@@ -248,23 +272,15 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor: (value, key, ipUrl) => {
+        changecolor: (value, key, ipUrl,areaId) => {
+            areaId=areaId[0];
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('mon', value.name));
+            dispatch(actions.setVars('mon', value.yearpoweract));
             dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('wind', value.plan));
-            dispatch(actions.setVars('winds', value.actrul));
-            dispatch(actions.setVars('windss', value.actruls));
 
 
-            let monthh = key + 1;
-            let datee = new Date;
-            let year = datee.getFullYear();
-            let month2=datee.getMonth();
-            if(month2==0){
-                    year=year-1;
-            }
-            let day = new Date(year, monthh, 0);
+
+            let day = new Date(value.year, value.yearpoweract, 0);
             let daycount = day.getDate();    //获取天数：
 
             $.ajax({
@@ -272,9 +288,9 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + ipUrl + '/wbi/yield/getYieldByGroupid',
                 async: false,
                 data: {
-                    'startdate': year + "-" + (key + 1) + "-" + '1',
-                    'enddate': year + "-" + (key + 1) + "-" + daycount,
-                    'groupid': '201612121721151',
+                    'startdate': value.year + "-" + value.yearpoweract + "-" + '1',
+                    'enddate': value.year + "-" + value.yearpoweract + "-" + daycount,
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -311,8 +327,8 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',
                 async: false,
                 data: {
-                    'startdate': year + "-" + (key + 1) + "-" + '1',
-                    'enddate': year + "-" + (key + 1) + "-" + daycount,
+                    'startdate': value.year + "-" + value.yearpoweract + "-" + '1',
+                    'enddate': value.year + "-" + value.yearpoweract + "-" + daycount,
                     'wfid': '150828',
                     'methods': 'desc',
                 },
@@ -347,29 +363,22 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        gogogo: (bt0, ipUrl, wfid, actbt) => {
+        gogogo: (bt0, ipUrl, wfid, actbt,areaId,mapmonth) => {
             dispatch(actions.setVars('bt0', 0));
-            let date = new Date();
-            let year = date.getFullYear()
-            let month2 = date.getMonth();
-            if(month2==0){
-                month2=12;
-                year=year-1;
-            }
-            let day = new Date(year, actbt+1, 0);
+
+
+
+            let day = new Date(mapmonth[actbt].year, mapmonth[actbt].yearpoweract, 0);
             let daycount = day.getDate();
 
-            console.log(year)
-            console.log(month2)
-            console.log(wfid)
-            console.log(daycount)
+
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',
                 async: false,
                 data: {
-                    'startdate':year+"-"+(actbt+1)+"-"+'1',
-                    'enddate':year+"-"+(actbt+1)+"-"+daycount,
+                    'startdate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+'1',
+                    'enddate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+daycount,
                     "wfid": wfid == undefined ? '150828' : wfid,
                     'methods':'desc',
                 },
@@ -404,24 +413,19 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, ipUrl, wfid, actbt) => {
+        back: (bt0, ipUrl, wfid, actbt,areaId,mapmonth) => {
             dispatch(actions.setVars('bt0', 1));
-            let date = new Date();
-            let year = date.getFullYear()
-            let month2 = date.getMonth();
-            if(month2==0){
-                month2=12;
-                year=year-1;
-            }
-            let day = new Date(year, actbt+1, 0);
+            let day = new Date(mapmonth[actbt].year, mapmonth[actbt].yearpoweract, 0);
             let daycount = day.getDate();
+
+
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',
                 async: false,
                 data: {
-                    'startdate':year+"-"+(actbt+1)+"-"+'1',
-                    'enddate':year+"-"+(actbt+1)+"-"+daycount,
+                    'startdate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+'1',
+                    'enddate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+daycount,
                     "wfid": wfid == undefined ? '150828' : wfid,
                     'methods':'asc',
                 },
@@ -454,24 +458,19 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (bt0, ipUrl, wfid, actbt) => {
-            let date = new Date();
-            let year = date.getFullYear()
-            let month2 = date.getMonth();
-            if(month2==0){
-                month2=12;
-                year=year-1;
-            }
-            let day = new Date(year, actbt+1, 0);
+        more: (bt0, ipUrl, wfid, actbt,areaId,mapmonth) => {
+            let day = new Date(mapmonth[actbt].year, mapmonth[actbt].yearpoweract, 0);
             let daycount = day.getDate();
+
+
 
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',
                 async: false,
                 data: {
-                    'startdate':year+"-"+(actbt+1)+"-"+'1',
-                    'enddate':year+"-"+(actbt+1)+"-"+daycount,
+                    'startdate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+'1',
+                    'enddate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+daycount,
                     "wfid": wfid == undefined ? '150828' : wfid,
                     'methods':'all',
                 },

@@ -154,6 +154,7 @@ const mapStateToProps = (state) => {
         skinStyle: state.vars.skinStyle,
         mapmonth: state.vars.mapmonth,
         areaId: state.vars.areaId,
+        boll10: state.vars.boll10,
     }
 };
 
@@ -202,10 +203,6 @@ const mapDispatchToProps = (dispatch) => {
                 success:function(data){
 
                     dispatch(actions.setVars('hhdata',  data));
-                    dispatch(actions.setVars('actbt',  month2-1));
-                    dispatch(actions.setVars('mon',  month2+"月"));
-
-
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
 
@@ -234,6 +231,7 @@ const mapDispatchToProps = (dispatch) => {
                     let w10=data.data[1][0].wfname;
 
                     dispatch(actions.setVars('w11', w10));
+                    dispatch(actions.setVars('boll10', true));
 
 
 

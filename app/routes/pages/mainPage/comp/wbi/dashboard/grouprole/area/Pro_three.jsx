@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {text,name0,runtime,downtime,tba0,changedata1,hhdata,w10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
+        let {text,name0,runtime,downtime,tba0,changedata1,hhdata,w10,wc1,actbt,areaId,hhdata2,hhdata3,ipUrl} = this.props;
 
 
         let configPie = {
@@ -77,7 +77,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w10 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl);
+                            changedata1(w10,  wc1, actbt,hhdata,ipUrl,areaId);
                         }
                     }
                 },
@@ -179,8 +179,7 @@ let Component = React.createClass({
                     color:'#70c080',
                     data: downtime,
                     borderRadius: 4,
-                }
-                ,
+                },
                 {
                     name: '收益率',
                     type: 'line',
@@ -211,6 +210,7 @@ const mapStateToProps = (state) => {
         wc1: state.vars.wc1,
         w10: state.vars.w11,
         ipUrl: state.vars.ipUrl,
+        areaId: state.vars.areaId,
     }
 };
 
@@ -218,19 +218,16 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1: (w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl) => {
-
-
-
-
-
+        changedata1: (w10,  wc1, actbt,hhdata,ipUrl,areaId) => {
+            areaId=areaId[0];
             $.ajax({
                 type:'post',
-                url:'http://'+ipUrl+'/wbi/yield/getMaxYieBayDay',
+                url:'http://'+ipUrl+'/wbi/yield/getByGroupidDay',
                 async:false,
                 data:{
-                    'month':wc1+1,
-
+                    'month':hhdata.data[wc1].month,
+                    'year':hhdata.data[wc1].year,
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -253,7 +250,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('downtime2', downtime2));
                     dispatch(actions.setVars('tba2', tba2));
                     dispatch(actions.setVars('name2', name2));
-                    dispatch(actions.setVars('mon', wc1+1+"月"));
+                    dispatch(actions.setVars('mon', hhdata.data[wc1].month+"月"));
 
 
                 },

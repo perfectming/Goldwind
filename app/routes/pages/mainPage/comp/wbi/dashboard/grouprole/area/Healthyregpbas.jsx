@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
 import Hly_tsa from './Hly_tsa.jsx';
-
+import Login from '../../../../../../../../components/common/Loading.jsx';
 import Hly_ds from './Hly_ds.jsx';
 var actions = require('redux/actions');
 let ip="10.9.101.15";
@@ -12,8 +12,8 @@ let text222 = data.data.line_date;
 
 let Component = React.createClass({
     componentWillMount() {
-        let {ipUrl}=this.props
-        this.props.ajax(ipUrl);
+        let {ipUrl,areaId}=this.props
+        this.props.ajax(ipUrl,areaId);
     },
     componentDidMount() {
         this.props.init();
@@ -21,12 +21,9 @@ let Component = React.createClass({
 
 
     render() {
-        let {hhdata,mon,w0="巴盟",w10,skinStyle,width0,hhdata2,hhdata3,changecolor, befor_pages = 'area',bt0, ipUrl, wfid,actbt=10, returnit,ip="10.68.100.32",runtime,downtime,tba0,name0,name2,runtime2,downtime2,tba2,gogogo,back,more,hideit} = this.props;
-
+        let {mapmonth,mon,w0="巴盟",areaId,w10,skinStyle,width0,jhp=false,hhdata3,changecolor, befor_pages = 'area',bt0, ipUrl, wfid,actbt=10, returnit,ip="10.68.100.32",runtime,downtime,tba0,name0,name2,runtime2,downtime2,tba2,gogogo,back,more,hideit} = this.props;
+        if(jhp){
         return (
-
-
-
 
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 {/*返回按钮*/}
@@ -54,10 +51,11 @@ let Component = React.createClass({
 
                 <div className={styles.onmonth}>
                     {
-                        data.data.yearelectric[0].wind.map((value, key) => {
+                        mapmonth.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl)}>
-                                    {value.name}
+                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key}
+                                     onClick={()=>changecolor(value,key,ipUrl,areaId)}>
+                                    {value.yearpoweract+"月"}
                                 </div>
                             )
                         })
@@ -83,8 +81,8 @@ let Component = React.createClass({
                 <div className={`${styles.fbox}  ${styles.logofa}`}>
                     <div className={` ${styles.box_shadow} ${styles.fbox2}`}>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0, ipUrl, wfid,actbt)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, ipUrl, wfid,actbt)}>后10</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0, ipUrl, wfid,actbt,mapmonth,areaId)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, ipUrl, wfid,actbt,mapmonth,areaId)}>后10</button>
                             <button className={styles.button22} onClick={() => more(hhdata3, wfid)}>更多</button>
                         </div>
                         <Hly_ds text={mon +w10+ "每日TBA"}
@@ -99,7 +97,9 @@ let Component = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        );}else {
+            return (<Login></Login>)
+        }
     }
 });
 
@@ -124,34 +124,51 @@ const mapStateToProps = (state) => {
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
         bt0: state.vars.bt0,
+        jhp: state.vars.jhp,
         width0: state.vars.width0,
-        skinStyle: state.vars.skinStyle
+        skinStyle: state.vars.skinStyle,
+        mapmonth: state.vars.mapmonth,
+        areaId: state.vars.areaId,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
-            var obj = {
-                test: ''
-            }
+        ajax: (ipUrl,areaId) => {
 
-            let date = new Date();
-            let year = date.getFullYear()
-            let month2 = date.getMonth();
-            if(month2==0){
-                month2=12;
-            }
+
+            areaId=areaId[0];
             dispatch(actions.setVars('bt0',  0));
-            dispatch(actions.setVars('actbt',  month2-1));
-            dispatch(actions.setVars('mon',  month2+"月"));
+
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ipUrl + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    console.log(data)
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon',  data.data[10].yearpoweract+"月"));
+                    jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+            function jiang(year) {
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/TBA/getGroupAllWfByM',
                 async:false,
                 data:{
-                    "groupid":  '201612121721151',
-                    "month":month2,
+                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "year": year[10].year,
+                    "month": year[10].yearpoweract,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -191,9 +208,10 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/TBA/getWfAllWtByM',
                 async:false,
                 data:{
-                    "groupid":  '201612121721151',
-                    "month":month2,
-                    "wfid":'150828',
+                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "year": year[10].year,
+                    "month": year[10].yearpoweract,
+                    "wfid":'150801',
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -218,12 +236,14 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('downtime2', downtime2));
                     dispatch(actions.setVars('tba2', tba2));
                     dispatch(actions.setVars('name2', name2));
+                    dispatch(actions.setVars('jhp', true));
 
                 },
                 error:function(){
 
                 },
             })
+            }
         },
 
         init: () => {
@@ -232,21 +252,21 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor:(value,key,ipUrl)=> {
+        changecolor:(value,key,ipUrl,areaId)=> {
+            areaId=areaId[0];
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('mon', value.name));
-            dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('wind', value.plan));
-            dispatch(actions.setVars('winds', value.actrul));
-            dispatch(actions.setVars('windss', value.actruls));
+            dispatch(actions.setVars('actbt',key ));
+            dispatch(actions.setVars('mon', value.yearpoweract+"月"));
+
 
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/TBA/getGroupAllWfByM',
                 async:false,
                 data:{
-                    "groupid":  '201612121721151',
-                    "month":key+1,
+                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "year":value.year,
+                    "month": value.yearpoweract,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -283,8 +303,9 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/TBA/getWfAllWtByM',
                 async:false,
                 data:{
-                    "groupid":  '201612121721151',
-                    "month":key+1,
+                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "year":value.year,
+                    "month": value.yearpoweract,
                     "wfid":'150801',
                 },
                 dataType:'json',
@@ -317,18 +338,20 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        gogogo: (bt0, ipUrl, wfid,actbt) => {
+        gogogo: (bt0, ipUrl, wfid,actbt,mapmonth,areaId) => {
+            areaId=areaId[0];
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/TBA/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
-                    "groupid": '201612121721151',
+
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "0",
-                    "year": '',
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -361,18 +384,20 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, ipUrl, wfid,actbt) => {
+        back: (bt0, ipUrl, wfid,actbt,mapmonth,areaId) => {
+            areaId=areaId[0];
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/TBA/getPageSize',
                 async: false,
                 data: {
-                    "month": actbt + 1,
-                    "groupid": '201612121721151',
+
+                    "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "1",
-                    "year": '',
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                 },
                 dataType: 'json',
                 timeout: '3000',

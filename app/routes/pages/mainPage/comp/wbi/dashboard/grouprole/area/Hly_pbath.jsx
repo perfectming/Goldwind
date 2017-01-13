@@ -251,8 +251,8 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/PBA/getCompanyDayTimePBA',
                 async:false,
                 data:{
-                    "month":wc1+1,
-
+                    "month":hhdata4.data[wc1].month,
+                    "year":hhdata4.data[wc1].year,
                 },
                 dataType:'json',
                 timeout:'3000',

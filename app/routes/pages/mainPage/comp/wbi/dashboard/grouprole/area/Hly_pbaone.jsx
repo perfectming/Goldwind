@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {areaId,hhdata4,actbt=10,text,changedata1,ipUrl,w0='一区域',wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
+        let {areaId,hhdata4,actbt=10,text,changedata1,ipUrl,mapmonth,wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
 
 
         let configPie = {
@@ -82,7 +82,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc1=e.point.index;
-                            changedata1(ipUrl,w10,e,wc1,actbt,hhdata4,areaId);
+                            changedata1(ipUrl,w10,e,wc1,actbt,hhdata4,areaId,mapmonth);
 
                         }
                     }
@@ -236,7 +236,7 @@ const mapStateToProps = (state) => {
         actbt : state.vars.actbt,
         areaId: state.vars.areaId,
         ipUrl: state.vars.ipUrl,
-
+        mapmonth: state.vars.mapmonth,
     }
 };
 
@@ -245,7 +245,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(ipUrl,w10,e,wc1,actbt,hhdata4,areaId)=> {
+        changedata1 :(ipUrl,w10,e,wc1,actbt,hhdata4,areaId,mapmonth)=> {
             dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('w11', w10));
             areaId=areaId[0];
@@ -257,7 +257,8 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/PBA/getCompanySpacesWfieldFans',
                 async:false,
                 data:{
-                    "month":actbt+1,
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                     "groupid":areaId==undefined? '201612121721151':areaId,
                     "wfid":wfid,
                 },

@@ -10,7 +10,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {text,name0,runtime,downtime,tba0,changedata1,hhdata,w10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
+        let {text,name0,runtime,downtime,tba0,changedata1,mapmonth,w10,wc1,actbt,hhdata1,hhdata2,hhdata3,ipUrl} = this.props;
 
 
         let configPie = {
@@ -77,7 +77,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w10 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl);
+                            changedata1(w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth);
                         }
                     }
                 },
@@ -211,6 +211,7 @@ const mapStateToProps = (state) => {
         wc1: state.vars.wc1,
         w10: state.vars.w11,
         ipUrl: state.vars.ipUrl,
+        mapmonth: state.vars.mapmonth,
     }
 };
 
@@ -218,21 +219,18 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1: (w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl) => {
+        changedata1: (w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth) => {
 
             dispatch(actions.setVars('w11', w10));
             let wfid = hhdata2.data[wc1].wfid;
             dispatch(actions.setVars('bt0', 0));
 
-            let date = new Date();
-            let year = date.getFullYear()
-            let month2 = date.getMonth();
-            let day = new Date(year, month2, 0);
+
+
+
+            let day = new Date(mapmonth[actbt].year, mapmonth[actbt].yearpoweract, 0);
             let daycount = day.getDate();
-            if(month2==0){
-                month2=12;
-                year=year-1;
-            }
+
 
 
             $.ajax({
@@ -240,8 +238,8 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/yield/getYieldByWfid',
                 async:false,
                 data:{
-                    'startdate':year+"-"+(actbt+1)+"-"+'1',
-                    'enddate':year+"-"+(actbt+1)+"-"+daycount,
+                    'startdate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+'1',
+                    'enddate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+daycount,
                     'wfid':wfid,
                     'methods':'desc',
                 },
