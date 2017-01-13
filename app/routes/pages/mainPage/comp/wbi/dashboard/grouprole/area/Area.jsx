@@ -285,7 +285,7 @@ const mapDispatchToProps = (dispatch) => {
 						        		month.push(data.data.twAreaMonthElec[i].month+"月");
 						        		monthNum.push(data.data.twAreaMonthElec[i].month);
 						        	};
-						        	for(var i in monthNum){
+						        	for(var i=0;i<monthNum.length;i++){
 						        		elecPlan.push((data.data.twAreaMonthPlanElec[monthNum[i]]).toFixed(1)/1);
 						        		
 						        	};
@@ -449,12 +449,14 @@ const mapDispatchToProps = (dispatch) => {
 						        	monthPlanElec=data.data.areasMonthsPlanElec;
 						        	dayPlanElec=data.data.dayPlanElec;
 						        	month=[],elecPlan=[],elecAct=[];
+						        	var monthNum=[];
 						        	for(var i in data.data.twAreaMonthElec){
 						        		elecAct.push((data.data.twAreaMonthElec[i].poweract).toFixed(1)/1);
 						        		month.push(data.data.twAreaMonthElec[i].month+"月");
+						        		monthNum.push(data.data.twAreaMonthElec[i].month);
 						        	}
-						        	for(var i in data.data.twAreaMonthPlanElec){
-						        		elecPlan.push((data.data.twAreaMonthPlanElec[i]).toFixed(1)/1);
+						        	for(var i=0;i<monthNum.length;i++){
+						        		elecPlan.push((data.data.twAreaMonthPlanElec[monthNum[i]]).toFixed(1)/1);
 						        	}
 						        	dispatch(actions.setVars('yearElec',yearElec ));
 						        	dispatch(actions.setVars('monthElec',monthElec ));

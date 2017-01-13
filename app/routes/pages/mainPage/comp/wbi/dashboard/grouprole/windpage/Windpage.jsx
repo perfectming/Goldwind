@@ -252,7 +252,7 @@ const mapDispatchToProps = (dispatch) => {
 											month.push(data.data.wfieldsMonthsElec[i].month);
 											monthNum.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
 										};
-										for(var i in monthNum){
+										for(var i=0;i<monthNum.length;i++){
 											monthPlan.push((data.data.wfieldsMonthsPlanElec[monthNum[i]]).toFixed(1)/1);
 										};
 										dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
@@ -463,12 +463,14 @@ const mapDispatchToProps = (dispatch) => {
 							        	wfDayPlan=data.data.dayPlanElec;
 							        	wfDayAct=data.data.dayelec;
 							        	month=[],monthAct=[],monthPlan=[];
+							        	var monthNum=[];
 							        	for(var i in data.data.wfieldsMonthsElec){
 											month.push(data.data.wfieldsMonthsElec[i].month+"月");
-											monthAct.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
+											month.push(data.data.wfieldsMonthsElec[i].month);
+											monthNum.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
 										};
-										for(var i in data.data.wfieldsMonthsPlanElec){
-											monthPlan.push((data.data.wfieldsMonthsPlanElec[i]).toFixed(1)/1);
+										for(var i=0;i<monthNum.length;i++){
+											monthPlan.push((data.data.wfieldsMonthsPlanElec[monthNum[i]]).toFixed(1)/1);
 										};
 										dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
 										dispatch(actions.setVars('wfYearAct',wfYearAct ));

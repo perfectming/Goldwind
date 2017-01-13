@@ -247,7 +247,7 @@ const mapDispatchToProps = (dispatch) => {
                                                 monthNum.push(data.data.wtKongMonthsElec[i].month);
                                                 arrAct.push((data.data.wtKongMonthsElec[i].poweract).toFixed(1)/1);
                                             }
-                                            for(var i in monthNum){
+                                            for(var i=0;i<monthNum.length;i++){
                                                 arrPlan.push((data.data.wtKongMonthsPlanElec[monthNum[i]]).toFixed(1)/1);
                                             }
                                         },
