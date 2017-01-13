@@ -14,7 +14,7 @@ let Component = React.createClass({
 
     render() {
         
-    let{fc_info='150801',choose,choose1,leftm,leftd}=this.props;
+    let{fc_info='150801',choose,choose1,leftm,leftd,skinStyle}=this.props;
 
 let date=leftd.ModelData;
 let datem=leftm.Model.dis;
@@ -67,7 +67,7 @@ let str=d.getDate();
 }
 }());
         return (
-          <div className={ styles.navbox}>
+          <div className={skinStyle==1?styles.navboxBlue:skinStyle==2?styles.navboxWhite:styles.navbox}>
                      <div className={styles.tit}>
                         <div className={styles.elect}>电场概况</div>
                      </div>
@@ -206,6 +206,7 @@ const mapStateToProps = (state) => {
        fc_info:state.vars.fc_info,
        leftm:state.vars.leftm,
        leftd:state.vars.leftd,
+        skinStyle: state.vars.skinStyle
     }
 };
 

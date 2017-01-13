@@ -7,7 +7,7 @@ import close from '../../../img/comp/close_down.png';
 let $ =require('jquery');
 var actions = require('redux/actions');
 let matrixdata = require('../../../../../../../config/MatrixData');
-let soamMs='http://10.9.100.43:8080/soam';
+let soamMs='http://10.68.100.32:8080/soam';
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
