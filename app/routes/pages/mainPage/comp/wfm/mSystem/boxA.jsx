@@ -10,14 +10,14 @@ var $ =require('jquery');
 var actions = require('redux/actions');
 let Component = React.createClass({
     componentWillMount() {
-    },
-    componentDidMount() {
-        this.props.init();
         let{playjq}=this.props;
         //初始化jquery方法
         setTimeout(function(){
             playjq();
         },1000)
+    },
+    componentDidMount() {
+        this.props.init();
     },
 
     render() {
