@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="各",hhdata,height,actbt,text,mon,wc2,w10,ipUrl,changedata1,namex2,healthy2}= this.props;
+        let {w0="各",hhdata,height,actbt,text,jhpcolor,areaId,mapmonth,wc2,w10,ipUrl,changedata1,namex2,healthy2}= this.props;
 
 
 
@@ -32,7 +32,7 @@ let Component = React.createClass({
                 align:'left',
                 x : "0",
                 style:{
-                    color:"#fff",
+                    color:jhpcolor,
                     fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
@@ -46,7 +46,7 @@ let Component = React.createClass({
                     color:'#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: jhpcolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
@@ -81,7 +81,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc2=e.point.index;
-                            changedata1(w10,w0,wc2,hhdata,actbt,ipUrl);
+                            changedata1(w10,w0,wc2,hhdata,actbt,ipUrl,mapmonth,areaId);
 
                         }
                     }
@@ -105,7 +105,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: jhpcolor,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -125,7 +125,7 @@ let Component = React.createClass({
                     y: -10,
                     x: 30,
                     style:{
-                        color:'#fff',
+                        color:jhpcolor,
                         fontSize:'14px'
                     },
                 },
@@ -133,7 +133,7 @@ let Component = React.createClass({
                     title:'kW',
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: jhpcolor,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -170,7 +170,8 @@ const mapStateToProps = (state) => {
         mon : state.vars.mon,
         windplan : state.vars.windplan,
         actbt : state.vars.actbt,
-
+        mapmonth : state.vars.mapmonth,
+        areaId: state.vars.areaId,
     }
 };
 
@@ -179,17 +180,20 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('w1',w0 ));
         },
-        changedata1 :(w10,w0,wc2,hhdata,actbt,ipUrl)=> {
+        changedata1 :(w10,w0,wc2,hhdata,actbt,ipUrl,mapmonth,areaId)=> {
+            areaId=areaId[0];
             dispatch(actions.setVars('w11', w10));
             dispatch(actions.setVars('bt0', 0));
             let wfid=hhdata.data[1][wc2].wfid;
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getByWfidFanHealth',
                 async:false,
                 data:{
-                    "month":actbt+1,
-                    "groupid":'201612121721151',
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
+                    "groupid": areaId==undefined? '201612121721151':areaId,
                     "wfid": wfid,
 
                 },

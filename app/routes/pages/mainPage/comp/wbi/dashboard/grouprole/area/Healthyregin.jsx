@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Hindex.scss';
-
+import Login from '../../../../../../../../components/common/Loading.jsx';
 import Hly_rone from './Hly_rone.jsx';
 import Hly_rtwo from './Hly_rtwo.jsx';
 var $ = require('jquery');
@@ -11,14 +11,7 @@ let ip="10.68.100.32";
 let data = require('./Healthy-data');
 let month = data.data.line_month;
 let button = data.data.button;
-let barLoTime1 = data.data.bar_lotime;
-let barLoPowerValue1 = data.data.bar_loPower;
-let text0 = data.data.line_date;
-let text2 = data.data.text3;
-let text3 = data.data.text4;
-let barRotime1 = data.data.bar_rotime;
-let barLoPowerValue2 = data.data.bar_loPower;
-let barLtPowerValue = data.data.bar_ltPower;
+
 
 let sort0=data.data.sort1;
 let x0=[];
@@ -46,8 +39,8 @@ let x7=[];
 
 let Component = React.createClass({
     componentWillMount() {
-        let {ipUrl}=this.props;
-        this.props.ajax(ipUrl);
+        let {ipUrl,areaId}=this.props;
+        this.props.ajax(ipUrl,areaId);
     },
     componentDidMount() {
         this.props.init();
@@ -55,11 +48,12 @@ let Component = React.createClass({
 
 
     render() {
-        let {ipUrl,befor_pages='area',width0,mon,w0,w10,wfid,hhdata,bt0,skinStyle, returnit,hideit,namex2,namex3,healthy2,healthy3,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
+        let {ipUrl,befor_pages='area',boll10=false,areaId,width0,mapmonth,mon,w0,w10,wfid,hhdata,bt0,skinStyle, returnit,hideit,namex2,namex3,healthy2,healthy3,gogogo,back,more,wind,buttonAction, actbt=0,changecolor,inputOnChange, onFocus} = this.props;
+
+        if (boll10){
+
+
         return (
-
-
-
 
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.light} id="light"> </div>
@@ -72,6 +66,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                     <Hly_rtwo height={450}
+                              jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                               namex3={namex3}
                               healthy3={healthy3}
                               widths={width0}
@@ -83,10 +78,11 @@ let Component = React.createClass({
 
                 <div className={styles.onmonth}>
                     {
-                        data.data.yearelectric[0].wind.map((value, key) => {
+                        mapmonth.map((value, key) => {
                             return (
-                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key} onClick={()=>changecolor(value,key,ipUrl)}>
-                                    {value.name}
+                                <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key}
+                                     onClick={()=>changecolor(value,key,ipUrl,areaId)}>
+                                    {value.yearpoweract+"月"}
                                 </div>
                             )
                         })
@@ -98,6 +94,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_rone  height={400}
+                                   jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                    namex2={namex2}
                                    healthy2={healthy2}
                                    text={mon+"各风场健康度"}></Hly_rone>
@@ -115,11 +112,12 @@ let Component = React.createClass({
                             {/*<span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</span>*/}
                         </div>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0, actbt, hhdata,ipUrl,wfid)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, actbt, hhdata,ipUrl,wfid)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(bt0, actbt, hhdata,ipUrl,wfid)}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>更多</button>
                         </div>
                         <Hly_rtwo height={390}
+                                  jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                   namex3={namex3}
                                   text={mon+w10+"各风机健康度"}
                                   healthy3={healthy3} ></Hly_rtwo>
@@ -130,7 +128,9 @@ let Component = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        );     }else{
+            return (<Login></Login>)
+        }
     }
 });
 
@@ -155,40 +155,57 @@ const mapStateToProps = (state) => {
         wfid:state.vars.wfid,
         width0:state.vars.width0,
         skinStyle: state.vars.skinStyle,
+        mapmonth: state.vars.mapmonth,
+        areaId: state.vars.areaId,
+        boll10: state.vars.boll10,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
+        ajax: (ipUrl,areaId) => {
             var obj = {
                 test: ''
             }
             dispatch(actions.setVars('bt0', 0));
-            let date=new Date();
-            let year=date.getFullYear()
-            let month2=date.getMonth();
-            if(month2==0){
-                month2=12;
-            }
+            areaId=areaId[0];
+
+            $.ajax({
+                type: 'post',
+                url: 'http://' + ipUrl + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon', data.data[10].yearpoweract + "月"));
+                    jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+
+            function jiang(year) {
+                
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getAreaRoleHealth',
                 async:false,
                 data:{
-                    "month":month2,
-                    "year":'',
-                    "groupid":  '201612121721151',
+                    "year": year[10].year,
+                    "month": year[10].yearpoweract,
+                    "groupid": areaId==undefined? '201612121721151':areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
 
                     dispatch(actions.setVars('hhdata',  data));
-                    dispatch(actions.setVars('actbt',  month2-1));
-                    dispatch(actions.setVars('mon',  month2+"月"));
-
-
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
 
@@ -217,6 +234,7 @@ const mapDispatchToProps = (dispatch) => {
                     let w10=data.data[1][0].wfname;
 
                     dispatch(actions.setVars('w11', w10));
+                    dispatch(actions.setVars('boll10', true));
 
 
 
@@ -226,6 +244,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
             })
+            }
         },
         init: () => {
 
@@ -233,21 +252,20 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor:(value,key,ipUrl)=>{
+        changecolor:(value,key,ipUrl,areaId)=>{
             dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('mon', value.name));
             dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('windplan',value.plan ));
-            dispatch(actions.setVars('windplan1', value.plan));
+            dispatch(actions.setVars('mon', value.yearpoweract + "月"));
 
+            areaId=areaId[0];
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getAreaRoleHealth',
                 async:false,
                 data:{
-                    "month":key+1,
-                    "year":'',
-                    "groupid":  '201612121721151',
+                    "year": value.year,
+                    "month": value.yearpoweract,
+                    "groupid": areaId==undefined? '201612121721151':areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -290,18 +308,20 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        gogogo: (bt0, actbt, hhdata,ipUrl,wfid) => {
+        gogogo: (bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 0));
+            areaId=areaId[0];
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getPageSize',
                 async:false,
                 data:{
-                    "month": actbt + 1,
-                    "groupid":  '201612121721151',
+
+                    "groupid": areaId==undefined? '201612121721151':areaId,
                     "wfid": wfid==undefined? '150801':wfid,
                     "type":"0",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month": mapmonth[actbt].yearpoweract,
 
                 },
                 dataType:'json',
@@ -328,18 +348,20 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, actbt, hhdata,ipUrl,wfid) => {
+        back: (bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 1));
+            areaId=areaId[0];
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getPageSize',
                 async:false,
                 data:{
-                    "month": actbt + 1,
-                    "groupid":  '201612121721151',
+
+                    "groupid": areaId==undefined? '201612121721151':areaId,
                     "wfid": wfid==undefined? '150801':wfid,
                     "type":"1",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month": mapmonth[actbt].yearpoweract,
 
                 },
                 dataType:'json',
@@ -364,18 +386,20 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        more: (bt0, actbt, hhdata,ipUrl,wfid) => {
+        more: (bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 0));
+            areaId=areaId[0];
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getPageSize',
                 async:false,
                 data:{
-                    "month": actbt + 1,
-                    "groupid":  '201612121721151',
+
+                    "groupid": areaId==undefined? '201612121721151':areaId,
                     "wfid": wfid==undefined? '150801':wfid,
                     "type":"2",
-                    "year":""
+                    "year": mapmonth[actbt].year,
+                    "month": mapmonth[actbt].yearpoweract,
 
                 },
                 dataType:'json',

@@ -10,8 +10,8 @@ let ip="10.68.100.32";
 
 let Component = React.createClass({
     componentWillMount() {
-        let {ipUrl}=this.props
-        this.props.ajax(ipUrl);
+        let {ipUrl,areaId}=this.props
+        this.props.ajax(ipUrl,areaId);
     },
     componentDidMount() {
         this.props.init();
@@ -19,7 +19,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages = 'area', returnit,name0,ipUrl,runtime,downtime,tba0,name2,runtime2,downtime2,tba2,actbt,hhdata,w0,mon} = this.props;
+        let {befor_pages = 'area',skinStyle,areaId, returnit,name0,ipUrl,runtime,downtime,tba0,name2,runtime2,downtime2,tba2,actbt,hhdata,w0,mon} = this.props;
         let data = require('./Healthy-data');
         let month=data.data.line_month;
         let text0=data.data.line_date;
@@ -35,6 +35,7 @@ let Component = React.createClass({
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Pro_three
+                            jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                             name0={name0}
                             runtime={runtime}
                             downtime={downtime}
@@ -53,6 +54,7 @@ let Component = React.createClass({
                 <div className={`${styles.fbox} ${styles.logofa} `}>
                     <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Pro_four height={450}
+                                  jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                    name2={name2}
                                    runtime2={runtime2}
                                    downtime2={downtime2}
@@ -85,17 +87,21 @@ const mapStateToProps = (state) => {
         hhdata: state.vars.hhdata,
         ipUrl: state.vars.ipUrl,
         wfid:state.vars.wfid,
+        skinStyle: state.vars.skinStyle,
+        areaId: state.vars.areaId,
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
+        ajax: (ipUrl,areaId) => {
+            areaId=areaId[0];
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
             if(month2==0){
                 month2=12;
+                year=year-1;
             }
             dispatch(actions.setVars('bt0',  0));
             dispatch(actions.setVars('actbt',  10));
@@ -105,9 +111,14 @@ const mapDispatchToProps = (dispatch) => {
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/yield/getAllRate',
                 async:false,
+                data:{
+                    "year":year,
+                    "month":month2,
+                },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+                    console.log(data)
                     dispatch(actions.setVars('hhdata',  data));
                     let runtime1=[];       //实际发电量
                     let downtime1=[];       //故障损失
@@ -135,21 +146,23 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
 
-
+            console.log(year)
+            console.log(month2)
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/yield/getByGroupidDay',
                 async:false,
                 data:{
 
+                    "year":year,
                     "month":month2,
-                    "groupid":'201612121721151',
+                    "groupid":areaId==undefined? '201612121721151':areaId,
 
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-console.log(data)
+
                     //各区域   一区域二区域
                     let runtime2=[];       //实际发电量
                     let downtime2=[];       //故障损失

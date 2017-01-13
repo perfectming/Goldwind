@@ -18,6 +18,7 @@ let Component = React.createClass({
     },
     componentDidMount() {
         this.props.init();
+
         let {display}=this.props;
         setTimeout(function(){
             display();

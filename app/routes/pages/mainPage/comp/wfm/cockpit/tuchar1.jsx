@@ -37,7 +37,7 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 }
             },
-            colors: ['#D06960','#E9C75C','#DDDDDD','#5298D3'],
+            colors: ['#D06960','#E9C75C','#70C080','#5298D3'],
             tooltip: {
                 shared: true,
                 style:{

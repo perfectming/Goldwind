@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let{xxdwfId,input_url,changedata2qw,areaRecordCostT,areaRecordProfitO,rate,text,areaPlan,areaPlanDay, areaPlanDayT,width,height,areaNameX,areaRecordCost}=this.props;
+        let{xxdwfId,input_url,changedata2qw,areaRecordCostT,areaRecordProfitO,rate,text,areaPlan,areaPlanDay, areaPlanDayT,width,height,areaNameX,areaRecordCost,data}=this.props;
      
         let configPie = {
             chart: {
@@ -78,6 +78,8 @@ let Component = React.createClass({
                        let arr1=[];
             let arr2=[];
             let arr3=[];
+           
+            let monthg=data.data[w0].month;
             let arr4=[];
             let date =new Date();
             let year =date.getFullYear();
@@ -86,20 +88,20 @@ let Component = React.createClass({
                                 month = 12;
                                 year=year-1;
                             }
-                       
+                   
                             $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/yield/getWfieldMaxYieBayDay',  
              async:false,
             data:{
-             'year':year,
-             'month':w0+1,
+             'year':data.data[w0].year,
+             'month':data.data[w0].month,
              'wfid':xxdwfId,
             },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-           
+    
             
         
              let dataa=data.data;
@@ -121,7 +123,7 @@ let Component = React.createClass({
             
              },
            });
-                              changedata2qw(w0,arr1,arr2,arr3,arr4,input_url,b)
+                              changedata2qw(w0,arr1,arr2,arr3,arr4,input_url,b,monthg)
                         }
                     }
                 }
@@ -236,12 +238,13 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-           changedata2qw:(w0,arr1,arr2,arr3,arr4,input_url,b) => {
+           changedata2qw:(w0,arr1,arr2,arr3,arr4,input_url,b,monthg) => {
              dispatch(actions.setVars('actbt',w0));
             dispatch(actions.setVars('areaNamee',arr1));
               dispatch(actions.setVars('wind',arr2));
               dispatch(actions.setVars('windP',arr3));
               dispatch(actions.setVars('arr4',arr4));
+              dispatch(actions.setVars('mon',monthg+'月'));
         },
     };
 };

@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {changedata3, xxdwfId, input_url, text, areaPlan, areaPlanDay, areaPlanDayT, width, height}=this.props;
+        let {changedata3, xxdwfId, input_url, text, areaPlan, areaPlanDay, areaPlanDayT, width, height,secondData}=this.props;
 
         let configPie = {
             chart: {
@@ -72,18 +72,24 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function (e) {
+             
+
                             let b = e.point.index;
                             let arr1 = [];
                             let arr2 = [];
                             let arr3 = [];
+
+                                let secoMon=secondData[b].month;
                             $.ajax({
                                 type: 'post',
                                 url: 'http://' + input_url + '/wbi/ELEC/getWtTimeAreaElec',
                                 async: false,
                                 data: {
-                                    'month': b + 1,
+                                    'month': secondData[b].month,
+                                    'year':secondData[b].year,
                                     'wfid': xxdwfId,
                                 },
+
                                 dataType: 'json',
                                 timeout: '3000',
                                 success: function (data) {
@@ -104,7 +110,7 @@ let Component = React.createClass({
 
                                 },
                             });
-                            changedata3(b, arr1, arr2, arr3);
+                            changedata3(b, arr1, arr2, arr3,secoMon);
                         }
                     }
                 }
@@ -180,11 +186,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata3: (b, arr1, arr2, arr3) => {
+        changedata3: (b, arr1, arr2, arr3,secoMon) => {
             dispatch(actions.setVars('areaNameNP', arr1));
             dispatch(actions.setVars('areaRecordCostNP', arr2));
             dispatch(actions.setVars('areaRecordProfitNP', arr3));
             dispatch(actions.setVars('actbtt', b));
+            dispatch(actions.setVars('mon', secoMon+'月'));
         }
     };
 };

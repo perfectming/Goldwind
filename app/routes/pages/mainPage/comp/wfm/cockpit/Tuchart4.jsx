@@ -132,7 +132,7 @@ let Component = React.createClass({
             }],
 
             series:[{ //第二个Y轴的数据
-                name: '成本',
+                name: '收入',
                 color: '#33BAC0',
                 type: 'column',
 
@@ -142,7 +142,7 @@ let Component = React.createClass({
                 }
 
             }, { //第一个Y轴的数据
-                name: '收入',
+                name: '成本',
                 color: '#70C080',
                 type: 'column',
 

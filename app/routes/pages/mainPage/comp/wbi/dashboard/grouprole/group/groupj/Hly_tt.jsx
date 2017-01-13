@@ -17,7 +17,7 @@ let Component = React.createClass({
      render() {
 
 
-        let {w0,changedata1,x,windplan1 = win,barLoTime,text,barLoPowerValue,wc1,hhdata,actbt,ipUrl}=this.props;
+        let {w0,changedata1,jhpcolor,x,hlyyear,hlymonth,barLoTime,text,barLoPowerValue,wc1,hhdata,actbt,ipUrl}=this.props;
         let configPie = {
             chart: {
                 height:400,
@@ -38,7 +38,7 @@ let Component = React.createClass({
                 align:'left',
                 x : "0",
                 style:{
-                    color:"#fff",
+                    color:jhpcolor,
                     fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
@@ -53,7 +53,7 @@ let Component = React.createClass({
                 },
 
                 itemStyle: {
-                    color: "#fff",
+                    color: jhpcolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
@@ -89,7 +89,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w0=e.point.category;
                             wc1=e.point.index;
-                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl);
+                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl,hlyyear,hlymonth);
 
                         }
                     }
@@ -111,7 +111,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: jhpcolor,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -130,7 +130,7 @@ let Component = React.createClass({
                     y: -10,
                     x: 30,
                     style:{
-                        color:'#fff',
+                        color:jhpcolor,
                         fontSize:'14px'
                     }
                 },
@@ -140,7 +140,7 @@ let Component = React.createClass({
                     title:'100%',
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: jhpcolor,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -173,6 +173,8 @@ const mapStateToProps = (state) => {
         hhddata : state.vars.hhdata,
         actbt : state.vars.actbt,
         ipUrl : state.vars.ipUrl,
+        hlyyear : state.vars.hlyyear,
+        hlymonth : state.vars.hlymonth,
 
 
     }
@@ -182,20 +184,21 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl)=>{
+        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl,hlyyear,hlymonth)=>{
+
             dispatch(actions.setVars('mon',w0 ));
+
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/Health/getCompanyMonthHealth',
                 async:false,
                 data:{
-                    "month":wc1+1,
-                    "year":'',
+                    "month":hlymonth[wc1],
+                    "year":hlyyear[wc1],
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-
                     dispatch(actions.setVars('hhdata',  data));
 
 

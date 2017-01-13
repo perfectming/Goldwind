@@ -7,7 +7,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {input_url, height, windFiled, windCost, windProfit, w111, changedata1, TBA, year, monthh, daycount, keyy, areaWindids, text}=this.props;
+        let {input_url, height, windFiled, windCost, windProfit, w111, changedata1, TBA, year, monthh, daycount, keyy, areaWindids, text,value,newIndex}=this.props;
 
         let configPie = {
 
@@ -76,7 +76,7 @@ let Component = React.createClass({
                                 keyy = 12;
                                 year = year - 1;
                             }
-                            let dayy = new Date(year, keyy, 0);
+                            let dayy = new Date(value[newIndex].year,value[newIndex].yearpoweract, 0);
 //获取天数：
                             let daycount = dayy.getDate();
                             let b = a[0];
@@ -91,8 +91,8 @@ let Component = React.createClass({
                                 async: false,
                                 data: {
 
-                                    'startdate': year + "-" + keyy + "-" + '1',
-                                    'enddate': year + "-" + keyy + "-" + daycount,
+                                    'startdate': value[newIndex].year + "-" + value[newIndex].yearpoweract + "-" + '1',
+                                    'enddate': value[newIndex].year + "-" + value[newIndex].yearpoweract + "-" + daycount,
                                     'wfid': areaWindids[index],
                                     'methods': 'desc',
 

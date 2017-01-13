@@ -8,7 +8,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {height,input_url,w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA}=this.props;
+        let {height,input_url,w0,changedataDay,areaNamee,areaRecordCostss,areaRecordProfitt,text,TBA,TBAdaydata}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -65,7 +65,6 @@ let Component = React.createClass({
                         click: function(e) {
                           let   tbaTime=e.point.category;
                             let TBAindex=e.point.index;
-                           
                         let  a=tbaTime.toString().split("");
                         let b=a[0];
                         let tbaDays=[];
@@ -78,11 +77,12 @@ let Component = React.createClass({
                      async:false,
                      dataType:'json',
                      data:{
-                      'month':TBAindex+1,
+                        'year':TBAdaydata[TBAindex].year,
+                      'month':TBAdaydata[TBAindex].month,
                      },
                      timeout:'3000',
                      success:function(data){
-                    
+                
                         let  TBAdaydata=data.data; 
                           for(let i in TBAdaydata){
                             let tbaDay=TBAdaydata[i].day+'日';
