@@ -283,7 +283,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.downCount}>
                             <span>{'记录合计：'+num2}</span>
-                            <span onClick={()=>{$('#center3').css('display','none')}}>确定</span>
+                            <input onClick={()=>{$('#center3').css('display','none')}} type="button" value='确 定'/>
                         </div>
                         <Bbox></Bbox>
                     </div>
