@@ -35,7 +35,7 @@ let Component = React.createClass({
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
                         <img src={icono}/>
-                        <p>{[actbt + 1] + '月' + w11 + w111 + '收益'}</p>
+                        <p>{mon + w11 + w111 + '收益'}</p>
                         <div onClick={()=>close()} className={styles.gg}>x</div>
                     </div>
                     <div className={styles.scroll}>

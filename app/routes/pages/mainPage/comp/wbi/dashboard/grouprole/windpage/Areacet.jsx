@@ -29,7 +29,7 @@ let Component = React.createClass({
         let areaPlanDayT = data.areaPlanDayT;
         let text = data.textT;
 
-        let {wftpowerplan, wftmonth, wftpoweract, ipUrl, xxdwfId, xxdwfNa, actbt = 0,  wind, windP, backtop, befor_pagee = 'windpage', areaPlan}=this.props;
+        let {wftpowerplan, wftmonth, wftpoweract, ipUrl, xxdwfId, xxdwfNa, actbt = 0,  wind, windP, backtop, befor_pagee = 'windpage', areaPlan,mon,secondData}=this.props;
         return (
             <div className={styles.box}>
 
@@ -43,7 +43,7 @@ let Component = React.createClass({
 
 
                     <Windcett areaPlan={wftmonth} xxdwfId={xxdwfId} input_url={ipUrl} areaPlanDay={wftpowerplan}
-                              areaPlanDayT={wftpoweract} height={410} text={xxdwfNa + '每月发电量'}></Windcett>
+                              areaPlanDayT={wftpoweract} height={410} text={xxdwfNa + '每月发电量'} secondData={secondData}></Windcett>
 
 
                     <div className={styles.imgq}>
@@ -58,7 +58,7 @@ let Component = React.createClass({
 
 
                     <Windcet areaPlan={areaPlan} areaPlanDay={wind} areaPlanDayT={windP} height={410}
-                             text={[actbt + 1] + '月' + xxdwfNa + '每日发电量'}></Windcet>
+                             text={mon + xxdwfNa + '每日发电量'}></Windcet>
 
 
                     <div className={styles.imgq}>
@@ -89,6 +89,8 @@ const mapStateToProps = (state) => {
         wftmonth: state.vars.wftmonth1,
         wftpowerplan: state.vars.wftpowerplan1,
         wftpoweract: state.vars.wftpoweract1,
+        mon: state.vars.mon,
+        secondData: state.vars.secondData,
 
 
     }
@@ -110,6 +112,7 @@ const mapDispatchToProps = (dispatch) => {
             let wftmonth = [];
             let wftpoweract = [];
             let wftpowerplan = [];
+            let secondData=[];
             // 发电量12个月的
             $.ajax({
                 url: 'http://' + input_url + '/wbi/ELEC/getWfieldElec',
@@ -118,6 +121,8 @@ const mapDispatchToProps = (dispatch) => {
                 data: {'wfid': xxdwfId},
                 dataType: 'json',//here
                 success: function (data) {
+
+ secondData=data.data.wfieldsMonthsElec
 
                     for (let i in data.data.wfieldsMonthsElec) {
                         let month = data.data.wfieldsMonthsElec[i].month;
@@ -135,6 +140,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wftmonth1', wftmonth));
                     dispatch(actions.setVars('wftpowerplan1', wftpowerplan));
                     dispatch(actions.setVars('wftpoweract1', wftpoweract));
+                    dispatch(actions.setVars('secondData', secondData));
                 },
                 error: function () {
 
@@ -148,6 +154,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     'month': month,
                     'wfid': xxdwfId,
+                    'year':year,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -171,7 +178,9 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('areaNameNP', arr1));
                     dispatch(actions.setVars('areaRecordCostNP', arr2));
                     dispatch(actions.setVars('areaRecordProfitNP', arr3));
-                    dispatch(actions.setVars('actbtt', month - 1));
+                    dispatch(actions.setVars('actbtt', month));
+                    
+                    dispatch(actions.setVars('mon', month+'月'));
                 },
                 error: function () {
 

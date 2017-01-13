@@ -133,7 +133,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-             console.log(data);
+             
                      PBAGroupSpace = data.data[0];
                     for (let i in PBAGroupSpace) {
 

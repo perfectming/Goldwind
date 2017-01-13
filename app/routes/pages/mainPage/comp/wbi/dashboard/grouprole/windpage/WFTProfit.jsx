@@ -31,7 +31,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {befor_pagee = 'windpage', befor_pagee2, income, ratem, cost, month2, rate, width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_page2, areaNameN, areaRecordCostN, areaRecordProfitN}=this.props;
+        let {befor_pagee = 'windpage', befor_pagee2, income, ratem, cost, month2, rate, width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_page2, areaNameN, areaRecordCostN, areaRecordProfitN,mon,data}=this.props;
 
         return (
             <div className={styles.box}>
@@ -39,7 +39,7 @@ let Component = React.createClass({
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
                         <img src={icono}/>
-                        <p>{[actbt + 1] + '月' + xxdwfNa + '各风机发电量'}</p>
+                        <p>{mon + xxdwfNa + '各风机发电量'}</p>
                         <div className={styles.xx} onClick={() => close()}>x</div>
                     </div>
                     <div className={styles.scroll}>
@@ -63,7 +63,7 @@ let Component = React.createClass({
                     <WFTprofitchartt input_url={ipUrl} xxdwfId={xxdwfId} areaNameX={month2} areaRecordCostT={income}
                                      areaRecordProfitO={cost} colorO={colorO} colorT={colorT} pointWidth={30}
                                      height={410} text={xxdwfNa + '每月收益'} rate={ratem} ly={40} pointPlacement={-0.07}
-                                     borderRadius={7}></WFTprofitchartt>
+                                     borderRadius={7} data={data}></WFTprofitchartt>
 
 
                     <div className={styles.imgq}>
@@ -76,7 +76,7 @@ let Component = React.createClass({
 
                     <WFTprofitchart areaNameX={areaNamee} areaRecordCostT={wind} areaRecordProfitO={windP}
                                     colorO={colorO} colorT={colorT} pointWidth={30} height={410}
-                                    text={[actbt + 1] + '月' + xxdwfNa + '每日收益'} rate={rate} ly={40}
+                                    text={mon+ xxdwfNa + '每日收益'} rate={rate} ly={40}
                                     pointPlacement={-0.07} borderRadius={7}></WFTprofitchart>
 
 
@@ -116,6 +116,8 @@ const mapStateToProps = (state) => {
         cost: state.vars.cost22,
         income: state.vars.income22,
         ratem: state.vars.rateee,
+        mon: state.vars.mon,
+        data: state.vars.rdata,
     }
 };
 
@@ -138,6 +140,7 @@ const mapDispatchToProps = (dispatch) => {
             let cost = [];
             let income = [];
             let rate = [];
+            let dataa=[];
             //huoqu  收益率12各月的
             $.ajax({
                 url: 'http://' + input_url + '/wbi/yield/getWfAllRate',//收益柱图
@@ -146,7 +149,8 @@ const mapDispatchToProps = (dispatch) => {
                 data: {'wfid': xxdwfId},
                 dataType: 'json',//here
                 success: function (data) {
-                    console.log(data)
+                 
+                    dataa=data
                     month2 = [], cost = [], income = [];
                     for (var i in data.data) {
                         month2.push(data.data[i].month + "月");
@@ -161,6 +165,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('cost22', cost));
                     dispatch(actions.setVars('income22', income));
                     dispatch(actions.setVars('rateee', rate));
+                    dispatch(actions.setVars('rdata',dataa));
+                    dispatch(actions.setVars('mon', month+'月'));
                 },
                 error: function () {
 
@@ -179,10 +185,8 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-                    console.log(data)
-
-
-                    let dataa = data.data;
+                  
+dataa=data.data
                     for (let i in dataa) {
                         let day = dataa[i].day;
                         arr1.push(day + '日');
@@ -194,7 +198,6 @@ const mapDispatchToProps = (dispatch) => {
                         arr4.push(Number(rate.toFixed(2)));
 
                     }
-
                 },
                 error: function () {
 

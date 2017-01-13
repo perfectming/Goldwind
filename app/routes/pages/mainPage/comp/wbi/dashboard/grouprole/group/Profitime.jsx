@@ -90,7 +90,7 @@ const mapDispatchToProps = (dispatch) => {
              success:function(data){
 
             let GE=data.data;
-          console.log(GE)
+
             
              for (let i in GE){
 

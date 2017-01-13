@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 

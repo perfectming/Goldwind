@@ -6,7 +6,7 @@ import Pie2 from '../PieTwo';//饼图组件
 import Login from '../../../../../../../../components/common/Loading.jsx';//加载跳转页面
 
 
-var ipUrl='10.9.100.25:8080';
+var ipUrl='10.68.100.32:8080';
 var actions = require('redux/actions');
 var $ =require("jQuery");
 
@@ -18,6 +18,7 @@ let Component = React.createClass({
     },
     componentDidMount() {
         this.props.init();
+
         let {display}=this.props;
         setTimeout(function(){
             display();
