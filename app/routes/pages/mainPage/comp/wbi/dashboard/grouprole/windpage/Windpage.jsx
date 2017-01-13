@@ -122,7 +122,7 @@ let Component = React.createClass({
 	           							<div className={styles.space} onClick={()=>changepageEleS()}></div>
 	           							<div className={styles.time} onClick={()=>changepageEleT()}></div>
 	           						</div>
-	           						<Yearelectric month={month} plan={monthPlan} actrul={monthAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+	           						<Yearelectric color={skinStyle==2? '#333':'#fff'} month={month} plan={monthPlan} actrul={monthAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
@@ -134,7 +134,7 @@ let Component = React.createClass({
 		           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
 	           							</div>
 		           					</div>
-	           						<Yearelectric month={month2} plan={income} actrul={cost} unit={'(元)'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
+	           						<Yearelectric color={skinStyle==2? '#333':'#fff'} month={month2} plan={income} actrul={cost} unit={'(元)'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           			</div>
@@ -255,6 +255,7 @@ const mapDispatchToProps = (dispatch) => {
 							        data:{'wfid':wfId[0]},
 							        dataType: 'json',//here
 							        success:function (data) {
+							        	console.log(data);
 							        	wfYearPlan=data.data.yearPlanElec;
 							        	wfYearAct=data.data.yearElec;
 							        	wfMonthPlan=data.data.monthPlanElec;
@@ -262,12 +263,14 @@ const mapDispatchToProps = (dispatch) => {
 							        	wfDayPlan=data.data.dayPlanElec;
 							        	wfDayAct=data.data.dayelec;
 							        	month=[],monthAct=[],monthPlan=[];
+							        	var monthNum=[];
 							        	for(var i in data.data.wfieldsMonthsElec){
 											month.push(data.data.wfieldsMonthsElec[i].month+"月");
-											monthAct.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
+											month.push(data.data.wfieldsMonthsElec[i].month);
+											monthNum.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
 										};
-										for(var i in data.data.wfieldsMonthsPlanElec){
-											monthPlan.push((data.data.wfieldsMonthsPlanElec[i]).toFixed(1)/1);
+										for(var i in monthNum){
+											monthPlan.push((data.data.wfieldsMonthsPlanElec[monthNum[i]]).toFixed(1)/1);
 										};
 										dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
 										dispatch(actions.setVars('wfYearAct',wfYearAct ));

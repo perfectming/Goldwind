@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {month,actrul,plan,unit,nameOne,nameTwo}=this.props;
+    	let {month,actrul,plan,unit,nameOne,nameTwo,color}=this.props;
         let configPie = {
             chart: {
                 height:282,
@@ -28,7 +28,7 @@ let Component = React.createClass({
                 align:"right",
                 verticalAlign: "top",
                 itemStyle: {
-                    color: "#fff",
+                    color: color,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
@@ -62,7 +62,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'10px'  //字体
                     }
                 },
@@ -78,13 +78,13 @@ let Component = React.createClass({
 	                x: -15,
 	                style:{
 	                	fontSize:'10px',
-	                	color:'white',
+	                	color:color,
 	                }
                 },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
