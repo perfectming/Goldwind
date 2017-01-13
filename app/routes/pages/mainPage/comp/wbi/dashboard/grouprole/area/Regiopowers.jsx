@@ -52,6 +52,7 @@ let Component = React.createClass({
                 <div className={`${styles.fbox10}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_genday   barLpdpowerValues={poweract}
+                                      jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                       barLpdpowerValue={powerplan}
                                       barLdpowerValue={day0}
                                       text={text0[actbt]+'月巴盟区域每日发电量'}></Hly_genday>

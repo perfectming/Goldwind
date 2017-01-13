@@ -40,6 +40,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                         <Pro_two text={''}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                  height={450}
                                  widths={width0}
                                  names={'TBA'}
@@ -67,6 +68,7 @@ let Component = React.createClass({
                 <div className={styles.tbox}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Pro_one text={mon + "巴盟各风场年收益"}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                  names={''}
                                  name0={name0}
                                  runtime={runtime}
@@ -96,6 +98,7 @@ let Component = React.createClass({
                                  name2={name2}
                                  runtime2={runtime2}
                                  downtime2={downtime2}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                  tba2={tba2}></Pro_two>
                         <div className={styles.logomini4}>
 

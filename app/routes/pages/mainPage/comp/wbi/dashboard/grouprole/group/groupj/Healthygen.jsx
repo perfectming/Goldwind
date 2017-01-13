@@ -68,6 +68,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_gen text={mon + "集团各区域发电量"}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                  name0={barlotimes1}
                                  power1={barlopowers1}
                                  power2={barlopowerp1}
@@ -84,6 +85,7 @@ let Component = React.createClass({
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
                         <Hly_gens height={400}
+                                  jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                   name0={barlotimes2}
                                   power1={barlopowers2}
                                   power2={barlopowerp2}
@@ -112,6 +114,7 @@ let Component = React.createClass({
 
                         <div className={styles.rbox4}>
                             <Hly_genp height={400}
+                                      jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                       name0={barlotimes3}
                                       power1={barlopowers3}
                                       power2={barlopowerp3}

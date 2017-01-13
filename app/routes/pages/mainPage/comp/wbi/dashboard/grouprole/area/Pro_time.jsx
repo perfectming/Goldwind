@@ -35,6 +35,7 @@ let Component = React.createClass({
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Pro_three
+                            jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                             name0={name0}
                             runtime={runtime}
                             downtime={downtime}
@@ -53,6 +54,7 @@ let Component = React.createClass({
                 <div className={`${styles.fbox} ${styles.logofa} `}>
                     <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Pro_four height={450}
+                                  jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                    name2={name2}
                                    runtime2={runtime2}
                                    downtime2={downtime2}

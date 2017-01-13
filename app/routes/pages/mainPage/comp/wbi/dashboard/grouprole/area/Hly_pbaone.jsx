@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {areaId,hhdata4,actbt=10,text,changedata1,ipUrl,mapmonth,wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
+        let {areaId,hhdata4,actbt=10,text,jhpcolor,changedata1,ipUrl,mapmonth,wc1,mon='十一月份',windplan=win,w10,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,height} = this.props;
 
 
         let configPie = {
@@ -34,7 +34,7 @@ let Component = React.createClass({
                 x : "0",
                 style:{
 
-                    color:"#fff",
+                    color:jhpcolor,
                     fontSize:"16px",
                     fontWight:'600',
                     fontFamily:"微软雅黑"
@@ -50,7 +50,7 @@ let Component = React.createClass({
                     color:'#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: jhpcolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
@@ -110,7 +110,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: jhpcolor,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -123,7 +123,7 @@ let Component = React.createClass({
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: jhpcolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -137,14 +137,14 @@ let Component = React.createClass({
                     x: 45,
                     style: {
                         fontSize: '14px',
-                        color: '#fff'
+                        color: jhpcolor
                     }
                 }
             }, {
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: jhpcolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -157,7 +157,7 @@ let Component = React.createClass({
                     y: -15,
                     x: -40,
                     style: {
-                        color: '#fff',
+                        color: jhpcolor,
                         fontSize: '14px'
                     }
 

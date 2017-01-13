@@ -66,6 +66,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                     <Hly_rtwo height={450}
+                              jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                               namex3={namex3}
                               healthy3={healthy3}
                               widths={width0}
@@ -93,6 +94,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_rone  height={400}
+                                   jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                    namex2={namex2}
                                    healthy2={healthy2}
                                    text={mon+"各风场健康度"}></Hly_rone>
@@ -115,6 +117,7 @@ let Component = React.createClass({
                             <button className={styles.button22} onClick={() => more(bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>更多</button>
                         </div>
                         <Hly_rtwo height={390}
+                                  jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                   namex3={namex3}
                                   text={mon+w10+"各风机健康度"}
                                   healthy3={healthy3} ></Hly_rtwo>

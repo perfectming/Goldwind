@@ -54,6 +54,7 @@ let Component = React.createClass({
                     <div className={styles.hidden_bottom}>
 
                         <Hly_pbas text={""}
+                                  jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                   widths={width0}
                                   height={450}
                                   barLotime3={barLotime3}
@@ -87,6 +88,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_a text={mon + "集团各区域PBA"}
+                               jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                barLotime={barLotime1}
                                power1={power1}
                                wrong10={wrong10}
@@ -110,6 +112,7 @@ let Component = React.createClass({
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
 
                         <Hly_pba text={mon + w0 + "各风场PBA"}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                  barLotime2={barLotime2 == null ? barLotime21 : barLotime2}
                                  power2={power2 == null ? power21 : power2}
                                  wrong20={wrong20 == null ? wrong201 : wrong20}
@@ -147,6 +150,7 @@ let Component = React.createClass({
 
                         <div className={styles.rbox4}>
                             <Hly_pbas text={mon + w0 + w10 + "各风机PBA"}
+                                      jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                       barLotime3={barLotime3 == null ? barLotime31 : barLotime3}
                                       power3={power3 == null ? power31 : power3}
                                       wrong30={ wrong30 == null ? wrong301 : wrong30}

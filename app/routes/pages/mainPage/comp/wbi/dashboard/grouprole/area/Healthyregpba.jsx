@@ -44,6 +44,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                     <Hly_pbatwo height={450}
+                                jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                 widths={width0}
                                 text={''}
                                 barRotimes={barLotime1}
@@ -79,6 +80,7 @@ let Component = React.createClass({
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
 
                         <Hly_pbaone height={400} text={mon+'各风场PBA'}
+                                    jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                     barRotime={barLotime2}
                                     power2={power2}
                                     wrong20={wrong20}
@@ -109,6 +111,7 @@ let Component = React.createClass({
                         </div>
 
                         <Hly_pbatwo height={390} text={mon+w10+"各风机PBA"}
+                                    jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                     barRotimes={barLotime1}
                                     power1={power1}
                                     wrong10={wrong10}

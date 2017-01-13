@@ -38,6 +38,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                         <Hly_ds text={''}
+                                jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                 height={450}
                                 widths={width0}
                                 names={'TBA'}
@@ -65,6 +66,7 @@ let Component = React.createClass({
                 <div className={styles.tbox}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_tsa text={"巴盟各风场TBA"}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                  names={'TBA'}
                                  name0={name0}
                                  runtime={runtime}
@@ -86,6 +88,7 @@ let Component = React.createClass({
                             <button className={styles.button22} onClick={() => more(hhdata3, wfid)}>更多</button>
                         </div>
                         <Hly_ds text={mon +w10+ "每日TBA"}
+                                jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                 names={'TBA'}
                                 name2={name2}
                                 runtime2={runtime2}

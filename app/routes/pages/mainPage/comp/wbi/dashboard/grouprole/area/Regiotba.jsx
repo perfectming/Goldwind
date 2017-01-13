@@ -43,6 +43,7 @@ let Component = React.createClass({
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_pbath height={400} text={'巴盟每月PBA'}
+                                   jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                     barRotime={barLotime2}
                                     power2={power2}
                                     wrong20={wrong20}
@@ -64,6 +65,7 @@ let Component = React.createClass({
                 <div className={`${styles.fbox} ${styles.logofa} `}>
                     <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Hly_pbatwo height={450} text={mon+"每日PBA"}
+                                    jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                     barRotimes={barLotime1}
                                     power1={power1}
                                     wrong10={wrong10}

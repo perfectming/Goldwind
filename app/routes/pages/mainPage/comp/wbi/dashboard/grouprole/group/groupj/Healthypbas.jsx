@@ -41,6 +41,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                         <Hly_ds text={''}
+                                jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                 height={450}
                                 widths={width0}
                                 names={'TBA'}
@@ -71,6 +72,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_tsb text={mon + "巴盟TBA"}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                  names={'TBA'}
                                  name3={name3}
                                  runtime3={runtime3}
@@ -88,6 +90,7 @@ let Component = React.createClass({
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
                         <Hly_tsa text={mon+"巴盟各风场TBA"}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                  height={400}
                                  names={'TBA'}
                                  name0={name0}
@@ -116,6 +119,7 @@ let Component = React.createClass({
 
                         <div className={styles.rbox4}>
                             <Hly_ds text={mon + w0 + w10 + "各风机TBA"}
+                                    jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                     names={'TBA'}
                                     name2={name2}
                                     runtime2={runtime2}

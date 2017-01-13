@@ -54,6 +54,7 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.hidden_bottom}>
                     <Hly_gentwo    widths={width0}  height={450}
+                                   jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                    name0={barlotimes2}
                                    powerplan1={barlopowers2}
                                    poweract2={barlopowerp2}
@@ -81,6 +82,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_genone height={400}
+                                    jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                     name0={barlotimes1}
                                     powerplan1={barlopowers1}
                                     poweract2={barlopowerp1}
@@ -105,6 +107,7 @@ let Component = React.createClass({
                             <button className={styles.button22} onClick={() => more(bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId)}>更多</button>
                         </div>
                         <Hly_gentwo    height={390}
+                                       jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                        name0={barlotimes2}
                                        powerplan1={barlopowers2}
                                        poweract2={barlopowerp2}

@@ -36,6 +36,7 @@ let Component = React.createClass({
                 <div className={styles.tbox2}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_ttt barLoTime={monthx}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                 barLoPowerValue={healthy2}
                                 text={"巴盟每月健康度"}></Hly_ttt>
 
@@ -51,6 +52,7 @@ let Component = React.createClass({
                 <div className={`${styles.fbox} ${styles.logofa} `}>
                     <div className={` ${styles.box_shadow}  ${styles.fbox2}`}>
                         <Hly_d monthx3={monthx3}
+                               jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                healthy3={healthy3}
                                text={mon + "巴盟每日健康度"}></Hly_d>
                         <div className={styles.logomini}>
