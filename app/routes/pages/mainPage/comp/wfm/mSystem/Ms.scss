@@ -179,14 +179,16 @@
       }
     }
     .downCount{
-      height: 25px;
-      line-height: 25px;
+      padding-top: 5px;
+      height: 34px;
+      line-height: 20px;
       background: rgb(100, 100, 110);
       span{
         margin-right: 300px;
-        &:last-child{
-          cursor: pointer;
-        }
+      }
+      input{
+        background: #444;
+        cursor: pointer;
       }
     }
   }
