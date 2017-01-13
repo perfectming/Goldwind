@@ -14,12 +14,12 @@ let Component = React.createClass({
     render() {
 
 
-       let {title,arr, changetab, act=0,leftd,fc_info='150801'} = this.props;
+       let {title,arr, changetab, act=0,leftd,fc_info='150801',skinStyle} = this.props;
        let date=leftd.ModelData;
-       
+
        if(!date['150801']){
         return (
-          <div className={styles.navbox}>
+          <div className={skinStyle==2?styles.navboxWhite:styles.navbox}>
                 <div className={styles.navleft}>
                    {
                     title.map((value,key)=>{
@@ -61,7 +61,7 @@ let Component = React.createClass({
 
        }else{
         return (
-          <div className={styles.navbox}>
+          <div className={skinStyle==2?styles.navboxWhite:styles.navbox}>
                 <div className={styles.navleft}>
                    {
                     title.map((value,key)=>{
@@ -113,6 +113,7 @@ const mapStateToProps = (state) => {
     return {
         act: state.vars.actbtn,
         fc_info:state.vars.fc_info,
+        skinStyle: state.vars.skinStyle
        
     }
 };

@@ -30,18 +30,18 @@ let Component = React.createClass({
 						<div className={styles.content}>
 							<div className={`${styles.area} ${styles.boxShadow}`}>
 								<div className={styles.img}><a></a></div>
-								<TableF areaName={areaName} areaElec={areaElec} areaFault={areaFault} areaMaintain={areaMaintain} areaLimit={areaLimit} areaDevice={areaDevice} areaPBA={areaPBA}></TableF>
+								<TableF color={skinStyle==2? '#333':'#fff'} areaName={areaName} areaElec={areaElec} areaFault={areaFault} areaMaintain={areaMaintain} areaLimit={areaLimit} areaDevice={areaDevice} areaPBA={areaPBA}></TableF>
 							</div>
 							<div className={`${styles.wind} ${styles.boxShadow}`}>
 								<div className={styles.img}><a></a></div>
-								<TableS wfName={wfName} wfId={wfId} wfElec={wfElec} wfLose={wfLose} wfPBA={wfPBA}></TableS>
+								<TableS color={skinStyle==2? '#333':'#fff'} wfName={wfName} wfId={wfId} wfElec={wfElec} wfLose={wfLose} wfPBA={wfPBA}></TableS>
 							</div>
 							<div className={`${styles.fan} ${styles.boxShadow}`}>
 								<div className={styles.img}><a></a></div>
 								<div className={choice==1? styles.topLight:styles.top} onClick={()=>topTen(wtData,choice,wtName,wtElec,wtLose,wtPBA)}>前10</div>
 								<div className={choice==2? styles.bottomLight:styles.bottom} onClick={()=>bottomTen(wtData,choice,wtName,wtElec,wtLose,wtPBA)}>后10</div>
 								<div className={choice==3? styles.moreLight:styles.more} onClick={()=>more(wtData,choice,wtName,wtElec,wtLose,wtPBA)}>更多</div>
-								<TableT wtName={wtName} wtElec={wtElec} wtPBA={wtPBA} wtLose={wtLose}></TableT>
+								<TableT color={skinStyle==2? '#333':'#fff'} wtName={wtName} wtElec={wtElec} wtPBA={wtPBA} wtLose={wtLose}></TableT>
 							</div>
 						</div>
 						<div className={choice==3? styles.show:styles.hide}>
@@ -51,7 +51,7 @@ let Component = React.createClass({
 							</div>
 							<div className={styles.chart}>
 								<div>
-								<TableT wtName={wtNameMore} wtElec={wtElecMore} wtPBA={wtPBAMore} wtLose={wtLoseMore}></TableT>
+								<TableT color={skinStyle==2? '#333':'#fff'} wtName={wtNameMore} wtElec={wtElecMore} wtPBA={wtPBAMore} wtLose={wtLoseMore}></TableT>
 								</div>
 							</div>
 						</div>

@@ -143,7 +143,6 @@ let Component = React.createClass({
             let msPerDay = 1000 * 60 * 60 ;
             //计算天数
             let diffDays = Math.ceil(dateDiff/ msPerDay);
-            console.log(diffDays);
 
             return(
                 <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>

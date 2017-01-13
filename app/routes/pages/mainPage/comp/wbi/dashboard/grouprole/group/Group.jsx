@@ -125,7 +125,7 @@ let Component = React.createClass({
                                         <div className={styles.links}><a className={styles.time} onClick={()=>changepageEleT()}></a></div>
                                     </div>
                                 </div>
-                                <Yearelectric month={month1} plan={arrPlan} actrul={arrAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+                                <Yearelectric color={skinStyle==2? '#333':'#fff'} month={month1} plan={arrPlan} actrul={arrAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
                             </div>
                             <div className={`${styles.yearprofit} ${styles.boxShadow}`}>
                                 <div className={styles.header}>
@@ -135,7 +135,7 @@ let Component = React.createClass({
                                         <div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
                                     </div>
                                 </div>
-                                <div className={styles.index}><Yearelectric month={month2} plan={incomes} actrul={cost} unit={"(元)"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
+                                <div className={styles.index}><Yearelectric color={skinStyle==2? '#333':'#fff'} month={month2} plan={incomes} actrul={cost} unit={"(元)"} nameOne={"收入"} nameTwo={"成本"}></Yearelectric></div>
                             </div>
                         </div>
                     </div>
@@ -241,12 +241,14 @@ const mapDispatchToProps = (dispatch) => {
                                             dayelec = data.data.dayelec;
                                             dayPlanElec=data.data.dayelecPlanElec;
                                             arrPlan=[],month1=[],arrAct=[];
+                                            var monthNum=[];
                                             for(var i=0;i<data.data.wtKongMonthsElec.length;i++){
                                                 month1.push(data.data.wtKongMonthsElec[i].month+"月");
+                                                monthNum.push(data.data.wtKongMonthsElec[i].month);
                                                 arrAct.push((data.data.wtKongMonthsElec[i].poweract).toFixed(1)/1);
                                             }
-                                            for(var i in data.data.wtKongMonthsPlanElec){
-                                                arrPlan.push((data.data.wtKongMonthsPlanElec[i]).toFixed(1)/1);
+                                            for(var i=0;i<monthNum.length;i++){
+                                                arrPlan.push((data.data.wtKongMonthsPlanElec[monthNum[i]]).toFixed(1)/1);
                                             }
                                         },
                                         complete : function(XMLHttpRequest,status){
@@ -312,13 +314,13 @@ const mapDispatchToProps = (dispatch) => {
         changepageSort:(flag1,flagTime1,sortArr)=>{//区域停机时间排序
             flagTime1==false? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.downtime-b.downtime}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.downtime-a.downtime})));
             dispatch(actions.setVars('flag1',false ));
-            dispatch(actions.setVars('flagTime1',!flagTime1 ));
+            dispatch(actions.setVars('flagTime1',!flagTime1));
 
         },
         changepageSort1:(flag1,flagPba1,sortArr)=>{//区域PBA排序
             flagPba1==true? dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return a.everyAreaPba-b.everyAreaPba}))):dispatch(actions.setVars('sortArr', sortArr.sort(function(a,b){return b.everyAreaPba-a.everyAreaPba})));
             dispatch(actions.setVars('flag1',true ));
-            dispatch(actions.setVars('flagPba1',!flagPba1 ));
+            dispatch(actions.setVars('flagPba1',!flagPba1));
         },
         changepageProfitS:()=>{
             dispatch(actions.setVars('showPage', 'profits'));
