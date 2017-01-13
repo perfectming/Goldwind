@@ -20,7 +20,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wfid, ipUrl,boll3, barlotimes1, skinStyle, bt0 = 0, width0,mapmonth, barlopowers1, barlopowerp1, barlotimes2, barlopowers2, barlopowerp2, barlotimes3, barlopowers3, barlopowerp3, hhdata, hhdata1, w0, w10, mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2} = this.props;
+        let {wfid, ipUrl,boll3=false, barlotimes1, skinStyle, bt0 = 0, width0,mapmonth, barlopowers1, barlopowerp1, barlotimes2, barlopowers2, barlopowerp2, barlotimes3, barlopowers3, barlopowerp3, hhdata, hhdata1, w0, w10, mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2} = this.props;
 
         let data = require('./../../area/Healthy-data');
         let month = data.data.line_month;
@@ -68,6 +68,7 @@ let Component = React.createClass({
                 <div className={`${styles.tbox}`}>
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_gen text={mon + "集团各区域发电量"}
+                                 jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                  name0={barlotimes1}
                                  power1={barlopowers1}
                                  power2={barlopowerp1}
@@ -84,6 +85,7 @@ let Component = React.createClass({
                 <div className={styles.fbox}>
                     <div className={`${styles.rbox} ${styles.box_shadow}`}>
                         <Hly_gens height={400}
+                                  jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                   name0={barlotimes2}
                                   power1={barlopowers2}
                                   power2={barlopowerp2}
@@ -112,6 +114,7 @@ let Component = React.createClass({
 
                         <div className={styles.rbox4}>
                             <Hly_genp height={400}
+                                      jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                       name0={barlotimes3}
                                       power1={barlopowers3}
                                       power2={barlopowerp3}

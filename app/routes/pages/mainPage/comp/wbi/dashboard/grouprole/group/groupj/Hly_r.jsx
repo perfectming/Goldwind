@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0="一区域",barRotime,height,jhpcolor,mon,windplan=win,w10,changedata1,text,barLoPowerValue,wc1,wc2,hhdata,actbt,ipUrl}= this.props;
+        let {w0="一区域",barRotime,height,jhpcolor,mon,mapmonth,w10,changedata1,text,barLoPowerValue,wc1,wc2,hhdata,actbt,ipUrl}= this.props;
 
 
 
@@ -78,7 +78,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc2=e.point.index;
-                            changedata1(w10,w0,wc1,wc2,hhdata,actbt,ipUrl);
+                            changedata1(w10,w0,wc1,wc2,hhdata,actbt,ipUrl,mapmonth);
 
                         }
                     }
@@ -108,9 +108,7 @@ let Component = React.createClass({
 
             },
             yAxis: {
-               // lineWidth: 1,
-               // lineColor: "red",
-                //tickWidth: 4,
+
                 gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
@@ -163,6 +161,7 @@ const mapStateToProps = (state) => {
         hhdata : state.vars.hhdata,
         actbt : state.vars.actbt,
         ipUrl : state.vars.ipUrl,
+        mapmonth: state.vars.mapmonth,
     }
 };
 
@@ -171,7 +170,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('w1',w0 ));
         },
-        changedata1 :(w10,w0,wc1,wc2,hhdata,actbt,ipUrl)=> {
+        changedata1 :(w10,w0,wc1,wc2,hhdata,actbt,ipUrl,mapmonth)=> {
             dispatch(actions.setVars('w11', w10));
             dispatch(actions.setVars('bt0', 0));
             let wfid=hhdata.data[1][wc2].wfid;
@@ -180,7 +179,8 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/Health/getByWfidFanHealth',
                 async:false,
                 data:{
-                    "month":actbt+1,
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                     "groupid":'201612121721151',
                     "wfid": wfid,
 

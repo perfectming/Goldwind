@@ -26,7 +26,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {saveDatabase,checkId,checkName,changeBoxItem,boxRoleArr,deleDate,fits,centerControl,addDate,changeRole,boxRoleId,roleList,boxRoleList,init,nextPage,lastPage,theOne,theLast,boxRole,boxCenter,page,ids,msCount,uName,remark,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem1} = this.props;
+        let {skinStyle,saveDatabase,checkId,checkName,changeBoxItem,boxRoleArr,deleDate,fits,centerControl,addDate,changeRole,boxRoleId,roleList,boxRoleList,init,nextPage,lastPage,theOne,theLast,boxRole,boxCenter,page,ids,msCount,uName,remark,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem1} = this.props;
         let num1=0;
         let num2=0;
         let newData={};
@@ -39,7 +39,7 @@ let Component = React.createClass({
         let comp=tabaleData.msData.from;
         if(table){
         return (
-            <div className={styles.bodyBox}>
+            <div className={skinStyle==1?styles.bodyBoxBlue:(skinStyle==2?styles.bodyBoxWhite:styles.bodyBox)}>
                 <Load></Load>
                 <div className={styles.roleputBox}>
                     <div className={styles.inquireBox} key='0'>
@@ -162,23 +162,7 @@ let Component = React.createClass({
                                                                        key={keyC} type="button" value='设置'
                                                                        onClick={()=>centerControl(value.id)}/>
                                                             )
-                                                        } else if(keyC==0){
-                                                            return (
-                                                                <input className={styles.tableContentItem}
-                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
-                                                                       key={keyC} contentEditable="true" onBlur={(e)=>checkId(e.target,key, keyC)}
-                                                                       onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
-                                                                       value={value[valueC]}/>
-                                                            )
-                                                        } else if(keyC==1){
-                                                            return (
-                                                                <input className={styles.tableContentItem}
-                                                                       style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
-                                                                       key={keyC} contentEditable="true" onBlur={(e)=>checkName(e.target,key, keyC)}
-                                                                       onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
-                                                                       value={value[valueC]}/>
-                                                            )
-                                                        } else {
+                                                        }else {
                                                             return (
                                                                 <input className={styles.tableContentItem}
                                                                        style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
@@ -322,6 +306,7 @@ const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContentMs,
         boxRole: state.objs.boxRole,
+        skinStyle: state.vars.skinStyle,
         boxRoleArr: state.vars.boxRoleArr,
         boxRoleId: state.vars.boxRoleId,
         boxRoleList: state.objs.boxRoleList,
@@ -435,50 +420,6 @@ const mapDispatchToProps = (dispatch) => {
                 success:function (data) {
                     console.log(data);
                     dispatch(actions.setObjs('boxRoleList', data));
-                },
-                error:function(){
-                    console.log('获取数据失败')
-                }
-            });
-        },
-        checkId(id,i,j){
-            $.ajax({
-                url: soamMs+'/role/getByIDUserAuthentication?id='+id.value,
-                type: 'post',
-                dataType: 'json',//here,
-                success:function (data) {
-                    console.log(data);
-                    if(data.data==true){alert('用户编号重复');
-                        let tableV = _.clone(getState().objs.tableContentMs);
-                        tableV.data.pagedata[i][arr[j]] = '';
-                        dispatch(actions.setObjs('tableContentMs', tableV));
-                    }else if(!id.value){
-                        let tableV = _.clone(getState().objs.tableContentMs);
-                        tableV.data.pagedata[i][arr[j]] = '请输入角色ID';
-                        dispatch(actions.setObjs('tableContentMs', tableV));
-                    }
-                },
-                error:function(){
-                    console.log('获取数据失败')
-                }
-            });
-        },
-        checkName(name,i,j){
-            $.ajax({
-                url: soamMs+'/role/getByNameUserAuthentication?name='+name.value,
-                type: 'post',
-                dataType: 'json',//here,
-                success:function (data) {
-                    console.log(data);
-                    if(data.data==true){alert('用户名重复');
-                        let tableV = _.clone(getState().objs.tableContentMs);
-                        tableV.data.pagedata[i][arr[j]] = '';
-                        dispatch(actions.setObjs('tableContentMs', tableV));
-                    }else if(!name.value){
-                        let tableV = _.clone(getState().objs.tableContentMs);
-                        tableV.data.pagedata[i][arr[j]] = '请输入角色名称';
-                        dispatch(actions.setObjs('tableContentMs', tableV));
-                    }
                 },
                 error:function(){
                     console.log('获取数据失败')

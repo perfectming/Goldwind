@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import PBAspacechart from './PBAspacechart.jsx';
 import icono from '../../../../../img/comp/PBA.png';
+import Login from '../../../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
-let input_url="10.68.100.32";
 let button=data.button;
 let fanCost=data.fanCost;
 let fanCostA=data.fanCostA;
@@ -32,7 +32,8 @@ let Component = React.createClass({
     },
 
     render() {
-        let{width,ipUrl,xxdwfId,xxdwfNa,btn=0,PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt=0,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+        let{width,ipUrl,xxdwfId,xxdwfNa,btn=0,PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2,mapmonth,mon,Go1=false}=this.props;
+        if(Go1){
         return (
             <div className={styles.box} >
                 {//遮罩层
@@ -43,7 +44,7 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{ [actbt+1]+'月'+xxdwfNa+'各风机PBA'}</p>
+                <p>{ mon+xxdwfNa+'各风机PBA'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
                  <div className={styles.scroll}>
@@ -59,8 +60,8 @@ let Component = React.createClass({
                
                 <ul className={styles.monthbox}>
                     {
-                        data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId,ipUrl)} key={key}>{value.name}</li>)
+                        mapmonth.map((value,key)=>{
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId,ipUrl)} key={key}>{value.yearpoweract+'月'}</li>)
                         })
                     }
      }
@@ -73,7 +74,7 @@ let Component = React.createClass({
                 
                     
                          
-                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={[actbt+1]+'月'+xxdwfNa+'各风机PBA'} ty={40} pointWidth={30}  pointPlacement={-0.07} borderRadius={7}></PBAspacechart>
+                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={mon+xxdwfNa+'各风机PBA'} ty={40} pointWidth={30}  pointPlacement={-0.07} borderRadius={7}></PBAspacechart>
                         
                     
                        
@@ -82,17 +83,23 @@ let Component = React.createClass({
                         <img src={icono}/>
                     </div>
                     <div className={styles.buttons}>
-                        <button className={btn===0? styles.btn0 : styles.btn1}onClick={()=>gogogo(actbt,xxdwfId,ipUrl)} > 前10</button>
-                        <button className={btn===1? styles.btn0 : styles.btn1}onClick={()=>back(actbt,xxdwfId,ipUrl)}>后10</button>
-                        <button className={btn===2? styles.btn0 : styles.btn1} onClick={()=>more(actbt,xxdwfId,ipUrl)}>更多</button>
+                        <button className={btn===0? styles.btn0 : styles.btn1}onClick={()=>gogogo(actbt,xxdwfId,ipUrl,mapmonth)} > 前10</button>
+                        <button className={btn===1? styles.btn0 : styles.btn1}onClick={()=>back(actbt,xxdwfId,ipUrl,mapmonth)}>后10</button>
+                        <button className={btn===2? styles.btn0 : styles.btn1} onClick={()=>more(actbt,xxdwfId,ipUrl,mapmonth)}>更多</button>
                     </div>
                 </div>
                 
             </div>
 
 
-        );
+        );}
+else{
+    return(
+<Login></Login>
+    )
+
     }
+}
 });
 
 
@@ -127,6 +134,9 @@ const mapStateToProps = (state) => {
         btn:state.vars.btnn,
         ipUrl:state.vars.ipUrl,
         width:state.vars.width1,
+        mapmonth:state.vars.mapmonth,
+        mon:state.vars.mon,
+        Go1:state.vars.Go1,
 
     
     }
@@ -137,6 +147,13 @@ const mapDispatchToProps = (dispatch) => {
         ajax: (xxdwfId,xxdwfNa,input_url) => {
             let areaIds=[];
             let windIds=[];
+            let date = new Date();
+            let month = date.getMonth();
+            let year = date.getFullYear();
+            if (month == 0) {
+                month = 12;
+                year = year - 1;
+            }
             // 初始化上个月的数据
             let PBASpaceFirstWtname=[];
             let PBASpaceFirstPoweract=[];
@@ -145,13 +162,32 @@ const mapDispatchToProps = (dispatch) => {
             let PBASpaceFirstLimitloss=[];
             let PBASpaceFirstNodevreasonloss=[];
             let PBASpaceFirstPbaP=[];
-         
+          //新建
+             $.ajax({
+                type: 'post',
+                url: 'http://' + input_url + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon', data.data[10].yearpoweract + "月"));
+                    // jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+             
+             //结束
             // 获取上面的区域
             $.ajax({
                 type:'post',
                 url:'http://'+input_url+'/wbi/BaseData/getGroup',
                 async:false,
-          
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
@@ -199,6 +235,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     'wfid':xxdwfId,
                     'month':month,
+                    'year':year,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -244,8 +281,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFirstFaultloss ));
             dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceFirstNodevreasonloss ));
             dispatch(actions.setVars('PBASpaceFirstPba12',PBASpaceFirstPbaP ));
-            dispatch(actions.setVars('actbt',month-1 ));
             dispatch(actions.setVars('btnn',0));
+            dispatch(actions.setVars('Go1',true));
         }
         ,
         init: () => {
@@ -270,7 +307,8 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     'wfid':xxdwfId,
-                    'month':key+1,
+                    'month':value.yearpoweract,
+                    'year':value.year,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -310,10 +348,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('btnn',0));
+            dispatch(actions.setVars('mon',value.yearpoweract+'月'));
           
         },
         // 前十
-        gogogo:(actbt,xxdwfId,input_url)=>{
+        gogogo:(actbt,xxdwfId,input_url,value)=>{
            
             let PBASpaceWtname=[];
             let PBASpacePoweract=[];
@@ -323,13 +362,15 @@ const mapDispatchToProps = (dispatch) => {
             let PBASpaceNodevreasonloss=[];
             let PBASpacePba=[];
             let PBASpacePbaPBA=[];
+            let PBAsMonth=value[actbt].yearpoweract;
             $.ajax({
                 type:'post',
                 url:'http://'+input_url+'/wbi/PBA/getWFliedArea',
                 async:false,
                 data:{
                     'wfid':xxdwfId,
-                    'month':actbt+1,
+                    'month':value[actbt].yearpoweract,
+                    'year':value[actbt].year,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -378,11 +419,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
             dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
             dispatch(actions.setVars('btnn',0));
+            // dispatch(actions.setVars('mon',PBAsMonth));
          
             // $('.box').css('opacity',".5")
         },
         // 后十
-        back:(actbt,xxdwfId,input_url)=>{
+        back:(actbt,xxdwfId,input_url,value)=>{
            
             let PBASpaceWtname=[];
             let PBASpacePoweract=[];
@@ -392,13 +434,15 @@ const mapDispatchToProps = (dispatch) => {
             let PBASpaceNodevreasonloss=[];
 
             let PBASpacePbaPBA=[];
+            let PBAsMonth=value[actbt].yearpoweract;         
             $.ajax({
                 type:'post',
                 url:'http://'+input_url+'/wbi/PBA/getWFliedArea',
                 async:false,
                 data:{
                     'wfid':xxdwfId,
-                    'month':actbt+1,
+                    'month':value[actbt].yearpoweract,
+                    'year':value[actbt].year,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -445,11 +489,12 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
             dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
             dispatch(actions.setVars('btnn',1));
+
          
             // $('.box').css('opacity',".5")
         },
         // 更多
-        more:(actbt,xxdwfId,input_url)=>{
+        more:(actbt,xxdwfId,input_url,value)=>{
             $("#sss").show();
             $('#boxcover').show();
             let PBASpaceWtname=[];
@@ -461,13 +506,15 @@ const mapDispatchToProps = (dispatch) => {
             let PBASpacePba=[];
             let PBASpacePbaPBA=[];
             let width =0;
+                        let PBAsMonth=value[actbt].yearpoweract;
             $.ajax({
                 type:'post',
                 url:'http://'+input_url+'/wbi/PBA/getWFliedArea',
                 async:false,
                 data:{
                     'wfid':xxdwfId,
-                    'month':actbt+1,
+                    'month':value[actbt].yearpoweract,
+                    'year':value[actbt].year,
                 },
                 dataType:'json',
                 timeout:'3000',

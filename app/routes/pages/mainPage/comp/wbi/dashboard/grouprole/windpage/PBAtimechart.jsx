@@ -14,7 +14,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {height, text, input_url, width, xxdwfId, xxdfc, monthT, profit, cost, w0, winsss, changedata3, machine, fanProfitQ, fanCost, fanCostA, fanCostB, fanCostC}=this.props;
+        let {height, text, input_url, width, xxdwfId, xxdfc, monthT, profit, cost, w0, winsss, changedata3, machine, fanProfitQ, fanCost, fanCostA, fanCostB, fanCostC,PBATimeFirstPbaa}=this.props;
         let configPie = {
             chart: {
                 height: height,
@@ -76,8 +76,9 @@ let Component = React.createClass({
                     cursor: 'pointer',
                     events: {
                         click: function (e) {
-                            let w0 = e.point.category;
-
+                          
+                            let w3 = e.point.index;
+ let w0 = PBATimeFirstPbaa[w3].month;
                             let b = parseInt(w0);
 
                             // 第二个图的数据
@@ -94,7 +95,8 @@ let Component = React.createClass({
                                 async: false,
                                 data: {
                                     'wfid': xxdwfId,
-                                    'month': b,
+                                    'month': PBATimeFirstPbaa[w3].month,
+                                    'year': PBATimeFirstPbaa[w3].year,
                                 },
                                 dataType: 'json',
                                 timeout: '3000',
@@ -285,7 +287,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
         },
         changedata3: (w0, winss, b, PBATimeSecondDay, PBATimeSecondPoweract, PBATimeSecondFaultloss, PBATimeSecondMaintainloss, PBATimeSecondLimitloss, PBATimeSecondNodevreasonloss, PBATimeSecondPbaP) => {
-            dispatch(actions.setVars('windpbaspace', w0));
+            dispatch(actions.setVars('windpbaspace', w0+'月'));
             dispatch(actions.setVars('wins1', winss[b - 1]));
             dispatch(actions.setVars('PBATimeSecondDay1', PBATimeSecondDay));
             dispatch(actions.setVars('PBATimeSecondPoweract1', PBATimeSecondPoweract));

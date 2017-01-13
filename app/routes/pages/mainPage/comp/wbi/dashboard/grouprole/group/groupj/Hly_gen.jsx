@@ -13,7 +13,7 @@ let Component = React.createClass({
 
     render() {
 
-        let {ipUrl,actbt=10,w0,changedata1,mapmonth,text,hhdata,wc1,wc2,power2,power1,name0} = this.props;
+        let {ipUrl,actbt=10,w0,changedata1,mapmonth,jhpcolor,text,hhdata,wc1,wc2,power2,power1,name0} = this.props;
 
 
 
@@ -35,7 +35,7 @@ let Component = React.createClass({
                 x : "0",
                 style:{
 
-                    color:"#fff",
+                    color:jhpcolor,
                     fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
@@ -49,7 +49,7 @@ let Component = React.createClass({
                     color:'#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: jhpcolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
@@ -104,7 +104,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: jhpcolor,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -123,7 +123,7 @@ let Component = React.createClass({
                     y: -10,
                     x: 50,
                     style:{
-                        color:'#fff',
+                        color:jhpcolor,
                         fontSize:'14px'
                     }
                 },
@@ -131,7 +131,7 @@ let Component = React.createClass({
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: jhpcolor,//颜色
                         fontSize:'14px'  //字体
                     }
                 },

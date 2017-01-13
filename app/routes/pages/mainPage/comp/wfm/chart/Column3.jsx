@@ -110,7 +110,7 @@ let Component = React.createClass({
                     animation:false
                 }
             },
-            colors: ['#37545C','#32C5CD','#1fe005','#D06960']
+            colors: ['#607F87','#32C5CD','#1fe005','#D06960']
             ,
             series: [{
                 name:'计划发电量',

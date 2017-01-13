@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {text1, height, input_url, PBAGroupPba, PBAGroupNodevreasonloss, PBAGroupMaintainloss, PBAGroupLimitloss, PBAGroupFaultloss, areaName, areaRecordCosts, areaRecordProfit, text0, w0, changedata1}=this.props;
+        let {text1, height, input_url, PBAGroupPba, PBAGroupNodevreasonloss, PBAGroupMaintainloss, PBAGroupLimitloss, PBAGroupFaultloss, areaName, areaRecordCosts, areaRecordProfit, text0, w0, changedata1,PBAGroupSpace}=this.props;
         let configPie = {
             chart: {
                 height: height,
@@ -87,11 +87,11 @@ let Component = React.createClass({
                                 async: false,
                                 dataType: 'json',
                                 data: {
-                                    'month': PBAGroupIndex + 1,
+                                    'year':PBAGroupSpace[PBAGroupIndex].year,
+                                    'month': PBAGroupSpace[PBAGroupIndex].month,
                                 },
                                 timeout: '3000',
                                 success: function (data) {
-
 
                                     let PBAGroupFirstMonth = data.data;
 

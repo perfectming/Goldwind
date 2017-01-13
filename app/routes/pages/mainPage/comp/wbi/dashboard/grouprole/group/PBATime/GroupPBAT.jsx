@@ -16,7 +16,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {ipUrl,PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,close,backtop,befor_pagee='group',befor_pagee2,}=this.props;
+        let {ipUrl,PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,close,backtop,befor_pagee='group',befor_pagee2,PBAGroupSpace}=this.props;
 
         return (
             <div className={styles.box}>
@@ -37,7 +37,8 @@ let Component = React.createClass({
                     <GroupPBAT height={410} PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth}
                                areaRecordProfit={PBAGroupPoweract} PBAGroupMaintainloss={PBAGroupMaintainloss}
                                PBAGroupLimitloss={PBAGroupLimitloss} PBAGroupNodevreasonloss={PBAGroupNodevreasonloss}
-                               PBAGroupPba={PBAGroupPba} text1={'集团每月PBA'} input_url={ipUrl}></GroupPBAT>
+                               PBAGroupPba={PBAGroupPba} text1={'集团每月PBA'} input_url={ipUrl}
+                               PBAGroupSpace={PBAGroupSpace}></GroupPBAT>
 
                 </div>
 
@@ -86,6 +87,8 @@ const mapStateToProps = (state) => {
         PBAGroupFirstPba: state.vars.PBAGroupFirstPba12,
         //ipUrl
         ipUrl: state.vars.ipUrl,
+        PBAGroupSpace: state.vars.PBAGroupSpace,
+
 
 
     }
@@ -117,17 +120,21 @@ const mapDispatchToProps = (dispatch) => {
             let PBAGroupFirstLimitloss = [];
             let PBAGroupFirstNodevreasonloss = [];
             let PBAGroupFirstPba = [];
+            let PBAGroupSpace=[];
             // 获取12个月的PBA 赋值第一个表
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi//PBA/getCompanyTimePBA',
                 async: false,
+                data:{
+                    "year":year,
+                    "month":monthF,
+                },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
-                    let PBAGroupSpace = data.data[0];
-
+             
+                     PBAGroupSpace = data.data[0];
                     for (let i in PBAGroupSpace) {
 
                         let month = PBAGroupSpace[i].month + '月';
@@ -200,6 +207,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBAGroupFirstFaultloss1', PBAGroupFirstFaultloss));
             dispatch(actions.setVars('PBAGroupFirstNodevreasonloss1', PBAGroupFirstNodevreasonloss));
             dispatch(actions.setVars('PBAGroupFirstPba12', PBAGroupFirstPba));
+            dispatch(actions.setVars('PBAGroupSpace',PBAGroupSpace));
 
 
         }

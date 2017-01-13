@@ -28,7 +28,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{ipUrl,xxdwfId,xxdwfNa,PBATimeSecondPba,PBATimeSecondNodevreasonloss,PBATimeSecondLimitloss,PBATimeSecondMaintainloss,PBATimeSecondFaultloss,PBATimeSecondPoweract,PBATimeSecondDay,PBATimeFirstPba,PBATimeFirstNodevreasonloss,PBATimeFirstLimitloss,PBATimeFirstMaintainloss,PBATimeFirstFaultloss,PBATimeFirstPoweract,PBATimeFirstMonth,w0,winsss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
+        let{ipUrl,xxdwfId,xxdwfNa,PBATimeSecondPba,PBATimeSecondNodevreasonloss,PBATimeSecondLimitloss,PBATimeSecondMaintainloss,PBATimeSecondFaultloss,PBATimeSecondPoweract,PBATimeSecondDay,PBATimeFirstPba,PBATimeFirstNodevreasonloss,PBATimeFirstLimitloss,PBATimeFirstMaintainloss,PBATimeFirstFaultloss,PBATimeFirstPoweract,PBATimeFirstMonth,w0,winsss,befor_pagee='windpage',backtop,befor_pagee2,PBATimeFirstPbaa}=this.props;
         return (
             <div className={styles.box}>
              <div className={styles.paddingtop}>
@@ -42,7 +42,7 @@ let Component = React.createClass({
                       
                          
                           
-                                <PBAtimechart monthT={PBATimeFirstMonth} profit={PBATimeFirstPoweract} cost={PBATimeFirstPba} fanCost={PBATimeFirstFaultloss} fanCostA={PBATimeFirstMaintainloss} fanCostB={PBATimeFirstLimitloss} fanCostC={PBATimeFirstNodevreasonloss} xxdwfId={xxdwfId} input_url={ipUrl} text={xxdwfNa+'每月PBA'} height={410}></PBAtimechart>
+                                <PBAtimechart monthT={PBATimeFirstMonth} profit={PBATimeFirstPoweract} cost={PBATimeFirstPba} fanCost={PBATimeFirstFaultloss} fanCostA={PBATimeFirstMaintainloss} fanCostB={PBATimeFirstLimitloss} fanCostC={PBATimeFirstNodevreasonloss} xxdwfId={xxdwfId} input_url={ipUrl} text={xxdwfNa+'每月PBA'} height={410} PBATimeFirstPbaa={PBATimeFirstPbaa}></PBAtimechart>
                             
                            
                    
@@ -101,6 +101,7 @@ const mapStateToProps = (state) => {
         xxdwfId:state.vars.xxdwfId1,
         xxdwfNa:state.vars.xxdwfNa1,
         ipUrl:state.vars.ipUrl,
+        PBATimeFirstPbaa:state.vars.PBATimeFirstPbaa,
 
 
     }
@@ -110,10 +111,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         ajax: (xxdwfId,xxdwfNa,input_url) => {
 
-           let date=new Date();
-           let month=date.getMonth();
+         let date = new Date();
+            let year = date.getFullYear();
+            let month = date.getMonth();
             if (month == 0) {
                 month = 12;
+                year = year - 1;
             }
           // 第一个图的数据
             let PBATimeFirstMonth=[];
@@ -131,19 +134,23 @@ const mapDispatchToProps = (dispatch) => {
             let PBATimeSecondLimitloss=[];
             let PBATimeSecondNodevreasonloss=[];
             let PBATimeSecondPbaP=[];
+            let PBATimeFirstPba=[];
             $.ajax({
                 type:'post',
                 url:'http://'+input_url+'/wbi/PBA/getWfieldMonthPBA',
                 async:false,
                 data:{
                     'wfid':xxdwfId,
+                    'year':year,
+                    'month':month
                    
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
                
-                     let PBATimeFirstPba=data.data;
+                      PBATimeFirstPba=data.data;
+                     // console.log(PBATimeFirstPba)
                      for ( let i in PBATimeFirstPba){
                          // 12个月的数据
                          let month=PBATimeFirstPba[i].month+'月';
@@ -182,6 +189,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('PBATimeFirstFaultloss1',PBATimeFirstFaultloss ));
             dispatch(actions.setVars('PBATimeFirstNodevreasonloss1',PBATimeFirstNodevreasonloss ));
             dispatch(actions.setVars('PBATimeFirstPba12',PBATimeFirstPbaP ));
+            dispatch(actions.setVars('PBATimeFirstPbaa',PBATimeFirstPba ));
 
            // 给第二个图赋初值
              $.ajax({
@@ -190,7 +198,8 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     'wfid':xxdwfId,
-                    'month':month,
+                    'year':year,
+                    'month':month
                 },
                 dataType:'json',
                 timeout:'3000',

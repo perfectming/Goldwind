@@ -108,7 +108,7 @@ let Component = React.createClass({
                     borderWidth: 0
                 }
             },
-            colors: ['#37545C','#32C5CD','#D06960']
+            colors: ['#607F87','#32C5CD','#D06960']
             ,
             series: [{
                 name:'故障损失',

@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {grid,ipUrl,hhdata,hhdata2,changedata1,w0='一区域',wc1=0,wc2=0,mon='一月份',actbt=10,windplan=win,w10,text,height,power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
+        let {grid,ipUrl,hhdata,jhpcolor,changedata1,mapmonth,wc1=0,wc2=0,mon='一月份',actbt=10,windplan=win,w10,text,height,power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
 
 
 
@@ -36,7 +36,7 @@ let Component = React.createClass({
                 x : "0",
                 style:{
 
-                    color:"#fff",
+                    color:jhpcolor,
                     fontSize:"16px",
                     fontWight:'600',
                     fontFamily:"微软雅黑"
@@ -52,7 +52,7 @@ let Component = React.createClass({
                     color:'#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: jhpcolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
@@ -84,7 +84,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w10 = e.point.category;
                             wc2 = e.point.index;
-                            changedata1(ipUrl,w10, win, wc1,wc2, actbt,hhdata,grid);
+                            changedata1(ipUrl,w10, win, wc1,wc2, actbt,hhdata,grid,mapmonth);
 
                         }
                     }
@@ -111,7 +111,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: jhpcolor,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -124,7 +124,7 @@ let Component = React.createClass({
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: jhpcolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -138,14 +138,14 @@ let Component = React.createClass({
                     x: 45,
                     style: {
                         fontSize: '14px',
-                        color: '#fff'
+                        color: jhpcolor
                     }
                 }
             }, {
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: jhpcolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -158,7 +158,7 @@ let Component = React.createClass({
                     y: -15,
                     x: -40,
                     style: {
-                        color: '#fff',
+                        color: jhpcolor,
                         fontSize: '14px'
                     }
 
@@ -241,6 +241,7 @@ const mapStateToProps = (state) => {
         actbt: state.vars.actbt,
         ipUrl: state.vars.ipUrl,
         grid: state.vars.grid,
+        mapmonth: state.vars.mapmonth,
 
 
     }
@@ -251,7 +252,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(ipUrl,w10, win,wc1, wc2, actbt,hhdata,grid)=> {
+        changedata1 :(ipUrl,w10, win,wc1, wc2, actbt,hhdata,grid,mapmonth)=> {
             dispatch(actions.setVars('w11', w10,));
             dispatch(actions.setVars('bt0', 0));
 
@@ -265,7 +266,8 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://'+ipUrl+'/wbi/PBA/getCompanySpacesWfieldFans',
                 async: false,
                 data: {
-                    "month": actbt + 1,
+                    "year": mapmonth[actbt].year,
+                    "month":mapmonth[actbt].yearpoweract,
                     "groupid":  grid==undefined? '201612121721151':grid,
                     "wfid": wfid==undefined? '150801':wfid,
                 },

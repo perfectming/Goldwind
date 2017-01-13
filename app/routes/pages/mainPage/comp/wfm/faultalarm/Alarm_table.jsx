@@ -13,11 +13,11 @@ let Component = React.createClass({
         this.props.init(tabaleData);
     },
     render() {
-        let {table, changeTableItem,btnIf} = this.props;
+        let {skinStyle,table, changeTableItem,btnIf} = this.props;
         let num=0;
         return (
             <div>
-                <div className={styles.tableHeaderBox}>
+                <div className={skinStyle==1?styles.tableHeaderBoxBlue:skinStyle==2?styles.tableHeaderBoxWhite:styles.tableHeaderBox}>
                     {
                         tabaleData.data.header.map((value, key)=> {
                             return (
@@ -29,7 +29,7 @@ let Component = React.createClass({
                         })
                     }
                 </div>
-                <div className={styles.tableBox}>
+                <div className={skinStyle==1?styles.tableBoxBlue:skinStyle==2?styles.tableBoxWhite:styles.tableBox}>
 
                     <div className={styles.tableContentBox} id="alarmTable">
                         {
@@ -48,7 +48,7 @@ let Component = React.createClass({
                                                     )
                                                 }else if(keyC==2){
                                                     return (
-                                                        <div className={styles.tableContentItem} style={{width:tabaleData.data.length[keyC],color:valueC=='故障'?'#f00':(valueC=='警告'?'#ff0':'#fff')}} key={keyC}>
+                                                        <div className={styles.tableContentItem} style={{width:tabaleData.data.length[keyC],color:valueC=='故障'?'#f00':(valueC=='警告' && '#ff0')}} key={keyC}>
                                                             {valueC}
                                                         </div>
                                                     )
@@ -91,6 +91,7 @@ let Component = React.createClass({
 const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
+        skinStyle: state.vars.skinStyle
     }
 };
 
