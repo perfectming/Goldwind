@@ -92,6 +92,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         closeboxAm:()=>{
             $("#boxAm").parent().css("display","none");
+            dispatch(actions.setVars('roleIds', null));
         },
         Tofaninfo1: (value)=> {
         },

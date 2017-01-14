@@ -59,6 +59,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            $("#center3 input[name='checkItOut']").prop('checked',true);
+            $("#center3 input[name='checkItIn']").prop('checked',false);
             $.ajax({
                 url: soamMs+'/roleright/getGroupInfoList',
                 type: 'post',
@@ -90,21 +92,26 @@ const mapDispatchToProps = (dispatch) => {
                 }
                 alert(check_valB);
             })
+            $("#center3 input[name='checkItOut']").prop('checked',true);
+            $("#center3 input[name='checkItIn']").prop('checked',false);
         },
         closebox2:()=>{
             $("#box2").parent().css("display","none");
         },
         Tofaninfo1: (id,name)=> {
+            $("#center3 input[name='checkItOut']").prop('checked',true);
+            $("#center3 input[name='checkItIn']").prop('checked',false);
             $.ajax({
                 url: soamMs+'/roleright/getByWfidRolerRightMapList',
                 type: 'post',
                 data:{wfid:id,roleid:name},
                 dataType: 'json',//here,
                 success:function (data) {
+                    dispatch(actions.setObjs('boxCenter', data));
                     console.log(data,id,name);
                     $("#center3 input[name='checkItOut']").prop('checked',true);
                     $("#center3 input[name='checkItIn']").prop('checked',false);
-                    dispatch(actions.setObjs('boxCenter', data));
+
                 },
                 error:function(){
                     console.log('获取数据失败')
