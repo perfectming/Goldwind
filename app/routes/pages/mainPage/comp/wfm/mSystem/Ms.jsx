@@ -433,14 +433,14 @@ const mapDispatchToProps = (dispatch) => {
         },
         checkId(id,i,j){
             $.ajax({
-                url: soam+'/user/getByIDUserAuthentication?id='+id.value,
+                url: soamMs+'/role/getByIDUserAuthentication?id='+id.value,
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
                     if(data.data==true){alert('用户编号重复');
-                        let tableV = _.clone(getState().objs.tableContentAmm);
+                        let tableV = _.clone(getState().objs.tableContentMs);
                         tableV.data.pagedata[i][arr[j]] = '';
-                        dispatch(actions.setObjs('tableContentAmm', tableV));
+                        dispatch(actions.setObjs('tableContentMs', tableV));
                     }
                 },
                 error:function(){
@@ -450,14 +450,14 @@ const mapDispatchToProps = (dispatch) => {
         },
         checkName(name,i,j){
             $.ajax({
-                url: soam+'/user/getByNameUserAuthentication?name='+name.value,
+                url: soamMs+'/role/getByNameUserAuthentication?name='+name.value,
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
                     if(data.data==true){alert('用户名重复');
-                        let tableV = _.clone(getState().objs.tableContentAmm);
+                        let tableV = _.clone(getState().objs.tableContentMs);
                         tableV.data.pagedata[i][arr[j]] = '';
-                        dispatch(actions.setObjs('tableContentAmm', tableV));
+                        dispatch(actions.setObjs('tableContentMs', tableV));
                     }
                 },
                 error:function(){
