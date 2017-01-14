@@ -121,7 +121,7 @@ const mapDispatchToprops = (dispatch) => {
         changedate:()=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", momo, "Screen", 0);
             function momo(jyname){
-                if( jyname.Model.dis == undefined || jyname.Model.ens == undefined ){
+                if( jyname.Model){
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", momo, "Screen", 0);
                 }else {
                     dispatch(actions.setVars('jyname', jyname));

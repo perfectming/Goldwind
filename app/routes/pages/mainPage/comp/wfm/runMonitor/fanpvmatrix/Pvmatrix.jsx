@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
 
     render() {
-         let{valuepage1,Topvinfo,zhzb,fModel,fData}=this.props;
+         let{valuepage1,Topvinfo,zhzb,fModel,fData,skinStyle}=this.props;
         // let model_ens = zhzb.Model.ens;
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
@@ -32,7 +32,7 @@ let Component = React.createClass({
             // }
         }
         return (
-            <div className={styles.slistbodyBox}>
+            <div className={skinStyle==1?styles.slistbodyBoxBlue:skinStyle==2?styles.slistbodyBoxWhite:styles.slistbodyBox}>
                 {
                 obj_pvd[valuepage1].map((value, key)=> {
                     let x;
@@ -111,6 +111,7 @@ const mapStateToProps = (state) => {
         zhzb : state.vars.zhzb,
         fModel : state.vars.fModel,
         fData : state.vars.fData,
+        skinStyle: state.vars.skinStyle
     }
 };
 
