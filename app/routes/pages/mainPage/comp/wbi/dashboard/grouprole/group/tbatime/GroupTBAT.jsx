@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Profitstyle3.scss';
+import styles from '../PBAtime/Profitstyle2.scss';
 import GroupTBAT from './GroupTBAchart.jsx';
 import TBATimechartt from './TBATimechartt.jsx';
-import icono from '../../../../../../img/comp/TBA.png';
+import icono1 from '../../../../../../img/comp/TBA2.png';
+import icono2 from '../../../../../../img/comp/TBA.png';
 var actions = require('redux/actions');
 var $ = require('jquery');
 
@@ -18,11 +19,11 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0,ipUrl,tbaMonths,tbaRunTimes,tbaDownTimes,tbaTba,befor_pagee='group',backtop,befor_pagee2,tbaDays3,tbaDayRunTimes3,tbaDayDownTimes3,tbaDayTba3,TBAtimedata}=this.props;
+        let {w0,ipUrl,tbaMonths,tbaRunTimes,tbaDownTimes,tbaTba,befor_pagee='group',backtop,befor_pagee2,tbaDays3,tbaDayRunTimes3,tbaDayDownTimes3,tbaDayTba3,TBAtimedata,skinStyle}=this.props;
 
         return (
 
-            <div className={styles.box}>
+             <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 { // 返回按钮
                 }
                 <div className={styles.paddingtop}>
@@ -31,20 +32,20 @@ let Component = React.createClass({
                 {// 集团每月TBA
                 }
                 <div className={`${styles.areabox} ${styles.shadow}`}>
-                    <div className={styles.bgc}><img src={icono}/></div>
+                    <div className={styles.bgc}><img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/></div>
 
                     <GroupTBAT text={'集团每月TBA'} areaNamee={tbaMonths} areaRecordCostss={tbaDownTimes}
-                               areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl} height={410} TBAdaydata={TBAtimedata}></GroupTBAT>
+                               areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl} height={410} TBAdaydata={TBAtimedata} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></GroupTBAT>
 
                 </div>
                 {//每天TBA
                 }
 
                 <div className={`${styles.areabox} ${styles.shadow}`}>
-                    <div className={styles.bgc}><img src={icono}/></div>
+                    <div className={styles.bgc}><img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/></div>
 
                     <TBATimechartt TBAx={tbaDays3} TBADownTimes={tbaDayDownTimes3} TBARunTimes={tbaDayRunTimes3}
-                                   TBAtba={tbaDayTba3} height={410} text={w0+'每日TBA'}></TBATimechartt>
+                                   TBAtba={tbaDayTba3} height={410} text={w0+'每日TBA'}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></TBATimechartt>
 
                 </div>
 
@@ -73,6 +74,7 @@ const mapStateToProps = (state) => {
         // 全局ip
         ipUrl: state.vars.ipUrl,
         TBAtimedata: state.vars.TBAtimedata,
+        skinStyle: state.vars.skinStyle,
 
     }
 };

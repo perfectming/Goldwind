@@ -58,12 +58,14 @@
         font-size: 16px;
         color: #fff;
       }
-      img {
+      .img {
         position: absolute;
         top: 22px;
         left: 4%;
         height: 16px;
         width: 17px;
+         background: url("../../../../../../img/comp/MON.png") no-repeat;
+        background-size: cover;       
       }
     }
   }
@@ -134,9 +136,11 @@
       position: absolute;
       height: 16px;
       width: 17px;
-      top: 5px;
+      top: 9px;
       left: 69px;
       z-index: 5;
+              background: url("../../../../../../img/comp/MON.png") no-repeat;
+        background-size: cover;
       img {
         height: 16px;
         width: 17px
@@ -152,13 +156,16 @@
     position: relative;
    overflow:hidden;
     border: 1px solid #282F37;
+    background: rgba(44, 61, 71, 0.4);
     .bgccc {
       position: absolute;
       height: 16px;
       width: 17px;
-      top: 5px;
+      top: 9px;
       left: 69px;
       z-index: 5;
+              background: url("../../../../../../img/comp/MON.png") no-repeat;
+        background-size: cover;
       img {
         height: 16px;
         width: 17px
@@ -179,8 +186,500 @@
       position: absolute;
       height: 16px;
       width: 17px;
-      top: 5px;
+      top: 9px;
       left: 69px;
+      z-index: 5;
+              background: url("../../../../../../img/comp/MON.png") no-repeat;
+        background-size: cover;
+      img {
+        height: 16px;
+        width: 17px
+      }
+    }
+  }
+  //按钮样式
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-right: 20px;
+    height: 60px;
+    line-height: 60px;
+    width: 35%;
+    button {
+      width: 70px;
+      height: 30px;
+      line-height: 20px;
+      text-align: center;
+      font-size: 16px;
+      border-radius: 15px;
+      font-family: '微软雅黑';
+      margin-left: 12px;
+      background-color: transparent;
+      color: white;
+      border: 1px solid #20FEFF;
+
+    }
+    //按钮高亮
+    .btn0 {
+      color: #31F3FB;
+    }
+    .btn1 {
+      color: #fff;
+    }
+    button:hover {
+      color: #31F3FB;
+      box-shadow: 0px 0px 10px #20FEFF;
+    }
+  }
+
+}
+.boxWhite{
+  overflow: hidden;
+  padding: 10px;
+  padding-right: 40px;
+  position: relative;
+  //遮罩层
+  .boxcover {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 1200;
+    background: black;
+    display: none;
+    opacity: .6;
+  }
+  //更多的表格
+  .scroll {
+    width: 100%;
+    position: relative;
+    overflow-x: scroll;
+  }
+  .more:hover {
+    box-shadow: 0 0 15px #fff;
+  }
+
+  .more {
+    background: #E7F1FA;
+    position: absolute;
+    z-index: 1600;
+    width: 95%;
+    top: 50%;
+    left: 48%;
+    padding-top: 60px;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    display: none;
+    .moretitle {
+      width: 100%;
+      height: 60px;
+      background: #ddd;
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      z-index: 2000;
+      .gg {
+        display: inline-block;
+        font-size: 16px;
+        float: right;
+        line-height: 60px;
+        cursor: pointer;
+        margin-right: 50px;
+        color: #333;
+      }
+      p {
+        position: absolute;
+        top: 18px;
+        left: 7%;
+        font-size: 16px;
+        color: #fff;
+      }
+      .img {
+        position: absolute;
+        top: 22px;
+        left: 4%;
+        height: 16px;
+        width: 17px;
+        background: url("../../../../../../img/comp/MON2.png") no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+  //表格hover样式
+  .shadow:hover {
+    box-shadow: 0 0 15px #fff;
+  }
+  //月份
+  .monthbox {
+    width: 98%;
+    height: 50px;
+    list-style: none;
+    padding: 0;
+    padding-left: 0px;
+    position: relative;
+    border-bottom: 1px solid #31F3FB;
+
+    li {
+      word-spacing: 15px;
+      height: 40px;
+      width: 100px;
+      border: 1px solid #31F3FB;
+      line-height: 38px;
+      float: left;
+      color: red;
+      font-family: "微软雅黑";
+      text-align: center;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+    color: #333333;
+    box-shadow: 0 0 10px #555555;
+      }
+    }
+
+    .back {
+      float: left;
+      align-items: center;
+      color: #20FEFF;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      top: 0px;
+      border-radius: 45px;
+       margin-left:20px;
+      text-align: center;
+      background: #E7F1FA;
+      color: #333;
+    }
+
+    .red {
+
+      color: #333;
+      background: #E7F1FA;
+      box-shadow: 0 0 10px #555555;
+    }
+    .green {
+      color: #333;
+      background: #E7F1FA;
+    }
+  }
+  //区域表格(第一个)
+  .areabox {
+    position: relative;
+    width: 98%;
+    margin-left: 2px;
+    height: 420px;
+    background: #E7F1FA;
+    margin-bottom: 15px;
+    .bgccc {
+      position: absolute;
+      height: 16px;
+      width: 17px;
+      top: 9px;
+      left: 69px;
+      z-index: 5;
+      background: url("../../../../../../img/comp/MON2.png") no-repeat;
+      background-size: cover;
+      
+      img {
+        height: 16px;
+        width: 17px
+      }
+    }
+  }
+  //风场表格（第二个）
+  .windbox {
+    float: left;
+    width: 48%;
+    height: 420px;
+    margin-right: 15px;
+    position: relative;
+   overflow:hidden;
+   
+    background: #E7F1FA;
+    .bgccc {
+      position: absolute;
+      height: 16px;
+      width: 17px;
+      top: 9px;
+      left: 69px;
+      z-index: 5;
+      background: url("../../../../../../img/comp/MON2.png") no-repeat;
+      background-size: cover;
+      img {
+        height: 16px;
+        width: 17px
+      }
+    }
+  }
+  //风场表格第三个
+  .bigbox {
+    float: right;
+    height: 420px;
+    overflow: hidden;
+    width: 49.3%;
+    margin-right: 30px;
+  
+    position: relative;
+    background: #E7F1FA;
+
+    .bgccc {
+      position: absolute;
+      height: 16px;
+      width: 17px;
+      top: 9px;
+      left: 69px;
+     background: url("../../../../../../img/comp/MON2.png") no-repeat;
+      background-size: cover;
+      z-index: 5;
+      img {
+        height: 16px;
+        width: 17px
+      }
+    }
+  }
+  //按钮样式
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-right: 20px;
+    height: 60px;
+    line-height: 60px;
+    width: 35%;
+    button {
+      width: 70px;
+      height: 30px;
+      line-height: 20px;
+      text-align: center;
+      font-size: 16px;
+      border-radius: 15px;
+      font-family: '微软雅黑';
+      margin-left: 12px;
+      background-color: transparent;
+      color: #333;
+      border: 1px solid #20FEFF;
+
+    }
+    //按钮高亮
+    .btn0 {
+      color: #333;
+       box-shadow: 0px 0px 15px #333333;
+    }
+    .btn1 {
+      color: #555;
+    }
+    button:hover {
+      color: #333;
+      box-shadow: 0px 0px 10px #333;
+    }
+  }
+
+}
+//qweqweqweqw
+.boxBlue{
+  overflow: hidden;
+  padding: 10px;
+  padding-right: 40px;
+  position: relative;
+  //遮罩层
+  .boxcover {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 1200;
+    background: black;
+    display: none;
+    opacity: .6;
+  }
+  //更多的表格
+  .scroll {
+    width: 100%;
+    position: relative;
+    overflow-x: scroll;
+  }
+  .more:hover {
+    box-shadow: 0 0 15px #fff;
+  }
+
+  .more {
+    background: #21242a;
+    position: absolute;
+    z-index: 1600;
+    width: 95%;
+    top: 50%;
+    left: 48%;
+    padding-top: 60px;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    display: none;
+    background: #112a48;
+    .moretitle {
+      width: 100%;
+      height: 60px;
+      background: #15181B;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2000;
+      .gg {
+        display: inline-block;
+        font-size: 16px;
+        float: right;
+        line-height: 60px;
+        cursor: pointer;
+        margin-right: 50px;
+        color: #fff;
+      }
+      p {
+        position: absolute;
+        top: 18px;
+        left: 7%;
+        font-size: 16px;
+        color: #fff;
+      }
+      .img {
+        position: absolute;
+        top: 22px;
+        left: 4%;
+        height: 16px;
+        width: 17px;
+        background: url("../../../../../../img/comp/MON.png") no-repeat;
+        background-size: cover;        
+      }
+    }
+  }
+  //表格hover样式
+  .shadow:hover {
+    box-shadow: 0 0 15px #fff;
+  }
+  //月份
+  .monthbox {
+    width: 98%;
+    height: 50px;
+    list-style: none;
+    padding: 0;
+    padding-left: 0px;
+    position: relative;
+    border-bottom: 1px solid #31F3FB;
+
+    li {
+      word-spacing: 15px;
+      height: 40px;
+      width: 100px;
+      border: 1px solid #31F3FB;
+      line-height: 38px;
+      float: left;
+      font-family: "微软雅黑";
+      text-align: center;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        color: #31F3FB;
+        box-shadow: 0 0 10px #fff;
+      }
+    }
+
+    .back {
+      float: left;
+      align-items: center;
+      color: #20FEFF;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      top: 0px;
+      border-radius: 45px;
+      box-shadow: 0px 0px 10px #20FEFF;
+      text-align: center;
+    }
+
+    .red {
+
+      color: #31F3FB;
+    }
+    .green {
+      color: white;
+    }
+  }
+  //区域表格(第一个)
+  .areabox {
+    position: relative;
+    width: 98%;
+    margin-left: 2px;
+    height: 420px;
+    background: #112a48;
+    margin-bottom: 15px;
+    .bgccc {
+      position: absolute;
+      height: 16px;
+      width: 17px;
+      top: 9px;
+      left: 69px;
+      z-index: 5;
+      background: url("../../../../../../img/comp/MON.png") no-repeat;
+      background-size: cover;
+      img {
+        height: 16px;
+        width: 17px
+      }
+    }
+  }
+  //风场表格（第二个）
+  .windbox {
+    float: left;
+    width: 48%;
+    height: 420px;
+    margin-right: 15px;
+    position: relative;
+    background: #112a48;
+   overflow:hidden;
+    border: 1px solid #282F37;
+    .bgccc {
+      position: absolute;
+      height: 16px;
+      width: 17px;
+      top: 9px;
+      left: 69px;
+      background: url("../../../../../../img/comp/MON.png") no-repeat;
+      background-size: cover;      
+      z-index: 5;
+      img {
+        height: 16px;
+        width: 17px
+      }
+    }
+  }
+  //风场表格第三个
+  .bigbox {
+    float: right;
+    height: 420px;
+    overflow: hidden;
+    width: 49.3%;
+    margin-right: 30px;
+    border: 1px solid #282F37;
+    position: relative;
+    background: #112a48;
+    .bgccc {
+      position: absolute;
+      height: 16px;
+      width: 17px;
+      top: 9px;
+      left: 69px;
+      background: url("../../../../../../img/comp/MON.png") no-repeat;
+      background-size: cover;      
       z-index: 5;
       img {
         height: 16px;

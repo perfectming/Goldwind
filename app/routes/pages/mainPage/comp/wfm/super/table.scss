@@ -252,25 +252,19 @@
 }
 
 .tableContentBox::-webkit-scrollbar {
-        width:12px;
-        height:12px;
-        border:1px solid #fff;
-    }
+  width:12px;
+  height:12px;
+  border:1px solid rgba(225,225,225,0.4);
+  border-radius:10px;
+}
 .tableContentBox::-webkit-scrollbar-button    {
-        background-color:#272b34;
-        display:none;
-    }
-.tableContentBox::-webkit-scrollbar-track     {
-        background:#131619;
+  display:none;
+}
 
-    }
 .tableContentBox::-webkit-scrollbar-thumb{
-        background:#464c58;
-        border-radius:10px;
-    }
+  background:rgba(200,200,200,0.4);
+  border-radius:10px;
+}
 .tableContentBox::-webkit-scrollbar-corner {
-        background:#131619;
-    }
-.tableContentBox::-webkit-scrollbar-resizer  {
-        background:#f00;
-    }
+  background:#131619;
+}

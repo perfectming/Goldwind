@@ -51,6 +51,7 @@ let Component = React.createClass({
 
 
                 </div>
+                
                 <div className={styles.paddingtop}>
 
                     <div className={styles.back} onClick={() => backtop(befor_pagee, befor_pagee2)}>返回</div>

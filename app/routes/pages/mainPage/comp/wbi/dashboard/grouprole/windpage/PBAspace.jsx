@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestyle.scss';
+import styles from '../group/PBATime/Profitstyle2.scss';
 import PBAspacechart from './PBAspacechart.jsx';
-import icono from '../../../../../img/comp/PBA.png';
+import icono2 from '../../../../../img/comp/PBA.png';
+import icono1 from '../../../../../img/comp/PBA2.png';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
@@ -32,10 +33,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let{width,ipUrl,xxdwfId,xxdwfNa,btn=0,PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2,mapmonth,mon,Go1=false}=this.props;
+        let{width,ipUrl,xxdwfId,xxdwfNa,btn=0,PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2,mapmonth,mon,Go1=false,skinStyle}=this.props;
         if(Go1){
         return (
-            <div className={styles.box} >
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 {//遮罩层
                      }
             <div className={styles.boxcover} id='boxcover'></div>
@@ -43,7 +44,7 @@ let Component = React.createClass({
                      }
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
-                <img src={icono}/>
+               <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                 <p>{ mon+xxdwfNa+'各风机PBA'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
@@ -54,7 +55,7 @@ let Component = React.createClass({
                    fanCostA={PBASpaceMoreMaintainloss} 
                    fanCostB={PBASpaceMoreLimitloss} 
                    fanCostC={PBASpaceMoreNodevreasonloss} 
-                   PBA={PBASpaceMorePba} height={483} width={width} ty={10} pointWidth={20} pointPlacement={0.07} borderRadius={4}></PBAspacechart>
+                   PBA={PBASpaceMorePba} height={483} width={width} ty={10} pointWidth={20} pointPlacement={0.07} borderRadius={4}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></PBAspacechart>
                  </div>
              </div>
                
@@ -70,19 +71,19 @@ let Component = React.createClass({
 
                 </ul>
           
-                <div className={styles.bigbox}>
+               <div className={`${styles.bigbox} ${styles.shadow}`}>
                 
                     
                          
-                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={mon+xxdwfNa+'各风机PBA'} ty={40} pointWidth={30}  pointPlacement={-0.07} borderRadius={7}></PBAspacechart>
+                                <PBAspacechart fanProfitQ={PBASpaceFirstPoweract} machine={PBASpaceFirstWtname} fanCost={PBASpaceFirstFaultloss} fanCostA={PBASpaceFirstMaintainloss} fanCostB={PBASpaceFirstLimitloss} fanCostC={PBASpaceFirstNodevreasonloss} PBA={PBASpaceFirstPba} height={800} width={1735} text={mon+xxdwfNa+'各风机PBA'} ty={40} pointWidth={30}  pointPlacement={-0.07} borderRadius={7} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></PBAspacechart>
                         
                     
                        
                   
-                    <div className={styles.imgccq}>
-                        <img src={icono}/>
+                    <div className={styles.imgqv}>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
-                    <div className={styles.buttons}>
+                    <div className={styles.buttonsh}>
                         <button className={btn===0? styles.btn0 : styles.btn1}onClick={()=>gogogo(actbt,xxdwfId,ipUrl,mapmonth)} > 前10</button>
                         <button className={btn===1? styles.btn0 : styles.btn1}onClick={()=>back(actbt,xxdwfId,ipUrl,mapmonth)}>后10</button>
                         <button className={btn===2? styles.btn0 : styles.btn1} onClick={()=>more(actbt,xxdwfId,ipUrl,mapmonth)}>更多</button>
@@ -137,6 +138,7 @@ const mapStateToProps = (state) => {
         mapmonth:state.vars.mapmonth,
         mon:state.vars.mon,
         Go1:state.vars.Go1,
+        skinStyle:state.vars.skinStyle,
 
     
     }
