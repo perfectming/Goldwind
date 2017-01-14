@@ -34,7 +34,7 @@ let Component = React.createClass({
         this.props.init(page);
     },
     render() {
-        let {userNameT,init,wfidCount,wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table,years,changeTableItem1,wfids} = this.props;
+        let {checkDate,skinStyle,userNameT,init,wfidCount,wtidAll,theOne,lastPage,nextPage,theLast,page=1,saveTableItem,buttonAction,deleData,deleDate,addData,addDate,table,years,changeTableItem1,wfids} = this.props;
         let newData={};
         let num=0;
         console.log(wfidCount);
@@ -45,7 +45,7 @@ let Component = React.createClass({
         newData['datetype']=1;
         if (table && wtidAll){//判断数据是否存在
             return (
-                <div className={styles.powerBox}>
+                <div className={skinStyle==1?styles.powerBoxBlue:(skinStyle==2?styles.powerBoxWhite:styles.powerBox)}>
                     <div className={styles.inquireBox}>
                         <div className={styles.seleBox}>
                             <span>年度</span>
@@ -134,6 +134,7 @@ let Component = React.createClass({
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
                                                                         <input onChange={(e)=>changeTableItem1(e.target.value,table,key,keyC)}
+                                                                               onBlur={(e)=>checkDate(e.target.value,newData,key,valueC)}
                                                                                type="date" value={value[valueC].slice(0,10)}/>
                                                                     </div>
                                                                 )
@@ -180,7 +181,7 @@ let Component = React.createClass({
                                                                     <div className={styles.tableContentItem}
                                                                          style={{width:arr[keyC]+"%",paddingLeft:30}} key={keyC}>
                                                                         <input onChange={(e)=>changeTableItem1(e.target.value,newData,key,keyC)}
-                                                                               onBlur={(e)=>checkDate(e.target.value,newData,key,keyC)}
+                                                                               onBlur={(e)=>checkDate(e.target.value,newData,key,valueC)}
                                                                                type="date"/>
                                                                     </div>
                                                                 )
@@ -239,6 +240,7 @@ const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContent,
         page: state.vars.page1,
+        skinStyle:state.vars.skinStyle,
         userNameT: state.vars.userNameT,
         wtidAll: state.objs.wtidAll,
         wfidCount:state.vars.wfidCount,
@@ -281,7 +283,24 @@ const mapDispatchToProps = (dispatch) => {
             });
         },
         checkDate(value,newData,key,keyC){
-            console.log(value);
+            let dialog=value.slice(0,8)+'01';
+            let tableV = _.clone(getState().objs.tableContent);
+            console.log(tableV);
+            alert('开始时间为每月的第一天');
+            tableV.data.pagedata[key][keyC]=dialog;
+            dispatch(actions.setObjs('tableContent', tableV));
+
+
+        },
+        checkNewDate(value,newData,key,keyC){
+            let dialog=value.slice(0,8)+'01';
+            let tableV = _.clone(getState().objs.tableContent);
+            console.log(dialog);
+            alert('开始时间为每月的第一天');
+            tableV.data.pagedata[key][keyC]=dialog;
+            dispatch(actions.setObjs('tableContent', tableV));
+
+
         },
         buttonAction (sit){
             // 获取select 选择的内容
@@ -383,6 +402,7 @@ const mapDispatchToProps = (dispatch) => {
             });
         },
         deleData:(j) => {
+            if(confirm("确定要删除数据吗？")){
             let tableV = _.clone(getState().objs.tableContent);
             let fid=tableV.data.pagedata[j]['wfid'];
             let rection=tableV.data.pagedata[j]['rectime'];
@@ -414,7 +434,7 @@ const mapDispatchToProps = (dispatch) => {
                 error:function(){
                     console.log('获取数据失败')
                 }
-            });
+            });}
         },
         deleDate:(j) => {
             let tableV = _.clone(getState().objs.tableContent);

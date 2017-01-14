@@ -291,7 +291,7 @@
             border-top: 1px solid #676971;
             border-bottom: 1px solid #676971;
             span{
-                color:#fff;
+                color:#333;
                 margin-right:10px;
                 margin-left:20px;
                 line-height:60px;
@@ -346,6 +346,7 @@
                     float: left;
                     width: 30%;
                     height: 380px;
+                    background: #E7F1FA;
                     .button{
                         cursor: pointer;
                         z-index:9;
@@ -372,6 +373,7 @@
                     width: 69%;
                     height: 380px;
                     margin-left: 1%;
+                    background: #E7F1FA;
                 }
             }
             .floorTwo{
@@ -383,6 +385,7 @@
                     float: left;
                     width: 30%;
                     height: 380px;
+                    background: #E7F1FA;
                     .button{
                         cursor: pointer;
                         z-index:9;
@@ -409,6 +412,7 @@
                     width: 69%;
                     height: 380px;
                     margin-left: 1%;
+                    background: #E7F1FA;
                 }
             }
         }

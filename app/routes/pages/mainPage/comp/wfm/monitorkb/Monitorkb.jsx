@@ -324,23 +324,20 @@ const mapDispatchToProps = (dispatch) => {
         changedate:(boole)=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
             function momo(moname){
-                if( moname.Model.dis == undefined || moname.Model.ens == undefined ){
+                if( moname.Model == undefined){
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
                 }else {
                     dispatch(actions.setVars('moname', moname));
                     TY.getRtData("MonitorBoard", 8888800, ppo);
                     function ppo(modata){
-                        TY.getRtData("MonitorBoard", 8888800, ppo);
-                        function ppo(modata){
-                            if (modata.ModelData==undefined||modata.ModelData[8888801]==undefined){
-                                TY.getRtData("MonitorBoard", 8888800, ppo);
-                            }else{
-                                dispatch(actions.setVars('modata', modata));
-                                setTimeout(function () {
-                                    dispatch(actions.setVars('boole', true));
-                                    clearTimeout(onceTime);
-                                },100)
-                            }
+                        if (modata.ModelData==undefined){
+                            TY.getRtData("MonitorBoard", 8888800, ppo);
+                        }else{
+                            dispatch(actions.setVars('modata', modata));
+                            setTimeout(function () {
+                                dispatch(actions.setVars('boole', true));
+                                clearTimeout(onceTime);
+                            },100)
                         }
                     }
                 }

@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ changpage, fcpage,actbt=0,backtop,changpage1,actbt1,befor_page,befor_page2,zhz,bs,befor_page3,npage='fanmatrix'}=this.props;
+       let{skinStyle, changpage, fcpage,actbt=0,backtop,changpage1,actbt1,befor_page,befor_page2,zhz,bs,befor_page3,npage='fanmatrix'}=this.props;
           let model_data = bs.ModelData;
           var model_ens = zhz.Model.ens;
           let arr1 = [];
@@ -31,19 +31,9 @@ let Component = React.createClass({
    
 }());
 
-
-
-
-
-
-
-
-
-
-
         return (
          
-                <div className={styles.bodynav}>
+                <div className={skinStyle==2?styles.bodynavWhite:styles.bodynav}>
                 <img src={back} onClick={()=>backtop(befor_page,befor_page2,befor_page3,npage)}/>
                  {
                     arr1.map((value,key)=>{
@@ -77,6 +67,7 @@ const mapStateToProps = (state) => {
         befor_page2 : state.vars.befor_page2,
         befor_page3 : state.vars.befor_page3,
         npage : state.vars.npage,
+        skinStyle: state.vars.skinStyle
         
 
     }

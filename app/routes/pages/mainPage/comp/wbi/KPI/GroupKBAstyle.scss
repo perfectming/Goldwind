@@ -501,7 +501,7 @@
         .show{
             height:460px;
             width: 1740px;
-            background-color: #21242a;
+            background: #E7F1FA;
             position: absolute;
             border: 1px solid #1e8087;
             top: 200px;
@@ -509,10 +509,11 @@
             z-index: 8;
             .header{
                 position: relative;
-                color: #fff;
+                color: #333;
                 height: 60px;
                 line-height: 50px;
-                background-color: #464c58;
+                background: #E7F1FA;
+                border-bottom:1px solid #d5e6f1;
                 font-size: 16px;
                 padding: 4px 6px;
                 h3{
@@ -569,6 +570,7 @@
                 position: relative;
                 height: 380px;
                 overflow: hidden;
+                background: #E7F1FA;
                 .img{
                     position: absolute;
                     z-index: 5;
@@ -591,6 +593,7 @@
                 height: 380px;
                 margin-right: 1%;
                 width: 49.5%;
+                background: #E7F1FA;
                 .img{
                     position: absolute;
                     z-index: 5;
@@ -612,6 +615,7 @@
                 float: left;
                 height: 380px;
                 width: 49.5%;
+                background: #E7F1FA;
                 .img{
                     position: absolute;
                     z-index: 5;
@@ -648,7 +652,7 @@
                     font-size: 14px;
                     font-family: '微软雅黑';
                     position: absolute;
-                    color:white;
+                    color:#333;
                     border: 1px solid #20FEFE;
                     top: 5px;
                     right: 174px;
@@ -684,7 +688,7 @@
                     font-size: 14px;
                     font-family: '微软雅黑';
                     position: absolute;
-                    color:white;
+                    color:#333;
                     border: 1px solid #20FEFE;
                     top: 5px;
                     right: 94px;
@@ -720,7 +724,7 @@
                     font-size: 14px;
                     font-family: '微软雅黑';
                     position: absolute;
-                    color:white;
+                    color:#333;
                     border: 1px solid #20FEFE;
                     top: 5px;
                     right: 12px;

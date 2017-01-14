@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {unit,text,lose,name}=this.props;
+    	let {color,unit,text,lose,name}=this.props;
         let configPie = {
             chart: {
                 height:360,
@@ -24,7 +24,7 @@ let Component = React.createClass({
                 text: text,
                 align:'center',
                 style:{
-                    color:"#fff",
+                    color:color,
                     fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
@@ -34,7 +34,7 @@ let Component = React.createClass({
                 align:"center",
                 verticalAlign: "bottom",
                 itemStyle: {
-                    color: "#fff",
+                    color: color,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
@@ -46,7 +46,7 @@ let Component = React.createClass({
             tooltip: {
                 shared: true,
                 style:{
-                    color: '#333',
+                    color: color,
                     fontSize: '12px',
                     fontFamily:'微软雅黑'
                 },
@@ -64,7 +64,7 @@ let Component = React.createClass({
 	                dataLabels: {
 	                    enabled: true,
                         style: {
-                            color: '#d1d2d3',
+                            color: color,
                             fontWeight: 'normal',
                             fontSize:'14px',
                             fontFamily: '微软雅黑',
@@ -79,7 +79,7 @@ let Component = React.createClass({
                 labels: {
                     y: 0, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -90,7 +90,7 @@ let Component = React.createClass({
                 	format:'{value}',
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
