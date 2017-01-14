@@ -7,7 +7,7 @@ let Component = React.createClass({
     },
     render() {
         
-       let {GERa,GEAm,GENa,GEIn,height,w0,TBA,text}=this.props;
+       let {GERa,GEAm,GENa,GEIn,height,w0,TBA,text,scolor}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -23,10 +23,10 @@ let Component = React.createClass({
                 top:'-20px',
                 vertical:'top',
                
-                 x:107,
-                 y:15,
+                 x: 105,
+                y: 15,
                 style:{
-                    color:"#fff",
+                    color:scolor,
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
                   
@@ -43,7 +43,7 @@ let Component = React.createClass({
                     color:'#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
@@ -83,7 +83,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20,
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize:'14px'
                     }
                 },
@@ -94,7 +94,7 @@ let Component = React.createClass({
                 labels: {
                 format: '',
                 style: {
-                    color: '#fff',
+                    color: scolor,
                     fontSize:'14px'
                 }
             },
@@ -102,21 +102,21 @@ let Component = React.createClass({
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'(元)',
+                text:'（元）',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x: 45,
                 style:{
                     fontSize:'14px',
-                    color:'#fff'
+                    color:scolor
                 }
             }
         }, {
              labels: {
                 format: '',
                 style: {
-                    color: '#fff',
+                    color: scolor,
                     fontSize:'14px'
                 }
             }, gridLineDashStyle: 'Solid',
@@ -129,7 +129,7 @@ let Component = React.createClass({
                 y: -15,
                 x: -48,
                 style:{
-                    color: '#fff',
+                    color: scolor,
                     fontSize:'14px'
                 }
 
