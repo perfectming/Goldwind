@@ -103,6 +103,15 @@ let Component = React.createClass({
                                                                            onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
                                                                            value={value[valueC]}/>
                                                                 )
+                                                            }else if(keyC ==1){
+                                                                return (
+                                                                    <input className={styles.tableContentItem}
+                                                                           style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                           key={keyC} contentEditable="true" readOnly="readOnly"
+                                                                           onBlur={(e)=>checkName(e.target,key,keyC)}
+                                                                           onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                           value={value[valueC]}/>
+                                                                )
                                                             }else if (keyC == 3) {
                                                                 return (
                                                                     <input className={styles.tableContentItem}
