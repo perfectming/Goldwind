@@ -7,7 +7,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {input_url,width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height,value,newIndex}=this.props;
+        let {input_url,width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height,value,newIndex,scolor}=this.props;
         let configPie = {
             chart: {
                 height: height,
@@ -25,7 +25,7 @@ let Component = React.createClass({
                 x: 105,
                 y: 13,
                 style: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "16px",
                     fontFamily: "微软雅黑",
 
@@ -43,7 +43,7 @@ let Component = React.createClass({
                     color: '#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "14px",
                     fontWeight: "normal",
                     fontFamily: "微软雅黑",
@@ -184,7 +184,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20,
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 },
@@ -194,7 +194,7 @@ let Component = React.createClass({
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -209,14 +209,14 @@ let Component = React.createClass({
                     x: 45,
                     style: {
                         fontSize: '14px',
-                        color: '#fff'
+                        color: scolor
                     }
                 }
             }, {
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 },
