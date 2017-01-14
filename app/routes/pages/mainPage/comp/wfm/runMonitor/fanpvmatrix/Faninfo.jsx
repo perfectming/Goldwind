@@ -41,11 +41,11 @@ let Component = React.createClass({
     },
 	render() {
 
-		let {value,fanid,infofmodel,infofdata,tobujian,faninfobool = false} = this.props;
+		let {value,fanid,infofmodel,infofdata,tobujian,faninfobool = false,skinStyle} = this.props;
 		// console.log(value)
 	if(faninfobool){
 		let val = value.Wtid;
-		console.log(infofmodel)
+		// console.log(infofmodel);
 		let sp = infofmodel.Model.ens[val].sp;
 		let PPVplace = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].place;
 		let PPVcoeff = infofmodel.Model.dis["WTGS.PPV.Ra.F32.A"].coeff;
@@ -220,7 +220,7 @@ let Component = React.createClass({
 		// console.log(code);
 		// this.props.init(value,fanid,infofmodel,infofdata);
 		return (
-			<div className={styles.bodyBox}>
+			<div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
 				<div className={styles.fanidbox}>
 					<div>风机名称：{value.Wtname}</div>
 					<div>风机型号：{sp}</div>
@@ -335,19 +335,19 @@ let Component = React.createClass({
 					<div className={`${styles.infoBox4} ${styles.infofL}`}>
 						<Title title={['当日功率与风速实时曲线']}></Title>
 						<div className={`${styles.box4Cahrt} ${styles.infofL000}`}>
-							<Pwschart className={styles.box4Cahrt1} data = {infofdata} value = {val}></Pwschart>
+							<Pwschart className={styles.box4Cahrt1} data = {infofdata} value = {val} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Pwschart>
 						</div>
 					</div>
 					<div className={`${styles.infoBox5} ${styles.infofL}`}>
 						<Title title={['风功率曲线']}></Title>
 						<div className={`${styles.box5Cahrt} ${styles.infofL000}`}>
-							<Pwschart2 className={styles.box4Cahrt1} data = {infofdata} value = {val}></Pwschart2>
+							<Pwschart2 className={styles.box4Cahrt1} data = {infofdata} value = {val} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Pwschart2>
 						</div>
 					</div>
 					<div className={`${styles.infoBox6} ${styles.infofL}`}>
 						<Title></Title>
 
-						<div className={styles.titlebox}><span>风机描述</span><span>风机状态</span><span>状态时长(分钟)</span></div>
+						<div className={styles.titlebox}><span>状态字</span><span>风机状态</span><span>状态时长(分钟)</span></div>
 						<div className={styles.statusquery}>
 							{
 
@@ -481,6 +481,7 @@ const mapStateToProps = (state) => {
         infofmodel : state.vars.infofmodel,
         infofdata : state.vars.infofdata,
         faninfobool : state.vars.faninfobool,
+        skinStyle: state.vars.skinStyle
     }
 };
 
@@ -489,12 +490,12 @@ const mapDispatchToProps = (dispatch) => {
     	toinfopage: (value,faninfobool) => {
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
                     function setData3(infofModel){
-                    	console.log(1,infofModel);
+                    	// console.log(1,infofModel);
                     	if(!infofModel.Model){
                     		TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", value.Wtid, "WTDetail", setData3, "Screen", 0);
                     	}else{
                     		dispatch(actions.setVars('infofmodel', infofModel));
-	                        console.log(0,infofModel);
+	                        // console.log(0,infofModel);
                             // console.log(1,infofModel);
 	                                TY.getRtData("WTDetail", value.Wtid, setData5)
 	                                function setData5(infofData){

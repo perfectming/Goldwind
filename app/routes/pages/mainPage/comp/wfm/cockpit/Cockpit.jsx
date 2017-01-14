@@ -369,10 +369,10 @@ const mapDispatchToProps = (dispatch) => {
             },10000)
             //数据刷新//
             time=setInterval(function(){
-                TY.getRtData("Cockpit", 8888800, ppo);
-                function ppo(mmodata){
+                TY.getRtData("Cockpit", 8888800, ppoo);
+                function ppoo(mmodata){
                     if(mmodata.ModelData==undefined){
-                        TY.getRtData("Cockpit", 8888800, ppo);
+                        TY.getRtData("Cockpit", 8888800, ppoo);
                     }else {
                         dispatch(actions.setVars('mmodata', mmodata));
                     }

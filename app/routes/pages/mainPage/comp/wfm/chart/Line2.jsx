@@ -9,7 +9,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{date, datenamel,height,name,unit}=this.props;
+        let{date, datenamel,height,name,unit,lettercolor}=this.props;
         let configPie = {
             chart: {
                 backgroundColor: "rgba(46, 46, 65, 0)",
@@ -31,7 +31,7 @@ let Component = React.createClass({
                  // min:datenamel.length-30,
                  labels: {
                         style: {
-                            color: '#fff',//颜色
+                            color: lettercolor,//颜色
                             fontFamily:"微软雅黑"
 
                         }
@@ -46,7 +46,7 @@ let Component = React.createClass({
                 labels: {
                       
                         style: {
-                            color: '#fff',//颜色
+                            color: lettercolor,//颜色
                             fontSize:'12px'  //字体
                         }
                     },
