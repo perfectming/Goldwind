@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestyle.scss';
+import styles from '../group/PBATime/Profitstyle2.scss';
 import TBAspacechart from './TBAspacechart.jsx';
-import icono from '../../../../../img/comp/TBA.png';
+import icono2 from '../../../../../img/comp/TBA.png';
+import icono1 from '../../../../../img/comp/TBA2.png';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let data = require('./../group/Profit-data3');
@@ -29,11 +30,11 @@ let Component = React.createClass({
     },
     render() {
 
-        let {width, ipUrl, wTBATM, wTBADownM, wTBARunM, wTBANaM, btn, wTBAT, wTBADown, wTBARun, wTBANa, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, back, machinee, more, close, backtop, befor_pagee = 'windpage', befor_page2,mapmonth,Go2=false,mon}=this.props;
+        let {width, ipUrl, wTBATM, wTBADownM, wTBARunM, wTBANaM, btn, wTBAT, wTBADown, wTBARun, wTBANa, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, back, machinee, more, close, backtop, befor_pagee = 'windpage', befor_page2,mapmonth,Go2=false,mon,skinStyle}=this.props;
         if(Go2){
         return (
 
-            <div className={styles.box}>
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 {//遮罩层
                 }
                 <div className={styles.boxcover} id='boxcover'></div>
@@ -41,14 +42,14 @@ let Component = React.createClass({
                 }
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
-                        <img src={icono}/>
+                         <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                         <p>{mon + xxdwfNa + '各风机TBA'}</p>
                         <div onClick={() => close()}>x</div>
                     </div>
                     <div className={styles.scroll}>
                         <TBAspacechart fanCost={wTBADownM} machine={wTBANaM} fanProfitQ={wTBARunM} TBA={wTBATM}
                                        height={481} width={width} ty={0} pointWidth={20} borderRadius={4}
-                                       pointPlacement={0.07}></TBAspacechart></div>
+                                       pointPlacement={0.07} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></TBAspacechart></div>
 
                 </div>
                 <ul className={styles.monthbox}>
@@ -64,21 +65,21 @@ let Component = React.createClass({
 
                 </ul>
 
-                <div className={styles.bigbox}>
+               <div className={`${styles.bigbox} ${styles.shadow}`}>
 
 
                     <div>
                         <TBAspacechart fanCost={wTBADown} machine={wTBANa} fanProfitQ={wTBARun} TBA={wTBAT} height={800}
                                        text={mon + xxdwfNa + '各风机TBA'} ty={50} pointWidth={30}
-                                       borderRadius={7} pointPlacement={-0.07}></TBAspacechart>
+                                       borderRadius={7} pointPlacement={-0.07}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></TBAspacechart>
                     </div>
 
 
-                    <div className={styles.imgcq}>
-                        <img src={icono}/>
+                    <div className={styles.imgqvg}>
+                         <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
 
-                    <div className={styles.buttons}>
+                    <div className={styles.buttonsh}>
                         <button onClick={() => gogogo(xxdwfId, actbt, btn, ipUrl,mapmonth)}
                                 className={btn === 0 ? styles.btn0 : styles.btn1}> 前10
                         </button>
@@ -129,7 +130,8 @@ const mapStateToProps = (state) => {
         width: state.vars.width1,
         mapmonth: state.vars.mapmonth,
         Go2:state.vars.Go2,
-        mon:state.vars.mon
+        mon:state.vars.mon,
+        skinStyle:state.vars.skinStyle
     }
 };
 
