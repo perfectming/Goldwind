@@ -17,10 +17,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let {valuepage1,zhzb,fModel,fData,next,previous,page=1,} = this.props;
+        let {valuepage1,zhzb,fModel,fData,next,previous,page=1,skinStyle} = this.props;
         let model_ens = zhzb.Model.ens;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
-        console.log(obj_pvd);
+        // console.log(obj_pvd);
         var run=0;
         var fau=0;
         var offL=0;
@@ -46,7 +46,7 @@ let Component = React.createClass({
             }
         }
         return (
-            <div className={css.toBox}>
+            <div className={skinStyle==1?css.toBoxBlue:skinStyle==2?css.toBoxWhite:css.toBox}>
                 <div className={css.leftBox}>
                     <div className={css.tableBox}>
                         <div className={css.tableHeaderBox}>
@@ -213,6 +213,7 @@ const mapStateToProps = (state) => {
         zhzb : state.vars.zhzb,
         fModel : state.vars.fModel,
         fData : state.vars.fData,
+        skinStyle: state.vars.skinStyle
 
     }
 };

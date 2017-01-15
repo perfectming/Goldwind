@@ -20,7 +20,7 @@ let Component = React.createClass({
 	},
 
 	render() {
-		let {value,fanid,infopmodel,infopdata} = this.props;
+		let {value,fanid,infopmodel,infopdata,skinStyle} = this.props;
 		// console.log(1111,infopmodel);
 		let x;
 		let code = value.WTStateCode;
@@ -63,7 +63,7 @@ let Component = React.createClass({
 			}
 		// console.log(code);
 		return (
-			<div className={styles.bodyBox}>
+			<div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
 				<div className={styles.fanidbox}>
 					<div>风机名称：{value.Wtname}</div>
 					<div>风机型号：{value.Wtid}</div>
@@ -147,6 +147,7 @@ const mapStateToProps = (state) => {
         fanid : state.vars.valueid,
         infopmodel : state.vars.infopmodel,
         infopdata : state.vars.infopdata,
+        skinStyle: state.vars.skinStyle
     }
 };
 

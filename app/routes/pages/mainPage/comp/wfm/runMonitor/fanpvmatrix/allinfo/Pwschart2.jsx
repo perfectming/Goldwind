@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {data,value} = this.props;
+        let {data,value,lettercolor} = this.props;
         // console.log(data);
         // let xdata = data.ModelData[value]["DevCurDayPowerCurve"]["Time"];
         let wpwdata = data.ModelData[value]["DevCurDayPowerCurve"]["Value"];
@@ -22,8 +22,8 @@ let Component = React.createClass({
                 width:460,
                 height:310,
                 margin: [20,35,45,35],
-                backgroundColor: '#282f37',
-                plotBackgroundColor: '#282f37',
+                backgroundColor: "rgba(46, 46, 65, 0)",
+                plotBackgroundColor: "rgba(46, 46, 65, 0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
@@ -46,7 +46,7 @@ let Component = React.createClass({
                     color:"#00F7FE"
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: lettercolor,
                     fontSize:"14px",
                    
 
@@ -82,7 +82,7 @@ let Component = React.createClass({
                 rotation: 0,
                 x: 30,
                     style: {
-                        color: '#00F7FE', //#4572A7
+                        color: lettercolor, //#4572A7
                         top:0,
                         right:0,
                     }
@@ -91,7 +91,7 @@ let Component = React.createClass({
                 
                
                 style: {
-                    color: '#fff'
+                    color: lettercolor
                 }
                 },
                 categories: '',
@@ -101,7 +101,7 @@ let Component = React.createClass({
                 offset: 0,
                 x:-5,
                 style: {
-                    color: '#fff'
+                    color: lettercolor
                 }
             },
             title: {
@@ -111,7 +111,7 @@ let Component = React.createClass({
                 rotation: 0,
                 y: -10,
                 style: {
-                    color: '#00F7FE',
+                    color: lettercolor,
                     top:0,
                     right:0,
                 }

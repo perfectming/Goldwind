@@ -85,6 +85,11 @@ let Component = React.createClass({
                     num.push([arrname[i],arr[i]])
                 }
             }
+
+           let annularPlate='#39565e';//环状图底色，用于换肤//
+           if(skinStyle==2){
+               annularPlate='#C0E2EA';
+           }
         return (
             <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
                 <div className={styles.leftBox}>
@@ -94,13 +99,13 @@ let Component = React.createClass({
                     <div className={styles.chart_pie} >
                         <div className={`${styles.ehart} ${styles.box_shadow}`}>  
                         <div className={styles.dingwei}>
-                            <Pie arn={arrname} nu={num}></Pie>
+                            <Pie arn={arrname} nu={num} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Pie>
                         </div>
                         <span className={styles.chartnum}><p>{(allnum/10000).toFixed(1)}</p><p>万kWh</p></span>
                             <Title title={['日发电量统计']}></Title>
                         </div>
                         <div className={`${styles.spanL} ${styles.box_shadow} ${styles.ehart}`}>
-                            <Line1 date={date03} datenamel={datename00} height={220} name={'当前出力'} unit={mod.dis.CurDayPowerCurve.unit}></Line1>
+                            <Line1 date={date03} datenamel={datename00} height={220} name={'当前出力'} unit={mod.dis.CurDayPowerCurve.unit} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Line1>
                    
                             <Title title={[mod.dis.CurDayPowerCurve.name+'('+mod.dis.CurDayPowerCurve.unit+')']}></Title>
                             
@@ -110,14 +115,14 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.chart_bar}>
                         <div className={`${styles.linebox} ${styles.box_shadow}`}>
-                            <Line1 date={date01} datenamel={datename01} height={150} name={'当前风速'} unit={mod.dis.CurDayWindSpeedCurve.unit}></Line1>
+                            <Line1 date={date01} datenamel={datename01} height={150} name={'当前风速'} unit={mod.dis.CurDayWindSpeedCurve.unit} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Line1>
                             <Title title={[mod.dis.CurDayWindSpeedCurve.name+'('+mod.dis.CurDayWindSpeedCurve.unit+')']}></Title>
                         </div>
                         <div style={{"clear":"both"}}></div>
                     </div>
                     <div className={styles.chart_bar}>
                          <div className={`${styles.linebox} ${styles.linebox1} ${styles.box_shadow}`}>
-                            <Line1 date={date02} datenamel={datename02} height={150} name={'当前辐照度'} unit={['(W/㎡)']}></Line1>
+                            <Line1 date={date02} datenamel={datename02} height={150} name={'当前辐照度'} unit={['(W/㎡)']} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Line1>
                             <Title title={[mod.dis.CurDayPVTSICurve.name+'(W/㎡)']}></Title>
                         </div>
                         <div style={{"clear":"both"}}></div>

@@ -11,7 +11,7 @@ let Component = React.createClass({
 
     render() {
 
-            let {arn,nu}=this.props;
+            let {arn,nu,lettercolor}=this.props;
             
         let configPie = {
             chart: {
@@ -54,7 +54,7 @@ let Component = React.createClass({
                         enabled: true,
                         format: '{point.name}:<b>{point.percentage:.1f}%</b>',
                            style: {
-                                    color: "#d1d2d3",
+                                    color: lettercolor,
                                     fontSize: '13px',
                                     fontFamily:"微软雅黑"
 

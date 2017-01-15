@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch) => {
         init:()=>{
             $('#citem').on('click',function(){
                 $('#shows').show();
-            })
+            });
              $('#shows').mouseleave(function(){
             $(this).hide()
             })

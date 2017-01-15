@@ -79,8 +79,8 @@ let Component = React.createClass({
             let gzsbgltime2=[];//故障时间在12-24小时之间//
             let gzsbgltime3=[];//故障时间在24-72小时之间//
             let gzsbgltime4=[];//故障时间在72小时以上//
-            let annularPlate='#39565e';//环状图底色，用于换肤//
 
+            let annularPlate='#39565e';//环状图底色，用于换肤//
             if(skinStyle==2){
                 annularPlate='#C0E2EA';
             }
@@ -349,10 +349,10 @@ const mapDispatchToProps = (dispatch) => {
             },10000);
             //数据刷新方法//
             time=setInterval(function(){
-                TY.getRtData("MonitorBoard", 8888800, ppo);
-                function ppo(modata){
+                TY.getRtData("MonitorBoard", 8888800, ppoo);
+                function ppoo(modata){
                     if(modata.ModelData==undefined){
-                        TY.getRtData("MonitorBoard", 8888800, ppo);
+                        TY.getRtData("MonitorBoard", 8888800, ppoo);
                     }else {
                         dispatch(actions.setVars('modata', modata));
                         dispatch(actions.setVars('bloo', true));

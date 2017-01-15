@@ -103,6 +103,15 @@ let Component = React.createClass({
                                                                            onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
                                                                            value={value[valueC]}/>
                                                                 )
+                                                            }else if(keyC ==1){
+                                                                return (
+                                                                    <input className={styles.tableContentItem}
+                                                                           style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                           key={keyC} contentEditable="true" readOnly="readOnly"
+                                                                           onBlur={(e)=>checkName(e.target,key,keyC)}
+                                                                           onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                           value={value[valueC]}/>
+                                                                )
                                                             }else if (keyC == 3) {
                                                                 return (
                                                                     <input className={styles.tableContentItem}
@@ -148,7 +157,23 @@ let Component = React.createClass({
                                                            readOnly="true" value={num}/>
                                                     {
                                                         arr.map((valueC, keyC)=> {
-                                                            if (keyC == 3) {
+                                                            if(keyC == 0) {
+                                                                return (
+                                                                    <input className={styles.tableContentItem}
+                                                                           style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                           key={keyC} contentEditable="true"  onBlur={(e)=>checkId(e.target,key,keyC)}
+                                                                           onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                           value={value[valueC]}/>
+                                                                )
+                                                            }else if(keyC == 1){
+                                                                return (
+                                                                    <input className={styles.tableContentItem}
+                                                                           style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
+                                                                           key={keyC} contentEditable="true"  onBlur={(e)=>checkName(e.target,key,keyC)}
+                                                                           onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
+                                                                           value={value[valueC]}/>
+                                                                )
+                                                            }else if (keyC == 3) {
                                                                 return (
                                                                     <input className={styles.tableContentItem}
                                                                            style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
@@ -408,6 +433,40 @@ const mapDispatchToProps = (dispatch) => {
                     if(data){
                         $("#box1 input[name='checkItOutbox']").prop('checked',true);
                         $("#box1 input[name='checkItInbox']").prop('checked',false);
+                    }
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        checkId(id,i,j){
+            $.ajax({
+                url: soamMs+'/role/getByIDUserAuthentication?id='+id.value,
+                type: 'post',
+                dataType: 'json',//here,
+                success:function (data) {
+                    if(data.data==true){alert('用户编号重复');
+                        let tableV = _.clone(getState().objs.tableContentMs);
+                        tableV.data.pagedata[i][arr[j]] = '';
+                        dispatch(actions.setObjs('tableContentMs', tableV));
+                    }
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
+        },
+        checkName(name,i,j){
+            $.ajax({
+                url: soamMs+'/role/getByNameUserAuthentication?name='+name.value,
+                type: 'post',
+                dataType: 'json',//here,
+                success:function (data) {
+                    if(data.data==true){alert('用户名重复');
+                        let tableV = _.clone(getState().objs.tableContentMs);
+                        tableV.data.pagedata[i][arr[j]] = '';
+                        dispatch(actions.setObjs('tableContentMs', tableV));
                     }
                 },
                 error:function(){
