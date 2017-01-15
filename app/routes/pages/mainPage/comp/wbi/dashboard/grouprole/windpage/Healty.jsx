@@ -168,8 +168,8 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     'wfid': xxdwfId,
-                    'month': 12,
-                    'year': 2016
+                    'month': month,
+                    'year': year
                 },
                 dataType: 'json',
                 timeout: '3000',
