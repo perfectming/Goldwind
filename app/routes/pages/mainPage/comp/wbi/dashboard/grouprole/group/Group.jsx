@@ -18,7 +18,6 @@ let Component = React.createClass({
     },
     componentDidMount() {
         this.props.init();
-
         let {display}=this.props;
         setTimeout(function(){
             display();
@@ -40,7 +39,7 @@ let Component = React.createClass({
                                 </div>
                                 <div className={styles.sectionBox}>
                                     <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{(rate*100).toFixed(1)}%</p>收益率</span>
-                                    <Pie2 color={rate/0.12>0.9? ['#62de88','#39565e']:rate/0.12>0.8?['#e8952a','#39565e']:rate/0.12>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[profit/1,amounts/1-profit/1]}></Pie2>
+                                    <Pie2 color={skinStyle==2? (rate/0.12>0.9? ['#62de88','#c0e2ea']:rate/0.12>0.8?['#e8952a','#c0e2ea']:rate/0.12>0.6?['#a32124','#c0e2ea']:['#d8403d','#c0e2ea']):(rate/0.12>0.9? ['#62de88','#39565e']:rate/0.12>0.8?['#e8952a','#39565e']:rate/0.12>0.6?['#a32124','#39565e']:['#d8403d','#39565e'])} num={[profit/1,amounts/1-profit/1]}></Pie2>
                                 </div>
                             </div>
                             <div className={styles.section}>
@@ -52,7 +51,7 @@ let Component = React.createClass({
                                 </div>
                                 <div className={styles.sectionBox}>
                                     <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{healthy.toFixed(1)}%</p>健康度</span>
-                                    <Pie2 color={healthy/100>0.9? ['#62de88','#39565e']:healthy/100>0.8?['#e8952a','#39565e']:healthy/100>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[healthy,100-healthy]}></Pie2>
+                                    <Pie2 color={skinStyle==2? (healthy/100>0.9? ['#62de88','#c0e2ea']:healthy/100>0.8?['#e8952a','#c0e2ea']:healthy/100>0.6?['#a32124','#c0e2ea']:['#d8403d','#c0e2ea']):(healthy/100>0.9? ['#62de88','#39565e']:healthy/100>0.8?['#e8952a','#39565e']:healthy/100>0.6?['#a32124','#39565e']:['#d8403d','#39565e'])} num={[healthy,100-healthy]}></Pie2>
                                 </div>
                             </div>
                             <div className={styles.section}>
@@ -64,7 +63,7 @@ let Component = React.createClass({
                                 </div>
                                 <div className={styles.sectionBox}>
                                     <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{actrulElec!==0&&shouldElec==0? (actrulElec/shouldElec):((actrulElec/shouldElec)*100).toFixed(1)+'%'}</p>PBA</span>
-                                    <Pie2 color={actrulElec/shouldElec>0.9? ['#62de88','#39565e']:actrulElec/shouldElec>0.8?['#e8952a','#39565e']:actrulElec/shouldElec>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[actrulElec,shouldElec-actrulElec]}></Pie2>
+                                    <Pie2 color={skinStyle==2? (actrulElec/shouldElec>0.9? ['#62de88','#c0e2ea']:actrulElec/shouldElec>0.8?['#e8952a','#c0e2ea']:actrulElec/shouldElec>0.6?['#a32124','#c0e2ea']:['#d8403d','#c0e2ea']):(actrulElec/shouldElec>0.9? ['#62de88','#39565e']:actrulElec/shouldElec>0.8?['#e8952a','#39565e']:actrulElec/shouldElec>0.6?['#a32124','#39565e']:['#d8403d','#39565e'])} num={[actrulElec,shouldElec-actrulElec]}></Pie2>
                                 </div>
                             </div>
                             <div className={styles.section}>
@@ -76,7 +75,7 @@ let Component = React.createClass({
                                 </div>
                                 <div className={styles.sectionBox}>
                                     <span className={styles.numBox}><p style={{color:'#e9c75c'}}>{(tba*100).toFixed(1)}%</p>TBA</span>
-                                    <Pie2 color={tba>0.9? ['#62de88','#39565e']:tba>0.8?['#e8952a','#39565e']:tba>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={runTime==0&&downTime==0? [0,1]:[runTime,downTime]}></Pie2>
+                                    <Pie2 color={skinStyle==2? (tba>0.9? ['#62de88','#c0e2ea']:tba>0.8?['#e8952a','#c0e2ea']:tba>0.6?['#a32124','#c0e2ea']:['#d8403d','#c0e2ea']):(tba>0.9? ['#62de88','#39565e']:tba>0.8?['#e8952a','#39565e']:tba>0.6?['#a32124','#39565e']:['#d8403d','#39565e'])} num={runTime==0&&downTime==0? [0,1]:[runTime,downTime]}></Pie2>
                                 </div>
                             </div>
                         </div>

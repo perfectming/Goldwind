@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0,height,widths,namex3,healthy3,text} = this.props;
+        let {w0,height,widths,namex3,healthy3,jhpcolor,text} = this.props;
 
 
         let configPie = {
