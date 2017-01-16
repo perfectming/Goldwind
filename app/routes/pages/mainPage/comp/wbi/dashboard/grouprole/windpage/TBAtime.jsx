@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestylee.scss';
+import styles from '../group/PBATime/Profitstyle2.scss';
 import TBAtimechart from './TBAtimechart.jsx';
 import TBATimechartt from '../group/TBATime/TBATimechartt.jsx';
-import icono from '../../../../../img/comp/TBA.png';;
+import icono2 from '../../../../../img/comp/TBA.png';
+import icono1 from '../../../../../img/comp/TBA2.png';
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
 let input_url="10.68.100.32";
@@ -17,10 +18,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let {ipUrl,xxdwfNa="川井风电场",xxdwfId,changedata2,TBA,TBAAA,montht,profit,cost,areaPlan,areaPlanDay,areaPlanDayT,w0,winss,befor_pagee='windpage',backtop,befor_pagee2}=this.props;
+        let {ipUrl,xxdwfNa="川井风电场",xxdwfId,changedata2,TBA,TBAAA,montht,profit,cost,areaPlan,areaPlanDay,areaPlanDayT,w0,winss,befor_pagee='windpage',backtop,befor_pagee2,skinStyle}=this.props;
         
         return (
-            <div className={`${styles.box} ${styles.shadow}`}>
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
           
              <div className={styles.paddingtop}>
                  {//返回
@@ -28,23 +29,23 @@ let Component = React.createClass({
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 {// 12个月数据
                      }
-                <div className={styles.bigbox}>
+               <div className={`${styles.areabox} ${styles.shadow}`}>
  
-                       <div className={styles.imgqq}>
-                        <img  className={styles.img}src={icono}/>
-                       </div>
-                          <TBAtimechart xxdwfNa={xxdwfNa}montht={montht} profit={profit} cost={cost} TBA={TBA} height={410} xxdwfId={xxdwfId} input_url={ipUrl} pointWidth={30}></TBAtimechart>
+                    <div className={styles.imgqvg}>
+                       <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
+                    </div>
+                          <TBAtimechart xxdwfNa={xxdwfNa}montht={montht} profit={profit} cost={cost} TBA={TBA} height={410} xxdwfId={xxdwfId} input_url={ipUrl} pointWidth={30}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></TBAtimechart>
    
                 </div>
                 {//  对应月份每天的数据
                      }
-                   <div className={styles.bigboxx}>
+                  <div className={`${styles.areabox} ${styles.shadow}`}>
                
                                
-                                <TBATimechartt TBAx={areaPlan} TBADownTimes={areaPlanDayT} TBARunTimes={areaPlanDay} TBAtba={TBAAA} height={410} text={w0+xxdwfNa+'每日TBA'}></TBATimechartt>
+                                <TBATimechartt TBAx={areaPlan} TBADownTimes={areaPlanDayT} TBARunTimes={areaPlanDay} TBAtba={TBAAA} height={410} text={w0+xxdwfNa+'每日TBA'} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></TBATimechartt>
 
-                     <div className={styles.imgqq}>
-                        <img  className={styles.img}src={icono}/>
+                    <div className={styles.imgqvg}>
+                       <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                 </div>
             </div>
@@ -75,6 +76,7 @@ const mapStateToProps = (state) => {
          xxdwfId:state.vars.xxdwfId1,
         xxdwfNa:state.vars.xxdwfNa1,
         ipUrl:state.vars.ipUrl,
+        skinStyle:state.vars.skinStyle,
 
        
 

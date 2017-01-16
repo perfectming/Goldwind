@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestyle.scss';
+import styles from '../group/PBATime/Profitstyle2.scss';
 import Windce from './Windce.jsx';
-import icono from '../../../../../img/comp/wind_logo.png';
-import Month from './Month';
+import icono2 from '../../../../../img/comp/wind_logo.png';
+import icono1 from '../../../../../img/comp/wind_logo2.png';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
@@ -18,10 +18,10 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_pagee = 'windpage',  areaNameN, areaRecordCostN, areaRecordProfitN,mapmonth,mon,Go2=false}=this.props;
+        let {width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_pagee = 'windpage',  areaNameN, areaRecordCostN, areaRecordProfitN,mapmonth,mon,Go2=false,skinStyle}=this.props;
 if(Go2){
         return (
-            <div className={styles.box}>
+             <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 {//遮罩层
                      }
 
@@ -30,14 +30,14 @@ if(Go2){
                 }
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
-                        <img src={icono}/>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                         <p>{mon + xxdwfNa + '各风机发电量'}</p>
                         <div className={styles.xx} onClick={() => close()}>x</div>
                     </div>
                     <div className={styles.scroll}>
                         <Windce areaNameX={areaNameN} areaRecordCostT={areaRecordCostN}
                                 areaRecordProfitO={areaRecordProfitN} pointWidth={20} width={width} height={483} ly={10}
-                                pointPlacement={0} borderRadius={4}></Windce>
+                                pointPlacement={0} borderRadius={4} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Windce>
                     </div>
 
 
@@ -59,13 +59,13 @@ if(Go2){
 
                     <Windce areaNameX={areaNamee} areaRecordCostT={wind} areaRecordProfitO={windP} pointWidth={30}
                             height={800} text={mon+ xxdwfNa + '各风机发电量'} ly={40}
-                            borderRadius={7}></Windce>
+                            borderRadius={7} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Windce>
 
 
-                    <div className={styles.imgq}>
-                        <img src={icono}/>
+                    <div className={styles.imgqv}>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
-                    <div className={`${styles.buttons} ${styles.buttonss}`}>
+                    <div className={`${styles.buttonsh} ${styles.buttonss}`}>
                         <button className={btn === 0 ? styles.btn0 : styles.btn1}
                                 onClick={() => gogogo(actbt, ipUrl, xxdwfId,mapmonth)}> 前10
                         </button>
@@ -111,6 +111,7 @@ const mapStateToProps = (state) => {
         mapmonth: state.vars.mapmonth,
         mon: state.vars.mon,
         Go2: state.vars.Go2,
+        skinStyle: state.vars.skinStyle,
     }
 };
 

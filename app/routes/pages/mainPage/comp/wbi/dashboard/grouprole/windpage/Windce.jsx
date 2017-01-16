@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {borderRadius,pointPlacement,areaPlan,ly,text,areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height}=this.props;
+        let {borderRadius,pointPlacement,areaPlan,ly,text,areaNameX,areaRecordCostT,areaRecordProfitO,pointWidth,width,height,scolor}=this.props;
          
         let configPie = {
             chart: {
@@ -29,7 +29,7 @@ let Component = React.createClass({
                 vertical:'top',
                 x:120,
                 style:{
-                    color:"#fff",
+                    color:scolor,
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
                     
@@ -49,7 +49,7 @@ let Component = React.createClass({
                    inactiveColor: "blue",
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
@@ -81,7 +81,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20,
                     style: {
-                        color: '#fff',//颜色
+                        color: scolor,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -98,7 +98,7 @@ let Component = React.createClass({
                     y: -10,
                     x: 47,
                     style:{
-                        color:'#fff',
+                        color:scolor,
                         fontSize:'14px',
                     }
             },
@@ -106,7 +106,7 @@ let Component = React.createClass({
                     title:'100%',
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color:"white",
+                        color:scolor,
                         fontSize:'14px'  //字体
                     }
                 },

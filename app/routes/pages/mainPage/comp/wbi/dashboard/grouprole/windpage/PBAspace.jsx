@@ -65,7 +65,7 @@ let Component = React.createClass({
                             return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId,ipUrl)} key={key}>{value.yearpoweract+'月'}</li>)
                         })
                     }
-     }
+     
  
     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
 

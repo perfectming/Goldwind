@@ -1,10 +1,11 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestylee.scss';
+import styles from '../group/PBATime/Profitstyle2.scss';
 import Healtytimechart from './Healtytimechart.jsx';
 import Healtytimecharttt from './Healtytimecharttt.jsx';
-import icono from '../../../../../img/comp/健康度1.png';
+import icono2 from '../../../../../img/comp/HEA.png';
+import icono1 from '../../../../../img/comp/HEA2.png';
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
 let month=data.month;
@@ -28,17 +29,16 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {ipUrl,WTHealNamee,WTNe,hlyyear,hlymonth,xxdwfNa="川井风电场",WTN,WTHealName,w0='11月',wins,befor_pagee='windpage',backtop,befor_pagee2,areaPlan,areaPlanDay}=this.props;
+        let {ipUrl,WTHealNamee,WTNe,hlyyear,hlymonth,xxdwfNa="川井风电场",WTN,WTHealName,w0='11月',wins,befor_pagee='windpage',backtop,befor_pagee2,areaPlan,areaPlanDay,skinStyle}=this.props;
         return (
-
-            <div className={styles.box}>
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
 
                 <div className={styles.paddingtop}>
                     <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div>
                 </div>
                 {//健康度12个月
                 }
-                <div className={`${styles.bigbox} ${styles.shadow}`}>
+                <div className={`${styles.areabox} ${styles.shadow}`}>
 
 
 
@@ -47,24 +47,24 @@ let Component = React.createClass({
                                       input_url={ipUrl} height={410}
                                       hlyyear={hlyyear}
                                       hlymonth={hlymonth}
-                                      text={xxdwfNa+'每月健康度'}></Healtytimechart>
+                                      text={xxdwfNa+'每月健康度'} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Healtytimechart>
 
-                    <div className={styles.imgqz}>
-                        <img src={icono}/>
+                    <div className={styles.bgcc}>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                 </div>
                 {//健康度每个月的数据
                 }
-                <div className={`${styles.bigbox} ${styles.shadow}`}>
+                <div className={`${styles.areabox} ${styles.shadow}`}>
 
 
 
-                    <Healtytimecharttt   areaPlan={WTHealNamee} areaPlanDay={WTNe} text1={w0+xxdwfNa+'每日健康度'} height={410}></Healtytimecharttt>
+                    <Healtytimecharttt   areaPlan={WTHealNamee} areaPlanDay={WTNe} text1={w0+xxdwfNa+'每日健康度'} height={410} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Healtytimecharttt>
 
 
 
-                    <div className={styles.imgqz}>
-                        <img src={icono}/>
+                    <div className={styles.bgcc}>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                 </div>
             </div>
@@ -87,6 +87,8 @@ const mapStateToProps = (state) => {
         xxdwfId:state.vars.xxdwfId1,
         xxdwfNa:state.vars.xxdwfNa1,
         ipUrl:state.vars.ipUrl,
+        skinStyle:state.vars.skinStyle,
+        w0:state.vars.WHmonth,
 
 
 
@@ -118,12 +120,11 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     'year':year,
                     'month':month,
-                    'wfid':xxdwfId==undefined? "150801":xxdwfId,
+                    'wfid':xxdwfId,
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
                     let WTHeal=data.data.monthHealth;
                     // 获取12个月份
                     WTHeal.map(function(value,key){
@@ -172,7 +173,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-console.log(data)
+
                     let WTHeal=data.data.dayHealth;
                     let WTHeall=data.data.monthHealth;
                     for (let i in WTHeal){

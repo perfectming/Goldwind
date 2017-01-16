@@ -13,7 +13,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {height, text1, input_url,hlyyear,hlymonth, xxdwfId, xxdwfNa, w0, wins, monthT, areaRecordProfitT, text, changedata1}=this.props;
+        let {height, text1, input_url,hlyyear,hlymonth, xxdwfId, xxdwfNa, w0, wins, monthT, areaRecordProfitT, text, changedata1,scolor}=this.props;
         let configPie = {
             chart: {
                 height: height,
@@ -32,7 +32,7 @@ let Component = React.createClass({
                 y: 14,
                 x: 90,
                 style: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "16px",
                     fontFamily: "微软雅黑",
 
@@ -46,7 +46,7 @@ let Component = React.createClass({
                     color: '#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "14px",
                     fontWeight: "normal",
                     fontFamily: "微软雅黑",
@@ -122,7 +122,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20,
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 },
@@ -132,7 +132,7 @@ let Component = React.createClass({
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -146,14 +146,14 @@ let Component = React.createClass({
                     x: 33,
                     style: {
                         fontSize: '14px',
-                        color: '#fff'
+                        color: scolor
                     }
                 }
             }, {
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',

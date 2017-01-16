@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestyle.scss';
+import styles from '../group/PBATime/Profitstyle2.scss';
 import WFSprofitchart from './WFSprofitchart.jsx';
-import icono from '../../../../../img/comp/TBA.png';
+import icono2 from '../../../../../img/comp/MON.png';
+import icono1 from '../../../../../img/comp/MON2.png';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
@@ -28,11 +29,11 @@ let Component = React.createClass({
     },
     render() {
        
-        let{width,ipUrl,WFSPRa,WFSPNaM,WFSPCo,WFSPEa,WFSPNa,WFSPRaM,WFSPCoM,WFSPEaM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2,mapmonth,mon,Go3=false}=this.props;
+        let{width,ipUrl,WFSPRa,WFSPNaM,WFSPCo,WFSPEa,WFSPNa,WFSPRaM,WFSPCoM,WFSPEaM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2,mapmonth,mon,Go3=false,skinStyle}=this.props;
         if(Go3){
         return (
            
-            <div className={styles.box}>
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 {//遮罩层
                      }
              <div className={styles.boxcover} id='boxcover'></div>
@@ -40,12 +41,12 @@ let Component = React.createClass({
                      }
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
-                <img src={icono}/>
+               <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                 <p>{mon+xxdwfNa+'各风机收益'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
-            <WFSprofitchart fanCost={WFSPCoM} machine={WFSPNaM} fanProfitQ={WFSPEaM} TBA={WFSPRaM} height={481} width={width}  ty={10} pointWidth={20} borderRadius={4} pointPlacement={0}></WFSprofitchart></div>
+            <WFSprofitchart fanCost={WFSPCoM} machine={WFSPNaM} fanProfitQ={WFSPEaM} TBA={WFSPRaM} height={481} width={width}  ty={10} pointWidth={20} borderRadius={4} pointPlacement={0} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></WFSprofitchart></div>
 
              </div>
                 <ul className={styles.monthbox}>
@@ -59,20 +60,23 @@ let Component = React.createClass({
 
                 </ul>
             
-                <div className={styles.bigbox}>
-                  
+                <div className={`${styles.bigbox} ${styles.shadow}`}>
+                                      <div>
+                          <WFSprofitchart fanCost={WFSPCo} machine={WFSPNa} fanProfitQ={WFSPEa} TBA={WFSPRa} text={mon+xxdwfNa+'各风机收益'} ty={40} pointWidth={30} borderRadius={7} pointPlacement={0} height={800} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></WFSprofitchart>
+                    </div>
+
                       
                          
-                                <WFSprofitchart fanCost={WFSPCo} machine={WFSPNa} fanProfitQ={WFSPEa} TBA={WFSPRa} text={mon+xxdwfNa+'各风机收益'} ty={40} pointWidth={30} borderRadius={7} pointPlacement={0} height={800}></WFSprofitchart>
+                          
                            
                        
                
                   
-                    <div className={styles.imgqnm}>
-                        <img src={icono}/>
+                    <div className={styles.imgqv}>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
 
-                    <div className={styles.buttons}>
+                    <div className={styles.buttonsh}>
                       <button onClick={()=>gogogo(xxdwfId,actbt,btn,ipUrl,mapmonth)} className={btn===0? styles.btn0 : styles.btn1} > 前10</button>
                       <button onClick={()=>back(xxdwfId,actbt,btn,ipUrl,mapmonth)} className={btn===1? styles.btn0 : styles.btn1}>后10</button>
                       <button  onClick={()=>more(xxdwfId,actbt,btn,ipUrl,mapmonth)} className={btn===2? styles.btn0 : styles.btn1}>更多</button>
@@ -122,6 +126,7 @@ const mapStateToProps = (state) => {
         mapmonth:state.vars.mapmonth,
         mon:state.vars.mon,
         Go3:state.vars.Go3,
+        skinStyle:state.vars.skinStyle,
      
     }
 };
@@ -129,7 +134,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
        ajax: (xxdwfId,xxdwfNa,input_url) => {
-     
+   
           let WFSPNa=[];
           let WFSPEa=[];
           let WFSPCo=[];

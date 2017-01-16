@@ -14,7 +14,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {height, text, input_url, width, xxdwfId, xxdfc, monthT, profit, cost, w0, winsss, changedata3, machine, fanProfitQ, fanCost, fanCostA, fanCostB, fanCostC,PBATimeFirstPbaa}=this.props;
+        let {height, text, input_url, width, xxdwfId, xxdfc, monthT, profit, cost, w0, winsss, changedata3, machine, fanProfitQ, fanCost, fanCostA, fanCostB, fanCostC,PBATimeFirstPbaa,scolor}=this.props;
         let configPie = {
             chart: {
                 height: height,
@@ -33,7 +33,7 @@ let Component = React.createClass({
                 x: 105,
                 y: 14,
                 style: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "16px",
                     fontFamily: "微软雅黑",
 
@@ -49,7 +49,7 @@ let Component = React.createClass({
                     color: '#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "14px",
                     fontWeight: "normal",
                     fontFamily: "微软雅黑",
@@ -143,7 +143,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20,
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 },
@@ -156,7 +156,7 @@ let Component = React.createClass({
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -170,15 +170,15 @@ let Component = React.createClass({
                     y: -20,
                     x: 46,
                     style: {
-                        fontSize: '14px',
-                        color: '#fff'
+                        fontSize: scolor,
+                        color: scolor
                     }
                 }
             }, {
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -192,7 +192,7 @@ let Component = React.createClass({
                     y: -15,
                     x: -40,
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
 

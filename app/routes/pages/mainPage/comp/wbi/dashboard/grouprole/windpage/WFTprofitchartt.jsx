@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let{xxdwfId,input_url,changedata2qw,areaRecordCostT,areaRecordProfitO,rate,text,areaPlan,areaPlanDay, areaPlanDayT,width,height,areaNameX,areaRecordCost,data}=this.props;
+        let{xxdwfId,input_url,changedata2qw,areaRecordCostT,areaRecordProfitO,rate,text,areaPlan,areaPlanDay, areaPlanDayT,width,height,areaNameX,areaRecordCost,data,scolor}=this.props;
      
         let configPie = {
             chart: {
@@ -27,10 +27,10 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                 x : 110,
-                 y:20,
+                x: 105,
+                y: 14,
                 style:{
-                    color:"#fff",
+                    color:scolor,
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
                     
@@ -47,7 +47,7 @@ let Component = React.createClass({
                     color:'#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
@@ -136,7 +136,7 @@ let Component = React.createClass({
                     y: 20, //x轴刻度往下移动20px
                     style: {
                         fontSize:'14px',
-                        color:'#fff'  //字体
+                        color:scolor  //字体
                     }
                 },
                 categories:areaNameX,
@@ -145,7 +145,7 @@ let Component = React.createClass({
             labels: {
                 format: '',
                 style: {
-                    color: '#fff',
+                    color: scolor,
                     fontSize:'14px'
                 }
             }, gridLineDashStyle: 'Solid',
@@ -160,14 +160,14 @@ let Component = React.createClass({
                 x:45,
                 style:{
                     fontSize:'14px',
-                    color:'#fff'
+                    color:scolor
                 }
             }
         }, {
              labels: {
                 format: '',
                 style: {
-                    color: '#fff',
+                    color: scolor,
                     fontSize:'14px'
                 }
             },
@@ -183,7 +183,7 @@ let Component = React.createClass({
                 y: -15,
                 x: -40,
                 style:{
-                    color: '#fff',
+                    color: scolor,
                     fontSize:'14px'
                 }
 

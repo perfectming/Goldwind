@@ -34,8 +34,6 @@ let Component = React.createClass({
         if(Go4){
         return (
             <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
-
-
                 <ul className={styles.monthbox}>
                     {
                         mapmonth.map((value, key) => {

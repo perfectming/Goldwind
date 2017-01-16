@@ -65,6 +65,19 @@
       width: 16px
     }
   }
+      .bgcc {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 7px;
+    left: 49px;
+    z-index: 5;
+    background-size: cover;
+    img {
+      height: 16px;
+      width: 16px
+    }
+  }
   }
   //健康度里的更多
     .more{
@@ -309,6 +322,19 @@
     z-index: 5;
    
      background-size: cover;
+    img {
+      height: 16px;
+      width: 16px
+    }
+  }
+        .bgcc {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 7px;
+    left: 49px;
+    z-index: 5;
+    background-size: cover;
     img {
       height: 16px;
       width: 16px
@@ -566,6 +592,19 @@
       width: 16px
     }
   }
+        .bgcc {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 7px;
+    left: 49px;
+    z-index: 5;
+    background-size: cover;
+    img {
+      height: 16px;
+      width: 16px
+    }
+  }
   }
     //健康度里的更多
     .more{
@@ -679,6 +718,7 @@
       }
      .btn0{
      color: #31F3FB;
+         box-shadow: 0px 0px 10px #20FEFF;
      }
     .btn1{
     color:#fff;

@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestyle.scss';
+import styles from '../group/PBATime/Profitstyle2.scss';
 import WFTprofitchart from './WFTprofitchart.jsx';
 import WFTprofitchartt from './WFTprofitchartt.jsx';
-import icono from '../../../../../img/comp/收益率1.png';
+import icono2 from '../../../../../img/comp/MON.png';
+import icono1 from '../../../../../img/comp/MON2.png';
 var $ = require('jquery');
 var actions = require('redux/actions');
 let data = require('./Profit-dataq')
@@ -31,14 +32,14 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {befor_pagee = 'windpage', befor_pagee2, income, ratem, cost, month2, rate, width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_page2, areaNameN, areaRecordCostN, areaRecordProfitN,mon,data}=this.props;
+        let {befor_pagee = 'windpage', befor_pagee2, income, ratem, cost, month2, rate, width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_page2, areaNameN, areaRecordCostN, areaRecordProfitN,mon,data,skinStyle}=this.props;
 
         return (
-            <div className={styles.box}>
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 <div className={styles.boxcover} id='boxcover'></div>
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
-                        <img src={icono}/>
+                         <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                         <p>{mon + xxdwfNa + '各风机发电量'}</p>
                         <div className={styles.xx} onClick={() => close()}>x</div>
                     </div>
@@ -46,7 +47,7 @@ let Component = React.createClass({
                         <WFTprofitchart areaNameX={areaNameN} areaRecordCostT={areaRecordCostN}
                                         areaRecordProfitO={areaRecordProfitN} colorO={colorO} colorT={colorT}
                                         pointWidth={20} width={width} height={483} ly={10} pointPlacement={0}
-                                        borderRadius={3} xxdwfId={xxdwfId}></WFTprofitchart>
+                                        borderRadius={3} xxdwfId={xxdwfId} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></WFTprofitchart>
                     </div>
 
 
@@ -58,31 +59,31 @@ let Component = React.createClass({
                 </div>
 
 
-                <div className={`${styles.biggbox} ${styles.shadow}`}>
+                <div className={`${styles.areabox} ${styles.shadow}`}>
 
 
                     <WFTprofitchartt input_url={ipUrl} xxdwfId={xxdwfId} areaNameX={month2} areaRecordCostT={income}
                                      areaRecordProfitO={cost} colorO={colorO} colorT={colorT} pointWidth={30}
                                      height={410} text={xxdwfNa + '每月收益'} rate={ratem} ly={40} pointPlacement={-0.07}
-                                     borderRadius={7} data={data}></WFTprofitchartt>
+                                     borderRadius={7} data={data} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></WFTprofitchartt>
 
 
-                    <div className={styles.imgq}>
-                        <img src={icono}/>
+                    <div className={styles.bgc}>
+                       <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                 </div>
 
-                <div className={`${styles.biggbox} ${styles.shadow}`}>
+                <div className={`${styles.areabox} ${styles.shadow}`}>
 
 
                     <WFTprofitchart areaNameX={areaNamee} areaRecordCostT={wind} areaRecordProfitO={windP}
                                     colorO={colorO} colorT={colorT} pointWidth={30} height={410}
                                     text={mon+ xxdwfNa + '每日收益'} rate={rate} ly={40}
-                                    pointPlacement={-0.07} borderRadius={7}></WFTprofitchart>
+                                    pointPlacement={-0.07} borderRadius={7} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></WFTprofitchart>
 
 
-                    <div className={styles.imgq}>
-                        <img src={icono}/>
+                    <div className={styles.bgc}>
+                       <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                 </div>
             </div>
@@ -119,6 +120,7 @@ const mapStateToProps = (state) => {
         ratem: state.vars.rateee,
         mon: state.vars.mon,
         data: state.vars.rdata,
+        skinStyle: state.vars.skinStyle,
     }
 };
 
