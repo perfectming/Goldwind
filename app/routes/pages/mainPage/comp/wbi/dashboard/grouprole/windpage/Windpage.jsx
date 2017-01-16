@@ -45,7 +45,7 @@ let Component = React.createClass({
 	           					<div className={styles.sectiontwo}>
 	           						<div className={styles.pie}>
 	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{healthy.toFixed(1)}%</p>健康度</span>
-	           						<Pie2 color={(healthy/100)>0.9? ['#62de88','#39565e']:(healthy/100)>0.8?['#e8952a','#39565e']:(healthy/100)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[healthy,100-healthy]}></Pie2>
+	           						<Pie2 color={skinStyle==2? ((healthy/100)>0.9? ['#62de88','#c0e2ea']:(healthy/100)>0.8?['#e8952a','#c0e2ea']:(healthy/100)>0.6?['#a32124','#c0e2ea']:['#d8403d','#c0e2ea']):((healthy/100)>0.9? ['#62de88','#39565e']:(healthy/100)>0.8?['#e8952a','#39565e']:(healthy/100)>0.6?['#a32124','#39565e']:['#d8403d','#39565e'])} num={[healthy,100-healthy]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageHealthyS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageHealthyT()}></a>
@@ -58,7 +58,7 @@ let Component = React.createClass({
 	           					<div className={styles.sectionthree}>
 	           						<div className={styles.pie}>
 	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{wfAct!==0&&wfTheory==0? (wfAct/wfTheory):(wfAct/wfTheory*100).toFixed(1)+'%'}</p>PBA</span>
-	           						<Pie2 color={(wfAct/wfTheory)>0.9? ['#62de88','#39565e']:(wfAct/wfTheory)>0.8?['#e8952a','#39565e']:(wfAct/wfTheory)>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={[wfAct,wfTheory-wfAct]}></Pie2>
+	           						<Pie2 color={skinStyle==2? ((wfAct/wfTheory)>0.9? ['#62de88','#c0e2ea']:(wfAct/wfTheory)>0.8?['#e8952a','#c0e2ea']:(wfAct/wfTheory)>0.6?['#a32124','#c0e2ea']:['#d8403d','#c0e2ea']):((wfAct/wfTheory)>0.9? ['#62de88','#39565e']:(wfAct/wfTheory)>0.8?['#e8952a','#39565e']:(wfAct/wfTheory)>0.6?['#a32124','#39565e']:['#d8403d','#39565e'])} num={[wfAct,wfTheory-wfAct]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepagePBAS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepagePBAT()}></a>
@@ -71,7 +71,7 @@ let Component = React.createClass({
 	           					<div className={styles.sectionfour}>
 	           						<div className={styles.pie}>
 	           						<span className={styles.numBox}><p style={{color:'#E9C75C'}}>{(TBA*100).toFixed(1)}%</p>TBA</span>
-	           						<Pie2 color={TBA>0.9? ['#62de88','#39565e']:TBA>0.8?['#e8952a','#39565e']:TBA>0.6?['#a32124','#39565e']:['#d8403d','#39565e']} num={runTime==0&&downTime==0? [0,1]:[runTime,downTime]}></Pie2>
+	           						<Pie2 color={skinStyle==2? (TBA>0.9? ['#62de88','#c0e2ea']:TBA>0.8?['#e8952a','#c0e2ea']:TBA>0.6?['#a32124','#c0e2ea']:['#d8403d','#c0e2ea']):(TBA>0.9? ['#62de88','#39565e']:TBA>0.8?['#e8952a','#39565e']:TBA>0.6?['#a32124','#39565e']:['#d8403d','#39565e'])} num={runTime==0&&downTime==0? [0,1]:[runTime,downTime]}></Pie2>
 	           						</div>
 	           						<a className={styles.space} onClick={()=>changepageTBAS()}></a><br/>
 	           						<a className={styles.time} onClick={()=>changepageTBAT()}></a>
