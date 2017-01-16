@@ -7,7 +7,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let {input_url,width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height}=this.props;
+        let {input_url,width,areaName,areaRecordCost,areaRecordProfit,text,w11,changedataq,windFiedN,year,monthh,daycount,keyy,arr5,TBA,height,value,newIndex,scolor}=this.props;
         let configPie = {
             chart: {
                 height: height,
@@ -25,7 +25,7 @@ let Component = React.createClass({
                 x: 105,
                 y: 13,
                 style: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "16px",
                     fontFamily: "微软雅黑",
 
@@ -43,7 +43,7 @@ let Component = React.createClass({
                     color: '#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "14px",
                     fontWeight: "normal",
                     fontFamily: "微软雅黑",
@@ -78,7 +78,7 @@ let Component = React.createClass({
                                year=year-1;
                             }
                             keyy=month2;
-                            let dayy = new Date(year, keyy, 0);
+                            let dayy = new Date(value[newIndex].year, value[newIndex].yearpoweract, 0);
 //获取天数：
                             let daycount = dayy.getDate();
 
@@ -101,15 +101,15 @@ let Component = React.createClass({
                                 url: 'http://' + input_url + '/wbi/yield/getYieldByGroupid',
                                 async: false,
                                 data: {
-                                    'startdate': year + "-" + (keyy) + "-" + '1',
-                                    'enddate': year + "-" + (keyy) + "-" + daycount,
+                                    'startdate': value[newIndex].year + "-" + value[newIndex].yearpoweract + "-" + '1',
+                                    'enddate':  value[newIndex].year + "-" + value[newIndex].yearpoweract  + "-" + daycount,
                                     'groupid': arr5[index],
 
                                 },
                                 dataType: 'json',
                                 timeout: '3000',
                                 success: function (data) {
-
+  
 
                                     let dataA = data.data;
                                     for (let i in dataA) {
@@ -140,8 +140,8 @@ let Component = React.createClass({
                                 async: false,
                                 data: {
 
-                                    'startdate': year + "-" + (keyy) + "-" + '1',
-                                    'enddate': year + "-" + (keyy) + "-" + daycount,
+                                    'startdate': value[newIndex].year + "-" + value[newIndex].yearpoweract + "-" + '1',
+                                    'enddate': value[newIndex].year + "-" + value[newIndex].yearpoweract + "-" + daycount,
                                     'wfid': areaWindids[0],
                                     'methods': 'desc',
 
@@ -149,8 +149,6 @@ let Component = React.createClass({
                                 dataType: 'json',
                                 timeout: '3000',
                                 success: function (data) {
-
-
                                     let dataA = data.data;
                                     for (let i in dataA) {
                                         let areaWindCost = dataA[i].costs;
@@ -186,7 +184,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20,
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 },
@@ -196,7 +194,7 @@ let Component = React.createClass({
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -211,14 +209,14 @@ let Component = React.createClass({
                     x: 45,
                     style: {
                         fontSize: '14px',
-                        color: '#fff'
+                        color: scolor
                     }
                 }
             }, {
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 },

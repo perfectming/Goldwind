@@ -143,7 +143,6 @@ let Component = React.createClass({
             let msPerDay = 1000 * 60 * 60 ;
             //计算天数
             let diffDays = Math.ceil(dateDiff/ msPerDay);
-            console.log(diffDays);
 
             return(
                 <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
@@ -295,17 +294,16 @@ const mapDispatchToProps = (dispatch) => {
         changedate:(bloo)=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "Cockpit", momo, "Screen", 0);
             function momo(mmoname){
-                if(mmoname.Model.dis==undefined||mmoname.Model.ens==undefined){
+                if(mmoname.Model==undefined){
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "Cockpit", momo, "Screen", 0);
                 }else {
                     dispatch(actions.setVars('mmoname', mmoname));
                     TY.getRtData("Cockpit", 8888800, ppo);
                     function ppo(mmodata){
-                            if(mmodata.ModelData==undefined||mmodata.ModelData[8888800]==undefined){
+                            if(mmodata.ModelData==undefined){
                                 TY.getRtData("Cockpit", 8888800, ppo);
                             }else {
                                 dispatch(actions.setVars('mmodata', mmodata));
-
                                 TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                                 function setData(rdata1){
                                     dispatch(actions.setVars('zhzb', rdata1));
@@ -317,7 +315,7 @@ const mapDispatchToProps = (dispatch) => {
                                             dispatch(actions.setVars('fModel', rdata3));
                                             TY.getRtData("DevicesMatrix", 8888800, setfData);
                                             function setfData(rdata4){
-                                                if(rdata4.ModelData==undefined || rdata4.ModelData[8888800]==undefined){
+                                                if(rdata4.ModelData==undefined){
                                                     TY.getRtData("DevicesMatrix", 8888800, setfData)
                                                 }else{
                                                     dispatch(actions.setVars('fData', rdata4));
@@ -371,10 +369,10 @@ const mapDispatchToProps = (dispatch) => {
             },10000)
             //数据刷新//
             time=setInterval(function(){
-                TY.getRtData("Cockpit", 8888800, ppo);
-                function ppo(mmodata){
-                    if(mmodata.ModelData[8888800]==undefined){
-                        TY.getRtData("Cockpit", 8888800, ppo);
+                TY.getRtData("Cockpit", 8888800, ppoo);
+                function ppoo(mmodata){
+                    if(mmodata.ModelData==undefined){
+                        TY.getRtData("Cockpit", 8888800, ppoo);
                     }else {
                         dispatch(actions.setVars('mmodata', mmodata));
                     }

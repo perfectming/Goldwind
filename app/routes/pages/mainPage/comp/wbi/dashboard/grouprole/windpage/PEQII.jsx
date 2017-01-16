@@ -56,7 +56,7 @@ let Component = React.createClass({
     render() {
         let {deleData, deleDate, addData, num = 0, wfidCount,changeTableItem12, addDate, wfids, table, ajax, wtidAll, groupAll, totalpage, saveTableItem, saveTableItem2, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll2 = false} = this.props;
 
-        //
+        
 
 
         if (boll2) {//判断数据是否存在
@@ -435,7 +435,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 //  timeout:'3000',
                 success: function (data) {
-console.log(data)
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('totalpage', data.data.totalPage));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
@@ -538,7 +537,7 @@ console.log(data)
                 alert("请输入数字类型的成本(例:0.02)");
                 tableV.data.pagedata[i][arr1[j]]='';
             }
-            console.log(tableV.data.pagedata[i][arr1[j]]);
+            // console.log(tableV.data.pagedata[i][arr1[j]]);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         //增加

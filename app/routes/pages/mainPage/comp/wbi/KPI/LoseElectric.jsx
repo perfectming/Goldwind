@@ -17,7 +17,7 @@ let Component = React.createClass({
         this.props.init();
         setTimeout(function(){
         	init()
-        },2000)
+        },1500)
     },
 	componentWillMount() {
     	let {ipUrl}=this.props;
@@ -85,23 +85,23 @@ let Component = React.createClass({
 						<div className={styles.areaLose}>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
 								<div className={loseAreaNameOne==''? styles.hide:styles.button} onClick={()=>buttonResetA()}>清除</div>
-								<ChartOne unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameOne+'损失电量分析':loseAreaNameOne+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameOne+'损失电量分析':loseAreaNameOne+'损失收入分析'} lose={loseAreaOne}></ChartOne>
+								<ChartOne color={skinStyle==2? '#333':'#fff'} unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameOne+'损失电量分析':loseAreaNameOne+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameOne+'损失电量分析':loseAreaNameOne+'损失收入分析'} lose={loseAreaOne}></ChartOne>
 							</div>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
 								<div className={loseAreaNameTwo==''? styles.hide:styles.button} onClick={()=>buttonResetB()}>清除</div>
-								<ChartOne unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameTwo+'损失电量分析':loseAreaNameTwo+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameTwo+'损失电量分析':loseAreaNameTwo+'损失收入分析'} lose={loseAreaTwo}></ChartOne>
+								<ChartOne color={skinStyle==2? '#333':'#fff'} unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameTwo+'损失电量分析':loseAreaNameTwo+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameTwo+'损失电量分析':loseAreaNameTwo+'损失收入分析'} lose={loseAreaTwo}></ChartOne>
 							</div>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
 								<div className={loseAreaNameThree==''? styles.hide:styles.button} onClick={()=>buttonResetC()}>清除</div>
-								<ChartOne unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameThree+'损失电量分析':loseAreaNameThree+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameThree+'损失电量分析':loseAreaNameThree+'损失收入分析'} lose={loseAreaThree}></ChartOne>
+								<ChartOne color={skinStyle==2? '#333':'#fff'} unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameThree+'损失电量分析':loseAreaNameThree+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameThree+'损失电量分析':loseAreaNameThree+'损失收入分析'} lose={loseAreaThree}></ChartOne>
 							</div>
 							<div className={`${styles.areaSection} ${styles.boxShadow}`}>
 								<div className={loseAreaNameFour==''? styles.hide:styles.button} onClick={()=>buttonResetD()}>清除</div>
-								<ChartOne unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameFour+'损失电量分析':loseAreaNameFour+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameFour+'损失电量分析':loseAreaNameFour+'损失收入分析'} lose={loseAreaFour}></ChartOne>
+								<ChartOne color={skinStyle==2? '#333':'#fff'} unit={storage==1? "kWh":"元"} name={storage==undefined? '':storage==1? loseAreaNameFour+'损失电量分析':loseAreaNameFour+'损失收入分析'} text={storage==undefined? '':storage==1? loseAreaNameFour+'损失电量分析':loseAreaNameFour+'损失收入分析'} lose={loseAreaFour}></ChartOne>
 							</div>
 						</div>
 						<div className={`${styles.lose} ${styles.boxShadow}`}>
-							<ChartFive title={storage==undefined? '':storage==1?'损失电量分析':'损失收入分析'} unit={storage==undefined? '':storage==1? "(kWh)":"(元)"} loseA={loseA} loseB={loseB} loseC={loseC} loseD={loseD} nameOne={loseAreaNameOne} nameTwo={loseAreaNameTwo} nameThree={loseAreaNameThree} nameFour={loseAreaNameFour}></ChartFive>
+							<ChartFive color={skinStyle==2? '#333':'#fff'} title={storage==undefined? '':storage==1?'损失电量分析':'损失收入分析'} unit={storage==undefined? '':storage==1? "(kWh)":"(元)"} loseA={loseA} loseB={loseB} loseC={loseC} loseD={loseD} nameOne={loseAreaNameOne} nameTwo={loseAreaNameTwo} nameThree={loseAreaNameThree} nameFour={loseAreaNameFour}></ChartFive>
 						</div>
 					</div>
 				</div>

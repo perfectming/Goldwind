@@ -15,7 +15,7 @@ let Component = React.createClass({
         this.props.init(ipUrl,selectId,selectName);
         setTimeout(function(){
             init(ipUrl,selectId,selectName)
-        },2000)
+        },1500)
     },
     
     render() {
@@ -67,19 +67,19 @@ let Component = React.createClass({
                         <div className={styles.floorOne}>
                             <div className={`${styles.pie} ${styles.boxShadow}`}>
                                 <div className={typeNameOne==undefined? styles.hide:styles.button} onClick={()=>buttonResetA()}>清除</div>
-                                <ChartPie judge={1} clickArr={reliabilityOne} unit={"h"} name={reliabilityNameOne} text={reliabilityNameOne} lose={reliabilityOne}></ChartPie>
+                                <ChartPie color={skinStyle==2? '#333':'#fff'} judge={1} clickArr={reliabilityOne} unit={"h"} name={reliabilityNameOne} text={reliabilityNameOne} lose={reliabilityOne}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
-                                <TwoColumn name={typeNameOne} title={typeNameOne} month={machineTypeOne} plan={typeOne} unit={"(h)"}></TwoColumn>
+                                <TwoColumn color={skinStyle==2? '#333':'#fff'} name={typeNameOne} title={typeNameOne} month={machineTypeOne} plan={typeOne} unit={"(h)"}></TwoColumn>
                             </div>
                         </div>
                         <div className={styles.floorTwo}>
                             <div className={`${styles.pie} ${styles.boxShadow}`}>
                                 <div className={typeNameTwo==undefined? styles.hide:styles.button} onClick={()=>buttonResetB()}>清除</div>
-                                <ChartPie judge={2} clickArr={reliabilityTwo} unit={"h"} name={reliabilityNameOne} text={reliabilityNameTwo} lose={reliabilityTwo}></ChartPie>
+                                <ChartPie color={skinStyle==2? '#333':'#fff'} judge={2} clickArr={reliabilityTwo} unit={"h"} name={reliabilityNameOne} text={reliabilityNameTwo} lose={reliabilityTwo}></ChartPie>
                             </div>
                             <div className={`${styles.column} ${styles.boxShadow}`}>
-                                <TwoColumn name={typeNameTwo} title={typeNameTwo} month={machineTypeTwo} plan={typeTwo} unit={"(h)"}></TwoColumn>
+                                <TwoColumn color={skinStyle==2? '#333':'#fff'} name={typeNameTwo} title={typeNameTwo} month={machineTypeTwo} plan={typeTwo} unit={"(h)"}></TwoColumn>
                             </div>
                         </div>
                     </div>

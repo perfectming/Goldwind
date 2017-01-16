@@ -7,14 +7,14 @@ let Component = React.createClass({
     },
 
     render() {
-        let {input_url, height, windFiled, windCost, windProfit, w111, changedata1, TBA, year, monthh, daycount, keyy, areaWindids, text}=this.props;
+        let {input_url, height, windFiled, windCost, windProfit, w111, changedata1, TBA, year, monthh, daycount, keyy, areaWindids, text,value,newIndex,scolor}=this.props;
 
         let configPie = {
 
             chart: {
                 height: height,
                 width: 860,
-                backgroundColor: "rgba(44, 61, 71,0.4)",
+                backgroundColor: "rgba(44, 61, 71,0)",
 
                 plotBorderWidth: 0,
                 borderWidth: 0,
@@ -28,7 +28,7 @@ let Component = React.createClass({
                 x: 105,
                 y: 13,
                 style: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "15px",
                     fontFamily: "微软雅黑",
 
@@ -44,7 +44,7 @@ let Component = React.createClass({
                     color: '#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "14px",
                     fontWeight: "normal",
                     fontFamily: "微软雅黑",
@@ -76,7 +76,7 @@ let Component = React.createClass({
                                 keyy = 12;
                                 year = year - 1;
                             }
-                            let dayy = new Date(year, keyy, 0);
+                            let dayy = new Date(value[newIndex].year,value[newIndex].yearpoweract, 0);
 //获取天数：
                             let daycount = dayy.getDate();
                             let b = a[0];
@@ -91,8 +91,8 @@ let Component = React.createClass({
                                 async: false,
                                 data: {
 
-                                    'startdate': year + "-" + keyy + "-" + '1',
-                                    'enddate': year + "-" + keyy + "-" + daycount,
+                                    'startdate': value[newIndex].year + "-" + value[newIndex].yearpoweract + "-" + '1',
+                                    'enddate': value[newIndex].year + "-" + value[newIndex].yearpoweract + "-" + daycount,
                                     'wfid': areaWindids[index],
                                     'methods': 'desc',
 
@@ -141,7 +141,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: scolor,//颜色
                         fontSize: '14px'  //字体
                     }
                 },
@@ -151,7 +151,7 @@ let Component = React.createClass({
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -166,14 +166,14 @@ let Component = React.createClass({
                     x: 45,
                     style: {
                         fontSize: '14px',
-                        color: '#fff'
+                        color: scolor
                     }
                 }
             }, {
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 },
@@ -188,7 +188,7 @@ let Component = React.createClass({
                     y: -15,
                     x: -45,
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
 

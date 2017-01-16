@@ -20,7 +20,7 @@ let Component = React.createClass({
         let {display}=this.props;
         setTimeout(function(){
             display();
-        },2000)
+        },3000)
     },
    
 
@@ -122,7 +122,7 @@ let Component = React.createClass({
 	           							<div className={styles.space} onClick={()=>changepageEleS()}></div>
 	           							<div className={styles.time} onClick={()=>changepageEleT()}></div>
 	           						</div>
-	           						<Yearelectric month={month} plan={monthPlan} actrul={monthAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+	           						<Yearelectric color={skinStyle==2? '#333':'#fff'} month={month} plan={monthPlan} actrul={monthAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
@@ -134,7 +134,7 @@ let Component = React.createClass({
 		           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
 	           							</div>
 		           					</div>
-	           						<Yearelectric month={month2} plan={income} actrul={cost} unit={'(元)'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
+	           						<Yearelectric color={skinStyle==2? '#333':'#fff'} month={month2} plan={income} actrul={cost} unit={'(元)'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           			</div>
@@ -262,12 +262,14 @@ const mapDispatchToProps = (dispatch) => {
 							        	wfDayPlan=data.data.dayPlanElec;
 							        	wfDayAct=data.data.dayelec;
 							        	month=[],monthAct=[],monthPlan=[];
+							        	var monthNum=[];
 							        	for(var i in data.data.wfieldsMonthsElec){
 											month.push(data.data.wfieldsMonthsElec[i].month+"月");
+											monthNum.push(data.data.wfieldsMonthsElec[i].month);
 											monthAct.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
 										};
-										for(var i in data.data.wfieldsMonthsPlanElec){
-											monthPlan.push((data.data.wfieldsMonthsPlanElec[i]).toFixed(1)/1);
+										for(var i=0;i<monthNum.length;i++){
+											monthPlan.push((data.data.wfieldsMonthsPlanElec[monthNum[i]]));
 										};
 										dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
 										dispatch(actions.setVars('wfYearAct',wfYearAct ));
@@ -497,12 +499,14 @@ const mapDispatchToProps = (dispatch) => {
 							        	wfDayPlan=data.data.dayPlanElec;
 							        	wfDayAct=data.data.dayelec;
 							        	month=[],monthAct=[],monthPlan=[];
+							        	var monthNum=[];
 							        	for(var i in data.data.wfieldsMonthsElec){
 											month.push(data.data.wfieldsMonthsElec[i].month+"月");
+											monthNum.push(data.data.wfieldsMonthsElec[i].month);
 											monthAct.push((data.data.wfieldsMonthsElec[i].poweract).toFixed(1)/1);
 										};
-										for(var i in data.data.wfieldsMonthsPlanElec){
-											monthPlan.push((data.data.wfieldsMonthsPlanElec[i]).toFixed(1)/1);
+										for(var i=0;i<monthNum.length;i++){
+											monthPlan.push((data.data.wfieldsMonthsPlanElec[monthNum[i]]));
 										};
 										dispatch(actions.setVars('wfYearPlan',wfYearPlan ));
 										dispatch(actions.setVars('wfYearAct',wfYearAct ));
@@ -536,11 +540,19 @@ const mapDispatchToProps = (dispatch) => {
 									        	dispatch(actions.setVars('income',income ));
 									        },
 									        complete : function(XMLHttpRequest,status){ 
+									        		var date = new Date();
+										            if(date.getMonth()==0){
+										            	var yearString = date.getFullYear()-1;
+										            	var monthString = 12;
+										            }else{
+										                var yearString = date.getFullYear();
+										                var monthString = date.getMonth();										                
+										            }
 										　　　　	$.ajax({
 									        		url: 'http://'+ipUrl+'/wbi/TBA/getWfLastMonthTBA',//TBA饼图
 											        type: 'post',
 											        async:false,
-											        data:{'wfid':wfId[key]},
+											        data:{'wfid':wfId[key],'year':yearString,'month':monthString},
 											        dataType: 'json',
 											        success:function (data) {
 											        	runTime=data.data[0].runtimes;

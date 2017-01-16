@@ -1,8 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestyle.scss';
+import styles from '../group/PBATime/Profitstyle2.scss';
 import Healtychart from './healtychart.jsx';
-import icono from '../../../../../img/comp/健康度1.png';
+import icono2 from '../../../../../img/comp/HEA.png';
+import icono1 from '../../../../../img/comp/HEA2.png';
+import Login from '../../../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
 let data = require('./../group/Profit-data3');
@@ -17,35 +19,36 @@ let Component = React.createClass({
     },
 
     render() {
-        let {width, ipUrl, xxdwfNa, xxdwfId, back, actbt, btn = 0, changpage, wind, gogogo, windP, windPP, windd, more, close, backtop, befor_pagee = 'windpage', befor_page2}=this.props;
+        let {width, ipUrl, xxdwfNa, xxdwfId, back, actbt, btn = 0, changpage, wind, gogogo, windP, windPP, windd, more, close, backtop, befor_pagee = 'windpage', befor_page2,mapmonth,Go=false,mon,skinStyle}=this.props;
+        if(Go){
         return (
 
-            <div className={styles.box}>
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 <div className={styles.boxcover} id='boxcover'></div>
                 {// 更多弹出的表格
                 }
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
-                        <img src={icono}/>
-                        <p>{[actbt + 1] + '月' + xxdwfNa + '各风机健康度'}</p>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
+                        <p>{mon + xxdwfNa + '各风机健康度'}</p>
                         <div onClick={() => close()}>x</div>
                     </div>
                     <div className={styles.scroll}>
                         <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={483} ty={20}
-                                     pointWidth={20} borderRadius={4}></Healtychart>
+                                     pointWidth={20} borderRadius={4} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Healtychart>
                     </div>
                 </div>
                 {// 导航的月份
                 }
                 <ul className={styles.monthbox}>
                     {
-                        data.healthy.map((value, key) => {
+                        mapmonth.map((value, key) => {
                             return (<li className={actbt === key ? styles.red : styles.green}
                                         onClick={() => changpage(xxdwfId, xxdwfNa, value, key, btn, ipUrl)}
-                                        key={key}>{value.name}</li>)
+                                        key={key}>{value.yearpoweract+'月'}</li>)
                         })
                     }
-
+                            
 
                     <li className={styles.back} onClick={() => backtop(befor_pagee, befor_page2)}>返回</li>
                 </ul>
@@ -57,21 +60,21 @@ let Component = React.createClass({
 
 
                     <Healtychart machineE={windP} areaRecordProfit={wind} height={800}
-                                 text={[actbt + 1] + '月' + xxdwfNa + '各风机健康度'} ty={35} pointWidth={30}
-                                 borderRadius={7}></Healtychart>
+                                 text={mon + xxdwfNa + '各风机健康度'} ty={35} pointWidth={30}
+                                 borderRadius={7} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Healtychart>
 
 
                     <div className={styles.imgqvg}>
-                        <img src={icono}/>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                     <div className={styles.buttonsh}>
                         <button className={btn === 0 ? styles.btn0 : styles.btn1}
-                                onClick={() => gogogo(actbt, btn, ipUrl, xxdwfId)}> 前10
+                                onClick={() => gogogo(actbt, btn, ipUrl, xxdwfId,mapmonth)}> 前10
                         </button>
-                        <button onClick={() => back(xxdwfNa, xxdwfId, actbt, btn, ipUrl)}
+                        <button onClick={() => back(xxdwfNa, xxdwfId, actbt, btn, ipUrl,mapmonth)}
                                 className={btn === 1 ? styles.btn0 : styles.btn1}>后10
                         </button>
-                        <button onClick={() => more(xxdwfNa, xxdwfId, actbt, btn, ipUrl)}
+                        <button onClick={() => more(xxdwfNa, xxdwfId, actbt, btn, ipUrl,mapmonth)}
                                 className={btn === 2 ? styles.btn0 : styles.btn1}>更多
                         </button>
                     </div>
@@ -82,7 +85,14 @@ let Component = React.createClass({
 
 
         );
-    }
+}
+else{
+    return(
+        <Login></Login>
+        )
+}
+    
+}
 });
 
 
@@ -105,6 +115,10 @@ const mapStateToProps = (state) => {
         xxdwfNa: state.vars.xxdwfNa1,
         ipUrl: state.vars.ipUrl,
         width: state.vars.width1,
+        mapmonth: state.vars.mapmonth,
+        Go:state.vars.Go,
+        mon:state.vars.mon,
+        skinStyle:state.vars.skinStyle,
 
 
     }
@@ -127,6 +141,27 @@ const mapDispatchToProps = (dispatch) => {
                 month = 12;
                 year = year - 1;
             }
+            //新建
+             $.ajax({
+                type: 'post',
+                url: 'http://' + input_url + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon', data.data[10].yearpoweract + "月"));
+                    // jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+            
+             //结束
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi/Health/getWfieldHealth',
@@ -139,7 +174,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
+               
                     let WSHeal = data.data;
                     for (var i = 0; i < 10; i++) {
                         let fanHealth = WSHeal[i].fanHealth;
@@ -151,12 +186,13 @@ const mapDispatchToProps = (dispatch) => {
                     }
                     dispatch(actions.setVars('WSHealH1', WSHealH));
                     dispatch(actions.setVars('WSHealName1', WSHealName));
-                    dispatch(actions.setVars('actbt', month - 1));
+                    
                     dispatch(actions.setVars('btnn', 0));
+                     dispatch(actions.setVars('Go', true));
 
                 },
                 error: function () {
-
+dispatch(actions.setVars('Go', true));
                 },
             });
         }
@@ -178,15 +214,16 @@ const mapDispatchToProps = (dispatch) => {
                 month = 12;
                 year = year - 1;
             }
-
+ 
+let adf=value.yearpoweract;
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi/Health/getWfieldHealth',
                 async: false,
                 data: {
                     'wfid': xxdwfId,
-                    'month': key + 1,
-                    'year': year,
+                    'month': value.yearpoweract,
+                    'year': value.year,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -203,6 +240,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('WSHealName1', WSHealName));
                     dispatch(actions.setVars('actbt', key));
                     dispatch(actions.setVars('btnn', 0));
+                    dispatch(actions.setVars('mon', adf+'月'))
 
                 },
                 error: function () {
@@ -212,7 +250,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         // 前十
-        gogogo: (key, btn, input_url, xxdwfId) => {
+        gogogo: (key, btn, input_url, xxdwfId,value) => {
             let date = new Date();
             let year = date.getFullYear()
 
@@ -224,17 +262,19 @@ const mapDispatchToProps = (dispatch) => {
                 month = 12;
                 year = year - 1;
             }
+
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi/Health/getWfieldHealth',
                 async: false,
                 data: {
                     'wfid': xxdwfId,
-                    'month': key + 1,
-                    'year': year,
+                    'month': value[key].yearpoweract,
+                    'year': value[key].year,
                 },
                 dataType: 'json',
                 timeout: '3000',
+
                 success: function (data) {
                     let WSHeal = data.data;
                     for (var i = 0; i < 10; i++) {
@@ -254,7 +294,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        back: (xxdwfNa, xxdwfId, key, btn, input_url) => {
+        back: (xxdwfNa, xxdwfId, key, btn, input_url,value) => {
             let date = new Date();
             let year = date.getFullYear()
             let WSHealH = [];
@@ -265,14 +305,15 @@ const mapDispatchToProps = (dispatch) => {
                 month = 12;
                 year = year - 1;
             }
+         
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi/Health/getWfieldHealth',
                 async: false,
                 data: {
                     'wfid': xxdwfId,
-                    'month': key + 1,
-                    'year': year,
+                    'month': value[key].yearpoweract,
+                    'year': value[key].year,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -298,7 +339,7 @@ const mapDispatchToProps = (dispatch) => {
             });
         },
         // 更多
-        more: (xxdwfNa, xxdwfId, key, btn, input_url) => {
+        more: (xxdwfNa, xxdwfId, key, btn, input_url,value) => {
             $("#sss").show();
             $('#boxcover').show();
             let date = new Date();
@@ -312,14 +353,15 @@ const mapDispatchToProps = (dispatch) => {
                 month = 12;
                 year = year - 1;
             }
+          
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi/Health/getWfieldHealth',
                 async: false,
                 data: {
                     'wfid': xxdwfId,
-                    'month': key + 1,
-                    'year': year,
+                    'month': value[key].yearpoweract,
+                    'year': value[key].year,
                 },
                 dataType: 'json',
                 timeout: '3000',

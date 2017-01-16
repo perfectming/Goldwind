@@ -8,7 +8,7 @@ let Component = React.createClass({
     },
 
     render() {
-    	let {name,title,month,plan,unit,nameOne}=this.props;
+    	let {color,name,title,month,plan,unit,nameOne}=this.props;
         let configPie = {
             chart: {
                 height:380,
@@ -24,7 +24,7 @@ let Component = React.createClass({
                 align:'left',
                  x : "0",
                 style:{
-                    color:"#fff",
+                    color:color,
                     fontSize:"16px",
                     fontFamily:"微软雅黑"
                 }
@@ -33,7 +33,7 @@ let Component = React.createClass({
             legend: {
             	enabled:false,
             	itemHoverStyle: {
-                color: '#31f3fb'
+                color: color
             	}
             },
             credits: {
@@ -54,12 +54,11 @@ let Component = React.createClass({
             },
             xAxis: {
                 lineWidth: 1,
-               //lineColor: "red",
                 tickWidth: 0,
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -75,13 +74,13 @@ let Component = React.createClass({
 	                x:-5,
 	                style:{
 	                	fontSize:'14px',
-	                	color:'white',
+	                	color: color,
 	                }
                 },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: '#fff',//颜色
+                        color: color,//颜色
                         fontSize:'14px'  //字体
                     }
                 },

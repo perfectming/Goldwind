@@ -15,11 +15,11 @@ let Component = React.createClass({
     
 
     render() {
-        let {buttonAction, onFocus,changeValueS,changeValueE}= this.props;
+        let {skinStyle,buttonAction, onFocus,changeValueS,changeValueE}= this.props;
         let {areaId,ipUrl,areaName,areaPBA,areaFault,areaLimit,areaDevice,areaMaintain,areaElec,wfName,wfId,wfElec,wfLose,wfPBA,wtData,wtName,wtElec,wtPBA,wtLose}=this.props;
         let comp = data.list;
         return (	
-            <div className={styles.inquireBox}>
+            <div className={skinStyle==2? styles.inquireBoxWhite:styles.inquireBox}>
                 {
                     comp.map((value, key,valueName)=> {
                         if (value.type === 'date') {
@@ -46,6 +46,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        skinStyle: state.vars.skinStyle, //全局换肤
     	X1 : state.vars.x1,
         ipUrl : state.vars.ipUrl,
     	areaId : state.vars.areaId,    	

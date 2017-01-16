@@ -7,7 +7,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() { 
-      let{input_url,changedata3,height,GeR,GeM,GeE,GeC,text}=this.props;
+      let{input_url,changedata3,height,GeR,GeM,GeE,GeC,text,GE,scolor}=this.props;
         let configPie = {
             chart: {
                 height:height,
@@ -23,10 +23,10 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                x : 107,
-                y :14,
+                x: 105,
+                y: 15,
                 style:{
-                    color:"#fff",
+                    color:scolor,
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
                   
@@ -43,7 +43,7 @@ let Component = React.createClass({
                     color:'#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
@@ -72,6 +72,7 @@ let Component = React.createClass({
                     events: {
                         click: function(e) {
                             let month=e.point.index+1;
+                            let pIndex=e.point.index;
                             let date =new Date();
             let year =date.getFullYear();
            
@@ -83,18 +84,19 @@ let Component = React.createClass({
         let GERa=[];
     let    GENa=[];
      
-          
+           
+           let  monthX=GE[pIndex].month;
            $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/yield/getMaxYieBayDay',  
              async:false,
              data:{
-              'month':month,
+              'year':GE[pIndex].year,
+              'month':GE[pIndex].month,
              },
              dataType:'json',
              timeout:'3000',
              success:function(data){
-           
            let GE=data.data;
            for( let i in GE){
           let incomes=GE[i].incomes
@@ -112,11 +114,11 @@ let Component = React.createClass({
              
              },
              error:function(){
-                console.log(1)
+             
               }
           })
        
-                     changedata3(month,GENa,GEIn,GEAm,GERa);
+                     changedata3(monthX,GENa,GEIn,GEAm,GERa);
        }
  
       
@@ -133,7 +135,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20,
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize:'14px'
                     }
                 },
@@ -143,28 +145,28 @@ let Component = React.createClass({
             labels: {
                 format: '',
                 style: {
-                    color: '#fff',
+                    color: scolor,
                     fontSize:'14px'
                 }
             }, gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
             title: {
-                text:'(元)',
+                text:'（元）',
                 align:'high',
                 rotation:'0',
                 y: -20,
                 x:45,
                 style:{
                     fontSize:'14px',
-                    color:'#fff'
+                    color:scolor
                 }
             }
         }, {
              labels: {
                 format: '',
                 style: {
-                    color: '#fff',
+                    color: scolor,
                     fontSize:'14px'
                 }
             }, gridLineDashStyle: 'Solid',
@@ -173,13 +175,13 @@ let Component = React.createClass({
                
 
             title: {
-                text: '(%)',
+                text: '（%）',
                  align:'high',
                 rotation:'0',
                 y: -15,
                 x: -48,
                 style:{
-                    color: '#fff',
+                    color: scolor,
                     fontSize:'14px'
                 }
 
@@ -233,12 +235,12 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-         changedata3:(month,GENa,GEIn,GEAm,GERa)=>{
+         changedata3:(monthX,GENa,GEIn,GEAm,GERa)=>{
              dispatch(actions.setVars('GENa1',GENa));
        dispatch(actions.setVars('GEIn1',GEIn));
        dispatch(actions.setVars('GEAm1',GEAm));
        dispatch(actions.setVars('GERa1',GERa));
-       dispatch(actions.setVars('w0GE',month+'月' ))
+       dispatch(actions.setVars('w0GE',monthX+'月'))
          }
     };
 };

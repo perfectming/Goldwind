@@ -23,7 +23,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+        let {skinStyle,saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData={};
         let num=0;
         for(let i=0;i<arr.length-1;i++){
@@ -32,7 +32,7 @@ let Component = React.createClass({
         let comp=tabaleData.comps.from;
         if(table&&boxData){
         return (
-        <div className={styles.bodyBox}>
+        <div className={skinStyle==1?styles.bodyBoxBlue:(skinStyle==2?styles.bodyBoxWhite:styles.bodyBox)}>
             <Load></Load>
             <div className={styles.roleputBox}>
                 <div className={styles.inquireBox}>
@@ -240,6 +240,7 @@ const mapStateToProps = (state) => {
     return {
         table: state.objs.tableContentAmm,
         boxData: state.objs.boxData,
+        skinStyle:state.vars.skinStyle,
         ammCount:state.vars.ammCount,
         ids:state.vars.roleIds,
         page:state.vars.pageAmm,
@@ -251,6 +252,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
             $("option[name='selectOpt']").prop('selected',true);
+            dispatch(actions.setVars('roleIds', null));
             dispatch(actions.setVars('nameAmm', null));
             dispatch(actions.setVars('pageAmm', 1));
             $.ajax({
@@ -327,6 +329,7 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     success:function (data) {
                         dispatch(actions.setObjs('tableContentAmm', data));
+                        dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                         $("option[name='selectOpt']").prop('selected',true);
                     },
                     error:function(){
@@ -341,15 +344,20 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('tableContentAmm', tableV));
         },
         saveDataAmm:(li)=>{
+            let pass;
             let tableV = _.clone(getState().objs.tableContentAmm);
             let ids = _.clone(getState().vars.roleIds);
+            if(ids instanceof Array){pass='pass'}
+            console.log(pass);
             let wfs=tableV.data.pagedata[li];
             wfs['roleids']=ids;
             let roleObj={};
             roleObj['userid']=wfs.id;
             roleObj['roleids']=ids;
+            roleObj['pass']=pass;
             let ddv=JSON.stringify(wfs);
             let idsString=JSON.stringify(roleObj);
+            console.log(ids,roleObj);
             dispatch(actions.setVars('boolAlert', false));
             $.ajax({
                 url: soam+'/user/updateUserInfo?userInfo=data',
@@ -372,9 +380,10 @@ const mapDispatchToProps = (dispatch) => {
                                 data:'pageSize='+pageSize+'&&page='+1+'&&username=',
                                 dataType: 'json',//here,
                                 success:function (data) {
-                                    dispatch(actions.setVars('boolAlert', true));
+                                    dispatch(actions.setVars('roleIds', null));
                                     dispatch(actions.setObjs('tableContentAmm', data));
                                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                                    dispatch(actions.setVars('boolAlert', true));
                                 },
                                 error:function(){
                                     dispatch(actions.setVars('boolAlert', true));
@@ -421,11 +430,11 @@ const mapDispatchToProps = (dispatch) => {
             wfs['roleids']=ids;
             (!wfs['logintype']) && (wfs['logintype']=0);
             if(!wfs.id){alert('请输入用户编号')}
-            else if(!phone.test(wfs.phonecode)){
+            else if(!phone.test(wfs.phonecode) && wfs.phonecode){
                 alert('请输入正确的手机号码')
                 tableV.data.pagedata[li]['phonecode'] = '';
                 dispatch(actions.setObjs('tableContentAmm', tableV));
-            }else if(!mail.test(wfs.mailbox)){
+            }else if(!mail.test(wfs.mailbox) && wfs.mailbox){
                 alert('请输入正确的邮箱');
                 tableV.data.pagedata[li]['mailbox'] = '';
                 dispatch(actions.setObjs('tableContentAmm', tableV));

@@ -9,17 +9,15 @@ let Component = React.createClass({
     },
     render() {
 
-        let {text1, height, input_url, PBAGroupPba, PBAGroupNodevreasonloss, PBAGroupMaintainloss, PBAGroupLimitloss, PBAGroupFaultloss, areaName, areaRecordCosts, areaRecordProfit, text0, w0, changedata1}=this.props;
+        let {text1, height, input_url, PBAGroupPba, PBAGroupNodevreasonloss, PBAGroupMaintainloss, PBAGroupLimitloss, PBAGroupFaultloss, areaName, areaRecordCosts, areaRecordProfit, text0, w0, changedata1,PBAGroupSpace,scolor}=this.props;
         let configPie = {
             chart: {
                 height: height,
-                backgroundColor: "rgba(44, 61, 71,0.4)",
+                backgroundColor: "rgba(44, 61, 71,0)",
                 plotBorderWidth: 0,
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft: 100,
-
-
             },
             title: {
                 text: text1,
@@ -27,7 +25,7 @@ let Component = React.createClass({
                 x: 105,
                 y: 15,
                 style: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "16px",
                     fontFamily: "微软雅黑",
 
@@ -42,7 +40,7 @@ let Component = React.createClass({
                     color: '#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize: "14px",
                     fontWeight: "normal",
                     fontFamily: "微软雅黑",
@@ -87,11 +85,11 @@ let Component = React.createClass({
                                 async: false,
                                 dataType: 'json',
                                 data: {
-                                    'month': PBAGroupIndex + 1,
+                                    'year':PBAGroupSpace[PBAGroupIndex].year,
+                                    'month': PBAGroupSpace[PBAGroupIndex].month,
                                 },
                                 timeout: '3000',
                                 success: function (data) {
-
 
                                     let PBAGroupFirstMonth = data.data;
 
@@ -138,7 +136,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20,
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 },
@@ -151,7 +149,7 @@ let Component = React.createClass({
                 labels: {
                     format: '',
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -165,14 +163,14 @@ let Component = React.createClass({
                     x: 50,
                     style: {
                         fontSize: '14px',
-                        color: '#fff'
+                        color: scolor
                     }
                 }
             }, {
                 labels: {
 
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 }, gridLineDashStyle: 'Solid',
@@ -187,7 +185,7 @@ let Component = React.createClass({
                     y: -15,
                     x: -40,
                     style: {
-                        color: '#fff',
+                        color: scolor,
                         fontSize: '14px'
                     }
                 },

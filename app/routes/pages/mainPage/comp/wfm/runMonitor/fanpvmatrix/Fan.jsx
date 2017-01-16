@@ -136,24 +136,33 @@ const mapDispatchToProps = (dispatch) => {
             // time = setInterval(function(){
                 TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
                 function setData(leftData){
-                    dispatch(actions.setVars('zhzb', leftData));
-                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
-                    function setDatas(MatrixModel){
-                        dispatch(actions.setVars('fModel', MatrixModel));
-                            TY.getRtData("DevicesMatrix", 8888800, setfDatas)
-                            function setfDatas(MatrixData){
-                                if(MatrixData.ModelData[8888801] == undefined){
-                                    TY.getRtData("DevicesMatrix", 8888800, setfDatas)
-                                }else{
-                                    dispatch(actions.setVars('fData', MatrixData));
-                                    setTimeout(function(){
-                                        dispatch(actions.setVars('fanbool', true));
-                                    },200)
+                    if(leftData.Model == undefined){
+                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                    }else{
+                        dispatch(actions.setVars('zhzb', leftData));
+                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
+                        function setDatas(MatrixModel){
+                            if(MatrixModel.Model == undefined){
+                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
+                            }else{
+                                dispatch(actions.setVars('fModel', MatrixModel));
+                                TY.getRtData("DevicesMatrix", 8888800, setfDatas)
+                                function setfDatas(MatrixData){
+                                    if(MatrixData.ModelData == undefined){
+                                        TY.getRtData("DevicesMatrix", 8888800, setfDatas)
+                                    }else{
+                                        dispatch(actions.setVars('fData', MatrixData));
+                                        setTimeout(function(){
+                                            dispatch(actions.setVars('fanbool', true));
+                                        },200)
+                                    }
+
+
                                 }
-                                
-                                
                             }
+                        }
                     }
+
                 }
             // },3000)
             fan_time = setInterval(function(){
@@ -163,11 +172,11 @@ const mapDispatchToProps = (dispatch) => {
                 //     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
                 //     function setDatas(rdata){
                 //         dispatch(actions.setVars('fModel', rdata));
-                        TY.getRtData("DevicesMatrix", 8888800, setfData)
+                        TY.getRtData("DevicesMatrix", 8888800, setfData);
                         function setfData(rdata){
                             dispatch(actions.setVars('fData', rdata));
 
-                            TY.getRtData("DataOverview", 8888800, setfDatas)
+                            TY.getRtData("DataOverview", 8888800, setfDatas);
 
                             function setfDatas(rdata){
                                 

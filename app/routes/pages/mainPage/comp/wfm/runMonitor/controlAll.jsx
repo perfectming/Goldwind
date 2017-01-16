@@ -16,7 +16,7 @@ let obj=require('../../../../../../../config/MatrixData');
 let data=tabaleData.ModelData;
 let mode=model.Model.ens;
 let nam=['AVC','AGC','PlanActPower','TActPower'];
-let header=['场站名称', '有功自动控制','无功自动控制','计划值','出力'];
+let header=['场站名称', '有功自动控制','无功自动控制','有功计划值','出力'];
 let time;
 let onceTime;
 

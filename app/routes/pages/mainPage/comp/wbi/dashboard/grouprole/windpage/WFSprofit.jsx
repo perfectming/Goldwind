@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Areacestyle.scss';
 import WFSprofitchart from './WFSprofitchart.jsx';
 import icono from '../../../../../img/comp/TBA.png';
+import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
 let input_url="10.9.100.38";
@@ -27,7 +28,8 @@ let Component = React.createClass({
     },
     render() {
        
-        let{width,ipUrl,WFSPRa,WFSPNaM,WFSPCo,WFSPEa,WFSPNa,WFSPRaM,WFSPCoM,WFSPEaM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt=0,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2}=this.props;
+        let{width,ipUrl,WFSPRa,WFSPNaM,WFSPCo,WFSPEa,WFSPNa,WFSPRaM,WFSPCoM,WFSPEaM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2,mapmonth,mon,Go3=false}=this.props;
+        if(Go3){
         return (
            
             <div className={styles.box}>
@@ -39,7 +41,7 @@ let Component = React.createClass({
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                 <img src={icono}/>
-                <p>{text[actbt]+xxdwfNa+'各风机收益'}</p>
+                <p>{mon+xxdwfNa+'各风机收益'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
                 <div className={styles.scroll}>
@@ -48,8 +50,8 @@ let Component = React.createClass({
              </div>
                 <ul className={styles.monthbox}>
                     {
-                        data.wind.map((value,key)=>{
-                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId,ipUrl)} key={key}>{value.name}</li>)
+                        mapmonth.map((value,key)=>{
+                            return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId,ipUrl)} key={key}>{value.yearpoweract+'月'}</li>)
                         })
                     }
                     <li className={styles.back} onClick={()=>backtop(befor_pagee,)}>返回</li>
@@ -61,7 +63,7 @@ let Component = React.createClass({
                   
                       
                          
-                                <WFSprofitchart fanCost={WFSPCo} machine={WFSPNa} fanProfitQ={WFSPEa} TBA={WFSPRa} text={[actbt+1]+'月'+xxdwfNa+'各风机收益'} ty={40} pointWidth={30} borderRadius={7} pointPlacement={0} height={800}></WFSprofitchart>
+                                <WFSprofitchart fanCost={WFSPCo} machine={WFSPNa} fanProfitQ={WFSPEa} TBA={WFSPRa} text={mon+xxdwfNa+'各风机收益'} ty={40} pointWidth={30} borderRadius={7} pointPlacement={0} height={800}></WFSprofitchart>
                            
                        
                
@@ -71,9 +73,9 @@ let Component = React.createClass({
                     </div>
 
                     <div className={styles.buttons}>
-                      <button onClick={()=>gogogo(xxdwfId,actbt,btn,ipUrl)} className={btn===0? styles.btn0 : styles.btn1} > 前10</button>
-                      <button onClick={()=>back(xxdwfId,actbt,btn,ipUrl)} className={btn===1? styles.btn0 : styles.btn1}>后10</button>
-                      <button  onClick={()=>more(xxdwfId,actbt,btn,ipUrl)} className={btn===2? styles.btn0 : styles.btn1}>更多</button>
+                      <button onClick={()=>gogogo(xxdwfId,actbt,btn,ipUrl,mapmonth)} className={btn===0? styles.btn0 : styles.btn1} > 前10</button>
+                      <button onClick={()=>back(xxdwfId,actbt,btn,ipUrl,mapmonth)} className={btn===1? styles.btn0 : styles.btn1}>后10</button>
+                      <button  onClick={()=>more(xxdwfId,actbt,btn,ipUrl,mapmonth)} className={btn===2? styles.btn0 : styles.btn1}>更多</button>
                    </div>
                 </div>
                 
@@ -81,7 +83,13 @@ let Component = React.createClass({
 
 
         );
+}else{
+
+  return(
+    <Login></Login>
+    )
     }
+  }
 });
 
 
@@ -110,6 +118,10 @@ const mapStateToProps = (state) => {
         WFSPCoM:state.vars.WFSPCo11,
         WFSPRaM:state.vars.WFSPRa11,
         width:state.vars.width1,
+
+        mapmonth:state.vars.mapmonth,
+        mon:state.vars.mon,
+        Go3:state.vars.Go3,
      
     }
 };
@@ -131,7 +143,27 @@ const mapDispatchToProps = (dispatch) => {
                month = 12;
                year=year-1;
            }
- 
+  //新建
+             $.ajax({
+                type: 'post',
+                url: 'http://' + input_url + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbtWFP', 10));
+                    dispatch(actions.setVars('mon', data.data[10].yearpoweract + "月"));
+                    // jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+             
+             //结束            
             $.ajax({
              type:'post',
              url:'http://'+input_url+'/wbi/yield/getYieldByWfid',  
@@ -173,8 +205,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('WFSPEa1',WFSPEa)) ;
             dispatch(actions.setVars('WFSPCo1',WFSPCo)); 
             dispatch(actions.setVars('WFSPRa1',WFSPRa)) ;
-            dispatch(actions.setVars('actbtWFP',month-1)) ;
             dispatch(actions.setVars('btnn',0)) ;
+            dispatch(actions.setVars('Go3',true)) ;
 
         }
         ,
@@ -194,7 +226,7 @@ const mapDispatchToProps = (dispatch) => {
           let date= new Date();
           let year =date.getFullYear();
           let month=date.getMonth();
-          let day = new Date(year,(key+1),0); 
+          let day = new Date(value.year,value.yearpoweract,0); 
           let  daycountT = day.getDate();
              if (month == 0) {
                  month = 12;
@@ -208,8 +240,8 @@ const mapDispatchToProps = (dispatch) => {
             data:{
 
              'wfid':xxdwfId,
-             'startdate':year+"-"+(key+1)+"-"+1,
-             'enddate':year+"-"+(key+1)+"-"+daycountT,
+             'startdate':value.year+"-"+value.yearpoweract+"-"+1,
+             'enddate':value.year+"-"+value.yearpoweract+"-"+daycountT,
              'methods':"desc"
             },
              dataType:'json',
@@ -244,9 +276,10 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('WFSPRa1',WFSPRa)) ;
             dispatch(actions.setVars('actbtWFP',key)) ;
              dispatch(actions.setVars('btnn',0)) ;
+             dispatch(actions.setVars('mon',value.yearpoweract+'月')) ;
         },
         // 前十
-         gogogo:(xxdwfId,actbt,btn,input_url)=>{
+         gogogo:(xxdwfId,actbt,btn,input_url,value)=>{
            let WFSPNa=[];
           let WFSPEa=[];
           let WFSPCo=[];
@@ -254,7 +287,7 @@ const mapDispatchToProps = (dispatch) => {
           let date= new Date();
           let year =date.getFullYear();
           let month=date.getMonth();
-          let day = new Date(year,(actbt+1),0); 
+          let day = new Date(value[actbt].year,value[actbt].yearpoweract,0); 
           let  daycountT = day.getDate();
              if (month == 0) {
                  month = 12;
@@ -268,8 +301,8 @@ const mapDispatchToProps = (dispatch) => {
             data:{
 
              'wfid':xxdwfId,
-             'startdate':year+"-"+(actbt+1)+"-"+1,
-             'enddate':year+"-"+(actbt+1)+"-"+daycountT,
+             'startdate':value[actbt].year+"-"+value[actbt].yearpoweract+"-"+1,
+             'enddate':value[actbt].year+"-"+value[actbt].yearpoweract+"-"+daycountT,
              'methods':"desc"
             },
              dataType:'json',
@@ -307,7 +340,7 @@ const mapDispatchToProps = (dispatch) => {
            
         },
         // 后十
-       back:(xxdwfId,actbt,btn,input_url)=>{
+       back:(xxdwfId,actbt,btn,input_url,value)=>{
            let WFSPNa=[];
           let WFSPEa=[];
           let WFSPCo=[];
@@ -315,7 +348,7 @@ const mapDispatchToProps = (dispatch) => {
           let date= new Date();
           let year =date.getFullYear();
           let month=date.getMonth();
-          let day = new Date(year,(actbt+1),0); 
+          let day = new Date(value[actbt].year,value[actbt].yearpoweract,0); 
           let  daycountT = day.getDate();
            if (month == 0) {
                month = 12;
@@ -328,8 +361,8 @@ const mapDispatchToProps = (dispatch) => {
              async:false,
             data:{
              'wfid':xxdwfId,
-             'startdate':year+"-"+(actbt+1)+"-"+1,
-             'enddate':year+"-"+(actbt+1)+"-"+daycountT,
+             'startdate':value[actbt].year+"-"+value[actbt].yearpoweract+"-"+1,
+             'enddate':value[actbt].year+"-"+value[actbt].yearpoweract+"-"+daycountT,
              'methods':"asc"
             },
              dataType:'json',
@@ -367,7 +400,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         // 更多
-         more:(xxdwfId,actbt,btn,input_url)=>{
+         more:(xxdwfId,actbt,btn,input_url,value)=>{
              $("#sss").show();
              $('#boxcover').show();
             let WFSPNa=[];
@@ -378,7 +411,7 @@ const mapDispatchToProps = (dispatch) => {
           let date= new Date();
           let year =date.getFullYear();
           let month=date.getMonth();
-          let day = new Date(year,(actbt+1),0); 
+          let day = new Date(value[actbt].year,value[actbt].yearpoweract,0); 
           let  daycountT = day.getDate();
              if (month == 0) {
                  month = 12;
@@ -392,8 +425,8 @@ const mapDispatchToProps = (dispatch) => {
             data:{
 
              'wfid':xxdwfId,
-             'startdate':year+"-"+(actbt+1)+"-"+1,
-             'enddate':year+"-"+(actbt+1)+"-"+daycountT,
+             'startdate':value[actbt].year+"-"+value[actbt].yearpoweract+"-"+1,
+             'enddate':value[actbt].year+"-"+value[actbt].yearpoweract+"-"+daycountT,
              'methods':"all"
             },
              dataType:'json',

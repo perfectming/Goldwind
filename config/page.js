@@ -83,7 +83,7 @@ module.exports = {
                 page:[
                     {
                         name:'计划电量录入',
-                        page:'PEQI',
+                        page:'projectSta',
                     }]
             }],
         },{

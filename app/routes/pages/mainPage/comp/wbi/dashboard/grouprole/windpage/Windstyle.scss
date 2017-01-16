@@ -1507,14 +1507,14 @@
 .boxWhite{
     width: 1780px;
     overflow:hidden;
-    color: #E6E7E8;
+    color: #333;
     font-size: 16px;
     padding: 0 40px 10px 10px;
     height: 930px;
     .monthbox{
         width: 100%;
         height: 60px;
-        color: #E6E7E8;
+        color: #333;
         list-style: none;
         padding-top: 10px;
         padding-left: 0;
@@ -1562,7 +1562,7 @@
                 position: relative;
                 width: 32%;
                 height: 100%;
-                background-color: rgba(44, 61, 71, 0.4);
+                background: #E7F1FA;
                 float: left;
                 padding-top: 10px ;
                 padding-left: 30px;
@@ -1623,7 +1623,7 @@
                         margin-top:-15px;
                         display:inline-block;
                         padding:0 5px;
-                        color: #ffffff;
+                        color: #333;
                         p{
                             font-size: 26px;
                         }
@@ -1636,7 +1636,7 @@
                 position: relative;
                 width: 33%;
                 height: 100%;
-                background-color: rgba(44, 61, 71, 0.4);
+                background: #E7F1FA;
                 margin-right: 1%;
                 padding-top: 10px;
                 padding-left: 30px;
@@ -1695,7 +1695,7 @@
                         margin-top:-15px;
                         display:inline-block;
                         padding:0 5px;
-                        color: #ffffff;
+                        color: #333;
                         p{
                             font-size: 26px;
                         }
@@ -1749,7 +1749,7 @@
                         margin-top:-15px;
                         display:inline-block;
                         padding:0 5px;
-                        color: #ffffff;
+                        color: #333;
                         p{
                             font-size: 26px;
                         }
@@ -1766,11 +1766,12 @@
                 position: absolute;
                 height: 100%;
                 width: 33%;
-                background-color: rgba(44, 61, 71, 0.4);
+                background: #E7F1FA;
                 .electricHeader{
                     height: 30px;
                     width: 100%;
-                    background:  #464C58;
+                    background: #E7F1FA;
+                    border-bottom:1px solid #d5e6f1;
                     line-height: 30px;
                     padding-left: 20px;
                     a{
@@ -1996,12 +1997,13 @@
                     }
                 }
             }.yearelectric{
-                background:rgba(44, 61, 71, 0.4);
+                background: #E7F1FA;
                 .header{
                     height: 30px;
                     line-height: 30px;
                     padding-left: 20px;
-                    background-color: #464C58;
+                    background: #E7F1FA;
+                    border-bottom:1px solid #d5e6f1;
                    .logo{
                         float: left; 
                         a{
@@ -2052,12 +2054,13 @@
                 top: 325px;
                 width: 66%;
                 border:1px solid #3e4c67;
-                background:rgba(44, 61, 71, 0.4);
+                background: #E7F1FA;
                 .header{
                     height: 30px;
                     line-height: 25px;
                     padding-left: 20px;
-                    background-color: #464C58;
+                    background: #E7F1FA;
+                    border-bottom:1px solid #d5e6f1;
                     position: relative;
                    .logo{
                         float: left; 
@@ -2110,7 +2113,7 @@
         position: relative;
         width: 27%;
         height: 850px;
-        background-color: rgba(44, 61, 71, 0.4);
+        background: #E7F1FA;
         float: right;
         h3{
             margin: 0;
@@ -2119,7 +2122,8 @@
             font-size: 16px;
             font-weight: 900;
             padding-left: 30px;
-            background-color: #464C58;
+            background: #E7F1FA;
+            border-bottom:1px solid #d5e6f1;
             a{
                 position: relative;
                 top: 4px;

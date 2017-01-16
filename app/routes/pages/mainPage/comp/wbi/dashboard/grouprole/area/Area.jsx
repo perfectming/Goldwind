@@ -22,7 +22,7 @@ let Component = React.createClass({
         let {display}=this.props;
         setTimeout(function(){
             display();
-        },2000)
+        },3000)
     },
    
 
@@ -125,7 +125,7 @@ let Component = React.createClass({
 		           						<div className={styles.space} onClick={()=>changepageEleS()}></div>&nbsp;
 		           						<div className={styles.time} onClick={()=>changepageEleT()}></div>
 	           						</div>
-	           						<Yearelectric month={month} plan={elecPlan} actrul={elecAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
+	           						<Yearelectric color={skinStyle==2? '#333':'#fff'} month={month} plan={elecPlan} actrul={elecAct} unit={'(kWh)'} nameOne={'计划电量'} nameTwo={'实际电量'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           				<div className={`${styles.yearprofit} ${styles.boxShadow}`}>
@@ -137,7 +137,7 @@ let Component = React.createClass({
 		           							<div className={styles.links}><a className={styles.time} onClick={()=>changepageProT()}></a></div>
 	           							</div>
 		           					</div>
-	           						<Yearelectric month={areaMonth} plan={areaProfit} actrul={areaCost} unit={'(元)'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
+	           						<Yearelectric color={skinStyle==2? '#333':'#fff'} month={areaMonth} plan={areaProfit} actrul={areaCost} unit={'(元)'} nameOne={'收入'} nameTwo={'成本'}></Yearelectric>
 	           					</div>
 	           				</div>
 	           			</div>
@@ -253,7 +253,8 @@ const mapDispatchToProps = (dispatch) => {
 				        async:true,
 				        data:{'groupid':areaId[0]},
 				        dataType: 'json',//here
-				        success:function (data) {				        	areaMonth=[],areaProfit=[],areaCost=[];
+				        success:function (data) {				        	
+				        	areaMonth=[],areaProfit=[],areaCost=[];
 				        	for(var i in data.data){
 				        		areaMonth.push(data.data[i].month+"月");
 				        		areaProfit.push((data.data[i].incomes).toFixed(1)/1);
@@ -278,12 +279,14 @@ const mapDispatchToProps = (dispatch) => {
 						        	monthPlanElec=data.data.areasMonthsPlanElec;
 						        	dayPlanElec=data.data.dayPlanElec;
 						        	month=[],elecPlan=[],elecAct=[];
+						        	var monthNum=[];
 						        	for(var i in data.data.twAreaMonthElec){
 						        		elecAct.push((data.data.twAreaMonthElec[i].poweract).toFixed(1)/1);
 						        		month.push(data.data.twAreaMonthElec[i].month+"月");
+						        		monthNum.push(data.data.twAreaMonthElec[i].month);
 						        	};
-						        	for(var i in data.data.twAreaMonthPlanElec){
-						        		elecPlan.push((data.data.twAreaMonthPlanElec[i]).toFixed(1)/1);
+						        	for(var i=0;i<monthNum.length;i++){
+						        		elecPlan.push((data.data.twAreaMonthPlanElec[monthNum[i]]));
 						        		
 						        	};
 						        	dispatch(actions.setVars('yearElec',yearElec ));
@@ -446,12 +449,14 @@ const mapDispatchToProps = (dispatch) => {
 						        	monthPlanElec=data.data.areasMonthsPlanElec;
 						        	dayPlanElec=data.data.dayPlanElec;
 						        	month=[],elecPlan=[],elecAct=[];
+						        	var monthNum=[];
 						        	for(var i in data.data.twAreaMonthElec){
 						        		elecAct.push((data.data.twAreaMonthElec[i].poweract).toFixed(1)/1);
 						        		month.push(data.data.twAreaMonthElec[i].month+"月");
+						        		monthNum.push(data.data.twAreaMonthElec[i].month);
 						        	}
-						        	for(var i in data.data.twAreaMonthPlanElec){
-						        		elecPlan.push((data.data.twAreaMonthPlanElec[i]).toFixed(1)/1);
+						        	for(var i=0;i<monthNum.length;i++){
+						        		elecPlan.push((data.data.twAreaMonthPlanElec[monthNum[i]]));
 						        	}
 						        	dispatch(actions.setVars('yearElec',yearElec ));
 						        	dispatch(actions.setVars('monthElec',monthElec ));
@@ -479,11 +484,19 @@ const mapDispatchToProps = (dispatch) => {
 								        	dispatch(actions.setVars('areaArr',areaArr));
 								        },
 								        complete : function(XMLHttpRequest,status){ 
+								        		var date = new Date();
+										            if(date.getMonth()==0){
+										            	var yearString = date.getFullYear()-1;
+										            	var monthString = 12;
+										            }else{
+										                var yearString = date.getFullYear();
+										                var monthString = date.getMonth();										                
+										            }
 									　　　　	$.ajax({
 								        		url: 'http://'+ipUrl+'/wbi/TBA/getGLastMonthTBA',//TBA饼图
 										        type: 'post',
 										        async:true,
-										        data:{'groupid':areaId[key]},
+										        data:{'groupid':areaId[key],'year':yearString,'month':monthString},
 										        dataType: 'json',//here
 										        success:function (data) {
 										        	runTime=data.data[0].runtimes;

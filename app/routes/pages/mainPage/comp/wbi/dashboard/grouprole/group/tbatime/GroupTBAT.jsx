@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Profitstyle3.scss';
+import styles from '../PBAtime/Profitstyle2.scss';
 import GroupTBAT from './GroupTBAchart.jsx';
 import TBATimechartt from './TBATimechartt.jsx';
-import icono from '../../../../../../img/comp/TBA.png';
+import icono1 from '../../../../../../img/comp/TBA2.png';
+import icono2 from '../../../../../../img/comp/TBA.png';
 var actions = require('redux/actions');
 var $ = require('jquery');
 
@@ -18,11 +19,11 @@ let Component = React.createClass({
     },
 
     render() {
-        let {w0,ipUrl,tbaMonths,tbaRunTimes,tbaDownTimes,tbaTba,befor_pagee='group',backtop,befor_pagee2,tbaDays3,tbaDayRunTimes3,tbaDayDownTimes3,tbaDayTba3}=this.props;
+        let {w0,ipUrl,tbaMonths,tbaRunTimes,tbaDownTimes,tbaTba,befor_pagee='group',backtop,befor_pagee2,tbaDays3,tbaDayRunTimes3,tbaDayDownTimes3,tbaDayTba3,TBAtimedata,skinStyle}=this.props;
 
         return (
 
-            <div className={styles.box}>
+             <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 { // 返回按钮
                 }
                 <div className={styles.paddingtop}>
@@ -31,20 +32,20 @@ let Component = React.createClass({
                 {// 集团每月TBA
                 }
                 <div className={`${styles.areabox} ${styles.shadow}`}>
-                    <div className={styles.bgc}><img src={icono}/></div>
+                    <div className={styles.bgc}><img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/></div>
 
                     <GroupTBAT text={'集团每月TBA'} areaNamee={tbaMonths} areaRecordCostss={tbaDownTimes}
-                               areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl} height={410}></GroupTBAT>
+                               areaRecordProfitt={tbaRunTimes} TBA={tbaTba} input_url={ipUrl} height={410} TBAdaydata={TBAtimedata} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></GroupTBAT>
 
                 </div>
                 {//每天TBA
                 }
 
                 <div className={`${styles.areabox} ${styles.shadow}`}>
-                    <div className={styles.bgc}><img src={icono}/></div>
+                    <div className={styles.bgc}><img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/></div>
 
                     <TBATimechartt TBAx={tbaDays3} TBADownTimes={tbaDayDownTimes3} TBARunTimes={tbaDayRunTimes3}
-                                   TBAtba={tbaDayTba3} height={410} text={w0+'每日TBA'}></TBATimechartt>
+                                   TBAtba={tbaDayTba3} height={410} text={w0+'每日TBA'}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></TBATimechartt>
 
                 </div>
 
@@ -72,6 +73,8 @@ const mapStateToProps = (state) => {
         tbaDayTba3: state.vars.tbaDayTba31,
         // 全局ip
         ipUrl: state.vars.ipUrl,
+        TBAtimedata: state.vars.TBAtimedata,
+        skinStyle: state.vars.skinStyle,
 
     }
 };
@@ -107,7 +110,12 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 dataType: 'json',
                 timeout: '3000',
+                data:{
+                    'year':year,
+                    'month':month
+                },
                 success: function (data) {
+
 
                     TBAtimedata = data.data;
                     for (let i in TBAtimedata) {
@@ -122,7 +130,7 @@ const mapDispatchToProps = (dispatch) => {
                         tbaDownTimes.push(downtimes);
 
                         let tba = TBAtimedata[i].tba * 100;
-                        tbaTba.push(Number(tba.toFixed(1)));
+                        tbaTba.push(Number(tba.toFixed(2)));
 
                     }
 
@@ -147,11 +155,11 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 dataType: 'json',
                 data: {
+                    'year':year,
                     'month': month,
                 },
                 timeout: '3000',
                 success: function (data) {
-
                     TBAdaydata = data.data;
                     for (var i in TBAdaydata) {
                         var tbaDay = TBAdaydata[i].day + '日';
@@ -180,6 +188,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('tbaDayRunTimes31', tbaDayRunTimes3));
             dispatch(actions.setVars('tbaDayDownTimes31', tbaDayDownTimes3));
             dispatch(actions.setVars('tbaDayTba31', tbaDayTba3));
+            dispatch(actions.setVars('TBAtimedata', TBAtimedata));
 
 
 

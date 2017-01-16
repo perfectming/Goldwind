@@ -14,10 +14,10 @@ let Component = React.createClass({
     },
 
     render() {
-        let{ flag=true, changpage, fcpage }=this.props;
+        let{ flag=true, changpage, fcpage,skinStyle }=this.props;
         return (
 
-            <div className={styles.bodybox}>
+            <div className={skinStyle==1?styles.bodyboxBlue:skinStyle==2?styles.bodyboxWhite:styles.bodybox}>
                 <div className={styles.infotitle1}>
                     <div className={styles.infobox}>
                         <span className={styles.boxname}>电流</span>
@@ -75,8 +75,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-
-
+        skinStyle: state.vars.skinStyle
     }
 };
 

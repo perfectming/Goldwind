@@ -88,11 +88,11 @@ const mapDispatchToProps = (dispatch) => {
                     if(obj[k].checked)
                         check_val.push(obj[k].value);
                 }
-                alert('选中角色'+check_val);
             });
         },
         closeboxAm:()=>{
             $("#boxAm").parent().css("display","none");
+            dispatch(actions.setVars('roleIds', null));
         },
         Tofaninfo1: (value)=> {
         },
