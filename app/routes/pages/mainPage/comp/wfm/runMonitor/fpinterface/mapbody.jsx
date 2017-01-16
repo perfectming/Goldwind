@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch) => {
                                     if(leftd.ModelData['150801'] == undefined){
                                          TY.getRtData("WTLeftOverview", 8888800, setlData)
                                      }else{
-                                        console.log(leftd)
+                                        // console.log(leftd);
                                         dispatch(actions.setVars('leftd', leftd));
                                            setTimeout(function(){
                                             dispatch(actions.setVars('boolmapbody', true)); 

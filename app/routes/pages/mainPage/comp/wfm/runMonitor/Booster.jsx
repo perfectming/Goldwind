@@ -121,7 +121,7 @@ const mapDispatchToprops = (dispatch) => {
         changedate:()=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", momo, "Screen", 0);
             function momo(jyname){
-                if( jyname.Model.dis == undefined || jyname.Model.ens == undefined ){
+                if( jyname.Model == undefined){
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "RegulationOverview", momo, "Screen", 0);
                 }else {
                     dispatch(actions.setVars('jyname', jyname));
@@ -145,10 +145,14 @@ const mapDispatchToprops = (dispatch) => {
                 dispatch(actions.setVars('userInfo', false));
             },10000);
             time=setInterval(function(){
-                TY.getRtData("RegulationOverview", 8888800, ppo);
-                function ppo(jydata){
-                    dispatch(actions.setVars('jydata', jydata));
-                    dispatch(actions.setVars('boolebooster', true));
+                TY.getRtData("RegulationOverview", 8888800, ppoo);
+                function ppoo(jydata){
+                    if(jydata.ModelData==undefined){
+                        TY.getRtData("RegulationOverview", 8888800, ppoo);
+                    }else{
+                        dispatch(actions.setVars('jydata', jydata));
+                        dispatch(actions.setVars('boolebooster', true));
+                    }
                 }
             },2000)
         },

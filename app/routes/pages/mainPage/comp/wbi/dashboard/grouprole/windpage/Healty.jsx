@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestyle.scss';
+import styles from '../group/PBATime/Profitstyle2.scss';
 import Healtychart from './healtychart.jsx';
-import icono from '../../../../../img/comp/健康度1.png';
+import icono2 from '../../../../../img/comp/HEA.png';
+import icono1 from '../../../../../img/comp/HEA2.png';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
@@ -18,23 +19,23 @@ let Component = React.createClass({
     },
 
     render() {
-        let {width, ipUrl, xxdwfNa, xxdwfId, back, actbt, btn = 0, changpage, wind, gogogo, windP, windPP, windd, more, close, backtop, befor_pagee = 'windpage', befor_page2,mapmonth,Go=false,mon}=this.props;
+        let {width, ipUrl, xxdwfNa, xxdwfId, back, actbt, btn = 0, changpage, wind, gogogo, windP, windPP, windd, more, close, backtop, befor_pagee = 'windpage', befor_page2,mapmonth,Go=false,mon,skinStyle}=this.props;
         if(Go){
         return (
 
-            <div className={styles.box}>
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 <div className={styles.boxcover} id='boxcover'></div>
                 {// 更多弹出的表格
                 }
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
-                        <img src={icono}/>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                         <p>{mon + xxdwfNa + '各风机健康度'}</p>
                         <div onClick={() => close()}>x</div>
                     </div>
                     <div className={styles.scroll}>
                         <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={483} ty={20}
-                                     pointWidth={20} borderRadius={4}></Healtychart>
+                                     pointWidth={20} borderRadius={4} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Healtychart>
                     </div>
                 </div>
                 {// 导航的月份
@@ -47,7 +48,7 @@ let Component = React.createClass({
                                         key={key}>{value.yearpoweract+'月'}</li>)
                         })
                     }
-
+                            
 
                     <li className={styles.back} onClick={() => backtop(befor_pagee, befor_page2)}>返回</li>
                 </ul>
@@ -60,11 +61,11 @@ let Component = React.createClass({
 
                     <Healtychart machineE={windP} areaRecordProfit={wind} height={800}
                                  text={mon + xxdwfNa + '各风机健康度'} ty={35} pointWidth={30}
-                                 borderRadius={7}></Healtychart>
+                                 borderRadius={7} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Healtychart>
 
 
                     <div className={styles.imgqvg}>
-                        <img src={icono}/>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                     <div className={styles.buttonsh}>
                         <button className={btn === 0 ? styles.btn0 : styles.btn1}
@@ -117,6 +118,7 @@ const mapStateToProps = (state) => {
         mapmonth: state.vars.mapmonth,
         Go:state.vars.Go,
         mon:state.vars.mon,
+        skinStyle:state.vars.skinStyle,
 
 
     }
@@ -166,8 +168,8 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     'wfid': xxdwfId,
-                    'month': 12,
-                    'year': 2016
+                    'month': month,
+                    'year': year
                 },
                 dataType: 'json',
                 timeout: '3000',

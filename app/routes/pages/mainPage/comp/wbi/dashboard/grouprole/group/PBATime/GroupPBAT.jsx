@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from './Profitstyle2.scss';
 import GroupPBAT from './GroupPBATchart.jsx';
-import icono from '../../../../../../img/comp/PBA.png';
+import icono2 from '../../../../../../img/comp/PBA.png';
+import icono1 from '../../../../../../img/comp/PBA2.png';
 import PBAtimechartt from './PBAtimechartt.jsx';
 var actions = require('redux/actions');
 let Component = React.createClass({
@@ -16,10 +17,10 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {ipUrl,PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,close,backtop,befor_pagee='group',befor_pagee2,PBAGroupSpace}=this.props;
+        let {ipUrl,PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,close,backtop,befor_pagee='group',befor_pagee2,PBAGroupSpace,skinStyle}=this.props;
 
         return (
-            <div className={styles.box}>
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 {//遮罩层
                 }
                 <div className={styles.boxcover} id='boxcover'></div>
@@ -33,12 +34,14 @@ let Component = React.createClass({
                 {//PBA各月份的数据
                 }
                 <div className={`${styles.areabox} ${styles.shadow}`}>
-                    <div className={styles.bgc}><img src={icono}/></div>
+                    <div className={styles.bgc}>
+                    <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
+                    </div>
                     <GroupPBAT height={410} PBAGroupFaultloss={PBAGroupFaultloss} areaName={PBAGroupMonth}
                                areaRecordProfit={PBAGroupPoweract} PBAGroupMaintainloss={PBAGroupMaintainloss}
                                PBAGroupLimitloss={PBAGroupLimitloss} PBAGroupNodevreasonloss={PBAGroupNodevreasonloss}
                                PBAGroupPba={PBAGroupPba} text1={'集团每月PBA'} input_url={ipUrl}
-                               PBAGroupSpace={PBAGroupSpace}></GroupPBAT>
+                               PBAGroupSpace={PBAGroupSpace} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></GroupPBAT>
 
                 </div>
 
@@ -49,11 +52,11 @@ let Component = React.createClass({
                               PBAFaultloss={PBAGroupFirstFaultloss} PBAMaintainloss={PBAGroupMaintainloss}
                               PBALimitloss={PBAGroupFirstLimitloss} PBANodevreasonloss={PBAGroupFirstNodevreasonloss} height={410}
                               PBAPba={PBAGroupFirstPba}
-                              text={PBAGroupMonthF+'每日PBA'}></PBAtimechartt>
+                              text={PBAGroupMonthF+'每日PBA'} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></PBAtimechartt>
 
 
                     <div className={styles.bgc}>
-                        <img src={icono}/>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                 </div>
 
@@ -88,6 +91,8 @@ const mapStateToProps = (state) => {
         //ipUrl
         ipUrl: state.vars.ipUrl,
         PBAGroupSpace: state.vars.PBAGroupSpace,
+        //皮肤样式
+        skinStyle: state.vars.skinStyle,
 
 
 

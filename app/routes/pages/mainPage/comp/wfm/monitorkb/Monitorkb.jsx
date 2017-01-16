@@ -79,8 +79,8 @@ let Component = React.createClass({
             let gzsbgltime2=[];//故障时间在12-24小时之间//
             let gzsbgltime3=[];//故障时间在24-72小时之间//
             let gzsbgltime4=[];//故障时间在72小时以上//
-            let annularPlate='#39565e';//环状图底色，用于换肤//
 
+            let annularPlate='#39565e';//环状图底色，用于换肤//
             if(skinStyle==2){
                 annularPlate='#C0E2EA';
             }
@@ -324,23 +324,20 @@ const mapDispatchToProps = (dispatch) => {
         changedate:(boole)=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
             function momo(moname){
-                if( moname.Model.dis == undefined || moname.Model.ens == undefined ){
+                if( moname.Model == undefined){
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "MonitorBoard", momo, "Screen", 0);
                 }else {
                     dispatch(actions.setVars('moname', moname));
                     TY.getRtData("MonitorBoard", 8888800, ppo);
                     function ppo(modata){
-                        TY.getRtData("MonitorBoard", 8888800, ppo);
-                        function ppo(modata){
-                            if (modata.ModelData==undefined||modata.ModelData[8888801]==undefined){
-                                TY.getRtData("MonitorBoard", 8888800, ppo);
-                            }else{
-                                dispatch(actions.setVars('modata', modata));
-                                setTimeout(function () {
-                                    dispatch(actions.setVars('boole', true));
-                                    clearTimeout(onceTime);
-                                },100)
-                            }
+                        if (modata.ModelData==undefined){
+                            TY.getRtData("MonitorBoard", 8888800, ppo);
+                        }else{
+                            dispatch(actions.setVars('modata', modata));
+                            setTimeout(function () {
+                                dispatch(actions.setVars('boole', true));
+                                clearTimeout(onceTime);
+                            },100)
                         }
                     }
                 }
@@ -352,10 +349,10 @@ const mapDispatchToProps = (dispatch) => {
             },10000);
             //数据刷新方法//
             time=setInterval(function(){
-                TY.getRtData("MonitorBoard", 8888800, ppo);
-                function ppo(modata){
+                TY.getRtData("MonitorBoard", 8888800, ppoo);
+                function ppoo(modata){
                     if(modata.ModelData==undefined){
-                        TY.getRtData("MonitorBoard", 8888800, ppo);
+                        TY.getRtData("MonitorBoard", 8888800, ppoo);
                     }else {
                         dispatch(actions.setVars('modata', modata));
                         dispatch(actions.setVars('bloo', true));

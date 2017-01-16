@@ -100,7 +100,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 y:-10,
                 itemStyle: {
-                    color: "#333",
+                    color: lettercolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"

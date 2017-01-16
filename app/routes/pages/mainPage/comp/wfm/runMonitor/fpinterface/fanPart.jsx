@@ -29,7 +29,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {vid,  changetab, act1=0, boolFan = false, bujianModel, bujianData} = this.props;
+        let {vid,  changetab, act1=0, boolFan = false, bujianModel, bujianData,skinStyle} = this.props;
         if (boolFan) {//判断执行完数据后打开页面
             var forIn=[];
             var forOut=[];
@@ -43,7 +43,7 @@ let Component = React.createClass({
                 (key.slice(5,9)==='Bool')&& forOut.push(key);
             }
             return (
-                <div className={styles.bodyBox} id="fanJy">
+                <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox} id="fanJy">
                     <div className={styles.fanidbox}>
                         {
                             pack.map((value, key)=> {
@@ -112,7 +112,8 @@ const mapStateToProps = (state) => {
         vid:state.vars.Wtid,
         boolFan: state.vars.boolFan,
         bujianModel:state.vars.bujianModel,
-        bujianData:state.vars.bujianData
+        bujianData:state.vars.bujianData,
+        skinStyle: state.vars.skinStyle
     }
 };
 

@@ -13,10 +13,10 @@ let Component = React.createClass({
     },
 
     render() {
-       let{ flag=true, changpage, fcpage }=this.props;
+       let{ flag=true, changpage, fcpage,skinStyle }=this.props;
         return (
          
-                <div className={styles.bodybox}>
+                <div className={skinStyle==1?styles.bodyboxBlue:skinStyle==2?styles.bodyboxWhite:styles.bodybox}>
                 {
                     data.cft1.map((value,key)=>{
                         if(key%2==0){
@@ -90,7 +90,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-
+        skinStyle: state.vars.skinStyle
     }
 };
 
