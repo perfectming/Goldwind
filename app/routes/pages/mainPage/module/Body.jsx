@@ -58,19 +58,19 @@ import Prospace from '../comp/wbi/dashboard/grouprole/area/Prospace.jsx';
 import Pro_time from '../comp/wbi/dashboard/grouprole/area/Pro_time.jsx';
 
 
- import Areace from '../comp/wbi/dashboard/grouprole/windpage/Areace.jsx';//薛旭东66
- import Areacet from '../comp/wbi/dashboard/grouprole/windpage/Areacet.jsx';
- import TBAtime from '../comp/wbi/dashboard/grouprole/windpage/TBAtime.jsx';
- import TBAspace from '../comp/wbi/dashboard/grouprole/windpage/TBAspace.jsx';
- import Healty from '../comp/wbi/dashboard/grouprole/windpage/Healty.jsx';
- import Healthytime from '../comp/wbi/dashboard/grouprole/windpage/Healthytime.jsx';
- import PBAtime from '../comp/wbi/dashboard/grouprole/windpage/PBAtime.jsx';
- import PBAspace from '../comp/wbi/dashboard/grouprole/windpage/PBAspace.jsx';
+import Areace from '../comp/wbi/dashboard/grouprole/windpage/Areace.jsx';//薛旭东66
+import Areacet from '../comp/wbi/dashboard/grouprole/windpage/Areacet.jsx';
+import TBAtime from '../comp/wbi/dashboard/grouprole/windpage/TBAtime.jsx';
+import TBAspace from '../comp/wbi/dashboard/grouprole/windpage/TBAspace.jsx';
+import Healty from '../comp/wbi/dashboard/grouprole/windpage/Healty.jsx';
+import Healthytime from '../comp/wbi/dashboard/grouprole/windpage/Healthytime.jsx';
+import PBAtime from '../comp/wbi/dashboard/grouprole/windpage/PBAtime.jsx';
+import PBAspace from '../comp/wbi/dashboard/grouprole/windpage/PBAspace.jsx';
 import Profits from '../comp/wbi/dashboard/grouprole/group/earnings/Profits.jsx';
- import PEQII from '../comp/wbi/dashboard/grouprole/windpage/PEQII.jsx';
- import WFSprofit from '../comp/wbi/dashboard/grouprole/windpage/WFSprofit.jsx';
- import WFTprofit from '../comp/wbi/dashboard/grouprole/windpage/WFTprofit.jsx';
- import Profitime from '../comp/wbi/dashboard/grouprole/group/Profitime.jsx';
+import PEQII from '../comp/wbi/dashboard/grouprole/windpage/PEQII.jsx';
+import WFSprofit from '../comp/wbi/dashboard/grouprole/windpage/WFSprofit.jsx';
+import WFTprofit from '../comp/wbi/dashboard/grouprole/windpage/WFTprofit.jsx';
+import Profitime from '../comp/wbi/dashboard/grouprole/group/Profitime.jsx';
 import Profitss from '../comp/wbi/dashboard/grouprole/group/PBATime/GroupPBAT.jsx';
 import Profitsss from '../comp/wbi/dashboard/grouprole/group/TBATime/GroupTBAT.jsx';
 // import ProjectSta from '../comp/wbi/dashboard/grouprole/windpage/ProjectSta.jsx';
