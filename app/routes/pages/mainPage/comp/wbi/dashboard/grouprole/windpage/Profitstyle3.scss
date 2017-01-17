@@ -1,0 +1,789 @@
+.box{
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  padding-left: 10px;
+  //返回框
+  .paddingtop {
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    width: 98%;
+    height: 50px;
+    padding: 0;
+    padding-left: 0px;
+    position: relative;
+    border-bottom: 1px solid #31F3FB;
+    //返回按钮
+    .back {
+      float: right;
+      color: #fff;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      border-radius: 45px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .back:hover{
+    box-shadow: 0 0 15px #fff;
+    color:#20FEFF;
+    }
+  }
+//遮罩层
+  .boxcover {
+    position: fixed;
+    height: 100%;
+    width: 93%;
+    z-index: 1200;
+    background: black;
+    display: none;
+    opacity: 0.6;
+  }
+
+  .areabox {
+    position: relative;
+    width: 98%;
+    margin-left: 2px;
+    height: 410px;
+    margin-bottom: 15px;
+    margin-top:15px;
+    overflow: hidden;
+    background: rgba(44, 61, 71, 0.4);
+    .bgc {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 7px;
+    left: 71px;
+    z-index: 5;
+    background-size: cover;
+    img {
+      height: 16px;
+      width: 16px
+    }
+  }
+      .bgcc {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 7px;
+    left: 49px;
+    z-index: 5;
+    background-size: cover;
+    img {
+      height: 16px;
+      width: 16px
+    }
+  }
+  }
+  //健康度里的更多
+    .more{
+    padding-top:0px;
+    background:#21242a;
+    position:absolute;
+    z-index:1200;
+    width:95.5%;
+    margin-left:0px;
+    top:50%;
+    left:50%;
+    height:560px;
+    transform:translate(-50%,-50%);
+    box-sizing:border-box;
+    display:none;
+    .scroll{
+    overflow-x: scroll;
+  }
+    .moretitle{
+    width:100%;
+    height:60px;
+    background:#15181B;
+    position:relative;
+    top:0;
+    left:0;
+    ;
+    z-index:2000;
+    height:60px;
+    div{
+    display:inline-block;
+    font-size:16px;
+    float:right;
+    line-height:60px;
+    cursor:pointer;
+    margin-right:50px;
+       color:#fff;
+    }
+    p{
+    position:absolute;
+    top:18px;
+    left:7%;
+    font-size:16px;
+    color:#fff;
+    }
+    img{
+    position:absolute;
+    top:22px;
+    left:4%;
+    height:19px;
+    width:18px;
+    }
+    }
+    }
+  //健康度等一个大表格
+    .bigbox{
+    height:100%;
+    width:100%;
+    margin:0 auto;
+    margin-top:40px;
+    border:1px solid #282F37;
+    position:relative;
+    overflow:hidden;
+    background: rgba(44, 61, 71,0.4);
+    .imgqvg{
+        width:16px;
+        height:30px;
+        position:absolute;
+        top:8px;
+        left:48px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:18px;
+          width:16px;
+        }
+      }
+                .imgqv{
+        width:16px;
+        height:30px;
+        position:absolute;
+        top:8px;
+        left:65px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:18px;
+          width:16px;
+        }
+      }
+      .buttonsh{
+     width:254px;
+    position:absolute;
+    top:0px;
+    right:0px;
+      height:60px;
+      line-height:60px;
+      button{
+      width:70px;
+      height:30px;
+      line-height:20px;
+      text-align:center;
+      font-size:16px;
+      font-family:'微软雅黑';
+      margin-left:12px;
+      background-color:white;
+      color:#20FEFF;
+      border:1px solid #20FEFF;
+      background:transparent;
+         border-radius:15px;
+      }
+     .btn0{
+        color: #20FEFF;
+
+    box-shadow: 0px 0px 10px #20FEFF
+     }
+    .btn1{
+    color:#fff;
+    }
+      button:hover{
+       color: #20FEFF;
+
+    box-shadow: 0px 0px 10px #20FEFF
+      }
+     
+    }
+    }
+    //健康度第一个大表格里的按钮
+    //健康度第一个大表格里的月份
+    .monthbox{
+    margin-bottom:10px;
+    width: 100%;
+    height: 50px;
+    list-style: none;
+    background-color: transparent;
+    padding:0;
+    padding-left:0px;
+    position:relative;
+    border-bottom: 1px solid #31F3FB;
+    li{
+      height: 40px;
+      width: 100px;
+      border: 1px solid #31F3FB;
+      line-height: 38px;
+      float: left;
+      font-family: "微软雅黑";
+      text-align: center;
+      margin-right: 10px;
+      border-radius:5px;
+      cursor:pointer;
+      &:hover{
+       color: #31F3FB;
+       box-shadow:0 0 10px #fff;
+            }
+     }
+      .back{
+      float:left;
+       align-items:center;
+       color: #20FEFF;
+       border:1px solid #20FEFF;
+       width:100px;
+       height:40px;
+       line-height:40px;
+       position:relative;
+       top:0px;
+       border-radius:45px;
+       text-align:center;
+    }
+      .red{
+        color: #31F3FB;
+        box-shadow: 0 0 10px #fff;
+      }
+      .green{
+        color:white;
+      }
+    }
+    .shadow:hover {
+    box-shadow: 0 0 15px #fff;
+  }
+}
+//bai
+.boxWhite{
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  padding-left: 10px;
+  //返回框
+  .paddingtop {
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    width: 98%;
+    height: 50px;
+    padding: 0;
+    padding-left: 0px;
+    position: relative;
+    border-bottom: 1px solid #31F3FB;
+    //返回按钮
+    .back {
+      float: right;
+      color: #555;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      border-radius: 45px;
+      cursor: pointer;
+      text-align: center;
+      background: #E7F1FA;
+    }
+    .back:hover{
+    box-shadow: 0px 0px 10px #555555;
+    color:#333;
+    }
+  }
+//遮罩层
+  .boxcover {
+    position: fixed;
+    height: 100%;
+    width: 93%;
+    z-index: 1200;
+    background: black;
+    display: none;
+    opacity: 0.6;
+  }
+
+  .areabox {
+    position: relative;
+    width: 98%;
+    margin-left: 2px;
+    height: 410px;
+    margin-bottom: 15px;
+    margin-top:15px;
+    overflow: hidden;
+    background: #E7F1FA;
+    .bgc {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 7px;
+    left: 71px;
+    z-index: 5;
+   
+     background-size: cover;
+    img {
+      height: 16px;
+      width: 16px
+    }
+  }
+        .bgcc {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 7px;
+    left: 49px;
+    z-index: 5;
+    background-size: cover;
+    img {
+      height: 16px;
+      width: 16px
+    }
+  }
+  }
+   //健康度里的更多
+    .more{
+    padding-top:0px;
+    background: #E7F1FA;
+    position:absolute;
+    z-index:1200;
+    width:95.5%;
+    margin-left:0px;
+    top:50%;
+    left:50%;
+    height:560px;
+    transform:translate(-50%,-50%);
+    box-sizing:border-box;
+    display:none;
+    .scroll{
+    overflow-x: scroll;
+  }
+    .moretitle{
+    width:100%;
+    height:60px;
+    background-color: #dddddd;
+    position:relative;
+    top:0;
+    left:0;
+    
+    z-index:2000;
+    height:60px;
+    div{
+    display:inline-block;
+    font-size:16px;
+    float:right;
+    line-height:60px;
+    cursor:pointer;
+    margin-right:50px;
+       color:#333;
+    }
+    p{
+    position:absolute;
+    top:18px;
+    left:7%;
+    font-size:16px;
+    color:#333;
+    }
+    img{
+    position:absolute;
+    top:22px;
+    left:4%;
+    height:19px;
+    width:18px;
+    }
+    }
+    }
+  //健康度等一个大表格
+    .bigbox{
+    height:100%;
+    width:100%;
+    margin:0 auto;
+    margin-top:40px;
+    position:relative;
+    overflow:hidden;
+    background: #E7F1FA;
+    .imgqvg{
+        width:16px;
+        height:30px;
+        position:absolute;
+        top:8px;
+        left:48px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:18px;
+          width:16px;
+        }
+      }
+                .imgqv{
+        width:16px;
+        height:30px;
+        position:absolute;
+        top:8px;
+        left:65px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:18px;
+          width:16px;
+        }
+      }
+      .buttonsh{
+     width:254px;
+    position:absolute;
+    top:0px;
+    right:0px;
+      height:60px;
+      line-height:60px;
+      button{
+      width:70px;
+      height:30px;
+      line-height:20px;
+      text-align:center;
+      font-size:16px;
+      font-family:'微软雅黑';
+      margin-left:12px;
+      background-color:white;
+     
+      color:#fff;
+      border:1px solid #20FEFF;
+      background:transparent;
+         border-radius:15px;
+      }
+     .btn0{
+     color: #333;
+     box-shadow: 0px 0px 15px #333333;
+     }
+    .btn1{
+    color:#555;
+    }
+      button:hover{
+               
+             color: #333;
+     box-shadow: 0px 0px 15px #333333;
+      }
+     
+    }
+    }
+    //健康度第一个大表格里的月份
+    .monthbox{
+    margin-bottom:10px;
+    width: 100%;
+    height: 50px;
+    list-style: none;
+    background-color: transparent;
+    padding:0;
+    padding-left:0px;
+    position:relative;
+    border-bottom: 1px solid #31F3FB;
+    li{
+      height: 40px;
+      width: 100px;
+      border: 1px solid #31F3FB;
+      line-height: 38px;
+      float: left;
+      font-family: "微软雅黑";
+      text-align: center;
+      margin-right: 10px;
+      border-radius:5px;
+      cursor:pointer;
+      background: #E7F1FA;
+      &:hover{
+    color: #333333;
+    box-shadow: 0 0 10px #555555
+            }
+     }
+      .back{
+      float:left;
+       align-items:center;
+      color: #555;
+      //box-shadow: 0 0 10px #555555
+       border:1px solid #20FEFF;
+       width:100px;
+       height:40px;
+       line-height:40px;
+       position:relative;
+       top:0px;
+       border-radius:45px;
+       box-shadow:0px 0px 10px  #555555;
+       text-align:center;
+    }
+      .red{
+       
+    color: #333333;
+    box-shadow: 0 0 10px #555555
+      }
+      .green{
+        color:#555;
+      }
+    }
+  .shadow:hover {
+    box-shadow: 0 0 15px #fff;
+  }
+
+}
+
+//blue
+.boxBlue{
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  padding-left: 10px;
+  //返回框
+  .paddingtop {
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    width: 98%;
+    height: 50px;
+    padding: 0;
+    padding-left: 0px;
+    position: relative;
+    border-bottom: 1px solid #31F3FB;
+    //返回按钮
+    .back {
+      float: right;
+      color: #fff;
+      border: 1px solid #20FEFF;
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      border-radius: 45px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .back:hover{
+    box-shadow: 0 0 15px #fff;
+    color:#20FEFF;
+    }
+  }
+//遮罩层
+  .boxcover {
+    position: fixed;
+    height: 100%;
+    width: 93%;
+    z-index: 1200;
+    background: black;
+    display: none;
+    opacity: 0.6;
+  }
+
+  .areabox {
+    position: relative;
+    width: 98%;
+    margin-left: 2px;
+    height: 410px;
+    margin-bottom: 15px;
+    margin-top:15px;
+    overflow: hidden;
+   background: #112a48;
+    .bgc {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 7px;
+    left: 71px;
+    z-index: 5;
+    
+    background-size: cover;
+    img {
+      height: 16px;
+      width: 16px
+    }
+  }
+        .bgcc {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    top: 7px;
+    left: 49px;
+    z-index: 5;
+    background-size: cover;
+    img {
+      height: 16px;
+      width: 16px
+    }
+  }
+  }
+    //健康度里的更多
+    .more{
+    padding-top:0px;
+    background: #112a48;
+    position:absolute;
+    z-index:1200;
+    width:95.5%;
+    margin-left:0px;
+    top:50%;
+    left:50%;
+    height:560px;
+    transform:translate(-50%,-50%);
+    box-sizing:border-box;
+    display:none;
+    .scroll{
+    overflow-x: scroll;
+  }
+    .moretitle{
+    width:100%;
+    height:60px;
+    background:#15181B;
+    position:relative;
+    top:0;
+    left:0;
+    ;
+    z-index:2000;
+    height:60px;
+    div{
+    display:inline-block;
+    font-size:16px;
+    float:right;
+    line-height:60px;
+    cursor:pointer;
+    margin-right:50px;
+       color:#fff;
+    }
+    p{
+    position:absolute;
+    top:18px;
+    left:7%;
+    font-size:16px;
+    color:#fff;
+    }
+    img{
+    position:absolute;
+    top:22px;
+    left:4%;
+    height:19px;
+    width:18px;
+    }
+    }
+    }
+  //健康度等一个大表格
+    .bigbox{
+    height:100%;
+    width:100%;
+    margin:0 auto;
+    margin-top:40px;
+    border:1px solid #282F37;
+    position:relative;
+    overflow:hidden;
+    background: #112a48;
+    .imgqvg{
+        width:16px;
+        height:30px;
+        position:absolute;
+        top:8px;
+        left:48px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:18px;
+          width:16px;
+        }
+      }
+          .imgqv{
+        width:16px;
+        height:30px;
+        position:absolute;
+        top:8px;
+        left:65px;
+        text-align:center;
+        line-height:30px;
+        img{
+          height:18px;
+          width:16px;
+        }
+      }
+      .buttonsh{
+     width:254px;
+    position:absolute;
+    top:0px;
+    right:0px;
+      height:60px;
+      line-height:60px;
+      button{
+      width:70px;
+      height:30px;
+      line-height:20px;
+      text-align:center;
+      font-size:16px;
+      font-family:'微软雅黑';
+      margin-left:12px;
+      background-color:white;
+    
+      color:#fff;
+      border:1px solid #20FEFF;
+      background:transparent;
+         border-radius:15px;
+      }
+     .btn0{
+     color: #31F3FB;
+         box-shadow: 0px 0px 10px #20FEFF;
+     }
+    .btn1{
+    color:#fff;
+    }
+      button:hover{
+               
+             color: #31F3FB;
+          box-shadow:0px 0px 10px  #20FEFF;
+      }
+     
+    }
+    }
+    //健康度第一个大表格里的按钮
+    //健康度第一个大表格里的月份
+    .monthbox{
+    margin-bottom:10px;
+    width: 100%;
+    height: 50px;
+    list-style: none;
+    background-color: transparent;
+    padding:0;
+    padding-left:0px;
+    position:relative;
+    border-bottom: 1px solid #31F3FB;
+    li{
+      height: 40px;
+      width: 100px;
+      border: 1px solid #31F3FB;
+      line-height: 38px;
+      float: left;
+      font-family: "微软雅黑";
+      text-align: center;
+      margin-right: 10px;
+      border-radius:5px;
+      cursor:pointer;
+      &:hover{
+       color: #31F3FB;
+       box-shadow:0 0 10px #fff;
+            }
+     }
+      .back{
+      float:left;
+       align-items:center;
+       color: #20FEFF;
+       border:1px solid #20FEFF;
+       width:100px;
+       height:40px;
+       line-height:40px;
+       position:relative;
+       top:0px;
+       border-radius:45px;
+       box-shadow:0px 0px 10px  #20FEFF;
+       text-align:center;
+    }
+      .red{
+       
+        color: #31F3FB; 
+        box-shadow:0 0 10px #fff;
+      }
+      .green{
+        color:white;
+      }
+    }
+  .shadow:hover {
+    box-shadow: 0 0 15px #fff;
+  }
+
+}

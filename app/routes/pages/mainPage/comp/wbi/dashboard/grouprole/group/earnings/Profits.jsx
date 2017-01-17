@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Profitstyle.scss';
+import styles from './Profitstyle1234.scss';
 import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
 import icono from '../../../../../../img/comp/收益率1.png';

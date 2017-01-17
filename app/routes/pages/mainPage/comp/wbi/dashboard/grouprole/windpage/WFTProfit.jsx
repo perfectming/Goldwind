@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from '../group/PBATime/Profitstyle2.scss';
+import styles from './Profitstyle3.scss';
 import WFTprofitchart from './WFTprofitchart.jsx';
 import WFTprofitchartt from './WFTprofitchartt.jsx';
 import icono2 from '../../../../../img/comp/MON.png';

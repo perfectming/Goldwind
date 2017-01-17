@@ -77,7 +77,9 @@ let Component = React.createClass({
                             let WTHealName = [];
                             let WTN = [];
 
-
+  console.log(hlymonth[wc1])
+  console.log(hlyyear[wc1])
+  
 
                             $.ajax({
                                 type: 'post',
@@ -109,7 +111,7 @@ let Component = React.createClass({
 
                                 },
                             });
-                            changedata1(w0, WTHealName, WTN);
+                            changedata1(hlymonth[wc1], WTHealName, WTN);
 
                         }
                     }
@@ -207,8 +209,8 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
         },
         changedata1: (w0, WTHealName, WTN) => {
-
-            dispatch(actions.setVars('wfH', w0));
+  console.log(w0)
+            dispatch(actions.setVars('wfH', w0+'月'));
             dispatch(actions.setVars('WTHealName12', WTHealName));
             dispatch(actions.setVars('WTN12', WTN));
 

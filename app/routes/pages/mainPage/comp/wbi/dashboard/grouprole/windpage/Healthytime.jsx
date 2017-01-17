@@ -1,7 +1,6 @@
-
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from '../group/PBATime/Profitstyle2.scss';
+import styles from './Profitstyle3.scss';
 import Healtytimechart from './Healtytimechart.jsx';
 import Healtytimecharttt from './Healtytimecharttt.jsx';
 import icono2 from '../../../../../img/comp/HEA.png';
@@ -147,11 +146,11 @@ const mapDispatchToProps = (dispatch) => {
                     }
 
                     dispatch(actions.setVars('hlyyear', WTHealName0));
-                    dispatch(actions.setVars('hlymonth', WTHealName));
+                    dispatch(actions.setVars('hlymonth', WTHealName+'月'));
                     dispatch(actions.setVars('WTHealName12',WTHealNamee));
                     dispatch(actions.setVars('WTHealName1',WTHealName3));
                     dispatch(actions.setVars('WTN1',WTN ));
-                    dispatch(actions.setVars('WHmonth',month));
+                    dispatch(actions.setVars('WHmonth',month+'月'));
                     dispatch(actions.setVars('wfh', WTHealName[10]+"月"));
                     dispatch(actions.setVars('WTN12',WTNN ));
 

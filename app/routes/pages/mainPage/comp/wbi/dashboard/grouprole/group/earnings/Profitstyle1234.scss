@@ -546,7 +546,7 @@
         top: 18px;
         left: 7%;
         font-size: 16px;
-        color: #333;
+        color: #fff;
       }
       .img {
         position: absolute;
@@ -607,7 +607,7 @@
     }
 
     .red {
-
+       box-shadow: 0px 0px 10px #20FEFF;
       color: #31F3FB;
     }
     .green {
@@ -716,6 +716,7 @@
     //按钮高亮
     .btn0 {
       color: #31F3FB;
+      box-shadow: 0px 0px 10px #20FEFF;
     }
     .btn1 {
       color: #fff;

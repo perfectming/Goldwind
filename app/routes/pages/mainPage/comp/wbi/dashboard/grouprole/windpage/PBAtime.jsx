@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from '../group/PBATime/Profitstyle2.scss';
+import styles from './Profitstyle3.scss';
 import PBAtimechart from './PBAtimechart.jsx';
 import PBAtimechartt from '../group/PBATime/PBAtimechartt.jsx';
 import icono2 from '../../../../../img/comp/PBA.png';
