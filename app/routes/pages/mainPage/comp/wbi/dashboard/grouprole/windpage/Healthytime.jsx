@@ -146,7 +146,7 @@ const mapDispatchToProps = (dispatch) => {
                     }
 
                     dispatch(actions.setVars('hlyyear', WTHealName0));
-                    dispatch(actions.setVars('hlymonth', WTHealName+'月'));
+                    dispatch(actions.setVars('hlymonth', WTHealName));
                     dispatch(actions.setVars('WTHealName12',WTHealNamee));
                     dispatch(actions.setVars('WTHealName1',WTHealName3));
                     dispatch(actions.setVars('WTN1',WTN ));

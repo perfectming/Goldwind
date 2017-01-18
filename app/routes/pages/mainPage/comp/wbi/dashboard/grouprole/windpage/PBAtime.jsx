@@ -43,7 +43,7 @@ let Component = React.createClass({
                            
                    
                   
-                    <div className={styles.imgqvg}>
+                    <div className={styles.bgc}>
                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                     
@@ -60,7 +60,7 @@ let Component = React.createClass({
                               </PBAtimechartt>
                         
                     
-                    <div className={styles.imgqvg}>
+                    <div className={styles.bgc}>
                         <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                     

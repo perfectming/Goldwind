@@ -55,7 +55,7 @@ let Component = React.createClass({
                    fanCostA={PBASpaceMoreMaintainloss} 
                    fanCostB={PBASpaceMoreLimitloss} 
                    fanCostC={PBASpaceMoreNodevreasonloss} 
-                   PBA={PBASpaceMorePba} height={483} width={width} ty={10} pointWidth={20} pointPlacement={0.07} borderRadius={4}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></PBAspacechart>
+                   PBA={PBASpaceMorePba} height={483} width={width} ty={0} pointWidth={20} pointPlacement={0.07} borderRadius={4}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></PBAspacechart>
                  </div>
              </div>
                

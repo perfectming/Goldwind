@@ -76,9 +76,6 @@ let Component = React.createClass({
                             let WTHealH = [];
                             let WTHealName = [];
                             let WTN = [];
-
-  console.log(hlymonth[wc1])
-  console.log(hlyyear[wc1])
   
 
                             $.ajax({
@@ -88,12 +85,13 @@ let Component = React.createClass({
                                 data: {
                                     "month":hlymonth[wc1],
                                     "year":hlyyear[wc1],
-                                    'wfid':xxdwfId==undefined? "150801":xxdwfId,
+                                    'wfid':xxdwfId,
                                 },
+                              
+
                                 dataType: 'json',
                                 timeout: '3000',
                                 success: function (data) {
-
 
                                     let WTHeal = data.data.dayHealth;
                                     let WTHeall = data.data.monthHealth;
@@ -209,8 +207,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
         },
         changedata1: (w0, WTHealName, WTN) => {
-  console.log(w0)
-            dispatch(actions.setVars('wfH', w0+'月'));
+            dispatch(actions.setVars('WHmonth', w0+'月'));
             dispatch(actions.setVars('WTHealName12', WTHealName));
             dispatch(actions.setVars('WTN12', WTN));
 

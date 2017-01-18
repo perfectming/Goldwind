@@ -34,7 +34,7 @@ let Component = React.createClass({
                         <div onClick={() => close()}>x</div>
                     </div>
                     <div className={styles.scroll}>
-                        <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={483} ty={20}
+                        <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={483} ty={0}
                                      pointWidth={20} borderRadius={4} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Healtychart>
                     </div>
                 </div>

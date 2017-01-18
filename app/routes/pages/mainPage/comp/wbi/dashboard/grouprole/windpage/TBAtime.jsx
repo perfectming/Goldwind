@@ -31,7 +31,7 @@ let Component = React.createClass({
                      }
                <div className={`${styles.areabox} ${styles.shadow}`}>
  
-                    <div className={styles.imgqvg}>
+                    <div className={styles.bgcc}>
                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                           <TBAtimechart xxdwfNa={xxdwfNa}montht={montht} profit={profit} cost={cost} TBA={TBA} height={410} xxdwfId={xxdwfId} input_url={ipUrl} pointWidth={30}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></TBAtimechart>
@@ -41,10 +41,9 @@ let Component = React.createClass({
                      }
                   <div className={`${styles.areabox} ${styles.shadow}`}>
                
-                               
                                 <TBATimechartt TBAx={areaPlan} TBADownTimes={areaPlanDayT} TBARunTimes={areaPlanDay} TBAtba={TBAAA} height={410} text={w0+xxdwfNa+'每日TBA'} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></TBATimechartt>
 
-                    <div className={styles.imgqvg}>
+                    <div className={styles.bgc}>
                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                 </div>

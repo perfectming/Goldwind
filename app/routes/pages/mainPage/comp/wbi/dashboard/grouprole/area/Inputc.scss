@@ -105,7 +105,7 @@
         margin-bottom: 40px;
         .tableContentLine {
           color:#fff;
-          background: #30343f;
+         background: #112A48;
           overflow: hidden;
           &:hover{
             background:rgba(183,195,224,.5);
@@ -117,7 +117,7 @@
             height: 40px;
             line-height:40px;
             border: none;
-            background:#30343f;
+                background: #112A48
             img{
               height:20px;
               width:20px;
@@ -228,7 +228,7 @@
       margin-left:23px;
       border-radius:3px;
       border:none;
-      color:#fff;
+      color:#333;
       font-size:14px;
     }
   }
@@ -253,24 +253,24 @@
       float:left;
       margin-right:40px;
       font-size: 16px;
-      color: #fff;
+      color: #333;
       select{
         margin-left: 40px;
-        color: #fff;
+        color: #333;
         width:300px;
-        background: #181a25;
+       background: #eee;
         height:40px;
         line-height:30px;
         border-radius:2px;
         .opt{
           font-size: 16px;
-          color: #fff;
+          color: #333;
         }
       }
     }
     .btnBox{
       div{
-        color: #fff;
+        color: #333;
         width:170px;
         height:30px;
         line-height: 30px;
@@ -297,13 +297,13 @@
       overflow: hidden;
       .tableHeaderBox {
         overflow: hidden;
-        background: #464c58;
+        background: #F2F3F4;
         .tableHeaderItem {
           float: left;
           height:60px;
           line-height:60px;
           overflow: hidden;
-          color:#fff;
+          color:#333;
           text-align: center;
         }
       }
@@ -323,7 +323,8 @@
             height: 40px;
             line-height:40px;
             border: none;
-            background:#30343f;
+            background: #E8F0F6;
+            color:#333;
             img{
               height:20px;
               width:20px;
@@ -337,7 +338,8 @@
             height: 40px;
             line-height:40px;
             border: none;
-            background:#30343f;
+            background: #E8F0F6;
+            color:#333;
             img{
               height:20px;
               width:20px;
@@ -361,8 +363,7 @@
         .tableContentLine1 {
           color:#fff;
           overflow: hidden;
-          background: #272b34;
-          background: #30343f;
+          background: #F2F4F5;
           &:hover{
             background:rgba(183,195,224,.5);
           }
@@ -385,15 +386,17 @@
             height: 40px;
             line-height:40px;
             border:none;
-            background: #272b34;
+                background: #F2F4F5;
+                color:#333;
             img{
               height:20px;
               width:20px;
             }
           }
           input{
-            background: #272b34;
+            background: #F2F4F5;
             border:6px solid #fff;
+            color:#333;
             &:hover{
               box-shadow:0px 0px 8px 2px #fff;
             }
@@ -503,7 +506,7 @@
       overflow: hidden;
       .tableHeaderBox {
         overflow: hidden;
-        background: #464c58;
+        background: #1C405B;
         .tableHeaderItem {
           float: left;
           height:60px;
@@ -517,7 +520,7 @@
         margin-bottom: 40px;
         .tableContentLine {
           color:#fff;
-          background: #30343f;
+          background: #112A48;
           overflow: hidden;
           &:hover{
             background:rgba(183,195,224,.5);
@@ -529,7 +532,7 @@
             height: 40px;
             line-height:40px;
             border: none;
-            background:#30343f;
+             background: #112A48;
             img{
               height:20px;
               width:20px;
@@ -543,7 +546,7 @@
             height: 40px;
             line-height:40px;
             border: none;
-            background:#30343f;
+             background: #112A48;
             img{
               height:20px;
               width:20px;
@@ -567,8 +570,7 @@
         .tableContentLine1 {
           color:#fff;
           overflow: hidden;
-          background: #272b34;
-          background: #30343f;
+          background: #15324E;
           &:hover{
             background:rgba(183,195,224,.5);
           }
@@ -591,14 +593,14 @@
             height: 40px;
             line-height:40px;
             border:none;
-            background: #272b34;
+            background: #15324E;
             img{
               height:20px;
               width:20px;
             }
           }
           input{
-            background: #272b34;
+            background: #15324E;
             border:6px solid #fff;
             &:hover{
               box-shadow:0px 0px 8px 2px #fff;
