@@ -29,7 +29,7 @@
     z-index: 1600;
     width: 95%;
     top: 50%;
-    left: 48%;
+    left: 50%;
     padding-top: 60px;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
@@ -56,7 +56,7 @@
         top: 18px;
         left: 7%;
         font-size: 16px;
-        color: #fff;
+         color: #fff;
       }
       .img {
         position: absolute;
@@ -117,7 +117,7 @@
     }
 
     .red {
-
+    box-shadow: 0 0 10px #fff;
       color: #31F3FB;
     }
     .green {
@@ -226,6 +226,7 @@
     //按钮高亮
     .btn0 {
       color: #31F3FB;
+          box-shadow: 0 0 10px #fff;
     }
     .btn1 {
       color: #fff;
@@ -268,7 +269,7 @@
     z-index: 1600;
     width: 95%;
     top: 50%;
-    left: 48%;
+    left: 50%;
     padding-top: 60px;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
@@ -296,7 +297,7 @@
         top: 18px;
         left: 7%;
         font-size: 16px;
-        color: #fff;
+         color: #333;
       }
       .img {
         position: absolute;
@@ -357,6 +358,7 @@
       text-align: center;
       background: #E7F1FA;
       color: #333;
+          box-shadow: 0px 0px 10px #555555;
     }
 
     .red {
@@ -518,7 +520,7 @@
     z-index: 1600;
     width: 95%;
     top: 50%;
-    left: 48%;
+    left: 50%;
     padding-top: 60px;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
@@ -607,7 +609,7 @@
     }
 
     .red {
-
+       box-shadow: 0px 0px 10px #20FEFF;
       color: #31F3FB;
     }
     .green {
@@ -716,6 +718,7 @@
     //按钮高亮
     .btn0 {
       color: #31F3FB;
+      box-shadow: 0px 0px 10px #20FEFF;
     }
     .btn1 {
       color: #fff;

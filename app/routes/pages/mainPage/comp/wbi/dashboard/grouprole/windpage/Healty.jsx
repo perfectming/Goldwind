@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from '../group/PBATime/Profitstyle2.scss';
+import styles from './Profitstyle3.scss';
 import Healtychart from './healtychart.jsx';
 import icono2 from '../../../../../img/comp/HEA.png';
 import icono1 from '../../../../../img/comp/HEA2.png';
@@ -34,7 +34,7 @@ let Component = React.createClass({
                         <div onClick={() => close()}>x</div>
                     </div>
                     <div className={styles.scroll}>
-                        <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={483} ty={20}
+                        <Healtychart machineE={windPP} areaRecordProfit={windd} width={width} height={483} ty={0}
                                      pointWidth={20} borderRadius={4} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Healtychart>
                     </div>
                 </div>
@@ -168,8 +168,8 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     'wfid': xxdwfId,
-                    'month': 12,
-                    'year': 2016
+                    'month': month,
+                    'year': year
                 },
                 dataType: 'json',
                 timeout: '3000',

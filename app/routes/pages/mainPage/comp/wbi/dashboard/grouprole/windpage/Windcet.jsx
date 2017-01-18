@@ -9,7 +9,7 @@ let Component = React.createClass({
     componentWillMount() {
     },
     render() {
-        let{text,areaPlan,areaPlanDay, areaPlanDayT,width,height}=this.props;
+        let{text,areaPlan,areaPlanDay, areaPlanDayT,width,height,scolor}=this.props;
      
         let configPie = {
             chart: {
@@ -27,10 +27,10 @@ let Component = React.createClass({
                 align:'left',
                 top:'-20px',
                 vertical:'top',
-                 x : 120,
+                 x : 100,
                  y:20,
                 style:{
-                    color:"#fff",
+                    color:scolor,
                     fontSize:"16px",
                     fontFamily:"微软雅黑",
                     
@@ -46,7 +46,7 @@ let Component = React.createClass({
                     color:'#31f3fb',
                 },
                 itemStyle: {
-                    color: "#fff",
+                    color: scolor,
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑",
@@ -84,7 +84,7 @@ let Component = React.createClass({
                     y: 20, //x轴刻度往下移动20px
                     style: {
                         fontSize:'14px',
-                        color:'#fff'  //字体
+                        color:scolor  //字体
                     }
                 },
                 categories:areaPlan,
@@ -98,16 +98,16 @@ let Component = React.createClass({
                     align:'high',
                     rotation:'0',
                     y: -10,
-                    x: 45,
+                    x: 50,
                     style:{
-                        color:'#fff',
+                        color:scolor,
                         fontSize:'14px',
                     }
             },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                       color:"#fff",
+                       color:scolor,
                         fontSize:'14px'  //字体
                     }
                 },

@@ -58,7 +58,7 @@ let Component = React.createClass({
         },1000)
     },
     render() {
-        let {deleData, deleDate, addData, num = 0, wfidCount, addDate,changeTableItem12, wfids, ajax, table, year, wtidAll, groupAll, totalpage, saveTableItem2, saveTableItem, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll = false} = this.props;
+        let {deleData, deleDate, addData, num = 0, wfidCount, addDate,changeTableItem12, wfids, ajax, table, year, wtidAll, groupAll, totalpage, saveTableItem2, saveTableItem, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll = false,skinStyle} = this.props;
 
         //
 
@@ -68,7 +68,7 @@ let Component = React.createClass({
 
             return (
 
-                <div className={styles.powerBox}>
+                      <div className={skinStyle == 1 ? styles.powerBlueBox : skinStyle == 2 ? styles.powerWhiteBox : styles.powerBox}>
                     <div className={styles.inquireBox}>
                         <div className={styles.seleBox}>
                             <span>年度</span>
@@ -415,6 +415,7 @@ const mapStateToProps = (state) => {
         years0: state.vars.years0,
         wfids: state.vars.wfids,
         totalpage: state.vars.totalpage,
+        skinStyle: state.vars.skinStyle,
     }
 };
 

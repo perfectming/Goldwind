@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from '../group/PBATime/Profitstyle2.scss';
+import styles from './Profitstyle3.scss';
 import PBAspacechart from './PBAspacechart.jsx';
 import icono2 from '../../../../../img/comp/PBA.png';
 import icono1 from '../../../../../img/comp/PBA2.png';
@@ -55,7 +55,7 @@ let Component = React.createClass({
                    fanCostA={PBASpaceMoreMaintainloss} 
                    fanCostB={PBASpaceMoreLimitloss} 
                    fanCostC={PBASpaceMoreNodevreasonloss} 
-                   PBA={PBASpaceMorePba} height={483} width={width} ty={10} pointWidth={20} pointPlacement={0.07} borderRadius={4}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></PBAspacechart>
+                   PBA={PBASpaceMorePba} height={483} width={width} ty={0} pointWidth={20} pointPlacement={0.07} borderRadius={4}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></PBAspacechart>
                  </div>
              </div>
                
@@ -65,7 +65,7 @@ let Component = React.createClass({
                             return(<li className={actbt===key? styles.red : styles.green}  onClick={()=>changpage(value,key,xxdwfId,ipUrl)} key={key}>{value.yearpoweract+'月'}</li>)
                         })
                     }
-     }
+     
  
     <li className={styles.back} onClick={()=>backtop(befor_pagee,befor_page2)}>返回</li>
 

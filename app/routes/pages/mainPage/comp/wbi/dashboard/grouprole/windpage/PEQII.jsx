@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './../area/Inputc.scss';
-
 import Login from '../../../../../../../../components/common/Loading.jsx';
 import save from '../../../../../img/comp/save.png';
 import refresh from '../../../../../img/comp/refresh.png';
@@ -54,7 +53,7 @@ let Component = React.createClass({
         this.props.init(comp);
     },
     render() {
-        let {deleData, deleDate, addData, num = 0, wfidCount,changeTableItem12, addDate, wfids, table, ajax, wtidAll, groupAll, totalpage, saveTableItem, saveTableItem2, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll2 = false} = this.props;
+        let {deleData, deleDate, addData, num = 0, wfidCount,changeTableItem12, addDate, wfids, table, ajax, wtidAll, groupAll, totalpage, saveTableItem, saveTableItem2, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll2 = false,skinStyle} = this.props;
 
         
 
@@ -64,7 +63,7 @@ let Component = React.createClass({
 
             return (
 
-                <div className={styles.powerBox}>
+               <div className={skinStyle == 1 ? styles.powerBlueBox : skinStyle == 2 ? styles.powerWhiteBox : styles.powerBox}>
                     <div className={styles.inquireBox}>
                         <div className={styles.seleBox}>
                             <span>年度</span>
@@ -412,6 +411,7 @@ const mapStateToProps = (state) => {
         years0: state.vars.years0,
         wfids: state.vars.wfids,
         totalpage: state.vars.totalpage,
+        skinStyle: state.vars.skinStyle,
     }
 };
 

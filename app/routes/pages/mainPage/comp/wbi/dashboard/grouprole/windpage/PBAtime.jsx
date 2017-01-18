@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestylee.scss';
+import styles from './Profitstyle3.scss';
 import PBAtimechart from './PBAtimechart.jsx';
-
 import PBAtimechartt from '../group/PBATime/PBAtimechartt.jsx';
-import icono from '../../../../../img/comp/PBA.png';
+import icono2 from '../../../../../img/comp/PBA.png';
+import icono1 from '../../../../../img/comp/PBA2.png';
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
 let monthT=data.monthT;
@@ -28,44 +28,40 @@ let Component = React.createClass({
     },
 
     render() {
-        let{ipUrl,xxdwfId,xxdwfNa,PBATimeSecondPba,PBATimeSecondNodevreasonloss,PBATimeSecondLimitloss,PBATimeSecondMaintainloss,PBATimeSecondFaultloss,PBATimeSecondPoweract,PBATimeSecondDay,PBATimeFirstPba,PBATimeFirstNodevreasonloss,PBATimeFirstLimitloss,PBATimeFirstMaintainloss,PBATimeFirstFaultloss,PBATimeFirstPoweract,PBATimeFirstMonth,w0,winsss,befor_pagee='windpage',backtop,befor_pagee2,PBATimeFirstPbaa}=this.props;
+        let{ipUrl,xxdwfId,xxdwfNa,PBATimeSecondPba,PBATimeSecondNodevreasonloss,PBATimeSecondLimitloss,PBATimeSecondMaintainloss,PBATimeSecondFaultloss,PBATimeSecondPoweract,PBATimeSecondDay,PBATimeFirstPba,PBATimeFirstNodevreasonloss,PBATimeFirstLimitloss,PBATimeFirstMaintainloss,PBATimeFirstFaultloss,PBATimeFirstPoweract,PBATimeFirstMonth,w0,winsss,befor_pagee='windpage',backtop,befor_pagee2,PBATimeFirstPbaa,skinStyle}=this.props;
         return (
-            <div className={styles.box}>
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
              <div className={styles.paddingtop}>
                  {//返回
                       }
              <div className={styles.back} onClick={()=>backtop(befor_pagee,befor_pagee2)}>返回</div></div>
                 {//12个月
                      }
-                <div className={`${styles.bigbox} ${styles.shadow}`}>
-                  
-                      
-                         
-                          
-                                <PBAtimechart monthT={PBATimeFirstMonth} profit={PBATimeFirstPoweract} cost={PBATimeFirstPba} fanCost={PBATimeFirstFaultloss} fanCostA={PBATimeFirstMaintainloss} fanCostB={PBATimeFirstLimitloss} fanCostC={PBATimeFirstNodevreasonloss} xxdwfId={xxdwfId} input_url={ipUrl} text={xxdwfNa+'每月PBA'} height={410} PBATimeFirstPbaa={PBATimeFirstPbaa}></PBAtimechart>
+                <div className={`${styles.areabox} ${styles.shadow}`}>
+                                <PBAtimechart monthT={PBATimeFirstMonth} profit={PBATimeFirstPoweract} cost={PBATimeFirstPba} fanCost={PBATimeFirstFaultloss} fanCostA={PBATimeFirstMaintainloss} fanCostB={PBATimeFirstLimitloss} fanCostC={PBATimeFirstNodevreasonloss} xxdwfId={xxdwfId} input_url={ipUrl} text={xxdwfNa+'每月PBA'} height={410} PBATimeFirstPbaa={PBATimeFirstPbaa}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></PBAtimechart>
                             
                            
                    
                   
-                    <div className={styles.imgq}>
-                        <img src={icono}/>
+                    <div className={styles.bgc}>
+                       <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                     
                 </div>
                 {//每个月的每天
                      }
-                 <div className={`${styles.bigboxx} ${styles.shadow}`}>                        
+                 <div className={`${styles.areabox} ${styles.shadow}`}>                        
                                
                               <PBAtimechartt PBAx={PBATimeSecondDay} PBAPoweract={PBATimeSecondPoweract}
                               PBAFaultloss={PBATimeSecondFaultloss} PBAMaintainloss={PBATimeSecondMaintainloss}
                               PBALimitloss={PBATimeSecondLimitloss} PBANodevreasonloss={PBATimeSecondNodevreasonloss} height={410}
                               PBAPba={PBATimeSecondPba}
-                              text={w0+xxdwfNa+'每日PBA'}>
+                              text={w0+xxdwfNa+'每日PBA'} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}>
                               </PBAtimechartt>
                         
                     
-                    <div className={styles.imgq}>
-                        <img src={icono}/>
+                    <div className={styles.bgc}>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
                     
                 </div>
@@ -101,6 +97,7 @@ const mapStateToProps = (state) => {
         xxdwfId:state.vars.xxdwfId1,
         xxdwfNa:state.vars.xxdwfNa1,
         ipUrl:state.vars.ipUrl,
+        skinStyle:state.vars.skinStyle,
         PBATimeFirstPbaa:state.vars.PBATimeFirstPbaa,
 
 

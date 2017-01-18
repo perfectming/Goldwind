@@ -58,7 +58,7 @@ import Prospace from '../comp/wbi/dashboard/grouprole/area/Prospace.jsx';
 import Pro_time from '../comp/wbi/dashboard/grouprole/area/Pro_time.jsx';
 
 
-import Areace from '../comp/wbi/dashboard/grouprole/windpage/Areace.jsx';//薛旭东44
+import Areace from '../comp/wbi/dashboard/grouprole/windpage/Areace.jsx';//薛旭东66
 import Areacet from '../comp/wbi/dashboard/grouprole/windpage/Areacet.jsx';
 import TBAtime from '../comp/wbi/dashboard/grouprole/windpage/TBAtime.jsx';
 import TBAspace from '../comp/wbi/dashboard/grouprole/windpage/TBAspace.jsx';

@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './Areacestyle.scss';
+import styles from './Profitstyle3.scss';
 import Windcet from './Windcet.jsx';
-import Windcett from './Windcett.jsx';
-import icono from '../../../../../img/comp/wind_logo.png';
+import icono2 from '../../../../../img/comp/wind_logo.png';
+import icono1 from '../../../../../img/comp/wind_logo2.png';
+import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 var $ = require('jquery');
 let data = require('./../group/Profit-data3');
@@ -29,40 +30,36 @@ let Component = React.createClass({
         let areaPlanDayT = data.areaPlanDayT;
         let text = data.textT;
 
-        let {wftpowerplan, wftmonth, wftpoweract, ipUrl, xxdwfId, xxdwfNa, actbt = 0,  wind, windP, backtop, befor_pagee = 'windpage', areaPlan,mon,secondData}=this.props;
+        let {wftpowerplan, wftmonth, wftpoweract, ipUrl, xxdwfId, xxdwfNa, actbt ,  wind, windP, backtop, befor_pagee = 'windpage', areaPlan,mon,secondData,mapmonth,Go4,changpage,skinStyle,befor_page2}=this.props;
+        if(Go4){
         return (
-            <div className={styles.box}>
+            <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
+                <ul className={styles.monthbox}>
+                    {
+                        mapmonth.map((value, key) => {
+                            return (<li className={actbt === key ? styles.red : styles.green}
+                                        onClick={() => changpage(xxdwfId, xxdwfNa, value, key,  ipUrl)}
+                                        key={key}>{value.yearpoweract+'月'}</li>)
+                        })
+                    }
+                            
 
-
-                <div className={styles.paddingtop}>
-                    <div className={styles.back} onClick={() => backtop(befor_pagee,)}>返回</div>
-                </div>
+                    <li className={styles.back} onClick={() => backtop(befor_pagee, befor_page2)}>返回</li>
+                </ul>
                 {//12个 月的数据
                      }
-                <div className={`${styles.biggbox} ${styles.shadow}`}>
-
-
-                    <Windcett areaPlan={wftmonth} xxdwfId={xxdwfId} input_url={ipUrl} areaPlanDay={wftpowerplan}
-                              areaPlanDayT={wftpoweract} height={410} text={xxdwfNa + '每月发电量'} secondData={secondData}></Windcett>
-
-
-                    <div className={styles.imgq}>
-                        <img src={icono}/>
-                    </div>
-
-                </div>
+            
 
                 {//每天的数据
                      }
-                <div className={`${styles.biggbox} ${styles.shadow}`}>
+                <div className={`${styles.bigbox} ${styles.shadow}`}>
 
 
-                    <Windcet areaPlan={areaPlan} areaPlanDay={wind} areaPlanDayT={windP} height={410}
-                             text={mon + xxdwfNa + '每日发电量'}></Windcet>
+                    <Windcet areaPlan={areaPlan} areaPlanDay={wind} areaPlanDayT={windP} height={800}
+                             text={mon + xxdwfNa + '每日发电量'}scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></Windcet>
 
-
-                    <div className={styles.imgq}>
-                        <img src={icono}/>
+                    <div className={styles.imgqv}>
+                        <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                     </div>
 
                 </div>
@@ -71,13 +68,19 @@ let Component = React.createClass({
 
 
         );
+}
+else{
+    return(
+        <Login></Login>)
+
     }
+}
 });
 
 
 const mapStateToProps = (state) => {
     return {
-        actbt: state.vars.actbtt,
+        actbt: state.vars.actbt,
         wind: state.vars.areaRecordCostNP,
         windP: state.vars.areaRecordProfitNP,
         befor_pagee: state.vars.befor_pagee,
@@ -90,7 +93,10 @@ const mapStateToProps = (state) => {
         wftpowerplan: state.vars.wftpowerplan1,
         wftpoweract: state.vars.wftpoweract1,
         mon: state.vars.mon,
+        mapmonth: state.vars.mapmonth,
+        Go4: state.vars.Go4,
         secondData: state.vars.secondData,
+        skinStyle: state.vars.skinStyle,
 
 
     }
@@ -113,6 +119,27 @@ const mapDispatchToProps = (dispatch) => {
             let wftpoweract = [];
             let wftpowerplan = [];
             let secondData=[];
+             //新建
+             $.ajax({
+                type: 'post',
+                url: 'http://' + input_url + '/wbi/BaseData/getYearAndMonthList',
+                async: false,
+                data: {},
+                dataType: 'json',
+                timeout: '3000',
+                success: function (data) {
+
+                    dispatch(actions.setVars('mapmonth', data.data));
+                    dispatch(actions.setVars('actbt', 10));
+                    dispatch(actions.setVars('mon', data.data[10].yearpoweract + "月"));
+                    // jiang(data.data);
+                },
+                error: function () {
+                    console.log("数据获取失败");
+                },
+            });
+            
+             //结束
             // 发电量12个月的
             $.ajax({
                 url: 'http://' + input_url + '/wbi/ELEC/getWfieldElec',
@@ -141,6 +168,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wftpowerplan1', wftpowerplan));
                     dispatch(actions.setVars('wftpoweract1', wftpoweract));
                     dispatch(actions.setVars('secondData', secondData));
+                    dispatch(actions.setVars('Go4', true));
                 },
                 error: function () {
 
@@ -195,56 +223,58 @@ const mapDispatchToProps = (dispatch) => {
             }
         }
         ,
-        changpage: (value, key, xxdwfId, input_url) => {
-            dispatch(actions.setVars('actbtt', key));
+        changpage: (xxdwfId, xxdwfNa, value, key, input_url) => {
+            let WSHealH = [];
+            let WSHealName = [];
+            let arr1 = [];
+            let arr2 = [];
+            let arr3 = [];
             let date = new Date();
-            let year = date.getFullYear();
             let month = date.getMonth();
-
+            let year = date.getFullYear();
             if (month == 0) {
                 month = 12;
                 year = year - 1;
             }
-            var arr1w = [];
-            var arr2w = [];
-            var arr3w = [];
-            var monthh = key + 1;
+ 
+let adf=value.yearpoweract;
             $.ajax({
                 type: 'post',
                 url: 'http://' + input_url + '/wbi/ELEC/getWtTimeAreaElec',
                 async: false,
                 data: {
-                    'year': year,
-                    'month': monthh,
                     'wfid': xxdwfId,
+                    'month': value.yearpoweract,
+                    'year': value.year,
                 },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
 
-                    // 获取x轴的值内蒙达茂天润风电场
-
-                    for (var i = 0; i < data.data.length; i++) {
-                        var xDay = data.data[i].day + '日';
-                        arr1w.push(xDay);
-                        var yPowerPlan = data.data[i].powerplan;
-                        arr2w.push(yPowerPlan);
-                        var yPowerAct = data.data[i].poweract;
-                        arr3w.push(yPowerAct);
+                    let dataa = data.data;
+              for (let i = 0; i < dataa.length; i++) {
+                  let xDay = data.data[i].day + '日';
+                  arr1.push(xDay);
+                  let yPowerPlan = Number(data.data[i].powerplan.toFixed(1));
+                  arr2.push(yPowerPlan);
+                  let yPowerAct = Number(data.data[i].poweract.toFixed(1));
+                  arr3.push(yPowerAct);
                     }
+            dispatch(actions.setVars('areaNameNP', arr1));
+            dispatch(actions.setVars('areaRecordCostNP', arr2));
+            dispatch(actions.setVars('areaRecordProfitNP', arr3));;
+                    dispatch(actions.setVars('actbt', key));
+                    dispatch(actions.setVars('btnn', 0));
+                    dispatch(actions.setVars('mon', adf+'月'))
 
                 },
                 error: function () {
 
                 },
             });
-            dispatch(actions.setVars('areaNameNP', arr1w));
-            dispatch(actions.setVars('areaRecordCostNP', arr2w));
-            dispatch(actions.setVars('areaRecordProfitNP', arr3w));
 
         },
-
-        backtop: (befor_pagee, ) => {
+        backtop: (befor_pagee,befor_pagee2) => {
             dispatch(actions.setVars('showPage', befor_pagee));
         },
     };

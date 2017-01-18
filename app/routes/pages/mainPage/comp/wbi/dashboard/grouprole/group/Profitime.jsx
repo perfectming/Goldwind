@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from './PBAtime/Profitstyle2.scss';
+import styles from './Profitstyle4.scss';
 import Profitimechart from './Profitimechart.jsx';
 import Profitimechartt from './Profitimechartt.jsx';
 import icono1 from '../../../../../img/comp/MON2.png';

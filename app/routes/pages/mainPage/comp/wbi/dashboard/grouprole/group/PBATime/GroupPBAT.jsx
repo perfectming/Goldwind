@@ -110,6 +110,7 @@ const mapDispatchToProps = (dispatch) => {
                 year=year-1;
             }
             dispatch(actions.setVars('PBAGroupPbaName', monthF+"月"));
+
             let PBAGroupMonth = [];
             let PBAGroupPoweract = [];
             let PBAGroupFaultloss = [];
@@ -187,7 +188,7 @@ const mapDispatchToProps = (dispatch) => {
                         PBAGroupFirstNodevreasonloss.push(nodevreasonloss);
 
                         let pba = PBAGroupFirstMonth[i].pba * 100;
-                        PBAGroupFirstPba.push(Number(pba.toFixed(1)));
+                        PBAGroupFirstPba.push(Number(pba.toFixed(2)));
                     }
 
 

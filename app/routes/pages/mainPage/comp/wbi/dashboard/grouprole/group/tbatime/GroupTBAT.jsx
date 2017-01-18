@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import styles from '../PBAtime/Profitstyle2.scss';
+import styles from './Profitstyle3.scss';
 import GroupTBAT from './GroupTBAchart.jsx';
 import TBATimechartt from './TBATimechartt.jsx';
 import icono1 from '../../../../../../img/comp/TBA2.png';
 import icono2 from '../../../../../../img/comp/TBA.png';
 var actions = require('redux/actions');
 var $ = require('jquery');
+
 
 let Component = React.createClass({
     componentWillMount() {
