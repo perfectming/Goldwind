@@ -346,7 +346,7 @@ const mapDispatchToProps = (dispatch) => {
                 alert('数据获取失败！请重新登入');
                 browserHistory.push('/app/all/page/login');
                 dispatch(actions.setVars('userInfo', false));
-            },10000);
+            },30000);
             //数据刷新方法//
             time=setInterval(function(){
                 TY.getRtData("MonitorBoard", 8888800, ppoo);

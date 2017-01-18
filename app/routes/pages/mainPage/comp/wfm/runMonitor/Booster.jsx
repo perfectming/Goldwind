@@ -143,7 +143,7 @@ const mapDispatchToprops = (dispatch) => {
                 alert('数据获取失败！请重新登入');
                 browserHistory.push('/app/all/page/login');
                 dispatch(actions.setVars('userInfo', false));
-            },10000);
+            },30000);
             time=setInterval(function(){
                 TY.getRtData("RegulationOverview", 8888800, ppoo);
                 function ppoo(jydata){
