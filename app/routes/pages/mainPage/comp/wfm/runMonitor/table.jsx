@@ -20,7 +20,7 @@ let Component = React.createClass({
     },
     render() {
         let {table,changepage2,changepage3,model,tabaleData,skinStyle} = this.props;
-        if(model!= null &&tabaleData != null) {
+        if(model!= null && model.Model &&tabaleData != null) {
             let arr1 = [];
             let arr2 = [];
             let arrAll=[];

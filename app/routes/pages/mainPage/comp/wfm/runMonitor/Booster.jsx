@@ -45,7 +45,7 @@ let Component = React.createClass({
                     }
                 }
                 for(let i=0;i<arr1.length;i++){
-                    zjrl.push((Number(moddata[arr1[i]].Capacity)*0.001).toFixed(2))
+                    zjrl.push((Number(moddata[arr1[i]] && moddata[arr1[i]].Capacity)*0.001).toFixed(2))
                 }
                 arr1.map((value, key)=>{
                     for(let i in modens){

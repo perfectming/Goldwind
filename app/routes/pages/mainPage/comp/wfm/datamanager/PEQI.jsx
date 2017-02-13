@@ -43,7 +43,7 @@ let Component = React.createClass({
             newData[arr1[i]]='';
         }
         newData['datetype']=1;
-        if (table && wtidAll){//判断数据是否存在
+        if (table && wtidAll && table.data){//判断数据是否存在
             return (
                 <div className={skinStyle==1?styles.powerBoxBlue:(skinStyle==2?styles.powerBoxWhite:styles.powerBox)}>
                     <div className={styles.inquireBox}>

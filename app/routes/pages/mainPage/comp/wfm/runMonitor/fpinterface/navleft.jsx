@@ -80,7 +80,7 @@ let str=d.getDate();
                                          <div className={styles.leftname}>{wtname[key]}</div>
                                          <div className={styles.leftnum}>
                                              <a>{uint[key]}</a>
-                                             <span className={styles.tabnum}>{arrayJy.indexOf(fc_info)!==-1?date[fc_info][title[key]]:date[fc_info]["InverterCount"]}</span>
+                                             <span className={styles.tabnum}>{arrayJy.indexOf(fc_info)!==-1?date[fc_info][title[key]]:(date[fc_info] && date[fc_info]["InverterCount"])}</span>
                                          </div>
                                      </div>
                                  )

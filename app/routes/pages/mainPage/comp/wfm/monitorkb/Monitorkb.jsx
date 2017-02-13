@@ -42,7 +42,7 @@ let Component = React.createClass({
     render() {
         //moname是ajax调到的数据模型，modata是ajax调到的数据，boole是判断执行完ajax再执行dom操作的变量//
         let{moname,modata,boole=false,skinStyle}=this.props;
-        if(boole){
+        if(boole && modata.ModelData[8888800]){
             let mobd=modata.ModelData;
             let mod=moname.Model.dis;
             let datename=moname.Model.ens;
