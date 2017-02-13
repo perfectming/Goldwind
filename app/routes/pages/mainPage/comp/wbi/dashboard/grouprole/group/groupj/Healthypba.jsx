@@ -7,7 +7,7 @@ import Hly_pbas from './Hly_pbas.jsx';
 import Login from '../../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 var $ = require('jquery');
-let ip = "10.68.100.32";
+
 var date=new Date
 var year=date.getFullYear();
 var month11=date.getMonth();
@@ -259,7 +259,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-                    console.log(data)
                     let w0 = data.data[2][0].groupname;
                     let w10 = data.data[1][0].wfname;
                     dispatch(actions.setVars('w1', w0));
@@ -350,7 +349,6 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         init: () => {
-            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }

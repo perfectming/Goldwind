@@ -40,13 +40,13 @@ let Component = React.createClass({
                     fontFamily:"微软雅黑"
                 },
                 itemHoverStyle: {
-                color: '#31f3fb'
+                    color: '#31f3fb'
             	}
             },
             tooltip: {
                 shared: true,
                 style:{
-                    color: color,
+                    color: 'black',
                     fontSize: '12px',
                     fontFamily:'微软雅黑'
                 },

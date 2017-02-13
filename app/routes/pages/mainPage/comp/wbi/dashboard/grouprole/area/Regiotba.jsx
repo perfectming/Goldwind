@@ -6,10 +6,6 @@ import Hly_pbatwo from './Hly_pbatwo.jsx';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 var $ = require("jquery");
-let ip="10.68.100.32";
-
-
-
 
 let Component = React.createClass({
     componentWillMount() {
@@ -28,8 +24,6 @@ let Component = React.createClass({
         let button=data.data.button;
 
         let text0=data.data.line_date;
-
-
 
         if(jhp){
 
@@ -151,7 +145,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
                     dispatch(actions.setVars('hhdata4',  data));
 
                     let barLotime21 = [];    //各区域   一区域二区域
@@ -182,7 +175,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error:function(){
-
+                    console.log("数据获取失败");
                 },
             })
             $.ajax({
@@ -225,7 +218,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error:function(){
-
+                    console.log("数据获取失败");
                 },
             })
             var obj = {
@@ -233,7 +226,6 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         init: () => {
-            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }

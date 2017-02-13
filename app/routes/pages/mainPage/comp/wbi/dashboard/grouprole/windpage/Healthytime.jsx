@@ -196,7 +196,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error:function(){
-
+                    console.log("数据获取失败");
                 },
             });
             dispatch(actions.setVars('WTHealName12',WTHealNamee));

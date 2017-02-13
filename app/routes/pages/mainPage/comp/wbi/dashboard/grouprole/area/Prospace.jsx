@@ -158,8 +158,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
-                    console.log(data)
                     dispatch(actions.setVars('mapmonth', data.data));
                     dispatch(actions.setVars('actbt', 10));
                     dispatch(actions.setVars('mon',  data.data[10].yearpoweract+"月"));
@@ -220,7 +218,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             })
 
@@ -263,7 +261,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             })
             }
@@ -322,7 +320,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             })
             $.ajax({
@@ -362,7 +360,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             })
         },
@@ -388,7 +386,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-                    console.log(data)
                     let name2 = [];
                     let runtime2 = [];       //实际发电量
                     let downtime2 = [];       //故障损失
@@ -410,7 +407,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
 
@@ -457,7 +454,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
         },
@@ -504,7 +501,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
 

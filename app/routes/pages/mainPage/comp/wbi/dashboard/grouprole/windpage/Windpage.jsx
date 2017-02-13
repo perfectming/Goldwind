@@ -349,74 +349,8 @@ const mapDispatchToProps = (dispatch) => {
 					},
 				});
 
-   //  		if(clickAreaId==undefined){
-   //  			$.ajax({
-	  //       		url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//默认获取1区域ID
-			//         type: 'post',
-			//         async:false,
-			//         dataType: 'json',
-			//         data:'type=0',
-			//         timeout : 60000, 
-			//         success:function (data) {
-			//         	areaId=[];
-			//         	for(var i in data.data){
-			//         		areaId.push(i);
-			//         	};
-			//         	dispatch(actions.setVars('areaId',areaId ));
-			//         },
-			//         complete : function(XMLHttpRequest,status){ 
-			// 		　　　
-			// 		},
-			// 	});
-	  //   		$.ajax({
-	  //       		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyAreaPBA',//默认1区域风场名和ID
-			//         type: 'post',
-			//         async:false,
-			//         data:{'groupid':areaId[0]},
-			//         dataType: 'json',//here
-			//         success:function (data) {
-			//         	wfName=[],wfId=[];
-			//         	for(var i in data.data.everyAreaPba){
-			//         		wfName.push(data.data.everyAreaPba[i].wfname);
-			//         		wfId.push(data.data.everyAreaPba[i].wfid);
-			//         	};
-			//         	dispatch(actions.setVars('wfName',wfName ));
-			//         	dispatch(actions.setVars('wfId',wfId ));
-			// 			dispatch(actions.setVars('xxdwfNa1', wfName[0]));
-			//         	dispatch(actions.setVars('xxdwfId1', wfId[0]));
 
-			//         },
-			//         complete : function(XMLHttpRequest,status){ 
-			// 	　　　　if(status=='timeout'){
-			// 	　　　　　 alert('超时');
-			// 	　　　　}
-			// 	　　},
-			//     });
-			// }else{
-   //  			$.ajax({
-	  //       		url: 'http://'+ipUrl+'/wbi/PBA/getCompanyAreaPBA',//区域页面点击区域获取风场名和ID
-			//         type: 'post',
-			//         async:false,
-			//         data:{'groupid':clickAreaId},
-			//         dataType: 'json',
-			//         success:function (data) {
-			//         	wfName=[],wfId=[];
-			//         	for(var i in data.data.everyAreaPba){
-			//         		wfName.push(data.data.everyAreaPba[i].wfname);
-			//         		wfId.push(data.data.everyAreaPba[i].wfid);
-			//         	};
-			//         	dispatch(actions.setVars('wfName',wfName ));
-			//         	dispatch(actions.setVars('wfId',wfId ));
-			//         },
-			//         complete : function(XMLHttpRequest,status){ 
-			// 	　　　　if(status=='timeout'){
-			// 	　　　　　 alert('超时');
-			// 	　　　　}
-			// 	　　},
-			//     });
-   //  		}
-    		
-		},
+    	},
         init: () => {
             var obj = {
                 test:''

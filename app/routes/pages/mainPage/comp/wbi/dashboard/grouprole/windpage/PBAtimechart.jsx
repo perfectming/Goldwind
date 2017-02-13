@@ -78,7 +78,7 @@ let Component = React.createClass({
                         click: function (e) {
                           
                             let w3 = e.point.index;
- let w0 = PBATimeFirstPbaa[w3].month;
+                            let w0 = PBATimeFirstPbaa[w3].month;
                             let b = parseInt(w0);
 
                             // 第二个图的数据
@@ -124,7 +124,7 @@ let Component = React.createClass({
 
                                 },
                                 error: function () {
-
+                                    console.log("数据获取失败");
                                 },
 
                             });

@@ -206,8 +206,6 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
         },
         changedata1:(w0, win, wc1, actbt,ipUrl,hhdata,areaId)=>{
-            console.log(hhdata.data[wc1].month)
-            console.log(hhdata.data[wc1].year);
             areaId=areaId[0];
 
             $.ajax({
@@ -244,7 +242,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('mon', wc1+1+"月"));
                 },
                 error:function(){
-
+                    console.log("数据获取失败");
                 },
             })
 

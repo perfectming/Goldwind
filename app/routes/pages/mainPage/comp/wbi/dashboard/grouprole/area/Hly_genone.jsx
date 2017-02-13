@@ -187,14 +187,12 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
                     "year": mapmonth[actbt].year,
-                    "months":mapmonth[actbt].yearpoweract,
+                    "month":mapmonth[actbt].yearpoweract,
                     "wfid":wfid,
                 },
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
-
                     let barlotimes2 = [];
                     let barlopowers2 = [];
                     let barlopowerp2 = [];
@@ -212,7 +210,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error:function(){
-
+                    console.log("数据获取失败");
                 },
             });
 

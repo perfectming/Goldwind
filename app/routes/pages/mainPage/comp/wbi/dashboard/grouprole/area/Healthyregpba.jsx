@@ -6,10 +6,6 @@ import Hly_pbatwo from './Hly_pbatwo.jsx';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 var $ = require("jquery");
-let ip="10.68.100.32";
-
-
-
 
 let Component = React.createClass({
     componentWillMount() {
@@ -189,7 +185,6 @@ const mapDispatchToProps = (dispatch) => {
                 timeout: '3000',
                 success: function (data) {
 
-                    console.log(data)
                     dispatch(actions.setVars('mapmonth', data.data));
                     dispatch(actions.setVars('actbt', 10));
                     dispatch(actions.setVars('mon',  data.data[10].yearpoweract+"月"));
@@ -273,7 +268,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error:function(){
-
+                    console.log("数据获取失败");
                 },
             })
             }
@@ -282,7 +277,6 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         init: () => {
-            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
@@ -358,7 +352,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('pba1', pba21q));
                 },
                 error:function(){
-
+                    console.log("数据获取失败");
                 },
             })
         },
@@ -411,7 +405,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
 
@@ -469,7 +463,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
         },
@@ -523,7 +517,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
             $("#light").show();

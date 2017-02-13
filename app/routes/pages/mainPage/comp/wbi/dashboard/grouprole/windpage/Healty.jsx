@@ -192,7 +192,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-dispatch(actions.setVars('Go', true));
+                    dispatch(actions.setVars('Go', true));
                 },
             });
         }
@@ -385,7 +385,7 @@ let adf=value.yearpoweract;
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
         },
