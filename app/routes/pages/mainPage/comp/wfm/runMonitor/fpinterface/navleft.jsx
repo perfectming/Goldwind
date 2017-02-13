@@ -92,7 +92,7 @@ let str=d.getDate();
                                         <div className={styles.leftnum}>
                                             <a>{uint[key]}</a>
                                             
-                                            <span className={styles.tabnum}>{(date[fc_info][title[key]]/1000).toFixed(2)}</span>
+                                            <span className={styles.tabnum}>{date[fc_info]?((date[fc_info][title[key]]/1000).toFixed(2)):'--'}</span>
                                         </div>
                                     </div>
                                  )
