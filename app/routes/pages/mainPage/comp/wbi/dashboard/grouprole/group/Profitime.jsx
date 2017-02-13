@@ -123,7 +123,7 @@ const mapDispatchToProps = (dispatch) => {
         let GEIn=[];
         let GEAm=[];
         let GERa=[];
-    let    GENa=[];
+        let GENa=[];
      
           
            $.ajax({
@@ -155,7 +155,7 @@ const mapDispatchToProps = (dispatch) => {
              
              },
              error:function(){
-          
+                
               }
           })
        

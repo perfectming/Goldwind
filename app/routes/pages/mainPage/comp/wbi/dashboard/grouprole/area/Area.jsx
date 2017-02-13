@@ -215,19 +215,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
     	ajax: (ipUrl,wbiUserId) => {//请求初始数据
-    		// console.log(wbiUserId)
-			// $.ajax({
-   			//   	url:'http://'+ipUrl+'/wbi/BaseData/getGroup',//固定获得各区域ID和名字
-			//      type: 'post',
-			//      async:true,
-			//      dataType: 'json',
-			//      data:'type=0',
-			//      timeout : 60000,
-    		//		success:function (data) {
-		 	//        	console.log(data)
-		 	//       },
-		 	// });
-			dispatch(actions.setVars('areaBool', false));
+    		dispatch(actions.setVars('areaBool', false));
     		dispatch(actions.setVars('actb',0 ));
     		 	$.ajax({
         		url:'http://'+ipUrl+'/wbi/user/getByUserIDGroup',//获得各区域ID和名字

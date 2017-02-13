@@ -4,9 +4,6 @@ import styles from './Hindex.scss';
 import Pro_three from './Pro_three.jsx';
 import Pro_four from './Pro_four.jsx';
 var actions = require('redux/actions');
-let ip="10.68.100.32";
-
-
 
 let Component = React.createClass({
     componentWillMount() {
@@ -24,9 +21,6 @@ let Component = React.createClass({
         let month=data.data.line_month;
         let text0=data.data.line_date;
         return (
-
-
-
 
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.paddingtop}>
@@ -118,7 +112,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
                     dispatch(actions.setVars('hhdata',  data));
                     let runtime1=[];       //实际发电量
                     let downtime1=[];       //故障损失
@@ -143,11 +136,10 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error:function(){
+                    console.log("数据获取失败");
                 },
             })
 
-            console.log(year)
-            console.log(month2)
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/yield/getByGroupidDay',
@@ -181,7 +173,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('name2', name2));
                 },
                 error:function(){
-
+                    console.log("数据获取失败");
                 },
             })
 
@@ -191,7 +183,6 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         init: () => {
-            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test:''
             }

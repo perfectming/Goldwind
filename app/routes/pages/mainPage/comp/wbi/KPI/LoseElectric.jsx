@@ -17,7 +17,7 @@ let Component = React.createClass({
         this.props.init();
         setTimeout(function(){
         	init()
-        },1500)
+        },800)
     },
 	componentWillMount() {
     	let {ipUrl}=this.props;
@@ -167,15 +167,19 @@ const mapDispatchToProps = (dispatch) => {
         		monthString=12;
         		yearString=yearString-1;
         	}else{
-        		monthString=monthString-1;
+        		if(monthString<11){
+                    monthString="0"+(monthString-1);
+                }else{
+                    monthString=monthString-1;
+                }
         	};
         	//判断获取上月最后一天日期
-        	if(monthString==2){
+        	if(monthString=="02"){
         		if(yearString%4==0){
         			dayString=29;
         		}
         		dayString=28;
-        	}else if(monthString==4||monthString==6||monthString==9||monthString==11){
+        	}else if(monthString=="04"||monthString=="06"||monthString=="09"||monthString==11){
         		dayString=30;
         	}else{
         		dayString=31;

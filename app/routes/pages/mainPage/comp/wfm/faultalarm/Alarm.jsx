@@ -69,7 +69,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-             //初始化日期
+            //初始化日期
             let date = new Date();
             let today = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
             let yestoday = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+(date.getDate()-1);

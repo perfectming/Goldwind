@@ -181,7 +181,7 @@ const mapDispatchToProps = (dispatch) => {
                 timeout: '3000',
                 success: function (data) {
 
-                    console.log(data)
+                    
                     dispatch(actions.setVars('mapmonth', data.data));
                     dispatch(actions.setVars('actbt', 10));
                     jiang(data.data);
@@ -200,8 +200,7 @@ const mapDispatchToProps = (dispatch) => {
             }
             function jiang(year) {
 
-                console.log(year[10].year)
-                console.log(year[10].yearpoweract)
+                
                 $.ajax({
                     type: 'post',
                     url: 'http://' + ipUrl + '/wbi/ELEC/getSpaceElec',
@@ -213,7 +212,6 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',
                     timeout: '3000',
                     success: function (data) {
-                        console.log(data)
                         dispatch(actions.setVars('hhdata', data));
                         dispatch(actions.setVars('mon', year[10].yearpoweract + "月"));
 
@@ -271,7 +269,6 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         init: () => {
-            // dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
@@ -293,7 +290,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-                    console.log(data)
                     dispatch(actions.setVars('hhdata', data));
 
 

@@ -4,9 +4,7 @@ import styles from '../../area/Hindex.scss';
 import Hly_genday from './Hly_genday.jsx';
 import Login from '../../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
-let ip="10.68.100.32";
 
-;
 
 let Component = React.createClass({
 
@@ -99,7 +97,7 @@ const mapDispatchToProps = (dispatch) => {
                 timeout: '3000',
                 success: function (data) {
 
-                    console.log(data)
+                    
                     dispatch(actions.setVars('mapmonth', data.data));
                     dispatch(actions.setVars('actbt', 10));
                     dispatch(actions.setVars('mon',  data.data[10].yearpoweract+"月"));
@@ -142,7 +140,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('boll4',true ))
                 },
                 error:function(){
-                    alert(2)
+                    console.log("数据获取失败");
                 },
             })
            }
@@ -150,7 +148,6 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         init: () => {
-            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
@@ -171,7 +168,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    console.log(data)
 
                     let day0=[];
                     let poweract=[];
@@ -188,7 +184,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('powerplan1',powerplan ))
                 },
                 error:function(){
-
+                    console.log("数据获取失败");
                 },
             })
 

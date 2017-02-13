@@ -46,7 +46,7 @@ let Component = React.createClass({
             tooltip: {
                 shared: true,
                 style:{
-                    color: color,
+                    color: 'black',
                     fontSize: '12px',
                     fontFamily:'微软雅黑'
                 },

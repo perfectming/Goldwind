@@ -202,7 +202,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
             dispatch(actions.setVars('wTBANa1q', wTBANa));
@@ -261,7 +261,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
             dispatch(actions.setVars('wTBANa1q', wTBANa));
@@ -272,9 +272,6 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('btnn', 0));
             dispatch(actions.setVars('mon', tbaspacemonth+'月'));
 
-            // dispatch(actions.setVars('actbt',key ));
-            // dispatch(actions.setVars('wind',value.plan));
-            // dispatch(actions.setVars('windP',value.actrul));
         },
         // 前十
         gogogo: (xxdwfId, actbt, btn, input_url,value) => {
@@ -314,7 +311,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
             dispatch(actions.setVars('wTBANa1q', wTBANa));
@@ -361,8 +358,7 @@ const mapDispatchToProps = (dispatch) => {
                     }
                 },
                 error: function () {
-
-
+                    console.log("数据获取失败");
                 },
             });
             dispatch(actions.setVars('wTBANa1q', wTBANa));
@@ -413,7 +409,7 @@ const mapDispatchToProps = (dispatch) => {
                     width = length * 60;
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             });
             dispatch(actions.setVars('wTBANa1qM', wTBANaM));

@@ -79,7 +79,6 @@ let Component = React.createClass({
                             let wTBADownD = [];
                             let wTBATD = [];
 
-                            console.log(hhdata)
                             $.ajax({
                                 type: 'post',
                                 url: 'http://' + input_url + '/wbi/TBA/getDaysTBAByWf',
@@ -111,7 +110,7 @@ let Component = React.createClass({
 
                                 },
                                 error: function () {
-
+                                    console.log("数据获取失败");
                                 },
                             });
 

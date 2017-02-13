@@ -18,6 +18,7 @@
 		left: 34%;
 		border-radius:10px;
 		.header{
+			position:relative;
 			height: 50px;
 			width: 100%;
 			background-color: #26f4ff;
@@ -27,6 +28,16 @@
 			color: white;
 			font-size:25px;
 			line-height: 50px;
+			.clickBox{
+				position:absolute;
+				right:0;
+				display: inline-block;
+				height:50px;
+				width:50px;
+				line-height:50px;
+				text-align:center;
+				cursor:pointer;
+			}
 		}
 		.warning{
 			height: 200px;

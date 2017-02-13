@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         	//初始日期为上月
-        	var date = new Date();
+            var date = new Date();
         	var yearString=date.getFullYear();
         	var monthString=date.getMonth()+1;
         	var dayString;
@@ -66,7 +66,11 @@ const mapDispatchToProps = (dispatch) => {
         		monthString=12;
         		yearString=yearString-1;
         	}else{
-        		monthString=monthString-1;
+                if(monthString<11){
+                    monthString="0"+(monthString-1);
+                }else{
+                    monthString=monthString-1;
+                }
         	};
         	//判断获取上月最后一天日期
         	if(monthString==2){

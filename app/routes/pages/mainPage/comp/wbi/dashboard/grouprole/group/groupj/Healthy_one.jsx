@@ -6,7 +6,6 @@ import Hly_r from './Hly_r.jsx';
 import Hly_rs from './Hly_rs.jsx';
 import Login from '../../../../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
-let ip = "10.68.100.32";
 
 var actions = require('redux/actions');
 
@@ -242,7 +241,6 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         init: () => {
-            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }

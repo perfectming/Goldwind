@@ -134,7 +134,7 @@ const mapDispatchToProps = (dispatch) => {
             
              },
              error:function(){
-                
+                console.log("数据获取失败"); 
              },
            });   
            // 给12个月赋初值
@@ -175,7 +175,7 @@ const mapDispatchToProps = (dispatch) => {
             
              },
              error:function(){
-                 
+                console.log("数据获取失败"); 
              },
            });   
            // 给每天赋值

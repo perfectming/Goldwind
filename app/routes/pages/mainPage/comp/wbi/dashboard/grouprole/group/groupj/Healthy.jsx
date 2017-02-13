@@ -21,10 +21,6 @@ let Component = React.createClass({
         let {ipUrl, monthx, skinStyle, healthy2, healthy3, monthx3, befor_pages = 'group', mon, returnit} = this.props;
      let data = require('./../../area/Healthy-data');
         return (
-
-
-
-
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 <div className={styles.paddingtop}>
                 <div className={styles.return2} onClick={() => returnit(befor_pages)}>返回</div>
@@ -33,6 +29,7 @@ let Component = React.createClass({
                     <div className={`${styles.box_shadow} ${styles.logofa}`}>
                         <Hly_tt barLoTime={monthx}
                                 barLoPowerValue={healthy2}
+                                jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                 text={"巴盟每月健康度"}></Hly_tt>
 
                         <div className={styles.logo1}>
@@ -48,7 +45,9 @@ let Component = React.createClass({
                     <div className={`${styles.box_shadow} ${styles.fbox2}`}>
                         <Hly_d monthx3={monthx3}
                                healthy3={healthy3}
+                               jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
                                text={mon + "巴盟每日健康度"}></Hly_d>
+                               
                         <div className={styles.logomini}>
 
                         </div>
@@ -115,8 +114,6 @@ const mapDispatchToProps = (dispatch) => {
                         }
 
                     })
-                    console.log(WTHealName)
-                    console.log(WTHealName0)
                     dispatch(actions.setVars('mon', WTHealName[10]+"月"));
                     dispatch(actions.setVars('hlyyear', WTHealName0));
                     dispatch(actions.setVars('hlymonth', WTHealName));
@@ -142,7 +139,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-
+                    console.log("数据获取失败");
                 },
             })
 

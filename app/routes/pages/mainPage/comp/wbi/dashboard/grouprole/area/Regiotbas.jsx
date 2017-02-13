@@ -4,9 +4,6 @@ import styles from './Hindex.scss';
 import Reg_tbat from './Reg_tbat.jsx';
 import Reg_tbats from './Reg_tbats.jsx';
 var actions = require('redux/actions');
-let ip="10.68.100.32";
-
-
 
 let Component = React.createClass({
     componentWillMount() {
@@ -143,6 +140,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error:function(){
+                    console.log("数据获取失败");
                 },
             })
             $.ajax({
@@ -177,7 +175,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('name2', name2));
                 },
                 error:function(){
-
+                    console.log("数据获取失败");
                 },
             })
 
@@ -187,7 +185,6 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         init: () => {
-            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test:''
             }
