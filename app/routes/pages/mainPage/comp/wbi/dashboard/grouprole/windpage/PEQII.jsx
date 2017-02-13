@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './../area/Inputc.scss';
+import AlertWindow from '../../../KPI/AlertWindow.jsx';//提示框
 import Login from '../../../../../../../../components/common/Loading.jsx';
 import save from '../../../../../img/comp/save.png';
 import refresh from '../../../../../img/comp/refresh.png';
@@ -45,6 +46,7 @@ arr3.splice(-2, 2);
 let arr = [15, 16, 10, 15, 22, 13];
 let arr2 = [15, 16, 6, 4, 15, 22, 8, 0, 0, 0, 0, 0];
 let comp = comps.peqi.table;
+
 let Component = React.createClass({
     componentWillMount() {
         this.props.ajax();
@@ -53,8 +55,8 @@ let Component = React.createClass({
         this.props.init(comp);
     },
     render() {
-        let {deleData, deleDate, addData, num = 0, wfidCount,changeTableItem12, addDate, wfids, table, ajax, wtidAll, groupAll, totalpage, saveTableItem, saveTableItem2, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll2 = false,skinStyle} = this.props;
-
+        let {alertText,deleData, deleDate, addData, num = 0, wfidCount,changeTableItem12, addDate, wfids, table, ajax, wtidAll, groupAll, totalpage, saveTableItem, saveTableItem2, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll2 = false,skinStyle} = this.props;
+        
         
 
 
@@ -64,6 +66,7 @@ let Component = React.createClass({
             return (
 
                <div className={skinStyle == 1 ? styles.powerBlueBox : skinStyle == 2 ? styles.powerWhiteBox : styles.powerBox}>
+                    <AlertWindow text={alertText}></AlertWindow>
                     <div className={styles.inquireBox}>
                         <div className={styles.seleBox}>
                             <span>年度</span>
@@ -128,8 +131,8 @@ let Component = React.createClass({
                                 }
                             </div>
                             <div className={styles.tableContentBox}>
-
                                 {
+                                    table.data.pagedata!==undefined &&
                                     table.data.pagedata.map((value, key) => {
                                         {/*遍历已经有的后台数据*/}
 
@@ -173,7 +176,7 @@ let Component = React.createClass({
                                                             if (keyC == 2) {
                                                                 return (
                                                                     <div className={styles.tableContentItemm}
-                                                                         style={{width: arr2[keyC] + '%'}}>
+                                                                         style={{width: arr2[keyC] + '%'}} key={keyC}>
                                                                         <input className={styles.tableContentItem}
                                                                                style={{width: 60 + '%'}}
                                                                                key={keyC} contentEditable="true"
@@ -188,7 +191,7 @@ let Component = React.createClass({
                                                             if (keyC == 3) {
                                                                 return (
                                                                     <div className={styles.tableContentItemm}
-                                                                         style={{width: arr2[keyC] + '%'}}>
+                                                                         style={{width: arr2[keyC] + '%'}} key={keyC}>
                                                                         <input className={styles.tableContentItem}
                                                                                style={{width: 60 + '%'}}
                                                                                key={keyC} contentEditable="true"
@@ -282,7 +285,7 @@ let Component = React.createClass({
                                                             if (keyC == 2) {
                                                                 return (
                                                                     <div className={styles.tableContentItemm}
-                                                                         style={{width: arr2[keyC] + '%'}}>
+                                                                         style={{width: arr2[keyC] + '%'}} key={keyC}> 
                                                                         <select className={styles.tableContentItemm}
                                                                                 onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
                                                                                 style={{width: 60 + '%'}}>
@@ -313,7 +316,7 @@ let Component = React.createClass({
                                                             if (keyC == 3) {
                                                                 return (
                                                                     <div className={styles.tableContentItemm}
-                                                                         style={{width: arr2[keyC] + '%'}}>
+                                                                         style={{width: arr2[keyC] + '%'}}  key={keyC}>
                                                                         <select className={styles.tableContentItemm}
                                                                                 onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
                                                                                 style={{width: 60 + '%'}}>
@@ -412,6 +415,7 @@ const mapStateToProps = (state) => {
         wfids: state.vars.wfids,
         totalpage: state.vars.totalpage,
         skinStyle: state.vars.skinStyle,
+        alertText : state.vars.alertText,//弹框提示文字
     }
 };
 
@@ -422,7 +426,6 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test: ''
             }
-            console.log("准备获取数据")
             dispatch(actions.setVars('page1', 1));
 
             $.ajax({
@@ -442,7 +445,8 @@ const mapDispatchToProps = (dispatch) => {
                     getgroupid()
                 },
                 error: function () {
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
           //  获取区域
@@ -458,7 +462,8 @@ const mapDispatchToProps = (dispatch) => {
                         getwtid()
                     },
                     error: function () {
-                        console.log('获取数据失败')
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败'));
                     }
                 });
             }
@@ -474,7 +479,8 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boll2', true));
                     },
                     error: function () {
-                        console.log('获取数据失败')
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败'));
                     }
                 });
             }
@@ -485,7 +491,7 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
             $("option[name='selectOpt']").prop('selected',true);
-            dispatch(actions.setObjs('tableContent', obj));
+            //dispatch(actions.setObjs('tableContent', obj));
         },
         //查询
         buttonAction (sit,){
@@ -509,7 +515,8 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success: function (data) {
                     if(data.data==null){
-                        alert("找不到您想要的数据")
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '找不到您想要的数据'));
                     }else{
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('totalpage', data.data.totalPage));
@@ -517,7 +524,8 @@ const mapDispatchToProps = (dispatch) => {
                     }
                 },
                 error: function () {
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -534,7 +542,8 @@ const mapDispatchToProps = (dispatch) => {
             tableV.data.pagedata[i][arr1[j]] = value;
             let reyz = /^[0-9]+.?[0-9]*$/;
             if (!reyz.test(value)){
-                alert("请输入数字类型的成本(例:0.02)");
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入数字类型的成本(例:0.02)'));
                 tableV.data.pagedata[i][arr1[j]]='';
             }
             // console.log(tableV.data.pagedata[i][arr1[j]]);
@@ -563,7 +572,8 @@ const mapDispatchToProps = (dispatch) => {
                     jiang();
                 },
                 error: function () {
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
             function jiang() {
@@ -610,7 +620,8 @@ const mapDispatchToProps = (dispatch) => {
             }
             console.log(wfs)
             if(wfs.price==null){
-                alert("成本不能为空")
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '成本不能为空'));
             }else {
                 let ddv = JSON.stringify(wfs);
 
@@ -625,15 +636,18 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('years0', null));
                         dispatch(actions.setVars('wfids', null));
                         if(data.data==true){
-                        alert("保存成功")
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '保存成功'));
                         }
                         if(data.code=="0000100"){
-                            alert("该月已有值")
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '该月已有值'));
                         }
                         jiang2(num);
                     },
                     error: function () {
-                        console.log('获取数据失败')
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败'));
                     }
                 });
                 function jiang2(num) {
@@ -659,7 +673,8 @@ const mapDispatchToProps = (dispatch) => {
 
                         },
                         error: function () {
-                            console.log('获取数据失败')
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '获取数据失败'));
                         }
                     });
                 }
@@ -703,17 +718,20 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('years0', null));
                         dispatch(actions.setVars('wfids', null));
                         if(data.data===true){
-                            alert("修改成功")
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '修改成功'));
                             jiang2();
                         }
                         else{
-                            alert("修改失败,请重试")
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '修改失败,请重试'));
                         }
 
 
                     },
                     error: function () {
-                        console.log('获取数据失败')
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败'));
                     }
                 });
                 function jiang2() {
@@ -736,7 +754,8 @@ const mapDispatchToProps = (dispatch) => {
 
                         },
                         error: function () {
-                            console.log('获取数据失败')
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '获取数据失败'));
                         }
                     });
                 }
@@ -759,13 +778,14 @@ const mapDispatchToProps = (dispatch) => {
                     success: function (data) {
 
                         if(data.data==1){
-                            alert("删除成功")
-
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '删除成功'));
                         }
                         jiang4(num);
                     },
                     error: function () {
-                        console.log('获取数据失败')
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败'));
                     }
                 });
                 function jiang4(num) {
@@ -785,7 +805,8 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setObjs('tableContent', data));
                         },
                         error: function () {
-                            console.log('获取数据失败')
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '获取数据失败'));
                         }
                     });
                 }
@@ -821,7 +842,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error: function () {
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -853,7 +875,8 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
                 error: function () {
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
 
@@ -879,7 +902,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error: function () {
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -904,7 +928,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error: function () {
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
