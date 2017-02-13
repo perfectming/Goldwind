@@ -41,8 +41,6 @@ for(let x=0;x<arr.length;x++){
     allnum+=arr[x]
 };
 
-var actions = require('redux/actions');
-
 let Component = React.createClass({
     //render渲染前执行的内容//
     componentWillMount() {
@@ -62,7 +60,7 @@ let Component = React.createClass({
     },
     render() {
         let{mmodata,mmoname,bloo=false,skinStyle}=this.props;
-        if(bloo){
+        if(bloo&&mmodata.ModelData[8888800]&&mmodata.ModelData[8888801].MonthLossElec&&mmodata.ModelData[8888802].MonthLossElec){
             let mobd=mmodata.ModelData;
             let mod=mmoname.Model.dis;
             let datename=mmoname.Model.ens;

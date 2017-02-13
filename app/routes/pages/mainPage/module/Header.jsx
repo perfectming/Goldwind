@@ -25,7 +25,6 @@ let Component = React.createClass({
                                 <div key={key} className={itemActive === key ? styles.itemBoxAct : styles.itemBox} onClick={()=>changeHeaderItem(key,value.subPage[0].page[0].page)}>
                                     <img src={itemActive === key ? value.iconActive : value.iconNormal}/>
                                     <span>{value.name}</span>
-                                    
                                 </div>
                             )
                         })
