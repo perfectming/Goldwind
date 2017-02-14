@@ -60,7 +60,7 @@ let Component = React.createClass({
         },1000)
     },
     render() {
-        let {alertText,deleData, deleDate, addData, num = 0, wfidCount, addDate,changeTableItem12, wfids, ajax, table, year, wtidAll, groupAll, totalpage, saveTableItem2, saveTableItem, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll = false,skinStyle} = this.props;
+        let {a,b,c,d,e,deleteBool=true,buttonConcel,buttonClose,alertText,deleData, deleDate, addData, num = 0, wfidCount, addDate,changeTableItem12, wfids, ajax, table, year, wtidAll, groupAll, totalpage, saveTableItem2, saveTableItem, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll = false,skinStyle} = this.props;
 
         //
 
@@ -69,8 +69,17 @@ let Component = React.createClass({
 
             return (
 
-                      <div className={skinStyle == 1 ? styles.powerBlueBox : skinStyle == 2 ? styles.powerWhiteBox : styles.powerBox}>
+                <div className={skinStyle == 1 ? styles.powerBlueBox : skinStyle == 2 ? styles.powerWhiteBox : styles.powerBox}>
                     <AlertWindow text={alertText}></AlertWindow>
+                    
+                    <div className={deleteBool==true? styles.hideBox:styles.container}>
+                        <div className={styles.alertBox}>
+                            <div className={styles.header}>提示<span className={styles.clickBox} onClick={()=>buttonConcel(deleteBool)}>×</span></div>
+                            <div className={styles.warning}>确定删除数据吗？点击关闭可取消</div>
+                            <div className={styles.close}><span onClick={()=>buttonClose(deleteBool,a,b,c)}>确定</span></div>
+                        </div>
+                    </div>
+
                     <div className={styles.inquireBox}>
                         <div className={styles.seleBox}>
                             <span>年度</span>
@@ -232,7 +241,7 @@ let Component = React.createClass({
                                                              onClick={(e) => saveTableItem2(key, value, wtidAll, groupAll, page)}/>
                                                     </div>
                                                     <div className={styles.tableContentItemm} style={{width: 7 + "%"}}>
-                                                        <img src={del} onClick={(e) => deleData(key, page,year,wfids,num)}/>
+                                                        <img src={del} onClick={(e) => deleData(key, page,num)}/>
                                                     </div>
                                                 </div>
                                             )
@@ -367,7 +376,7 @@ let Component = React.createClass({
                                                              onClick={(e) => saveTableItem(key, value, wtidAll, groupAll, page,num)}/>
                                                     </div>
                                                     <div className={styles.tableContentItemm} style={{width: 7 + "%"}}>
-                                                        <img src={del} onClick={(e) => deleDate(key,)}/>
+                                                        <img src={del} onClick={(e) => deleDate(key)}/>
                                                     </div>
                                                 </div>
                                             )
@@ -419,6 +428,10 @@ const mapStateToProps = (state) => {
         totalpage: state.vars.totalpage,
         skinStyle: state.vars.skinStyle,
         alertText : state.vars.alertText,//弹框提示文字
+        deleteBool : state.vars.deleteBool,//是否删除
+        a : state.vars.a,//删除操作的5个参数
+        b : state.vars.b,
+        c : state.vars.c,
     }
 };
 
@@ -630,7 +643,7 @@ const mapDispatchToProps = (dispatch) => {
                 let ddv = JSON.stringify(wfs);
 
                 $.ajax({
-                    url: soam + '/info/getUpdateOneWfcost',
+                    url: soam+'/wbi/info/getUpdateOneWfcost',
                     type: 'post',
                     data: ddv,
                     dataType: 'json',//here,
@@ -715,7 +728,7 @@ const mapDispatchToProps = (dispatch) => {
                 wfs.month="1"
             }
 
-            if(wfs.cost==null){
+            if(wfs.cost==null||wfs.cost==''){
                 dispatch(actions.setVars('alertBool', false));
                 dispatch(actions.setVars('alertText', '成本不能为空'));
             }else {
@@ -727,7 +740,10 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
-
+                        if(data.code=="0000100"){
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '该月已有值'));
+                        }
                         dispatch(actions.setVars('years0', null));
                         dispatch(actions.setVars('wfids', null));
                         jiang3(num);
@@ -771,11 +787,10 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         //删除数据
-        deleData: (j, page,year,wfid,num) => {
-            let w=confirm("确认要删除这条数据吗?删除不可恢复");
-            if(w==true){
+        buttonClose:(deleteBool,a,b,c) => {
+            dispatch(actions.setVars('deleteBool', true));
             let tableV = _.clone(getState().objs.tableContent);
-            let uuid = tableV.data.pagedata[j].uuid;
+            let uuid = tableV.data.pagedata[a].uuid;
 
 
             $.ajax({
@@ -790,7 +805,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('alertBool', false));
                     dispatch(actions.setVars('alertText', '删除成功'));
                  }
-                    jiang4(num);
+                    jiang4(c);
                 },
                 error: function () {
                     dispatch(actions.setVars('alertBool', false));
@@ -798,36 +813,42 @@ const mapDispatchToProps = (dispatch) => {
                 }
 
             });
-            function jiang4(num) {
-            if(num==1){
-                page=page-1;
-            }
-
-            $.ajax({
-                url: soam + '/info/getWfcosts',
-                type: 'post',
-                data: {
-                    "curpage": page,
-                    "pageSize": pageSize,
-                },
-                dataType: 'json',//here,
-                success: function (data) {
-                    dispatch(actions.setVars('years0', null));
-                    dispatch(actions.setVars('wfids', null));
-                    dispatch(actions.setVars('page1', page));
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('totalpage', data.data.totalPage));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
-                },
-                error: function () {
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+            function jiang4(c) {
+                if(c==1){
+                    b=b-1;
                 }
-            });
-            }
-            }else {
 
+                $.ajax({
+                    url: soam + '/info/getWfcosts',
+                    type: 'post',
+                    data: {
+                        "curpage": b,
+                        "pageSize": pageSize,
+                    },
+                    dataType: 'json',//here,
+                    success: function (data) {
+                        dispatch(actions.setVars('years0', null));
+                        dispatch(actions.setVars('wfids', null));
+                        dispatch(actions.setVars('page1', b));
+                        dispatch(actions.setObjs('tableContent', data));
+                        dispatch(actions.setVars('totalpage', data.data.totalPage));
+                        dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    },
+                    error: function () {
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败'));
+                    }
+                });
             }
+        },
+        buttonConcel:(deleteBool) => {
+            dispatch(actions.setVars('deleteBool', true));
+        },
+        deleData: (j, page,num) => {
+            dispatch(actions.setVars('deleteBool', false));
+            dispatch(actions.setVars('a', j));
+            dispatch(actions.setVars('b', page));
+            dispatch(actions.setVars('c', num));
         },
         //删除新增还未保存的数据
         deleDate: (j) => {
