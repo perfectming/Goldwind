@@ -132,7 +132,7 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.tableContentBox}>
                                 {
-                                    table.data.pagedata!==undefined &&
+                                    table.data.pagedata !==undefined &&
                                     table.data.pagedata.map((value, key) => {
                                         {/*遍历已经有的后台数据*/}
 
@@ -486,10 +486,6 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         init: () => {
-
-            var obj = {
-                test: ''
-            }
             $("option[name='selectOpt']").prop('selected',true);
             //dispatch(actions.setObjs('tableContent', obj));
         },
@@ -534,7 +530,6 @@ const mapDispatchToProps = (dispatch) => {
         changeTableItem1: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.data.pagedata[i][arr1[j]] = value;
-            console.log(tableV.data.pagedata[i][arr1[j]]);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         changeTableItem12: (value, table, i, j) => {
@@ -546,7 +541,6 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(actions.setVars('alertText', '请输入数字类型的成本(例:0.02)'));
                 tableV.data.pagedata[i][arr1[j]]='';
             }
-            // console.log(tableV.data.pagedata[i][arr1[j]]);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         //增加
@@ -618,7 +612,6 @@ const mapDispatchToProps = (dispatch) => {
             if (wfs.month==''){
                 wfs.month="1"
             }
-            console.log(wfs)
             if(wfs.price==null){
                 dispatch(actions.setVars('alertBool', false));
                 dispatch(actions.setVars('alertText', '成本不能为空'));
@@ -632,7 +625,6 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
-                        console.log(data)
                         dispatch(actions.setVars('years0', null));
                         dispatch(actions.setVars('wfids', null));
                         if(data.data==true){
@@ -714,7 +706,6 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
-                        console.log(data)
                         dispatch(actions.setVars('years0', null));
                         dispatch(actions.setVars('wfids', null));
                         if(data.data===true){
