@@ -4,6 +4,10 @@ module.exports = {
             name: '风场1',
             page: 'fcone',
             rightpagge:[
+                {
+                    tabname:'逆变室',
+                    rpage:'nbs'
+                },
             	{
             		tabname:'风机矩阵',
             		rpage:'fanmatrix'
@@ -29,7 +33,11 @@ module.exports = {
             name: '风场2',
             page: 'fcone',
             rightpagge:[
-            	  {
+                {
+                    tabname:'逆变室',
+                    rpage:'fanmatrix'
+                },
+                {
                     tabname:'光伏矩阵',
                     rpage:'pvmatrix'
                 },

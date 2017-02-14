@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch) => {
                jsonpCallback:"testCall",    
                timeout:3000,       
                success:function(json,textStatus){
-                   // console.log(json);
+                   let finixs=$('#username1').val();
                    if ($('#check')[0].value!==$('#checked')[0].value){
                        alert('验证码输入错误');
                        $('#denglu1')[0].value='登     录';
@@ -124,7 +124,7 @@ const mapDispatchToProps = (dispatch) => {
                                // console.log(data);
                                data.data.result==='False'? alert(data.message): browserHistory.push('/app/all/page/main') ;
                                dispatch(actions.setObjs('userMessage', data));
-                               dispatch(actions.setVars('userNameT', $('#username1').val()));
+                               dispatch(actions.setVars('userNameT', finixs));
                                dispatch(actions.setVars('wbiUserId', data.data.id));
                                dispatch(actions.setVars('userInfo', true));
                                try { Base.returnPlay(); } catch (e) { };
