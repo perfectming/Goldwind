@@ -59,8 +59,8 @@ let Component = React.createClass({
 
         },1000)
     },
-    render() {
-        let {a,b,c,d,e,deleteBool=true,buttonConcel,buttonClose,alertText,deleData, deleDate, addData, num = 0, wfidCount, addDate,changeTableItem12, wfids, ajax, table, year, wtidAll, groupAll, totalpage, saveTableItem2, saveTableItem, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll = false,skinStyle} = this.props;
+    render() {//a,b,c为删除弹窗传递参数
+        let {a,b,c,deleteBool=true,buttonConcel,buttonClose,alertText,deleData, deleDate, addData, num = 0, wfidCount, addDate,changeTableItem12, wfids, ajax, table, year, wtidAll, groupAll, totalpage, saveTableItem2, saveTableItem, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll = false,skinStyle} = this.props;
 
         //
 
@@ -429,7 +429,7 @@ const mapStateToProps = (state) => {
         skinStyle: state.vars.skinStyle,
         alertText : state.vars.alertText,//弹框提示文字
         deleteBool : state.vars.deleteBool,//是否删除
-        a : state.vars.a,//删除操作的5个参数
+        a : state.vars.a,//删除操作的3个参数
         b : state.vars.b,
         c : state.vars.c,
     }
@@ -516,7 +516,7 @@ const mapDispatchToProps = (dispatch) => {
         },
 
         //查询
-        buttonAction (sit,){
+        buttonAction (sit){
             // 获取select 选择的内容
             var tContent = $('#textContent5')[0].value;
             var tContent1 = $('#textContent6')[0].value;

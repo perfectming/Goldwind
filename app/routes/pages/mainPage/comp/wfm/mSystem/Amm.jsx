@@ -6,6 +6,7 @@ var $ =require('jquery');
 import styles from './Amm.scss';
 let pageSize=10;
 // onClick={()=>jump(value['id'])}
+import AlertWindow from '../../wbi/KPI/AlertWindow.jsx';//提示框
 import save from '../../../img/comp/save.png';
 import refresh from '../../../img/comp/refresh.png';
 import del from '../../../img/icon/tabDel.png';
@@ -22,8 +23,8 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-    render() {
-        let {skinStyle,saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
+    render() {//j,k为删除弹窗传递参数
+        let {j,k,deleteBool=true,buttonConcel,buttonClose,alertText,skinStyle,saveDataAmm,page,uName,lastPage,nextPage,theOne,theLast,init,checkId,checkName,addDate,deleDate,ammCount,boxData,jump,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem} = this.props;
         let newData={};
         let num=0;
         for(let i=0;i<arr.length-1;i++){
@@ -34,6 +35,16 @@ let Component = React.createClass({
         return (
         <div className={skinStyle==1?styles.bodyBoxBlue:(skinStyle==2?styles.bodyBoxWhite:styles.bodyBox)}>
             <Load></Load>
+            <AlertWindow text={alertText}></AlertWindow>
+
+            <div className={deleteBool==true? styles.hideBox:styles.container}>
+                <div className={styles.alertBox}>
+                    <div className={styles.header}>提示<span className={styles.clickBox} onClick={()=>buttonConcel(deleteBool)}>×</span></div>
+                    <div className={styles.warning}>确定删除数据吗？点击关闭可取消</div>
+                    <div className={styles.close}><span onClick={()=>buttonClose(deleteBool,j,k)}>确定</span></div>
+                </div>
+            </div>
+
             <div className={styles.roleputBox}>
                 <div className={styles.inquireBox}>
                     {
@@ -244,7 +255,11 @@ const mapStateToProps = (state) => {
         ammCount:state.vars.ammCount,
         ids:state.vars.roleIds,
         page:state.vars.pageAmm,
-        uName:state.vars.nameAmm
+        uName:state.vars.nameAmm,
+        alertText:state.vars.alertText,//弹框提示文字
+        j:state.vars.j,//删除按钮传递参数
+        k:state.vars.k,//删除按钮传递参数
+        deleteBool:state.vars.deleteBool//是否删除
     }
 };
 
@@ -261,12 +276,13 @@ const mapDispatchToProps = (dispatch) => {
                 data:'pageSize='+pageSize+'&&page='+1+'&&username=',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
+                    //console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
             $.ajax({
@@ -278,7 +294,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.appendObjs('initData', data));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
 
@@ -289,14 +306,17 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
-                    if(data.data==true){alert('用户编号重复');
+                    if(data.data==true){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '用户编号重复'));
                         let tableV = _.clone(getState().objs.tableContentAmm);
                         tableV.data.pagedata[i][arr[j]] = '';
                         dispatch(actions.setObjs('tableContentAmm', tableV));
                     }
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -306,14 +326,17 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'post',
                 dataType: 'json',//here,
                 success:function (data) {
-                    if(data.data==true){alert('用户名重复');
+                    if(data.data==true){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '用户名重复'));
                         let tableV = _.clone(getState().objs.tableContentAmm);
                         tableV.data.pagedata[i][arr[j]] = '';
                         dispatch(actions.setObjs('tableContentAmm', tableV));
                     }
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -333,7 +356,8 @@ const mapDispatchToProps = (dispatch) => {
                         $("option[name='selectOpt']").prop('selected',true);
                     },
                     error:function(){
-                        console.log('获取数据失败')
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败'));
                     }
             });
             // 然后去更新图表
@@ -348,7 +372,7 @@ const mapDispatchToProps = (dispatch) => {
             let tableV = _.clone(getState().objs.tableContentAmm);
             let ids = _.clone(getState().vars.roleIds);
             if(ids instanceof Array){pass='pass'}
-            console.log(pass);
+            //console.log(pass);
             let wfs=tableV.data.pagedata[li];
             wfs['roleids']=ids;
             let roleObj={};
@@ -357,7 +381,7 @@ const mapDispatchToProps = (dispatch) => {
             roleObj['pass']=pass;
             let ddv=JSON.stringify(wfs);
             let idsString=JSON.stringify(roleObj);
-            console.log(ids,roleObj);
+            //console.log(ids,roleObj);
             dispatch(actions.setVars('boolAlert', false));
             $.ajax({
                 url: soam+'/user/updateUserInfo?userInfo=data',
@@ -387,19 +411,22 @@ const mapDispatchToProps = (dispatch) => {
                                 },
                                 error:function(){
                                     dispatch(actions.setVars('boolAlert', true));
-                                    console.log('获取数据失败')
+                                    dispatch(actions.setVars('alertBool', false));
+                                    dispatch(actions.setVars('alertText', '获取数据失败'));
                                 }
                             });
                         },
                         error:function(){
                             dispatch(actions.setVars('boolAlert', true));
-                            console.log('获取数据失败')
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '获取数据失败'));
                         }
                     });
                 },
                 error:function(){
                     dispatch(actions.setVars('boolAlert', true));
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -416,10 +443,14 @@ const mapDispatchToProps = (dispatch) => {
                         $("#boxAm input[title='checkedOut']").prop('checked',false);
                     },
                     error:function(){
-                        console.log('获取数据失败')
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败'));
                     }
                 });
-            }else {alert('请输入用户ID')}
+            }else {
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入用户ID'));
+            }
         },
         addDate:(li)=>{
             let phone=/^1\d{10}$/;
@@ -429,20 +460,37 @@ const mapDispatchToProps = (dispatch) => {
             let wfs=tableV.data.pagedata[li];
             wfs['roleids']=ids;
             (!wfs['logintype']) && (wfs['logintype']=0);
-            if(!wfs.id){alert('请输入用户编号')}
+            if(!wfs.id){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入用户编号'));
+            }
             else if(!phone.test(wfs.phonecode) && wfs.phonecode){
-                alert('请输入正确的手机号码')
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入正确的手机号码'));
                 tableV.data.pagedata[li]['phonecode'] = '';
                 dispatch(actions.setObjs('tableContentAmm', tableV));
             }else if(!mail.test(wfs.mailbox) && wfs.mailbox){
-                alert('请输入正确的邮箱');
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入正确的邮箱'));
                 tableV.data.pagedata[li]['mailbox'] = '';
                 dispatch(actions.setObjs('tableContentAmm', tableV));
             }
-            else if(!wfs.name){alert('请输入用户名')}
-            else if(!wfs.password){alert('请输入用户密码')}
-            else if(!wfs.loginname){alert('请输入用户别名')}
-            else if(!ids){alert('请选择对应角色')}
+            else if(!wfs.name){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入用户名'));
+            }
+            else if(!wfs.password){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入用户密码'));
+            }
+            else if(!wfs.loginname){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入用户别名'));
+            }
+            else if(!ids){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择对应角色'));
+            }
             else {
             let ddv=JSON.stringify(wfs);
             dispatch(actions.setVars('boolAlert', false));
@@ -463,15 +511,19 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('boolAlert', true));
                             dispatch(actions.setObjs('tableContentAmm', data));
                             dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '添加成功'));
                         },
                         error:function(){
                             dispatch(actions.setVars('boolAlert', true));
-                            console.log('获取数据失败')
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '获取数据失败'));
                         }
                     });
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });}
         },
@@ -488,10 +540,14 @@ const mapDispatchToProps = (dispatch) => {
             tableV.data.pagedata.push(i);
             dispatch(actions.setObjs('tableContentAmm', tableV));
         },
-        deleData:(j,k) => {
-            if(confirm("确定要删除数据吗？")){
+        buttonConcel:(deleteBool) => {
+            dispatch(actions.setVars('deleteBool', true));
+        },
+        buttonClose:(deleteBool,j,k) => {
+            dispatch(actions.setVars('deleteBool', true));
+            
             let tableV = _.clone(getState().objs.tableContentAmm);
-                dispatch(actions.setVars('boolAlert', false));
+            dispatch(actions.setVars('boolAlert', false));
             $.ajax({
                 url: soam+'/user/getByIDDeleteUser?id='+k,
                 type: 'post',
@@ -509,19 +565,25 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('boolAlert', true));
                             dispatch(actions.setObjs('tableContentAmm', data));
                             dispatch(actions.setVars('ammCount', data.data.pagedata.length));
-                            alert('已删除');
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '删除成功'));
                         },
                         error:function(){
-                            console.log('获取数据失败')
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '获取数据失败'));
                         }
                     });
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
-
-            }
+        },
+        deleData:(j,k) => {
+            dispatch(actions.setVars('deleteBool', false));
+            dispatch(actions.setVars('j', j));
+            dispatch(actions.setVars('k', k));
         },
         lastPage:(page,name)=>{
             page>1 ? page--:page;
@@ -532,19 +594,20 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,page:page,username:name},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
+                    //console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                     $("option[name='selectOpt']").prop('selected',true);
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
         nextPage:(page,i,j,name)=>{
             (page<Math.ceil(i/j)) ? page++:page;
-            console.log(page,name);
+            //console.log(page,name);
             dispatch(actions.setVars('pageAmm', page));
             $.ajax({
                 url: soam+'/user/getAllUser',
@@ -552,13 +615,14 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,page:page,username:name},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
+                    //console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                     $("option[name='selectOpt']").prop('selected',true);
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -571,13 +635,14 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,page:page,username:name},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
+                    //console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                     $("option[name='selectOpt']").prop('selected',true);
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -590,13 +655,14 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,page:page,username:name},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
+                    //console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                     $("option[name='selectOpt']").prop('selected',true);
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         }

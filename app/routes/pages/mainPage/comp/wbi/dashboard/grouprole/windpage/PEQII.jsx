@@ -54,7 +54,7 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init(comp);
     },
-    render() {
+    render() {//x,y,z为删除数据确认弹窗传递参数
         let {x,y,z,deleteBool=true,buttonConcel,buttonClose,alertText,deleData, deleDate, addData, num = 0, wfidCount,changeTableItem12, addDate, wfids, table, ajax, wtidAll, groupAll, totalpage, saveTableItem, saveTableItem2, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll2 = false,skinStyle} = this.props;
         
         
