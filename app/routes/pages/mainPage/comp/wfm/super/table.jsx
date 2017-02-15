@@ -188,7 +188,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         changepage:(key) => {
            dispatch(actions.setVars('showPage', 'fan_matrix'));
-           dispatch(actions.setVars('numpage', 'fanmatrix'));
+           dispatch(actions.setVars('numpage', 'nbs'));
            dispatch(actions.setVars('fan_page', 'allpage'));
           dispatch(actions.setVars('actbt',key ));
           dispatch(actions.setVars('actbtn',0));

@@ -35,7 +35,7 @@ module.exports = {
             rightpagge:[
                 {
                     tabname:'逆变室',
-                    rpage:'fanmatrix'
+                    rpage:'nbs1'
                 },
                 {
                     tabname:'光伏矩阵',

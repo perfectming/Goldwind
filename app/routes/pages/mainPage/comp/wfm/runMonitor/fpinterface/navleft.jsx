@@ -66,6 +66,7 @@ let str=d.getDate();
     } 
 }
 }());
+        if (!date[fc_info]){date[fc_info]=1}
         return (
           <div className={skinStyle==1?styles.navboxBlue:skinStyle==2?styles.navboxWhite:styles.navbox}>
                      <div className={styles.tit}>

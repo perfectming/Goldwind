@@ -26,7 +26,7 @@ let Component = React.createClass({
     render() {
          
         let {zhzb,bbs,all,boolsuper=false,skinStyle}=this.props;
-       if(boolsuper){
+       if(boolsuper && bbs.ModelData){
         let data=bbs.ModelData;
         let mod=zhzb.Model;
         let date03=[];

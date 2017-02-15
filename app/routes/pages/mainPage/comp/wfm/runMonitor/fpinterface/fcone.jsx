@@ -8,6 +8,8 @@ import Sjlb from './fanDataList.jsx';
 import Sjlb1 from './fanDataList1.jsx';
 import Fjkx from './fjkx.jsx';
 import Cft from './cft.jsx';
+import Nbs from './nbs.jsx';
+import Nbs1 from './nbs1.jsx';
 import Cgt from './cgt.jsx';
 import Gfkx from './gfkx.jsx';
 import Gisdxt from './gisdxt.jsx';
@@ -33,6 +35,8 @@ let Component = React.createClass({
                         <Navleft></Navleft>
                       </div>
                     <div className={`${styles.conright} ${flag===true? styles.animat3 : styles.animat2}`}>
+                        { numpage==='nbs' && <Nbs></Nbs>}
+                        { numpage==='nbs1' && <Nbs1></Nbs1>}
                         { numpage==='fanmatrix' && <Fanmatrix faninfobool={faninfobool}></Fanmatrix>}
                         { numpage==='pvmatrix' && <Pvmatrix></Pvmatrix>}
                         { numpage==='sjlb' && <Sjlb></Sjlb>}
@@ -74,7 +78,7 @@ const mapDispatchToProps = (dispatch) => {
         },
             changeFlag :(flag)=>{
                 
-                if(flag){
+                if (flag){
                     flag=false;
                 }else{
                     flag=true;

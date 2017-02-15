@@ -22,6 +22,8 @@ let Component = React.createClass({
         let {all,zhzb,bbs,chooseONL,chooseALL,chooseFault,chooseRepair,chooseOffline,chooseWFStandby,chooseWFLIM,choosePVALL,choosePVONL,choosePVFLT,choosePVOFL,skinStyle}=this.props;
         let mod1=zhzb.Model;
         let data2=bbs.ModelData;
+        (!data2[8888800]) && (data2[8888800]=0);
+        (!data2[8888801]) && (data2[8888801]=0);
         let nfdl=(data2[8888800].YearEgyAt/data2[8888800].YearPlanTotEgyAt)*100;//年发电量//
         let yfdl=(data2[8888800].MonthEgyAt/data2[8888800].CurMonthPlanEgyAt)*100;//月发电量//
         if(mod1==undefined){
