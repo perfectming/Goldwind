@@ -54,8 +54,8 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init(comp);
     },
-    render() {
-        let {alertText,deleData, deleDate, addData, num = 0, wfidCount,changeTableItem12, addDate, wfids, table, ajax, wtidAll, groupAll, totalpage, saveTableItem, saveTableItem2, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll2 = false,skinStyle} = this.props;
+    render() {//x,y,z为删除数据确认弹窗传递参数
+        let {x,y,z,deleteBool=true,buttonConcel,buttonClose,alertText,deleData, deleDate, addData, num = 0, wfidCount,changeTableItem12, addDate, wfids, table, ajax, wtidAll, groupAll, totalpage, saveTableItem, saveTableItem2, changeTableItem1, page, nextPage, lastPage, theOne, years0 = null, theLast, dataenter, buttonAction, boll2 = false,skinStyle} = this.props;
         
         
 
@@ -67,6 +67,15 @@ let Component = React.createClass({
 
                <div className={skinStyle == 1 ? styles.powerBlueBox : skinStyle == 2 ? styles.powerWhiteBox : styles.powerBox}>
                     <AlertWindow text={alertText}></AlertWindow>
+                    
+                    <div className={deleteBool==true? styles.hideBox:styles.container}>
+                        <div className={styles.alertBox}>
+                            <div className={styles.header}>提示<span className={styles.clickBox} onClick={()=>buttonConcel(deleteBool)}>×</span></div>
+                            <div className={styles.warning}>确定删除数据吗？点击关闭可取消</div>
+                            <div className={styles.close}><span onClick={()=>buttonClose(deleteBool,x,y,z)}>确定</span></div>
+                        </div>
+                    </div>
+
                     <div className={styles.inquireBox}>
                         <div className={styles.seleBox}>
                             <span>年度</span>
@@ -90,7 +99,7 @@ let Component = React.createClass({
                                 {wtidAll.data.map((value, key) => {
                                     if(key==0){
                                         return (
-                                            <option selected="selected" value={value.wfid} key={key}>{value.wfname}</option>
+                                            <option name="selectOpt" value={value.wfid} key={key}>{value.wfname}</option>
                                         )
                                     }
                                     return (
@@ -132,7 +141,7 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.tableContentBox}>
                                 {
-                                    table.data.pagedata!==undefined &&
+                                    table.data.pagedata !==undefined &&
                                     table.data.pagedata.map((value, key) => {
                                         {/*遍历已经有的后台数据*/}
 
@@ -232,7 +241,7 @@ let Component = React.createClass({
                                                     </div>
                                                     <div className={styles.tableContentItemm} style={{width: 7 + "%"}}>
                                                         {/*删除*/}
-                                                        <img src={del} onClick={(e) => deleData(key,page,num)}/>
+                                                        <img src={del} onClick={(e) => deleData(deleteBool,key,page,num)}/>
                                                     </div>
                                                 </div>
                                             )
@@ -416,6 +425,10 @@ const mapStateToProps = (state) => {
         totalpage: state.vars.totalpage,
         skinStyle: state.vars.skinStyle,
         alertText : state.vars.alertText,//弹框提示文字
+        deleteBool : state.vars.deleteBool,//是否删除
+        x : state.vars.x,//x,y,z为三个删除操作的参数
+        y : state.vars.y,
+        z : state.vars.z,
     }
 };
 
@@ -486,10 +499,6 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         init: () => {
-
-            var obj = {
-                test: ''
-            }
             $("option[name='selectOpt']").prop('selected',true);
             //dispatch(actions.setObjs('tableContent', obj));
         },
@@ -534,7 +543,6 @@ const mapDispatchToProps = (dispatch) => {
         changeTableItem1: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContent);
             tableV.data.pagedata[i][arr1[j]] = value;
-            console.log(tableV.data.pagedata[i][arr1[j]]);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         changeTableItem12: (value, table, i, j) => {
@@ -546,7 +554,6 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(actions.setVars('alertText', '请输入数字类型的成本(例:0.02)'));
                 tableV.data.pagedata[i][arr1[j]]='';
             }
-            // console.log(tableV.data.pagedata[i][arr1[j]]);
             dispatch(actions.setObjs('tableContent', tableV));
         },
         //增加
@@ -618,8 +625,7 @@ const mapDispatchToProps = (dispatch) => {
             if (wfs.month==''){
                 wfs.month="1"
             }
-            console.log(wfs)
-            if(wfs.price==null){
+            if(wfs.price==null||wfs.price==''){
                 dispatch(actions.setVars('alertBool', false));
                 dispatch(actions.setVars('alertText', '成本不能为空'));
             }else {
@@ -632,7 +638,6 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
-                        console.log(data)
                         dispatch(actions.setVars('years0', null));
                         dispatch(actions.setVars('wfids', null));
                         if(data.data==true){
@@ -714,12 +719,12 @@ const mapDispatchToProps = (dispatch) => {
                     dataType: 'json',//here,
                     contentType: 'application/json;charset=UTF-8',
                     success: function (data) {
-                        console.log(data)
                         dispatch(actions.setVars('years0', null));
                         dispatch(actions.setVars('wfids', null));
                         if(data.data===true){
-                            dispatch(actions.setVars('alertBool', false));
                             dispatch(actions.setVars('alertText', '修改成功'));
+                            dispatch(actions.setVars('alertBool', false));
+                            
                             jiang2();
                         }
                         else{
@@ -762,11 +767,10 @@ const mapDispatchToProps = (dispatch) => {
 
         },
        // 删除
-        deleData: (j, page,num) => {
-            let w=confirm("确认要删除这条数据吗?删除不可恢复");
-            if(w==true) {
-                let tableV = _.clone(getState().objs.tableContent);
-                let uuid = tableV.data.pagedata[j].uuid;
+        buttonClose:(deleteBool,x,y,z) => {
+            dispatch(actions.setVars('deleteBool', true));
+            let tableV = _.clone(getState().objs.tableContent);
+                let uuid = tableV.data.pagedata[x].uuid;
 
                 $.ajax({
                     url: soam + '/StagePrice/delete',
@@ -781,22 +785,22 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('alertBool', false));
                             dispatch(actions.setVars('alertText', '删除成功'));
                         }
-                        jiang4(num);
+                        jiang4(z);
                     },
                     error: function () {
                         dispatch(actions.setVars('alertBool', false));
                         dispatch(actions.setVars('alertText', '获取数据失败'));
                     }
                 });
-                function jiang4(num) {
-                    if(num==1){
+                function jiang4(z) {
+                    if(z==1){
                         page=page-1;
                     }
                     $.ajax({
                         url: soam + '/info/getStageprice',
                         type: 'post',
                         data: {
-                            "curpage": page,
+                            "curpage": y,
                             "pageSize": pageSize,
                         },
                         dataType: 'json',//here,
@@ -810,9 +814,15 @@ const mapDispatchToProps = (dispatch) => {
                         }
                     });
                 }
-            }else {
-
-            }
+        },
+        buttonConcel:(deleteBool) => {
+            dispatch(actions.setVars('deleteBool', true));
+        },
+        deleData: (deleteBool,key,page,num) => {
+            dispatch(actions.setVars('deleteBool', false));
+            dispatch(actions.setVars('x', key));
+            dispatch(actions.setVars('y', page));
+            dispatch(actions.setVars('z', num));
         },
         // 新增的删除
         deleDate: (j) => {

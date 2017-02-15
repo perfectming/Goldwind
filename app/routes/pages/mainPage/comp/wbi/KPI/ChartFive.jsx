@@ -58,7 +58,12 @@ let Component = React.createClass({
             },
             tooltip: {
                 valueSuffix: unit,
-                shared: true
+                shared: true,
+                style:{
+                    color: 'black',
+                    fontSize: '12px',
+                    fontFamily:'微软雅黑'
+                },
             },
             xAxis: {
                 lineWidth: 1,

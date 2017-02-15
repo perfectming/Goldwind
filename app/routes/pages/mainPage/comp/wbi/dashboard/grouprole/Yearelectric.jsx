@@ -52,7 +52,7 @@ let Component = React.createClass({
             },
             tooltip: {
 	            valueSuffix: unit,
-                shared: true
+                crosshairs: true
 	        },
             xAxis: {
             	gridLineDashStyle: 'Solid',
