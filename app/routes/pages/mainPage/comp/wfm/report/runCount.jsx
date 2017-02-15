@@ -272,9 +272,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.appendObjs('devtype',json));
                     gettreedata(); 
                 },    
-                error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));  
+                error:function(XMLHttpRequest,textStatus,errorThrown){ 
+                    console.log('获取数据失败！')  
                 }    
             });
 
@@ -291,9 +290,8 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('select_list',json));
                         dispatch(actions.setVars('boolywbb', true));
                     },    
-                    error:function(XMLHttpRequest,textStatus,errorThrown){    
-                        dispatch(actions.setVars('alertBool', false));
-                        dispatch(actions.setVars('alertText', '获取数据失败！'));  
+                    error:function(XMLHttpRequest,textStatus,errorThrown){  
+                        console.log('获取数据失败！') 
                     }    
                 });
             }

@@ -284,7 +284,7 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boolywbb', true));
                     },    
                     error:function(XMLHttpRequest,textStatus,errorThrown){    
-                        alert('获取数据失败！');    
+                        console.log('获取数据失败！');    
                     }    
             });
             
@@ -378,8 +378,8 @@ const mapDispatchToProps = (dispatch) => {
                     thirdId.push($(this).val());
                 }
             });
-            console.log(firstId);
-            console.log(secondId);
+            //console.log(firstId);
+            //console.log(secondId);
             if(firstId.length>50){
                 firstId.splice(50,firstId.length);
             }
@@ -409,7 +409,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log(json)
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    alert('获取数据失败！');    
+                    console.log('获取数据失败！');    
                 }    
             });
         }

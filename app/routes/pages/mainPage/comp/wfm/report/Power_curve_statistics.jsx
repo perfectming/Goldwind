@@ -305,7 +305,7 @@ const mapDispatchToProps = (dispatch) => {
                     gettreedata();
                 },
                 error:function(XMLHttpRequest,textStatus,errorThrown){
-                    alert('获取数据失败！');
+                    console.log('获取数据失败！');
 
                 }
             });
@@ -324,7 +324,7 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boolywbb', true));
                     },
                     error:function(XMLHttpRequest,textStatus,errorThrown){
-                        alert('获取数据失败！');
+                        console.log('获取数据失败！');
                     }
                 });
             }
@@ -435,7 +435,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('boolywbb', true));
                 },
                 error:function(XMLHttpRequest,textStatus,errorThrown){
-                    alert('获取数据失败！');
+                    console.log('获取数据失败！');
                 }
             });
 
@@ -478,7 +478,7 @@ const mapDispatchToProps = (dispatch) => {
                 all.splice(50,all.length);
             }
             if(all.length==0){
-                alert('设备数据获取失败！')
+                console.log('设备数据获取失败！')
                 return;
             }
             $.ajax({
@@ -489,11 +489,11 @@ const mapDispatchToProps = (dispatch) => {
                 jsonpCallback:"testCall",
                 timeout:5000,
                 success:function(json,textStatus){
-                    console.log(json)
+                    //console.log(json)
                     dispatch(actions.setVars('Powdata',json));
                 },
                 error:function(XMLHttpRequest,textStatus,errorThrown){
-                    alert('获取数据失败！');
+                    console.log('获取数据失败！');
                 }
             });
         }

@@ -5,6 +5,7 @@ import jian from '../../../img/comp/jian_icon.png';
 import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
 import Column from './colum.jsx';
+import AlertWindow from '../../wbi/KPI/AlertWindow.jsx';//提示框
 import Login from '../../../../../../components/common/Loading.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
@@ -27,7 +28,7 @@ let Component = React.createClass({
         },1000)
     },
    showTree (devurl){
-    let{playjq,showtree,select_list,firstname,devtype}=this.props;
+    let{alertText,playjq,showtree,select_list,firstname,devtype}=this.props;
    
      //点击切换下拉选择项
             for(let id in devtype.list){
@@ -123,6 +124,7 @@ let Component = React.createClass({
             
         return (
             <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
+                <AlertWindow text={alertText}></AlertWindow>
                 <div className={styles.search_tit}>
                     <div className={styles.seleBox}>
                         <span>设备类型:</span>
@@ -322,6 +324,7 @@ const mapStateToProps = (state) => {
         chartname:state.vars.chartname,
         chartTitle:state.vars.chartTitle,
         devurls:state.vars.devurls,
+        alertText:state.vars.alertText,//弹框提示文字
     }
 };
 
@@ -331,48 +334,39 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(actions.setVars('boolywbb', false));
           dispatch(actions.setObjs('tabledata',undefined));
             //获取设备类型信息
-        $.ajax({    
-               url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=GetDevTypeTree&crossDomain=true&zip=false&menuid=1DD28544-7805-4D86-8E39-09404726214A&sysid=1',    
-               dataType:"jsonp",    
-               jsonp:"callback",    
-               jsonpCallback:"testCall",    
-               timeout:3000,       
-               success:function(json,textStatus){    
-                   dispatch(actions.appendObjs('devtype',json));
-                   gettreedata(); 
-               },    
-               error:function(XMLHttpRequest,textStatus,errorThrown){    
-                   alert('获取数据失败！');   
-                   
-               }    
+          $.ajax({    
+              url:'http://'+url+'/Monitor/xml.aspx',    
+              data:'functionname=GetDevTypeTree&crossDomain=true&zip=false&menuid=1DD28544-7805-4D86-8E39-09404726214A&sysid=1',    
+              dataType:"jsonp",    
+              jsonp:"callback",    
+              jsonpCallback:"testCall",    
+              timeout:3000,       
+              success:function(json,textStatus){    
+                  dispatch(actions.appendObjs('devtype',json));
+                  gettreedata(); 
+              },    
+              error:function(XMLHttpRequest,textStatus,errorThrown){
+                  console.log('获取数据失败!')  
+              }    
+          });
+          function gettreedata(){
+            $.ajax({    
+                url:'http://'+url+'/Monitor/xml.aspx',    
+                data:'functionname=GetWFInfoByMonNoWfType&devtype=WindTurbine&crossDomain=true&zip=false',    
+                dataType:"jsonp",    
+                jsonp:"callback",    
+                jsonpCallback:"testCall",    
+                timeout:3000,       
+                success:function(json,textStatus){    
+                    dispatch(actions.setVars('select_list',json));
+                    dispatch(actions.setVars('boolywbb', true));
+                },    
+                error:function(XMLHttpRequest,textStatus,errorThrown){    
+                    console.log('获取数据失败!')    
+                }    
             });
-
-
-        function gettreedata(){
-           $.ajax({    
-               url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=GetWFInfoByMonNoWfType&devtype=WindTurbine&crossDomain=true&zip=false',    
-               dataType:"jsonp",    
-               jsonp:"callback",    
-               jsonpCallback:"testCall",    
-               timeout:3000,       
-               success:function(json,textStatus){    
-                dispatch(actions.setVars('select_list',json));
-                dispatch(actions.setVars('boolywbb', true));
-               },    
-               error:function(XMLHttpRequest,textStatus,errorThrown){    
-                   alert('获取数据失败！');    
-               }    
-            });
-        }
-
-
-
-
-
+          }
         },
-        
         init: () => {
         },
         playjq:()=>{
@@ -413,22 +407,19 @@ const mapDispatchToProps = (dispatch) => {
             $('#startTime').val(dateString1);
             $('#endTime').val(dateString)
             //显示下拉菜单
-        $('#slide').on('click',function(){
-            $('#selectye').show();
-        })
-        //鼠标移出隐藏下拉菜单
-        $('#selectye').mouseleave(function(){
-            $(this).hide()
-        })
-        //选择显示设备类型并隐藏下拉菜单
-        $('#selectye>div').on('click',function(){
-            $('#showitem').html($(this).html());
-            $('#selectye').hide();
-        })
-
-
-
-         //复选框状态跟随
+            $('#slide').on('click',function(){
+                $('#selectye').show();
+            })
+            //鼠标移出隐藏下拉菜单
+            $('#selectye').mouseleave(function(){
+                $(this).hide()
+            })
+            //选择显示设备类型并隐藏下拉菜单
+            $('#selectye>div').on('click',function(){
+                $('#showitem').html($(this).html());
+                $('#selectye').hide();
+            })
+            //复选框状态跟随
             $("#leftlist input").change(function(){
                 $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
             })
@@ -441,118 +432,98 @@ const mapDispatchToProps = (dispatch) => {
                     $(this).siblings('img').attr('src', add);
                 }
             })
-              
-             
-              //查询按钮功能
+            //查询按钮功能
             $('#searchall').on('click',function(){
-              $('#tabtit span').css('background','none');
-              $('#tablist td').css('background','none');
-             
-              //显示表格
-              $('#tablebox').show();
-             
-
-               
-
+                $('#tabtit span').css('background','none');
+                $('#tablist td').css('background','none');
+                //显示表格
+                $('#tablebox').show();
             })
-
-
-
-
         },
         showtree:(devurl,firstname)=>{
             dispatch(actions.setVars('boolywbb', false));
             dispatch(actions.appendObjs('firstname',firstname));
             //获取对应设备的数据
-        $.ajax({    
-               url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=GetWFInfoByMonNoWfType&devtype='+devurl+'&crossDomain=true&zip=false',    
-               dataType:"jsonp",    
-               jsonp:"callback",    
-               jsonpCallback:"testCall",    
-               timeout:3000,       
-               success:function(json,textStatus){  
-                dispatch(actions.setVars('select_list',json));
-                dispatch(actions.setVars('devurls',devurl));
-                dispatch(actions.setVars('boolywbb', true));
-               },    
-               error:function(XMLHttpRequest,textStatus,errorThrown){    
-                   alert('获取数据失败！');    
-               }    
+            $.ajax({    
+                url:'http://'+url+'/Monitor/xml.aspx',    
+                data:'functionname=GetWFInfoByMonNoWfType&devtype='+devurl+'&crossDomain=true&zip=false',    
+                dataType:"jsonp",    
+                jsonp:"callback",    
+                jsonpCallback:"testCall",    
+                timeout:3000,       
+                success:function(json,textStatus){  
+                    dispatch(actions.setVars('select_list',json));
+                    dispatch(actions.setVars('devurls',devurl));
+                    dispatch(actions.setVars('boolywbb', true));
+                },    
+                error:function(XMLHttpRequest,textStatus,errorThrown){    
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败！'));  
+                }    
             });
-      
-
-
         },
-
         clickitem:(kk,even)=>{
-          let knum=[];
-          let Tname=[];
-          $('#'+even.id).css('background','#369').siblings().css('background','none')
-          $('#tabody tr').each(function(){
-            $(this).children('td').eq(kk).css('background','#369').siblings().css('background','none');
-            knum.push(Number($(this).children('td').eq(kk).text()))
-            Tname.push($(this).children('td').eq(1).text())
-          })
-          dispatch(actions.setVars('chart', knum));
-          dispatch(actions.setVars('chartname', Tname));
-          dispatch(actions.setVars('chartTitle', even.innerHTML));
-          $('#colum').show();
+            let knum=[];
+            let Tname=[];
+            $('#'+even.id).css('background','#369').siblings().css('background','none')
+            $('#tabody tr').each(function(){
+                $(this).children('td').eq(kk).css('background','#369').siblings().css('background','none');
+                knum.push(Number($(this).children('td').eq(kk).text()))
+                Tname.push($(this).children('td').eq(1).text())
+            })
+            dispatch(actions.setVars('chart', knum));
+            dispatch(actions.setVars('chartname', Tname));
+            dispatch(actions.setVars('chartTitle', even.innerHTML));
+            $('#colum').show();
         },
         searchnum:(devurls)=>{
-          dispatch(actions.setVars('tabledata',undefined));
+            dispatch(actions.setVars('tabledata',undefined));
             var all=[];
-           //清空数组
-               all.splice(0,all.length);//字段
+            //清空数组
+            all.splice(0,all.length);//字段
 
-               //获取查询时间
-               var startTime=$('#startTime').val();
-               var endTime=$('#endTime').val();
-              $('#leftlist input').each(function(){
-                 if($(this).prop('checked')==true){
+            //获取查询时间
+            var startTime=$('#startTime').val();
+            var endTime=$('#endTime').val();
+            $('#leftlist input').each(function(){
+                if($(this).prop('checked')==true){
                     if($(this).val()!=='value'){
                       all.push($(this).val())
                     }
-                  }
-
-              })
-              if(all.length>50){
+                }
+            })
+            if(all.length>50){
                 all.splice(50,all.length);
-              }
-              if(all.length==0){
-
-                alert('设备数据获取失败！')
+            }
+            if(all.length==0){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '设备数据获取失败！')); 
                 return;
-              }
-
-
-          $.ajax({    
-               url:'http://'+url+'/Monitor/xml.aspx',    
-               data:'functionname=CountDay&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&modelid=1DD28544-7805-4D86-8E39-09404726214A&devtype='+devurls+'&CountColumn=true&crossDomain=true&zip=false',    
-               dataType:"jsonp",    
-               jsonp:"callback",    
-               jsonpCallback:"testCall",    
-               timeout:6000,       
-               success:function(json,textStatus){  
-                let shu=[];
-                for(let i in json){
-                  shu.push(json[i])
-                }
-                if(shu.length==0){
-                  alert('没有符合条件的数据！')
-                }
-                
-                dispatch(actions.setVars('tabledata',json));
-               },    
-               error:function(XMLHttpRequest,textStatus,errorThrown){    
-                   alert('获取数据失败！');    
-               }    
+            }
+            $.ajax({    
+                url:'http://'+url+'/Monitor/xml.aspx',    
+                data:'functionname=CountDay&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&modelid=1DD28544-7805-4D86-8E39-09404726214A&devtype='+devurls+'&CountColumn=true&crossDomain=true&zip=false',    
+                dataType:"jsonp",    
+                jsonp:"callback",    
+                jsonpCallback:"testCall",    
+                timeout:6000,       
+                success:function(json,textStatus){  
+                    let shu=[];
+                    for(let i in json){
+                      shu.push(json[i])
+                    }
+                    if(shu.length==0){
+                      dispatch(actions.setVars('alertBool', false));
+                      dispatch(actions.setVars('alertText', '没有符合条件的数据！')); 
+                    }
+                    dispatch(actions.setVars('tabledata',json));
+                },    
+                error:function(XMLHttpRequest,textStatus,errorThrown){
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败！'));    
+                }    
             });
         }
-
-       
-       
-       
     };
 };
 
