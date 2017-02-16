@@ -11,12 +11,8 @@ let win = winds[0].plan;
 let Component = React.createClass({
     componentWillMount() {
     },
-
     render() {
-
         let {actbt, changedata1,grid, win,ipUrl, w0,jhpcolor, wc1, mapmonth, hhdata, barLotime, text, power1, wrong10, wrong11, wrong12, wrong13, pba1, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2, power3, wrong30, wrong31, wrong32, wrong33, pba3, barLotime3} = this.props;
-
-
         let configPie = {
             chart: {
                 height: 400,
@@ -28,7 +24,6 @@ let Component = React.createClass({
             },
             title: {
                 text: text,
-
                 align: 'left',
                 x: "0",
                 style: {
@@ -40,7 +35,6 @@ let Component = React.createClass({
             },
             //图例说明
             legend: {
-
                 align: "right",
                 verticalAlign: "top",
                 y: 20,
@@ -55,25 +49,20 @@ let Component = React.createClass({
                     fontFamily: "微软雅黑"
                 }
             },
-
             credits: {
                 enabled: false //不显示highCharts版权信息
             },
-            colors: ['#4CDB9D', ' #A2D04D', '#FFD927', '#FF9424', '#FF6124', '#000fff', '#134833', '#082B1F']
-            ,
+            colors: ['#4CDB9D', ' #A2D04D', '#FFD927', '#FF9424', '#FF6124', '#000fff', '#134833', '#082B1F'],
+            tooltip: {
+                shared: true
+            },
             plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
+                column: {
+                    stacking:"normal",
+                    pointPadding: 0.1,
                     borderWidth: 0,
-                    size: '100%',
-                    innerSize: '80%',
-                    dataLabels: {
-                        enabled: false
-                    }
-                },
-                bar: {
-                    animation: true
+                    pointWidth: 35,
+                    borderRadius:2
                 },
                 series: {
                     cursor: 'pointer',
@@ -82,25 +71,10 @@ let Component = React.createClass({
                             w0 = e.point.category;
                             wc1 = e.point.index;
                             changedata1(grid,ipUrl,w0, win, wc1, actbt, hhdata,mapmonth );
-
                         }
                     }
-                },
-                column: {
-                    stacking: 'normal',
-                    maxPointWidth: 40,
-                    borderWidth: 0,
-
-
-
-                },
-                line:{
-                    tooltip: {
-                        valueSuffix:'%'
-                    },
-                },
+                },                
             },
-
             xAxis: {
                 lineWidth: 1,
                 //lineColor: "red",
@@ -114,9 +88,6 @@ let Component = React.createClass({
                 },
                 categories: barLotime,
             },
-            tooltip: {
-                shared: true
-            },
             yAxis: [{
                 labels: {
                     format: '',
@@ -124,7 +95,8 @@ let Component = React.createClass({
                         color: jhpcolor,
                         fontSize: '14px'
                     }
-                }, gridLineDashStyle: 'Solid',
+                }, 
+                gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
 
                 title: {
@@ -145,7 +117,8 @@ let Component = React.createClass({
                         color: jhpcolor,
                         fontSize: '14px'
                     }
-                }, gridLineDashStyle: 'Solid',
+                },
+                gridLineDashStyle: 'Solid',
                 gridLineColor: '#6d6a6c',
                 min:0,
                 title: {
@@ -168,8 +141,8 @@ let Component = React.createClass({
                 type: 'column',
                 color: "#33BAC0",
                 data: power1,
-                borderRadius: 4,
-                pointPlacement:0.1,
+                // borderRadius: 4,
+                // pointPlacement:0.1,
                 tooltip: {
                     valueSuffix:'kWh'
                 },
@@ -179,56 +152,56 @@ let Component = React.createClass({
                 type: 'column',
                 data: wrong10,
                 stack: 'time',
-                pointPlacement:-0.1,
+                // pointPlacement:-0.1,
                 tooltip: {
                     valueSuffix:'kWh'
                 },
 
             },
-                {
-                    name: '维护损失',
-                    color: '#ffffff',
-                    type: 'column',
-                    data: wrong11,
-                    stack: 'time',
-                    pointPlacement:-0.1,
-                    tooltip: {
-                        valueSuffix:'kWh'
-                    },
+            {
+                name: '维护损失',
+                color: '#ffffff',
+                type: 'column',
+                data: wrong11,
+                stack: 'time',
+                // pointPlacement:-0.1,
+                tooltip: {
+                    valueSuffix:'kWh'
                 },
-                {
-                    name: '限功率损失',
-                    color: '#e8952a',
-                    type: 'column',
-                    data: wrong12,
-                    stack: 'time',
-                    pointPlacement:-0.1,
-                    tooltip: {
-                        valueSuffix:'kWh'
-                    },
+            },
+            {
+                name: '限功率损失',
+                color: '#e8952a',
+                type: 'column',
+                data: wrong12,
+                stack: 'time',
+                // pointPlacement:-0.1,
+                tooltip: {
+                    valueSuffix:'kWh'
                 },
-
-                {
-                    name: '非设备原因损失',
-                    color: '#d8403d',
-                    type: 'column',
-                    data: wrong13,
-                    stack: 'time',
-                    borderRadius: 2,
-                    pointPlacement:-0.1,
-                    tooltip: {
-                        valueSuffix:'kWh'
-                    },
+            },
+            {
+                name: '非设备原因损失',
+                color: '#d8403d',
+                type: 'column',
+                data: wrong13,
+                stack: 'time',
+                // borderRadius: 2,
+                // pointPlacement:-0.1,
+                tooltip: {
+                    valueSuffix:'kWh'
                 },
-
-
-                {
-                    name: 'PBA',
-                    type: 'line',
-                    color: '#0000ff',
-                    data: pba1,
-                    yAxis: 1,
+            },
+            {
+                name: 'PBA',
+                type: 'line',
+                color: '#0000ff',
+                data: pba1,
+                yAxis: 1,
+                tooltip: {
+                    valueSuffix: '%',
                 },
+            },
 
             ]
         };

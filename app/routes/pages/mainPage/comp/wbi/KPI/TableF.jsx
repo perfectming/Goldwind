@@ -52,7 +52,7 @@ let Component = React.createClass({
             },
             colors: [ '#33BAC0', '#5298d2', '#ffffff', '#e8952a','#d8403d','#0000ff'],
             tooltip: {
-                shared: true
+                shared: true,
             },
             plotOptions: {
                 column: {
