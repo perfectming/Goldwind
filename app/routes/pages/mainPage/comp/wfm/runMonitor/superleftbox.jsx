@@ -142,14 +142,13 @@ let Component = React.createClass({
                 <p>{mod1.dis.YearEgyAt.name}<span className={styles.pspan}>({mod1.dis.YearEgyAt.unit})</span></p>
                 <div className={styles.boxone}>
                     <div className={styles.absbox1} style={{width:((data2[8888800].YearEgyAt/data2[8888800].YearPlanTotEgyAt)*100).toFixed(1)+"%",background:nfdl>90?'#62de88':nfdl>80?'#e8952a':nfdl>60?'#a32124':'#d8403d'}}>{Number((data2[8888800].YearEgyAt)*zhzb.Model.dis.YearEgyAt.coeff).toFixed(zhzb.Model.dis.YearEgyAt.place)}</div>
-                    <span className={styles.absnum} >{nfdl.toFixed(1)}%</span>
+                    <span className={styles.absnum}>{nfdl.toFixed(1)}%</span>
                 </div>
                  <p>{mod1.dis.MonthEgyAt.name}<span className={styles.pspan}>({mod1.dis.MonthEgyAt.unit})</span></p>
                 <div className={styles.boxone}>
                     <div className={`${styles.absbox1} ${styles.absbox2}`} style={{width:((data2[8888800].MonthEgyAt/data2[8888800].CurMonthPlanEgyAt)*100).toFixed(2)+"%",background:yfdl>90?'#62de88':yfdl>80?'#e8952a':yfdl>60?'#a32124':'#d8403d'}} >{Number((data2[8888800].MonthEgyAt)*zhzb.Model.dis.MonthEgyAt.coeff).toFixed(zhzb.Model.dis.MonthEgyAt.place)}</div>
                     <span className={styles.absnum}>{yfdl.toFixed(2)}%</span>
                 </div>
-
                 </div>
                 <div className={`${styles.Completion} ${styles.box_shadow}`}>
 

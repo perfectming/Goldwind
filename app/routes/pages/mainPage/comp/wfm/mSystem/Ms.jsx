@@ -584,6 +584,7 @@ const mapDispatchToProps = (dispatch) => {
                                     dataType: 'json',//here,
                                     contentType:'application/json;charset=UTF-8',
                                     success:function () {
+                                        dispatch(actions.setVars('pageMs', 1));
                                         $.ajax({
                                             url: soamMs+'/role/likeRole',
                                             type: 'post',
@@ -699,6 +700,7 @@ const mapDispatchToProps = (dispatch) => {
                                 dataType: 'json',//here,
                                 contentType:'application/json;charset=UTF-8',
                                 success:function () {
+                                    dispatch(actions.setVars('pageMs', 1));
                                     $.ajax({
                                         url: soamMs+'/role/likeRole',
                                         type: 'post',

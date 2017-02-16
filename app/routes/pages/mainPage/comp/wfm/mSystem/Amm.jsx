@@ -456,6 +456,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         addDate:(li)=>{
             let phone=/^1\d{10}$/;
+            let dogcode=/^[a-zA-Z0-9_]+$/;
             let mail=/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
             let tableV = _.clone(getState().objs.tableContentAmm);
             let ids = _.clone(getState().vars.roleIds);
@@ -475,6 +476,11 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(actions.setVars('alertBool', false));
                 dispatch(actions.setVars('alertText', '请输入正确的邮箱'));
                 tableV.data.pagedata[li]['mailbox'] = '';
+                dispatch(actions.setObjs('tableContentAmm', tableV));
+            } else if(!dogcode.test(wfs.dogcode) && wfs.dogcode){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入正确的加密狗码'));
+                tableV.data.pagedata[li]['dogcode'] = '';
                 dispatch(actions.setObjs('tableContentAmm', tableV));
             }
             else if(!wfs.name){
