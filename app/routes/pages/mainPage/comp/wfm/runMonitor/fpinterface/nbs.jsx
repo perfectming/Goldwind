@@ -72,7 +72,7 @@ let Component = React.createClass({
                                 <div className={`${styles.itembox} ${styles.itemL}`} key = {key}>
                                     <div className={styles.namebox}>{value}</div>
                                     <div className={styles.itemrightbox}>
-                                        <div className={styles.itemrightT}>
+                                        <div className={styles.itemrightB}>
                                             <p>Ia(A)<span>0</span><span>A</span></p>
                                         </div>
                                         <div className={styles.itemrightB}>
