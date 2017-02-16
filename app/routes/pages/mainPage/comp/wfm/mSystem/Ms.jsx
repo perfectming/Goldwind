@@ -711,6 +711,8 @@ const mapDispatchToProps = (dispatch) => {
                                             dispatch(actions.setVars('boxRoleArr', null));
                                             dispatch(actions.setVars('boxCenter', null));
                                             dispatch(actions.setVars('boolAlert', true));
+                                            dispatch(actions.setVars('alertBool', false));
+                                            dispatch(actions.setVars('alertText', '修改成功'));
                                         },
                                         error:function(){
                                             dispatch(actions.setVars('boolAlert', true));

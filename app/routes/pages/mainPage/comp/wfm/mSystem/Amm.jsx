@@ -408,6 +408,8 @@ const mapDispatchToProps = (dispatch) => {
                                     dispatch(actions.setObjs('tableContentAmm', data));
                                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                                     dispatch(actions.setVars('boolAlert', true));
+                                    dispatch(actions.setVars('alertBool', false));
+                                    dispatch(actions.setVars('alertText', '保存成功'));
                                 },
                                 error:function(){
                                     dispatch(actions.setVars('boolAlert', true));

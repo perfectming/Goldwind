@@ -153,7 +153,7 @@ let Component = React.createClass({
 	                			</tr>
 	                			{
 	                				wtArr.slice(0,15).map((value,key)=>{
-			                    		return(<tr key={key}><th>{key+1}</th><th>{value.wtname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime/60).toFixed(1)}小时</th></tr>)
+			                    		return(<tr key={key}><th>{key+1}</th><th>{value.wtname}</th><th>{(value.everyAreaPba*100).toFixed(1)}%</th><th>{(value.downtime/60).toFixed(1)}h</th></tr>)
 			                    	})
 	                			}
 	                		</tbody>	
