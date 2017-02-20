@@ -77,10 +77,9 @@ const mapDispatchToProps = (dispatch) => {
                 }else{
                     $(this).css("background-image",'url('+add+')');
                 }
-
                 $(this).siblings('div').toggle();
-            })
-            //获取选中风机的信息
+            });
+            //获取选中信息
             $("#sent").on('click',function(){
                 var obj = document.getElementsByName("checkname");
                 var check_val = [];

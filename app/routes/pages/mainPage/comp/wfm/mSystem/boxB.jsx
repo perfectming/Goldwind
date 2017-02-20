@@ -13,7 +13,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {boxCenterId,wfBoxB,border1=true,closebox2,Tofaninfo1} = this.props;
+        let {act,boxCenterId,wfBoxB,border1=true,closebox2,Tofaninfo1} = this.props;
         return (
 
             <div className={styles.fiexdbox}  style={{top: 30, left:-73}}>
@@ -29,7 +29,7 @@ let Component = React.createClass({
                                             {
                                                 value.wfinfos.map((valueC,keyC)=>{
                                                     return(
-                                                        <div className={styles.listitem} key={keyC} onClick = {()=> Tofaninfo1(valueC.id,boxCenterId)}>
+                                                        <div className={act==keyC?styles.listitem1:styles.listitem} key={keyC} onClick = {()=> Tofaninfo1(valueC.id,boxCenterId,keyC)}>
                                                             {valueC.name}
                                                         </div>
                                                     )
@@ -53,6 +53,7 @@ const mapStateToProps = (state) => {
         border1: state.vars.bordershow1,
         wfBoxB: state.objs.wfBoxB,
         boxCenterId: state.objs.boxCenterId,
+        act:state.vars.actBoxB,
     }
 };
 
@@ -98,7 +99,8 @@ const mapDispatchToProps = (dispatch) => {
         closebox2:()=>{
             $("#box2").parent().css("display","none");
         },
-        Tofaninfo1: (id,name)=> {
+        Tofaninfo1: (id,name,i)=> {
+            dispatch(actions.setVars('actBoxB', i));
             $("#center3 input[name='checkItOut']").prop('checked',true);
             $("#center3 input[name='checkItIn']").prop('checked',false);
             $.ajax({

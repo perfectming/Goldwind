@@ -105,12 +105,11 @@ let Component = React.createClass({
                                                                onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                value={value[valueC]}/>
                                                     )
-                                                }else if (valueC=='logintype'){
+                                                }else if (keyC==6){
                                                     return (
                                                         <select className={styles.tableContentItem} key={keyC}
                                                                 onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                               style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                                type="button">
+                                                               style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}>
                                                             {
                                                                 logintypeArr.map((valueD,keyD)=>{
                                                                 return(
@@ -185,16 +184,15 @@ let Component = React.createClass({
                                                                    onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                                    value={value[valueC]} type="password"/>
                                                         )
-                                                    }else if (valueC=='logintype'){
+                                                    }else if (keyC==6){
                                                         return (
                                                             <select className={styles.tableContentItem} key={keyC}
                                                                     onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
-                                                                    style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}
-                                                                    type="button">
+                                                                    style={{width:(100/(tabaleData.ammData.header.length+2))+"%"}}>
                                                                 {
                                                                     logintypeArr.map((valueD,keyD)=>{
                                                                         return(
-                                                                            < option className={styles.opt} value={keyD} key={keyD}>{valueD}</option>
+                                                                            < option className={styles.opt} name={value[valueC]==keyD?"selectOpt":'seleOpt'} value={keyD} key={keyD}>{valueD}</option>
                                                                         )
                                                                     })
                                                                 }
@@ -266,7 +264,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            $("option[name='selectOpt']").prop('selected',true);
             dispatch(actions.setVars('roleIds', null));
             dispatch(actions.setVars('nameAmm', null));
             dispatch(actions.setVars('pageAmm', 1));
@@ -279,6 +276,7 @@ const mapDispatchToProps = (dispatch) => {
                     //console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                    $("option[name='selectOpt']").prop('selected',true);
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
@@ -298,7 +296,6 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
-
         },
         checkId(id,i,j){
             $.ajax({
@@ -398,6 +395,7 @@ const mapDispatchToProps = (dispatch) => {
                         contentType:'application/json;charset=UTF-8',
                         success:function () {
                             dispatch(actions.setVars('pageAmm', 1));
+                            $("option[name='selectOpt']").prop('selected',true);
                             $.ajax({
                                 url: soam+'/user/getAllUser',
                                 type: 'post',
@@ -410,6 +408,7 @@ const mapDispatchToProps = (dispatch) => {
                                     dispatch(actions.setVars('boolAlert', true));
                                     dispatch(actions.setVars('alertBool', false));
                                     dispatch(actions.setVars('alertText', '保存成功'));
+                                    $("option[name='selectOpt']").prop('selected',true);
                                 },
                                 error:function(){
                                     dispatch(actions.setVars('boolAlert', true));
@@ -519,6 +518,7 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('boolAlert', true));
                             dispatch(actions.setObjs('tableContentAmm', data));
                             dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                            $("option[name='selectOpt']").prop('selected',true);
                             dispatch(actions.setVars('alertBool', false));
                             dispatch(actions.setVars('alertText', '添加成功'));
                         },
@@ -575,6 +575,7 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                             dispatch(actions.setVars('alertBool', false));
                             dispatch(actions.setVars('alertText', '删除成功'));
+                            $("option[name='selectOpt']").prop('selected',true);
                         },
                         error:function(){
                             dispatch(actions.setVars('alertBool', false));
@@ -643,7 +644,6 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,page:page,username:name},
                 dataType: 'json',//here,
                 success:function (data) {
-                    //console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                     $("option[name='selectOpt']").prop('selected',true);
@@ -663,7 +663,6 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,page:page,username:name},
                 dataType: 'json',//here,
                 success:function (data) {
-                    //console.log(data);
                     dispatch(actions.setObjs('tableContentAmm', data));
                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                     $("option[name='selectOpt']").prop('selected',true);

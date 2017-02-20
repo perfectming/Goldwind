@@ -9,13 +9,6 @@ let type = require('../report/ywbb_date');
 var $ =require('jquery');
 var actions = require('redux/actions');
 let Component = React.createClass({
-    componentWillMount() {
-        let{playjq}=this.props;
-        //初始化jquery方法
-        setTimeout(function(){
-            playjq();
-        },1000)
-    },
     componentDidMount() {
         this.props.init();
     },
@@ -99,11 +92,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-        },
-        closeboxA:()=>{
-            $("#box1").parent().css("display","none");
-        },
-        playjq:()=>{
             //复选框状态跟随
             $("#box1 input").change(function(){
                 $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
@@ -117,6 +105,11 @@ const mapDispatchToProps = (dispatch) => {
                     $(this).siblings('img').attr('src', add);
                 }
             })
+        },
+        closeboxA:()=>{
+            $("#box1").parent().css("display","none");
+        },
+        playjq:()=>{
         },
         saveAll: ()=> {
             let typeIdTemp = _.clone(getState().vars.boxRoleId);
