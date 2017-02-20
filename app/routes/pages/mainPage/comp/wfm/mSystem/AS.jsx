@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import AlertWindow from '../../wbi/KPI/AlertWindow.jsx';//提示框
 var actions = require('redux/actions');
 var $ =require('jquery');
 import styles from './AS.scss';
@@ -33,7 +34,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {skinStyle,saveTableItem,addData,deleData,page,theOne,lastPage,nextPage,theLast,wttypedefine,protocolid,init,wfidCount,buttonAction,onFocus,inputOnChange,add,table, changeTableItem,dele} = this.props;
+        let {alertText,skinStyle,saveTableItem,addData,deleData,page,theOne,lastPage,nextPage,theLast,wttypedefine,protocolid,init,wfidCount,buttonAction,onFocus,inputOnChange,add,table, changeTableItem,dele} = this.props;
         let num=0;
         let newData={};
         for(let i=0;i<arr.length;i++){
@@ -42,6 +43,7 @@ let Component = React.createClass({
         if (table) {//判断数据是否存在
             return (
                 <div>
+                    <AlertWindow text={alertText}></AlertWindow>
                     <div className={skinStyle==2?styles.inquireBoxWhite:styles.inquireBox}>
                         {
                             tabaleData.as.comps.map((value, key)=> {
@@ -185,7 +187,8 @@ const mapStateToProps = (state) => {
         wttypedefine:state.vars.wttypedefine,
         protocolid:state.vars.protocolid,
         ASCount:state.vars.ASCount,
-        skinStyle: state.vars.skinStyle
+        skinStyle: state.vars.skinStyle,
+        alertText : state.vars.alertText,//弹框提示文字
     }
 };
 
@@ -201,7 +204,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,curpage:1},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
+                    //console.log(data);
                     dispatch(actions.setObjs('tableContentAS', data));
                     dispatch(actions.setVars('ASCount', data.data.pagedata.length));
                 },
@@ -223,11 +226,12 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,curpage:1,wttypedefine:tContent,protocolid:tContent1},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
+                    //console.log(data);
                     dispatch(actions.setObjs('tableContentAS', data));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -243,10 +247,13 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 contentType:'application/json;charset=UTF-8',
                 success:function (data) {
-                    console.log(data,'Victory');
+                    //console.log(data,'Victory');
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '保存成功'));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
             $.ajax({
@@ -255,12 +262,13 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,curpage:1},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
+                    //console.log(data);
                     dispatch(actions.setObjs('tableContentAS', data));
                     dispatch(actions.setVars('ASCount', data.data.pagedata.length));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '刷新列表失败'));
                 }
             });
         },
@@ -280,7 +288,7 @@ const mapDispatchToProps = (dispatch) => {
             (wfs.wfid==='') && (wfs.wfid='150801');
             let ddv;
             ddv=JSON.stringify(wfs);
-            console.log(wfs,ddv);
+            //console.log(wfs,ddv);
             $.ajax({
                 url: soam+'/Alarm/addAlarm?alarm=data',
                 type: 'post',
@@ -288,10 +296,12 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 contentType:'application/json;charset=UTF-8',
                 success:function (data) {
-                    console.log(data);
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '添加成功'));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
             $.ajax({
@@ -304,7 +314,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setObjs('tableContentAS', data));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '刷新列表失败'));
                 }
             });
         },
@@ -317,11 +328,13 @@ const mapDispatchToProps = (dispatch) => {
                 data:'id='+fid,
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data);
-                    alert('删除成功');
+                    //console.log(data);
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '删除成功'));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
             $.ajax({
@@ -330,12 +343,13 @@ const mapDispatchToProps = (dispatch) => {
                 data:'pageSize='+pageSize+'&&nowPage=1',
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data.data.pagedata.length);
+                    //console.log(data.data.pagedata.length);
                     dispatch(actions.setObjs('tableContent', data));
                     dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -356,12 +370,13 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,curpage:page,wttypedefine:x,protocolid:y},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data)
+                    //console.log(data)
                     dispatch(actions.setObjs('tableContentAS', data));
                     dispatch(actions.setVars('ASCount', data.data.pagedata.length));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -375,12 +390,13 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,curpage:page,wttypedefine:x,protocolid:y},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data)
+                    //console.log(data)
                     dispatch(actions.setObjs('tableContentAS', data));
                     dispatch(actions.setVars('ASCount', data.data.pagedata.length));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
 
@@ -394,12 +410,13 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,curpage:page,wttypedefine:x,protocolid:y},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data)
+                    //console.log(data)
                     dispatch(actions.setObjs('tableContentAS', data));
                     dispatch(actions.setVars('ASCount', data.data.pagedata.length));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },
@@ -412,12 +429,13 @@ const mapDispatchToProps = (dispatch) => {
                 data:{pageSize:pageSize,curpage:page,wttypedefine:x,protocolid:y},
                 dataType: 'json',//here,
                 success:function (data) {
-                    console.log(data)
+                    //console.log(data)
                     dispatch(actions.setObjs('tableContentAS', data));
                     dispatch(actions.setVars('ASCount', data.data.pagedata.length));
                 },
                 error:function(){
-                    console.log('获取数据失败')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
         },

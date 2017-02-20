@@ -58,8 +58,6 @@ let Component = React.createClass({
                        <div className={styles.btnbox}>
                             <a id='sent'>启动</a>
                             <a>停机</a>
-                            <a>复位</a>
-                            <a>测试</a>
                        </div>
                     </div>   
         );
