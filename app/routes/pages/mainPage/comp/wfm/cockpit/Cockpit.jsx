@@ -25,7 +25,7 @@ var {browserHistory} = require('react-router');
 let parameter = require('../monitorkb/Monitorkb-parameter');//日期以及CDM场站参数文件引用//
 var actions = require('redux/actions');
 var $ = require('jquery');
-let ipUrl='10.68.100.32:8080';
+let ipUrl=require('../../urlData').ipUrl;
 let time;
 let onceTime;
 let profit,amounts,rate,yearPro,month2,cost,incomes;

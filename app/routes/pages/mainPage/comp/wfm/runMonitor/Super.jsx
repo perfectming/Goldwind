@@ -26,33 +26,33 @@ let Component = React.createClass({
     render() {
          
         let {zhzb,bbs,all,boolsuper=false,skinStyle}=this.props;
-       if(boolsuper && bbs.ModelData){
-        let data=bbs.ModelData;
-        let mod=zhzb.Model;
-        let date03=[];
+        if(boolsuper && bbs.ModelData){
+            let data=bbs.ModelData;
+            let mod=zhzb.Model;
+            let date03=[];
 
-        let datename00=bbs.ModelData[8888800].CurDayPowerCurve.Time;
-        let date00=bbs.ModelData[8888800].CurDayPowerCurve.Value;
-          date00.map(function(value,key){
-            date03.push(Number((value/1000).toFixed(2)))
-          })
+            let datename00=bbs.ModelData[8888800].CurDayPowerCurve.Time;
+            let date00=bbs.ModelData[8888800].CurDayPowerCurve.Value;
+            date00.map(function(value,key){
+                date03.push(Number((value/1000).toFixed(2)))
+            })
           
-        let datename01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Time;
-        let date01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Value;
-        let datename02=bbs.ModelData[8888802].CurDayPVTSICurve.Time;
-        let date02=bbs.ModelData[8888802].CurDayPVTSICurve.Value;
-         if(datename00==undefined || date00==undefined){
-            datename00=[];
-            date00=[];
-        }
-         if(datename01==undefined || date01==undefined){
-            datename01=[];
-            date02=[];
-        }
-        if(datename02==undefined || date02==undefined){
-            datename02=[];
-            date02=[];
-        }
+            let datename01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Time;
+            let date01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Value;
+            let datename02=bbs.ModelData[8888802].CurDayPVTSICurve.Time;
+            let date02=bbs.ModelData[8888802].CurDayPVTSICurve.Value;
+            if(datename00==undefined || date00==undefined){
+                datename00=[];
+                date00=[];
+            }
+            if(datename01==undefined || date01==undefined){
+                datename01=[];
+                date02=[];
+            }
+            if(datename02==undefined || date02==undefined){
+                datename02=[];
+                date02=[];
+            }
             let datename=zhzb.Model.ens;
             let arr=[];
             let arrname=[];
@@ -86,10 +86,10 @@ let Component = React.createClass({
                 }
             }
 
-           let annularPlate='#39565e';//环状图底色，用于换肤//
-           if(skinStyle==2){
-               annularPlate='#C0E2EA';
-           }
+            let annularPlate='#39565e';//环状图底色，用于换肤//
+            if(skinStyle==2){
+                annularPlate='#C0E2EA';
+            }
         return (
             <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
                 <div className={styles.leftBox}>
@@ -151,7 +151,7 @@ const mapStateToProps = (state) => {
     return {
         zhzb: state.vars.zhzb,
         bbs: state.vars.bbs,
-        boolsuper:state.vars.boolsuper,
+        boolsuper: state.vars.boolsuper,
         skinStyle: state.vars.skinStyle
     }
 };
@@ -172,8 +172,7 @@ const mapDispatchToProps = (dispatch) => {
                                     dispatch(actions.setVars('bbs', bbs));
                                     setTimeout(function(){
                                        dispatch(actions.setVars('boolsuper', true));  
-
-                                   },500)
+                                    },500)
                                      
                                 }
                         }
@@ -181,13 +180,12 @@ const mapDispatchToProps = (dispatch) => {
                 }
 
 
-                 time=setInterval(function(){
+                time=setInterval(function(){
                     TY.getRtData("DataOverview", 8888800, setData1)
                         function setData1(bbs1){
-                            dispatch(actions.setVars('bbs', bbs1));
-   
+                            dispatch(actions.setVars('bbs', bbs1));   
                         }
-                 },2000)
+                },2000)
                                                    
             
         },
@@ -195,8 +193,7 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
-        }
-        ,
+        },
     };
 };
 

@@ -10,7 +10,7 @@ let type = require('./ywbb_date');
 let btype = type.comps.from;
 var $ =require('jquery');
 var actions = require('redux/actions');
-let url='54.223.200.134';
+let url=require('../../urlData').url;
 
 let Component = React.createClass({
     componentWillMount() {

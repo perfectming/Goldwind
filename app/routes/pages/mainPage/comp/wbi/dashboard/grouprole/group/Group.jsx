@@ -6,7 +6,8 @@ import Pie2 from '../PieTwo';//饼图组件
 import Login from '../../../../../../../../components/common/Loading.jsx';//加载跳转页面
 
 
-var ipUrl='10.68.100.32:8080';
+let urlData = require('../../../../urlData');
+var ipUrl = urlData.ipUrl;
 var actions = require('redux/actions');
 var $ =require("jQuery");
 

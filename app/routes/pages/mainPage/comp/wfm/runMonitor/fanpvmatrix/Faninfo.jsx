@@ -504,7 +504,7 @@ const mapDispatchToProps = (dispatch) => {
 	                                    // console.log(infofData.ModelData[value.Wtid]["WTUR.Temp.Ra.F32"])
 	                                    let d = infofData.ModelData[value.Wtid];
 	                                    if(d == undefined || d["DevCurDayPowerCurve"] == undefined || d["CurDayWindSpeedCurve_Device"] == undefined){
-	                                    	console.log(value,setData5)
+	                                    	//console.log(value,setData5)
 	                                    	TY.getRtData("WTDetail", value.Wtid, setData5)
 	                                    }else{
 	                                    	dispatch(actions.setVars('infofdata', infofData));
