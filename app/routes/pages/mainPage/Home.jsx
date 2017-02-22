@@ -7,6 +7,8 @@ import Body from './module/Body';
 import FixedContent from '../../../components/common/FixedContent.jsx';
 var {browserHistory} = require('react-router');
 var $ =require('jquery');
+let ipUrl = require('./comp/urlData.js').soam1;//超时url
+let icon = require('./comp/urlData.js').icon;//图标url
 var ReactHighcharts = require('react-highcharts');
 
 var actions = require('redux/actions');
@@ -29,8 +31,8 @@ let Component = React.createClass({
                 menu.push(
                     {
                         name:value.name,
-                        iconNormal: 'http://10.68.100.29:2992/_assets/'+value.smallpicture+'.png',
-                        iconActive: 'http://10.68.100.29:2992/_assets/'+value.largepicture+'.png',
+                        iconNormal: icon+value.smallpicture+'.png',
+                        iconActive: icon+value.largepicture+'.png',
                         subPage:[]
                     }
                 );
@@ -40,8 +42,8 @@ let Component = React.createClass({
                         menu[key].subPage.push(
                             {
                                 name:valueC.name,
-                                iconNormal: 'http://10.68.100.29:2992/_assets/'+valueC.smallpicture+'.png',
-                                iconActive: 'http://10.68.100.29:2992/_assets/'+valueC.largepicture+'.png',
+                                iconNormal: icon+valueC.smallpicture+'.png',
+                                iconActive: icon+valueC.largepicture+'.png',
                                 page:[]
                             }
                         )
@@ -140,7 +142,7 @@ const mapDispatchToProps = (dispatch) => {
                 ()=>Verification(userMessage);
             }else{
                 $.ajax({
-                url:'http://10.68.100.32:8080/soam/token/verifyToken',
+                url:ipUrl+'/token/verifyToken',
                 data:'userid='+userMessage.data.id+'&token='+userMessage.data.token+'',
                 type:'post',
                 dataType:"json",
