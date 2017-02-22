@@ -119,7 +119,6 @@ let Component = React.createClass({
                                                                     <input className={styles.tableContentItem}
                                                                            style={{width: (100 / (tabaleData.msData.header.length + 2)) + "%"}}
                                                                            key={keyC} contentEditable="true" readOnly="readOnly"
-                                                                           onBlur={(e)=>checkName(e.target,key,keyC)}
                                                                            onChange={(e)=>changeTableItem1(e.target.value, table, key, keyC)}
                                                                            value={value[valueC]}/>
                                                                 )
