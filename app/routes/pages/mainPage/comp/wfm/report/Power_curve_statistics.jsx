@@ -11,7 +11,7 @@ let btype = type.comps.from;
 var $ =require('jquery');
 var actions = require('redux/actions');
 var {browserHistory} = require('react-router');
-let url='54.223.200.134';
+let url=require('../../urlData').url;
 
 let Component = React.createClass({
     componentWillMount() {

@@ -218,6 +218,34 @@
     border:1px solid #3e4c67;
     margin-top:15px;
     background: rgba(44,61,71,0.4);
+    .hoverBoxD{
+      display:none;
+      padding-left:20px;
+      padding-top:9px;
+      z-index:999;
+      position:absolute;
+      top:-45px;
+      left:50%;
+      background-color:#39565e;
+      height:100px;
+      width:35%;
+      border-radius:25px;
+      color:white;
+    }
+    .hoverBoxM{
+      display:none;
+      padding-left:20px;
+      padding-top:9px;
+      z-index:533;
+      position:absolute;
+      top:10px;
+      left:50%;
+      background-color:#39565e;
+      height:100px;
+      width:35%;
+      border-radius:25px;
+      color:white;
+    }
     p{
       padding-left:45px;
       height:30px;
@@ -494,6 +522,34 @@
     margin-top:15px;
     border:1px solid #1C405B;
     background: #112A48;
+    .hoverBoxD{
+      display:none;
+      padding-left:20px;
+      padding-top:9px;
+      z-index:999;
+      position:absolute;
+      top:-45px;
+      left:50%;
+      background-color:#39565e;
+      height:100px;
+      width:35%;
+      border-radius:25px;
+      color:white;
+    }
+    .hoverBoxM{
+      display:none;
+      padding-left:20px;
+      padding-top:9px;
+      z-index:533;
+      position:absolute;
+      top:10px;
+      left:50%;
+      background-color:#39565e;
+      height:100px;
+      width:35%;
+      border-radius:25px;
+      color:white;
+    }
     p{
       padding-left:45px;
       height:30px;
@@ -770,6 +826,34 @@
     margin-top:15px;
     border:1px solid #DDDDDD;
     background: #E7F1FA;
+    .hoverBoxD{
+      display:none;
+      padding-left:20px;
+      padding-top:9px;
+      z-index:999;
+      position:absolute;
+      top:-45px;
+      left:50%;
+      background-color:#39565e;
+      height:100px;
+      width:35%;
+      border-radius:25px;
+      color:white;
+    }
+    .hoverBoxM{
+      display:none;
+      padding-left:20px;
+      padding-top:9px;
+      z-index:533;
+      position:absolute;
+      top:10px;
+      left:50%;
+      background-color:#39565e;
+      height:100px;
+      width:35%;
+      border-radius:25px;
+      color:white;
+    }
     p{
       padding-left:45px;
       height:30px;

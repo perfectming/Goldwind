@@ -99,7 +99,7 @@ let Component = React.createClass({
                 enabled: false //不显示highCharts版权信息
             },
             tooltip: {
-                shared: true,
+                
             },
             plotOptions: {
                 column: {

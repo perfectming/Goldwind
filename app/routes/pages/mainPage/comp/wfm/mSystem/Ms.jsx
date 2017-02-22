@@ -7,7 +7,7 @@ var actions = require('redux/actions');
 import styles from './Ms.scss';
 import AlertWindow from '../../wbi/KPI/AlertWindow.jsx';//提示框
 var $ = require('jquery');
-let soamMs='http://10.68.100.32:8080/soam';
+let soamMs=require('../../urlData').soam1;
 import Abox from './boxA';
 import Bbox from './boxB';
 import Load from './load';

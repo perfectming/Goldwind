@@ -187,17 +187,17 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setObjs('tableContent', tableV));
         },
         changepage:(key) => {
-            console.log(fcnum[key])
-           dispatch(actions.setVars('showPage', 'fan_matrix'));
-           dispatch(actions.setVars('numpage', 'nbs1'));
-           dispatch(actions.setVars('fan_page', 'allpage'));
-          dispatch(actions.setVars('actbt1',key ));
-          dispatch(actions.setVars('actbtn',0));
-          dispatch(actions.setVars('actbt','' ));
-          dispatch(actions.setVars('valuepage1', fcnum[key]));
-          dispatch(actions.setVars('befor_page','super' ));
-           dispatch(actions.setVars('fc_info', fcnum[key]));
-           dispatch(actions.setVars('Changnav', 1));
+            //console.log(fcnum[key])
+            dispatch(actions.setVars('showPage', 'fan_matrix'));
+            dispatch(actions.setVars('numpage', 'nbs1'));
+            dispatch(actions.setVars('fan_page', 'allpage'));
+            dispatch(actions.setVars('actbt1',key ));
+            dispatch(actions.setVars('actbtn',0));
+            dispatch(actions.setVars('actbt','' ));
+            dispatch(actions.setVars('valuepage1', fcnum[key]));
+            dispatch(actions.setVars('befor_page','super' ));
+            dispatch(actions.setVars('fc_info', fcnum[key]));
+            dispatch(actions.setVars('Changnav', 1));
         
                
          
