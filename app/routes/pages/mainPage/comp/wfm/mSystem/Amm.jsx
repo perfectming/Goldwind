@@ -18,7 +18,9 @@ import Load from './load';
 let soam='http://10.68.100.32:8080/soam';
 let tabaleData = require('./data');
 let arr=['id','name','loginname','password','phonecode','mailbox','logintype','dogcode','remark','roleids'];
-let logintypeArr=['密码验证','手机验证','加密狗验证'];
+let logintypeArr=['密码验证',
+    // '手机验证','加密狗验证'
+];
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
@@ -237,7 +239,6 @@ let Component = React.createClass({
                     <span onClick={()=>nextPage(page,table.data.totalRecord,pageSize,uName)}>下一页</span>
                     <span onClick={()=>theLast(page,table.data.totalRecord,pageSize,uName)}>末页</span>
                 </div>
-
             </div>
         </div>
         );}else {return(<Login></Login>)}
@@ -364,72 +365,82 @@ const mapDispatchToProps = (dispatch) => {
             tableV.data.pagedata[i][arr[j]] = value;
             dispatch(actions.setObjs('tableContentAmm', tableV));
         },
-        saveDataAmm:(li)=>{
+        saveDataAmm:(li)=> {
             let pass;
             let tableV = _.clone(getState().objs.tableContentAmm);
             let ids = _.clone(getState().vars.roleIds);
-            if(ids instanceof Array){pass='pass'}
+            if (ids instanceof Array) {
+                pass = 'pass'
+            }
             //console.log(pass);
-            let wfs=tableV.data.pagedata[li];
-            wfs['roleids']=ids;
-            let roleObj={};
-            roleObj['userid']=wfs.id;
-            roleObj['roleids']=ids;
-            roleObj['pass']=pass;
-            let ddv=JSON.stringify(wfs);
-            let idsString=JSON.stringify(roleObj);
+            let wfs = tableV.data.pagedata[li];
+            wfs['roleids'] = ids;
+            let dogcode = /^[a-zA-Z0-9_]+$/;
+            if (dogcode.test(wfs.dogcode) || (!wfs.dogcode)) {
+            let roleObj = {};
+            roleObj['userid'] = wfs.id;
+            roleObj['roleids'] = ids;
+            roleObj['pass'] = pass;
+            let ddv = JSON.stringify(wfs);
+            let idsString = JSON.stringify(roleObj);
             //console.log(ids,roleObj);
             dispatch(actions.setVars('boolAlert', false));
             $.ajax({
-                url: soam+'/user/updateUserInfo?userInfo=data',
+                url: soam + '/user/updateUserInfo?userInfo=data',
                 type: 'post',
                 data: ddv,
                 dataType: 'json',//here,
-                contentType:'application/json;charset=UTF-8',
-                success:function () {
+                contentType: 'application/json;charset=UTF-8',
+                success: function () {
                     $.ajax({
-                        url: soam+'/user/getSetUpUserRole?roleVO=data',
+                        url: soam + '/user/getSetUpUserRole?roleVO=data',
                         type: 'post',
                         data: idsString,
                         dataType: 'json',//here,
-                        contentType:'application/json;charset=UTF-8',
-                        success:function () {
+                        contentType: 'application/json;charset=UTF-8',
+                        success: function () {
                             dispatch(actions.setVars('pageAmm', 1));
-                            $("option[name='selectOpt']").prop('selected',true);
+                            $("option[name='selectOpt']").prop('selected', true);
                             $.ajax({
-                                url: soam+'/user/getAllUser',
+                                url: soam + '/user/getAllUser',
                                 type: 'post',
-                                data:'pageSize='+pageSize+'&&page='+1+'&&username=',
+                                data: 'pageSize=' + pageSize + '&&page=' + 1 + '&&username=',
                                 dataType: 'json',//here,
-                                success:function (data) {
+                                success: function (data) {
                                     dispatch(actions.setVars('roleIds', null));
                                     dispatch(actions.setObjs('tableContentAmm', data));
                                     dispatch(actions.setVars('ammCount', data.data.pagedata.length));
                                     dispatch(actions.setVars('boolAlert', true));
                                     dispatch(actions.setVars('alertBool', false));
                                     dispatch(actions.setVars('alertText', '保存成功'));
-                                    $("option[name='selectOpt']").prop('selected',true);
+                                    $("option[name='selectOpt']").prop('selected', true);
                                 },
-                                error:function(){
+                                error: function () {
                                     dispatch(actions.setVars('boolAlert', true));
                                     dispatch(actions.setVars('alertBool', false));
                                     dispatch(actions.setVars('alertText', '获取数据失败'));
                                 }
                             });
                         },
-                        error:function(){
+                        error: function () {
                             dispatch(actions.setVars('boolAlert', true));
                             dispatch(actions.setVars('alertBool', false));
                             dispatch(actions.setVars('alertText', '获取数据失败'));
                         }
                     });
                 },
-                error:function(){
+                error: function () {
                     dispatch(actions.setVars('boolAlert', true));
                     dispatch(actions.setVars('alertBool', false));
                     dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
+        }else {
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入正确的加密狗码'));
+                tableV.data.pagedata[li]['dogcode'] = '';
+                dispatch(actions.setObjs('tableContentAmm', tableV));
+            }
         },
         jump: (id) => {
             if(id){

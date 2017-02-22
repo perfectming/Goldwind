@@ -33,6 +33,7 @@ let Component = React.createClass({
         if (boolFan) {//判断执行完数据后打开页面
             var forIn=[];
             var forOut=[];
+            console.log(bujianModel,bujianData);
             for(let key in bujianData.ModelData){
                 var diks=key;
             }
