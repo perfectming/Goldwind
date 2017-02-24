@@ -5,12 +5,6 @@ import Hly_ttt from './Hly_ttt.jsx';
 import Hly_d from '../group/groupj/Hly_d.jsx';
 var actions = require('redux/actions');
 
-
-let data = require('./Healthy-data');
-
-
-
-
 let Component = React.createClass({
     componentWillMount() {
         let {ipUrl,areaId}=this.props;
@@ -23,7 +17,7 @@ let Component = React.createClass({
 
     render() {
         let {ipUrl,areaId,skinStyle, monthx, monthx2, healthy2, healthy3, monthx3, befor_pages = 'area', mon, returnit} = this.props;
-        let data = require('./Healthy-data');
+        
         return (
 
 
