@@ -146,12 +146,12 @@ const mapDispatchToProps = (dispatch) => {
                             dispatch(actions.setVars('AlertBool', true));
                         },    
                         error:function(XMLHttpRequest,textStatus,errorThrown){    
-                            console.log('获取数据失败！')  
+                            console.log('请求超时！')  
                         }    
                     });
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    console.log('获取数据失败！')  
+                    console.log('请求超时！')  
                 }    
             });
         },
@@ -173,7 +173,7 @@ const mapDispatchToProps = (dispatch) => {
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));   
+                    dispatch(actions.setVars('alertText', '请求超时！'));   
                 }    
             });
         },
@@ -272,7 +272,7 @@ const mapDispatchToProps = (dispatch) => {
             }
             if(all.length==0){
                 dispatch(actions.setVars('alertBool', false));
-                dispatch(actions.setVars('alertText', '设备数据获取失败！')); 
+                dispatch(actions.setVars('alertText', '请选择设备！')); 
                 return;
             }
             $.ajax({    
@@ -293,7 +293,7 @@ const mapDispatchToProps = (dispatch) => {
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));   
+                    dispatch(actions.setVars('alertText', '请求超时！'));   
                 }    
             });
             

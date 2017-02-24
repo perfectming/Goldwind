@@ -136,7 +136,7 @@ const mapDispatchToProps = (dispatch) => {
             //获取时间间隔
             let Time=(newTime-oldTime)/60000;
             if( Time>20&& Time<(newTime/60000)){
-                alert('由于您长时间没有进行操作,请您重新登入！');
+                alert('由于您长时间没有进行操作,请您重新登录！');
                 browserHistory.push('/app/all/page/login');
             }else if(oldTime=0){
                 ()=>Verification(userMessage);

@@ -6,6 +6,7 @@ import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
 import OneColumn from './oneColumn.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
+import AlertWindow from '../../wbi/KPI/AlertWindow.jsx';//提示框
 let type = require('./ywbb_date');
 let btype = type.comps.from;
 var $ =require('jquery');
@@ -27,7 +28,7 @@ let Component = React.createClass({
     },
 
     render() {
-            let {skinStyle,selectType,lineType=1,boolywbb=false,playjq,select_list,searchnum,powerCurveData} = this.props;
+            let {alertText,skinStyle,selectType,lineType=1,boolywbb=false,playjq,select_list,searchnum,powerCurveData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
@@ -79,6 +80,7 @@ let Component = React.createClass({
                 let treetype=["原始曲线","矫正曲线","对比曲线","分析曲线"];
                 return (
                     <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
+                        <AlertWindow text={alertText}></AlertWindow>
                         <div className={styles.search_tit}>
                             <div className={styles.seleBox}>
                                 <span>曲线种类:</span>
@@ -265,6 +267,7 @@ const mapStateToProps = (state) => {
         select_list:state.vars.select_list,
         powerCurveData:state.objs.powerCurveData,
         lineType:state.vars.lineType,
+        alertText:state.vars.alertText,//弹框提示文字
     }
 };
 
@@ -284,7 +287,7 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boolywbb', true));
                     },    
                     error:function(XMLHttpRequest,textStatus,errorThrown){    
-                        console.log('获取数据失败！');    
+                        console.log('请求超时！');    
                     }    
             });
             
@@ -390,7 +393,8 @@ const mapDispatchToProps = (dispatch) => {
                 thirdId.splice(50,thirdId.length);
             }
             if(firstId.length==0&&secondId.length==0&&thirdId.length==0){
-                alert('请选择设备或路线');
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择设备！'));
                 return false;
             }
             $.ajax({    
@@ -406,10 +410,11 @@ const mapDispatchToProps = (dispatch) => {
                     //     return;
                     // } 
                     // dispatch(actions.setObjs('powerCurveData',json));
-                    console.log(json)
+                    //console.log(json)
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    console.log('获取数据失败！');    
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '请求超时！'));    
                 }    
             });
         }

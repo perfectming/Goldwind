@@ -6,6 +6,7 @@ import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
 import Column from './colum.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
+import AlertWindow from './AlertWindow.jsx';
 let type = require('./ywbb_date');
 let btype = type.comps.from;
 var $ =require('jquery');
@@ -47,7 +48,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {skinStyle,devtype,boolywbb=false,showtree,playjq,firstname,select_list,Powdata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
+        let {alertText,skinStyle,devtype,boolywbb=false,showtree,playjq,firstname,select_list,Powdata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
         let treetype=[];
         let Tarr=[]; //标题数组
         let Barr=[];  //数据
@@ -140,6 +141,7 @@ let Component = React.createClass({
 
             return (
                 <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
+                    <AlertWindow text={alertText}></AlertWindow>
                     <div className={styles.search_tit}>
                         <div className={styles.seleBox}>
                             <span>设备类型:</span>
@@ -284,6 +286,7 @@ const mapStateToProps = (state) => {
         chartname:state.vars.chartname,
         chartTitle:state.vars.chartTitle,
         devurls:state.vars.devurls,
+        alertText : state.vars.alertText,
     }
 };
 
@@ -305,7 +308,7 @@ const mapDispatchToProps = (dispatch) => {
                     gettreedata();
                 },
                 error:function(XMLHttpRequest,textStatus,errorThrown){
-                    console.log('获取数据失败！');
+                    console.log('请求超时！');
 
                 }
             });
@@ -324,7 +327,7 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boolywbb', true));
                     },
                     error:function(XMLHttpRequest,textStatus,errorThrown){
-                        console.log('获取数据失败！');
+                        console.log('请求超时！');
                     }
                 });
             }
@@ -435,7 +438,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('boolywbb', true));
                 },
                 error:function(XMLHttpRequest,textStatus,errorThrown){
-                    console.log('获取数据失败！');
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '请求超时！'));
                 }
             });
 
@@ -478,7 +482,8 @@ const mapDispatchToProps = (dispatch) => {
                 all.splice(50,all.length);
             }
             if(all.length==0){
-                console.log('设备数据获取失败！')
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择设备！'));
                 return;
             }
             $.ajax({
@@ -493,7 +498,8 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('Powdata',json));
                 },
                 error:function(XMLHttpRequest,textStatus,errorThrown){
-                    console.log('获取数据失败！');
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '请求超时！'));
                 }
             });
         }

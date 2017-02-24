@@ -6,6 +6,7 @@ import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
 import Column from './colum.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
+import AlertWindow from '../../wbi/KPI/AlertWindow.jsx';//提示框
 let type = require('./ywbb_date');
 let btype = type.comps.from;
 var $ =require('jquery');
@@ -26,7 +27,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {skinStyle,devtype2,boolywbb2=false,showtree,playjq,select_list3,select_list31,tabledata2,clickitem,chart2,chart2name,chart2Title} = this.props;
+        let {alertText,skinStyle,devtype2,boolywbb2=false,showtree,playjq,select_list3,select_list31,tabledata2,clickitem,chart2,chart2name,chart2Title} = this.props;
         let treetype=[];
         let lefttree=[];
         let Tarr=[];
@@ -127,7 +128,7 @@ let Component = React.createClass({
 
             return (
                 <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
-
+                    <AlertWindow text={alertText}></AlertWindow>
                     <div className={`${styles.leftlist} ${styles.leftlist1}`} id='leftlist'>
                         {
                             select_list3 !== undefined && one.map((valueC,keyC)=>{
@@ -292,6 +293,7 @@ const mapStateToProps = (state) => {
         chart2:state.vars.chart2,
         chart2name:state.vars.chart2name,
         chart2Title:state.vars.chart2Title,
+        alertText:state.vars.alertText,//弹框提示文字
     }
 };
 
@@ -314,7 +316,7 @@ const mapDispatchToProps = (dispatch) => {
                     gettreedata()
                 },
                 error:function(XMLHttpRequest,textStatus,errorThrown){
-                    console.log('获取数据失败！');
+                    console.log('请求超时！');
                 }
             });
 
@@ -332,7 +334,7 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boolywbb2', true));
                     },
                     error:function(XMLHttpRequest,textStatus,errorThrown){
-                        console.log('获取数据失败！');
+                        console.log('请求超时！');
                     }
                 });
             }
@@ -439,7 +441,8 @@ const mapDispatchToProps = (dispatch) => {
                     all.splice(50,all.length);
                 }
                 if(all.length==0){
-                    alert('设备数据获取失败！')
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '请选择设备！'));
                     return;
                 }
 
@@ -454,7 +457,8 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.appendObjs('tabledata2',json));
                     },
                     error:function(XMLHttpRequest,textStatus,errorThrown){
-                        console.log('获取数据失败！');
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '网络请求超时！'));
                     }
                 });
 

@@ -6,7 +6,7 @@ import Hly_r from './Hly_r.jsx';
 import Hly_rs from './Hly_rs.jsx';
 import Login from '../../../../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
-
+let bmId = require("../../../../../urlData").groupId;
 var actions = require('redux/actions');
 
 let data = require('./../../area/Healthy-data');
@@ -314,7 +314,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
 
-                    "groupid": '201612121721151',
+                    "groupid": bmId,
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type": "0",
                     "year": mapmonth[actbt].year,
@@ -353,7 +353,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
 
-                    "groupid": '201612121721151',
+                    "groupid": bmId,
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type": "1",
                     "year": mapmonth[actbt].year,
@@ -389,7 +389,7 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + ipUrl + '/wbi/Health/getPageSize',
                 async: false,
                 data: {
-                    "groupid": '201612121721151',
+                    "groupid": bmId,
                     "wfid": wfid == undefined ? '150801' : wfid,
                     "type": "2",
                     "year": mapmonth[actbt].year,
