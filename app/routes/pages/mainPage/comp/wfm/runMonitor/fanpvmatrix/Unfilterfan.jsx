@@ -417,7 +417,7 @@ const mapDispatchToProps = (dispatch) => {
         },
 
         pageTo_1:(value,key,fData)=>{
-          dispatch(actions.setVars('numpage', 'nbs'));
+          dispatch(actions.setVars('numpage', 'fanmatrix'));
           dispatch(actions.setVars('valuepage', value));
           dispatch(actions.setVars('actbt',key ));
           dispatch(actions.setVars('actbt1','' ));
@@ -433,7 +433,7 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         pageTo_2:(value,key,fData)=>{
-          dispatch(actions.setVars('numpage', 'nbs1'));
+          dispatch(actions.setVars('numpage', 'pvmatrix'));
           dispatch(actions.setVars('valuepage1', value));
           dispatch(actions.setVars('actbt1',key ));
           dispatch(actions.setVars('actbt',''));

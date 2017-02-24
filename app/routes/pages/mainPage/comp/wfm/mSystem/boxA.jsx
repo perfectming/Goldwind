@@ -92,18 +92,18 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            //复选框状态跟随
-            $("#box1 input").change(function(){
-                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
-            })
             //下拉点击事件
             $("#box1 b").on('click',function(){
-                $(this).parent().siblings().toggle();
                 if($(this).siblings('img').attr('src') == add){
                     $(this).siblings('img').attr('src', jian);
                 }else{
                     $(this).siblings('img').attr('src', add);
                 }
+                $(this).parent().siblings().toggle();
+            });
+            //复选框状态跟随
+            $("#box1 input").change(function(){
+                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
             })
         },
         closeboxA:()=>{

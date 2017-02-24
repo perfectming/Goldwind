@@ -27,7 +27,7 @@ let Component = React.createClass({
     },
     render() {
         //j,k为删除弹窗传递参数
-        let {j,k,deleteBool=true,buttonConcel,buttonClose,alertText,skinStyle,saveDatabase,checkId,checkName,changeBoxItem,boxRoleArr,deleDate,fits,centerControl,addDate,changeRole,boxRoleId,roleList,boxRoleList,init,nextPage,lastPage,theOne,theLast,boxRole,boxCenter,page,ids,msCount,uName,remark,deleData,addData,buttonAction, inputOnChange, onFocus,table, changeTableItem1} = this.props;
+        let {j,k,deleteBool=true,buttonConcel,buttonClose,alertText,skinStyle,saveDatabase,checkId,checkName,changeBoxItem,boxRoleArr,deleDate,fits,centerControl,addDate,changeRole,boxRoleId,roleList,boxRoleList,init,nextPage,lastPage,theOne,theLast,boxRole,boxCenter,page,ids,msCount,uName,remark,deleData,addData,buttonAction,closeBoxB, inputOnChange, onFocus,table, changeTableItem1} = this.props;
         let num1=0;
         let num2=0;
         let newData={};
@@ -267,7 +267,7 @@ let Component = React.createClass({
                             </div>
                         </div>
                         <div className={styles.tanC} id="center3" key='4' style={{width:1000,top: 100, left:400,paddingLeft:300}}>
-                            <div className={styles.upName}>角色权限<img src={close} className={styles.wrong} onClick={()=>{$('#center3').css('display','none')}}/></div>
+                            <div className={styles.upName}>角色权限<img src={close} className={styles.wrong} onClick={closeBoxB}/></div>
                             <div className={styles.tableHeaderBox}>
                                 <div className={styles.tableHeaderItem}
                                      style={{width:(100/(tabaleData.msData.center.header.length+1)-12)+"%"}}>序号</div>
@@ -527,6 +527,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         inputOnChange:(value,id)=>{
 
+        },
+        closeBoxB: () => {
+            {$('#center3').css('display','none')}
+            dispatch(actions.setVars('actBoxB', null));
+            dispatch(actions.setObjs('boxCenter', null));
         },
         addDate:(li,ids,names)=>{
             if(ids && names){

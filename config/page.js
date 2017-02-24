@@ -44,10 +44,10 @@ module.exports = {
                         name:'升压站矩阵',
                         page:'booster',
                     },{
-                        name:'调控概览',
+                        name:'功率控制',
                         page:'tkgl',
                     },{
-                        name:'集合预报',
+                        name:'功率预测',
                         page:'power',
                     }]
             },{

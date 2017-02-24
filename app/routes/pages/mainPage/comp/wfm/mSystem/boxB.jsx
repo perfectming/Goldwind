@@ -6,7 +6,6 @@ import add from '../../../img/comp/add_down.png';
 import close from '../../../img/comp/close_down.png';
 let $ =require('jquery');
 var actions = require('redux/actions');
-let matrixdata = require('../../../../../../../config/MatrixData');
 let soamMs=require('../../urlData').soam1;
 let Component = React.createClass({
     componentDidMount() {
@@ -68,31 +67,31 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     dispatch(actions.setObjs('wfBoxB', data));
+                    $('#box2 ul li a').on('click',function(){
+                        var bg=$(this).css("background-image");
+                        if(bg=='url("'+add+'")'){
+                            $(this).css("background-image",'url('+jian+')');
+                        }else{
+                            $(this).css("background-image",'url('+add+')');
+                        }
+
+                        $(this).siblings('div').toggle();
+                    })
+                    //获取选中风机的信息
+                    $("#sentB").on('click',function(){
+                        let objB = document.getElementsByName("checknameB");
+                        var check_valB = [];
+                        for(let k in objB){
+                            if(objB[k].checked)
+                                check_valB.push(objB[k].value);
+                        }
+                        alert(check_valB);
+                    })
                 },
                 error:function(){
                     console.log('获取数据失败')
                 }
             });
-            $('#box2 ul li a').on('click',function(){
-                var bg=$(this).css("background-image");
-                if(bg=='url("'+add+'")'){
-                    $(this).css("background-image",'url('+jian+')');
-                }else{
-                    $(this).css("background-image",'url('+add+')');
-                }
-
-                $(this).siblings('div').toggle();
-            })
-            //获取选中风机的信息
-            $("#sentB").on('click',function(){
-                let objB = document.getElementsByName("checknameB");
-                var check_valB = [];
-                for(let k in objB){
-                    if(objB[k].checked)
-                        check_valB.push(objB[k].value);
-                }
-                alert(check_valB);
-            })
             $("#center3 input[name='checkItOut']").prop('checked',true);
             $("#center3 input[name='checkItIn']").prop('checked',false);
         },
