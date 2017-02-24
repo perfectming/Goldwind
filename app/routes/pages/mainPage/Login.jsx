@@ -4,6 +4,8 @@ import FixedContent from '../../../components/common/FixedContent.jsx';
 var {browserHistory} = require('react-router');
 var actions = require('redux/actions');
 var $ = require('jquery');
+let ipUrl = require('./comp/urlData.js').soam1;//登陆人信息获取
+let url = require('./comp/urlData.js').url;//登陆验证
 let page = require('../../../../config/page');
 let comp = require('../../../../config/comp');
 import css from './Login.scss';
@@ -77,7 +79,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('verificationCode', codeNew));
         }else {
          $.ajax({
-              url: 'http://54.223.200.134/System/mlogin.aspx?loginType=4&P_username='+$('#username1')[0].value+'&P_password='+$('#password1')[0].value+'&crossDomain=true',
+              url: 'http://'+url+'/System/mlogin.aspx?loginType=4&P_username='+$('#username1')[0].value+'&P_password='+$('#password1')[0].value+'&crossDomain=true',
                dataType:"jsonp",    
                jsonp:"callback",    
                jsonpCallback:"testCall",    
@@ -87,7 +89,7 @@ const mapDispatchToProps = (dispatch) => {
 
                        $('#denglu1')[0].value='登 录 中...';
                        $.ajax({
-                           url: 'http://10.68.100.32:8080/soam/user/login',
+                           url: ipUrl+'/user/login',
                            // url: 'http://10.9.100.25:8080/soam/user/login',
                            type: 'post',
                            data:'name='+$('#username1')[0].value+'&&password='+$('#password1')[0].value,
