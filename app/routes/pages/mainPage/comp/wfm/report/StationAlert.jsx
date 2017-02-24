@@ -141,7 +141,7 @@ const mapDispatchToProps = (dispatch) => {
                         jsonpCallback:"testCall",    
                         timeout:5000,       
                         success:function(json,textStatus){  
-                            console.log(json)
+                            //console.log(json)
                             dispatch(actions.appendObjs('logType',json));
                             dispatch(actions.setVars('AlertBool', true));
                         },    
@@ -167,7 +167,7 @@ const mapDispatchToProps = (dispatch) => {
                 jsonpCallback:"testCall",    
                 timeout:5000,       
                 success:function(json,textStatus){  
-                    console.log(json)
+                    //console.log(json)
                     dispatch(actions.setObjs('logType',json));
                     
                 },    
@@ -289,7 +289,7 @@ const mapDispatchToProps = (dispatch) => {
                     //     return;
                     // } 
                     dispatch(actions.setObjs('StationAlertData',json));
-                    console.log(json)
+                    //console.log(json)
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
