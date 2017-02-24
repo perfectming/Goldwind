@@ -257,7 +257,24 @@ const mapDispatchToProps = (dispatch) => {
             //获取查询时间
             var startTime=$('#startTime').val();
             var endTime=$('#endTime').val();
-            
+            //清空数组
+            var all=[];
+            all.splice(0,all.length);//字段
+            $('#leftlist input').each(function(){
+                if($(this).prop('checked')==true){
+                    if($(this).val()!=='value'){
+                      all.push($(this).val())
+                    }
+                }
+            })
+            if(all.length>50){
+                all.splice(50,all.length);
+            }
+            if(all.length==0){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '设备数据获取失败！')); 
+                return;
+            }
             $.ajax({    
                 url:'http://'+url+'/Monitor/xml.aspx',                                               //sysid系统名称   //typeid日志类型
                 data:'functionname=GetRunLog&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&&sysid=1&typeid=-1&crossDomain=true&zip=false',    

@@ -28,7 +28,7 @@ let Component = React.createClass({
         },1000)
     },
    showTree (devurl){
-    let{alertText,playjq,showtree,select_list,firstname,devtype}=this.props;
+    let{playjq,showtree,select_list,firstname,devtype}=this.props;
    
      //点击切换下拉选择项
             for(let id in devtype.list){
@@ -48,7 +48,7 @@ let Component = React.createClass({
    },
 
     render() {
-         let {skinStyle,devtype,boolywbb=false,showtree,playjq,firstname,select_list,tabledata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
+         let {alertText,skinStyle,devtype,boolywbb=false,showtree,playjq,firstname,select_list,tabledata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
            let treetype=[];
            let Tarr=[]; //标题数组
            let Barr=[];  //数据

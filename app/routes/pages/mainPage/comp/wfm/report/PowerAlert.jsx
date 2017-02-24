@@ -141,7 +141,7 @@ const mapDispatchToProps = (dispatch) => {
                         jsonpCallback:"testCall",    
                         timeout:5000,       
                         success:function(json,textStatus){  
-                            console.log(json)
+                            //console.log(json)
                             dispatch(actions.appendObjs('logType',json));
                             dispatch(actions.setVars('AlertBool', true));
                         },    
@@ -257,7 +257,24 @@ const mapDispatchToProps = (dispatch) => {
             //获取查询时间
             var startTime=$('#startTime').val();
             var endTime=$('#endTime').val();
-            
+            var all=[];
+            //清空数组
+            all.splice(0,all.length);//字段
+            $('#leftlist input').each(function(){
+                if($(this).prop('checked')==true){
+                    if($(this).val()!=='value'){
+                      all.push($(this).val())
+                    }
+                }
+            })
+            if(all.length>50){
+                all.splice(50,all.length);
+            }
+            if(all.length==0){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '设备数据获取失败！')); 
+                return;
+            }
             $.ajax({    
                 url:'http://'+url+'/Monitor/xml.aspx',    
                 data:'functionname=CountStationInfo&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&groupbydevice=0&crossDomain=true&zip=false',    
