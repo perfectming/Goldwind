@@ -5,15 +5,14 @@ import Pro_one from './Pro_one.jsx';
 import Pro_two from './Pro_two.jsx';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
-let ip = "10.9.101.15";
-
+let bmId = require("../../../../urlData").groupId;
 let data = require('./Healthy-data');
 let text222 = data.data.line_date;
 
 let Component = React.createClass({
     componentWillMount() {
         let {ipUrl,areaId}=this.props
-        this.props.ajax(ipUrl,areaId);
+        this.props.ajax(ipUrl,areaId,bmId);
     },
     componentDidMount() {
         this.props.init();
@@ -57,7 +56,7 @@ let Component = React.createClass({
                         mapmonth.map((value, key) => {
                             return (
                                 <div className={actbt === key ? styles.inmonth : styles.inmonth2} key={key}
-                                     onClick={() => changecolor(value, key, ipUrl,areaId)}>
+                                     onClick={() => changecolor(value, key, ipUrl,areaId,bmId)}>
                                     {value.yearpoweract+"月"}
                                 </div>
                             )
@@ -143,7 +142,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl,areaId) => {
+        ajax: (ipUrl,areaId,bmId) => {
             var obj = {
                 test: ''
             }
@@ -185,7 +184,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     'startdate': year[10].year + "-" + year[10].yearpoweract + "-" + '1',
                     'enddate': year[10].year + "-" + year[10].yearpoweract + "-" + daycountT,
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -268,12 +267,11 @@ const mapDispatchToProps = (dispatch) => {
         },
 
         init: () => {
-            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
         },
-        changecolor: (value, key, ipUrl,areaId) => {
+        changecolor: (value, key, ipUrl,areaId,bmId) => {
             areaId=areaId[0];
             dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('mon', value.yearpoweract));
@@ -291,7 +289,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     'startdate': value.year + "-" + value.yearpoweract + "-" + '1',
                     'enddate': value.year + "-" + value.yearpoweract + "-" + daycount,
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                 },
                 dataType: 'json',
                 timeout: '3000',

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
+let bmId = require("../../../../urlData").groupId;
 let data = require('./Healthy-data');
 let text0 = data.data.line_date;
 let winds = data.data.yearelectric[0].wind;
@@ -82,7 +82,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc1=e.point.index;
-                            changedata1(ipUrl,w10,e,wc1,actbt,hhdata4,areaId,mapmonth);
+                            changedata1(bmId,ipUrl,w10,e,wc1,actbt,hhdata4,areaId,mapmonth);
 
                         }
                     }
@@ -245,7 +245,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(ipUrl,w10,e,wc1,actbt,hhdata4,areaId,mapmonth)=> {
+        changedata1 :(bmId,ipUrl,w10,e,wc1,actbt,hhdata4,areaId,mapmonth)=> {
             dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('w11', w10));
             areaId=areaId[0];
@@ -259,7 +259,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                     "wfid":wfid,
                 },
                 dataType:'json',

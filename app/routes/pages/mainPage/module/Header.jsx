@@ -102,7 +102,7 @@ const mapDispatchToProps = (dispatch) => {
         },
 
         login:(userInfo)=>{
-            console.log(userInfo);
+            //console.log(userInfo);
             if(!userInfo){
                 browserHistory.push('/app/all/page/login');
             }

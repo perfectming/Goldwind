@@ -56,7 +56,11 @@ let Component = React.createClass({
     },
     //render渲染后执行的内容//
     componentDidMount() {
+        let {init}=this.props;
         this.props.init();
+        setTimeout(function(){
+            init()
+        },800)
     },
     render() {
         let{mmodata,mmoname,bloo=false,skinStyle}=this.props;
@@ -208,14 +212,15 @@ let Component = React.createClass({
                         </div>
                     </div>
                     <div className={styles.columbox}>
-                        <div className={`${styles.leftcolum} ${styles.box_shadow}`}>
-                            <Title title={['月发电量完成情况']}></Title>
-                            <Tuchart2 njhfdl={kbynjhfdl1} nsjfdl={kbynsjfdl1} nfdlwcl={kbynfdwcl} monthTime={monthTimeHandle} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Tuchart2>
-                        </div>
                         <div className={`${styles.rightcolum} ${styles.box_shadow}`}>
                             <Title title={['月收益状况']}></Title>
                             <Tuchart4 cbsj={cost} srsj={incomes} monthTime={month2} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Tuchart4>
                         </div>
+                        <div className={`${styles.leftcolum} ${styles.box_shadow}`}>
+                            <Title title={['月发电量完成情况']}></Title>
+                            <Tuchart2 njhfdl={kbynjhfdl1} nsjfdl={kbynsjfdl1} nfdlwcl={kbynfdwcl} monthTime={monthTimeHandle} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Tuchart2>
+                        </div>
+                        
                     </div>
 
                     <div className={`${styles.fgzyfx} ${styles.box_shadow}`}>
@@ -283,7 +288,8 @@ const mapStateToProps = (state) => {
         mmoname:state.vars.mmoname,
         mmodata:state.vars.mmodata,
         bloo:state.vars.bloo,
-        skinStyle: state.vars.skinStyle
+        skinStyle: state.vars.skinStyle,
+        coefficient: state.vars.coefficient
     }
 };
 

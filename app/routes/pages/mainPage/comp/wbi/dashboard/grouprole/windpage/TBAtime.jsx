@@ -7,7 +7,6 @@ import icono2 from '../../../../../img/comp/TBA.png';
 import icono1 from '../../../../../img/comp/TBA2.png';
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
-let input_url="10.68.100.32";
 let Component = React.createClass({
     componentWillMount() {
        let{xxdwfId,xxdwfNa,ipUrl}=this.props;

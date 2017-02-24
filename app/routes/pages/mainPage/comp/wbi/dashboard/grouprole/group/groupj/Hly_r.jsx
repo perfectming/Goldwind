@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
+let bmId = require("../../../../../urlData").groupId;
 let data = require('./../../area/Healthy-data');
 let text0 = data.data.line_date;
 let winds = data.data.yearelectric[0].wind;
@@ -78,7 +78,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w10=e.point.category;
                             wc2=e.point.index;
-                            changedata1(w10,w0,wc1,wc2,hhdata,actbt,ipUrl,mapmonth);
+                            changedata1(bmId,w10,w0,wc1,wc2,hhdata,actbt,ipUrl,mapmonth);
 
                         }
                     }
@@ -170,7 +170,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
             dispatch(actions.setVars('w1',w0 ));
         },
-        changedata1 :(w10,w0,wc1,wc2,hhdata,actbt,ipUrl,mapmonth)=> {
+        changedata1 :(bmId,w10,w0,wc1,wc2,hhdata,actbt,ipUrl,mapmonth)=> {
             dispatch(actions.setVars('w11', w10));
             dispatch(actions.setVars('bt0', 0));
             let wfid=hhdata.data[1][wc2].wfid;
@@ -181,7 +181,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
-                    "groupid":'201612121721151',
+                    "groupid":bmId,
                     "wfid": wfid,
 
                 },

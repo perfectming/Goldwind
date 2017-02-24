@@ -2,13 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let input_url = "10.9.100.38";
 let Component = React.createClass({
     componentWillMount() {
     },
     render() {
 
-        let {pointWidth, input_url, xxdwfNa, xxdwfId, w0, hhdata, montht, profit, cost, height, TBA, changedata2qw,scolor}=this.props;
+        let {pointWidth, input_url="10.9.100.38", xxdwfNa, xxdwfId, w0, hhdata, montht, profit, cost, height, TBA, changedata2qw,scolor}=this.props;
         let configPie = {
             chart: {
                 height: height,

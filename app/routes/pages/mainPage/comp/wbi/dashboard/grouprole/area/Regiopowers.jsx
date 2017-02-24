@@ -4,11 +4,11 @@ import styles from './Hindex.scss';
 import Hly_genday from '../group/groupj/Hly_genday.jsx';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
-
+let bmId = require("../../../../urlData").groupId;//id
 let Component = React.createClass({
     componentWillMount() {
         let {ipUrl,areaId}=this.props
-        this.props.ajax(ipUrl,areaId);
+        this.props.ajax(ipUrl,areaId,bmId);
     },
     componentDidMount() {
         this.props.init();
@@ -36,7 +36,7 @@ let Component = React.createClass({
                         mapmonth.map((value, key) => {
                             return (
                                 <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key}
-                                     onClick={()=>changecolor(value,key,ipUrl,areaId)}>
+                                     onClick={()=>changecolor(value,key,ipUrl,areaId,bmId)}>
                                     {value.yearpoweract+"月"}
                                 </div>
                             )
@@ -88,7 +88,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl,areaId) => {
+        ajax: (ipUrl,areaId,bmId) => {
 
             areaId=areaId[0];
             $.ajax({
@@ -120,7 +120,7 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
 
-                    "groupid":  areaId==undefined? '201612121721151':areaId,
+                    "groupid":  areaId==undefined? bmId:areaId,
                     "year": year[10].year,
                     "month": year[10].yearpoweract,
                 },
@@ -156,7 +156,7 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor :(value,key,ipUrl,areaId)=>{
+        changecolor :(value,key,ipUrl,areaId,bmId)=>{
             areaId=areaId[0];
             dispatch(actions.setVars('actbt',key ));
             dispatch(actions.setVars('wind',value.plan ));
@@ -167,7 +167,7 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://' + ipUrl + '/wbi/ELEC/getAreaTimesElec',
                 async:false,
                 data:{
-                    "groupid":  areaId==undefined? '201612121721151':areaId,
+                    "groupid":  areaId==undefined? bmId:areaId,
                     "year":value.year,
                     "month": value.yearpoweract,
                 },

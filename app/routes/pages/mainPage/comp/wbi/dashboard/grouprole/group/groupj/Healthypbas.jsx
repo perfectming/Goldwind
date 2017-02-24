@@ -6,13 +6,14 @@ import Hly_tsb from '../../area/Hly_tsb.jsx';
 import Hly_ds from '../../area/Hly_ds.jsx';
 import Login from '../../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
+let bmId = require("../../../../../urlData").groupId;
 var $ = require('jquery');
 
 
 let Component = React.createClass({
     componentWillMount() {
         let {ipUrl}=this.props
-        this.props.ajax(ipUrl);
+        this.props.ajax(ipUrl,bmId);
     },
     componentDidMount() {
         this.props.init();
@@ -59,7 +60,7 @@ let Component = React.createClass({
                         mapmonth.map((value, key) => {
                             return (
                                 <div className={actbt === key ? styles.inmonth : styles.inmonth2} key={key}
-                                     onClick={() => changecolor(value, key, ipUrl)}>
+                                     onClick={() => changecolor(value, key, ipUrl,bmId)}>
                                     {value.yearpoweract+"月"}
                                 </div>
                             )
@@ -108,12 +109,12 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.rbox3}>
                             <button className={bt0 === 0 ? styles.button : styles.button22}
-                                    onClick={() => gogogo(bt0, ipUrl, wfid,actbt,mapmonth)}>前10
+                                    onClick={() => gogogo(bt0, ipUrl, wfid,actbt,mapmonth,bmId)}>前10
                             </button>
                             <button className={bt0 === 1 ? styles.button : styles.button22}
-                                    onClick={() => back(bt0, ipUrl, wfid,actbt,mapmonth)}>后10
+                                    onClick={() => back(bt0, ipUrl, wfid,actbt,mapmonth,bmId)}>后10
                             </button>
-                            <button className={styles.button22} onClick={() => more(hhdata3, wfid,mapmonth)}>更多</button>
+                            <button className={styles.button22} onClick={() => more(hhdata3, wfid,mapmonth,bmId)}>更多</button>
                         </div>
 
 
@@ -175,7 +176,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl) => {
+        ajax: (ipUrl,bmId) => {
 
             dispatch(actions.setVars('bt0', 0));
 
@@ -246,7 +247,7 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + ipUrl + '/wbi/TBA/getGroupAllWfByM',
                 async: false,
                 data: {
-                    "groupid": '201612121721151',
+                    "groupid": bmId,
                     "year": year[10].year,
                     "month": year[10].yearpoweract,
                 },
@@ -289,7 +290,7 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + ipUrl + '/wbi/TBA/getWfAllWtByM',
                 async: false,
                 data: {
-                    "groupid": '201612121721151',
+                    "groupid": bmId,
                     "year": year[10].year,
                     "month": year[10].yearpoweract,
                     "wfid": '150801',
@@ -335,7 +336,7 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor: (value, key, ipUrl) => {
+        changecolor: (value, key, ipUrl ,bmId) => {
             dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('mon', value.yearpoweract + "月"));
@@ -386,7 +387,7 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + ipUrl + '/wbi/TBA/getGroupAllWfByM',
                 async: false,
                 data: {
-                    "groupid": '201612121721151',
+                    "groupid": bmId,
                     "year": value.year,
                     "month": value.yearpoweract,
                 },
@@ -427,7 +428,7 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://' + ipUrl + '/wbi/TBA/getWfAllWtByM',
                 async: false,
                 data: {
-                    "groupid": '201612121721151',
+                    "groupid": bmId,
                     "year": value.year,
                     "month": value.yearpoweract,
                     "wfid": '150801',
@@ -465,14 +466,14 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0, ipUrl, wfid,actbt,mapmonth) => {
+        gogogo: (bt0, ipUrl, wfid,actbt,mapmonth,bmId) => {
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/TBA/getPageSize',
                 async: false,
                 data: {
-                    "groupid": '201612121721151',
+                    "groupid": bmId,
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "0",
                     "year": mapmonth[actbt].year,
@@ -509,7 +510,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, ipUrl, wfid,actbt,mapmonth) => {
+        back: (bt0, ipUrl, wfid,actbt,mapmonth,bmId) => {
 
             $.ajax({
                 type: 'post',
@@ -517,7 +518,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
 
-                    "groupid": '201612121721151',
+                    "groupid": bmId,
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "1",
                     "year": mapmonth[actbt].year,

@@ -5,7 +5,7 @@ var ReactHighcharts = require('react-highcharts');
 
 var $ = require('jQuery');
 let data = require('./../../area/Healthy-data');
-
+let bmId = require("../../../../../urlData").groupId;
 let winds = data.data.yearelectric[0].wind;
 let win  = winds[0].plan;
 
@@ -89,7 +89,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w0=e.point.category;
                             wc1=e.point.index;
-                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl,mapmonth);
+                            changedata1(bmId,w0,win,wc1,hhdata,actbt,ipUrl,mapmonth);
 
                         }
                     }
@@ -182,7 +182,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl,mapmonth)=>{
+        changedata1 :(bmId,w0,win,wc1,hhdata,actbt,ipUrl,mapmonth)=>{
             dispatch(actions.setVars('w1',w0 ));
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
@@ -192,7 +192,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
-                    "groupid":'201612121721151',
+                    "groupid":bmId,
 
                 },
                 dataType:'json',

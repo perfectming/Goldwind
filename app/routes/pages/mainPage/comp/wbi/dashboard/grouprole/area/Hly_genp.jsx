@@ -89,7 +89,7 @@ let Component = React.createClass({
                 labels: {
                     y: 20, //x轴刻度往下移动20px
                     style: {
-                        color: jhpcolor,//颜色
+                        color: "white",//颜色
                         fontSize:'14px'  //字体
                     }
                 },
@@ -109,14 +109,14 @@ let Component = React.createClass({
                     y: -10,
                     x: 50,
                     style:{
-                        color:jhpcolor,
+                        color:"white",
                         fontSize:'14px'
                     }
                 },
                 labels: {
                     y: 10, //x轴刻度往下移动20px
                     style: {
-                        color: jhpcolor,//颜色
+                        color: "white",//颜色
                         fontSize:'14px'  //字体
                     }
                 },

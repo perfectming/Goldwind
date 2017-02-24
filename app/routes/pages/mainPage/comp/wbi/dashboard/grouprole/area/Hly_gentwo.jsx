@@ -12,7 +12,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {ip="10.68.100.32",w0,w10,mon,widths,jhpcolor,barlopowers,barlopowerp,text,height,name0,powerplan1,poweract2,} = this.props;
+        let {w0,w10,mon,widths,jhpcolor,barlopowers,barlopowerp,text,height,name0,powerplan1,poweract2,} = this.props;
 
 
         let configPie = {

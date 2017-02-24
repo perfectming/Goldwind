@@ -10,7 +10,6 @@ var $ = require('jquery');
 let data = require('./../group/Profit-data3');
 let month = data.month;
 let button = data.button;
-let input_url = "10.9.100.38";
 let x0 = [];
 let x1 = [];
 let x2 = [];

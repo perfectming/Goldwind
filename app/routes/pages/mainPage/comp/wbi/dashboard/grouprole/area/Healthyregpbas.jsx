@@ -5,8 +5,7 @@ import Hly_tsa from './Hly_tsa.jsx';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 import Hly_ds from './Hly_ds.jsx';
 var actions = require('redux/actions');
-let ip="10.9.101.15";
-
+let bmId = require("../../../../urlData").groupId;
 let data = require('./Healthy-data');
 let text222 = data.data.line_date;
 
@@ -83,8 +82,8 @@ let Component = React.createClass({
                 <div className={`${styles.fbox}  ${styles.logofa}`}>
                     <div className={` ${styles.box_shadow} ${styles.fbox2}`}>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0, ipUrl, wfid,actbt,mapmonth,areaId)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, ipUrl, wfid,actbt,mapmonth,areaId)}>后10</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0, ipUrl, wfid,actbt,mapmonth,areaId,bmId)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, ipUrl, wfid,actbt,mapmonth,areaId,bmId)}>后10</button>
                             <button className={styles.button22} onClick={() => more(hhdata3, wfid)}>更多</button>
                         </div>
                         <Hly_ds text={mon +w10+ "每日TBA"}
@@ -137,7 +136,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl,areaId) => {
+        ajax: (ipUrl,areaId,bmId) => {
 
 
             areaId=areaId[0];
@@ -169,7 +168,7 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/TBA/getGroupAllWfByM',
                 async:false,
                 data:{
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                     "year": year[10].year,
                     "month": year[10].yearpoweract,
                 },
@@ -211,7 +210,7 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/TBA/getWfAllWtByM',
                 async:false,
                 data:{
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                     "year": year[10].year,
                     "month": year[10].yearpoweract,
                     "wfid":'150801',
@@ -250,12 +249,11 @@ const mapDispatchToProps = (dispatch) => {
         },
 
         init: () => {
-            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
         },
-        changecolor:(value,key,ipUrl,areaId)=> {
+        changecolor:(value,key,ipUrl,areaId,bmId)=> {
             areaId=areaId[0];
             dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('actbt',key ));
@@ -267,7 +265,7 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/TBA/getGroupAllWfByM',
                 async:false,
                 data:{
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                     "year":value.year,
                     "month": value.yearpoweract,
                 },
@@ -306,7 +304,7 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/TBA/getWfAllWtByM',
                 async:false,
                 data:{
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                     "year":value.year,
                     "month": value.yearpoweract,
                     "wfid":'150801',
@@ -341,7 +339,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        gogogo: (bt0, ipUrl, wfid,actbt,mapmonth,areaId) => {
+        gogogo: (bt0, ipUrl, wfid,actbt,mapmonth,areaId,bmId) => {
             areaId=areaId[0];
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
@@ -350,7 +348,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
 
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "0",
                     "year": mapmonth[actbt].year,
@@ -387,7 +385,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, ipUrl, wfid,actbt,mapmonth,areaId) => {
+        back: (bt0, ipUrl, wfid,actbt,mapmonth,areaId,bmId) => {
             areaId=areaId[0];
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
@@ -396,7 +394,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
 
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                     "wfid": wfid == undefined ? '150828' : wfid,
                     "type": "1",
                     "year": mapmonth[actbt].year,

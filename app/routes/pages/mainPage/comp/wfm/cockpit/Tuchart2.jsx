@@ -32,7 +32,7 @@ let Component = React.createClass({
                 itemStyle: {
                     color: lettercolor,
 
-                    fontSize:"14px",
+                    fontSize:"8px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
                 }
@@ -42,7 +42,7 @@ let Component = React.createClass({
                 shared: true,
                 style:{
                     color: '#333',
-                    fontSize: '12px',
+                    fontSize: '8px',
                     fontFamily:'微软雅黑'
                 },
                 //pointFormat: '{series.name}: <b>{point.y}</b>',
@@ -76,7 +76,7 @@ let Component = React.createClass({
                     y: 20, //x轴刻度往下移动20px
                     style: {
                         color: lettercolor,//颜色
-                        fontSize:'10px',  //字体
+                        fontSize:'8px',  //字体
                         fontFamily:"微软雅黑"
                     }
                 },
@@ -171,7 +171,9 @@ let Component = React.createClass({
 
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+       
+    }
 };
 
 const mapDispatchToProps = (dispatch) => {

@@ -6,7 +6,7 @@ import Hly_rone from './Hly_rone.jsx';
 import Hly_rtwo from './Hly_rtwo.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
-let ip="10.68.100.32";
+let bmId = require("../../../../urlData").groupId;
 
 let data = require('./Healthy-data');
 let month = data.data.line_month;
@@ -40,7 +40,7 @@ let x7=[];
 let Component = React.createClass({
     componentWillMount() {
         let {ipUrl,areaId}=this.props;
-        this.props.ajax(ipUrl,areaId);
+        this.props.ajax(ipUrl,areaId,bmId);
     },
     componentDidMount() {
         this.props.init();
@@ -81,7 +81,7 @@ let Component = React.createClass({
                         mapmonth.map((value, key) => {
                             return (
                                 <div className={actbt===key? styles.inmonth : styles.inmonth2} key={key}
-                                     onClick={()=>changecolor(value,key,ipUrl,areaId)}>
+                                     onClick={()=>changecolor(bmId,value,key,ipUrl,areaId)}>
                                     {value.yearpoweract+"月"}
                                 </div>
                             )
@@ -112,9 +112,9 @@ let Component = React.createClass({
                             {/*<span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</span>*/}
                         </div>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>更多</button>
                         </div>
                         <Hly_rtwo height={390}
                                   jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
@@ -163,7 +163,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl,areaId) => {
+        ajax: (ipUrl,areaId,bmId) => {
             var obj = {
                 test: ''
             }
@@ -199,7 +199,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     "year": year[10].year,
                     "month": year[10].yearpoweract,
-                    "groupid": areaId==undefined? '201612121721151':areaId,
+                    "groupid": areaId==undefined? bmId:areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -252,7 +252,7 @@ const mapDispatchToProps = (dispatch) => {
                 test: ''
             }
         },
-        changecolor:(value,key,ipUrl,areaId)=>{
+        changecolor:(bmId,value,key,ipUrl,areaId)=>{
             dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('actbt', key));
             dispatch(actions.setVars('mon', value.yearpoweract + "月"));
@@ -265,7 +265,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     "year": value.year,
                     "month": value.yearpoweract,
-                    "groupid": areaId==undefined? '201612121721151':areaId,
+                    "groupid": areaId==undefined? bmId:areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -308,7 +308,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        gogogo: (bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
+        gogogo: (bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 0));
             areaId=areaId[0];
             $.ajax({
@@ -317,7 +317,7 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
 
-                    "groupid": areaId==undefined? '201612121721151':areaId,
+                    "groupid": areaId==undefined? bmId:areaId,
                     "wfid": wfid==undefined? '150801':wfid,
                     "type":"0",
                     "year": mapmonth[actbt].year,
@@ -348,7 +348,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
+        back: (bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 1));
             areaId=areaId[0];
             $.ajax({
@@ -357,7 +357,7 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
 
-                    "groupid": areaId==undefined? '201612121721151':areaId,
+                    "groupid": areaId==undefined? bmId:areaId,
                     "wfid": wfid==undefined? '150801':wfid,
                     "type":"1",
                     "year": mapmonth[actbt].year,
@@ -386,7 +386,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        more: (bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
+        more: (bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 0));
             areaId=areaId[0];
             $.ajax({
@@ -395,7 +395,7 @@ const mapDispatchToProps = (dispatch) => {
                 async:false,
                 data:{
 
-                    "groupid": areaId==undefined? '201612121721151':areaId,
+                    "groupid": areaId==undefined? bmId:areaId,
                     "wfid": wfid==undefined? '150801':wfid,
                     "type":"2",
                     "year": mapmonth[actbt].year,

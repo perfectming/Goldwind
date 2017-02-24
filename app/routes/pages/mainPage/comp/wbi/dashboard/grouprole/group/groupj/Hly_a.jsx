@@ -247,10 +247,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
-                        console.log(data)
-
-
                     let barLotime2 = [];    //各区域   一区域二区域
                     let power2 = [];       //实际发电量
                     let wrong20 = [];       //故障损失
