@@ -241,7 +241,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         changepage2:(value,key)=>{
             dispatch(actions.setVars('Changnav', 0));
-            dispatch(actions.setVars('numpage', 'nbs'));
+            dispatch(actions.setVars('numpage', 'fanmatrix'));
             dispatch(actions.setVars('fan_page', 'allpage'));
             dispatch(actions.setVars('valuepage', value));
             dispatch(actions.setVars('actbt',key ));
@@ -253,7 +253,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         changepage3:(value,key)=>{
             dispatch(actions.setVars('Changnav', 0));
-            dispatch(actions.setVars('numpage', 'nbs1'));
+            dispatch(actions.setVars('numpage', 'pvmatrix'));
             dispatch(actions.setVars('fan_page', 'allpage'));
             dispatch(actions.setVars('valuepage1', value));
             dispatch(actions.setVars('actbt1',key ));

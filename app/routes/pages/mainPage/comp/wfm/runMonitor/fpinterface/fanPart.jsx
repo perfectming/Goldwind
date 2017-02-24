@@ -18,11 +18,17 @@ var actions = require('redux/actions');
 var $ = require('jquery');
 let pack=['pack_WROT','pack_WNAC','pack_WGEN','pack_WTPS','pack_WYAW','pack_WTCS','pack_WCNV','pack_WTRF','pack_WTGS'];//设置表格每列属性
 let arr=[bg1,bg2,bg3,bg4,bg5,bg6,bg7,bg8,bg9];//整理背景路径
+let time;
+let onceTime;
 let Component = React.createClass({
     componentWillMount() {
         let {vid, act1=0} = this.props;
         console.log(vid);
         this.props.changeDate(vid,act1);
+    },
+    componentWillUnmount() {
+        clearInterval(time);
+        clearTimeout(onceTime);
     },
     componentDidMount() {
         this.props.init();
@@ -33,10 +39,6 @@ let Component = React.createClass({
         if (boolFan) {//判断执行完数据后打开页面
             var forIn=[];
             var forOut=[];
-            console.log(bujianModel,bujianData);
-            for(let key in bujianData.ModelData){
-                var diks=key;
-            }
             for(let key in bujianModel.Model.dis){
                 (key[14]&&key.slice(5,9)!='Bool')&& forIn.push(key);
             }
@@ -59,21 +61,14 @@ let Component = React.createClass({
                         <div className={styles.action1box}>
                             {
                                 forIn.map((value, key)=> {
-                                    if(bujianData.ModelData){
+                                    if(bujianData.ModelData[vid]){
                                     return (
                                         <div className={styles.fandatabox} key={key}>
                                             <span>{bujianModel.Model.dis[value].name}</span>
                                             <span
-                                                className={styles.numbox}><span>{(bujianData.ModelData[diks][bujianModel.Model.dis[value].path])?(bujianData.ModelData[diks][bujianModel.Model.dis[value].path]):'--'}</span><span>单位</span></span>
+                                                className={styles.numbox}><span>{(bujianData.ModelData[vid][bujianModel.Model.dis[value].path])?(bujianData.ModelData[vid][bujianModel.Model.dis[value].path]):'--'}</span><span>{bujianModel.Model.dis[value].unit}</span></span>
                                         </div>
-                                    )}else {
-                                        return(
-                                            <div className={styles.fandatabox} key={key}>
-                                                <span>{bujianModel.Model.dis[value].name}</span>
-                                                <span
-                                                    className={styles.numbox}><span>--</span><span>单位</span></span>
-                                            </div>
-                                        )
+                                    )
                                     }
                                 })
                             }
@@ -136,11 +131,26 @@ const mapDispatchToProps = (dispatch) => {
                     function setDataDo(rdata) {
                         dispatch(actions.setVars('bujianModel', rdata));
                         TY.getRtData(pkscs[pack[act1]].scid, vid, setDatafin);
-                        function setDatafin(rdata) {
-                            dispatch(actions.setVars('bujianData', rdata));
-                            dispatch(actions.setVars('boolFan', true));
+                        function setDatafin(rdata1) {
+                            dispatch(actions.setVars('bujianData', rdata1));
+                            setTimeout(function () {
+                                dispatch(actions.setVars('boolFan', true));
+                                clearTimeout(onceTime);
+                            },100)
                         }/*从后台取出数据并赋给bujianData并告知页面加载完成*/
                     }
+                    time=setInterval(function(){
+                        TY.getRtData(pkscs[pack[act1]].scid, vid, setDatafin);
+                        function setDatafin(rdata1) {
+                            for (let key in rdata1.ModelData)
+                            dispatch(actions.setVars('bujianData', rdata1));
+                        }
+                    },2000);
+                    onceTime=setTimeout(function(){
+                        alert('数据获取失败！请重新登入');
+                        browserHistory.push('/app/all/page/login');
+                        dispatch(actions.setVars('userInfo', false));
+                    },7000)
                 }}
             }
         },
