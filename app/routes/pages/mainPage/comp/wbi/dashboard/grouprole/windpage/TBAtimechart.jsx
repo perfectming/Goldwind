@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
+let cjId = require("../../../../urlData").CJwfId;
 let Component = React.createClass({
     componentWillMount() {
     },
@@ -83,7 +84,7 @@ let Component = React.createClass({
                                 url: 'http://' + input_url + '/wbi/TBA/getDaysTBAByWf',
                                 async: false,
                                 data: {
-                                    'wfid':xxdwfId==undefined? "150801":xxdwfId,
+                                    'wfid':xxdwfId==undefined? cjId:xxdwfId,
                                     'month': hhdata.data[w3].month,
                                     'year': hhdata.data[w3].year,
                                 },

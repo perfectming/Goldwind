@@ -5,6 +5,7 @@ import Healtytimechart from './Healtytimechart.jsx';
 import Healtytimecharttt from './Healtytimecharttt.jsx';
 import icono2 from '../../../../../img/comp/HEA.png';
 import icono1 from '../../../../../img/comp/HEA2.png';
+let cjId = require("../../../../urlData").CJwfId;
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
 let month=data.month;
@@ -21,7 +22,7 @@ let areaPlan=data.areaPlan
 let Component = React.createClass({
     componentWillMount() {
         let{xxdwfId,xxdwfNa,ipUrl}=this.props;
-        this.props.ajax(xxdwfId,xxdwfNa,ipUrl);
+        this.props.ajax(cjId,xxdwfId,xxdwfNa,ipUrl);
 
     },
     componentDidMount() {
@@ -96,7 +97,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (xxdwfId,xxdwfNa,input_url) => {
+        ajax: (cjId,xxdwfId,xxdwfNa,input_url) => {
 
             let WTHealH=[];
             let WTHealName=[];
@@ -167,7 +168,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     'year':year,
                     'month':month,
-                    'wfid':xxdwfId==undefined? "150801":xxdwfId,
+                    'wfid':xxdwfId==undefined? cjId:xxdwfId,
                 },
                 dataType:'json',
                 timeout:'3000',

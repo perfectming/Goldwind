@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let bmId = require("../../../../../urlData").groupId;
+let cjId = require("../../../../../urlData").CJwfId;
 let data = require('./../../area/Healthy-data');
 let text0 = data.data.line_date;
 let winds = data.data.yearelectric[0].wind;
@@ -84,7 +85,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w10 = e.point.category;
                             wc2 = e.point.index;
-                            changedata1(bmId,ipUrl,w10, win, wc1,wc2, actbt,hhdata,grid,mapmonth);
+                            changedata1(cjId,bmId,ipUrl,w10, win, wc1,wc2, actbt,hhdata,grid,mapmonth);
 
                         }
                     }
@@ -252,7 +253,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(bmId,ipUrl,w10, win,wc1, wc2, actbt,hhdata,grid,mapmonth)=> {
+        changedata1 :(cjId,bmId,ipUrl,w10, win,wc1, wc2, actbt,hhdata,grid,mapmonth)=> {
             dispatch(actions.setVars('w11', w10,));
             dispatch(actions.setVars('bt0', 0));
 
@@ -269,7 +270,7 @@ const mapDispatchToProps = (dispatch) => {
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
                     "groupid":  grid==undefined? bmId:grid,
-                    "wfid": wfid==undefined? '150801':wfid,
+                    "wfid": wfid==undefined? cjId:wfid,
                 },
                 dataType: 'json',
                 timeout: '3000',

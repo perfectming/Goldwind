@@ -7,6 +7,7 @@ import Hly_rtwo from './Hly_rtwo.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
 let bmId = require("../../../../urlData").groupId;
+let cjId = require("../../../../urlData").CJwfId;
 
 let data = require('./Healthy-data');
 let month = data.data.line_month;
@@ -112,9 +113,9 @@ let Component = React.createClass({
                             {/*<span>{text0[actbt]+"月"+text0[5]+"区域"+text0[5]+"风场各风机健康度"}</span>*/}
                         </div>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(cjId,bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(cjId,bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(cjId,bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId)}>更多</button>
                         </div>
                         <Hly_rtwo height={390}
                                   jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
@@ -308,7 +309,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        gogogo: (bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
+        gogogo: (cjId,bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 0));
             areaId=areaId[0];
             $.ajax({
@@ -318,7 +319,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
 
                     "groupid": areaId==undefined? bmId:areaId,
-                    "wfid": wfid==undefined? '150801':wfid,
+                    "wfid": wfid==undefined? cjId:wfid,
                     "type":"0",
                     "year": mapmonth[actbt].year,
                     "month": mapmonth[actbt].yearpoweract,
@@ -348,7 +349,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
+        back: (cjId,bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 1));
             areaId=areaId[0];
             $.ajax({
@@ -358,7 +359,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
 
                     "groupid": areaId==undefined? bmId:areaId,
-                    "wfid": wfid==undefined? '150801':wfid,
+                    "wfid": wfid==undefined? cjId:wfid,
                     "type":"1",
                     "year": mapmonth[actbt].year,
                     "month": mapmonth[actbt].yearpoweract,
@@ -386,7 +387,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        more: (bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
+        more: (cjId,bmId,bt0, actbt, hhdata,ipUrl,wfid,mapmonth,areaId) => {
             dispatch(actions.setVars('bt0', 0));
             areaId=areaId[0];
             $.ajax({
@@ -396,7 +397,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
 
                     "groupid": areaId==undefined? bmId:areaId,
-                    "wfid": wfid==undefined? '150801':wfid,
+                    "wfid": wfid==undefined? cjId:wfid,
                     "type":"2",
                     "year": mapmonth[actbt].year,
                     "month": mapmonth[actbt].yearpoweract,

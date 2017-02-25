@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 let bmId = require("../../../../urlData").groupId;
+let cjId = require("../../../../urlData").CJwfId;
 let data = require('./Healthy-data');
 
 let Component = React.createClass({
@@ -76,7 +77,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w0 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(bmId,w0, wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth);
+                            changedata1(cjId,bmId,w0, wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth);
 
                         }
                     }
@@ -211,7 +212,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1: (bmId,w0,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth) => {
+        changedata1: (cjId,bmId,w0,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth) => {
 
 
             dispatch(actions.setVars('bt0', 0));
@@ -268,7 +269,7 @@ const mapDispatchToProps = (dispatch) => {
                     "groupid":  bmId,
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
-                    "wfid":'150801',
+                    "wfid":cjId,
                 },
                 dataType:'json',
                 timeout:'3000',

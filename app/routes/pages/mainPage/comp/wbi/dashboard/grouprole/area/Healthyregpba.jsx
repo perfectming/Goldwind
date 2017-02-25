@@ -6,6 +6,7 @@ import Hly_pbatwo from './Hly_pbatwo.jsx';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let bmId = require("../../../../urlData").groupId;
+let cjId = require("../../../../urlData").CJwfId;
 var $ = require("jquery");
 
 let Component = React.createClass({
@@ -102,9 +103,9 @@ let Component = React.createClass({
 
                         </div>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId)}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(cjId,bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(cjId,bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(cjId,bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId)}>更多</button>
                         </div>
 
                         <Hly_pbatwo height={390} text={mon+w10+"各风机PBA"}
@@ -357,7 +358,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        gogogo: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId) => {
+        gogogo: (cjId,bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId) => {
             dispatch(actions.setVars('bt0', 0));
             areaId=areaId[0];
             $.ajax({
@@ -366,7 +367,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "groupid":areaId==undefined? bmId:areaId,
-                    "wfid": wfid == undefined ? '150801' : wfid,
+                    "wfid": wfid == undefined ? cjId : wfid,
                     "type":"0",
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
@@ -415,7 +416,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId) => {
+        back: (cjId,bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId) => {
             dispatch(actions.setVars('bt0', 1));
             areaId=areaId[0];
             $.ajax({
@@ -425,7 +426,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
 
                     "groupid":areaId==undefined? bmId:areaId,
-                    "wfid": wfid == undefined ? '150801' : wfid,
+                    "wfid": wfid == undefined ? cjId : wfid,
                     "type":"1",
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
@@ -468,7 +469,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId) => {
+        more: (cjId,bt0,w0,  wc1,wc2, actbt, hhdata,ipUrl,wfid,areaId,mapmonth,bmId) => {
             areaId=areaId[0];
             dispatch(actions.setVars('bt0', 2));
             $.ajax({
@@ -478,7 +479,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
 
                     "groupid":areaId==undefined? bmId:areaId,
-                    "wfid": wfid == undefined ? '150801' : wfid,
+                    "wfid": wfid == undefined ? cjId : wfid,
                     "type":"2",
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,

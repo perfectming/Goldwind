@@ -5,6 +5,7 @@ import Login from '../../../../../../../../components/common/Loading.jsx';
 import Hly_genone from './Hly_genone.jsx';
 import Hly_gentwo from './Hly_gentwo.jsx';
 let bmId = require("../../../../urlData").groupId;//id
+let abId = require("../../../../urlData").ABwfId;
 var actions = require('redux/actions');
 var $ = require('jquery');
 let data = require('./Healthy-data');
@@ -101,9 +102,9 @@ let Component = React.createClass({
 
                         </div>
                         <div className={styles.rbox33}>
-                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo( bt0,actbt, hhdata,ipUrl, wfid,mapmonth,areaId,bmId)}>前10</button>
-                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(bt0, actbt, hhdata,ipUrl, wfid,mapmonth,areaId,bmId)}>后10</button>
-                            <button className={styles.button22} onClick={() => more(bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId,bmId)}>更多</button>
+                            <button className={bt0===0? styles.button:styles.button22} onClick={() => gogogo(abId, bt0,actbt, hhdata,ipUrl, wfid,mapmonth,areaId,bmId)}>前10</button>
+                            <button className={bt0===1? styles.button:styles.button22} onClick={() => back(abId,bt0, actbt, hhdata,ipUrl, wfid,mapmonth,areaId,bmId)}>后10</button>
+                            <button className={styles.button22} onClick={() => more(abId,bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId,bmId)}>更多</button>
                         </div>
                         <Hly_gentwo    height={390}
                                        jhpcolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}
@@ -314,7 +315,7 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId,bmId) => {
+        gogogo: (abId,bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId,bmId) => {
             dispatch(actions.setVars('bt0', 0));
             areaId=areaId[0];
             $.ajax({
@@ -323,7 +324,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "groupid":areaId==undefined? bmId:areaId,
-                    "wfid":wfid == undefined ? '150828' : wfid,
+                    "wfid":wfid == undefined ? abId : wfid,
                     "type":"0",
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
@@ -360,7 +361,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId,bmId) => {
+        back: (abId,bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId,bmId) => {
             dispatch(actions.setVars('bt0', 1));
             areaId=areaId[0];
             $.ajax({
@@ -369,7 +370,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "groupid":areaId==undefined? bmId:areaId,
-                    "wfid":wfid == undefined ? '150828' : wfid,
+                    "wfid":wfid == undefined ? abId : wfid,
                     "type":"1",
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
@@ -400,7 +401,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId,bmId) => {
+        more: (abId,bt0, actbt, hhdata, ipUrl, wfid,mapmonth,areaId,bmId) => {
             areaId=areaId[0];
             $.ajax({
                 type: 'post',
@@ -408,7 +409,7 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "groupid":areaId==undefined? bmId:areaId,
-                    "wfid":wfid == undefined ? '150828' : wfid,
+                    "wfid":wfid == undefined ? abId : wfid,
                     "type":"2",
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
