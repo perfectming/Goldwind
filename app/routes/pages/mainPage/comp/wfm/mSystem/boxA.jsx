@@ -11,6 +11,11 @@ var actions = require('redux/actions');
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
+        let{playjq}=this.props;
+        //初始化jquery方法
+        setTimeout(function(){
+            playjq();
+        },1000)
     },
 
     render() {
@@ -92,6 +97,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+        },
+        playjq: () => {
             //下拉点击事件
             $("#box1 b").on('click',function(){
                 if($(this).siblings('img').attr('src') == add){
@@ -99,7 +106,7 @@ const mapDispatchToProps = (dispatch) => {
                 }else{
                     $(this).siblings('img').attr('src', add);
                 }
-                $(this).parent().siblings('div').toggle();
+                $(this).parent().siblings().toggle();
             });
             //复选框状态跟随
             $("#box1 input").change(function(){
@@ -108,8 +115,6 @@ const mapDispatchToProps = (dispatch) => {
         },
         closeboxA:()=>{
             $("#box1").parent().css("display","none");
-        },
-        playjq:()=>{
         },
         saveAll: ()=> {
             let typeIdTemp = _.clone(getState().vars.boxRoleId);

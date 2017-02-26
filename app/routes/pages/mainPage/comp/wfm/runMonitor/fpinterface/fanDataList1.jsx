@@ -6,7 +6,7 @@ import icon1 from '../../../../img/comp/icon1.png';
 import icon2 from '../../../../img/comp/icon2.png';
 import icon3 from '../../../../img/comp/icon3.png';
 import icon4 from '../../../../img/comp/icon4.png';
-let arr=['Wtid','dayElec','ActPwr','WindSpeed','WTStateCode'];
+let arr=['Wtid','dayElec','ActPwr','WTStateCode'];
 var actions = require('redux/actions');
 let database = require('./../../../../../../../../config/data');
 import _ from 'lodash';
@@ -52,18 +52,11 @@ let Component = React.createClass({
                         <div className={css.tableHeaderBox}>
                             {
                                 data.header1.map((value, key)=> {
-                                    if(key==3){
-                                        return (
-                                            <div className={css.tableHeaderItem}
-                                                 style={{width:(100/data.header1.length)+"%"}} key={key}>辐照度[W/m<sup>2</sup>]</div>
-                                        )
-                                    }else {
                                         return (
                                             <div className={css.tableHeaderItem}
                                                  style={{width: (100 / data.header1.length) + "%"}}
                                                  key={key}>{value}</div>
                                         )
-                                    }
                                 })
                             }
                         </div>
@@ -75,7 +68,7 @@ let Component = React.createClass({
                                             <div className={key%2===0? css.tableContentLine : css.tableContentLine1} key={key}>
                                                 {
                                                     arr.map((valueC, keyC)=> {
-                                                        if(keyC==4){
+                                                        if(keyC==3){
                                                             switch (value[valueC]){
                                                                 case "Online":case "LimitPow":case "Alarm":
                                                                 return (
@@ -143,7 +136,7 @@ let Component = React.createClass({
                                             <div className={key%2===0? css.tableContentLine : css.tableContentLine1} key={key}>
                                                 {
                                                     arr.map((valueC, keyC)=> {
-                                                        if(keyC==4){
+                                                        if(keyC==3){
                                                             switch (value[valueC]){
                                                                 case "Online":case "LimitPow":case "Alarm":
                                                                 return (
