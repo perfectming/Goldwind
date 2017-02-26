@@ -412,8 +412,7 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('alertText', '无符合条件数据！')); 
                         return;
                     } ;
-                    dispatch(actions.setObjs('faultData',json));
-                    console.log(json)
+                    dispatch(actions.setObjs('faultData',json));                    
                 }, 
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));

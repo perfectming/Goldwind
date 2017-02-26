@@ -73,7 +73,6 @@ let Component = React.createClass({
 		// let qwer = "WTGS.PPV.Ra.F32.A";
 		let Value = [];
 		let  fdv = fmvalue["DevStatusQuery"];
-
 		if(fdv.Value == undefined){
 			fdv[Value] = Value
 		}
