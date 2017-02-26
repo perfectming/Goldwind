@@ -99,7 +99,7 @@ const mapDispatchToProps = (dispatch) => {
                 }else{
                     $(this).siblings('img').attr('src', add);
                 }
-                $(this).parent().siblings().toggle();
+                $(this).parent().siblings('div').toggle();
             });
             //复选框状态跟随
             $("#box1 input").change(function(){

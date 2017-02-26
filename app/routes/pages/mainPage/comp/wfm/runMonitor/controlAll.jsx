@@ -151,7 +151,7 @@ let Component = React.createClass({
                         </div>
                     </div>
                     <div className={styles.upBox}>
-                        <Column model={jyname} tabaleData={jydata} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Column>
+                        <Column model={jyname} tabaleData={jydata} lettercolor={"#555555"}></Column>
                     </div>
                     <div className={styles.downBox}>
                         <Table model={jyname} tabaleData={jydata}></Table>
