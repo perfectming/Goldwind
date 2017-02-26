@@ -74,7 +74,7 @@ let Component = React.createClass({
 		let Value = [];
 		let  fdv = fmvalue["DevStatusQuery"];
 
-		if(fdv.Value == undefined){
+		if(fdv || fdv.Value == undefined){
 			fdv[Value] = Value
 		}
 		// console.log(3,fmvalue);

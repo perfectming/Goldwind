@@ -40,10 +40,6 @@ let Component = React.createClass({
             if (data[150801]){
         return (
             <div>
-                <div className={styles.actionBox}>
-                    <img src={save} onClick={()=>alert("您保存的数据为:" + JSON.stringify(table))}/>
-                    <img src={refresh}/>
-                </div>
                 <div className={skinStyle==1?styles.tableBoxBlue:skinStyle==2?styles.tableBoxWhite:styles.tableBox}>
                     <div className={styles.tableHeaderBox}>
                         {
@@ -152,7 +148,8 @@ let Component = React.createClass({
                                         }
                                     </div>
                                 )
-                            })}
+                            })
+                        }
                         {
                             arr2.map((value, key)=> {
                             return (
