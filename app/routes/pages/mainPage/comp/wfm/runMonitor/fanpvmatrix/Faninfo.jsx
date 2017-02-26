@@ -74,7 +74,7 @@ let Component = React.createClass({
 		let Value = [];
 		let  fdv = fmvalue["DevStatusQuery"];
 
-		if(fdv || fdv.Value == undefined){
+		if(fdv.Value == undefined){
 			fdv[Value] = Value
 		}
 		// console.log(3,fmvalue);
@@ -503,7 +503,7 @@ const mapDispatchToProps = (dispatch) => {
 	                                    // console.log(value.Wtid)
 	                                    // console.log(infofData.ModelData[value.Wtid]["WTUR.Temp.Ra.F32"])
 	                                    let d = infofData.ModelData[value.Wtid];
-	                                    if(d == undefined || d["DevCurDayPowerCurve"] == undefined || d["CurDayWindSpeedCurve_Device"] == undefined){
+	                                    if(d == undefined || d["DevCurDayPowerCurve"] == undefined || d["CurDayWindSpeedCurve_Device"] == undefined || d["DevStatusQuery"] == undefined){
 	                                    	//console.log(value,setData5)
 	                                    	TY.getRtData("WTDetail", value.Wtid, setData5)
 	                                    }else{
