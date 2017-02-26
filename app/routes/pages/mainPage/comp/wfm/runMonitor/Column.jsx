@@ -55,7 +55,7 @@ let Component = React.createClass({
             tooltip: {
                 valueSuffix:'MW',
                 style:{
-                    color: lettercolor,
+                    color: '#000',
                     fontSize: '13px',
                     fontFamily:'微软雅黑'
                 }

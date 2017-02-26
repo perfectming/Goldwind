@@ -253,7 +253,7 @@ const mapDispatchToProps = (dispatch) => {
                 }
             }
             
-            //获取今天与昨天的日期
+            //初始化今天与昨天的日期
             $('#startTime').val(dateString1);
             $('#endTime').val(dateString);
             //复选框状态跟随

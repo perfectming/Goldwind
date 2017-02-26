@@ -242,12 +242,12 @@ const mapDispatchToProps = (dispatch) => {
                                             dayPlanElec=data.data.dayelecPlanElec;
                                             arrPlan=[],month1=[],arrAct=[];
                                             var monthNum=[];
-                                            for(var i=0;i<data.data.wtKongMonthsElec.length;i++){
+                                            for(var i=0;i<12;i++){
                                                 month1.push(data.data.wtKongMonthsElec[i].month+"月");
                                                 monthNum.push(data.data.wtKongMonthsElec[i].month);
                                                 arrAct.push((data.data.wtKongMonthsElec[i].poweract).toFixed(1)/1);
                                             }
-                                            for(var i=0;i<monthNum.length;i++){
+                                            for(var i=0;i<12;i++){
                                                 arrPlan.push((data.data.wtKongMonthsPlanElec[monthNum[i]]).toFixed(1)/1);
                                             }
                                         },
