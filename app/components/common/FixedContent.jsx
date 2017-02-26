@@ -10,7 +10,7 @@ let FixedContent = React.createClass({
     let designWidth = this.props.width;
     let actualWidth = Math.min(1920, $(window).width());
     let widthScale = actualWidth / designWidth;
-
+    //dispatch(actions.setVars('widthScale', widthScale));
     if (mode === 'fullWidth') {
       return {
         "transform": "scale(" + widthScale + "," + widthScale + ")",

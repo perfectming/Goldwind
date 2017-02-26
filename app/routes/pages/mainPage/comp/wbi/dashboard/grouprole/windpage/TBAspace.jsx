@@ -7,7 +7,6 @@ import icono1 from '../../../../../img/comp/TBA2.png';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let data = require('./../group/Profit-data3');
-let input_url = "10.9.100.38";
 let month = data.month;
 let button = data.button;
 let machine = data.machine;

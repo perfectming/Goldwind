@@ -6,6 +6,7 @@ import add from '../../../img/comp/add_icon.png';
 import drop from '../../../img/comp/drop2.gif';
 import OneColumn from './oneColumn.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
+import AlertWindow from '../../wbi/KPI/AlertWindow.jsx';//提示框
 let type = require('./ywbb_date');
 let btype = type.comps.from;
 var $ =require('jquery');
@@ -27,7 +28,7 @@ let Component = React.createClass({
     },
 
     render() {
-            let {skinStyle,selectType,lineType=1,boolywbb=false,playjq,select_list,searchnum,powerCurveData} = this.props;
+            let {alertText,skinStyle,selectType,lineType=1,boolywbb=false,playjq,select_list,searchnum,compareCurveData} = this.props;
             let treetype=[];//设备类型
             let one=[]; //一级菜单
             let two=[]; //二级菜单
@@ -50,13 +51,13 @@ let Component = React.createClass({
                 }
             }
             //表格数据处理
-            if(powerCurveData!==undefined&&powerCurveData.areadescr!==undefined){
+            if(compareCurveData!==undefined&&compareCurveData.areadescr!==undefined){
                 let arrString1,arrString2,arrString3,arrString4,arrString5;
-                arrString1=powerCurveData.areadescr.Values.split(',');//风速区间
-                arrString2=powerCurveData.windhour.Values.split(',');//累计时长
-                arrString3=powerCurveData.averspeed.Values.split(',');//平均风速
-                arrString4=powerCurveData.frecount.Values.split(',');//频次
-                arrString5=powerCurveData.percent.Values.split(',');//百分比
+                arrString1=compareCurveData.areadescr.Values.split(',');//风速区间
+                arrString2=compareCurveData.windhour.Values.split(',');//累计时长
+                arrString3=compareCurveData.averspeed.Values.split(',');//平均风速
+                arrString4=compareCurveData.frecount.Values.split(',');//频次
+                arrString5=compareCurveData.percent.Values.split(',');//百分比
                 for (var i=0 ; i< arrString1.length ; i++){
                         stateArr.push(arrString1[i]);
                 }
@@ -73,12 +74,13 @@ let Component = React.createClass({
                         percentArr.push((arrString5[i]/1).toFixed(2));
                 }
             }else{
-                powerCurveData=undefined;
+                compareCurveData=undefined;
             }
             if(boolywbb){
                 let treetype=["原始曲线","矫正曲线","对比曲线","分析曲线"];
                 return (
                     <div className={skinStyle==1? styles.faultBoxBlue:skinStyle==2? styles.faultBoxWhite:styles.faultBox}>
+                        <AlertWindow text={alertText}></AlertWindow>
                         <div className={styles.search_tit}>
                             <div className={styles.seleBox}>
                                 <span>曲线种类:</span>
@@ -228,10 +230,10 @@ let Component = React.createClass({
                     </div>
                         <div className={styles.righttable}>
                             <div className={styles.columnbox} id='colum'>
-                                {powerCurveData!==undefined && <OneColumn month={stateArr} arr1={frequency} unit1={'次'} nameOne={'频次'} title={'风频图'}></OneColumn>}
+                                {compareCurveData!==undefined && <OneColumn month={stateArr} arr1={frequency} unit1={'次'} nameOne={'频次'} title={'风频图'}></OneColumn>}
                             </div>
                             <div className={styles.tablebox} id='tablebox'>
-                                {powerCurveData!==undefined &&
+                                {compareCurveData!==undefined &&
                                 <table>
                                     <tbody>
                                         <tr className={styles.thState}><th>序号</th><th>风速区间</th><th>频次</th><th>平均风速(m/s)</th><th>累计时长(h)</th><th>百分比(%)</th></tr>
@@ -263,8 +265,9 @@ const mapStateToProps = (state) => {
         skinStyle: state.vars.skinStyle, //全局换肤
         boolywbb:state.vars.boolywbb,
         select_list:state.vars.select_list,
-        powerCurveData:state.objs.powerCurveData,
+        compareCurveData:state.objs.compareCurveData,
         lineType:state.vars.lineType,
+        alertText:state.vars.alertText,//弹框提示文字
     }
 };
 
@@ -284,7 +287,7 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boolywbb', true));
                     },    
                     error:function(XMLHttpRequest,textStatus,errorThrown){    
-                        console.log('获取数据失败！');    
+                        console.log('请求超时！');    
                     }    
             });
             
@@ -390,7 +393,8 @@ const mapDispatchToProps = (dispatch) => {
                 thirdId.splice(50,thirdId.length);
             }
             if(firstId.length==0&&secondId.length==0&&thirdId.length==0){
-                alert('请选择设备或路线');
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择设备！'));
                 return false;
             }
             $.ajax({    
@@ -405,11 +409,12 @@ const mapDispatchToProps = (dispatch) => {
                     //     alert('无数据');
                     //     return;
                     // } 
-                    // dispatch(actions.setObjs('powerCurveData',json));
-                    console.log(json)
+                    // dispatch(actions.setObjs('compareCurveData',json));
+                    //console.log(json)
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    console.log('获取数据失败！');    
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '请求超时！'));    
                 }    
             });
         }

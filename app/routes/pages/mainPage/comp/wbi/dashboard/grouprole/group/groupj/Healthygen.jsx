@@ -6,6 +6,8 @@ import Hly_gens from '../../area/Hly_gens.jsx';
 import Hly_genp from '../../area/Hly_genp.jsx';
 import Login from '../../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
+let bmId = require("../../../../../urlData").groupId;
+let cjId = require("../../../../../urlData").CJwfId;
 var $ = require('jquery');
 
 
@@ -101,13 +103,13 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.rbox3}>
                             <button className={bt0 === 0 ? styles.button : styles.button22}
-                                    onClick={() => gogogo(bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth)}>前10
+                                    onClick={() => gogogo(cjId,bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth,bmId)}>前10
                             </button>
                             <button className={bt0 === 1 ? styles.button : styles.button22}
-                                    onClick={() => back(bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth)}>后10
+                                    onClick={() => back(cjId,bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth,bmId)}>后10
                             </button>
                             <button className={styles.button22}
-                                    onClick={() => more(bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth)}>更多
+                                    onClick={() => more(cjId,bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth,bmId)}>更多
                             </button>
                         </div>
 
@@ -342,7 +344,7 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth) => {
+        gogogo: (cjId,bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth,bmId) => {
             dispatch(actions.setVars('bt0', 0));
             $.ajax({
                 type: 'post',
@@ -350,8 +352,8 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "month": mapmonth[actbt].yearpoweract,
-                    "groupid": '201612121721151',
-                    "wfid": wfid == undefined ? '150801' : wfid,
+                    "groupid": bmId,
+                    "wfid": wfid == undefined ? cjId : wfid,
                     "type": "0",
                     "year": mapmonth[actbt].year,
                 },
@@ -384,7 +386,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth) => {
+        back: (cjId,bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth,bmId) => {
             dispatch(actions.setVars('bt0', 1));
             $.ajax({
                 type: 'post',
@@ -392,8 +394,8 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "month": mapmonth[actbt].yearpoweract,
-                    "groupid": '201612121721151',
-                    "wfid": wfid == undefined ? '150801' : wfid,
+                    "groupid": bmId,
+                    "wfid": wfid == undefined ? cjId : wfid,
                     "type": "1",
                     "year": mapmonth[actbt].year,
                 },
@@ -424,7 +426,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth) => {
+        more: (cjId,bt0, w0, wc1, wc2, actbt, hhdata, ipUrl, wfid,mapmonth,bmId) => {
             dispatch(actions.setVars('bt0', 2));
 
             $.ajax({
@@ -433,8 +435,8 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
                     "month": mapmonth[actbt].yearpoweract,
-                    "groupid": '201612121721151',
-                    "wfid": wfid == undefined ? '150801' : wfid,
+                    "groupid": bmId,
+                    "wfid": wfid == undefined ? cjId : wfid,
                     "type": "2",
                     "year": mapmonth[actbt].year,
                 },

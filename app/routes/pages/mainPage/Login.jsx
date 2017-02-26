@@ -103,7 +103,7 @@ const mapDispatchToProps = (dispatch) => {
                                dispatch(actions.setVars('userInfo', true));
                                try { Base.returnPlay(); } catch (e) { };
                                try { if (TY == null) { } } catch (e) { alert("配置文件加载失败!"); return; }
-                               TY.dataUrl = "http://54.223.200.134/System/data.aspx";
+                               TY.dataUrl = "http://"+url+"/System/data.aspx";
                                TY.crossDomain = true;
                                TY.Zip =false;
                                TY.TT.timeOutlength = 1000*60*1;

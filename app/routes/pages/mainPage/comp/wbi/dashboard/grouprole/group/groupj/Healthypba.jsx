@@ -6,6 +6,7 @@ import Hly_pba from './Hly_pba.jsx';
 import Hly_pbas from './Hly_pbas.jsx';
 import Login from '../../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
+let bmId = require("../../../../../urlData").groupId;
 var $ = require('jquery');
 
 var date=new Date
@@ -136,15 +137,15 @@ let Component = React.createClass({
                         <div className={styles.rbox3}>
 
                             <button className={bt0===0? styles.button : styles.button22}
-                                    onClick={() => gogogo(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth)}>
+                                    onClick={() => gogogo(cjId,bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth,bmId)}>
                                 前10
                             </button>
                             <button className={bt0===1? styles.button : styles.button22}
-                                    onClick={() => back(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth)}>
+                                    onClick={() => back(cjId,bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth,bmId)}>
                                 后10
                             </button>
                             <button className={bt0===2? styles.button : styles.button22}
-                                    onClick={() => more(bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth)}>更多</button>
+                                    onClick={() => more(cjId,bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth,bmId)}>更多</button>
                         </div>
 
 
@@ -455,7 +456,7 @@ const mapDispatchToProps = (dispatch) => {
             })
 
         },
-        gogogo: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth) => {
+        gogogo: (cjId,bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth,bmId) => {
             dispatch(actions.setVars('bt0', 0));
           //  let grid = hhdata.data[2][0].groupid;
 
@@ -465,8 +466,8 @@ const mapDispatchToProps = (dispatch) => {
                 async: false,
                 data: {
 
-                    "groupid":  '201612121721151',
-                    "wfid": wfid == undefined ? '150801' : wfid,
+                    "groupid":  bmId,
+                    "wfid": wfid == undefined ? cjId : wfid,
                     "type":"0",
                     "year": mapmonth[actbt].year,
                     "month": mapmonth[actbt].yearpoweract,
@@ -510,9 +511,8 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth) => {
-console.log(actbt)
-console.log(wfid)
+        back: (cjId,bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth,bmId) => {
+
 
             dispatch(actions.setVars('bt0', 1));
 
@@ -521,8 +521,8 @@ console.log(wfid)
                 url: 'http://' + ipUrl + '/wbi/PBA/getPageSize',
                 async: false,
                 data: {
-                    "groupid":  '201612121721151',
-                    "wfid": wfid == undefined ? '150801' : wfid,
+                    "groupid":  bmId,
+                    "wfid": wfid == undefined ? cjId : wfid,
                     "type":"1",
                     "year": mapmonth[actbt].year,
                     "month": mapmonth[actbt].yearpoweract,
@@ -530,7 +530,7 @@ console.log(wfid)
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-                    console.log(data)
+                    //console.log(data)
                     let barLotime3c = [];    //各区域   一区域二区域
                     let power3c = [];       //实际发电量
                     let wrong30c = [];       //故障损失
@@ -564,7 +564,7 @@ console.log(wfid)
             });
 
         },
-        more: (bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth) => {
+        more: (cjId,bt0,w0, win, wc1,wc2, actbt, hhdata,ipUrl,wfid,mapmonth,bmId) => {
             dispatch(actions.setVars('bt0', 2));
             $.ajax({
                 type: 'post',
@@ -572,8 +572,8 @@ console.log(wfid)
                 async: false,
                 data: {
 
-                    "groupid":  '201612121721151',
-                    "wfid": wfid == undefined ? '150801' : wfid,
+                    "groupid":  bmId,
+                    "wfid": wfid == undefined ? cjId : wfid,
                     "type":"2",
                     "year": mapmonth[actbt].year,
                     "month": mapmonth[actbt].yearpoweract,

@@ -231,7 +231,7 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('boolywbb', true));
                     },    
                     error:function(XMLHttpRequest,textStatus,errorThrown){
-                        console.log('获取数据失败！')    
+                        console.log('请求超时！')    
                     }    
             });
             
@@ -330,7 +330,7 @@ const mapDispatchToProps = (dispatch) => {
                 success:function(json,textStatus){ 
                     if(json.wfid==undefined){
                         dispatch(actions.setVars('alertBool', false));
-                        dispatch(actions.setVars('alertText', '无数据！'));  
+                        dispatch(actions.setVars('alertText', '无符合条件数据！'));  
                         return;
                     } 
                     dispatch(actions.setObjs('AvaData',json));
@@ -338,7 +338,7 @@ const mapDispatchToProps = (dispatch) => {
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));      
+                    dispatch(actions.setVars('alertText', '请求超时！'));      
                 }    
             });
         }

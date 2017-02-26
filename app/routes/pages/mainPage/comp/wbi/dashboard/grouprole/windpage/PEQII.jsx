@@ -25,6 +25,7 @@ let thDate = new Date();
 let thYear = thDate.getFullYear();
 let month2 = thDate.getMonth();
 let soam = require('../../../../urlData').soam2;//设置接口
+let soam1 = require('../../../../urlData').soam1;//设置接口
 for (let i = 0; i <= 30; i++) {
     yeares.push(thYear - 2 + i)
 }
@@ -483,7 +484,7 @@ const mapDispatchToProps = (dispatch) => {
             //获取风场
             function getwtid() {
                 $.ajax({
-                    url: 'http://10.68.100.32:8080/soam/wf/getAll',
+                    url: soam1+'/wf/getAll',
                     type: 'post',
                     dataType: 'json',//here,
                     success: function (data) {

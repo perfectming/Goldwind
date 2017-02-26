@@ -262,7 +262,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.righttable}>
                             <div className={styles.columnbox} id='colum'>
-                                {powerCountData==undefined && <OneColumn month={timeArr} arr1={frequency} unit1={'次'} nameOne={'频次'} title={'风频图'}></OneColumn>}
+                                {powerCountData==!undefined && <OneColumn month={timeArr} arr1={frequency} unit1={'次'} nameOne={'频次'} title={'风频图'}></OneColumn>}
                             </div>
                             <div className={styles.tablebox} id='tablebox'>
                                 {powerCountData!==undefined &&
@@ -478,7 +478,6 @@ const mapDispatchToProps = (dispatch) => {
                         return;
                     } 
                     dispatch(actions.setObjs('powerCountData',json));
-                    console.log(json)
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));

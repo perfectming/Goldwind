@@ -4,11 +4,11 @@ import styles from './Hindex.scss';
 import Pro_three from './Pro_three.jsx';
 import Pro_four from './Pro_four.jsx';
 var actions = require('redux/actions');
-
+let bmId = require("../../../../urlData").groupId;
 let Component = React.createClass({
     componentWillMount() {
         let {ipUrl,areaId}=this.props
-        this.props.ajax(ipUrl,areaId);
+        this.props.ajax(ipUrl,areaId,bmId);
     },
     componentDidMount() {
         this.props.init();
@@ -88,7 +88,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl,areaId) => {
+        ajax: (ipUrl,areaId,bmId) => {
             areaId=areaId[0];
             let date = new Date();
             let year = date.getFullYear()
@@ -148,7 +148,7 @@ const mapDispatchToProps = (dispatch) => {
 
                     "year":year,
                     "month":month2,
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
 
                 },
                 dataType:'json',

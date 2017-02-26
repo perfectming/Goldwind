@@ -6,11 +6,11 @@ import Hly_pbatwo from './Hly_pbatwo.jsx';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 var $ = require("jquery");
-
+let bmId = require("../../../../urlData").groupId;//id
 let Component = React.createClass({
     componentWillMount() {
         let {ipUrl,areaId}=this.props
-        this.props.ajax(ipUrl,areaId);
+        this.props.ajax(ipUrl,areaId,bmId);
     },
     componentDidMount() {
         this.props.init();
@@ -122,7 +122,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl,areaId) => {
+        ajax: (ipUrl,areaId,bmId) => {
             let date = new Date();
             let year = date.getFullYear()
             let month2 = date.getMonth();
@@ -140,7 +140,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     "year":year,
                     "month":month2,
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -185,7 +185,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     "year":year,
                     "month":month2,
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                 },
                 dataType:'json',
                 timeout:'3000',

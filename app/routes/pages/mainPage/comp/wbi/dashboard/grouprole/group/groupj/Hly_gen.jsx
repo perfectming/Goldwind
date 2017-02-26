@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
+let bmId = require("../../../../../urlData").groupId;
 let data = require('./../../area/Healthy-data');
 let winds = data.data.yearelectric[0].wind;
 let win  = winds[0].plan;
@@ -83,7 +83,7 @@ let Component = React.createClass({
                         click: function(e) {
                             w0=e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl,mapmonth);
+                            changedata1(w0,win,wc1,hhdata,actbt,ipUrl,mapmonth,bmId);
 
                         }
                     }
@@ -185,7 +185,7 @@ const mapDispatchToProps = (dispatch) => {
         init: () => {
 
         },
-        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl,mapmonth)=>{
+        changedata1 :(w0,win,wc1,hhdata,actbt,ipUrl,mapmonth,bmId)=>{
 
 
             $.ajax({
@@ -195,7 +195,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     "year": mapmonth[actbt].year,
                     "months":mapmonth[actbt].yearpoweract,
-                    "groupid": '201612121721151',
+                    "groupid": bmId,
                     "wfid":'',
                 },
                 dataType:'json',

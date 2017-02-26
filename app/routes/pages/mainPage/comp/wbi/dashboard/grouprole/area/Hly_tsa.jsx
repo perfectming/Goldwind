@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-
+let bmId = require("../../../../urlData").groupId;
 let data = require('./Healthy-data');
 
 let Component = React.createClass({
@@ -77,7 +77,7 @@ let Component = React.createClass({
                         click: function (e,) {
                             w10 = e.point.category;
                             wc1 = e.point.index;
-                            changedata1(w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth);
+                            changedata1(bmId,w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth);
 
                         }
                     }
@@ -221,7 +221,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        changedata1: (w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth) => {
+        changedata1: (bmId,w10,  wc1, actbt,hhdata1,hhdata2,hhdata3,ipUrl,mapmonth) => {
 
             dispatch(actions.setVars('w11', w10));
 
@@ -234,7 +234,7 @@ const mapDispatchToProps = (dispatch) => {
                 url:'http://'+ipUrl+'/wbi/TBA/getWfAllWtByM',
                 async:false,
                 data:{
-                    "groupid":'201612121721151',
+                    "groupid":bmId,
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
                     "wfid":wfid,

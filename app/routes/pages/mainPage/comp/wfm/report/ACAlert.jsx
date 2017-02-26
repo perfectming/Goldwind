@@ -141,17 +141,17 @@ const mapDispatchToProps = (dispatch) => {
                         jsonpCallback:"testCall",    
                         timeout:5000,       
                         success:function(json,textStatus){  
-                            console.log(json)
+                            //console.log(json)
                             dispatch(actions.appendObjs('logType',json));
                             dispatch(actions.setVars('AlertBool', true));
                         },    
                         error:function(XMLHttpRequest,textStatus,errorThrown){    
-                            console.log('获取数据失败！')  
+                            console.log('请求超时！')  
                         }    
                     });
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    console.log('获取数据失败！')
+                    console.log('请求超时！')
                 }    
             });
         },
@@ -167,13 +167,13 @@ const mapDispatchToProps = (dispatch) => {
                 jsonpCallback:"testCall",    
                 timeout:5000,       
                 success:function(json,textStatus){  
-                    console.log(json)
+                    //console.log(json)
                     dispatch(actions.setObjs('logType',json));
                     
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));   
+                    dispatch(actions.setVars('alertText', '请求超时！'));   
                 }    
             });
         },
@@ -257,7 +257,24 @@ const mapDispatchToProps = (dispatch) => {
             //获取查询时间
             var startTime=$('#startTime').val();
             var endTime=$('#endTime').val();
-            
+            //清空数组
+            var all=[];
+            all.splice(0,all.length);//字段
+            $('#leftlist input').each(function(){
+                if($(this).prop('checked')==true){
+                    if($(this).val()!=='value'){
+                      all.push($(this).val())
+                    }
+                }
+            })
+            if(all.length>50){
+                all.splice(50,all.length);
+            }
+            if(all.length==0){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请选择设备！')); 
+                return;
+            }
             $.ajax({    
                 url:'http://'+url+'/Monitor/xml.aspx',    
                 data:'functionname=CountStationInfo&wtid='+all+'&starttime='+startTime+'&endtime='+endTime+'&groupbydevice=0&crossDomain=true&zip=false',    
@@ -268,14 +285,14 @@ const mapDispatchToProps = (dispatch) => {
                 success:function(json,textStatus){ 
                     if(json.wtid==undefined){
                         dispatch(actions.setVars('alertBool', false));
-                        dispatch(actions.setVars('alertText', '无数据'));
+                        dispatch(actions.setVars('alertText', '无符合条件数据'));
                         return;
                     } 
                     dispatch(actions.setObjs('chartData',json));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));   
+                    dispatch(actions.setVars('alertText', '请求超时！'));   
                 }    
             });
             

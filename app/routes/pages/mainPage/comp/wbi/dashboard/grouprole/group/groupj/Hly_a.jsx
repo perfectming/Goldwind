@@ -4,7 +4,7 @@ var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
 
 let data = require('./../../area/Healthy-data');
-
+let bmId = require("../../../../../urlData").groupId;
 let winds = data.data.yearelectric[0].wind;
 let win = winds[0].plan;
 
@@ -242,15 +242,11 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     "year": mapmonth[actbt].year,
                     "month":mapmonth[actbt].yearpoweract,
-                    "groupid":   grid==undefined? '201612121721151':grid,
+                    "groupid":   grid==undefined? bmId:grid,
                 },
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
-                        console.log(data)
-
-
                     let barLotime2 = [];    //各区域   一区域二区域
                     let power2 = [];       //实际发电量
                     let wrong20 = [];       //故障损失

@@ -7,11 +7,11 @@ import icono2 from '../../../../../img/comp/TBA.png';
 import icono1 from '../../../../../img/comp/TBA2.png';
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
-let input_url="10.68.100.32";
+let cjId = require("../../../../urlData").CJwfId;
 let Component = React.createClass({
     componentWillMount() {
        let{xxdwfId,xxdwfNa,ipUrl}=this.props;
-        this.props.ajax(xxdwfId,xxdwfNa,ipUrl);
+        this.props.ajax(cjId,xxdwfId,xxdwfNa,ipUrl);
     },
     componentDidMount() {
         this.props.init();
@@ -84,7 +84,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-           ajax: (xxdwfId,xxdwfNa,input_url) => {
+        ajax: (cjId,xxdwfId,xxdwfNa,input_url) => {
             let date=new Date;
             let monthT=date.getMonth();
             let year=date.getFullYear();
@@ -109,7 +109,7 @@ const mapDispatchToProps = (dispatch) => {
              url:'http://'+input_url+'/wbi/TBA/getMonthsTBAByWf',  
              async:false,
             data:{
-             'wfid':xxdwfId==undefined? "150801":xxdwfId,
+             'wfid':xxdwfId==undefined? cjId:xxdwfId,
             },
              dataType:'json',
              timeout:'3000',
@@ -148,7 +148,7 @@ const mapDispatchToProps = (dispatch) => {
              url:'http://'+input_url+'/wbi/TBA/getDaysTBAByWf',  
              async:false,
             data:{
-                'wfid':xxdwfId==undefined? "150801":xxdwfId,
+                'wfid':xxdwfId==undefined? cjId:xxdwfId,
              'month':monthT,
                 'year':year,
 

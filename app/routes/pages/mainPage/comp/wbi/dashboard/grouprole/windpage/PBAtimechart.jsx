@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 var actions = require('redux/actions');
 var ReactHighcharts = require('react-highcharts');
-let input_url = "10.68.100.32";
 var $ = require('jquery');
 let data = require('./../group/Profit-data3');
 let winss = data.areaPlanDayY;
@@ -277,7 +276,6 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-
         w0: state.vars.windpbaspace,
     }
 };

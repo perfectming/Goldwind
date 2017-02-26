@@ -28,7 +28,7 @@ let Component = React.createClass({
         },1000)
     },
    showTree (devurl){
-    let{alertText,playjq,showtree,select_list,firstname,devtype}=this.props;
+    let{playjq,showtree,select_list,firstname,devtype}=this.props;
    
      //点击切换下拉选择项
             for(let id in devtype.list){
@@ -48,7 +48,7 @@ let Component = React.createClass({
    },
 
     render() {
-         let {skinStyle,devtype,boolywbb=false,showtree,playjq,firstname,select_list,tabledata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
+         let {alertText,skinStyle,devtype,boolywbb=false,showtree,playjq,firstname,select_list,tabledata,clickitem,chart,chartname,chartTitle,devurls='WindTurbine',searchnum} = this.props;
            let treetype=[];
            let Tarr=[]; //标题数组
            let Barr=[];  //数据
@@ -346,7 +346,7 @@ const mapDispatchToProps = (dispatch) => {
                   gettreedata(); 
               },    
               error:function(XMLHttpRequest,textStatus,errorThrown){
-                  console.log('获取数据失败!')  
+                  console.log("请求超时");
               }    
           });
           function gettreedata(){
@@ -362,7 +362,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('boolywbb', true));
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
-                    console.log('获取数据失败!')    
+                    console.log("请求超时");
                 }    
             });
           }
@@ -458,7 +458,7 @@ const mapDispatchToProps = (dispatch) => {
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){    
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));  
+                    dispatch(actions.setVars('alertText', '网络请求超时！'));  
                 }    
             });
         },
@@ -497,7 +497,7 @@ const mapDispatchToProps = (dispatch) => {
             }
             if(all.length==0){
                 dispatch(actions.setVars('alertBool', false));
-                dispatch(actions.setVars('alertText', '设备数据获取失败！')); 
+                dispatch(actions.setVars('alertText', '请选择设备类型！')); 
                 return;
             }
             $.ajax({    
@@ -520,7 +520,7 @@ const mapDispatchToProps = (dispatch) => {
                 },    
                 error:function(XMLHttpRequest,textStatus,errorThrown){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败！'));    
+                    dispatch(actions.setVars('alertText', '网络请求超时！'));    
                 }    
             });
         }

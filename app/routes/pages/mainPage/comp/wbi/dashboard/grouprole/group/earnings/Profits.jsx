@@ -285,7 +285,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
                 error: function () {
 
- console.log(12)
+ 
                 },
             });
             dispatch(actions.setVars('w1', arr3[0]));
@@ -337,7 +337,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
                 error: function () {
 
- console.log(13)
+ 
                 },
 
             });

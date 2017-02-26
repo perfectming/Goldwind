@@ -5,15 +5,15 @@ import Pro_one from './Pro_one.jsx';
 import Pro_two from './Pro_two.jsx';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
-let ip = "10.9.101.15";
-
+let bmId = require("../../../../urlData").groupId;
+let abId = require("../../../../urlData").ABwfId;
 let data = require('./Healthy-data');
 let text222 = data.data.line_date;
 
 let Component = React.createClass({
     componentWillMount() {
         let {ipUrl,areaId}=this.props
-        this.props.ajax(ipUrl,areaId);
+        this.props.ajax(ipUrl,areaId,bmId,abId);
     },
     componentDidMount() {
         this.props.init();
@@ -57,7 +57,7 @@ let Component = React.createClass({
                         mapmonth.map((value, key) => {
                             return (
                                 <div className={actbt === key ? styles.inmonth : styles.inmonth2} key={key}
-                                     onClick={() => changecolor(value, key, ipUrl,areaId)}>
+                                     onClick={() => changecolor(abId,value, key, ipUrl,areaId,bmId)}>
                                     {value.yearpoweract+"月"}
                                 </div>
                             )
@@ -86,12 +86,12 @@ let Component = React.createClass({
                     <div className={`  ${styles.box_shadow}  ${styles.fbox2}`}>
                         <div className={styles.rbox33}>
                             <button className={bt0 === 0 ? styles.button : styles.button22}
-                                    onClick={() => gogogo(bt0, ipUrl, wfid, actbt,areaId,mapmonth)}>前10
+                                    onClick={() => gogogo(abId,bt0, ipUrl, wfid, actbt,areaId,mapmonth)}>前10
                             </button>
                             <button className={bt0 === 1 ? styles.button : styles.button22}
-                                    onClick={() => back(bt0, ipUrl, wfid, actbt,areaId,mapmonth)}>后10
+                                    onClick={() => back(abId,bt0, ipUrl, wfid, actbt,areaId,mapmonth)}>后10
                             </button>
-                            <button className={styles.button22} onClick={() => more(bt0, ipUrl, wfid, actbt,areaId,mapmonth)}>更多</button>
+                            <button className={styles.button22} onClick={() => more(abId,bt0, ipUrl, wfid, actbt,areaId,mapmonth)}>更多</button>
                         </div>
                         <Pro_two text={mon + w10 + "各风机年收益"}
                                  names={'TBA'}
@@ -143,7 +143,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl,areaId) => {
+        ajax: (ipUrl,areaId,bmId,abId) => {
             var obj = {
                 test: ''
             }
@@ -185,7 +185,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     'startdate': year[10].year + "-" + year[10].yearpoweract + "-" + '1',
                     'enddate': year[10].year + "-" + year[10].yearpoweract + "-" + daycountT,
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -227,7 +227,7 @@ const mapDispatchToProps = (dispatch) => {
                 url: 'http://'+ipUrl+'/wbi/yield/getYieldByWfid',
                 async: false,
                 data: {
-                    'wfid': '150828',
+                    'wfid': abId,
                     'startdate': year[10].year + "-" + year[10].yearpoweract + "-" + '1',
                     'enddate': year[10].year + "-" + year[10].yearpoweract + "-" + daycountT,
                     'methods': 'desc',
@@ -268,12 +268,11 @@ const mapDispatchToProps = (dispatch) => {
         },
 
         init: () => {
-            dispatch(actions.setVars('ip', ip));
             var obj = {
                 test: ''
             }
         },
-        changecolor: (value, key, ipUrl,areaId) => {
+        changecolor: (abId,value, key, ipUrl,areaId,bmId) => {
             areaId=areaId[0];
             dispatch(actions.setVars('bt0', 0));
             dispatch(actions.setVars('mon', value.yearpoweract));
@@ -291,7 +290,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     'startdate': value.year + "-" + value.yearpoweract + "-" + '1',
                     'enddate': value.year + "-" + value.yearpoweract + "-" + daycount,
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                 },
                 dataType: 'json',
                 timeout: '3000',
@@ -330,7 +329,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     'startdate': value.year + "-" + value.yearpoweract + "-" + '1',
                     'enddate': value.year + "-" + value.yearpoweract + "-" + daycount,
-                    'wfid': '150828',
+                    'wfid': abId,
                     'methods': 'desc',
                 },
                 dataType: 'json',
@@ -364,7 +363,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             })
         },
-        gogogo: (bt0, ipUrl, wfid, actbt,areaId,mapmonth) => {
+        gogogo: (abId,bt0, ipUrl, wfid, actbt,areaId,mapmonth) => {
             dispatch(actions.setVars('bt0', 0));
 
 
@@ -380,7 +379,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     'startdate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+'1',
                     'enddate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+daycount,
-                    "wfid": wfid == undefined ? '150828' : wfid,
+                    "wfid": wfid == undefined ? abId : wfid,
                     'methods':'desc',
                 },
                 dataType: 'json',
@@ -413,7 +412,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
         },
-        back: (bt0, ipUrl, wfid, actbt,areaId,mapmonth) => {
+        back: (abId,bt0, ipUrl, wfid, actbt,areaId,mapmonth) => {
             dispatch(actions.setVars('bt0', 1));
             let day = new Date(mapmonth[actbt].year, mapmonth[actbt].yearpoweract, 0);
             let daycount = day.getDate();
@@ -426,7 +425,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     'startdate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+'1',
                     'enddate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+daycount,
-                    "wfid": wfid == undefined ? '150828' : wfid,
+                    "wfid": wfid == undefined ? abId : wfid,
                     'methods':'asc',
                 },
                 dataType: 'json',
@@ -458,7 +457,7 @@ const mapDispatchToProps = (dispatch) => {
                 },
             });
         },
-        more: (bt0, ipUrl, wfid, actbt,areaId,mapmonth) => {
+        more: (abId,bt0, ipUrl, wfid, actbt,areaId,mapmonth) => {
             let day = new Date(mapmonth[actbt].year, mapmonth[actbt].yearpoweract, 0);
             let daycount = day.getDate();
 
@@ -471,7 +470,7 @@ const mapDispatchToProps = (dispatch) => {
                 data: {
                     'startdate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+'1',
                     'enddate':mapmonth[actbt].year+"-"+mapmonth[actbt].yearpoweract+"-"+daycount,
-                    "wfid": wfid == undefined ? '150828' : wfid,
+                    "wfid": wfid == undefined ? abId : wfid,
                     'methods':'all',
                 },
                 dataType: 'json',

@@ -4,11 +4,11 @@ import styles from './Hindex.scss';
 import Reg_tbat from './Reg_tbat.jsx';
 import Reg_tbats from './Reg_tbats.jsx';
 var actions = require('redux/actions');
-
+let bmId = require("../../../../urlData").groupId;//id
 let Component = React.createClass({
     componentWillMount() {
         let {ipUrl,areaId}=this.props
-        this.props.ajax(ipUrl,areaId);
+        this.props.ajax(ipUrl,areaId,bmId);
     },
     componentDidMount() {
         this.props.init();
@@ -91,7 +91,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        ajax: (ipUrl,areaId) => {
+        ajax: (ipUrl,areaId,bmId) => {
             areaId=areaId[0];
             let date = new Date();
             let year = date.getFullYear()
@@ -111,7 +111,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     "year":year,
                     "month":month2,
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
@@ -150,7 +150,7 @@ const mapDispatchToProps = (dispatch) => {
                 data:{
                     "year":year,
                     "month":month2,
-                    "groupid":areaId==undefined? '201612121721151':areaId,
+                    "groupid":areaId==undefined? bmId:areaId,
                 },
                 dataType:'json',
                 timeout:'3000',
