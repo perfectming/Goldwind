@@ -52,18 +52,11 @@ let Component = React.createClass({
                         <div className={css.tableHeaderBox}>
                             {
                                 data.header1.map((value, key)=> {
-                                    if(key==3){
-                                        return (
-                                            <div className={css.tableHeaderItem}
-                                                 style={{width:(100/data.header1.length)+"%"}} key={key}>辐照度[W/m<sup>2</sup>]</div>
-                                        )
-                                    }else {
                                         return (
                                             <div className={css.tableHeaderItem}
                                                  style={{width: (100 / data.header1.length) + "%"}}
                                                  key={key}>{value}</div>
                                         )
-                                    }
                                 })
                             }
                         </div>
