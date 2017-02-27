@@ -218,7 +218,7 @@ const mapDispatchToProps = (dispatch) => {
            
         },
         choose: (value) => {
-            console.log(value)
+            //console.log(value)
             dispatch(actions.setVars('choosefans', value));
             dispatch(actions.setVars('numpage', 'choosefan'));
             dispatch(actions.setVars('actbtn', 0));

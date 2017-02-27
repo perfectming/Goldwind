@@ -78,8 +78,6 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        // 接收初始的月份
-        w0 : state.vars.wfH,
         WTHealName:state.vars.WTHealName1,
         WTN:state.vars.WTN1,
         WTHealNamee:state.vars.WTHealName12,

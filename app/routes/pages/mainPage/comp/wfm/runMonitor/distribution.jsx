@@ -5,6 +5,10 @@ import leftIcon from '../../../img/icon/direct_icon.png' ;
 import rightIcon from '../../../img/icon/direct_icon1.png' ;
 import Superleftbox from './superleftbox.jsx';
 let Item = require('./fpinterface/date');
+let mobdNum = require('../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 import Login from '../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
 let time;
@@ -108,23 +112,23 @@ let Component = React.createClass({
                         <div className={styles.allinfo} id='allinfo'>
                             <h3>综合指标</h3>
                             <p className={styles.capday}>
-                                <span className={styles.allspan}><a className={styles.anum1}>装机容量</a><a className={styles.anum}><b>{Number((mapdata[8888800].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></span>
-                                <span className={styles.allspan}><a className={styles.anum1}>日发电量</a><a className={styles.anum}><b>{Number((mapdata[8888800].DayEgyAt)*mapmodel.dis.DayEgyAt.coeff).toFixed(mapmodel.dis.DayEgyAt.place)}</b>{mapmodel.dis.DayEgyAt.unit}</a></span>
+                                <span className={styles.allspan}><a className={styles.anum1}>装机容量</a><a className={styles.anum}><b>{Number((mapdata[mobdZero].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></span>
+                                <span className={styles.allspan}><a className={styles.anum1}>日发电量</a><a className={styles.anum}><b>{Number((mapdata[mobdZero].DayEgyAt)*mapmodel.dis.DayEgyAt.coeff).toFixed(mapmodel.dis.DayEgyAt.place)}</b>{mapmodel.dis.DayEgyAt.unit}</a></span>
                             </p>
                             <div className={styles.wind}>
                              <div className={styles.ptit}>风场指标</div>
-                              <div className={styles.allitem}><a className={styles.anum1}>风电容量</a><a className={styles.anum}><b>{Number((mapdata[8888801].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
-                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.WFCount.name}</a><a className={styles.anum}><b>{mapdata[8888801].WFCount}</b>个</a></div>
-                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.WTCount.name}</a><a className={styles.anum}><b>{mapdata[8888800].WTCount}</b>台</a></div>
-                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{Number(mapdata[8888800].WindSpeed_DevAverValue).toFixed(2)=='NaN' ? '--' : Number(mapdata[8888800].WindSpeed_DevAverValue).toFixed(2)}</b>{mapmodel.dis.WindSpeed_DevAverValue.unit}</a></div>
+                              <div className={styles.allitem}><a className={styles.anum1}>风电容量</a><a className={styles.anum}><b>{Number((mapdata[mobdOne].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
+                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.WFCount.name}</a><a className={styles.anum}><b>{mapdata[mobdOne].WFCount}</b>个</a></div>
+                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.WTCount.name}</a><a className={styles.anum}><b>{mapdata[mobdZero].WTCount}</b>台</a></div>
+                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.WindSpeed_DevAverValue.name}</a><a className={styles.anum}><b>{Number(mapdata[mobdZero].WindSpeed_DevAverValue).toFixed(2)=='NaN' ? '--' : Number(mapdata[mobdZero].WindSpeed_DevAverValue).toFixed(2)}</b>{mapmodel.dis.WindSpeed_DevAverValue.unit}</a></div>
                               <div className={styles.allitem}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{wTact==0 ? '--' : (wTact/1000).toFixed(2) }</b>MW</a></div>
                             </div>
                             <div className={styles.light}>
                              <div className={styles.ptit}>光伏指标</div>
-                              <div className={styles.allitem}><a className={styles.anum1}>光伏容量</a><a className={styles.anum}><b>{Number((mapdata[8888802].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
-                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.PVCount.name}</a><a className={styles.anum}><b>{mapdata[8888802].PVCount}</b>个</a></div>
-                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.InverterCount.name}</a><a className={styles.anum}><b>{mapdata[8888802].InverterCount}</b>台</a></div>
-                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{mapdata[8888802].PVTSI_Aver ==='null' ? '--':Number(mapdata[8888802].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></div>
+                              <div className={styles.allitem}><a className={styles.anum1}>光伏容量</a><a className={styles.anum}><b>{Number((mapdata[mobdTwo].Capacity)*mapmodel.dis.Capacity.coeff).toFixed(mapmodel.dis.Capacity.place)}</b>{mapmodel.dis.Capacity.unit}</a></div>
+                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.PVCount.name}</a><a className={styles.anum}><b>{mapdata[mobdTwo].PVCount}</b>个</a></div>
+                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.InverterCount.name}</a><a className={styles.anum}><b>{mapdata[mobdTwo].InverterCount}</b>台</a></div>
+                              <div className={styles.allitem}><a className={styles.anum1}>{mapmodel.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{mapdata[mobdTwo].PVTSI_Aver ==='null' ? '--':Number(mapdata[mobdTwo].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></div>
                               <div className={styles.allitem}><a className={styles.anum1}>有功功率</a><a className={styles.anum}><b>{lTact==0 ? '--' : (lTact/1000).toFixed(2) }</b>MW</a></div>
                             </div>
                         </div>
@@ -185,18 +189,18 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setVars('mapbool', false)); 
             dispatch(actions.setVars('map', false));
              dispatch(actions.setVars('map1', false));
-            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DataOverview", setData, "Screen", 0);
                 function setData(mapmodel){
                     if(mapmodel.Model==undefined){
-                         TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                         TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DataOverview", setData, "Screen", 0);
                     }else{
                     dispatch(actions.appendObjs('mapmodel', mapmodel.Model));
-                    TY.getRtData("DataOverview", 8888800, setData1)
+                    TY.getRtData("DataOverview", mobdZero, setData1)
                         function setData1(mapdata){
-                            TY.getRtData("DataOverview", 8888800, setData1)
+                            TY.getRtData("DataOverview", mobdZero, setData1)
                                 function setData1(mapdata){
                                     if(mapdata.ModelData==undefined){
-                                         TY.getRtData("DataOverview", 8888800, setData1)
+                                         TY.getRtData("DataOverview", mobdZero, setData1)
                                     }else{
                                     dispatch(actions.appendObjs('mapdata', mapdata.ModelData));
                                      start();
@@ -214,7 +218,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 function start(){
                      time=setInterval(function(){
-                    TY.getRtData("DataOverview", 8888800, setData5)
+                    TY.getRtData("DataOverview", mobdZero, setData5)
                         function setData5(mapdata5){
                             dispatch(actions.setVars('bbs', mapdata5));
                             dispatch(actions.appendObjs('mapdata', mapdata5.ModelData));

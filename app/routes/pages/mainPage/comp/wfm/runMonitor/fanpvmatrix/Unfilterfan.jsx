@@ -7,6 +7,10 @@ import styles from './Unfilterfan.scss';
 // import matrix from '../../../../../config/MatrixModel';
 var actions = require('redux/actions');
 var { Router, Route, browserHistory} = require('react-router');
+let mobdNum = require('../../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 // let fanData = require('../../../../../config/fan-data');
 // let matrixdata = require('../../../../../config/MatrixData');
 // let model = require('../../../../../config/Model'); 
@@ -37,8 +41,8 @@ var { Router, Route, browserHistory} = require('react-router');
 //  // var arr3 = [];
 //  // var arr4 = [];
 //  var obj = matrixdata;
-//     var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-//     var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+//     var obj_wfd = obj.ModelData[mobdOne].WFDevsStatus;
+//     var obj_pvd = obj.ModelData[mobdTwo].PVDevsStatus;
 
 
 //     // console.log(obj_pvd);
@@ -84,8 +88,8 @@ let Component = React.createClass({
         // console.log(zhzb);
         // if(fanbool){
         let model_ens = zhzb.Model.ens;
-        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
-        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let obj_wfd = fData.ModelData[mobdOne].WFDevsStatus;
+        let obj_pvd = fData.ModelData[mobdTwo].PVDevsStatus;
         let arr1 = [];
         let arr2 = [];
         for(var x in obj_wfd){

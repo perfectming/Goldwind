@@ -7,6 +7,10 @@ import Superleftbox from '../superleftbox.jsx';    // 左侧组件
 import Unfilterfan from './Unfilterfan.jsx';    //右侧组件
 
 var actions = require('redux/actions');
+let mobdNum = require('../../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 // import Filterfan from './xym/Filterfan.jsx';
 // import Filterpv from './xym/Filterpv.jsx';
 // import dataBase from '../../../../../config/ModelData';
@@ -43,8 +47,8 @@ var actions = require('redux/actions');
 //  // var arr3 = [];
 //  // var arr4 = [];
 //  var obj = matrixdata;
-//     var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-//     var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+//     var obj_wfd = obj.ModelData[mobdOne].WFDevsStatus;
+//     var obj_pvd = obj.ModelData[mobdTwo].PVDevsStatus;
 
 
 //     // console.log(obj_pvd);
@@ -85,8 +89,8 @@ let Component = React.createClass({
         // fModel:风机光伏矩阵模型, fData:风机光伏矩阵数据。fanbool：页面挂载控制
         if(fanbool){
         let model_ens = zhzb.Model.ens;
-        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
-        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let obj_wfd = fData.ModelData[mobdOne].WFDevsStatus;
+        let obj_pvd = fData.ModelData[mobdTwo].PVDevsStatus;
         let arr1 = []; // 接收风场集合
         let arr2 = []; // 接收光伏场集合
         for(var i in obj_wfd){
@@ -134,22 +138,22 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getfanpvdata: () => {
             // time = setInterval(function(){
-                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DataOverview", setData, "Screen", 0);
                 function setData(leftData){
                     if(leftData.Model == undefined){
-                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DataOverview", setData, "Screen", 0);
                     }else{
                         dispatch(actions.setVars('zhzb', leftData));
-                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
+                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DevicesMatrix", setDatas, "Screen", 0);
                         function setDatas(MatrixModel){
                             if(MatrixModel.Model == undefined){
-                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
+                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DevicesMatrix", setDatas, "Screen", 0);
                             }else{
                                 dispatch(actions.setVars('fModel', MatrixModel));
-                                TY.getRtData("DevicesMatrix", 8888800, setfDatas)
+                                TY.getRtData("DevicesMatrix", mobdZero, setfDatas)
                                 function setfDatas(MatrixData){
                                     if(MatrixData.ModelData == undefined){
-                                        TY.getRtData("DevicesMatrix", 8888800, setfDatas)
+                                        TY.getRtData("DevicesMatrix", mobdZero, setfDatas)
                                     }else{
                                         dispatch(actions.setVars('fData', MatrixData));
                                         setTimeout(function(){
@@ -166,17 +170,17 @@ const mapDispatchToProps = (dispatch) => {
                 }
             // },3000)
             fan_time = setInterval(function(){
-                // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DataOverview", setData, "Screen", 0);
                 // function setData(rdata){
                 //     dispatch(actions.setVars('zhzb', rdata));
-                //     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
+                //     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DevicesMatrix", setDatas, "Screen", 0);
                 //     function setDatas(rdata){
                 //         dispatch(actions.setVars('fModel', rdata));
-                        TY.getRtData("DevicesMatrix", 8888800, setfData);
+                        TY.getRtData("DevicesMatrix", mobdZero, setfData);
                         function setfData(rdata){
                             dispatch(actions.setVars('fData', rdata));
 
-                            TY.getRtData("DataOverview", 8888800, setfDatas);
+                            TY.getRtData("DataOverview", mobdZero, setfDatas);
 
                             function setfDatas(rdata){
                                 

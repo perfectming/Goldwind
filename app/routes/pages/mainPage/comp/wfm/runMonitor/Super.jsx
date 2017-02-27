@@ -8,6 +8,10 @@ import Line1 from '../chart/Line2.jsx';
 import Table from '../super/table.jsx';
 import Table1 from '../super/table1.jsx';
 import Login from '../../../../../../components/common/Loading.jsx';
+let mobdNum = require('../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 var actions = require('redux/actions');
 let time;
 
@@ -31,16 +35,16 @@ let Component = React.createClass({
             let mod=zhzb.Model;
             let date03=[];
 
-            let datename00=bbs.ModelData[8888800].CurDayPowerCurve.Time;
-            let date00=bbs.ModelData[8888800].CurDayPowerCurve.Value;
+            let datename00=bbs.ModelData[mobdZero].CurDayPowerCurve.Time;
+            let date00=bbs.ModelData[mobdZero].CurDayPowerCurve.Value;
             date00.map(function(value,key){
                 date03.push(Number((value/1000).toFixed(2)))
             })
           
-            let datename01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Time;
-            let date01=bbs.ModelData[8888801].CurDayWindSpeedCurve.Value;
-            let datename02=bbs.ModelData[8888802].CurDayPVTSICurve.Time;
-            let date02=bbs.ModelData[8888802].CurDayPVTSICurve.Value;
+            let datename01=bbs.ModelData[mobdOne].CurDayWindSpeedCurve.Time;
+            let date01=bbs.ModelData[mobdOne].CurDayWindSpeedCurve.Value;
+            let datename02=bbs.ModelData[mobdTwo].CurDayPVTSICurve.Time;
+            let date02=bbs.ModelData[mobdTwo].CurDayPVTSICurve.Value;
             if(datename00==undefined || date00==undefined){
                 datename00=[];
                 date00=[];
@@ -159,15 +163,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
          changedate:()=>{ 
-            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DataOverview", setData, "Screen", 0);
                 function setData(zhzb){
                     if(zhzb.Model && zhzb.Model.ens==undefined){
-                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DataOverview", setData, "Screen", 0);
                     }else{
                     dispatch(actions.setVars('zhzb', zhzb));
-                    TY.getRtData("DataOverview", 8888800, setData1)
+                    TY.getRtData("DataOverview", mobdZero, setData1)
                         function setData1(bbs){
-                            TY.getRtData("DataOverview", 8888800, setData1)
+                            TY.getRtData("DataOverview", mobdZero, setData1)
                                 function setData1(bbs){
                                     dispatch(actions.setVars('bbs', bbs));
                                     setTimeout(function(){
@@ -181,7 +185,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
                 time=setInterval(function(){
-                    TY.getRtData("DataOverview", 8888800, setData1)
+                    TY.getRtData("DataOverview", mobdZero, setData1)
                         function setData1(bbs1){
                             dispatch(actions.setVars('bbs', bbs1));   
                         }

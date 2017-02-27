@@ -5,6 +5,10 @@ import Corner from '../../super/Corner.jsx';
 import styles from './Fanmatrix.scss';
 import fan_matrix from '../fpinterface/Fan_matrix.jsx';
 var actions = require('redux/actions');
+let mobdNum = require('../../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 // import dataBase from '../../../../../config/ModelData';
 // let matrixdata = require('../../../../../../config/MatrixData');
 // let model = require('../../../../../../config/Model');
@@ -34,8 +38,8 @@ var actions = require('redux/actions');
 //  // var arr3 = [];
 //  // var arr4 = [];
 //  var obj = matrixdata;
-//     var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-//     var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+//     var obj_wfd = obj.ModelData[mobdOne].WFDevsStatus;
+//     var obj_pvd = obj.ModelData[mobdTwo].PVDevsStatus;
 
 
 //     // console.log(obj_wfd);
@@ -67,8 +71,8 @@ let Component = React.createClass({
     render() {
         let{valuepage,Tofaninfo,zhzb,fData,fModel,skinStyle}=this.props;
         // console.log(fData);
-        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
-        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let obj_wfd = fData.ModelData[mobdOne].WFDevsStatus;
+        let obj_pvd = fData.ModelData[mobdTwo].PVDevsStatus;
         let arr1 = [];
         let arr2 = [];
         for(var x in obj_wfd){

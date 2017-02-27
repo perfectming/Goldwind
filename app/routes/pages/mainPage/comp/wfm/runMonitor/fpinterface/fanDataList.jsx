@@ -7,6 +7,10 @@ import icon2 from '../../../../img/comp/icon2.png';
 import icon3 from '../../../../img/comp/icon3.png';
 import icon4 from '../../../../img/comp/icon4.png';
 import icon5 from '../../../../img/comp/icon5.png';
+let mobdNum = require('../../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 let arr=['Wtid','wtne','dayElec','ActPwr','WindSpeed','WTStateCode'];//设置表格每列属性
 var actions = require('redux/actions');
 let database = require('./../../../../../../../../config/data');
@@ -19,7 +23,7 @@ let Component = React.createClass({
 
     render() {
         let {valuepage,fModel,fData,next,previous,page=1,skinStyle} = this.props;
-        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+        let obj_wfd = fData.ModelData[mobdOne].WFDevsStatus;
         var run=0;
         var fau=0;
         var offL=0;

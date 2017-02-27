@@ -4,6 +4,10 @@ import styles from './mapbodyy.scss';
 import Fcone from './fcone.jsx';
 import Nav from './nav.jsx';
 import Login from '../../../../../../../components/common/Loading.jsx';
+let mobdNum = require('../../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 let time;
 
 var actions = require('redux/actions');
@@ -57,22 +61,22 @@ const mapDispatchToProps = (dispatch) => {
             //     console.log('刷新')
                dispatch(actions.setVars('boolmapbody', false)); 
 
-                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
+                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DevicesMatrix", setDatas, "Screen", 0);
                     function setDatas(fmodel){
                         dispatch(actions.setVars('fModel', fmodel));
-                        TY.getRtData("DevicesMatrix", 8888800, setfData)
+                        TY.getRtData("DevicesMatrix", mobdZero, setfData)
                         function setfData(fdata){
-                            if(fdata.ModelData[8888801] == undefined){
-                                TY.getRtData("DevicesMatrix", 8888800, setfData)
+                            if(fdata.ModelData[mobdOne] == undefined){
+                                TY.getRtData("DevicesMatrix", mobdZero, setfData)
                             }else{
                                 dispatch(actions.setVars('fData', fdata));
-                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "WTLeftOverview", setDatas, "Screen", 0);
+                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "WTLeftOverview", setDatas, "Screen", 0);
                                 function setDatas(leftm){
                                     dispatch(actions.setVars('leftm', leftm));
-                                    TY.getRtData("WTLeftOverview", 8888800, setlData)
+                                    TY.getRtData("WTLeftOverview", mobdZero, setlData)
                                     function setlData(leftd){
                                     if(leftd.ModelData['150801'] == undefined){
-                                         TY.getRtData("WTLeftOverview", 8888800, setlData)
+                                         TY.getRtData("WTLeftOverview", mobdZero, setlData)
                                      }else{
                                         // console.log(leftd);
                                         dispatch(actions.setVars('leftd', leftd));
@@ -90,10 +94,10 @@ const mapDispatchToProps = (dispatch) => {
                     }
 
             time=setInterval(function(){
-                         TY.getRtData("DevicesMatrix", 8888800, setfData)
+                         TY.getRtData("DevicesMatrix", mobdZero, setfData)
                         function setfData(fdata){
                             dispatch(actions.setVars('fData', fdata));
-                             TY.getRtData("WTLeftOverview", 8888800, setlData)
+                             TY.getRtData("WTLeftOverview", mobdZero, setlData)
                                 function setlData(rdata2){
                                     dispatch(actions.setVars('leftd', rdata2));
                                 }

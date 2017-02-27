@@ -7,6 +7,10 @@ import icon2 from '../../../../img/comp/icon2.png';
 import icon3 from '../../../../img/comp/icon3.png';
 import icon4 from '../../../../img/comp/icon4.png';
 let arr=['Wtid','dayElec','ActPwr','WTStateCode'];
+let mobdNum = require('../../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 var actions = require('redux/actions');
 let database = require('./../../../../../../../../config/data');
 import _ from 'lodash';
@@ -19,7 +23,7 @@ let Component = React.createClass({
     render() {
         let {valuepage1,zhzb,fModel,fData,next,previous,page=1,skinStyle} = this.props;
         let model_ens = zhzb.Model.ens;
-        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let obj_pvd = fData.ModelData[mobdTwo].PVDevsStatus;
         // console.log(obj_pvd);
         var run=0;
         var fau=0;

@@ -21,6 +21,10 @@ import monBoardData from '../../../../../../../config/MonitorBoardData';
 import model from '../../../../../../../config/MonitorBoardModel';
 import Login from '../../../../../../components/common/Loading.jsx';
 let comp = require('./../runMonitor/fpinterface/date');
+let mobdNum = require('../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 var {browserHistory} = require('react-router');
 let parameter = require('../monitorkb/Monitorkb-parameter');//日期以及CDM场站参数文件引用//
 var actions = require('redux/actions');
@@ -64,22 +68,22 @@ let Component = React.createClass({
     },
     render() {
         let{mmodata,mmoname,bloo=false,skinStyle}=this.props;
-        if(bloo&&mmodata.ModelData[8888800]&&mmodata.ModelData[8888801].MonthLossElec&&mmodata.ModelData[8888802].MonthLossElec){
+        if(bloo&&mmodata.ModelData[mobdZero]&&mmodata.ModelData[mobdOne].MonthLossElec&&mmodata.ModelData[mobdTwo].MonthLossElec){
             let mobd=mmodata.ModelData;
             let mod=mmoname.Model.dis;
             let datename=mmoname.Model.ens;
             let arrname=[];//各场站名字的数组//
-            let swdlsj=(Number(mobd[8888800].MonthPostGridEgyAt)*mod.MonthPostGridEgyAt.coeff);//上网电量//
-            let gwdlsj=(Number(mobd[8888800].MonthGetGridEgyAt)*mod.MonthGetGridEgyAt.coeff);//购网电量//
-            let yfdlsj=(Number(mobd[8888800].MonthEgyAt)*mod.MonthEgyAt.coeff);//月发电量//
-            let qfl=(mobd[8888801].MonthLossElec.Sum/(mobd[8888801].MonthEgyAt/1+mobd[8888801].MonthLossElec.Sum/1)*100).toFixed(2);//弃风率//
-            let qgl=(mobd[8888802].MonthLossElec.Sum/(mobd[8888802].MonthEgyAt/1+mobd[8888802].MonthLossElec.Sum/1)*100).toFixed(2);//弃光率//
-            let nfdjhwcl=(mobd[8888800].YearEgyAt/mobd[8888800].YearPlanTotEgyAt*100).toFixed(2);//年发电计划完成率//
-            let ndpba=(mobd[8888800].YearEgyAt/(mobd[8888800].YearEgyAt/1+(mobd[8888800].YearLossElec.Sum/1))*100).toFixed(2);//年度PBA//
-            let zmtbf=Number(mobd[8888800].YearMTBF);//集团年MTBF//
+            let swdlsj=(Number(mobd[mobdZero].MonthPostGridEgyAt)*mod.MonthPostGridEgyAt.coeff);//上网电量//
+            let gwdlsj=(Number(mobd[mobdZero].MonthGetGridEgyAt)*mod.MonthGetGridEgyAt.coeff);//购网电量//
+            let yfdlsj=(Number(mobd[mobdZero].MonthEgyAt)*mod.MonthEgyAt.coeff);//月发电量//
+            let qfl=(mobd[mobdOne].MonthLossElec.Sum/(mobd[mobdOne].MonthEgyAt/1+mobd[mobdOne].MonthLossElec.Sum/1)*100).toFixed(2);//弃风率//
+            let qgl=(mobd[mobdTwo].MonthLossElec.Sum/(mobd[mobdTwo].MonthEgyAt/1+mobd[mobdTwo].MonthLossElec.Sum/1)*100).toFixed(2);//弃光率//
+            let nfdjhwcl=(mobd[mobdZero].YearEgyAt/mobd[mobdZero].YearPlanTotEgyAt*100).toFixed(2);//年发电计划完成率//
+            let ndpba=(mobd[mobdZero].YearEgyAt/(mobd[mobdZero].YearEgyAt/1+(mobd[mobdZero].YearLossElec.Sum/1))*100).toFixed(2);//年度PBA//
+            let zmtbf=Number(mobd[mobdZero].YearMTBF);//集团年MTBF//
             let monthTimeHandle=[];//变形后的最近的十二个月的月份数组//
-            let kbynjhfdl=mobd[8888800].Last12MonthsPlanEgyAtStat.Value;//原始最近十二个月计划发电量//
-            let kbynsjfdl=mobd[8888800].Last12MonthsEgyAtStat.Value;//原始最近十二个月实际发电量//
+            let kbynjhfdl=mobd[mobdZero].Last12MonthsPlanEgyAtStat.Value;//原始最近十二个月计划发电量//
+            let kbynsjfdl=mobd[mobdZero].Last12MonthsEgyAtStat.Value;//原始最近十二个月实际发电量//
             let kbynjhfdl1=[];//运算处理后最近十二个月计划发电量//
             let kbynsjfdl1=[];//运算处理后最近十二个月实际发电量//
             let kbynfdwcl=[];//最近十二个月发电量完成率（通过运算得出）//
@@ -109,8 +113,8 @@ let Component = React.createClass({
                 for(let i=0;i<parameter.NotIntoCDM.length;i++){
                     NotIntoCDMjp += mobd[parameter.NotIntoCDM[i]].YearEgyAt*mod.YearEgyAt.coeff*parameter.Coefficient*10;
                 }
-                for(let i=0;i<mobd[8888800].Last12MonthsEgyAtStat.Time.length;i++){
-                    monthTimeHandle.push(Number(mobd[8888800].Last12MonthsEgyAtStat.Time[i].substring(5))+'月')
+                for(let i=0;i<mobd[mobdZero].Last12MonthsEgyAtStat.Time.length;i++){
+                    monthTimeHandle.push(Number(mobd[mobdZero].Last12MonthsEgyAtStat.Time[i].substring(5))+'月')
                 }
                 for(let i in mobd){
                     if (mobd[i].TActPower && !mobd[i].YearCO2Emissions){
@@ -118,10 +122,10 @@ let Component = React.createClass({
                         czmtbf.push(Number(mobd[i].MonthMTBF))
                     }
                 }
-                ssdlqkfx.push(Number((mobd[8888800].YearLossElec.Fault/1).toFixed(2)));
-                ssdlqkfx.push(Number((mobd[8888800].YearLossElec.Maintain/1).toFixed(2)));
-                ssdlqkfx.push(Number((mobd[8888800].YearLossElec.Limit/1).toFixed(2)));
-                ssdlqkfx.push(Number((mobd[8888800].YearLossElec.NoDevReason/1).toFixed(2)));
+                ssdlqkfx.push(Number((mobd[mobdZero].YearLossElec.Fault/1).toFixed(2)));
+                ssdlqkfx.push(Number((mobd[mobdZero].YearLossElec.Maintain/1).toFixed(2)));
+                ssdlqkfx.push(Number((mobd[mobdZero].YearLossElec.Limit/1).toFixed(2)));
+                ssdlqkfx.push(Number((mobd[mobdZero].YearLossElec.NoDevReason/1).toFixed(2)));
             }());
             (function(){
                 for(let i in datename){
@@ -154,7 +158,7 @@ let Component = React.createClass({
                             <span className={styles.daynum}> {dni}</span> 天
                         </div>
                         <div className={styles.zhzbtop}>
-                            <div className={styles.zhzbtopbox}><div>全年发电量</div> <span className={styles.zhzbtopboxg}>{Number((mobd[8888800].YearEgyAt)*mod.YearEgyAt.coeff).toFixed(2)}</span>{mod.YearEgyAt.unit}</div>
+                            <div className={styles.zhzbtopbox}><div>全年发电量</div> <span className={styles.zhzbtopboxg}>{Number((mobd[mobdZero].YearEgyAt)*mod.YearEgyAt.coeff).toFixed(2)}</span>{mod.YearEgyAt.unit}</div>
                             <div className={styles.zhzbtopbox}><div>弃风率</div> <span className={styles.zhzbtopboxg}>{qfl=="NaN"?"--":qfl}</span>%</div>
                             <div className={styles.zhzbtopbox}><div>弃光率</div> <span className={styles.zhzbtopboxg}>{qgl=="NaN"?"--":qgl}</span>%</div>
                             <div className={styles.zhzbtopbox}><div>上网电量</div> <span className={styles.zhzbtopboxg}>{swdlsj.toFixed(2)}</span>万kWh</div>
@@ -176,14 +180,14 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.zhzbglbox}><img src={up}/>
                                 <p>年发电计划完成率</p>
-                                <Pie2 color={nfdjhwcl>90? ['#62de88',annularPlate]:nfdjhwcl>80?['#e8952a',annularPlate]:nfdjhwcl>60?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearEgyAt),Number((mobd[8888800].YearPlanTotEgyAt/1)-(mobd[8888800].YearEgyAt/1))]}></Pie2>
+                                <Pie2 color={nfdjhwcl>90? ['#62de88',annularPlate]:nfdjhwcl>80?['#e8952a',annularPlate]:nfdjhwcl>60?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[mobdZero].YearEgyAt),Number((mobd[mobdZero].YearPlanTotEgyAt/1)-(mobd[mobdZero].YearEgyAt/1))]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
                                     <p style={nfdjhwcl>90? {color:'#62de88'} :nfdjhwcl>80?{color:'#e8952a'}:nfdjhwcl>60?{color:'#a32124'}:{color:'#d8403d'}}>{nfdjhwcl}%</p>
                                 </span>
                             </div>
                             <div className={styles.zhzbglbox}><img src={down}/>
                                 <p>年度PBA</p>
-                                <Pie2 color={ndpba>90? ['#62de88',annularPlate]:ndpba>80?['#e8952a',annularPlate]:ndpba>60?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearEgyAt),Number((mobd[8888800].YearEgyAt/1)+(mobd[8888800].YearLossElec.Sum/1)-(mobd[8888800].YearEgyAt/1))]}></Pie2>
+                                <Pie2 color={ndpba>90? ['#62de88',annularPlate]:ndpba>80?['#e8952a',annularPlate]:ndpba>60?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[mobdZero].YearEgyAt),Number((mobd[mobdZero].YearEgyAt/1)+(mobd[mobdZero].YearLossElec.Sum/1)-(mobd[mobdZero].YearEgyAt/1))]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
                                     <p style={ndpba>90? {color:'#62de88'} :ndpba>80?{color:'#e8952a'}:ndpba>60?{color:'#a32124'}:{color:'#d8403d'}}>{ndpba}%</p>
                                 </span>
@@ -204,7 +208,7 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.zhzbglbox}><img src={up}/>
                                 <p>年度MTBF</p>
-                                <Pie2 color={zmtbf>diffDays*0.9? ['#62de88',annularPlate]:zmtbf>diffDays*0.8?['#e8952a',annularPlate]:zmtbf>diffDays*0.6 ?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[8888800].YearMTBF),diffDays-Number(mobd[8888800].YearMTBF)]}></Pie2>
+                                <Pie2 color={zmtbf>diffDays*0.9? ['#62de88',annularPlate]:zmtbf>diffDays*0.8?['#e8952a',annularPlate]:zmtbf>diffDays*0.6 ?['#a32124',annularPlate]:['#d8403d',annularPlate]} num={[Number(mobd[mobdZero].YearMTBF),diffDays-Number(mobd[mobdZero].YearMTBF)]}></Pie2>
                                 <span className={styles.zhzbglboxnum}>
                                     <p style={zmtbf>diffDays*0.9? {color:'#62de88'} :zmtbf>diffDays*0.8?{color:'#e8952a'}:zmtbf>diffDays*0.6?{color:'#a32124'}:{color:'#d8403d'}}>{zmtbf}h</p>
                                 </span>
@@ -296,31 +300,31 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         changedate:(bloo)=>{
-            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "Cockpit", momo, "Screen", 0);
+            TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "Cockpit", momo, "Screen", 0);
             function momo(mmoname){
                 if(mmoname.Model==undefined){
-                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "Cockpit", momo, "Screen", 0);
+                    TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "Cockpit", momo, "Screen", 0);
                 }else {
                     dispatch(actions.setVars('mmoname', mmoname));
-                    TY.getRtData("Cockpit", 8888800, ppo);
+                    TY.getRtData("Cockpit", mobdZero, ppo);
                     function ppo(mmodata){
                             if(mmodata.ModelData==undefined){
-                                TY.getRtData("Cockpit", 8888800, ppo);
+                                TY.getRtData("Cockpit", mobdZero, ppo);
                             }else {
                                 dispatch(actions.setVars('mmodata', mmodata));
-                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DataOverview", setData, "Screen", 0);
+                                TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DataOverview", setData, "Screen", 0);
                                 function setData(rdata1){
                                     dispatch(actions.setVars('zhzb', rdata1));
-                                    TY.getRtData("DataOverview", 8888800, setData1);
+                                    TY.getRtData("DataOverview", mobdZero, setData1);
                                     function setData1(rdata2){
                                         dispatch(actions.setVars('bbs', rdata2));
-                                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", 8888800, "DevicesMatrix", setDatas, "Screen", 0);
+                                        TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DevicesMatrix", setDatas, "Screen", 0);
                                         function setDatas(rdata3){
                                             dispatch(actions.setVars('fModel', rdata3));
-                                            TY.getRtData("DevicesMatrix", 8888800, setfData);
+                                            TY.getRtData("DevicesMatrix", mobdZero, setfData);
                                             function setfData(rdata4){
                                                 if(rdata4.ModelData==undefined){
-                                                    TY.getRtData("DevicesMatrix", 8888800, setfData)
+                                                    TY.getRtData("DevicesMatrix", mobdZero, setfData)
                                                 }else{
                                                     dispatch(actions.setVars('fData', rdata4));
 
@@ -373,10 +377,10 @@ const mapDispatchToProps = (dispatch) => {
             },30000);
             //数据刷新//
             time=setInterval(function(){
-                TY.getRtData("Cockpit", 8888800, ppoo);
+                TY.getRtData("Cockpit", mobdZero, ppoo);
                 function ppoo(mmodata){
                     if(mmodata.ModelData==undefined){
-                        TY.getRtData("Cockpit", 8888800, ppoo);
+                        TY.getRtData("Cockpit", mobdZero, ppoo);
                     }else {
                         dispatch(actions.setVars('mmodata', mmodata));
                     }

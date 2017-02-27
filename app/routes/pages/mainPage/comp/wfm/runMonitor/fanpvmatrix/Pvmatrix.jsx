@@ -4,7 +4,10 @@ import Corner from '../../super/Corner.jsx';
 import styles from './Pvmatrix.scss';
 var actions = require('redux/actions');
 // import dataBase from '../../../../../config/ModelData';
-
+let mobdNum = require('../../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 
 
 let Component = React.createClass({
@@ -15,8 +18,8 @@ let Component = React.createClass({
     render() {
          let{valuepage1,Topvinfo,zhzb,fModel,fData,skinStyle}=this.props;
         // let model_ens = zhzb.Model.ens;
-        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
-        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let obj_wfd = fData.ModelData[mobdOne].WFDevsStatus;
+        let obj_pvd = fData.ModelData[mobdTwo].PVDevsStatus;
         let arr1 = [];
         let arr2 = [];
         for(var x in obj_wfd){

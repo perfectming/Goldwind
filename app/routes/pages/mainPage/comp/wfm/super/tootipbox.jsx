@@ -5,6 +5,10 @@ import jian from '../../../img/comp/jian_icon.png';
 import add from '../../../img/comp/add_icon.png';
 import close from '../../../img/comp/close_icon.png';
 let $ =require('jquery');
+let mobdNum = require('../../urlData.js');
+let mobdZero = mobdNum.mobdZero/1;
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 var actions = require('redux/actions');
 let Component = React.createClass({
     componentDidMount() {
@@ -18,8 +22,8 @@ let model_data = bbs.ModelData;
 var model_ens = zhzb.Model.ens;
 let arr1 = [];
 let arr2 = [];
-var obj_wfd = fData.ModelData[8888801].WFDevsStatus;
-var obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+var obj_wfd = fData.ModelData[mobdOne].WFDevsStatus;
+var obj_pvd = fData.ModelData[mobdTwo].PVDevsStatus;
 
 
 (function(){
