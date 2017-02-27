@@ -4,7 +4,7 @@ var {getState} = require('redux/store');
 import _ from 'lodash';
 import styles from './boxA.scss';
 import jian from '../../../img/comp/jian_down.png';
-import add from '../../../img/comp/add_down.png';
+import jia from '../../../img/comp/add_down.png';
 let type = require('../report/ywbb_date');
 var $ =require('jquery');
 var actions = require('redux/actions');
@@ -30,7 +30,7 @@ let Component = React.createClass({
                                 return(
                                     <div key={keyC} className={styles.place}>
                                         <a className={styles.ca}>
-                                            <img src={add}/>
+                                            <img src={jia}/>
                                             <b>{valueC.name}</b>
                                             <input type='checkbox' value={valueC.id} title={valueC.rightstype}
                                                    name={valueC['ids']==false?'checkItInbox':'checkItOutbox'}/>
@@ -40,7 +40,7 @@ let Component = React.createClass({
                                                     return(
                                                             <div className={styles.placename} key={keyD}>
                                                                 <a className={styles.da}>
-                                                                    <img src={add} />
+                                                                    <img src={jia} />
                                                                     <b>{valueD.name}</b>
                                                                     <input type='checkbox' value={valueD.id} title={valueD.rightstype}
                                                                            name={valueD['ids']==false?'checkItInbox':'checkItOutbox'}/>
@@ -101,10 +101,10 @@ const mapDispatchToProps = (dispatch) => {
         playjq: () => {
             //下拉点击事件
             $("#box1 b").on('click',function(){
-                if($(this).siblings('img').attr('src') == add){
+                if($(this).siblings('img').attr('src') == jia){
                     $(this).siblings('img').attr('src', jian);
                 }else{
-                    $(this).siblings('img').attr('src', add);
+                    $(this).siblings('img').attr('src', jia);
                 }
                 $(this).parent().siblings().toggle();
             });
