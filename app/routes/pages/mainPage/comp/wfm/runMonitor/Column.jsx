@@ -47,7 +47,7 @@ let Component = React.createClass({
             title: {
                 text: '升压站负荷概览',
                 style:{
-                    color:lettercolor,
+                    color:'white',
                     fontSize:"16px",
                     fontFamily:"Microsoft YaHei"
                 }
@@ -65,7 +65,7 @@ let Component = React.createClass({
             xAxis: {
                 labels: {
                     style: {
-                        color: lettercolor,//颜色
+                        color: 'white',//颜色
                         fontSize:'15px'  //字体
                     }
                 },
@@ -74,7 +74,13 @@ let Component = React.createClass({
             yAxis: {
                 title:{
                     text:''
-                }
+                },
+                labels: {
+                    style: {
+                        color: '#cde1d5',//颜色
+                        fontSize:'12px'  //字体
+                    }
+                },
             },
             credits: {
                 enabled: false //不显示highCharts版权信息
@@ -100,7 +106,7 @@ let Component = React.createClass({
                 verticalAlign: "top",
                 y:-10,
                 itemStyle: {
-                    color: lettercolor,
+                    color: 'white',
                     fontSize:"14px",
                     fontWeight:"normal",
                     fontFamily:"微软雅黑"
