@@ -192,7 +192,7 @@ let Component = React.createClass({
                                                                                style={{width: 60 + '%'}}
                                                                                key={keyC} contentEditable="true"
                                                                                onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
-                                                                               value={value["startdate"].substring(6, 10)}/>
+                                                                               value={value['startdate'] && value["startdate"].substring(6, 10)}/>
                                                                         <span>年</span>
 
                                                                     </div>
@@ -207,7 +207,7 @@ let Component = React.createClass({
                                                                                style={{width: 60 + '%'}}
                                                                                key={keyC} contentEditable="true"
                                                                                onChange={(e) => changeTableItem1(e.target.value, table, key, keyC)}
-                                                                               value={value['startdate'].substring(3, 5)}/>
+                                                                               value={value['startdate'] && value['startdate'].substring(3, 5)}/>
                                                                         <span>月</span>
 
                                                                     </div>
@@ -644,7 +644,7 @@ const mapDispatchToProps = (dispatch) => {
                 let ddv = JSON.stringify(wfs);
 
                 $.ajax({
-                    url: soam+'/wbi/info/getUpdateOneWfcost',
+                    url: soam+'/info/getUpdateOneWfcost',
                     type: 'post',
                     data: ddv,
                     dataType: 'json',//here,

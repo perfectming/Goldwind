@@ -248,16 +248,16 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
-        table: state.objs.tableContent,
-        page: state.vars.page1,
+        table: state.objs.tableContentJy,
+        page: state.vars.page2,
         skinStyle:state.vars.skinStyle,
         userNameT: state.vars.userNameT,
-        wtidAll: state.objs.wtidAll,
-        wfidCount:state.vars.wfidCount,
-        wfids:state.vars.wfids,
+        wtidAll: state.objs.wtidAll1,
+        wfidCount:state.vars.wfidCount1,
+        wfids:state.vars.wfids1,
         years:state.vars.years,
-        alertText : state.vars.alertText,//提示框文字
-        deleteBool : state.vars.deleteBool,//是否删除
+        alertText : state.vars.alertText1,//提示框文字
+        deleteBool : state.vars.deleteBool1,//是否删除
         j : state.vars.j,//删除操作的参数
     }
 };
@@ -265,9 +265,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
-            dispatch(actions.setVars('wfids', null));
+            dispatch(actions.setVars('wfids1', null));
             dispatch(actions.setVars('years', null));
-            dispatch(actions.setVars('page1', 1));
+            dispatch(actions.setVars('page2', 1));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
@@ -275,8 +275,8 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     //console.log(data.data.pagedata.length);
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentJy', data));
+                    dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -288,7 +288,7 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     //console.log(data);
-                    dispatch(actions.setObjs('wtidAll', data));
+                    dispatch(actions.setObjs('wtidAll1', data));
                 },
                 error:function(){
                     console.log('获取数据失败')
@@ -298,7 +298,7 @@ const mapDispatchToProps = (dispatch) => {
         checkDate(value,newData,key,keyC){
             
             let dialog=value.slice(0,8)+'01';
-            let tableV = _.clone(getState().objs.tableContent);
+            let tableV = _.clone(getState().objs.tableContentJy);
             let yearDate=value.slice(0,4);//输入年份
             let monthDate=value.slice(5,7);//输入月份
             let myDate = new Date();
@@ -306,12 +306,12 @@ const mapDispatchToProps = (dispatch) => {
             let monthDateNow=myDate.getMonth()+1;//获取当前月份
             if(yearDate>yearDateNow){
                 dispatch(actions.setVars('alertBool', false));
-                dispatch(actions.setVars('alertText', '选择正确的开始时间'));
+                dispatch(actions.setVars('alertText1', '选择正确的开始时间'));
                 return;
             }else{
                 if(monthDate>monthDateNow){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '选择正确的开始时间'));
+                    dispatch(actions.setVars('alertText1', '选择正确的开始时间'));
                     return;
                 }
             }
@@ -319,19 +319,19 @@ const mapDispatchToProps = (dispatch) => {
             let numDate=value.slice(8,10);
             if(numDate!=='01'){
                 dispatch(actions.setVars('alertBool', false));
-                dispatch(actions.setVars('alertText', '系统默认开始时间为每月的第一天'));
+                dispatch(actions.setVars('alertText1', '系统默认开始时间为每月的第一天'));
             }
             tableV.data.pagedata[key][keyC]=dialog;
-            dispatch(actions.setObjs('tableContent', tableV));
+            dispatch(actions.setObjs('tableContentJy', tableV));
         },
         checkNewDate(value,newData,key,keyC){
             let dialog=value.slice(0,8)+'01';
-            let tableV = _.clone(getState().objs.tableContent);
+            let tableV = _.clone(getState().objs.tableContentJy);
             //console.log(dialog);
             dispatch(actions.setVars('alertBool', false));
-            dispatch(actions.setVars('alertText', '开始时间为每月的第一天')); 
+            dispatch(actions.setVars('alertText1', '开始时间为每月的第一天')); 
             tableV.data.pagedata[key][keyC]=dialog;
-            dispatch(actions.setObjs('tableContent', tableV));
+            dispatch(actions.setObjs('tableContentJy', tableV));
 
 
         },
@@ -339,9 +339,9 @@ const mapDispatchToProps = (dispatch) => {
             // 获取select 选择的内容
             var tContent = $('#textContent5')[0].value;
             var tContent1 = $('#textContent6')[0].value;
-            dispatch(actions.setVars('page1', 1));
+            dispatch(actions.setVars('page2', 1));
             dispatch(actions.setVars('years', tContent));
-            dispatch(actions.setVars('wfids', tContent1));
+            dispatch(actions.setVars('wfids1', tContent1));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
@@ -349,16 +349,16 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     //console.log(data);
-                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setObjs('tableContentJy', data));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败')); 
+                    dispatch(actions.setVars('alertText1', '获取数据失败')); 
                 }
             });
         },
         saveTableItem:(line)=>{//更改
-            let tableV = _.clone(getState().objs.tableContent);
+            let tableV = _.clone(getState().objs.tableContentJy);
             let horizon = _.clone(getState().vars.userNameT);
             let asd=tableV.data.pagedata[line];
             let wfp;
@@ -373,11 +373,11 @@ const mapDispatchToProps = (dispatch) => {
                 success:function (data) {
                     //console.log(data);
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '保存成功'));
+                    dispatch(actions.setVars('alertText1', '保存成功'));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+                    dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             });
             $.ajax({
@@ -386,27 +386,27 @@ const mapDispatchToProps = (dispatch) => {
                 data:'pageSize='+pageSize+'&&nowPage=1',
                 dataType: 'json',//here,
                 success:function (data) {
-                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setObjs('tableContentJy', data));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+                    dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             });
         },
         changeTableItem1: (value, table, i, j) => {
-            let tableV = _.clone(getState().objs.tableContent);
+            let tableV = _.clone(getState().objs.tableContentJy);
             tableV.data.pagedata[i][arr1[j]] = value;
             //console.log(tableV.data.pagedata[i][arr1[j]]);
-            dispatch(actions.setObjs('tableContent', tableV));
+            dispatch(actions.setObjs('tableContentJy', tableV));
         },
         addData:(i) => {
-            let tableV = _.clone(getState().objs.tableContent);
+            let tableV = _.clone(getState().objs.tableContentJy);
             tableV.data.pagedata.push(i);
-            dispatch(actions.setObjs('tableContent', tableV));
+            dispatch(actions.setObjs('tableContentJy', tableV));
         },
         addDate:(li)=>{//添加
-            let tableV = _.clone(getState().objs.tableContent);
+            let tableV = _.clone(getState().objs.tableContentJy);
             let horizon = _.clone(getState().vars.userNameT);
             let wfs=tableV.data.pagedata[li];
             (wfs.wfid==='') && (wfs.wfid='150801');
@@ -422,11 +422,11 @@ const mapDispatchToProps = (dispatch) => {
                 success:function (data) {
                     //console.log(data);
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '添加成功'));
+                    dispatch(actions.setVars('alertText1', '添加成功'));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+                    dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             });
             $.ajax({
@@ -435,19 +435,19 @@ const mapDispatchToProps = (dispatch) => {
                 data:'pageSize='+pageSize+'&&nowPage=1',
                 dataType: 'json',//here,
                 success:function (data) {
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
-                    dispatch(actions.setObjs('tableContent', data));
+                    dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentJy', data));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+                    dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             });
         },
         //删除
         buttonClose:(deleteBool,j) => {
-            dispatch(actions.setVars('deleteBool', true));
-            let tableV = _.clone(getState().objs.tableContent);
+            dispatch(actions.setVars('deleteBool1', true));
+            let tableV = _.clone(getState().objs.tableContentJy);
             let fid=tableV.data.pagedata[j]['wfid'];
             let rection=tableV.data.pagedata[j]['rectime'];
             let daytype=tableV.data.pagedata[j]['datetype'];
@@ -460,11 +460,11 @@ const mapDispatchToProps = (dispatch) => {
                 success:function (data) {
                     //console.log(data);
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '删除成功'));
+                    dispatch(actions.setVars('alertText1', '删除成功'));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+                    dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             });
             $.ajax({
@@ -474,30 +474,30 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     //console.log(data.data.pagedata.length);
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentJy', data));
+                    dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+                    dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             })
         },
         buttonConcel:(deleteBool) => {
-            dispatch(actions.setVars('deleteBool', true));
+            dispatch(actions.setVars('deleteBool1', true));
         },
         deleData:(j) => {
-            dispatch(actions.setVars('deleteBool', false));
+            dispatch(actions.setVars('deleteBool1', false));
             dispatch(actions.setVars('j', j));
         },
         deleDate:(j) => {
-            let tableV = _.clone(getState().objs.tableContent);
+            let tableV = _.clone(getState().objs.tableContentJy);
             tableV.data.pagedata.splice(j,1);
-            dispatch(actions.setObjs('tableContent', tableV));
+            dispatch(actions.setObjs('tableContentJy', tableV));
         },
         lastPage:(page,years,wfids)=>{//上一页
             page>1 ? page--:page;
-            dispatch(actions.setVars('page1', page));
+            dispatch(actions.setVars('page2', page));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
@@ -505,19 +505,19 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     //console.log(data)
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentJy', data));
+                    dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+                    dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             });
         },
         nextPage:(page,i,j,years,wfids)=>{//下一页
             (page<Math.ceil(i/j)) ? page++:page;
             //console.log(page,years,wfids);
-            dispatch(actions.setVars('page1', page));
+            dispatch(actions.setVars('page2', page));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
@@ -525,19 +525,19 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     //console.log(data.data.pagedata.length);
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentJy', data));
+                    dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+                    dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             });
 
         },
         theOne :(page,years,wfids)=>{//首页
             page=1;
-            dispatch(actions.setVars('page1', page));
+            dispatch(actions.setVars('page2', page));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
@@ -545,18 +545,18 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     //console.log(data)
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentJy', data));
+                    dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+                    dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             });
         },
         theLast :(page,i,j,years,wfids)=>{//末页
             page=Math.ceil(i / j);
-            dispatch(actions.setVars('page1', page));
+            dispatch(actions.setVars('page2', page));
             $.ajax({
                 url: soam+'/ELEC/getWfelec',
                 type: 'post',
@@ -564,12 +564,12 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     //console.log(data)
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                    dispatch(actions.setObjs('tableContentJy', data));
+                    dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
+                    dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             });
         },

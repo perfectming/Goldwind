@@ -68,7 +68,7 @@ let Component = React.createClass({
                                                     return (
                                                         <input maxLength="15" className={styles.tableContentItem}
                                                            style={{width:tabaleData.data.length[keyC]}}
-                                                           key={keyC} contentEditable="true"
+                                                           key={keyC} contentEditable="true" readOnly="true"
                                                            onChange={(e)=>changeTableItem(e.target.value,table,key,keyC)}
                                                            value={valueC}/>
                                                     )
