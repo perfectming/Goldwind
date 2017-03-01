@@ -296,7 +296,7 @@ const mapDispatchToProps = (dispatch) => {
             });
         },
         checkDate(value,newData,key,keyC){
-            
+
             let dialog=value.slice(0,8)+'01';
             let tableV = _.clone(getState().objs.tableContentJy);
             let yearDate=value.slice(0,4);//输入年份
@@ -304,17 +304,17 @@ const mapDispatchToProps = (dispatch) => {
             let myDate = new Date();
             let yearDateNow=myDate.getFullYear(); //获取当前年份
             let monthDateNow=myDate.getMonth()+1;//获取当前月份
-            if(yearDate>yearDateNow){
-                dispatch(actions.setVars('alertBool', false));
-                dispatch(actions.setVars('alertText1', '选择正确的开始时间'));
-                return;
-            }else{
-                if(monthDate>monthDateNow){
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText1', '选择正确的开始时间'));
-                    return;
-                }
-            }
+            // if(yearDate>yearDateNow){
+            //     dispatch(actions.setVars('alertBool', false));
+            //     dispatch(actions.setVars('alertText1', '开始时间应小于操作时间'));
+            //     return;
+            // }else{
+            //     if(monthDate>monthDateNow){
+            //         dispatch(actions.setVars('alertBool', false));
+            //         dispatch(actions.setVars('alertText1', '开始时间应小于操作时间'));
+            //         return;
+            //     }
+            // }
 
             let numDate=value.slice(8,10);
             if(numDate!=='01'){
@@ -420,9 +420,14 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 contentType:'application/json;charset=UTF-8',
                 success:function (data) {
-                    //console.log(data);
+                    console.log(data);
+                    if (data.data){
                     dispatch(actions.setVars('alertBool', false));
                     dispatch(actions.setVars('alertText1', '添加成功'));
+                    }else {
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText1', '添加失败，该数据已存在'));
+                    }
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
