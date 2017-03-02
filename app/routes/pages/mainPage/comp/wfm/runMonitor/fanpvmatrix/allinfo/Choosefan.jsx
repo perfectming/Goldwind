@@ -8,7 +8,8 @@ var actions = require('redux/actions');
 let matrixdata = require('../../../../../../../../../config/MatrixData');
 let model = require('../../../../../../../../../config/Model');
 let modeldata = require('../../../../../../../../../config/ModelData');
-
+let mobdOne = require('../../../../urlData').mobdOne/1;
+let mobdTwo = require('../../../../urlData').mobdTwo/1;
        
 
 var model_data = modeldata.ModelData;
@@ -33,8 +34,8 @@ for(var j in model_ens){
  // var arr3 = [];
  // var arr4 = [];
  var obj = matrixdata;
-    var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-    var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+    var obj_wfd = obj.ModelData[mobdOne].WFDevsStatus;
+    var obj_pvd = obj.ModelData[mobdTwo].PVDevsStatus;
 
 
     // console.log(obj_wfd);
@@ -65,7 +66,7 @@ let Component = React.createClass({
     render() {
         let arrCount=[0];
         let{valuepage,Tofaninfo,choosefans,fData,faninfobool}=this.props;
-        let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
+        let obj_wfd = fData.ModelData[mobdOne].WFDevsStatus;
         // console.log(valuepage);
         // console.log(choosefans);
         
@@ -76,7 +77,6 @@ let Component = React.createClass({
                     // let bordercolor = value.WTStateColor;
                     let x;
                     let code = value.WTStateCode;
-                    // console.log(code);
                     switch(code)
                         {
                             case "DisComForPre":
