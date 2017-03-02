@@ -11,7 +11,7 @@ let mobdNum = require('../../../urlData.js');
 let mobdZero = mobdNum.mobdZero/1;
 let mobdOne = mobdNum.mobdOne/1;
 let mobdTwo = mobdNum.mobdTwo/1;
-let arr=['Wtid','wtne','dayElec','ActPwr','WindSpeed','WTStateCode'];//设置表格每列属性
+let arr=['Wtid','wtne','DayEgy','ActPwr','WindSpeed','WTStateCode'];//设置表格每列属性
 var actions = require('redux/actions');
 let database = require('./../../../../../../../../config/data');
 import _ from 'lodash';
