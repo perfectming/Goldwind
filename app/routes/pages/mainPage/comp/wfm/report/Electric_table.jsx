@@ -408,7 +408,7 @@ const mapDispatchToProps = (dispatch) => {
               }
               if(all.length==0){
                 dispatch(actions.setVars('alertBool', false));
-                dispatch(actions.setVars('alertText', '请选择设备类型！'));
+                dispatch(actions.setVars('alertText', '请选择设备类型或线路！'));
                 return;
               }
 

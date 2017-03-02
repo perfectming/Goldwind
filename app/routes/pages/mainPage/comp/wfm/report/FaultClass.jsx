@@ -394,7 +394,7 @@ const mapDispatchToProps = (dispatch) => {
             }
             if(all.length==0){
                 dispatch(actions.setVars('alertBool', false));
-                dispatch(actions.setVars('alertText', '请选择设备！'));   
+                dispatch(actions.setVars('alertText', '请选择设备或线路！'));   
                 return;
             }
             $.ajax({    
