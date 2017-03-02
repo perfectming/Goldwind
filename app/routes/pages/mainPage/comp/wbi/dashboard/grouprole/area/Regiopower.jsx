@@ -4,6 +4,7 @@ import styles from './Hindex.scss';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 import Hly_genone from './Hly_genone.jsx';
 import Hly_gentwo from './Hly_gentwo.jsx';
+import AlertWindow from '../../../KPI/AlertWindow';
 let bmId = require("../../../../urlData").groupId;//id
 let abId = require("../../../../urlData").ABwfId;
 var actions = require('redux/actions');
@@ -35,14 +36,14 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='area',boll5=false,skinStyle,areaId,w0,w10,width0,mapmonth, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
+        let {alertText,befor_pages='area',boll5=false,skinStyle,areaId,w0,w10,width0,mapmonth, wc1,wc2,bt0=0, ipUrl, wfid,returnit,hideit,arr,arr2,gogogo,back,more,hhdata,actbt=10,changecolor,barlotimes1,barlopowers1,barlopowerp1,barlotimes2,barlopowers2,barlopowerp2,mon = "十一月份",} = this.props;
         if(boll5){
 
 
         return (
 
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
-
+                <AlertWindow text={alertText}></AlertWindow>
                 <div className={styles.light} id="light"> </div>
 
 
@@ -153,6 +154,7 @@ const mapStateToProps = (state) => {
         skinStyle: state.vars.skinStyle,
         mapmonth: state.vars.mapmonth,
         boll5: state.vars.boll5,
+        alertText : state.vars.alertText
     }
 };
 
@@ -255,12 +257,6 @@ const mapDispatchToProps = (dispatch) => {
 
         },
         changecolor:(value,key,ipUrl,areaId,bmId)=>{
-
-            dispatch(actions.setVars('bt0',  0));
-            dispatch(actions.setVars('actbt',key ));
-            dispatch(actions.setVars('mon', value.yearpoweract+"月"));
-
-
             areaId=areaId[0];
             $.ajax({
                 type:'post',
@@ -276,36 +272,46 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-                    dispatch(actions.setVars('hhdata',  data));
-                    let w10=data.data.AreaWtids[0].wfname;
+                    if(data.data.AreaWtids.length==0){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '暂无数据'));
+                    }else{
+                        dispatch(actions.setVars('bt0',  0));
+                        dispatch(actions.setVars('actbt',key ));
+                        dispatch(actions.setVars('mon', value.yearpoweract+"月"));
 
-                    let barlotimes1 = [];
-                    let barlopowers1 = [];
-                    let barlopowerp1 = [];
-                    for (var i in data.data.AreaWtids) {
-                        barlotimes1.push(data.data.AreaWtids[i].wfname);    //区域的横坐标
-                        barlopowers1.push(Number((data.data.AreaWtids[i].powerplan).toFixed(2)));     //计划发电量
-                        barlopowerp1.push(Number((data.data.AreaWtids[i].poweract).toFixed(2)));   //实际发电量
+                        dispatch(actions.setVars('hhdata',  data));
+                        let w10=data.data.AreaWtids[0].wfname;
+
+                        let barlotimes1 = [];
+                        let barlopowers1 = [];
+                        let barlopowerp1 = [];
+                        for (var i in data.data.AreaWtids) {
+                            barlotimes1.push(data.data.AreaWtids[i].wfname);    //区域的横坐标
+                            barlopowers1.push(Number((data.data.AreaWtids[i].powerplan).toFixed(2)));     //计划发电量
+                            barlopowerp1.push(Number((data.data.AreaWtids[i].poweract).toFixed(2)));   //实际发电量
+                        }
+
+                        let barlotimes2 = [];
+                        let barlopowers2 = [];
+                        let barlopowerp2 = [];
+                        for (var i=0;i<10;i++) {
+                            barlotimes2.push(data.data.wfElecs[i].wtname);    //区域的横坐标
+                            barlopowers2.push(Number((data.data.wfElecs[i].powerplan).toFixed(2)));   //计划发电量
+                            barlopowerp2.push(Number((data.data.wfElecs[i].poweract).toFixed(2)));     //实际发电量
+                        }
+
+
+                        dispatch(actions.setVars('barlotimes1', barlotimes1));
+                        dispatch(actions.setVars('barlopowers1', barlopowers1));
+                        dispatch(actions.setVars('barlopowerp1', barlopowerp1));
+
+                        dispatch(actions.setVars('barlotimes2', barlotimes2));
+                        dispatch(actions.setVars('barlopowers2', barlopowers2));
+                        dispatch(actions.setVars('barlopowerp2', barlopowerp2));
+                        dispatch(actions.setVars('w11', w10)); 
                     }
-
-                    let barlotimes2 = [];
-                    let barlopowers2 = [];
-                    let barlopowerp2 = [];
-                    for (var i=0;i<10;i++) {
-                        barlotimes2.push(data.data.wfElecs[i].wtname);    //区域的横坐标
-                        barlopowers2.push(Number((data.data.wfElecs[i].powerplan).toFixed(2)));   //计划发电量
-                        barlopowerp2.push(Number((data.data.wfElecs[i].poweract).toFixed(2)));     //实际发电量
-                    }
-
-
-                    dispatch(actions.setVars('barlotimes1', barlotimes1));
-                    dispatch(actions.setVars('barlopowers1', barlopowers1));
-                    dispatch(actions.setVars('barlopowerp1', barlopowerp1));
-
-                    dispatch(actions.setVars('barlotimes2', barlotimes2));
-                    dispatch(actions.setVars('barlopowers2', barlopowers2));
-                    dispatch(actions.setVars('barlopowerp2', barlopowerp2));
-                    dispatch(actions.setVars('w11', w10));
+                    
 
 
                 },

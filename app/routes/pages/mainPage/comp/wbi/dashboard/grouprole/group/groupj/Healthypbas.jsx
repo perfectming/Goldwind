@@ -5,6 +5,7 @@ import Hly_tsa from '../../area/Hly_tsa.jsx';
 import Hly_tsb from '../../area/Hly_tsb.jsx';
 import Hly_ds from '../../area/Hly_ds.jsx';
 import Login from '../../../../../../../../../components/common/Loading.jsx';
+import AlertWindow from '../../../../KPI/AlertWindow';
 var actions = require('redux/actions');
 let bmId = require("../../../../../urlData").groupId;
 let cjId = require("../../../../../urlData").CJwfId;
@@ -23,7 +24,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {wfid, ipUrl, bt0 = 0,width0,skinStyle,mapmonth,boll9=false, hhdata,hhdata2,hhdata3, w0 = "巴盟", w10 , mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2, runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, name3, runtime3, downtime3, tba3} = this.props;
+        let {alertText,wfid, ipUrl, bt0 = 0,width0,skinStyle,mapmonth,boll9=false, hhdata,hhdata2,hhdata3, w0 = "巴盟", w10 , mon, befor_pages = 'group', returnit, hideit, arr, arr2, arr3, gogogo, back, more, actbt = 10, changecolor, wc1, wc2, runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, name3, runtime3, downtime3, tba3} = this.props;
 
          let data = require('./../../area/Healthy-data');
         let month = data.data.line_month;
@@ -33,6 +34,7 @@ let Component = React.createClass({
 
         return (
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
+                <AlertWindow text={alertText}></AlertWindow>
                 <div className={styles.light} id="light"></div>
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`} id="boxhidden">
                     <div className={styles.hidden_top}>
@@ -145,6 +147,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        alertText : state.vars.alertText,
         actbt: state.vars.actbt,
         hhdata: state.vars.hhdata,
         hhdata1: state.vars.hhdata1,
@@ -339,11 +342,6 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor: (cjId,value, key, ipUrl ,bmId) => {
-            dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('mon', value.yearpoweract + "月"));
-
-
             $.ajax({
                 type: 'post',
                 url: 'http://' + ipUrl + '/wbi/TBA/getAllGByM',
@@ -355,28 +353,115 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-                    dispatch(actions.setVars('hhdata1', data));
+                    if(data.data.length==0){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '暂无数据'));
+                    }else{
+                        dispatch(actions.setVars('bt0', 0));
+                        dispatch(actions.setVars('actbt', key));
+                        dispatch(actions.setVars('mon', value.yearpoweract + "月"));
+                        dispatch(actions.setVars('hhdata1', data));
+                        //各区域   一区域二区域
+                        let runtime3 = [];       //实际发电量
+                        let downtime3 = [];       //故障损失
+                        let tba3 = [];       //维护损失
+                        let name3 = [];
+                        let wfid1 = [];
+                        for (let i in data.data) {
+                            //区域的横坐标
+                            name3.push(data.data[i].groupname)
+                            runtime3.push(data.data[i].runtimes);   //实际发电量
+                            downtime3.push(data.data[i].downtimes);   //故障损失
+                            tba3.push(Number((data.data[i].tba*100).toFixed(2)));  //维护损失
+                        }
+                        dispatch(actions.setVars('name3', name3));
+                        dispatch(actions.setVars('runtime3', runtime3));
+                        dispatch(actions.setVars('downtime3', downtime3));
+                        dispatch(actions.setVars('tba3', tba3));  
+                        $.ajax({
+                            type: 'post',
+                            url: 'http://' + ipUrl + '/wbi/TBA/getGroupAllWfByM',
+                            async: false,
+                            data: {
+                                "groupid": bmId,
+                                "year": value.year,
+                                "month": value.yearpoweract,
+                            },
+                            dataType: 'json',
+                            timeout: '3000',
+                            success: function (data) {
+                                dispatch(actions.setVars('hhdata2', data));
+                                dispatch(actions.setVars('w11', data.data[0].wfname));
+                                //各区域   一区域二区域
+                                let runtime1 = [];       //实际发电量
+                                let downtime1 = [];       //故障损失
+                                let tba1 = [];       //维护损失
+                                let name1 = [];
+                                let wfid1 = [];
+                                for (var i in data.data) {
+                                    //区域的横坐标
+                                    name1.push(data.data[i].wfname)
+                                    runtime1.push(data.data[i].runtimes);   //实际发电量
+                                    downtime1.push(data.data[i].downtimes);   //故障损失
+                                    tba1.push(Number((data.data[i].tba*100).toFixed(2)));   //维护损失
+                                    wfid1.push(data.data[0].wfid);   //维护损失
 
-                    //各区域   一区域二区域
-                    let runtime3 = [];       //实际发电量
-                    let downtime3 = [];       //故障损失
-                    let tba3 = [];       //维护损失
-                    let name3 = [];
-                    let wfid1 = [];
-                    for (let i in data.data) {
-                        //区域的横坐标
+                                }
 
-                        name3.push(data.data[i].groupname)
-                        runtime3.push(data.data[i].runtimes);   //实际发电量
-                        downtime3.push(data.data[i].downtimes);   //故障损失
-                        tba3.push(Number((data.data[i].tba*100).toFixed(2)));  //维护损失
+                                dispatch(actions.setVars('name1', name1));
+                                dispatch(actions.setVars('runtime1', runtime1));
+                                dispatch(actions.setVars('downtime1', downtime1));
+                                dispatch(actions.setVars('tba1', tba1));
 
+
+                            },
+                            error: function () {
+
+                            },
+                        })
+                        $.ajax({
+                            type: 'post',
+                            url: 'http://' + ipUrl + '/wbi/TBA/getWfAllWtByM',
+                            async: false,
+                            data: {
+                                "groupid": bmId,
+                                "year": value.year,
+                                "month": value.yearpoweract,
+                                "wfid": cjId,
+                            },
+                            dataType: 'json',
+                            timeout: '3000',
+                            success: function (data) {
+                                dispatch(actions.setVars('hhdata3', data));
+                                //各区域   一区域二区域
+
+
+                                let runtime2 = [];       //实际发电量
+                                let downtime2 = [];       //故障损失
+                                let tba2 = [];       //维护损失
+                                let name2 = [];
+
+                                for (var i =0;i<10;i++) {
+                                    //区域的横坐标
+
+                                    name2.push(data.data[i].wtname)
+                                    runtime2.push(data.data[i].runtimes);   //实际发电量
+                                    downtime2.push(data.data[i].downtimes);   //故障损失
+                                    tba2.push(Number((data.data[i].tba*100).toFixed(2)));  //维护损失
+                                }
+                                dispatch(actions.setVars('name2', name2));
+                                dispatch(actions.setVars('runtime2', runtime2));
+                                dispatch(actions.setVars('downtime2', downtime2));
+                                dispatch(actions.setVars('tba2', tba2));
+
+
+                            },
+                            error: function () {
+
+                            },
+                        }) 
                     }
-
-                    dispatch(actions.setVars('name3', name3));
-                    dispatch(actions.setVars('runtime3', runtime3));
-                    dispatch(actions.setVars('downtime3', downtime3));
-                    dispatch(actions.setVars('tba3', tba3));
+                    
 
 
                 },
@@ -384,88 +469,7 @@ const mapDispatchToProps = (dispatch) => {
 
                 },
             })
-            $.ajax({
-                type: 'post',
-                url: 'http://' + ipUrl + '/wbi/TBA/getGroupAllWfByM',
-                async: false,
-                data: {
-                    "groupid": bmId,
-                    "year": value.year,
-                    "month": value.yearpoweract,
-                },
-                dataType: 'json',
-                timeout: '3000',
-                success: function (data) {
-                    dispatch(actions.setVars('hhdata2', data));
-                    dispatch(actions.setVars('w11', data.data[0].wfname));
-                    //各区域   一区域二区域
-                    let runtime1 = [];       //实际发电量
-                    let downtime1 = [];       //故障损失
-                    let tba1 = [];       //维护损失
-                    let name1 = [];
-                    let wfid1 = [];
-                    for (var i in data.data) {
-                        //区域的横坐标
-                        name1.push(data.data[i].wfname)
-                        runtime1.push(data.data[i].runtimes);   //实际发电量
-                        downtime1.push(data.data[i].downtimes);   //故障损失
-                        tba1.push(Number((data.data[i].tba*100).toFixed(2)));   //维护损失
-                        wfid1.push(data.data[0].wfid);   //维护损失
-
-                    }
-
-                    dispatch(actions.setVars('name1', name1));
-                    dispatch(actions.setVars('runtime1', runtime1));
-                    dispatch(actions.setVars('downtime1', downtime1));
-                    dispatch(actions.setVars('tba1', tba1));
-
-
-                },
-                error: function () {
-
-                },
-            })
-            $.ajax({
-                type: 'post',
-                url: 'http://' + ipUrl + '/wbi/TBA/getWfAllWtByM',
-                async: false,
-                data: {
-                    "groupid": bmId,
-                    "year": value.year,
-                    "month": value.yearpoweract,
-                    "wfid": cjId,
-                },
-                dataType: 'json',
-                timeout: '3000',
-                success: function (data) {
-                    dispatch(actions.setVars('hhdata3', data));
-                    //各区域   一区域二区域
-
-
-                    let runtime2 = [];       //实际发电量
-                    let downtime2 = [];       //故障损失
-                    let tba2 = [];       //维护损失
-                    let name2 = [];
-
-                    for (var i =0;i<10;i++) {
-                        //区域的横坐标
-
-                        name2.push(data.data[i].wtname)
-                        runtime2.push(data.data[i].runtimes);   //实际发电量
-                        downtime2.push(data.data[i].downtimes);   //故障损失
-                        tba2.push(Number((data.data[i].tba*100).toFixed(2)));  //维护损失
-                    }
-                    dispatch(actions.setVars('name2', name2));
-                    dispatch(actions.setVars('runtime2', runtime2));
-                    dispatch(actions.setVars('downtime2', downtime2));
-                    dispatch(actions.setVars('tba2', tba2));
-
-
-                },
-                error: function () {
-
-                },
-            })
+            
 
         },
         gogogo: (abId,bt0, ipUrl, wfid,actbt,mapmonth,bmId) => {

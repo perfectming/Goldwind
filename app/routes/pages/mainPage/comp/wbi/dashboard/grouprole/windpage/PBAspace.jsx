@@ -4,6 +4,7 @@ import styles from './Profitstyle3.scss';
 import PBAspacechart from './PBAspacechart.jsx';
 import icono2 from '../../../../../img/comp/PBA.png';
 import icono1 from '../../../../../img/comp/PBA2.png';
+import AlertWindow from '../../../KPI/AlertWindow';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
@@ -33,7 +34,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let{width,ipUrl,xxdwfId,xxdwfNa,btn=0,PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2,mapmonth,mon,Go1=false,skinStyle}=this.props;
+        let{alertText,width,ipUrl,xxdwfId,xxdwfNa,btn=0,PBASpaceMorePba,PBASpaceMoreNodevreasonloss,PBASpaceMoreLimitloss,PBASpaceMoreMaintainloss,PBASpaceMoreFaultloss,PBASpaceMorePoweract,PBASpaceMoreWtname2,back,gogogo,PBASpaceFirstWtname,PBASpaceFirstPba,PBASpaceFirstNodevreasonloss,PBASpaceFirstLimitloss,PBASpaceFirstMaintainloss,PBASpaceFirstFaultloss,PBASpaceFirstPoweract,actbt,changpage,wind,windP,more,moree,close,backtop,befor_pagee='windpage',befor_page2,mapmonth,mon,Go1=false,skinStyle}=this.props;
         if(Go1){
         return (
             <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
@@ -42,9 +43,10 @@ let Component = React.createClass({
             <div className={styles.boxcover} id='boxcover'></div>
                 {//更多弹出框
                      }
-             <div className={styles.more} id="sss">
+            <AlertWindow text={alertText}></AlertWindow>
+            <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
-               <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
+                <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
                 <p>{ mon+xxdwfNa+'各风机PBA'}</p>
                 <div onClick={()=>close()}>x</div>
                 </div>
@@ -139,6 +141,7 @@ const mapStateToProps = (state) => {
         mon:state.vars.mon,
         Go1:state.vars.Go1,
         skinStyle:state.vars.skinStyle,
+        alertText : state.vars.alertText
 
     
     }
@@ -315,24 +318,40 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
-           
-                    let PBASpacePba=data.data;
-                    for  ( let  i=0;i<10;i++){
-                        let wtname=PBASpacePba[i].wtname;
-                        PBASpaceWtname.push(wtname);
-                        let poweract=PBASpacePba[i].poweract;
-                        PBASpacePoweract.push(poweract);
-                        let faultloss=PBASpacePba[i].faultloss;
-                        PBASpaceFaultloss.push(faultloss);
-                        let maintainloss=PBASpacePba[i].maintainloss;
-                        PBASpaceMaintainloss.push(maintainloss);
-                        let limitloss=PBASpacePba[i].limitloss;
-                        PBASpaceLimitloss.push(limitloss);
-                        let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
-                        PBASpaceNodevreasonloss.push(nodevreasonloss);
-                        let pba=PBASpacePba[i].pba*100;
-                        PBASpacePbaPBA.push(Number(pba.toFixed(2)));
+                    if(data.data.length==0){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '暂无数据'));
+                    }else{
+                        let PBASpacePba=data.data;
+                        for  ( let  i=0;i<10;i++){
+                            let wtname=PBASpacePba[i].wtname;
+                            PBASpaceWtname.push(wtname);
+                            let poweract=PBASpacePba[i].poweract;
+                            PBASpacePoweract.push(poweract);
+                            let faultloss=PBASpacePba[i].faultloss;
+                            PBASpaceFaultloss.push(faultloss);
+                            let maintainloss=PBASpacePba[i].maintainloss;
+                            PBASpaceMaintainloss.push(maintainloss);
+                            let limitloss=PBASpacePba[i].limitloss;
+                            PBASpaceLimitloss.push(limitloss);
+                            let nodevreasonloss=PBASpacePba[i].nodevreasonloss;
+                            PBASpaceNodevreasonloss.push(nodevreasonloss);
+                            let pba=PBASpacePba[i].pba*100;
+                            PBASpacePbaPBA.push(Number(pba.toFixed(2)));
+                        } 
+                        // 将变化月份赋值
+                        dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
+                        dispatch(actions.setVars('PBASpaceFirstPoweract1',PBASpacePoweract ));
+                        dispatch(actions.setVars('PBASpaceFirstMaintainloss1',PBASpaceMaintainloss ));
+                        dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceLimitloss));
+                        dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFaultloss ));
+                        dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
+                        dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
+                        dispatch(actions.setVars('actbt',key ));
+                        dispatch(actions.setVars('btnn',0));
+                        dispatch(actions.setVars('mon',value.yearpoweract+'月'));
                     }
+                    
                
 
                 },
@@ -340,17 +359,7 @@ const mapDispatchToProps = (dispatch) => {
                
                 },
             });
-            // 将变化月份赋值
-            dispatch(actions.setVars('PBASpaceWtname1',PBASpaceWtname));
-            dispatch(actions.setVars('PBASpaceFirstPoweract1',PBASpacePoweract ));
-            dispatch(actions.setVars('PBASpaceFirstMaintainloss1',PBASpaceMaintainloss ));
-            dispatch(actions.setVars('PBASpaceFirstLimitloss1',PBASpaceLimitloss));
-            dispatch(actions.setVars('PBASpaceFirstFaultloss1',PBASpaceFaultloss ));
-            dispatch(actions.setVars('PBASpaceFirstNodevreasonloss1',PBASpaceNodevreasonloss ));
-            dispatch(actions.setVars('PBASpaceFirstPba12',PBASpacePbaPBA ));
-            dispatch(actions.setVars('actbt',key ));
-            dispatch(actions.setVars('btnn',0));
-            dispatch(actions.setVars('mon',value.yearpoweract+'月'));
+            
           
         },
         // 前十

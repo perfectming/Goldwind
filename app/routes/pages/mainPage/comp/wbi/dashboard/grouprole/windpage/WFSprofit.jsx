@@ -4,6 +4,7 @@ import styles from './Profitstyle3.scss';
 import WFSprofitchart from './WFSprofitchart.jsx';
 import icono2 from '../../../../../img/comp/MON.png';
 import icono1 from '../../../../../img/comp/MON2.png';
+import AlertWindow from '../../../KPI/AlertWindow';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let data=require('./../group/Profit-data3');
@@ -28,7 +29,7 @@ let Component = React.createClass({
     },
     render() {
        
-        let{width,ipUrl,WFSPRa,WFSPNaM,WFSPCo,WFSPEa,WFSPNa,WFSPRaM,WFSPCoM,WFSPEaM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2,mapmonth,mon,Go3=false,skinStyle}=this.props;
+        let{alertText,width,ipUrl,WFSPRa,WFSPNaM,WFSPCo,WFSPEa,WFSPNa,WFSPRaM,WFSPCoM,WFSPEaM,wTBANaM,btn,wTBAT,wTBADown,wTBARun,wTBANa,xxdwfId,xxdwfNa,actbt,changpage,wind,windP,gogogo,back,machinee,more,close,backtop,befor_pagee='windpage',befor_page2,mapmonth,mon,Go3=false,skinStyle}=this.props;
         if(Go3){
         return (
            
@@ -38,6 +39,7 @@ let Component = React.createClass({
              <div className={styles.boxcover} id='boxcover'></div>
                 {//更多弹出
                      }
+             <AlertWindow text={alertText}></AlertWindow>        
              <div className={styles.more} id="sss">
                 <div className={styles.moretitle}>
                <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
@@ -126,7 +128,7 @@ const mapStateToProps = (state) => {
         mon:state.vars.mon,
         Go3:state.vars.Go3,
         skinStyle:state.vars.skinStyle,
-     
+        alertText : state.vars.alertText
     }
 };
 
@@ -238,35 +240,47 @@ const mapDispatchToProps = (dispatch) => {
              }
  
             $.ajax({
-             type:'post',
-             url:'http://'+input_url+'/wbi/yield/getYieldByWfid',  
-             async:false,
-            data:{
+              type:'post',
+              url:'http://'+input_url+'/wbi/yield/getYieldByWfid',  
+              async:false,
+              data:{
 
-             'wfid':xxdwfId,
-             'startdate':value.year+"-"+value.yearpoweract+"-"+1,
-             'enddate':value.year+"-"+value.yearpoweract+"-"+daycountT,
-             'methods':"desc"
-            },
-             dataType:'json',
-             timeout:'3000',
-             success:function(data){
-          
-              let WFSP=data.data;
-              for (let i in WFSP)
-              {
-              	let wtname=WFSP[i].wtname;
-              	WFSPNa.push(wtname);
+               'wfid':xxdwfId,
+               'startdate':value.year+"-"+value.yearpoweract+"-"+1,
+               'enddate':value.year+"-"+value.yearpoweract+"-"+daycountT,
+               'methods':"desc"
+              },
+              dataType:'json',
+              timeout:'3000',
+              success:function(data){
+                if(data.data.length==0){
+                    dispatch(actions.setVars('alertBool', false));
+                    dispatch(actions.setVars('alertText', '暂无数据'));
+                }else{
+                    let WFSP=data.data;
+                    for (let i in WFSP)
+                    {
+                      let wtname=WFSP[i].wtname;
+                      WFSPNa.push(wtname);
 
-              	let earning=WFSP[i].earning;
-              	WFSPEa.push(earning);
+                      let earning=WFSP[i].earning;
+                      WFSPEa.push(earning);
 
-              	let costs=WFSP[i].costs;
-              	WFSPCo.push(costs);
+                      let costs=WFSP[i].costs;
+                      WFSPCo.push(costs);
 
-              	let rate=WFSP[i].rate*100;
-              	WFSPRa.push(Number(rate.toFixed(2)));
-              }
+                      let rate=WFSP[i].rate*100;
+                      WFSPRa.push(Number(rate.toFixed(2)));
+                    }
+                    dispatch(actions.setVars('WFSPNa1',WFSPNa)) ;
+                    dispatch(actions.setVars('WFSPEa1',WFSPEa)) ;
+                    dispatch(actions.setVars('WFSPCo1',WFSPCo)); 
+                    dispatch(actions.setVars('WFSPRa1',WFSPRa)) ;
+                    dispatch(actions.setVars('actbtWFP',key)) ;
+                    dispatch(actions.setVars('btnn',0)) ;
+                    dispatch(actions.setVars('mon',value.yearpoweract+'月')) ;
+                }
+                
           
 
               },
@@ -274,13 +288,7 @@ const mapDispatchToProps = (dispatch) => {
           
               },
             });   
-            dispatch(actions.setVars('WFSPNa1',WFSPNa)) ;
-            dispatch(actions.setVars('WFSPEa1',WFSPEa)) ;
-            dispatch(actions.setVars('WFSPCo1',WFSPCo)); 
-            dispatch(actions.setVars('WFSPRa1',WFSPRa)) ;
-            dispatch(actions.setVars('actbtWFP',key)) ;
-             dispatch(actions.setVars('btnn',0)) ;
-             dispatch(actions.setVars('mon',value.yearpoweract+'月')) ;
+            
         },
         // 前十
          gogogo:(xxdwfId,actbt,btn,input_url,value)=>{

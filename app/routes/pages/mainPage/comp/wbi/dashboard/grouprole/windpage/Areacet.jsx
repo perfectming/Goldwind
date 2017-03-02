@@ -249,7 +249,6 @@ let adf=value.yearpoweract;
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
                     let dataa = data.data;
               for (let i = 0; i < dataa.length; i++) {
                   let xDay = data.data[i].day + '日';

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styles from './Hindex.scss';
 import Pro_one from './Pro_one.jsx';
 import Pro_two from './Pro_two.jsx';
+import AlertWindow from '../../../KPI/AlertWindow';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let bmId = require("../../../../urlData").groupId;
@@ -21,7 +22,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {jhp=false, mon, mapmonth, w10, areaId,skinStyle, width0, hhdata2, hhdata3, changecolor, befor_pages = 'area', bt0, ipUrl, wfid, actbt = 10, returnit, ip = "10.68.100.32", runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, gogogo, back, more, hideit} = this.props;
+        let {alertText,jhp=false, mon, mapmonth, w10, areaId,skinStyle, width0, hhdata2, hhdata3, changecolor, befor_pages = 'area', bt0, ipUrl, wfid, actbt = 10, returnit, ip = "10.68.100.32", runtime, downtime, tba0, name0, name2, runtime2, downtime2, tba2, gogogo, back, more, hideit} = this.props;
         if(jhp){
 
 
@@ -29,6 +30,7 @@ let Component = React.createClass({
 
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
                 {/*返回按钮*/}
+                <AlertWindow text={alertText}></AlertWindow>
                 <div className={styles.light} id="light"></div>
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`} id="boxhidden">
                     <div className={styles.hidden_top}>
@@ -138,6 +140,7 @@ const mapStateToProps = (state) => {
         mapmonth: state.vars.mapmonth,
         jhp: state.vars.jhp,
         areaId: state.vars.areaId,
+        alertText : state.vars.alertText
     }
 };
 
@@ -274,9 +277,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         changecolor: (abId,value, key, ipUrl,areaId,bmId) => {
             areaId=areaId[0];
-            dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('mon', value.yearpoweract));
-            dispatch(actions.setVars('actbt', key));
+            
 
 
 
@@ -295,26 +296,74 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
+                    if(data.data.length==0){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '暂无数据'));
+                    }else{
+                        dispatch(actions.setVars('bt0', 0));
+                        dispatch(actions.setVars('mon', value.yearpoweract));
+                        dispatch(actions.setVars('actbt', key));
+                        dispatch(actions.setVars('hhdata2', data));
+                        //先定义一个空数组
+                        let runtime1 = [];
+                        let downtime1 = [];
+                        let tba1 = [];
+                        let name1 = [];
+                        for (var i in data.data) {
+                            //区域的横坐标
+                            name1.push(data.data[i].wfname)
+                            runtime1.push(data.data[i].earning);   //收益
+                            downtime1.push(data.data[i].costs);   //成本
+                            tba1.push(Number((data.data[i].rate * 100).toFixed(2)));       //收益率(小数点后两位)
 
-                    dispatch(actions.setVars('hhdata2', data));
-                    //先定义一个空数组
-                    let runtime1 = [];
-                    let downtime1 = [];
-                    let tba1 = [];
-                    let name1 = [];
-                    for (var i in data.data) {
-                        //区域的横坐标
-                        name1.push(data.data[i].wfname)
-                        runtime1.push(data.data[i].earning);   //收益
-                        downtime1.push(data.data[i].costs);   //成本
-                        tba1.push(Number((data.data[i].rate * 100).toFixed(2)));       //收益率(小数点后两位)
+                        }
+                        dispatch(actions.setVars('w11', data.data[0].wfname));
+                        dispatch(actions.setVars('name1', name1));
+                        dispatch(actions.setVars('runtime1', runtime1));
+                        dispatch(actions.setVars('downtime1', downtime1));
+                        dispatch(actions.setVars('tba1', tba1));
+                        $.ajax({
+                            type: 'post',
+                            url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',
+                            async: false,
+                            data: {
+                                'startdate': value.year + "-" + value.yearpoweract + "-" + '1',
+                                'enddate': value.year + "-" + value.yearpoweract + "-" + daycount,
+                                'wfid': abId,
+                                'methods': 'desc',
+                            },
+                            dataType: 'json',
+                            timeout: '3000',
+                            success: function (data) {
 
+                                dispatch(actions.setVars('hhdata3', data));
+                                //各区域   一区域二区域
+
+
+                                let runtime2 = [];
+                                let downtime2 = [];
+                                let tba2 = [];
+                                let name2 = [];
+                                for (var i = 0; i < 10; i++) {
+                                    //区域的横坐标
+                                    name2.push(data.data[i].wtname);
+                                    runtime2.push(data.data[i].earning);   //成本
+                                    downtime2.push(data.data[i].costs); //收益
+                                    tba2.push(Number((data.data[i].rate * 100).toFixed(2))); //收益率
+
+                                }
+                                dispatch(actions.setVars('runtime2', runtime2));
+                                dispatch(actions.setVars('downtime2', downtime2));
+                                dispatch(actions.setVars('tba2', tba2));
+                                dispatch(actions.setVars('name2', name2));
+
+                            },
+                            error: function () {
+                                console.log("数据获取失败");
+                            },
+                        })
                     }
-                    dispatch(actions.setVars('w11', data.data[0].wfname));
-                    dispatch(actions.setVars('name1', name1));
-                    dispatch(actions.setVars('runtime1', runtime1));
-                    dispatch(actions.setVars('downtime1', downtime1));
-                    dispatch(actions.setVars('tba1', tba1));
+                    
 
 
                 },
@@ -322,46 +371,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log("数据获取失败");
                 },
             })
-            $.ajax({
-                type: 'post',
-                url: 'http://' + ipUrl + '/wbi/yield/getYieldByWfid',
-                async: false,
-                data: {
-                    'startdate': value.year + "-" + value.yearpoweract + "-" + '1',
-                    'enddate': value.year + "-" + value.yearpoweract + "-" + daycount,
-                    'wfid': abId,
-                    'methods': 'desc',
-                },
-                dataType: 'json',
-                timeout: '3000',
-                success: function (data) {
-
-                    dispatch(actions.setVars('hhdata3', data));
-                    //各区域   一区域二区域
-
-
-                    let runtime2 = [];
-                    let downtime2 = [];
-                    let tba2 = [];
-                    let name2 = [];
-                    for (var i = 0; i < 10; i++) {
-                        //区域的横坐标
-                        name2.push(data.data[i].wtname);
-                        runtime2.push(data.data[i].earning);   //成本
-                        downtime2.push(data.data[i].costs); //收益
-                        tba2.push(Number((data.data[i].rate * 100).toFixed(2))); //收益率
-
-                    }
-                    dispatch(actions.setVars('runtime2', runtime2));
-                    dispatch(actions.setVars('downtime2', downtime2));
-                    dispatch(actions.setVars('tba2', tba2));
-                    dispatch(actions.setVars('name2', name2));
-
-                },
-                error: function () {
-                    console.log("数据获取失败");
-                },
-            })
+            
         },
         gogogo: (abId,bt0, ipUrl, wfid, actbt,areaId,mapmonth) => {
             dispatch(actions.setVars('bt0', 0));

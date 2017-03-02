@@ -4,6 +4,7 @@ import styles from './Profitstyle3.scss';
 import TBAspacechart from './TBAspacechart.jsx';
 import icono2 from '../../../../../img/comp/TBA.png';
 import icono1 from '../../../../../img/comp/TBA2.png';
+import AlertWindow from '../../../KPI/AlertWindow';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 let data = require('./../group/Profit-data3');
@@ -29,7 +30,7 @@ let Component = React.createClass({
     },
     render() {
 
-        let {width, ipUrl, wTBATM, wTBADownM, wTBARunM, wTBANaM, btn, wTBAT, wTBADown, wTBARun, wTBANa, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, back, machinee, more, close, backtop, befor_pagee = 'windpage', befor_page2,mapmonth,Go2=false,mon,skinStyle}=this.props;
+        let {alertText,width, ipUrl, wTBATM, wTBADownM, wTBARunM, wTBANaM, btn, wTBAT, wTBADown, wTBARun, wTBANa, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, back, machinee, more, close, backtop, befor_pagee = 'windpage', befor_page2,mapmonth,Go2=false,mon,skinStyle}=this.props;
         if(Go2){
         return (
 
@@ -39,6 +40,7 @@ let Component = React.createClass({
                 <div className={styles.boxcover} id='boxcover'></div>
                 {//更多弹出框
                 }
+                <AlertWindow text={alertText}></AlertWindow>
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
                          <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
@@ -130,7 +132,8 @@ const mapStateToProps = (state) => {
         mapmonth: state.vars.mapmonth,
         Go2:state.vars.Go2,
         mon:state.vars.mon,
-        skinStyle:state.vars.skinStyle
+        skinStyle:state.vars.skinStyle,
+        alertText : state.vars.alertText
     }
 };
 
@@ -239,23 +242,36 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
+                    if(data.data.length==0){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '暂无数据'));
+                    }else{
+                        let WTSpace = data.data
+                        for (let i = 0; i < 10; i++) {
+                            // 风场名字
+                            let wtname = WTSpace[i].wtname;
+                            wTBANa.push(wtname);
+                            // 停机时间
+                            let downtimes = WTSpace[i].downtimes;
+                            wTBADown.push(downtimes);
+                            // 运行时间
+                            let runtimes = WTSpace[i].runtimes;
+                            wTBARun.push(runtimes);
+                            // TBA
+                            let tba = WTSpace[i].tba * 100;
+                            wTBAT.push(Number(tba.toFixed(2)));
+                        } 
+                        dispatch(actions.setVars('wTBANa1q', wTBANa));
+                        dispatch(actions.setVars('wTBARun1q', wTBARun));
+                        dispatch(actions.setVars('wTBADown1q', wTBADown));
+                        dispatch(actions.setVars('wTBAT1q', wTBAT));
+                        dispatch(actions.setVars('actbt', key));
+                        dispatch(actions.setVars('btnn', 0));
+                        dispatch(actions.setVars('mon', tbaspacemonth+'月'));
 
-
-                    let WTSpace = data.data
-                    for (let i = 0; i < 10; i++) {
-                        // 风场名字
-                        let wtname = WTSpace[i].wtname;
-                        wTBANa.push(wtname);
-                        // 停机时间
-                        let downtimes = WTSpace[i].downtimes;
-                        wTBADown.push(downtimes);
-// 运行时间
-                        let runtimes = WTSpace[i].runtimes;
-                        wTBARun.push(runtimes);
-// TBA
-                        let tba = WTSpace[i].tba * 100;
-                        wTBAT.push(Number(tba.toFixed(2)));
                     }
+
+                    
 
 
                 },
@@ -263,14 +279,7 @@ const mapDispatchToProps = (dispatch) => {
                     console.log("数据获取失败");
                 },
             });
-            dispatch(actions.setVars('wTBANa1q', wTBANa));
-            dispatch(actions.setVars('wTBARun1q', wTBARun));
-            dispatch(actions.setVars('wTBADown1q', wTBADown));
-            dispatch(actions.setVars('wTBAT1q', wTBAT));
-            dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('btnn', 0));
-            dispatch(actions.setVars('mon', tbaspacemonth+'月'));
-
+            
         },
         // 前十
         gogogo: (xxdwfId, actbt, btn, input_url,value) => {
