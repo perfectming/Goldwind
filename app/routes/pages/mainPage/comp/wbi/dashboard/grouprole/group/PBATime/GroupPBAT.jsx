@@ -18,7 +18,6 @@ let Component = React.createClass({
     },
     render() {
         let {ipUrl,PBAGroupMonthF="11月",PBAGroupFirstDayy,PBAGroupFirstPoweract,PBAGroupFirstFaultloss,PBAGroupFirstMaintainloss,PBAGroupFirstLimitloss,PBAGroupFirstNodevreasonloss,PBAGroupFirstPba,PBAGroupMonth,PBAGroupPoweract,PBAGroupFaultloss,PBAGroupMaintainloss,PBAGroupLimitloss,PBAGroupNodevreasonloss,PBAGroupPba,close,backtop,befor_pagee='group',befor_pagee2,PBAGroupSpace,skinStyle}=this.props;
-
         return (
             <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
                 {//遮罩层
@@ -49,7 +48,7 @@ let Component = React.createClass({
                }
                 <div className={`${styles.areabox} ${styles.shadow}`}>
                     <PBAtimechartt PBAx={PBAGroupFirstDayy} PBAPoweract={PBAGroupFirstPoweract}
-                              PBAFaultloss={PBAGroupFirstFaultloss} PBAMaintainloss={PBAGroupMaintainloss}
+                              PBAFaultloss={PBAGroupFirstFaultloss} PBAMaintainloss={PBAGroupFirstMaintainloss}
                               PBALimitloss={PBAGroupFirstLimitloss} PBANodevreasonloss={PBAGroupFirstNodevreasonloss} height={410}
                               PBAPba={PBAGroupFirstPba}
                               text={PBAGroupMonthF+'每日PBA'} scolor={skinStyle == 1 ? "#fff" : skinStyle == 2 ? "#333333" : "#fff"}></PBAtimechartt>
