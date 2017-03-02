@@ -4,6 +4,7 @@ import styles from './Profitstyle3.scss';
 import Windce from './Windce.jsx';
 import icono2 from '../../../../../img/comp/wind_logo.png';
 import icono1 from '../../../../../img/comp/wind_logo2.png';
+import AlertWindow from '../../../KPI/AlertWindow';
 import Login from '../../../../../../../../components/common/Loading.jsx';
 var $ = require('jquery');
 var actions = require('redux/actions');
@@ -18,7 +19,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_pagee = 'windpage',  areaNameN, areaRecordCostN, areaRecordProfitN,mapmonth,mon,Go2=false,skinStyle}=this.props;
+        let {alertText,width, ipUrl, btn = 0, xxdwfId, xxdwfNa, actbt, changpage, wind, windP, gogogo, areaNamee, back, more, close, backtop, befor_pagee = 'windpage',  areaNameN, areaRecordCostN, areaRecordProfitN,mapmonth,mon,Go2=false,skinStyle}=this.props;
 if(Go2){
         return (
              <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
@@ -28,6 +29,7 @@ if(Go2){
                 <div className={styles.boxcover} id='boxcover'></div>
                 {//更多弹出框
                 }
+                <AlertWindow text={alertText}></AlertWindow>
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
                         <img src={skinStyle == 1 ? icono2 : skinStyle == 2 ? icono1: icono2}/>
@@ -112,6 +114,7 @@ const mapStateToProps = (state) => {
         mon: state.vars.mon,
         Go2: state.vars.Go2,
         skinStyle: state.vars.skinStyle,
+        alertText : state.vars.alertText
     }
 };
 
@@ -226,33 +229,37 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
-
-                    // 获取x轴的值内蒙达茂天润风电场
-
-                    for (let i = 0; i < 10; i++) {
-                        // 风场时间
-                        let xWild = data.data[i].wtname;
-                        arr1.push(xWild);
-                        // 计划发电量
-                        let yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
-                        arr2.push(yPowerPlan);
-                        // 实际发电量
-                        let yPowerAct = Number(data.data[i].poweract.toFixed(2));
-                        arr3.push(yPowerAct);
+                    if(data.data.length==0){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '暂无数据'));
+                    }else{
+                        for (let i = 0; i < 10; i++) {
+                            // 风场时间
+                            let xWild = data.data[i].wtname;
+                            arr1.push(xWild);
+                            // 计划发电量
+                            let yPowerPlan = Number(data.data[i].powerplan.toFixed(2));
+                            arr2.push(yPowerPlan);
+                            // 实际发电量
+                            let yPowerAct = Number(data.data[i].poweract.toFixed(2));
+                            arr3.push(yPowerAct);
+                        }
+                        dispatch(actions.setVars('actbt', key));
+                        dispatch(actions.setVars('areaNamee', arr1));
+                        dispatch(actions.setVars('wind', arr3));
+                        dispatch(actions.setVars('windP', arr2));
+                        dispatch(actions.setVars('btnn', 0));
+                        dispatch(actions.setVars('mon', amonth+'月'));
                     }
+
+                    
 
                 },
                 error: function () {
 
                 },
             });
-            dispatch(actions.setVars('actbt', key));
-            dispatch(actions.setVars('areaNamee', arr1));
-            dispatch(actions.setVars('wind', arr3));
-            dispatch(actions.setVars('windP', arr2));
-            dispatch(actions.setVars('btnn', 0));
-            dispatch(actions.setVars('mon', amonth+'月'));
+            
 
         },
         // 前十

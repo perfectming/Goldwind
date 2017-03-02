@@ -5,6 +5,7 @@ import AreaTable from './AreaTable.jsx';
 import WindfieldTable from './WindfieldTable.jsx';
 import icono from '../../../../../../img/comp/收益率1.png';
 var $ = require('jquery');
+import AlertWindow from '../../../../KPI/AlertWindow';
 import Login from '../../../../../../../../../components/common/Loading.jsx';//加载跳转页面
 import Fanchart from './fanchart.jsx';
 var actions = require('redux/actions');
@@ -23,7 +24,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {mapmonth,trt,width,ipUrl,index2,keyy,actbt=0,btn=0,changpage,wind,windP,windPT,gogogo,back,height,more,close,backtop,befor_pagee='group',befor_page2,w11='1区域',w111='风机1',pointPlacement,windN,keyyy,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNamessT,areaWindCostssT,areaWindEarningssT,areaWindRatessT,areaWindidssT,areaWindCostMore,areaWindEarningMore,areaWindNameMore,areaWindRateMore,mon,boll=false,skinStyle}=this.props;
+        let {alertText,mapmonth,trt,width,ipUrl,index2,keyy,actbt=0,btn=0,changpage,wind,windP,windPT,gogogo,back,height,more,close,backtop,befor_pagee='group',befor_page2,w11='1区域',w111='风机1',pointPlacement,windN,keyyy,areaWindNames,areaWindCosts,areaWindEarnings,areaWindRates,areaWindids,areaWindNamessT,areaWindCostssT,areaWindEarningssT,areaWindRatessT,areaWindidssT,areaWindCostMore,areaWindEarningMore,areaWindNameMore,areaWindRateMore,mon,boll=false,skinStyle}=this.props;
         if (boll){
         return (
             <div className={skinStyle == 1 ? styles.boxBlue : skinStyle == 2 ? styles.boxWhite : styles.box}>
@@ -32,6 +33,7 @@ let Component = React.createClass({
                 <div className={styles.boxcover} id='boxcover'></div>
                 {// 更多弹出的表格
                 }
+                <AlertWindow text={alertText}></AlertWindow>
                 <div className={styles.more} id="sss">
                     <div className={styles.moretitle}>
                       <span className={styles.img}></span>    
@@ -156,6 +158,7 @@ const mapStateToProps = (state) => {
          mon: state.vars.mon,
         boll: state.vars.boll,
         skinStyle: state.vars.skinStyle,
+        alertText : state.vars.alertText
     }
 };
 const mapDispatchToProps = (dispatch) => {
@@ -242,7 +245,7 @@ const mapDispatchToProps = (dispatch) => {
                     }
                 },
                 error: function () {
-                 console.log(1)
+                    console.log('网络错误')
                 },
             });
             // dispatch(actions.setVars('actbt', monthF - 1));
@@ -404,7 +407,10 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',
                 timeout: '3000',
                 success: function (data) {
-
+                    if(data.data.length==0){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '暂无数据'));
+                    }
                     let dataA = data.data;
                     for (let i in dataA) {
                         let earnings = dataA[i].earning;

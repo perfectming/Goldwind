@@ -4,6 +4,7 @@ import styles from './Hindex.scss';
 import Hly_pbaone from './Hly_pbaone.jsx';
 import Hly_pbatwo from './Hly_pbatwo.jsx';
 import Login from '../../../../../../../../components/common/Loading.jsx';
+import AlertWindow from '../../../KPI/AlertWindow';
 var actions = require('redux/actions');
 let bmId = require("../../../../urlData").groupId;
 let cjId = require("../../../../urlData").CJwfId;
@@ -20,7 +21,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {areaId,ipUrl,befor_pages='area',mapmonth,jhp=false,width0,w10,wc1,wfid,bt0=0,skinStyle,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
+        let {alertText,areaId,ipUrl,befor_pages='area',mapmonth,jhp=false,width0,w10,wc1,wfid,bt0=0,skinStyle,wc2,hhdata,w0,mon, returnit,barLotime1,actbt=10,changecolor, hhdata4, hideit,gogogo,back,more,arr,arr2,power1, wrong10, wrong11, wrong12, wrong13, pba1, barRotimes,barRotime, power2, wrong20, wrong21, wrong22, wrong23, pba2, barLotime2,} = this.props;
         let data = require('./Healthy-data');
         let month = data.data.line_month;
         let button=data.data.button;
@@ -29,7 +30,7 @@ let Component = React.createClass({
         if(jhp){
         return (
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
-
+                <AlertWindow text={alertText}></AlertWindow>
                 <div className={styles.light} id="light"> </div>
 
                 <div className={`${styles.boxhidden} ${styles.box_shadow}`}   id="boxhidden">
@@ -133,6 +134,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        alertText : state.vars.alertText,
         actbt:state.vars.actbt,
         wind:state.vars.wind,
         winds:state.vars.winds,
@@ -284,9 +286,7 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor:(value,key,ipUrl,areaId,bmId)=>{
-            dispatch(actions.setVars('bt0', 0));
-            dispatch(actions.setVars('actbt',key ));
-            dispatch(actions.setVars('mon', value.yearpoweract+"月"));
+            
             areaId=areaId[0];
 
             $.ajax({
@@ -301,57 +301,65 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+                    if(data.data==null){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '暂无数据'));
+                    }else{
+                        dispatch(actions.setVars('bt0', 0));
+                        dispatch(actions.setVars('actbt',key ));
+                        dispatch(actions.setVars('mon', value.yearpoweract+"月"));
+                        let w10 = data.data[1][0].wfname;
+                        dispatch(actions.setVars('w11', w10));
+                        dispatch(actions.setVars('hhdata4',  data));
+                        let barLotime21 = [];    //各区域   一区域二区域
+                        let power21=[];       //实际发电量
+                        let wrong201=[];       //故障损失
+                        let wrong211=[];       //维护损失
+                        let wrong221=[];       //限功率损失
+                        let wrong231=[];       //非设备原因损失
+                        let pba21=[];
+                        for (var i in data.data[1]) {
+                            barLotime21.push(data.data[1][i].wfname);    //区域的横坐标
+                            power21.push(data.data[1][i].poweract);   //实际发电量
+                            wrong201.push(data.data[1][i].faultloss);   //故障损失
+                            wrong211.push(data.data[1][i].maintainloss);   //维护损失
+                            wrong221.push(data.data[1][i].limitloss);   //限功率损失
+                            wrong231.push(data.data[1][i].nodevreasonloss);   //非设备原因损失
+                            pba21.push(Number((data.data[1][i].pba*100).toFixed(2)));    //非设备原因损失
+                        }
+                        dispatch(actions.setVars('barLotime21', barLotime21));
+                        dispatch(actions.setVars('power21', power21));
+                        dispatch(actions.setVars('wrong201', wrong201));
+                        dispatch(actions.setVars('wrong211', wrong211));
+                        dispatch(actions.setVars('wrong221', wrong221));
+                        dispatch(actions.setVars('wrong231', wrong231));
+                        dispatch(actions.setVars('pba21', pba21));
 
-                    let w10 = data.data[1][0].wfname;
-                    dispatch(actions.setVars('w11', w10));
-                    dispatch(actions.setVars('hhdata4',  data));
-                    let barLotime21 = [];    //各区域   一区域二区域
-                    let power21=[];       //实际发电量
-                    let wrong201=[];       //故障损失
-                    let wrong211=[];       //维护损失
-                    let wrong221=[];       //限功率损失
-                    let wrong231=[];       //非设备原因损失
-                    let pba21=[];
-                    for (var i in data.data[1]) {
-                        barLotime21.push(data.data[1][i].wfname);    //区域的横坐标
-                        power21.push(data.data[1][i].poweract);   //实际发电量
-                        wrong201.push(data.data[1][i].faultloss);   //故障损失
-                        wrong211.push(data.data[1][i].maintainloss);   //维护损失
-                        wrong221.push(data.data[1][i].limitloss);   //限功率损失
-                        wrong231.push(data.data[1][i].nodevreasonloss);   //非设备原因损失
-                        pba21.push(Number((data.data[1][i].pba*100).toFixed(2)));    //非设备原因损失
+                        let barLotime21q = [];    //各区域   一区域二区域
+                        let power21q=[];       //实际发电量
+                        let wrong201q=[];       //故障损失
+                        let wrong211q=[];       //维护损失
+                        let wrong221q=[];       //限功率损失
+                        let wrong231q=[];       //非设备原因损失
+                        let pba21q=[];
+                        for (var i=0;i<10;i++) {
+                            barLotime21q.push(data.data[0][i].wtname);    //区域的横坐标
+                            power21q.push(data.data[0][i].poweract);   //实际发电量
+                            wrong201q.push(data.data[0][i].faultloss);   //故障损失
+                            wrong211q.push(data.data[0][i].maintainloss);   //维护损失
+                            wrong221q.push(data.data[0][i].limitloss);   //限功率损失
+                            wrong231q.push(Number(data.data[0][i].nodevreasonloss.toFixed(2)));   //非设备原因损失
+                            pba21q.push(Number((data.data[0][i].pba*100).toFixed(2)));      //非设备原因损失
+                        }
+                        dispatch(actions.setVars('barLotime1', barLotime21q));
+                        dispatch(actions.setVars('power1', power21q));
+                        dispatch(actions.setVars('wrong10', wrong201q));
+                        dispatch(actions.setVars('wrong11', wrong211q));
+                        dispatch(actions.setVars('wrong12', wrong221q));
+                        dispatch(actions.setVars('wrong13', wrong231q));
+                        dispatch(actions.setVars('pba1', pba21q));   
                     }
-                    dispatch(actions.setVars('barLotime21', barLotime21));
-                    dispatch(actions.setVars('power21', power21));
-                    dispatch(actions.setVars('wrong201', wrong201));
-                    dispatch(actions.setVars('wrong211', wrong211));
-                    dispatch(actions.setVars('wrong221', wrong221));
-                    dispatch(actions.setVars('wrong231', wrong231));
-                    dispatch(actions.setVars('pba21', pba21));
-
-                    let barLotime21q = [];    //各区域   一区域二区域
-                    let power21q=[];       //实际发电量
-                    let wrong201q=[];       //故障损失
-                    let wrong211q=[];       //维护损失
-                    let wrong221q=[];       //限功率损失
-                    let wrong231q=[];       //非设备原因损失
-                    let pba21q=[];
-                    for (var i=0;i<10;i++) {
-                        barLotime21q.push(data.data[0][i].wtname);    //区域的横坐标
-                        power21q.push(data.data[0][i].poweract);   //实际发电量
-                        wrong201q.push(data.data[0][i].faultloss);   //故障损失
-                        wrong211q.push(data.data[0][i].maintainloss);   //维护损失
-                        wrong221q.push(data.data[0][i].limitloss);   //限功率损失
-                        wrong231q.push(Number(data.data[0][i].nodevreasonloss.toFixed(2)));   //非设备原因损失
-                        pba21q.push(Number((data.data[0][i].pba*100).toFixed(2)));      //非设备原因损失
-                    }
-                    dispatch(actions.setVars('barLotime1', barLotime21q));
-                    dispatch(actions.setVars('power1', power21q));
-                    dispatch(actions.setVars('wrong10', wrong201q));
-                    dispatch(actions.setVars('wrong11', wrong211q));
-                    dispatch(actions.setVars('wrong12', wrong221q));
-                    dispatch(actions.setVars('wrong13', wrong231q));
-                    dispatch(actions.setVars('pba1', pba21q));
+                    
                 },
                 error:function(){
                     console.log("数据获取失败");

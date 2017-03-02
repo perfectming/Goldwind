@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import styles from '../../area/Hindex.scss';
 import Hly_genday from './Hly_genday.jsx';
+import AlertWindow from '../../../../KPI/AlertWindow';
 import Login from '../../../../../../../../../components/common/Loading.jsx';
 var actions = require('redux/actions');
 
@@ -19,7 +20,7 @@ let Component = React.createClass({
 
 
     render() {
-        let {befor_pages='group',mapmonth,boll4=false,skinStyle, returnit,actbt=10,changecolor,day0,poweract,powerplan,mon,ipUrl} = this.props;
+        let {alertText,befor_pages='group',mapmonth,boll4=false,skinStyle, returnit,actbt=10,changecolor,day0,poweract,powerplan,mon,ipUrl} = this.props;
           let data = require('./../../area/Healthy-data');
 
         if(boll4){
@@ -27,7 +28,7 @@ let Component = React.createClass({
 
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
 
-
+                <AlertWindow text={alertText}></AlertWindow>
                 <div className={styles.onmonth}>
                     {
                         mapmonth.map((value, key) => {
@@ -69,6 +70,7 @@ let Component = React.createClass({
 
 const mapStateToProps = (state) => {
     return {
+        alertText : state.vars.alertText,
         actbt:state.vars.actbt,
         wind:state.vars.wind,
         winds:state.vars.winds,
@@ -153,10 +155,6 @@ const mapDispatchToProps = (dispatch) => {
             }
         },
         changecolor :(value,key,ipUrl)=>{
-            dispatch(actions.setVars('actbt',key ));
-            dispatch(actions.setVars('mon', value.yearpoweract+"月"));
-
-
             $.ajax({
                 type:'post',
                 url:'http://'+ipUrl+'/wbi/ELEC/getSpaceTimeElec',
@@ -168,20 +166,27 @@ const mapDispatchToProps = (dispatch) => {
                 dataType:'json',
                 timeout:'3000',
                 success:function(data){
+                    if(data.data.length==0){
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '暂无数据'));
+                    }else{
+                        dispatch(actions.setVars('actbt',key ));
+                        dispatch(actions.setVars('mon', value.yearpoweract+"月"));
+                        let day0=[];
+                        let poweract=[];
+                        let powerplan=[];
+                        for(var i in data.data){
 
-                    let day0=[];
-                    let poweract=[];
-                    let powerplan=[];
-                    for(var i in data.data){
+                            day0.push(data.data[i].day+"日");
+                            poweract.push(Number((data.data[i].poweract).toFixed(2)));
+                            powerplan.push(Number((data.data[i].powerplan).toFixed(2)));
 
-                        day0.push(data.data[i].day+"日");
-                        poweract.push(Number((data.data[i].poweract).toFixed(2)));
-                        powerplan.push(Number((data.data[i].powerplan).toFixed(2)));
-
+                        }
+                        dispatch(actions.setVars('day1',day0 ));
+                        dispatch(actions.setVars('poweract1',poweract ));
+                        dispatch(actions.setVars('powerplan1',powerplan ))  
                     }
-                    dispatch(actions.setVars('day1',day0 ));
-                    dispatch(actions.setVars('poweract1',poweract ));
-                    dispatch(actions.setVars('powerplan1',powerplan ))
+                    
                 },
                 error:function(){
                     console.log("数据获取失败");
