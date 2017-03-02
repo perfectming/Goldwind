@@ -58,9 +58,9 @@ let str=d.getDate();
            array.push((date[key].YearEgyAt/date[key].Capacity).toFixed(1)+'h') //年累计利用小时
            array.push((((date[key].MonthEgyAt/date[key].Capacity)/str*24)*100).toFixed(2)+'%') //当月时间可利用率
         }
-      
+
         array.push(date[key][title[i]]) //获取每一个key值得对应字段数组
-        
+
     }
     array2.push(array) //获取全部风场的对应字段数据
     } 

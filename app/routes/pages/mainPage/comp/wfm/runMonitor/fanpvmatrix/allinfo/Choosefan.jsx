@@ -62,8 +62,8 @@ let Component = React.createClass({
     componentDidMount() {
         this.props.init();
     },
-
     render() {
+        let arrCount=[0];
         let{valuepage,Tofaninfo,choosefans,fData,faninfobool}=this.props;
         let obj_wfd = fData.ModelData[8888801].WFDevsStatus;
         // console.log(valuepage);
@@ -73,7 +73,6 @@ let Component = React.createClass({
             <div className={styles.listbodyBox}>
                 {
                 obj_wfd[valuepage].map((value, key)=> {
-
                     // let bordercolor = value.WTStateColor;
                     let x;
                     let code = value.WTStateCode;
@@ -116,9 +115,10 @@ let Component = React.createClass({
                         }
                     if(choosefans == "RunCount_SOAM" && value.WTStateCode== "Online"){
                         // console.log(choosefans);
+                        arrCount[0]++;
                     return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
-                           
+
                             <div className={styles.listitemR}>
                                 <span className={styles.listitemT}>
                                         <p className={styles.listitemTT}>{value.Wtname}</p>
@@ -134,13 +134,14 @@ let Component = React.createClass({
                                         <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
                                     </span>
                                 </span>
-                            </div>          
-                        </div>  
+                            </div>
+                        </div>
                     )
                     }else if(choosefans== "FaultCount" && value.WTStateCode== "Fault"){
+                        arrCount[0]++;
                         return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
-                           
+
                             <div className={styles.listitemR}>
                                 <span className={styles.listitemT}>
                                         <p className={styles.listitemTT}>{value.Wtname}</p>
@@ -156,11 +157,12 @@ let Component = React.createClass({
                                         <p><span className={styles.listitemBLL}>{Number(value.ActPwr).toFixed(2)}</span><span className={styles.listitemBLR}>KW</span></p>
                                     </span>
                                 </span>
-                            </div>          
-                        </div>  
+                            </div>
+                        </div>
                     )
                     }else if(choosefans== "OfflineCount" && value.WTStateCode== "DisComForPre"){
-                       return (
+                        arrCount[0]++;
+                        return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
                             <div className={styles.listitemR}>
@@ -182,7 +184,8 @@ let Component = React.createClass({
                         </div>  
                     ) 
                     }else if(choosefans== "OfflineCount" && value.WTStateCode== "DisComForPlc"){
-                       return (
+                        arrCount[0]++;
+                        return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.offline : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
                             <div className={styles.listitemR}>
@@ -204,7 +207,8 @@ let Component = React.createClass({
                         </div>  
                     ) 
                     }else if(choosefans== "OfflineCount" && value.WTStateCode== "Unknown"){
-                       return (
+                        arrCount[0]++;
+                        return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
                             <div className={styles.listitemR}>
@@ -226,7 +230,8 @@ let Component = React.createClass({
                         </div>  
                     ) 
                     }else if(choosefans== "WFStandbyCount" && value.WTStateCode== "Offline"){
-                       return (
+                        arrCount[0]++;
+                        return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.offline : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
                             <div className={styles.listitemR}>
@@ -248,7 +253,8 @@ let Component = React.createClass({
                         </div>  
                     ) 
                     }else if(choosefans== "WFLIMCount" && value.WTStateCode== "LimitPow"){
-                       return (
+                        arrCount[0]++;
+                        return (
                         <div className={`${styles.listBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.limitPow : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
                             <div className={styles.listitemR}>
@@ -270,7 +276,8 @@ let Component = React.createClass({
                         </div>  
                     ) 
                     }else if(choosefans== "RepairCount" && value.WTStateColor== "#c7b88c"){
-                       return (
+                        arrCount[0]++;
+                        return (
                         <div className={`${styles.listBox} ${styles.repair} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Tofaninfo(value,valuepage)}>
                            
                             <div className={styles.listitemR}>
@@ -294,6 +301,14 @@ let Component = React.createClass({
                     }
                 })
                 }
+                {arrCount.map((value,key)=>{
+                    if (value===0){
+                        return(
+                            <div className={styles.alarm} key={key}>当前无数据</div>
+                        )
+                    }
+                })
+                }
             </div>
         );
     }
@@ -314,6 +329,7 @@ const mapDispatchToProps = (dispatch) => {
             var obj = {
                 test:''
             }
+
         },
         Tofaninfo: (value,valuepage)=> {
             dispatch(actions.setVars('value', value));

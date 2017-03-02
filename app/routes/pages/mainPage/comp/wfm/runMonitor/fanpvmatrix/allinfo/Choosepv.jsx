@@ -38,6 +38,7 @@ let Component = React.createClass({
     },
 
     render() {
+        let arrCount=[0];
         let{valuepage1,Topvinfo,choosefans1,fData}=this.props;
         let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
 
@@ -84,6 +85,7 @@ let Component = React.createClass({
                                 break;
                         }  
                     if(choosefans1 == "PVONL" && (code == "Online" || code == "LimitPow" || code == "Alarm")){
+                        arrCount[0]++;
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.online : (code === "Alarm" ? styles.online : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -105,6 +107,7 @@ let Component = React.createClass({
                         </div>  
                         )
                     }else if(choosefans1 == "PVFLT" && code== "Fault"){
+                        arrCount[0]++;
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -126,6 +129,7 @@ let Component = React.createClass({
                         </div>  
                         )
                     }else if(choosefans1 == "PVOFL" && (code== "DisComForPre" || code== "Offline")){
+                        arrCount[0]++;
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.offline : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -147,6 +151,7 @@ let Component = React.createClass({
                         </div>  
                         )
                     }else if(choosefans1 == "PVOFL" && code== "DisComForPlc"){
+                        arrCount[0]++;
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -168,6 +173,7 @@ let Component = React.createClass({
                         </div>  
                         )
                     }else if(choosefans1 == "PVOFL" && code== "Unknown"){
+                        arrCount[0]++;
                         return (
                         <div className={`${styles.slistBox} ${code == "DisComForPre" ? styles.discomfor : (code == "DisComForPlc" ? styles.discomfor : (code === "Unknown" ? styles.discomfor : (code === "Online" ? styles.online : (code === "LimitPow" ? styles.discomfor : (code === "Alarm" ? styles.discomfor : (code === "Fault" ? styles.fault : (code === "Offline" ? styles.discomfor : (code === "ProtoectStop" ? styles.discomfor : (code === "LimitPowStop" ? styles.discomfor : styles.default)))))))))}`} key={key} onClick = {()=> Topvinfo(value, key)}>
                             <div className={styles.slistitemR}>
@@ -192,7 +198,15 @@ let Component = React.createClass({
                     
                         
                 })
-                }
+                }{
+                arrCount.map((value,key)=>{
+                    if (value===0){
+                        return(
+                            <div className={styles.alarm} key={key}>当前无数据</div>
+                        )
+                    }
+                })
+            }
             </div>
         );
     }
