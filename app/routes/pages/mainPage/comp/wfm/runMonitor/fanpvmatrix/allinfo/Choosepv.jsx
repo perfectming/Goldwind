@@ -6,12 +6,14 @@ var actions = require('redux/actions');
 let obj = require('../../../../../../../../../config/MatrixData');
 let model = require('../../../../../../../../../config/Model');
 let modeldata = require('../../../../../../../../../config/ModelData');
+let mobdOne = require('../../../../urlData').mobdOne/1;
+let mobdTwo = require('../../../../urlData').mobdTwo/1;
 var model_data = modeldata.ModelData;
 var model_ens = model.Model.ens;
 var arr1 = [];
 var arr2 = [];
-var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+var obj_wfd = obj.ModelData[mobdOne].WFDevsStatus;
+var obj_pvd = obj.ModelData[mobdTwo].PVDevsStatus;
     for(var x in obj_wfd){
         arr1.push(x)
         // for(var y in obj_wfd[x]){
@@ -40,7 +42,7 @@ let Component = React.createClass({
     render() {
         let arrCount=[0];
         let{valuepage1,Topvinfo,choosefans1,fData}=this.props;
-        let obj_pvd = fData.ModelData[8888802].PVDevsStatus;
+        let obj_pvd = fData.ModelData[mobdTwo].PVDevsStatus;
 
         return (
             <div className={styles.slistbodyBox}>
