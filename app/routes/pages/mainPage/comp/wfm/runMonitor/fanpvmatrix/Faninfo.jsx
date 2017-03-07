@@ -229,7 +229,7 @@ let Component = React.createClass({
 				</div>
 				<div className={`${styles.infoBox} ${styles.infofL}`}>
 					<div className={`${styles.infoBox1} ${styles.infofL}`}>
-						<Title></Title>
+						<Title title={['Grid frequency参数']}></Title>
 						<div className={`${styles.hzBoxt} ${styles.infofL11}`}>
 							<div className={`${styles.hzBoxtA} ${styles.hzBoxtall}`}>
 								<div>A相</div>
@@ -262,7 +262,7 @@ let Component = React.createClass({
 						</div>
 					</div>
 					<div className={`${styles.infoBox2} ${styles.infofL}`}>
-						<Title></Title>
+						<Title title={['Impeller and enerator参数']}></Title>
 						<div id="wsBox" className={`${styles.wsbox1} ${styles.dialbox}`}>
 							<div className={styles.boxtitle}><p>风速</p></div>
 							<div className={styles.wsdialbox}>

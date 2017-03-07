@@ -22,6 +22,7 @@ import Monitorkb from '../comp/wfm/monitorkb/Monitorkb.jsx';
 import Fan from '../comp/wfm/runMonitor/fanpvmatrix/Fan.jsx';//徐远明
 import Ms from '../comp/wfm/mSystem/Ms.jsx';
 import Amm from '../comp/wfm/mSystem/Amm.jsx';
+import Manager from '../comp/wfm/manager/manager.jsx';
 
 import PEQI from '../comp/wfm/datamanager/PEQI.jsx';//姜园
 import AS from '../comp/wfm/mSystem/AS.jsx';
@@ -138,6 +139,7 @@ let Component = React.createClass({
                 {showPage === 'fan_matrix' && <Fan_matrix></Fan_matrix>}
                 {showPage === 'ywbb' && <Ywbb></Ywbb>}
                 {showPage === 'fault' && <Fault></Fault>}
+                {showPage === 'manager' && <Manager></Manager>}
 
                 {showPage === 'baotou' && <Baotou></Baotou>}
                 {showPage === 'windbtpage' && <Windbtpage></Windbtpage>}

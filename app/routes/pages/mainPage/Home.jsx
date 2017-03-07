@@ -24,7 +24,6 @@ let Component = React.createClass({
     render() {
         let {itemHeaderActive, itemTreeAct, flag=true,userMessage,Verification,skinStyle}=this.props;
         let menu=[];
-        // console.log(userMessage);
         if(userMessage){
             userMessage.data.tlist.map(function(value,key){
                 //获取一级菜单
@@ -82,7 +81,6 @@ let Component = React.createClass({
                 }
             })
         }
-
         return (
 
             <FixedContent mode="fullWidth" width={1920}>

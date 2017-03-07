@@ -21,8 +21,7 @@ let Component = React.createClass({
     },
 
     render() {
-        let {valuepage1,zhzb,fModel,fData,next,previous,page=1,skinStyle} = this.props;
-        console.log(zhzb,fData);
+        let {fanDataType='all',changeType,valuepage1,zhzb,fModel,fData,next,previous,page=1,skinStyle} = this.props;
         let model_ens = zhzb.Model.ens;
         let obj_pvd = fData.ModelData[mobdTwo].PVDevsStatus;
         // console.log(obj_pvd);
@@ -31,25 +30,34 @@ let Component = React.createClass({
         var offL=0;
         var stand=0;
         var haul=0;
-        for (let i=0;i<obj_pvd[valuepage1].length;i++){
-            switch (obj_pvd[valuepage1][i].WTStateCode){
+        let  dataLow={
+            run:[],fau:[],offL:[],stand:[],elec:[],haul:[]
+        };
+        dataLow.all=obj_pvd[valuepage1];
+        obj_pvd[valuepage1].map((value,key)=>{
+            switch (value.WTStateCode){
                 case "Online":case "LimitPow":case "Alarm":
+                dataLow.run.push(value);
                 run++;
                 break;
                 case "Fault":
+                    dataLow.fau.push(value);
                     fau++;
                     break;
                 case "DisComForPre":case "DisComForPlc":case "Unknown":
+                dataLow.offL.push(value);
                 offL++;
                 break;
                 case "Offline":case "ProtoectStop":case "LimitPowStop":
+                dataLow.stand.push(value);
                 stand++;
                 break;
                 default:
+                    dataLow.haul.push(value);
                     haul++;
                     break;
             }
-        }
+        });
         return (
             <div className={skinStyle==1?css.toBoxBlue:skinStyle==2?css.toBoxWhite:css.toBox}>
                 <div className={css.leftBox}>
@@ -67,7 +75,7 @@ let Component = React.createClass({
                         </div>
                         <div className={css.tableContentBox}>
                             {
-                                obj_pvd[valuepage1].map((value, key)=> {
+                                dataLow[fanDataType].map((value, key)=> {
                                     if(38*(page-1)<=key&&key<(38*(page-1)+19)){
                                         return (
                                             <div className={key%2===0? css.tableContentLine : css.tableContentLine1} key={key}>
@@ -135,7 +143,7 @@ let Component = React.createClass({
                         </div>
                         <div className={css.tableContentBox}>
                             {
-                                obj_pvd[valuepage1].map((value, key)=> {
+                                dataLow[fanDataType].map((value, key)=> {
                                     if(key>=(page*38-19)&&key<(page*38)){
                                         return (
                                             <div className={key%2===0? css.tableContentLine : css.tableContentLine1} key={key}>
@@ -190,11 +198,11 @@ let Component = React.createClass({
                     </div>
                 </div>
                 <div className={css.btnClass}>
-                    <span className={css.run}><img src={icon0}/>运行 &nbsp; {run}</span>
-                    <span className={css.fau}><img src={icon1}/>故障 &nbsp; {fau}</span>
-                    <span className={css.offL}><img src={icon3}/>离线 &nbsp; {offL}</span>
-                    <a className={css.btnP} onClick={()=>next(page,obj_pvd[valuepage1].length)}>下一页</a>
-                    <span className={css.txt}>{page}/{Math.ceil(obj_pvd[valuepage1].length/38)}</span>
+                    <span onClick={()=>{changeType('run')}} className={css.run}><img src={icon0}/>运行 &nbsp; {run}</span>
+                    <span onClick={()=>{changeType('fau')}} className={css.fau}><img src={icon1}/>故障 &nbsp; {fau}</span>
+                    <span onClick={()=>{changeType('offL')}} className={css.offL}><img src={icon3}/>离线 &nbsp; {offL}</span>
+                    <a className={css.btnP} onClick={()=>next(page,dataLow[fanDataType].length)}>下一页</a>
+                    <span className={css.txt}>{page}/{Math.ceil(dataLow[fanDataType].length/38)}</span>
                     <a className={css.btnP} onClick={()=>previous(page)}>上一页</a>
 
                 </div>
@@ -210,6 +218,7 @@ const mapStateToProps = (state) => {
         valuepage1 : state.vars.valuepage1,
         zhzb : state.vars.zhzb,
         fModel : state.vars.fModel,
+        fanDataType : state.vars.fanDataType,
         fData : state.vars.fData,
         skinStyle: state.vars.skinStyle
 
@@ -219,6 +228,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            dispatch(actions.setVars('fanDataType', 'all'));
             var obj = {
                 test:''
             }
@@ -231,6 +241,9 @@ const mapDispatchToProps = (dispatch) => {
             (page<(i/38)) ? page++:page;
             dispatch(actions.setVars('page1', page));
 
+        },
+        changeType:(k)=>{
+            dispatch(actions.setVars('fanDataType', k));
         }
     };
 };
