@@ -85,6 +85,17 @@ module.exports = {
                         name:'计划电量录入',
                         page:'projectSta',
                     }]
+            },{
+                name:'场站信息',
+                iconNormal: require('../app/routes/pages/mainPage/img/comp/sj.png'),
+                iconActive: require('../app/routes/pages/mainPage/img/comp/sj_active.png'),
+
+                    page:[
+                        {
+                            name:'场站信息维护',
+                            page:'manager',
+
+                        }],
             }],
         },{
 

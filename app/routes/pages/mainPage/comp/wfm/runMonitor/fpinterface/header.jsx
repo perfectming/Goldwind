@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import styles from './header.scss';
+let soam=require('../../../urlData').soam1;//设置接口
 import back from '../../../../img/comp/back.png';
 var actions = require('redux/actions');
 var $ =require('jquery');
@@ -17,7 +18,6 @@ let Component = React.createClass({
           var model_ens = zhz.Model.ens;
           let arr1 = [];
           let arr2 = [];
-
 
 (function(){
 
@@ -91,6 +91,18 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('Changnav', 0));
               dispatch(actions.setVars('actbtn', 0));
               dispatch(actions.setVars('fc_info', value));
+             $.ajax({
+                 url: soam+'/wcc/findOneWcontacterByWfid',
+                 type: 'post',
+                 data:'wfid='+value,
+                 dataType: 'json',//here,
+                 success:function (data) {
+                     dispatch(actions.setObjs('mana', data));
+                 },
+                 error:function(){
+                     console.log('获取数据失败')
+                 }
+             });
              
         },
         changpage1 :(value,key)=>{
@@ -102,6 +114,18 @@ const mapDispatchToProps = (dispatch) => {
               dispatch(actions.setVars('Changnav', 1));
               dispatch(actions.setVars('actbtn', 0));
               dispatch(actions.setVars('fc_info', value));
+            $.ajax({
+                url: soam+'/wcc/findOneWcontacterByWfid',
+                type: 'post',
+                data:'wfid='+value,
+                dataType: 'json',//here,
+                success:function (data) {
+                    dispatch(actions.setObjs('mana', data));
+                },
+                error:function(){
+                    console.log('获取数据失败')
+                }
+            });
 
         },
         backtop:(befor_page,befor_page2,befor_page3,npage)=>{

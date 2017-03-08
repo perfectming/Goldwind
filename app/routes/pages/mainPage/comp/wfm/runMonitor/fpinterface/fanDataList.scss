@@ -184,12 +184,21 @@
     width: 95%;
     padding-left: 5%;
     overflow: hidden;
+    .all {
+      height: 40px;
+      width: 120px;
+      border-radius: 10px;
+      margin-right: 2%;
+      cursor: pointer;
+      color: #fff;
+    }
     .run {
       height: 40px;
       width: 120px;
       border-radius: 10px;
       margin-right: 2%;
       color: #1fe005;
+      cursor: pointer;
     }
     .fau {
       height: 40px;
@@ -197,6 +206,7 @@
       border-radius: 10px;
       margin-right: 2%;
       color: #ff0000;
+      cursor: pointer;
     }
     .offL {
       height: 40px;
@@ -204,12 +214,14 @@
       border-radius: 10px;
       margin-right: 2%;
       color: #818285;
+      cursor: pointer;
     }
     .stand {
       height: 40px;
       width: 120px;
       border-radius: 10px;
       margin-right: 2%;
+      cursor: pointer;
       color: #2187fb;
     }
     .haul {
@@ -217,6 +229,7 @@
       width: 120px;
       border-radius: 10px;
       margin-right: 2%;
+      cursor: pointer;
       color: #fbd500;
     }
     .elec {
@@ -224,6 +237,7 @@
       width: 120px;
       border-radius: 10px;
       color: #ddd;
+      cursor: pointer;
     }
     .btnP {
       float: right;
@@ -426,18 +440,28 @@
     width: 95%;
     padding-left: 5%;
     overflow: hidden;
+    .all {
+      height: 40px;
+      width: 120px;
+      border-radius: 10px;
+      margin-right: 2%;
+      cursor: pointer;
+      color: #fff;
+    }
     .run {
       height: 40px;
       width: 120px;
       border-radius: 10px;
       margin-right: 2%;
       color: #1fe005;
+      cursor: pointer;
     }
     .fau {
       height: 40px;
       width: 120px;
       border-radius: 10px;
       margin-right: 2%;
+      cursor: pointer;
       color: #ff0000;
     }
     .offL {
@@ -446,18 +470,21 @@
       border-radius: 10px;
       margin-right: 2%;
       color: #818285;
+      cursor: pointer;
     }
     .stand {
       height: 40px;
       width: 120px;
       border-radius: 10px;
       margin-right: 2%;
+      cursor: pointer;
       color: #2187fb;
     }
     .haul {
       height: 40px;
       width: 120px;
       border-radius: 10px;
+      cursor: pointer;
       margin-right: 2%;
       color: #fbd500;
     }
@@ -466,6 +493,7 @@
       width: 120px;
       border-radius: 10px;
       color: #ddd;
+      cursor: pointer;
     }
     .btnP {
       float: right;
@@ -668,12 +696,21 @@
     width: 95%;
     padding-left: 5%;
     overflow: hidden;
+    .all {
+      height: 40px;
+      width: 120px;
+      border-radius: 10px;
+      margin-right: 2%;
+      cursor: pointer;
+      color: #fff;
+    }
     .run {
       height: 40px;
       width: 120px;
       border-radius: 10px;
       margin-right: 2%;
       color: #1fe005;
+      cursor: pointer;
     }
     .fau {
       height: 40px;
@@ -681,6 +718,7 @@
       border-radius: 10px;
       margin-right: 2%;
       color: #ff0000;
+      cursor: pointer;
     }
     .offL {
       height: 40px;
@@ -688,17 +726,20 @@
       border-radius: 10px;
       margin-right: 2%;
       color: #818285;
+      cursor: pointer;
     }
     .stand {
       height: 40px;
       width: 120px;
       border-radius: 10px;
       margin-right: 2%;
+      cursor: pointer;
       color: #2187fb;
     }
     .haul {
       height: 40px;
       width: 120px;
+      cursor: pointer;
       border-radius: 10px;
       margin-right: 2%;
       color: #fbd500;

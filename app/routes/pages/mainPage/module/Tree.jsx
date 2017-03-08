@@ -116,7 +116,7 @@ const mapDispatchToProps = (dispatch) => {
              dispatch(actions.setVars('tabItemActive', 0));
               dispatch(actions.setVars('colorAct', false));
                 dispatch(actions.setVars('navhide', true));
-                if(page=='monitorkb' || page=='ywbb'){
+                if(page=='monitorkb' || page=='ywbb' || page=='manager'){
                     dispatch(actions.setVars('showPage', page));
                     dispatch(actions.setVars('navhide', false));
                 }else if(page=='health_main'){
