@@ -30,6 +30,7 @@ let Component = React.createClass({
         var stand=0;
         var haul=0;
         var elec=0;
+        console.log(obj_wfd);
         for (let i=0;i<obj_wfd[valuepage].length;i++){
             switch (obj_wfd[valuepage][i].WTStateCode){
                 case "Online":case "Alarm":

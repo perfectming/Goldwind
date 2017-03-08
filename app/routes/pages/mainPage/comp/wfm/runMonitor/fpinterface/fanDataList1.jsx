@@ -22,7 +22,7 @@ let Component = React.createClass({
 
     render() {
         let {valuepage1,zhzb,fModel,fData,next,previous,page=1,skinStyle} = this.props;
-        console.log(zhzb,fData);
+        //console.log(zhzb,fData);
         let model_ens = zhzb.Model.ens;
         let obj_pvd = fData.ModelData[mobdTwo].PVDevsStatus;
         // console.log(obj_pvd);
