@@ -210,44 +210,57 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
         },
-        saveTableItem:(line,wtAll)=>{//更改
+        saveTableItem:(line,wtAll)=> {//更改
+            let mobile = /^1\d{10}$/;
+            let telephone = /^[0-9]*$/;
             let tableV = _.clone(getState().objs.tableContentMan);
-            let asd=tableV.data.pagedata[line];
+            let asd = tableV.data.pagedata[line];
             wtAll.data.map((value, key)=> {
-                (asd.wfid==value.wfid) && (asd.wfname=value.wfname)
+                (asd.wfid == value.wfid) && (asd.wfname = value.wfname)
             });
-            let wfp;
-            wfp=JSON.stringify(asd);
-            $.ajax({
-                url: soam+'/wcc/update?wfcontacterInfo=data',
-                type: 'post',
-                data: wfp,
-                dataType: 'json',//here,
-                contentType:'application/json;charset=UTF-8',
-                success:function (data) {
-                    //console.log(data);
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertTextMan', '保存成功'));
-                    $.ajax({
-                        url: soam+'/wcc/getWfcontacterList',
-                        type: 'post',
-                        dataType: 'json',//here,
-                        success:function (data) {
-                            dispatch(actions.setObjs('tableContentMan', data));
-                            dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
-                        },
-                        error:function(){
-                            dispatch(actions.setVars('alertBool', false));
-                            dispatch(actions.setVars('alertTextMan', '获取数据失败'));
-                        }
-                    });
-                },
-                error:function(){
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertTextMan', '获取数据失败'));
-                }
-            });
-
+            if ((!mobile.test(asd.mobile)) && (asd.mobile)) {
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertTextMan', '请输入正确的手机号码'));
+                tableV.data.pagedata[line]['mobile'] = '';
+                dispatch(actions.setObjs('tableContentMan', tableV));
+            } else if (!telephone.test(asd.telephone)) {
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertTextMan', '请输入正确的电话号码'));
+                tableV.data.pagedata[line]['telephone'] = '';
+                dispatch(actions.setObjs('tableContentMan', tableV));
+            } else{
+                let wfp;
+                wfp = JSON.stringify(asd);
+                $.ajax({
+                    url: soam + '/wcc/update?wfcontacterInfo=data',
+                    type: 'post',
+                    data: wfp,
+                    dataType: 'json',//here,
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (data) {
+                        //console.log(data);
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertTextMan', '保存成功'));
+                        $.ajax({
+                            url: soam + '/wcc/getWfcontacterList',
+                            type: 'post',
+                            dataType: 'json',//here,
+                            success: function (data) {
+                                dispatch(actions.setObjs('tableContentMan', data));
+                                dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
+                            },
+                            error: function () {
+                                dispatch(actions.setVars('alertBool', false));
+                                dispatch(actions.setVars('alertTextMan', '获取数据失败'));
+                            }
+                        });
+                    },
+                    error: function () {
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertTextMan', '获取数据失败'));
+                    }
+                });
+            }
         },
         changeTableItem1: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContentMan);
@@ -260,66 +273,80 @@ const mapDispatchToProps = (dispatch) => {
             tableV.data.pagedata.push(i);
             dispatch(actions.setObjs('tableContentMan', tableV));
         },
-        addDate:(li,wtAll)=>{//添加
+        addDate:(li,wtAll)=> {//添加
+            let mobile = /^1\d{10}$/;
+            let telephone = /^[0-9]*$/;
             let tableV = _.clone(getState().objs.tableContentMan);
-            let wfs=tableV.data.pagedata[li];
-            (wfs.wfid==='') && (wfs.wfid='150801');
-            $.ajax({
-                url: soam+'/wcc/getOneWcontacterByWfid?wfid='+wfs.wfid,
-                type: 'post',
-                dataType: 'json',//here,
-                success:function (data) {
-                    if (data.data){
-                        wtAll.data.map((value, key)=> {
-                            (wfs.wfid==value.wfid) && (wfs.wfname=value.wfname)
-                        });
-                        console.log(wfs);
-                        let ddv;
-                        ddv=JSON.stringify(wfs);
-                        $.ajax({
-                            url: soam+'/wcc/addWfcontacter?wfcontacterInfo=data',
-                            type: 'post',
-                            data: ddv,
-                            dataType: 'json',//here,
-                            contentType:'application/json;charset=UTF-8',
-                            success:function (data) {
-                                console.log(data);
-                                if (data.data){
-                                    dispatch(actions.setVars('alertBool', false));
-                                    dispatch(actions.setVars('alertTextMan', '添加成功'));
-                                }else {
-                                    dispatch(actions.setVars('alertBool', false));
-                                    dispatch(actions.setVars('alertTextMan', '添加失败，该数据已存在'));
-                                }
-                                $.ajax({
-                                    url: soam+'/wcc/getWfcontacterList',
-                                    type: 'post',
-                                    dataType: 'json',//here,
-                                    success:function (data) {
-                                        dispatch(actions.setObjs('tableContentMan', data));
-                                        dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
-                                    },
-                                    error:function(){
+            let wfs = tableV.data.pagedata[li];
+            (wfs.wfid === '') && (wfs.wfid = '150801');
+            if(!mobile.test(wfs.mobile) && wfs.mobile){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertTextMan', '请输入正确的手机号码'));
+                tableV.data.pagedata[li]['mobile'] = '';
+                dispatch(actions.setObjs('tableContentMan', tableV));
+            }else if(!telephone.test(wfs.telephone)){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertTextMan', '请输入正确的电话号码'));
+                tableV.data.pagedata[li]['telephone'] = '';
+                dispatch(actions.setObjs('tableContentMan', tableV));
+            }else{
+                $.ajax({
+                    url: soam + '/wcc/getOneWcontacterByWfid?wfid=' + wfs.wfid,
+                    type: 'post',
+                    dataType: 'json',//here,
+                    success: function (data) {
+                        if (data.data) {
+                            wtAll.data.map((value, key)=> {
+                                (wfs.wfid == value.wfid) && (wfs.wfname = value.wfname)
+                            });
+                            console.log(wfs);
+                            let ddv;
+                            ddv = JSON.stringify(wfs);
+                            $.ajax({
+                                url: soam + '/wcc/addWfcontacter?wfcontacterInfo=data',
+                                type: 'post',
+                                data: ddv,
+                                dataType: 'json',//here,
+                                contentType: 'application/json;charset=UTF-8',
+                                success: function (data) {
+                                    console.log(data);
+                                    if (data.data) {
                                         dispatch(actions.setVars('alertBool', false));
-                                        dispatch(actions.setVars('alertTextMan', '获取数据失败'));
+                                        dispatch(actions.setVars('alertTextMan', '添加成功'));
+                                    } else {
+                                        dispatch(actions.setVars('alertBool', false));
+                                        dispatch(actions.setVars('alertTextMan', '添加失败，该数据已存在'));
                                     }
-                                });
-                            },
-                            error:function(){
-                                dispatch(actions.setVars('alertBool', false));
-                                dispatch(actions.setVars('alertTextMan', '获取数据失败'));
-                            }
-                        });
-                    }else {
+                                    $.ajax({
+                                        url: soam + '/wcc/getWfcontacterList',
+                                        type: 'post',
+                                        dataType: 'json',//here,
+                                        success: function (data) {
+                                            dispatch(actions.setObjs('tableContentMan', data));
+                                            dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
+                                        },
+                                        error: function () {
+                                            dispatch(actions.setVars('alertBool', false));
+                                            dispatch(actions.setVars('alertTextMan', '获取数据失败'));
+                                        }
+                                    });
+                                },
+                                error: function () {
+                                    dispatch(actions.setVars('alertBool', false));
+                                    dispatch(actions.setVars('alertTextMan', '获取数据失败'));
+                                }
+                            });
+                        } else {
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertTextMan', '该数据已存在'));
+                        }
+                    },
+                    error: function () {
                         dispatch(actions.setVars('alertBool', false));
-                        dispatch(actions.setVars('alertTextMan', '该数据已存在'));
+                        dispatch(actions.setVars('alertTextMan', '获取数据失败'));
                     }
-                },
-                error:function(){
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertTextMan', '获取数据失败'));
-                }
-            });
+                });
+            }
         },
         //删除
         buttonClose:(deleteBool,j) => {
