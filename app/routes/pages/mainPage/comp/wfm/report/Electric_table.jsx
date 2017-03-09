@@ -138,28 +138,31 @@ let Component = React.createClass({
                 <div className={styles.leftlist} id='leftlist'>
                   {
                      select_list2 !== undefined && lefttree.map((valueC,keyC)=>{
-                        return(
-                          <div key={keyC} className={styles.place} >
-                            <a className={styles.ca}>
-                              <img src={add} />
-                              <b><img src={'http://'+url+'/'+valueC.img}/>{valueC.text}</b>
-                              <input type='checkbox' value='value'   />
-                            </a>
-                              { 
+                        if(keyC<6){
+                            return(
+                              <div key={keyC} className={styles.place} >
+                                <a className={styles.ca}>
+                                  <img src={add} />
+                                  <b><img src={'http://'+url+'/'+valueC.img}/>{valueC.text}</b>
+                                  <input type='checkbox' value='value'   />
+                                </a>
+                                  { 
 
-                                alltree[keyC] !== undefined && alltree[keyC].map((valueE,keyE)=>{
-                                    return(
-                                        <div className={styles.placename} key={keyE}>
-                                            <a className={styles.da} >
-                                            <b style={{cursor:'auto'}}><img src={'http://'+url+'/'+valueE.img}/>{valueE.text}</b>
-                                            <input type='checkbox' value={valueE.id}  />
-                                            </a>
-                                        </div>
-                                    )
-                                })
-                              }
-                          </div>
-                        )
+                                    alltree[keyC] !== undefined && alltree[keyC].map((valueE,keyE)=>{
+                                        return(
+                                            <div className={styles.placename} key={keyE}>
+                                                <a className={styles.da} >
+                                                <b style={{cursor:'auto'}}><img src={'http://'+url+'/'+valueE.img}/>{valueE.text}</b>
+                                                <input type='checkbox' value={valueE.id}  />
+                                                </a>
+                                            </div>
+                                        )
+                                    })
+                                  }
+                              </div>
+                            )
+                        }
+                        
                      })
                   }
                 </div>

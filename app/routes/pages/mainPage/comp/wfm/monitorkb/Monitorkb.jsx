@@ -135,11 +135,11 @@ let Component = React.createClass({
                         czsjfdl.push(Number((mobd[i].MonthEgyAt*mod.MonthEgyAt.coeff).toFixed(mod.MonthEgyAt.place)));
                         czwcl1.push(Number((mobd[i].MonthEgyAt/mobd[i].CurMonthPlanEgyAt*100).toFixed(2)));
                         gswcl2.push(gswcl1);
-                        czgzss1.push(Number((mobd[i].MonthLossElec.Fault*mod.MonthLossElec.coeff).toFixed(mod.MonthLossElec.place)));
-                        czwhss1.push(Number((mobd[i].MonthLossElec.Maintain*mod.MonthLossElec.coeff).toFixed(mod.MonthLossElec.place)));
-                        czxdss1.push(Number((mobd[i].MonthLossElec.Limit*mod.MonthLossElec.coeff).toFixed(mod.MonthLossElec.place)));
+                        czgzss1.push(Number((mobd[i].MonthLossElec.Fault*mod.MonthLossElec.coeff/10000).toFixed(mod.MonthLossElec.place)));
+                        czwhss1.push(Number((mobd[i].MonthLossElec.Maintain*mod.MonthLossElec.coeff/10000).toFixed(mod.MonthLossElec.place)));
+                        czxdss1.push(Number((mobd[i].MonthLossElec.Limit*mod.MonthLossElec.coeff/10000).toFixed(mod.MonthLossElec.place)));
                         czndxly1.push(Number((mobd[i].YearEgyAt/mobd[i].Capacity).toFixed(2)))
-
+                        
                     }
                 }
             }());
@@ -270,7 +270,7 @@ let Component = React.createClass({
                     <div className={`${styles.gzsbgl} ${styles.box_shadow}`}>
                         <Title title={['损失电量情况分析']}></Title>
                         <div className={styles.gzsbglmain}>
-                            <Column2 czname={arrname} unit={mod.MonthLossElec.unit} czgzss={czgzss1} czwhss={czwhss1} czxdss={czxdss1} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Column2>
+                            <Column2 czname={arrname} unit={"万kWh"} czgzss={czgzss1} czwhss={czwhss1} czxdss={czxdss1} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Column2>
                         </div>
                     </div>
                     <div className={`${styles.longbox} ${styles.box_shadow}`}>

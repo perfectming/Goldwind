@@ -53,7 +53,7 @@ let Component = React.createClass({
                     pointPadding: 0.1,
                     borderWidth: 0,
                     pointWidth: 25,
-                    borderRadius:4,
+                    borderRadius:3,
                 }
             },
             tooltip: {

@@ -96,7 +96,7 @@ let Component = React.createClass({
                     maxPointWidth: 100 // 设置最大宽度
                     },
                    series: {
-                borderRadius: 10
+                borderRadius: 3
             },
                 pie: {
                     allowPointSelect: false,
