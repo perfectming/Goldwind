@@ -7,24 +7,6 @@ import Pwschart from './allinfo/Pwschart.jsx';
 import Pwschart2 from './allinfo/Pwschart2.jsx';
 var actions = require('redux/actions');
 var $ = require('jquery');
-
-
-			// function setData(rdata, time) {
-   //              //var date = new Date();
-   //              //date.setTime(time);
-   //              // $(".info").text(time + ":" + JSON.stringify(rdata));
-   //              // console.log(TY);
-   //              // console.log(JSON.stringify(rdata));
-   //              //$(".info").text(JSON.stringify(rdata));
-   //          }
-
-
-                //获取模型，适用于综合指标界面的初始化
-                    //          此参数固定          “”文档中指定的
-                // TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", "652113028", "WTDetail", setData, "Screen", 0);
-
-// console.log(WNACTemp);
-// console.log(fmvalue);
 let times;
 let Component = React.createClass({
 	componentWillMount() {     // 页面加载前执行的方法
@@ -229,7 +211,7 @@ let Component = React.createClass({
 				</div>
 				<div className={`${styles.infoBox} ${styles.infofL}`}>
 					<div className={`${styles.infoBox1} ${styles.infofL}`}>
-						<Title title={['Grid frequency参数']}></Title>
+						<Title title={['电网&电流信息']}></Title>
 						<div className={`${styles.hzBoxt} ${styles.infofL11}`}>
 							<div className={`${styles.hzBoxtA} ${styles.hzBoxtall}`}>
 								<div>A相</div>
@@ -262,7 +244,7 @@ let Component = React.createClass({
 						</div>
 					</div>
 					<div className={`${styles.infoBox2} ${styles.infofL}`}>
-						<Title title={['Impeller and enerator参数']}></Title>
+						<Title title={['主要运行参数']}></Title>
 						<div id="wsBox" className={`${styles.wsbox1} ${styles.dialbox}`}>
 							<div className={styles.boxtitle}><p>风速</p></div>
 							<div className={styles.wsdialbox}>
@@ -390,8 +372,6 @@ let Component = React.createClass({
 						<div className={styles.actionbox}>
 							<div>启动</div>
 							<div>停机</div>
-							<div>复位</div>
-							<div>测试</div>
 						</div>
 					</div>
 					<div className={styles.action1box}>
