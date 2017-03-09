@@ -52,7 +52,7 @@
         background: #30343f;
         overflow: hidden;
         &:hover{
-          background:rgba(255,255,255,0.1);
+          background:rgba(100,255,255,0.1);
         }
         .tableContentItem {
           float: left;
@@ -115,7 +115,7 @@
         overflow: hidden;
         background: #272b34;
         &:hover{
-          background:rgba(255,255,255,0.1);
+          background:rgba(100,255,255,0.1);
         }
         .tableContentItem {
           float: left;
@@ -176,6 +176,8 @@
     }
   }
   .btnClass {
+    position: absolute;
+    top:947px;
     clear: both;
     float: left;
     font-size: 16px;
@@ -234,13 +236,13 @@
     }
     .elec {
       height: 40px;
+      margin-right: 396px;
       width: 120px;
       border-radius: 10px;
       color: #ddd;
       cursor: pointer;
     }
     .btnP {
-      float: right;
       height: 40px;
       width: 50px;
       border-radius: 10px;
@@ -248,7 +250,6 @@
       cursor: pointer;
     }
     .txt {
-      float: right;
       margin-left: 1%;
       margin-right: 1%;
     }
@@ -308,7 +309,7 @@
         background: #15324E;
         overflow: hidden;
         &:hover{
-          background:rgba(255,255,255,0.3);
+          background:rgba(100,255,255,0.3);
         }
         .tableContentItem {
           float: left;
@@ -371,7 +372,7 @@
         overflow: hidden;
         background: #112A48;
         &:hover{
-          background:rgba(255,255,255,0.3);
+          background:rgba(100,255,255,0.3);
         }
         .tableContentItem {
           float: left;
@@ -432,6 +433,8 @@
     }
   }
   .btnClass {
+    position: absolute;
+    top:947px;
     clear: both;
     float: left;
     font-size: 16px;
@@ -489,6 +492,7 @@
       color: #fbd500;
     }
     .elec {
+      margin-right: 396px;
       height: 40px;
       width: 120px;
       border-radius: 10px;
@@ -564,7 +568,7 @@
         background: #F2F4F5;
         overflow: hidden;
         &:hover{
-          background:rgba(255,255,255,0.4);
+          background:rgba(100,255,255,0.4);
         }
         .tableContentItem {
           float: left;
@@ -627,7 +631,7 @@
         overflow: hidden;
         background: #E8F0F6;
         &:hover{
-          background:rgba(255,255,255,0.4);
+          background:rgba(100,255,255,0.4);
         }
         .tableContentItem {
           float: left;
@@ -688,6 +692,8 @@
     }
   }
   .btnClass {
+    position: absolute;
+    top:947px;
     clear: both;
     float: left;
     font-size: 16px;
@@ -745,6 +751,7 @@
       color: #fbd500;
     }
     .elec {
+      margin-right: 396px;
       height: 40px;
       width: 120px;
       border-radius: 10px;

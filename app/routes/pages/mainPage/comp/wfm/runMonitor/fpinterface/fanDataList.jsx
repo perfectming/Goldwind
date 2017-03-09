@@ -213,17 +213,16 @@ let Component = React.createClass({
                     </div>
                 </div>
                 <div className={css.btnClass}>
-                    <span onClick={()=>{changeType('all')}} className={css.all}>全部 &nbsp;{dataLow[fanDataType].length}</span>
+                    <span onClick={()=>{changeType('all')}} className={css.all}>全部</span>
                     <span onClick={()=>{changeType('run')}} className={css.run}><img src={icon0}/>运行 &nbsp;{run}</span>
                     <span onClick={()=>{changeType('fau')}} className={css.fau}><img src={icon1}/>故障 &nbsp;{fau}</span>
                     <span onClick={()=>{changeType('offL')}} className={css.offL}><img src={icon3}/>离线 &nbsp;{offL}</span>
                     <span onClick={()=>{changeType('stand')}} className={css.stand}><img src={icon4}/>待机 &nbsp;{stand}</span>
                     <span onClick={()=>{changeType('haul')}} className={css.haul}><img src={icon2}/>检修 &nbsp;{haul}</span>
                     <span onClick={()=>{changeType('elec')}} className={css.elec}><img src={icon5}/>限电 &nbsp;{elec}</span>
-                    <a className={css.btnP} onClick={()=>next(page,dataLow[fanDataType].length)}>下一页</a>
-                    <span className={css.txt}>{page}/{Math.ceil(dataLow[fanDataType].length/38)}</span>
                     <a className={css.btnP} onClick={()=>previous(page)}>上一页</a>
-
+                    <span className={css.txt}>{page}/{Math.ceil(dataLow[fanDataType].length/38)}</span>
+                    <a className={css.btnP} onClick={()=>next(page,dataLow[fanDataType].length)}>下一页</a>
                 </div>
             </div>
         );

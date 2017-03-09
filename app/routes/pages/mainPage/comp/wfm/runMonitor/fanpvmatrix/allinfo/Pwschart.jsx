@@ -81,7 +81,7 @@ let Component = React.createClass({
                 },
                 categories: xdata,
                 max:xdata.length-1,
-                min:xdata.length-15,
+                min:xdata.length-150,
             },
             yAxis:[{ //第一个Y轴，序号为0
             labels: {

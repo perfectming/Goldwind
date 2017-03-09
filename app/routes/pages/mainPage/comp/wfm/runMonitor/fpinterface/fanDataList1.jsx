@@ -198,12 +198,13 @@ let Component = React.createClass({
                     </div>
                 </div>
                 <div className={css.btnClass}>
+                    <span onClick={()=>{changeType('all')}} className={css.all}>全部</span>
                     <span onClick={()=>{changeType('run')}} className={css.run}><img src={icon0}/>运行 &nbsp; {run}</span>
                     <span onClick={()=>{changeType('fau')}} className={css.fau}><img src={icon1}/>故障 &nbsp; {fau}</span>
-                    <span onClick={()=>{changeType('offL')}} className={css.offL}><img src={icon3}/>离线 &nbsp; {offL}</span>
-                    <a className={css.btnP} onClick={()=>next(page,dataLow[fanDataType].length)}>下一页</a>
-                    <span className={css.txt}>{page}/{Math.ceil(dataLow[fanDataType].length/38)}</span>
+                    <span onClick={()=>{changeType('offL')}} className={css.offL} style={{'marginRight':680}}><img src={icon3}/>离线 &nbsp; {offL}</span>
                     <a className={css.btnP} onClick={()=>previous(page)}>上一页</a>
+                    <span className={css.txt}>{page}/{Math.ceil(dataLow[fanDataType].length/38)}</span>
+                    <a className={css.btnP} onClick={()=>next(page,dataLow[fanDataType].length)}>下一页</a>
 
                 </div>
             </div>
