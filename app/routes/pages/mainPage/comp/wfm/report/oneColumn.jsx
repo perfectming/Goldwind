@@ -17,7 +17,7 @@ let Component = React.createClass({
                 borderWidth: 0,
                 plotShadow: false,
                 paddingLeft:100,
-                borderRadius:10
+                borderRadius:3
             },
             title: {
                 text: title,
