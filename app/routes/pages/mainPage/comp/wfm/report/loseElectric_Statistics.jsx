@@ -192,7 +192,7 @@ let Component = React.createClass({
 
                             <div className={`${styles.tabtit} ${styles.tabtit1}`} id='tabtit' >
                                 {
-                                    tabledata2!=undefined && Tarr.map((value,key)=>{
+                                    tabledata2!==undefined && Tarr.map((value,key)=>{
 
                                         if(key==0){
                                             return(
@@ -252,11 +252,13 @@ let Component = React.createClass({
                                 </table>
                             </div>
                             <div className={`${styles.bot} ${styles.bot1}`}>
-
-                                <span style={{width:'360px'}}>统计</span>
+                                {
+                                    tabledata2!==undefined && <span style={{width:'360px'}}>统计</span>
+                                }
+                                
 
                                 {
-                                    tabledata2!=undefined && Darr.map((value,key)=>{
+                                    tabledata2!==undefined && Darr.map((value,key)=>{
                                         return(
                                             <span key={key}>{value.toFixed(2)}</span>
                                         )
