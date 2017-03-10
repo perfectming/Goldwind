@@ -280,10 +280,13 @@ let Component = React.createClass({
                         </table>
                         </div>
                         <div className={styles.bot}>
-                        <span style={{width:'360px'}}>统计</span>
+                          {
+                              tabledata!==undefined && <span style={{width:'360px'}}>统计</span>
+                          }
+                        
                         
                            {
-                            tabledata!=undefined && Darr.map((value,key)=>{
+                            tabledata!==undefined && Darr.map((value,key)=>{
                               if(value==0){
 
                               }else{
