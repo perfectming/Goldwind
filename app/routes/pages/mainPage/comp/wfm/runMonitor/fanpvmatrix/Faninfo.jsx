@@ -204,7 +204,7 @@ let Component = React.createClass({
 		return (
 			<div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
 				<div className={styles.fanidbox}>
-					<div>风机名称：{value.Wtname}</div>
+					<div>风机       名称：{value.Wtname}</div>
 					<div>风机型号：{sp}</div>
 					<div>运行状态：{x}</div>
 					<div>首次并网日期：</div>

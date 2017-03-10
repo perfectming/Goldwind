@@ -127,12 +127,12 @@ let Component = React.createClass({
         }],
         plotOptions: {
             spline: {
-                lineWidth: 4,
+                lineWidth: 1,
                 opacity:0,
                 states: {
                     dashStyle: "Solid",
                     hover: {
-                        lineWidth: 5
+                        lineWidth: 2
                     }
                 },
                 marker: {

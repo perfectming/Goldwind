@@ -24,7 +24,7 @@ let Component = React.createClass({
     render() {
         let {itemHeaderActive, itemTreeAct, flag=true,userMessage,Verification,skinStyle}=this.props;
         let menu=[];
-        if(userMessage){
+        if(userMessage && userMessage.data.tlist){
             userMessage.data.tlist.map(function(value,key){
                 //获取一级菜单
                 menu.push(
