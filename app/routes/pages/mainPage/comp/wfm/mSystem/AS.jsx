@@ -11,7 +11,6 @@ import del from '../../../img/icon/tabDel.png';//定义图片路径
 import save from '../../../img/comp/save.png';
 var pageSize=11;//设置初始页码
 import refresh from '../../../img/comp/refresh.png';
-import tabAdd from '../../../img/icon/tabAdd.png';
 import _ from 'lodash';
 let header=[
     '序号',
@@ -34,7 +33,7 @@ let Component = React.createClass({
         this.props.init();
     },
     render() {
-        let {alertText,skinStyle,saveTableItem,addData,deleData,page,theOne,lastPage,nextPage,theLast,wttypedefine,protocolid,init,wfidCount,buttonAction,onFocus,inputOnChange,add,table, changeTableItem,dele} = this.props;
+        let {changeTableBool,alertText,skinStyle,saveTableItem,addData,deleData,page,theOne,lastPage,nextPage,theLast,wttypedefine,protocolid,init,wfidCount,buttonAction,onFocus,inputOnChange,add,table, changeTableItem,dele} = this.props;
         let num=0;
         let newData={};
         for(let i=0;i<arr.length;i++){
@@ -68,7 +67,6 @@ let Component = React.createClass({
                     </div>
                     <div className={styles.btn}>
                         <img src={refresh} onClick={()=>init()}/>
-                        <img src={tabAdd} onClick={()=>add(newData)}/>
                     </div>
 
                     <div className={skinStyle==1?styles.tableBoxBlue:skinStyle==2?styles.tableBoxWhite:styles.tableBox}>
@@ -106,6 +104,14 @@ let Component = React.createClass({
                                                                        key={keyC} readOnly="readOnly"
                                                                        onChange={(e)=>changeTableItem(e.target.value, table, key, keyC)}
                                                                        value={value[valueC]}/>
+                                                            )
+                                                        }else if(keyC>3&& keyC<8){
+                                                            return (
+                                                                <input className={styles.tableContentItem}
+                                                                       style={{width: (100 / (header.length + 1)) + "%"}}
+                                                                       key={keyC} name={value[valueC]} readOnly="readOnly"
+                                                                       onClick={(e)=>changeTableBool(e.target, table, key, keyC)}
+                                                                       value={value[valueC]=='0'?'否':'是'}/>
                                                             )
                                                         }else{
                                                             return (
@@ -250,27 +256,37 @@ const mapDispatchToProps = (dispatch) => {
                     //console.log(data,'Victory');
                     dispatch(actions.setVars('alertBool', false));
                     dispatch(actions.setVars('alertText', '保存成功'));
+                    dispatch(actions.setVars('pageAS', 1));
+                    dispatch(actions.setVars('wttypedefine', null));
+                    dispatch(actions.setVars('protocolid', null));
+                    $.ajax({
+                        url: soam+'/Alarm/getAlarmruleInfoList',
+                        type: 'post',
+                        data:{pageSize:pageSize,curpage:1},
+                        dataType: 'json',//here,
+                        success:function (data) {
+                            //console.log(data);
+                            dispatch(actions.setObjs('tableContentAS', data));
+                            dispatch(actions.setVars('ASCount', data.data.pagedata.length));
+                        },
+                        error:function(){
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '刷新列表失败'));
+                        }
+                    });
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
                     dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
-            $.ajax({
-                url: soam+'/Alarm/getAlarmruleInfoList',
-                type: 'post',
-                data:{pageSize:pageSize,curpage:1},
-                dataType: 'json',//here,
-                success:function (data) {
-                    //console.log(data);
-                    dispatch(actions.setObjs('tableContentAS', data));
-                    dispatch(actions.setVars('ASCount', data.data.pagedata.length));
-                },
-                error:function(){
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '刷新列表失败'));
-                }
-            });
+        },
+        changeTableBool:(value,table,i,j)=>{
+            let tableV = _.clone(getState().objs.tableContentAS);
+            value.name==='0'?value.name='1':value.name='0';
+            value.value==='是'?value.value='否':value.value='是';
+            tableV.data.pagedata[i][arr[j]] = value.name;
+            dispatch(actions.setObjs('tableContentAS', tableV));
         },
         changeTableItem: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContentAS);
@@ -331,27 +347,31 @@ const mapDispatchToProps = (dispatch) => {
                     //console.log(data);
                     dispatch(actions.setVars('alertBool', false));
                     dispatch(actions.setVars('alertText', '删除成功'));
+                    dispatch(actions.setVars('pageAS', 1));
+                    dispatch(actions.setVars('wttypedefine', null));
+                    dispatch(actions.setVars('protocolid', null));
+                    $.ajax({
+                        url: soam+'/ELEC/getWfelec',
+                        type: 'post',
+                        data:'pageSize='+pageSize+'&&nowPage=1',
+                        dataType: 'json',//here,
+                        success:function (data) {
+                            //console.log(data.data.pagedata.length);
+                            dispatch(actions.setObjs('tableContent', data));
+                            dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
+                        },
+                        error:function(){
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText', '获取数据失败'));
+                        }
+                    });
                 },
                 error:function(){
                     dispatch(actions.setVars('alertBool', false));
                     dispatch(actions.setVars('alertText', '获取数据失败'));
                 }
             });
-            $.ajax({
-                url: soam+'/ELEC/getWfelec',
-                type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage=1',
-                dataType: 'json',//here,
-                success:function (data) {
-                    //console.log(data.data.pagedata.length);
-                    dispatch(actions.setObjs('tableContent', data));
-                    dispatch(actions.setVars('wfidCount', data.data.pagedata.length));
-                },
-                error:function(){
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
-                }
-            });
+
         },
         dele:(j) => {
             let tableV = _.clone(getState().objs.tableContentAS);
