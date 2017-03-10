@@ -119,6 +119,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('alertBool', false));
                     dispatch(actions.setVars('loginText', '验证码输入错误'));
                     $('#denglu1')[0].value='登     录';
+                    $('#check')[0].value='';
                     let codeNew='';
                     for (let i=0;i<4;i++){
                         codeNew+=codeChars[Math.floor(Math.random()*36)]
@@ -145,7 +146,13 @@ const mapDispatchToProps = (dispatch) => {
                                     // console.log(data);
                                     if(data.data.result==='False') {
                                         dispatch(actions.setVars('alertBool', false));
-                                        dispatch(actions.setVars('loginText', data.message))
+                                        dispatch(actions.setVars('loginText', data.message));
+                                        $('#check')[0].value='';
+                                        let codeNew='';
+                                        for (let i=0;i<4;i++){
+                                            codeNew+=codeChars[Math.floor(Math.random()*36)]
+                                        }
+                                        dispatch(actions.setVars('verificationCode', codeNew));
                                     }else{
                                         browserHistory.push('/app/all/page/main')
                                     }
@@ -185,6 +192,7 @@ const mapDispatchToProps = (dispatch) => {
             if ($('#check')[0].value!==$('#checked')[0].value){
                 dispatch(actions.setVars('alertBool', false));
                 dispatch(actions.setVars('loginText', '验证码输入错误'));
+                $('#check')[0].value='';
                 $('#denglu1')[0].value='登     录';
                 let codeNew='';
                 for (let i=0;i<4;i++){
@@ -212,7 +220,13 @@ const mapDispatchToProps = (dispatch) => {
                                 // console.log(data);
                                 if(data.data.result==='False') {
                                     dispatch(actions.setVars('alertBool', false));
-                                    dispatch(actions.setVars('loginText', data.message))
+                                    dispatch(actions.setVars('loginText', data.message));
+                                    $('#check')[0].value='';
+                                    let codeNew='';
+                                    for (let i=0;i<4;i++){
+                                        codeNew+=codeChars[Math.floor(Math.random()*36)]
+                                    }
+                                    dispatch(actions.setVars('verificationCode', codeNew));
                                 }else{
                                     browserHistory.push('/app/all/page/main')
                                 }
