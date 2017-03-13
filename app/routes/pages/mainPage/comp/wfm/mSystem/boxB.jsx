@@ -109,7 +109,6 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     dispatch(actions.setObjs('boxCenter', data));
-                    console.log(data,id,name);
                     $("#center3 input[name='checkItOut']").prop('checked',true);
                     $("#center3 input[name='checkItIn']").prop('checked',false);
 

@@ -15,7 +15,7 @@ let Component = React.createClass({
         //初始化jquery方法
         setTimeout(function(){
             playjq();
-        },1000)
+        },2000)
     },
 
     render() {
