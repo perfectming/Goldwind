@@ -439,7 +439,7 @@ const mapDispatchToProps = (dispatch) => {
         changeRole(j){
             //console.log(j);
 
-            $('#box1').parent().css('display','block');
+
             //复选框状态跟随
             $("#box1 input").change(function(){
                 $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
@@ -462,6 +462,7 @@ const mapDispatchToProps = (dispatch) => {
                     //console.log(data);
                     data.data && dispatch(actions.setObjs('boxRole', data));
                     if(data){
+                        $('#box1').parent().css('display','block');
                         $("#box1 input[name='checkItOutbox']").prop('checked',true);
                         $("#box1 input[name='checkItInbox']").prop('checked',false);
                     }
