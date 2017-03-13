@@ -103,7 +103,6 @@ let Component = React.createClass({
                         <div className={styles.search_tit}>
                             <div className={styles.seleBox}>
                                 <div className={styles.dateBox}>
-                                    <span>日期维度</span><input id="timeLenth" type='date'/>
                                     <span>发生时间</span><input id="startTime" type='date'/>
                                     <span>结束时间</span><input id="endTime" type='date'/>
                                 </div>
@@ -277,7 +276,6 @@ const mapDispatchToProps = (dispatch) => {
             //获取今天与昨天的日期
             $('#startTime').val(dateString1);
             $('#endTime').val(dateString);
-            $('#timeLenth').val(dateString1);
             //复选框状态跟随
             $("#leftlist input").change(function(){
                 $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))

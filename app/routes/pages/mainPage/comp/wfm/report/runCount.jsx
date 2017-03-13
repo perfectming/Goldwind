@@ -140,7 +140,6 @@ let Component = React.createClass({
                             </div>
                             <div className={styles.seleBox}>
                                 <div className={styles.dateBox}>
-                                    <span>日期维度</span><input id='timelength' type='date'/>
                                     <span>发生时间</span><input id="startTime" type='date'/>
                                     <span>结束时间</span><input id="endTime" type='date'/>
                                 </div>
@@ -337,7 +336,6 @@ const mapDispatchToProps = (dispatch) => {
             //获取今天与昨天的日期
             $('#startTime').val(dateString1);
             $('#endTime').val(dateString);
-            $('#timelength').val(dateString1);
             //显示下拉菜单
             $('#slide').on('click',function(){
                 $('#selectye').show();
