@@ -376,70 +376,82 @@ const mapDispatchToProps = (dispatch) => {
             let wfs = tableV.data.pagedata[li];
             wfs['roleids'] = ids;
             let dogcode = /^[a-zA-Z0-9_]+$/;
-            if (dogcode.test(wfs.dogcode) || (!wfs.dogcode)) {
-            let roleObj = {};
-            roleObj['userid'] = wfs.id;
-            roleObj['roleids'] = ids;
-            roleObj['pass'] = pass;
-            let ddv = JSON.stringify(wfs);
-            let idsString = JSON.stringify(roleObj);
-            //console.log(ids,roleObj);
-            dispatch(actions.setVars('boolAlert', false));
-            $.ajax({
-                url: soam + '/user/updateUserInfo?userInfo=data',
-                type: 'post',
-                data: ddv,
-                dataType: 'json',//here,
-                contentType: 'application/json;charset=UTF-8',
-                success: function () {
-                    $.ajax({
-                        url: soam + '/user/getSetUpUserRole?roleVO=data',
-                        type: 'post',
-                        data: idsString,
-                        dataType: 'json',//here,
-                        contentType: 'application/json;charset=UTF-8',
-                        success: function () {
-                            dispatch(actions.setVars('pageAmm', 1));
-                            $("option[name='selectOpt']").prop('selected', true);
-                            $.ajax({
-                                url: soam + '/user/getAllUser',
-                                type: 'post',
-                                data: 'pageSize=' + pageSize + '&&page=' + 1 + '&&username=',
-                                dataType: 'json',//here,
-                                success: function (data) {
-                                    dispatch(actions.setVars('roleIds', null));
-                                    dispatch(actions.setObjs('tableContentAmm', data));
-                                    dispatch(actions.setVars('ammCount', data.data.pagedata.length));
-                                    dispatch(actions.setVars('boolAlert', true));
-                                    dispatch(actions.setVars('alertBool', false));
-                                    dispatch(actions.setVars('alertText', '保存成功'));
-                                    $("option[name='selectOpt']").prop('selected', true);
-                                },
-                                error: function () {
-                                    dispatch(actions.setVars('boolAlert', true));
-                                    dispatch(actions.setVars('alertBool', false));
-                                    dispatch(actions.setVars('alertText', '获取数据失败'));
-                                }
-                            });
-                        },
-                        error: function () {
-                            dispatch(actions.setVars('boolAlert', true));
-                            dispatch(actions.setVars('alertBool', false));
-                            dispatch(actions.setVars('alertText', '获取数据失败'));
-                        }
-                    });
-                },
-                error: function () {
-                    dispatch(actions.setVars('boolAlert', true));
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText', '获取数据失败'));
-                }
-            });
-        }else {
+            let phone=/^1\d{10}$/;
+            let mail=/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+            if(!phone.test(wfs.phonecode) && wfs.phonecode){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入正确的手机号码'));
+                tableV.data.pagedata[li]['phonecode'] = '';
+                dispatch(actions.setObjs('tableContentAmm', tableV));
+            }else if(!mail.test(wfs.mailbox) && wfs.mailbox){
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText', '请输入正确的邮箱'));
+                tableV.data.pagedata[li]['mailbox'] = '';
+                dispatch(actions.setObjs('tableContentAmm', tableV));
+            } else if(!dogcode.test(wfs.dogcode) && wfs.dogcode){
                 dispatch(actions.setVars('alertBool', false));
                 dispatch(actions.setVars('alertText', '请输入正确的加密狗码'));
                 tableV.data.pagedata[li]['dogcode'] = '';
                 dispatch(actions.setObjs('tableContentAmm', tableV));
+            }else {
+                let roleObj = {};
+                roleObj['userid'] = wfs.id;
+                roleObj['roleids'] = ids;
+                roleObj['pass'] = pass;
+                let ddv = JSON.stringify(wfs);
+                let idsString = JSON.stringify(roleObj);
+                //console.log(ids,roleObj);
+                dispatch(actions.setVars('boolAlert', false));
+                $.ajax({
+                    url: soam + '/user/updateUserInfo?userInfo=data',
+                    type: 'post',
+                    data: ddv,
+                    dataType: 'json',//here,
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function () {
+                        $.ajax({
+                            url: soam + '/user/getSetUpUserRole?roleVO=data',
+                            type: 'post',
+                            data: idsString,
+                            dataType: 'json',//here,
+                            contentType: 'application/json;charset=UTF-8',
+                            success: function () {
+                                dispatch(actions.setVars('pageAmm', 1));
+                                $("option[name='selectOpt']").prop('selected', true);
+                                $.ajax({
+                                    url: soam + '/user/getAllUser',
+                                    type: 'post',
+                                    data: 'pageSize=' + pageSize + '&&page=' + 1 + '&&username=',
+                                    dataType: 'json',//here,
+                                    success: function (data) {
+                                        dispatch(actions.setVars('roleIds', null));
+                                        dispatch(actions.setObjs('tableContentAmm', data));
+                                        dispatch(actions.setVars('ammCount', data.data.pagedata.length));
+                                        dispatch(actions.setVars('boolAlert', true));
+                                        dispatch(actions.setVars('alertBool', false));
+                                        dispatch(actions.setVars('alertText', '保存成功'));
+                                        $("option[name='selectOpt']").prop('selected', true);
+                                    },
+                                    error: function () {
+                                        dispatch(actions.setVars('boolAlert', true));
+                                        dispatch(actions.setVars('alertBool', false));
+                                        dispatch(actions.setVars('alertText', '获取数据失败'));
+                                    }
+                                });
+                            },
+                            error: function () {
+                                dispatch(actions.setVars('boolAlert', true));
+                                dispatch(actions.setVars('alertBool', false));
+                                dispatch(actions.setVars('alertText', '获取数据失败'));
+                            }
+                        });
+                    },
+                    error: function () {
+                        dispatch(actions.setVars('boolAlert', true));
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText', '获取数据失败'));
+                    }
+                });
             }
         },
         jump: (id) => {
