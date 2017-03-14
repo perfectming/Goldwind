@@ -5,6 +5,9 @@ import Controler_fc from '../comp/wfm/super/controler_fc.jsx';
 
 var actions = require('redux/actions');
 var $ =require('jquery');
+let mobdNum = require('../comp/urlData.js');
+let mobdOne = mobdNum.mobdOne/1;
+let mobdTwo = mobdNum.mobdTwo/1;
 let matrixdata = require('../../../../../config/MatrixData');
 let model = require('../../../../../config/Model');
 let modeldata = require('../../../../../config/ModelData');
@@ -17,8 +20,8 @@ var model_ens = model.Model.ens;
 let arr1 = [];
 let arr2 = [];
 var obj = matrixdata;
-var obj_wfd = obj.ModelData[8888801].WFDevsStatus;
-var obj_pvd = obj.ModelData[8888802].PVDevsStatus;
+var obj_wfd = obj.ModelData[mobdOne].WFDevsStatus;
+var obj_pvd = obj.ModelData[mobdTwo].PVDevsStatus;
 
 
 (function(){
