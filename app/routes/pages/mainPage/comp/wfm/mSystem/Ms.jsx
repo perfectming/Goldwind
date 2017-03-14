@@ -440,38 +440,13 @@ const mapDispatchToProps = (dispatch) => {
             //console.log(j);
 
 
-            //复选框状态跟随
-            $("#box1 input").change(function(){
-                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
-            });
-            //下拉点击事件
-            $("#box1 b").on('click',function(){
-                if($(this).siblings('img').attr('src') ==jia){
-                    $(this).siblings('img').attr('src', jian);
-                }else{
-                    $(this).siblings('img').attr('src', jia);
-                }
-                $(this).parent().siblings().toggle();
-            });
+
             $.ajax({
                 url: soamMs+'/role/getByRoleidAllMenu',
                 type: 'post',
                 data:{roleid:j},
                 dataType: 'json',//here,
                 success:function (data) {
-                    //console.log(data);
-                    $("#box1 b").on('click',function(){
-                        if($(this).siblings('img').attr('src') == jia){
-                            $(this).siblings('img').attr('src', jian);
-                        }else{
-                            $(this).siblings('img').attr('src', jia);
-                        }
-                        $(this).parent().siblings().toggle();
-                    });
-                    //复选框状态跟随
-                    $("#box1 input").change(function(){
-                        $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
-                    })
                     data.data && dispatch(actions.setObjs('boxRole', data));
                     if(data){
                         $('#box1').parent().css('display','block');
@@ -528,19 +503,6 @@ const mapDispatchToProps = (dispatch) => {
         roleList(i){
             dispatch(actions.setVars('boxRoleId', i));
             $('#aids').css('display','block');
-            //复选框状态跟随
-            $("#box1 input").change(function(){
-                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
-            });
-            //下拉点击事件
-            $("#box1 b").on('click',function(){
-                if($(this).siblings('img').attr('src') ==jia){
-                    $(this).siblings('img').attr('src', jian);
-                }else{
-                    $(this).siblings('img').attr('src', jia);
-                }
-                $(this).parent().siblings().toggle();
-            });
             $.ajax({
                 url: soamMs+'/role/getRoleMenuList?roleid='+i,
                 type: 'post',

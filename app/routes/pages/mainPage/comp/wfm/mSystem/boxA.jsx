@@ -5,21 +5,15 @@ import _ from 'lodash';
 import styles from './boxA.scss';
 import jian from '../../../img/comp/jian_down.png';
 import jia from '../../../img/comp/add_down.png';
-let type = require('../report/ywbb_date');
 var $ =require('jquery');
 var actions = require('redux/actions');
 let Component = React.createClass({
     componentDidMount() {
         this.props.init();
-        let{playjq}=this.props;
-        //初始化jquery方法
-        setTimeout(function(){
-            playjq();
-        },2000)
     },
 
     render() {
-        let {saveAll,closeboxA,boxRole} = this.props;
+        let {pullDown,follow,saveAll,closeboxA,boxRole} = this.props;
         //表格数据处理
             return (
                 <div className={styles.faultBox} style={{top: 200, left:906}}>
@@ -31,8 +25,9 @@ let Component = React.createClass({
                                     <div key={keyC} className={styles.place}>
                                         <a className={styles.ca}>
                                             <img src={jia}/>
-                                            <b>{valueC.name}</b>
+                                            <b onClick={(e)=>pullDown(e.target)}>{valueC.name}</b>
                                             <input type='checkbox' value={valueC.id} title={valueC.rightstype}
+                                                   onChange={(e)=>follow(e.target)}
                                                    name={valueC['ids']==false?'checkItInbox':'checkItOutbox'}/>
                                         </a>
                                         {
@@ -41,8 +36,9 @@ let Component = React.createClass({
                                                             <div className={styles.placename} key={keyD}>
                                                                 <a className={styles.da}>
                                                                     <img src={jia} />
-                                                                    <b>{valueD.name}</b>
+                                                                    <b onClick={(e)=>pullDown(e.target)}>{valueD.name}</b>
                                                                     <input type='checkbox' value={valueD.id} title={valueD.rightstype}
+                                                                           onChange={(e)=>follow(e.target)}
                                                                            name={valueD['ids']==false?'checkItInbox':'checkItOutbox'}/>
                                                                 </a>
                                                                 {
@@ -50,8 +46,9 @@ let Component = React.createClass({
                                                                             return(
                                                                                 <div className={styles.placeline} key={keyE}>
                                                                                     <a className={styles.ea} >
-                                                                                        <b style={{cursor:'auto'}}>{valueE.name}</b>
+                                                                                        <b onClick={(e)=>pullDown(e.target)} style={{cursor:'auto'}}>{valueE.name}</b>
                                                                                         <input type='checkbox' title={valueE.rightstype} value={valueE.id}
+                                                                                               onChange={(e)=>follow(e.target)}
                                                                                                name={valueE['ids']==false?'checkItInbox':'checkItOutbox'}/>
                                                                                     </a>
                                                                                 </div>
@@ -100,18 +97,30 @@ const mapDispatchToProps = (dispatch) => {
         },
         playjq: () => {
             //下拉点击事件
+            //复选框状态跟随
+            $("#box1 input").change(function(){
+                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
+            });
+            //下拉点击事件
             $("#box1 b").on('click',function(){
-                if($(this).siblings('img').attr('src') == jia){
+                if($(this).siblings('img').attr('src') ==jia){
                     $(this).siblings('img').attr('src', jian);
                 }else{
                     $(this).siblings('img').attr('src', jia);
                 }
                 $(this).parent().siblings().toggle();
             });
-            //复选框状态跟随
-            $("#box1 input").change(function(){
-                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
-            })
+        },
+        follow:(key)=>{
+            $(key).parent().siblings().find('input').prop('checked',$(key).prop('checked'))
+        },
+        pullDown:(key)=>{
+            if($(key).siblings('img').attr('src') ==jia){
+                $(key).siblings('img').attr('src', jian);
+            }else{
+                $(key).siblings('img').attr('src', jia);
+            }
+            $(key).parent().siblings().toggle();
         },
         closeboxA:()=>{
             $("#box1").parent().css("display","none");
