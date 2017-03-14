@@ -460,6 +460,18 @@ const mapDispatchToProps = (dispatch) => {
                 dataType: 'json',//here,
                 success:function (data) {
                     //console.log(data);
+                    $("#box1 b").on('click',function(){
+                        if($(this).siblings('img').attr('src') == jia){
+                            $(this).siblings('img').attr('src', jian);
+                        }else{
+                            $(this).siblings('img').attr('src', jia);
+                        }
+                        $(this).parent().siblings().toggle();
+                    });
+                    //复选框状态跟随
+                    $("#box1 input").change(function(){
+                        $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
+                    })
                     data.data && dispatch(actions.setObjs('boxRole', data));
                     if(data){
                         $('#box1').parent().css('display','block');
