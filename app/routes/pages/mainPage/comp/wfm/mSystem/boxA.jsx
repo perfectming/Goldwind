@@ -24,7 +24,7 @@ let Component = React.createClass({
                                 return(
                                     <div key={keyC} className={styles.place}>
                                         <a className={styles.ca}>
-                                            <img src={jia}/>
+                                            <img onClick={(e)=>pullDown(e.target)} src={jia}/>
                                             <b onClick={(e)=>pullDown(e.target)}>{valueC.name}</b>
                                             <input type='checkbox' value={valueC.id} title={valueC.rightstype}
                                                    onChange={(e)=>follow(e.target)}
@@ -35,7 +35,7 @@ let Component = React.createClass({
                                                     return(
                                                             <div className={styles.placename} key={keyD}>
                                                                 <a className={styles.da}>
-                                                                    <img src={jia} />
+                                                                    <img onClick={(e)=>pullDown(e.target)} src={jia} />
                                                                     <b onClick={(e)=>pullDown(e.target)}>{valueD.name}</b>
                                                                     <input type='checkbox' value={valueD.id} title={valueD.rightstype}
                                                                            onChange={(e)=>follow(e.target)}
@@ -115,10 +115,10 @@ const mapDispatchToProps = (dispatch) => {
             $(key).parent().siblings().find('input').prop('checked',$(key).prop('checked'))
         },
         pullDown:(key)=>{
-            if($(key).siblings('img').attr('src') ==jia){
-                $(key).siblings('img').attr('src', jian);
+            if($(key).parent().children('img').attr('src') ==jia){
+                $(key).parent().children('img').attr('src', jian);
             }else{
-                $(key).siblings('img').attr('src', jia);
+                $(key).parent().children('img').attr('src', jia);
             }
             $(key).parent().siblings().toggle();
         },
