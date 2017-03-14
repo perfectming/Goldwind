@@ -320,12 +320,6 @@ let Component = React.createClass({
 							<Pwschart className={styles.box4Cahrt1} data = {infofdata} value = {val} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Pwschart>
 						</div>
 					</div>
-					<div className={`${styles.infoBox5} ${styles.infofL}`}>
-						<Title title={['风功率曲线']}></Title>
-						<div className={`${styles.box5Cahrt} ${styles.infofL000}`}>
-							<Pwschart2 className={styles.box4Cahrt1} data = {infofdata} value = {val} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Pwschart2>
-						</div>
-					</div>
 					<div className={`${styles.infoBox6} ${styles.infofL}`}>
 						<Title></Title>
 

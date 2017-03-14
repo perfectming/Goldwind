@@ -16,7 +16,7 @@ let Component = React.createClass({
             chart: {
 
                 type: 'spline',
-                width:460,
+                width:945,
                 height:310,
                 margin: [20,35,45,35],
                 backgroundColor: "rgba(46, 46, 65, 0)",
