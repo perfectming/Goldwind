@@ -15,7 +15,7 @@ let Component = React.createClass({
         this.props.init(ipUrl,selectId,selectName);
         setTimeout(function(){
             init(ipUrl,selectId,selectName)
-        },800)
+        },1500)
     },
     
     render() {
