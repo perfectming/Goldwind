@@ -43,7 +43,7 @@ for(let i in monBoardData.ModelData){
 arr.pop();
 for(let x=0;x<arr.length;x++){
     allnum+=arr[x]
-};
+}
 
 let Component = React.createClass({
     //render渲染前执行的内容//

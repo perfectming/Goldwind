@@ -162,10 +162,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-         changedate:()=>{ 
+         changedate:()=>{
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DataOverview", setData, "Screen", 0);
                 function setData(zhzb){
-                    if(zhzb.Model && zhzb.Model.ens==undefined){
+                    if(zhzb.Model && (zhzb.Model.ens==undefined || zhzb.Model.dis==undefined)){
                         TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", mobdZero, "DataOverview", setData, "Screen", 0);
                     }else{
                     dispatch(actions.setVars('zhzb', zhzb));
@@ -173,11 +173,14 @@ const mapDispatchToProps = (dispatch) => {
                         function setData1(bbs){
                             TY.getRtData("DataOverview", mobdZero, setData1)
                                 function setData1(bbs){
-                                    dispatch(actions.setVars('bbs', bbs));
-                                    setTimeout(function(){
-                                       dispatch(actions.setVars('boolsuper', true));  
-                                    },500)
-                                     
+                                    if(!(bbs.ModelData[mobdZero] && bbs.ModelData[mobdZero] && bbs.ModelData[mobdZero])){
+                                        TY.getRtData("DataOverview", mobdZero, setData1)
+                                    }else {
+                                        dispatch(actions.setVars('bbs', bbs));
+                                        setTimeout(function () {
+                                            dispatch(actions.setVars('boolsuper', true));
+                                        }, 500)
+                                    }
                                 }
                         }
                     }

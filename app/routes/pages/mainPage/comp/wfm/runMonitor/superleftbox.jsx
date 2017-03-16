@@ -30,17 +30,15 @@ let Component = React.createClass({
         let {all,zhzb,bbs,chooseONL,chooseALL,chooseFault,chooseRepair,chooseOffline,chooseWFStandby,chooseWFLIM,choosePVALL,choosePVONL,choosePVFLT,choosePVOFL,skinStyle}=this.props;
         let mod1=zhzb.Model;
         let data2=bbs.ModelData;
-        (!data2[mobdZero]) && (data2[mobdZero]=0);
-        (!data2[mobdOne]) && (data2[mobdOne]=0);
-        let nfdl=(data2[mobdZero].YearEgyAt/data2[mobdZero].YearPlanTotEgyAt)*100;//年发电量//
-        let yfdl=(data2[mobdZero].MonthEgyAt/data2[mobdZero].CurMonthPlanEgyAt)*100;//月发电量//
-        if(mod1==undefined){
-          mod1=[];
-        }
-        if(data2==undefined){
+        if(!data2){
           data2=[];
           alert('数据获取失败！')
         }else{
+            (!data2[mobdZero]) && (data2[mobdZero]=0);
+            (!data2[mobdOne]) && (data2[mobdOne]=0);
+            (!data2[8888802]) && (data2[8888802]=0);
+            let nfdl=(data2[mobdZero].YearEgyAt/data2[mobdZero].YearPlanTotEgyAt)*100;//年发电量//
+            let yfdl=(data2[mobdZero].MonthEgyAt/data2[mobdZero].CurMonthPlanEgyAt)*100;//月发电量//
         return (
             <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>
                 <div className={`${styles.states} ${styles.box_shadow}`}>

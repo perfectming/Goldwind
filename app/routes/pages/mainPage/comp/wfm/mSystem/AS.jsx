@@ -1,4 +1,5 @@
 import React from 'react';
+import api from '../../../../../../lib/apiClient';
 import {connect} from 'react-redux';
 import AlertWindow from '../../wbi/KPI/AlertWindow.jsx';//提示框
 var actions = require('redux/actions');
@@ -201,9 +202,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
+            console.log(api);
             dispatch(actions.setVars('pageAS', 1));
             dispatch(actions.setVars('wttypedefine', null));
             dispatch(actions.setVars('protocolid', null));
+            api.post(soam+'/Alarm/getAlarmruleInfoList',)
             $.ajax({
                 url: soam+'/Alarm/getAlarmruleInfoList',
                 type: 'post',

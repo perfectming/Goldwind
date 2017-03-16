@@ -95,22 +95,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         init: () => {
         },
-        playjq: () => {
-            //下拉点击事件
-            //复选框状态跟随
-            $("#box1 input").change(function(){
-                $(this).parent().siblings().find('input').prop('checked',$(this).prop('checked'))
-            });
-            //下拉点击事件
-            $("#box1 b").on('click',function(){
-                if($(this).siblings('img').attr('src') ==jia){
-                    $(this).siblings('img').attr('src', jian);
-                }else{
-                    $(this).siblings('img').attr('src', jia);
-                }
-                $(this).parent().siblings().toggle();
-            });
-        },
         follow:(key)=>{
             $(key).parent().siblings().find('input').prop('checked',$(key).prop('checked'))
         },
