@@ -6,6 +6,7 @@ import del from '../../../img/icon/tabDel.png';
 import refresh from '../../../img/comp/refresh.png';
 import add from '../../../img/icon/tabAdd.png';
 import AlertWindow from '../report/AlertWindow.jsx';//提示框
+import api from '../../../../../../lib/apiClient';
 var {getState} = require('../../../../../../redux/store');
 var $ = require('jquery');
 import _ from 'lodash';
@@ -304,17 +305,6 @@ const mapDispatchToProps = (dispatch) => {
             let myDate = new Date();
             let yearDateNow=myDate.getFullYear(); //获取当前年份
             let monthDateNow=myDate.getMonth()+1;//获取当前月份
-            // if(yearDate>yearDateNow){
-            //     dispatch(actions.setVars('alertBool', false));
-            //     dispatch(actions.setVars('alertText1', '开始时间应小于操作时间'));
-            //     return;
-            // }else{
-            //     if(monthDate>monthDateNow){
-            //         dispatch(actions.setVars('alertBool', false));
-            //         dispatch(actions.setVars('alertText1', '开始时间应小于操作时间'));
-            //         return;
-            //     }
-            // }
 
             let numDate=value.slice(8,10);
             if(numDate!=='01'){
@@ -357,42 +347,47 @@ const mapDispatchToProps = (dispatch) => {
                 }
             });
         },
-        saveTableItem:(line)=>{//更改
+        saveTableItem:(line)=> {//更改
             let tableV = _.clone(getState().objs.tableContentJy);
             let horizon = _.clone(getState().vars.userNameT);
-            let asd=tableV.data.pagedata[line];
+            let asd = tableV.data.pagedata[line];
             let wfp;
-            asd['operator']=horizon;
-            wfp=JSON.stringify(asd);
+            asd['operator'] = horizon;
+            if (asd.planelec / 1){
+                wfp = JSON.stringify(asd);
             $.ajax({
-                url: soam+'/ELEC/uppWfelec?newwfp=data',
+                url: soam + '/ELEC/uppWfelec?newwfp=data',
                 type: 'post',
                 data: wfp,
                 dataType: 'json',//here,
-                contentType:'application/json;charset=UTF-8',
-                success:function (data) {
+                contentType: 'application/json;charset=UTF-8',
+                success: function (data) {
                     //console.log(data);
                     dispatch(actions.setVars('alertBool', false));
                     dispatch(actions.setVars('alertText1', '保存成功'));
+                    $.ajax({
+                        url: soam + '/ELEC/getWfelec',
+                        type: 'post',
+                        data: 'pageSize=' + pageSize + '&&nowPage=1',
+                        dataType: 'json',//here,
+                        success: function (data) {
+                            dispatch(actions.setObjs('tableContentJy', data));
+                        },
+                        error: function () {
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText1', '获取数据失败'));
+                        }
+                    });
                 },
-                error:function(){
+                error: function () {
                     dispatch(actions.setVars('alertBool', false));
                     dispatch(actions.setVars('alertText1', '获取数据失败'));
                 }
             });
-            $.ajax({
-                url: soam+'/ELEC/getWfelec',
-                type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage=1',
-                dataType: 'json',//here,
-                success:function (data) {
-                    dispatch(actions.setObjs('tableContentJy', data));
-                },
-                error:function(){
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText1', '获取数据失败'));
-                }
-            });
+        }else{
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText1', '计划电量为具体数值'));
+            }
         },
         changeTableItem1: (value, table, i, j) => {
             let tableV = _.clone(getState().objs.tableContentJy);
