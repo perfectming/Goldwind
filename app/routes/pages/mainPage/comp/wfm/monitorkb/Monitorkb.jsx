@@ -230,7 +230,7 @@ let Component = React.createClass({
                         <Title title={['场站容量占比']}></Title>
                         <div className={styles.czrlzdmain}>
                             <Pie1 arrname1={arrname} num1={num} unit={mod.Capacity.unit} lettercolor={skinStyle==2?"#555555":"#FFFFFF"}></Pie1>
-                            <span className={styles.chartnum}><p>{Number(allnum)}</p><p className={styles.danweicc}>{mod.Capacity.unit}</p></span>
+                            <span className={styles.chartnum}><p>{Number(allnum).toFixed(2)}</p><p className={styles.danweicc}>{mod.Capacity.unit}</p></span>
                         </div>
                     </div>
                     <div className={`${styles.nfdlwcqk} ${styles.box_shadow}`}>
@@ -334,7 +334,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('moname', moname));
                     TY.getRtData("MonitorBoard", mobdZero, ppo);
                     function ppo(modata){
-                        if (modata.ModelData==undefined || modata.ModelData[mobdZero].YearLossElec.Sum==undefined){
+                        if (modata.ModelData==undefined || modata.ModelData[mobdZero].YearLossElec==undefined || modata.ModelData[mobdZero].YearLossElec.Sum==undefined){
                             TY.getRtData("MonitorBoard", mobdZero, ppo);
                         }else{
                             dispatch(actions.setVars('modata', modata));
@@ -355,7 +355,7 @@ const mapDispatchToProps = (dispatch) => {
             time=setInterval(function(){
                 TY.getRtData("MonitorBoard", mobdZero, ppoo);
                 function ppoo(modata){
-                    if(modata.ModelData==undefined || modata.ModelData[mobdZero].YearLossElec.Sum==undefined){
+                    if(modata.ModelData==undefined || modata.ModelData[mobdZero].YearLossElec==undefined || modata.ModelData[mobdZero].YearLossElec.Sum==undefined){
                         TY.getRtData("MonitorBoard", mobdZero, ppoo);
                     }else {
                         dispatch(actions.setVars('modata', modata));
