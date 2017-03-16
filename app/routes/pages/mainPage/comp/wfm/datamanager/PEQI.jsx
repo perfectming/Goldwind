@@ -355,36 +355,37 @@ const mapDispatchToProps = (dispatch) => {
             asd['operator'] = horizon;
             if (asd.planelec / 1){
                 wfp = JSON.stringify(asd);
-            $.ajax({
-                url: soam + '/ELEC/uppWfelec?newwfp=data',
-                type: 'post',
-                data: wfp,
-                dataType: 'json',//here,
-                contentType: 'application/json;charset=UTF-8',
-                success: function (data) {
-                    //console.log(data);
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText1', '保存成功'));
-                    $.ajax({
-                        url: soam + '/ELEC/getWfelec',
-                        type: 'post',
-                        data: 'pageSize=' + pageSize + '&&nowPage=1',
-                        dataType: 'json',//here,
-                        success: function (data) {
-                            dispatch(actions.setObjs('tableContentJy', data));
-                        },
-                        error: function () {
-                            dispatch(actions.setVars('alertBool', false));
-                            dispatch(actions.setVars('alertText1', '获取数据失败'));
-                        }
-                    });
-                },
-                error: function () {
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText1', '获取数据失败'));
-                }
-            });
-        }else{
+                $.ajax({
+                    url: soam + '/ELEC/uppWfelec?newwfp=data',
+                    type: 'post',
+                    data: wfp,
+                    dataType: 'json',//here,
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (data) {
+                        //console.log(data);
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText1', '保存成功'));
+                        dispatch(actions.setVars('page2', 1));
+                        $.ajax({
+                            url: soam + '/ELEC/getWfelec',
+                            type: 'post',
+                            data: 'pageSize=' + pageSize + '&&nowPage=1',
+                            dataType: 'json',//here,
+                            success: function (data) {
+                                dispatch(actions.setObjs('tableContentJy', data));
+                            },
+                            error: function () {
+                                dispatch(actions.setVars('alertBool', false));
+                                dispatch(actions.setVars('alertText1', '获取数据失败'));
+                            }
+                        });
+                    },
+                    error: function () {
+                        dispatch(actions.setVars('alertBool', false));
+                        dispatch(actions.setVars('alertText1', '获取数据失败'));
+                    }
+                });
+            }else{
                 dispatch(actions.setVars('alertBool', false));
                 dispatch(actions.setVars('alertText1', '计划电量为具体数值'));
             }
@@ -407,42 +408,48 @@ const mapDispatchToProps = (dispatch) => {
             (wfs.wfid==='') && (wfs.wfid='150801');
             let ddv;
             wfs['operator']=horizon;
-            ddv=JSON.stringify(wfs);
-            $.ajax({
-                url: soam+'/ELEC/addWfelec?wfp=data',
-                type: 'post',
-                data: ddv,
-                dataType: 'json',//here,
-                contentType:'application/json;charset=UTF-8',
-                success:function (data) {
-                    console.log(data);
-                    if (data.data){
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText1', '添加成功'));
-                    }else {
+            if (wfs.planelec / 1){
+                ddv=JSON.stringify(wfs);
+                $.ajax({
+                    url: soam+'/ELEC/addWfelec?wfp=data',
+                    type: 'post',
+                    data: ddv,
+                    dataType: 'json',//here,
+                    contentType:'application/json;charset=UTF-8',
+                    success:function (data) {
+                        console.log(data);
+                        if (data.data){
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText1', '添加成功'));
+                            dispatch(actions.setVars('page2', 1));
+                            $.ajax({
+                                url: soam+'/ELEC/getWfelec',
+                                type: 'post',
+                                data:'pageSize='+pageSize+'&&nowPage=1',
+                                dataType: 'json',//here,
+                                success:function (data) {
+                                    dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
+                                    dispatch(actions.setObjs('tableContentJy', data));
+                                },
+                                error:function(){
+                                    dispatch(actions.setVars('alertBool', false));
+                                    dispatch(actions.setVars('alertText1', '获取数据失败'));
+                                }
+                            });
+                        }else {
+                            dispatch(actions.setVars('alertBool', false));
+                            dispatch(actions.setVars('alertText1', '添加失败，该数据已存在'));
+                        }
+                    },
+                    error:function(){
                         dispatch(actions.setVars('alertBool', false));
-                        dispatch(actions.setVars('alertText1', '添加失败，该数据已存在'));
+                        dispatch(actions.setVars('alertText1', '获取数据失败'));
                     }
-                },
-                error:function(){
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText1', '获取数据失败'));
-                }
-            });
-            $.ajax({
-                url: soam+'/ELEC/getWfelec',
-                type: 'post',
-                data:'pageSize='+pageSize+'&&nowPage=1',
-                dataType: 'json',//here,
-                success:function (data) {
-                    dispatch(actions.setVars('wfidCount1', data.data.pagedata.length));
-                    dispatch(actions.setObjs('tableContentJy', data));
-                },
-                error:function(){
-                    dispatch(actions.setVars('alertBool', false));
-                    dispatch(actions.setVars('alertText1', '获取数据失败'));
-                }
-            });
+                });
+            }else {
+                dispatch(actions.setVars('alertBool', false));
+                dispatch(actions.setVars('alertText1', '计划电量为具体数值'));
+            }
         },
         //删除
         buttonClose:(deleteBool,j) => {

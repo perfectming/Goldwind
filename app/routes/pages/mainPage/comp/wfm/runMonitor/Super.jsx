@@ -173,7 +173,7 @@ const mapDispatchToProps = (dispatch) => {
                         function setData1(bbs){
                             TY.getRtData("DataOverview", mobdZero, setData1)
                                 function setData1(bbs){
-                                    if(!(bbs.ModelData[mobdZero] && bbs.ModelData[mobdZero] && bbs.ModelData[mobdZero])){
+                                    if(!(bbs.ModelData[mobdZero] && bbs.ModelData[mobdTwo] && bbs.ModelData[mobdOne])){
                                         TY.getRtData("DataOverview", mobdZero, setData1)
                                     }else {
                                         dispatch(actions.setVars('bbs', bbs));
