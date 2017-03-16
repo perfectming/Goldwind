@@ -43,7 +43,7 @@ let Component = React.createClass({
         for(let i=0;i<arr1.length;i++){
             newData[arr1[i]]='';
         }
-        console.log(wfidCount)
+        //console.log(wfidCount)
         if (table && wtidAll && table.data){//判断数据是否存在
             return (
                 <div className={skinStyle==1?styles.powerBoxBlue:(skinStyle==2?styles.powerBoxWhite:styles.powerBox)}>
@@ -299,7 +299,7 @@ const mapDispatchToProps = (dispatch) => {
                             wtAll.data.map((value, key)=> {
                                 (wfs.wfid == value.wfid) && (wfs.wfname = value.wfname)
                             });
-                            console.log(wfs);
+                            //console.log(wfs);
                             let ddv;
                             ddv = JSON.stringify(wfs);
                             $.ajax({
@@ -309,7 +309,7 @@ const mapDispatchToProps = (dispatch) => {
                                 dataType: 'json',//here,
                                 contentType: 'application/json;charset=UTF-8',
                                 success: function (data) {
-                                    console.log(data);
+                                    //console.log(data);
                                     if (data.data) {
                                         dispatch(actions.setVars('alertBool', false));
                                         dispatch(actions.setVars('alertTextMan', '添加成功'));
