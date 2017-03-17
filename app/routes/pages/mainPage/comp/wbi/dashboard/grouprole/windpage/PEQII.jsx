@@ -698,11 +698,11 @@ const mapDispatchToProps = (dispatch) => {
                 (value.wfid == wfs.wfid) && (wfs['wfname'] = value.wfname);
             });
             wfs['groupname'] = groupname.data[wfs.groupid];
-            wfs['startdate'] = null;
-            wfs['enddate'] = null;
-            wfs['costtype'] = null;
+            wfs['startdate'] = '';
+            wfs['enddate'] = '';
+            wfs['costtype'] = '';
             wfs['uuid'] = uuid;
-            wfs['day'] = null;
+            wfs['day'] = '';
             wfs['id'] = id;
             //wfs.push({groupname:"巴盟"});
 
@@ -725,7 +725,7 @@ const mapDispatchToProps = (dispatch) => {
                         if(data.data===true){
                             dispatch(actions.setVars('alertText', '修改成功'));
                             dispatch(actions.setVars('alertBool', false));
-                            
+
                             jiang2();
                         }
                         else{
