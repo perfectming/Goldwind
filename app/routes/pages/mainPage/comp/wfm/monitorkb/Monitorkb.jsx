@@ -334,7 +334,7 @@ const mapDispatchToProps = (dispatch) => {
                     dispatch(actions.setVars('moname', moname));
                     TY.getRtData("MonitorBoard", mobdZero, ppo);
                     function ppo(modata){
-                        if (modata.ModelData==undefined || modata.ModelData[mobdZero].YearLossElec==undefined || modata.ModelData[mobdZero].YearLossElec.Sum==undefined){
+                        if (modata.ModelData==undefined || modata.ModelData[mobdZero]==undefined || modata.ModelData[mobdZero].YearLossElec==undefined || modata.ModelData[mobdZero].YearLossElec.Sum==undefined){
                             TY.getRtData("MonitorBoard", mobdZero, ppo);
                         }else{
                             dispatch(actions.setVars('modata', modata));
@@ -355,7 +355,7 @@ const mapDispatchToProps = (dispatch) => {
             time=setInterval(function(){
                 TY.getRtData("MonitorBoard", mobdZero, ppoo);
                 function ppoo(modata){
-                    if(modata.ModelData==undefined || modata.ModelData[mobdZero].YearLossElec==undefined || modata.ModelData[mobdZero].YearLossElec.Sum==undefined){
+                    if(modata.ModelData==undefined || modata.ModelData[mobdZero]==undefined || modata.ModelData[mobdZero].YearLossElec==undefined || modata.ModelData[mobdZero].YearLossElec.Sum==undefined){
                         TY.getRtData("MonitorBoard", mobdZero, ppoo);
                     }else {
                         dispatch(actions.setVars('modata', modata));

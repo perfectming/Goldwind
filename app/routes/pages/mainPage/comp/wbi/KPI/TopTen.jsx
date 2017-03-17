@@ -240,7 +240,7 @@ const mapDispatchToProps = (dispatch) => {
 							data: {'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
 							timeout : 60000, 
 							success: function (data) {
-								console.log(data)
+								//console.log(data)
 								if (topTitleOne==undefined) {
 									dispatch(actions.setVars('selectId3', selectId));
 									dispatch(actions.setVars('sTime3', sTime));
@@ -280,7 +280,7 @@ const mapDispatchToProps = (dispatch) => {
 									data: {'wttype':wtType,'flag':checkedTop,'startTime':sTime,'endTime':eTime,'wfid':selectId},
 									timeout : 60000, 
 									success: function (data) {
-										console.log(data)
+										//console.log(data)
 										if (columnOneName.length==0) {
 											columnOneName=[],columnOne=[];
 											for(var i in data.data){
