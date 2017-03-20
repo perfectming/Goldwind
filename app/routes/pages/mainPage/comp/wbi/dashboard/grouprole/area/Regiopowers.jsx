@@ -24,8 +24,10 @@ let Component = React.createClass({
         let barLdpowerValue1 = data.data.line_date;
         let barLpdpowerValue1 = data.data.line_pdate;
         let barLpdpowerValues1 = data.data.line_pdates;
-        let text0=data.data.line_date
-
+        let text0=[];
+        for(let i in mapmonth){
+            text0.push(mapmonth[i].yearpoweract)
+        }
         if(boll6){
         return (
             <div className={skinStyle==1?styles.boxBlue:skinStyle==2?styles.boxWhite:styles.box}>
