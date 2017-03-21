@@ -78,11 +78,7 @@ const mapDispatchToProps = (dispatch) => {
         },
             changeFlag :(flag)=>{
                 
-                if (flag){
-                    flag=false;
-                }else{
-                    flag=true;
-                };
+                flag ? flag=false : flag=true;
                 dispatch(actions.setVars('flagff', flag));
             },
            
