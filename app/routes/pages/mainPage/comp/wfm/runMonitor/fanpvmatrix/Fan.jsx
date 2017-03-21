@@ -11,66 +11,6 @@ let mobdNum = require('../../../urlData.js');
 let mobdZero = mobdNum.mobdZero/1;
 let mobdOne = mobdNum.mobdOne/1;
 let mobdTwo = mobdNum.mobdTwo/1;
-// import Filterfan from './xym/Filterfan.jsx';
-// import Filterpv from './xym/Filterpv.jsx';
-// import dataBase from '../../../../../config/ModelData';
-// import matrix from '../../../../../config/MatrixModel';
-
-// var { Router, Route, browserHistory} = require('react-router');
-// let fanData = require('../../../../../config/fan-data');
-// let matrixdata = require('../../../../../config/MatrixData');
-// let model = require('../../../../../config/Model'); 
-// let modeldata = require('../../../../../config/ModelData');
-
-//         let data=modeldata.ModelData;
-//         let mod=model.Model;
-//         let  mat=matrix.Model;
-//         let matD=matrixdata.ModelData;
-
-// var model_data = modeldata.ModelData;
-
-// var arr3 = [];
-// var arr4 = [];
-// // var model_ens = model.Model.ens;
-// for(var j in model_ens){
-//     arr3.push(model_ens[j])
-// }
-// // arr3.map((valueE,keyE)=> {
-// //     return (
-// //         console.log(valueE.name)
-// //         )
-// // });
-
-
-//  var arr1 = [];
-//  var arr2 = [];
-//  // var arr3 = [];
-//  // var arr4 = [];
-//  var obj = matrixdata;
-//     var obj_wfd = obj.ModelData[mobdOne].WFDevsStatus;
-//     var obj_pvd = obj.ModelData[mobdTwo].PVDevsStatus;
-
-
-//     // console.log(obj_pvd);
-//     for(var x in obj_wfd){
-//         arr1.push(x);
-//         // for(var y in obj_wfd[x]){
-//         //     arr2.push(obj_wfd[x][y])
-//         // }
-//     }
-//     for(var m in obj_pvd){
-//         arr2.push(m);
-//         // for(var n in obj_wfd[m]){
-//         //     arr2.push(obj_wfd[m][n])
-//         // }
-//     }
-//     // console.log(arr2);
-//     // console.log(arr1);
-//     // console.log(arr2);
-// // arr2.map((valueZ, keyZ)=> {
-// //     console.log( )
-// // })
-
 
 let fan_time; // 该页面定时器
 let Component = React.createClass({
@@ -178,7 +118,7 @@ const mapDispatchToProps = (dispatch) => {
                 //         dispatch(actions.setVars('fModel', rdata));
                         TY.getRtData("DevicesMatrix", mobdZero, setfData);
                         function setfData(rdata){
-                            dispatch(actions.setVars('fData', rdata));
+                            rdata.ModelData && dispatch(actions.setVars('fData', rdata));
 
                             TY.getRtData("DataOverview", mobdZero, setfDatas);
 

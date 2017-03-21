@@ -9,59 +9,6 @@ let mobdNum = require('../../../urlData.js');
 let mobdZero = mobdNum.mobdZero/1;
 let mobdOne = mobdNum.mobdOne/1;
 let mobdTwo = mobdNum.mobdTwo/1;
-// import dataBase from '../../../../../config/ModelData';
-// let matrixdata = require('../../../../../../config/MatrixData');
-// let model = require('../../../../../../config/Model');
-// let modeldata = require('../../../../../../config/ModelData');
-
-       
-
-// var model_data = modeldata.ModelData;
-// // console.log(model_data);
-// var arrdata = model_data[650107].WindSpeed_DevAverValue;
-
-// var arr3 = [];
-// var arr4 = [];
-// var model_ens = model.Model.ens;
-// for(var j in model_ens){
-//     arr3.push(model_ens[j])
-// }
-// // arr3.map((valueE,keyE)=> {
-// //     return (
-// //         console.log(valueE.name)
-// //         )
-// // });
-
-
-//  var arr1 = [];
-//  var arr2 = [];
-//  // var arr3 = [];
-//  // var arr4 = [];
-//  var obj = matrixdata;
-//     var obj_wfd = obj.ModelData[mobdOne].WFDevsStatus;
-//     var obj_pvd = obj.ModelData[mobdTwo].PVDevsStatus;
-
-
-//     // console.log(obj_wfd);
-//     for(var x in obj_wfd){
-//         arr1.push(x)
-//         // for(var y in obj_wfd[x]){
-//         //     arr2.push(obj_wfd[x][y])
-//         // }
-//     }
-//     for(var m in obj_pvd){
-//         arr2.push(m)
-//         // for(var n in obj_wfd[m]){
-//         //     arr2.push(obj_wfd[m][n])
-//         // }
-//     }
-//     // console.log(arr1);
-//     // console.log(arr2);
-// // arr1.map((valueZ, keyZ)=> {
-// //     // console.log(valueZ)
-// // })  
-
-
 
 let Component = React.createClass({
     componentDidMount() {
