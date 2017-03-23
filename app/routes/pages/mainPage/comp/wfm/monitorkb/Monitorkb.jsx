@@ -283,7 +283,7 @@ let Component = React.createClass({
                         </div>
                         <div className={styles.navitem}>
                             <div className={styles.leftimg}><img src={nlcojp}/></div>
-                            <div className={styles.righttext1}><h2>年累CO<sub>2</sub>减排</h2><h2><b>{(IntoCDMjp+NotIntoCDMjp).toFixed(2)}</b>t</h2></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{(IntoCDMjp+NotIntoCDMjp).toFixed(2)}</b>t</h2></div>
                         </div>
                         <div className={`${styles.navitem} ${styles.bore1}`}>
                             <div className={styles.leftimg} style={{width:'100%'}}>纳入CDM场站数量:{parameter.IntoCDM.length}个</div>
@@ -291,7 +291,7 @@ let Component = React.createClass({
 
                         <div className={styles.navitem}>
                             <div className={styles.leftimg}><img src={nlcojp}/></div>
-                            <div className={styles.righttext1}><h2>年累CO<sub>2</sub>减排</h2><h2><b>{IntoCDMjp.toFixed(2)}</b>t</h2></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{IntoCDMjp.toFixed(2)}</b>t</h2></div>
                         </div>
                         <div className={`${styles.navitem} ${styles.bore1}`}>
                             <div className={styles.leftimg} style={{width:'100%'}}>未纳入CDM场站数量:{parameter.NotIntoCDM.length}个</div>
@@ -299,7 +299,7 @@ let Component = React.createClass({
 
                         <div className={styles.navitem}>
                             <div className={styles.leftimg}><img src={nlcojp}/></div>
-                            <div className={styles.righttext1}><h2>年累CO<sub>2</sub>减排</h2><h2><b>{NotIntoCDMjp.toFixed(2)}</b>t</h2></div>
+                            <div className={styles.righttext1}><h2>年累CO2减排</h2><h2><b>{NotIntoCDMjp.toFixed(2)}</b>t</h2></div>
                         </div>
 
                     </div>

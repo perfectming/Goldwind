@@ -423,11 +423,11 @@ let Component = React.createClass({
 						</div>
 						<div className={styles.fandatabox}>
 							<span>1号变桨逆变器温度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(2)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter1"]).toFixed(2)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>2号变桨逆变器温度</span>
-							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter3"]).toFixed(2)}</span><span>℃</span></span>
+							<span className={styles.numbox}><span>{Number(fmvalue["WTPS.Temp.Ra.F32.inverter2"]).toFixed(2)}</span><span>℃</span></span>
 						</div>
 						<div className={styles.fandatabox}>
 							<span>3号变桨逆变器温度</span>
