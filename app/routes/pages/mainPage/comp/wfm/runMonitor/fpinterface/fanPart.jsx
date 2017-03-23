@@ -46,7 +46,6 @@ let Component = React.createClass({
             for(let key in bujianModel.Model.dis){
                 (key.slice(5,9)==='Bool')&& forOut.push(key);
             }
-            console.log(bujianData,bujianModel)
             return (
                 <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox} id="fanJy">
                     <div className={styles.fanidbox}>
