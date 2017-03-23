@@ -46,6 +46,7 @@ let Component = React.createClass({
             for(let key in bujianModel.Model.dis){
                 (key.slice(5,9)==='Bool')&& forOut.push(key);
             }
+            console.log(bujianData,bujianModel)
             return (
                 <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox} id="fanJy">
                     <div className={styles.fanidbox}>
@@ -90,7 +91,7 @@ let Component = React.createClass({
                                     return (
                                         <div key={key}
                                              className={`${key % 12 < 6 ? styles.bgbox : styles.nomalbox} ${styles.statusquerybox}`}>
-                                            <span><img src={value[1] == 0 ? Jerry : Tom}/>{bujianModel.Model.dis[value].name}</span>
+                                            <span><img src={bujianData.ModelData[vid][value] == 'TRUE' ? Jerry : Tom}/>{bujianModel.Model.dis[value].name}</span>
                                         </div>
                                     )
                                 })
@@ -125,7 +126,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         changeDate:(vid,act1)=>{
-            console.log(act1);
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, "WTDetail", setData, "Screen", 0);
             function setData(rdata) {
                 if (rdata.Model){
