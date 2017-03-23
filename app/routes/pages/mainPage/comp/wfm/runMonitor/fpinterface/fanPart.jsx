@@ -196,11 +196,11 @@ const mapDispatchToProps = (dispatch) => {
                         var pkscs = rdata.Model.prs[key].pkscs;
                         TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, pkscs[pack[act1]].scid, setDataDo, "Screen", 0);
                         function setDataDo(rdata) {
-                            console.log(rdata)
+                            //console.log(rdata)
                             dispatch(actions.setVars('bujianModel', rdata));
                             TY.getRtData(pkscs[pack[act1]].scid, vid, setDatafin);
                             function setDatafin(rdata1) {
-                                console.log(rdata1)
+                                //console.log(rdata1)
                                 dispatch(actions.setVars('bujianData', rdata1));
                                 dispatch(actions.setVars('boolFan', true));
                             }
