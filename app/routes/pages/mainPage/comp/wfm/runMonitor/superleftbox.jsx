@@ -36,7 +36,7 @@ let Component = React.createClass({
         }else{
             (!data2[mobdZero]) && (data2[mobdZero]=0);
             (!data2[mobdOne]) && (data2[mobdOne]=0);
-            (!data2[8888802]) && (data2[8888802]=0);
+            (!data2[mobdTwo]) && (data2[mobdTwo]=0);
             let nfdl=(data2[mobdZero].YearEgyAt/data2[mobdZero].YearPlanTotEgyAt)*100;//年发电量//
             let yfdl=(data2[mobdZero].MonthEgyAt/data2[mobdZero].CurMonthPlanEgyAt)*100;//月发电量//
         return (
@@ -47,7 +47,7 @@ let Component = React.createClass({
                         <span className={styles.num}><a className={styles.anum1}>{mod1.dis.TActPower.name}</a><a className={styles.anum}><b>{Number((data2[mobdZero].TActPower)*zhzb.Model.dis.TActPower.coeff).toFixed(zhzb.Model.dis.TActPower.place)}</b>{mod1.dis.TActPower.unit}</a></span>
                         <span className={styles.num}><a className={styles.anum1}>{mod1.dis.Capacity.name}</a><a className={styles.anum}><b>{Number((data2[mobdZero].Capacity)*zhzb.Model.dis.Capacity.coeff).toFixed(zhzb.Model.dis.Capacity.place)}</b>{mod1.dis.Capacity.unit}</a></span>
                         <span className={styles.num}><a className={styles.anum1}>风电容量</a><a className={styles.anum}><b>{Number((data2[mobdOne].Capacity)*zhzb.Model.dis.Capacity.coeff).toFixed(zhzb.Model.dis.Capacity.place)}</b>{mod1.dis.Capacity.unit}</a></span>
-                        <span className={styles.num}><a className={styles.anum1}>光伏容量</a><a className={styles.anum}><b>{Number((data2[8888802].Capacity)*zhzb.Model.dis.Capacity.coeff).toFixed(zhzb.Model.dis.Capacity.place)}</b>{mod1.dis.Capacity.unit}</a></span>
+                        <span className={styles.num}><a className={styles.anum1}>光伏容量</a><a className={styles.anum}><b>{Number((data2[mobdTwo].Capacity)*zhzb.Model.dis.Capacity.coeff).toFixed(zhzb.Model.dis.Capacity.place)}</b>{mod1.dis.Capacity.unit}</a></span>
                     </div>
                     <div className={styles.wind}>
                         <span className={styles.num}><a className={styles.anum1}>{mod1.dis.YearEgyAt.name}</a><a className={styles.anum}><b>{Number((data2[mobdZero].YearEgyAt)*zhzb.Model.dis.YearEgyAt.coeff).toFixed(zhzb.Model.dis.YearEgyAt.place)}</b>{mod1.dis.YearEgyAt.unit}</a></span>
@@ -103,27 +103,27 @@ let Component = React.createClass({
 
                     <Title title={['光伏指标']}></Title>
                     <div className={styles.wind}>
-                        <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVCount.name}</a><a className={styles.anum}><b>{data2[8888802].PVCount}</b>个</a></span>
-                        <span className={styles.num2} id='allpv' style={{cursor:'pointer'}} onClick = {()=> choosePVALL()}><a className={styles.anum1}>{mod1.dis.InverterCount.name}</a><a className={styles.anum}><b>{data2[8888802].InverterCount}</b>台</a></span>
-                        <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{data2[8888802].PVTSI_Aver ==='null' ? '--':Number(data2[8888802].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></span>
+                        <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVCount.name}</a><a className={styles.anum}><b>{data2[mobdTwo].PVCount}</b>个</a></span>
+                        <span className={styles.num2} id='allpv' style={{cursor:'pointer'}} onClick = {()=> choosePVALL()}><a className={styles.anum1}>{mod1.dis.InverterCount.name}</a><a className={styles.anum}><b>{data2[mobdTwo].InverterCount}</b>台</a></span>
+                        <span className={styles.num2}><a className={styles.anum1}>{mod1.dis.PVTSI_Aver.name}</a><a className={styles.anum}><b>{data2[mobdTwo].PVTSI_Aver ==='null' ? '--':Number(data2[mobdTwo].PVTSI_Aver).toFixed(2)}</b>W/㎡</a></span>
                     </div>
                     <div className={styles.spedc} id='specd'>
                         <div className={`${styles.box} ${styles.box1}`} style={{color:mod1.dis.PVONL.color}} onClick ={()=> choosePVONL()}>
                             <span className={styles.block}><img src={icon0}/></span>
                             <span className={styles.contect} >{mod1.dis.PVONL.name}</span>
-                            <span className={styles.num} >{data2[8888802].PVONL}</span>
+                            <span className={styles.num} >{data2[mobdTwo].PVONL}</span>
                         </div>
 
                         <div className={`${styles.box} ${styles.box1}`} style={{color:mod1.dis.PVFLT.color}} onClick ={()=> choosePVFLT()}>
                             <span className={styles.block}><img src={icon1}/></span>
                             <span className={styles.contect} >{mod1.dis.PVFLT.name}</span>
-                            <span className={styles.num} >{data2[8888802].PVFLT}</span>
+                            <span className={styles.num} >{data2[mobdTwo].PVFLT}</span>
                         </div>
 
                         <div className={`${styles.box} ${styles.box1}`} style={{color:'#aaa'}} onClick ={()=> choosePVOFL()}>
                             <span className={styles.block}><img src={icon3}/></span>
                             <span className={styles.contect} >{mod1.dis.PVOFL.name}</span>
-                            <span className={styles.num} >{data2[8888802].PVOFL}</span>
+                            <span className={styles.num} >{data2[mobdTwo].PVOFL}</span>
                         </div>
                     </div>
                 </div>
