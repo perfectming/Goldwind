@@ -52,7 +52,7 @@ let Component = React.createClass({
             })
         }
         }
-      
+
         
         return (
             <div className={skinStyle==1?styles.bodyBoxBlue:skinStyle==2?styles.bodyBoxWhite:styles.bodyBox}>

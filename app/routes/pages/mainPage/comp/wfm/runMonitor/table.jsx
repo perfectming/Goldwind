@@ -94,7 +94,7 @@ let Component = React.createClass({
                                              key={key} onClick={()=>changepage3(value,key)}>{mode[value]['name']}</div>
                                         {
                                             nam.map((valueC, keyC)=> {
-                                                if(keyC>5){
+                                                if(keyC>5&&keyC<8){
                                                     arrAll.map((valueD,keyD)=>{
                                                         ((valueD.pid == value) && (valueD.det=='AVC')) && (mutable=valueD.cis);
                                                     });
@@ -102,7 +102,7 @@ let Component = React.createClass({
                                                     return (
                                                         <div className={styles.tableContentItem}
                                                              style={{width:contentSize[keyC]+'%'}}
-                                                             key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='#669999'?styles.succ:(data[mutable][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                             key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='Online'?styles.succ:(data[mutable][valueC]=='Fault'?styles.defa:styles.cutD)):styles.cutD}></div></div>
                                                     )}else {
                                                         return (
                                                             <div className={styles.tableContentItem}
@@ -125,22 +125,44 @@ let Component = React.createClass({
                                                              style={{width:contentSize[keyC]+'%'}}
                                                              key={keyC}>{(data[value]&&data[value][valueC])?data[value][valueC]:'--'}</div>
                                                     )
-                                                }else{
+                                                }else if(keyC==8){
+                                                    arrAll.map((valueD,keyD)=>{
+                                                        ((valueD.pid == value) && (valueD.det=='TransSubstation')) && (mutable=valueD.cis);
+                                                    });
+                                                    return (
+                                                        <div className={styles.tableContentItem}
+                                                             style={{width:contentSize[keyC]+'%'}}
+                                                             key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
+                                                    )}
+                                                else{
                                                     arrAll.map((valueD,keyD)=>{
                                                         ((valueD.pid == value) && (valueD.det=="EnergyManager")) && (mutable=valueD.cis);
                                                     });
                                                     if(keyC==3){
+                                                        arrAll.map((valueD,keyD)=>{
+                                                            ((valueD.pid == value) && (valueD.det=="TransSubstation")) && (mutable=valueD.cis);
+                                                        });
                                                         return (
                                                             <div className={styles.tableContentItem}
                                                                  style={{width:contentSize[keyC]+'%'}}
                                                                  key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
                                                         )
                                                     }else{
+                                                        arrAll.map((valueD,keyD)=>{
+                                                            ((valueD.pid == value) && (valueD.det=="AGC")) && (mutable=valueD.cis);
+                                                        });
+                                                        if(keyC==1||keyC==5){
                                                         return(
                                                             <div className={styles.tableContentItem}
                                                                  style={{width:contentSize[keyC]+'%'}}
                                                                  key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='#669999'?styles.succ:(data[mutable][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
-                                                        )
+                                                        )}else {
+                                                            return(
+                                                                <div className={styles.tableContentItem}
+                                                                     style={{width:contentSize[keyC]+'%'}}
+                                                                     key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='Online'?styles.succ:(data[mutable][valueC]=="Fault"?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                            )
+                                                        }
                                                     }
                                                 }
 
@@ -159,7 +181,7 @@ let Component = React.createClass({
                                      key={key} onClick={()=>changepage2(value,key)}>{mode[value]['name']}</div>
                                 {
                                     nam.map((valueC, keyC)=> {
-                                        if(keyC>5){
+                                        if(keyC>5&&keyC<8){
                                             arrAll.map((valueD,keyD)=>{
                                                 ((valueD.pid == value) && (valueD.det=='AVC')) && (mutable=valueD.cis);
                                             });
@@ -167,7 +189,7 @@ let Component = React.createClass({
                                                 return (
                                                     <div className={styles.tableContentItem}
                                                          style={{width:contentSize[keyC]+'%'}}
-                                                         key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='#669999'?styles.succ:(data[mutable][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                         key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='Online'?styles.succ:(data[mutable][valueC]=='Fault'?styles.defa:styles.cutD)):styles.cutD}></div></div>
                                                 )}else {
                                                 return (
                                                     <div className={styles.tableContentItem}
@@ -184,28 +206,50 @@ let Component = React.createClass({
                                                      style={{width:contentSize[keyC]+'%'}}
                                                      key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
                                             )
-                                        }else if(keyC==0){
+                                        } else if(keyC==0){
                                             return (
                                                 <div className={styles.tableContentItem}
                                                      style={{width:contentSize[keyC]+'%'}}
                                                      key={keyC}>{(data[value]&&data[value][valueC])?data[value][valueC]:'--'}</div>
                                             )
-                                        }else{
+                                        }else if(keyC==8){
+                                            arrAll.map((valueD,keyD)=>{
+                                                ((valueD.pid == value) && (valueD.det=='TransSubstation')) && (mutable=valueD.cis);
+                                            });
+                                            return (
+                                                <div className={styles.tableContentItem}
+                                                     style={{width:contentSize[keyC]+'%'}}
+                                                     key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
+                                            )}
+                                        else{
                                             arrAll.map((valueD,keyD)=>{
                                                 ((valueD.pid == value) && (valueD.det=="EnergyManager")) && (mutable=valueD.cis);
                                             });
                                             if(keyC==3){
+                                                arrAll.map((valueD,keyD)=>{
+                                                    ((valueD.pid == value) && (valueD.det=="TransSubstation")) && (mutable=valueD.cis);
+                                                });
                                                 return (
                                                     <div className={styles.tableContentItem}
                                                          style={{width:contentSize[keyC]+'%'}}
                                                          key={keyC}>{(data[mutable]&&data[mutable][valueC])?data[mutable][valueC]:'--'}</div>
                                                 )
                                             }else{
-                                                return(
-                                                    <div className={styles.tableContentItem}
-                                                         style={{width:contentSize[keyC]+'%'}}
-                                                         key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='#669999'?styles.succ:(data[mutable][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
-                                                )
+                                                arrAll.map((valueD,keyD)=>{
+                                                    ((valueD.pid == value) && (valueD.det=="AGC")) && (mutable=valueD.cis);
+                                                });
+                                                if(keyC==1||keyC==5){
+                                                    return(
+                                                        <div className={styles.tableContentItem}
+                                                             style={{width:contentSize[keyC]+'%'}}
+                                                             key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='#669999'?styles.succ:(data[mutable][valueC]=='#FF0000'?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                    )}else {
+                                                    return(
+                                                        <div className={styles.tableContentItem}
+                                                             style={{width:contentSize[keyC]+'%'}}
+                                                             key={keyC}><div className={data[mutable]?(data[mutable][valueC]=='Online'?styles.succ:(data[mutable][valueC]=="Fault"?styles.defa:styles.cutD)):styles.cutD}></div></div>
+                                                    )
+                                                }
                                             }
                                         }
 

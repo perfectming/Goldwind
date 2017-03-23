@@ -355,7 +355,7 @@ const mapDispatchToProps = (dispatch) => {
             time=setInterval(function(){
                 TY.getRtData("MonitorBoard", mobdZero, ppoo);
                 function ppoo(modata){
-                    if(modata.ModelData==undefined || modata.ModelData[mobdZero]==undefined || modata.ModelData[mobdZero].YearLossElec==undefined || modata.ModelData[mobdZero].YearLossElec.Sum==undefined){
+                    if(modata.ModelData==undefined || modata.ModelData[mobdZero]==undefined || modata.ModelData[mobdZero].YearLossElec==undefined || modata.ModelData[mobdZero].YearLossElec.Sum==undefined || modata.ModelData[mobdZero].DevFaultOverview==undefined){
                         TY.getRtData("MonitorBoard", mobdZero, ppoo);
                     }else {
                         dispatch(actions.setVars('modata', modata));
