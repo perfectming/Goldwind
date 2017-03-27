@@ -131,6 +131,7 @@ const mapDispatchToProps = (dispatch) => {
                 var sk = rdata.Model.ens[vid].sk;
                 TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, sk, setDatas, "Screen", 0);
                 function setDatas(rdata) {
+                    !rdata.Model && TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, sk, setDatas, "Screen", 0);
                     var key;
                     for (let x in rdata.Model.prs) {
                         key = x;
@@ -141,17 +142,17 @@ const mapDispatchToProps = (dispatch) => {
                         dispatch(actions.setVars('bujianModel', rdata));
                         TY.getRtData(pkscs[pack[act1]].scid, vid, setDatafin);
                         function setDatafin(rdata1) {
-                            // if(rdata1.ModelData[vid]){
-                            //     let arr=[];
-                            //     for(let key in rdata1.ModelData[vid]){ arr.push(key)};
-                            //     arr.length>10 &&
+                            if(rdata1.ModelData[vid]){
                                 dispatch(actions.setVars('bujianData', rdata1));
-                            // }
+
                             setTimeout(function () {
                                 dispatch(actions.setVars('boolFan', true));
                                 clearTimeout(onceTime);
                             },100)
-                        }/*从后台取出数据并赋给bujianData并告知页面加载完成*/
+                            }else{
+                                TY.getRtData(pkscs[pack[act1]].scid, vid, setDatafin);
+                            }
+                                }/*从后台取出数据并赋给bujianData并告知页面加载完成*/
                     }
                     time=setInterval(function(){
                         let act2=_.clone(getState().vars.val);
@@ -184,10 +185,11 @@ const mapDispatchToProps = (dispatch) => {
             $('#fanJy').css('background-image','url('+arr[act1]+')');//切换背景图片引用路径
             TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, "WTDetail", setData, "Screen", 0);
             function setData(rdata) {
-                if (rdata.Model){
-                    var sk = rdata.Model.ens[vid].sk;
+                !rdata.Model && TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, "WTDetail", setData, "Screen", 0);
+                var sk = rdata.Model.ens[vid].sk;
                     TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, sk, setDatas, "Screen", 0);
                     function setDatas(rdata) {
+                        !rdata.Model && TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, sk, setDatas, "Screen", 0);
                         var key;
                         for (let x in rdata.Model.prs) {
                             key = x;
@@ -195,16 +197,20 @@ const mapDispatchToProps = (dispatch) => {
                         var pkscs = rdata.Model.prs[key].pkscs;
                         TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, pkscs[pack[act1]].scid, setDataDo, "Screen", 0);
                         function setDataDo(rdata) {
-                            //console.log(rdata)
+                            !rdata.Model && TY.getModel("6C5002D3-1566-414a-8834-5077940C78E1", vid, pkscs[pack[act1]].scid, setDataDo, "Screen", 0);
                             dispatch(actions.setVars('bujianModel', rdata));
                             TY.getRtData(pkscs[pack[act1]].scid, vid, setDatafin);
                             function setDatafin(rdata1) {
                                 //console.log(rdata1)
-                                dispatch(actions.setVars('bujianData', rdata1));
-                                dispatch(actions.setVars('boolFan', true));
+                                if(rdata1.ModelData[vid]) {
+                                    dispatch(actions.setVars('bujianData', rdata1));
+                                    dispatch(actions.setVars('boolFan', true));
+                                }else {
+                                    TY.getRtData(pkscs[pack[act1]].scid, vid, setDatafin);
+                                }
                             }
                         }
-                    }}
+                    }
             }
         }
 
