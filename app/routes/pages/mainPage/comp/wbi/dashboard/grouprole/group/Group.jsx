@@ -242,13 +242,13 @@ const mapDispatchToProps = (dispatch) => {
                                             dayPlanElec=data.data.dayelecPlanElec;
                                             arrPlan=[],month1=[],arrAct=[];
                                             var monthNum=[];
-                                            for(var i=0;i<12;i++){
+                                            for(var i in data.data.wtKongMonthsElec){
                                                 month1.push(data.data.wtKongMonthsElec[i].month+"月");
                                                 monthNum.push(data.data.wtKongMonthsElec[i].month);
-                                                arrAct.push((data.data.wtKongMonthsElec[i].poweract).toFixed(1)/1);
+                                                arrAct.push((data.data.wtKongMonthsElec[i].poweract/1).toFixed(1)/1);
                                             }
-                                            for(var i=0;i<12;i++){
-                                                arrPlan.push((data.data.wtKongMonthsPlanElec[monthNum[i]]).toFixed(1)/1);
+                                            for(var i=0;i<monthNum.length;i++){
+                                                arrPlan.push((data.data.wtKongMonthsPlanElec[monthNum[i]]/1).toFixed(1)/1);
                                             }
                                         },
                                         complete : function(XMLHttpRequest,status){
@@ -271,7 +271,10 @@ const mapDispatchToProps = (dispatch) => {
                                                         dataType: 'json',
                                                         timeout : 60000,
                                                         success:function (data) {
-                                                            healthy=data.data.health;
+                                                            if(typeof(data.data.health)=="number"){
+                                                                healthy=data.data.health; 
+                                                            }
+                                                            healthy=0;
                                                         },
                                                         complete : function(XMLHttpRequest,status){
                                                             dispatch(actions.setVars('groupbool', true));

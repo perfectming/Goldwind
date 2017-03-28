@@ -331,7 +331,10 @@ const mapDispatchToProps = (dispatch) => {
 												                dataType: 'json',
 												                timeout : 60000,
 												                success:function (data) {
-																	healthy=data.data.health;
+												                	if(typeof(data.data.health)=="number"){
+												                		healthy=data.data.health;
+												                	}
+																	healthy=0;
 																	dispatch(actions.setVars('healthy',healthy ));
 												                },
 												                complete : function(XMLHttpRequest,status){
@@ -415,7 +418,10 @@ const mapDispatchToProps = (dispatch) => {
 							dataType: 'json',
 							timeout : 60000,
 							success:function (data) {
-								healthy=data.data.health;
+								if(typeof(data.data.health)=="number"){
+									healthy=data.data.health;
+								}
+								healthy=0;
 								dispatch(actions.setVars('healthy',healthy ));
 							},
 							complete : function(XMLHttpRequest,status){
